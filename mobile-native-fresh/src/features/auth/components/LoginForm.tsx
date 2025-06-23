@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// src/features/auth/components/LoginForm.tsx
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -6,43 +7,44 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-} from 'react-native';
+} from 'react-native'
+import { colors, spacing, typography } from '../../../theme/theme'
 
 interface LoginFormProps {
-  onSubmit: (email: string, password: string) => void;
-  loading?: boolean;
+  onSubmit: (email: string, password: string) => void
+  loading?: boolean
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
 
   const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
-    
+    const newErrors: { email?: string; password?: string } = {}
+
     if (!email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email is required'
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = 'Please enter a valid email'
     }
-    
+
     if (!password.trim()) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Password is required'
     } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'Password must be at least 6 characters'
     }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = () => {
     if (validateForm()) {
-      onSubmit(email.trim(), password);
+      onSubmit(email.trim(), password)
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -53,6 +55,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           value={email}
           onChangeText={setEmail}
           placeholder="Enter your email"
+          placeholderTextColor={colors.subtext}
+          selectionColor={colors.primary}
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
@@ -63,12 +67,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
-        <View style={styles.passwordContainer}>
+        <View style={[styles.passwordContainer, errors.password && styles.inputError]}>
           <TextInput
-            style={[styles.passwordInput, errors.password && styles.inputError]}
+            style={styles.passwordInput}
             value={password}
             onChangeText={setPassword}
             placeholder="Enter your password"
+            placeholderTextColor={colors.subtext}
+            selectionColor={colors.primary}
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             autoCorrect={false}
@@ -79,7 +85,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
             onPress={() => setShowPassword(!showPassword)}
             disabled={loading}
           >
-            <Text style={styles.eyeButtonText}>{showPassword ? '🙈' : '👁️'}</Text>
+            <Text style={styles.eyeButtonText}>
+              {showPassword ? '🙈' : '👁️'}
+            </Text>
           </TouchableOpacity>
         </View>
         {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
@@ -97,30 +105,30 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
         )}
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
   inputContainer: {
-    marginBottom: 16,
+    marginBottom: spacing.md,
   },
   label: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 8,
-    color: '#1a1a1a',
+    ...typography.body,
+    color: colors.text,
+    marginBottom: spacing.xs,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: colors.border,
     borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    backgroundColor: '#ffffff',
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    fontSize: typography.body.fontSize,
+    color: colors.text,
+    backgroundColor: colors.card,
   },
   inputError: {
     borderColor: '#ff4444',
@@ -129,42 +137,43 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: colors.border,
     borderRadius: 8,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.card,
   },
   passwordInput: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    borderWidth: 0,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    fontSize: typography.body.fontSize,
+    color: colors.text,
   },
   eyeButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
   },
   eyeButtonText: {
     fontSize: 18,
+    color: colors.subtext,
   },
   errorText: {
     color: '#ff4444',
     fontSize: 14,
-    marginTop: 4,
+    marginTop: spacing.xs,
   },
   submitButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: colors.primary,
     borderRadius: 8,
-    paddingVertical: 16,
+    paddingVertical: spacing.sm * 1.5,
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: spacing.sm,
   },
   submitButtonDisabled: {
-    backgroundColor: '#cccccc',
+    backgroundColor: '#555555',
   },
   submitButtonText: {
+    ...typography.body,
     color: '#ffffff',
-    fontSize: 16,
     fontWeight: '600',
   },
-});
+})
