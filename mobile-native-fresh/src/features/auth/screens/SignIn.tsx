@@ -1,22 +1,23 @@
+// src/features/auth/screens/SignIn.tsx
 import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  Platform,
   Image,
   Alert,
+  Platform,
+  KeyboardAvoidingView,
+  StyleSheet,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../hooks/useAuth';
 import { LoginForm } from '../components/LoginForm';
 import { OAuthButton } from '../components/OAuthButton';
+import { colors, spacing, typography } from '../../../theme/theme';
 
-// Replace with your actual logo file
-const logo = require('/Users/sawyer/gitSync/thoughtmarks-mobile/mobile-native-fresh/assets/AppIcon.png');
+const logo = require('../../../../assets/logo.png');
 
-export const SignInScreen = () => {
+export const SignInScreen: React.FC = () => {
   const { signIn, signInWithGoogle, signInWithApple, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,8 +25,8 @@ export const SignInScreen = () => {
     try {
       setIsLoading(true);
       await signIn(email, password);
-    } catch (error: any) {
-      Alert.alert('Sign In Failed', error.message);
+    } catch (err: any) {
+      Alert.alert('Sign In Failed', err.message);
     } finally {
       setIsLoading(false);
     }
@@ -35,8 +36,8 @@ export const SignInScreen = () => {
     try {
       setIsLoading(true);
       await signInWithGoogle();
-    } catch (error: any) {
-      Alert.alert('Google Sign In Failed', error.message);
+    } catch (err: any) {
+      Alert.alert('Google Sign In Failed', err.message);
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +47,8 @@ export const SignInScreen = () => {
     try {
       setIsLoading(true);
       await signInWithApple();
-    } catch (error: any) {
-      Alert.alert('Apple Sign In Failed', error.message);
+    } catch (err: any) {
+      Alert.alert('Apple Sign In Failed', err.message);
     } finally {
       setIsLoading(false);
     }
@@ -56,15 +57,15 @@ export const SignInScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.keyboard}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <View style={styles.logoContainer}>
           <Image source={logo} style={styles.logo} resizeMode="contain" />
         </View>
 
-        <Text style={styles.title}>Welcome to Thoughtmarks</Text>
-        <Text style={styles.subtitle}>Sign in to continue</Text>
+        <Text style={styles.title}>WELCOME TO THOUGHTMARKS!</Text>
+        <Text style={styles.subtitle}>please sign in to continue</Text>
 
         <View style={styles.formContainer}>
           <LoginForm
@@ -104,53 +105,93 @@ export const SignInScreen = () => {
   );
 };
 
-const BRAND = '#007AFF';
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
-  keyboard: { flex: 1, paddingHorizontal: 24, justifyContent: 'center' },
-  logoContainer: { alignItems: 'center', marginBottom: 32 },
-  logo: { width: 120, height: 120 },
-
-  title: { fontSize: 28, fontWeight: '700', textAlign: 'center', color: '#1a1a1a' },
-  subtitle: { fontSize: 16, textAlign: 'center', marginBottom: 24, color: '#666' },
-
-  formContainer: {
-    backgroundColor: '#f9f9f9',
-    borderRadius: 12,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 3,
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
   },
-
+  keyboard: {
+    flex: 1,
+    paddingHorizontal: spacing.md,
+    justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: spacing.xl,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+  },
+  title: {
+    ...typography.heading,
+    color: colors.text,
+    textAlign: 'center',
+    marginBottom: spacing.sm,
+  },
+  subtitle: {
+    ...typography.body,
+    color: colors.subtext,
+    textAlign: 'center',
+    marginBottom: spacing.lg,
+  },
+  formContainer: {
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: spacing.md,
+    marginHorizontal: spacing.sm,
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
   input: {
+    backgroundColor: colors.inputBackground,   // NEW
+    color: colors.text,                        // NEW
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.border,
     borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginBottom: 16,
+    paddingVertical: spacing.sm * 1.5,
+    paddingHorizontal: spacing.md,
+    marginBottom: spacing.md,
   },
   primaryButton: {
-    backgroundColor: BRAND,
+    backgroundColor: colors.primary,
     borderRadius: 8,
-    paddingVertical: 14,
+    paddingVertical: spacing.sm * 1.5,
     alignItems: 'center',
+    marginBottom: spacing.md,
   },
-  primaryButtonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
-
-  divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 16 },
-  dividerLine: { flex: 1, height: 1, backgroundColor: '#e0e0e0' },
-  dividerText: { marginHorizontal: 12, fontSize: 14, color: '#999' },
-
+  primaryButtonText: {
+    ...typography.body,
+    color: '#ffffff',
+    fontWeight: '600',
+  },
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.border,
+  },
+  dividerText: {
+    marginHorizontal: spacing.sm,
+    ...typography.body,
+    color: colors.subtext,                    // switched to subtext
+  },
   oauthButton: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.border,
     borderRadius: 8,
-    paddingVertical: 12,
-    marginBottom: 12,
+    paddingVertical: spacing.sm * 1.5,
+    marginBottom: spacing.md,
   },
-  oauthButtonText: { color: '#333', fontSize: 16, fontWeight: '500' },
-});
+  oauthButtonText: {
+    ...typography.body,
+    color: colors.text,
+  },
+})
