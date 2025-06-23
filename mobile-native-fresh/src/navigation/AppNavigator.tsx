@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../features/auth/hooks/useAuth';
+import { ContentScreen } from '../features/content/screens/ContentScreen';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
@@ -67,6 +68,11 @@ const HomeStack = () => (
       name="VoiceRecord" 
       component={VoiceRecordScreen}
       options={{ headerShown: true, title: 'Voice Note', presentation: 'modal' }}
+    />
+    <Stack.Screen
+      name="Content"
+      component={ContentScreen}
+      options={{ headerShown: true, title: 'Content' }}
     />
   </Stack.Navigator>
 );

@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "thoughtmarks",
     "entryPoint": "App.tsx",
     "name": "mobile-native-fresh",
     "slug": "mobile-native-fresh",
@@ -11,7 +12,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#181818"
     },
     "ios": {
       "supportsTablet": true
@@ -19,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#181818"
       },
       "edgeToEdgeEnabled": true
     },
@@ -27,12 +28,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-notifications"
+      "expo-notifications",
+      "expo-font"
     ],
-     "extra": {
-      "googleIosClientId":   "1234567890-abcdefgHIJKLMNopqrstuv.apps.googleusercontent.com",
+    "extra": {
+      "googleIosClientId": "1234567890-abcdefgHIJKLMNopqrstuv.apps.googleusercontent.com",
       "googleAndroidClientId": "1234567890-ABCDEFGhijklmnopqrst.apps.googleusercontent.com",
-      "googleWebClientId":     "1234567890-abcdefghIjklmnopQRs.apps.googleusercontent.com"
+      "googleWebClientId": "1234567890-abcdefghIjklmnopQRs.apps.googleusercontent.com"
     }
   }
 }
