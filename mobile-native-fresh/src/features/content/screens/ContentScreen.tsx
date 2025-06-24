@@ -12,19 +12,19 @@ import {
   useNavigation,
   NavigationProp,
 } from '@react-navigation/native';
-import { NativeStackParamList } from '../../../navigation/types';
+import { RootStackParamList } from '../../../navigation/types';
 import { colors, spacing, typography } from '../../../theme/theme';
 
 type ContentPage = {
   title: string;
   description: string;
-  route: keyof NativeStackParamList;
+  route: keyof RootStackParamList;
   iconName: React.ComponentProps<typeof Feather>['name'];
   iconColor: string;
 };
 
 // tell TS what routes we can navigate to
-type ContentScreenNavigationProp = NavigationProp<NativeStackParamList>;
+type ContentScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 export const ContentScreen: React.FC = () => {
   const navigation = useNavigation<ContentScreenNavigationProp>();
@@ -40,7 +40,7 @@ export const ContentScreen: React.FC = () => {
     {
       title: 'All Thoughtmarks',
       description: 'Browse and manage all your thoughtmarks',
-      route: 'HomeMain',
+      route: 'Dashboard',
       iconName: 'list',
       iconColor: '#3b82f6',
     },
@@ -54,7 +54,7 @@ export const ContentScreen: React.FC = () => {
     {
       title: 'Recently Deleted',
       description: 'Recover deleted thoughtmarks and bins',
-      route: 'Trash',
+      route: 'Archive',
       iconName: 'rotate-ccw',
       iconColor: '#ef4444',
     },
@@ -79,7 +79,7 @@ export const ContentScreen: React.FC = () => {
           <TouchableOpacity
             key={page.route}
             style={styles.card}
-            onPress={() => navigation.navigate(page.route)}
+            onPress={() => navigation.navigate(page.route as string)}
           >
             <View style={styles.cardIconContainer}>
               <Feather name={page.iconName} size={24} color={page.iconColor} />

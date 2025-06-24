@@ -12,15 +12,18 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../hooks/useAuth';
+import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 import { RegistrationForm } from '../components/RegistrationForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { colors, spacing, typography } from '../../../theme/theme';
+import { designTokens } from '../../../theme/tokens';
 
 const logo = require('../../../../assets/logo.png');
 
 export const SignUpScreen: React.FC = () => {
-  const { signUp, signInWithGoogle, signInWithApple, loading } = useAuth();
+  const { signUp, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const { promptAsync: googlePromptAsync } = useGoogleAuth();
 
   const handleEmailSignUp = async (
     email: string,
@@ -41,7 +44,7 @@ export const SignUpScreen: React.FC = () => {
   const handleGoogleSignUp = async () => {
     try {
       setIsLoading(true);
-      await signInWithGoogle();
+      await googlePromptAsync();
     } catch (err: any) {
       Alert.alert('Google Sign Up Failed', err.message);
     } finally {
@@ -81,9 +84,6 @@ export const SignUpScreen: React.FC = () => {
             <RegistrationForm
               onSubmit={handleEmailSignUp}
               loading={isLoading || loading}
-              inputStyle={styles.input}
-              buttonStyle={styles.primaryButton}
-              buttonTextStyle={styles.primaryButtonText}
             />
 
             <View style={styles.divider}>
@@ -96,9 +96,6 @@ export const SignUpScreen: React.FC = () => {
               provider="google"
               onPress={handleGoogleSignUp}
               loading={isLoading || loading}
-              style={styles.oauthButton}
-              textStyle={styles.oauthButtonText}
-              text="Continue with Google"
             />
 
             {Platform.OS === 'ios' && (
@@ -106,9 +103,6 @@ export const SignUpScreen: React.FC = () => {
                 provider="apple"
                 onPress={handleAppleSignUp}
                 loading={isLoading || loading}
-                style={styles.oauthButton}
-                textStyle={styles.oauthButtonText}
-                text="Continue with Apple"
               />
             )}
           </View>
@@ -154,7 +148,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     backgroundColor: colors.card,
-    borderRadius: 12,
+    borderRadius: designTokens.radius.md,
     padding: spacing.md,
     shadowColor: '#000',
     shadowOpacity: 0.05,
@@ -164,14 +158,14 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingVertical: spacing.sm * 1.5,
     paddingHorizontal: spacing.md,
     marginBottom: spacing.md,
   },
   primaryButton: {
     backgroundColor: colors.primary,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingVertical: spacing.sm * 1.5,
     alignItems: 'center',
     marginBottom: spacing.md,
@@ -200,7 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingVertical: spacing.sm * 2,
     marginBottom: spacing.sm,
   },

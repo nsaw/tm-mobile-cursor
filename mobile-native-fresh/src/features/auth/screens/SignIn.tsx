@@ -8,18 +8,21 @@ import {
   Platform,
   KeyboardAvoidingView,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../hooks/useAuth';
 import { LoginForm } from '../components/LoginForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { colors, spacing, typography } from '../../../theme/theme';
+import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 
 const logo = require('../../../../assets/logo.png');
 
 export const SignInScreen: React.FC = () => {
-  const { signIn, signInWithGoogle, signInWithApple, loading } = useAuth();
+  const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const { promptAsync: googlePromptAsync } = useGoogleAuth();
 
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
@@ -35,7 +38,7 @@ export const SignInScreen: React.FC = () => {
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
-      await signInWithGoogle();
+      await googlePromptAsync();
     } catch (err: any) {
       Alert.alert('Google Sign In Failed', err.message);
     } finally {
@@ -49,6 +52,17 @@ export const SignInScreen: React.FC = () => {
       await signInWithApple();
     } catch (err: any) {
       Alert.alert('Apple Sign In Failed', err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDemoSignIn = async () => {
+    try {
+      setIsLoading(true);
+      await signInWithDemo();
+    } catch (err: any) {
+      Alert.alert('Demo Sign In Failed', err.message);
     } finally {
       setIsLoading(false);
     }
@@ -71,9 +85,6 @@ export const SignInScreen: React.FC = () => {
           <LoginForm
             onSubmit={handleEmailSignIn}
             loading={isLoading || loading}
-            inputStyle={styles.input}
-            buttonStyle={styles.primaryButton}
-            buttonTextStyle={styles.primaryButtonText}
           />
 
           <View style={styles.divider}>
@@ -86,8 +97,6 @@ export const SignInScreen: React.FC = () => {
             provider="google"
             onPress={handleGoogleSignIn}
             loading={isLoading || loading}
-            style={styles.oauthButton}
-            textStyle={styles.oauthButtonText}
           />
 
           {Platform.OS === 'ios' && (
@@ -95,10 +104,19 @@ export const SignInScreen: React.FC = () => {
               provider="apple"
               onPress={handleAppleSignIn}
               loading={isLoading || loading}
-              style={styles.oauthButton}
-              textStyle={styles.oauthButtonText}
             />
           )}
+
+          {/* Demo Login Button */}
+          <View style={{ marginTop: 12 }}>
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={handleDemoSignIn}
+              disabled={isLoading || loading}
+            >
+              <Text style={styles.primaryButtonText}>Demo Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

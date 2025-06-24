@@ -12,7 +12,6 @@ function createVariantStyles<T extends Record<string, any>>(
 // Button variants (matching web app's button system)
 export const buttonVariants = createVariantStyles(
   {
-    borderRadius: designTokens.radius.lg,
     paddingHorizontal: designTokens.spacing.lg,
     paddingVertical: designTokens.spacing.md,
     flexDirection: 'row' as const,
@@ -55,26 +54,29 @@ export const buttonVariants = createVariantStyles(
     },
     size: {
       sm: {
+        borderRadius: designTokens.radius.sm,
         paddingHorizontal: designTokens.spacing.md,
         paddingVertical: designTokens.spacing.sm,
         minHeight: 36,
       },
       md: {
+        borderRadius: designTokens.radius.md,
         paddingHorizontal: designTokens.spacing.lg,
         paddingVertical: designTokens.spacing.md,
         minHeight: 44,
       },
       lg: {
+        borderRadius: designTokens.radius.lg,
         paddingHorizontal: designTokens.spacing.xl,
         paddingVertical: designTokens.spacing.lg,
         minHeight: 52,
       },
       icon: {
+        borderRadius: designTokens.radius.full,
         paddingHorizontal: designTokens.spacing.md,
         paddingVertical: designTokens.spacing.md,
         minHeight: 44,
         minWidth: 44,
-        borderRadius: designTokens.radius.full,
       },
     },
   }
@@ -83,7 +85,6 @@ export const buttonVariants = createVariantStyles(
 // Card variants (matching web app's card system)
 export const cardVariants = createVariantStyles(
   {
-    borderRadius: designTokens.radius.lg,
     backgroundColor: designTokens.colors.backgroundSecondary,
     borderColor: designTokens.colors.border,
     borderWidth: 1,
@@ -109,12 +110,15 @@ export const cardVariants = createVariantStyles(
     },
     size: {
       sm: {
+        borderRadius: designTokens.radius.sm,
         padding: designTokens.spacing.md,
       },
       md: {
+        borderRadius: designTokens.radius.md,
         padding: designTokens.spacing.lg,
       },
       lg: {
+        borderRadius: designTokens.radius.lg,
         padding: designTokens.spacing.xl,
       },
     },

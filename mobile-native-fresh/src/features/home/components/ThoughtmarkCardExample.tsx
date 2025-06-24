@@ -20,6 +20,8 @@ const sampleThoughtmarks: ThoughtmarkWithBin[] = [
     aiCategorySuggestions: ['mobile', 'development'],
     createdAt: '2024-01-15T10:30:00Z',
     updatedAt: '2024-01-15T10:30:00Z',
+    isTask: false,
+    isCompleted: false,
   },
   {
     id: 2,
@@ -35,6 +37,8 @@ const sampleThoughtmarks: ThoughtmarkWithBin[] = [
     aiCategorySuggestions: ['shopping', 'food'],
     createdAt: '2024-01-14T16:45:00Z',
     updatedAt: '2024-01-14T16:45:00Z',
+    isTask: false,
+    isCompleted: false,
   },
   {
     id: 3,
@@ -50,6 +54,8 @@ const sampleThoughtmarks: ThoughtmarkWithBin[] = [
     aiCategorySuggestions: ['business', 'planning'],
     createdAt: '2024-01-13T14:20:00Z',
     updatedAt: '2024-01-13T14:20:00Z',
+    isTask: false,
+    isCompleted: false,
   },
 ];
 

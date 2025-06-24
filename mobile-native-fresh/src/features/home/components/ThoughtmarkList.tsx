@@ -23,8 +23,7 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
   const renderThoughtmark = ({ item }: { item: Thoughtmark }) => (
     <ThoughtmarkCard
       thoughtmark={item}
-      onPress={() => onThoughtmarkPress(item)}
-      style={horizontal ? styles.horizontalCard : undefined}
+      onClick={() => onThoughtmarkPress(item)}
     />
   );
 
