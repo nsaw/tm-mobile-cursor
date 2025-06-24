@@ -133,6 +133,12 @@ class ApiService {
     });
   }
 
+  async deleteUserAccount(): Promise<APIResponse<boolean>> {
+    return this.makeRequest('/api/users/profile', {
+      method: 'DELETE',
+    });
+  }
+
   // Thoughtmarks methods
   async getThoughtmarks(): Promise<APIResponse<Thoughtmark[]>> {
     return this.makeRequest('/api/thoughtmarks');

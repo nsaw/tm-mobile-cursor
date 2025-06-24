@@ -175,7 +175,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.actionButton}
             onPress={handleDelete}
           >
-            <Ionicons name="trash-outline" size={20} color={colors.error} />
+            <Ionicons name="trash-outline" size={20} color={colors.primary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -192,7 +192,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
               <Ionicons 
                 name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                 size={20} 
-                color={thoughtmark.isCompleted ? colors.success : colors.subtext} 
+                color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
               />
               <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
                 {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
@@ -254,20 +254,22 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         {/* Actions */}
         <View style={styles.actionsContainer}>
           <Button
-            title="Edit"
             onPress={handleEdit}
             variant="outline"
-            style={styles.actionButton}
-          />
+            style={{ padding: 8 }}
+          >
+            Edit
+          </Button>
           <Button
-            title="Share"
             onPress={() => {
               // TODO: Implement share functionality
               Alert.alert('Share', 'Share functionality coming soon');
             }}
             variant="outline"
-            style={styles.actionButton}
-          />
+            style={{ padding: 8 }}
+          >
+            Share
+          </Button>
         </View>
       </ScrollView>
     </View>
@@ -347,7 +349,7 @@ const styles = StyleSheet.create({
     color: colors.subtext,
   },
   taskCompletedText: {
-    color: colors.success,
+    color: colors.primary,
     textDecorationLine: 'line-through',
   },
   contentCard: {

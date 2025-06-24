@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native'
 import { colors, spacing, typography } from '../../../theme/theme'
+import { designTokens } from '../../../theme/tokens'
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     fontSize: typography.body.fontSize,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     backgroundColor: colors.card,
   },
   passwordInput: {
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     backgroundColor: colors.primary,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingVertical: spacing.sm * 1.5,
     alignItems: 'center',
     marginTop: spacing.sm,

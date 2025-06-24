@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
+import { designTokens } from '../../../theme/tokens';
 import { TagChip } from '../../../components/ui/TagChip';
 import { ActionSheet } from '../../../components/ui/ActionSheet';
 import { ThoughtmarkWithBin } from '../../../types';
@@ -242,7 +243,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     marginVertical: 0,
     borderWidth: 0,
     elevation: 1,
@@ -295,7 +296,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#C6D60020',
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
-    borderRadius: 12,
+    borderRadius: designTokens.radius.md,
     marginRight: spacing.sm,
   },
   similarityText: {

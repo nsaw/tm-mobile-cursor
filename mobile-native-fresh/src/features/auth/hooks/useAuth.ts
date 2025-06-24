@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { auth } from '../../../config/firebase';
 import { 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
-  signInWithPopup, 
   signOut as firebaseSignOut,
   onAuthStateChanged,
   User as FirebaseUser,
-  updateProfile
+  updateProfile,
+  signInWithPopup
 } from 'firebase/auth';
-import { auth, googleProvider, appleProvider } from '../../../config/firebase';
 import { apiService } from '../../../services/api';
 import type { User, AuthState } from '../../../types';
 
@@ -89,7 +89,6 @@ export const useAuth = () => {
         }
       }
     });
-
     return unsubscribe;
   }, []);
 
@@ -132,7 +131,6 @@ export const useAuth = () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      // Firebase auth state change will handle the rest
       return userCredential.user;
     } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
@@ -144,14 +142,10 @@ export const useAuth = () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // Update display name if provided
       if (firstName || lastName) {
         const displayName = [firstName, lastName].filter(Boolean).join(' ');
         await updateProfile(userCredential.user, { displayName });
       }
-      
-      // Firebase auth state change will handle the rest
       return userCredential.user;
     } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
@@ -162,14 +156,11 @@ export const useAuth = () => {
   const signInWithGoogle = async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      // Firebase auth state change will handle the rest
-      return result.user;
+      // TODO: Use expo-auth-session to get Google ID token
+      // Then use: signInWithCredential(auth, googleCredential)
+      throw new Error('Google sign-in not implemented. Use expo-auth-session and pass credential to signInWithCredential(auth, credential).');
     } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      if (error.code === 'auth/popup-closed-by-user') {
-        throw new Error('Google sign in was cancelled');
-      }
       throw new Error(error.message || 'Google sign in failed');
     }
   };
@@ -177,14 +168,11 @@ export const useAuth = () => {
   const signInWithApple = async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const result = await signInWithPopup(auth, appleProvider);
-      // Firebase auth state change will handle the rest
-      return result.user;
+      // TODO: Use expo-apple-authentication to get Apple ID token
+      // Then use: signInWithCredential(auth, appleCredential)
+      throw new Error('Apple sign-in not implemented. Use expo-apple-authentication and pass credential to signInWithCredential(auth, credential).');
     } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      if (error.code === 'auth/popup-closed-by-user') {
-        throw new Error('Apple sign in was cancelled');
-      }
       throw new Error(error.message || 'Apple sign in failed');
     }
   };
@@ -199,16 +187,8 @@ export const useAuth = () => {
         loading: false,
         guestMode: true,
       });
-    } catch (error) {
-      console.error('Sign out error:', error);
-      // Force sign out even if Firebase fails
-      await clearAuthData();
-      setAuthState({
-        user: null,
-        isAuthenticated: false,
-        loading: false,
-        guestMode: true,
-      });
+    } catch (error: any) {
+      throw new Error(error.message || 'Sign out failed');
     }
   };
 
@@ -254,5 +234,6 @@ export const useAuth = () => {
     signOut,
     enableGuestMode,
     disableGuestMode,
+    signInWithDemo,
   };
 };
