@@ -36,7 +36,6 @@ export const useAuth = () => {
     iosClientId:   googleIosClientId,
     androidClientId: googleAndroidClientId,
     webClientId:     googleWebClientId,
-    expoClientId:    googleWebClientId, // for Expo Go
   });
 
   // Initialize auth state from storage
@@ -62,10 +61,47 @@ export const useAuth = () => {
         const user = JSON.parse(storedUser) as User;
         await validateAndSetUser(user, storedToken);
       } else {
-        setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
+        // For demo purposes, auto-login with demo user
+        await signInWithDemo();
       }
     } catch (error) {
       console.error('Failed to initialize auth:', error);
+      // For demo purposes, auto-login with demo user
+      await signInWithDemo();
+    }
+  };
+
+  const signInWithDemo = async () => {
+    try {
+      const res = await apiService.demoLogin();
+      console.log('Demo login response:', JSON.stringify(res, null, 2));
+      
+      if (res.success && res.data && res.data.user && res.data.token) {
+        console.log('Storing auth data:', { 
+          user: res.data.user, 
+          token: res.data.token,
+          userType: typeof res.data.user,
+          tokenType: typeof res.data.token
+        });
+        await storeAuthData(res.data.user, res.data.token);
+        setAuthState({
+          user: res.data.user,
+          isAuthenticated: true,
+          loading: false,
+          guestMode: false,
+        });
+      } else {
+        console.log('Demo login failed or missing data:', {
+          success: res.success,
+          hasData: !!res.data,
+          hasUser: !!(res.data && res.data.user),
+          hasToken: !!(res.data && res.data.token),
+          dataKeys: res.data ? Object.keys(res.data) : 'no data'
+        });
+        setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
+      }
+    } catch (error) {
+      console.error('Failed to sign in with demo:', error);
       setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
     }
   };
@@ -135,10 +171,15 @@ export const useAuth = () => {
 
   const signInWithGoogle = async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
-    const result = await promptAsync();
-    if (result.type !== 'success') {
+    try {
+      const result = await promptAsync();
+      if (result.type !== 'success') {
+        setAuthState(prev => ({ ...prev, loading: false }));
+        throw new Error('Google sign in was cancelled');
+      }
+    } catch (error) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error('Google sign in was cancelled');
+      throw error;
     }
   };
 
@@ -198,16 +239,39 @@ export const useAuth = () => {
 
   const signOut = async () => {
     await clearAuthData();
-    setAuthState({ user: null, isAuthenticated: false, loading: false, guestMode: true });
+    setAuthState({
+      user: null,
+      isAuthenticated: false,
+      loading: false,
+      guestMode: true,
+    });
   };
 
-  // Helpers
+  const enableGuestMode = () => {
+    setAuthState({
+      user: null,
+      isAuthenticated: false,
+      loading: false,
+      guestMode: true,
+    });
+  };
+
+  const disableGuestMode = () => {
+    setAuthState(prev => ({ ...prev, guestMode: false }));
+  };
+
   const storeAuthData = async (user: User, token: string) => {
+    if (!user || !token) {
+      console.error('Cannot store auth data: user or token is null/undefined', { user, token });
+      throw new Error('User and token are required for storing auth data');
+    }
+    
     await Promise.all([
       AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user)),
       AsyncStorage.setItem(STORAGE_KEYS.TOKEN, token),
     ]);
   };
+
   const clearAuthData = async () => {
     await Promise.all([
       AsyncStorage.removeItem(STORAGE_KEYS.USER),
@@ -223,5 +287,7 @@ export const useAuth = () => {
     signInWithGoogle,
     signInWithApple,
     signOut,
+    enableGuestMode,
+    disableGuestMode,
   };
 };

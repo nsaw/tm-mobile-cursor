@@ -1,17 +1,34 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { ContentScreen } from '../features/content/screens/ContentScreen';
+import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
+import { RootStackParamList } from './types';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
 import { SignUpScreen } from '../features/auth/screens/SignUp';
 
 // Home Screens
-import { HomeScreen } from '../features/home/screens/HomeScreen';
+import { DashboardScreen } from '../features/home/screens/DashboardScreen';
 import { DetailScreen } from '../features/home/screens/DetailScreen';
+
+// AI Screens
+import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
+
+// Settings Screens
+import { SettingsScreen } from '../features/settings/screens/SettingsScreen';
+
+// Search Screens
+import { SearchScreen } from '../features/search/screens/SearchScreen';
+
+// Thoughtmarks Screens
+import { AllThoughtmarksScreen } from '../features/thoughtmarks/screens/AllThoughtmarksScreen';
+import { ThoughtmarkDetailScreen } from '../features/thoughtmarks/screens/ThoughtmarkDetailScreen';
+
+// Bins Screens
+import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
 
 import { View, Text } from 'react-native';
 
@@ -26,11 +43,6 @@ const ProfileScreen = () => (
     <Text>Profile Screen</Text>
   </View>
 );
-const SettingsScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Settings Screen</Text>
-  </View>
-);
 const BinDetailScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Bin Detail Screen</Text>
@@ -41,95 +53,68 @@ const VoiceRecordScreen = () => (
     <Text>Voice Record Screen</Text>
   </View>
 );
+const TasksScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Tasks Screen</Text>
+  </View>
+);
+const BinsScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Bins Screen</Text>
+  </View>
+);
+const ThoughtmarksScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Thoughtmarks Screen</Text>
+  </View>
+);
+const ThoughtmarkEditScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Thoughtmark Edit Screen</Text>
+  </View>
+);
+const CreateBinScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Create Bin Screen</Text>
+  </View>
+);
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
-// Home Stack Navigator
-const HomeStack = () => (
+// Main Stack Navigator (for authenticated users)
+const MainStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="HomeMain" component={HomeScreen} />
-    <Stack.Screen 
-      name="ThoughtmarkDetail" 
-      component={DetailScreen}
-      options={{ headerShown: true, title: 'Thoughtmark' }}
-    />
+    <Stack.Screen name="Dashboard" component={DashboardScreen} />
+    <Stack.Screen name="Search" component={SearchScreen} />
+    <Stack.Screen name="AITools" component={AIToolsScreen} />
+    <Stack.Screen name="AllThoughtmarks" component={AllThoughtmarksScreen} />
+    <Stack.Screen name="AllBins" component={AllBinsScreen} />
+    <Stack.Screen name="Tasks" component={TasksScreen} />
+    <Stack.Screen name="Bins" component={BinsScreen} />
+    <Stack.Screen name="Thoughtmarks" component={ThoughtmarksScreen} />
+    <Stack.Screen name="ThoughtmarkDetail" component={ThoughtmarkDetailScreen} />
+    <Stack.Screen name="ThoughtmarkEdit" component={ThoughtmarkEditScreen} />
     <Stack.Screen 
       name="CreateThoughtmark" 
       component={CreateThoughtmarkScreen}
-      options={{ headerShown: true, title: 'New Thoughtmark', presentation: 'modal' }}
+      options={{ presentation: 'modal' }}
     />
     <Stack.Screen 
-      name="BinDetail" 
-      component={BinDetailScreen}
-      options={{ headerShown: true, title: 'Bin' }}
+      name="CreateBin" 
+      component={CreateBinScreen}
+      options={{ presentation: 'modal' }}
     />
+    <Stack.Screen name="BinDetail" component={BinDetailScreen} />
     <Stack.Screen 
       name="VoiceRecord" 
       component={VoiceRecordScreen}
-      options={{ headerShown: true, title: 'Voice Note', presentation: 'modal' }}
+      options={{ presentation: 'modal' }}
     />
-    <Stack.Screen
-      name="Content"
-      component={ContentScreen}
-      options={{ headerShown: true, title: 'Content' }}
-    />
+    <Stack.Screen name="Content" component={ContentScreen} />
+    <Stack.Screen name="DesignSystemDemo" component={DesignSystemDemo} />
+    <Stack.Screen name="Settings" component={SettingsScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
   </Stack.Navigator>
-);
-
-// Profile Stack Navigator
-const ProfileStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="ProfileMain" component={ProfileScreen} />
-    <Stack.Screen 
-      name="Settings" 
-      component={SettingsScreen}
-      options={{ headerShown: true, title: 'Settings' }}
-    />
-  </Stack.Navigator>
-);
-
-// Main Tab Navigator (for authenticated users)
-const MainTabs = () => (
-  <Tab.Navigator
-    screenOptions={{
-      headerShown: false,
-      tabBarStyle: {
-        backgroundColor: '#ffffff',
-        borderTopColor: '#e0e0e0',
-        paddingTop: 8,
-        paddingBottom: 8,
-        height: 80,
-      },
-      tabBarActiveTintColor: '#007AFF',
-      tabBarInactiveTintColor: '#666666',
-      tabBarLabelStyle: {
-        fontSize: 12,
-        fontWeight: '500',
-      },
-    }}
-  >
-    <Tab.Screen 
-      name="Home" 
-      component={HomeStack}
-      options={{
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ color, size }) => (
-          <HomeIcon color={color} size={size} />
-        ),
-      }}
-    />
-    <Tab.Screen 
-      name="Profile" 
-      component={ProfileStack}
-      options={{
-        tabBarLabel: 'Profile',
-        tabBarIcon: ({ color, size }) => (
-          <ProfileIcon color={color} size={size} />
-        ),
-      }}
-    />
-  </Tab.Navigator>
 );
 
 // Auth Stack Navigator (for unauthenticated users)
@@ -145,26 +130,15 @@ const AuthStack = () => (
   </Stack.Navigator>
 );
 
-// Simple icon components (you can replace with react-native-vector-icons)
-const HomeIcon = ({ color, size }: { color: string; size: number }) => (
+// Loading Screen
+const LoadingScreen = () => (
   <View style={{ 
-    width: size, 
-    height: size,
+    flex: 1, 
+    justifyContent: 'center', 
     alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#181818'
   }}>
-    <Text style={{ fontSize: size * 0.8, color }}>🏠</Text>
-  </View>
-);
-
-const ProfileIcon = ({ color, size }: { color: string; size: number }) => (
-  <View style={{ 
-    width: size, 
-    height: size,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }}>
-    <Text style={{ fontSize: size * 0.8, color }}>👤</Text>
+    <Text style={{ color: '#ffffff', fontSize: 18 }}>Loading...</Text>
   </View>
 );
 
@@ -184,22 +158,7 @@ export const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <MainTabs /> : <AuthStack />}
+      {isAuthenticated ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
-  );
-};
-
-// Loading Screen Component
-const LoadingScreen = () => {
-  return (
-    <View style={{
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#ffffff'
-    }}>
-      <Text style={{ fontSize: 24, marginBottom: 16 }}>🤔</Text>
-      <Text style={{ fontSize: 16, color: '#666666' }}>Loading Thoughtmarks...</Text>
-    </View>
   );
 };

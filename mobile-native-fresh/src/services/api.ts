@@ -1,12 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { User, Thoughtmark, Bin, APIResponse, ThoughtmarkFormData, BinFormData } from '../types';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
 
 class ApiService {
   private async getAuthHeaders(): Promise<HeadersInit> {
     const token = await AsyncStorage.getItem('@thoughtmarks_token');
-    const userId = await AsyncStorage.getItem('@thoughtmarks_user_id');
     
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -14,10 +13,6 @@ class ApiService {
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
-    }
-    
-    if (userId) {
-      headers['X-User-ID'] = userId;
     }
 
     return headers;
@@ -39,14 +34,19 @@ class ApiService {
         },
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
       if (!response.ok) {
         return {
           success: false,
-          error: data.message || data.error || `HTTP ${response.status}`,
+          error: responseData.error || responseData.message || `HTTP ${response.status}`,
         };
       }
+
+      // Handle nested response structure from backend
+      // Backend returns: { success: true, data: { ... } }
+      // We want to return: { success: true, data: { ... } }
+      const data = responseData.data || responseData;
 
       return {
         success: true,
@@ -62,7 +62,7 @@ class ApiService {
 
   // Authentication methods
   async signIn(email: string, password: string): Promise<APIResponse<{ user: User; token: string }>> {
-    return this.makeRequest('/api/auth/signin', {
+    return this.makeRequest('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -74,7 +74,7 @@ class ApiService {
     firstName?: string,
     lastName?: string
   ): Promise<APIResponse<{ user: User; token: string }>> {
-    return this.makeRequest('/api/auth/signup', {
+    return this.makeRequest('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, firstName, lastName }),
     });
@@ -101,20 +101,25 @@ class ApiService {
     });
   }
 
-  // User profile methods
-  async getUserProfile(userId: number): Promise<APIResponse<User>> {
-    return this.makeRequest(`/api/users/${userId}`);
+  async demoLogin(): Promise<APIResponse<{ user: User; token: string }>> {
+    return this.makeRequest('/api/auth/demo', {
+      method: 'POST',
+    });
   }
 
-  async updateUserProfile(userId: number, updates: Partial<User>): Promise<APIResponse<User>> {
-    return this.makeRequest(`/api/users/${userId}`, {
+  // User profile methods
+  async getUserProfile(): Promise<APIResponse<User>> {
+    return this.makeRequest('/api/users/profile');
+  }
+
+  async updateUserProfile(updates: Partial<User>): Promise<APIResponse<User>> {
+    return this.makeRequest('/api/users/profile', {
       method: 'PATCH',
       body: JSON.stringify(updates),
     });
   }
 
   async updateUserPreferences(
-    userId: number,
     preferences: {
       marketingEmails?: boolean;
       aiNotifications?: boolean;
@@ -122,15 +127,9 @@ class ApiService {
       privacyConsent?: boolean;
     }
   ): Promise<APIResponse<User>> {
-    return this.makeRequest(`/api/users/${userId}/preferences`, {
+    return this.makeRequest('/api/users/profile', {
       method: 'PATCH',
       body: JSON.stringify(preferences),
-    });
-  }
-
-  async deleteUserAccount(userId: number): Promise<APIResponse<boolean>> {
-    return this.makeRequest(`/api/users/${userId}`, {
-      method: 'DELETE',
     });
   }
 
@@ -176,7 +175,7 @@ class ApiService {
   }
 
   async searchThoughtmarks(query: string): Promise<APIResponse<Thoughtmark[]>> {
-    return this.makeRequest(`/api/thoughtmarks/search?q=${encodeURIComponent(query)}`);
+    return this.makeRequest(`/api/thoughtmarks/search?query=${encodeURIComponent(query)}`);
   }
 
   // Bins methods
@@ -208,7 +207,7 @@ class ApiService {
     });
   }
 
-  // AI methods
+  // AI methods (for later)
   async generateInsights(thoughtmarkIds?: number[]): Promise<APIResponse<any>> {
     return this.makeRequest('/api/ai/insights', {
       method: 'POST',
@@ -230,14 +229,15 @@ class ApiService {
     });
   }
 
-  // Voice methods
+  // Voice processing (for later)
   async uploadVoiceNote(formData: FormData): Promise<APIResponse<{ url: string; transcription: string }>> {
-    const headers = await this.getAuthHeaders();
-    delete (headers as any)['Content-Type']; // Let fetch set the boundary for multipart
-
-    return this.makeRequest('/api/voice/upload', {
+    const token = await AsyncStorage.getItem('@thoughtmarks_token');
+    
+    return this.makeRequest('/api/ai/process-voice', {
       method: 'POST',
-      headers,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
       body: formData,
     });
   }

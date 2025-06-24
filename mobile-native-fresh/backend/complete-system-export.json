@@ -1,0 +1,163 @@
+{
+  "export_metadata": {
+    "timestamp": "2025-06-23T21:00:00.000Z",
+    "environment": "production",
+    "export_type": "complete_system_export",
+    "version": "1.0.0"
+  },
+  "database_connection": {
+    "host": "REDACTED_FOR_SECURITY",
+    "port": "5432",
+    "database": "REDACTED_FOR_SECURITY", 
+    "ssl_mode": "require",
+    "connection_string_pattern": "postgresql://username:password@host:port/database"
+  },
+  "api_endpoints": {
+    "base_url": "https://527dd908-215f-43c3-b0c3-479241cd1557-00-1rnu8mf9041wv.janeway.replit.dev",
+    "authentication": {
+      "login": "/api/auth/login",
+      "register": "/api/auth/register",
+      "logout": "/api/auth/logout",
+      "refresh": "/api/auth/refresh",
+      "demo": "/api/auth/demo"
+    },
+    "user_management": {
+      "profile": "/api/users/profile",
+      "by_firebase": "/api/users/by-firebase/:uid",
+      "update": "/api/users/:id",
+      "delete": "/api/users/:id"
+    },
+    "thoughtmarks": {
+      "list": "/api/thoughtmarks",
+      "create": "/api/thoughtmarks",
+      "get": "/api/thoughtmarks/:id",
+      "update": "/api/thoughtmarks/:id", 
+      "delete": "/api/thoughtmarks/:id",
+      "search": "/api/thoughtmarks/search",
+      "bulk_update": "/api/thoughtmarks/bulk-update"
+    },
+    "bins": {
+      "list": "/api/bins",
+      "create": "/api/bins",
+      "get": "/api/bins/:id",
+      "update": "/api/bins/:id",
+      "delete": "/api/bins/:id"
+    },
+    "ai_services": {
+      "categorize": "/api/ai/categorize",
+      "process_voice": "/api/ai/process-voice",
+      "generate_tags": "/api/ai/generate-tags",
+      "summarize": "/api/ai/summarize"
+    },
+    "admin": {
+      "export": "/api/admin/export",
+      "status": "/api/admin/export/status",
+      "download": "/api/admin/export/download/:filename"
+    },
+    "email": {
+      "subscribe": "/api/email/subscribe",
+      "unsubscribe": "/api/email/unsubscribe",
+      "send_verification": "/api/email/send-verification"
+    }
+  },
+  "environment_variables": {
+    "database": {
+      "DATABASE_URL": "SENSITIVE_DATA_REDACTED",
+      "PGHOST": "SENSITIVE_DATA_REDACTED",
+      "PGPORT": "5432",
+      "PGUSER": "SENSITIVE_DATA_REDACTED",
+      "PGPASSWORD": "SENSITIVE_DATA_REDACTED",
+      "PGDATABASE": "SENSITIVE_DATA_REDACTED"
+    },
+    "firebase": {
+      "FIREBASE_PROJECT_ID": "CONFIGURATION_DATA",
+      "FIREBASE_PRIVATE_KEY": "SENSITIVE_KEY_REDACTED",
+      "FIREBASE_CLIENT_EMAIL": "SERVICE_ACCOUNT_EMAIL"
+    },
+    "openai": {
+      "OPENAI_API_KEY": "SENSITIVE_KEY_REDACTED"
+    },
+    "email_services": {
+      "SENDGRID_API_KEY": "SENSITIVE_KEY_REDACTED"
+    },
+    "authentication": {
+      "JWT_SECRET": "SENSITIVE_SECRET_REDACTED",
+      "SESSION_SECRET": "SENSITIVE_SECRET_REDACTED"
+    },
+    "oauth": {
+      "GOOGLE_CLIENT_ID": "PUBLIC_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET": "SENSITIVE_SECRET_REDACTED",
+      "APPLE_CLIENT_ID": "PUBLIC_CLIENT_ID",
+      "APPLE_TEAM_ID": "TEAM_IDENTIFIER",
+      "APPLE_KEY_ID": "KEY_IDENTIFIER",
+      "APPLE_PRIVATE_KEY": "SENSITIVE_KEY_REDACTED"
+    }
+  },
+  "database_schema": {
+    "users": {
+      "columns": [
+        {"name": "id", "type": "integer", "primary_key": true},
+        {"name": "email", "type": "text", "unique": true},
+        {"name": "display_name", "type": "text", "nullable": true},
+        {"name": "firebase_uid", "type": "text", "unique": true},
+        {"name": "created_at", "type": "timestamp", "default": "now()"},
+        {"name": "is_premium", "type": "boolean", "default": false},
+        {"name": "is_admin", "type": "boolean", "default": false},
+        {"name": "subscription_tier", "type": "varchar", "nullable": true},
+        {"name": "subscription_status", "type": "varchar", "default": "active"}
+      ],
+      "relationships": ["has_many thoughtmarks", "has_many bins"]
+    },
+    "thoughtmarks": {
+      "columns": [
+        {"name": "id", "type": "integer", "primary_key": true},
+        {"name": "title", "type": "text", "required": true},
+        {"name": "content", "type": "text", "required": true},
+        {"name": "tags", "type": "text[]", "default": "{}"},
+        {"name": "bin_id", "type": "integer", "foreign_key": "bins.id"},
+        {"name": "user_id", "type": "integer", "foreign_key": "users.id"},
+        {"name": "is_task", "type": "boolean", "default": false},
+        {"name": "is_completed", "type": "boolean", "default": false},
+        {"name": "is_pinned", "type": "boolean", "default": false},
+        {"name": "due_date", "type": "timestamp", "nullable": true},
+        {"name": "created_at", "type": "timestamp", "default": "now()"},
+        {"name": "updated_at", "type": "timestamp", "default": "now()"}
+      ],
+      "relationships": ["belongs_to user", "belongs_to bin"]
+    },
+    "bins": {
+      "columns": [
+        {"name": "id", "type": "integer", "primary_key": true},
+        {"name": "name", "type": "text", "required": true},
+        {"name": "description", "type": "text", "nullable": true},
+        {"name": "color", "type": "text", "default": "#C6D600"},
+        {"name": "icon", "type": "text", "default": "folder"},
+        {"name": "user_id", "type": "integer", "foreign_key": "users.id"},
+        {"name": "parent_bin_id", "type": "integer", "foreign_key": "bins.id"},
+        {"name": "sort_order", "type": "integer", "default": 0},
+        {"name": "created_at", "type": "timestamp", "default": "now()"}
+      ],
+      "relationships": ["belongs_to user", "has_many thoughtmarks", "has_many child_bins"]
+    }
+  },
+  "data_summary": {
+    "total_users": 16,
+    "total_thoughtmarks": 140, 
+    "total_bins": 173,
+    "active_subscriptions": "0 (demo environment)",
+    "premium_users": "2 admin accounts"
+  },
+  "security_configuration": {
+    "authentication_methods": ["Firebase Auth", "Google OAuth", "Apple Sign-In", "Demo Mode"],
+    "session_management": "Express sessions with PostgreSQL store",
+    "api_protection": ["Rate limiting", "CORS", "Helmet security headers"],
+    "data_encryption": "TLS in transit, encrypted at rest"
+  },
+  "deployment_configuration": {
+    "platform": "Replit",
+    "runtime": "Node.js",
+    "build_command": "npm run build",
+    "start_command": "npm run dev",
+    "environment": "production"
+  }
+}
