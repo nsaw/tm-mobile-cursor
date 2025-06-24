@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
     borderRadius: 8,
-    marginVertical: 4,
+    marginVertical: 0,
     borderWidth: 0,
     elevation: 1,
     shadowColor: '#000',

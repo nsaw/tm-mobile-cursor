@@ -80,6 +80,14 @@ export const designTokens = {
       normal: 1.5,
       relaxed: 1.75,
     },
+    // Heading 2 specific styles
+    heading2: {
+      fontFamily: 'Ubuntu',
+      fontSize: 28,
+      fontWeight: '700',
+      textTransform: 'uppercase' as const,
+      letterSpacing: 1,
+    },
   },
   
   shadows: {

@@ -39,7 +39,7 @@ export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ ch
       navigation.navigate('CreateThoughtmark', {
         content: transcript,
         title: aiTitle,
-        voice: true,
+        isVoiceNote: true,
       });
     }
   };
