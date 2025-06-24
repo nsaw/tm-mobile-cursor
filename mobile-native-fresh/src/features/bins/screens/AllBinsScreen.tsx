@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -18,15 +18,22 @@ import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
+import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../navigation/types';
+
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 export const AllBinsScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
   const { bins, loading, fetchBins } = useBins();
   const { thoughtmarks } = useThoughtmarks();
   
   const [refreshing, setRefreshing] = useState(false);
   const [sortBy, setSortBy] = useState<'name' | 'count' | 'date'>('name');
+
+  const { showVoiceRecorder } = useVoiceRecorder();
 
   // Get filter parameters from navigation
   const filterParams = route.params as {
@@ -91,8 +98,7 @@ export const AllBinsScreen: React.FC = () => {
   };
 
   const handleVoiceRecord = () => {
-    // TODO: Implement voice recording
-    console.log('Voice recording started');
+    showVoiceRecorder();
   };
 
   const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) => (

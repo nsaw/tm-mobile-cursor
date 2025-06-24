@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,19 +9,26 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
-import { useNavigation } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
+import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
+import { RootStackParamList } from '../../../navigation/types';
+
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 export const SearchScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const { thoughtmarks } = useThoughtmarks();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+
+  const { showVoiceRecorder } = useVoiceRecorder();
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -76,8 +83,7 @@ export const SearchScreen: React.FC = () => {
   };
 
   const handleVoiceRecord = () => {
-    // TODO: Implement voice recording
-    console.log('Voice recording started');
+    showVoiceRecorder();
   };
 
   const handleCreateThoughtmark = () => {

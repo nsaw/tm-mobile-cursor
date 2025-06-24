@@ -20,7 +20,7 @@ export type RootStackParamList = {
     tag?: string;
   };
   ThoughtmarkDetail: { thoughtmarkId: number };
-  CreateThoughtmark: { thoughtmarkId?: number };
+  CreateThoughtmark: { thoughtmarkId?: number; content?: string; title?: string; voice?: boolean };
   ThoughtmarkEdit: { thoughtmarkId: number };
   
   // Bins Screens

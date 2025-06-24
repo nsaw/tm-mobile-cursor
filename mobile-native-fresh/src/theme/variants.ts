@@ -12,7 +12,7 @@ function createVariantStyles<T extends Record<string, any>>(
 // Button variants (matching web app's button system)
 export const buttonVariants = createVariantStyles(
   {
-    borderRadius: designTokens.radius.md,
+    borderRadius: designTokens.radius.lg,
     paddingHorizontal: designTokens.spacing.lg,
     paddingVertical: designTokens.spacing.md,
     flexDirection: 'row' as const,
@@ -23,7 +23,7 @@ export const buttonVariants = createVariantStyles(
   {
     variant: {
       primary: {
-        backgroundColor: designTokens.colors.accent,
+        backgroundColor: 'transparent',
         borderColor: designTokens.colors.accent,
         borderWidth: 1,
       },
@@ -38,7 +38,7 @@ export const buttonVariants = createVariantStyles(
         borderWidth: 0,
       },
       destructive: {
-        backgroundColor: designTokens.colors.danger,
+        backgroundColor: 'transparent',
         borderColor: designTokens.colors.danger,
         borderWidth: 1,
       },
@@ -48,7 +48,7 @@ export const buttonVariants = createVariantStyles(
         borderWidth: 1,
       },
       brand: {
-        backgroundColor: designTokens.colors.brand,
+        backgroundColor: 'transparent',
         borderColor: designTokens.colors.brand,
         borderWidth: 1,
       },
@@ -84,24 +84,26 @@ export const buttonVariants = createVariantStyles(
 export const cardVariants = createVariantStyles(
   {
     borderRadius: designTokens.radius.lg,
-    backgroundColor: designTokens.colors.surface,
+    backgroundColor: designTokens.colors.backgroundSecondary,
     borderColor: designTokens.colors.border,
     borderWidth: 1,
     padding: designTokens.spacing.lg,
   },
   {
     variant: {
-      default: {},
+      default: {
+        backgroundColor: designTokens.colors.backgroundSecondary,
+      },
       glass: {
-        backgroundColor: 'rgba(255,255,255,0.05)',
-        // Note: backdrop-filter not available in React Native
-        // We'll use opacity and blur effects where possible
+        backgroundColor: 'rgba(26, 26, 30, 0.9)',
+        borderColor: 'rgba(255,255,255,0.25)',
       },
       elevated: {
+        backgroundColor: designTokens.colors.backgroundSecondary,
         ...designTokens.shadows.md,
       },
       interactive: {
-        backgroundColor: designTokens.colors.surface,
+        backgroundColor: designTokens.colors.backgroundSecondary,
         borderColor: designTokens.colors.borderHover,
       },
     },
@@ -122,7 +124,7 @@ export const cardVariants = createVariantStyles(
 // Input variants
 export const inputVariants = createVariantStyles(
   {
-    borderRadius: designTokens.radius.md,
+    borderRadius: designTokens.radius.lg,
     borderWidth: 1,
     paddingHorizontal: designTokens.spacing.md,
     paddingVertical: designTokens.spacing.sm,
@@ -177,40 +179,63 @@ export const textVariants = createVariantStyles(
   {
     variant: {
       body: {
-        fontSize: designTokens.typography.fontSize.body,
+        fontSize: designTokens.typography.fontSize.sm,
         fontWeight: designTokens.typography.fontWeight.normal,
-        lineHeight: designTokens.typography.lineHeight.normal,
+        lineHeight: designTokens.typography.fontSize.sm * 1.6,
       },
       heading: {
-        fontSize: designTokens.typography.fontSize.heading,
+        fontSize: designTokens.typography.fontSize.lg,
         fontWeight: designTokens.typography.fontWeight.bold,
         fontFamily: designTokens.typography.fontFamily.heading,
-        lineHeight: designTokens.typography.lineHeight.tight,
+        lineHeight: designTokens.typography.fontSize.lg * 1.3,
       },
       subheading: {
-        fontSize: designTokens.typography.fontSize.lg,
-        fontWeight: designTokens.typography.fontWeight.semibold,
-        lineHeight: designTokens.typography.lineHeight.tight,
+        fontSize: designTokens.typography.fontSize.body,
+        fontWeight: designTokens.typography.fontWeight.normal,
+        lineHeight: designTokens.typography.fontSize.body * 1.4,
       },
       caption: {
-        fontSize: designTokens.typography.fontSize.sm,
+        fontSize: designTokens.typography.fontSize.xs,
         fontWeight: designTokens.typography.fontWeight.normal,
         color: designTokens.colors.textMuted,
+        lineHeight: designTokens.typography.fontSize.xs * 1.5,
       },
       label: {
-        fontSize: designTokens.typography.fontSize.sm,
-        fontWeight: designTokens.typography.fontWeight.medium,
+        fontSize: designTokens.typography.fontSize.xs,
+        fontWeight: designTokens.typography.fontWeight.normal,
         color: designTokens.colors.textSecondary,
+        lineHeight: designTokens.typography.fontSize.xs * 1.5,
       },
     },
     size: {
-      xs: { fontSize: designTokens.typography.fontSize.xs },
-      sm: { fontSize: designTokens.typography.fontSize.sm },
-      md: { fontSize: designTokens.typography.fontSize.body },
-      lg: { fontSize: designTokens.typography.fontSize.lg },
-      xl: { fontSize: designTokens.typography.fontSize.xl },
-      '2xl': { fontSize: designTokens.typography.fontSize['2xl'] },
-      '3xl': { fontSize: designTokens.typography.fontSize['3xl'] },
+      xs: { 
+        fontSize: designTokens.typography.fontSize.xs - 2,
+        lineHeight: (designTokens.typography.fontSize.xs - 2) * 1.5,
+      },
+      sm: { 
+        fontSize: designTokens.typography.fontSize.xs,
+        lineHeight: designTokens.typography.fontSize.xs * 1.5,
+      },
+      md: { 
+        fontSize: designTokens.typography.fontSize.sm,
+        lineHeight: designTokens.typography.fontSize.sm * 1.6,
+      },
+      lg: { 
+        fontSize: designTokens.typography.fontSize.body,
+        lineHeight: designTokens.typography.fontSize.body * 1.4,
+      },
+      xl: { 
+        fontSize: designTokens.typography.fontSize.lg,
+        lineHeight: designTokens.typography.fontSize.lg * 1.3,
+      },
+      '2xl': { 
+        fontSize: designTokens.typography.fontSize.xl,
+        lineHeight: designTokens.typography.fontSize.xl * 1.3,
+      },
+      '3xl': { 
+        fontSize: designTokens.typography.fontSize['2xl'],
+        lineHeight: designTokens.typography.fontSize['2xl'] * 1.2,
+      },
     },
   }
 );
@@ -250,6 +275,11 @@ export const badgeVariants = createVariantStyles(
       danger: {
         backgroundColor: designTokens.colors.danger,
         borderColor: designTokens.colors.danger,
+        borderWidth: 1,
+      },
+      outline: {
+        backgroundColor: 'transparent',
+        borderColor: designTokens.colors.border,
         borderWidth: 1,
       },
     },
