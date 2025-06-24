@@ -4,55 +4,105 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  ViewStyle,
   Alert,
+  Vibration,
 } from 'react-native';
-import { formatDistanceToNow, isWithinInterval, subDays } from 'date-fns';
-import { apiService } from '../../../services/api';
-import type { Thoughtmark } from '../../../types';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, spacing, typography } from '../../../theme/theme';
+import { TagChip } from '../../../components/ui/TagChip';
+import { ActionSheet } from '../../../components/ui/ActionSheet';
+import { ThoughtmarkWithBin } from '../../../types';
 
 interface ThoughtmarkCardProps {
-  thoughtmark: Thoughtmark;
-  onPress: () => void;
+  thoughtmark: ThoughtmarkWithBin;
   onEdit?: () => void;
   onDelete?: () => void;
   onArchive?: () => void;
-  style?: ViewStyle;
+  onClick?: () => void;
+  enableSwipeDelete?: boolean;
+  showSimilarity?: boolean;
+  similarity?: number;
   isSelectable?: boolean;
   isSelected?: boolean;
   onSelectionToggle?: (id: number) => void;
-  showSimilarity?: boolean;
-  similarity?: number;
 }
 
 export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   thoughtmark,
-  onPress,
   onEdit,
   onDelete,
   onArchive,
-  style,
+  onClick,
+  enableSwipeDelete = false,
+  showSimilarity = false,
+  similarity,
   isSelectable = false,
   isSelected = false,
   onSelectionToggle,
-  showSimilarity = false,
-  similarity,
 }) => {
+  const [showContextMenu, setShowContextMenu] = useState(false);
   const [isLongPressing, setIsLongPressing] = useState(false);
+
+  const handleLongPress = () => {
+    Vibration.vibrate(50);
+    setIsLongPressing(true);
+    setTimeout(() => {
+      if (isLongPressing) {
+        setShowContextMenu(true);
+      }
+    }, 500);
+  };
+
+  const handlePressOut = () => {
+    setIsLongPressing(false);
+  };
+
+  const handleCardPress = () => {
+    if (isSelectable && onSelectionToggle) {
+      onSelectionToggle(thoughtmark.id);
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
+  const handleTogglePin = async () => {
+    try {
+      // TODO: Implement API call to toggle pin status
+      // await apiRequest("POST", `/api/thoughtmarks/${thoughtmark.id}/toggle-pin`);
+      Alert.alert(
+        thoughtmark.isPinned ? "Unpinned" : "Pinned",
+        `Thoughtmark ${thoughtmark.isPinned ? "unpinned from" : "pinned to"} top`
+      );
+    } catch (error) {
+      Alert.alert("Error", "Failed to update pin status");
+    }
+  };
+
+  const handleShare = () => {
+    // TODO: Implement share functionality
+    Alert.alert("Share", "Share functionality coming soon!");
+  };
 
   const formatDate = (dateString: string) => {
     if (!dateString || isNaN(new Date(dateString).getTime())) {
-      return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return new Date().toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric' 
+      });
     }
-    
+
     const createdDate = new Date(dateString);
     const now = new Date();
-    const sevenDaysAgo = subDays(now, 7);
-    
-    if (isWithinInterval(createdDate, { start: sevenDaysAgo, end: now })) {
-      return createdDate.toLocaleDateString('en-US', { weekday: 'short' });
+    const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+    // Show day of the week for items created within the last 7 days
+    if (createdDate >= sevenDaysAgo) {
+      return createdDate.toLocaleDateString('en-US', { 
+        weekday: 'short'
+      });
     }
-    
+
+    // Show date for older items
     return createdDate.toLocaleDateString('en-US', { 
       month: 'short', 
       day: 'numeric',
@@ -60,234 +110,224 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
     });
   };
 
-  const truncateContent = (content: string, maxLength: number = 120) => {
-    if (content.length <= maxLength) return content;
-    return content.substring(0, maxLength).trim() + '...';
-  };
-
-  const handleTogglePin = async () => {
-    try {
-      await apiService.togglePin(thoughtmark.id);
-      // Refresh data or use callback
-    } catch (error) {
-      Alert.alert('Error', 'Failed to update pin status');
-    }
-  };
-
-  const handleCardPress = () => {
-    if (isSelectable && onSelectionToggle) {
-      onSelectionToggle(thoughtmark.id);
-    } else {
-      onPress();
-    }
-  };
-
-  const showActionMenu = () => {
-    const options = ['View', 'Edit', thoughtmark.isPinned ? 'Unpin' : 'Pin', 'Share'];
-    if (onArchive) options.push(thoughtmark.isArchived ? 'Unarchive' : 'Archive');
-    if (onDelete) options.push('Delete');
-    options.push('Cancel');
-
-    Alert.alert(
-      thoughtmark.title,
-      'Choose an action',
-      options.map((option, index) => ({
-        text: option,
-        style: option === 'Delete' ? 'destructive' : option === 'Cancel' ? 'cancel' : 'default',
-        onPress: () => {
-          switch (option) {
-            case 'View': onPress(); break;
-            case 'Edit': onEdit?.(); break;
-            case 'Pin':
-            case 'Unpin': handleTogglePin(); break;
-            case 'Archive':
-            case 'Unarchive': onArchive?.(); break;
-            case 'Delete': onDelete?.(); break;
-          }
-        }
-      }))
-    );
-  };
+  const contextMenuItems = [
+    {
+      label: 'View',
+      icon: 'eye-outline',
+      onPress: onClick || (() => {}),
+    },
+    ...(onEdit ? [{
+      label: 'Edit',
+      icon: 'create-outline',
+      onPress: onEdit,
+    }] : []),
+    {
+      label: thoughtmark.isPinned ? 'Unpin' : 'Pin to top',
+      icon: 'pin-outline',
+      onPress: handleTogglePin,
+    },
+    {
+      label: 'Share',
+      icon: 'share-outline',
+      onPress: handleShare,
+    },
+    ...(onArchive ? [{
+      label: 'Archive',
+      icon: 'archive-outline',
+      onPress: onArchive,
+    }] : []),
+  ];
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.container,
-        thoughtmark.isPinned && styles.pinnedContainer,
-        isSelected && styles.selectedContainer,
-        style
-      ]}
-      onPress={handleCardPress}
-      onLongPress={showActionMenu}
-      activeOpacity={0.7}
-    >
-      <View style={styles.header}>
-        <View style={styles.titleContainer}>
-          {isSelectable && (
-            <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
-              {isSelected && <Text style={styles.checkmark}>✓</Text>}
+    <>
+      <TouchableOpacity
+        style={[
+          styles.container,
+          thoughtmark.isPinned && styles.pinned,
+          isSelected && styles.selected,
+        ]}
+        onPress={handleCardPress}
+        onLongPress={handleLongPress}
+        onPressOut={handlePressOut}
+        activeOpacity={0.7}
+      >
+        <View style={styles.content}>
+          {/* Header */}
+          <View style={styles.header}>
+            <View style={styles.headerLeft}>
+              {isSelectable && (
+                <TouchableOpacity
+                  style={styles.checkbox}
+                  onPress={() => onSelectionToggle?.(thoughtmark.id)}
+                >
+                  <Ionicons
+                    name={isSelected ? 'checkbox' : 'square-outline'}
+                    size={16}
+                    color={colors.primary}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
-          )}
-          <Text style={styles.title} numberOfLines={2}>
-            {thoughtmark.title}
+
+            <Text style={styles.title} numberOfLines={1}>
+              {thoughtmark.title}
+            </Text>
+
+            <View style={styles.headerRight}>
+              {showSimilarity && similarity !== undefined && (
+                <View style={styles.similarityBadge}>
+                  <Text style={styles.similarityText}>
+                    {Math.round(similarity * 100)}% match
+                  </Text>
+                </View>
+              )}
+              
+              <Text style={styles.date}>
+                {formatDate(thoughtmark.createdAt)}
+              </Text>
+              
+              {thoughtmark.isPinned && (
+                <Ionicons
+                  name="pin"
+                  size={12}
+                  color={colors.primary}
+                />
+              )}
+              
+              <TouchableOpacity
+                style={styles.menuButton}
+                onPress={() => setShowContextMenu(true)}
+              >
+                <Ionicons
+                  name="ellipsis-vertical"
+                  size={16}
+                  color={colors.subtext}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Content */}
+          <Text style={styles.contentText} numberOfLines={2}>
+            {thoughtmark.content}
           </Text>
-        </View>
-        
-        <View style={styles.headerRight}>
-          {showSimilarity && similarity !== undefined && (
-            <View style={styles.similarityBadge}>
-              <Text style={styles.similarityText}>{Math.round(similarity * 100)}%</Text>
+
+          {/* Footer */}
+          <View style={styles.footer}>
+            <View style={styles.tagsContainer}>
+              {thoughtmark.tags.map((tag) => (
+                <TagChip key={tag} tag={tag} />
+              ))}
             </View>
-          )}
-          {thoughtmark.isPinned && (
-            <View style={styles.pinnedIndicator}>
-              <Text style={styles.pinnedIcon}>📌</Text>
-            </View>
-          )}
-          <Text style={styles.timestamp}>
-            {formatDate(thoughtmark.createdAt)}
-          </Text>
+            
+            {thoughtmark.binName && (
+              <Text style={styles.binName}>
+                {thoughtmark.binName}
+              </Text>
+            )}
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
 
-      {thoughtmark.content && (
-        <Text style={styles.content} numberOfLines={3}>
-          {truncateContent(thoughtmark.content)}
-        </Text>
-      )}
-
-      {thoughtmark.tags.length > 0 && (
-        <View style={styles.tagsContainer}>
-          {thoughtmark.tags.slice(0, 3).map((tag, index) => (
-            <View key={index} style={styles.tag}>
-              <Text style={styles.tagText}>#{tag}</Text>
-            </View>
-          ))}
-          {thoughtmark.tags.length > 3 && (
-            <Text style={styles.moreTagsText}>+{thoughtmark.tags.length - 3}</Text>
-          )}
-        </View>
-      )}
-
-      <View style={styles.footer}>
-        <View style={styles.indicators}>
-          {thoughtmark.voiceNoteUrl && (
-            <Text style={styles.indicatorIcon}>🎤</Text>
-          )}
-          {thoughtmark.aiSummary && (
-            <Text style={styles.indicatorIcon}>🤖</Text>
-          )}
-          {thoughtmark.completedAt && (
-            <Text style={styles.indicatorIcon}>✅</Text>
-          )}
-        </View>
-      </View>
-
-      {thoughtmark.isArchived && (
-        <View style={styles.archivedOverlay}>
-          <Text style={styles.archivedText}>Archived</Text>
-        </View>
-      )}
-    </TouchableOpacity>
+      <ActionSheet
+        visible={showContextMenu}
+        onClose={() => setShowContextMenu(false)}
+        items={contextMenuItems}
+        title="Thoughtmark Options"
+      />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
+    backgroundColor: colors.card,
+    borderRadius: 8,
+    marginVertical: 4,
+    borderWidth: 0,
+    elevation: 1,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
-    elevation: 2,
+  },
+  pinned: {
+    borderColor: colors.primary,
+    borderWidth: 2,
+  },
+  selected: {
+    backgroundColor: colors.primary + '20',
+    borderColor: colors.primary,
+  },
+  content: {
+    padding: 10,
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 8,
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: spacing.sm,
+  },
+  checkbox: {
+    marginRight: spacing.xs,
+  },
+  menuButton: {
+    padding: spacing.xs,
   },
   title: {
-    flex: 1,
-    fontSize: 16,
+    ...typography.body,
+    fontSize: typography.body.fontSize * 0.9,
+    color: colors.text,
     fontWeight: '600',
-    color: '#1a1a1a',
-    lineHeight: 22,
+    flex: 1,
+    marginHorizontal: 0,
   },
-  pinnedIndicator: {
-    marginLeft: 8,
-  },
-  pinnedIcon: {
-    fontSize: 14,
-  },
-  content: {
-    fontSize: 14,
-    color: '#666666',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  tagsContainer: {
+  headerRight: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
-    marginBottom: 12,
+    flexShrink: 0,
   },
-  tag: {
-    backgroundColor: '#f0f0f0',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+  similarityBadge: {
+    backgroundColor: '#C6D60020',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
     borderRadius: 12,
-    marginRight: 6,
-    marginBottom: 4,
+    marginRight: spacing.sm,
   },
-  tagText: {
-    fontSize: 12,
-    color: '#666666',
+  similarityText: {
+    fontSize: 10,
+    color: '#C6D600',
+    fontWeight: '600',
   },
-  moreTagsText: {
-    fontSize: 12,
-    color: '#999999',
-    fontStyle: 'italic',
+  date: {
+    fontSize: 10,
+    color: colors.subtext,
+    marginRight: 4,
+  },
+  contentText: {
+    fontSize: typography.body.fontSize * 0.65,
+    color: colors.subtext,
+    marginBottom: 8,
+    lineHeight: 16,
+    fontWeight: '400',
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
-  timestamp: {
-    fontSize: 12,
-    color: '#999999',
-  },
-  indicators: {
+  tagsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    flexWrap: 'wrap',
+    flex: 1,
   },
-  indicator: {
-    marginLeft: 6,
-  },
-  indicatorIcon: {
-    fontSize: 12,
-  },
-  archivedOverlay: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    backgroundColor: '#ff9800',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-  archivedText: {
+  binName: {
     fontSize: 10,
-    color: '#ffffff',
-    fontWeight: '600',
+    color: colors.subtext,
+    marginLeft: 8,
   },
 });
