@@ -15,26 +15,38 @@
       "backgroundColor": "#181818"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.thoughtmarks.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#181818"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.thoughtmarks.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-notifications",
-      "expo-font"
+      "expo-font",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "extra": {
-      "googleIosClientId": "1234567890-abcdefgHIJKLMNopqrstuv.apps.googleusercontent.com",
-      "googleAndroidClientId": "1234567890-ABCDEFGhijklmnopqrst.apps.googleusercontent.com",
-      "googleWebClientId": "1234567890-abcdefghIjklmnopQRs.apps.googleusercontent.com"
+      "firebaseConfig": {
+        "apiKey": "your-firebase-api-key",
+        "authDomain": "your-project.firebaseapp.com",
+        "projectId": "your-project-id",
+        "storageBucket": "your-project.appspot.com",
+        "messagingSenderId": "123456789",
+        "appId": "your-firebase-app-id"
+      },
+      "googleIosClientId": "your-ios-client-id.apps.googleusercontent.com",
+      "googleAndroidClientId": "your-android-client-id.apps.googleusercontent.com",
+      "googleWebClientId": "your-web-client-id.apps.googleusercontent.com"
     }
   }
 }

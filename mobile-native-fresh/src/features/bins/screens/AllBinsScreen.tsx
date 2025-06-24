@@ -74,31 +74,36 @@ export const AllBinsScreen: React.FC = () => {
     });
   };
 
-  const handleCreateBin = () => {
-    navigation.navigate('CreateBin');
-  };
-
   const handleNavigate = (path: string) => {
     switch (path) {
       case '/':
-        navigation.navigate('Dashboard');
+      case 'Dashboard':
+        navigation.navigate('Dashboard' as any);
         break;
       case '/search':
-        navigation.navigate('Search');
+      case 'Search':
+        navigation.navigate('Search' as any);
         break;
       case '/all-thoughtmarks':
-        navigation.navigate('AllThoughtmarks');
+      case 'AllThoughtmarks':
+        navigation.navigate('AllThoughtmarks' as any);
         break;
       case '/ai-tools':
-        navigation.navigate('AITools');
+      case 'AITools':
+        navigation.navigate('AITools' as any);
         break;
       default:
+        console.log('Unknown navigation path:', path);
         break;
     }
   };
 
   const handleVoiceRecord = () => {
     showVoiceRecorder();
+  };
+
+  const handleCreateBin = () => {
+    navigation.navigate('CreateBin' as any);
   };
 
   const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) => (

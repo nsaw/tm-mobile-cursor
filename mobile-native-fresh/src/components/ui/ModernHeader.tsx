@@ -100,7 +100,9 @@ const styles = StyleSheet.create({
     fontSize: typography.heading.fontSize,
     fontWeight: '700',
     color: colors.text,
-    letterSpacing: -0.5,
+    textTransform: 'uppercase',
+    fontFamily: 'Ubuntu',
+    letterSpacing: 1,
   },
   subtitle: {
     fontSize: typography.body.fontSize * 0.8,

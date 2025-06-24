@@ -189,6 +189,14 @@ export const textVariants = createVariantStyles(
         fontFamily: designTokens.typography.fontFamily.heading,
         lineHeight: designTokens.typography.fontSize.lg * 1.3,
       },
+      heading2: {
+        fontSize: designTokens.typography.fontSize['2xl'],
+        fontWeight: designTokens.typography.fontWeight.bold,
+        fontFamily: designTokens.typography.fontFamily.body,
+        lineHeight: designTokens.typography.fontSize['2xl'] * 1.2,
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+      },
       subheading: {
         fontSize: designTokens.typography.fontSize.body,
         fontWeight: designTokens.typography.fontWeight.normal,

@@ -21,10 +21,18 @@ import { useBins } from '../../features/home/hooks/useBins';
 interface VoiceRecorderProps {
   isVisible: boolean;
   onClose: () => void;
-  onComplete?: (thoughtmarkId?: number) => void;
+  onComplete?: (thoughtmarkId?: number, transcript?: string, aiTitle?: string) => void;
 }
 
 type RecordingStage = 'ready' | 'listening' | 'processing' | 'complete';
+
+// Fallback voice recognition for Expo Go
+let Voice: any = null;
+try {
+  Voice = require('@react-native-voice/voice').default;
+} catch (error) {
+  console.log('Voice module not available in Expo Go, using fallback');
+}
 
 export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   isVisible,
@@ -45,11 +53,19 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const [autoSaveId, setAutoSaveId] = useState<number | null>(null);
 
   const transcriptRef = useRef<string>('');
-  const recognitionRef = useRef<any>(null);
 
   // Request permissions on mount
   useEffect(() => {
     requestPermissions();
+    if (Voice) {
+      setupVoiceRecognition();
+    }
+    
+    return () => {
+      if (Voice) {
+        Voice.destroy().then(Voice.removeAllListeners);
+      }
+    };
   }, []);
 
   // Auto-start recording when modal opens
@@ -77,6 +93,51 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     }
   };
 
+  const setupVoiceRecognition = () => {
+    if (!Voice) return;
+
+    Voice.onSpeechStart = () => {
+      console.log('Speech recognition started');
+    };
+
+    Voice.onSpeechRecognized = () => {
+      console.log('Speech recognized');
+    };
+
+    Voice.onSpeechEnd = () => {
+      console.log('Speech recognition ended');
+    };
+
+    Voice.onSpeechError = (error: any) => {
+      console.error('Speech recognition error:', error);
+      if (error.error?.code === '7') {
+        // No speech detected
+        setTranscript('No speech detected. Please try again.');
+      }
+    };
+
+    Voice.onSpeechResults = (event: any) => {
+      if (event.value && event.value.length > 0) {
+        const recognizedText = event.value[0];
+        transcriptRef.current = recognizedText;
+        setTranscript(recognizedText);
+        console.log('Speech recognition result:', recognizedText);
+      }
+    };
+
+    Voice.onSpeechPartialResults = (event: any) => {
+      if (event.value && event.value.length > 0) {
+        const partialText = event.value[0];
+        setTranscript(partialText);
+        console.log('Speech recognition partial result:', partialText);
+      }
+    };
+
+    Voice.onSpeechVolumeChanged = (event: any) => {
+      console.log('Speech volume changed:', event.value);
+    };
+  };
+
   const startRecording = async () => {
     try {
       setTranscript('');
@@ -96,21 +157,21 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       setRecording(recording);
       setIsRecording(true);
 
-      // Start speech recognition if available
-      startSpeechRecognition();
+      // Start voice recognition if available
+      if (Voice) {
+        await Voice.start('en-US');
+      } else {
+        // Fallback for Expo Go - simulate transcription
+        setTimeout(() => {
+          setTranscript('Voice recording in progress... (Transcription not available in Expo Go)');
+        }, 1000);
+      }
 
     } catch (error) {
       console.error('Error starting recording:', error);
       Alert.alert('Recording Error', 'Could not start recording. Please try again.');
       setRecordingStage('ready');
     }
-  };
-
-  const startSpeechRecognition = () => {
-    // Note: React Native doesn't have built-in speech recognition
-    // This would need to be implemented with a native module or third-party service
-    // For now, we'll simulate transcription with a timer
-    console.log('Speech recognition would start here');
   };
 
   const stopRecording = async () => {
@@ -124,7 +185,12 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       await recording.stopAndUnloadAsync();
       setRecording(null);
 
-      // Get the final transcript (in real implementation, this would come from speech recognition)
+      // Stop voice recognition if available
+      if (Voice) {
+        await Voice.stop();
+      }
+
+      // Get the final transcript
       const finalTranscript = transcriptRef.current || transcript || 'Voice note recorded';
       
       await processTranscription(finalTranscript);
@@ -191,8 +257,8 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             text: 'OK',
             onPress: () => {
               onClose();
-              if (onComplete && autoSaveId) {
-                onComplete(autoSaveId);
+              if (onComplete) {
+                onComplete(autoSaveId || undefined, transcriptionText.trim(), aiTitle);
               }
             }
           }
@@ -212,6 +278,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       recording.stopAndUnloadAsync();
       setRecording(null);
     }
+    if (Voice) {
+      Voice.stop();
+    }
     setIsRecording(false);
     setRecordingStage('ready');
     onClose();
@@ -222,14 +291,14 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       case 'ready':
         return {
           title: 'Voice Recorder',
-          message: 'Preparing to listen...',
+          message: Voice ? 'Preparing to listen...' : 'Voice recording (Expo Go mode)',
           icon: <Ionicons name="mic" size={64} color={tokens.colors.accent} />,
           showCancel: true,
         };
       case 'listening':
         return {
           title: 'Now listening...',
-          message: transcript || 'Tell me about your idea, task, or thought. I\'ll capture and organize it for you.',
+          message: transcript || (Voice ? 'Tell me about your idea, task, or thought. I\'ll capture and organize it for you.' : 'Recording in progress...'),
           icon: (
             <View style={styles.recordingIcon}>
               <Ionicons name="mic" size={32} color="#FFFFFF" />

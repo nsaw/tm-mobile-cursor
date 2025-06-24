@@ -1,22 +1,23 @@
 // Shared TypeScript types and interfaces for React Native app
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   firstName?: string;
   lastName?: string;
   displayName?: string;
-  firebaseUid: string;
-  roleId: number;
-  isAdmin: boolean;
+  firebaseUid?: string;
+  roleId?: number;
+  isAdmin?: boolean;
   isPremium: boolean;
   isTestUser: boolean;
   premiumExpiresAt?: string;
   subscriptionTier?: string;
-  subscriptionStatus: string;
-  emailVerified: boolean;
+  subscriptionStatus?: string;
+  emailVerified?: boolean;
   lastLoginAt?: string;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface Thoughtmark {

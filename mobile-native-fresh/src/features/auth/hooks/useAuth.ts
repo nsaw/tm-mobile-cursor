@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Google from 'expo-auth-session/providers/google';
-import * as AppleAuthentication from 'expo-apple-authentication';
-import Constants from 'expo-constants';
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signInWithPopup, 
+  signOut as firebaseSignOut,
+  onAuthStateChanged,
+  User as FirebaseUser,
+  updateProfile
+} from 'firebase/auth';
+import { auth, googleProvider, appleProvider } from '../../../config/firebase';
 import { apiService } from '../../../services/api';
 import type { User, AuthState } from '../../../types';
 
@@ -10,17 +17,6 @@ const STORAGE_KEYS = {
   USER: '@thoughtmarks_user',
   TOKEN: '@thoughtmarks_token',
   REFRESH_TOKEN: '@thoughtmarks_refresh_token',
-};
-
-// Pull your client IDs from app.json → expo.extra
-const {
-  googleIosClientId,
-  googleAndroidClientId,
-  googleWebClientId,
-} = (Constants.expoConfig?.extra ?? {}) as {
-  googleIosClientId?: string;
-  googleAndroidClientId?: string;
-  googleWebClientId?: string;
 };
 
 export const useAuth = () => {
@@ -31,45 +27,71 @@ export const useAuth = () => {
     guestMode: false,
   });
 
-  // Google OAuth setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    iosClientId:   googleIosClientId,
-    androidClientId: googleAndroidClientId,
-    webClientId:     googleWebClientId,
-  });
-
-  // Initialize auth state from storage
+  // Initialize auth state from Firebase
   useEffect(() => {
-    initializeAuth();
-  }, []);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        // Convert Firebase user to our User type
+        const user: User = {
+          id: firebaseUser.uid,
+          email: firebaseUser.email || '',
+          firstName: firebaseUser.displayName?.split(' ')[0] || '',
+          lastName: firebaseUser.displayName?.split(' ').slice(1).join(' ') || '',
+          isPremium: false, // Default to false, can be updated from backend
+          isTestUser: false,
+          createdAt: firebaseUser.metadata.creationTime || new Date().toISOString(),
+          updatedAt: firebaseUser.metadata.lastSignInTime || new Date().toISOString(),
+        };
 
-  // Handle Google OAuth response
-  useEffect(() => {
-    if (response?.type === 'success') {
-      handleGoogleAuthSuccess(response.authentication?.accessToken);
-    }
-  }, [response]);
-
-  const initializeAuth = async () => {
-    try {
-      const [storedUser, storedToken] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEYS.USER),
-        AsyncStorage.getItem(STORAGE_KEYS.TOKEN),
-      ]);
-
-      if (storedUser && storedToken) {
-        const user = JSON.parse(storedUser) as User;
-        await validateAndSetUser(user, storedToken);
+        // Get custom token from backend for API access
+        try {
+          const token = await firebaseUser.getIdToken();
+          const res = await apiService.validateToken(token);
+          if (res.success && res.data) {
+            // Update user with backend data (premium status, etc.)
+            const updatedUser = { ...user, ...res.data };
+            await storeAuthData(updatedUser, token);
+            setAuthState({
+              user: updatedUser,
+              isAuthenticated: true,
+              loading: false,
+              guestMode: false,
+            });
+          } else {
+            // Use Firebase user data if backend validation fails
+            await storeAuthData(user, token);
+            setAuthState({
+              user,
+              isAuthenticated: true,
+              loading: false,
+              guestMode: false,
+            });
+          }
+        } catch (error) {
+          console.error('Failed to validate token with backend:', error);
+          // Use Firebase user data as fallback
+          const token = await firebaseUser.getIdToken();
+          await storeAuthData(user, token);
+          setAuthState({
+            user,
+            isAuthenticated: true,
+            loading: false,
+            guestMode: false,
+          });
+        }
       } else {
-        // For demo purposes, auto-login with demo user
-        await signInWithDemo();
+        // No Firebase user, try demo login for development
+        try {
+          await signInWithDemo();
+        } catch (error) {
+          console.error('Demo login failed:', error);
+          setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
+        }
       }
-    } catch (error) {
-      console.error('Failed to initialize auth:', error);
-      // For demo purposes, auto-login with demo user
-      await signInWithDemo();
-    }
-  };
+    });
+
+    return unsubscribe;
+  }, []);
 
   const signInWithDemo = async () => {
     try {
@@ -106,145 +128,88 @@ export const useAuth = () => {
     }
   };
 
-  const validateAndSetUser = async (user: User, token: string) => {
-    try {
-      const res = await apiService.validateToken(token);
-      if (res.success && res.data) {
-        setAuthState({
-          user: res.data,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-      } else {
-        await clearAuthData();
-        setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
-      }
-    } catch (error) {
-      console.error('Token validation failed:', error);
-      await clearAuthData();
-      setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
-    }
-  };
-
   const signIn = async (email: string, password: string) => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const res = await apiService.signIn(email, password);
-      if (res.success && res.data) {
-        await storeAuthData(res.data.user, res.data.token);
-        setAuthState({
-          user: res.data.user,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-        return res.data.user;
-      }
-      throw new Error(res.error || 'Sign in failed');
-    } catch (error) {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      // Firebase auth state change will handle the rest
+      return userCredential.user;
+    } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      throw error;
+      throw new Error(error.message || 'Sign in failed');
     }
   };
 
   const signUp = async (email: string, password: string, firstName?: string, lastName?: string) => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const res = await apiService.signUp(email, password, firstName, lastName);
-      if (res.success && res.data) {
-        await storeAuthData(res.data.user, res.data.token);
-        setAuthState({
-          user: res.data.user,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-        return res.data.user;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      // Update display name if provided
+      if (firstName || lastName) {
+        const displayName = [firstName, lastName].filter(Boolean).join(' ');
+        await updateProfile(userCredential.user, { displayName });
       }
-      throw new Error(res.error || 'Sign up failed');
-    } catch (error) {
+      
+      // Firebase auth state change will handle the rest
+      return userCredential.user;
+    } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      throw error;
+      throw new Error(error.message || 'Sign up failed');
     }
   };
 
   const signInWithGoogle = async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const result = await promptAsync();
-      if (result.type !== 'success') {
-        setAuthState(prev => ({ ...prev, loading: false }));
+      const result = await signInWithPopup(auth, googleProvider);
+      // Firebase auth state change will handle the rest
+      return result.user;
+    } catch (error: any) {
+      setAuthState(prev => ({ ...prev, loading: false }));
+      if (error.code === 'auth/popup-closed-by-user') {
         throw new Error('Google sign in was cancelled');
       }
-    } catch (error) {
-      setAuthState(prev => ({ ...prev, loading: false }));
-      throw error;
-    }
-  };
-
-  const handleGoogleAuthSuccess = async (accessToken?: string) => {
-    if (!accessToken) {
-      setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error('No access token received from Google');
-    }
-    try {
-      const res = await apiService.signInWithGoogle(accessToken);
-      if (res.success && res.data) {
-        await storeAuthData(res.data.user, res.data.token);
-        setAuthState({
-          user: res.data.user,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-      } else {
-        throw new Error(res.error || 'Google sign in failed');
-      }
-    } catch (error) {
-      setAuthState(prev => ({ ...prev, loading: false }));
-      throw error;
+      throw new Error(error.message || 'Google sign in failed');
     }
   };
 
   const signInWithApple = async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      const res = await apiService.signInWithApple(credential);
-      if (res.success && res.data) {
-        await storeAuthData(res.data.user, res.data.token);
-        setAuthState({
-          user: res.data.user,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-        return res.data.user;
-      }
-      throw new Error(res.error || 'Apple sign in failed');
+      const result = await signInWithPopup(auth, appleProvider);
+      // Firebase auth state change will handle the rest
+      return result.user;
     } catch (error: any) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      if (error.code === 'ERR_REQUEST_CANCELED') {
+      if (error.code === 'auth/popup-closed-by-user') {
         throw new Error('Apple sign in was cancelled');
       }
-      throw error;
+      throw new Error(error.message || 'Apple sign in failed');
     }
   };
 
   const signOut = async () => {
-    await clearAuthData();
-    setAuthState({
-      user: null,
-      isAuthenticated: false,
-      loading: false,
-      guestMode: true,
-    });
+    try {
+      await firebaseSignOut(auth);
+      await clearAuthData();
+      setAuthState({
+        user: null,
+        isAuthenticated: false,
+        loading: false,
+        guestMode: true,
+      });
+    } catch (error) {
+      console.error('Sign out error:', error);
+      // Force sign out even if Firebase fails
+      await clearAuthData();
+      setAuthState({
+        user: null,
+        isAuthenticated: false,
+        loading: false,
+        guestMode: true,
+      });
+    }
   };
 
   const enableGuestMode = () => {
