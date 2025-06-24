@@ -240,9 +240,10 @@ export const AllThoughtmarksScreen: React.FC = () => {
           <FlatList
             data={sortedThoughtmarks}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleThoughtmarkPress(item)}>
-                <ThoughtmarkCard thoughtmark={item} />
-              </TouchableOpacity>
+              <ThoughtmarkCard 
+                thoughtmark={item} 
+                onClick={() => handleThoughtmarkPress(item)}
+              />
             )}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.listContent}

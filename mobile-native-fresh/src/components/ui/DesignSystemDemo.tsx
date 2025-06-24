@@ -4,6 +4,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { Button } from './Button';
 import { Card, CardHeader, CardContent, CardFooter } from './Card';
 import { Text, Heading, Subheading, BodyText, Caption } from './Text';
+import { Ionicons } from '@expo/vector-icons';
 
 export const DesignSystemDemo: React.FC = () => {
   const { tokens } = useTheme();
@@ -89,7 +90,7 @@ export const DesignSystemDemo: React.FC = () => {
               </Button>
               
               <Button variant="primary" size="icon" onPress={() => console.log('Icon pressed')}>
-                🔥
+                <Ionicons name="flame" size={20} color="#FFFFFF" />
               </Button>
             </View>
           </CardContent>

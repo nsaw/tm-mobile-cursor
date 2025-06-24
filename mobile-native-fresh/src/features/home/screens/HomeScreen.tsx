@@ -17,6 +17,7 @@ import { SearchBar } from '../components/SearchBar';
 import { TagFilter } from '../../../components/ui/TagFilter';
 import { colors, spacing, typography } from '../../../theme/theme';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,28 +136,36 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     />
   );
 
+  const handleProfilePress = () => {
+    navigation.navigate('Profile');
+  };
+
+  const handleVoiceRecord = () => {
+    navigation.navigate('VoiceRecord');
+  };
+
+  const handleViewBins = () => {
+    navigation.navigate('Bins');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Thoughtmarks</Text>
-        <TouchableOpacity
-          style={styles.profileButton}
-          onPress={() => navigation.navigate('Profile')}
-        >
-          <Text style={styles.profileButtonText}>👤</Text>
+        <TouchableOpacity style={styles.profileButton} onPress={handleProfilePress}>
+          <Ionicons name="person-circle-outline" size={24} color={colors.text} />
         </TouchableOpacity>
       </View>
 
       <SearchBar
-        value={searchQuery}
-        onChangeText={handleSearch}
+        onSearch={handleSearch}
         placeholder="Search thoughtmarks..."
       />
 
       <QuickActions
         onCreateThoughtmark={handleCreateNew}
-        onCreateBin={() => navigation.navigate('CreateBin')}
-        onVoiceRecord={() => navigation.navigate('VoiceRecord')}
+        onVoiceRecord={handleVoiceRecord}
+        onViewBins={handleViewBins}
       />
 
       {allTags.length > 0 && (
@@ -221,7 +230,12 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                       style={[styles.binCard, { backgroundColor: item.color || '#f0f0f0' }]}
                       onPress={() => handleBinPress(item)}
                     >
-                      <Text style={styles.binIcon}>{item.icon || '📁'}</Text>
+                      <Ionicons 
+                        name={item.icon || "folder-outline"} 
+                        size={24} 
+                        color={colors.text} 
+                        style={styles.binIcon}
+                      />
                       <Text style={styles.binName} numberOfLines={1}>
                         {item.name}
                       </Text>
@@ -277,9 +291,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  profileButtonText: {
-    fontSize: 20,
   },
   section: {
     marginBottom: spacing.lg,

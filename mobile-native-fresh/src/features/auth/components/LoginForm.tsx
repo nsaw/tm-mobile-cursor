@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import { colors, spacing, typography } from '../../../theme/theme'
 import { designTokens } from '../../../theme/tokens'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void
@@ -84,11 +85,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           <TouchableOpacity
             style={styles.eyeButton}
             onPress={() => setShowPassword(!showPassword)}
-            disabled={loading}
           >
-            <Text style={styles.eyeButtonText}>
-              {showPassword ? '🙈' : '👁️'}
-            </Text>
+            <Ionicons 
+              name={showPassword ? "eye-off" : "eye"} 
+              size={20} 
+              color={colors.subtext} 
+            />
           </TouchableOpacity>
         </View>
         {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
@@ -152,10 +154,6 @@ const styles = StyleSheet.create({
   eyeButton: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-  },
-  eyeButtonText: {
-    fontSize: 18,
-    color: colors.subtext,
   },
   errorText: {
     color: '#ff4444',

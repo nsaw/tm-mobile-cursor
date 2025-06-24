@@ -33,6 +33,7 @@ export const designTokens = {
     // Brand colors (matching web app)
     brand: '#5C6A24', // olive green
     brandHover: '#6C7A34', // slightly lighter
+    buttonText: '#fff',
   },
   
   spacing: {

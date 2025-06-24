@@ -1,43 +1,31 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, spacing, typography } from '../../../theme/theme';
 
 interface QuickActionsProps {
   onCreateThoughtmark: () => void;
-  onCreateBin: () => void;
   onVoiceRecord: () => void;
+  onViewBins: () => void;
 }
 
 export const QuickActions: React.FC<QuickActionsProps> = ({
   onCreateThoughtmark,
-  onCreateBin,
   onVoiceRecord,
+  onViewBins,
 }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.icon}>✏️</Text>
-        </View>
-        <Text style={styles.actionText}>New Note</Text>
+        <Ionicons name="create-outline" size={24} color={colors.background} />
       </TouchableOpacity>
-
+      
       <TouchableOpacity style={styles.actionButton} onPress={onVoiceRecord}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.icon}>🎤</Text>
-        </View>
-        <Text style={styles.actionText}>Voice Note</Text>
+        <Ionicons name="mic-outline" size={24} color={colors.background} />
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.actionButton} onPress={onCreateBin}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.icon}>📁</Text>
-        </View>
-        <Text style={styles.actionText}>New Bin</Text>
+      
+      <TouchableOpacity style={styles.actionButton} onPress={onViewBins}>
+        <Ionicons name="folder-outline" size={24} color={colors.background} />
       </TouchableOpacity>
     </View>
   );
@@ -47,32 +35,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: '#ffffff',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
   },
   actionButton: {
+    backgroundColor: colors.primary,
+    padding: spacing.md,
+    borderRadius: spacing.md,
+    minWidth: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingVertical: 12,
-  },
-  iconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#f0f0f0',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 8,
-  },
-  icon: {
-    fontSize: 20,
-  },
-  actionText: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: '#666666',
-    textAlign: 'center',
   },
 });

@@ -9,6 +9,7 @@ import thoughtmarkRoutes from './routes/thoughtmarks';
 import binRoutes from './routes/bins';
 import authRoutes from './routes/auth';
 import userRoutes from './routes/users';
+import aiRoutes from './routes/ai';
 
 dotenv.config();
 
@@ -48,6 +49,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/thoughtmarks', thoughtmarkRoutes);
 app.use('/api/bins', binRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
@@ -60,10 +62,14 @@ app.get('/health', (req, res) => {
 });
 
 // 404 handler
-app.use('*', (req, res) => {
+app.all('*', (req, res) => {
   res.status(404).json({
     error: 'Route not found',
-    message: `The route ${req.method} ${req.originalUrl} does not exist.`,
+    message: `Not all who wander are lost... but this page definitely is!`,
+    actions: [
+      { label: 'Go Back', action: 'back' },
+      { label: 'Dashboard', action: 'dashboard' }
+    ]
   });
 });
 

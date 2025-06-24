@@ -6,106 +6,75 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, spacing, typography } from '../../../theme/theme';
 
 interface SearchBarProps {
-  value: string;
-  onChangeText: (text: string) => void;
+  onSearch: (query: string) => void;
   placeholder?: string;
-  onClear?: () => void;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
-  value,
-  onChangeText,
-  placeholder = 'Search...',
-  onClear,
+  onSearch,
+  placeholder = 'Search thoughtmarks...',
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [query, setQuery] = useState('');
+
+  const handleSearch = () => {
+    onSearch(query);
+  };
 
   const handleClear = () => {
-    onChangeText('');
-    onClear?.();
+    setQuery('');
+    onSearch('');
   };
 
   return (
-    <View style={[styles.container, isFocused && styles.containerFocused]}>
-      <View style={styles.searchIcon}>
-        <SearchIcon />
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
+        <Ionicons name="search-outline" size={20} color={colors.subtext} style={styles.searchIcon} />
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          placeholderTextColor={colors.subtext}
+          value={query}
+          onChangeText={setQuery}
+          onSubmitEditing={handleSearch}
+          returnKeyType="search"
+        />
+        {query.length > 0 && (
+          <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
+            <Ionicons name="close-circle" size={20} color={colors.subtext} />
+          </TouchableOpacity>
+        )}
       </View>
-      
-      <TextInput
-        style={styles.input}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor="#999999"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="search"
-      />
-      
-      {value.length > 0 && (
-        <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
-          <ClearIcon />
-        </TouchableOpacity>
-      )}
     </View>
   );
 };
 
-// Simple icon components
-const SearchIcon = () => (
-  <View style={styles.icon}>
-    <Text style={styles.iconText}>🔍</Text>
-  </View>
-);
-
-const ClearIcon = () => (
-  <View style={styles.icon}>
-    <Text style={styles.iconText}>✕</Text>
-  </View>
-);
-
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+  },
+  searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginHorizontal: 16,
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: 'transparent',
-  },
-  containerFocused: {
-    borderColor: '#007AFF',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.inputBackground,
+    borderRadius: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
   },
   searchIcon: {
-    marginRight: 8,
+    marginRight: spacing.sm,
   },
   input: {
     flex: 1,
-    fontSize: 16,
-    color: '#1a1a1a',
-    paddingVertical: 4,
+    fontSize: typography.body.fontSize,
+    color: colors.text,
+    paddingVertical: spacing.xs,
   },
   clearButton: {
-    marginLeft: 8,
-    padding: 4,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconText: {
-    fontSize: 14,
-    color: '#666666',
+    padding: spacing.xs,
   },
 });

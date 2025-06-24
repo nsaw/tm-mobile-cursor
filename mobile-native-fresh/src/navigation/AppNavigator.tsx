@@ -7,6 +7,8 @@ import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
 import { LoadingScreen } from '../components/ui/LoadingScreen';
 import { RootStackParamList } from './types';
 import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
+import { View } from 'react-native';
+import { Text } from '../components/ui/Text';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
@@ -42,8 +44,6 @@ import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/Unifi
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
-
-import { View, Text } from 'react-native';
 
 // Placeholder screens - to be implemented
 const CreateBinScreen = () => (

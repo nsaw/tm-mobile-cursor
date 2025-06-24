@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   View,
-  Text,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
@@ -11,35 +10,47 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import type { NavigationProp } from '../../../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { Card } from '../../../components/ui/Card';
+import { Card, CardHeader, CardContent, CardFooter } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
+import { Heading, Caption, Text } from '../../../components/ui/Text';
+import { BottomNav } from '../../../components/ui/BottomNav';
+import { TagChip } from '../../../components/ui/TagChip';
+import { apiService } from '../../../services/api';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+// Define the AIInsight type
+type AIInsight = {
+  type: string;
+  title: string;
+  description: string;
+  content?: string;
+  confidence?: number;
+  actionable?: boolean;
+  relatedThoughtmarks?: number[];
+};
 
 export const AIToolsScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const { tokens } = useTheme();
   const { user } = useAuth();
 
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
   const [isSmartSorting, setIsSmartSorting] = useState(false);
   const [isGeneratingRecommendations, setIsGeneratingRecommendations] = useState(false);
-  const [insights, setInsights] = useState<any>(null);
+  const [isGeneratingLearningResources, setIsGeneratingLearningResources] = useState(false);
+  const [insights, setInsights] = useState<AIInsight[]>([]);
+  const [smartSortResults, setSmartSortResults] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<any>(null);
+  const [learningResources, setLearningResources] = useState<any>(null);
 
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
 
-  const getAuthToken = async () => {
-    try {
-      return await AsyncStorage.getItem('@thoughtmarks_token');
-    } catch (error) {
-      console.error('Error getting auth token:', error);
-      return null;
-    }
-  };
-
   const generateInsights = async () => {
+    console.log('[AIToolsScreen] generateInsights called');
     if (!hasPremiumAccess) {
       Alert.alert(
         'Premium Feature',
@@ -54,27 +65,13 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsGeneratingInsights(true);
     try {
-      const token = await getAuthToken();
-      // Implement AI insights API call
-      const response = await fetch('/api/ai/insights', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate insights');
-      }
-
-      const data = await response.json();
-      setInsights(data);
-      
+      const result = await apiService.generateInsights();
+      console.log('[AIToolsScreen] API result:', result);
+      setInsights(Array.isArray(result.data.insights) ? result.data.insights : []);
+      console.log('[AIToolsScreen] insights after set:', Array.isArray(result.data.insights) ? result.data.insights : []);
       Alert.alert(
         'Insights Generated',
-        'Your AI insights have been generated successfully!',
-        [{ text: 'OK' }]
+        'Your AI insights have been generated successfully!'
       );
     } catch (error) {
       console.error('Error generating insights:', error);
@@ -99,27 +96,17 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsSmartSorting(true);
     try {
-      const token = await getAuthToken();
-      // Implement smart sorting API call
-      const response = await fetch('/api/ai/smart-sort', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to perform smart sorting');
+      const result = await apiService.smartSort();
+      if (result.success) {
+        setSmartSortResults(result.data);
+        Alert.alert(
+          'Smart Sorting Complete',
+          'Your thoughtmarks have been intelligently organized.',
+          [{ text: 'OK' }]
+        );
+      } else {
+        throw new Error(result.error || 'Failed to perform smart sorting');
       }
-
-      const data = await response.json();
-      
-      Alert.alert(
-        'Smart Sorting Complete',
-        `Your thoughtmarks have been intelligently organized. ${data.reorganizedCount} items were reorganized based on content patterns and relationships.`,
-        [{ text: 'OK' }]
-      );
     } catch (error) {
       console.error('Error performing smart sorting:', error);
       Alert.alert('Error', 'Failed to perform smart sorting. Please try again.');
@@ -143,28 +130,17 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsGeneratingRecommendations(true);
     try {
-      const token = await getAuthToken();
-      // Implement AI recommendations API call
-      const response = await fetch('/api/ai/recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate recommendations');
+      const result = await apiService.recommendations();
+      if (result.success) {
+        setRecommendations(result.data);
+        Alert.alert(
+          'Recommendations Generated',
+          'Your personalized AI recommendations have been generated!',
+          [{ text: 'OK' }]
+        );
+      } else {
+        throw new Error(result.error || 'Failed to generate recommendations');
       }
-
-      const data = await response.json();
-      setRecommendations(data);
-      
-      Alert.alert(
-        'Recommendations Generated',
-        'Your personalized AI recommendations have been generated!',
-        [{ text: 'OK' }]
-      );
     } catch (error) {
       console.error('Error generating recommendations:', error);
       Alert.alert('Error', 'Failed to generate recommendations. Please try again.');
@@ -172,6 +148,153 @@ export const AIToolsScreen: React.FC = () => {
       setIsGeneratingRecommendations(false);
     }
   };
+
+  const generateLearningResources = async () => {
+    if (!hasPremiumAccess) {
+      Alert.alert(
+        'Premium Feature',
+        'Learning resources are available for premium users. Upgrade to unlock this feature.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Upgrade', onPress: () => navigation.navigate('Subscribe' as never) }
+        ]
+      );
+      return;
+    }
+
+    setIsGeneratingLearningResources(true);
+    try {
+      const result = await apiService.learningResources();
+      if (result.success) {
+        setLearningResources(result.data);
+        Alert.alert(
+          'Learning Resources Generated',
+          'Your personalized learning resources have been generated!',
+          [{ text: 'OK' }]
+        );
+      } else {
+        throw new Error(result.error || 'Failed to generate learning resources');
+      }
+    } catch (error) {
+      console.error('Error generating learning resources:', error);
+      Alert.alert('Error', 'Failed to generate learning resources. Please try again.');
+    } finally {
+      setIsGeneratingLearningResources(false);
+    }
+  };
+
+  const handleNavigate = (path: string) => {
+    switch (path) {
+      case '/':
+      case 'Dashboard':
+        navigation.navigate('Dashboard');
+        break;
+      case '/search':
+      case 'Search':
+        navigation.navigate('Search');
+        break;
+      case '/all-thoughtmarks':
+      case 'AllThoughtmarks':
+        navigation.navigate('AllThoughtmarks');
+        break;
+      case '/ai-tools':
+      case 'AITools':
+        navigation.navigate('AITools');
+        break;
+      default:
+        console.log('Unknown navigation path:', path);
+        break;
+    }
+  };
+
+  const getIconForType = (type: string) => {
+    switch (type) {
+      case 'pattern':
+        return 'lightbulb-outline';
+      case 'recommendation':
+        return 'star-outline';
+      case 'trend':
+        return 'trending-up';
+      case 'connection':
+        return 'link-variant';
+      default:
+        return 'lightbulb-outline';
+    }
+  };
+
+  const getIconColorForType = (type: string) => {
+    switch (type) {
+      case 'pattern':
+        return tokens.colors.accent;
+      case 'recommendation':
+        return '#FFD700';
+      case 'trend':
+        return tokens.colors.success;
+      case 'connection':
+        return tokens.colors.brand;
+      default:
+        return tokens.colors.accent;
+    }
+  };
+
+  const renderAICard = (item: any, index: number, type: string) => (
+    <Card key={index} style={{ marginBottom: tokens.spacing.md }}>
+      <CardContent>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: tokens.spacing.sm }}>
+          <MaterialCommunityIcons 
+            name={getIconForType(item.type || type) as any}
+            size={24}
+            color={getIconColorForType(item.type || type)}
+            style={{ marginRight: tokens.spacing.sm, marginTop: 2 }}
+          />
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.xs }}>
+              <Text style={{ fontWeight: 'bold', color: tokens.colors.text, flex: 1 }}>
+                {item.title}
+              </Text>
+              {item.actionable && (
+                <TagChip
+                  tag="Actionable"
+                  variant="success"
+                  size="sm"
+                />
+              )}
+            </View>
+            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.sm }}>
+              {item.description}
+            </Text>
+            {item.relatedThoughtmarks && item.relatedThoughtmarks.length > 0 && (
+              <View style={{ marginTop: tokens.spacing.sm }}>
+                <Text style={{ color: tokens.colors.textMuted, fontSize: 12, marginBottom: tokens.spacing.xs }}>
+                  Related Thoughtmarks:
+                </Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                  {item.relatedThoughtmarks.map((thoughtmarkId: number, idx: number) => (
+                    <TouchableOpacity
+                      key={idx}
+                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
+                      style={{
+                        backgroundColor: tokens.colors.accent + '20',
+                        paddingHorizontal: tokens.spacing.sm,
+                        paddingVertical: tokens.spacing.xs,
+                        borderRadius: tokens.radius.sm,
+                        marginRight: tokens.spacing.xs,
+                        marginBottom: tokens.spacing.xs,
+                      }}
+                    >
+                      <Text style={{ color: tokens.colors.accent, fontSize: 12 }}>
+                        #{thoughtmarkId}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            )}
+          </View>
+        </View>
+      </CardContent>
+    </Card>
+  );
 
   if (!hasPremiumAccess) {
     return (
@@ -183,35 +306,35 @@ export const AIToolsScreen: React.FC = () => {
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
-          <Text style={[styles.headerTitle, { color: tokens.colors.text }]}>AI Tools</Text>
+          <Text style={{...styles.headerTitle, color: tokens.colors.text}}>AI Tools</Text>
           <View style={styles.headerSpacer} />
         </View>
 
         <View style={styles.upgradeContainer}>
           <Ionicons name="star" size={64} color={tokens.colors.accent} />
-          <Text style={[styles.upgradeTitle, { color: tokens.colors.text }]}>
+          <Text style={{...styles.upgradeTitle, color: tokens.colors.text}}>
             Upgrade to Premium
           </Text>
-          <Text style={[styles.upgradeDescription, { color: tokens.colors.textSecondary }]}>
+          <Text style={{...styles.upgradeDescription, color: tokens.colors.textSecondary}}>
             Unlock AI-powered insights, smart sorting, and personalized recommendations with Premium.
           </Text>
           
           <View style={styles.featuresList}>
             <View style={styles.featureItem}>
               <Ionicons name="bulb" size={20} color={tokens.colors.accent} />
-              <Text style={[styles.featureText, { color: tokens.colors.textSecondary }]}>
+              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
                 Intelligent pattern recognition
               </Text>
             </View>
             <View style={styles.featureItem}>
               <Ionicons name="trending-up" size={20} color={tokens.colors.accent} />
-              <Text style={[styles.featureText, { color: tokens.colors.textSecondary }]}>
+              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
                 Smart content organization
               </Text>
             </View>
             <View style={styles.featureItem}>
               <Ionicons name="book" size={20} color={tokens.colors.accent} />
-              <Text style={[styles.featureText, { color: tokens.colors.textSecondary }]}>
+              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
                 Personalized learning recommendations
               </Text>
             </View>
@@ -223,7 +346,7 @@ export const AIToolsScreen: React.FC = () => {
             style={styles.upgradeButton}
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
-            <Text style={[styles.upgradeButtonText, { color: tokens.colors.text }]}>
+            <Text style={{...styles.upgradeButtonText, color: tokens.colors.text}}>
               Upgrade to Premium
             </Text>
           </Button>
@@ -234,155 +357,126 @@ export const AIToolsScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
+      {/* Header with Back Button */}
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: tokens.spacing.lg, paddingTop: tokens.spacing.lg, marginBottom: tokens.spacing.md }}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginRight: tokens.spacing.md }}>
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: tokens.colors.text }]}>AI Tools</Text>
-        <View style={styles.headerSpacer} />
+        <Heading level={1} style={{ color: tokens.colors.text }}>AI Tools</Heading>
       </View>
-
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={styles.content}>
-          {/* AI Tools Grid */}
-          <View style={styles.toolsGrid}>
-            <TouchableOpacity
-              style={[styles.toolCard, { backgroundColor: tokens.colors.backgroundSecondary }]}
-              onPress={generateInsights}
-              disabled={isGeneratingInsights}
-            >
-              <View style={styles.toolIcon}>
-                <Ionicons name="bulb" size={32} color={tokens.colors.accent} />
-              </View>
-              <Text style={[styles.toolTitle, { color: tokens.colors.text }]}>
-                AI Insights
-              </Text>
-              <Text style={[styles.toolDescription, { color: tokens.colors.textSecondary }]}>
-                Discover patterns and trends in your thoughtmarks
-              </Text>
-              {isGeneratingInsights && (
-                <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.toolLoader} />
+      
+      <ScrollView contentContainerStyle={{ padding: tokens.spacing.lg }}>
+        {/* AI Insights */}
+        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+          <CardContent>
+            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>AI Insights</Heading>
+            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+              Get a summary of your recent thoughtmarks, trends, and patterns discovered by AI.
+            </Text>
+            <Button onPress={generateInsights} disabled={isGeneratingInsights} style={{ marginBottom: tokens.spacing.md }}>
+              {isGeneratingInsights ? (
+                <>
+                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                </>
+              ) : (
+                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Insights</Text>
               )}
-            </TouchableOpacity>
+            </Button>
+            {insights && insights.length > 0 ? (
+              insights.map((insight, idx) => renderAICard(insight, idx, 'insight'))
+            ) : (
+              <Text style={{ color: tokens.colors.textSecondary }}>
+                No insights generated yet.
+              </Text>
+            )}
+          </CardContent>
+        </Card>
 
-            <TouchableOpacity
-              style={[styles.toolCard, { backgroundColor: tokens.colors.backgroundSecondary }]}
-              onPress={performSmartSorting}
-              disabled={isSmartSorting}
-            >
-              <View style={styles.toolIcon}>
-                <Ionicons name="trending-up" size={32} color={tokens.colors.accent} />
-              </View>
-              <Text style={[styles.toolTitle, { color: tokens.colors.text }]}>
-                Smart Sort
-              </Text>
-              <Text style={[styles.toolDescription, { color: tokens.colors.textSecondary }]}>
-                Automatically organize content by relevance
-              </Text>
-              {isSmartSorting && (
-                <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.toolLoader} />
+        {/* Smart Sorting */}
+        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+          <CardContent>
+            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Smart Sorting</Heading>
+            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+              Let AI automatically organize your thoughtmarks into the most relevant bins.
+            </Text>
+            <Button onPress={performSmartSorting} disabled={isSmartSorting} style={{ marginBottom: tokens.spacing.md }}>
+              {isSmartSorting ? (
+                <>
+                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Sorting...</Text>
+                </>
+              ) : (
+                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Run Smart Sort</Text>
               )}
-            </TouchableOpacity>
+            </Button>
+            {smartSortResults && smartSortResults.suggestions ? (
+              smartSortResults.suggestions.map((suggestion: any, idx: number) => renderAICard(suggestion, idx, 'smart-sort'))
+            ) : (
+              <Text style={{ color: tokens.colors.textSecondary }}>
+                No smart sort results yet.
+              </Text>
+            )}
+          </CardContent>
+        </Card>
 
-            <TouchableOpacity
-              style={[styles.toolCard, { backgroundColor: tokens.colors.backgroundSecondary }]}
-              onPress={generateRecommendations}
-              disabled={isGeneratingRecommendations}
-            >
-              <View style={styles.toolIcon}>
-                <Ionicons name="book" size={32} color={tokens.colors.accent} />
-              </View>
-              <Text style={[styles.toolTitle, { color: tokens.colors.text }]}>
-                Learning Resources
-              </Text>
-              <Text style={[styles.toolDescription, { color: tokens.colors.textSecondary }]}>
-                Get personalized recommendations
-              </Text>
-              {isGeneratingRecommendations && (
-                <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.toolLoader} />
+        {/* AI Recommendations */}
+        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+          <CardContent>
+            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>AI Recommendations</Heading>
+            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+              Get personalized suggestions for next actions, topics, or organization improvements.
+            </Text>
+            <Button onPress={generateRecommendations} disabled={isGeneratingRecommendations} style={{ marginBottom: tokens.spacing.md }}>
+              {isGeneratingRecommendations ? (
+                <>
+                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                </>
+              ) : (
+                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Recommendations</Text>
               )}
-            </TouchableOpacity>
-          </View>
-
-          {/* Insights Results */}
-          {insights && (
-            <Card variant="elevated" style={styles.resultsCard}>
-              <Text style={[styles.resultsTitle, { color: tokens.colors.text }]}>
-                AI Insights
+            </Button>
+            {recommendations && recommendations.recommendations ? (
+              recommendations.recommendations.map((recommendation: any, idx: number) => renderAICard(recommendation, idx, 'recommendation'))
+            ) : (
+              <Text style={{ color: tokens.colors.textSecondary }}>
+                No recommendations generated yet.
               </Text>
-              
-              <View style={styles.insightsSection}>
-                <Text style={[styles.sectionTitle, { color: tokens.colors.text }]}>Patterns</Text>
-                {insights.patterns.map((pattern: any, index: number) => (
-                  <View key={index} style={styles.patternItem}>
-                    <View style={styles.patternHeader}>
-                      <Text style={[styles.patternType, { color: tokens.colors.accent }]}>
-                        {pattern.type}
-                      </Text>
-                      <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: 8, borderWidth: 1, borderColor: tokens.colors.accent, marginLeft: 8 }}>
-                        <Text style={{ fontSize: 12, fontWeight: '600', color: tokens.colors.accent }}>{Math.round(pattern.confidence * 100)}%</Text>
-                      </View>
-                    </View>
-                    <Text style={[styles.patternDescription, { color: tokens.colors.textSecondary }]}>
-                      {pattern.description}
-                    </Text>
-                  </View>
-                ))}
-              </View>
+            )}
+          </CardContent>
+        </Card>
 
-              <View style={styles.insightsSection}>
-                <Text style={[styles.sectionTitle, { color: tokens.colors.text }]}>Suggestions</Text>
-                {insights.suggestions.map((suggestion: string, index: number) => (
-                  <View key={index} style={styles.suggestionItem}>
-                    <Ionicons name="checkmark-circle" size={16} color={tokens.colors.accent} />
-                    <Text style={[styles.suggestionText, { color: tokens.colors.textSecondary }]}>
-                      {suggestion}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            </Card>
-          )}
-
-          {/* Recommendations Results */}
-          {recommendations && (
-            <Card variant="elevated" style={styles.resultsCard}>
-              <Text style={[styles.resultsTitle, { color: tokens.colors.text }]}>
-                AI Recommendations
+        {/* Learning Resources */}
+        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+          <CardContent>
+            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Learning Resources</Heading>
+            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+              Discover personalized learning materials and resources based on your thoughtmarks.
+            </Text>
+            <Button onPress={generateLearningResources} disabled={isGeneratingLearningResources} style={{ marginBottom: tokens.spacing.md }}>
+              {isGeneratingLearningResources ? (
+                <>
+                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                </>
+              ) : (
+                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Learning Resources</Text>
+              )}
+            </Button>
+            {learningResources && learningResources.learningResources ? (
+              learningResources.learningResources.map((resource: any, idx: number) => renderAICard(resource, idx, 'learning-resource'))
+            ) : (
+              <Text style={{ color: tokens.colors.textSecondary }}>
+                No learning resources generated yet.
               </Text>
-              
-              <View style={styles.insightsSection}>
-                <Text style={[styles.sectionTitle, { color: tokens.colors.text }]}>Learning Resources</Text>
-                {recommendations.learning.map((item: any, index: number) => (
-                  <View key={index} style={styles.recommendationItem}>
-                    <Text style={[styles.recommendationTitle, { color: tokens.colors.text }]}>
-                      {item.title}
-                    </Text>
-                    <Text style={[styles.recommendationReason, { color: tokens.colors.textSecondary }]}>
-                      {item.reason}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-
-              <View style={styles.insightsSection}>
-                <Text style={[styles.sectionTitle, { color: tokens.colors.text }]}>Suggested Actions</Text>
-                {recommendations.actions.map((action: string, index: number) => (
-                  <View key={index} style={styles.suggestionItem}>
-                    <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} />
-                    <Text style={[styles.suggestionText, { color: tokens.colors.textSecondary }]}>
-                      {action}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            </Card>
-          )}
-        </View>
+            )}
+          </CardContent>
+        </Card>
       </ScrollView>
+      
+      {/* Bottom Nav Bar */}
+      <BottomNav onNavigate={handleNavigate} />
     </SafeAreaView>
   );
 };

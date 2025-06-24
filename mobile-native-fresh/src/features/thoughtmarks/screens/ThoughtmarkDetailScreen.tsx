@@ -10,27 +10,42 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
-import { Card } from '../../../components/ui/Card';
+import { Card, CardContent } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
+import { TagChip } from '../../../components/ui/TagChip';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useBins } from '../../home/hooks/useBins';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '../../../navigation/types';
+import { apiService } from '../../../services/api';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { thoughtmarkId } = route.params as { thoughtmarkId: number };
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<RouteProp<'ThoughtmarkDetail'>>();
+  const { thoughtmarkId } = route.params;
   
   const { thoughtmarks, loading, getThoughtmark, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
+  const { user } = useAuth();
   
   const [thoughtmark, setThoughtmark] = useState<any>(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [aiInsights, setAiInsights] = useState<any[]>([]);
+  const [aiSuggestions, setAiSuggestions] = useState<any>(null);
+  const [isGeneratingAI, setIsGeneratingAI] = useState(false);
+
+  const hasPremiumAccess = user?.isPremium || user?.isTestUser;
 
   useEffect(() => {
     loadThoughtmark();
   }, [thoughtmarkId]);
+
+  useEffect(() => {
+    if (thoughtmark && hasPremiumAccess) {
+      generateAIInsights();
+    }
+  }, [thoughtmark, hasPremiumAccess]);
 
   const loadThoughtmark = async () => {
     try {
@@ -42,24 +57,50 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
     }
   };
 
-  const handleEdit = () => {
-    setIsEditing(true);
+  const generateAIInsights = async () => {
+    if (!thoughtmark || !hasPremiumAccess) return;
+
+    setIsGeneratingAI(true);
+    try {
+      const result = await apiService.generateInsights([thoughtmark.id.toString()]);
+      if (result.success && result.data && typeof result.data === 'object' && 'insights' in result.data) {
+        const insights = (result.data as any).insights;
+        if (Array.isArray(insights)) {
+          setAiInsights(insights);
+        }
+      }
+    } catch (error) {
+      console.error('Error generating AI insights:', error);
+    } finally {
+      setIsGeneratingAI(false);
+    }
   };
 
-  const handleSave = async () => {
-    if (!thoughtmark) return;
-    
-    setIsLoading(true);
+  const generateAISuggestions = async () => {
+    if (!thoughtmark || !hasPremiumAccess) return;
+
+    setIsGeneratingAI(true);
     try {
-      await updateThoughtmark(thoughtmark.id, thoughtmark);
-      setIsEditing(false);
-      Alert.alert('Success', 'Thoughtmark updated successfully');
+      const result = await apiService.generateThoughtmarkSuggestions({
+        content: thoughtmark.content,
+        title: thoughtmark.title,
+        tags: thoughtmark.tags,
+      });
+
+      if (result.success && result.data && typeof result.data === 'object') {
+        setAiSuggestions(result.data as any);
+      }
     } catch (error) {
-      console.error('Error updating thoughtmark:', error);
-      Alert.alert('Error', 'Failed to update thoughtmark');
+      console.error('Error generating AI suggestions:', error);
     } finally {
-      setIsLoading(false);
+      setIsGeneratingAI(false);
     }
+  };
+
+  const handleEdit = () => {
+    navigation.navigate('CreateThoughtmark', { 
+      thoughtmarkId: thoughtmark.id 
+    });
   };
 
   const handleDelete = () => {
@@ -183,71 +224,180 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         {/* Title */}
         <Card style={styles.titleCard}>
-          <Text style={styles.title}>{thoughtmark.title}</Text>
-          {thoughtmark.isTask && (
-            <TouchableOpacity
-              style={[styles.taskStatus, thoughtmark.isCompleted && styles.taskCompleted]}
-              onPress={handleComplete}
-            >
-              <Ionicons 
-                name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
-                size={20} 
-                color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
-              />
-              <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
-                {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
-              </Text>
-            </TouchableOpacity>
-          )}
+          <CardContent>
+            <Text style={styles.title}>{thoughtmark.title}</Text>
+            {thoughtmark.isTask && (
+              <TouchableOpacity
+                style={[styles.taskStatus, thoughtmark.isCompleted && styles.taskCompleted]}
+                onPress={handleComplete}
+              >
+                <Ionicons 
+                  name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
+                  size={20} 
+                  color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
+                />
+                <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
+                  {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </CardContent>
         </Card>
 
         {/* Content */}
         <Card style={styles.contentCard}>
-          <Text style={styles.contentText}>{thoughtmark.content}</Text>
+          <CardContent>
+            <Text style={styles.contentText}>{thoughtmark.content}</Text>
+          </CardContent>
         </Card>
+
+        {/* AI Insights */}
+        {hasPremiumAccess && (
+          <Card style={styles.aiCard}>
+            <CardContent>
+              <View style={styles.aiHeader}>
+                <View style={styles.aiTitleContainer}>
+                  <Ionicons name="sparkles" size={16} color={colors.primary} />
+                  <Text style={styles.aiTitle}>AI Insights</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={generateAIInsights}
+                  disabled={isGeneratingAI}
+                >
+                  {isGeneratingAI ? (
+                    <ActivityIndicator size="small" color={colors.primary} />
+                  ) : (
+                    <Ionicons name="refresh" size={16} color={colors.primary} />
+                  )}
+                </TouchableOpacity>
+              </View>
+              
+              {aiInsights.length > 0 ? (
+                <View style={styles.insightsContainer}>
+                  {aiInsights.map((insight, index) => (
+                    <View key={index} style={styles.insightItem}>
+                      <View style={styles.insightHeader}>
+                        <View style={[styles.insightType, { backgroundColor: getInsightTypeColor(insight.type) }]}>
+                          <Text style={styles.insightTypeText}>{insight.type}</Text>
+                        </View>
+                        {insight.actionable && (
+                          <View style={styles.actionableBadge}>
+                            <Text style={styles.actionableText}>Actionable</Text>
+                          </View>
+                        )}
+                      </View>
+                      <Text style={styles.insightTitle}>{insight.title}</Text>
+                      <Text style={styles.insightDescription}>{insight.description}</Text>
+                    </View>
+                  ))}
+                </View>
+              ) : (
+                <Text style={styles.aiEmptyText}>
+                  {isGeneratingAI ? 'Generating insights...' : 'Tap refresh to generate AI insights'}
+                </Text>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* AI Suggestions */}
+        {hasPremiumAccess && (
+          <Card style={styles.aiCard}>
+            <CardContent>
+              <View style={styles.aiHeader}>
+                <View style={styles.aiTitleContainer}>
+                  <Ionicons name="bulb-outline" size={16} color={colors.primary} />
+                  <Text style={styles.aiTitle}>AI Suggestions</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={generateAISuggestions}
+                  disabled={isGeneratingAI}
+                >
+                  {isGeneratingAI ? (
+                    <ActivityIndicator size="small" color={colors.primary} />
+                  ) : (
+                    <Ionicons name="refresh" size={16} color={colors.primary} />
+                  )}
+                </TouchableOpacity>
+              </View>
+              
+              {aiSuggestions ? (
+                <View style={styles.suggestionsContainer}>
+                  {aiSuggestions.suggestedTags && aiSuggestions.suggestedTags.length > 0 && (
+                    <View style={styles.suggestionSection}>
+                      <Text style={styles.suggestionLabel}>Suggested Tags:</Text>
+                      <View style={styles.suggestedTags}>
+                        {aiSuggestions.suggestedTags.map((tag: string, index: number) => (
+                          <TagChip key={index} tag={tag} variant="outline" size="sm" />
+                        ))}
+                      </View>
+                    </View>
+                  )}
+                  
+                  {aiSuggestions.contentSuggestions && aiSuggestions.contentSuggestions.length > 0 && (
+                    <View style={styles.suggestionSection}>
+                      <Text style={styles.suggestionLabel}>Content Ideas:</Text>
+                      {aiSuggestions.contentSuggestions.map((suggestion: string, index: number) => (
+                        <View key={index} style={styles.contentSuggestion}>
+                          <Text style={styles.contentSuggestionText}>{suggestion}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              ) : (
+                <Text style={styles.aiEmptyText}>
+                  {isGeneratingAI ? 'Generating suggestions...' : 'Tap refresh to get AI suggestions'}
+                </Text>
+              )}
+            </CardContent>
+          </Card>
+        )}
 
         {/* Metadata */}
         <Card style={styles.metadataCard}>
-          <View style={styles.metadataItem}>
-            <Ionicons name="folder-outline" size={16} color={colors.subtext} />
-            <Text style={styles.metadataLabel}>Bin:</Text>
-            <Text style={styles.metadataValue}>{getBinName(thoughtmark.binId)}</Text>
-          </View>
-          
-          <View style={styles.metadataItem}>
-            <Ionicons name="time-outline" size={16} color={colors.subtext} />
-            <Text style={styles.metadataLabel}>Created:</Text>
-            <Text style={styles.metadataValue}>{formatDate(thoughtmark.createdAt)}</Text>
-          </View>
-          
-          {thoughtmark.updatedAt !== thoughtmark.createdAt && (
+          <CardContent>
             <View style={styles.metadataItem}>
-              <Ionicons name="refresh-outline" size={16} color={colors.subtext} />
-              <Text style={styles.metadataLabel}>Updated:</Text>
-              <Text style={styles.metadataValue}>{formatDate(thoughtmark.updatedAt)}</Text>
+              <Ionicons name="folder-outline" size={16} color={colors.subtext} />
+              <Text style={styles.metadataLabel}>Bin:</Text>
+              <Text style={styles.metadataValue}>{getBinName(thoughtmark.binId)}</Text>
             </View>
-          )}
-          
-          {thoughtmark.dueDate && (
+            
             <View style={styles.metadataItem}>
-              <Ionicons name="calendar-outline" size={16} color={colors.subtext} />
-              <Text style={styles.metadataLabel}>Due:</Text>
-              <Text style={styles.metadataValue}>{formatDate(thoughtmark.dueDate)}</Text>
+              <Ionicons name="time-outline" size={16} color={colors.subtext} />
+              <Text style={styles.metadataLabel}>Created:</Text>
+              <Text style={styles.metadataValue}>{formatDate(thoughtmark.createdAt)}</Text>
             </View>
-          )}
+            
+            {thoughtmark.updatedAt !== thoughtmark.createdAt && (
+              <View style={styles.metadataItem}>
+                <Ionicons name="refresh-outline" size={16} color={colors.subtext} />
+                <Text style={styles.metadataLabel}>Updated:</Text>
+                <Text style={styles.metadataValue}>{formatDate(thoughtmark.updatedAt)}</Text>
+              </View>
+            )}
+            
+            {thoughtmark.dueDate && (
+              <View style={styles.metadataItem}>
+                <Ionicons name="calendar-outline" size={16} color={colors.subtext} />
+                <Text style={styles.metadataLabel}>Due:</Text>
+                <Text style={styles.metadataValue}>{formatDate(thoughtmark.dueDate)}</Text>
+              </View>
+            )}
+          </CardContent>
         </Card>
 
         {/* Tags */}
         {thoughtmark.tags && thoughtmark.tags.length > 0 && (
           <Card style={styles.tagsCard}>
-            <Text style={styles.sectionTitle}>Tags</Text>
-            <View style={styles.tagsContainer}>
-              {thoughtmark.tags.map((tag: string, index: number) => (
-                <View key={index} style={styles.tag}>
-                  <Text style={styles.tagText}>#{tag}</Text>
-                </View>
-              ))}
-            </View>
+            <CardContent>
+              <Text style={styles.sectionTitle}>Tags</Text>
+              <View style={styles.tagsContainer}>
+                {thoughtmark.tags.map((tag: string, index: number) => (
+                  <TagChip key={index} tag={tag} variant="primary" size="sm" />
+                ))}
+              </View>
+            </CardContent>
           </Card>
         )}
 
@@ -274,6 +424,16 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       </ScrollView>
     </View>
   );
+};
+
+const getInsightTypeColor = (type: string) => {
+  switch (type) {
+    case 'pattern': return '#3B82F6';
+    case 'recommendation': return '#10B981';
+    case 'trend': return '#F59E0B';
+    case 'connection': return '#8B5CF6';
+    default: return '#6B7280';
+  }
 };
 
 const styles = StyleSheet.create({
@@ -327,7 +487,6 @@ const styles = StyleSheet.create({
   },
   titleCard: {
     marginBottom: spacing.md,
-    padding: spacing.lg,
   },
   title: {
     fontSize: typography.heading.fontSize,
@@ -354,16 +513,110 @@ const styles = StyleSheet.create({
   },
   contentCard: {
     marginBottom: spacing.md,
-    padding: spacing.lg,
   },
   contentText: {
     fontSize: typography.body.fontSize,
     color: colors.text,
     lineHeight: 24,
   },
+  aiCard: {
+    marginBottom: spacing.md,
+  },
+  aiHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.md,
+  },
+  aiTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  aiTitle: {
+    fontSize: typography.subheading.fontSize,
+    fontWeight: '600',
+    color: colors.text,
+    marginLeft: spacing.sm,
+  },
+  aiEmptyText: {
+    fontSize: typography.body.fontSize,
+    color: colors.subtext,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  insightsContainer: {
+    gap: spacing.md,
+  },
+  insightItem: {
+    padding: spacing.md,
+    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+    borderRadius: spacing.sm,
+  },
+  insightHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.sm,
+  },
+  insightType: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: spacing.xs,
+  },
+  insightTypeText: {
+    fontSize: 10,
+    color: colors.background,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  actionableBadge: {
+    backgroundColor: '#10B981',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: spacing.xs,
+  },
+  actionableText: {
+    fontSize: 10,
+    color: colors.background,
+    fontWeight: '600',
+  },
+  insightTitle: {
+    fontSize: typography.body.fontSize,
+    fontWeight: '600',
+    color: colors.text,
+    marginBottom: spacing.xs,
+  },
+  insightDescription: {
+    fontSize: typography.body.fontSize,
+    color: colors.subtext,
+  },
+  suggestionsContainer: {
+    gap: spacing.md,
+  },
+  suggestionSection: {
+    gap: spacing.sm,
+  },
+  suggestionLabel: {
+    fontSize: typography.body.fontSize,
+    fontWeight: '600',
+    color: colors.text,
+  },
+  suggestedTags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+  },
+  contentSuggestion: {
+    padding: spacing.sm,
+    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+    borderRadius: spacing.sm,
+  },
+  contentSuggestionText: {
+    fontSize: typography.body.fontSize,
+    color: colors.text,
+  },
   metadataCard: {
     marginBottom: spacing.md,
-    padding: spacing.lg,
   },
   metadataItem: {
     flexDirection: 'row',
@@ -385,7 +638,6 @@ const styles = StyleSheet.create({
   },
   tagsCard: {
     marginBottom: spacing.md,
-    padding: spacing.lg,
   },
   sectionTitle: {
     fontSize: typography.subheading.fontSize,
@@ -397,17 +649,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: spacing.sm,
-  },
-  tag: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.sm,
-  },
-  tagText: {
-    fontSize: 12,
-    color: colors.background,
-    fontWeight: '500',
   },
   actionsContainer: {
     flexDirection: 'row',

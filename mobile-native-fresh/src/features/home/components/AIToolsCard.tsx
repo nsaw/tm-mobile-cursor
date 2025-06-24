@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors, spacing, typography } from '../../../theme/theme';
 
 interface AIToolsCardProps {
@@ -25,7 +26,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     >
       <View style={styles.content}>
         <View style={styles.leftContent}>
-          <Ionicons name="bulb-outline" size={24} color="#FCD34D" />
+          <MaterialCommunityIcons name="crown-outline" size={24} color="#FFD700" />
           <Text style={styles.title}>AI Tools</Text>
           {isPremium && (
             <Ionicons name="diamond" size={16} color="#FCD34D" />

@@ -20,6 +20,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NavigationProp } from '../../../navigation/types';
 import type { RootStackParamList } from '../../../navigation/types';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -209,24 +210,64 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={styles.welcomeCard}>
-          <View style={styles.welcomeContent}>
-            <Text style={styles.welcomeTitle}>
-              Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
-            </Text>
-            <Text style={styles.welcomeSubtitle}>
-              Your personal knowledge management system
-            </Text>
-            <Button
-              variant="outline"
-              size="md"
-              style={{ marginTop: 12, alignSelf: 'flex-start' }}
-              onPress={() => navigation.navigate('HowTo')}
-              leftIcon={<Ionicons name="book-outline" size={18} color={colors.primary} />}
-            >
-              Learn More
-            </Button>
-          </View>
+        <Card style={{ alignItems: 'center', padding: spacing.xl, marginBottom: spacing.lg }}>
+          {(() => {
+            const { tokens } = useTheme();
+            return (
+              <>
+                {/* Brain icon in circle */}
+                <View style={{
+                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
+                  backgroundColor: `${tokens.colors.success}80`, // 50% opacity
+                  alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Brain size={28} color={tokens.colors.background} strokeWidth={2.5} />
+                </View>
+                {/* Title */}
+                <Text style={{
+                  fontFamily: tokens.typography.fontFamily.heading,
+                  fontSize: 22,
+                  fontWeight: '700',
+                  color: tokens.colors.text,
+                  textAlign: 'center',
+                  marginBottom: tokens.spacing.sm,
+                }}>
+                  Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
+                </Text>
+                {/* Subtitle */}
+                <Text style={{
+                  fontFamily: tokens.typography.fontFamily.body,
+                  fontSize: 12,
+                  color: tokens.colors.textSecondary,
+                  textAlign: 'center',
+                  marginBottom: tokens.spacing.md,
+                }}>
+                  Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
+                </Text>
+                {/* User Guide Button */}
+                <Button
+                  style={{
+                    width: '100%',
+                    minWidth: '50%',
+                    backgroundColor: tokens.colors.accent,
+                    paddingVertical: tokens.spacing.sm,
+                    borderRadius: 8,
+                  }}
+                  onPress={() => navigation.navigate('HowTo')}
+                >
+                  <Text style={{
+                    fontFamily: tokens.typography.fontFamily.body,
+                    fontWeight: '600',
+                    color: '#fff',
+                    textAlign: 'center',
+                    width: '100%',
+                  }}>
+                    User Guide
+                  </Text>
+                </Button>
+              </>
+            );
+          })()}
         </Card>
 
         {/* Account Settings */}

@@ -214,11 +214,53 @@ class ApiService {
   }
 
   // AI methods (for later)
-  async generateInsights(thoughtmarkIds?: number[]): Promise<APIResponse<any>> {
-    return this.makeRequest('/api/ai/insights', {
+  async generateInsights(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
+    const response = await this.makeRequest('/api/ai/insights', {
       method: 'POST',
       body: JSON.stringify({ thoughtmarkIds }),
     });
+    console.log('[apiService.generateInsights] Raw response:', response);
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
+  }
+
+  async smartSort(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
+    const response = await this.makeRequest('/api/ai/smart-sort', {
+      method: 'POST',
+      body: JSON.stringify({ thoughtmarkIds }),
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
+  }
+
+  async recommendations(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
+    const response = await this.makeRequest('/api/ai/recommendations', {
+      method: 'POST',
+      body: JSON.stringify({ thoughtmarkIds }),
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
+  }
+
+  async learningResources(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
+    const response = await this.makeRequest('/api/ai/learning-resources', {
+      method: 'POST',
+      body: JSON.stringify({ thoughtmarkIds }),
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
   }
 
   async categorizeThoughtmark(content: string): Promise<APIResponse<string[]>> {
@@ -246,6 +288,41 @@ class ApiService {
       },
       body: formData,
     });
+  }
+
+  async semanticSearch(query: string) {
+    const response = await this.makeRequest('/api/ai/semantic-search', {
+      method: 'POST',
+      body: JSON.stringify({ query }),
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
+  }
+
+  async generateSearchSuggestions() {
+    const response = await this.makeRequest('/api/ai/search-suggestions', {
+      method: 'POST',
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
+  }
+
+  async generateThoughtmarkSuggestions(data: { content: string; title?: string; tags?: string[] }) {
+    const response = await this.makeRequest('/api/ai/thoughtmark-suggestions', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    return {
+      success: response.success,
+      data: response.data,
+      error: response.error,
+    };
   }
 }
 
