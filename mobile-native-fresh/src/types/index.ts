@@ -33,9 +33,17 @@ export interface Thoughtmark {
   isArchived: boolean;
   isPinned: boolean;
   isDeleted: boolean;
+  isTask: boolean;
+  isCompleted: boolean;
+  dueDate?: string;
+  priority?: 'low' | 'medium' | 'high';
   completedAt?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ThoughtmarkWithBin extends Thoughtmark {
+  binName?: string;
 }
 
 export interface Bin {
@@ -49,6 +57,7 @@ export interface Bin {
   isArchived: boolean;
   isDeleted: boolean;
   sortOrder: number;
+  thoughtmarkCount?: number;
   createdAt: string;
   updatedAt: string;
 }

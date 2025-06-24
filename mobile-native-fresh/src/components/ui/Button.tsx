@@ -1,123 +1,119 @@
-import React from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
+import React, { useState } from 'react';
+import { Pressable, Text, ViewStyle, TextStyle } from 'react-native';
+import { useTheme } from '../../theme/ThemeProvider';
+import { buttonVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface ButtonProps {
-  title: string;
-  onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'small' | 'medium' | 'large';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline' | 'brand';
+  size?: 'sm' | 'md' | 'lg' | 'icon';
   disabled?: boolean;
-  loading?: boolean;
+  onPress?: () => void;
+  children: React.ReactNode;
   style?: ViewStyle;
   textStyle?: TextStyle;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  title,
-  onPress,
   variant = 'primary',
-  size = 'medium',
+  size = 'md',
   disabled = false,
-  loading = false,
+  onPress,
+  children,
   style,
   textStyle,
+  leftIcon,
+  rightIcon,
 }) => {
-  const buttonStyles = [
-    styles.button,
-    styles[`${variant}Button`],
-    styles[`${size}Button`],
-    disabled && styles.disabledButton,
-    style,
-  ];
+  const { tokens } = useTheme();
+  const [isPressed, setIsPressed] = useState(false);
 
-  const textStyles = [
-    styles.text,
-    styles[`${variant}Text`],
-    styles[`${size}Text`],
-    disabled && styles.disabledText,
-    textStyle,
-  ];
+  // Get variant styles
+  const baseStyle = buttonVariants.base;
+  const variantStyle = buttonVariants.variants.variant[variant];
+  const sizeStyle = buttonVariants.variants.size[size];
+
+  // Merge all styles
+  const buttonStyle = mergeVariantStyles(baseStyle, {
+    variant: variantStyle,
+    size: sizeStyle,
+  });
+
+  // Apply disabled state and press state
+  const finalButtonStyle = {
+    ...buttonStyle,
+    opacity: disabled ? 0.5 : 1,
+    // Add 80% opacity fill for primary button when pressed
+    backgroundColor: variant === 'primary' && isPressed 
+      ? `${tokens.colors.accent}CC` // 80% opacity (CC = 204/255)
+      : buttonStyle.backgroundColor,
+    ...style,
+  };
+
+  // Text color based on variant
+  const getTextColor = () => {
+    switch (variant) {
+      case 'primary':
+        return tokens.colors.accent; // Blue text for outline style
+      case 'secondary':
+        return tokens.colors.text;
+      case 'outline':
+        return tokens.colors.text;
+      case 'ghost':
+        return tokens.colors.text;
+      case 'destructive':
+        return tokens.colors.danger;
+      case 'brand':
+        return tokens.colors.brand;
+      default:
+        return tokens.colors.text;
+    }
+  };
+
+  const textColor = getTextColor();
 
   return (
-    <TouchableOpacity
-      style={buttonStyles}
-      onPress={onPress}
-      disabled={disabled || loading}
-      activeOpacity={0.7}
+    <Pressable
+      style={finalButtonStyle}
+      onPress={disabled ? undefined : onPress}
+      onPressIn={() => setIsPressed(true)}
+      onPressOut={() => setIsPressed(false)}
+      disabled={disabled}
+      android_ripple={{
+        color: tokens.colors.surfaceHover,
+        borderless: false,
+      }}
     >
-      {loading ? (
-        <ActivityIndicator 
-          color={variant === 'primary' ? '#ffffff' : '#007AFF'} 
-          size="small" 
-        />
-      ) : (
-        <Text style={textStyles}>{title}</Text>
+      {leftIcon && (
+        <Text style={{ marginRight: tokens.spacing.sm, color: textColor }}>
+          {leftIcon}
+        </Text>
       )}
-    </TouchableOpacity>
+      
+      {typeof children === 'string' ? (
+        <Text
+          style={[
+            {
+              color: textColor,
+              fontSize: tokens.typography.fontSize.body,
+              fontWeight: tokens.typography.fontWeight.medium,
+              textAlign: 'center',
+            },
+            textStyle,
+          ]}
+        >
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
+      
+      {rightIcon && (
+        <Text style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
+          {rightIcon}
+        </Text>
+      )}
+    </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryButton: {
-    backgroundColor: '#007AFF',
-  },
-  secondaryButton: {
-    backgroundColor: '#f0f0f0',
-  },
-  outlineButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#007AFF',
-  },
-  disabledButton: {
-    backgroundColor: '#cccccc',
-  },
-  smallButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  mediumButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  largeButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-  },
-  text: {
-    fontWeight: '600',
-  },
-  primaryText: {
-    color: '#ffffff',
-  },
-  secondaryText: {
-    color: '#1a1a1a',
-  },
-  outlineText: {
-    color: '#007AFF',
-  },
-  disabledText: {
-    color: '#999999',
-  },
-  smallText: {
-    fontSize: 14,
-  },
-  mediumText: {
-    fontSize: 16,
-  },
-  largeText: {
-    fontSize: 18,
-  },
-});

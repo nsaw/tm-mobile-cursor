@@ -14,11 +14,14 @@ import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { ThoughtmarkList } from '../components/ThoughtmarkList';
 import { QuickActions } from '../components/QuickActions';
 import { SearchBar } from '../components/SearchBar';
-import type { Thoughtmark, Bin } from '../../../types';
+import { TagFilter } from '../../../components/ui/TagFilter';
+import { colors, spacing, typography } from '../../../theme/theme';
+import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 
 export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBin, setSelectedBin] = useState<Bin | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const {
@@ -65,6 +68,10 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
 
+  const handleThoughtmarkEdit = (thoughtmark: Thoughtmark) => {
+    navigation.navigate('CreateThoughtmark', { thoughtmarkId: thoughtmark.id });
+  };
+
   const handleCreateNew = () => {
     navigation.navigate('CreateThoughtmark');
   };
@@ -74,16 +81,59 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     navigation.navigate('BinDetail', { binId: bin.id });
   };
 
-  const filteredThoughtmarks = selectedBin
-    ? thoughtmarks.filter(tm => tm.binId === selectedBin.id)
-    : thoughtmarks;
+  const handleTagPress = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
 
-  const recentThoughtmarks = thoughtmarks
+  const handleClearAllTags = () => {
+    setSelectedTags([]);
+  };
+
+  // Convert Thoughtmark to ThoughtmarkWithBin by adding binName
+  const thoughtmarksWithBin: ThoughtmarkWithBin[] = thoughtmarks.map(tm => ({
+    ...tm,
+    binName: bins.find(bin => bin.id === tm.binId)?.name,
+  }));
+
+  // Get all unique tags from thoughtmarks
+  const allTags = Array.from(
+    new Set(
+      thoughtmarks
+        .flatMap(tm => tm.tags)
+        .filter(tag => tag.trim().length > 0)
+    )
+  ).sort();
+
+  // Filter thoughtmarks by selected bin and tags
+  const filteredThoughtmarks = thoughtmarksWithBin.filter(tm => {
+    const matchesBin = !selectedBin || tm.binId === selectedBin.id;
+    const matchesTags = selectedTags.length === 0 || 
+      selectedTags.some(tag => tm.tags.includes(tag));
+    return matchesBin && matchesTags;
+  });
+
+  const recentThoughtmarks = filteredThoughtmarks
     .filter(tm => !tm.isArchived && !tm.isDeleted)
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 5);
 
-  const pinnedThoughtmarks = thoughtmarks.filter(tm => tm.isPinned);
+  const pinnedThoughtmarks = filteredThoughtmarks.filter(tm => tm.isPinned);
+
+  const renderThoughtmarkCard = ({ item }: { item: ThoughtmarkWithBin }) => (
+    <ThoughtmarkCard
+      thoughtmark={item}
+      onClick={() => handleThoughtmarkPress(item)}
+      onEdit={() => handleThoughtmarkEdit(item)}
+      onArchive={() => {
+        // TODO: Implement archive functionality
+        console.log('Archive thoughtmark:', item.id);
+      }}
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -109,15 +159,19 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         onVoiceRecord={() => navigation.navigate('VoiceRecord')}
       />
 
+      {allTags.length > 0 && (
+        <TagFilter
+          tags={allTags}
+          selectedTags={selectedTags}
+          onTagPress={handleTagPress}
+          onClearAll={handleClearAllTags}
+        />
+      )}
+
       <FlatList
         data={filteredThoughtmarks}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ThoughtmarkCard
-            thoughtmark={item}
-            onPress={() => handleThoughtmarkPress(item)}
-          />
-        )}
+        renderItem={renderThoughtmarkCard}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -129,10 +183,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             {pinnedThoughtmarks.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Pinned</Text>
-                <ThoughtmarkList
-                  thoughtmarks={pinnedThoughtmarks}
-                  onThoughtmarkPress={handleThoughtmarkPress}
+                <FlatList
+                  data={pinnedThoughtmarks}
                   horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item) => item.id.toString()}
+                  renderItem={renderThoughtmarkCard}
+                  contentContainerStyle={styles.horizontalList}
                 />
               </View>
             )}
@@ -140,10 +197,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             {recentThoughtmarks.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Recent</Text>
-                <ThoughtmarkList
-                  thoughtmarks={recentThoughtmarks}
-                  onThoughtmarkPress={handleThoughtmarkPress}
+                <FlatList
+                  data={recentThoughtmarks}
                   horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item) => item.id.toString()}
+                  renderItem={renderThoughtmarkCard}
+                  contentContainerStyle={styles.horizontalList}
                 />
               </View>
             )}
@@ -197,87 +257,83 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
+    ...typography.heading,
+    color: colors.text,
   },
   profileButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-    alignItems: 'center',
+    backgroundColor: colors.card,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   profileButtonText: {
-    fontSize: 18,
+    fontSize: 20,
   },
   section: {
-    marginBottom: 24,
+    marginBottom: spacing.lg,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 12,
-    paddingHorizontal: 16,
-    color: '#1a1a1a',
+    ...typography.subheading,
+    color: colors.text,
+    paddingHorizontal: spacing.lg,
+    marginBottom: spacing.sm,
+  },
+  horizontalList: {
+    paddingHorizontal: spacing.md,
   },
   binCard: {
-    width: 100,
+    width: 80,
     height: 80,
     borderRadius: 12,
-    marginLeft: 16,
-    padding: 12,
-    alignItems: 'center',
+    marginHorizontal: spacing.xs,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   binIcon: {
     fontSize: 24,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   binName: {
     fontSize: 12,
-    fontWeight: '500',
+    color: colors.text,
     textAlign: 'center',
-    color: '#1a1a1a',
-  },
-  listContent: {
-    paddingBottom: 20,
   },
   emptyState: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 32,
-    paddingVertical: 64,
+    alignItems: 'center',
+    paddingHorizontal: spacing.lg,
   },
   emptyStateText: {
-    fontSize: 16,
-    color: '#666666',
+    ...typography.body,
+    color: colors.subtext,
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: spacing.lg,
   },
   createButton: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
+    backgroundColor: colors.primary,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
     borderRadius: 8,
   },
   createButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
+    ...typography.body,
+    color: '#FFFFFF',
     fontWeight: '600',
+  },
+  listContent: {
+    paddingBottom: spacing.xl,
   },
 });

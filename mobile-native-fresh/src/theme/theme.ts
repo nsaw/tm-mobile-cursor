@@ -1,12 +1,12 @@
 // src/theme/theme.ts
 export const colors = {
-  primary:        '#007AFF',
-  background:     '#181818',      // your app bg
-  card:           '#242424',      // darker card surface
-  inputBackground:'#aaaaaa',      // fields themselves
-  text:           '#FFFFFF',      // primary text on dark
-  subtext:        '#AAAAAA',      // secondary text / placeholders
-  border:         '#3A3A3C',      // subtle border
+  primary:        '#3B82F6',
+  background:     '#181818',
+  card:           '#1F1F1F',
+  inputBackground:'#aaaaaa',
+  text:           '#E0E0E0',
+  subtext:        '#A0A0A0',
+  border:         '#2E2E2E',
 }
 
 export const spacing = {
