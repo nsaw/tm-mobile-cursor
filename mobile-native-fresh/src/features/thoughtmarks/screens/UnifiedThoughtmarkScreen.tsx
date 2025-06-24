@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,540 +6,381 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '../../../theme/ThemeProvider';
-import { Button } from '../../../components/ui/Button';
-import { Card } from '../../../components/ui/Card';
-import { Badge } from '../../../components/ui/Badge';
-import { Switch } from '../../../components/ui/Switch';
-import { TagChip } from '../../../components/ui/TagChip';
-import { useThoughtmarks } from '../hooks/useThoughtmarks';
-import { useBins } from '../../bins/hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { colors, spacing, typography } from '../../../theme/theme';
-import type { Thoughtmark, Bin } from '../../../types';
-
-type Mode = 'create' | 'edit' | 'view';
-
-interface UnifiedThoughtmarkScreenProps {
-  mode?: Mode;
-}
+import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
+import { useBins } from '../../home/hooks/useBins';
+import { Button } from '../../../components/ui/Button';
+import { ModernHeader } from '../../../components/ui/ModernHeader';
 
 interface RouteParams {
   thoughtmarkId?: number;
-  mode?: Mode;
-  voice?: boolean;
   content?: string;
   title?: string;
-  tags?: string;
-  binId?: string;
+  isVoiceNote?: boolean;
 }
 
-export const UnifiedThoughtmarkScreen: React.FC<UnifiedThoughtmarkScreenProps> = ({ 
-  mode: initialMode = 'view' 
-}) => {
+export const UnifiedThoughtmarkScreen: React.FC = () => {
+  const { tokens } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
-  const { tokens } = useTheme();
   const { user } = useAuth();
-  
-  const [mode, setMode] = useState<Mode>(initialMode);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [tags, setTags] = useState<string[]>([]);
-  const [selectedBinId, setSelectedBinId] = useState<number | null>(null);
-  const [isTask, setIsTask] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
-  const [dueDate, setDueDate] = useState('');
-  const [newTag, setNewTag] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const [lastSaved, setLastSaved] = useState<Date | null>(null);
-  const [showAIFeatures, setShowAIFeatures] = useState(false);
-  const [aiSuggestions, setAiSuggestions] = useState<any>(null);
-  const [isGeneratingAI, setIsGeneratingAI] = useState(false);
+  const { createThoughtmark, updateThoughtmark, thoughtmarks, loading } = useThoughtmarks();
+  const { bins } = useBins();
 
   const params = route.params as RouteParams;
-  const thoughtmarkId = params?.thoughtmarkId;
-  
-  const {
-    thoughtmarks,
-    createThoughtmark,
-    updateThoughtmark,
-    deleteThoughtmark,
-    loading: thoughtmarksLoading,
-  } = useThoughtmarks();
+  const isEditing = !!params.thoughtmarkId;
+  const isVoiceNote = params.isVoiceNote || false;
 
-  const {
-    bins,
-    loading: binsLoading,
-  } = useBins();
+  // Form state
+  const [title, setTitle] = useState(params.title || '');
+  const [content, setContent] = useState(params.content || '');
+  const [selectedBinId, setSelectedBinId] = useState<number | undefined>();
+  const [tags, setTags] = useState<string[]>(isVoiceNote ? ['voice'] : []);
+  const [isTask, setIsTask] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+  const [isPinned, setIsPinned] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const currentThoughtmark = thoughtmarkId 
-    ? thoughtmarks.find(t => t.id === thoughtmarkId)
+  // Find existing thoughtmark if editing
+  const existingThoughtmark = isEditing 
+    ? thoughtmarks.find(t => t.id === params.thoughtmarkId)
     : null;
 
-  // Handle voice content from route params
+  // Load existing data when editing
   useEffect(() => {
-    if (mode === 'create' && params?.voice) {
-      if (params.content) {
-        setContent(decodeURIComponent(params.content));
-      }
-      if (params.title) {
-        setTitle(decodeURIComponent(params.title));
-      }
-      if (params.tags) {
-        setTags(params.tags.split(','));
-      }
-      if (params.binId) {
-        setSelectedBinId(parseInt(params.binId));
-      }
+    if (existingThoughtmark) {
+      setTitle(existingThoughtmark.title || '');
+      setContent(existingThoughtmark.content || '');
+      setSelectedBinId(existingThoughtmark.binId || undefined);
+      setTags(existingThoughtmark.tags || []);
+      setIsTask(existingThoughtmark.isTask || false);
+      setIsCompleted(existingThoughtmark.isCompleted || false);
+      setDueDate(existingThoughtmark.dueDate ? new Date(existingThoughtmark.dueDate) : null);
+      setIsPinned(existingThoughtmark.isPinned || false);
     }
-  }, [mode, params]);
-
-  // Load thoughtmark data for edit/view modes
-  useEffect(() => {
-    if (currentThoughtmark && (mode === 'edit' || mode === 'view')) {
-      setTitle(currentThoughtmark.title);
-      setContent(currentThoughtmark.content);
-      setTags(currentThoughtmark.tags || []);
-      setSelectedBinId(currentThoughtmark.binId);
-      setIsTask(currentThoughtmark.isTask || false);
-      setIsCompleted(currentThoughtmark.isCompleted || false);
-      setIsPinned(currentThoughtmark.isPinned || false);
-      if (currentThoughtmark.dueDate) {
-        setDueDate(new Date(currentThoughtmark.dueDate).toISOString().split('T')[0]);
-      }
-    }
-  }, [currentThoughtmark, mode]);
-
-  // Auto-select default bin for new thoughtmarks
-  useEffect(() => {
-    if (mode === 'create' && bins.length > 0 && !selectedBinId) {
-      const sortLaterBin = bins.find(bin => bin.name === 'Sort Later');
-      if (sortLaterBin) {
-        setSelectedBinId(sortLaterBin.id);
-      }
-    }
-  }, [mode, bins, selectedBinId]);
+  }, [existingThoughtmark]);
 
   const handleSave = async () => {
-    if (!title.trim() || !content.trim()) {
-      Alert.alert('Missing Information', 'Please provide both title and content.');
+    if (!content.trim()) {
+      Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
       return;
     }
 
-    setIsSaving(true);
+    setIsSubmitting(true);
+
     try {
       const thoughtmarkData = {
-        title: title.trim(),
+        title: title.trim() || 'Untitled Thoughtmark',
         content: content.trim(),
         tags,
         binId: selectedBinId,
         isTask,
         isCompleted,
-        dueDate: dueDate ? new Date(dueDate).toISOString() : null,
+        dueDate: dueDate?.toISOString() || null,
         isPinned,
       };
 
-      if (mode === 'create') {
-        await createThoughtmark(thoughtmarkData);
-        Alert.alert('Success', 'Thoughtmark created successfully!', [
-          { text: 'OK', onPress: () => navigation.goBack() }
-        ]);
-      } else if (mode === 'edit' && currentThoughtmark) {
-        await updateThoughtmark(currentThoughtmark.id, thoughtmarkData);
-        setLastSaved(new Date());
+      if (isEditing && existingThoughtmark) {
+        await updateThoughtmark(existingThoughtmark.id, thoughtmarkData);
         Alert.alert('Success', 'Thoughtmark updated successfully!');
+      } else {
+        const newThoughtmark = await createThoughtmark(thoughtmarkData);
+        Alert.alert('Success', 'Thoughtmark created successfully!');
+        
+        // Navigate to detail view for new thoughtmarks
+        (navigation as any).navigate('ThoughtmarkDetail', { 
+          thoughtmarkId: newThoughtmark.id 
+        });
+        return;
       }
+
+      // Go back for edits
+      navigation.goBack();
+
     } catch (error) {
+      console.error('Error saving thoughtmark:', error);
       Alert.alert('Error', 'Failed to save thoughtmark. Please try again.');
     } finally {
-      setIsSaving(false);
+      setIsSubmitting(false);
     }
   };
 
-  const handleDelete = () => {
-    if (!currentThoughtmark) return;
-
-    Alert.alert(
-      'Delete Thoughtmark',
-      'Are you sure you want to delete this thoughtmark? This action cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await deleteThoughtmark(currentThoughtmark.id);
-              navigation.goBack();
-            } catch (error) {
-              Alert.alert('Error', 'Failed to delete thoughtmark.');
-            }
-          }
-        }
-      ]
-    );
-  };
-
-  const addTag = () => {
-    if (newTag.trim() && !tags.includes(newTag.trim())) {
-      setTags([...tags, newTag.trim()]);
-      setNewTag('');
-    }
-  };
-
-  const removeTag = (tagToRemove: string) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
-  };
-
-  const generateAISuggestions = async () => {
-    if (!user?.isPremium && !user?.isTestUser) {
+  const handleCancel = () => {
+    if (title.trim() || content.trim()) {
       Alert.alert(
-        'Premium Feature',
-        'AI suggestions are available for premium users. Upgrade to unlock this feature.',
+        'Discard Changes?',
+        'You have unsaved changes. Are you sure you want to discard them?',
         [
           { text: 'Cancel', style: 'cancel' },
-          { text: 'Upgrade', onPress: () => navigation.navigate('Subscribe' as never) }
+          { text: 'Discard', style: 'destructive', onPress: () => navigation.goBack() },
         ]
       );
-      return;
-    }
-
-    if (!title.trim() || !content.trim()) {
-      Alert.alert('Missing Content', 'Please provide title and content to generate AI suggestions.');
-      return;
-    }
-
-    setIsGeneratingAI(true);
-    try {
-      // TODO: Implement AI suggestions API call
-      // For now, show a placeholder
-      setTimeout(() => {
-        setAiSuggestions({
-          suggestedTags: ['ai-suggested', 'smart-tag'],
-          suggestedTitle: 'AI Enhanced Title',
-          insights: 'This thoughtmark appears to be about productivity and organization.',
-        });
-        setIsGeneratingAI(false);
-      }, 2000);
-    } catch (error) {
-      Alert.alert('Error', 'Failed to generate AI suggestions.');
-      setIsGeneratingAI(false);
+    } else {
+      navigation.goBack();
     }
   };
 
-  const renderHeader = () => (
-    <View style={styles.header}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
-      </TouchableOpacity>
-      
-      <Text style={styles.headerTitle}>
-        {mode === 'create' ? 'New Thoughtmark' : 
-         mode === 'edit' ? 'Edit Thoughtmark' : 'View Thoughtmark'}
-      </Text>
-      
-      <View style={styles.headerActions}>
-        {mode === 'view' && currentThoughtmark && (
-          <>
-            <TouchableOpacity
-              style={styles.actionButton}
-              onPress={() => setIsPinned(!isPinned)}
-            >
-              <Ionicons 
-                name={isPinned ? "pin" : "pin-outline"} 
-                size={20} 
-                color={isPinned ? tokens.colors.accent : tokens.colors.textSecondary} 
-              />
-            </TouchableOpacity>
-            
-            <TouchableOpacity
-              style={styles.actionButton}
-              onPress={() => setMode('edit')}
-            >
-              <Ionicons name="create-outline" size={20} color={tokens.colors.textSecondary} />
-            </TouchableOpacity>
-          </>
-        )}
-        
-        {mode === 'edit' && (
-          <TouchableOpacity
-            style={styles.actionButton}
-            onPress={() => setMode('view')}
-          >
-            <Ionicons name="close" size={20} color={tokens.colors.textSecondary} />
-          </TouchableOpacity>
-        )}
-      </View>
-    </View>
-  );
-
-  const renderAIFeatures = () => {
-    if (!user?.isPremium && !user?.isTestUser) {
-      return (
-        <Card variant="elevated" style={styles.aiCard}>
-          <View style={styles.aiCardHeader}>
-            <Ionicons name="sparkles" size={20} color={tokens.colors.accent} />
-            <Text style={styles.aiCardTitle}>AI Features</Text>
-            <TouchableOpacity
-              style={styles.upgradeButton}
-              onPress={() => navigation.navigate('Subscribe' as never)}
-            >
-              <Text style={styles.upgradeButtonText}>Upgrade</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.aiCardDescription}>
-            Unlock AI-powered insights, smart suggestions, and intelligent organization with Premium.
-          </Text>
-        </Card>
-      );
-    }
-
-    return (
-      <Card variant="elevated" style={styles.aiCard}>
-        <View style={styles.aiCardHeader}>
-          <Ionicons name="sparkles" size={20} color={tokens.colors.accent} />
-          <Text style={styles.aiCardTitle}>AI Suggestions</Text>
-          <TouchableOpacity
-            style={styles.aiButton}
-            onPress={generateAISuggestions}
-            disabled={isGeneratingAI}
-          >
-            {isGeneratingAI ? (
-              <ActivityIndicator size="small" color={tokens.colors.accent} />
-            ) : (
-              <Ionicons name="wand" size={16} color={tokens.colors.accent} />
-            )}
-          </TouchableOpacity>
-        </View>
-        
-        {aiSuggestions && (
-          <View style={styles.aiSuggestions}>
-            <Text style={styles.aiSuggestionTitle}>Suggested Tags:</Text>
-            <View style={styles.suggestedTags}>
-              {aiSuggestions.suggestedTags.map((tag: string) => (
-                <TagChip
-                  key={tag}
-                  tag={tag}
-                  onPress={() => addTag()}
-                  variant="suggestion"
-                />
-              ))}
-            </View>
-            <Text style={styles.aiInsight}>{aiSuggestions.insights}</Text>
-          </View>
-        )}
-      </Card>
+  const toggleTag = (tag: string) => {
+    setTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
     );
   };
 
-  if (thoughtmarksLoading || binsLoading) {
-    return (
-      <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={tokens.colors.accent} />
-          <Text style={styles.loadingText}>Loading...</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
+  const toggleTask = () => {
+    setIsTask(!isTask);
+    if (isTask) {
+      setIsCompleted(false);
+      setDueDate(null);
+    }
+  };
+
+  const togglePin = () => {
+    setIsPinned(!isPinned);
+  };
+
+  const getHeaderTitle = () => {
+    if (isVoiceNote) return 'Voice Note';
+    return isEditing ? 'Edit Thoughtmark' : 'New Thoughtmark';
+  };
+
+  const getHeaderSubtitle = () => {
+    if (isVoiceNote) return 'Review and edit your voice note';
+    return isEditing ? 'Update your thoughtmark' : 'Capture your thoughts';
+  };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-      {renderHeader()}
-      
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <KeyboardAvoidingView 
-        style={styles.keyboardView}
+        style={{ flex: 1 }} 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-          <View style={styles.content}>
-            {/* Title Section */}
-            <View style={styles.section}>
-              <Text style={styles.sectionLabel}>Title</Text>
-              {mode === 'view' ? (
-                <Text style={styles.viewTitle}>{title}</Text>
-              ) : (
-                <TextInput
-                  style={styles.titleInput}
-                  value={title}
-                  onChangeText={setTitle}
-                  placeholder="Enter title..."
-                  placeholderTextColor={tokens.colors.textMuted}
-                />
-              )}
-            </View>
+        {/* Header */}
+        <ModernHeader
+          title={getHeaderTitle()}
+          subtitle={getHeaderSubtitle()}
+          onBack={handleCancel}
+          rightAction={{
+            icon: "checkmark",
+            onPress: handleSave
+          }}
+          showBackButton={true}
+        />
 
-            {/* Content Section */}
-            <View style={styles.section}>
-              <Text style={styles.sectionLabel}>Content</Text>
-              {mode === 'view' ? (
-                <Text style={styles.viewContent}>{content}</Text>
-              ) : (
-                <TextInput
-                  style={styles.contentInput}
-                  value={content}
-                  onChangeText={setContent}
-                  placeholder="What's on your mind?"
-                  placeholderTextColor={tokens.colors.textMuted}
-                  multiline
-                  textAlignVertical="top"
-                />
-              )}
-            </View>
-
-            {/* Tags Section */}
-            <View style={styles.section}>
-              <Text style={styles.sectionLabel}>Tags</Text>
-              <View style={styles.tagsContainer}>
-                {tags.map(tag => (
-                  <TagChip
-                    key={tag}
-                    tag={tag}
-                    onPress={() => mode !== 'view' && removeTag(tag)}
-                    variant={mode === 'view' ? 'default' : 'removable'}
-                  />
-                ))}
-              </View>
-              
-              {mode !== 'view' && (
-                <View style={styles.addTagContainer}>
-                  <TextInput
-                    style={styles.tagInput}
-                    value={newTag}
-                    onChangeText={setNewTag}
-                    placeholder="Add tag..."
-                    placeholderTextColor={tokens.colors.textMuted}
-                    onSubmitEditing={addTag}
-                  />
-                  <TouchableOpacity
-                    style={styles.addTagButton}
-                    onPress={addTag}
-                  >
-                    <Ionicons name="add" size={20} color={tokens.colors.accent} />
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
-
-            {/* Bin Selection */}
-            <View style={styles.section}>
-              <Text style={styles.sectionLabel}>Bin</Text>
-              {mode === 'view' ? (
-                <Text style={styles.viewBin}>
-                  {bins.find(b => b.id === selectedBinId)?.name || 'No bin selected'}
-                </Text>
-              ) : (
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <View style={styles.binsContainer}>
-                    {bins.map(bin => (
-                      <TouchableOpacity
-                        key={bin.id}
-                        style={[
-                          styles.binOption,
-                          selectedBinId === bin.id && styles.selectedBin
-                        ]}
-                        onPress={() => setSelectedBinId(bin.id)}
-                      >
-                        <Text style={[
-                          styles.binText,
-                          selectedBinId === bin.id && styles.selectedBinText
-                        ]}>
-                          {bin.name}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                </ScrollView>
-              )}
-            </View>
-
-            {/* Task Settings */}
-            {mode !== 'view' && (
-              <View style={styles.section}>
-                <View style={styles.switchRow}>
-                  <Text style={styles.switchLabel}>Mark as task</Text>
-                  <Switch
-                    value={isTask}
-                    onValueChange={setIsTask}
-                  />
-                </View>
-                
-                {isTask && (
-                  <View style={styles.taskSettings}>
-                    <View style={styles.switchRow}>
-                      <Text style={styles.switchLabel}>Completed</Text>
-                      <Switch
-                        value={isCompleted}
-                        onValueChange={setIsCompleted}
-                      />
-                    </View>
-                    
-                    <TextInput
-                      style={styles.dateInput}
-                      value={dueDate}
-                      onChangeText={setDueDate}
-                      placeholder="Due date (YYYY-MM-DD)"
-                      placeholderTextColor={tokens.colors.textMuted}
-                    />
-                  </View>
-                )}
-              </View>
-            )}
-
-            {/* AI Features */}
-            {renderAIFeatures()}
-
-            {/* Action Buttons */}
-            {mode !== 'view' && (
-              <View style={styles.actions}>
-                <Button
-                  variant="primary"
-                  onPress={handleSave}
-                  disabled={isSaving}
-                  style={styles.saveButton}
-                >
-                  {isSaving ? (
-                    <ActivityIndicator size="small" color={tokens.colors.text} />
-                  ) : (
-                    <Ionicons name="save-outline" size={20} color={tokens.colors.text} />
-                  )}
-                  <Text style={styles.saveButtonText}>
-                    {mode === 'create' ? 'Create' : 'Save Changes'}
-                  </Text>
-                </Button>
-                
-                {mode === 'edit' && currentThoughtmark && (
-                  <Button
-                    variant="destructive"
-                    onPress={handleDelete}
-                    style={styles.deleteButton}
-                  >
-                    <Ionicons name="trash-outline" size={20} color={tokens.colors.danger} />
-                    <Text style={styles.deleteButtonText}>Delete</Text>
-                  </Button>
-                )}
-              </View>
-            )}
-
-            {/* Last Saved Indicator */}
-            {lastSaved && (
-              <Text style={styles.lastSaved}>
-                Last saved: {lastSaved.toLocaleTimeString()}
+        <ScrollView 
+          style={{ flex: 1 }}
+          contentContainerStyle={{ padding: tokens.spacing.lg }}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Voice Note Indicator */}
+          {isVoiceNote && (
+            <View style={[styles.voiceIndicator, { backgroundColor: tokens.colors.surface }]}>
+              <Ionicons name="mic" size={20} color={tokens.colors.accent} />
+              <Text style={[styles.voiceIndicatorText, { color: tokens.colors.textSecondary }]}>
+                Voice note captured
               </Text>
-            )}
+            </View>
+          )}
+
+          {/* Title Input */}
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
+              Title (optional)
+            </Text>
+            <TextInput
+              style={[styles.titleInput, { 
+                backgroundColor: tokens.colors.surface,
+                borderColor: tokens.colors.border,
+                color: tokens.colors.text,
+              }]}
+              value={title}
+              onChangeText={setTitle}
+              placeholder="Enter a title..."
+              placeholderTextColor={tokens.colors.textMuted}
+              maxLength={100}
+            />
+          </View>
+
+          {/* Content Input */}
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
+              Content *
+            </Text>
+            <TextInput
+              style={[styles.contentInput, { 
+                backgroundColor: tokens.colors.surface,
+                borderColor: tokens.colors.border,
+                color: tokens.colors.text,
+              }]}
+              value={content}
+              onChangeText={setContent}
+              placeholder="What's on your mind?"
+              placeholderTextColor={tokens.colors.textMuted}
+              multiline
+              textAlignVertical="top"
+              maxLength={5000}
+            />
+            <Text style={[styles.charCount, { color: tokens.colors.textMuted }]}>
+              {content.length}/5000
+            </Text>
+          </View>
+
+          {/* Bin Selection */}
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
+              Bin (optional)
+            </Text>
+            <ScrollView 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.binContainer}
+            >
+              <TouchableOpacity
+                style={[
+                  styles.binOption,
+                  { 
+                    backgroundColor: selectedBinId === undefined 
+                      ? tokens.colors.accent 
+                      : tokens.colors.surface,
+                    borderColor: tokens.colors.border,
+                  }
+                ]}
+                onPress={() => setSelectedBinId(undefined)}
+              >
+                <Text style={[
+                  styles.binOptionText,
+                  { color: selectedBinId === undefined ? '#FFFFFF' : tokens.colors.text }
+                ]}>
+                  No Bin
+                </Text>
+              </TouchableOpacity>
+              
+              {bins.map((bin: any) => (
+                <TouchableOpacity
+                  key={bin.id}
+                  style={[
+                    styles.binOption,
+                    { 
+                      backgroundColor: selectedBinId === bin.id 
+                        ? bin.color 
+                        : tokens.colors.surface,
+                      borderColor: tokens.colors.border,
+                    }
+                  ]}
+                  onPress={() => setSelectedBinId(bin.id)}
+                >
+                  <Text style={[
+                    styles.binOptionText,
+                    { color: selectedBinId === bin.id ? '#FFFFFF' : tokens.colors.text }
+                  ]}>
+                    {bin.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Quick Actions */}
+          <View style={styles.quickActions}>
+            <TouchableOpacity
+              style={[
+                styles.actionButton,
+                { 
+                  backgroundColor: isTask ? tokens.colors.accent : tokens.colors.surface,
+                  borderColor: tokens.colors.border,
+                }
+              ]}
+              onPress={toggleTask}
+            >
+              <Ionicons 
+                name={isTask ? "checkmark-circle" : "ellipse-outline"} 
+                size={20} 
+                color={isTask ? '#FFFFFF' : tokens.colors.text} 
+              />
+              <Text style={[
+                styles.actionButtonText,
+                { color: isTask ? '#FFFFFF' : tokens.colors.text }
+              ]}>
+                Task
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.actionButton,
+                { 
+                  backgroundColor: isPinned ? tokens.colors.accent : tokens.colors.surface,
+                  borderColor: tokens.colors.border,
+                }
+              ]}
+              onPress={togglePin}
+            >
+              <Ionicons 
+                name="pin" 
+                size={20} 
+                color={isPinned ? '#FFFFFF' : tokens.colors.text} 
+              />
+              <Text style={[
+                styles.actionButtonText,
+                { color: isPinned ? '#FFFFFF' : tokens.colors.text }
+              ]}>
+                Pin
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Tags */}
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
+              Tags
+            </Text>
+            <View style={styles.tagsContainer}>
+              {['voice', 'idea', 'task', 'important', 'personal', 'work'].map((tag) => (
+                <TouchableOpacity
+                  key={tag}
+                  style={[
+                    styles.tagButton,
+                    { 
+                      backgroundColor: tags.includes(tag) 
+                        ? tokens.colors.accent 
+                        : tokens.colors.surface,
+                      borderColor: tokens.colors.border,
+                    }
+                  ]}
+                  onPress={() => toggleTag(tag)}
+                >
+                  <Text style={[
+                    styles.tagButtonText,
+                    { color: tags.includes(tag) ? '#FFFFFF' : tokens.colors.text }
+                  ]}>
+                    {tag}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* Save Button */}
+          <View style={styles.saveContainer}>
+            <Button
+              variant="primary"
+              size="lg"
+              onPress={handleSave}
+              disabled={isSubmitting || !content.trim()}
+              style={styles.saveButton}
+            >
+              {isSubmitting ? 'Saving...' : (isEditing ? 'Update Thoughtmark' : 'Save Thoughtmark')}
+            </Button>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -548,270 +389,103 @@ export const UnifiedThoughtmarkScreen: React.FC<UnifiedThoughtmarkScreenProps> =
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: '#A0A0A0',
-  },
-  header: {
+  voiceIndicator: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2E2E2E',
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 16,
   },
-  backButton: {
-    padding: 8,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#E0E0E0',
-  },
-  headerActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  actionButton: {
-    padding: 8,
+  voiceIndicatorText: {
     marginLeft: 8,
+    fontSize: 14,
+    fontWeight: '500',
   },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  content: {
-    padding: 16,
-  },
-  section: {
+  inputGroup: {
     marginBottom: 24,
   },
-  sectionLabel: {
-    fontSize: 16,
+  label: {
+    fontSize: 14,
     fontWeight: '600',
-    color: '#E0E0E0',
     marginBottom: 8,
   },
   titleInput: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#E0E0E0',
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
-    padding: 16,
     borderWidth: 1,
-    borderColor: '#2E2E2E',
-  },
-  viewTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#E0E0E0',
+    borderRadius: 16,
     padding: 16,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
+    fontSize: 18,
+    fontWeight: '600',
+    minHeight: 56,
   },
   contentInput: {
-    fontSize: 16,
-    color: '#E0E0E0',
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
-    padding: 16,
     borderWidth: 1,
-    borderColor: '#2E2E2E',
+    borderRadius: 16,
+    padding: 16,
+    fontSize: 16,
+    lineHeight: 24,
     minHeight: 120,
   },
-  viewContent: {
-    fontSize: 16,
-    color: '#E0E0E0',
-    padding: 16,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
-    lineHeight: 24,
+  charCount: {
+    fontSize: 12,
+    textAlign: 'right',
+    marginTop: 4,
+  },
+  binContainer: {
+    paddingRight: 16,
+  },
+  binOption: {
+    borderWidth: 1,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginRight: 12,
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  binOptionText: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  quickActions: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 24,
+  },
+  actionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  actionButtonText: {
+    marginLeft: 8,
+    fontSize: 14,
+    fontWeight: '500',
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
-    marginBottom: 12,
   },
-  addTagContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  tagInput: {
-    flex: 1,
-    fontSize: 16,
-    color: '#E0E0E0',
-    backgroundColor: '#1F1F1F',
-    borderRadius: 8,
-    padding: 12,
+  tagButton: {
     borderWidth: 1,
-    borderColor: '#2E2E2E',
-    marginRight: 8,
-  },
-  addTagButton: {
-    padding: 12,
-    backgroundColor: '#3B82F6',
-    borderRadius: 8,
-  },
-  binsContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  binOption: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#2E2E2E',
-  },
-  selectedBin: {
-    backgroundColor: '#3B82F6',
-    borderColor: '#3B82F6',
-  },
-  binText: {
-    fontSize: 14,
-    color: '#A0A0A0',
-  },
-  selectedBinText: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-  viewBin: {
-    fontSize: 16,
-    color: '#E0E0E0',
-    padding: 16,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
-  },
-  switchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  switchLabel: {
-    fontSize: 16,
-    color: '#E0E0E0',
-  },
-  taskSettings: {
-    marginTop: 12,
-    padding: 16,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 12,
-  },
-  dateInput: {
-    fontSize: 16,
-    color: '#E0E0E0',
-    backgroundColor: '#2E2E2E',
-    borderRadius: 8,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#3A3A3A',
-  },
-  aiCard: {
-    marginBottom: 24,
-  },
-  aiCardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  aiCardTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#E0E0E0',
-    marginLeft: 8,
-    flex: 1,
-  },
-  upgradeButton: {
-    backgroundColor: '#5C6A24',
+    borderRadius: 16,
     paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
+    paddingVertical: 8,
   },
-  upgradeButtonText: {
+  tagButtonText: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#FFFFFF',
+    fontWeight: '500',
   },
-  aiButton: {
-    padding: 8,
-    backgroundColor: '#1F1F1F',
-    borderRadius: 6,
-  },
-  aiCardDescription: {
-    fontSize: 14,
-    color: '#A0A0A0',
-    lineHeight: 20,
-  },
-  aiSuggestions: {
-    marginTop: 12,
-  },
-  aiSuggestionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#E0E0E0',
-    marginBottom: 8,
-  },
-  suggestedTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 12,
-  },
-  aiInsight: {
-    fontSize: 14,
-    color: '#A0A0A0',
-    fontStyle: 'italic',
-  },
-  actions: {
-    flexDirection: 'row',
-    gap: 12,
-    marginTop: 24,
+  saveContainer: {
+    marginTop: 32,
+    marginBottom: 40,
   },
   saveButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  saveButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#E0E0E0',
-  },
-  deleteButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-    paddingHorizontal: 16,
-  },
-  deleteButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#7A2C3B',
-  },
-  lastSaved: {
-    fontSize: 12,
-    color: '#808080',
-    textAlign: 'center',
-    marginTop: 16,
+    width: '100%',
   },
 }); 

@@ -4,7 +4,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { textVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface TextProps {
-  variant?: 'body' | 'heading' | 'subheading' | 'caption' | 'label';
+  variant?: 'body' | 'heading' | 'heading2' | 'subheading' | 'caption' | 'label';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   children: React.ReactNode;
   style?: TextStyle;

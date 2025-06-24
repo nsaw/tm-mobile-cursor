@@ -20,7 +20,12 @@ export type RootStackParamList = {
     tag?: string;
   };
   ThoughtmarkDetail: { thoughtmarkId: number };
-  CreateThoughtmark: { thoughtmarkId?: number; content?: string; title?: string; voice?: boolean };
+  CreateThoughtmark: { 
+    thoughtmarkId?: number; 
+    content?: string; 
+    title?: string; 
+    isVoiceNote?: boolean;
+  };
   ThoughtmarkEdit: { thoughtmarkId: number };
   
   // Bins Screens
@@ -35,6 +40,7 @@ export type RootStackParamList = {
   VoiceRecord: undefined;
   Content: undefined;
   DesignSystemDemo: undefined;
+  Archive: undefined;
   
   // Loading
   Loading: undefined;

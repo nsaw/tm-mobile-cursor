@@ -28,6 +28,7 @@ import { SearchScreen } from '../features/search/screens/SearchScreen';
 // Thoughtmarks Screens
 import { AllThoughtmarksScreen } from '../features/thoughtmarks/screens/AllThoughtmarksScreen';
 import { ThoughtmarkDetailScreen } from '../features/thoughtmarks/screens/ThoughtmarkDetailScreen';
+import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/UnifiedThoughtmarkScreen';
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
@@ -35,12 +36,6 @@ import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
 import { View, Text } from 'react-native';
 
 // Placeholder screens - to be implemented
-const CreateThoughtmarkScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Create Thoughtmark Screen</Text>
-  </View>
-);
-
 const CreateBinScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Create Bin Screen</Text>
@@ -77,9 +72,9 @@ const ThoughtmarksScreen = () => (
   </View>
 );
 
-const ThoughtmarkEditScreen = () => (
+const ArchiveScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Thoughtmark Edit Screen</Text>
+    <Text>Archive Screen</Text>
   </View>
 );
 
@@ -109,10 +104,9 @@ const MainStack = () => (
       <Stack.Screen name="Bins" component={BinsScreen} />
       <Stack.Screen name="Thoughtmarks" component={ThoughtmarksScreen} />
       <Stack.Screen name="ThoughtmarkDetail" component={ThoughtmarkDetailScreen} />
-      <Stack.Screen name="ThoughtmarkEdit" component={ThoughtmarkEditScreen} />
       <Stack.Screen 
         name="CreateThoughtmark" 
-        component={CreateThoughtmarkScreen}
+        component={UnifiedThoughtmarkScreen}
         options={{ presentation: 'modal' }}
       />
       <Stack.Screen 
@@ -130,6 +124,7 @@ const MainStack = () => (
       <Stack.Screen name="DesignSystemDemo" component={DesignSystemDemo} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Archive" component={ArchiveScreen} />
     </Stack.Navigator>
   </VoiceRecorderProvider>
 );

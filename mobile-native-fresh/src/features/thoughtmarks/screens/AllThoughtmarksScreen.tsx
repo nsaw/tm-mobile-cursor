@@ -99,24 +99,29 @@ export const AllThoughtmarksScreen: React.FC = () => {
   };
 
   const handleCreateThoughtmark = () => {
-    navigation.navigate('CreateThoughtmark');
+    navigation.navigate('CreateThoughtmark' as any);
   };
 
   const handleNavigate = (path: string) => {
     switch (path) {
       case '/':
-        navigation.navigate('Dashboard');
+      case 'Dashboard':
+        navigation.navigate('Dashboard' as any);
         break;
       case '/search':
-        navigation.navigate('Search');
+      case 'Search':
+        navigation.navigate('Search' as any);
         break;
       case '/all-thoughtmarks':
-        navigation.navigate('AllThoughtmarks');
+      case 'AllThoughtmarks':
+        navigation.navigate('AllThoughtmarks' as any);
         break;
       case '/ai-tools':
-        navigation.navigate('AITools');
+      case 'AITools':
+        navigation.navigate('AITools' as any);
         break;
       default:
+        console.log('Unknown navigation path:', path);
         break;
     }
   };

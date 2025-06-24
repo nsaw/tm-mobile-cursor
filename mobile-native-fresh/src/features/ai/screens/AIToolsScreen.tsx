@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { Card } from '../../../components/ui/Card';
@@ -29,6 +30,15 @@ export const AIToolsScreen: React.FC = () => {
 
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
 
+  const getAuthToken = async () => {
+    try {
+      return await AsyncStorage.getItem('@thoughtmarks_token');
+    } catch (error) {
+      console.error('Error getting auth token:', error);
+      return null;
+    }
+  };
+
   const generateInsights = async () => {
     if (!hasPremiumAccess) {
       Alert.alert(
@@ -44,27 +54,30 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsGeneratingInsights(true);
     try {
-      // TODO: Implement AI insights API call
-      // For now, simulate the API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setInsights({
-        patterns: [
-          { type: 'productivity', confidence: 0.85, description: 'You often write about productivity and time management' },
-          { type: 'creativity', confidence: 0.72, description: 'Creative ideas and inspiration appear frequently' },
-          { type: 'learning', confidence: 0.68, description: 'You document learning experiences and insights' },
-        ],
-        trends: [
-          { trend: 'Increasing focus on AI and technology', confidence: 0.78 },
-          { trend: 'Growing interest in mindfulness practices', confidence: 0.65 },
-        ],
-        suggestions: [
-          'Consider creating a dedicated bin for AI-related content',
-          'You might benefit from a "Learning Insights" tag',
-          'Try setting up weekly review reminders for your productivity notes',
-        ]
+      const token = await getAuthToken();
+      // Implement AI insights API call
+      const response = await fetch('/api/ai/insights', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate insights');
+      }
+
+      const data = await response.json();
+      setInsights(data);
+      
+      Alert.alert(
+        'Insights Generated',
+        'Your AI insights have been generated successfully!',
+        [{ text: 'OK' }]
+      );
     } catch (error) {
+      console.error('Error generating insights:', error);
       Alert.alert('Error', 'Failed to generate insights. Please try again.');
     } finally {
       setIsGeneratingInsights(false);
@@ -86,15 +99,29 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsSmartSorting(true);
     try {
-      // TODO: Implement smart sorting API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const token = await getAuthToken();
+      // Implement smart sorting API call
+      const response = await fetch('/api/ai/smart-sort', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to perform smart sorting');
+      }
+
+      const data = await response.json();
       
       Alert.alert(
         'Smart Sorting Complete',
-        'Your thoughtmarks have been intelligently organized based on content patterns and relationships.',
+        `Your thoughtmarks have been intelligently organized. ${data.reorganizedCount} items were reorganized based on content patterns and relationships.`,
         [{ text: 'OK' }]
       );
     } catch (error) {
+      console.error('Error performing smart sorting:', error);
       Alert.alert('Error', 'Failed to perform smart sorting. Please try again.');
     } finally {
       setIsSmartSorting(false);
@@ -116,25 +143,30 @@ export const AIToolsScreen: React.FC = () => {
 
     setIsGeneratingRecommendations(true);
     try {
-      // TODO: Implement AI recommendations API call
-      await new Promise(resolve => setTimeout(resolve, 1800));
-      
-      setRecommendations({
-        learning: [
-          { title: 'Atomic Habits by James Clear', reason: 'Based on your productivity interests' },
-          { title: 'Deep Work by Cal Newport', reason: 'Aligns with your focus on efficiency' },
-        ],
-        connections: [
-          { from: 'Productivity Tips', to: 'Time Management', strength: 0.89 },
-          { from: 'AI Ideas', to: 'Technology Trends', strength: 0.76 },
-        ],
-        actions: [
-          'Review your productivity thoughtmarks weekly',
-          'Consider creating a "Weekly Goals" thoughtmark',
-          'Connect related ideas using tags more consistently',
-        ]
+      const token = await getAuthToken();
+      // Implement AI recommendations API call
+      const response = await fetch('/api/ai/recommendations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate recommendations');
+      }
+
+      const data = await response.json();
+      setRecommendations(data);
+      
+      Alert.alert(
+        'Recommendations Generated',
+        'Your personalized AI recommendations have been generated!',
+        [{ text: 'OK' }]
+      );
     } catch (error) {
+      console.error('Error generating recommendations:', error);
       Alert.alert('Error', 'Failed to generate recommendations. Please try again.');
     } finally {
       setIsGeneratingRecommendations(false);

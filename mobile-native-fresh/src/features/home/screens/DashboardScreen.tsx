@@ -281,21 +281,82 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
           </TouchableOpacity>
 
           {showBinsSection && (
-            <View style={styles.binsGrid}>
-              {bins.slice(0, 12).map((bin) => (
-                <BinCard
-                  key={bin.id}
-                  bin={bin}
-                  onPress={() => handleBinPress(bin)}
-                />
-              ))}
-              <TouchableOpacity
-                style={styles.newBinCard}
-                onPress={handleCreateBin}
-              >
-                <Ionicons name="add" size={16} color={colors.primary} />
-                <Text style={styles.newBinText}>New Bin</Text>
-              </TouchableOpacity>
+            <View style={styles.binsContainer}>
+              {binsLoading ? (
+                <View style={styles.binsGrid}>
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <View key={i} style={styles.binCardSkeleton} />
+                  ))}
+                </View>
+              ) : (
+                <>
+                  {/* Template bins in preferred order */}
+                  <View style={styles.binsGrid}>
+                    {['Relevant', 'Life Hacks', 'Quotes', 'Inspiration', 'Circle Back', 'Revelations', 'Funny', 'Stories', 'Half-Baked', 'Team-Up', 'Newsworthy'].map((binName) => {
+                      // Find the template bin (preferring lower ID for original)
+                      const bin = bins.filter(b => b.name === binName).sort((a: any, b: any) => a.id - b.id)[0];
+                      if (!bin) return null;
+                      return (
+                        <TouchableOpacity
+                          key={bin.id}
+                          style={styles.binCard}
+                          onPress={() => handleBinPress(bin)}
+                        >
+                          <View style={styles.binCardContent}>
+                            <Text style={styles.binCardName}>{bin.name}</Text>
+                            <Text style={styles.binCardCount}>
+                              {bin?.thoughtmarkCount || 0}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    })}
+                    
+                    {/* New Bin Button */}
+                    <TouchableOpacity
+                      style={styles.newBinCard}
+                      onPress={handleCreateBin}
+                    >
+                      <View style={styles.newBinCardContent}>
+                        <Ionicons name="add" size={16} color={colors.primary} />
+                        <Text style={styles.newBinText}>New Bin</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  
+                  {/* Special sections below grid */}
+                  <View style={styles.specialBinsContainer}>
+                    {/* Saved to Sort Later */}
+                    <TouchableOpacity
+                      style={styles.specialBinCard}
+                      onPress={() => {
+                        const sortLaterBin = bins.find((b: any) => b.name === 'Sort Later');
+                        if (sortLaterBin) {
+                          handleBinPress(sortLaterBin);
+                        }
+                      }}
+                    >
+                      <View style={styles.specialBinCardContent}>
+                        <Text style={styles.specialBinCardText}>Saved to Sort Later</Text>
+                        <Text style={styles.specialBinCardCount}>
+                          {bins.find((b: any) => b.name === 'Sort Later')?.thoughtmarkCount || 0}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    
+                    {/* Archive */}
+                    <TouchableOpacity
+                      style={styles.archiveCard}
+                      onPress={() => navigation.navigate('Archive')}
+                    >
+                      <View style={styles.archiveCardContent}>
+                        <Text style={styles.archiveCardText}>View Archive</Text>
+                        <Ionicons name="archive-outline" size={16} color={colors.primary} />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              )}
             </View>
           )}
         </View>
@@ -434,6 +495,8 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: colors.text,
     letterSpacing: 1,
+    textTransform: 'uppercase',
+    fontFamily: 'Ubuntu',
   },
   subtitle: {
     fontSize: typography.body.fontSize * 0.8,
@@ -448,7 +511,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
-    borderRadius: spacing.md,
+    borderRadius: 16,
     marginBottom: spacing.xl,
     flexDirection: 'row',
     alignItems: 'center',
@@ -497,28 +560,117 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     marginVertical: spacing.sm,
   },
+  binsContainer: {
+    // Styles for the bins container
+  },
   binsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginBottom: spacing.md,
+  },
+  binCardSkeleton: {
+    width: (width - spacing.lg * 3) / 2,
+    height: 52, // h-13 equivalent
+    backgroundColor: '#202124',
+    borderRadius: 8,
+    marginBottom: spacing.sm,
+  },
+  binCard: {
+    width: (width - spacing.lg * 3) / 2,
+    height: 52, // h-13 equivalent
+    backgroundColor: '#202124',
+    borderRadius: 8,
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+    justifyContent: 'center',
+  },
+  binCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  binCardName: {
+    fontSize: 14,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  binCardCount: {
+    fontSize: 12,
+    color: colors.primary,
   },
   newBinCard: {
     width: (width - spacing.lg * 3) / 2,
-    height: 80,
-    backgroundColor: colors.card,
-    borderRadius: spacing.md,
+    height: 52, // h-13 equivalent
+    backgroundColor: '#202124',
+    borderRadius: 8,
     borderWidth: 2,
-    borderColor: colors.primary,
+    borderColor: '#666666',
     borderStyle: 'dashed',
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+    justifyContent: 'center',
+  },
+  newBinCardContent: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.md,
+    gap: spacing.xs,
   },
   newBinText: {
-    fontSize: typography.body.fontSize,
+    fontSize: 14,
     color: colors.primary,
     fontWeight: '500',
-    marginTop: spacing.xs,
+  },
+  specialBinsContainer: {
+    marginTop: spacing.md,
+  },
+  specialBinCard: {
+    width: '100%',
+    height: 52, // h-13 equivalent
+    backgroundColor: '#1e3a8a', // blue-950 equivalent
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#1e40af', // blue-800 equivalent
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+    justifyContent: 'center',
+  },
+  specialBinCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  specialBinCardText: {
+    fontSize: 14,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  specialBinCardCount: {
+    fontSize: 12,
+    color: colors.primary,
+  },
+  archiveCard: {
+    width: '100%',
+    height: 52, // h-13 equivalent
+    backgroundColor: 'transparent',
+    borderRadius: 8,
+    padding: spacing.sm,
+    marginBottom: spacing.sm,
+    justifyContent: 'center',
+  },
+  archiveCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  archiveCardText: {
+    fontSize: 14,
+    color: colors.text,
+    fontWeight: '500',
   },
   viewMoreCard: {
     backgroundColor: colors.card,

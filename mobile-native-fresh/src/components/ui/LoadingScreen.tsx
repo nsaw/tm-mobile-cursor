@@ -157,7 +157,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   if (!isVisible) return null;
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+    <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: tokens.colors.background }]}>
       <Animated.View style={[styles.content, { transform: [{ scale: scaleAnim }] }]}>
         {/* Glow ring effect */}
         <View style={styles.glowRing} />
@@ -180,7 +180,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </View>
 
         {/* Text with fade animation */}
-        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity }]}>
+        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: tokens.colors.textSecondary }]}>
           {message}
         </Animated.Text>
 
@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#181818',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 999999,
@@ -246,7 +245,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   thinkingText: {
-    color: 'rgba(255, 255, 255, 0.8)',
     fontSize: 14,
     fontWeight: '400',
     fontFamily: 'Ubuntu_400Regular',
