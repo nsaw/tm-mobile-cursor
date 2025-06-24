@@ -19,6 +19,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { RootStackParamList } from '../../../navigation/types';
+import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 
 export const AllThoughtmarksScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -33,6 +34,8 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const [selectedBin, setSelectedBin] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'date' | 'title' | 'pinned'>('date');
   const [refreshing, setRefreshing] = useState(false);
+
+  const { showVoiceRecorder } = useVoiceRecorder();
 
   // Apply initial filters from navigation params
   useEffect(() => {
@@ -119,8 +122,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
   };
 
   const handleVoiceRecord = () => {
-    // TODO: Implement voice recording
-    console.log('Voice recording started');
+    showVoiceRecorder();
   };
 
   // Get header title based on filters

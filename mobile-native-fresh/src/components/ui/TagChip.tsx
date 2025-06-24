@@ -1,54 +1,68 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors, spacing, typography } from '../../theme/theme';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useTheme } from '../../theme/ThemeProvider';
+import { badgeVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface TagChipProps {
   tag: string;
-  onPress?: () => void;
-  selected?: boolean;
+  isSelected?: boolean;
+  onPress?: (tag: string) => void;
+  variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
 }
 
-export const TagChip: React.FC<TagChipProps> = ({ 
-  tag, 
-  onPress, 
-  selected = false 
+export const TagChip: React.FC<TagChipProps> = ({
+  tag,
+  isSelected = false,
+  onPress,
+  variant = 'default',
+  size = 'md',
 }) => {
+  const { tokens } = useTheme();
+
+  // Get variant styles
+  const baseStyle = badgeVariants.base;
+  const variantStyle = badgeVariants.variants.variant[variant] || badgeVariants.variants.variant.default;
+  const sizeStyle = badgeVariants.variants.size[size];
+
+  // Merge all styles
+  const chipStyle = mergeVariantStyles(baseStyle, {
+    variant: variantStyle,
+    size: sizeStyle,
+  });
+
+  // Apply selected state or outline variant
+  const finalChipStyle = {
+    ...chipStyle,
+    backgroundColor: variant === 'outline' ? 'transparent' : 
+                   isSelected ? tokens.colors.accent : chipStyle.backgroundColor,
+    borderColor: variant === 'outline' ? tokens.colors.border :
+                isSelected ? tokens.colors.accent : chipStyle.borderColor,
+  };
+
+  const textColor = variant === 'outline' ? tokens.colors.textSecondary :
+                   isSelected ? tokens.colors.text : tokens.colors.textSecondary;
+
   return (
-    <View style={[
-      styles.container,
-      selected && styles.selected
-    ]}>
-      <Text style={[
-        styles.text,
-        selected && styles.selectedText
-      ]}>
-        #{tag}
+    <TouchableOpacity
+      style={[styles.container, finalChipStyle]}
+      onPress={() => onPress?.(tag)}
+      activeOpacity={0.7}
+    >
+      <Text style={[styles.text, { color: textColor }]}>
+        {tag}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 8,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    marginRight: 4,
-    marginBottom: 4,
-  },
-  selected: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    marginRight: 8,
+    marginBottom: 8,
   },
   text: {
-    ...typography.body,
-    fontSize: 10,
-    color: colors.subtext,
-  },
-  selectedText: {
-    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '500',
   },
 }); 

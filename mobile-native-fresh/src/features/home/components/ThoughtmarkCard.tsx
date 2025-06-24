@@ -216,7 +216,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
           <View style={styles.footer}>
             <View style={styles.tagsContainer}>
               {thoughtmark.tags.map((tag) => (
-                <TagChip key={tag} tag={tag} />
+                <TagChip key={tag} tag={tag} size="sm" />
               ))}
             </View>
             

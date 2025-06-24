@@ -24,6 +24,7 @@ import { ThoughtmarkWithBin } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { NeonGradientText } from '../../../components/ui/NeonGradientText';
+import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 
 const { width } = Dimensions.get('window');
 
@@ -53,6 +54,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     error: binsError,
     fetchBins,
   } = useBins();
+
+  const { showVoiceRecorder } = useVoiceRecorder();
 
   useEffect(() => {
     loadInitialData();
@@ -141,9 +144,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   };
 
   const handleVoiceRecord = () => {
-    setIsRecording(!isRecording);
-    // TODO: Implement voice recording
-    console.log('Voice recording:', !isRecording);
+    showVoiceRecorder();
   };
 
   const handleNavigate = (path: string) => {

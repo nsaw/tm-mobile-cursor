@@ -14,19 +14,19 @@ export const DesignSystemDemo: React.FC = () => {
         {/* Typography Section */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
           <CardHeader>
-            <Heading level={1}>Design System Demo</Heading>
-            <Caption>Showcasing our new component variants</Caption>
+            <Heading level={1} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 16, textTransform: 'uppercase' }}>Design System Demo</Heading>
+            <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Showcasing our new component variants</Caption>
           </CardHeader>
           
           <CardContent>
             <View style={{ gap: tokens.spacing.md }}>
-              <Heading level={1}>Heading Level 1</Heading>
-              <Heading level={2}>Heading Level 2</Heading>
-              <Heading level={3}>Heading Level 3</Heading>
-              <Subheading>Subheading Text</Subheading>
-              <BodyText>Body text with normal weight and size</BodyText>
-              <Caption>Caption text for secondary information</Caption>
-              <Text variant="label">Label text for form elements</Text>
+              <Heading level={1} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 16, textTransform: 'uppercase' }}>Heading Level 1</Heading>
+              <Heading level={2} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 14 }}>Heading Level 2</Heading>
+              <Heading level={3} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 12, textTransform: 'uppercase' }}>Heading Level 3</Heading>
+              <Subheading style={{ color: tokens.colors.text, includeFontPadding: false, textTransform: 'lowercase' }}>Subheading Text</Subheading>
+              <BodyText style={{ color: tokens.colors.text, includeFontPadding: false }}>Body text with normal weight and size</BodyText>
+              <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Caption text for secondary information</Caption>
+              <Text variant="label" style={{ color: tokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
             </View>
           </CardContent>
         </Card>
@@ -34,7 +34,8 @@ export const DesignSystemDemo: React.FC = () => {
         {/* Button Variants */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
           <CardHeader>
-            <Heading level={2}>Button Variants</Heading>
+            <Heading level={2} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 14 }}>Button Variants</Heading>
+            <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Different button styles and states</Caption>
           </CardHeader>
           
           <CardContent>
@@ -69,7 +70,8 @@ export const DesignSystemDemo: React.FC = () => {
         {/* Button Sizes */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
           <CardHeader>
-            <Heading level={2}>Button Sizes</Heading>
+            <Heading level={2} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 14 }}>Button Sizes</Heading>
+            <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Available button size options</Caption>
           </CardHeader>
           
           <CardContent>
@@ -96,69 +98,69 @@ export const DesignSystemDemo: React.FC = () => {
         {/* Card Variants */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
           <CardHeader>
-            <Heading level={2}>Card Variants</Heading>
+            <Heading level={2} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 14 }}>Card Variants</Heading>
+            <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Different card styles and layouts</Caption>
           </CardHeader>
           
           <CardContent>
             <View style={{ gap: tokens.spacing.md }}>
               <Card variant="default" onPress={() => console.log('Default card pressed')}>
                 <CardContent>
-                  <BodyText>Default Card - Tap me!</BodyText>
+                  <BodyText style={{ color: tokens.colors.text, includeFontPadding: false }}>Default Card - Tap me!</BodyText>
                 </CardContent>
               </Card>
               
               <Card variant="glass" onPress={() => console.log('Glass card pressed')}>
                 <CardContent>
-                  <BodyText>Glass Card - Tap me!</BodyText>
+                  <BodyText style={{ color: tokens.colors.text, includeFontPadding: false }}>Glass Card - Tap me!</BodyText>
                 </CardContent>
               </Card>
               
               <Card variant="elevated" onPress={() => console.log('Elevated card pressed')}>
                 <CardContent>
-                  <BodyText>Elevated Card - Tap me!</BodyText>
+                  <BodyText style={{ color: tokens.colors.text, includeFontPadding: false }}>Elevated Card - Tap me!</BodyText>
                 </CardContent>
               </Card>
               
               <Card variant="interactive" onPress={() => console.log('Interactive card pressed')}>
                 <CardContent>
-                  <BodyText>Interactive Card - Tap me!</BodyText>
+                  <BodyText style={{ color: tokens.colors.text, includeFontPadding: false }}>Interactive Card - Tap me!</BodyText>
                 </CardContent>
               </Card>
             </View>
           </CardContent>
         </Card>
 
-        {/* Color Palette */}
+        {/* Color Palette Section */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
           <CardHeader>
-            <Heading level={2}>Color Palette</Heading>
+            <Heading level={2} style={{ color: tokens.colors.text, includeFontPadding: false, fontSize: 14 }}>Color Palette</Heading>
+            <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false }}>Our refined muted color system</Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.sm }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
-                <View style={{ width: 20, height: 20, backgroundColor: tokens.colors.accent, borderRadius: 4 }} />
-                <Text>Accent: {tokens.colors.accent}</Text>
-              </View>
-              
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
-                <View style={{ width: 20, height: 20, backgroundColor: tokens.colors.success, borderRadius: 4 }} />
-                <Text>Success: {tokens.colors.success}</Text>
-              </View>
-              
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
-                <View style={{ width: 20, height: 20, backgroundColor: tokens.colors.warning, borderRadius: 4 }} />
-                <Text>Warning: {tokens.colors.warning}</Text>
-              </View>
-              
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
-                <View style={{ width: 20, height: 20, backgroundColor: tokens.colors.danger, borderRadius: 4 }} />
-                <Text>Danger: {tokens.colors.danger}</Text>
-              </View>
-              
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: tokens.spacing.sm }}>
-                <View style={{ width: 20, height: 20, backgroundColor: tokens.colors.brand, borderRadius: 4 }} />
-                <Text>Brand: {tokens.colors.brand}</Text>
+            <View style={{ gap: tokens.spacing.md }}>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm }}>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: '#3B82F6' }} />
+                  <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false, fontSize: 10 }}>Accent</Caption>
+                </View>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: '#39675B' }} />
+                  <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false, fontSize: 10 }}>Success</Caption>
+                </View>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: '#806F4C' }} />
+                  <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false, fontSize: 10 }}>Warning</Caption>
+                </View>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: '#7A2C3B' }} />
+                  <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false, fontSize: 10 }}>Danger</Caption>
+                </View>
+                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: '#5C6A24' }} />
+                  <Caption style={{ color: tokens.colors.textMuted, includeFontPadding: false, fontSize: 10 }}>Brand</Caption>
+                </View>
               </View>
             </View>
           </CardContent>

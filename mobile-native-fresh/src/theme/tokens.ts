@@ -4,35 +4,35 @@
 export const designTokens = {
   colors: {
     // Base dark foundation (matching web app)
-    background: '#0e0e11',
-    backgroundSecondary: '#151518',
-    surface: 'rgba(255,255,255,0.04)',
+    background: '#181818',
+    backgroundSecondary: '#1a1a1e', // Updated to match card color
+    surface: 'rgba(255,255,255,.04)',
     surfaceHover: 'rgba(255,255,255,0.08)',
     
-    // Softened accent colors - ambient sci-fi
-    accent: '#3399ff', // hsl(200, 80%, 60%)
-    accentHover: '#4da6ff', // hsl(200, 85%, 70%)
-    accentMuted: '#2d5a7a', // hsl(200, 40%, 40%)
+    // Muted accent colors - refined palette
+    accent: '#3B82F6', // blue-500 - more blue than the previous slate-blue
+    accentHover: '#4B92F6', // slightly lighter blue
+    accentMuted: '#2B72E6', // darker blue variant
     
-    // Secondary accents
-    success: '#22c55e', // hsl(142, 70%, 55%)
-    warning: '#f59e0b', // hsl(38, 85%, 65%)
-    danger: '#ef4444', // hsl(0, 75%, 60%)
+    // Secondary accents - muted palette
+    success: '#39675B', // deep teal
+    warning: '#806F4C', // dark mustard
+    danger: '#7A2C3B', // rich burgundy
     
-    // Text hierarchy
-    text: '#f0f0f5',
-    textSecondary: '#c0c0c8',
-    textMuted: '#8a8a95',
-    textDisabled: '#5a5a62',
+    // Text hierarchy - improved contrast
+    text: '#E0E0E0', // Updated to match request
+    textSecondary: '#A0A0A0', // Updated to match request
+    textMuted: '#808080', // Adjusted for better hierarchy
+    textDisabled: '#606060', // Improved disabled text contrast
     
     // Borders and dividers
-    border: 'rgba(255,255,255,0.1)',
-    borderHover: 'rgba(255,255,255,0.2)',
-    divider: 'rgba(255,255,255,0.06)',
+    border: '#2E2E2E', // Updated to match request
+    borderHover: 'rgba(255,255,255,0.25)', // More visible hover borders
+    divider: 'rgba(255,255,255,0.08)', // Better divider visibility
     
     // Brand colors (matching web app)
-    brand: '#C6D600',
-    brandHover: '#9CB800',
+    brand: '#5C6A24', // olive green
+    brandHover: '#6C7A34', // slightly lighter
   },
   
   spacing: {

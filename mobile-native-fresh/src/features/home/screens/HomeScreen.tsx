@@ -14,12 +14,14 @@ import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { ThoughtmarkList } from '../components/ThoughtmarkList';
 import { QuickActions } from '../components/QuickActions';
 import { SearchBar } from '../components/SearchBar';
+import { TagFilter } from '../../../components/ui/TagFilter';
 import { colors, spacing, typography } from '../../../theme/theme';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 
 export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBin, setSelectedBin] = useState<Bin | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const {
@@ -79,22 +81,47 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     navigation.navigate('BinDetail', { binId: bin.id });
   };
 
+  const handleTagPress = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
+
+  const handleClearAllTags = () => {
+    setSelectedTags([]);
+  };
+
   // Convert Thoughtmark to ThoughtmarkWithBin by adding binName
   const thoughtmarksWithBin: ThoughtmarkWithBin[] = thoughtmarks.map(tm => ({
     ...tm,
     binName: bins.find(bin => bin.id === tm.binId)?.name,
   }));
 
-  const filteredThoughtmarks = selectedBin
-    ? thoughtmarksWithBin.filter(tm => tm.binId === selectedBin.id)
-    : thoughtmarksWithBin;
+  // Get all unique tags from thoughtmarks
+  const allTags = Array.from(
+    new Set(
+      thoughtmarks
+        .flatMap(tm => tm.tags)
+        .filter(tag => tag.trim().length > 0)
+    )
+  ).sort();
 
-  const recentThoughtmarks = thoughtmarksWithBin
+  // Filter thoughtmarks by selected bin and tags
+  const filteredThoughtmarks = thoughtmarksWithBin.filter(tm => {
+    const matchesBin = !selectedBin || tm.binId === selectedBin.id;
+    const matchesTags = selectedTags.length === 0 || 
+      selectedTags.some(tag => tm.tags.includes(tag));
+    return matchesBin && matchesTags;
+  });
+
+  const recentThoughtmarks = filteredThoughtmarks
     .filter(tm => !tm.isArchived && !tm.isDeleted)
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 5);
 
-  const pinnedThoughtmarks = thoughtmarksWithBin.filter(tm => tm.isPinned);
+  const pinnedThoughtmarks = filteredThoughtmarks.filter(tm => tm.isPinned);
 
   const renderThoughtmarkCard = ({ item }: { item: ThoughtmarkWithBin }) => (
     <ThoughtmarkCard
@@ -131,6 +158,15 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         onCreateBin={() => navigation.navigate('CreateBin')}
         onVoiceRecord={() => navigation.navigate('VoiceRecord')}
       />
+
+      {allTags.length > 0 && (
+        <TagFilter
+          tags={allTags}
+          selectedTags={selectedTags}
+          onTagPress={handleTagPress}
+          onClearAll={handleClearAllTags}
+        />
+      )}
 
       <FlatList
         data={filteredThoughtmarks}

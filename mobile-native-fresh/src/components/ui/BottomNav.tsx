@@ -44,6 +44,36 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     { icon: 'brain', label: 'All', path: '/all-thoughtmarks', iconType: 'lucide' },
   ];
 
+  const renderIcon = (item: any, isActive: boolean, isHome: boolean, isVoice: boolean) => {
+    const iconColor = isHome
+      ? '#007AFF' // Always blue for Home
+      : isActive
+      ? '#007AFF' // Blue active tint for other active items
+      : isVoice
+      ? '#FF3B30' // Red tint for Voice
+      : item.action === 'ai-tools'
+      ? '#FFD700' // Gold tint for AI
+      : '#8E8E93'; // Light gray for inactive
+
+    if (item.iconType === 'lucide') {
+      return (
+        <Brain
+          size={20}
+          strokeWidth={2}
+          color={iconColor}
+        />
+      );
+    }
+
+    return (
+      <MaterialCommunityIcons
+        name={item.icon as any}
+        size={24}
+        color={iconColor}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.navBackground}>
@@ -71,39 +101,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   }
                 }}
               >
-                {iconType === 'lucide' ? (
-                  <Brain
-                    size={20}
-                    strokeWidth={2}
-                    color={
-                      isHome
-                        ? '#007AFF' // Always blue for Home
-                        : isActive
-                        ? '#007AFF' // Blue active tint for other active items
-                        : isVoice
-                        ? '#FF3B30' // Red tint for Voice
-                        : action === 'ai-tools'
-                        ? '#FFD700' // Gold tint for AI
-                        : '#8E8E93' // Light gray for inactive
-                    }
-                  />
-                ) : (
-                  <MaterialCommunityIcons
-                    name={icon as any}
-                    size={24}
-                    color={
-                      isHome
-                        ? '#007AFF' // Always blue for Home
-                        : isActive
-                        ? '#007AFF' // Blue active tint for other active items
-                        : isVoice
-                        ? '#FF3B30' // Red tint for Voice
-                        : action === 'ai-tools'
-                        ? '#FFD700' // Gold tint for AI
-                        : '#8E8E93' // Light gray for inactive
-                    }
-                  />
-                )}
+                {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && <View style={styles.activeGlow} />}
               </TouchableOpacity>
             );
