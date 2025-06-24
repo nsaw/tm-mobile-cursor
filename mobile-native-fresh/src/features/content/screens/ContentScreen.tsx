@@ -79,7 +79,7 @@ export const ContentScreen: React.FC = () => {
           <TouchableOpacity
             key={page.route}
             style={styles.card}
-            onPress={() => navigation.navigate(page.route as string)}
+            onPress={() => navigation.navigate(page.route as any)}
           >
             <View style={styles.cardIconContainer}>
               <Feather name={page.iconName} size={24} color={page.iconColor} />
