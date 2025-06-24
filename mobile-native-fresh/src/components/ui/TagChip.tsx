@@ -17,19 +17,31 @@ export const TagChip: React.FC<TagChipProps> = ({
   onPress,
   variant = 'default',
   size = 'md',
-}) => {
+}: TagChipProps) => {
   const { tokens } = useTheme();
 
   // Get variant styles
   const baseStyle = badgeVariants.base;
-  const variantStyle = badgeVariants.variants.variant[variant] || badgeVariants.variants.variant.default;
-  const sizeStyle = badgeVariants.variants.size[size];
+  const variantStyles: { [key: string]: any } = badgeVariants.variants.variant;
+  const sizeStyles: { [key: string]: any } = badgeVariants.variants.size;
+  const variantStyle = variantStyles[variant] || variantStyles.default;
+  const sizeStyle = sizeStyles[size];
 
-  // Merge all styles
+  // Merge all styles first
   const chipStyle = mergeVariantStyles(baseStyle, {
     variant: variantStyle,
     size: sizeStyle,
   });
+  // Compact outlined style overrides
+  const compactStyle = {
+    paddingHorizontal: tokens.spacing.xs,
+    paddingVertical: tokens.spacing.xs,
+    borderRadius: 8,
+    minHeight: 24,
+    borderWidth: 1,
+    borderColor: tokens.colors.border,
+    backgroundColor: variant === 'outline' ? 'transparent' : chipStyle.backgroundColor,
+  };
 
   // Apply selected state or outline variant
   const finalChipStyle = {
@@ -43,13 +55,19 @@ export const TagChip: React.FC<TagChipProps> = ({
   const textColor = variant === 'outline' ? tokens.colors.textSecondary :
                    isSelected ? tokens.colors.text : tokens.colors.textSecondary;
 
+  const textStyle = {
+    color: textColor,
+    fontSize: 10,
+    fontWeight: '300' as '300',
+  };
+
   return (
     <TouchableOpacity
-      style={[styles.container, finalChipStyle]}
+      style={[styles.container, chipStyle, compactStyle]}
       onPress={() => onPress?.(tag)}
       activeOpacity={0.7}
     >
-      <Text style={[styles.text, { color: textColor }]}>
+      <Text style={[styles.text, textStyle, { paddingHorizontal: 0 }]}>#
         {tag}
       </Text>
     </TouchableOpacity>

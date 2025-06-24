@@ -3,101 +3,6 @@ import { apiService } from '../../../services/api';
 import type { Thoughtmark, ThoughtmarkFormData } from '../../../types';
 import { useAuth } from '../../auth/hooks/useAuth';
 
-// Mock data for immediate testing
-const mockThoughtmarks: Thoughtmark[] = [
-  {
-    id: 1,
-    title: 'React Native Best Practices',
-    content: 'Always use StyleSheet.create for better performance. Avoid inline styles and use proper component composition. Remember to handle loading states and error boundaries.',
-    tags: ['react-native', 'performance', 'best-practices'],
-    binId: 1,
-    userId: 1,
-    aiSummary: 'Best practices for React Native development',
-    aiCategorySuggestions: ['mobile', 'development'],
-    isArchived: false,
-    isPinned: true,
-    isDeleted: false,
-    isTask: false,
-    isCompleted: false,
-    createdAt: '2024-01-15T10:30:00Z',
-    updatedAt: '2024-01-15T10:30:00Z',
-  },
-  {
-    id: 2,
-    title: 'Grocery Shopping List',
-    content: 'Milk, bread, eggs, cheese, tomatoes, onions, garlic, olive oil, pasta, chicken breast, spinach, bananas, apples',
-    tags: ['shopping', 'food', 'groceries'],
-    binId: 2,
-    userId: 1,
-    aiSummary: 'Grocery shopping list with essential items',
-    aiCategorySuggestions: ['shopping', 'food'],
-    isArchived: false,
-    isPinned: false,
-    isDeleted: false,
-    isTask: true,
-    isCompleted: false,
-    dueDate: '2024-01-20T18:00:00Z',
-    priority: 'medium',
-    createdAt: '2024-01-14T16:45:00Z',
-    updatedAt: '2024-01-14T16:45:00Z',
-  },
-  {
-    id: 3,
-    title: 'Meeting Notes - Q1 Planning',
-    content: 'Discussed Q1 goals and objectives. Key focus areas: user acquisition, feature development, and team expansion. Budget approved for new hires.',
-    tags: ['meeting', 'planning', 'business'],
-    binId: 3,
-    userId: 1,
-    aiSummary: 'Q1 planning meeting notes with key objectives',
-    aiCategorySuggestions: ['business', 'planning'],
-    isArchived: false,
-    isPinned: false,
-    isDeleted: false,
-    isTask: false,
-    isCompleted: false,
-    createdAt: '2024-01-13T14:20:00Z',
-    updatedAt: '2024-01-13T14:20:00Z',
-  },
-  {
-    id: 4,
-    title: 'Call Mom',
-    content: 'Remember to call mom this weekend to check in and see how she\'s doing.',
-    tags: ['personal', 'family'],
-    binId: 2,
-    userId: 1,
-    aiSummary: 'Personal reminder to call family',
-    aiCategorySuggestions: ['personal', 'family'],
-    isArchived: false,
-    isPinned: false,
-    isDeleted: false,
-    isTask: true,
-    isCompleted: false,
-    dueDate: '2024-01-16T20:00:00Z',
-    priority: 'high',
-    createdAt: '2024-01-12T09:15:00Z',
-    updatedAt: '2024-01-12T09:15:00Z',
-  },
-  {
-    id: 5,
-    title: 'Book Flight to Conference',
-    content: 'Need to book flight for React Native conference in San Francisco. Check dates and book early for better prices.',
-    tags: ['travel', 'work', 'conference'],
-    binId: 1,
-    userId: 1,
-    aiSummary: 'Travel planning for work conference',
-    aiCategorySuggestions: ['travel', 'work'],
-    isArchived: false,
-    isPinned: false,
-    isDeleted: false,
-    isTask: true,
-    isCompleted: false,
-    dueDate: '2024-01-25T12:00:00Z',
-    priority: 'medium',
-    createdAt: '2024-01-11T11:30:00Z',
-    updatedAt: '2024-01-11T11:30:00Z',
-  },
-];
-
 export const useThoughtmarks = () => {
   const [thoughtmarks, setThoughtmarks] = useState<Thoughtmark[]>([]);
   const [loading, setLoading] = useState(true);
@@ -120,19 +25,17 @@ export const useThoughtmarks = () => {
           console.log('Using API thoughtmarks:', response.data.length, 'items');
           setThoughtmarks(response.data);
         } else {
-          // If no data returned, use mock data for demo purposes
-          console.log('No thoughtmarks found in database, using mock data');
-          setThoughtmarks(mockThoughtmarks);
+          // If no data returned, show empty list
+          setThoughtmarks([]);
         }
       } else {
-        // If API fails, fall back to mock data
-        console.log('API failed, using mock data. Error:', response.error);
-        setThoughtmarks(mockThoughtmarks);
+        // If API fails, show empty list
+        setThoughtmarks([]);
       }
     } catch (error) {
       console.error('Error fetching thoughtmarks:', error);
       setError('Failed to fetch thoughtmarks');
-      setThoughtmarks(mockThoughtmarks);
+      setThoughtmarks([]);
     } finally {
       setLoading(false);
     }

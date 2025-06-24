@@ -179,10 +179,10 @@ export const createTemplateContent = async (userId: number) => {
     }
     
     const templateThoughtmarks = [
-      // Core welcome thoughtmark
+      // 1. Welcome Message (Pinned)
       {
         title: "Welcome to Thoughtmarks!",
-        content: "Welcome to your personal knowledge management system! This is your first thoughtmark - a place to capture ideas, insights, and thoughts that matter to you.\n\nHere's how to get started:\n• Tap the bright NEW THOUGHTMARK button to capture ideas\n• Organize thoughts into Collections (Bins) for different topics\n• Use tags for cross-cutting themes\n• Try the AI Tools for smart insights and connections\n• Voice record thoughts on-the-go\n\nThis welcome message is pinned to the top so you can always reference it. Happy thinking!",
+        content: "Welcome guide with getting started instructions",
         tags: ["welcome", "tutorial", "getting-started"],
         binId: defaultBinId,
         userId,
@@ -192,48 +192,48 @@ export const createTemplateContent = async (userId: number) => {
         dueDate: null,
         attachments: [],
       },
-      // Task examples
+      // 2. Task Examples (3 items)
       {
         title: "Call dentist for appointment",
-        content: "Schedule routine cleaning and checkup. Prefer morning appointments if available.",
-        tags: ["health", "appointments"],
+        content: "Health appointment task (3 days overdue)",
+        tags: ["health", "task"],
         binId: defaultBinId,
         userId,
         isPinned: false,
         isTask: true,
         isCompleted: false,
-        dueDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days overdue
+        dueDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
         attachments: [],
       },
       {
         title: "Research vacation destinations",
-        content: "Look into beach resorts in Costa Rica and Portugal. Compare prices for spring travel.",
-        tags: ["travel", "vacation", "research"],
+        content: "Travel planning task (due in 2 weeks)",
+        tags: ["travel", "task"],
         binId: defaultBinId,
         userId,
         isPinned: false,
         isTask: true,
         isCompleted: false,
-        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 2 weeks from now
+        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
         attachments: [],
       },
       {
         title: "Learn how to delete example thoughtmarks",
-        content: "Visit the 'All Thoughtmarks' page to see all your thoughtmarks. After viewing them, you'll get a popup asking if you want to delete all example thoughtmarks at once. You can also delete individual thoughtmarks by tapping the three dots menu on any thoughtmark card.",
-        tags: ["tutorial", "deletion", "cleanup"],
+        content: "Tutorial task (due in 1 day)",
+        tags: ["tutorial", "task"],
         binId: defaultBinId,
         userId,
         isPinned: false,
         isTask: true,
         isCompleted: false,
-        dueDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // Due in 1 day
+        dueDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
         attachments: [],
       },
-      // Quote thoughtmarks
+      // 3. Quote Collection (2 items)
       {
         title: "Creative Awareness",
-        content: "The universe is only as large as our perception of it. When we cultivate our awareness, we are expanding the universe. This expands the scope of what we have to work with and what can work through us.",
-        tags: ["quotes", "philosophy", "mindfulness"],
+        content: "Philosophy quote about perception and awareness",
+        tags: ["quotes", "philosophy"],
         binId: defaultBinId,
         userId,
         isPinned: false,
@@ -243,9 +243,9 @@ export const createTemplateContent = async (userId: number) => {
         attachments: [],
       },
       {
-        title: "The Compound Effect of Small Decisions", 
-        content: "Every choice you make has a compound effect. Small decisions, consistently made, create massive results over time. Focus on systems, not goals.",
-        tags: ["quotes", "wisdom", "decisions"],
+        title: "The Compound Effect of Small Decisions",
+        content: "Wisdom about consistent choices",
+        tags: ["quotes", "wisdom"],
         binId: defaultBinId,
         userId,
         isPinned: false,
@@ -254,11 +254,11 @@ export const createTemplateContent = async (userId: number) => {
         dueDate: null,
         attachments: [],
       },
-      // Innovation and ideas
+      // 4. Innovation Content (1 item)
       {
         title: "AI Innovation Ideas",
-        content: "• Voice-activated personal assistant that learns your preferences\n• Smart home integration with natural language commands\n• Automated task scheduling based on calendar patterns\n• Context-aware reminder system\n• Collaborative workspace with real-time insights",
-        tags: ["ai", "innovation", "technology", "ideas"],
+        content: "Bullet list of AI/technology concepts",
+        tags: ["ai", "innovation"],
         binId: defaultBinId,
         userId,
         isPinned: false,
@@ -267,10 +267,10 @@ export const createTemplateContent = async (userId: number) => {
         dueDate: null,
         attachments: [],
       },
-      // Humor and personal
+      // 5. Humor Content (1 item)
       {
         title: "Funny office conversation overheard",
-        content: "Manager: 'We need to think outside the box.'\nEmployee: 'What if we just get a bigger box?'\nManager: 'You're promoted.'",
+        content: "Workplace humor dialogue",
         tags: ["funny", "office", "humor"],
         binId: defaultBinId,
         userId,
@@ -280,11 +280,11 @@ export const createTemplateContent = async (userId: number) => {
         dueDate: null,
         attachments: [],
       },
-      // Practical and lifestyle
+      // 6. Practical Content (3 items)
       {
         title: "Book recommendation: Atomic Habits",
-        content: "Small changes compound over time. James Clear's approach to habit formation through identity-based habits rather than outcome-based habits is revolutionary.",
-        tags: ["books", "habits", "self-improvement"],
+        content: "James Clear book review",
+        tags: ["books", "habits"],
         binId: defaultBinId,
         userId,
         isPinned: false,
@@ -295,8 +295,8 @@ export const createTemplateContent = async (userId: number) => {
       },
       {
         title: "Weekend camping gear checklist",
-        content: "• Tent and sleeping bag\n• Portable water filter\n• First aid kit\n• Headlamp with extra batteries\n• Weather-appropriate clothing\n• Non-perishable food\n• Multi-tool or knife",
-        tags: ["camping", "outdoors", "checklist"],
+        content: "Outdoor equipment list",
+        tags: ["camping", "checklist"],
         binId: defaultBinId,
         userId,
         isPinned: false,
@@ -307,8 +307,8 @@ export const createTemplateContent = async (userId: number) => {
       },
       {
         title: "Flow State Triggers",
-        content: "What puts me in flow:\n• Early morning work sessions\n• Classical music or nature sounds\n• Clean, minimal workspace\n• Challenging but achievable tasks\n• No notifications or distractions",
-        tags: ["productivity", "flow", "focus"],
+        content: "Personal productivity insights",
+        tags: ["productivity", "flow"],
         binId: defaultBinId,
         userId,
         isPinned: false,

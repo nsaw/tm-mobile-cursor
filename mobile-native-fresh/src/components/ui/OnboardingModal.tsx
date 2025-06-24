@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, spacing, typography } from '../../theme/theme';
+import { Button } from '../ui/Button';
 
 interface OnboardingModalProps {
   visible: boolean;
@@ -29,9 +30,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             <Text style={styles.highlight}>• AI-powered smart categorization</Text>
             <Text style={styles.highlight}>• Semantic search and discovery</Text>
           </View>
-          <TouchableOpacity style={styles.button} onPress={onClose}>
-            <Text style={styles.buttonText}>Get Started</Text>
-          </TouchableOpacity>
+          <Button onPress={onClose} variant="outline" style={styles.button}>
+            Get Started
+          </Button>
         </View>
       </View>
     </Modal>

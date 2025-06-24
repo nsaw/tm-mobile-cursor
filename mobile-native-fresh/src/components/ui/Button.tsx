@@ -4,7 +4,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { buttonVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline' | 'brand';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   disabled?: boolean;
   onPress?: () => void;
@@ -15,17 +15,18 @@ interface ButtonProps {
   rightIcon?: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
-  disabled = false,
-  onPress,
-  children,
-  style,
-  textStyle,
-  leftIcon,
-  rightIcon,
-}) => {
+export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+  const {
+    variant = 'primary',
+    size = 'md',
+    disabled = false,
+    onPress,
+    children,
+    style,
+    textStyle,
+    leftIcon,
+    rightIcon,
+  } = props;
   const { tokens } = useTheme();
   const [isPressed, setIsPressed] = useState(false);
 
@@ -40,15 +41,30 @@ export const Button: React.FC<ButtonProps> = ({
     size: sizeStyle,
   });
 
-  // Apply disabled state and press state
+  // Only allow margin and padding to be overridden by style prop, not borderRadius
+  const { margin, marginTop, marginBottom, marginLeft, marginRight, marginHorizontal, marginVertical, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingHorizontal, paddingVertical, ...restStyle } = style || {};
   const finalButtonStyle = {
     ...buttonStyle,
     opacity: disabled ? 0.5 : 1,
-    // Add 80% opacity fill for primary button when pressed
     backgroundColor: variant === 'primary' && isPressed 
-      ? `${tokens.colors.accent}CC` // 80% opacity (CC = 204/255)
+      ? `${tokens.colors.accent}CC`
       : buttonStyle.backgroundColor,
-    ...style,
+    // Only allow margin and padding overrides
+    ...(margin !== undefined ? { margin } : {}),
+    ...(marginTop !== undefined ? { marginTop } : {}),
+    ...(marginBottom !== undefined ? { marginBottom } : {}),
+    ...(marginLeft !== undefined ? { marginLeft } : {}),
+    ...(marginRight !== undefined ? { marginRight } : {}),
+    ...(marginHorizontal !== undefined ? { marginHorizontal } : {}),
+    ...(marginVertical !== undefined ? { marginVertical } : {}),
+    ...(padding !== undefined ? { padding } : {}),
+    ...(paddingTop !== undefined ? { paddingTop } : {}),
+    ...(paddingBottom !== undefined ? { paddingBottom } : {}),
+    ...(paddingLeft !== undefined ? { paddingLeft } : {}),
+    ...(paddingRight !== undefined ? { paddingRight } : {}),
+    ...(paddingHorizontal !== undefined ? { paddingHorizontal } : {}),
+    ...(paddingVertical !== undefined ? { paddingVertical } : {}),
+    // Ignore all other style overrides (restStyle)
   };
 
   // Text color based on variant

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   Vibration,
+  ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
@@ -15,17 +16,16 @@ import { ActionSheet } from '../../../components/ui/ActionSheet';
 import { ThoughtmarkWithBin } from '../../../types';
 
 interface ThoughtmarkCardProps {
-  thoughtmark: ThoughtmarkWithBin;
+  thoughtmark: any;
+  onClick?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
   onArchive?: () => void;
-  onClick?: () => void;
-  enableSwipeDelete?: boolean;
-  showSimilarity?: boolean;
+  selected?: boolean;
+  pinned?: boolean;
   similarity?: number;
-  isSelectable?: boolean;
-  isSelected?: boolean;
-  onSelectionToggle?: (id: number) => void;
+  onSelectionToggle?: () => void;
+  style?: ViewStyle;
 }
 
 export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
@@ -34,13 +34,12 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   onDelete,
   onArchive,
   onClick,
-  enableSwipeDelete = false,
-  showSimilarity = false,
+  selected,
+  pinned,
   similarity,
-  isSelectable = false,
-  isSelected = false,
   onSelectionToggle,
-}) => {
+  style,
+}: ThoughtmarkCardProps) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [isLongPressing, setIsLongPressing] = useState(false);
 
@@ -59,8 +58,8 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   };
 
   const handleCardPress = () => {
-    if (isSelectable && onSelectionToggle) {
-      onSelectionToggle(thoughtmark.id);
+    if (selected && onSelectionToggle) {
+      onSelectionToggle();
     } else if (onClick) {
       onClick();
     }
@@ -71,8 +70,8 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
       // TODO: Implement API call to toggle pin status
       // await apiRequest("POST", `/api/thoughtmarks/${thoughtmark.id}/toggle-pin`);
       Alert.alert(
-        thoughtmark.isPinned ? "Unpinned" : "Pinned",
-        `Thoughtmark ${thoughtmark.isPinned ? "unpinned from" : "pinned to"} top`
+        pinned ? "Unpinned" : "Pinned",
+        `Thoughtmark ${pinned ? "unpinned from" : "pinned to"} top`
       );
     } catch (error) {
       Alert.alert("Error", "Failed to update pin status");
@@ -123,7 +122,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
       onPress: onEdit,
     }] : []),
     {
-      label: thoughtmark.isPinned ? 'Unpin' : 'Pin to top',
+      label: pinned ? 'Unpin' : 'Pin to top',
       icon: 'pin-outline',
       onPress: handleTogglePin,
     },
@@ -144,8 +143,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
       <TouchableOpacity
         style={[
           styles.container,
-          thoughtmark.isPinned && styles.pinned,
-          isSelected && styles.selected,
+          pinned && styles.pinned,
+          selected && styles.selected,
+          style,
         ]}
         onPress={handleCardPress}
         onLongPress={handleLongPress}
@@ -155,14 +155,15 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
+            {/* Left: Checkbox */}
             <View style={styles.headerLeft}>
-              {isSelectable && (
+              {selected && (
                 <TouchableOpacity
                   style={styles.checkbox}
-                  onPress={() => onSelectionToggle?.(thoughtmark.id)}
+                  onPress={() => onSelectionToggle?.()}
                 >
                   <Ionicons
-                    name={isSelected ? 'checkbox' : 'square-outline'}
+                    name={selected ? 'checkbox' : 'square-outline'}
                     size={16}
                     color={colors.primary}
                   />
@@ -170,31 +171,32 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               )}
             </View>
 
-            <Text style={styles.title} numberOfLines={1}>
-              {thoughtmark.title}
-            </Text>
+            {/* Center: Title */}
+            <View style={styles.headerCenter}>
+              <Text style={styles.title} numberOfLines={1}>
+                {thoughtmark.title}
+              </Text>
+            </View>
 
+            {/* Right: Date, Pin, Dropdown */}
             <View style={styles.headerRight}>
-              {showSimilarity && similarity !== undefined && (
+              {similarity !== undefined && (
                 <View style={styles.similarityBadge}>
                   <Text style={styles.similarityText}>
                     {Math.round(similarity * 100)}% match
                   </Text>
                 </View>
               )}
-              
               <Text style={styles.date}>
                 {formatDate(thoughtmark.createdAt)}
               </Text>
-              
-              {thoughtmark.isPinned && (
+              {pinned && (
                 <Ionicons
                   name="pin"
                   size={12}
                   color={colors.primary}
                 />
               )}
-              
               <TouchableOpacity
                 style={styles.menuButton}
                 onPress={() => setShowContextMenu(true)}
@@ -243,54 +245,54 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: designTokens.radius.md,
-    marginVertical: 0,
+    borderRadius: 8,
+    padding: spacing.sm,
     borderWidth: 0,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
+    borderColor: 'transparent',
   },
   pinned: {
-    borderColor: colors.primary,
-    borderWidth: 2,
+    borderColor: 'transparent',
+    borderWidth: 0,
   },
   selected: {
     backgroundColor: colors.primary + '20',
-    borderColor: colors.primary,
+    borderColor: 'transparent',
+    borderWidth: 0,
   },
   content: {
-    padding: 10,
+    marginTop: spacing.xs,
+    marginLeft: 0,
+    color: colors.textSecondary,
+    fontSize: 12,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
+    justifyContent: 'space-between',
   },
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: spacing.sm,
   },
-  checkbox: {
-    marginRight: spacing.xs,
-  },
-  menuButton: {
-    padding: spacing.xs,
+  headerCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    marginRight: spacing.sm,
   },
   title: {
-    ...typography.body,
-    fontSize: typography.body.fontSize * 0.9,
+    fontSize: 14,
+    fontWeight: '500',
     color: colors.text,
-    fontWeight: '600',
-    flex: 1,
-    marginHorizontal: 0,
+    textAlign: 'left',
+    paddingLeft: 0,
   },
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
     flexShrink: 0,
+    marginLeft: 'auto',
   },
   similarityBadge: {
     backgroundColor: '#C6D60020',
@@ -315,6 +317,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     lineHeight: 16,
     fontWeight: '400',
+    paddingLeft: 0,
   },
   footer: {
     flexDirection: 'row',
@@ -330,5 +333,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: colors.subtext,
     marginLeft: 8,
+  },
+  checkbox: {
+    marginRight: spacing.xs,
+  },
+  menuButton: {
+    padding: spacing.xs,
   },
 });

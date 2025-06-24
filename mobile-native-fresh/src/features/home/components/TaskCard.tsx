@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
@@ -13,12 +14,14 @@ interface TaskCardProps {
   task: ThoughtmarkWithBin;
   onPress: () => void;
   onToggle: () => void;
+  style?: ViewStyle;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({
   task,
   onPress,
   onToggle,
+  style,
 }) => {
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
   
@@ -34,6 +37,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       style={[
         styles.container,
         isOverdue && styles.overdueContainer,
+        style,
       ]}
       onPress={onPress}
       activeOpacity={0.7}
@@ -87,10 +91,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderRadius: 8,
+    padding: spacing.sm,
+    borderWidth: 0,
+    borderColor: 'transparent',
   },
   overdueContainer: {
     backgroundColor: 'rgba(239, 68, 68, 0.1)',
@@ -99,6 +103,9 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
+    fontSize: 12,
+    color: colors.textSecondary,
+    marginTop: spacing.xs,
   },
   checkbox: {
     width: 24,
@@ -118,10 +125,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    ...typography.body,
-    color: colors.text,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '500',
     marginBottom: spacing.xs,
+    color: colors.text,
   },
   titleCompleted: {
     textDecorationLine: 'line-through',

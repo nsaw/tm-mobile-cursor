@@ -28,6 +28,7 @@ import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
+import { Button } from '../../../components/ui/Button';
 
 const { width } = Dimensions.get('window');
 
@@ -255,13 +256,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         </View>
 
         {/* Design System Demo Button */}
-        <TouchableOpacity
-          style={styles.demoButton}
+        <Button
+          variant="primary"
           onPress={() => navigation.navigate('DesignSystemDemo')}
+          leftIcon={<Ionicons name="color-palette-outline" size={16} color={colors.background} />}
+          style={{ marginBottom: spacing.lg }}
         >
-          <Ionicons name="color-palette-outline" size={16} color={colors.primary} />
-          <Text style={styles.demoButtonText}> Design System Demo</Text>
-        </TouchableOpacity>
+          Design System Demo
+        </Button>
 
         {/* Tasks Section */}
         {activeTasks.length > 0 && (
@@ -288,15 +290,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
             {showTasksSection && (
               <View style={styles.tasksList}>
-                {activeTasks.slice(0, 5).map((task) => (
-                  <View key={task.id}>
-                    <TaskCard
-                      task={task}
-                      onPress={() => handleThoughtmarkPress(task)}
-                      onToggle={() => handleTaskToggle(task)}
-                    />
-                    <View style={styles.separator} />
-                  </View>
+                {activeTasks.slice(0, 5).map((task, idx, arr) => (
+                  <TaskCard
+                    key={task.id}
+                    task={task}
+                    onPress={() => handleThoughtmarkPress(task)}
+                    onToggle={() => handleTaskToggle(task)}
+                    style={idx !== arr.length - 1 ? { marginBottom: spacing.sm } : undefined}
+                  />
                 ))}
               </View>
             )}
@@ -451,15 +452,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               {recentThoughtmarks.length > 0 ? (
                 <>
                   <View style={styles.thoughtmarksList}>
-                    {recentThoughtmarks.map((thoughtmark) => (
-                      <View key={thoughtmark.id}>
-                        <ThoughtmarkCard
-                          thoughtmark={thoughtmark}
-                          onClick={() => handleThoughtmarkPress(thoughtmark)}
-                          onEdit={() => handleThoughtmarkEdit(thoughtmark)}
-                        />
-                        <View style={styles.separator} />
-                      </View>
+                    {recentThoughtmarks.map((thoughtmark, idx, arr) => (
+                      <ThoughtmarkCard
+                        key={thoughtmark.id}
+                        thoughtmark={thoughtmark}
+                        onClick={() => handleThoughtmarkPress(thoughtmark)}
+                        onEdit={() => handleThoughtmarkEdit(thoughtmark)}
+                        style={idx !== arr.length - 1 ? { marginBottom: spacing.sm } : undefined}
+                      />
                     ))}
                   </View>
                   
@@ -551,21 +551,6 @@ const styles = StyleSheet.create({
   },
   settingsButton: {
     padding: spacing.sm,
-  },
-  demoButton: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderRadius: 16,
-    marginBottom: spacing.xl,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  demoButtonText: {
-    color: colors.background,
-    fontSize: typography.body.fontSize,
-    fontWeight: '600',
   },
   section: {
     marginBottom: spacing.lg,

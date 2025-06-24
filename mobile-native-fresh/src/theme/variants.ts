@@ -54,19 +54,19 @@ export const buttonVariants = createVariantStyles(
     },
     size: {
       sm: {
-        borderRadius: 18, // minHeight: 36, pill = 36/2
+        borderRadius: 8, // Match bin card
         paddingHorizontal: designTokens.spacing.md,
         paddingVertical: designTokens.spacing.sm,
         minHeight: 36,
       },
       md: {
-        borderRadius: 22, // minHeight: 44, pill = 44/2
+        borderRadius: 8, // Match bin card
         paddingHorizontal: designTokens.spacing.lg,
         paddingVertical: designTokens.spacing.md,
         minHeight: 44,
       },
       lg: {
-        borderRadius: 26, // minHeight: 52, pill = 52/2
+        borderRadius: 8, // Match bin card
         paddingHorizontal: designTokens.spacing.xl,
         paddingVertical: designTokens.spacing.lg,
         minHeight: 52,
