@@ -36,7 +36,6 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
       showsHorizontalScrollIndicator={showsScrollIndicator && horizontal}
       showsVerticalScrollIndicator={showsScrollIndicator && !horizontal}
       contentContainerStyle={horizontal ? styles.horizontalContainer : styles.verticalContainer}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
     />
   );
 };
