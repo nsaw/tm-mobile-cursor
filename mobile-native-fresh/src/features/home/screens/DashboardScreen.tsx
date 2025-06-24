@@ -29,7 +29,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { Button } from '../../../components/ui/Button';
-import SiriShortcutsService from '../../../services/SiriShortcutsService';
+// import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 const { width } = Dimensions.get('window');
 
@@ -155,7 +155,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   const handleCreateNew = () => {
     // Donate Siri shortcut for creating thoughtmarks
-    SiriShortcutsService.donateCreateThoughtmarkShortcut();
+    // SiriShortcutsService.donateCreateThoughtmarkShortcut();
     navigation.navigate('CreateThoughtmark');
   };
 
@@ -169,7 +169,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   const handleViewAllTasks = () => {
     // Donate Siri shortcut for viewing tasks
-    SiriShortcutsService.donateViewTasksShortcut();
+    // SiriShortcutsService.donateViewTasksShortcut();
     navigation.navigate('AllThoughtmarks', { filter: 'tasks' });
   };
 
@@ -183,7 +183,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   const handleVoiceRecord = () => {
     // Donate Siri shortcut for voice recording
-    SiriShortcutsService.donateVoiceRecordShortcut();
+    // SiriShortcutsService.donateVoiceRecordShortcut();
     showVoiceRecorder();
   };
 

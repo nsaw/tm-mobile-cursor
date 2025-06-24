@@ -21,7 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NavigationProp } from '../../../navigation/types';
 import type { RootStackParamList } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
-import SiriShortcutsService from '../../../services/SiriShortcutsService';
+// import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -403,7 +403,7 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Siri Shortcuts */}
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <Text style={styles.sectionTitle}>SIRI SHORTCUTS</Text>
           <Card style={styles.sectionCard}>
             <SettingItem
@@ -458,7 +458,7 @@ export const SettingsScreen: React.FC = () => {
               }}
             />
           </Card>
-        </View>
+        </View> */}
 
         {/* Account Actions */}
         <View style={styles.section}>
