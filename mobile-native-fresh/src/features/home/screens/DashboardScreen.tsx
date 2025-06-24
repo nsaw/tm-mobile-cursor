@@ -25,6 +25,9 @@ import { useNavigation } from '@react-navigation/native';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { NeonGradientText } from '../../../components/ui/NeonGradientText';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { OnboardingModal } from '../../../components/ui/OnboardingModal';
+import { useAuth } from '../../auth/hooks/useAuth';
 
 const { width } = Dimensions.get('window');
 
@@ -40,6 +43,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   const [showBinsSection, setShowBinsSection] = useState(true);
   const [showThoughtmarksSection, setShowThoughtmarksSection] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
+  const { user, isAuthenticated, loading } = useAuth();
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const {
     thoughtmarks,
@@ -60,6 +65,32 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   useEffect(() => {
     loadInitialData();
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    const checkOnboarding = async () => {
+      const isDemo = user.isTestUser || (user.email && user.email.includes('demo'));
+      const key = isDemo
+        ? `onboarding-demo-last-login-${user.id}`
+        : `onboarding-completed-${user.id}`;
+      if (isDemo) {
+        // Always show for demo users, but only once per login
+        const lastLogin = await AsyncStorage.getItem(key);
+        const now = Date.now().toString();
+        if (lastLogin !== now) {
+          setShowOnboarding(true);
+          await AsyncStorage.setItem(key, now);
+        }
+      } else {
+        // Show for new users only
+        const completed = await AsyncStorage.getItem(key);
+        if (!completed) {
+          setShowOnboarding(true);
+        }
+      }
+    };
+    checkOnboarding();
+  }, [user]);
 
   const loadInitialData = async () => {
     await Promise.all([
@@ -159,6 +190,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     });
   };
 
+  const handleOnboardingClose = async () => {
+    if (!user) return;
+    const isDemo = user.isTestUser || (user.email && user.email.includes('demo'));
+    if (!isDemo) {
+      await AsyncStorage.setItem(`onboarding-completed-${user.id}`, 'true');
+    }
+    setShowOnboarding(false);
+  };
+
   const renderTaskCard = ({ item }: { item: ThoughtmarkWithBin }) => (
     <ThoughtmarkCard
       thoughtmark={item}
@@ -184,6 +224,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   return (
     <View style={styles.container}>
+      <OnboardingModal
+        visible={showOnboarding}
+        onClose={handleOnboardingClose}
+        isDemo={!!(user && (user.isTestUser || (user.email && user.email.includes('demo'))))}
+      />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
