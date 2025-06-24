@@ -15,7 +15,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   tag,
   isSelected = false,
   onPress,
-  variant = 'default',
+  variant = 'outline',
   size = 'md',
 }: TagChipProps) => {
   const { tokens } = useTheme();
@@ -24,7 +24,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   const baseStyle = badgeVariants.base;
   const variantStyles: { [key: string]: any } = badgeVariants.variants.variant;
   const sizeStyles: { [key: string]: any } = badgeVariants.variants.size;
-  const variantStyle = variantStyles[variant] || variantStyles.default;
+  const variantStyle = variantStyles[variant] || variantStyles.outline;
   const sizeStyle = sizeStyles[size];
 
   // Merge all styles first
@@ -59,6 +59,7 @@ export const TagChip: React.FC<TagChipProps> = ({
     color: textColor,
     fontSize: 10,
     fontWeight: '300' as '300',
+    fontFamily: 'Ubuntu',
   };
 
   return (

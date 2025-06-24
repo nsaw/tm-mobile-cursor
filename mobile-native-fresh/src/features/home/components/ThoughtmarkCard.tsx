@@ -218,7 +218,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
           {/* Footer */}
           <View style={styles.footer}>
             <View style={styles.tagsContainer}>
-              {thoughtmark.tags.map((tag) => (
+              {thoughtmark.tags.map((tag: string) => (
                 <TagChip key={tag} tag={tag} size="sm" />
               ))}
             </View>
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   content: {
     marginTop: spacing.xs,
     marginLeft: 0,
-    color: colors.textSecondary,
+    color: colors.subtext,
     fontSize: 12,
   },
   header: {
@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     textAlign: 'left',
     paddingLeft: 0,
+    fontFamily: 'Ubuntu_500Medium',
   },
   headerRight: {
     flexDirection: 'row',
@@ -305,11 +306,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#C6D600',
     fontWeight: '600',
+    fontFamily: 'Ubuntu_600SemiBold',
   },
   date: {
     fontSize: 10,
     color: colors.subtext,
     marginRight: 4,
+    fontFamily: 'Ubuntu_400Regular',
   },
   contentText: {
     fontSize: typography.body.fontSize * 0.65,
@@ -318,6 +321,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     fontWeight: '400',
     paddingLeft: 0,
+    fontFamily: 'Ubuntu_400Regular',
   },
   footer: {
     flexDirection: 'row',
@@ -333,6 +337,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: colors.subtext,
     marginLeft: 8,
+    fontFamily: 'Ubuntu_400Regular',
   },
   checkbox: {
     marginRight: spacing.xs,

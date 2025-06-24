@@ -14,7 +14,11 @@ export const spacing = {
 }
 
 export const typography = {
-  heading:    { fontFamily: 'Oswald_700Bold',   fontSize: 28 },
-  subheading: { fontFamily: 'Oswald_500Medium', fontSize: 20 },
-  body:       { fontFamily: 'Oswald_400Regular',fontSize: 16 },
+  heading:    { fontFamily: 'Ubuntu_700Bold',   fontSize: 28 },
+  subheading: { fontFamily: 'Ubuntu_500Medium', fontSize: 20 },
+  body:       { fontFamily: 'Ubuntu_400Regular',fontSize: 16 },
+  heading2:   { fontFamily: 'Ubuntu_700Bold',   fontSize: 24 },
+  heading3:   { fontFamily: 'Ubuntu_500Medium', fontSize: 18 },
+  caption:    { fontFamily: 'Ubuntu_400Regular',fontSize: 14 },
+  small:      { fontFamily: 'Ubuntu_400Regular',fontSize: 12 },
 }

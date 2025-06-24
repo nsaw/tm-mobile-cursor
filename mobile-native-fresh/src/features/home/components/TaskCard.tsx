@@ -61,27 +61,29 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         </TouchableOpacity>
         
         <View style={styles.textContainer}>
-          <Text
-            style={[
-              styles.title,
-              task.isCompleted && styles.titleCompleted,
-              isOverdue && styles.overdueTitle,
-            ]}
-            numberOfLines={1}
-          >
-            {task.title}
-          </Text>
-          
-          {task.dueDate && (
+          <View style={styles.titleRow}>
             <Text
               style={[
-                styles.dueDate,
-                isOverdue && styles.overdueDate,
+                styles.title,
+                task.isCompleted && styles.titleCompleted,
+                isOverdue && styles.overdueTitle,
               ]}
+              numberOfLines={1}
             >
-              Due {formatDueDate(task.dueDate)}
+              {task.title}
             </Text>
-          )}
+            
+            {task.dueDate && (
+              <Text
+                style={[
+                  styles.dueDate,
+                  isOverdue && styles.overdueDate,
+                ]}
+              >
+                {formatDueDate(task.dueDate)}
+              </Text>
+            )}
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     fontSize: 12,
-    color: colors.textSecondary,
+    color: colors.subtext,
     marginTop: spacing.xs,
   },
   checkbox: {
@@ -125,23 +127,37 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 13,
+    fontWeight: '400',
     marginBottom: spacing.xs,
     color: colors.text,
+    fontFamily: 'Ubuntu_400Regular',
+    flex: 1,
   },
   titleCompleted: {
     textDecorationLine: 'line-through',
     color: colors.subtext,
+    fontFamily: 'Ubuntu_500Medium',
   },
   overdueTitle: {
     color: '#FCA5A5', // Light red
+    fontFamily: 'Ubuntu_500Medium',
   },
   dueDate: {
     fontSize: 12,
     color: colors.primary,
+    fontFamily: 'Ubuntu_400Regular',
+    marginLeft: 8,
+    textAlign: 'right',
+    minWidth: 48,
   },
   overdueDate: {
     color: '#FCA5A5', // Light red
+    fontFamily: 'Ubuntu_400Regular',
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 }); 

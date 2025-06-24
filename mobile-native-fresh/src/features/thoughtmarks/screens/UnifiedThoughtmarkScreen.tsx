@@ -14,6 +14,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
@@ -22,6 +23,7 @@ import { Button } from '../../../components/ui/Button';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { TagChip } from '../../../components/ui/TagChip';
+import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { apiService } from '../../../services/api';
 
 interface RouteParams {
@@ -62,6 +64,18 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
   const [autoTags, setAutoTags] = useState<string[]>([]);
   const [contentSuggestions, setContentSuggestions] = useState<string[]>([]);
 
+  // Date picker state
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  // Custom alert dialog state
+  const [showAlertDialog, setShowAlertDialog] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    title: '',
+    message: '',
+    buttons: [] as any[],
+  });
+
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
 
   // Find existing thoughtmark if editing
@@ -85,14 +99,14 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
   // Generate AI suggestions when content changes
   useEffect(() => {
-    if (content.length > 20 && hasPremiumAccess && !isEditing) {
+    if (content.length > 20 && hasPremiumAccess) {
       const timeoutId = setTimeout(() => {
         generateAISuggestions();
       }, 2000); // Debounce for 2 seconds
 
       return () => clearTimeout(timeoutId);
     }
-  }, [content, hasPremiumAccess, isEditing]);
+  }, [content, hasPremiumAccess]);
 
   const generateAISuggestions = async () => {
     if (!hasPremiumAccess || !content.trim()) return;
@@ -182,16 +196,107 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
   const handleCancel = () => {
     if (title.trim() || content.trim()) {
-      Alert.alert(
-        'Discard Changes?',
-        'You have unsaved changes. Are you sure you want to discard them?',
-        [
-          { text: 'Cancel', style: 'cancel' },
+      setAlertConfig({
+        title: 'Save Changes?',
+        message: 'You have unsaved changes. What would you like to do?',
+        buttons: [
+          { text: 'Cancel', style: 'cancel', onPress: () => setShowAlertDialog(false) },
+          { text: 'Save & Exit', onPress: () => handleSaveAndExit() },
+          { text: 'Save & New', onPress: () => handleSaveAndNew() },
           { text: 'Discard', style: 'destructive', onPress: () => navigation.goBack() },
-        ]
-      );
+        ],
+      });
+      setShowAlertDialog(true);
     } else {
       navigation.goBack();
+    }
+  };
+
+  const handleSaveAndExit = async () => {
+    if (!content.trim()) {
+      Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const thoughtmarkData = {
+        title: title.trim() || 'Untitled Thoughtmark',
+        content: content.trim(),
+        tags,
+        binId: selectedBinId,
+        isTask,
+        isCompleted,
+        dueDate: dueDate?.toISOString() || null,
+        isPinned,
+      };
+
+      if (isEditing && existingThoughtmark) {
+        await updateThoughtmark(existingThoughtmark.id, thoughtmarkData);
+        Alert.alert('Success', 'Thoughtmark updated successfully!');
+      } else {
+        await createThoughtmark(thoughtmarkData);
+        Alert.alert('Success', 'Thoughtmark created successfully!');
+      }
+
+      navigation.goBack();
+
+    } catch (error) {
+      console.error('Error saving thoughtmark:', error);
+      Alert.alert('Error', 'Failed to save thoughtmark. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSaveAndNew = async () => {
+    if (!content.trim()) {
+      Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const thoughtmarkData = {
+        title: title.trim() || 'Untitled Thoughtmark',
+        content: content.trim(),
+        tags,
+        binId: selectedBinId,
+        isTask,
+        isCompleted,
+        dueDate: dueDate?.toISOString() || null,
+        isPinned,
+      };
+
+      if (isEditing && existingThoughtmark) {
+        await updateThoughtmark(existingThoughtmark.id, thoughtmarkData);
+        Alert.alert('Success', 'Thoughtmark updated successfully!');
+      } else {
+        await createThoughtmark(thoughtmarkData);
+        Alert.alert('Success', 'Thoughtmark created successfully!');
+      }
+
+      // Reset form for new thoughtmark
+      setTitle('');
+      setContent('');
+      setSelectedBinId(undefined);
+      setTags([]);
+      setIsTask(false);
+      setIsCompleted(false);
+      setDueDate(null);
+      setIsPinned(false);
+      setAiSuggestions(null);
+      setAutoTitle('');
+      setAutoTags([]);
+      setContentSuggestions([]);
+
+    } catch (error) {
+      console.error('Error saving thoughtmark:', error);
+      Alert.alert('Error', 'Failed to save thoughtmark. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -208,11 +313,42 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
     if (isTask) {
       setIsCompleted(false);
       setDueDate(null);
+    } else {
+      // When enabling task, show date picker
+      setShowDatePicker(true);
     }
   };
 
   const togglePin = () => {
     setIsPinned(!isPinned);
+  };
+
+  const handleDateChange = (event: any, selectedDate?: Date) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setDueDate(selectedDate);
+      // Show time picker after date is selected
+      setShowTimePicker(true);
+    }
+  };
+
+  const handleTimeChange = (event: any, selectedTime?: Date) => {
+    setShowTimePicker(false);
+    if (selectedTime && dueDate) {
+      // Combine the selected date with the selected time
+      const combinedDateTime = new Date(dueDate);
+      combinedDateTime.setHours(selectedTime.getHours());
+      combinedDateTime.setMinutes(selectedTime.getMinutes());
+      setDueDate(combinedDateTime);
+    }
+  };
+
+  const clearDueDate = () => {
+    setDueDate(null);
+  };
+
+  const formatDueDate = (date: Date) => {
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
   const getHeaderTitle = () => {
@@ -421,7 +557,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 <TagChip
                   key={index}
                   tag={tag}
-                  variant="primary"
+                  variant="outline"
                   onPress={() => toggleTag(tag)}
                 />
               ))}
@@ -490,6 +626,58 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
             </TouchableOpacity>
           </View>
 
+          {/* Due Date Section - Only show when task is selected */}
+          {isTask && (
+            <View style={styles.inputGroup}>
+              <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
+                Due Date (optional)
+              </Text>
+              <View style={styles.dueDateContainer}>
+                {dueDate ? (
+                  <View style={styles.dueDateDisplay}>
+                    <Ionicons name="calendar" size={16} color={tokens.colors.accent} />
+                    <Text style={[styles.dueDateText, { color: tokens.colors.text }]}>
+                      {formatDueDate(dueDate)}
+                    </Text>
+                    <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton}>
+                      <Ionicons name="close-circle" size={16} color={tokens.colors.textSecondary} />
+                    </TouchableOpacity>
+                  </View>
+                ) : (
+                  <TouchableOpacity
+                    style={[styles.setDueDateButton, { borderColor: tokens.colors.border }]}
+                    onPress={() => setShowDatePicker(true)}
+                  >
+                    <Ionicons name="calendar-outline" size={16} color={tokens.colors.textSecondary} />
+                    <Text style={[styles.setDueDateText, { color: tokens.colors.textSecondary }]}>
+                      Set Due Date
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          )}
+
+          {/* Date and Time Pickers */}
+          {showDatePicker && (
+            <DateTimePicker
+              value={dueDate || new Date()}
+              mode="date"
+              display="default"
+              onChange={handleDateChange}
+              minimumDate={new Date()}
+            />
+          )}
+
+          {showTimePicker && (
+            <DateTimePicker
+              value={dueDate || new Date()}
+              mode="time"
+              display="default"
+              onChange={handleTimeChange}
+            />
+          )}
+
           {/* Bin Selection */}
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
@@ -535,6 +723,15 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      
+      {/* Custom Dark Alert Dialog */}
+      <DarkAlertDialog
+        visible={showAlertDialog}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        buttons={alertConfig.buttons}
+        onDismiss={() => setShowAlertDialog(false)}
+      />
     </SafeAreaView>
   );
 };
@@ -643,77 +840,123 @@ const styles = StyleSheet.create({
   titleInput: {
     borderWidth: 1,
     borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
+    padding: 8,
+    fontSize: 14,
     fontWeight: '500',
+    fontFamily: 'Ubuntu',
+    lineHeight: 18,
   },
   contentInput: {
     borderWidth: 1,
     borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    minHeight: 120,
+    padding: 8,
+    fontSize: 14,
+    fontFamily: 'Ubuntu',
+    lineHeight: 18,
+    minHeight: 80,
   },
   charCount: {
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'right',
-    marginTop: 4,
+    marginTop: 2,
+    fontFamily: 'Ubuntu',
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 4,
   },
   addTagButton: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderRadius: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
     gap: 4,
   },
   addTagText: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '500',
+    fontFamily: 'Ubuntu',
   },
   quickActions: {
     flexDirection: 'row',
-    gap: 16,
-    marginBottom: 20,
+    gap: 8,
+    marginBottom: 12,
   },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    gap: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    gap: 4,
   },
   actionButtonActive: {
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
   },
   actionText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
+    fontFamily: 'Ubuntu',
   },
   binsContainer: {
     flexDirection: 'row',
   },
   binOption: {
     borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginRight: 8,
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    marginRight: 4,
   },
   binOptionActive: {
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
     borderColor: '#3B82F6',
   },
   binOptionText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
+    fontFamily: 'Ubuntu',
+  },
+  dueDateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(59, 130, 246, 0.1)',
+    borderRadius: 6,
+    padding: 8,
+  },
+  dueDateDisplay: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    flex: 1,
+  },
+  dueDateText: {
+    fontSize: 12,
+    fontWeight: '500',
+    flex: 1,
+    fontFamily: 'Ubuntu',
+  },
+  clearDueDateButton: {
+    padding: 2,
+  },
+  setDueDateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 8,
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderRadius: 6,
+    gap: 4,
+    flex: 1,
+  },
+  setDueDateText: {
+    fontSize: 12,
+    fontWeight: '500',
+    fontFamily: 'Ubuntu',
   },
 }); 

@@ -130,6 +130,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   });
 
   const handleThoughtmarkPress = (thoughtmark: ThoughtmarkWithBin) => {
+    console.log('DashboardScreen - Navigating to thoughtmark:', thoughtmark.id, thoughtmark.title);
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
 
@@ -541,13 +542,14 @@ const styles = StyleSheet.create({
     color: colors.text,
     letterSpacing: 1,
     textTransform: 'uppercase',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu_700Bold',
   },
   subtitle: {
     fontSize: typography.body.fontSize * 0.8,
     fontWeight: '400',
     marginTop: -4, // Reduced spacing between title and tagline
     marginLeft: 16, // Indent the tagline
+    fontFamily: 'Ubuntu_400Regular',
   },
   settingsButton: {
     padding: spacing.sm,
@@ -566,6 +568,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.text,
     letterSpacing: 0.5,
+    fontFamily: 'Ubuntu_700Bold',
   },
   sectionHeaderRight: {
     flexDirection: 'row',
@@ -578,6 +581,7 @@ const styles = StyleSheet.create({
     fontSize: typography.body.fontSize,
     color: colors.primary,
     fontWeight: '500',
+    fontFamily: 'Ubuntu_500Medium',
   },
   tasksList: {
     // Styles for tasks list

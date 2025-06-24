@@ -41,9 +41,6 @@ export default function App() {
     }
   }, [fontsLoaded])
 
-  //Temp Log
-  console.log('fontsLoaded:', fontsLoaded);
-
   // Don't render anything until fonts are ready
   if (!fontsLoaded) {
     return null

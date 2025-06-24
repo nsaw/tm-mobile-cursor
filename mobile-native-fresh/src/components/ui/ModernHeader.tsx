@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.1)',
     paddingHorizontal: 16,
-    paddingVertical: 8,
-    minHeight: 46,
+    paddingVertical: 2,
+    minHeight: 40,
     // Cross-platform shadow
     ...Platform.select({
       ios: {
@@ -101,14 +101,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.text,
     textTransform: 'uppercase',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu_700Bold',
     letterSpacing: 1,
   },
   subtitle: {
     fontSize: typography.body.fontSize * 0.8,
     color: colors.subtext,
-    marginTop: 2,
+    marginTop: 1,
     fontWeight: '400',
+    fontFamily: 'Ubuntu_400Regular',
   },
   rightButton: {
     padding: spacing.xs,

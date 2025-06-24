@@ -42,6 +42,11 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   }, [thoughtmarkId]);
 
   useEffect(() => {
+    console.log('ThoughtmarkDetailScreen - thoughtmarkId:', thoughtmarkId);
+    console.log('ThoughtmarkDetailScreen - thoughtmark:', thoughtmark);
+  }, [thoughtmarkId, thoughtmark]);
+
+  useEffect(() => {
     if (thoughtmark && hasPremiumAccess) {
       generateAIInsights();
     }

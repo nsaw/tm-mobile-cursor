@@ -306,66 +306,70 @@ export const AIToolsScreen: React.FC = () => {
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
-          <Text style={{...styles.headerTitle, color: tokens.colors.text}}>AI Tools</Text>
+          <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>
           <View style={styles.headerSpacer} />
         </View>
 
         <View style={styles.upgradeContainer}>
           <Ionicons name="star" size={64} color={tokens.colors.accent} />
-          <Text style={{...styles.upgradeTitle, color: tokens.colors.text}}>
+          <Text style={{ ...styles.upgradeTitle, color: tokens.colors.text }}>
             Upgrade to Premium
           </Text>
-          <Text style={{...styles.upgradeDescription, color: tokens.colors.textSecondary}}>
+          <Text style={{ ...styles.upgradeDescription, color: tokens.colors.textSecondary }}>
             Unlock AI-powered insights, smart sorting, and personalized recommendations with Premium.
           </Text>
           
           <View style={styles.featuresList}>
             <View style={styles.featureItem}>
               <Ionicons name="bulb" size={20} color={tokens.colors.accent} />
-              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
+              <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Intelligent pattern recognition
               </Text>
             </View>
             <View style={styles.featureItem}>
               <Ionicons name="trending-up" size={20} color={tokens.colors.accent} />
-              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
+              <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Smart content organization
               </Text>
             </View>
             <View style={styles.featureItem}>
               <Ionicons name="book" size={20} color={tokens.colors.accent} />
-              <Text style={{...styles.featureText, color: tokens.colors.textSecondary}}>
+              <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Personalized learning recommendations
               </Text>
             </View>
           </View>
 
-          <Button
-            variant="primary"
+          <TouchableOpacity
+            style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
             onPress={() => navigation.navigate('Subscribe' as never)}
-            style={styles.upgradeButton}
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
-            <Text style={{...styles.upgradeButtonText, color: tokens.colors.text}}>
+            <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
               Upgrade to Premium
             </Text>
-          </Button>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-      {/* Header with Back Button */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: tokens.spacing.lg, paddingTop: tokens.spacing.lg, marginBottom: tokens.spacing.md }}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginRight: tokens.spacing.md }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
-        <Heading level={1} style={{ color: tokens.colors.text }}>AI Tools</Heading>
+        <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>
+        <View style={styles.headerSpacer} />
       </View>
-      
-      <ScrollView contentContainerStyle={{ padding: tokens.spacing.lg }}>
+
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
         {/* AI Insights */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
           <CardContent>
@@ -474,6 +478,14 @@ export const AIToolsScreen: React.FC = () => {
           </CardContent>
         </Card>
       </ScrollView>
+      
+      {/* Floating Action Button */}
+      <TouchableOpacity
+        style={[styles.fab, { backgroundColor: tokens.colors.accent }]}
+        onPress={() => navigation.navigate('CreateThoughtmark' as never)}
+      >
+        <Ionicons name="add" size={24} color="#FFFFFF" />
+      </TouchableOpacity>
       
       {/* Bottom Nav Bar */}
       <BottomNav onNavigate={handleNavigate} />
@@ -645,5 +657,23 @@ const styles = StyleSheet.create({
   recommendationReason: {
     fontSize: 12,
     lineHeight: 16,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 80,
+    right: 20,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
 }); 
