@@ -11,6 +11,15 @@ export type RootStackParamList = {
   AITools: undefined;
   Settings: undefined;
   Profile: undefined;
+  Premium: undefined;
+  Help: undefined;
+  Terms: undefined;
+  Privacy: undefined;
+  Security: undefined;
+  Theme: undefined;
+  Export: undefined;
+  Contact: undefined;
+  HowTo: undefined;
   
   // Thoughtmarks Screens
   AllThoughtmarks: { 

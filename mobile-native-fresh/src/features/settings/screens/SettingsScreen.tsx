@@ -10,15 +10,19 @@ import {
   TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Brain } from 'lucide-react-native';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import type { NavigationProp } from '../../../navigation/types';
+import type { RootStackParamList } from '../../../navigation/types';
 
 export const SettingsScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
   
   const [showNavLabels, setShowNavLabels] = useState(true);
@@ -148,34 +152,44 @@ export const SettingsScreen: React.FC = () => {
     switchValue?: boolean;
     onSwitchChange?: (value: boolean) => void;
     showArrow?: boolean;
-  }) => (
-    <TouchableOpacity 
-      style={styles.settingItem} 
-      onPress={onPress}
-      disabled={!onPress}
-    >
-      <View style={styles.settingItemLeft}>
-        <Ionicons name={icon as any} size={20} color={colors.primary} />
-        <View style={styles.settingItemText}>
-          <Text style={styles.settingItemTitle}>{title}</Text>
-          {subtitle && <Text style={styles.settingItemSubtitle}>{subtitle}</Text>}
+  }) => {
+    let iconElement = null;
+    if (icon === 'crown') {
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color="#FFD700" />;
+    } else if (icon === 'brain') {
+      iconElement = <Brain size={20} strokeWidth={2} color={colors.primary} />;
+    } else {
+      iconElement = <Ionicons name={icon as any} size={20} color={colors.primary} />;
+    }
+    return (
+      <TouchableOpacity 
+        style={styles.settingItem} 
+        onPress={onPress}
+        disabled={!onPress}
+      >
+        <View style={styles.settingItemLeft}>
+          {iconElement}
+          <View style={styles.settingItemText}>
+            <Text style={styles.settingItemTitle}>{title}</Text>
+            {subtitle && <Text style={styles.settingItemSubtitle}>{subtitle}</Text>}
+          </View>
         </View>
-      </View>
-      <View style={styles.settingItemRight}>
-        {showSwitch && (
-          <Switch
-            value={switchValue}
-            onValueChange={onSwitchChange}
-            trackColor={{ false: colors.border, true: colors.primary }}
-            thumbColor={colors.background}
-          />
-        )}
-        {showArrow && !showSwitch && (
-          <Ionicons name="chevron-forward" size={16} color={colors.subtext} />
-        )}
-      </View>
-    </TouchableOpacity>
-  );
+        <View style={styles.settingItemRight}>
+          {showSwitch && (
+            <Switch
+              value={switchValue}
+              onValueChange={onSwitchChange}
+              trackColor={{ false: colors.border, true: colors.primary }}
+              thumbColor={colors.background}
+            />
+          )}
+          {showArrow && !showSwitch && (
+            <Ionicons name="chevron-forward" size={16} color={colors.subtext} />
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -203,6 +217,15 @@ export const SettingsScreen: React.FC = () => {
             <Text style={styles.welcomeSubtitle}>
               Your personal knowledge management system
             </Text>
+            <Button
+              variant="outline"
+              size="md"
+              style={{ marginTop: 12, alignSelf: 'flex-start' }}
+              onPress={() => navigation.navigate('HowTo')}
+              leftIcon={<Ionicons name="book-outline" size={18} color={colors.primary} />}
+            >
+              Learn More
+            </Button>
           </View>
         </Card>
 
@@ -277,17 +300,14 @@ export const SettingsScreen: React.FC = () => {
             )}
             <SettingItem
               icon="mic"
-              title="Siri Integration"
-              subtitle={`"Hey Siri, ${siriTriggerPhrase}"`}
-              onPress={() => {
-                setTempSiriPhrase(siriTriggerPhrase);
-                setShowSiriDialog(true);
-              }}
+              title="Voice Commands"
+              subtitle="Set up Siri or Google Assistant"
+              onPress={() => setShowSiriDialog(true)}
             />
             <SettingItem
-              icon="download"
+              icon="cloud-upload"
               title="Export Data"
-              subtitle="Download your thoughtmarks"
+              subtitle="Download your data"
               onPress={() => navigation.navigate('Export')}
             />
           </Card>
@@ -315,26 +335,26 @@ export const SettingsScreen: React.FC = () => {
           <Card style={styles.sectionCard}>
             <SettingItem
               icon="help-circle"
-              title="Help & FAQ"
-              subtitle="Get help and find answers"
+              title="Help & Support"
+              subtitle="Get help or contact support"
               onPress={() => navigation.navigate('Help')}
             />
             <SettingItem
               icon="document-text"
               title="Terms of Service"
-              subtitle="Read our terms and conditions"
+              subtitle="Read our terms"
               onPress={() => navigation.navigate('Terms')}
             />
             <SettingItem
-              icon="shield"
+              icon="shield-checkmark"
               title="Privacy Policy"
-              subtitle="How we protect your data"
+              subtitle="Read our privacy policy"
               onPress={() => navigation.navigate('Privacy')}
             />
             <SettingItem
               icon="mail"
               title="Contact Support"
-              subtitle="Get in touch with our team"
+              subtitle="Email or message us"
               onPress={() => navigation.navigate('Contact')}
             />
           </Card>

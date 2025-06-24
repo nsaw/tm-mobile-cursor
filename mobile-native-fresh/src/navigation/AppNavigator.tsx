@@ -21,6 +21,16 @@ import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
 
 // Settings Screens
 import { SettingsScreen } from '../features/settings/screens/SettingsScreen';
+import ProfileScreen from '../features/settings/screens/ProfileScreen';
+import PremiumScreen from '../features/settings/screens/PremiumScreen';
+import HelpScreen from '../features/settings/screens/HelpScreen';
+import TermsScreen from '../features/settings/screens/TermsScreen';
+import PrivacyScreen from '../features/settings/screens/PrivacyScreen';
+import SecurityScreen from '../features/settings/screens/SecurityScreen';
+import ThemeScreen from '../features/settings/screens/ThemeScreen';
+import ExportScreen from '../features/settings/screens/ExportScreen';
+import ContactScreen from '../features/settings/screens/ContactScreen';
+import HowToScreen from '../features/settings/screens/HowToScreen';
 
 // Search Screens
 import { SearchScreen } from '../features/search/screens/SearchScreen';
@@ -78,12 +88,6 @@ const ArchiveScreen = () => (
   </View>
 );
 
-const ProfileScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Profile Screen</Text>
-  </View>
-);
-
 // Loading Screen Wrapper for React Navigation
 const LoadingScreenWrapper = () => (
   <LoadingScreen isVisible={true} message="Loading Thoughtmarks..." />
@@ -125,6 +129,15 @@ const MainStack = () => (
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Archive" component={ArchiveScreen} />
+      <Stack.Screen name="Premium" component={PremiumScreen} />
+      <Stack.Screen name="Help" component={HelpScreen} />
+      <Stack.Screen name="Terms" component={TermsScreen} />
+      <Stack.Screen name="Privacy" component={PrivacyScreen} />
+      <Stack.Screen name="Security" component={SecurityScreen} />
+      <Stack.Screen name="Theme" component={ThemeScreen} />
+      <Stack.Screen name="Export" component={ExportScreen} />
+      <Stack.Screen name="Contact" component={ContactScreen} />
+      <Stack.Screen name="HowTo" component={HowToScreen} />
     </Stack.Navigator>
   </VoiceRecorderProvider>
 );
