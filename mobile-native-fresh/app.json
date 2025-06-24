@@ -16,7 +16,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thoughtmarks.app"
+      "bundleIdentifier": "com.thoughtmarks.app",
+      "teamId": "72SVDSY448"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,22 +32,20 @@
     },
     "plugins": [
       "expo-notifications",
-      "expo-font",
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth"
+      "expo-font"
     ],
     "extra": {
       "firebaseConfig": {
-        "apiKey": "your-firebase-api-key",
-        "authDomain": "your-project.firebaseapp.com",
-        "projectId": "your-project-id",
-        "storageBucket": "your-project.appspot.com",
-        "messagingSenderId": "123456789",
-        "appId": "your-firebase-app-id"
+        "apiKey": "AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y",
+        "authDomain": "thoughtmarks-25replit.firebaseapp.com",
+        "projectId": "thoughtmarks-25replit",
+        "storageBucket": "thoughtmarks-25replit.appspot.com",
+        "messagingSenderId": "371020564944",
+        "appId": "1:371020564944:web:your-app-id"
       },
-      "googleIosClientId": "your-ios-client-id.apps.googleusercontent.com",
-      "googleAndroidClientId": "your-android-client-id.apps.googleusercontent.com",
-      "googleWebClientId": "your-web-client-id.apps.googleusercontent.com"
-    }
+      "googleAndroidClientId": "482692133923-uahvc6eshmr3p03mv8dl9vgk6vrl6b5v.apps.googleusercontent.com",
+      "googleIosClientId": "482692133923-urb0tq0gcjbp06e26gimulhjp18kpcpb.apps.googleusercontent.com"
+    },
+    "jsEngine": "jsc"
   }
 }

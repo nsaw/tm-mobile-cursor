@@ -4,6 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Text,
 } from 'react-native';
 
 interface SearchBarProps {
@@ -57,13 +58,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 // Simple icon components
 const SearchIcon = () => (
   <View style={styles.icon}>
-    <View style={styles.iconText}>🔍</View>
+    <Text style={styles.iconText}>🔍</Text>
   </View>
 );
 
 const ClearIcon = () => (
   <View style={styles.icon}>
-    <View style={styles.iconText}>✕</View>
+    <Text style={styles.iconText}>✕</Text>
   </View>
 );
 

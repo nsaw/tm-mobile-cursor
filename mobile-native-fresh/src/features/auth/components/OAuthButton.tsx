@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   View,
 } from 'react-native';
+import { designTokens } from '../../../theme/tokens';
 
 interface OAuthButtonProps {
   provider: 'google' | 'apple';
@@ -88,7 +89,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     paddingVertical: 16,
     paddingHorizontal: 24,
     alignItems: 'center',

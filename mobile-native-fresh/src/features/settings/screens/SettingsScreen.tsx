@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, signOut } = useAuth();
   
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
@@ -33,10 +33,7 @@ export const SettingsScreen: React.FC = () => {
 
   // Load user preferences
   useEffect(() => {
-    if (user?.isPremium || user?.isTestUser) {
-      setAiNotifications(user?.aiNotifications !== undefined ? user.aiNotifications : true);
-      setSmartReminders(user?.smartReminders !== undefined ? user.smartReminders : true);
-    }
+    // No longer set aiNotifications or smartReminders from user
   }, [user]);
 
   // Load saved preferences
@@ -87,7 +84,7 @@ export const SettingsScreen: React.FC = () => {
   // Handle sign out
   const handleSignOut = async () => {
     try {
-      await logout();
+      await signOut();
       Alert.alert(
         'Signed out successfully',
         'You have been signed out of your account.'
@@ -200,7 +197,6 @@ export const SettingsScreen: React.FC = () => {
         {/* Welcome Section */}
         <Card style={styles.welcomeCard}>
           <View style={styles.welcomeContent}>
-            <Ionicons name="brain" size={32} color={colors.primary} />
             <Text style={styles.welcomeTitle}>
               Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
             </Text>

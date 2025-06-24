@@ -24,7 +24,7 @@ export const useUserProfile = () => {
       setLoading(true);
       setError(null);
 
-      const response = await apiService.updateUserProfile(user.id, updates);
+      const response = await apiService.updateUserProfile(updates);
       if (response.success && response.data) {
         setProfile(response.data);
         return response.data;
@@ -49,7 +49,7 @@ export const useUserProfile = () => {
       setLoading(true);
       setError(null);
 
-      const response = await apiService.getUserProfile(user.id);
+      const response = await apiService.getUserProfile();
       if (response.success && response.data) {
         setProfile(response.data);
         return response.data;
@@ -79,7 +79,7 @@ export const useUserProfile = () => {
       setLoading(true);
       setError(null);
 
-      const response = await apiService.updateUserPreferences(user.id, preferences);
+      const response = await apiService.updateUserPreferences(preferences);
       if (response.success && response.data) {
         setProfile(response.data);
         return response.data;
@@ -104,7 +104,7 @@ export const useUserProfile = () => {
       setLoading(true);
       setError(null);
 
-      const response = await apiService.deleteUserAccount(user.id);
+      const response = await apiService.deleteUserAccount();
       if (response.success) {
         return true;
       } else {

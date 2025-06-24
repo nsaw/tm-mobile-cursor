@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { colors, spacing, typography } from '../../../theme/theme';
+import { designTokens } from '../../../theme/tokens';
 import { Bin } from '../../../types';
 
 const { width } = Dimensions.get('window');
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     width: (width - spacing.lg * 2 - spacing.sm) / 2,
     height: 52,
     backgroundColor: colors.card,
-    borderRadius: 8,
+    borderRadius: designTokens.radius.md,
     marginBottom: spacing.sm,
     borderWidth: 1,
     borderColor: colors.border,

@@ -2,43 +2,51 @@
 
 ## 🔥 Your Firebase Configuration
 
-Based on your existing Firebase setup, here's how to configure the mobile app:
+**Project Details:**
+- **Project Name**: Thoughtmarks
+- **Project ID**: thoughtmarks-25replit
+- **Project Number**: 371020564944
+- **Web API Key**: AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y
 
-### 1. Update app.json with Your Firebase Credentials
+## ✅ What's Already Configured
 
-Replace the placeholder values in `app.json` with your actual Firebase configuration:
+Your Firebase project is already set up with:
+- ✅ Email/Password authentication
+- ✅ Google OAuth with proper scopes
+- ✅ Apple Sign-In with proper scopes
+- ✅ Backend integration endpoint
+
+## 🔧 Next Steps to Complete Setup
+
+### 1. Get Your App ID
+
+You need to get the **App ID** from your Firebase Console:
+
+1. Go to [Firebase Console](https://console.firebase.google.com/project/thoughtmarks-25replit)
+2. **Project Settings** → **General** tab
+3. **Your apps** section → Find your web app
+4. Copy the **App ID** (format: `1:371020564944:web:xxxxxxxx`)
+
+### 2. Update app.json with App ID
+
+Replace `"your-app-id"` in `app.json` with your actual App ID:
 
 ```json
 {
   "expo": {
     "extra": {
       "firebaseConfig": {
-        "apiKey": "YOUR_ACTUAL_FIREBASE_API_KEY",
-        "authDomain": "YOUR_PROJECT_ID.firebaseapp.com",
-        "projectId": "YOUR_PROJECT_ID",
-        "storageBucket": "YOUR_PROJECT_ID.appspot.com",
-        "messagingSenderId": "YOUR_MESSAGING_SENDER_ID",
-        "appId": "YOUR_FIREBASE_APP_ID"
-      },
-      "googleIosClientId": "YOUR_IOS_CLIENT_ID.apps.googleusercontent.com",
-      "googleAndroidClientId": "YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com",
-      "googleWebClientId": "YOUR_WEB_CLIENT_ID.apps.googleusercontent.com"
+        "apiKey": "AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y",
+        "authDomain": "thoughtmarks-25replit.firebaseapp.com",
+        "projectId": "thoughtmarks-25replit",
+        "storageBucket": "thoughtmarks-25replit.appspot.com",
+        "messagingSenderId": "371020564944",
+        "appId": "YOUR_ACTUAL_APP_ID_HERE"
+      }
     }
   }
 }
 ```
-
-### 2. Get Your Firebase Configuration Values
-
-From your Firebase Console (https://console.firebase.google.com/):
-
-1. **Project Settings** → **General** tab
-2. **Your apps** section → Select your web app
-3. Copy the configuration values:
-   - `apiKey`
-   - `projectId` 
-   - `appId`
-   - `messagingSenderId`
 
 ### 3. Get Google OAuth Client IDs
 
@@ -51,30 +59,25 @@ From your Firebase Console:
    - **Android**: `YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com`
    - **Web**: `YOUR_WEB_CLIENT_ID.apps.googleusercontent.com`
 
-### 4. Enable Authentication Methods
+### 4. Update OAuth Client IDs
 
-In Firebase Console → **Authentication** → **Sign-in method**:
+Replace the placeholder OAuth client IDs in `app.json`:
 
-✅ **Email/Password** - Enable
-✅ **Google** - Enable and configure OAuth client IDs
-✅ **Apple** - Enable (for iOS)
+```json
+{
+  "expo": {
+    "extra": {
+      "googleIosClientId": "YOUR_IOS_CLIENT_ID.apps.googleusercontent.com",
+      "googleAndroidClientId": "YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com",
+      "googleWebClientId": "YOUR_WEB_CLIENT_ID.apps.googleusercontent.com"
+    }
+  }
+}
+```
 
-### 5. Apple Sign-In Setup (iOS)
+## 🚀 Test the Configuration
 
-For Apple Sign-In to work on iOS:
-
-1. **Apple Developer Console**:
-   - Create App ID with Sign In with Apple capability
-   - Create Service ID for your app
-   - Configure domains and redirect URLs
-
-2. **Firebase Console**:
-   - Add Apple provider in Authentication
-   - Configure Service ID and Team ID
-
-### 6. Test the Configuration
-
-After updating the credentials:
+After updating the App ID and OAuth client IDs:
 
 ```bash
 # Restart the development server
@@ -88,7 +91,7 @@ npm start
 
 ## 🔧 Current Implementation
 
-The mobile app is now configured to use Firebase with:
+The mobile app is now configured to use your Firebase project with:
 
 - **Firebase Auth** for user authentication
 - **Google OAuth** with proper scopes (email, profile)
@@ -135,4 +138,4 @@ Your Firebase project is already configured with:
 - ✅ Apple Sign-In with proper scopes
 - ✅ Backend integration endpoint
 
-Just update the `app.json` with your actual credentials and you're ready to go! 
+Just add your App ID and OAuth client IDs to complete the setup! 
