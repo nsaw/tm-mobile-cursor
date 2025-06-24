@@ -24,6 +24,7 @@ import { Button } from '../../../components/ui/Button';
 import { TagChip } from '../../../components/ui/TagChip';
 import { apiService } from '../../../services/api';
 import { RootStackParamList } from '../../../navigation/types';
+import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -52,6 +53,9 @@ export const SearchScreen: React.FC = () => {
       setIsSearching(false);
       return;
     }
+
+    // Donate Siri shortcut for search
+    SiriShortcutsService.donateSearchShortcut();
 
     // Add to recent searches
     if (!recentSearches.includes(query)) {

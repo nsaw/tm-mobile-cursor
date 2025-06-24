@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NavigationProp } from '../../../navigation/types';
 import type { RootStackParamList } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
+import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -158,7 +159,7 @@ export const SettingsScreen: React.FC = () => {
     if (icon === 'crown') {
       iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color="#FFD700" />;
     } else if (icon === 'brain') {
-      iconElement = <Brain size={20} strokeWidth={2} color={colors.primary} />;
+      iconElement = <Brain size={28} />;
     } else {
       iconElement = <Ionicons name={icon as any} size={20} color={colors.primary} />;
     }
@@ -221,7 +222,7 @@ export const SettingsScreen: React.FC = () => {
                   backgroundColor: `${tokens.colors.success}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <Brain size={28} color={tokens.colors.background} strokeWidth={2.5} />
+                  <Brain size={28} />
                 </View>
                 {/* Title */}
                 <Text style={{
@@ -397,6 +398,64 @@ export const SettingsScreen: React.FC = () => {
               title="Contact Support"
               subtitle="Email or message us"
               onPress={() => navigation.navigate('Contact')}
+            />
+          </Card>
+        </View>
+
+        {/* Siri Shortcuts */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>SIRI SHORTCUTS</Text>
+          <Card style={styles.sectionCard}>
+            <SettingItem
+              icon="mic"
+              title="Donate All Shortcuts"
+              subtitle="Make all actions available to Siri"
+              onPress={async () => {
+                try {
+                  await SiriShortcutsService.donateAllShortcuts();
+                  Alert.alert(
+                    'Shortcuts Donated',
+                    'All Siri shortcuts have been donated successfully. You can now use Siri to perform actions in Thoughtmarks.'
+                  );
+                } catch (error) {
+                  Alert.alert(
+                    'Error',
+                    'Failed to donate shortcuts. Please try again.'
+                  );
+                }
+              }}
+            />
+            <SettingItem
+              icon="trash-outline"
+              title="Clear All Shortcuts"
+              subtitle="Remove all Siri shortcuts"
+              onPress={async () => {
+                Alert.alert(
+                  'Clear Shortcuts',
+                  'Are you sure you want to clear all Siri shortcuts?',
+                  [
+                    { text: 'Cancel', style: 'cancel' },
+                    {
+                      text: 'Clear',
+                      style: 'destructive',
+                      onPress: async () => {
+                        try {
+                          await SiriShortcutsService.clearAllShortcuts();
+                          Alert.alert(
+                            'Shortcuts Cleared',
+                            'All Siri shortcuts have been cleared.'
+                          );
+                        } catch (error) {
+                          Alert.alert(
+                            'Error',
+                            'Failed to clear shortcuts. Please try again.'
+                          );
+                        }
+                      }
+                    }
+                  ]
+                );
+              }}
             />
           </Card>
         </View>
