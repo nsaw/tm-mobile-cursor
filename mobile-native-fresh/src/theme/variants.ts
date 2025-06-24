@@ -54,19 +54,19 @@ export const buttonVariants = createVariantStyles(
     },
     size: {
       sm: {
-        borderRadius: designTokens.radius.sm,
+        borderRadius: 18, // minHeight: 36, pill = 36/2
         paddingHorizontal: designTokens.spacing.md,
         paddingVertical: designTokens.spacing.sm,
         minHeight: 36,
       },
       md: {
-        borderRadius: designTokens.radius.md,
+        borderRadius: 22, // minHeight: 44, pill = 44/2
         paddingHorizontal: designTokens.spacing.lg,
         paddingVertical: designTokens.spacing.md,
         minHeight: 44,
       },
       lg: {
-        borderRadius: designTokens.radius.lg,
+        borderRadius: 26, // minHeight: 52, pill = 52/2
         paddingHorizontal: designTokens.spacing.xl,
         paddingVertical: designTokens.spacing.lg,
         minHeight: 52,
