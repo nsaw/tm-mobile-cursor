@@ -6,32 +6,26 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  RefreshControl,
-  FlatList,
   Dimensions,
   useWindowDimensions,
   Animated,
-  Vibration,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { TaskCard } from '../components/TaskCard';
-import { BinCard } from '../components/BinCard';
-import { TagFilter } from '../components/TagFilter';
 import { AIToolsCard } from '../components/AIToolsCard';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { ThoughtmarkWithBin } from '../../../types';
-import { useNavigation } from '@react-navigation/native';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { NeonGradientText } from '../../../components/ui/NeonGradientText';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { Button } from '../../../components/ui/Button';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
@@ -323,7 +317,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             <View style={styles.tagsContainer}>
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
-                <TouchableOpacity onPress={handleViewAllThoughtmarks}>
+                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                   <Ionicons name="arrow-forward" size={14} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
@@ -339,6 +333,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   ]}
                   onPress={() => handleLocalTagPress('all')}
                   accessibilityRole="button"
+                  accessible={true}
                   accessibilityLabel={`filter by tag: all`}
                 >
                   <Text style={[
@@ -358,6 +353,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     ]}
                     onPress={() => handleLocalTagPress(tag)}
                     accessibilityRole="button"
+                    accessible={true}
                     accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
                   >
                     <Text style={[
@@ -392,6 +388,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 <TouchableOpacity
                   style={styles.viewMoreCard}
                   onPress={handleViewAllThoughtmarks}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Button"
                 >
                   <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
                   <Text style={styles.viewMoreText}>VIEW ALL THOUGHTMARKS</Text>
@@ -432,7 +431,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             {binsLoading ? (
               <View style={styles.binsGrid}>
                 {Array.from({ length: 12 }).map((_, i) => (
-                  <View key={i} style={styles.binCardSkeleton} />
+                  <View key={i}><Text>Loading...</Text></View>
                 ))}
               </View>
             ) : (
@@ -448,6 +447,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                         key={bin.id}
                         style={styles.binCard}
                         onPress={() => handleBinPress(bin)}
+                        accessibilityRole="button"
+                        accessible={true}
+                        accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
                       >
                         <View style={styles.binCardContent}>
                           <Text style={styles.binCardName}>{bin.name || 'Unnamed Bin'}</Text>
@@ -463,6 +465,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   <TouchableOpacity
                     style={styles.newBinCard}
                     onPress={handleCreateBin}
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="Create new bin"
                   >
                     <View style={styles.newBinCardContent}>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
@@ -482,6 +487,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                         handleBinPress(sortLaterBin);
                       }
                     }}
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="Saved to sort later"
                   >
                     <View style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>Saved to Sort Later</Text>
@@ -495,6 +503,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   <TouchableOpacity
                     style={styles.archiveCard}
                     onPress={() => navigation.navigate('Archive')}
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="View archive"
                   >
                     <View style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View Archive</Text>
@@ -904,7 +915,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             />
             <View style={styles.titleContainer}>
               <Text style={styles.title}>THOUGHTMARKS</Text>
-              <NeonGradientText style={styles.subtitle}>bookmarks for your brain</NeonGradientText>
+              <NeonGradientText><Text>bookmarks for your brain</Text></NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>
@@ -912,6 +923,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               <TouchableOpacity
                 style={styles.infoButton}
                 onPress={handleReorderHintPress}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
               >
                 <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
               </TouchableOpacity>
@@ -919,6 +933,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             <TouchableOpacity
               style={styles.settingsButton}
               onPress={() => navigation.navigate('Settings')}
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Button"
             >
               <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
@@ -937,7 +954,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         <View style={styles.aiToolsContainer}>
           <AIToolsCard 
             title="AI Tools"
-            description="Unlock AI-powered insights and recommendations"
+            subtitle="Unlock AI-powered insights and recommendations"
             onPress={handleAIToolsPress} 
           />
         </View>

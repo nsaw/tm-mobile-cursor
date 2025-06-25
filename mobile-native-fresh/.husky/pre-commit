@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check for designTokens usage outside ThemeProvider.tsx
+echo "🔍 Checking for designTokens violations..."
+
+# Find any designTokens usage outside ThemeProvider.tsx
+DESIGN_TOKENS_VIOLATIONS=$(grep -r "designTokens" src/ --include="*.ts" --include="*.tsx" | grep -v "ThemeProvider.tsx" || true)
+
+if [ -n "$DESIGN_TOKENS_VIOLATIONS" ]; then
+    echo "❌ designTokens usage found outside ThemeProvider.tsx:"
+    echo "$DESIGN_TOKENS_VIOLATIONS"
+    echo ""
+    echo "🚫 Commit blocked: designTokens can only be used in ThemeProvider.tsx"
+    echo "💡 Use useTheme() hook instead in components"
+    exit 1
+fi
+
+# Run ESLint with theming rules
+echo "🔍 Running ESLint theming architecture checks..."
+npm run lint:check-theme
+
+if [ $? -ne 0 ]; then
+    echo "❌ ESLint theming architecture violations found"
+    echo "🚫 Commit blocked: Fix theming architecture violations first"
+    exit 1
+fi
+
+echo "✅ Theming architecture checks passed" 

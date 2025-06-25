@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Linking } from 'react-native';
+import { View, ScrollView, Linking } from 'react-native';
+import { Brain, Mic, FileText, Lightbulb, Search, Book, Users, Mail, HelpCircle, CheckCircle } from 'lucide-react-native';
+import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Card } from '../../../components/ui/Card';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
-import { Button } from '../../../components/ui/Button';
-import { Brain, Mic, FileText, Lightbulb, Search, Book, Users, Mail, HelpCircle, CheckCircle } from 'lucide-react-native';
-import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 const helpCategories = [
   {
@@ -162,18 +162,12 @@ const HowToScreen: React.FC = () => {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }} contentContainerStyle={{ padding: tokens.spacing.lg }}>
-      <Heading level={1} style={{ color: tokens.colors.text, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
-        How to Use Thoughtmarks
-      </Heading>
+      <Heading><Text>How to Use Thoughtmarks</Text></Heading>
       
-      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.xl }}>
-        Get the most out of your thoughtmarking experience with these helpful guides and tips.
-      </Caption>
+      <Caption><Text>Get the most out of your thoughtmarking experience with these helpful guides and tips.</Text></Caption>
 
       {/* Categories */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
-        Quick Start Guide
-      </Heading>
+      <Heading><Text>Quick Start Guide</Text></Heading>
       
       <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
         {categories.map((cat) => (
@@ -182,7 +176,7 @@ const HowToScreen: React.FC = () => {
               <cat.icon size={28} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
               <View style={{ flex: 1 }}>
                 <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{cat.title}</Text>
-                <Caption style={{ color: tokens.colors.textMuted }}>{cat.description}</Caption>
+                <Caption><Text>{cat.description}</Text></Caption>
               </View>
             </View>
             <View style={{ gap: tokens.spacing.xs }}>
@@ -198,9 +192,7 @@ const HowToScreen: React.FC = () => {
       </View>
 
       {/* FAQs */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
-        Frequently Asked Questions
-      </Heading>
+      <Heading><Text>Frequently Asked Questions</Text></Heading>
       
       <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
         {faqs.map((faq) => (
@@ -210,7 +202,7 @@ const HowToScreen: React.FC = () => {
               <View style={{ flex: 1 }}>
                 <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{faq.question}</Text>
                 <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.xs }}>{faq.answer}</Text>
-                <Caption style={{ color: tokens.colors.textMuted }}>{faq.category}</Caption>
+                <Caption><Text>{faq.category}</Text></Caption>
               </View>
             </View>
           </Card>
@@ -218,16 +210,14 @@ const HowToScreen: React.FC = () => {
       </View>
 
       {/* Resources */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
-        Additional Resources
-      </Heading>
+      <Heading><Text>Additional Resources</Text></Heading>
       
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
         {resources.map((res) => (
           <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
             <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
             <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
-            <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center' }}>{res.description}</Caption>
+            <Caption><Text>{res.description}</Text></Caption>
           </Card>
         ))}
       </View>
@@ -238,9 +228,7 @@ const HowToScreen: React.FC = () => {
           <HelpCircle size={20} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
           <View style={{ flex: 1 }}>
             <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
-            <Caption style={{ color: tokens.colors.textMuted }}>
-              We typically respond to support requests within 24 hours during business days.
-            </Caption>
+            <Caption><Text>We typically respond to support requests within 24 hours during business days.</Text></Caption>
           </View>
         </View>
       </Card>

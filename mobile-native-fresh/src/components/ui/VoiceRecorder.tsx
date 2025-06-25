@@ -1,19 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   Modal,
   StyleSheet,
   ActivityIndicator,
   Alert,
-  Platform,
   Dimensions,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useRef, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import * as Speech from 'expo-speech';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useThoughtmarks } from '../../features/home/hooks/useThoughtmarks';
@@ -488,13 +486,13 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       transparent
       animationType="fade"
       onRequestClose={cancelRecording}
-    >
+     accessible={false} accessibilityLabel="Modal">
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View style={styles.header}>
             <View style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording}>
+            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
@@ -509,7 +507,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             ]}
             onPress={isRecording ? stopRecording : startRecording}
             disabled={isProcessing}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Ionicons
               name={isRecording ? "stop" : "mic"}
               size={32}
@@ -557,7 +555,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
                 <Text style={styles.actionButtonText}>Use</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording}>
+              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                 <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>

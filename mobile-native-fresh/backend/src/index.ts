@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './utils/logger';
 import thoughtmarkRoutes from './routes/thoughtmarks';

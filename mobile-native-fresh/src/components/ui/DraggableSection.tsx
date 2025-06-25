@@ -1,18 +1,18 @@
-import React, { useState, useRef } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Animated,
   Vibration,
 } from 'react-native';
+import React, { useState, useRef } from 'react';
 import {
   PanGestureHandler,
   State,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 interface DraggableSectionProps {
@@ -192,7 +192,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               onPressOut={handlePressOut}
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <View style={styles.headerLeft}>
                 <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.text }]}>
@@ -206,9 +206,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
             </TouchableOpacity>
 
             {isExpanded && (
-              <View style={styles.sectionContent}>
-                {children}
-              </View>
+              <View><Text>{children}</Text></View>
             )}
           </Animated.View>
         </PanGestureHandler>

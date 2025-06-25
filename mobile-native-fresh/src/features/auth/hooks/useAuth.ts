@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { auth } from '../../../config/firebase';
 import { 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
   signOut as firebaseSignOut,
   onAuthStateChanged,
-  User as FirebaseUser,
-  updateProfile,
-  signInWithPopup
+  updateProfile
 } from 'firebase/auth';
+
+import { auth } from '../../../config/firebase';
 import { apiService } from '../../../services/api';
 import type { User, AuthState } from '../../../types';
 
@@ -29,7 +28,9 @@ export const useAuth = () => {
 
   // Initialize auth state from Firebase
   useEffect(() => {
+    console.log('🔐 Auth: Initializing authentication...');
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      console.log('🔐 Auth: Firebase auth state changed:', firebaseUser ? 'User logged in' : 'No user');
       if (firebaseUser) {
         // Convert Firebase user to our User type
         const user: User = {
@@ -81,6 +82,7 @@ export const useAuth = () => {
         }
       } else {
         // No Firebase user, try demo login for development
+        console.log('🔐 Auth: No Firebase user, attempting demo login...');
         try {
           await signInWithDemo();
         } catch (error) {
@@ -93,16 +95,17 @@ export const useAuth = () => {
   }, []);
 
   const signInWithDemo = async () => {
+    console.log('🔐 Auth: Starting demo login...');
     try {
       const res = await apiService.demoLogin();
-      console.log('Demo login response:', JSON.stringify(res, null, 2));
+      console.log('🔐 Auth: Demo login response:', JSON.stringify(res, null, 2));
       
       if (res.success && res.data && res.data.user && res.data.token) {
         // Ensure token is a string and user is an object
         const token = String(res.data.token);
         const user = res.data.user as User;
         
-        console.log('Storing auth data:', { 
+        console.log('🔐 Auth: Storing auth data:', { 
           user: user, 
           token: token,
           userType: typeof user,
@@ -115,8 +118,9 @@ export const useAuth = () => {
           loading: false,
           guestMode: false,
         });
+        console.log('🔐 Auth: Demo login successful!');
       } else {
-        console.log('Demo login failed or missing data:', {
+        console.log('🔐 Auth: Demo login failed or missing data:', {
           success: res.success,
           hasData: !!res.data,
           hasUser: !!(res.data && res.data.user),
@@ -126,7 +130,7 @@ export const useAuth = () => {
         setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
       }
     } catch (error) {
-      console.error('Failed to sign in with demo:', error);
+      console.error('🔐 Auth: Failed to sign in with demo:', error);
       setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
     }
   };

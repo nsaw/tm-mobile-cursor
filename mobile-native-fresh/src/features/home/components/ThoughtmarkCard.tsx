@@ -1,20 +1,19 @@
-import React, { useState, useRef } from 'react';
 import {
   View,
   TouchableOpacity,
-  StyleSheet,
   Alert,
   Vibration,
   ViewStyle,
   Animated,
   ScrollView,
 } from 'react-native';
+import React, { useState, useRef } from 'react';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+
 import { Text } from '../../../components/ui/Text';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { TagChip } from '../../../components/ui/TagChip';
 import { ActionSheet } from '../../../components/ui/ActionSheet';
-import { ThoughtmarkWithBin } from '../../../types';
 
 interface ThoughtmarkCardProps {
   thoughtmark: any;
@@ -58,6 +57,9 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
       onPress={handlePress} 
       style={{ marginRight: tokens.spacing.xs, padding: 2 }}
       activeOpacity={0.7}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel={pinned ? "Unpin thoughtmark" : "Pin thoughtmark"}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <FontAwesome
@@ -208,6 +210,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onLongPress={handleLongPress}
         onPressOut={handlePressOut}
         activeOpacity={0.7}
+        accessibilityRole="button"
+        accessible={true}
+        accessibilityLabel="Thoughtmark card"
       >
         <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
           {/* Header */}
@@ -228,6 +233,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                 <TouchableOpacity
                   style={{ marginRight: tokens.spacing.xs }}
                   onPress={() => onSelectionToggle?.()}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Toggle selection"
                 >
                   <Ionicons
                     name={selected ? 'checkbox' : 'square-outline'}
@@ -296,6 +304,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               <TouchableOpacity
                 style={{ padding: tokens.spacing.xs }}
                 onPress={() => setShowContextMenu(true)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Open context menu"
               >
                 <Ionicons
                   name="ellipsis-vertical"
@@ -336,7 +347,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               }}
             >
               {(thoughtmark.tags || []).map((tag: string) => (
-                <TagChip key={tag} tag={tag} size="sm" />
+                <TagChip key={tag} tag={tag} />
               ))}
             </ScrollView>
             

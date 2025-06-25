@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { User } from 'lucide-react-native';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
@@ -49,10 +50,8 @@ export const ProfileScreen: React.FC = () => {
           <User size={32} color={tokens.colors.background} />
         </View>
         
-        <Heading level={1} style={styles.title}>Profile</Heading>
-        <Caption style={styles.subtitle}>
-          This feature is coming soon. We're working hard to bring you the best experience.
-        </Caption>
+        <Heading><Text>Profile</Text></Heading>
+        <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
         
         <Button disabled style={styles.button}>
           <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>

@@ -1,6 +1,7 @@
-import React from 'react';
 import { View } from 'react-native';
+import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
@@ -28,14 +29,10 @@ const ThemeScreen: React.FC = () => {
         <MaterialCommunityIcons name="palette-outline" size={32} color={tokens.colors.background} />
       </View>
       
-      <Heading level={1} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Theme</Heading>
-      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
-        Customize the appearance of your app with different themes and color schemes.
-      </Caption>
+      <Heading><Text>Theme</Text></Heading>
+      <Caption><Text>Customize the appearance of your app with different themes and color schemes.</Text></Caption>
       
-      <Button disabled style={{ width: 180, backgroundColor: tokens.colors.accent, opacity: 0.5 }}>
-        Coming Soon
-      </Button>
+      <Button><Text>Coming Soon</Text></Button>
     </View>
   );
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  View,
   FlatList,
   StyleSheet,
 } from 'react-native';
-import { ThoughtmarkCard } from './ThoughtmarkCard';
+
 import type { Thoughtmark } from '../../../types';
+
+import { ThoughtmarkCard } from './ThoughtmarkCard';
 
 interface ThoughtmarkListProps {
   thoughtmarks: Thoughtmark[];

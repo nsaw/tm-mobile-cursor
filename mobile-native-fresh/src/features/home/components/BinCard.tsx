@@ -1,11 +1,11 @@
-import React from 'react';
 import {
-  View,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
 
@@ -60,7 +60,7 @@ export const BinCard: React.FC<BinCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Ionicons 
         name={bin.icon as any} 
         size={32} 

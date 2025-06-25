@@ -1,16 +1,16 @@
-// src/features/auth/components/LoginForm.tsx
-import React, { useState } from 'react'
-import {
+import { Text ,
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-} from 'react-native'
+} from 'react-native';
+// src/features/auth/components/LoginForm.tsx
+import React, { useState } from 'react'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
 import { colors, spacing, typography } from '../../../theme/theme'
 import { useTheme } from '../../../theme/ThemeProvider'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void
@@ -167,7 +167,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
         style={[styles.submitButton, loading && styles.submitButtonDisabled]}
         onPress={handleSubmit}
         disabled={loading}
-      >
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         {loading ? (
           <ActivityIndicator color="#ffffff" />
         ) : (

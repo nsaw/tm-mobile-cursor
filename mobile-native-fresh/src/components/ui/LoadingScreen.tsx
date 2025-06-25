@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   Animated,
   Easing,
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 interface LoadingScreenProps {

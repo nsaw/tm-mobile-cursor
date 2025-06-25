@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ViewStyle, Text } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { getCardVariants, mergeVariantStyles } from '../../theme/variants';
 
@@ -58,22 +59,12 @@ export const Card: React.FC<CardProps> = ({
 
   if (onPress && !disabled) {
     return (
-      <View
-        style={finalCardStyle}
-        onTouchEnd={onPress}
-        accessible={true}
-        accessibilityRole="button"
-        accessibilityLabel="Card"
-      >
-        {renderChildren()}
-      </View>
+      <View><Text>{renderChildren()}</Text></View>
     );
   }
 
   return (
-    <View style={finalCardStyle}>
-      {renderChildren()}
-    </View>
+    <View><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -101,18 +92,7 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View
-      style={[
-        {
-          paddingBottom: tokens.spacing.md,
-          borderBottomWidth: 1,
-          borderBottomColor: tokens.colors.divider,
-        },
-        style,
-      ]}
-    >
-      {renderChildren()}
-    </View>
+    <View><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -138,16 +118,7 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   };
   
   return (
-    <View
-      style={[
-        {
-          paddingTop: tokens.spacing.md,
-        },
-        style,
-      ]}
-    >
-      {renderChildren()}
-    </View>
+    <View><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -173,20 +144,6 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View
-      style={[
-        {
-          paddingTop: tokens.spacing.md,
-          borderTopWidth: 1,
-          borderTopColor: tokens.colors.divider,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        },
-        style,
-      ]}
-    >
-      {renderChildren()}
-    </View>
+    <View><Text>{renderChildren()}</Text></View>
   );
 }; 

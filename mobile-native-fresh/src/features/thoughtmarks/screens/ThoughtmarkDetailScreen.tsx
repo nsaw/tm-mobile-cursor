@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
 import {
   View,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
+  StyleSheet,
   Alert,
   ActivityIndicator,
 } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+
+import type { NavigationProp } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
+import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
+import { useBins } from '../../home/hooks/useBins';
+import { Text } from '../../../components/ui/Text';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { TagChip } from '../../../components/ui/TagChip';
-import { Text } from '../../../components/ui/Text';
-import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
-import { useBins } from '../../home/hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { NavigationProp, RouteProp } from '../../../navigation/types';
 import { apiService } from '../../../services/api';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
@@ -436,7 +437,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             onPress={handlePin}
             accessibilityRole="button"
             accessibilityLabel={thoughtmark.isPinned ? "Unpin thoughtmark" : "Pin thoughtmark"}
-          >
+           accessible={true}>
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
@@ -448,7 +449,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             onPress={handleEdit}
             accessibilityRole="button"
             accessibilityLabel="Edit thoughtmark"
-          >
+           accessible={true}>
             <Ionicons name="create-outline" size={20} color={tokens.colors.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -456,7 +457,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             onPress={handleDelete}
             accessibilityRole="button"
             accessibilityLabel="Delete thoughtmark"
-          >
+           accessible={true}>
             <Ionicons name="trash-outline" size={20} color={tokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
         </View>
@@ -473,7 +474,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 onPress={handleComplete}
                 accessibilityRole="button"
                 accessibilityLabel={thoughtmark.isCompleted ? "Mark task as incomplete" : "Mark task as complete"}
-              >
+               accessible={true}>
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
@@ -508,7 +509,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   disabled={generatingAI}
                   accessibilityRole="button"
                   accessibilityLabel="Generate AI insights"
-                >
+                 accessible={true}>
                   {generatingAI ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
                   ) : (
@@ -559,7 +560,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   disabled={generatingSuggestions}
                   accessibilityRole="button"
                   accessibilityLabel="Generate AI suggestions"
-                >
+                 accessible={true}>
                   {generatingSuggestions ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
                   ) : (
@@ -650,13 +651,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
 
         {/* Actions */}
         <View style={styles.actionsContainer}>
-          <Button
-            onPress={handleEdit}
-            variant="outline"
-            style={{ padding: 8 }}
-          >
-            Edit
-          </Button>
+          <Button><Text>Edit</Text></Button>
           <Button
             onPress={() => {
               // TODO: Implement share functionality

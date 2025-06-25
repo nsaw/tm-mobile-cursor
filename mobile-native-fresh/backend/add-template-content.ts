@@ -1,13 +1,14 @@
+import { eq } from 'drizzle-orm';
+
 import { db } from './src/db';
 import { bins, thoughtmarks, users } from './src/db/schema';
-import { eq } from 'drizzle-orm';
 
 async function addTemplateContent() {
   try {
     console.log('Starting template content creation...');
 
     // Find the demo user
-    let demoUser = await db.select().from(users).where(eq(users.email, 'demo@thoughtmarks.app')).limit(1);
+    const demoUser = await db.select().from(users).where(eq(users.email, 'demo@thoughtmarks.app')).limit(1);
     let user = demoUser[0];
 
     if (!user) {

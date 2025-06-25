@@ -1,14 +1,13 @@
-import React from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   ViewStyle,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
-import type { DesignTokens } from '../../../theme/tokens';
 import { ThoughtmarkWithBin } from '../../../types';
 
 interface TaskCardProps {
@@ -18,7 +17,7 @@ interface TaskCardProps {
   style?: ViewStyle;
 }
 
-const getStyles = (tokens: DesignTokens, isCompleted: boolean, isOverdue: boolean) => StyleSheet.create({
+const getStyles = (tokens: any, isCompleted: boolean, isOverdue: boolean) => StyleSheet.create({
   container: {
     backgroundColor: tokens.colors.surface,
     borderRadius: tokens.radius.md,
@@ -126,6 +125,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       style={[styles.container, style, isOverdue && { borderColor: tokens.colors.danger }]}
       onPress={onPress}
       activeOpacity={0.7}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel="Task card"
     >
       <TouchableOpacity
         style={styles.checkbox}
@@ -133,6 +135,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           e.stopPropagation();
           onToggle();
         }}
+        accessibilityRole="button"
+        accessible={true}
+        accessibilityLabel="Toggle task completion"
       >
         {task.isCompleted && (
           <Ionicons name="checkmark" size={16} color={tokens.colors.background} />

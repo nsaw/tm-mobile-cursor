@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { binController } from '../controllers/binController';
 import { authMiddleware } from '../middleware/authMiddleware';
 

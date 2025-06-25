@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
 import { DashboardScreen } from '../screens/DashboardScreen';
 import { useTheme } from '../../../theme/ThemeProvider';
 

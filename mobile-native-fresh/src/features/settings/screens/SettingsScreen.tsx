@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -9,17 +7,16 @@ import {
   Switch,
   TextInput,
 } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Brain } from 'lucide-react-native';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { NavigationProp } from '../../../navigation/types';
-import type { RootStackParamList } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
@@ -179,7 +176,7 @@ export const SettingsScreen: React.FC = () => {
         style={styles.settingItem} 
         onPress={onPress}
         disabled={!onPress}
-      >
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <View style={styles.settingItemLeft}>
           {iconElement}
           <View style={styles.settingItemText}>
@@ -421,13 +418,12 @@ export const SettingsScreen: React.FC = () => {
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
-                  <Text style={{
-                    fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
+                  <Text style={{ fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
                     fontWeight: '600',
-                    color: '#fff',
+                    color: tokens.colors.text,
                     textAlign: 'center',
                     width: '100%',
-                  }}>
+                   }}>
                     User Guide
                   </Text>
                 </Button>

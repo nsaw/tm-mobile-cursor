@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
@@ -47,17 +47,15 @@ export const PrivacyScreen: React.FC = () => {
       <View style={styles.container}>
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="shield-outline" size={32} color={tokens.colors.background} />
-        </View>
+      </View>
         
-        <Heading level={1} style={styles.title}>Privacy Policy</Heading>
-        <Caption style={styles.subtitle}>
-          This feature is coming soon. We're working hard to bring you the best experience.
-        </Caption>
+        <Heading><Text>Privacy Policy</Text></Heading>
+        <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
         
         <Button style={styles.button}>
           <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
-        </Button>
-      </View>
+      </Button>
+    </View>
     </SafeAreaView>
   );
-}; 
+};

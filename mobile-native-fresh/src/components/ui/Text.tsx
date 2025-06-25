@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text as RNText, TextStyle, TextProps as RNTextProps } from 'react-native';
+import { Text as RNText, TextStyle } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { getTextVariants, mergeVariantStyles } from '../../theme/variants';
 
@@ -50,13 +51,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <RNText
-      style={finalTextStyle}
-      numberOfLines={numberOfLines}
-      ellipsizeMode={ellipsizeMode}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 };
 

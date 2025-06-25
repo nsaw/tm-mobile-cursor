@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,9 +5,12 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Text } from './Text';
+
 import { useTheme } from '../../theme/ThemeProvider';
+
+import { Text } from './Text';
 
 interface ActionSheetItem {
   label: string;
@@ -83,6 +85,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   }}
                   onPress={() => handleItemPress(item)}
                   accessibilityRole="button"
+                  accessible={true}
                   accessibilityLabel={item.label}
                 >
                   <View style={{
@@ -121,7 +124,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 onPress={onClose}
                 accessibilityRole="button"
                 accessibilityLabel="Cancel"
-              >
+               accessible={true}>
                 <Text 
                   variant="body" 
                   style={{

@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { aiController } from '../controllers/aiController';
 import { authMiddleware } from '../middleware/authMiddleware';
 

@@ -1,13 +1,12 @@
-import React from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Modal,
   Dimensions,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 interface DarkAlertDialogProps {
@@ -126,7 +125,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       transparent
       animationType="fade"
       onRequestClose={onCancel}
-    >
+     accessible={false} accessibilityLabel="Modal">
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
           <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
@@ -136,7 +135,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Text style={[styles.buttonText, styles.cancelButtonText]}>
                 {cancelText}
               </Text>
@@ -145,7 +144,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, getButtonStyle()]}
               onPress={onConfirm}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Text style={[styles.buttonText, styles.confirmButtonText]}>
                 {confirmText}
               </Text>

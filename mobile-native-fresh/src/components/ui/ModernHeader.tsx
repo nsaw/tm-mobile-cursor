@@ -1,12 +1,14 @@
-import React from 'react';
 import {
   View,
   TouchableOpacity,
   Platform,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Text } from './Text';
+
 import { useTheme } from '../../theme/ThemeProvider';
+
+import { Text } from './Text';
 
 interface ModernHeaderProps {
   title: string;
@@ -72,7 +74,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 backgroundColor: tokens.colors.surface,
               }} 
               onPress={onBack}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
             </TouchableOpacity>
           )}
@@ -108,7 +110,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               backgroundColor: tokens.colors.surface,
             }} 
             onPress={rightAction.onPress}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
           </TouchableOpacity>
         )}

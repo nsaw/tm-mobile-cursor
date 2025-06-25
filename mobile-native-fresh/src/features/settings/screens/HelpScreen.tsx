@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
@@ -48,10 +49,8 @@ export const HelpScreen: React.FC = () => {
           <MaterialCommunityIcons name="help-circle-outline" size={32} color={tokens.colors.background} />
         </View>
         
-        <Heading level={1} style={styles.title}>Help & Support</Heading>
-        <Caption style={styles.subtitle}>
-          This feature is coming soon. We're working hard to bring you the best experience.
-        </Caption>
+        <Heading><Text>Help & Support</Text></Heading>
+        <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
         
         <Button style={styles.button}>
           <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>Get Help</Text>

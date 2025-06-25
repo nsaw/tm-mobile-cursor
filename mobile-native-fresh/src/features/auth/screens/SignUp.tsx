@@ -1,8 +1,5 @@
-// src/features/auth/screens/SignUp.tsx
-import React, { useState } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   Image,
   Alert,
   Platform,
@@ -10,7 +7,10 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
+// src/features/auth/screens/SignUp.tsx
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { useAuth } from '../hooks/useAuth';
 import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 import { RegistrationForm } from '../components/RegistrationForm';

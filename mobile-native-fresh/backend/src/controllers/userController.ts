@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
+import { eq } from 'drizzle-orm';
+
 import { db } from '../db';
 import { users } from '../db/schema';
-import { eq } from 'drizzle-orm';
 
 export const userController = {
   async getProfile(req: Request, res: Response) {

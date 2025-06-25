@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+
 import type { Bin, BinFormData } from '../../../types';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';

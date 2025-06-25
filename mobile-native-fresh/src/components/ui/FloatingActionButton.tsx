@@ -9,6 +9,7 @@ import {
 import { BlurView } from 'expo-blur';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 interface FloatingActionButtonProps {
@@ -89,7 +90,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             onPress={handlePress}
             onLongPress={handleLongPress}
             activeOpacity={0.8}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}

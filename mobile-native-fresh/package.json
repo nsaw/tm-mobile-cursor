@@ -8,7 +8,18 @@
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
-    "postinstall": "npm uninstall -g expo-cli || true"
+    "postinstall": "npm uninstall -g expo-cli || true",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint:ci": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "lint:check-theme": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l",
+    "lint:wrap-text": "eslint . --ext .ts,.tsx --fix --rulesdir eslint-rules --rule 'no-text-outside-text: error',",
+    "lint:fix-text": "node scripts/fix-unwrapped-text.cjs",
+    "lint:fix-jsx": "node scripts/enforce-jsx-rules.cjs",
+    "lint:check-jsx": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep -E '(no-text-outside-text|no-inline-colors|enforce-theme-hook)' | wc -l",
+    "lint:fix-accessibility": "node scripts/fix-accessibility.cjs",
+    "lint:fix-all": "npm run lint:fix-text && npm run lint:fix-accessibility && npm run lint:check-theme && npm run lint:fix",
+    "pre-commit": "npm run lint:fix-all"
   },
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.4.1",
@@ -54,9 +65,25 @@
     "@react-native-community/cli": "latest",
     "@types/react": "~19.0.10",
     "@types/react-native-vector-icons": "^6.4.18",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.57.1",
     "eslint-config-expo": "^9.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "glob": "^11.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
     "typescript": "~5.8.3"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "eslint --rule 'no-restricted-imports: error'"
+    ]
+  }
 }

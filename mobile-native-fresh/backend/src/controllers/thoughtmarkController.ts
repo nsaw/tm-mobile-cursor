@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
+import { eq, like, or } from 'drizzle-orm';
+
 import { db } from '../db';
 import { thoughtmarks } from '../db/schema';
-import { eq, and, like, or } from 'drizzle-orm';
 
 export const thoughtmarkController = {
   async getAll(req: Request, res: Response) {

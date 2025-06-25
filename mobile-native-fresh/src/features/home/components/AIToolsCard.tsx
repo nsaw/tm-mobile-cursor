@@ -1,11 +1,11 @@
-import React from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 
 interface AIToolsCardProps {
@@ -60,7 +60,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7}>
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>

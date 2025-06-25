@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../../theme/ThemeProvider';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { useTheme } from '../../../theme/ThemeProvider';
 import { NavigationProp, RouteProp } from '../../../navigation/types';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import {
+import { 
   View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 
 interface SearchBarProps {
@@ -87,7 +88,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           autoCorrect={false}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
+          <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
           </TouchableOpacity>
         )}

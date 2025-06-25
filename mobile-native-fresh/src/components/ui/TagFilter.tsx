@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { TagChip } from './TagChip';
+
 import { useTheme } from '../../theme/ThemeProvider';
+
+import { TagChip } from './TagChip';
 
 interface TagFilterProps {
   tags: string[];

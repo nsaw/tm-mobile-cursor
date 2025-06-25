@@ -1,13 +1,13 @@
-import React from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Button } from '../../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../../components/ui/Card';

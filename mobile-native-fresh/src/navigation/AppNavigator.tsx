@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useAuth } from '../features/auth/hooks/useAuth';
-import { ContentScreen } from '../features/content/screens/ContentScreen';
-import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
-import { LoadingScreen } from '../components/ui/LoadingScreen';
-import { RootStackParamList } from './types';
-import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { View } from 'react-native';
+
+import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
+import { LoadingScreen } from '../components/ui/LoadingScreen';
+import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
+import { ContentScreen } from '../features/content/screens/ContentScreen';
+import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
 
 // Auth Screens
@@ -16,21 +16,20 @@ import { SignUpScreen } from '../features/auth/screens/SignUp';
 
 // Home Screens
 import { DashboardScreen } from '../features/home/screens/DashboardScreen';
-import { DetailScreen } from '../features/home/screens/DetailScreen';
 
 // AI Screens
 import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
 
 // Settings Screens
 import { SettingsScreen } from '../features/settings/screens/SettingsScreen';
-import ProfileScreen from '../features/settings/screens/ProfileScreen';
-import PremiumScreen from '../features/settings/screens/PremiumScreen';
-import HelpScreen from '../features/settings/screens/HelpScreen';
-import TermsScreen from '../features/settings/screens/TermsScreen';
-import PrivacyScreen from '../features/settings/screens/PrivacyScreen';
-import SecurityScreen from '../features/settings/screens/SecurityScreen';
+import { ProfileScreen } from '../features/settings/screens/ProfileScreen';
+import { PremiumScreen } from '../features/settings/screens/PremiumScreen';
+import { HelpScreen } from '../features/settings/screens/HelpScreen';
+import { TermsScreen } from '../features/settings/screens/TermsScreen';
+import { PrivacyScreen } from '../features/settings/screens/PrivacyScreen';
+import { SecurityScreen } from '../features/settings/screens/SecurityScreen';
 import ThemeScreen from '../features/settings/screens/ThemeScreen';
-import ExportScreen from '../features/settings/screens/ExportScreen';
+import { ExportScreen } from '../features/settings/screens/ExportScreen';
 import ContactScreen from '../features/settings/screens/ContactScreen';
 import HowToScreen from '../features/settings/screens/HowToScreen';
 import { AdminDashboardScreen } from '../features/settings/screens/AdminDashboardScreen';
@@ -45,6 +44,8 @@ import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/Unifi
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
+
+import { RootStackParamList } from './types';
 
 // Placeholder screens - to be implemented
 const CreateBinScreen = () => (

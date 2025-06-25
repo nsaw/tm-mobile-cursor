@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
 import {
   View,
-  ScrollView,
   TouchableOpacity,
+  StyleSheet,
   FlatList,
   RefreshControl,
   ActivityIndicator,
-  StyleSheet,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import type { NavigationProp } from '../../../navigation/types';
+import { useTheme } from '../../../theme/ThemeProvider';
+import { useBins } from '../../home/hooks/useBins';
 import { Text } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 import { Card } from '../../../components/ui/Card';
-import { useTheme } from '../../../theme/ThemeProvider';
 import { BinCard } from '../../home/components/BinCard';
-import { useBins } from '../../home/hooks/useBins';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigation/types';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
@@ -348,14 +349,9 @@ export const AllBinsScreen: React.FC = () => {
         >
           Sort by:
         </Text>
-        <View style={{
-          flexDirection: 'row',
-          gap: tokens.spacing.sm,
-        }}>
-          {renderSortButton('name', 'Name')}
+        <View><Text>{renderSortButton('name', 'Name')}
           {renderSortButton('count', 'Count')}
-          {renderSortButton('date', 'Date')}
-        </View>
+          {renderSortButton('date', 'Date')}</Text></View>
       </View>
 
       {/* Bins List */}

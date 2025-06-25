@@ -8,6 +8,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Brain } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 const { width } = Dimensions.get('window');

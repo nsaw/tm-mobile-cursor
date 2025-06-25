@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
+import { Brain, Mic, Search } from 'lucide-react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { Button } from '../ui/Button';
 import { Text, Heading, Caption } from '../ui/Text';
-import { Brain, Mic, Lightbulb, Search } from 'lucide-react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface OnboardingModalProps {
   visible: boolean;
@@ -88,23 +89,22 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Step Indicator */}
           <View style={styles.stepHeader}>
             <View style={[styles.stepCircle, { backgroundColor: '#C6D600' }]}> {/* Accent color */}
-              <Text style={{
-                fontWeight: 'bold',
-                color: '#222',
+              <Text style={{ fontWeight: 'bold',
+                color: tokens.colors.text,
                 fontSize: tokens.typography.fontSize.sm * 1.34,
-              }}>{currentStep + 1}</Text>
+               }}>{currentStep + 1}</Text>
             </View>
             <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
-              <Heading level={1} style={{ color: tokens.colors.text }}>{steps[currentStep].title}</Heading>
-              <Caption style={{ color: tokens.colors.textSecondary }}>{`${currentStep + 1} of ${steps.length}`}</Caption>
+              <Heading>{steps[currentStep].title}</Heading>
+              <Caption>{`${currentStep + 1} of ${steps.length}`}</Caption>
             </View>
           </View>
 
           {/* Icon */}
-          <View style={styles.iconContainer}>{steps[currentStep].icon}</View>
+          <View>{steps[currentStep].icon}</View>
 
           {/* Description */}
-          <Text align="center" style={{ color: tokens.colors.text, marginBottom: tokens.spacing.lg }}>{steps[currentStep].description}</Text>
+          <Text style={{ color: tokens.colors.text, marginBottom: tokens.spacing.lg, textAlign: 'center' }}>{steps[currentStep].description}</Text>
 
           {/* Divider/accent below text chunk */}
           <View style={{ alignItems: 'center', marginBottom: tokens.spacing.lg }}>
@@ -114,15 +114,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Progress Dots */}
           <View style={styles.progressDots}>
             {steps.map((_, idx) => (
-              <View
-                key={idx}
-                style={[
+              <View key={idx}>
+                <View style={[
                   styles.dot,
-                  idx === currentStep
-                    ? { backgroundColor: '#C6D600' }
-                    : { backgroundColor: tokens.colors.textMuted },
-                ]}
-              />
+                  {
+                    backgroundColor: idx === currentStep ? tokens.colors.accent : tokens.colors.border,
+                  }
+                ]} />
+              </View>
             ))}
           </View>
 
@@ -132,7 +131,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               variant="outline"
               onPress={() => {/* TODO: navigate to premium/upgrade */}}
               style={{
-                borderColor: '#FFD700',
+                borderColor: tokens.colors.border,
                 borderWidth: 2,
                 backgroundColor: 'transparent',
                 borderRadius: tokens.radius.md,
@@ -163,17 +162,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             </Button>
             {/* Step 6/6: Finish Button */}
             {steps[currentStep].premium && !isPremium ? (
-              <Button
-                onPress={onClose}
-                style={{
-                  backgroundColor: tokens.colors.accent,
-                  borderRadius: tokens.radius.md,
-                  paddingHorizontal: tokens.spacing.xl,
-                }}
-                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
-              >
-                Finish
-              </Button>
+              <Button>Finish</Button>
             ) : (
               <Button
                 onPress={handleNext}
@@ -186,12 +175,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             )}
           </View>
 
-          <Button
-            variant="ghost"
-            onPress={onClose}
-          >
-            Close
-          </Button>
+          <Button onPress={onClose}>Close</Button>
         </View>
       </View>
     </Modal>
@@ -222,26 +206,22 @@ const styles = StyleSheet.create({
   },
   stepCircleText: {
     fontWeight: 'bold',
-  },
-  iconContainer: {
-    alignItems: 'center',
-    marginBottom: 21, // 16 * 1.34
+    fontSize: 16,
   },
   progressDots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 21, // 16 * 1.34
+    gap: 8,
+    marginBottom: 24,
   },
   dot: {
-    width: 13, // 10 * 1.34
-    height: 13, // 10 * 1.34
-    borderRadius: 7, // 5 * 1.34
-    marginHorizontal: 4, // 3 * 1.34
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 11, // 8 * 1.34
   },
 }); 

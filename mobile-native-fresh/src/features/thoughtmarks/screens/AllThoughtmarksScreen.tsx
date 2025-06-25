@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -9,13 +7,14 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
-import { TagFilter } from '../../../components/ui/TagFilter';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useBins } from '../../home/hooks/useBins';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { RootStackParamList } from '../../../navigation/types';
@@ -370,11 +369,9 @@ export const AllThoughtmarksScreen: React.FC = () => {
           {/* Sort Dropdown */}
           <View style={styles.filterDropdown}>
             <Text style={styles.filterLabel}>Sort</Text>
-            <View style={styles.dropdownContainer}>
-              {renderSortButton('date', 'Date')}
+            <View><Text>{renderSortButton('date', 'Date')}
               {renderSortButton('title', 'Title')}
-              {renderSortButton('pinned', 'Pinned')}
-            </View>
+              {renderSortButton('pinned', 'Pinned')}</Text></View>
           </View>
 
           {/* Bin Filter Dropdown */}

@@ -1,6 +1,7 @@
-import React from 'react';
 import { View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
@@ -25,17 +26,13 @@ const ContactScreen: React.FC = () => {
         justifyContent: 'center', 
         marginBottom: tokens.spacing.lg 
       }}>
-        <MaterialCommunityIcons name="email-outline" size={32} color={tokens.colors.background} />
+        <Ionicons name="mail-outline" size={32} color={tokens.colors.background} />
       </View>
       
-      <Heading level={1} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Contact Support</Heading>
-      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
-        Need help? We're here to assist you with any questions or issues.
-      </Caption>
+      <Heading><Text>Contact Support</Text></Heading>
+      <Caption><Text>Need help? We're here to assist you with any questions or issues.</Text></Caption>
       
-      <Button disabled style={{ width: 180, backgroundColor: tokens.colors.accent, opacity: 0.5 }}>
-        Coming Soon
-      </Button>
+      <Button><Text>Coming Soon</Text></Button>
     </View>
   );
 };

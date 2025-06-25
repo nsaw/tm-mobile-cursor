@@ -1,6 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 
 interface OAuthButtonProps {
@@ -67,7 +68,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.8}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Ionicons
         name={config.icon as any}
         size={20}

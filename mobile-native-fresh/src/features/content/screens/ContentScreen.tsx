@@ -1,8 +1,9 @@
-import React from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
 import { RootStackParamList } from '../../../navigation/types';

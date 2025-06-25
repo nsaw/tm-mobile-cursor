@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text, StyleSheet } from 'react-native';
-import { colors, typography } from '../../theme/theme';
+import { Animated, StyleSheet } from 'react-native';
+
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface NeonGradientTextProps {
   children: string;
@@ -11,7 +12,10 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
   children, 
   style 
 }) => {
+  const { tokens } = useTheme();
   const animatedValue = useRef(new Animated.Value(0)).current;
+
+  const styles = getStyles(tokens);
 
   useEffect(() => {
     const animation = Animated.loop(
@@ -48,7 +52,7 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   neonText: {
     fontSize: 22, // Increased from 19 to 22 for better readability
     fontWeight: '700',

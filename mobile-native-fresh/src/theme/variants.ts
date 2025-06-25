@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { DesignTokens } from './tokens';
 
 // Utility function to create variant styles

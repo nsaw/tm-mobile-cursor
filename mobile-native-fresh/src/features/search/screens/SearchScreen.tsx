@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -9,9 +7,11 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
@@ -227,8 +227,6 @@ export const SearchScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
             onPress={() => setUseAISearch(!useAISearch)}
-            accessibilityRole="button"
-            accessibilityLabel={`${useAISearch ? 'Disable' : 'Enable'} AI enhanced search`}
           >
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
@@ -295,8 +293,6 @@ export const SearchScreen: React.FC = () => {
                         key={index}
                         style={styles.suggestionItem}
                         onPress={() => handleSuggestionPress(suggestion)}
-                        accessibilityRole="button"
-                        accessibilityLabel={`Search for ${suggestion.query}`}
                       >
                         <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
@@ -321,8 +317,6 @@ export const SearchScreen: React.FC = () => {
                     <TouchableOpacity
                       key={index}
                       onPress={() => handleRecentSearchPress(query)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`Search for ${query}`}
                     >
                       <TagChip
                         tag={query}

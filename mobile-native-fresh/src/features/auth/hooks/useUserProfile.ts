@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import { apiService } from '../../../services/api';
 import type { User } from '../../../types';
+
 import { useAuth } from './useAuth';
 
 export const useUserProfile = () => {

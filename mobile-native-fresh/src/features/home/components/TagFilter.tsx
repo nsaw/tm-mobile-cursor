@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 
 interface TagFilterProps {

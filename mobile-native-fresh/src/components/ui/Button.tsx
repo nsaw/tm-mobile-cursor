@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, ViewStyle, TextStyle } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
 
@@ -97,6 +98,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel="Button"
       android_ripple={{
         color: tokens.colors.surfaceHover,
         borderless: false,

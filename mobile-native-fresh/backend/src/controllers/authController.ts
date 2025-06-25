@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { db } from '../db';
-import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
+
+import { db } from '../db';
+import { users , bins } from '../db/schema';
 import { createTemplateContent } from '../utils/templates';
-import { bins } from '../db/schema';
 
 export const authController = {
   // Basic authentication

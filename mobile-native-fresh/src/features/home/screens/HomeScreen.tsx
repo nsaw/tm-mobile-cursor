@@ -1,25 +1,19 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
-  FlatList,
-  TouchableOpacity,
-  RefreshControl,
-  SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+
+import { useTheme } from '../../../theme/ThemeProvider';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
-import { useAuth } from '../../auth/hooks/useAuth';
-import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
-import { ThoughtmarkList } from '../components/ThoughtmarkList';
-import { QuickActions } from '../components/QuickActions';
-import { SearchBar } from '../components/SearchBar';
-import { TagFilter } from '../../../components/ui/TagFilter';
 import { Text } from '../../../components/ui/Text';
-import { Button } from '../../../components/ui/Button';
-import { useTheme } from '../../../theme/ThemeProvider';
+import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 

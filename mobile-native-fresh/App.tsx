@@ -14,13 +14,25 @@ import {
   Ubuntu_500Medium,
   Ubuntu_700Bold
 } from '@expo-google-fonts/ubuntu'
-import { AppNavigator } from './src/navigation/AppNavigator'
-import { ThemeProvider } from './src/theme/ThemeProvider'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+
+import { AppNavigator } from './src/navigation/AppNavigator'
+import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
 // import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
 SplashScreen.preventAutoHideAsync()
+
+function AppContent() {
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <StatusBar style="light" />
+      <AppNavigator />
+    </SafeAreaView>
+  )
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -91,10 +103,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#181818' }}>
-          <StatusBar style="light" />
-          <AppNavigator />
-        </SafeAreaView>
+        <AppContent />
       </ThemeProvider>
     </SafeAreaProvider>
   )
