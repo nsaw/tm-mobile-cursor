@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { designTokens } from '../../../theme/tokens';
 
 interface AIToolsCardProps {
@@ -23,9 +23,19 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   title,
   description,
 }) => {
+  const { tokens } = useTheme();
+
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={{
+        backgroundColor: tokens?.colors?.surface ?? '#fff',
+        borderRadius: 11,
+        paddingVertical: designTokens.spacing.md * 0.7,
+        paddingHorizontal: designTokens.spacing.lg * 1.34,
+        borderWidth: 3,
+        borderColor: 'rgba(255, 221, 0, 0.25)',
+        minHeight: 75,
+      }}
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityRole="button"
@@ -49,8 +59,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
     borderRadius: 11,
-    paddingVertical: spacing.md * 0.7,
-    paddingHorizontal: spacing.lg * 1.34,
+    paddingVertical: designTokens.spacing.md * 0.7,
+    paddingHorizontal: designTokens.spacing.lg * 1.34,
     borderWidth: 3,
     borderColor: 'rgba(255, 221, 0, 0.25)',
     minHeight: 75,
@@ -68,8 +78,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgba(255, 221, 0, 0.7)',
     fontWeight: '700',
-    marginLeft: spacing.sm * 1.34,
-    marginRight: spacing.xs * 1.34,
+    marginLeft: designTokens.spacing.sm * 1.34,
+    marginRight: designTokens.spacing.xs * 1.34,
     textTransform: 'uppercase',
     fontFamily: designTokens.typography.fontFamily.heading,
   },

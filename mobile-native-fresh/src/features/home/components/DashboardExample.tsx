@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { DashboardScreen } from '../screens/DashboardScreen';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 // Mock navigation for the example
 const mockNavigation = {
@@ -14,8 +14,10 @@ const mockNavigation = {
 };
 
 export const DashboardExample: React.FC = () => {
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
   return (
-    <View style={styles.container}>
+    <View style={{ backgroundColor: tokens?.colors?.background ?? '#0D0D0F' }}>
       <Text style={styles.title}>Dashboard Example</Text>
       <Text style={styles.subtitle}>
         This demonstrates the complete dashboard with all components
@@ -26,22 +28,22 @@ export const DashboardExample: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens?.colors?.background ?? '#0D0D0F',
   },
   title: {
-    ...typography.heading,
-    color: colors.text,
+    ...tokens.typography.heading,
+    color: tokens?.colors?.text ?? '#FFFFFF',
     textAlign: 'center',
-    padding: spacing.lg,
+    padding: tokens.spacing.lg,
   },
   subtitle: {
-    ...typography.body,
-    color: colors.subtext,
+    ...tokens.typography.body,
+    color: tokens?.colors?.textSecondary ?? '#808080',
     textAlign: 'center',
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.md,
+    paddingHorizontal: tokens.spacing.lg,
+    marginBottom: tokens.spacing.md,
   },
 }); 

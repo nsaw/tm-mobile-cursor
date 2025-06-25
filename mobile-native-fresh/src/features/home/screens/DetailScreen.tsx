@@ -10,7 +10,7 @@ import {
   Share,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -22,6 +22,8 @@ export const DetailScreen = () => {
   const { thoughtmarkId } = route.params as { thoughtmarkId: number };
   const { thoughtmarks, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
   
   const thoughtmark = thoughtmarks.find(t => t.id === thoughtmarkId);
   const bin = thoughtmark ? bins.find(b => b.id === thoughtmark.binId) : null;
@@ -87,20 +89,20 @@ export const DetailScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.headerButton} onPress={handleBack}>
-          <Ionicons name="arrow-back" size={24} color={colors.text} />
+          <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? '#000'} />
         </TouchableOpacity>
         
         <View style={styles.headerActions}>
           {thoughtmark.isPinned && (
-            <Ionicons name="pin" size={20} color={colors.primary} />
+            <Ionicons name="pin" size={20} color={tokens?.colors?.accent ?? '#000'} />
           )}
           
           <TouchableOpacity style={styles.headerButton} onPress={handleEdit}>
-            <Ionicons name="create-outline" size={24} color={colors.text} />
+            <Ionicons name="create-outline" size={24} color={tokens?.colors?.text ?? '#000'} />
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.headerButton} onPress={handleShare}>
-            <Ionicons name="share-outline" size={24} color={colors.text} />
+            <Ionicons name="share-outline" size={24} color={tokens?.colors?.text ?? '#000'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -110,7 +112,7 @@ export const DetailScreen = () => {
         
         {bin && (
           <View style={styles.binInfo}>
-            <Ionicons name="folder-outline" size={16} color={colors.subtext} />
+            <Ionicons name="folder-outline" size={16} color={tokens?.colors?.textSecondary ?? '#000'} />
             <Text style={styles.binName}>{bin.name}</Text>
           </View>
         )}
@@ -132,7 +134,7 @@ export const DetailScreen = () => {
             <Ionicons 
               name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
               size={20} 
-              color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
+              color={thoughtmark.isCompleted ? tokens?.colors?.accent ?? '#000' : tokens?.colors?.textSecondary ?? '#000'} 
             />
             <Text style={styles.taskText}>
               {thoughtmark.isCompleted ? 'Completed' : 'Pending'}
@@ -154,7 +156,7 @@ export const DetailScreen = () => {
       
       <View style={styles.footer}>
         <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-          <Ionicons name="trash-outline" size={20} color="#EF4444" />
+          <Ionicons name="trash-outline" size={20} color={tokens?.colors?.danger ?? '#EF4444'} />
           <Text style={styles.deleteButtonText}>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -162,22 +164,22 @@ export const DetailScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens?.colors?.background ?? '#0D0D0F',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    paddingHorizontal: tokens.spacing.lg,
+    paddingVertical: tokens.spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomColor: tokens?.colors?.border ?? '#000',
   },
   headerButton: {
-    padding: spacing.sm,
+    padding: tokens.spacing.sm,
   },
   headerActions: {
     flexDirection: 'row',
@@ -185,87 +187,87 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: tokens.spacing.lg,
   },
   title: {
-    ...typography.heading,
-    color: colors.text,
-    marginBottom: spacing.md,
+    ...tokens.typography.heading,
+    color: tokens?.colors?.text ?? '#000',
+    marginBottom: tokens.spacing.md,
   },
   binInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   binName: {
-    ...typography.body,
-    color: colors.subtext,
-    marginLeft: spacing.xs,
+    ...tokens.typography.body,
+    color: tokens?.colors?.textSecondary ?? '#000',
+    marginLeft: tokens.spacing.xs,
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   tag: {
-    backgroundColor: colors.card,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.sm,
-    marginRight: spacing.xs,
-    marginBottom: spacing.xs,
+    backgroundColor: tokens?.colors?.card ?? '#000',
+    paddingHorizontal: tokens.spacing.sm,
+    paddingVertical: tokens.spacing.xs,
+    borderRadius: tokens.spacing.sm,
+    marginRight: tokens.spacing.xs,
+    marginBottom: tokens.spacing.xs,
   },
   tagText: {
-    ...typography.body,
+    ...tokens.typography.body,
     fontSize: 12,
-    color: colors.subtext,
+    color: tokens?.colors?.textSecondary ?? '#000',
   },
   contentText: {
-    ...typography.body,
-    color: colors.text,
+    ...tokens.typography.body,
+    color: tokens?.colors?.text ?? '#000',
     lineHeight: 24,
-    marginBottom: spacing.lg,
+    marginBottom: tokens.spacing.lg,
   },
   taskInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.card,
-    padding: spacing.md,
-    borderRadius: spacing.md,
-    marginBottom: spacing.lg,
+    backgroundColor: tokens?.colors?.card ?? '#000',
+    padding: tokens.spacing.md,
+    borderRadius: tokens.spacing.md,
+    marginBottom: tokens.spacing.lg,
   },
   taskText: {
-    ...typography.body,
-    color: colors.text,
-    marginLeft: spacing.sm,
+    ...tokens.typography.body,
+    color: tokens?.colors?.text ?? '#000',
+    marginLeft: tokens.spacing.sm,
     flex: 1,
   },
   dueDate: {
-    ...typography.body,
+    ...tokens.typography.body,
     fontSize: 12,
-    color: colors.subtext,
+    color: tokens?.colors?.textSecondary ?? '#000',
   },
   footer: {
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    paddingHorizontal: tokens.spacing.lg,
+    paddingVertical: tokens.spacing.md,
     borderTopWidth: 1,
-    borderTopColor: colors.border,
+    borderTopColor: tokens?.colors?.border ?? '#000',
   },
   deleteButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.sm,
+    paddingVertical: tokens.spacing.sm,
   },
   deleteButtonText: {
-    ...typography.body,
-    color: "#EF4444",
-    marginLeft: spacing.xs,
+    ...tokens.typography.body,
+    color: tokens?.colors?.danger ?? '#EF4444',
+    marginLeft: tokens.spacing.xs,
   },
   errorText: {
-    ...typography.body,
-    color: "#EF4444",
+    ...tokens.typography.body,
+    color: tokens?.colors?.danger ?? '#EF4444',
     textAlign: 'center',
-    marginTop: spacing.xl,
+    marginTop: tokens.spacing.xl,
   },
 });

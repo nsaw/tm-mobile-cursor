@@ -13,7 +13,7 @@ import {
   NavigationProp,
 } from '@react-navigation/native';
 import { RootStackParamList } from '../../../navigation/types';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 type ContentPage = {
   title: string;
@@ -28,6 +28,8 @@ type ContentScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 export const ContentScreen: React.FC = () => {
   const navigation = useNavigation<ContentScreenNavigationProp>();
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
 
   const contentPages: ContentPage[] = [
     {
@@ -95,46 +97,45 @@ export const ContentScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens.colors.background,
   },
   content: {
-    padding: spacing.md,
+    padding: tokens.spacing.md,
   },
   screenTitle: {
-    ...typography.heading,
-    color: colors.text,
-    marginBottom: spacing.sm,
+    ...tokens.typography.heading,
+    marginBottom: tokens.spacing.sm,
   },
   screenSubtitle: {
-    ...typography.body,
-    color: colors.subtext,
-    marginBottom: spacing.lg,
+    ...tokens.typography.body,
+    marginBottom: tokens.spacing.lg,
+    color: tokens.colors.textSecondary,
   },
   card: {
     flexDirection: 'row',
-    backgroundColor: colors.card,
+    backgroundColor: tokens.colors.card,
     borderRadius: 12,
-    padding: spacing.md,
+    padding: tokens.spacing.md,
     alignItems: 'flex-start',
-    marginBottom: spacing.md,
+    marginBottom: tokens.spacing.md,
     elevation: 2,
   },
   cardIconContainer: {
-    marginRight: spacing.md,
+    marginRight: tokens.spacing.md,
   },
   cardTextContainer: {
     flex: 1,
   },
   cardTitle: {
-    ...typography.subheading,
-    color: colors.text,
-    marginBottom: spacing.xs,
+    ...tokens.typography.subheading,
+    marginBottom: tokens.spacing.xs,
+    color: tokens.colors.text,
   },
   cardDescription: {
-    ...typography.body,
-    color: colors.subtext,
+    ...tokens.typography.body,
+    color: tokens.colors.textSecondary,
   },
 });

@@ -13,7 +13,7 @@ import {
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../theme/theme';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface DraggableSectionProps {
   id: string;
@@ -46,6 +46,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
+  const { tokens } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -193,14 +194,14 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               delayLongPress={500}
             >
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={colors.subtext} style={styles.chevronIcon} />
-                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim }]}>
+                <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
+                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.text }]}>
                   {title}
                 </Animated.Text>
               </View>
               
               <View style={styles.headerRight}>
-                <Ionicons name="menu-outline" size={16} color={colors.subtext} style={styles.dragHandle} />
+                <Ionicons name="menu-outline" size={16} color={tokens.colors.textSecondary} style={styles.dragHandle} />
               </View>
             </TouchableOpacity>
 
@@ -218,9 +219,9 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: spacing.lg * 0.47,
-    backgroundColor: 'transparent', // Removed custom background color
-    borderRadius: 11, // 8 * 1.34
+    marginBottom: 8,
+    backgroundColor: 'transparent',
+    borderRadius: 11,
   },
   dragging: {
     opacity: 0.8,
@@ -230,9 +231,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: spacing.md * 1.34,
-    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
-    paddingBottom: spacing.sm * 1.34, // Reduced bottom padding
+    paddingVertical: 21,
+    paddingHorizontal: 11,
+    paddingBottom: 11,
   },
   headerLeft: {
     flexDirection: 'row',
@@ -240,13 +241,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   chevronIcon: {
-    marginRight: spacing.sm * 1.34,
+    marginRight: 11,
   },
   sectionTitle: {
-    fontSize: 22, // Increased from 18 to 22 for better readability
+    fontSize: 22,
     fontWeight: '700',
-    color: colors.text,
-    letterSpacing: 0.7, // 0.5 * 1.34
+    letterSpacing: 0.7,
     fontFamily: 'Ubuntu_700Bold',
     flex: 1,
   },
@@ -255,10 +255,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionContent: {
-    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
-    paddingBottom: spacing.md * 1.34,
+    paddingHorizontal: 11,
+    paddingBottom: 21,
   },
   dragHandle: {
-    marginLeft: spacing.sm * 1.34,
+    marginLeft: 11,
   },
 }); 

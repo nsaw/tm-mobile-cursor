@@ -8,13 +8,15 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { Button } from '../../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../../components/ui/Card';
 import { useAuth } from '../../auth/hooks/useAuth';
 
 export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const { user } = useAuth();
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
 
   // Check if user is admin (you can customize this logic)
   const isAdmin = user?.email?.includes('admin') || user?.isAdmin || false;
@@ -23,7 +25,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
     return (
       <View style={styles.container}>
         <View style={styles.accessDenied}>
-          <Ionicons name="lock-closed" size={48} color="#FF3B30" />
+          <Ionicons name="lock-closed" size={48} color={tokens?.colors?.danger ?? '#FF3B30'} />
           <Text style={styles.accessDeniedTitle}>Access Denied</Text>
           <Text style={styles.accessDeniedText}>
             This area is restricted to administrators only.
@@ -64,7 +66,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1, backgroundColor: tokens?.colors?.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
@@ -72,7 +74,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color={colors.text} />
+            <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? '#000'} />
           </TouchableOpacity>
           <Text style={styles.title}>Admin Dashboard</Text>
           <View style={styles.headerRight} />
@@ -100,7 +102,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={handleDesignSystemDemo}
-                leftIcon={<Ionicons name="color-palette-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="color-palette-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Design System Demo
@@ -109,7 +111,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={handleExportData}
-                leftIcon={<Ionicons name="download-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="download-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Export Data
@@ -118,7 +120,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={handleImportData}
-                leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Import Data
@@ -137,7 +139,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="destructive"
                 onPress={handleDatabaseReset}
-                leftIcon={<Ionicons name="refresh-outline" size={16} color={colors.background} />}
+                leftIcon={<Ionicons name="refresh-outline" size={16} color={tokens?.colors?.background ?? '#0D0D0F'} />}
                 style={styles.adminButton}
               >
                 Reset to Demo
@@ -146,7 +148,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={() => Alert.alert('Logs', 'System logs functionality coming soon.')}
-                leftIcon={<Ionicons name="document-text-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="document-text-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 View Logs
@@ -155,7 +157,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={() => Alert.alert('Analytics', 'Analytics dashboard coming soon.')}
-                leftIcon={<Ionicons name="analytics-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="analytics-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Analytics
@@ -174,7 +176,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={() => Alert.alert('Users', 'User management functionality coming soon.')}
-                leftIcon={<Ionicons name="people-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="people-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Manage Users
@@ -183,7 +185,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={() => Alert.alert('Permissions', 'Permission management coming soon.')}
-                leftIcon={<Ionicons name="shield-outline" size={16} color={colors.primary} />}
+                leftIcon={<Ionicons name="shield-outline" size={16} color={tokens?.colors?.accent ?? '#000'} />}
                 style={styles.adminButton}
               >
                 Permissions
@@ -196,10 +198,10 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens?.colors?.background ?? '#0D0D0F',
   },
   scrollView: {
     flex: 1,
@@ -208,17 +210,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: spacing.lg,
+    padding: tokens.spacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomColor: tokens?.colors?.border ?? '#000',
   },
   backButton: {
-    padding: spacing.sm,
+    padding: tokens.spacing.sm,
   },
   title: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens.typography.heading.fontSize,
     fontWeight: '700',
-    color: colors.text,
+    color: tokens?.colors?.text ?? '#000',
     fontFamily: 'Ubuntu_700Bold',
   },
   headerRight: {
@@ -228,47 +230,47 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: spacing.xl,
+    padding: tokens.spacing.xl,
   },
   accessDeniedTitle: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens.typography.heading.fontSize,
     fontWeight: '700',
-    color: '#FF3B30',
-    marginTop: spacing.md,
+    color: tokens?.colors?.danger ?? '#FF3B30',
+    marginTop: tokens.spacing.md,
     fontFamily: 'Ubuntu_700Bold',
   },
   accessDeniedText: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    fontSize: tokens.typography.body.fontSize,
+    color: tokens?.colors?.textSecondary ?? '#666',
     textAlign: 'center',
-    marginTop: spacing.sm,
+    marginTop: tokens.spacing.sm,
     fontFamily: 'Ubuntu_400Regular',
   },
   adminInfoCard: {
-    margin: spacing.lg,
+    margin: tokens.spacing.lg,
   },
   adminInfoTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens.typography.subheading.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens?.colors?.text ?? '#000',
     fontFamily: 'Ubuntu_600SemiBold',
   },
   adminInfoText: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    fontSize: tokens.typography.body.fontSize,
+    color: tokens?.colors?.textSecondary ?? '#666',
     fontFamily: 'Ubuntu_400Regular',
   },
   section: {
-    margin: spacing.lg,
+    margin: tokens.spacing.lg,
   },
   sectionTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens.typography.subheading.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens?.colors?.text ?? '#000',
     fontFamily: 'Ubuntu_600SemiBold',
   },
   buttonGrid: {
-    gap: spacing.md,
+    gap: tokens.spacing.md,
   },
   adminButton: {
     justifyContent: 'flex-start',

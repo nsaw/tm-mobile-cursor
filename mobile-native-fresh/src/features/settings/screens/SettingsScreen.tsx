@@ -26,6 +26,8 @@ import { useTheme } from '../../../theme/ThemeProvider';
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
   
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
@@ -167,11 +169,11 @@ export const SettingsScreen: React.FC = () => {
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color="#FFD700" />;
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens?.colors?.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
-      iconElement = <Ionicons name={icon as any} size={20} color={colors.primary} />;
+      iconElement = <Ionicons name={icon as any} size={20} color={tokens?.colors?.accent ?? '#000'} />;
     }
     return (
       <TouchableOpacity 
@@ -191,12 +193,12 @@ export const SettingsScreen: React.FC = () => {
             <Switch
               value={switchValue}
               onValueChange={onSwitchChange}
-              trackColor={{ false: colors.border, true: colors.primary }}
-              thumbColor={colors.background}
+              trackColor={{ false: tokens?.colors?.border ?? '#ccc', true: tokens?.colors?.accent ?? '#000' }}
+              thumbColor={tokens?.colors?.background ?? '#fff'}
             />
           )}
           {showArrow && !showSwitch && (
-            <Ionicons name="chevron-forward" size={16} color={colors.subtext} />
+            <Ionicons name="chevron-forward" size={16} color={tokens?.colors?.textSecondary ?? '#666'} />
           )}
         </View>
       </TouchableOpacity>
@@ -204,7 +206,7 @@ export const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1, backgroundColor: tokens?.colors?.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -213,7 +215,7 @@ export const SettingsScreen: React.FC = () => {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons name="arrow-back" size={24} color={colors.text} />
+              <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
           </View>
@@ -223,35 +225,34 @@ export const SettingsScreen: React.FC = () => {
         {/* Welcome Section */}
         <Card style={{ alignItems: 'center', padding: spacing.xl, marginBottom: spacing.lg }}>
           {(() => {
-            const { tokens } = useTheme();
             return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
-                  backgroundColor: `${tokens.colors.success}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: spacing.md,
+                  backgroundColor: `${tokens?.colors?.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
                 </View>
                 {/* Title */}
                 <Text style={{
-                  fontFamily: tokens.typography.fontFamily.heading,
+                  fontFamily: tokens?.typography?.fontFamily?.heading ?? 'Arial',
                   fontSize: 22,
                   fontWeight: '700',
-                  color: tokens.colors.text,
+                  color: tokens?.colors?.text ?? '#000',
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.sm,
+                  marginBottom: spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
-                  fontFamily: tokens.typography.fontFamily.body,
+                  fontFamily: tokens?.typography?.fontFamily?.body ?? 'Arial',
                   fontSize: 12,
-                  color: tokens.colors.textSecondary,
+                  color: tokens?.colors?.textSecondary ?? '#666',
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -260,14 +261,14 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens.colors.accent,
-                    paddingVertical: tokens.spacing.sm,
+                    backgroundColor: tokens?.colors?.accent ?? '#000',
+                    paddingVertical: spacing.sm,
                     borderRadius: 8,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
-                    fontFamily: tokens.typography.fontFamily.body,
+                    fontFamily: tokens?.typography?.fontFamily?.body ?? 'Arial',
                     fontWeight: '600',
                     color: '#fff',
                     textAlign: 'center',
@@ -517,10 +518,10 @@ export const SettingsScreen: React.FC = () => {
               onPress={() => navigation.navigate('AdminDashboard')}
             >
               <View style={styles.settingLeft}>
-                <Ionicons name="shield-outline" size={20} color={colors.primary} />
+                <Ionicons name="shield-outline" size={20} color={tokens?.colors?.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color={colors.subtext} />
+              <Ionicons name="chevron-forward" size={16} color={tokens?.colors?.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </View>
         )}
@@ -539,7 +540,7 @@ export const SettingsScreen: React.FC = () => {
               value={tempSiriPhrase}
               onChangeText={setTempSiriPhrase}
               placeholder="Enter your Siri phrase"
-              placeholderTextColor={colors.subtext}
+              placeholderTextColor={tokens?.colors?.textSecondary ?? '#666'}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity
@@ -564,7 +565,7 @@ export const SettingsScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,

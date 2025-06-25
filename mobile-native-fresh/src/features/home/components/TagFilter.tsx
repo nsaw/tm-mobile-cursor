@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { RFValue } from "react-native-responsive-fontsize";
 
 interface TagFilterProps {
@@ -25,16 +25,20 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   onTagPress,
   totalCount,
 }) => {
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
+  const colorArray = [
+    tokens?.colors?.accent ?? '#FFD500',
+    tokens?.colors?.success ?? '#4CAF50',
+    tokens?.colors?.brand ?? '#0057FF',
+    tokens?.colors?.danger ?? '#FF3B30',
+    tokens?.colors?.warning ?? '#FF9500',
+    tokens?.colors?.textSecondary ?? '#888',
+  ];
+
   const getTagColor = (tag: string) => {
-    const colors = [
-      '#C6D600', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57',
-      '#FF9FF3', '#54A0FF', '#5F27CD', '#00D2D3', '#FF9F43', '#10AC84',
-      '#EE5A6F', '#C44569', '#F8B500', '#6C5CE7', '#A55EEA', '#26DE81',
-      '#FC427B', '#FD79A8', '#FDCB6E', '#74B9FF', '#00B894', '#E84393',
-      '#00CEC9', '#E17055', '#81ECEC', '#FAB1A0'
-    ];
-    const index = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
-    return colors[index];
+    const index = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colorArray.length;
+    return colorArray[index];
   };
 
   const getTagCount = (tag: string) => {
@@ -55,7 +59,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Ionicons name="filter-outline" size={16} color={colors.subtext} />
+          <Ionicons name="filter-outline" size={16} color={tokens?.colors?.textSecondary ?? '#888'} />
           <Text style={styles.headerText}>tags</Text>
         </View>
         <TouchableOpacity style={styles.moreButton}>
@@ -111,15 +115,15 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
-    marginBottom: spacing.lg,
+    marginBottom: tokens?.spacing?.lg ?? 20,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: tokens?.spacing?.sm ?? 10,
   },
   headerLeft: {
     flexDirection: 'row',
@@ -127,38 +131,38 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 8,
-    color: colors.subtext,
-    marginLeft: spacing.sm,
+    color: tokens?.colors?.textSecondary ?? '#888',
+    marginLeft: tokens?.spacing?.sm ?? 10,
     textTransform: 'lowercase',
   },
   moreButton: {
-    paddingHorizontal: spacing.sm,
+    paddingHorizontal: tokens?.spacing?.sm ?? 10,
   },
   moreText: {
     fontSize: 8,
-    color: colors.subtext,
+    color: tokens?.colors?.textSecondary ?? '#888',
   },
   scrollContent: {
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: tokens?.spacing?.lg ?? 20,
   },
   tagChip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingHorizontal: tokens?.spacing?.md ?? 10,
+    paddingVertical: tokens?.spacing?.sm ?? 5,
     borderRadius: 8,
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: colors.border,
-    marginRight: spacing.sm,
+    borderColor: tokens?.colors?.border ?? '#888',
+    marginRight: tokens?.spacing?.sm ?? 10,
     minHeight: 32,
     justifyContent: 'center',
   },
   tagChipSelected: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    backgroundColor: tokens?.colors?.accent ?? '#FFD500',
+    borderColor: tokens?.colors?.accent ?? '#FFD500',
   },
   tagText: {
     fontSize: 10,
-    color: colors.subtext,
+    color: tokens?.colors?.textSecondary ?? '#888',
     textTransform: 'lowercase',
     fontWeight: '400',
   },

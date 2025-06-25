@@ -182,7 +182,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   if (loading || !thoughtmark) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={tokens.colors.accent} />
+        <ActivityIndicator size="large" color={tokens?.colors?.accent ?? '#FFD500'} />
         <Text style={styles.loadingText}>Loading thoughtmark...</Text>
       </View>
     );
@@ -197,7 +197,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color={tokens.text} />
+            <Ionicons name="arrow-back" size={24} color={tokens?.text ?? '#F5F5F7'} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         </View>
@@ -211,7 +211,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
-              color={thoughtmark.isPinned ? tokens.primary : tokens.subtext} 
+              color={thoughtmark.isPinned ? tokens?.accent ?? '#FFD500' : tokens?.textSecondary ?? '#6B7280'} 
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -220,7 +220,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Edit thoughtmark"
           >
-            <Ionicons name="create-outline" size={20} color={tokens.subtext} />
+            <Ionicons name="create-outline" size={20} color={tokens?.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
@@ -228,7 +228,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Delete thoughtmark"
           >
-            <Ionicons name="trash-outline" size={20} color={tokens.primary} />
+            <Ionicons name="trash-outline" size={20} color={tokens?.accent ?? '#FFD500'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -248,7 +248,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
-                  color={thoughtmark.isCompleted ? tokens.primary : tokens.subtext} 
+                  color={thoughtmark.isCompleted ? tokens?.accent ?? '#FFD500' : tokens?.textSecondary ?? '#6B7280'} 
                 />
                 <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
                   {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
@@ -271,7 +271,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="sparkles" size={16} color={tokens.primary} />
+                  <Ionicons name="sparkles" size={16} color={tokens?.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Insights</Text>
                 </View>
                 <TouchableOpacity
@@ -281,9 +281,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI insights"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={tokens.primary} />
+                    <ActivityIndicator size="small" color={tokens?.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens.primary} />
+                    <Ionicons name="refresh" size={16} color={tokens?.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -322,7 +322,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="bulb-outline" size={16} color={tokens.primary} />
+                  <Ionicons name="bulb-outline" size={16} color={tokens?.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Suggestions</Text>
                 </View>
                 <TouchableOpacity
@@ -332,9 +332,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI suggestions"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={tokens.primary} />
+                    <ActivityIndicator size="small" color={tokens?.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens.primary} />
+                    <Ionicons name="refresh" size={16} color={tokens?.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -376,20 +376,20 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <Card style={styles.metadataCard}>
           <CardContent>
             <View style={styles.metadataItem}>
-              <Ionicons name="folder-outline" size={16} color={tokens.subtext} />
+              <Ionicons name="folder-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataLabel}>Bin:</Text>
               <Text style={styles.metadataValue}>{getBinName(thoughtmark.binId)}</Text>
             </View>
             
             <View style={styles.metadataItem}>
-              <Ionicons name="time-outline" size={16} color={tokens.subtext} />
+              <Ionicons name="time-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataLabel}>Created:</Text>
               <Text style={styles.metadataValue}>{formatDate(thoughtmark.createdAt)}</Text>
             </View>
             
             {thoughtmark.updatedAt !== thoughtmark.createdAt && (
               <View style={styles.metadataItem}>
-                <Ionicons name="refresh-outline" size={16} color={tokens.subtext} />
+                <Ionicons name="refresh-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataLabel}>Updated:</Text>
                 <Text style={styles.metadataValue}>{formatDate(thoughtmark.updatedAt)}</Text>
               </View>
@@ -397,7 +397,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             
             {thoughtmark.dueDate && (
               <View style={styles.metadataItem}>
-                <Ionicons name="calendar-outline" size={16} color={tokens.subtext} />
+                <Ionicons name="calendar-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataLabel}>Due:</Text>
                 <Text style={styles.metadataValue}>{formatDate(thoughtmark.dueDate)}</Text>
               </View>
@@ -457,7 +457,7 @@ const getInsightTypeColor = (type: string) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.background,
+    backgroundColor: tokens?.background ?? '#0D0D0F',
   },
   loadingContainer: {
     flex: 1,
@@ -465,212 +465,212 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    marginTop: spacing.md,
-    fontSize: typography.body.fontSize,
-    color: tokens.subtext,
+    marginTop: tokens?.spacing.md,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.textSecondary ?? '#6B7280',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xl,
-    paddingBottom: spacing.md,
+    paddingHorizontal: tokens?.spacing.lg,
+    paddingTop: tokens?.spacing.xl,
+    paddingBottom: tokens?.spacing.md,
   },
   headerContent: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   backButton: {
-    marginRight: spacing.md,
+    marginRight: tokens?.spacing.md,
   },
   headerTitle: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens?.typography.heading.fontSize,
     fontWeight: '700',
-    color: tokens.text,
+    color: tokens?.text ?? '#F5F5F7',
   },
   headerActions: {
     flexDirection: 'row',
-    gap: spacing.sm,
+    gap: tokens?.spacing.sm,
   },
   actionButton: {
-    padding: spacing.sm,
+    padding: tokens?.spacing.sm,
   },
   content: {
     flex: 1,
   },
   contentContainer: {
-    padding: spacing.lg,
-    paddingBottom: spacing.xl,
+    padding: tokens?.spacing.lg,
+    paddingBottom: tokens?.spacing.xl,
   },
   titleCard: {
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   title: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens?.typography.heading.fontSize,
     fontWeight: '700',
-    color: tokens.text,
-    marginBottom: spacing.md,
+    color: tokens?.text ?? '#F5F5F7',
+    marginBottom: tokens?.spacing.md,
   },
   taskStatus: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: spacing.sm,
+    paddingVertical: tokens?.spacing.sm,
   },
   taskCompleted: {
     opacity: 0.7,
   },
   taskStatusText: {
-    marginLeft: spacing.sm,
-    fontSize: typography.body.fontSize,
-    color: tokens.subtext,
+    marginLeft: tokens?.spacing.sm,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.textSecondary ?? '#6B7280',
   },
   taskCompletedText: {
-    color: tokens.primary,
+    color: tokens?.accent ?? '#FFD500',
     textDecorationLine: 'line-through',
   },
   contentCard: {
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   contentText: {
-    fontSize: typography.body.fontSize,
-    color: tokens.text,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.text ?? '#F5F5F7',
     lineHeight: 24,
   },
   aiCard: {
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   aiHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   aiTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   aiTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens?.typography.subheading.fontSize,
     fontWeight: '600',
-    color: tokens.text,
-    marginLeft: spacing.sm,
+    color: tokens?.text ?? '#F5F5F7',
+    marginLeft: tokens?.spacing.sm,
   },
   aiEmptyText: {
-    fontSize: typography.body.fontSize,
-    color: tokens.subtext,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.textSecondary ?? '#6B7280',
     fontStyle: 'italic',
     textAlign: 'center',
   },
   insightsContainer: {
-    gap: spacing.md,
+    gap: tokens?.spacing.md,
   },
   insightItem: {
-    padding: spacing.md,
+    padding: tokens?.spacing.md,
     backgroundColor: 'rgba(59, 130, 246, 0.05)',
-    borderRadius: spacing.sm,
+    borderRadius: tokens?.spacing.sm,
   },
   insightHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: tokens?.spacing.sm,
   },
   insightType: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.xs,
+    paddingHorizontal: tokens?.spacing.sm,
+    paddingVertical: tokens?.spacing.xs,
+    borderRadius: tokens?.spacing.xs,
   },
   insightTypeText: {
     fontSize: 10,
-    color: tokens.background,
+    color: tokens?.background ?? '#0D0D0F',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   actionableBadge: {
     backgroundColor: '#10B981',
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.xs,
+    paddingHorizontal: tokens?.spacing.sm,
+    paddingVertical: tokens?.spacing.xs,
+    borderRadius: tokens?.spacing.xs,
   },
   actionableText: {
     fontSize: 10,
-    color: tokens.background,
+    color: tokens?.background ?? '#0D0D0F',
     fontWeight: '600',
   },
   insightTitle: {
-    fontSize: typography.body.fontSize,
+    fontSize: tokens?.typography.body.fontSize,
     fontWeight: '600',
-    color: tokens.text,
-    marginBottom: spacing.xs,
+    color: tokens?.text ?? '#F5F5F7',
+    marginBottom: tokens?.spacing.xs,
   },
   insightDescription: {
-    fontSize: typography.body.fontSize,
-    color: tokens.subtext,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.textSecondary ?? '#6B7280',
   },
   suggestionsContainer: {
-    gap: spacing.md,
+    gap: tokens?.spacing.md,
   },
   suggestionSection: {
-    gap: spacing.sm,
+    gap: tokens?.spacing.sm,
   },
   suggestionLabel: {
-    fontSize: typography.body.fontSize,
+    fontSize: tokens?.typography.body.fontSize,
     fontWeight: '600',
-    color: tokens.text,
+    color: tokens?.text ?? '#F5F5F7',
   },
   suggestedTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: tokens?.spacing.sm,
   },
   contentSuggestion: {
-    padding: spacing.sm,
+    padding: tokens?.spacing.sm,
     backgroundColor: 'rgba(59, 130, 246, 0.05)',
-    borderRadius: spacing.sm,
+    borderRadius: tokens?.spacing.sm,
   },
   contentSuggestionText: {
-    fontSize: typography.body.fontSize,
-    color: tokens.text,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.text ?? '#F5F5F7',
   },
   metadataCard: {
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   metadataItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: tokens?.spacing.sm,
   },
   metadataLabel: {
-    fontSize: typography.body.fontSize,
+    fontSize: tokens?.typography.body.fontSize,
     fontWeight: '600',
-    color: tokens.text,
-    marginLeft: spacing.sm,
-    marginRight: spacing.sm,
+    color: tokens?.text ?? '#F5F5F7',
+    marginLeft: tokens?.spacing.sm,
+    marginRight: tokens?.spacing.sm,
     minWidth: 80,
   },
   metadataValue: {
-    fontSize: typography.body.fontSize,
-    color: tokens.subtext,
+    fontSize: tokens?.typography.body.fontSize,
+    color: tokens?.textSecondary ?? '#6B7280',
     flex: 1,
   },
   tagsCard: {
-    marginBottom: spacing.md,
+    marginBottom: tokens?.spacing.md,
   },
   sectionTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens?.typography.subheading.fontSize,
     fontWeight: '600',
-    color: tokens.text,
-    marginBottom: spacing.md,
+    color: tokens?.text ?? '#F5F5F7',
+    marginBottom: tokens?.spacing.md,
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: tokens?.spacing.sm,
   },
   actionsContainer: {
     flexDirection: 'row',
-    gap: spacing.md,
-    marginTop: spacing.lg,
+    gap: tokens?.spacing.md,
+    marginTop: tokens?.spacing.lg,
   },
 }); 

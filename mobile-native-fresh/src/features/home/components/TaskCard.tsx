@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkWithBin } from '../../../types';
 
 interface TaskCardProps {
@@ -23,6 +23,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   onToggle,
   style,
 }) => {
+  const { tokens } = useTheme();
+  const styles = getStyles(tokens);
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
   
   const formatDueDate = (dateString: string) => {
@@ -38,8 +40,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   return (
     <TouchableOpacity
       style={[
-        styles.container,
-        isOverdue && styles.overdueContainer,
+        { backgroundColor: tokens?.colors?.surface ?? '#fff' },
+        { borderRadius: 11, padding: tokens?.spacing?.sm * 1.34, borderWidth: 1, borderColor: tokens?.colors?.border ?? '#000' },
+        isOverdue && { backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.3)' },
         style,
       ]}
       onPress={onPress}
@@ -48,8 +51,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       <View style={styles.content}>
         <TouchableOpacity
           style={[
-            styles.checkbox,
-            task.isCompleted && styles.checkboxCompleted,
+            { width: 43, height: 43, borderRadius: 21, borderWidth: 3, borderColor: tokens?.colors?.border ?? '#000', justifyContent: 'center', alignItems: 'center', marginRight: tokens?.spacing?.md * 1.34 },
+            { backgroundColor: task.isCompleted ? tokens?.colors?.accent : tokens?.colors?.textSecondary },
           ]}
           onPress={(e) => {
             e.stopPropagation();
@@ -59,7 +62,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <Ionicons
             name={task.isCompleted ? 'checkmark' : 'ellipse-outline'}
             size={21}
-            color={task.isCompleted ? colors.primary : colors.subtext}
+            color={task.isCompleted ? tokens?.colors?.accent : tokens?.colors?.textSecondary}
           />
         </TouchableOpacity>
         
@@ -67,9 +70,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <View style={styles.titleRow}>
             <Text
               style={[
-                styles.title,
-                task.isCompleted && styles.titleCompleted,
-                isOverdue && styles.overdueTitle,
+                { fontSize: 16, fontWeight: '600', color: tokens?.colors?.text, marginBottom: 5, fontFamily: 'Ubuntu_600SemiBold', textTransform: 'capitalize' },
+                task.isCompleted && { textDecorationLine: 'line-through', color: tokens?.colors?.textSecondary, fontFamily: 'Ubuntu_500Medium' },
+                isOverdue && { color: '#FCA5A5', fontFamily: 'Ubuntu_500Medium' },
               ]}
               numberOfLines={1}
             >
@@ -79,8 +82,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {task.dueDate && (
               <Text
                 style={[
-                  styles.dueDate,
-                  isOverdue && styles.overdueDate,
+                  { fontSize: 11, color: tokens?.colors?.accent, fontFamily: 'Ubuntu_400Regular', marginLeft: 11, textAlign: 'right', minWidth: 86 },
+                  isOverdue && { color: '#FCA5A5', fontFamily: 'Ubuntu_400Regular' },
                 ]}
               >
                 {formatDueDate(task.dueDate)}
@@ -93,13 +96,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
-    backgroundColor: colors.card,
+    backgroundColor: tokens?.colors?.surface ?? '#fff',
     borderRadius: 11,
-    padding: spacing.sm * 1.34,
+    padding: tokens?.spacing?.sm * 1.34,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: tokens?.colors?.border ?? '#000',
   },
   overdueContainer: {
     backgroundColor: 'rgba(239, 68, 68, 0.1)',
@@ -114,14 +117,14 @@ const styles = StyleSheet.create({
     height: 43,
     borderRadius: 21,
     borderWidth: 3,
-    borderColor: colors.border,
+    borderColor: tokens?.colors?.border ?? '#000',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: spacing.md * 1.34,
+    marginRight: tokens?.spacing?.md * 1.34,
   },
   checkboxCompleted: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    backgroundColor: tokens?.colors?.accent,
+    borderColor: tokens?.colors?.accent,
   },
   textContainer: {
     flex: 1,
@@ -129,14 +132,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens?.colors?.text,
     marginBottom: 5,
     fontFamily: 'Ubuntu_600SemiBold',
     textTransform: 'capitalize',
   },
   titleCompleted: {
     textDecorationLine: 'line-through',
-    color: colors.subtext,
+    color: tokens?.colors?.textSecondary,
     fontFamily: 'Ubuntu_500Medium',
   },
   overdueTitle: {
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
   },
   dueDate: {
     fontSize: 11,
-    color: colors.primary,
+    color: tokens?.colors?.accent,
     fontFamily: 'Ubuntu_400Regular',
     marginLeft: 11,
     textAlign: 'right',
