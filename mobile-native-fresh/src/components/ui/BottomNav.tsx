@@ -45,14 +45,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
   const renderIcon = (item: any, isActive: boolean, isHome: boolean, isVoice: boolean) => {
     const iconColor = isHome
-      ? designTokens.colors.accent // Always blue for Home
+      ? tokens.colors.accent // Always blue for Home
       : isActive
-      ? designTokens.colors.accent // Blue active tint for other active items
+      ? tokens.colors.accent // Blue active tint for other active items
       : isVoice
-      ? designTokens.colors.danger // Red tint for Voice
+      ? tokens.colors.danger // Red tint for Voice
       : item.action === 'ai-tools'
       ? '#FFD700' // Gold tint for AI
-      : designTokens.colors.textMuted; // Light gray for inactive
+      : tokens.colors.textMuted; // Light gray for inactive
 
     if (item.iconType === 'lucide') {
       return (
@@ -82,13 +82,13 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       maxWidth: 440,
       alignSelf: 'center',
       width: '100%',
-      zIndex: designTokens.zIndex.modal,
+      zIndex: tokens.zIndex.modal,
       paddingBottom: 0,
     }}>
       <View style={{
-        backgroundColor: designTokens.colors.backgroundSecondary,
+        backgroundColor: tokens.colors.backgroundSecondary,
         borderTopWidth: 1,
-        borderTopColor: designTokens.colors.divider,
+        borderTopColor: tokens.colors.divider,
         // Cross-platform shadow
         ...Platform.select({
           ios: {
@@ -109,8 +109,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
-          paddingVertical: designTokens.spacing.md,
-          paddingHorizontal: designTokens.spacing.lg,
+          paddingVertical: tokens.spacing.md,
+          paddingHorizontal: tokens.spacing.lg,
           minHeight: 107,
         }}>
           {navItems.map((item, index) => {
@@ -125,9 +125,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 style={{
                   alignItems: 'center',
                   justifyContent: 'center',
-                  paddingVertical: designTokens.spacing.sm,
-                  paddingHorizontal: designTokens.spacing.sm,
-                  borderRadius: designTokens.radius.sm,
+                  paddingVertical: tokens.spacing.sm,
+                  paddingHorizontal: tokens.spacing.sm,
+                  borderRadius: tokens.radius.sm,
                   backgroundColor: 'transparent',
                   minHeight: 59,
                   minWidth: 59,
@@ -153,10 +153,10 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     left: -2,
                     right: -2,
                     bottom: -2,
-                    borderRadius: designTokens.radius.md,
-                    backgroundColor: `${designTokens.colors.accent}1A`,
+                    borderRadius: tokens.radius.md,
+                    backgroundColor: `${tokens.colors.accent}1A`,
                     borderWidth: 1,
-                    borderColor: `${designTokens.colors.accent}4D`,
+                    borderColor: `${tokens.colors.accent}4D`,
                   }} />
                 )}
               </TouchableOpacity>
@@ -171,7 +171,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           position: 'absolute',
           left: '50%',
           transform: [{ translateX: -43 }],
-          zIndex: designTokens.zIndex.tooltip,
+          zIndex: tokens.zIndex.tooltip,
           alignItems: 'center',
           justifyContent: 'center',
           bottom: (insets.bottom + 40) * 1.34,
@@ -181,15 +181,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             height: 83,
             borderRadius: 56,
             padding: 4,
-            backgroundColor: `${designTokens.colors.accent}E6`,
+            backgroundColor: `${tokens.colors.accent}E6`,
             borderWidth: 4,
-            borderColor: `${designTokens.colors.accent}E6`,
+            borderColor: `${tokens.colors.accent}E6`,
             alignItems: 'center',
             justifyContent: 'center',
             // Cross-platform shadow
             ...Platform.select({
               ios: {
-                shadowColor: designTokens.colors.accent,
+                shadowColor: tokens.colors.accent,
                 shadowOffset: {
                   width: 0,
                   height: 0,
@@ -206,8 +206,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               style={{
                 width: 78,
                 height: 78,
-                borderRadius: designTokens.radius.lg,
-                backgroundColor: designTokens.colors.background,
+                borderRadius: tokens.radius.lg,
+                backgroundColor: tokens.colors.background,
                 alignItems: 'center',
                 justifyContent: 'center',
                 // Cross-platform shadow
@@ -236,7 +236,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               accessibilityRole="button"
               accessibilityLabel="Create new thoughtmark"
             >
-              <MaterialCommunityIcons name="plus" size={47} color={designTokens.colors.accent} />
+              <MaterialCommunityIcons name="plus" size={47} color={tokens.colors.accent} />
             </TouchableOpacity>
           </View>
         </View>

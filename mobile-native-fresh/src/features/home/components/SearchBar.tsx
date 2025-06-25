@@ -11,78 +11,87 @@ import { useTheme } from '../../../theme/ThemeProvider';
 interface SearchBarProps {
   onSearch: (query: string) => void;
   placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
-  placeholder = 'Search thoughtmarks...',
+  placeholder = 'Search...',
+  value,
+  onChangeText,
 }) => {
-  const [query, setQuery] = useState('');
   const { tokens } = useTheme();
+  const [searchQuery, setSearchQuery] = useState(value || '');
 
-  const handleSearch = () => {
-    onSearch(query);
+  const styles = StyleSheet.create({
+    container: {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+    },
+    searchContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.radius.md,
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+    },
+    searchIcon: {
+      marginRight: tokens.spacing.sm,
+    },
+    searchInput: {
+      flex: 1,
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.text,
+      paddingVertical: tokens.spacing.xs,
+    },
+    clearButton: {
+      padding: tokens.spacing.xs,
+    },
+  });
+
+  const handleSearch = (text: string) => {
+    setSearchQuery(text);
+    if (onChangeText) {
+      onChangeText(text);
+    }
+    onSearch(text);
   };
 
   const handleClear = () => {
-    setQuery('');
+    setSearchQuery('');
+    if (onChangeText) {
+      onChangeText('');
+    }
     onSearch('');
   };
 
   return (
-    <View style={[styles.container, { paddingHorizontal: designTokens.spacing.lg, paddingVertical: designTokens.spacing.md }]}>
-      <View style={[styles.searchContainer, {
-        backgroundColor: designTokens.colors.surface,
-        borderRadius: designTokens.radius.md,
-        paddingHorizontal: designTokens.spacing.md,
-        paddingVertical: designTokens.spacing.sm,
-      }]}>
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
         <Ionicons 
-          name="search-outline" 
+          name="search" 
           size={20} 
-          color={designTokens.colors.textMuted} 
-          style={[styles.searchIcon, { marginRight: designTokens.spacing.sm }]} 
+          color={tokens.colors.textMuted}
+          style={styles.searchIcon}
         />
         <TextInput
-          style={[styles.input, {
-            fontSize: designTokens.typography.fontSize.body,
-            color: designTokens.colors.text,
-            paddingVertical: designTokens.spacing.xs,
-          }]}
+          style={styles.searchInput}
           placeholder={placeholder}
-          placeholderTextColor={designTokens.colors.textMuted}
-          value={query}
-          onChangeText={setQuery}
-          onSubmitEditing={handleSearch}
+          placeholderTextColor={tokens.colors.textMuted}
+          value={searchQuery}
+          onChangeText={handleSearch}
           returnKeyType="search"
+          autoCapitalize="none"
+          autoCorrect={false}
         />
-        {query.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={[styles.clearButton, { padding: designTokens.spacing.xs }]}>
-            <Ionicons name="close-circle" size={20} color={designTokens.colors.textMuted} />
+        {searchQuery.length > 0 && (
+          <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
+            <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
           </TouchableOpacity>
         )}
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    // Styles moved to inline for token access
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // Styles moved to inline for token access
-  },
-  searchIcon: {
-    // Styles moved to inline for token access
-  },
-  input: {
-    flex: 1,
-    // Styles moved to inline for token access
-  },
-  clearButton: {
-    // Styles moved to inline for token access
-  },
-});

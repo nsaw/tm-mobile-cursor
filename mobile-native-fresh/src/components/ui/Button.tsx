@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, Text, ViewStyle, TextStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { buttonVariants, mergeVariantStyles } from '../../theme/variants';
+import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';
@@ -31,6 +31,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const [isPressed, setIsPressed] = useState(false);
 
   // Get variant styles
+  const buttonVariants = getButtonVariants(tokens);
   const baseStyle = buttonVariants.base;
   const variantStyle = buttonVariants.variants.variant[variant];
   const sizeStyle = buttonVariants.variants.size[size];
@@ -47,7 +48,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     ...buttonStyle,
     opacity: disabled ? 0.5 : 1,
     backgroundColor: variant === 'primary' && isPressed 
-      ? `${designTokens.colors.accent}CC`
+      ? `${tokens.colors.accent}CC`
       : buttonStyle.backgroundColor,
     // Only allow margin and padding overrides
     ...(margin !== undefined ? { margin } : {}),
@@ -71,19 +72,19 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const getTextColor = () => {
     switch (variant) {
       case 'primary':
-        return designTokens.colors.accent; // Blue text for outline style
+        return tokens.colors.accent;
       case 'secondary':
-        return designTokens.colors.text;
+        return tokens.colors.text;
       case 'outline':
-        return designTokens.colors.text;
+        return tokens.colors.text;
       case 'ghost':
-        return designTokens.colors.text;
+        return tokens.colors.text;
       case 'destructive':
-        return designTokens.colors.danger;
+        return tokens.colors.danger;
       case 'brand':
-        return designTokens.colors.brand;
+        return tokens.colors.brand;
       default:
-        return designTokens.colors.text;
+        return tokens.colors.text;
     }
   };
 
@@ -97,12 +98,12 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       android_ripple={{
-        color: designTokens.colors.surfaceHover,
+        color: tokens.colors.surfaceHover,
         borderless: false,
       }}
     >
       {leftIcon && (
-        <Text style={{ marginRight: designTokens.spacing.sm, color: textColor }}>
+        <Text style={{ marginRight: tokens.spacing.sm, color: textColor }}>
           {leftIcon}
         </Text>
       )}
@@ -112,8 +113,8 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
           style={[
             {
               color: textColor,
-              fontSize: designTokens.typography.fontSize.lg,
-              fontWeight: designTokens.typography.fontWeight.medium,
+              fontSize: tokens.typography.fontSize.lg,
+              fontWeight: tokens.typography.fontWeight.medium,
               textAlign: 'center',
             },
             textStyle,
@@ -126,7 +127,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       )}
       
       {rightIcon && (
-        <Text style={{ marginLeft: designTokens.spacing.sm, color: textColor }}>
+        <Text style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
           {rightIcon}
         </Text>
       )}

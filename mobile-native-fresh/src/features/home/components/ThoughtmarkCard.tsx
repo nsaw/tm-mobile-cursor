@@ -56,14 +56,14 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
   return (
     <TouchableOpacity 
       onPress={handlePress} 
-      style={{ marginRight: designTokens.spacing.xs, padding: 2 }}
+      style={{ marginRight: tokens.spacing.xs, padding: 2 }}
       activeOpacity={0.7}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <FontAwesome
           name="thumb-tack"
           size={20}
-          color={pinned ? `${designTokens.colors.accent}99` : `${designTokens.colors.text}4D`}
+          color={pinned ? `${tokens.colors.accent}99` : `${tokens.colors.text}4D`}
         />
       </Animated.View>
     </TouchableOpacity>
@@ -194,12 +194,12 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         style={[
           {
             backgroundColor: selected 
-              ? `${designTokens.colors.accent}33` 
-              : designTokens.colors.backgroundSecondary,
-            borderRadius: designTokens.radius.sm,
-            padding: designTokens.spacing.sm,
+              ? `${tokens.colors.accent}33` 
+              : tokens.colors.backgroundSecondary,
+            borderRadius: tokens.radius.sm,
+            padding: tokens.spacing.sm,
             borderWidth: 1,
-            borderColor: designTokens.colors.border,
+            borderColor: tokens.colors.border,
             position: 'relative',
           },
           style,
@@ -209,7 +209,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onPressOut={handlePressOut}
         activeOpacity={0.7}
       >
-        <View style={{ marginTop: designTokens.spacing.xs, marginLeft: 0 }}>
+        <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
           {/* Header */}
           <View style={{
             flexDirection: 'row',
@@ -221,18 +221,18 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             <View style={{
               flexDirection: 'row',
               alignItems: 'center',
-              marginRight: designTokens.spacing.sm,
+              marginRight: tokens.spacing.sm,
             }}>
               <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
               {selected && (
                 <TouchableOpacity
-                  style={{ marginRight: designTokens.spacing.xs }}
+                  style={{ marginRight: tokens.spacing.xs }}
                   onPress={() => onSelectionToggle?.()}
                 >
                   <Ionicons
                     name={selected ? 'checkbox' : 'square-outline'}
                     size={16}
-                    color={designTokens.colors.accent}
+                    color={tokens.colors.accent}
                   />
                 </TouchableOpacity>
               )}
@@ -242,7 +242,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             <View style={{
               flex: 1,
               justifyContent: 'center',
-              marginRight: designTokens.spacing.sm,
+              marginRight: tokens.spacing.sm,
             }}>
               <Text 
                 variant="subheading" 
@@ -266,17 +266,17 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             }}>
               {similarity !== undefined && (
                 <View style={{
-                  backgroundColor: `${designTokens.colors.brand}33`,
-                  paddingHorizontal: designTokens.spacing.sm,
-                  paddingVertical: designTokens.spacing.xs,
-                  borderRadius: designTokens.radius.md,
-                  marginRight: designTokens.spacing.sm,
+                  backgroundColor: `${tokens.colors.brand}33`,
+                  paddingHorizontal: tokens.spacing.sm,
+                  paddingVertical: tokens.spacing.xs,
+                  borderRadius: tokens.radius.md,
+                  marginRight: tokens.spacing.sm,
                 }}>
                   <Text 
                     variant="caption" 
                     size="xs"
                     style={{ 
-                      color: designTokens.colors.brand,
+                      color: tokens.colors.brand,
                       fontWeight: '600',
                     }}
                   >
@@ -294,13 +294,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                 {formatDate(thoughtmark.createdAt)}
               </Text>
               <TouchableOpacity
-                style={{ padding: designTokens.spacing.xs }}
+                style={{ padding: tokens.spacing.xs }}
                 onPress={() => setShowContextMenu(true)}
               >
                 <Ionicons
                   name="ellipsis-vertical"
                   size={16}
-                  color={designTokens.colors.textMuted}
+                  color={tokens.colors.textMuted}
                 />
               </TouchableOpacity>
             </View>
@@ -328,11 +328,11 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             <ScrollView 
               horizontal 
               showsHorizontalScrollIndicator={false}
-              style={{ flex: 1, marginRight: designTokens.spacing.sm }}
+              style={{ flex: 1, marginRight: tokens.spacing.sm }}
               contentContainerStyle={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                paddingRight: designTokens.spacing.sm,
+                paddingRight: tokens.spacing.sm,
               }}
             >
               {(thoughtmark.tags || []).map((tag: string) => (

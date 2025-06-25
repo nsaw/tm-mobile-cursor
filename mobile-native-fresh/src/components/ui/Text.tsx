@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text as RNText, TextStyle } from 'react-native';
+import { Text as RNText, TextStyle, TextProps as RNTextProps } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { textVariants, mergeVariantStyles } from '../../theme/variants';
+import { getTextVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface TextProps {
   variant?: 'body' | 'heading' | 'heading2' | 'subheading' | 'caption' | 'label';
@@ -29,6 +29,7 @@ export const Text: React.FC<TextProps> = ({
   const { tokens } = useTheme();
 
   // Get variant styles
+  const textVariants = getTextVariants(tokens);
   const baseStyle = textVariants.base;
   const variantStyle = textVariants.variants.variant[variant];
   const sizeStyle = size ? textVariants.variants.size[size] : {};
@@ -43,7 +44,7 @@ export const Text: React.FC<TextProps> = ({
   const finalTextStyle = {
     ...textStyle,
     color: color || textStyle.color,
-    fontWeight: weight ? designTokens.typography.fontWeight[weight] : textStyle.fontWeight,
+    fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
     textAlign: align,
     ...style,
   };

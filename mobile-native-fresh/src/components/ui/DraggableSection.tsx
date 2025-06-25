@@ -194,14 +194,14 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               delayLongPress={500}
             >
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={designTokens.colors.textSecondary} style={styles.chevronIcon} />
-                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: designTokens.colors.text }]}>
+                <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
+                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.text }]}>
                   {title}
                 </Animated.Text>
               </View>
               
               <View style={styles.headerRight}>
-                <Ionicons name="menu-outline" size={16} color={designTokens.colors.textSecondary} style={styles.dragHandle} />
+                <Ionicons name="menu-outline" size={16} color={tokens.colors.textSecondary} style={styles.dragHandle} />
               </View>
             </TouchableOpacity>
 

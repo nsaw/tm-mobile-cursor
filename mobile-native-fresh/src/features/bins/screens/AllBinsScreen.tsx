@@ -6,6 +6,7 @@ import {
   FlatList,
   RefreshControl,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/ui/Text';
@@ -21,9 +22,10 @@ import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigation/types';
-import { designTokens } from '../../../theme/tokens';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
+
+type SortType = 'name' | 'created' | 'updated';
 
 export const AllBinsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -33,7 +35,7 @@ export const AllBinsScreen: React.FC = () => {
   const { thoughtmarks } = useThoughtmarks();
   
   const [refreshing, setRefreshing] = useState(false);
-  const [sortBy, setSortBy] = useState<'name' | 'count' | 'date'>('name');
+  const [sortBy, setSortBy] = useState<SortType>('name');
 
   const { showVoiceRecorder } = useVoiceRecorder();
 
@@ -111,19 +113,19 @@ export const AllBinsScreen: React.FC = () => {
   const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) => (
     <TouchableOpacity
       style={{
-        paddingHorizontal: designTokens.spacing.md,
-        paddingVertical: designTokens.spacing.sm,
-        borderRadius: designTokens.radius.sm,
-        backgroundColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.backgroundSecondary,
+        paddingHorizontal: tokens.spacing.md,
+        paddingVertical: tokens.spacing.sm,
+        borderRadius: tokens.radius.sm,
+        backgroundColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.backgroundSecondary,
         borderWidth: 1,
-        borderColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.border,
+        borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() => setSortBy(sortType)}
+      onPress={() => setSortBy(sortType as SortType)}
     >
       <Text 
         variant="body" 
         style={{
-          color: sortBy === sortType ? designTokens.colors.background : designTokens.colors.text,
+          color: sortBy === sortType ? tokens.colors.background : tokens.colors.text,
           fontWeight: '500',
         }}
       >
@@ -134,10 +136,10 @@ export const AllBinsScreen: React.FC = () => {
 
   const renderBinStats = () => (
     <View style={{
-      paddingHorizontal: designTokens.spacing.lg,
-      marginBottom: designTokens.spacing.md,
+      paddingHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
     }}>
-      <Card style={{ padding: designTokens.spacing.lg }}>
+      <Card style={{ padding: tokens.spacing.lg }}>
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -150,8 +152,8 @@ export const AllBinsScreen: React.FC = () => {
               variant="heading" 
               size="xl"
               style={{
-                color: designTokens.colors.accent,
-                marginBottom: designTokens.spacing.xs,
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
               }}
             >
               {bins.length}
@@ -165,8 +167,8 @@ export const AllBinsScreen: React.FC = () => {
           </View>
           <View style={{
             width: 1,
-            backgroundColor: designTokens.colors.border,
-            marginHorizontal: designTokens.spacing.md,
+            backgroundColor: tokens.colors.border,
+            marginHorizontal: tokens.spacing.md,
           }} />
           <View style={{
             alignItems: 'center',
@@ -176,8 +178,8 @@ export const AllBinsScreen: React.FC = () => {
               variant="heading" 
               size="xl"
               style={{
-                color: designTokens.colors.accent,
-                marginBottom: designTokens.spacing.xs,
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
               }}
             >
               {thoughtmarks.length}
@@ -191,8 +193,8 @@ export const AllBinsScreen: React.FC = () => {
           </View>
           <View style={{
             width: 1,
-            backgroundColor: designTokens.colors.border,
-            marginHorizontal: designTokens.spacing.md,
+            backgroundColor: tokens.colors.border,
+            marginHorizontal: tokens.spacing.md,
           }} />
           <View style={{
             alignItems: 'center',
@@ -202,8 +204,8 @@ export const AllBinsScreen: React.FC = () => {
               variant="heading" 
               size="xl"
               style={{
-                color: designTokens.colors.accent,
-                marginBottom: designTokens.spacing.xs,
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
               }}
             >
               {bins.length > 0 ? Math.round(thoughtmarks.length / bins.length) : 0}
@@ -220,30 +222,135 @@ export const AllBinsScreen: React.FC = () => {
     </View>
   );
 
+  const styles = StyleSheet.create({
+    sortButton: {
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+      borderRadius: tokens.radius.sm,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      marginRight: tokens.spacing.sm,
+    },
+    sortButtonActive: {
+      backgroundColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent,
+    },
+    sortButtonText: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.text,
+    },
+    sortButtonTextActive: {
+      color: tokens.colors.background,
+    },
+    sortContainer: {
+      paddingHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
+    },
+    binCard: {
+      padding: tokens.spacing.lg,
+    },
+    binIcon: {
+      color: tokens.colors.accent,
+      marginBottom: tokens.spacing.xs,
+    },
+    binDivider: {
+      height: 1,
+      backgroundColor: tokens.colors.border,
+      marginHorizontal: tokens.spacing.md,
+    },
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background,
+    },
+    header: {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingBottom: tokens.spacing.md,
+    },
+    headerTitle: {
+      fontSize: tokens.typography.fontSize.xl,
+      fontWeight: tokens.typography.fontWeight.bold,
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+    },
+    headerSubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: tokens.spacing.lg,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.lg,
+    },
+    emptyIcon: {
+      marginBottom: tokens.spacing.md,
+    },
+    emptyTitle: {
+      fontSize: tokens.typography.fontSize.xl,
+      fontWeight: tokens.typography.fontWeight.bold,
+      color: tokens.colors.text,
+      marginTop: tokens.spacing.md,
+      marginBottom: tokens.spacing.sm,
+      textAlign: 'center',
+    },
+    emptySubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    createButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: tokens.colors.accent,
+      paddingVertical: tokens.spacing.lg,
+      borderRadius: tokens.radius.md,
+      marginBottom: tokens.spacing.xl,
+    },
+    createButtonText: {
+      marginLeft: tokens.spacing.sm,
+    },
+    listContainer: {
+      paddingBottom: tokens.spacing.xl,
+    },
+    refreshControl: {
+      colors: [tokens.colors.accent],
+      tintColor: tokens.colors.accent,
+    },
+  });
+
   return (
-    <View style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+    <View style={styles.container}>
       <ModernHeader title="ALL BINS" subtitle="Organize your thoughtmarks into collections" />
 
       {/* Stats */}
       {renderBinStats()}
 
       {/* Controls */}
-      <View style={{
-        paddingHorizontal: designTokens.spacing.lg,
-        paddingBottom: designTokens.spacing.md,
-      }}>
+      <View style={styles.sortContainer}>
         <Text 
           variant="body" 
           style={{
             fontWeight: '600',
-            marginBottom: designTokens.spacing.sm,
+            marginBottom: tokens.spacing.sm,
           }}
         >
           Sort by:
         </Text>
         <View style={{
           flexDirection: 'row',
-          gap: designTokens.spacing.sm,
+          gap: tokens.spacing.sm,
         }}>
           {renderSortButton('name', 'Name')}
           {renderSortButton('count', 'Count')}
@@ -252,21 +359,14 @@ export const AllBinsScreen: React.FC = () => {
       </View>
 
       {/* Bins List */}
-      <View style={{
-        flex: 1,
-        paddingHorizontal: designTokens.spacing.lg,
-      }}>
+      <View style={styles.content}>
         {loading ? (
-          <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <ActivityIndicator size="large" color={designTokens.colors.accent} />
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={tokens.colors.accent} />
             <Text 
               variant="body" 
               style={{
-                marginTop: designTokens.spacing.md,
+                marginTop: tokens.spacing.md,
               }}
             >
               Loading bins...
@@ -281,45 +381,34 @@ export const AllBinsScreen: React.FC = () => {
               </TouchableOpacity>
             )}
             keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{ paddingBottom: designTokens.spacing.xl }}
+            contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                colors={[designTokens.colors.accent]}
-                tintColor={designTokens.colors.accent}
+                colors={[tokens.colors.accent]}
+                tintColor={tokens.colors.accent}
               />
             }
             ListEmptyComponent={
-              <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingVertical: designTokens.spacing.xl,
-              }}>
-                <Ionicons name="folder" size={64} color={designTokens.colors.textMuted} />
+              <View style={styles.emptyContainer}>
+                <Ionicons name="folder" size={64} color={tokens.colors.textMuted} />
                 <Text 
                   variant="subheading" 
-                  style={{
-                    marginTop: designTokens.spacing.md,
-                    marginBottom: designTokens.spacing.sm,
-                  }}
+                  style={styles.emptyTitle}
                 >
                   No bins found
                 </Text>
                 <Text 
                   variant="body" 
-                  style={{
-                    textAlign: 'center',
-                    marginBottom: designTokens.spacing.lg,
-                  }}
+                  style={styles.emptySubtitle}
                 >
                   Create your first bin to organize your thoughtmarks
                 </Text>
                 <Button variant="primary" onPress={handleCreateBin}>
-                  <Ionicons name="add" size={20} color={designTokens.colors.background} />
-                  <Text style={{ marginLeft: designTokens.spacing.sm }}>Create Bin</Text>
+                  <Ionicons name="add" size={20} color={tokens.colors.background} />
+                  <Text style={styles.createButtonText}>Create Bin</Text>
                 </Button>
               </View>
             }

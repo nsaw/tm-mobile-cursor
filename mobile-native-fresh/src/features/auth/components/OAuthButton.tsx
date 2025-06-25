@@ -1,134 +1,80 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  View,
-} from 'react-native';
-import { designTokens } from '../../../theme/tokens';
+import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface OAuthButtonProps {
   provider: 'google' | 'apple';
   onPress: () => void;
-  loading?: boolean;
-  text?: string;
+  disabled?: boolean;
 }
 
-export const OAuthButton: React.FC<OAuthButtonProps> = ({ 
-  provider, 
-  onPress, 
-  loading = false,
-  text 
+export const OAuthButton: React.FC<OAuthButtonProps> = ({
+  provider,
+  onPress,
+  disabled = false,
 }) => {
-  const getButtonStyle = () => {
+  const { tokens } = useTheme();
+
+  const styles = StyleSheet.create({
+    button: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: tokens.spacing.lg,
+      borderRadius: tokens.radius.md,
+      backgroundColor: provider === 'google' ? '#fff' : '#000',
+      borderWidth: 1,
+      borderColor: provider === 'google' ? tokens.colors.border : 'transparent',
+      opacity: disabled ? 0.6 : 1,
+    },
+    icon: {
+      marginRight: tokens.spacing.sm,
+    },
+    text: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: tokens.typography.fontWeight.semibold,
+      color: provider === 'google' ? '#000' : '#fff',
+    },
+  });
+
+  const getProviderConfig = () => {
     switch (provider) {
       case 'google':
-        return [styles.button, styles.googleButton];
+        return {
+          icon: 'logo-google',
+          text: 'Continue with Google',
+        };
       case 'apple':
-        return [styles.button, styles.appleButton];
+        return {
+          icon: 'logo-apple',
+          text: 'Continue with Apple',
+        };
       default:
-        return styles.button;
+        return {
+          icon: 'help-circle',
+          text: 'Continue',
+        };
     }
   };
 
-  const getTextStyle = () => {
-    switch (provider) {
-      case 'google':
-        return [styles.buttonText, styles.googleText];
-      case 'apple':
-        return [styles.buttonText, styles.appleText];
-      default:
-        return styles.buttonText;
-    }
-  };
-
-  const getIcon = () => {
-    switch (provider) {
-      case 'google':
-        return 'G';
-      case 'apple':
-        return '';
-      default:
-        return '';
-    }
-  };
-
-  const getDefaultText = () => {
-    switch (provider) {
-      case 'google':
-        return 'Sign in with Google';
-      case 'apple':
-        return 'Sign in with Apple';
-      default:
-        return 'Sign in';
-    }
-  };
+  const config = getProviderConfig();
 
   return (
     <TouchableOpacity
-      style={[getButtonStyle(), loading && styles.buttonDisabled]}
+      style={styles.button}
       onPress={onPress}
-      disabled={loading}
-      accessibilityRole="button"
-      accessibilityLabel={text || getDefaultText()}
+      disabled={disabled}
+      activeOpacity={0.8}
     >
-      {loading ? (
-        <ActivityIndicator 
-          color={provider === 'apple' ? '#ffffff' : '#1a1a1a'} 
-        />
-      ) : (
-        <View style={styles.buttonContent}>
-          <Text style={styles.icon}>{getIcon()}</Text>
-          <Text style={getTextStyle()}>
-            {text || getDefaultText()}
-          </Text>
-        </View>
-      )}
+      <Ionicons
+        name={config.icon as any}
+        size={20}
+        color={provider === 'google' ? '#000' : '#fff'}
+        style={styles.icon}
+      />
+      <Text style={styles.text}>{config.text}</Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: designTokens.radius.md,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 6,
-    minHeight: 52,
-  },
-  buttonDisabled: {
-    opacity: 0.6,
-  },
-  buttonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  icon: {
-    fontSize: 18,
-    marginRight: 12,
-    width: 20,
-    textAlign: 'center',
-  },
-  googleButton: {
-    backgroundColor: '#ffffff',
-    borderWidth: 1,
-    borderColor: '#dadce0',
-  },
-  googleText: {
-    color: '#1a1a1a',
-  },
-  appleButton: {
-    backgroundColor: '#000000',
-  },
-  appleText: {
-    color: '#ffffff',
-  },
-});

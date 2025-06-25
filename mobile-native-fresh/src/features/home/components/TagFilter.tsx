@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,151 +7,130 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface TagFilterProps {
   tags: string[];
-  selectedTag: string;
-  onTagSelect: (tag: string) => void;
-  onTagPress?: (tag: string) => void;
-  totalCount: number;
+  selectedTags: string[];
+  onTagToggle: (tag: string) => void;
+  onClearAll: () => void;
 }
-
-const getStyles = () => StyleSheet.create({
-  container: {
-    marginBottom: designTokens.spacing.lg ?? 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: designTokens.spacing.sm ?? 10,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 8,
-    color: designTokens.colors.textSecondary ?? '#888',
-    marginLeft: designTokens.spacing.sm ?? 10,
-    textTransform: 'lowercase',
-  },
-  moreButton: {
-    paddingHorizontal: designTokens.spacing.sm ?? 10,
-  },
-  moreText: {
-    fontSize: 8,
-    color: designTokens.colors.textSecondary ?? '#888',
-  },
-  scrollContent: {
-    paddingHorizontal: designTokens.spacing.lg ?? 20,
-  },
-  tagChip: {
-    paddingHorizontal: designTokens.spacing.md ?? 10,
-    paddingVertical: designTokens.spacing.sm ?? 5,
-    borderRadius: 8,
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: designTokens.colors.border ?? '#888',
-    marginRight: designTokens.spacing.sm ?? 10,
-    minHeight: 32,
-    justifyContent: 'center',
-  },
-  tagChipSelected: {
-    backgroundColor: designTokens.colors.accent ?? '#FFD500',
-    borderColor: designTokens.colors.accent ?? '#FFD500',
-  },
-  tagText: {
-    fontSize: 10,
-    color: designTokens.colors.textSecondary ?? '#888',
-    textTransform: 'lowercase',
-    fontWeight: '400',
-  },
-  tagTextSelected: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-});
 
 export const TagFilter: React.FC<TagFilterProps> = ({
   tags,
-  selectedTag,
-  onTagSelect,
-  onTagPress,
-  totalCount,
+  selectedTags,
+  onTagToggle,
+  onClearAll,
 }) => {
-  const styles = getStyles();
+  const { tokens } = useTheme();
+  const [showAllTags, setShowAllTags] = useState(false);
 
-  const getTagCount = (tag: string) => {
-    // This would need to be passed from parent or calculated
-    // For now, return a placeholder
-    return Math.floor(Math.random() * 10) + 1;
-  };
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: tokens.spacing.lg ?? 20,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: tokens.spacing.sm ?? 10,
+    },
+    title: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: tokens.typography.fontWeight.semibold,
+      color: tokens.colors.textSecondary ?? '#888',
+      marginLeft: tokens.spacing.sm ?? 10,
+    },
+    clearButton: {
+      paddingHorizontal: tokens.spacing.sm ?? 10,
+    },
+    clearText: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary ?? '#888',
+    },
+    tagsContainer: {
+      paddingHorizontal: tokens.spacing.lg ?? 20,
+    },
+    tagRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: tokens.spacing.md ?? 10,
+      paddingHorizontal: tokens.spacing.md ?? 10,
+      paddingVertical: tokens.spacing.sm ?? 5,
+    },
+    tag: {
+      paddingHorizontal: tokens.spacing.lg ?? 20,
+      paddingVertical: tokens.spacing.sm ?? 5,
+      borderRadius: tokens.radius.md ?? 20,
+      borderWidth: 1,
+      borderColor: tokens.colors.border ?? '#888',
+      marginRight: tokens.spacing.sm ?? 10,
+    },
+    tagSelected: {
+      backgroundColor: tokens.colors.accent ?? '#FFD500',
+      borderColor: tokens.colors.accent ?? '#FFD500',
+    },
+    tagText: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary ?? '#888',
+    },
+    filterIcon: {
+      marginRight: tokens.spacing.xs,
+    },
+  });
 
-  const handleTagPress = (tag: string) => {
-    if (onTagPress) {
-      onTagPress(tag);
-    } else {
-      onTagSelect(tag);
-    }
-  };
+  const displayedTags = showAllTags ? tags : tags.slice(0, 5);
+  const hasMoreTags = tags.length > 5;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <Ionicons name="filter-outline" size={16} color={designTokens.colors.textSecondary ?? '#888'} />
-          <Text style={styles.headerText}>tags</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="filter-outline" size={16} color={tokens.colors.textSecondary ?? '#888'} />
+          <Text style={styles.title}>Filter by tags</Text>
         </View>
-        <TouchableOpacity style={styles.moreButton}>
-          <Text style={styles.moreText}>...</Text>
-        </TouchableOpacity>
-      </View>
-      
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
-        {/* All tag */}
-        <TouchableOpacity
-          style={[
-            styles.tagChip,
-            selectedTag === 'all' && styles.tagChipSelected,
-          ]}
-          onPress={() => onTagSelect('all')}
-        >
-          <Text
-            style={[
-              styles.tagText,
-              selectedTag === 'all' && styles.tagTextSelected,
-            ]}
-          >
-            all ({totalCount})
-          </Text>
-        </TouchableOpacity>
-
-        {/* Individual tags */}
-        {tags.sort().map((tag) => (
-          <TouchableOpacity
-            key={tag}
-            style={[
-              styles.tagChip,
-              selectedTag === tag && styles.tagChipSelected,
-            ]}
-            onPress={() => handleTagPress(tag)}
-          >
-            <Text
-              style={[
-                styles.tagText,
-                selectedTag === tag && styles.tagTextSelected,
-              ]}
-            >
-              {tag.toLowerCase()} ({getTagCount(tag)})
-            </Text>
+        {selectedTags.length > 0 && (
+          <TouchableOpacity onPress={onClearAll} style={styles.clearButton}>
+            <Text style={styles.clearText}>Clear all</Text>
           </TouchableOpacity>
-        ))}
+        )}
+      </View>
+
+      <ScrollView 
+        horizontal 
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.tagsContainer}
+      >
+        <View style={styles.tagRow}>
+          {displayedTags.map((tag) => (
+            <TouchableOpacity
+              key={tag}
+              style={[
+                styles.tag,
+                selectedTags.includes(tag) && styles.tagSelected,
+              ]}
+              onPress={() => onTagToggle(tag)}
+            >
+              <Text style={[
+                styles.tagText,
+                selectedTags.includes(tag) && { color: tokens.colors.background }
+              ]}>
+                {tag}
+              </Text>
+            </TouchableOpacity>
+          ))}
+          
+          {hasMoreTags && (
+            <TouchableOpacity
+              style={styles.tag}
+              onPress={() => setShowAllTags(!showAllTags)}
+            >
+              <Text style={styles.tagText}>
+                {showAllTags ? 'Show less' : `+${tags.length - 5} more`}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </ScrollView>
     </View>
   );

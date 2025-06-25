@@ -370,7 +370,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <KeyboardAvoidingView 
         style={{ flex: 1 }} 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -389,14 +389,14 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
         <ScrollView 
           style={{ flex: 1 }}
-          contentContainerStyle={{ padding: designTokens.spacing.lg }}
+          contentContainerStyle={{ padding: tokens.spacing.lg }}
           keyboardShouldPersistTaps="handled"
         >
           {/* Voice Note Indicator */}
           {isVoiceNote && (
-            <View style={[styles.voiceIndicator, { backgroundColor: designTokens.colors.surface }]}>
-              <Ionicons name="mic" size={20} color={designTokens.colors.accent} />
-              <Text style={[styles.voiceIndicatorText, { color: designTokens.colors.textSecondary }]}>
+            <View style={[styles.voiceIndicator, { backgroundColor: tokens.colors.surface }]}>
+              <Ionicons name="mic" size={20} color={tokens.colors.accent} />
+              <Text style={[styles.voiceIndicatorText, { color: tokens.colors.textSecondary }]}>
                 Voice note captured
               </Text>
             </View>
@@ -408,8 +408,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <CardContent>
                 <View style={styles.aiPanelHeader}>
                   <View style={styles.aiPanelTitle}>
-                    <Ionicons name="sparkles" size={16} color={designTokens.colors.accent} />
-                    <Text style={[styles.aiPanelTitleText, { color: designTokens.colors.text }]}>
+                    <Ionicons name="sparkles" size={16} color={tokens.colors.accent} />
+                    <Text style={[styles.aiPanelTitleText, { color: tokens.colors.text }]}>
                       AI Assistant
                     </Text>
                   </View>
@@ -420,7 +420,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     <Ionicons 
                       name={showAIPanel ? "chevron-up" : "chevron-down"} 
                       size={16} 
-                      color={designTokens.colors.textSecondary} 
+                      color={tokens.colors.textSecondary} 
                     />
                   </TouchableOpacity>
                 </View>
@@ -429,8 +429,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   <View style={styles.aiPanelContent}>
                     {isGeneratingSuggestions ? (
                       <View style={styles.aiLoading}>
-                        <ActivityIndicator size="small" color={designTokens.colors.accent} />
-                        <Text style={[styles.aiLoadingText, { color: designTokens.colors.textSecondary }]}>
+                        <ActivityIndicator size="small" color={tokens.colors.accent} />
+                        <Text style={[styles.aiLoadingText, { color: tokens.colors.textSecondary }]}>
                           Analyzing your content...
                         </Text>
                       </View>
@@ -439,11 +439,11 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                         {/* Auto Title Suggestion */}
                         {autoTitle && (
                           <View style={styles.suggestionItem}>
-                            <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
+                            <Text style={[styles.suggestionLabel, { color: tokens.colors.textSecondary }]}>
                               Suggested Title:
                             </Text>
                             <View style={styles.suggestionAction}>
-                              <Text style={[styles.suggestionText, { color: designTokens.colors.text }]}>
+                              <Text style={[styles.suggestionText, { color: tokens.colors.text }]}>
                                 {autoTitle}
                               </Text>
                               <Button
@@ -451,7 +451,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                 size="sm"
                                 onPress={() => applyAISuggestion('title', autoTitle)}
                               >
-                                <Ionicons name="checkmark" size={14} color={designTokens.colors.accent} />
+                                <Ionicons name="checkmark" size={14} color={tokens.colors.accent} />
                               </Button>
                             </View>
                           </View>
@@ -460,7 +460,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                         {/* Auto Tags Suggestion */}
                         {autoTags.length > 0 && (
                           <View style={styles.suggestionItem}>
-                            <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
+                            <Text style={[styles.suggestionLabel, { color: tokens.colors.textSecondary }]}>
                               Suggested Tags:
                             </Text>
                             <View style={styles.suggestionTags}>
@@ -483,7 +483,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                         {/* Content Suggestions */}
                         {contentSuggestions.length > 0 && (
                           <View style={styles.suggestionItem}>
-                            <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
+                            <Text style={[styles.suggestionLabel, { color: tokens.colors.textSecondary }]}>
                               Content Ideas:
                             </Text>
                             {contentSuggestions.map((suggestion, index) => (
@@ -492,17 +492,17 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                 style={styles.contentSuggestion}
                                 onPress={() => applyAISuggestion('content', suggestion)}
                               >
-                                <Text style={[styles.contentSuggestionText, { color: designTokens.colors.text }]}>
+                                <Text style={[styles.contentSuggestionText, { color: tokens.colors.text }]}>
                                   {suggestion}
                                 </Text>
-                                <Ionicons name="add" size={14} color={designTokens.colors.accent} />
+                                <Ionicons name="add" size={14} color={tokens.colors.accent} />
                               </TouchableOpacity>
                             ))}
                           </View>
                         )}
                       </View>
                     ) : (
-                      <Text style={[styles.aiEmptyText, { color: designTokens.colors.textSecondary }]}>
+                      <Text style={[styles.aiEmptyText, { color: tokens.colors.textSecondary }]}>
                         Start typing to get AI suggestions
                       </Text>
                     )}
@@ -514,17 +514,17 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
           {/* Title Input */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
               Title (optional)
             </Text>
             <TextInput
               style={[styles.titleInput, { 
-                backgroundColor: designTokens.colors.surface,
-                color: designTokens.colors.text,
-                borderColor: designTokens.colors.border 
+                backgroundColor: tokens.colors.surface,
+                color: tokens.colors.text,
+                borderColor: tokens.colors.border 
               }]}
               placeholder="Enter a title for your thoughtmark..."
-              placeholderTextColor={designTokens.colors.textSecondary}
+              placeholderTextColor={tokens.colors.textSecondary}
               value={title}
               onChangeText={setTitle}
               maxLength={100}
@@ -533,31 +533,31 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
           {/* Content Input */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
               Content *
             </Text>
             <TextInput
               style={[styles.contentInput, { 
-                backgroundColor: designTokens.colors.surface,
-                color: designTokens.colors.text,
-                borderColor: designTokens.colors.border 
+                backgroundColor: tokens.colors.surface,
+                color: tokens.colors.text,
+                borderColor: tokens.colors.border 
               }]}
               placeholder="What's on your mind?"
-              placeholderTextColor={designTokens.colors.textSecondary}
+              placeholderTextColor={tokens.colors.textSecondary}
               value={content}
               onChangeText={setContent}
               multiline
               textAlignVertical="top"
               maxLength={5000}
             />
-            <Text style={[styles.charCount, { color: designTokens.colors.textSecondary }]}>
+            <Text style={[styles.charCount, { color: tokens.colors.textSecondary }]}>
               {content.length}/5000
             </Text>
           </View>
 
           {/* Tags */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
               Tags
             </Text>
             <View style={styles.tagsContainer}>
@@ -571,7 +571,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               ))}
               {tags.length < 5 && (
                 <TouchableOpacity
-                  style={[styles.addTagButton, { borderColor: designTokens.colors.border }]}
+                  style={[styles.addTagButton, { borderColor: tokens.colors.border }]}
                   onPress={() => {
                     Alert.prompt(
                       'Add Tag',
@@ -590,8 +590,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     );
                   }}
                 >
-                  <Ionicons name="add" size={16} color={designTokens.colors.textSecondary} />
-                  <Text style={[styles.addTagText, { color: designTokens.colors.textSecondary }]}>
+                  <Ionicons name="add" size={16} color={tokens.colors.textSecondary} />
+                  <Text style={[styles.addTagText, { color: tokens.colors.textSecondary }]}>
                     Add Tag
                   </Text>
                 </TouchableOpacity>
@@ -608,10 +608,10 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <Ionicons 
                 name={isTask ? "checkmark-circle" : "checkmark-circle-outline"} 
                 size={20} 
-                color={isTask ? designTokens.colors.accent : designTokens.colors.textSecondary} 
+                color={isTask ? tokens.colors.accent : tokens.colors.textSecondary} 
               />
               <Text style={[styles.actionText, { 
-                color: isTask ? designTokens.colors.accent : designTokens.colors.textSecondary 
+                color: isTask ? tokens.colors.accent : tokens.colors.textSecondary 
               }]}>
                 Task
               </Text>
@@ -624,10 +624,10 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <Ionicons 
                 name={isPinned ? "pin" : "pin-outline"} 
                 size={20} 
-                color={isPinned ? designTokens.colors.accent : designTokens.colors.textSecondary} 
+                color={isPinned ? tokens.colors.accent : tokens.colors.textSecondary} 
               />
               <Text style={[styles.actionText, { 
-                color: isPinned ? designTokens.colors.accent : designTokens.colors.textSecondary 
+                color: isPinned ? tokens.colors.accent : tokens.colors.textSecondary 
               }]}>
                 Pin
               </Text>
@@ -637,27 +637,27 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           {/* Due Date Section - Only show when task is selected */}
           {isTask && (
             <View style={styles.inputGroup}>
-              <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
+              <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
                 Due Date (optional - no due date by default)
               </Text>
               <View style={styles.dueDateContainer}>
                 {dueDate ? (
                   <View style={styles.dueDateDisplay}>
-                    <Ionicons name="calendar" size={16} color={designTokens.colors.accent} />
-                    <Text style={[styles.dueDateText, { color: designTokens.colors.text }]}>
+                    <Ionicons name="calendar" size={16} color={tokens.colors.accent} />
+                    <Text style={[styles.dueDateText, { color: tokens.colors.text }]}>
                       {formatDueDate(dueDate)}
                     </Text>
                     <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton}>
-                      <Ionicons name="close-circle" size={16} color={designTokens.colors.textSecondary} />
+                      <Ionicons name="close-circle" size={16} color={tokens.colors.textSecondary} />
                     </TouchableOpacity>
                   </View>
                 ) : (
                   <TouchableOpacity
-                    style={[styles.setDueDateButton, { borderColor: designTokens.colors.border }]}
+                    style={[styles.setDueDateButton, { borderColor: tokens.colors.border }]}
                     onPress={() => setShowDatePicker(true)}
                   >
-                    <Ionicons name="calendar-outline" size={16} color={designTokens.colors.textSecondary} />
-                    <Text style={[styles.setDueDateText, { color: designTokens.colors.textSecondary }]}>
+                    <Ionicons name="calendar-outline" size={16} color={tokens.colors.textSecondary} />
+                    <Text style={[styles.setDueDateText, { color: tokens.colors.textSecondary }]}>
                       Set Due Date
                     </Text>
                   </TouchableOpacity>
@@ -688,7 +688,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
           {/* Bin Selection */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
+            <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
               Collection (optional)
             </Text>
             <ScrollView 
@@ -700,12 +700,12 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 style={[
                   styles.binOption,
                   !selectedBinId && styles.binOptionActive,
-                  { borderColor: designTokens.colors.border }
+                  { borderColor: tokens.colors.border }
                 ]}
                 onPress={() => setSelectedBinId(undefined)}
               >
                 <Text style={[styles.binOptionText, { 
-                  color: !selectedBinId ? designTokens.colors.accent : designTokens.colors.textSecondary 
+                  color: !selectedBinId ? tokens.colors.accent : tokens.colors.textSecondary 
                 }]}>
                   No Collection
                 </Text>
@@ -716,12 +716,12 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   style={[
                     styles.binOption,
                     selectedBinId === bin.id && styles.binOptionActive,
-                    { borderColor: designTokens.colors.border }
+                    { borderColor: tokens.colors.border }
                   ]}
                   onPress={() => setSelectedBinId(bin.id)}
                 >
                   <Text style={[styles.binOptionText, { 
-                    color: selectedBinId === bin.id ? designTokens.colors.accent : designTokens.colors.textSecondary 
+                    color: selectedBinId === bin.id ? tokens.colors.accent : tokens.colors.textSecondary 
                   }]}>
                     {bin.name}
                   </Text>

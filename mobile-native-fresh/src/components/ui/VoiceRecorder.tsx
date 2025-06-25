@@ -292,7 +292,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Voice Recorder',
           message: Voice ? 'Preparing to listen...' : 'Voice recording (Expo Go mode)',
-          icon: <Ionicons name="mic" size={64} color={designTokens.colors.accent} />,
+          icon: <Ionicons name="mic" size={64} color={tokens.colors.accent} />,
           showCancel: true,
         };
       case 'listening':
@@ -310,7 +310,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Processing...',
           message: 'Creating your thoughtmark...',
-          icon: <ActivityIndicator size={64} color={designTokens.colors.accent} />,
+          icon: <ActivityIndicator size={64} color={tokens.colors.accent} />,
           showCancel: false,
         };
       case 'complete':
@@ -339,7 +339,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       onRequestClose={cancelRecording}
     >
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
+        <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
           {/* Cancel Button */}
           {stageContent.showCancel && (
             <TouchableOpacity

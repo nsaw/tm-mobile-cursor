@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   FlatList,
   TouchableOpacity,
   RefreshControl,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { ThoughtmarkList } from '../components/ThoughtmarkList';
 import { QuickActions } from '../components/QuickActions';
@@ -18,6 +20,8 @@ import { Button } from '../../../components/ui/Button';
 import { useTheme } from '../../../theme/ThemeProvider';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { ModernHeader } from '../../../components/ui/ModernHeader';
+import { BottomNav } from '../../../components/ui/BottomNav';
 
 export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,6 +30,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const { tokens } = useTheme();
+  const { user } = useAuth();
 
   const {
     thoughtmarks,
@@ -164,186 +169,247 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     navigation.navigate('Bins');
   };
 
+  const handleNavigate = (route: string) => {
+    navigation.navigate(route);
+  };
+
+  const quickActions = [
+    {
+      title: 'Create Thoughtmark',
+      icon: 'create',
+      onPress: handleCreateNew,
+      color: tokens.colors.accent,
+    },
+    {
+      title: 'Voice Record',
+      icon: 'mic',
+      onPress: handleVoiceRecord,
+      color: tokens.colors.accent,
+    },
+    {
+      title: 'View Bins',
+      icon: 'folder',
+      onPress: handleViewBins,
+      color: tokens.colors.accent,
+    },
+  ];
+
+  const tags = allTags;
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: designTokens.spacing.lg,
-        paddingVertical: designTokens.spacing.md,
-      }}>
-        <Text variant="heading" size="2xl">Thoughtmarks</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <ModernHeader 
+        title="HOME" 
+      />
+
+      <ScrollView 
+        style={{ 
+          flex: 1,
+          paddingHorizontal: tokens.spacing.lg,
+          paddingVertical: tokens.spacing.md,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Profile Section */}
         <TouchableOpacity 
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: designTokens.radius.full,
-            backgroundColor: designTokens.colors.backgroundSecondary,
-            justifyContent: 'center',
+            flexDirection: 'row',
             alignItems: 'center',
-          }} 
-          onPress={handleProfilePress}
+            paddingVertical: tokens.spacing.sm,
+            borderRadius: tokens.radius.full,
+            backgroundColor: tokens.colors.backgroundSecondary,
+            marginBottom: tokens.spacing.lg,
+          }}
+          onPress={() => navigation.navigate('Account' as any)}
         >
-          <Ionicons name="person-circle-outline" size={24} color={designTokens.colors.text} />
+          <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
+          <Text style={{ marginLeft: tokens.spacing.sm, fontWeight: '600' }}>
+            {user?.firstName || 'User'}
+          </Text>
         </TouchableOpacity>
-      </View>
 
-      <SearchBar
-        onSearch={handleSearch}
-        placeholder="Search thoughtmarks..."
-      />
-
-      <QuickActions
-        onCreateThoughtmark={handleCreateNew}
-        onVoiceRecord={handleVoiceRecord}
-        onViewBins={handleViewBins}
-      />
-
-      {allTags.length > 0 && (
-        <TagFilter
-          tags={allTags}
-          selectedTags={selectedTags}
-          onTagPress={handleTagPress}
-          onClearAll={handleClearAllTags}
-        />
-      )}
-
-      <FlatList
-        data={filteredThoughtmarks}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderThoughtmarkCard}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-          />
-        }
-        ListHeaderComponent={
-          <>
-            {pinnedThoughtmarks.length > 0 && (
-              <View style={{ marginBottom: designTokens.spacing.lg }}>
-                <Text 
-                  variant="subheading" 
-                  size="lg"
-                  style={{
-                    paddingHorizontal: designTokens.spacing.lg,
-                    marginBottom: designTokens.spacing.sm,
-                  }}
-                >
-                  Pinned
-                </Text>
-                <FlatList
-                  data={pinnedThoughtmarks}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
-                />
-              </View>
-            )}
-            
-            {recentThoughtmarks.length > 0 && (
-              <View style={{ marginBottom: designTokens.spacing.lg }}>
-                <Text 
-                  variant="subheading" 
-                  size="lg"
-                  style={{
-                    paddingHorizontal: designTokens.spacing.lg,
-                    marginBottom: designTokens.spacing.sm,
-                  }}
-                >
-                  Recent
-                </Text>
-                <FlatList
-                  data={recentThoughtmarks}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
-                />
-              </View>
-            )}
-
-            {bins.length > 0 && (
-              <View style={{ marginBottom: designTokens.spacing.lg }}>
-                <Text 
-                  variant="subheading" 
-                  size="lg"
-                  style={{
-                    paddingHorizontal: designTokens.spacing.lg,
-                    marginBottom: designTokens.spacing.sm,
-                  }}
-                >
-                  Bins
-                </Text>
-                <FlatList
-                  data={bins.filter(bin => !bin.isArchived && !bin.isDeleted)}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      style={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: designTokens.radius.md,
-                        marginHorizontal: designTokens.spacing.xs,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: item.color || designTokens.colors.surface,
-                      }}
-                      onPress={() => handleBinPress(item)}
-                    >
-                      <Ionicons 
-                        name={item.icon || "folder-outline"} 
-                        size={24} 
-                        color={designTokens.colors.text} 
-                        style={{ marginBottom: designTokens.spacing.xs }}
-                      />
-                      <Text variant="caption" size="xs" style={{ textAlign: 'center' }}>
-                        {item.name}
-                      </Text>
-                    </TouchableOpacity>
-                  )}
-                />
-              </View>
-            )}
-
-            <View style={{ marginBottom: designTokens.spacing.lg }}>
-              <Text 
-                variant="subheading" 
-                size="lg"
+        {/* Quick Actions */}
+        <View style={{ marginBottom: tokens.spacing.lg }}>
+          <Text 
+            variant="subheading" 
+            size="lg"
+            style={{ 
+              marginBottom: tokens.spacing.sm,
+              paddingHorizontal: tokens.spacing.lg,
+            }}
+          >
+            Quick Actions
+          </Text>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+          >
+            {quickActions.map((action) => (
+              <TouchableOpacity
+                key={action.title}
                 style={{
-                  paddingHorizontal: designTokens.spacing.lg,
-                  marginBottom: designTokens.spacing.sm,
+                  alignItems: 'center',
+                  marginRight: tokens.spacing.lg,
+                  minWidth: 80,
                 }}
+                onPress={action.onPress}
               >
-                All Thoughtmarks
+                <View style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: tokens.radius.md,
+                  marginHorizontal: tokens.spacing.xs,
+                  backgroundColor: action.color || tokens.colors.surface,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: tokens.spacing.xs,
+                }}>
+                  <Ionicons name={action.icon} size={24} color={tokens.colors.text} />
+                </View>
+                <Text 
+                  variant="caption" 
+                  size="sm"
+                  style={{ 
+                    textAlign: 'center',
+                    marginBottom: tokens.spacing.xs,
+                  }}
+                >
+                  {action.title}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Recent Thoughtmarks */}
+        <View style={{ marginBottom: tokens.spacing.lg }}>
+          <Text 
+            variant="subheading" 
+            size="lg"
+            style={{ 
+              marginBottom: tokens.spacing.sm,
+              paddingHorizontal: tokens.spacing.lg,
+            }}
+          >
+            Recent Thoughtmarks
+          </Text>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+          >
+            {recentThoughtmarks.map((thoughtmark) => (
+              <TouchableOpacity
+                key={thoughtmark.id}
+                style={{
+                  width: 200,
+                  marginRight: tokens.spacing.md,
+                  padding: tokens.spacing.md,
+                  backgroundColor: tokens.colors.surface,
+                  borderRadius: tokens.radius.md,
+                }}
+                onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+              >
+                <Text 
+                  variant="subheading" 
+                  size="sm"
+                  style={{ 
+                    marginBottom: tokens.spacing.xs,
+                    fontWeight: '600',
+                  }}
+                  numberOfLines={1}
+                >
+                  {thoughtmark.title}
+                </Text>
+                <Text 
+                  variant="body" 
+                  size="sm"
+                  style={{ 
+                    color: tokens.colors.textSecondary,
+                  }}
+                  numberOfLines={2}
+                >
+                  {thoughtmark.content}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Stats */}
+        <View style={{ marginBottom: tokens.spacing.lg }}>
+          <Text 
+            variant="subheading" 
+            size="lg"
+            style={{ 
+              marginBottom: tokens.spacing.sm,
+              paddingHorizontal: tokens.spacing.lg,
+            }}
+          >
+            Your Stats
+          </Text>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            paddingHorizontal: tokens.spacing.lg,
+          }}>
+            <View style={{ alignItems: 'center' }}>
+              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+                {thoughtmarks.length}
+              </Text>
+              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+                Thoughtmarks
               </Text>
             </View>
-          </>
-        }
-        ListEmptyComponent={
-          <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingHorizontal: designTokens.spacing.lg,
-          }}>
-            <Text variant="body" style={{ textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
-              {thoughtmarksLoading ? 'Loading...' : 'No thoughtmarks yet'}
-            </Text>
-            {!thoughtmarksLoading && (
-              <Button variant="primary" onPress={handleCreateNew}>
-                Create your first thoughtmark
-              </Button>
-            )}
+            <View style={{ alignItems: 'center' }}>
+              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+                {bins.length}
+              </Text>
+              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+                Bins
+              </Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+                {tags.length}
+              </Text>
+              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+                Tags
+              </Text>
+            </View>
           </View>
-        }
-        contentContainerStyle={{ paddingBottom: designTokens.spacing.xl }}
+        </View>
+
+        {/* Tips */}
+        <View style={{ marginBottom: tokens.spacing.lg }}>
+          <Text 
+            variant="subheading" 
+            size="lg"
+            style={{ 
+              marginBottom: tokens.spacing.sm,
+              paddingHorizontal: tokens.spacing.lg,
+            }}
+          >
+            Tips & Tricks
+          </Text>
+          <View style={{
+            paddingHorizontal: tokens.spacing.lg,
+          }}>
+            <Text variant="body" style={{ textAlign: 'center', marginBottom: tokens.spacing.lg }}>
+              Use voice recording to quickly capture ideas on the go. Long press any thoughtmark for quick actions.
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+
+      {/* Bottom Navigation */}
+      <BottomNav
+        onNavigate={handleNavigate}
+        onVoiceRecord={handleVoiceRecord}
+        showCreateButton={true}
+        currentRoute="/"
+        onCreateNew={handleCreateNew}
       />
     </SafeAreaView>
   );

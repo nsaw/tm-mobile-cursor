@@ -157,7 +157,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   if (!isVisible) return null;
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: designTokens.colors.background }]}>
+    <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: tokens.colors.background }]}>
       <Animated.View style={[styles.content, { transform: [{ scale: scaleAnim }] }]}>
         {/* Glow ring effect */}
         <View style={styles.glowRing} />
@@ -167,7 +167,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           <Ionicons 
             name="bulb" 
             size={40} 
-            color={designTokens.colors.accent}
+            color={tokens.colors.accent}
             style={styles.brainIcon}
           />
         </Animated.View>
@@ -180,7 +180,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </View>
 
         {/* Text with fade animation */}
-        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: designTokens.colors.textSecondary }]}>
+        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: tokens.colors.textSecondary }]}>
           {message}
         </Animated.Text>
 

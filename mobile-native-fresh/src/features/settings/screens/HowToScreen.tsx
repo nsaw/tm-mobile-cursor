@@ -5,6 +5,7 @@ import { Card } from '../../../components/ui/Card';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 import { Brain, Mic, FileText, Lightbulb, Search, Book, Users, Mail, HelpCircle, CheckCircle } from 'lucide-react-native';
+import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 const helpCategories = [
   {
@@ -103,34 +104,92 @@ const resources = [
 
 const HowToScreen: React.FC = () => {
   const { tokens } = useTheme();
+
+  const categories = [
+    {
+      title: 'Getting Started',
+      description: 'Learn the basics of using Thoughtmarks',
+      icon: Ionicons,
+      items: [
+        'Create your first thoughtmark',
+        'Organize with bins',
+        'Use tags for better organization',
+        'Search and find content quickly',
+      ],
+    },
+    {
+      title: 'Advanced Features',
+      description: 'Master advanced functionality',
+      icon: MaterialCommunityIcons,
+      items: [
+        'Voice recording',
+        'AI-powered search',
+        'Export and backup',
+        'Customize your experience',
+      ],
+    },
+  ];
+
+  const faqs = [
+    {
+      question: 'How do I create a thoughtmark?',
+      answer: 'Tap the + button and start typing or use voice recording.',
+      category: 'Basics',
+      icon: Feather,
+    },
+    {
+      question: 'Can I organize my thoughtmarks?',
+      answer: 'Yes! Use bins to group related thoughtmarks together.',
+      category: 'Organization',
+      icon: Feather,
+    },
+  ];
+
+  const resources = [
+    {
+      title: 'Video Tutorials',
+      description: 'Step-by-step guides',
+      icon: Ionicons,
+      onPress: () => {},
+    },
+    {
+      title: 'User Guide',
+      description: 'Comprehensive documentation',
+      icon: MaterialCommunityIcons,
+      onPress: () => {},
+    },
+  ];
+
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }} contentContainerStyle={{ padding: designTokens.spacing.lg }}>
-      <Heading level={1} style={{ color: designTokens.colors.text, textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
-        Help & Support
+    <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }} contentContainerStyle={{ padding: tokens.spacing.lg }}>
+      <Heading level={1} style={{ color: tokens.colors.text, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
+        How to Use Thoughtmarks
       </Heading>
-      <Caption style={{ color: designTokens.colors.textMuted, textAlign: 'center', marginBottom: designTokens.spacing.xl }}>
-        Get assistance and find answers to make the most of Thoughtmarks
+      
+      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.xl }}>
+        Get the most out of your thoughtmarking experience with these helpful guides and tips.
       </Caption>
 
-      {/* Help Categories */}
-      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
-        Quick Help
+      {/* Categories */}
+      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
+        Quick Start Guide
       </Heading>
-      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
-        {helpCategories.map((cat, idx) => (
-          <Card key={cat.title} style={{ padding: designTokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
-              <cat.icon size={28} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
-              <View>
-                <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{cat.title}</Text>
-                <Caption style={{ color: designTokens.colors.textMuted }}>{cat.description}</Caption>
+      
+      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+        {categories.map((cat) => (
+          <Card key={cat.title} style={{ padding: tokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
+              <cat.icon size={28} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+              <View style={{ flex: 1 }}>
+                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{cat.title}</Text>
+                <Caption style={{ color: tokens.colors.textMuted }}>{cat.description}</Caption>
               </View>
             </View>
-            <View style={{ marginLeft: 36 }}>
-              {cat.items.map((item, i) => (
-                <View key={item} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-                  <CheckCircle size={14} color={designTokens.colors.success} style={{ marginRight: 6 }} />
-                  <Text style={{ color: designTokens.colors.textSecondary, fontSize: designTokens.typography.fontSize.sm }}>{item}</Text>
+            <View style={{ gap: tokens.spacing.xs }}>
+              {cat.items.map((item, index) => (
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <CheckCircle size={14} color={tokens.colors.success} style={{ marginRight: 6 }} />
+                  <Text style={{ color: tokens.colors.textSecondary, fontSize: tokens.typography.fontSize.sm }}>{item}</Text>
                 </View>
               ))}
             </View>
@@ -138,45 +197,49 @@ const HowToScreen: React.FC = () => {
         ))}
       </View>
 
-      {/* FAQ */}
-      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
+      {/* FAQs */}
+      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
         Frequently Asked Questions
       </Heading>
-      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
-        {faqs.map((faq, idx) => (
-          <Card key={faq.question} style={{ padding: designTokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
-              <faq.icon size={22} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
-              <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{faq.question}</Text>
+      
+      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+        {faqs.map((faq) => (
+          <Card key={faq.question} style={{ padding: tokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
+              <faq.icon size={22} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+              <View style={{ flex: 1 }}>
+                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{faq.question}</Text>
+                <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.xs }}>{faq.answer}</Text>
+                <Caption style={{ color: tokens.colors.textMuted }}>{faq.category}</Caption>
+              </View>
             </View>
-            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.xs }}>{faq.answer}</Text>
-            <Caption style={{ color: designTokens.colors.textMuted }}>{faq.category}</Caption>
           </Card>
         ))}
       </View>
 
       {/* Resources */}
-      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
+      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
         Additional Resources
       </Heading>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
+      
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
         {resources.map((res) => (
-          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: designTokens.spacing.md }} onPress={res.onPress}>
-            <res.icon size={32} color={designTokens.colors.accent} style={{ marginBottom: designTokens.spacing.sm }} />
-            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
-            <Caption style={{ color: designTokens.colors.textMuted, textAlign: 'center' }}>{res.description}</Caption>
+          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
+            <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
+            <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
+            <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center' }}>{res.description}</Caption>
           </Card>
         ))}
       </View>
 
-      {/* Support Response Notice */}
-      <Card style={{ backgroundColor: designTokens.colors.accentMuted, borderColor: designTokens.colors.accent, padding: designTokens.spacing.md }}>
+      {/* Support Info */}
+      <Card style={{ backgroundColor: tokens.colors.accentMuted, borderColor: tokens.colors.accent, padding: tokens.spacing.md }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <HelpCircle size={20} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
-          <View>
-            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
-            <Caption style={{ color: designTokens.colors.textMuted }}>
-              We typically respond to support requests within 24 hours. For urgent issues, please email us directly.
+          <HelpCircle size={20} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
+            <Caption style={{ color: tokens.colors.textMuted }}>
+              We typically respond to support requests within 24 hours during business days.
             </Caption>
           </View>
         </View>

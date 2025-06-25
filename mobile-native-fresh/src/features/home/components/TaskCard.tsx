@@ -7,7 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
+import type { DesignTokens } from '../../../theme/tokens';
 import { ThoughtmarkWithBin } from '../../../types';
 
 interface TaskCardProps {
@@ -17,13 +18,13 @@ interface TaskCardProps {
   style?: ViewStyle;
 }
 
-const getStyles = (isCompleted: boolean, isOverdue: boolean) => StyleSheet.create({
+const getStyles = (tokens: DesignTokens, isCompleted: boolean, isOverdue: boolean) => StyleSheet.create({
   container: {
-    backgroundColor: designTokens.colors.surface ?? '#fff',
+    backgroundColor: tokens.colors.surface ?? '#fff',
     borderRadius: 11,
-    padding: designTokens?.spacing?.sm * 1.34,
+    padding: tokens?.spacing?.sm * 1.34,
     borderWidth: 1,
-    borderColor: designTokens.colors.border ?? '#000',
+    borderColor: tokens.colors.border ?? '#000',
     ...(isOverdue && { backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.3)' }),
   },
   content: {
@@ -35,11 +36,11 @@ const getStyles = (isCompleted: boolean, isOverdue: boolean) => StyleSheet.creat
     height: 43,
     borderRadius: 21,
     borderWidth: 3,
-    borderColor: designTokens.colors.border ?? '#000',
+    borderColor: tokens.colors.border ?? '#000',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: designTokens?.spacing?.md * 1.34,
-    backgroundColor: isCompleted ? designTokens.colors.accent : designTokens.colors.textSecondary,
+    marginRight: tokens?.spacing?.md * 1.34,
+    backgroundColor: isCompleted ? tokens.colors.accent : tokens.colors.textSecondary,
   },
   textContainer: {
     flex: 1,
@@ -47,7 +48,7 @@ const getStyles = (isCompleted: boolean, isOverdue: boolean) => StyleSheet.creat
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: isOverdue ? '#FCA5A5' : isCompleted ? designTokens.colors.textSecondary : designTokens.colors.text,
+    color: isOverdue ? '#FCA5A5' : isCompleted ? tokens.colors.textSecondary : tokens.colors.text,
     marginBottom: 5,
     fontFamily: isOverdue ? 'Ubuntu_500Medium' : isCompleted ? 'Ubuntu_500Medium' : 'Ubuntu_600SemiBold',
     textTransform: 'capitalize',
@@ -55,7 +56,7 @@ const getStyles = (isCompleted: boolean, isOverdue: boolean) => StyleSheet.creat
   },
   dueDate: {
     fontSize: 11,
-    color: isOverdue ? '#FCA5A5' : designTokens.colors.accent,
+    color: isOverdue ? '#FCA5A5' : tokens.colors.accent,
     fontFamily: 'Ubuntu_400Regular',
     marginLeft: 11,
     textAlign: 'right',
@@ -67,7 +68,7 @@ const getStyles = (isCompleted: boolean, isOverdue: boolean) => StyleSheet.creat
     justifyContent: 'space-between',
   },
   icon: {
-    color: isCompleted ? designTokens.colors.accent : designTokens.colors.textSecondary,
+    color: isCompleted ? tokens.colors.accent : tokens.colors.textSecondary,
   },
 });
 
@@ -77,8 +78,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   onToggle,
   style,
 }) => {
+  const { tokens } = useTheme();
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
-  const styles = getStyles(!!task.isCompleted, !!isOverdue);
+  const styles = getStyles(tokens, !!task.isCompleted, !!isOverdue);
   const formatDueDate = (dateString: string) => {
     if (!dateString || isNaN(new Date(dateString).getTime())) {
       return 'No due date';
