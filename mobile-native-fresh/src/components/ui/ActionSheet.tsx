@@ -1,15 +1,14 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   Modal,
-  StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../theme/theme';
+import { Text } from './Text';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface ActionSheetItem {
   label: string;
@@ -31,6 +30,8 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
   items,
   title,
 }) => {
+  const { tokens } = useTheme();
+
   const handleItemPress = (item: ActionSheetItem) => {
     item.onPress();
     onClose();
@@ -46,40 +47,63 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       accessibilityLabel={title || 'Action menu'}
     >
       <TouchableWithoutFeedback onPress={onClose}>
-        <View style={styles.overlay}>
+        <View style={{
+          flex: 1,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          justifyContent: 'flex-end',
+        }}>
           <TouchableWithoutFeedback>
-            <View style={styles.container}>
+            <View style={{
+              backgroundColor: tokens.colors.backgroundSecondary,
+              borderTopLeftRadius: tokens.radius.lg,
+              borderTopRightRadius: tokens.radius.lg,
+              paddingBottom: tokens.spacing.lg,
+              maxWidth: Dimensions.get('window').width,
+              width: '100%',
+            }}>
               {title && (
-                <View style={styles.titleContainer}>
-                  <Text style={styles.title}>{title}</Text>
+                <View style={{
+                  paddingVertical: tokens.spacing.md,
+                  paddingHorizontal: tokens.spacing.lg,
+                  borderBottomWidth: 1,
+                  borderBottomColor: tokens.colors.border,
+                }}>
+                  <Text variant="subheading" style={{ textAlign: 'center' }}>{title}</Text>
                 </View>
               )}
               
               {items.map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={[
-                    styles.item,
-                    item.destructive && styles.destructiveItem,
-                    index === items.length - 1 && styles.lastItem,
-                  ]}
+                  style={{
+                    paddingVertical: tokens.spacing.md,
+                    paddingHorizontal: tokens.spacing.lg,
+                    borderBottomWidth: index === items.length - 1 ? 0 : 1,
+                    borderBottomColor: tokens.colors.border,
+                  }}
                   onPress={() => handleItemPress(item)}
                   accessibilityRole="button"
                   accessibilityLabel={item.label}
                 >
-                  <View style={styles.itemContent}>
+                  <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
                     {item.icon && (
                       <Ionicons
                         name={item.icon as any}
                         size={16}
-                        color={item.destructive ? '#FF3B30' : colors.text}
-                        style={styles.itemIcon}
+                        color={item.destructive ? tokens.colors.danger : tokens.colors.text}
+                        style={{ marginRight: tokens.spacing.sm }}
                       />
                     )}
-                    <Text style={[
-                      styles.itemText,
-                      item.destructive && styles.destructiveText,
-                    ]}>
+                    <Text 
+                      variant="body" 
+                      style={{
+                        textAlign: 'center',
+                        color: item.destructive ? tokens.colors.danger : tokens.colors.text,
+                      }}
+                    >
                       {item.label}
                     </Text>
                   </View>
@@ -87,12 +111,27 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               ))}
               
               <TouchableOpacity
-                style={[styles.item, styles.cancelItem]}
+                style={{
+                  paddingVertical: tokens.spacing.md,
+                  paddingHorizontal: tokens.spacing.lg,
+                  marginTop: tokens.spacing.sm,
+                  borderTopWidth: 8,
+                  borderTopColor: tokens.colors.border,
+                }}
                 onPress={onClose}
                 accessibilityRole="button"
                 accessibilityLabel="Cancel"
               >
-                <Text style={styles.cancelText}>Cancel</Text>
+                <Text 
+                  variant="body" 
+                  style={{
+                    textAlign: 'center',
+                    color: tokens.colors.accent,
+                    fontWeight: '600',
+                  }}
+                >
+                  Cancel
+                </Text>
               </TouchableOpacity>
             </View>
           </TouchableWithoutFeedback>
@@ -100,71 +139,4 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       </TouchableWithoutFeedback>
     </Modal>
   );
-};
-
-const { width } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-  },
-  container: {
-    backgroundColor: colors.card,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    paddingBottom: spacing.lg,
-    maxWidth: width,
-    width: '100%',
-  },
-  titleContainer: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  title: {
-    ...typography.subheading,
-    color: colors.text,
-    textAlign: 'center',
-  },
-  item: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  lastItem: {
-    borderBottomWidth: 0,
-  },
-  destructiveItem: {
-    // Additional styling for destructive actions if needed
-  },
-  itemText: {
-    ...typography.body,
-    color: colors.text,
-    textAlign: 'center',
-  },
-  destructiveText: {
-    color: '#FF3B30',
-  },
-  cancelItem: {
-    marginTop: spacing.sm,
-    borderTopWidth: 8,
-    borderTopColor: colors.border,
-  },
-  cancelText: {
-    ...typography.body,
-    color: colors.primary,
-    textAlign: 'center',
-    fontWeight: '600',
-  },
-  itemContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  itemIcon: {
-    marginRight: spacing.sm,
-  },
-}); 
+}; 
