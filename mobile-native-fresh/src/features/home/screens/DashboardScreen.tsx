@@ -303,17 +303,27 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     }, 3000);
   };
 
-  // Add runtime verification for content loading
+  // Runtime data load verification
   useEffect(() => {
-    if (!binsLoading && !thoughtmarksLoading) {
-      if (!bins || bins.length === 0) {
-        console.warn('Dashboard: No bins loaded from server/client cache');
-      }
+    if (!thoughtmarksLoading && !binsLoading) {
       if (!thoughtmarks || thoughtmarks.length === 0) {
-        console.warn('Dashboard: No thoughtmarks loaded from server/client cache');
+        console.warn('DashboardScreen: No thoughtmarks loaded');
+      }
+      if (!bins || bins.length === 0) {
+        console.warn('DashboardScreen: No bins loaded');
+      }
+      
+      // Block commits in development if data is empty
+      if (__DEV__) {
+        if (!thoughtmarks || thoughtmarks.length === 0) {
+          console.error('DashboardScreen: Layout rendering with empty thoughtmarks array');
+        }
+        if (!bins || bins.length === 0) {
+          console.error('DashboardScreen: Layout rendering with empty bins array');
+        }
       }
     }
-  }, [bins, thoughtmarks, binsLoading, thoughtmarksLoading]);
+  }, [thoughtmarks, bins, thoughtmarksLoading, binsLoading]);
 
   // Render section content based on section ID
   const renderSectionContent = (sectionId: string) => {
@@ -546,6 +556,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         return null;
     }
   };
+
+  // Check if we should render fallback
+  const shouldRenderFallback = (!thoughtmarks || thoughtmarks.length === 0) && 
+                               (!bins || bins.length === 0) && 
+                               !thoughtmarksLoading && 
+                               !binsLoading;
 
   // Create styles with tokens
   const styles = StyleSheet.create({
@@ -912,6 +928,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       opacity: 0.8,
     },
   });
+
+  // Fallback component for when data is not loaded
+  const renderFallbackContent = () => (
+    <View style={styles.emptyState}>
+      <Text style={styles.emptyStateText}>
+        {thoughtmarksLoading || binsLoading ? 'Loading content...' : 'No content available'}
+      </Text>
+    </View>
+  );
+
+  // Check if we should render fallback
+  if (shouldRenderFallback) {
+    return (
+      <View style={styles.container}>
+        {renderFallbackContent()}
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
