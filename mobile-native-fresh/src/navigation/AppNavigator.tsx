@@ -49,43 +49,43 @@ import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
 // Placeholder screens - to be implemented
 const CreateBinScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Create Bin Screen</Text>
+    <Text variant="heading" size="lg">Create Bin Screen</Text>
   </View>
 );
 
 const BinDetailScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Bin Detail Screen</Text>
+    <Text variant="heading" size="lg">Bin Detail Screen</Text>
   </View>
 );
 
 const VoiceRecordScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Voice Record Screen</Text>
+    <Text variant="heading" size="lg">Voice Record Screen</Text>
   </View>
 );
 
 const TasksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Tasks Screen</Text>
+    <Text variant="heading" size="lg">Tasks Screen</Text>
   </View>
 );
 
 const BinsScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Bins Screen</Text>
+    <Text variant="heading" size="lg">Bins Screen</Text>
   </View>
 );
 
 const ThoughtmarksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Thoughtmarks Screen</Text>
+    <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
   </View>
 );
 
 const ArchiveScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Archive Screen</Text>
+    <Text variant="heading" size="lg">Archive Screen</Text>
   </View>
 );
 
