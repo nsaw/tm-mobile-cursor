@@ -98,7 +98,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               <Text variant="heading" style={{ marginBottom: 4 }}>
                 {steps[currentStep].title}
               </Text>
-              <Caption><Text>{`${currentStep + 1} of ${steps.length}`}</Text></Caption>
+              <Caption>{`${currentStep + 1} of ${steps.length}`}</Caption>
             </View>
           </View>
 
