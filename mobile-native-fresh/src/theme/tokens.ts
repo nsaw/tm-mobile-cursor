@@ -44,6 +44,7 @@ export const designTokens = {
     xl: 32,   // Updated to match requirements
     xxl: 43,  // 32px * 1.34
     xxxl: 64, // 48px * 1.34
+    page: 16, // Page-level horizontal padding
   },
   
   radius: {

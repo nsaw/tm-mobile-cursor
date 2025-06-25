@@ -562,13 +562,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
       paddingBottom: 120, // Increased padding to account for nav bar + safe area
       minHeight: '100%', // Ensure content fills the scroll view
+      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
     },
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
       marginBottom: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
-      paddingHorizontal: tokens.spacing.sm, // Reduced from spacing.lg for full width
+      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
     },
     headerLeft: {
       flexDirection: 'row',
@@ -621,7 +622,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     aiToolsContainer: {
       marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
-      paddingHorizontal: tokens.spacing.sm, // Reduced from spacing.lg for full width
+      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
     },
     section: {
       marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
