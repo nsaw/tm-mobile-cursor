@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
-  StyleSheet,
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../theme/theme';
+import { Text } from './Text';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface ModernHeaderProps {
   title: string;
@@ -27,93 +26,93 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   rightAction,
   showBackButton = true,
 }) => {
+  const { tokens } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContent}>
-        <View style={styles.leftSection}>
+    <View style={{
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      borderBottomWidth: 1,
+      borderBottomColor: tokens.colors.divider,
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: 2,
+      minHeight: 40,
+      // Cross-platform shadow
+      ...Platform.select({
+        ios: {
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.3,
+          shadowRadius: 8,
+        },
+        android: {
+          elevation: 8,
+        },
+      }),
+    }}>
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        minHeight: 32,
+      }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          flex: 1,
+        }}>
           {showBackButton && onBack && (
-            <TouchableOpacity style={styles.backButton} onPress={onBack}>
-              <Ionicons name="arrow-back" size={20} color={colors.text} />
+            <TouchableOpacity 
+              style={{
+                marginRight: tokens.spacing.md,
+                padding: tokens.spacing.xs,
+                borderRadius: tokens.radius.sm,
+                backgroundColor: tokens.colors.surface,
+              }} 
+              onPress={onBack}
+            >
+              <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
             </TouchableOpacity>
           )}
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{title}</Text>
-            {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+          <View style={{ flex: 1 }}>
+            <Text 
+              variant="heading2" 
+              style={{ 
+                textTransform: 'uppercase',
+                letterSpacing: 1,
+              }}
+            >
+              {title}
+            </Text>
+            {subtitle && (
+              <Text 
+                variant="body" 
+                size="sm"
+                style={{ 
+                  marginTop: 1,
+                }}
+              >
+                {subtitle}
+              </Text>
+            )}
           </View>
         </View>
         
         {rightAction && (
-          <TouchableOpacity style={styles.rightButton} onPress={rightAction.onPress}>
-            <Ionicons name={rightAction.icon as any} size={20} color={colors.text} />
+          <TouchableOpacity 
+            style={{
+              padding: tokens.spacing.xs,
+              borderRadius: tokens.radius.sm,
+              backgroundColor: tokens.colors.surface,
+            }} 
+            onPress={rightAction.onPress}
+          >
+            <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
           </TouchableOpacity>
         )}
       </View>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
-    paddingHorizontal: 16,
-    paddingVertical: 2,
-    minHeight: 40,
-    // Cross-platform shadow
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 8,
-      },
-    }),
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minHeight: 32,
-  },
-  leftSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  backButton: {
-    marginRight: spacing.md,
-    padding: spacing.xs,
-    borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-  },
-  titleContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: typography.heading.fontSize,
-    fontWeight: '700',
-    color: colors.text,
-    textTransform: 'uppercase',
-    fontFamily: 'Ubuntu_700Bold',
-    letterSpacing: 1,
-  },
-  subtitle: {
-    fontSize: typography.body.fontSize * 0.8,
-    color: colors.subtext,
-    marginTop: 1,
-    fontWeight: '400',
-    fontFamily: 'Ubuntu_400Regular',
-  },
-  rightButton: {
-    padding: spacing.xs,
-    borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-  },
-}); 
+}; 
