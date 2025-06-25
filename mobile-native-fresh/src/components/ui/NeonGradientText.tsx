@@ -1,64 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, TextStyle } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import { Text } from './Text';
 
 interface NeonGradientTextProps {
-  children: string;
-  style?: any;
+  children: React.ReactNode;
+  style?: TextStyle;
+  variant?: 'tagline' | 'body' | 'heading' | 'title' | 'subtitle' | 'caption' | 'muted';
 }
 
 export const NeonGradientText: React.FC<NeonGradientTextProps> = ({ 
   children, 
-  style 
+  style,
+  variant = 'tagline'
 }) => {
   const { tokens } = useTheme();
-  const animatedValue = useRef(new Animated.Value(0)).current;
 
-  const styles = getStyles(tokens);
-
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.timing(animatedValue, {
-        toValue: 1,
-        duration: 4000, // 4 seconds to match the original CSS animation
-        useNativeDriver: false,
-      })
-    );
-    animation.start();
-
-    return () => animation.stop();
-  }, [animatedValue]);
-
-  const gradientColors = ['#C6D600', '#00FFFF', '#FF00FF', '#C6D600'];
-  
-  const interpolatedColor = animatedValue.interpolate({
-    inputRange: [0, 0.33, 0.66, 1],
-    outputRange: gradientColors,
-  });
+  const neonStyle: TextStyle = {
+    fontSize: tokens.typography.fontSize.sm,
+    fontWeight: tokens.typography.fontWeight.medium,
+    fontFamily: tokens.typography.fontFamily.body,
+    color: '#C6D600',
+    textShadowColor: '#C6D600',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    letterSpacing: 0.2,
+    ...style,
+  };
 
   return (
-    <Animated.Text
-      style={[
-        styles.neonText,
-        {
-          color: interpolatedColor,
-        },
-        style,
-      ]}
+    <Text
+      variant={variant}
+      style={neonStyle}
     >
       {children}
-    </Animated.Text>
+    </Text>
   );
 };
 
 const getStyles = (tokens: any) => StyleSheet.create({
   neonText: {
-    fontSize: 22, // Increased from 19 to 22 for better readability
-    fontWeight: '700',
-    fontFamily: 'Ubuntu',
+    fontSize: tokens.typography.fontSize.sm, // Use tagline variant size
+    fontWeight: tokens.typography.fontWeight.medium, // Medium weight for tagline
+    fontFamily: tokens.typography.fontFamily.body,
+    color: '#C6D600', // Use the accent color directly
     textShadowColor: '#C6D600',
-    textShadowOffset: { width: 8, height: 8 }, // 45deg angle
-    textShadowRadius: 11, // 8 * 1.34
+    textShadowOffset: { width: 1, height: 1 }, // 45deg angle (1,1)
+    textShadowRadius: 2,
+    letterSpacing: 0.2,
   },
 }); 

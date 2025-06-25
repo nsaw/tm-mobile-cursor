@@ -303,6 +303,18 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     }, 3000);
   };
 
+  // Add runtime verification for content loading
+  useEffect(() => {
+    if (!binsLoading && !thoughtmarksLoading) {
+      if (!bins || bins.length === 0) {
+        console.warn('Dashboard: No bins loaded from server/client cache');
+      }
+      if (!thoughtmarks || thoughtmarks.length === 0) {
+        console.warn('Dashboard: No thoughtmarks loaded from server/client cache');
+      }
+    }
+  }, [bins, thoughtmarks, binsLoading, thoughtmarksLoading]);
+
   // Render section content based on section ID
   const renderSectionContent = (sectionId: string) => {
     switch (sectionId) {
@@ -429,15 +441,27 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         return (
           <View style={styles.binsContainer}>
             {binsLoading ? (
-              <View style={styles.binsGrid}>
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <View key={i}><Text>Loading...</Text></View>
+              <ScrollView 
+                horizontal 
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.binsHorizontalContent}
+              >
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <View key={i} style={styles.binCardSkeletonHorizontal}>
+                    <Text>Loading...</Text>
+                  </View>
                 ))}
-              </View>
+              </ScrollView>
             ) : (
               <>
-                {/* Template bins in preferred order */}
-                <View style={styles.binsGrid}>
+                {/* Template bins in horizontal scroll */}
+                <ScrollView 
+                  horizontal 
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.binsHorizontalContent}
+                  snapToInterval={160} // Card width + margin
+                  decelerationRate="fast"
+                >
                   {['Relevant', 'Life Hacks', 'Quotes', 'Inspiration', 'Circle Back', 'Revelations', 'Funny', 'Stories', 'Half-Baked', 'Team-Up', 'Newsworthy'].map((binName) => {
                     // Find the template bin (preferring lower ID for original)
                     const bin = bins.filter(b => b.name === binName).sort((a: any, b: any) => a.id - b.id)[0];
@@ -445,15 +469,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     return (
                       <TouchableOpacity
                         key={bin.id}
-                        style={styles.binCard}
+                        style={styles.binCardHorizontal}
                         onPress={() => handleBinPress(bin)}
                         accessibilityRole="button"
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
                       >
-                        <View style={styles.binCardContent}>
-                          <Text style={styles.binCardName}>{bin.name || 'Unnamed Bin'}</Text>
-                          <Text style={styles.binCardCount}>
+                        <View style={styles.binCardContentHorizontal}>
+                          <Text style={styles.binCardNameHorizontal}>{bin.name || 'Unnamed Bin'}</Text>
+                          <Text style={styles.binCardCountHorizontal}>
                             {bin?.thoughtmarkCount || 0}
                           </Text>
                         </View>
@@ -463,20 +487,20 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   
                   {/* New Bin Button */}
                   <TouchableOpacity
-                    style={styles.newBinCard}
+                    style={styles.newBinCardHorizontal}
                     onPress={handleCreateBin}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel="Create new bin"
                   >
-                    <View style={styles.newBinCardContent}>
+                    <View style={styles.newBinCardContentHorizontal}>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
-                      <Text style={styles.newBinText}>New Bin</Text>
+                      <Text style={styles.newBinTextHorizontal}>New Bin</Text>
                     </View>
                   </TouchableOpacity>
-                </View>
+                </ScrollView>
                 
-                {/* Special sections below grid */}
+                {/* Special sections below horizontal scroll */}
                 <View style={styles.specialBinsContainer}>
                   {/* Saved to Sort Later */}
                   <TouchableOpacity
@@ -644,80 +668,73 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     binsContainer: {
       // Styles for the bins container
     },
-    binsGrid: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      marginBottom: tokens.spacing.md,
+    binsHorizontalContent: {
+      padding: tokens.spacing.sm,
     },
-    binCardSkeleton: {
-      width: '48%', // Use percentage instead of fixed width
-      height: 70, // 52 * 1.34
+    binCardSkeletonHorizontal: {
+      width: 160,
+      height: 70,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
-      marginBottom: tokens.spacing.sm,
-      borderWidth: 1, // Added subtle border
-      borderColor: tokens.colors.border, // Subtle gray outline
+      marginRight: tokens.spacing.sm,
     },
-    binCard: {
-      width: '48%', // Use percentage instead of fixed width
-      height: 70, // 52 * 1.34
+    binCardHorizontal: {
+      width: 160,
+      height: 70,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
       padding: tokens.spacing.sm,
-      marginBottom: tokens.spacing.sm,
+      marginRight: tokens.spacing.sm,
       justifyContent: 'center',
-      borderWidth: 1, // Added subtle border
-      borderColor: tokens.colors.border, // Subtle gray outline
     },
-    binCardContent: {
+    binCardContentHorizontal: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
       width: '100%',
     },
-    binCardName: {
+    binCardNameHorizontal: {
       fontSize: RFValue(16),
       fontWeight: '600',
       color: tokens.colors.text,
       marginBottom: 2,
       fontFamily: 'Ubuntu_600SemiBold',
     },
-    binCardCount: {
+    binCardCountHorizontal: {
       fontSize: RFValue(13),
       color: tokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
     },
-    newBinCard: {
-      width: '48%', // Use percentage instead of fixed width
-      height: 52, // h-13 equivalent
+    newBinCardHorizontal: {
+      width: 160,
+      height: 52,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
       borderWidth: 2,
       borderColor: tokens.colors.textMuted,
       borderStyle: 'dashed',
       padding: tokens.spacing.sm,
-      marginBottom: tokens.spacing.sm,
+      marginRight: tokens.spacing.sm,
       justifyContent: 'center',
     },
-    newBinCardContent: {
+    newBinCardContentHorizontal: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
       gap: tokens.spacing.xs,
     },
-    newBinText: {
+    newBinTextHorizontal: {
       fontSize: RFValue(14),
       color: tokens.colors.accent,
       fontWeight: '500',
-      opacity: 0.8, // Added 80% opacity for text below h3
+      opacity: 0.8,
     },
     specialBinsContainer: {
       marginTop: tokens.spacing.md * 1.34,
     },
     specialBinCard: {
       width: '100%',
-      height: 70, // 52 * 1.34
+      height: 70,
       backgroundColor: tokens.colors.accent,
       borderRadius: tokens.radius.md,
       borderWidth: 1,
@@ -736,23 +753,23 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(14),
       color: tokens.colors.text,
       fontWeight: '500',
-      opacity: 0.8, // Added 80% opacity for text below h3
+      opacity: 0.8,
     },
     specialBinCardCount: {
       fontSize: RFValue(11),
       color: tokens.colors.accent,
-      opacity: 0.8, // Added 80% opacity for text below h3
+      opacity: 0.8,
     },
     archiveCard: {
       width: '100%',
-      height: 70, // 52 * 1.34
+      height: 70,
       backgroundColor: 'transparent',
       borderRadius: tokens.radius.md,
       padding: tokens.spacing.sm * 1.34,
       marginBottom: tokens.spacing.sm * 1.34,
       justifyContent: 'center',
-      borderWidth: 1, // Added subtle border
-      borderColor: tokens.colors.border, // Subtle gray outline
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
     },
     archiveCardContent: {
       flexDirection: 'row',
@@ -764,7 +781,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(14),
       color: tokens.colors.text,
       fontWeight: '500',
-      opacity: 0.8, // Added 80% opacity for text below h3
+      opacity: 0.8,
     },
     viewMoreCard: {
       backgroundColor: 'transparent',
@@ -775,7 +792,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       borderWidth: 2,
       borderColor: tokens.colors.accent,
       borderStyle: 'dashed',
-      height: 80, // 60 * 1.34
+      height: 80,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
@@ -800,12 +817,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(14),
       color: tokens.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: 32, // 24 * 1.34
+      lineHeight: 32,
       opacity: 0.8,
     },
     reorderTooltip: {
       position: 'absolute',
-      top: 107, // 80 * 1.34
+      top: 107,
       right: tokens.spacing.lg * 1.34,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
@@ -813,23 +830,23 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       shadowColor: tokens.colors.text,
       shadowOffset: {
         width: 0,
-        height: 3, // 2 * 1.34
+        height: 3,
       },
       shadowOpacity: 0.1,
-      shadowRadius: 5, // 4 * 1.34
-      elevation: 4, // 3 * 1.34
+      shadowRadius: 5,
+      elevation: 4,
       zIndex: 1000,
-      maxWidth: 268, // 200 * 1.34
+      maxWidth: 268,
     },
     tooltipArrow: {
       position: 'absolute',
-      top: -11, // -8 * 1.34
-      right: 27, // 20 * 1.34
+      top: -11,
+      right: 27,
       width: 0,
       height: 0,
-      borderLeftWidth: 11, // 8 * 1.34
-      borderRightWidth: 11, // 8 * 1.34
-      borderBottomWidth: 11, // 8 * 1.34
+      borderLeftWidth: 11,
+      borderRightWidth: 11,
+      borderBottomWidth: 11,
       borderColor: `transparent transparent ${tokens.colors.backgroundSecondary} transparent`,
     },
     reorderTooltipText: {
@@ -880,7 +897,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(12),
       fontWeight: '400',
       color: tokens.colors.textSecondary,
-      letterSpacing: 0.7, // 0.5 * 1.34
+      letterSpacing: 0.7,
       fontFamily: 'Ubuntu_400Regular',
       textTransform: 'lowercase',
       opacity: 0.8,
@@ -915,7 +932,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             />
             <View style={styles.titleContainer}>
               <Text style={styles.title}>THOUGHTMARKS</Text>
-              <NeonGradientText><Text>bookmarks for your brain</Text></NeonGradientText>
+              <NeonGradientText variant="tagline">bookmarks for your brain</NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>

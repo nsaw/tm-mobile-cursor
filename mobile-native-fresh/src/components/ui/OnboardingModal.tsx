@@ -102,13 +102,25 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             </View>
           </View>
 
-          {/* Icon - Centered with flex and padding */}
-          <View style={styles.iconContainer}>
+          {/* Icon - Centered with proper spacing */}
+          <View style={[styles.iconContainer, { 
+            alignSelf: 'center',
+            marginTop: tokens.spacing.lg,
+            marginBottom: tokens.spacing.lg,
+          }]}>
             {steps[currentStep].icon}
           </View>
 
-          {/* Description - Using tagline variant */}
-          <Text variant="tagline" style={{ marginBottom: tokens.spacing.lg, textAlign: 'center' }} numberOfLines={3}>
+          {/* Description - Using tagline variant with safe vertical spacing */}
+          <Text 
+            variant="tagline" 
+            style={{ 
+              marginBottom: tokens.spacing.lg, 
+              textAlign: 'center',
+              paddingVertical: tokens.spacing.lg,
+            }} 
+            numberOfLines={3}
+          >
             {steps[currentStep].description}
           </Text>
 
