@@ -5,7 +5,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { getTextVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface TextProps {
-  variant?: 'body' | 'heading' | 'heading2' | 'subheading' | 'caption' | 'label';
+  variant?: 'body' | 'heading' | 'title' | 'subtitle' | 'caption' | 'muted';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   children: React.ReactNode;
   style?: TextStyle;
@@ -51,7 +51,9 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <RNText><Text>{children}</Text></RNText>
+    <RNText style={finalTextStyle} numberOfLines={numberOfLines} ellipsizeMode={ellipsizeMode}>
+      {children}
+    </RNText>
   );
 };
 
@@ -83,7 +85,7 @@ export const Heading: React.FC<Omit<TextProps, 'variant'> & { level?: 1 | 2 | 3 
 };
 
 export const Subheading: React.FC<Omit<TextProps, 'variant'>> = (props) => (
-  <Text variant="subheading" {...props} />
+  <Text variant="subtitle" {...props} />
 );
 
 export const BodyText: React.FC<Omit<TextProps, 'variant'>> = (props) => (
@@ -95,5 +97,5 @@ export const Caption: React.FC<Omit<TextProps, 'variant'>> = (props) => (
 );
 
 export const Label: React.FC<Omit<TextProps, 'variant'>> = (props) => (
-  <Text variant="label" {...props} />
+  <Text variant="caption" {...props} />
 ); 
