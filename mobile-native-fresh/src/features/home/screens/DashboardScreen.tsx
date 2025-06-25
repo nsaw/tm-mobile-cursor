@@ -634,12 +634,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginBottom: tokens.spacing.md * 0.5, // Reduced from spacing.md
     },
     sectionTitle: {
-      fontSize: RFValue(22),
-      fontWeight: '700',
-      color: tokens.colors.text,
-      opacity: 0.9, // Added 90% opacity for h2 text
-      letterSpacing: 0.7, // 0.5 * 1.34
-      fontFamily: 'Ubuntu_700Bold',
+      fontSize: RFValue(18),
+      fontWeight: '600',
+      color: tokens.colors.textSecondary,
+      opacity: 0.7,
+      letterSpacing: 0.5,
+      fontFamily: 'Ubuntu_600SemiBold',
     },
     sectionHeaderRight: {
       flexDirection: 'row',

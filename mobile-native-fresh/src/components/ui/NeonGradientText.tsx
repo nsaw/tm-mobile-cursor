@@ -18,14 +18,9 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
   const { tokens } = useTheme();
 
   const neonStyle: TextStyle = {
-    fontSize: tokens.typography.fontSize.sm,
-    fontWeight: tokens.typography.fontWeight.medium,
-    fontFamily: tokens.typography.fontFamily.body,
+    ...tokens.typography.tagline, // Use tagline variant from tokens
     color: '#C6D600',
-    textShadowColor: '#C6D600',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
-    letterSpacing: 0.2,
+    // Remove glow effects for tagline variant
     ...style,
   };
 

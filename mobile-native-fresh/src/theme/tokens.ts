@@ -90,6 +90,14 @@ export const designTokens = {
       textTransform: 'uppercase' as const,
       letterSpacing: 1,
     },
+    // Tagline variant
+    tagline: {
+      fontFamily: 'Ubuntu',
+      fontSize: 12,
+      fontWeight: '500',
+      opacity: 0.8,
+      letterSpacing: 0.5,
+    },
   },
   
   shadows: {
