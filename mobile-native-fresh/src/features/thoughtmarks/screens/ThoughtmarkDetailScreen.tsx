@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -9,10 +8,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { TagChip } from '../../../components/ui/TagChip';
+import { Text } from '../../../components/ui/Text';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useBins } from '../../home/hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
@@ -24,6 +24,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<'ThoughtmarkDetail'>>();
   const { thoughtmarkId } = route.params;
+  const { tokens } = useTheme();
   
   const { thoughtmarks, loading, getThoughtmark, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
@@ -181,7 +182,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   if (loading || !thoughtmark) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator size="large" color={tokens.colors.accent} />
         <Text style={styles.loadingText}>Loading thoughtmark...</Text>
       </View>
     );
@@ -196,7 +197,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color={colors.text} />
+            <Ionicons name="arrow-back" size={24} color={tokens.text} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         </View>
@@ -210,7 +211,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
-              color={thoughtmark.isPinned ? colors.primary : colors.subtext} 
+              color={thoughtmark.isPinned ? tokens.primary : tokens.subtext} 
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -219,7 +220,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Edit thoughtmark"
           >
-            <Ionicons name="create-outline" size={20} color={colors.subtext} />
+            <Ionicons name="create-outline" size={20} color={tokens.subtext} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
@@ -227,7 +228,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Delete thoughtmark"
           >
-            <Ionicons name="trash-outline" size={20} color={colors.primary} />
+            <Ionicons name="trash-outline" size={20} color={tokens.primary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -247,7 +248,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
-                  color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
+                  color={thoughtmark.isCompleted ? tokens.primary : tokens.subtext} 
                 />
                 <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
                   {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
@@ -270,7 +271,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="sparkles" size={16} color={colors.primary} />
+                  <Ionicons name="sparkles" size={16} color={tokens.primary} />
                   <Text style={styles.aiTitle}>AI Insights</Text>
                 </View>
                 <TouchableOpacity
@@ -280,9 +281,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI insights"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={colors.primary} />
+                    <ActivityIndicator size="small" color={tokens.primary} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={colors.primary} />
+                    <Ionicons name="refresh" size={16} color={tokens.primary} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -321,7 +322,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="bulb-outline" size={16} color={colors.primary} />
+                  <Ionicons name="bulb-outline" size={16} color={tokens.primary} />
                   <Text style={styles.aiTitle}>AI Suggestions</Text>
                 </View>
                 <TouchableOpacity
@@ -331,9 +332,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI suggestions"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={colors.primary} />
+                    <ActivityIndicator size="small" color={tokens.primary} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={colors.primary} />
+                    <Ionicons name="refresh" size={16} color={tokens.primary} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -375,20 +376,20 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <Card style={styles.metadataCard}>
           <CardContent>
             <View style={styles.metadataItem}>
-              <Ionicons name="folder-outline" size={16} color={colors.subtext} />
+              <Ionicons name="folder-outline" size={16} color={tokens.subtext} />
               <Text style={styles.metadataLabel}>Bin:</Text>
               <Text style={styles.metadataValue}>{getBinName(thoughtmark.binId)}</Text>
             </View>
             
             <View style={styles.metadataItem}>
-              <Ionicons name="time-outline" size={16} color={colors.subtext} />
+              <Ionicons name="time-outline" size={16} color={tokens.subtext} />
               <Text style={styles.metadataLabel}>Created:</Text>
               <Text style={styles.metadataValue}>{formatDate(thoughtmark.createdAt)}</Text>
             </View>
             
             {thoughtmark.updatedAt !== thoughtmark.createdAt && (
               <View style={styles.metadataItem}>
-                <Ionicons name="refresh-outline" size={16} color={colors.subtext} />
+                <Ionicons name="refresh-outline" size={16} color={tokens.subtext} />
                 <Text style={styles.metadataLabel}>Updated:</Text>
                 <Text style={styles.metadataValue}>{formatDate(thoughtmark.updatedAt)}</Text>
               </View>
@@ -396,7 +397,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             
             {thoughtmark.dueDate && (
               <View style={styles.metadataItem}>
-                <Ionicons name="calendar-outline" size={16} color={colors.subtext} />
+                <Ionicons name="calendar-outline" size={16} color={tokens.subtext} />
                 <Text style={styles.metadataLabel}>Due:</Text>
                 <Text style={styles.metadataValue}>{formatDate(thoughtmark.dueDate)}</Text>
               </View>
@@ -456,7 +457,7 @@ const getInsightTypeColor = (type: string) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens.background,
   },
   loadingContainer: {
     flex: 1,
@@ -466,7 +467,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: spacing.md,
     fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    color: tokens.subtext,
   },
   header: {
     flexDirection: 'row',
@@ -486,7 +487,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: typography.heading.fontSize,
     fontWeight: '700',
-    color: colors.text,
+    color: tokens.text,
   },
   headerActions: {
     flexDirection: 'row',
@@ -508,7 +509,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: typography.heading.fontSize,
     fontWeight: '700',
-    color: colors.text,
+    color: tokens.text,
     marginBottom: spacing.md,
   },
   taskStatus: {
@@ -522,10 +523,10 @@ const styles = StyleSheet.create({
   taskStatusText: {
     marginLeft: spacing.sm,
     fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    color: tokens.subtext,
   },
   taskCompletedText: {
-    color: colors.primary,
+    color: tokens.primary,
     textDecorationLine: 'line-through',
   },
   contentCard: {
@@ -533,7 +534,7 @@ const styles = StyleSheet.create({
   },
   contentText: {
     fontSize: typography.body.fontSize,
-    color: colors.text,
+    color: tokens.text,
     lineHeight: 24,
   },
   aiCard: {
@@ -552,12 +553,12 @@ const styles = StyleSheet.create({
   aiTitle: {
     fontSize: typography.subheading.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.text,
     marginLeft: spacing.sm,
   },
   aiEmptyText: {
     fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    color: tokens.subtext,
     fontStyle: 'italic',
     textAlign: 'center',
   },
@@ -582,7 +583,7 @@ const styles = StyleSheet.create({
   },
   insightTypeText: {
     fontSize: 10,
-    color: colors.background,
+    color: tokens.background,
     fontWeight: '600',
     textTransform: 'uppercase',
   },
@@ -594,18 +595,18 @@ const styles = StyleSheet.create({
   },
   actionableText: {
     fontSize: 10,
-    color: colors.background,
+    color: tokens.background,
     fontWeight: '600',
   },
   insightTitle: {
     fontSize: typography.body.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.text,
     marginBottom: spacing.xs,
   },
   insightDescription: {
     fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    color: tokens.subtext,
   },
   suggestionsContainer: {
     gap: spacing.md,
@@ -616,7 +617,7 @@ const styles = StyleSheet.create({
   suggestionLabel: {
     fontSize: typography.body.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.text,
   },
   suggestedTags: {
     flexDirection: 'row',
@@ -630,7 +631,7 @@ const styles = StyleSheet.create({
   },
   contentSuggestionText: {
     fontSize: typography.body.fontSize,
-    color: colors.text,
+    color: tokens.text,
   },
   metadataCard: {
     marginBottom: spacing.md,
@@ -643,14 +644,14 @@ const styles = StyleSheet.create({
   metadataLabel: {
     fontSize: typography.body.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.text,
     marginLeft: spacing.sm,
     marginRight: spacing.sm,
     minWidth: 80,
   },
   metadataValue: {
     fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    color: tokens.subtext,
     flex: 1,
   },
   tagsCard: {
@@ -659,7 +660,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: typography.subheading.fontSize,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.text,
     marginBottom: spacing.md,
   },
   tagsContainer: {
