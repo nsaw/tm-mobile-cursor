@@ -26,7 +26,8 @@ const getStyles = (tokens: any, isCompleted: boolean, isOverdue: boolean) => Sty
     borderWidth: 1,
     borderColor: tokens.colors.border,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    width: '100%',
   },
   content: {
     flex: 1,
@@ -41,6 +42,7 @@ const getStyles = (tokens: any, isCompleted: boolean, isOverdue: boolean) => Sty
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: tokens.spacing.md,
+    marginTop: 2,
   },
   textContainer: {
     flex: 1,
@@ -51,6 +53,12 @@ const getStyles = (tokens: any, isCompleted: boolean, isOverdue: boolean) => Sty
     color: isOverdue ? '#FCA5A5' : isCompleted ? tokens.colors.textSecondary : tokens.colors.text,
     marginBottom: tokens.spacing.xs,
     textDecorationLine: isCompleted ? 'line-through' : 'none',
+  },
+  contentText: {
+    fontSize: tokens.typography.fontSize.sm,
+    color: isCompleted ? tokens.colors.textSecondary : tokens.colors.textSecondary,
+    marginBottom: tokens.spacing.xs,
+    lineHeight: tokens.typography.fontSize.sm * 1.4,
   },
   dueDate: {
     fontSize: tokens.typography.fontSize.sm,
@@ -157,6 +165,14 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             </Text>
           )}
         </View>
+        {task.content && (
+          <Text
+            style={styles.contentText}
+            numberOfLines={2}
+          >
+            {task.content}
+          </Text>
+        )}
       </View>
       
       {task.priority && (
