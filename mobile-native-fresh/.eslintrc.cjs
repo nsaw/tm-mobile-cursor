@@ -1,6 +1,6 @@
 // Register the local plugin for ESLint
 try {
-  require('eslint/lib/api').linter.definePlugin('thoughtmarks', require('./eslint-plugin-thoughtmarks.js'));
+  require('eslint/lib/api').linter.definePlugin('thoughtmarks', require('./eslint-plugin-thoughtmarks.cjs'));
 } catch (e) {
   // Ignore if already registered or in environments where this is not needed
 }
@@ -29,6 +29,7 @@ module.exports = {
     'jsx-a11y',
     'unused-imports',
     'promise',
+    'react-native',
   ],
   extends: [
     'eslint:recommended',
@@ -59,6 +60,11 @@ module.exports = {
     'promise/no-new-statics': 'error',
     'promise/no-return-in-finally': 'error',
     'promise/valid-params': 'error',
+    // React Native specific rules
+    'react-native/no-inline-styles': 'warn',
+    'react-native/no-unused-styles': 'warn',
+    'react-native/split-platform-components': 'warn',
+    'react-native/no-color-literals': 'warn',
     // Custom theming architecture rules (inlined)
     'no-restricted-imports': [
       'error',
@@ -77,6 +83,8 @@ module.exports = {
     'thoughtmarks/no-global-theme': 'error',
     'thoughtmarks/require-use-theme': 'error',
     'thoughtmarks/no-circular-text': 'error',
+    // Custom text wrapping rule
+    'thoughtmarks/enforce-text-wrapping': 'error',
     // Accessibility rules
     'jsx-a11y/accessible-emoji': 'warn',
     'jsx-a11y/alt-text': 'error',

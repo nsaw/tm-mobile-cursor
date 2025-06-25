@@ -19,6 +19,7 @@
     "lint:check-jsx": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep -E '(no-text-outside-text|no-inline-colors|enforce-theme-hook)' | wc -l",
     "lint:fix-accessibility": "node scripts/fix-accessibility.cjs",
     "lint:fix-all": "npm run lint:fix-text && npm run lint:fix-accessibility && npm run lint:check-theme && npm run lint:fix",
+    "lint:enforce-text-wrapping": "eslint . --ext .ts,.tsx --rule 'thoughtmarks/enforce-text-wrapping: error' --fix",
     "pre-commit": "npm run lint:fix-all && node scripts/scan-unwrapped-text.cjs",
     "fix:text-errors": "node scripts/auto-fix-text-errors.cjs",
     "auto:fix": "npm run fix:text-errors",
@@ -77,6 +78,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^5.0.0",
+    "eslint-plugin-thoughtmarks": "file:eslint-plugin-thoughtmarks",
     "eslint-plugin-unused-imports": "^4.1.4",
     "glob": "^11.0.3",
     "husky": "^8.0.3",
@@ -87,7 +90,11 @@
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
-        "exclude": ["react-native-responsive-fontsize", "firebase", "react-native-vector-icons"]
+        "exclude": [
+          "react-native-responsive-fontsize",
+          "firebase",
+          "react-native-vector-icons"
+        ]
       }
     }
   },
