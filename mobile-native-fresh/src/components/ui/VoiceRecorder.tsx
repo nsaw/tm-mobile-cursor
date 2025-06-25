@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Alert,
   Platform,
+  Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -51,6 +52,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [hasAutoSaved, setHasAutoSaved] = useState(false);
   const [autoSaveId, setAutoSaveId] = useState<number | null>(null);
+  const [audioUri, setAudioUri] = useState<string | null>(null);
 
   const transcriptRef = useRef<string>('');
 
@@ -140,6 +142,11 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
   const startRecording = async () => {
     try {
+      if (audioUri) {
+        Alert.alert('Recording in progress', 'You are already recording.');
+        return;
+      }
+
       setTranscript('');
       transcriptRef.current = '';
       setRecordingStage('listening');
@@ -156,6 +163,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
       setRecording(recording);
       setIsRecording(true);
+      setAudioUri(null);
 
       // Start voice recognition if available
       if (Voice) {
@@ -183,7 +191,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       setIsProcessing(true);
 
       await recording.stopAndUnloadAsync();
+      const uri = recording.getURI();
       setRecording(null);
+      setAudioUri(uri);
 
       // Stop voice recognition if available
       if (Voice) {
@@ -329,6 +339,147 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
   const stageContent = getStageContent();
 
+  const styles = StyleSheet.create({
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalContent: {
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.radius.lg,
+      padding: tokens.spacing.xl,
+      margin: tokens.spacing.lg,
+      width: Dimensions.get('window').width - tokens.spacing.lg * 2,
+      maxWidth: 400,
+      alignItems: 'center',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      marginBottom: tokens.spacing.lg,
+    },
+    closeButton: {
+      padding: tokens.spacing.sm,
+    },
+    title: {
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      textAlign: 'center',
+    },
+    recordButton: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      backgroundColor: tokens.colors.accent,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical: tokens.spacing.lg,
+    },
+    recordButtonRecording: {
+      backgroundColor: tokens.colors.danger,
+    },
+    recordButtonDisabled: {
+      backgroundColor: tokens.colors.textMuted,
+    },
+    recordIcon: {
+      color: tokens.colors.background,
+    },
+    statusText: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.md,
+    },
+    transcriptContainer: {
+      width: '100%',
+      minHeight: 100,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderRadius: tokens.radius.md,
+      padding: tokens.spacing.md,
+      marginTop: tokens.spacing.md,
+    },
+    transcriptText: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.text,
+      lineHeight: 20,
+    },
+    messageText: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+      fontStyle: 'italic',
+    },
+    buttonRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      width: '100%',
+      marginTop: tokens.spacing.lg,
+    },
+    actionButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+      borderRadius: tokens.radius.md,
+      backgroundColor: tokens.colors.surface,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+    },
+    actionButtonText: {
+      marginLeft: tokens.spacing.sm,
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.text,
+    },
+    testButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+      borderRadius: tokens.radius.md,
+      backgroundColor: tokens.colors.accent,
+      marginTop: tokens.spacing.md,
+    },
+    testButtonText: {
+      marginLeft: tokens.spacing.sm,
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.background,
+      fontWeight: '600',
+    },
+    testTipText: {
+      fontSize: tokens.typography.fontSize.xs,
+      color: tokens.colors.textMuted,
+      textAlign: 'center',
+      marginTop: tokens.spacing.sm,
+      fontStyle: 'italic',
+    },
+    recordingIcon: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: '#EF4444',
+      justifyContent: 'center',
+      alignItems: 'center',
+      shadowColor: '#EF4444',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.5,
+      shadowRadius: 16,
+      elevation: 8,
+    },
+    successIcon: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: '#10B981',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+
   if (!isVisible) return null;
 
   return (
@@ -339,216 +490,81 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       onRequestClose={cancelRecording}
     >
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
-          {/* Cancel Button */}
-          {stageContent.showCancel && (
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={cancelRecording}
-            >
-              <Ionicons name="close" size={24} color={designTokens.colors.textSecondary} />
+        <View style={styles.modalContent}>
+          <View style={styles.header}>
+            <View style={{ width: 40 }} />
+            <Text style={styles.title}>Voice Recorder</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording}>
+              <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
+          </View>
+
+          <Text style={styles.title}>Record Your Thought</Text>
+          
+          <TouchableOpacity
+            style={[
+              styles.recordButton,
+              isRecording && styles.recordButtonRecording,
+              isProcessing && styles.recordButtonDisabled,
+            ]}
+            onPress={isRecording ? stopRecording : startRecording}
+            disabled={isProcessing}
+          >
+            <Ionicons
+              name={isRecording ? "stop" : "mic"}
+              size={32}
+              style={styles.recordIcon}
+            />
+          </TouchableOpacity>
+
+          <Text style={styles.statusText}>
+            {isRecording
+              ? "Recording... Tap to stop"
+              : isProcessing
+              ? "Processing audio..."
+              : "Tap to start recording"}
+          </Text>
+
+          {transcript ? (
+            <View style={styles.transcriptContainer}>
+              <Text style={styles.transcriptText}>{transcript}</Text>
+            </View>
+          ) : (
+            <Text style={styles.messageText}>
+              {isProcessing
+                ? "Converting speech to text..."
+                : "Your transcript will appear here"}
+            </Text>
           )}
 
-          {/* Content */}
-          <View style={styles.content}>
-            {/* Icon */}
-            <View style={styles.iconContainer}>
-              {stageContent.icon}
+          <TouchableOpacity style={styles.testButton} onPress={() => Speech.speak("This is a test of the voice recorder functionality.")}>
+            <Ionicons name="flask" size={16} color={tokens.colors.accent} />
+            <Text style={styles.testButtonText}>Test Audio</Text>
+          </TouchableOpacity>
+          <Text style={styles.testTipText}>
+            Tap to hear a test message
+          </Text>
+          <Text style={styles.testTipText}>
+            (Requires device audio)
+          </Text>
+
+          {transcript && (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity style={styles.actionButton} onPress={() => {
+                onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
+                onClose();
+              }}>
+                <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
+                <Text style={styles.actionButtonText}>Use</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording}>
+                <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
+                <Text style={styles.actionButtonText}>Clear</Text>
+              </TouchableOpacity>
             </View>
-
-            {/* Title */}
-            <Text style={[styles.title, { color: designTokens.colors.text }]}>
-              {stageContent.title}
-            </Text>
-
-            {/* Message/Transcript */}
-            <View style={styles.messageContainer}>
-              {recordingStage === 'listening' && transcript ? (
-                <View style={[styles.transcriptContainer, { backgroundColor: designTokens.colors.surface }]}>
-                  <Text style={[styles.transcriptText, { color: designTokens.colors.text }]}>
-                    {transcript}
-                  </Text>
-                </View>
-              ) : (
-                <Text style={[styles.messageText, { color: designTokens.colors.textSecondary }]}>
-                  {stageContent.message}
-                </Text>
-              )}
-            </View>
-
-            {/* Action Buttons */}
-            {recordingStage === 'listening' && (
-              <View style={styles.actionButtons}>
-                <TouchableOpacity
-                  style={styles.stopButton}
-                  onPress={stopRecording}
-                >
-                  <Ionicons name="square" size={24} color="#FFFFFF" />
-                  <Text style={styles.stopButtonText}>Stop & Save</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-
-            {/* Test Button for Development */}
-            {recordingStage === 'ready' && __DEV__ && (
-              <View style={styles.testContainer}>
-                <TouchableOpacity
-                  style={styles.testButton}
-                  onPress={() => processTranscription("This is a test voice note to verify the thoughtmark creation functionality is working properly.")}
-                >
-                  <Ionicons name="flask" size={16} color={designTokens.colors.accent} />
-                  <Text style={[styles.testButtonText, { color: designTokens.colors.accent }]}>
-                    Test Save Function
-                  </Text>
-                </TouchableOpacity>
-                <View style={styles.testTips}>
-                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
-                    Try saying:
-                  </Text>
-                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
-                    "Remind me to call John tomorrow"
-                  </Text>
-                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
-                    "I had an idea about improving our workflow"
-                  </Text>
-                </View>
-              </View>
-            )}
-          </View>
+          )}
         </View>
       </View>
     </Modal>
   );
-};
-
-const styles = StyleSheet.create({
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  modalContent: {
-    width: '100%',
-    maxWidth: 400,
-    borderRadius: 24,
-    padding: 32,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  cancelButton: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: 'rgba(128, 128, 128, 0.8)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  content: {
-    alignItems: 'center',
-    width: '100%',
-  },
-  iconContainer: {
-    marginBottom: 24,
-  },
-  recordingIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#EF4444',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#EF4444',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  successIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#10B981',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  messageContainer: {
-    minHeight: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  messageText: {
-    fontSize: 16,
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-  transcriptContainer: {
-    padding: 16,
-    borderRadius: 16,
-    maxHeight: 120,
-    width: '100%',
-  },
-  transcriptText: {
-    fontSize: 14,
-    lineHeight: 20,
-    textAlign: 'left',
-  },
-  actionButtons: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  stopButton: {
-    backgroundColor: '#EF4444',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stopButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  testContainer: {
-    marginTop: 24,
-    alignItems: 'center',
-  },
-  testButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderWidth: 1,
-    borderColor: 'rgba(59, 130, 246, 0.3)',
-  },
-  testButtonText: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  testTips: {
-    marginTop: 16,
-    alignItems: 'center',
-  },
-  testTipText: {
-    fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 4,
-  },
-}); 
+}; 

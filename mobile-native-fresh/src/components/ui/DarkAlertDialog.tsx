@@ -3,73 +3,120 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Modal,
   StyleSheet,
+  Modal,
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../theme/ThemeProvider';
 
-interface AlertButton {
-  text: string;
-  onPress?: () => void;
-  style?: 'default' | 'cancel' | 'destructive';
-}
-
 interface DarkAlertDialogProps {
   visible: boolean;
   title: string;
   message: string;
-  buttons: AlertButton[];
-  onDismiss?: () => void;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  type?: 'danger' | 'warning' | 'info';
 }
+
+const { width } = Dimensions.get('window');
 
 export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   visible,
   title,
   message,
-  buttons,
-  onDismiss,
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
+  onConfirm,
+  onCancel,
+  type = 'info',
 }) => {
   const { tokens } = useTheme();
 
-  const handleButtonPress = (button: AlertButton) => {
-    if (button.onPress) {
-      button.onPress();
+  const styles = StyleSheet.create({
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalContent: {
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.radius.lg,
+      padding: tokens.spacing.xl,
+      margin: tokens.spacing.lg,
+      width: width - tokens.spacing.lg * 2,
+      maxWidth: 400,
+    },
+    title: {
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+      textAlign: 'center',
+    },
+    message: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      marginBottom: tokens.spacing.xl,
+      textAlign: 'center',
+      lineHeight: 20,
+    },
+    buttonRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      gap: tokens.spacing.md,
+    },
+    button: {
+      flex: 1,
+      paddingVertical: tokens.spacing.md,
+      borderRadius: tokens.radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    cancelButton: {
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+    },
+    confirmButton: {
+      backgroundColor: tokens.colors.accent,
+      borderWidth: 1,
+      borderColor: tokens.colors.accent,
+    },
+    dangerButton: {
+      backgroundColor: tokens.colors.danger,
+      borderColor: tokens.colors.danger,
+    },
+    buttonText: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+    },
+    cancelButtonText: {
+      color: tokens.colors.textSecondary,
+    },
+    confirmButtonText: {
+      color: tokens.colors.background,
+    },
+  });
+
+  const getButtonStyle = () => {
+    if (type === 'danger') {
+      return styles.dangerButton;
     }
-    if (onDismiss) {
-      onDismiss();
-    }
+    return styles.confirmButton;
   };
 
-  const getButtonStyle = (style?: string) => {
-    switch (style) {
-      case 'destructive':
-        return {
-          backgroundColor: designTokens.colors.danger,
-          borderColor: designTokens.colors.danger,
-        };
-      case 'cancel':
-        return {
-          backgroundColor: 'transparent',
-          borderColor: designTokens.colors.border,
-        };
+  const getIconColor = () => {
+    switch (type) {
+      case 'danger':
+        return tokens.colors.danger;
+      case 'warning':
+        return tokens.colors.warning;
       default:
-        return {
-          backgroundColor: designTokens.colors.accent,
-          borderColor: designTokens.colors.accent,
-        };
-    }
-  };
-
-  const getButtonTextStyle = (style?: string) => {
-    switch (style) {
-      case 'destructive':
-        return { color: '#FFFFFF' };
-      case 'cancel':
-        return { color: designTokens.colors.textSecondary };
-      default:
-        return { color: '#FFFFFF' };
+        return tokens.colors.textSecondary;
     }
   };
 
@@ -78,88 +125,34 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       visible={visible}
       transparent
       animationType="fade"
-      onRequestClose={onDismiss}
+      onRequestClose={onCancel}
     >
-      <View style={styles.overlay}>
-        <View style={[styles.container, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
-          <View style={styles.header}>
-            <Text style={[styles.title, { color: designTokens.colors.text }]}>{title}</Text>
-            <Text style={[styles.message, { color: designTokens.colors.textSecondary }]}>{message}</Text>
-          </View>
+      <View style={styles.modalOverlay}>
+        <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
+          <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
+          <Text style={[styles.message, { color: tokens.colors.textSecondary }]}>{message}</Text>
           
-          <View style={styles.buttonContainer}>
-            {buttons.map((button, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.button,
-                  getButtonStyle(button.style),
-                  index < buttons.length - 1 && styles.buttonMargin
-                ]}
-                onPress={() => handleButtonPress(button)}
-                activeOpacity={0.7}
-              >
-                <Text style={[styles.buttonText, getButtonTextStyle(button.style)]}>
-                  {button.text}
-                </Text>
-              </TouchableOpacity>
-            ))}
+          <View style={styles.buttonRow}>
+            <TouchableOpacity
+              style={[styles.button, styles.cancelButton]}
+              onPress={onCancel}
+            >
+              <Text style={[styles.buttonText, styles.cancelButtonText]}>
+                {cancelText}
+              </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.button, getButtonStyle()]}
+              onPress={onConfirm}
+            >
+              <Text style={[styles.buttonText, styles.confirmButtonText]}>
+                {confirmText}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
     </Modal>
   );
-};
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  container: {
-    width: '100%',
-    maxWidth: 320,
-    borderRadius: 12,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  header: {
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  message: {
-    fontSize: 14,
-    lineHeight: 20,
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 12,
-  },
-  button: {
-    flex: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonMargin: {
-    marginRight: 8,
-  },
-  buttonText: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-}); 
+}; 

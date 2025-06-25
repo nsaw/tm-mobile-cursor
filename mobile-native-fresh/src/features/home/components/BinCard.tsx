@@ -5,16 +5,22 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
-import { Bin } from '../../../types';
-
-const { width } = Dimensions.get('window');
 
 interface BinCardProps {
-  bin: Bin;
+  bin: {
+    id: number;
+    name: string;
+    icon: string;
+    color?: string;
+    thoughtmarkCount: number;
+  };
   onPress: () => void;
 }
+
+const { width } = Dimensions.get('window');
 
 export const BinCard: React.FC<BinCardProps> = ({
   bin,
@@ -22,59 +28,46 @@ export const BinCard: React.FC<BinCardProps> = ({
 }) => {
   const { tokens } = useTheme();
 
+  const styles = StyleSheet.create({
+    container: {
+      width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
+      aspectRatio: 1,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderRadius: tokens.radius.md * 1.34,
+      marginBottom: tokens.spacing.sm * 1.34,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: tokens.spacing.md * 1.34,
+    },
+    icon: {
+      fontSize: 32,
+      marginBottom: tokens.spacing.sm,
+    },
+    name: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: tokens.colors.accent,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.xs,
+    },
+    count: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+    },
+  });
+
   return (
-    <TouchableOpacity
-      style={[styles.container, {
-        width: (width - designTokens.spacing.lg * 2 - designTokens.spacing.sm) / 2,
-        height: 70,
-        backgroundColor: designTokens.colors.backgroundSecondary,
-        borderRadius: designTokens.radius.md * 1.34,
-        marginBottom: designTokens.spacing.sm * 1.34,
-        borderWidth: 1,
-        borderColor: designTokens.colors.border,
-      }]}
-      onPress={onPress}
-      activeOpacity={0.7}
-    >
-      <View style={[styles.content, {
-        paddingHorizontal: designTokens.spacing.md * 1.34,
-      }]}>
-        <Text 
-          variant="body" 
-          size="sm"
-          style={{
-            fontWeight: '600',
-            flex: 1,
-            textTransform: 'capitalize',
-          }}
-          numberOfLines={1}
-        >
-          {bin.name}
-        </Text>
-        <Text 
-          variant="caption" 
-          size="xs"
-          style={{
-            color: designTokens.colors.accent,
-            fontWeight: '500',
-          }}
-        >
-          {bin.thoughtmarkCount || 0}
-        </Text>
-      </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Ionicons 
+        name={bin.icon as any} 
+        size={32} 
+        style={[styles.icon, { color: bin.color || tokens.colors.accent }]} 
+      />
+      <Text style={styles.name}>{bin.name}</Text>
+      <Text style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
     </TouchableOpacity>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    // Styles moved to inline for token access
-  },
-  content: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    // Styles moved to inline for token access
-  },
-}); 
+}; 

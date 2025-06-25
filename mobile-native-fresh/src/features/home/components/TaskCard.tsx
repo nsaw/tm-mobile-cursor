@@ -20,43 +20,42 @@ interface TaskCardProps {
 
 const getStyles = (tokens: DesignTokens, isCompleted: boolean, isOverdue: boolean) => StyleSheet.create({
   container: {
-    backgroundColor: tokens.colors.surface ?? '#fff',
-    borderRadius: 11,
-    padding: tokens?.spacing?.sm * 1.34,
+    backgroundColor: tokens.colors.surface,
+    borderRadius: tokens.radius.md,
+    padding: tokens.spacing.md,
+    marginBottom: tokens.spacing.sm,
     borderWidth: 1,
-    borderColor: tokens.colors.border ?? '#000',
-    ...(isOverdue && { backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.3)' }),
-  },
-  content: {
+    borderColor: tokens.colors.border,
     flexDirection: 'row',
     alignItems: 'center',
   },
+  content: {
+    flex: 1,
+  },
   checkbox: {
-    width: 43,
-    height: 43,
-    borderRadius: 21,
-    borderWidth: 3,
-    borderColor: tokens.colors.border ?? '#000',
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: isCompleted ? tokens.colors.accent : tokens.colors.border,
+    backgroundColor: isCompleted ? tokens.colors.accent : 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: tokens?.spacing?.md * 1.34,
-    backgroundColor: isCompleted ? tokens.colors.accent : tokens.colors.textSecondary,
+    marginRight: tokens.spacing.md,
   },
   textContainer: {
     flex: 1,
   },
   title: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: tokens.typography.fontSize.body,
+    fontWeight: isCompleted ? '400' : '600',
     color: isOverdue ? '#FCA5A5' : isCompleted ? tokens.colors.textSecondary : tokens.colors.text,
-    marginBottom: 5,
-    fontFamily: isOverdue ? 'Ubuntu_500Medium' : isCompleted ? 'Ubuntu_500Medium' : 'Ubuntu_600SemiBold',
-    textTransform: 'capitalize',
+    marginBottom: tokens.spacing.xs,
     textDecorationLine: isCompleted ? 'line-through' : 'none',
   },
   dueDate: {
-    fontSize: 11,
-    color: isOverdue ? '#FCA5A5' : tokens.colors.accent,
+    fontSize: tokens.typography.fontSize.sm,
+    color: isOverdue ? '#FCA5A5' : tokens.colors.textSecondary,
     fontFamily: 'Ubuntu_400Regular',
     marginLeft: 11,
     textAlign: 'right',
@@ -69,6 +68,21 @@ const getStyles = (tokens: DesignTokens, isCompleted: boolean, isOverdue: boolea
   },
   icon: {
     color: isCompleted ? tokens.colors.accent : tokens.colors.textSecondary,
+  },
+  priorityIndicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: tokens.spacing.sm,
+  },
+  priorityLow: {
+    backgroundColor: tokens.colors.success,
+  },
+  priorityMedium: {
+    backgroundColor: tokens.colors.warning,
+  },
+  priorityHigh: {
+    backgroundColor: tokens.colors.danger,
   },
 });
 
@@ -90,42 +104,59 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       day: 'numeric',
     });
   };
+
+  const getPriorityColor = () => {
+    if (task.priority) {
+      switch (task.priority) {
+        case 'high':
+          return styles.priorityHigh;
+        case 'medium':
+          return styles.priorityMedium;
+        case 'low':
+          return styles.priorityLow;
+        default:
+          return styles.priorityLow;
+      }
+    }
+    return styles.priorityLow;
+  };
+
   return (
     <TouchableOpacity
-      style={[styles.container, style]}
+      style={[styles.container, style, isOverdue && { borderColor: tokens.colors.danger }]}
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <View style={styles.content}>
-        <TouchableOpacity
-          style={styles.checkbox}
-          onPress={(e) => {
-            e.stopPropagation();
-            onToggle();
-          }}
-        >
-          <Ionicons
-            name={task.isCompleted ? 'checkmark' : 'ellipse-outline'}
-            size={21}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <View style={styles.textContainer}>
-          <View style={styles.titleRow}>
-            <Text
-              style={styles.title}
-              numberOfLines={1}
-            >
-              {task.title || 'Untitled Task'}
+      <TouchableOpacity
+        style={styles.checkbox}
+        onPress={(e) => {
+          e.stopPropagation();
+          onToggle();
+        }}
+      >
+        {task.isCompleted && (
+          <Ionicons name="checkmark" size={16} color={tokens.colors.background} />
+        )}
+      </TouchableOpacity>
+      <View style={styles.textContainer}>
+        <View style={styles.titleRow}>
+          <Text
+            style={styles.title}
+            numberOfLines={1}
+          >
+            {task.title || 'Untitled Task'}
+          </Text>
+          {task.dueDate && (
+            <Text style={[styles.dueDate, isOverdue && { color: tokens.colors.danger }]}>
+              {formatDueDate(task.dueDate)}
             </Text>
-            {task.dueDate && (
-              <Text style={styles.dueDate}>
-                {formatDueDate(task.dueDate)}
-              </Text>
-            )}
-          </View>
+          )}
         </View>
       </View>
+      
+      {task.priority && (
+        <View style={[styles.priorityIndicator, getPriorityColor()]} />
+      )}
     </TouchableOpacity>
   );
 }; 

@@ -1,26 +1,63 @@
 import React from 'react';
-import { View } from 'react-native';
-import { useTheme } from '../../../theme/ThemeProvider';
-import { Text, Heading, Caption } from '../../../components/ui/Text';
-import { Button } from '../../../components/ui/Button';
+import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { User } from 'lucide-react-native';
+import { useTheme } from '../../../theme/ThemeProvider';
+import { Heading, Caption } from '../../../components/ui/Text';
+import { Button } from '../../../components/ui/Button';
 
-const ProfileScreen: React.FC = () => {
+export const ProfileScreen: React.FC = () => {
   const { tokens } = useTheme();
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: designTokens.colors.background, padding: designTokens.spacing.xl }}>
-      <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: designTokens.colors.accentMuted, alignItems: 'center', justifyContent: 'center', marginBottom: designTokens.spacing.lg }}>
-        <User size={32} color={designTokens.colors.background} />
-      </View>
-      <Heading level={1} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.sm }}>Profile</Heading>
-      <Caption style={{ color: designTokens.colors.textMuted, textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
-        Manage your account information and personal details here. Edit your name, email, and more.
-      </Caption>
-      <Button disabled style={{ width: 180, backgroundColor: designTokens.colors.accent, opacity: 0.5 }}>
-        <Text style={{ color: '#fff', fontWeight: '600', textAlign: 'center' }}>Edit Profile</Text>
-      </Button>
-    </View>
-  );
-};
 
-export default ProfileScreen; 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.background,
+      padding: tokens.spacing.xl,
+    },
+    iconContainer: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: tokens.colors.accentMuted,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    title: {
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+    },
+    subtitle: {
+      color: tokens.colors.textMuted,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    button: {
+      width: 180,
+      backgroundColor: tokens.colors.accent,
+      opacity: 0.5,
+    },
+  });
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={styles.container}>
+        <View style={styles.iconContainer}>
+          <User size={32} color={tokens.colors.background} />
+        </View>
+        
+        <Heading level={1} style={styles.title}>Profile</Heading>
+        <Caption style={styles.subtitle}>
+          This feature is coming soon. We're working hard to bring you the best experience.
+        </Caption>
+        
+        <Button disabled style={styles.button}>
+          <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
+  );
+}; 

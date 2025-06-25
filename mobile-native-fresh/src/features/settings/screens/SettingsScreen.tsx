@@ -20,168 +20,13 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NavigationProp } from '../../../navigation/types';
 import type { RootStackParamList } from '../../../navigation/types';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
-const getStyles = () => StyleSheet.create({
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: designTokens.spacing.xl,
-  },
-  header: {
-    paddingHorizontal: designTokens.spacing.lg,
-    paddingVertical: designTokens.spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: designTokens.colors.border,
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: designTokens.spacing.sm,
-  },
-  backButton: {
-    marginRight: designTokens.spacing.md,
-  },
-  headerTitle: {
-    fontSize: designTokens.typography.fontSize.heading,
-    fontWeight: '700',
-    color: designTokens.colors.text,
-    fontFamily: designTokens.typography.fontFamily.heading,
-  },
-  headerSubtitle: {
-    fontSize: designTokens.typography.fontSize.sm,
-    color: designTokens.colors.textSecondary,
-    fontFamily: designTokens.typography.fontFamily.body,
-  },
-  section: {
-    marginBottom: designTokens.spacing.lg,
-  },
-  sectionTitle: {
-    fontSize: designTokens.typography.fontSize.sm,
-    fontWeight: '600',
-    color: designTokens.colors.textSecondary,
-    marginBottom: designTokens.spacing.sm,
-    paddingHorizontal: designTokens.spacing.lg,
-    fontFamily: designTokens.typography.fontFamily.body,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  sectionCard: {
-    marginHorizontal: designTokens.spacing.lg,
-  },
-  settingItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: designTokens.spacing.md,
-    paddingHorizontal: designTokens.spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: designTokens.colors.border,
-  },
-  settingItemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  settingItemText: {
-    marginLeft: designTokens.spacing.md,
-    flex: 1,
-  },
-  settingItemTitle: {
-    fontSize: designTokens.typography.fontSize.body,
-    fontWeight: '600',
-    color: designTokens.colors.text,
-    fontFamily: designTokens.typography.fontFamily.body,
-  },
-  settingItemSubtitle: {
-    fontSize: designTokens.typography.fontSize.sm,
-    color: designTokens.colors.textSecondary,
-    marginTop: 2,
-    fontFamily: designTokens.typography.fontFamily.body,
-  },
-  settingItemRight: {
-    alignItems: 'center',
-  },
-  expandedSettings: {
-    backgroundColor: designTokens.colors.backgroundSecondary,
-  },
-  settingLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  settingText: {
-    marginLeft: designTokens.spacing.md,
-    flex: 1,
-  },
-  modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: designTokens.spacing.lg,
-  },
-  modalContent: {
-    backgroundColor: designTokens.colors.surface,
-    borderRadius: designTokens.spacing.md,
-    padding: designTokens.spacing.lg,
-    width: '100%',
-    maxWidth: 400,
-  },
-  modalTitle: {
-    fontSize: designTokens.typography.fontSize.lg,
-    fontWeight: '600',
-    color: designTokens.colors.text,
-    marginBottom: designTokens.spacing.sm,
-  },
-  modalSubtitle: {
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.textSecondary,
-    marginBottom: designTokens.spacing.lg,
-  },
-  modalInput: {
-    borderWidth: 1,
-    borderColor: designTokens.colors.border,
-    borderRadius: designTokens.spacing.sm,
-    padding: designTokens.spacing.md,
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.text,
-    backgroundColor: designTokens.colors.background,
-    marginBottom: designTokens.spacing.lg,
-  },
-  modalButtons: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    gap: designTokens.spacing.md,
-  },
-  modalButton: {
-    paddingVertical: designTokens.spacing.sm,
-    paddingHorizontal: designTokens.spacing.md,
-    borderRadius: designTokens.spacing.sm,
-  },
-  modalButtonText: {
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.text,
-  },
-  modalButtonPrimary: {
-    backgroundColor: designTokens.colors.accent,
-  },
-  modalButtonTextPrimary: {
-    color: designTokens.colors.background,
-    fontWeight: '500',
-  },
-});
-
 export const SettingsScreen: React.FC = () => {
+  const { tokens } = useTheme();
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
-  const styles = getStyles();
   
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
@@ -323,11 +168,11 @@ export const SettingsScreen: React.FC = () => {
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={designTokens.colors.accent ?? '#FFD700'} />;
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
-      iconElement = <Ionicons name={icon as any} size={20} color={designTokens.colors.accent ?? '#000'} />;
+      iconElement = <Ionicons name={icon as any} size={20} color={tokens.colors.accent ?? '#000'} />;
     }
     return (
       <TouchableOpacity 
@@ -347,20 +192,175 @@ export const SettingsScreen: React.FC = () => {
             <Switch
               value={switchValue}
               onValueChange={onSwitchChange}
-              trackColor={{ false: designTokens.colors.border ?? '#ccc', true: designTokens.colors.accent ?? '#000' }}
-              thumbColor={designTokens.colors.background ?? '#fff'}
+              trackColor={{ false: tokens.colors.border ?? '#ccc', true: tokens.colors.accent ?? '#000' }}
+              thumbColor={tokens.colors.background ?? '#fff'}
             />
           )}
           {showArrow && !showSwitch && (
-            <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
+            <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
           )}
         </View>
       </TouchableOpacity>
     );
   };
 
+  const styles = StyleSheet.create({
+    scrollView: {
+      flex: 1,
+    },
+    scrollContent: {
+      paddingBottom: tokens.spacing.xl,
+    },
+    header: {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+      borderBottomWidth: 1,
+      borderBottomColor: tokens.colors.border,
+    },
+    headerContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: tokens.spacing.sm,
+    },
+    backButton: {
+      marginRight: tokens.spacing.md,
+    },
+    headerTitle: {
+      fontSize: tokens.typography.fontSize.heading,
+      fontWeight: '700',
+      color: tokens.colors.text,
+      fontFamily: tokens.typography.fontFamily.heading,
+    },
+    headerSubtitle: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      fontFamily: tokens.typography.fontFamily.body,
+    },
+    section: {
+      marginBottom: tokens.spacing.lg,
+    },
+    sectionTitle: {
+      fontSize: tokens.typography.fontSize.sm,
+      fontWeight: '600',
+      color: tokens.colors.textSecondary,
+      marginBottom: tokens.spacing.sm,
+      paddingHorizontal: tokens.spacing.lg,
+      fontFamily: tokens.typography.fontFamily.body,
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+    },
+    sectionCard: {
+      marginHorizontal: tokens.spacing.lg,
+    },
+    settingItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: tokens.spacing.lg,
+      borderBottomWidth: 1,
+      borderBottomColor: tokens.colors.border,
+    },
+    settingItemLeft: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flex: 1,
+    },
+    settingItemText: {
+      marginLeft: tokens.spacing.md,
+      flex: 1,
+    },
+    settingItemTitle: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      fontFamily: tokens.typography.fontFamily.body,
+    },
+    settingItemSubtitle: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      marginTop: 2,
+      fontFamily: tokens.typography.fontFamily.body,
+    },
+    settingItemRight: {
+      alignItems: 'center',
+    },
+    expandedSettings: {
+      backgroundColor: tokens.colors.backgroundSecondary,
+    },
+    settingLeft: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flex: 1,
+    },
+    settingText: {
+      marginLeft: tokens.spacing.md,
+      flex: 1,
+    },
+    modalOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: tokens.spacing.lg,
+    },
+    modalContent: {
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.spacing.md,
+      padding: tokens.spacing.lg,
+      width: '100%',
+      maxWidth: 400,
+    },
+    modalTitle: {
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+    },
+    modalSubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      marginBottom: tokens.spacing.lg,
+    },
+    modalInput: {
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      borderRadius: tokens.spacing.sm,
+      padding: tokens.spacing.md,
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.text,
+      backgroundColor: tokens.colors.background,
+      marginBottom: tokens.spacing.lg,
+    },
+    modalButtons: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      gap: tokens.spacing.md,
+    },
+    modalButton: {
+      paddingVertical: tokens.spacing.sm,
+      paddingHorizontal: tokens.spacing.md,
+      borderRadius: tokens.spacing.sm,
+    },
+    modalButtonText: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.text,
+    },
+    modalButtonPrimary: {
+      backgroundColor: tokens.colors.accent,
+    },
+    modalButtonTextPrimary: {
+      color: tokens.colors.background,
+      fontWeight: '500',
+    },
+  });
+
   return (
-    <View style={{ flex: 1, backgroundColor: designTokens.colors.background ?? '#0D0D0F' }}>
+    <View style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -369,7 +369,7 @@ export const SettingsScreen: React.FC = () => {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
+              <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
           </View>
@@ -377,36 +377,36 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={{ alignItems: 'center', padding: designTokens.spacing.xl, marginBottom: designTokens.spacing.lg }}>
+        <Card style={{ alignItems: 'center', padding: tokens.spacing.xl, marginBottom: tokens.spacing.lg }}>
           {(() => {
             return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: designTokens.spacing.md,
-                  backgroundColor: `${designTokens.colors.success ?? '#000'}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
+                  backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
                 </View>
                 {/* Title */}
                 <Text style={{
-                  fontFamily: designTokens.typography.fontFamily.heading ?? 'Arial',
+                  fontFamily: tokens.typography.fontFamily.heading ?? 'Arial',
                   fontSize: 22,
                   fontWeight: '700',
-                  color: designTokens.colors.text ?? '#000',
+                  color: tokens.colors.text ?? '#000',
                   textAlign: 'center',
-                  marginBottom: designTokens.spacing.sm,
+                  marginBottom: tokens.spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
-                  fontFamily: designTokens.typography.fontFamily.body ?? 'Arial',
+                  fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
                   fontSize: 12,
-                  color: designTokens.colors.textSecondary ?? '#666',
+                  color: tokens.colors.textSecondary ?? '#666',
                   textAlign: 'center',
-                  marginBottom: designTokens.spacing.md,
+                  marginBottom: tokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -415,14 +415,14 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: designTokens.colors.accent ?? '#000',
-                    paddingVertical: designTokens.spacing.sm,
+                    backgroundColor: tokens.colors.accent ?? '#000',
+                    paddingVertical: tokens.spacing.sm,
                     borderRadius: 8,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
-                    fontFamily: designTokens.typography.fontFamily.body ?? 'Arial',
+                    fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
                     fontWeight: '600',
                     color: '#fff',
                     textAlign: 'center',
@@ -672,10 +672,10 @@ export const SettingsScreen: React.FC = () => {
               onPress={() => navigation.navigate('AdminDashboard')}
             >
               <View style={styles.settingLeft}>
-                <Ionicons name="shield-outline" size={20} color={designTokens.colors.accent ?? '#000'} />
+                <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
+              <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </View>
         )}
@@ -694,7 +694,7 @@ export const SettingsScreen: React.FC = () => {
               value={tempSiriPhrase}
               onChangeText={setTempSiriPhrase}
               placeholder="Enter your Siri phrase"
-              placeholderTextColor={designTokens.colors.textSecondary ?? '#666'}
+              placeholderTextColor={tokens.colors.textSecondary ?? '#666'}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity

@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
 import { TagFilter } from '../../../components/ui/TagFilter';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
@@ -21,157 +21,8 @@ import { BottomNav } from '../../../components/ui/BottomNav';
 import { RootStackParamList } from '../../../navigation/types';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: designTokens.colors.background ?? '#0D0D0F',
-  },
-  controls: {
-    paddingHorizontal: designTokens.spacing.lg,
-    paddingBottom: designTokens.spacing.sm,
-  },
-  filterRow: {
-    flexDirection: 'row',
-    gap: designTokens.spacing.md,
-    marginBottom: designTokens.spacing.sm,
-  },
-  filterDropdown: {
-    flex: 1,
-    alignItems: 'flex-start',
-  },
-  filterLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: designTokens.colors.text ?? '#F5F5F7',
-    marginBottom: designTokens.spacing.xs,
-    opacity: 0.8,
-  },
-  dropdownContainer: {
-    flexDirection: 'row',
-    gap: designTokens.spacing.xs,
-  },
-  dropdownButton: {
-    paddingHorizontal: designTokens.spacing.sm,
-    paddingVertical: designTokens.spacing.xs,
-    borderRadius: 6,
-    backgroundColor: designTokens.colors.surface ?? '#2C2C2E',
-    borderWidth: 1,
-    borderColor: designTokens.colors.border ?? '#2C2C2E',
-  },
-  dropdownButtonActive: {
-    backgroundColor: designTokens.colors.accent ?? '#FFD500',
-    borderColor: designTokens.colors.accent ?? '#FFD500',
-  },
-  dropdownButtonText: {
-    fontSize: 11,
-    color: designTokens.colors.text ?? '#F5F5F7',
-    fontWeight: '500',
-  },
-  dropdownButtonTextActive: {
-    color: designTokens.colors.background ?? '#0D0D0F',
-  },
-  sortButton: {
-    paddingHorizontal: designTokens.spacing.sm,
-    paddingVertical: designTokens.spacing.xs,
-    borderRadius: 6,
-    backgroundColor: designTokens.colors.surface,
-    borderWidth: 1,
-    borderColor: designTokens.colors.border,
-  },
-  sortButtonActive: {
-    backgroundColor: designTokens.colors.accent,
-    borderColor: designTokens.colors.accent,
-  },
-  sortButtonText: {
-    fontSize: 11,
-    color: designTokens.colors.text,
-    fontWeight: '500',
-  },
-  sortButtonTextActive: {
-    color: designTokens.colors.background,
-  },
-  binFilterContainer: {
-    marginBottom: designTokens.spacing.md,
-  },
-  binFilterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: designTokens.spacing.md,
-    paddingVertical: designTokens.spacing.sm,
-    marginRight: designTokens.spacing.sm,
-    borderRadius: designTokens.spacing.sm,
-    backgroundColor: designTokens.colors.surface,
-    borderWidth: 1,
-    borderColor: designTokens.colors.border,
-  },
-  binFilterButtonActive: {
-    backgroundColor: designTokens.colors.accent,
-    borderColor: designTokens.colors.accent,
-  },
-  binFilterIcon: {
-    marginRight: designTokens.spacing.xs,
-  },
-  binFilterText: {
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.text,
-    fontWeight: '500',
-  },
-  binFilterTextActive: {
-    color: designTokens.colors.background,
-  },
-  listContainer: {
-    flex: 1,
-    paddingHorizontal: designTokens.spacing.lg,
-  },
-  listContent: {
-    paddingBottom: designTokens.spacing.lg,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: designTokens.spacing.md,
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.textSecondary,
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: designTokens.spacing.xl,
-  },
-  emptyStateTitle: {
-    fontSize: designTokens.typography.fontSize.lg,
-    fontWeight: '600',
-    color: designTokens.colors.text,
-    marginTop: designTokens.spacing.md,
-    marginBottom: designTokens.spacing.sm,
-  },
-  emptyStateSubtitle: {
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: designTokens.spacing.lg,
-  },
-  createButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: designTokens.colors.accent,
-    paddingHorizontal: designTokens.spacing.lg,
-    paddingVertical: designTokens.spacing.md,
-    borderRadius: designTokens.spacing.md,
-  },
-  createButtonText: {
-    fontSize: designTokens.typography.fontSize.body,
-    fontWeight: '600',
-    color: designTokens.colors.background,
-    marginLeft: designTokens.spacing.sm,
-  },
-});
-
 export const AllThoughtmarksScreen: React.FC = () => {
+  const { tokens } = useTheme();
   const navigation = useNavigation<any>();
   const route = useRoute<RouteProp<RootStackParamList, 'AllThoughtmarks'>>();
   const { thoughtmarks, loading, fetchThoughtmarks } = useThoughtmarks();
@@ -186,6 +37,156 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const { showVoiceRecorder } = useVoiceRecorder();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+    },
+    controls: {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingBottom: tokens.spacing.sm,
+    },
+    filterRow: {
+      flexDirection: 'row',
+      gap: tokens.spacing.md,
+      marginBottom: tokens.spacing.sm,
+    },
+    filterDropdown: {
+      flex: 1,
+      alignItems: 'flex-start',
+    },
+    filterLabel: {
+      fontSize: 12,
+      fontWeight: '600',
+      color: tokens.colors.text ?? '#F5F5F7',
+      marginBottom: tokens.spacing.xs,
+      opacity: 0.8,
+    },
+    dropdownContainer: {
+      flexDirection: 'row',
+      gap: tokens.spacing.xs,
+    },
+    dropdownButton: {
+      paddingHorizontal: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.xs,
+      borderRadius: 6,
+      backgroundColor: tokens.colors.surface ?? '#2C2C2E',
+      borderWidth: 1,
+      borderColor: tokens.colors.border ?? '#2C2C2E',
+    },
+    dropdownButtonActive: {
+      backgroundColor: tokens.colors.accent ?? '#FFD500',
+      borderColor: tokens.colors.accent ?? '#FFD500',
+    },
+    dropdownButtonText: {
+      fontSize: 11,
+      color: tokens.colors.text ?? '#F5F5F7',
+      fontWeight: '500',
+    },
+    dropdownButtonTextActive: {
+      color: tokens.colors.background ?? '#0D0D0F',
+    },
+    sortButton: {
+      paddingHorizontal: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.xs,
+      borderRadius: 6,
+      backgroundColor: tokens.colors.surface,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+    },
+    sortButtonActive: {
+      backgroundColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent,
+    },
+    sortButtonText: {
+      fontSize: 11,
+      color: tokens.colors.text,
+      fontWeight: '500',
+    },
+    sortButtonTextActive: {
+      color: tokens.colors.background,
+    },
+    binFilterContainer: {
+      marginBottom: tokens.spacing.md,
+    },
+    binFilterButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+      marginRight: tokens.spacing.sm,
+      borderRadius: tokens.spacing.sm,
+      backgroundColor: tokens.colors.surface,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+    },
+    binFilterButtonActive: {
+      backgroundColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent,
+    },
+    binFilterIcon: {
+      marginRight: tokens.spacing.xs,
+    },
+    binFilterText: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.text,
+      fontWeight: '500',
+    },
+    binFilterTextActive: {
+      color: tokens.colors.background,
+    },
+    listContainer: {
+      flex: 1,
+      paddingHorizontal: tokens.spacing.lg,
+    },
+    listContent: {
+      paddingBottom: tokens.spacing.lg,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      marginTop: tokens.spacing.md,
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+    },
+    emptyState: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: tokens.spacing.xl,
+    },
+    emptyStateTitle: {
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      marginTop: tokens.spacing.md,
+      marginBottom: tokens.spacing.sm,
+    },
+    emptyStateSubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    createButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.accent,
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+      borderRadius: tokens.spacing.md,
+    },
+    createButtonText: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: tokens.colors.background,
+      marginLeft: tokens.spacing.sm,
+    },
+  });
 
   // Apply initial filters from navigation params
   useEffect(() => {
@@ -341,7 +342,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <Ionicons 
               name={bin.icon as any} 
               size={16} 
-              color={selectedBin === bin.id ? designTokens.colors.background : designTokens.colors.text}
+              color={selectedBin === bin.id ? tokens.colors.background : tokens.colors.text}
               style={styles.binFilterIcon}
             />
             <Text style={[styles.binFilterText, selectedBin === bin.id && styles.binFilterTextActive]}>
@@ -440,7 +441,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <View style={styles.listContainer}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={designTokens.colors.accent} />
+            <ActivityIndicator size="large" color={tokens.colors.accent} />
             <Text style={styles.loadingText}>Loading thoughtmarks...</Text>
           </View>
         ) : (
@@ -460,13 +461,13 @@ export const AllThoughtmarksScreen: React.FC = () => {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                colors={[designTokens.colors.accent]}
-                tintColor={designTokens.colors.accent}
+                colors={[tokens.colors.accent]}
+                tintColor={tokens.colors.accent}
               />
             }
             ListEmptyComponent={
               <View style={styles.emptyState}>
-                <Ionicons name="document-text" size={64} color={designTokens.colors.textSecondary} />
+                <Ionicons name="document-text" size={64} color={tokens.colors.textSecondary} />
                 <Text style={styles.emptyStateTitle}>No thoughtmarks found</Text>
                 <Text style={styles.emptyStateSubtitle}>
                   {selectedTags.length > 0 || selectedBin 
@@ -479,7 +480,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     style={styles.createButton}
                     onPress={handleCreateThoughtmark}
                   >
-                    <Ionicons name="add" size={20} color={designTokens.colors.background} />
+                    <Ionicons name="add" size={20} color={tokens.colors.background} />
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>
                 )}

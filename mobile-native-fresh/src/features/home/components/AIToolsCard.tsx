@@ -6,72 +6,66 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface AIToolsCardProps {
   onPress: () => void;
-  isPremium?: boolean;
-  title: string;
-  description: string;
+  title?: string;
+  subtitle?: string;
+  icon?: string;
 }
-
-const getStyles = () => StyleSheet.create({
-  container: {
-    backgroundColor: designTokens.colors.surface ?? '#fff',
-    borderRadius: 11,
-    paddingVertical: designTokens.spacing.md * 0.7,
-    paddingHorizontal: designTokens.spacing.lg * 1.34,
-    borderWidth: 3,
-    borderColor: 'rgba(255, 221, 0, 0.25)',
-    minHeight: 75,
-  },
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  leftContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 18,
-    color: 'rgba(255, 221, 0, 0.7)',
-    fontWeight: '700',
-    marginLeft: designTokens.spacing.sm * 1.34,
-    marginRight: designTokens.spacing.xs * 1.34,
-    textTransform: 'uppercase',
-    fontFamily: designTokens.typography.fontFamily.heading,
-  },
-});
 
 export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   onPress,
-  isPremium = false,
-  title,
-  description,
+  title = "AI Tools",
+  subtitle = "Generate insights and suggestions",
+  icon = "sparkles",
 }) => {
-  const styles = getStyles();
+  const { tokens } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: tokens.colors.surface ?? '#fff',
+      borderRadius: tokens.radius.md,
+      paddingVertical: tokens.spacing.md * 0.7,
+      paddingHorizontal: tokens.spacing.lg * 1.34,
+      marginHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    content: {
+      flex: 1,
+      marginLeft: tokens.spacing.sm * 1.34,
+      marginRight: tokens.spacing.xs * 1.34,
+    },
+    title: {
+      fontFamily: tokens.typography.fontFamily.heading,
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.xs,
+    },
+    subtitle: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      lineHeight: 16,
+    },
+    icon: {
+      color: tokens.colors.accent,
+    },
+  });
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      activeOpacity={0.7}
-      accessibilityRole="button"
-      accessibilityLabel={`AI tools card: ${title}`}
-    >
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.content}>
-        <View style={styles.leftContent}>
-          <MaterialCommunityIcons name="crown-outline" size={32} color="rgba(255, 221, 0, 0.6)" />
-          <Text style={styles.title}>AI TOOLS</Text>
-          {isPremium && (
-            <Ionicons name="diamond" size={21} color="rgba(252, 211, 77, 0.6)" />
-          )}
-        </View>
-        <Ionicons name="arrow-forward" size={27} color="rgba(252, 211, 77, 0.6)" />
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
+      <Ionicons name={icon as any} size={24} style={styles.icon} />
     </TouchableOpacity>
   );
 }; 
