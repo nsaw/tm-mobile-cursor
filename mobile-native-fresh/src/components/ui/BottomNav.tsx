@@ -86,7 +86,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       paddingBottom: 0,
     }}>
       <View style={{
-        backgroundColor: 'rgba(24, 24, 24, 0.95)',
+        backgroundColor: tokens.colors.backgroundSecondary,
         borderTopWidth: 1,
         borderTopColor: tokens.colors.divider,
         // Cross-platform shadow
@@ -109,7 +109,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
-          paddingVertical: 16,
+          paddingVertical: tokens.spacing.md,
           paddingHorizontal: tokens.spacing.lg,
           minHeight: 107,
         }}>
@@ -153,7 +153,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     left: -2,
                     right: -2,
                     bottom: -2,
-                    borderRadius: 10,
+                    borderRadius: tokens.radius.md,
                     backgroundColor: `${tokens.colors.accent}1A`,
                     borderWidth: 1,
                     borderColor: `${tokens.colors.accent}4D`,
@@ -206,7 +206,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               style={{
                 width: 78,
                 height: 78,
-                borderRadius: 21,
+                borderRadius: tokens.radius.lg,
                 backgroundColor: tokens.colors.background,
                 alignItems: 'center',
                 justifyContent: 'center',

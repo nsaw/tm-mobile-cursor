@@ -2,7 +2,7 @@ import { useTheme } from '../theme/ThemeProvider';
 
 export function getTextVariant(variant: keyof ReturnType<typeof useTheme>['variants']['textVariants']['variants']) {
   const theme = useTheme();
-  const textVariants = theme.variants?.textVariants;
+  const textVariants = theme.variants.textVariants;
   
   if (!textVariants) {
     return {
