@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Button } from '../ui/Button';
-import { Text, Heading, Caption } from '../ui/Text';
+import { Text } from '../ui/Text';
 
 interface OnboardingModalProps {
   visible: boolean;
@@ -84,42 +84,43 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           borderRadius: tokens.radius.lg,
           padding: tokens.spacing.xl,
           maxWidth: 500,
+          minHeight: 400, // Ensure minimum height
         }]}
         >
-          {/* Step Indicator */}
-          <View style={styles.stepHeader}>
-            <View style={[styles.stepCircle, { backgroundColor: '#C6D600' }]}> {/* Accent color */}
-              <Text style={{ fontWeight: 'bold',
-                color: tokens.colors.text,
-                fontSize: tokens.typography.fontSize.sm * 1.34,
-               }}>{currentStep + 1}</Text>
-            </View>
-            <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
-              <Text variant="heading" style={{ marginBottom: 4 }}>
-                {steps[currentStep].title}
-              </Text>
-              <Caption>{`${currentStep + 1} of ${steps.length}`}</Caption>
-            </View>
+          {/* Centered Heading */}
+          <View style={styles.centeredHeader}>
+            <Text variant="heading" style={{ 
+              marginBottom: 4,
+              textAlign: 'center',
+              fontSize: tokens.typography.fontSize.xl + 2, // Increased font size
+            }}>
+              {steps[currentStep].title}
+            </Text>
           </View>
 
-          {/* Icon - Centered with proper spacing */}
+          {/* Icon - Enlarged and centered */}
           <View style={[styles.iconContainer, { 
             alignSelf: 'center',
             marginTop: tokens.spacing.lg,
             marginBottom: tokens.spacing.lg,
           }]}>
-            {steps[currentStep].icon}
+            {React.cloneElement(steps[currentStep].icon, {
+              size: 54, // Enlarged by 1.25x (43 * 1.25)
+              ...(steps[currentStep].icon.props || {})
+            })}
           </View>
 
-          {/* Description - Using tagline variant with safe vertical spacing */}
+          {/* Description - Increased font size */}
           <Text 
-            variant="tagline" 
+            variant="body" 
             style={{ 
               marginBottom: tokens.spacing.lg, 
               textAlign: 'center',
               paddingVertical: tokens.spacing.lg,
+              fontSize: tokens.typography.fontSize.body + 2, // Increased font size
+              lineHeight: (tokens.typography.fontSize.body + 2) * 1.5, // Improved line height
             }} 
-            numberOfLines={3}
+            numberOfLines={4}
           >
             {steps[currentStep].description}
           </Text>
@@ -215,21 +216,9 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'stretch',
   },
-  stepHeader: {
-    flexDirection: 'row',
+  centeredHeader: {
     alignItems: 'center',
-    marginBottom: 21, // 16 * 1.34
-  },
-  stepCircle: {
-    width: 48, // 36 * 1.34
-    height: 48, // 36 * 1.34
-    borderRadius: 24, // 18 * 1.34
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  stepCircleText: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    marginBottom: 24,
   },
   iconContainer: {
     alignItems: 'center',
