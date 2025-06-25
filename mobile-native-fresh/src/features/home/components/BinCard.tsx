@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { colors, spacing, typography } from '../../../theme/theme';
-import { designTokens } from '../../../theme/tokens';
+import { useTheme } from '../../../theme/ThemeProvider';
+import { Text } from '../../../components/ui/Text';
 import { Bin } from '../../../types';
 
 const { width } = Dimensions.get('window');
@@ -21,17 +20,45 @@ export const BinCard: React.FC<BinCardProps> = ({
   bin,
   onPress,
 }) => {
+  const { tokens } = useTheme();
+
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, {
+        width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
+        height: 70,
+        backgroundColor: tokens.colors.backgroundSecondary,
+        borderRadius: tokens.radius.md * 1.34,
+        marginBottom: tokens.spacing.sm * 1.34,
+        borderWidth: 1,
+        borderColor: tokens.colors.border,
+      }]}
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <View style={styles.content}>
-        <Text style={styles.name} numberOfLines={1}>
+      <View style={[styles.content, {
+        paddingHorizontal: tokens.spacing.md * 1.34,
+      }]}>
+        <Text 
+          variant="body" 
+          size="sm"
+          style={{
+            fontWeight: '600',
+            flex: 1,
+            textTransform: 'capitalize',
+          }}
+          numberOfLines={1}
+        >
           {bin.name}
         </Text>
-        <Text style={styles.count}>
+        <Text 
+          variant="caption" 
+          size="xs"
+          style={{
+            color: tokens.colors.accent,
+            fontWeight: '500',
+          }}
+        >
           {bin.thoughtmarkCount || 0}
         </Text>
       </View>
@@ -41,32 +68,13 @@ export const BinCard: React.FC<BinCardProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: (width - spacing.lg * 2 - spacing.sm) / 2,
-    height: 70,
-    backgroundColor: colors.card,
-    borderRadius: designTokens.radius.md * 1.34,
-    marginBottom: spacing.sm * 1.34,
-    borderWidth: 1,
-    borderColor: colors.border,
+    // Styles moved to inline for token access
   },
   content: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: spacing.md * 1.34,
-  },
-  name: {
-    ...typography.body,
-    color: colors.text,
-    fontWeight: '600',
-    fontSize: 14,
-    flex: 1,
-    textTransform: 'capitalize',
-  },
-  count: {
-    fontSize: 9,
-    color: colors.primary,
-    fontWeight: '500',
+    // Styles moved to inline for token access
   },
 }); 

@@ -178,7 +178,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
           style={{
             width: 40,
             height: 40,
-            borderRadius: 20,
+            borderRadius: tokens.radius.full,
             backgroundColor: tokens.colors.backgroundSecondary,
             justifyContent: 'center',
             alignItems: 'center',

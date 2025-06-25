@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface QuickActionsProps {
   onCreateThoughtmark: () => void;
@@ -14,18 +14,47 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   onVoiceRecord,
   onViewBins,
 }) => {
+  const { tokens } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark}>
-        <Ionicons name="create-outline" size={24} color={colors.background} />
+    <View style={[styles.container, {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+    }]}>
+      <TouchableOpacity 
+        style={[styles.actionButton, {
+          backgroundColor: tokens.colors.accent,
+          padding: tokens.spacing.md,
+          borderRadius: tokens.radius.md,
+          minWidth: 60,
+        }]} 
+        onPress={onCreateThoughtmark}
+      >
+        <Ionicons name="create-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.actionButton} onPress={onVoiceRecord}>
-        <Ionicons name="mic-outline" size={24} color={colors.background} />
+      <TouchableOpacity 
+        style={[styles.actionButton, {
+          backgroundColor: tokens.colors.accent,
+          padding: tokens.spacing.md,
+          borderRadius: tokens.radius.md,
+          minWidth: 60,
+        }]} 
+        onPress={onVoiceRecord}
+      >
+        <Ionicons name="mic-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.actionButton} onPress={onViewBins}>
-        <Ionicons name="folder-outline" size={24} color={colors.background} />
+      <TouchableOpacity 
+        style={[styles.actionButton, {
+          backgroundColor: tokens.colors.accent,
+          padding: tokens.spacing.md,
+          borderRadius: tokens.radius.md,
+          minWidth: 60,
+        }]} 
+        onPress={onViewBins}
+      >
+        <Ionicons name="folder-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
     </View>
   );
@@ -35,14 +64,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
   },
   actionButton: {
-    backgroundColor: colors.primary,
-    padding: spacing.md,
-    borderRadius: spacing.md,
-    minWidth: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },

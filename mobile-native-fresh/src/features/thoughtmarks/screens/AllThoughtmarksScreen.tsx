@@ -10,9 +10,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
-import { TagFilter } from '../../home/components/TagFilter';
+import { TagFilter } from '../../../components/ui/TagFilter';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useBins } from '../../home/hooks/useBins';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -26,6 +26,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'AllThoughtmarks'>>();
   const { thoughtmarks, loading, fetchThoughtmarks } = useThoughtmarks();
   const { bins } = useBins();
+  const { tokens } = useTheme();
   
   // Get filter parameters from navigation
   const filterParams = route.params;
@@ -191,7 +192,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <Ionicons 
               name={bin.icon as any} 
               size={16} 
-              color={selectedBin === bin.id ? colors.background : colors.text}
+              color={selectedBin === bin.id ? tokens.colors.background : tokens.colors.text}
               style={styles.binFilterIcon}
             />
             <Text style={[styles.binFilterText, selectedBin === bin.id && styles.binFilterTextActive]}>
@@ -290,7 +291,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <View style={styles.listContainer}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={colors.primary} />
+            <ActivityIndicator size="large" color={tokens.colors.accent} />
             <Text style={styles.loadingText}>Loading thoughtmarks...</Text>
           </View>
         ) : (
@@ -310,8 +311,8 @@ export const AllThoughtmarksScreen: React.FC = () => {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                colors={[colors.primary]}
-                tintColor={colors.primary}
+                colors={[tokens.colors.accent]}
+                tintColor={tokens.colors.accent}
               />
             }
             ListEmptyComponent={

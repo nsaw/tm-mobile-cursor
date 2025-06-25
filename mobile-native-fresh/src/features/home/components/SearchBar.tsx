@@ -4,10 +4,9 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Text,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -19,6 +18,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = 'Search thoughtmarks...',
 }) => {
   const [query, setQuery] = useState('');
+  const { tokens } = useTheme();
 
   const handleSearch = () => {
     onSearch(query);
@@ -30,21 +30,35 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <Ionicons name="search-outline" size={20} color={colors.subtext} style={styles.searchIcon} />
+    <View style={[styles.container, { paddingHorizontal: tokens.spacing.lg, paddingVertical: tokens.spacing.md }]}>
+      <View style={[styles.searchContainer, {
+        backgroundColor: tokens.colors.surface,
+        borderRadius: tokens.radius.md,
+        paddingHorizontal: tokens.spacing.md,
+        paddingVertical: tokens.spacing.sm,
+      }]}>
+        <Ionicons 
+          name="search-outline" 
+          size={20} 
+          color={tokens.colors.textMuted} 
+          style={[styles.searchIcon, { marginRight: tokens.spacing.sm }]} 
+        />
         <TextInput
-          style={styles.input}
+          style={[styles.input, {
+            fontSize: tokens.typography.fontSize.body,
+            color: tokens.colors.text,
+            paddingVertical: tokens.spacing.xs,
+          }]}
           placeholder={placeholder}
-          placeholderTextColor={colors.subtext}
+          placeholderTextColor={tokens.colors.textMuted}
           value={query}
           onChangeText={setQuery}
           onSubmitEditing={handleSearch}
           returnKeyType="search"
         />
         {query.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
-            <Ionicons name="close-circle" size={20} color={colors.subtext} />
+          <TouchableOpacity onPress={handleClear} style={[styles.clearButton, { padding: tokens.spacing.xs }]}>
+            <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
           </TouchableOpacity>
         )}
       </View>
@@ -54,27 +68,21 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    // Styles moved to inline for token access
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.inputBackground,
-    borderRadius: spacing.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    // Styles moved to inline for token access
   },
   searchIcon: {
-    marginRight: spacing.sm,
+    // Styles moved to inline for token access
   },
   input: {
     flex: 1,
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-    paddingVertical: spacing.xs,
+    // Styles moved to inline for token access
   },
   clearButton: {
-    padding: spacing.xs,
+    // Styles moved to inline for token access
   },
 });

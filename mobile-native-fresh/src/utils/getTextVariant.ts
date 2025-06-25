@@ -1,20 +1,8 @@
-import { useTheme } from '../theme/ThemeProvider';
+import { textVariants } from '../theme/variants';
 
-export function getTextVariant(variant: keyof ReturnType<typeof useTheme>['variants']['textVariants']['variants']) {
-  const theme = useTheme();
-  const textVariants = theme.variants.textVariants;
-  
-  if (!textVariants) {
-    return {
-      fontSize: 15,
-      fontWeight: '400',
-      fontFamily: 'Ubuntu',
-      color: '#E0E0E0'
-    };
-  }
-  
+export function getTextVariant(variant: keyof typeof textVariants.variants.variant) {
   const base = textVariants.base || {};
-  const variantStyle = textVariants.variants?.[variant] || {};
+  const variantStyle = textVariants.variants.variant[variant] || {};
   
   return {
     ...base,
