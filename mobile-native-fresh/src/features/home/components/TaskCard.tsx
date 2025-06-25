@@ -26,6 +26,9 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
   
   const formatDueDate = (dateString: string) => {
+    if (!dateString || isNaN(new Date(dateString).getTime())) {
+      return 'No due date';
+    }
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -70,7 +73,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
               ]}
               numberOfLines={1}
             >
-              {task.title}
+              {task.title || 'Untitled Task'}
             </Text>
             
             {task.dueDate && (
@@ -95,8 +98,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderRadius: 8,
     padding: spacing.sm,
-    borderWidth: 0,
-    borderColor: 'transparent',
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   overdueContainer: {
     backgroundColor: 'rgba(239, 68, 68, 0.1)',

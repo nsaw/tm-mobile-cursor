@@ -72,7 +72,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       filterParams.filter !== 'tasks' || 
       thoughtmark.isTask;
     
-    return matchesTags && matchesBin && matchesTaskFilter;
+    return matchesTags && matchesBin && matchesTaskFilter && !thoughtmark.isDeleted;
   });
 
   // Sort thoughtmarks
@@ -100,6 +100,19 @@ export const AllThoughtmarksScreen: React.FC = () => {
 
   const handleCreateThoughtmark = () => {
     navigation.navigate('CreateThoughtmark' as any);
+  };
+
+  const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
+    try {
+      // TODO: Implement API call to toggle pin status
+      // await apiRequest("POST", `/api/thoughtmarks/${thoughtmarkId}/toggle-pin`, { pinned });
+      console.log(`Thoughtmark ${thoughtmarkId} ${pinned ? 'pinned' : 'unpinned'}`);
+      
+      // For now, we'll just log the action
+      // In a real implementation, you would update the local state and sync with backend
+    } catch (error) {
+      console.error('Failed to toggle pin status:', error);
+    }
   };
 
   const handleNavigate = (path: string) => {
@@ -201,32 +214,76 @@ export const AllThoughtmarksScreen: React.FC = () => {
 
       {/* Controls */}
       <View style={styles.controls}>
-        {/* Sort Options */}
-        <View style={styles.sortContainer}>
-          <Text style={styles.filterLabel}>Sort by:</Text>
-          <View style={styles.sortButtons}>
-            {renderSortButton('date', 'Date')}
-            {renderSortButton('title', 'Title')}
-            {renderSortButton('pinned', 'Pinned')}
+        {/* Compact Filter Row */}
+        <View style={styles.filterRow}>
+          {/* Sort Dropdown */}
+          <View style={styles.filterDropdown}>
+            <Text style={styles.filterLabel}>Sort</Text>
+            <View style={styles.dropdownContainer}>
+              {renderSortButton('date', 'Date')}
+              {renderSortButton('title', 'Title')}
+              {renderSortButton('pinned', 'Pinned')}
+            </View>
+          </View>
+
+          {/* Bin Filter Dropdown */}
+          <View style={styles.filterDropdown}>
+            <Text style={styles.filterLabel}>Bin</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
+              <TouchableOpacity
+                style={[styles.dropdownButton, !selectedBin && styles.dropdownButtonActive]}
+                onPress={() => setSelectedBin(null)}
+              >
+                <Text style={[styles.dropdownButtonText, !selectedBin && styles.dropdownButtonTextActive]}>
+                  All
+                </Text>
+              </TouchableOpacity>
+              {bins.slice(0, 5).map((bin: any) => (
+                <TouchableOpacity
+                  key={bin.id}
+                  style={[styles.dropdownButton, selectedBin === bin.id && styles.dropdownButtonActive]}
+                  onPress={() => setSelectedBin(bin.id)}
+                >
+                  <Text style={[styles.dropdownButtonText, selectedBin === bin.id && styles.dropdownButtonTextActive]}>
+                    {bin.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Tag Filter Dropdown */}
+          <View style={styles.filterDropdown}>
+            <Text style={styles.filterLabel}>Tag</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
+              <TouchableOpacity
+                style={[styles.dropdownButton, selectedTags.length === 0 && styles.dropdownButtonActive]}
+                onPress={() => setSelectedTags([])}
+              >
+                <Text style={[styles.dropdownButtonText, selectedTags.length === 0 && styles.dropdownButtonTextActive]}>
+                  All
+                </Text>
+              </TouchableOpacity>
+              {allTags.slice(0, 5).map((tag: string) => (
+                <TouchableOpacity
+                  key={tag}
+                  style={[styles.dropdownButton, selectedTags.includes(tag) && styles.dropdownButtonActive]}
+                  onPress={() => {
+                    if (selectedTags.includes(tag)) {
+                      setSelectedTags(selectedTags.filter(t => t !== tag));
+                    } else {
+                      setSelectedTags([tag]);
+                    }
+                  }}
+                >
+                  <Text style={[styles.dropdownButtonText, selectedTags.includes(tag) && styles.dropdownButtonTextActive]}>
+                    {tag}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
           </View>
         </View>
-
-        {/* Bin Filter */}
-        {renderBinFilter()}
-
-        {/* Tag Filter */}
-        <TagFilter
-          tags={allTags}
-          selectedTag={selectedTags.length === 1 ? selectedTags[0] : 'all'}
-          onTagSelect={(tag) => {
-            if (tag === 'all') {
-              setSelectedTags([]);
-            } else {
-              setSelectedTags([tag]);
-            }
-          }}
-          totalCount={thoughtmarks.length}
-        />
       </View>
 
       {/* Thoughtmarks List */}
@@ -243,6 +300,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
               <ThoughtmarkCard 
                 thoughtmark={item} 
                 onClick={() => handleThoughtmarkPress(item)}
+                onPinToggle={handlePinToggle}
               />
             )}
             keyExtractor={(item) => item.id.toString()}
@@ -302,23 +360,50 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingBottom: spacing.sm,
   },
-  sortContainer: {
-    marginBottom: spacing.md,
-  },
-  filterLabel: {
-    fontSize: typography.body.fontSize,
-    fontWeight: '600',
-    color: colors.text,
+  filterRow: {
+    flexDirection: 'row',
+    gap: spacing.md,
     marginBottom: spacing.sm,
   },
-  sortButtons: {
+  filterDropdown: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  filterLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.text,
+    marginBottom: spacing.xs,
+    opacity: 0.8,
+  },
+  dropdownContainer: {
     flexDirection: 'row',
-    gap: spacing.sm,
+    gap: spacing.xs,
+  },
+  dropdownButton: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 6,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  dropdownButtonActive: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+  },
+  dropdownButtonText: {
+    fontSize: 11,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  dropdownButtonTextActive: {
+    color: colors.background,
   },
   sortButton: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 6,
     backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.border,
@@ -328,7 +413,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   sortButtonText: {
-    fontSize: typography.body.fontSize,
+    fontSize: 11,
     color: colors.text,
     fontWeight: '500',
   },

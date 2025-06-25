@@ -33,6 +33,7 @@ import ThemeScreen from '../features/settings/screens/ThemeScreen';
 import ExportScreen from '../features/settings/screens/ExportScreen';
 import ContactScreen from '../features/settings/screens/ContactScreen';
 import HowToScreen from '../features/settings/screens/HowToScreen';
+import { AdminDashboardScreen } from '../features/settings/screens/AdminDashboardScreen';
 
 // Search Screens
 import { SearchScreen } from '../features/search/screens/SearchScreen';
@@ -138,6 +139,7 @@ const MainStack = () => (
       <Stack.Screen name="Export" component={ExportScreen} />
       <Stack.Screen name="Contact" component={ContactScreen} />
       <Stack.Screen name="HowTo" component={HowToScreen} />
+      <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
     </Stack.Navigator>
   </VoiceRecorderProvider>
 );

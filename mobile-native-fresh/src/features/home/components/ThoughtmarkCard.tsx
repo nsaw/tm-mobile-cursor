@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,18 @@ import {
   Alert,
   Vibration,
   ViewStyle,
+  Animated,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { SvgXml } from 'react-native-svg';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { designTokens } from '../../../theme/tokens';
 import { TagChip } from '../../../components/ui/TagChip';
 import { ActionSheet } from '../../../components/ui/ActionSheet';
 import { ThoughtmarkWithBin } from '../../../types';
+
+// Keep icon SVG content
+const keepIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>`;
 
 interface ThoughtmarkCardProps {
   thoughtmark: any;
@@ -25,8 +30,52 @@ interface ThoughtmarkCardProps {
   pinned?: boolean;
   similarity?: number;
   onSelectionToggle?: () => void;
+  onPinToggle?: (thoughtmarkId: string, pinned: boolean) => void;
   style?: ViewStyle;
 }
+
+// PinIcon component with animation
+const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, onPress }) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const handlePress = () => {
+    // Animate scale on press
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 1.2,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
+    
+    onPress();
+  };
+
+  return (
+    <TouchableOpacity 
+      onPress={handlePress} 
+      style={styles.pinButton}
+      activeOpacity={0.7}
+    >
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <SvgXml
+          xml={keepIconSvg}
+          width={20}
+          height={20}
+          style={{
+            opacity: pinned ? 0.4 : 0.15,
+          }}
+          fill={pinned ? 'rgba(0,122,255,1)' : '#ffffff'}
+        />
+      </Animated.View>
+    </TouchableOpacity>
+  );
+};
 
 export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   thoughtmark,
@@ -38,6 +87,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   pinned,
   similarity,
   onSelectionToggle,
+  onPinToggle,
   style,
 }: ThoughtmarkCardProps) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
@@ -67,12 +117,18 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 
   const handleTogglePin = async () => {
     try {
-      // TODO: Implement API call to toggle pin status
-      // await apiRequest("POST", `/api/thoughtmarks/${thoughtmark.id}/toggle-pin`);
-      Alert.alert(
-        pinned ? "Unpinned" : "Pinned",
-        `Thoughtmark ${pinned ? "unpinned from" : "pinned to"} top`
-      );
+      // Call the onPinToggle callback if provided
+      if (onPinToggle) {
+        onPinToggle(thoughtmark.id, !pinned);
+      } else {
+        // Fallback to the old implementation
+        // TODO: Implement API call to toggle pin status
+        // await apiRequest("POST", `/api/thoughtmarks/${thoughtmark.id}/toggle-pin`);
+        Alert.alert(
+          pinned ? "Unpinned" : "Pinned",
+          `Thoughtmark ${pinned ? "unpinned from" : "pinned to"} top`
+        );
+      }
     } catch (error) {
       Alert.alert("Error", "Failed to update pin status");
     }
@@ -152,6 +208,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onPressOut={handlePressOut}
         activeOpacity={0.7}
       >
+        {/* Interactive Pin Icon - Always visible */}
+        <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
+        
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
@@ -174,11 +233,11 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             {/* Center: Title */}
             <View style={styles.headerCenter}>
               <Text style={styles.title} numberOfLines={1}>
-                {thoughtmark.title}
+                {thoughtmark.title || 'Untitled'}
               </Text>
             </View>
 
-            {/* Right: Date, Pin, Dropdown */}
+            {/* Right: Date, Similarity, Dropdown */}
             <View style={styles.headerRight}>
               {similarity !== undefined && (
                 <View style={styles.similarityBadge}>
@@ -190,13 +249,6 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               <Text style={styles.date}>
                 {formatDate(thoughtmark.createdAt)}
               </Text>
-              {pinned && (
-                <Ionicons
-                  name="pin"
-                  size={12}
-                  color={colors.primary}
-                />
-              )}
               <TouchableOpacity
                 style={styles.menuButton}
                 onPress={() => setShowContextMenu(true)}
@@ -212,18 +264,18 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 
           {/* Content */}
           <Text style={styles.contentText} numberOfLines={2}>
-            {thoughtmark.content}
+            {thoughtmark.content || 'No content'}
           </Text>
 
           {/* Footer */}
           <View style={styles.footer}>
             <View style={styles.tagsContainer}>
-              {thoughtmark.tags.map((tag: string) => (
+              {(thoughtmark.tags || []).map((tag: string) => (
                 <TagChip key={tag} tag={tag} size="sm" />
               ))}
             </View>
             
-            {thoughtmark.binName && (
+            {thoughtmark.binName && thoughtmark.binName.trim() && (
               <Text style={styles.binName}>
                 {thoughtmark.binName}
               </Text>
@@ -247,17 +299,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderRadius: 8,
     padding: spacing.sm,
-    borderWidth: 0,
-    borderColor: 'transparent',
+    borderWidth: 1,
+    borderColor: colors.border,
+    position: 'relative',
   },
   pinned: {
-    borderColor: 'transparent',
-    borderWidth: 0,
+    borderColor: colors.border,
+    borderWidth: 1,
   },
   selected: {
     backgroundColor: colors.primary + '20',
-    borderColor: 'transparent',
-    borderWidth: 0,
+    borderColor: colors.border,
+    borderWidth: 1,
+  },
+  pinButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    zIndex: 10,
+    padding: 4,
   },
   content: {
     marginTop: spacing.xs,

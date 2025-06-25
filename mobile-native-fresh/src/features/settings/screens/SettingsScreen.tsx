@@ -136,6 +136,16 @@ export const SettingsScreen: React.FC = () => {
     );
   };
 
+  const handleDonateShortcuts = async () => {
+    // Siri shortcuts functionality removed due to React version conflicts
+    Alert.alert('Siri Shortcuts', 'Siri shortcuts functionality is temporarily disabled.');
+  };
+
+  const handleClearShortcuts = async () => {
+    // Siri shortcuts functionality removed due to React version conflicts
+    Alert.alert('Siri Shortcuts', 'Siri shortcuts functionality is temporarily disabled.');
+  };
+
   const SettingItem = ({ 
     icon, 
     title, 
@@ -497,6 +507,23 @@ export const SettingsScreen: React.FC = () => {
             />
           </Card>
         </View>
+
+        {/* Admin Section - Only show for admin users */}
+        {(user?.email?.includes('admin') || user?.isAdmin) && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Administration</Text>
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={() => navigation.navigate('AdminDashboard')}
+            >
+              <View style={styles.settingLeft}>
+                <Ionicons name="shield-outline" size={20} color={colors.primary} />
+                <Text style={styles.settingText}>Admin Dashboard</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.subtext} />
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
 
       {/* Siri Dialog */}
@@ -696,5 +723,14 @@ const styles = StyleSheet.create({
   modalButtonTextPrimary: {
     color: colors.background,
     fontWeight: '500',
+  },
+  settingLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  settingText: {
+    marginLeft: spacing.md,
+    flex: 1,
   },
 }); 

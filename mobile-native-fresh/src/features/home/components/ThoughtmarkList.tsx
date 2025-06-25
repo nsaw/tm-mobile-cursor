@@ -10,6 +10,7 @@ import type { Thoughtmark } from '../../../types';
 interface ThoughtmarkListProps {
   thoughtmarks: Thoughtmark[];
   onThoughtmarkPress: (thoughtmark: Thoughtmark) => void;
+  onPinToggle?: (thoughtmarkId: string, pinned: boolean) => void;
   horizontal?: boolean;
   showsScrollIndicator?: boolean;
 }
@@ -17,6 +18,7 @@ interface ThoughtmarkListProps {
 export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
   thoughtmarks,
   onThoughtmarkPress,
+  onPinToggle,
   horizontal = false,
   showsScrollIndicator = true,
 }) => {
@@ -24,6 +26,7 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
     <ThoughtmarkCard
       thoughtmark={item}
       onClick={() => onThoughtmarkPress(item)}
+      onPinToggle={onPinToggle}
     />
   );
 

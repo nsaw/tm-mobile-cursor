@@ -53,6 +53,12 @@ export type RootStackParamList = {
   
   // Loading
   Loading: undefined;
+
+  // New screens
+  Home: undefined;
+  Detail: { thoughtmarkId: string };
+  UnifiedThoughtmark: { thoughtmarkId?: string } | undefined;
+  AdminDashboard: undefined;
 };
 
 // Type for navigation prop

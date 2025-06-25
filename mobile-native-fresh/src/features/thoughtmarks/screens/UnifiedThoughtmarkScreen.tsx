@@ -200,10 +200,21 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         title: 'Save Changes?',
         message: 'You have unsaved changes. What would you like to do?',
         buttons: [
-          { text: 'Cancel', style: 'cancel', onPress: () => setShowAlertDialog(false) },
-          { text: 'Save & Exit', onPress: () => handleSaveAndExit() },
-          { text: 'Save & New', onPress: () => handleSaveAndNew() },
-          { text: 'Discard', style: 'destructive', onPress: () => navigation.goBack() },
+          {
+            text: 'Discard',
+            style: 'destructive',
+            onPress: () => navigation.goBack(),
+          },
+          {
+            text: 'Save & Exit',
+            style: 'default',
+            onPress: handleSaveAndExit,
+          },
+          {
+            text: 'Save & New',
+            style: 'default',
+            onPress: handleSaveAndNew,
+          },
         ],
       });
       setShowAlertDialog(true);
@@ -313,9 +324,6 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
     if (isTask) {
       setIsCompleted(false);
       setDueDate(null);
-    } else {
-      // When enabling task, show date picker
-      setShowDatePicker(true);
     }
   };
 
@@ -395,7 +403,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           )}
 
           {/* AI Assistant Panel */}
-          {hasPremiumAccess && !isEditing && (
+          {hasPremiumAccess && (
             <Card style={styles.aiPanel}>
               <CardContent>
                 <View style={styles.aiPanelHeader}>
@@ -630,7 +638,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           {isTask && (
             <View style={styles.inputGroup}>
               <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
-                Due Date (optional)
+                Due Date (optional - no due date by default)
               </Text>
               <View style={styles.dueDateContainer}>
                 {dueDate ? (
@@ -830,33 +838,34 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   inputGroup: {
-    marginBottom: 20,
+    marginBottom: 16,
   },
   label: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
-    marginBottom: 8,
+    marginBottom: 6,
+    fontFamily: 'Ubuntu',
   },
   titleInput: {
     borderWidth: 1,
     borderRadius: 8,
-    padding: 8,
-    fontSize: 14,
+    padding: 6,
+    fontSize: 12,
     fontWeight: '500',
     fontFamily: 'Ubuntu',
-    lineHeight: 18,
+    lineHeight: 15,
   },
   contentInput: {
     borderWidth: 1,
     borderRadius: 8,
-    padding: 8,
-    fontSize: 14,
+    padding: 6,
+    fontSize: 12,
     fontFamily: 'Ubuntu',
-    lineHeight: 18,
-    minHeight: 80,
+    lineHeight: 15,
+    minHeight: 60,
   },
   charCount: {
-    fontSize: 11,
+    fontSize: 10,
     textAlign: 'right',
     marginTop: 2,
     fontFamily: 'Ubuntu',
@@ -883,22 +892,22 @@ const styles = StyleSheet.create({
   },
   quickActions: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 12,
+    gap: 6,
+    marginBottom: 10,
   },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
     borderRadius: 6,
-    gap: 4,
+    gap: 3,
   },
   actionButtonActive: {
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
   },
   actionText: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '500',
     fontFamily: 'Ubuntu',
   },

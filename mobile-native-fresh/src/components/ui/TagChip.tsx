@@ -32,34 +32,29 @@ export const TagChip: React.FC<TagChipProps> = ({
     variant: variantStyle,
     size: sizeStyle,
   });
+  
   // Compact outlined style overrides
   const compactStyle = {
-    paddingHorizontal: tokens.spacing.xs,
+    paddingHorizontal: tokens.spacing.md,
     paddingVertical: tokens.spacing.xs,
-    borderRadius: 8,
-    minHeight: 24,
+    borderRadius: 6,
     borderWidth: 1,
-    borderColor: tokens.colors.border,
-    backgroundColor: variant === 'outline' ? 'transparent' : chipStyle.backgroundColor,
+    borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
+    backgroundColor: isSelected ? 'transparent' : 'transparent',
   };
 
   // Apply selected state or outline variant
   const finalChipStyle = {
     ...chipStyle,
-    backgroundColor: variant === 'outline' ? 'transparent' : 
-                   isSelected ? tokens.colors.accent : chipStyle.backgroundColor,
-    borderColor: variant === 'outline' ? tokens.colors.border :
-                isSelected ? tokens.colors.accent : chipStyle.borderColor,
+    backgroundColor: 'transparent', // Always transparent
+    borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
   };
 
-  const textColor = variant === 'outline' ? tokens.colors.textSecondary :
-                   isSelected ? tokens.colors.text : tokens.colors.textSecondary;
-
   const textStyle = {
-    color: textColor,
-    fontSize: 10,
-    fontWeight: '300' as '300',
-    fontFamily: 'Ubuntu',
+    fontSize: 11,
+    fontWeight: '500' as const,
+    fontFamily: 'Ubuntu_500Medium',
+    color: isSelected ? tokens.colors.accent : tokens.colors.text,
   };
 
   return (

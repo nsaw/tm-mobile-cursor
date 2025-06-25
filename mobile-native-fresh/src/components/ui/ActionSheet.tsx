@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../theme/theme';
 
 interface ActionSheetItem {
@@ -62,13 +63,22 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   ]}
                   onPress={() => handleItemPress(item)}
                 >
-                  <Text style={[
-                    styles.itemText,
-                    item.destructive && styles.destructiveText,
-                  ]}>
-                    {item.icon && `${item.icon} `}
-                    {item.label}
-                  </Text>
+                  <View style={styles.itemContent}>
+                    {item.icon && (
+                      <Ionicons
+                        name={item.icon as any}
+                        size={16}
+                        color={item.destructive ? '#FF3B30' : colors.text}
+                        style={styles.itemIcon}
+                      />
+                    )}
+                    <Text style={[
+                      styles.itemText,
+                      item.destructive && styles.destructiveText,
+                    ]}>
+                      {item.label}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
               ))}
               
@@ -143,5 +153,12 @@ const styles = StyleSheet.create({
     color: colors.primary,
     textAlign: 'center',
     fontWeight: '600',
+  },
+  itemContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  itemIcon: {
+    marginRight: spacing.sm,
   },
 }); 

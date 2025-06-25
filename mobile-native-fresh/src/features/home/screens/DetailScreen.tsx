@@ -106,7 +106,7 @@ export const DetailScreen = () => {
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>{thoughtmark.title}</Text>
+        <Text style={styles.title}>{thoughtmark.title || 'Untitled'}</Text>
         
         {bin && (
           <View style={styles.binInfo}>
@@ -125,7 +125,7 @@ export const DetailScreen = () => {
           </View>
         )}
         
-        <Text style={styles.contentText}>{thoughtmark.content}</Text>
+        <Text style={styles.contentText}>{thoughtmark.content || 'No content'}</Text>
         
         {thoughtmark.isTask && (
           <View style={styles.taskInfo}>
@@ -139,7 +139,13 @@ export const DetailScreen = () => {
             </Text>
             {thoughtmark.dueDate && (
               <Text style={styles.dueDate}>
-                Due: {new Date(thoughtmark.dueDate).toLocaleDateString()}
+                Due: {(() => {
+                  try {
+                    return new Date(thoughtmark.dueDate).toLocaleDateString();
+                  } catch (error) {
+                    return 'Invalid date';
+                  }
+                })()}
               </Text>
             )}
           </View>

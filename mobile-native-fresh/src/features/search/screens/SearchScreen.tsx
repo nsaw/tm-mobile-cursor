@@ -179,6 +179,19 @@ export const SearchScreen: React.FC = () => {
     navigation.navigate('CreateThoughtmark' as any);
   };
 
+  const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
+    try {
+      // TODO: Implement API call to toggle pin status
+      // await apiRequest("POST", `/api/thoughtmarks/${thoughtmarkId}/toggle-pin`, { pinned });
+      console.log(`Thoughtmark ${thoughtmarkId} ${pinned ? 'pinned' : 'unpinned'}`);
+      
+      // For now, we'll just log the action
+      // In a real implementation, you would update the local state and sync with backend
+    } catch (error) {
+      console.error('Failed to toggle pin status:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ModernHeader 
@@ -322,6 +335,7 @@ export const SearchScreen: React.FC = () => {
             <ThoughtmarkCard 
               thoughtmark={item} 
               onClick={() => handleThoughtmarkPress(item)}
+              onPinToggle={handlePinToggle}
             />
           )}
           keyExtractor={(item) => item.id.toString()}
