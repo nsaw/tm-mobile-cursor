@@ -4,21 +4,20 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-// Simple regex-based approach to find and fix unwrapped text
+// Enhanced regex-based approach to find and fix unwrapped text
 function fixUnwrappedText(content) {
   let modified = false;
+  let hasTextImport = content.includes("import { Text } from 'react-native'") || 
+                     content.includes("import { Text,") ||
+                     content.includes("import {Text} from 'react-native'");
   
   // Pattern to match JSX elements that contain string literals
-  // This is a simplified approach - in production you'd want a proper JSX parser
-  const jsxPattern = /<([A-Z][a-zA-Z]*)\s*[^>]*>([^<]*)<\/\1>/g;
-  
-  // For now, let's use a simpler approach to detect unwrapped text
-  // This will catch basic cases like: <View>Hello</View>
+  // This catches more cases including strings with spaces and punctuation
   const unwrappedTextPattern = /<([A-Z][a-zA-Z]*)\s*[^>]*>\s*([^<>\s][^<>]*[^<>\s])\s*<\/\1>/g;
   
   let newContent = content.replace(unwrappedTextPattern, (match, tagName, textContent) => {
-    // Skip if it's already a Text component
-    if (tagName === 'Text') {
+    // Skip if it's already a Text component or similar
+    if (tagName === 'Text' || tagName === 'Heading' || tagName === 'Caption' || tagName === 'NeonGradientText') {
       return match;
     }
     
@@ -27,8 +26,13 @@ function fixUnwrappedText(content) {
       return match;
     }
     
-    // Skip if it's just whitespace
+    // Skip if it's just whitespace or empty
     if (textContent.trim() === '') {
+      return match;
+    }
+    
+    // Skip if it's a number or boolean
+    if (/^\d+$/.test(textContent.trim()) || textContent.trim() === 'true' || textContent.trim() === 'false') {
       return match;
     }
     
@@ -38,6 +42,28 @@ function fixUnwrappedText(content) {
     // Replace with wrapped text
     return `<${tagName}><Text>${textContent}</Text></${tagName}>`;
   });
+  
+  // Auto-inject Text import if needed and not already present
+  if (modified && !hasTextImport) {
+    const importPattern = /import\s+{([^}]+)}\s+from\s+['"]react-native['"]/;
+    const match = newContent.match(importPattern);
+    
+    if (match) {
+      // Add Text to existing react-native import
+      const imports = match[1].split(',').map(imp => imp.trim());
+      if (!imports.includes('Text')) {
+        imports.push('Text');
+        const newImport = `import { ${imports.join(', ')} } from 'react-native'`;
+        newContent = newContent.replace(importPattern, newImport);
+        console.log('  Added Text to existing react-native import');
+      }
+    } else {
+      // Add new react-native import with Text
+      const newImport = "import { Text } from 'react-native';\n";
+      newContent = newImport + newContent;
+      console.log('  Added new react-native import with Text');
+    }
+  }
   
   return { content: newContent, modified };
 }
