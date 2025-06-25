@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { View, ViewStyle, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { cardVariants, mergeVariantStyles } from '../../theme/variants';
 
@@ -40,6 +40,21 @@ export const Card: React.FC<CardProps> = ({
     ...style,
   };
 
+  // Handle string children by wrapping them in Text
+  const renderChildren = () => {
+    if (typeof children === 'string') {
+      return (
+        <Text style={{
+          color: tokens.colors.text,
+          fontSize: tokens.typography.fontSize.body,
+        }}>
+          {children}
+        </Text>
+      );
+    }
+    return children;
+  };
+
   if (onPress && !disabled) {
     return (
       <View
@@ -48,14 +63,14 @@ export const Card: React.FC<CardProps> = ({
         accessible={true}
         accessibilityRole="button"
       >
-        {children}
+        {renderChildren()}
       </View>
     );
   }
 
   return (
     <View style={finalCardStyle}>
-      {children}
+      {renderChildren()}
     </View>
   );
 };
@@ -66,6 +81,22 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   style,
 }) => {
   const { tokens } = useTheme();
+  
+  // Handle string children by wrapping them in Text
+  const renderChildren = () => {
+    if (typeof children === 'string') {
+      return (
+        <Text style={{
+          color: tokens.colors.text,
+          fontSize: tokens.typography.fontSize.lg,
+          fontWeight: tokens.typography.fontWeight.semibold,
+        }}>
+          {children}
+        </Text>
+      );
+    }
+    return children;
+  };
   
   return (
     <View
@@ -78,7 +109,7 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
         style,
       ]}
     >
-      {children}
+      {renderChildren()}
     </View>
   );
 };
@@ -89,6 +120,21 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
 }) => {
   const { tokens } = useTheme();
   
+  // Handle string children by wrapping them in Text
+  const renderChildren = () => {
+    if (typeof children === 'string') {
+      return (
+        <Text style={{
+          color: tokens.colors.text,
+          fontSize: tokens.typography.fontSize.body,
+        }}>
+          {children}
+        </Text>
+      );
+    }
+    return children;
+  };
+  
   return (
     <View
       style={[
@@ -98,7 +144,7 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
         style,
       ]}
     >
-      {children}
+      {renderChildren()}
     </View>
   );
 };
@@ -108,6 +154,21 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   style,
 }) => {
   const { tokens } = useTheme();
+  
+  // Handle string children by wrapping them in Text
+  const renderChildren = () => {
+    if (typeof children === 'string') {
+      return (
+        <Text style={{
+          color: tokens.colors.text,
+          fontSize: tokens.typography.fontSize.body,
+        }}>
+          {children}
+        </Text>
+      );
+    }
+    return children;
+  };
   
   return (
     <View
@@ -123,7 +184,7 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
         style,
       ]}
     >
-      {children}
+      {renderChildren()}
     </View>
   );
 }; 

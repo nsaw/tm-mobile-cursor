@@ -112,7 +112,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
           style={[
             {
               color: textColor,
-              fontSize: tokens.typography.fontSize.body,
+              fontSize: tokens.typography.fontSize.lg,
               fontWeight: tokens.typography.fontWeight.medium,
               textAlign: 'center',
             },

@@ -8,17 +8,14 @@ import {
   Vibration,
   ViewStyle,
   Animated,
+  ScrollView,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { SvgXml } from 'react-native-svg';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { designTokens } from '../../../theme/tokens';
 import { TagChip } from '../../../components/ui/TagChip';
 import { ActionSheet } from '../../../components/ui/ActionSheet';
 import { ThoughtmarkWithBin } from '../../../types';
-
-// Keep icon SVG content
-const keepIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>`;
 
 interface ThoughtmarkCardProps {
   thoughtmark: any;
@@ -63,14 +60,10 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
       activeOpacity={0.7}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-        <SvgXml
-          xml={keepIconSvg}
-          width={20}
-          height={20}
-          style={{
-            opacity: pinned ? 0.4 : 0.15,
-          }}
-          fill={pinned ? 'rgba(0,122,255,1)' : '#ffffff'}
+        <FontAwesome
+          name="thumb-tack"
+          size={20}
+          color={pinned ? 'rgba(0, 122, 255, 0.6)' : 'rgba(255, 255, 255, 0.3)'}
         />
       </Animated.View>
     </TouchableOpacity>
@@ -208,14 +201,12 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onPressOut={handlePressOut}
         activeOpacity={0.7}
       >
-        {/* Interactive Pin Icon - Always visible */}
-        <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
-        
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
             {/* Left: Checkbox */}
             <View style={styles.headerLeft}>
+              <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
               {selected && (
                 <TouchableOpacity
                   style={styles.checkbox}
@@ -269,11 +260,16 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 
           {/* Footer */}
           <View style={styles.footer}>
-            <View style={styles.tagsContainer}>
+            <ScrollView 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+              style={styles.tagsScrollView}
+              contentContainerStyle={styles.tagsContainer}
+            >
               {(thoughtmark.tags || []).map((tag: string) => (
                 <TagChip key={tag} tag={tag} size="sm" />
               ))}
-            </View>
+            </ScrollView>
             
             {thoughtmark.binName && thoughtmark.binName.trim() && (
               <Text style={styles.binName}>
@@ -297,8 +293,8 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 8,
-    padding: spacing.sm,
+    borderRadius: 11,
+    padding: spacing.sm * 1.34,
     borderWidth: 1,
     borderColor: colors.border,
     position: 'relative',
@@ -313,41 +309,39 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   pinButton: {
-    position: 'absolute',
-    top: 8,
-    right: 8,
-    zIndex: 10,
-    padding: 4,
+    marginRight: spacing.xs,
+    padding: 2,
   },
   content: {
-    marginTop: spacing.xs,
+    marginTop: spacing.xs * 1.34,
     marginLeft: 0,
     color: colors.subtext,
-    fontSize: 12,
+    fontSize: 16,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: 8,
     justifyContent: 'space-between',
   },
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: spacing.sm,
+    marginRight: spacing.sm * 1.34,
   },
   headerCenter: {
     flex: 1,
     justifyContent: 'center',
-    marginRight: spacing.sm,
+    marginRight: spacing.sm * 1.34,
   },
   title: {
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: '500',
     color: colors.text,
     textAlign: 'left',
     paddingLeft: 0,
     fontFamily: 'Ubuntu_500Medium',
+    textTransform: 'capitalize',
   },
   headerRight: {
     flexDirection: 'row',
@@ -357,10 +351,10 @@ const styles = StyleSheet.create({
   },
   similarityBadge: {
     backgroundColor: '#C6D60020',
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: designTokens.radius.md,
-    marginRight: spacing.sm,
+    paddingHorizontal: spacing.sm * 1.34,
+    paddingVertical: spacing.xs * 1.34,
+    borderRadius: designTokens.radius.md * 1.34,
+    marginRight: spacing.sm * 1.34,
   },
   similarityText: {
     fontSize: 10,
@@ -371,14 +365,14 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 10,
     color: colors.subtext,
-    marginRight: 4,
+    marginRight: 5,
     fontFamily: 'Ubuntu_400Regular',
   },
   contentText: {
-    fontSize: typography.body.fontSize * 0.65,
+    fontSize: typography.body.fontSize * 0.80,
     color: colors.subtext,
-    marginBottom: 8,
-    lineHeight: 16,
+    marginBottom: 11,
+    lineHeight: 28,
     fontWeight: '400',
     paddingLeft: 0,
     fontFamily: 'Ubuntu_400Regular',
@@ -388,21 +382,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
+  tagsScrollView: {
+    flex: 1,
+    marginRight: spacing.sm,
+  },
   tagsContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    flex: 1,
+    alignItems: 'center',
+    paddingRight: spacing.sm,
   },
   binName: {
     fontSize: 10,
     color: colors.subtext,
-    marginLeft: 8,
+    marginLeft: 11,
     fontFamily: 'Ubuntu_400Regular',
   },
   checkbox: {
-    marginRight: spacing.xs,
+    marginRight: spacing.xs * 1.34,
   },
   menuButton: {
-    padding: spacing.xs,
+    padding: spacing.xs * 1.34,
   },
 });

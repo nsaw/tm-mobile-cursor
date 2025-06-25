@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, typography } from '../../../theme/theme';
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface TagFilterProps {
   tags: string[];
@@ -101,7 +102,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
                 selectedTag === tag && styles.tagTextSelected,
               ]}
             >
-              {tag} ({getTagCount(tag)})
+              {tag.toLowerCase()} ({getTagCount(tag)})
             </Text>
           </TouchableOpacity>
         ))}
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 12,
+    fontSize: 8,
     color: colors.subtext,
     marginLeft: spacing.sm,
     textTransform: 'lowercase',
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sm,
   },
   moreText: {
-    fontSize: 12,
+    fontSize: 8,
     color: colors.subtext,
   },
   scrollContent: {

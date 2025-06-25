@@ -37,13 +37,13 @@ export const designTokens = {
   },
   
   spacing: {
-    xs: 4,    // 4px
-    sm: 8,    // 8px  
-    md: 12,   // 12px
-    lg: 16,   // 16px
-    xl: 24,   // 24px
-    xxl: 32,  // 32px
-    xxxl: 48, // 48px
+    xs: 5,    // 4px * 1.34
+    sm: 11,   // 8px * 1.34
+    md: 16,   // 12px * 1.34
+    lg: 21,   // 16px * 1.34
+    xl: 32,   // 24px * 1.34
+    xxl: 43,  // 32px * 1.34
+    xxxl: 64, // 48px * 1.34
   },
   
   radius: {
@@ -127,11 +127,11 @@ export const designTokens = {
   
   // Icon sizes
   iconSize: {
-    xs: 14,
-    sm: 16,
-    md: 20,
-    lg: 24,
-    xl: 32,
+    xs: 19,  // 14 * 1.34
+    sm: 21,  // 16 * 1.34
+    md: 27,  // 20 * 1.34
+    lg: 32,  // 24 * 1.34
+    xl: 43,  // 32 * 1.34
   },
   
   // Z-index scale

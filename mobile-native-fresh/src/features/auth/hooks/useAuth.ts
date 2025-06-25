@@ -98,15 +98,19 @@ export const useAuth = () => {
       console.log('Demo login response:', JSON.stringify(res, null, 2));
       
       if (res.success && res.data && res.data.user && res.data.token) {
+        // Ensure token is a string and user is an object
+        const token = String(res.data.token);
+        const user = res.data.user as User;
+        
         console.log('Storing auth data:', { 
-          user: res.data.user, 
-          token: res.data.token,
-          userType: typeof res.data.user,
-          tokenType: typeof res.data.token
+          user: user, 
+          token: token,
+          userType: typeof user,
+          tokenType: typeof token
         });
-        await storeAuthData(res.data.user, res.data.token);
+        await storeAuthData(user, token);
         setAuthState({
-          user: res.data.user,
+          user: user,
           isAuthenticated: true,
           loading: false,
           guestMode: false,

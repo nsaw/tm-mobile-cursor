@@ -10,15 +10,15 @@ export const colors = {
 }
 
 export const spacing = {
-  xs: 4, sm: 8, md: 16, lg: 24, xl: 32
+  xs: 5, sm: 11, md: 21, lg: 32, xl: 43
 }
 
 export const typography = {
-  heading:    { fontFamily: 'Ubuntu_700Bold',   fontSize: 28 },
-  subheading: { fontFamily: 'Ubuntu_500Medium', fontSize: 20 },
-  body:       { fontFamily: 'Ubuntu_400Regular',fontSize: 16 },
-  heading2:   { fontFamily: 'Ubuntu_700Bold',   fontSize: 24 },
-  heading3:   { fontFamily: 'Ubuntu_500Medium', fontSize: 18 },
-  caption:    { fontFamily: 'Ubuntu_400Regular',fontSize: 14 },
-  small:      { fontFamily: 'Ubuntu_400Regular',fontSize: 12 },
+  heading:    { fontFamily: 'Ubuntu_700Bold',   fontSize: 38 },
+  subheading: { fontFamily: 'Ubuntu_500Medium', fontSize: 27 },
+  body:       { fontFamily: 'Ubuntu_400Regular',fontSize: 21 },
+  heading2:   { fontFamily: 'Ubuntu_700Bold',   fontSize: 32 },
+  heading3:   { fontFamily: 'Ubuntu_500Medium', fontSize: 24 },
+  caption:    { fontFamily: 'Ubuntu_400Regular',fontSize: 19 },
+  small:      { fontFamily: 'Ubuntu_400Regular',fontSize: 16 },
 }

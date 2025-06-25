@@ -21,32 +21,32 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
       description: "Enable voice commands like 'Hey Siri, capture thoughtmark' or 'Hey Siri, add to thoughtmarks' from anywhere on your device. You can set this up now or later in Settings.",
-      icon: <Ionicons name="phone-portrait-outline" size={tokens.iconSize.xl} color="#60A5FA" />,
+      icon: <Ionicons name="phone-portrait-outline" size={43} color="#60A5FA" />,
     },
     {
       title: 'Organize with Smart Bins',
       description: 'AI automatically categorizes your thoughts into relevant bins. You can also create custom bins for specific projects.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={tokens.iconSize.xl} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
     },
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
       description: 'Access advanced AI, unlimited bins, priority support, and more.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={tokens.iconSize.xl} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
       premium: true,
     },
   ];
@@ -80,7 +80,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           backgroundColor: tokens.colors.backgroundSecondary,
           borderRadius: tokens.radius.lg,
           padding: tokens.spacing.xl,
-          maxWidth: 400,
+          maxWidth: 500,
         }]}
         >
           {/* Step Indicator */}
@@ -89,7 +89,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               <Text style={{
                 fontWeight: 'bold',
                 color: '#222',
-                fontSize: tokens.typography.fontSize.sm,
+                fontSize: 16, // tokens.typography.fontSize.sm * 1.34
               }}>{currentStep + 1}</Text>
             </View>
             <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
@@ -142,8 +142,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               }}
               textStyle={{ color: '#FFD700', fontWeight: 'bold' }}
             >
-              <Text style={{ color: '#FFD700', fontWeight: 'bold', marginRight: 4 }}>Upgrade Now</Text>
-              <MaterialCommunityIcons name="crown-outline" size={tokens.iconSize.md} color="#FFD700" />
+              Upgrade Now
             </Button>
           )}
 
@@ -156,9 +155,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               disabled={currentStep === 0}
               style={{ flexDirection: 'row', alignItems: 'center', opacity: currentStep === 0 ? 0.5 : 1 }}
               textStyle={{ color: tokens.colors.textSecondary, fontWeight: 'bold' }}
+              leftIcon={<Ionicons name="arrow-back" size={27} color={tokens.colors.textSecondary} />}
             >
-              <Ionicons name="arrow-back" size={tokens.iconSize.md} color={tokens.colors.textSecondary} />
-              <Text style={{ color: tokens.colors.textSecondary, marginLeft: 4, fontWeight: 'bold' }}>Previous</Text>
+              Previous
             </Button>
             {/* Step 6/6: Finish Button */}
             {steps[currentStep].premium && !isPremium ? (
@@ -171,16 +170,16 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 }}
                 textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
               >
-                <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Finish</Text>
+                Finish
               </Button>
             ) : (
               <Button
                 onPress={handleNext}
                 style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: tokens.radius.md, paddingHorizontal: tokens.spacing.xl }}
                 textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
+                rightIcon={<Ionicons name="arrow-forward" size={27} color={tokens.colors.text} />}
               >
-                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', marginRight: 4 }}>{currentStep === steps.length - 1 ? 'Get Started' : 'Next'}</Text>
-                <Ionicons name="arrow-forward" size={tokens.iconSize.md} color={tokens.colors.text} />
+                {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
               </Button>
             )}
           </View>
@@ -203,12 +202,12 @@ const styles = StyleSheet.create({
   stepHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 21, // 16 * 1.34
   },
   stepCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 48, // 36 * 1.34
+    height: 48, // 36 * 1.34
+    borderRadius: 24, // 18 * 1.34
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -217,23 +216,23 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 21, // 16 * 1.34
   },
   progressDots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginBottom: 21, // 16 * 1.34
   },
   dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 3,
+    width: 13, // 10 * 1.34
+    height: 13, // 10 * 1.34
+    borderRadius: 7, // 5 * 1.34
+    marginHorizontal: 4, // 3 * 1.34
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 11, // 8 * 1.34
   },
 }); 

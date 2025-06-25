@@ -218,9 +218,9 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: spacing.lg,
+    marginBottom: spacing.lg * 0.47,
     backgroundColor: 'transparent', // Removed custom background color
-    borderRadius: 8,
+    borderRadius: 11, // 8 * 1.34
   },
   dragging: {
     opacity: 0.8,
@@ -230,9 +230,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg, // Added horizontal padding
-    paddingBottom: spacing.sm, // Reduced bottom padding
+    paddingVertical: spacing.md * 1.34,
+    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
+    paddingBottom: spacing.sm * 1.34, // Reduced bottom padding
   },
   headerLeft: {
     flexDirection: 'row',
@@ -240,13 +240,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   chevronIcon: {
-    marginRight: spacing.sm,
+    marginRight: spacing.sm * 1.34,
   },
   sectionTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: 22, // Increased from 18 to 22 for better readability
     fontWeight: '700',
     color: colors.text,
-    letterSpacing: 0.5,
+    letterSpacing: 0.7, // 0.5 * 1.34
     fontFamily: 'Ubuntu_700Bold',
     flex: 1,
   },
@@ -255,10 +255,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionContent: {
-    paddingHorizontal: spacing.lg, // Added horizontal padding
-    paddingBottom: spacing.md,
+    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
+    paddingBottom: spacing.md * 1.34,
   },
   dragHandle: {
-    marginLeft: spacing.sm,
+    marginLeft: spacing.sm * 1.34,
   },
 }); 

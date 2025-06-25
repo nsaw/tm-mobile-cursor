@@ -14,6 +14,7 @@ import {
   Vibration,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { TaskCard } from '../components/TaskCard';
@@ -341,7 +342,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     styles.tagChipText,
                     localTagFilter === 'all' && styles.tagChipTextActive
                   ]}>
-                    All ({thoughtmarks.filter(t => !t.isDeleted).length})
+                    all ({thoughtmarks.filter(t => !t.isDeleted).length})
                   </Text>
                 </TouchableOpacity>
                 
@@ -358,7 +359,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       styles.tagChipText,
                       localTagFilter === tag && styles.tagChipTextActive
                     ]}>
-                      {tag}
+                      {tag.toLowerCase()}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -373,6 +374,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     <ThoughtmarkCard
                       key={thoughtmark.id}
                       thoughtmark={thoughtmark}
+                      pinned={thoughtmark.isPinned}
                       onClick={() => handleThoughtmarkPress(thoughtmark)}
                       onEdit={() => handleThoughtmarkEdit(thoughtmark)}
                       onPinToggle={handlePinToggle}
@@ -458,7 +460,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     onPress={handleCreateBin}
                   >
                     <View style={styles.newBinCardContent}>
-                      <Ionicons name="add" size={16} color={colors.primary} />
+                      <Ionicons name="add" size={21} color={colors.primary} />
                       <Text style={styles.newBinText}>New Bin</Text>
                     </View>
                   </TouchableOpacity>
@@ -491,7 +493,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   >
                     <View style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View Archive</Text>
-                      <Ionicons name="archive-outline" size={16} color={colors.primary} />
+                      <Ionicons name="archive-outline" size={21} color={colors.primary} />
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -535,14 +537,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 style={styles.infoButton}
                 onPress={handleReorderHintPress}
               >
-                <Ionicons name="information-circle-outline" size={20} color={colors.subtext} />
+                <Ionicons name="information-circle-outline" size={27} color={colors.subtext} />
               </TouchableOpacity>
             </Animated.View>
             <TouchableOpacity
               style={styles.settingsButton}
               onPress={() => navigation.navigate('Settings')}
             >
-              <Ionicons name="settings-outline" size={24} color={colors.subtext} />
+              <Ionicons name="settings-outline" size={32} color={colors.subtext} />
             </TouchableOpacity>
           </View>
         </View>
@@ -617,7 +619,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   scrollContent: {
-    paddingTop: spacing.lg,
+    paddingTop: spacing.lg * 0.5, // Reduced from spacing.lg
     paddingBottom: 120, // Increased padding to account for nav bar + safe area
     minHeight: '100%', // Ensure content fills the scroll view
   },
@@ -625,8 +627,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: spacing.lg,
-    paddingHorizontal: spacing.lg,
+    marginBottom: spacing.lg * 0.5, // Reduced from spacing.lg
+    paddingHorizontal: spacing.sm, // Reduced from spacing.lg for full width
   },
   headerLeft: {
     flexDirection: 'row',
@@ -634,28 +636,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    width: 48, // Increased from 40
-    height: 48, // Increased from 40
-    borderRadius: 10, // Slightly increased for larger size
-    marginRight: spacing.md,
+    width: 64, // 48 * 1.34
+    height: 64, // 48 * 1.34
+    borderRadius: 13, // 10 * 1.34
+    marginRight: spacing.sm,
   },
   titleContainer: {
     flex: 1,
   },
   title: {
-    fontSize: typography.heading.fontSize * 0.9,
+    fontSize: RFValue(18),
     fontWeight: '900',
     color: colors.text,
     opacity: 0.9, // Added 90% opacity for h2 text
-    letterSpacing: 1,
+    letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
     textTransform: 'uppercase',
     fontFamily: 'Ubuntu_700Bold',
   },
   subtitle: {
-    fontSize: typography.body.fontSize * 0.8,
+    fontSize: RFValue(10),
     fontWeight: '400',
-    marginTop: -4, // Reduced spacing between title and tagline
-    marginLeft: 16, // Indent the tagline
+    marginTop: -5, // Reduced spacing between title and tagline
+    marginLeft: 21, // Indent the tagline - 16 * 1.34
     fontFamily: 'Ubuntu_400Regular',
     opacity: 0.8, // Added 80% opacity for text below h3
   },
@@ -664,7 +666,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   infoButton: {
-    padding: spacing.sm,
+    padding: spacing.sm * 1.34,
     shadowColor: colors.text,
     shadowOffset: {
       width: 0,
@@ -675,27 +677,27 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   settingsButton: {
-    padding: spacing.sm,
+    padding: spacing.sm * 1.34,
   },
   aiToolsContainer: {
-    marginBottom: spacing.lg,
-    paddingHorizontal: spacing.lg,
+    marginBottom: spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+    paddingHorizontal: spacing.sm, // Reduced from spacing.lg for full width
   },
   section: {
-    marginBottom: spacing.lg,
+    marginBottom: spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: spacing.md,
+    marginBottom: spacing.md * 0.5, // Reduced from spacing.md
   },
   sectionTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: RFValue(22),
     fontWeight: '700',
     color: colors.text,
     opacity: 0.9, // Added 90% opacity for h2 text
-    letterSpacing: 0.5,
+    letterSpacing: 0.7, // 0.5 * 1.34
     fontFamily: 'Ubuntu_700Bold',
   },
   sectionHeaderRight: {
@@ -706,7 +708,7 @@ const styles = StyleSheet.create({
     marginRight: spacing.sm,
   },
   viewAllText: {
-    fontSize: typography.body.fontSize,
+    fontSize: RFValue(typography.body.fontSize),
     color: colors.primary,
     fontWeight: '500',
     fontFamily: 'Ubuntu_500Medium',
@@ -734,7 +736,7 @@ const styles = StyleSheet.create({
   },
   binCardSkeleton: {
     width: '48%', // Use percentage instead of fixed width
-    height: 52, // h-13 equivalent
+    height: 70, // 52 * 1.34
     backgroundColor: '#202124',
     borderRadius: 8,
     marginBottom: spacing.sm,
@@ -743,7 +745,7 @@ const styles = StyleSheet.create({
   },
   binCard: {
     width: '48%', // Use percentage instead of fixed width
-    height: 52, // h-13 equivalent
+    height: 70, // 52 * 1.34
     backgroundColor: '#202124',
     borderRadius: 8,
     padding: spacing.sm,
@@ -759,15 +761,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   binCardName: {
-    fontSize: 14,
+    fontSize: RFValue(16),
+    fontWeight: '600',
     color: colors.text,
-    fontWeight: '500',
-    opacity: 0.8, // Added 80% opacity for text below h3
+    marginBottom: 2,
+    fontFamily: 'Ubuntu_600SemiBold',
   },
   binCardCount: {
-    fontSize: 12,
-    color: colors.primary,
-    opacity: 0.8, // Added 80% opacity for text below h3
+    fontSize: RFValue(13),
+    color: colors.subtext,
+    fontFamily: 'Ubuntu_400Regular',
   },
   newBinCard: {
     width: '48%', // Use percentage instead of fixed width
@@ -788,23 +791,23 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   newBinText: {
-    fontSize: 14,
+    fontSize: RFValue(14),
     color: colors.primary,
     fontWeight: '500',
     opacity: 0.8, // Added 80% opacity for text below h3
   },
   specialBinsContainer: {
-    marginTop: spacing.md,
+    marginTop: spacing.md * 1.34,
   },
   specialBinCard: {
     width: '100%',
-    height: 52, // h-13 equivalent
+    height: 70, // 52 * 1.34
     backgroundColor: '#1e3a8a', // blue-950 equivalent
-    borderRadius: 8,
+    borderRadius: 11, // 8 * 1.34
     borderWidth: 1,
     borderColor: '#1e40af', // blue-800 equivalent
-    padding: spacing.sm,
-    marginBottom: spacing.sm,
+    padding: spacing.sm * 1.34,
+    marginBottom: spacing.sm * 1.34,
     justifyContent: 'center',
   },
   specialBinCardContent: {
@@ -814,23 +817,23 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   specialBinCardText: {
-    fontSize: 14,
+    fontSize: RFValue(14),
     color: colors.text,
     fontWeight: '500',
     opacity: 0.8, // Added 80% opacity for text below h3
   },
   specialBinCardCount: {
-    fontSize: 12,
+    fontSize: RFValue(11),
     color: colors.primary,
     opacity: 0.8, // Added 80% opacity for text below h3
   },
   archiveCard: {
     width: '100%',
-    height: 52, // h-13 equivalent
+    height: 70, // 52 * 1.34
     backgroundColor: 'transparent',
-    borderRadius: 8,
-    padding: spacing.sm,
-    marginBottom: spacing.sm,
+    borderRadius: 11, // 8 * 1.34
+    padding: spacing.sm * 1.34,
+    marginBottom: spacing.sm * 1.34,
     justifyContent: 'center',
     borderWidth: 1, // Added subtle border
     borderColor: colors.border, // Subtle gray outline
@@ -842,79 +845,79 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   archiveCardText: {
-    fontSize: 14,
+    fontSize: RFValue(14),
     color: colors.text,
     fontWeight: '500',
     opacity: 0.8, // Added 80% opacity for text below h3
   },
   viewMoreCard: {
     backgroundColor: 'transparent',
-    borderRadius: 6,
-    padding: spacing.md,
+    borderRadius: 8, // 6 * 1.34
+    padding: spacing.md * 1.34,
     alignItems: 'center',
-    marginTop: spacing.md,
+    marginTop: spacing.md * 1.34,
     borderWidth: 2,
     borderColor: colors.primary,
     borderStyle: 'dashed',
-    height: 60,
+    height: 80, // 60 * 1.34
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   viewMoreText: {
-    fontSize: typography.body.fontSize,
+    fontSize: RFValue(14),
     color: colors.primary,
     fontWeight: '600',
     marginTop: 0,
     opacity: 0.8,
   },
   viewMoreCount: {
-    fontSize: 12,
+    fontSize: RFValue(11),
     color: colors.subtext,
     marginTop: 0,
     opacity: 0.8,
   },
   emptyState: {
     alignItems: 'center',
-    paddingVertical: spacing.xl,
+    paddingVertical: spacing.xl * 1.34,
   },
   emptyStateText: {
-    fontSize: typography.body.fontSize,
+    fontSize: RFValue(14),
     color: colors.subtext,
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 32, // 24 * 1.34
     opacity: 0.8,
   },
   reorderTooltip: {
     position: 'absolute',
-    top: 80,
-    right: spacing.lg,
+    top: 107, // 80 * 1.34
+    right: spacing.lg * 1.34,
     backgroundColor: colors.card,
-    borderRadius: 8,
-    padding: spacing.sm,
+    borderRadius: 11, // 8 * 1.34
+    padding: spacing.sm * 1.34,
     shadowColor: colors.text,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 3, // 2 * 1.34
     },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowRadius: 5, // 4 * 1.34
+    elevation: 4, // 3 * 1.34
     zIndex: 1000,
-    maxWidth: 200,
+    maxWidth: 268, // 200 * 1.34
   },
   tooltipArrow: {
     position: 'absolute',
-    top: -8,
-    right: 20,
+    top: -11, // -8 * 1.34
+    right: 27, // 20 * 1.34
     width: 0,
     height: 0,
-    borderLeftWidth: 8,
-    borderRightWidth: 8,
-    borderBottomWidth: 8,
+    borderLeftWidth: 11, // 8 * 1.34
+    borderRightWidth: 11, // 8 * 1.34
+    borderBottomWidth: 11, // 8 * 1.34
     borderColor: `transparent transparent ${colors.card} transparent`,
   },
   reorderTooltipText: {
-    fontSize: 12,
+    fontSize: RFValue(11),
     color: colors.text,
     fontWeight: '500',
     fontFamily: 'Ubuntu_500Medium',
@@ -922,26 +925,26 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   tagsContainer: {
-    marginBottom: spacing.sm,
+    marginBottom: spacing.sm * 1.34,
   },
   tagsScrollContent: {
     paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
+    paddingVertical: spacing.xs * 1.34,
   },
   tagChip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.md * 1.34,
+    paddingVertical: spacing.xs * 1.34,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 6,
-    marginRight: spacing.xs,
+    borderRadius: 8, // 6 * 1.34
+    marginRight: spacing.xs * 1.34,
   },
   tagChipActive: {
     backgroundColor: 'transparent',
     borderColor: colors.primary,
   },
   tagChipText: {
-    fontSize: 11,
+    fontSize: RFValue(10),
     color: colors.text,
     fontWeight: '500',
     fontFamily: 'Ubuntu_500Medium',
@@ -955,19 +958,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: spacing.md,
+    marginBottom: spacing.md * 1.34,
   },
   tagsTitle: {
-    fontSize: 10,
+    fontSize: RFValue(12),
     fontWeight: '400',
     color: colors.subtext,
-    letterSpacing: 0.5,
+    letterSpacing: 0.7, // 0.5 * 1.34
     fontFamily: 'Ubuntu_400Regular',
     textTransform: 'lowercase',
     opacity: 0.8,
   },
   viewAllTagsText: {
-    fontSize: typography.body.fontSize,
+    fontSize: RFValue(19),
     color: colors.primary,
     fontWeight: '500',
     fontFamily: 'Ubuntu_500Medium',

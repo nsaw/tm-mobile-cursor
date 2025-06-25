@@ -58,7 +58,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     if (item.iconType === 'lucide') {
       return (
         <Brain
-          size={20}
+          size={27}
           strokeWidth={2}
           color={iconColor}
         />
@@ -68,7 +68,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     return (
       <MaterialCommunityIcons
         name={item.icon as any}
-        size={24}
+        size={32}
         color={iconColor}
       />
     );
@@ -111,7 +111,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
       {/* Floating New Thoughtmark Button */}
       {showCreateButton && currentRoute !== '/' && (
-        <View style={[styles.fabWrapper, { bottom: insets.bottom + 40 }]}>
+        <View style={[styles.fabWrapper, { bottom: (insets.bottom + 40) * 1.34 }]}>
           <View style={styles.fabRing}>
             <TouchableOpacity
               style={styles.fab}
@@ -123,7 +123,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 }
               }}
             >
-              <MaterialCommunityIcons name="plus" size={26} color="#007AFF" />
+              <MaterialCommunityIcons name="plus" size={47} color="#007AFF" />
             </TouchableOpacity>
           </View>
         </View>
@@ -168,19 +168,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 16,
     paddingHorizontal: spacing.lg,
-    minHeight: 80,
+    minHeight: 107,
   },
   navButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-    borderRadius: 8,
+    paddingVertical: 11,
+    paddingHorizontal: 11,
+    borderRadius: 11,
     backgroundColor: 'transparent',
-    minHeight: 44,
-    minWidth: 44,
+    minHeight: 59,
+    minWidth: 59,
     position: 'relative',
   },
   activeNavButton: {
@@ -200,18 +200,18 @@ const styles = StyleSheet.create({
   fabWrapper: {
     position: 'absolute',
     left: '50%',
-    transform: [{ translateX: -32 }],
+    transform: [{ translateX: -43 }],
     zIndex: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   fabRing: {
-    width: 62,
-    height: 62,
-    borderRadius: 42,
-    padding: 3,
+    width: 83,
+    height: 83,
+    borderRadius: 56,
+    padding: 4,
     backgroundColor: 'rgba(0, 122, 255, 0.9)',
-    borderWidth: 3,
+    borderWidth: 4,
     borderColor: 'rgba(0, 122, 255, 0.9)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -224,17 +224,17 @@ const styles = StyleSheet.create({
           height: 0,
         },
         shadowOpacity: 0.6,
-        shadowRadius: 24,
+        shadowRadius: 32,
       },
       android: {
-        elevation: 20,
+        elevation: 27,
       },
     }),
   },
   fab: {
-    width: 58,
-    height: 58,
-    borderRadius: 16,
+    width: 78,
+    height: 78,
+    borderRadius: 21,
     backgroundColor: '#0A0A0A',
     alignItems: 'center',
     justifyContent: 'center',
@@ -244,13 +244,13 @@ const styles = StyleSheet.create({
         shadowColor: '#000000',
         shadowOffset: {
           width: 0,
-          height: 4,
+          height: 5,
         },
         shadowOpacity: 0.4,
-        shadowRadius: 12,
+        shadowRadius: 16,
       },
       android: {
-        elevation: 12,
+        elevation: 16,
       },
     }),
   },

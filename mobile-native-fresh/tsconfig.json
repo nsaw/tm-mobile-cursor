@@ -4,7 +4,7 @@
     "jsx": "react-native",
     "esModuleInterop": true,
     "target": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },

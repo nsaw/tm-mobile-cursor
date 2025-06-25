@@ -50,11 +50,11 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
 
 const styles = StyleSheet.create({
   neonText: {
-    fontSize: typography.body.fontSize,
+    fontSize: 22, // Increased from 19 to 22 for better readability
     fontWeight: '700',
     fontFamily: 'Ubuntu',
     textShadowColor: '#C6D600',
     textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 8,
+    textShadowRadius: 11, // 8 * 1.34
   },
 }); 

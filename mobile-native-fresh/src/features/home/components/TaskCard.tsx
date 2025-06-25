@@ -58,7 +58,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         >
           <Ionicons
             name={task.isCompleted ? 'checkmark' : 'ellipse-outline'}
-            size={16}
+            size={21}
             color={task.isCompleted ? colors.primary : colors.subtext}
           />
         </TouchableOpacity>
@@ -96,8 +96,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.card,
-    borderRadius: 8,
-    padding: spacing.sm,
+    borderRadius: 11,
+    padding: spacing.sm * 1.34,
     borderWidth: 1,
     borderColor: colors.border,
   },
@@ -108,19 +108,16 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    fontSize: 12,
-    color: colors.subtext,
-    marginTop: spacing.xs,
   },
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
+    width: 43,
+    height: 43,
+    borderRadius: 21,
+    borderWidth: 3,
     borderColor: colors.border,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: spacing.md,
+    marginRight: spacing.md * 1.34,
   },
   checkboxCompleted: {
     backgroundColor: colors.primary,
@@ -130,12 +127,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 13,
-    fontWeight: '400',
-    marginBottom: spacing.xs,
+    fontSize: 16,
+    fontWeight: '600',
     color: colors.text,
-    fontFamily: 'Ubuntu_400Regular',
-    flex: 1,
+    marginBottom: 5,
+    fontFamily: 'Ubuntu_600SemiBold',
+    textTransform: 'capitalize',
   },
   titleCompleted: {
     textDecorationLine: 'line-through',
@@ -147,12 +144,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Ubuntu_500Medium',
   },
   dueDate: {
-    fontSize: 12,
+    fontSize: 11,
     color: colors.primary,
     fontFamily: 'Ubuntu_400Regular',
-    marginLeft: 8,
+    marginLeft: 11,
     textAlign: 'right',
-    minWidth: 48,
+    minWidth: 86,
   },
   overdueDate: {
     color: '#FCA5A5', // Light red

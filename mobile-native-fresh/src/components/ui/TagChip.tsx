@@ -33,14 +33,16 @@ export const TagChip: React.FC<TagChipProps> = ({
     size: sizeStyle,
   });
   
-  // Compact outlined style overrides
+  // Compact outlined style overrides - scaled by 1.34
   const compactStyle = {
-    paddingHorizontal: tokens.spacing.md,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: 6,
+    paddingHorizontal: tokens.spacing.md * 1.34,
+    paddingVertical: tokens.spacing.sm, // Equal top and bottom padding for proper centering
+    borderRadius: 8, // 6 * 1.34
     borderWidth: 1,
     borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
     backgroundColor: isSelected ? 'transparent' : 'transparent',
+    alignItems: 'center', // Ensure horizontal centering
+    justifyContent: 'center', // Ensure vertical centering
   };
 
   // Apply selected state or outline variant
@@ -50,21 +52,24 @@ export const TagChip: React.FC<TagChipProps> = ({
     borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
   };
 
-  const textStyle = {
-    fontSize: 11,
-    fontWeight: '500' as const,
-    fontFamily: 'Ubuntu_500Medium',
-    color: isSelected ? tokens.colors.accent : tokens.colors.text,
-  };
-
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
       onPress={() => onPress?.(tag)}
       activeOpacity={0.7}
     >
-      <Text style={[styles.text, textStyle, { paddingHorizontal: 0 }]}>#
-        {tag}
+      <Text 
+        style={{
+          fontSize: 12,
+          fontWeight: '500' as const,
+          fontFamily: 'Ubuntu_500Medium',
+          color: isSelected ? tokens.colors.accent : tokens.colors.text,
+          textAlign: 'center' as const,
+          paddingHorizontal: 0
+        }} 
+        numberOfLines={1}
+      >
+        #{tag.toLowerCase()}
       </Text>
     </TouchableOpacity>
   );
@@ -72,11 +77,12 @@ export const TagChip: React.FC<TagChipProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginRight: 8,
-    marginBottom: 8,
+    marginRight: 8, // Reduced from 11 to work better in horizontal scrolling
+    marginBottom: 0, // Removed bottom margin for horizontal layout
   },
   text: {
-    fontSize: 14,
+    fontSize: 10, // Increased from 8 to 10
     fontWeight: '500',
+    textAlign: 'center',
   },
 }); 

@@ -42,10 +42,10 @@ export const BinCard: React.FC<BinCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: (width - spacing.lg * 2 - spacing.sm) / 2,
-    height: 52,
+    height: 70,
     backgroundColor: colors.card,
-    borderRadius: designTokens.radius.md,
-    marginBottom: spacing.sm,
+    borderRadius: designTokens.radius.md * 1.34,
+    marginBottom: spacing.sm * 1.34,
     borderWidth: 1,
     borderColor: colors.border,
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.md * 1.34,
   },
   name: {
     ...typography.body,
@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     flex: 1,
+    textTransform: 'capitalize',
   },
   count: {
-    fontSize: 12,
+    fontSize: 9,
     color: colors.primary,
     fontWeight: '500',
   },

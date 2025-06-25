@@ -188,23 +188,23 @@ export const textVariants = createVariantStyles(
         lineHeight: designTokens.typography.fontSize.sm * 1.6,
       },
       heading: {
-        fontSize: designTokens.typography.fontSize.lg,
+        fontSize: designTokens.typography.fontSize.xl,
         fontWeight: designTokens.typography.fontWeight.bold,
         fontFamily: designTokens.typography.fontFamily.heading,
-        lineHeight: designTokens.typography.fontSize.lg * 1.3,
+        lineHeight: designTokens.typography.fontSize.xl * 1.3,
       },
       heading2: {
-        fontSize: designTokens.typography.fontSize['2xl'],
+        fontSize: designTokens.typography.fontSize['3xl'],
         fontWeight: designTokens.typography.fontWeight.bold,
         fontFamily: designTokens.typography.fontFamily.body,
-        lineHeight: designTokens.typography.fontSize['2xl'] * 1.2,
+        lineHeight: designTokens.typography.fontSize['3xl'] * 1.2,
         textTransform: 'uppercase',
         letterSpacing: 1,
       },
       subheading: {
-        fontSize: designTokens.typography.fontSize.body,
+        fontSize: designTokens.typography.fontSize.lg,
         fontWeight: designTokens.typography.fontWeight.normal,
-        lineHeight: designTokens.typography.fontSize.body * 1.4,
+        lineHeight: designTokens.typography.fontSize.lg * 1.4,
       },
       caption: {
         fontSize: designTokens.typography.fontSize.xs,
@@ -237,16 +237,16 @@ export const textVariants = createVariantStyles(
         lineHeight: designTokens.typography.fontSize.body * 1.4,
       },
       xl: { 
-        fontSize: designTokens.typography.fontSize.lg,
-        lineHeight: designTokens.typography.fontSize.lg * 1.3,
+        fontSize: designTokens.typography.fontSize.xl + 2,
+        lineHeight: (designTokens.typography.fontSize.xl + 2) * 1.3,
       },
       '2xl': { 
-        fontSize: designTokens.typography.fontSize.xl,
-        lineHeight: designTokens.typography.fontSize.xl * 1.3,
+        fontSize: designTokens.typography.fontSize['2xl'] + 2,
+        lineHeight: (designTokens.typography.fontSize['2xl'] + 2) * 1.3,
       },
       '3xl': { 
-        fontSize: designTokens.typography.fontSize['2xl'],
-        lineHeight: designTokens.typography.fontSize['2xl'] * 1.2,
+        fontSize: designTokens.typography.fontSize['3xl'] + 2,
+        lineHeight: (designTokens.typography.fontSize['3xl'] + 2) * 1.2,
       },
     },
   }
