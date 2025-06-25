@@ -670,14 +670,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       // Styles for the bins container
     },
     binsHorizontalContent: {
-      padding: tokens.spacing.sm,
+      paddingHorizontal: tokens.spacing.page, // Page-level padding
+      paddingVertical: tokens.spacing.sm,
     },
     binCardSkeletonHorizontal: {
       width: 160,
       height: 70,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
-      marginRight: tokens.spacing.sm,
+      marginRight: tokens.spacing.md, // Increased spacing
     },
     binCardHorizontal: {
       width: 160,
@@ -685,7 +686,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
       padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.sm,
+      marginRight: tokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
     binCardContentHorizontal: {
@@ -695,14 +696,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       width: '100%',
     },
     binCardNameHorizontal: {
-      fontSize: RFValue(16),
+      fontSize: RFValue(14), // Reduced from 16
       fontWeight: '600',
       color: tokens.colors.text,
       marginBottom: 2,
       fontFamily: 'Ubuntu_600SemiBold',
     },
     binCardCountHorizontal: {
-      fontSize: RFValue(13),
+      fontSize: RFValue(12), // Reduced from 13
       color: tokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
     },
@@ -715,7 +716,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       borderColor: tokens.colors.textMuted,
       borderStyle: 'dashed',
       padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.sm,
+      marginRight: tokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
     newBinCardContentHorizontal: {
