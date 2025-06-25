@@ -30,35 +30,35 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <View style={[styles.container, { paddingHorizontal: tokens.spacing.lg, paddingVertical: tokens.spacing.md }]}>
+    <View style={[styles.container, { paddingHorizontal: designTokens.spacing.lg, paddingVertical: designTokens.spacing.md }]}>
       <View style={[styles.searchContainer, {
-        backgroundColor: tokens.colors.surface,
-        borderRadius: tokens.radius.md,
-        paddingHorizontal: tokens.spacing.md,
-        paddingVertical: tokens.spacing.sm,
+        backgroundColor: designTokens.colors.surface,
+        borderRadius: designTokens.radius.md,
+        paddingHorizontal: designTokens.spacing.md,
+        paddingVertical: designTokens.spacing.sm,
       }]}>
         <Ionicons 
           name="search-outline" 
           size={20} 
-          color={tokens.colors.textMuted} 
-          style={[styles.searchIcon, { marginRight: tokens.spacing.sm }]} 
+          color={designTokens.colors.textMuted} 
+          style={[styles.searchIcon, { marginRight: designTokens.spacing.sm }]} 
         />
         <TextInput
           style={[styles.input, {
-            fontSize: tokens.typography.fontSize.body,
-            color: tokens.colors.text,
-            paddingVertical: tokens.spacing.xs,
+            fontSize: designTokens.typography.fontSize.body,
+            color: designTokens.colors.text,
+            paddingVertical: designTokens.spacing.xs,
           }]}
           placeholder={placeholder}
-          placeholderTextColor={tokens.colors.textMuted}
+          placeholderTextColor={designTokens.colors.textMuted}
           value={query}
           onChangeText={setQuery}
           onSubmitEditing={handleSearch}
           returnKeyType="search"
         />
         {query.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={[styles.clearButton, { padding: tokens.spacing.xs }]}>
-            <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
+          <TouchableOpacity onPress={handleClear} style={[styles.clearButton, { padding: designTokens.spacing.xs }]}>
+            <Ionicons name="close-circle" size={20} color={designTokens.colors.textMuted} />
           </TouchableOpacity>
         )}
       </View>

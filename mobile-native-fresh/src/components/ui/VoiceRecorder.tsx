@@ -292,7 +292,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Voice Recorder',
           message: Voice ? 'Preparing to listen...' : 'Voice recording (Expo Go mode)',
-          icon: <Ionicons name="mic" size={64} color={tokens.colors.accent} />,
+          icon: <Ionicons name="mic" size={64} color={designTokens.colors.accent} />,
           showCancel: true,
         };
       case 'listening':
@@ -310,7 +310,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Processing...',
           message: 'Creating your thoughtmark...',
-          icon: <ActivityIndicator size={64} color={tokens.colors.accent} />,
+          icon: <ActivityIndicator size={64} color={designTokens.colors.accent} />,
           showCancel: false,
         };
       case 'complete':
@@ -339,14 +339,14 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       onRequestClose={cancelRecording}
     >
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
+        <View style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
           {/* Cancel Button */}
           {stageContent.showCancel && (
             <TouchableOpacity
               style={styles.cancelButton}
               onPress={cancelRecording}
             >
-              <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
+              <Ionicons name="close" size={24} color={designTokens.colors.textSecondary} />
             </TouchableOpacity>
           )}
 
@@ -358,20 +358,20 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </View>
 
             {/* Title */}
-            <Text style={[styles.title, { color: tokens.colors.text }]}>
+            <Text style={[styles.title, { color: designTokens.colors.text }]}>
               {stageContent.title}
             </Text>
 
             {/* Message/Transcript */}
             <View style={styles.messageContainer}>
               {recordingStage === 'listening' && transcript ? (
-                <View style={[styles.transcriptContainer, { backgroundColor: tokens.colors.surface }]}>
-                  <Text style={[styles.transcriptText, { color: tokens.colors.text }]}>
+                <View style={[styles.transcriptContainer, { backgroundColor: designTokens.colors.surface }]}>
+                  <Text style={[styles.transcriptText, { color: designTokens.colors.text }]}>
                     {transcript}
                   </Text>
                 </View>
               ) : (
-                <Text style={[styles.messageText, { color: tokens.colors.textSecondary }]}>
+                <Text style={[styles.messageText, { color: designTokens.colors.textSecondary }]}>
                   {stageContent.message}
                 </Text>
               )}
@@ -397,19 +397,19 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                   style={styles.testButton}
                   onPress={() => processTranscription("This is a test voice note to verify the thoughtmark creation functionality is working properly.")}
                 >
-                  <Ionicons name="flask" size={16} color={tokens.colors.accent} />
-                  <Text style={[styles.testButtonText, { color: tokens.colors.accent }]}>
+                  <Ionicons name="flask" size={16} color={designTokens.colors.accent} />
+                  <Text style={[styles.testButtonText, { color: designTokens.colors.accent }]}>
                     Test Save Function
                   </Text>
                 </TouchableOpacity>
                 <View style={styles.testTips}>
-                  <Text style={[styles.testTipText, { color: tokens.colors.textMuted }]}>
+                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
                     Try saying:
                   </Text>
-                  <Text style={[styles.testTipText, { color: tokens.colors.textMuted }]}>
+                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
                     "Remind me to call John tomorrow"
                   </Text>
-                  <Text style={[styles.testTipText, { color: tokens.colors.textMuted }]}>
+                  <Text style={[styles.testTipText, { color: designTokens.colors.textMuted }]}>
                     "I had an idea about improving our workflow"
                   </Text>
                 </View>

@@ -43,7 +43,7 @@ export const Text: React.FC<TextProps> = ({
   const finalTextStyle = {
     ...textStyle,
     color: color || textStyle.color,
-    fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
+    fontWeight: weight ? designTokens.typography.fontWeight[weight] : textStyle.fontWeight,
     textAlign: align,
     ...style,
   };

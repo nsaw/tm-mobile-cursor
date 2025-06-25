@@ -20,14 +20,168 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NavigationProp } from '../../../navigation/types';
 import type { RootStackParamList } from '../../../navigation/types';
-import { useTheme } from '../../../theme/ThemeProvider';
+import { designTokens } from '../../../theme/tokens';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
+
+const getStyles = () => StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: designTokens.spacing.xl,
+  },
+  header: {
+    paddingHorizontal: designTokens.spacing.lg,
+    paddingVertical: designTokens.spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: designTokens.colors.border,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: designTokens.spacing.sm,
+  },
+  backButton: {
+    marginRight: designTokens.spacing.md,
+  },
+  headerTitle: {
+    fontSize: designTokens.typography.fontSize.heading,
+    fontWeight: '700',
+    color: designTokens.colors.text,
+    fontFamily: designTokens.typography.fontFamily.heading,
+  },
+  headerSubtitle: {
+    fontSize: designTokens.typography.fontSize.sm,
+    color: designTokens.colors.textSecondary,
+    fontFamily: designTokens.typography.fontFamily.body,
+  },
+  section: {
+    marginBottom: designTokens.spacing.lg,
+  },
+  sectionTitle: {
+    fontSize: designTokens.typography.fontSize.sm,
+    fontWeight: '600',
+    color: designTokens.colors.textSecondary,
+    marginBottom: designTokens.spacing.sm,
+    paddingHorizontal: designTokens.spacing.lg,
+    fontFamily: designTokens.typography.fontFamily.body,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  sectionCard: {
+    marginHorizontal: designTokens.spacing.lg,
+  },
+  settingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: designTokens.spacing.md,
+    paddingHorizontal: designTokens.spacing.lg,
+    borderBottomWidth: 1,
+    borderBottomColor: designTokens.colors.border,
+  },
+  settingItemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  settingItemText: {
+    marginLeft: designTokens.spacing.md,
+    flex: 1,
+  },
+  settingItemTitle: {
+    fontSize: designTokens.typography.fontSize.body,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    fontFamily: designTokens.typography.fontFamily.body,
+  },
+  settingItemSubtitle: {
+    fontSize: designTokens.typography.fontSize.sm,
+    color: designTokens.colors.textSecondary,
+    marginTop: 2,
+    fontFamily: designTokens.typography.fontFamily.body,
+  },
+  settingItemRight: {
+    alignItems: 'center',
+  },
+  expandedSettings: {
+    backgroundColor: designTokens.colors.backgroundSecondary,
+  },
+  settingLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  settingText: {
+    marginLeft: designTokens.spacing.md,
+    flex: 1,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: designTokens.spacing.lg,
+  },
+  modalContent: {
+    backgroundColor: designTokens.colors.surface,
+    borderRadius: designTokens.spacing.md,
+    padding: designTokens.spacing.lg,
+    width: '100%',
+    maxWidth: 400,
+  },
+  modalTitle: {
+    fontSize: designTokens.typography.fontSize.lg,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.sm,
+  },
+  modalSubtitle: {
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.textSecondary,
+    marginBottom: designTokens.spacing.lg,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: designTokens.colors.border,
+    borderRadius: designTokens.spacing.sm,
+    padding: designTokens.spacing.md,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.text,
+    backgroundColor: designTokens.colors.background,
+    marginBottom: designTokens.spacing.lg,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: designTokens.spacing.md,
+  },
+  modalButton: {
+    paddingVertical: designTokens.spacing.sm,
+    paddingHorizontal: designTokens.spacing.md,
+    borderRadius: designTokens.spacing.sm,
+  },
+  modalButtonText: {
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.text,
+  },
+  modalButtonPrimary: {
+    backgroundColor: designTokens.colors.accent,
+  },
+  modalButtonTextPrimary: {
+    color: designTokens.colors.background,
+    fontWeight: '500',
+  },
+});
 
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
-  const { tokens } = useTheme();
-  const styles = getStyles(tokens);
+  const styles = getStyles();
   
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
@@ -169,11 +323,11 @@ export const SettingsScreen: React.FC = () => {
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens?.colors?.accent ?? '#FFD700'} />;
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={designTokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
-      iconElement = <Ionicons name={icon as any} size={20} color={tokens?.colors?.accent ?? '#000'} />;
+      iconElement = <Ionicons name={icon as any} size={20} color={designTokens.colors.accent ?? '#000'} />;
     }
     return (
       <TouchableOpacity 
@@ -193,12 +347,12 @@ export const SettingsScreen: React.FC = () => {
             <Switch
               value={switchValue}
               onValueChange={onSwitchChange}
-              trackColor={{ false: tokens?.colors?.border ?? '#ccc', true: tokens?.colors?.accent ?? '#000' }}
-              thumbColor={tokens?.colors?.background ?? '#fff'}
+              trackColor={{ false: designTokens.colors.border ?? '#ccc', true: designTokens.colors.accent ?? '#000' }}
+              thumbColor={designTokens.colors.background ?? '#fff'}
             />
           )}
           {showArrow && !showSwitch && (
-            <Ionicons name="chevron-forward" size={16} color={tokens?.colors?.textSecondary ?? '#666'} />
+            <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
           )}
         </View>
       </TouchableOpacity>
@@ -206,7 +360,7 @@ export const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: tokens?.colors?.background ?? '#0D0D0F' }}>
+    <View style={{ flex: 1, backgroundColor: designTokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -215,7 +369,7 @@ export const SettingsScreen: React.FC = () => {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? '#000'} />
+              <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
           </View>
@@ -223,36 +377,36 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={{ alignItems: 'center', padding: spacing.xl, marginBottom: spacing.lg }}>
+        <Card style={{ alignItems: 'center', padding: designTokens.spacing.xl, marginBottom: designTokens.spacing.lg }}>
           {(() => {
             return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: spacing.md,
-                  backgroundColor: `${tokens?.colors?.success ?? '#000'}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: designTokens.spacing.md,
+                  backgroundColor: `${designTokens.colors.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
                 </View>
                 {/* Title */}
                 <Text style={{
-                  fontFamily: tokens?.typography?.fontFamily?.heading ?? 'Arial',
+                  fontFamily: designTokens.typography.fontFamily.heading ?? 'Arial',
                   fontSize: 22,
                   fontWeight: '700',
-                  color: tokens?.colors?.text ?? '#000',
+                  color: designTokens.colors.text ?? '#000',
                   textAlign: 'center',
-                  marginBottom: spacing.sm,
+                  marginBottom: designTokens.spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
-                  fontFamily: tokens?.typography?.fontFamily?.body ?? 'Arial',
+                  fontFamily: designTokens.typography.fontFamily.body ?? 'Arial',
                   fontSize: 12,
-                  color: tokens?.colors?.textSecondary ?? '#666',
+                  color: designTokens.colors.textSecondary ?? '#666',
                   textAlign: 'center',
-                  marginBottom: spacing.md,
+                  marginBottom: designTokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -261,14 +415,14 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens?.colors?.accent ?? '#000',
-                    paddingVertical: spacing.sm,
+                    backgroundColor: designTokens.colors.accent ?? '#000',
+                    paddingVertical: designTokens.spacing.sm,
                     borderRadius: 8,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
-                    fontFamily: tokens?.typography?.fontFamily?.body ?? 'Arial',
+                    fontFamily: designTokens.typography.fontFamily.body ?? 'Arial',
                     fontWeight: '600',
                     color: '#fff',
                     textAlign: 'center',
@@ -518,10 +672,10 @@ export const SettingsScreen: React.FC = () => {
               onPress={() => navigation.navigate('AdminDashboard')}
             >
               <View style={styles.settingLeft}>
-                <Ionicons name="shield-outline" size={20} color={tokens?.colors?.accent ?? '#000'} />
+                <Ionicons name="shield-outline" size={20} color={designTokens.colors.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color={tokens?.colors?.textSecondary ?? '#666'} />
+              <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </View>
         )}
@@ -540,7 +694,7 @@ export const SettingsScreen: React.FC = () => {
               value={tempSiriPhrase}
               onChangeText={setTempSiriPhrase}
               placeholder="Enter your Siri phrase"
-              placeholderTextColor={tokens?.colors?.textSecondary ?? '#666'}
+              placeholderTextColor={designTokens.colors.textSecondary ?? '#666'}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity
@@ -563,175 +717,4 @@ export const SettingsScreen: React.FC = () => {
       )}
     </View>
   );
-};
-
-const getStyles = (tokens: any) => StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: spacing.lg,
-    paddingBottom: 120,
-  },
-  header: {
-    marginBottom: spacing.xl,
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  backButton: {
-    marginRight: spacing.md,
-  },
-  headerTitle: {
-    fontSize: typography.heading.fontSize,
-    fontWeight: '700',
-    color: colors.text,
-  },
-  headerSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
-  },
-  welcomeCard: {
-    marginBottom: spacing.xl,
-  },
-  welcomeContent: {
-    alignItems: 'center',
-    padding: spacing.lg,
-  },
-  welcomeTitle: {
-    fontSize: typography.subheading.fontSize,
-    fontWeight: '600',
-    color: colors.text,
-    marginTop: spacing.md,
-    marginBottom: spacing.xs,
-    textAlign: 'center',
-  },
-  welcomeSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
-    textAlign: 'center',
-  },
-  section: {
-    marginBottom: spacing.xl,
-  },
-  sectionTitle: {
-    fontSize: typography.body.fontSize,
-    fontWeight: '600',
-    color: colors.text,
-    marginBottom: spacing.sm,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  sectionCard: {
-    marginBottom: spacing.md,
-  },
-  settingItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  settingItemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  settingItemText: {
-    marginLeft: spacing.md,
-    flex: 1,
-  },
-  settingItemTitle: {
-    fontSize: typography.body.fontSize,
-    fontWeight: '500',
-    color: colors.text,
-  },
-  settingItemSubtitle: {
-    fontSize: 12,
-    color: colors.subtext,
-    marginTop: spacing.xs,
-  },
-  settingItemRight: {
-    alignItems: 'center',
-  },
-  expandedSettings: {
-    paddingLeft: spacing.xl,
-  },
-  modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: spacing.lg,
-  },
-  modalContent: {
-    backgroundColor: colors.card,
-    borderRadius: spacing.md,
-    padding: spacing.lg,
-    width: '100%',
-    maxWidth: 400,
-  },
-  modalTitle: {
-    fontSize: typography.subheading.fontSize,
-    fontWeight: '600',
-    color: colors.text,
-    marginBottom: spacing.sm,
-  },
-  modalSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
-    marginBottom: spacing.lg,
-  },
-  modalInput: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: spacing.sm,
-    padding: spacing.md,
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-    backgroundColor: colors.background,
-    marginBottom: spacing.lg,
-  },
-  modalButtons: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    gap: spacing.md,
-  },
-  modalButton: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderRadius: spacing.sm,
-  },
-  modalButtonPrimary: {
-    backgroundColor: colors.primary,
-  },
-  modalButtonText: {
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-  },
-  modalButtonTextPrimary: {
-    color: colors.background,
-    fontWeight: '500',
-  },
-  settingLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  settingText: {
-    marginLeft: spacing.md,
-    flex: 1,
-  },
-}); 
+}; 

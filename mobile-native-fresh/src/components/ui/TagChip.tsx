@@ -35,11 +35,11 @@ export const TagChip: React.FC<TagChipProps> = ({
   
   // Compact outlined style overrides - scaled by 1.34
   const compactStyle = {
-    paddingHorizontal: tokens.spacing.md * 1.34,
-    paddingVertical: tokens.spacing.sm, // Equal top and bottom padding for proper centering
+    paddingHorizontal: designTokens.spacing.md * 1.34,
+    paddingVertical: designTokens.spacing.sm, // Equal top and bottom padding for proper centering
     borderRadius: 8, // 6 * 1.34
     borderWidth: 1,
-    borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
+    borderColor: isSelected ? designTokens.colors.accent : designTokens.colors.border,
     backgroundColor: isSelected ? 'transparent' : 'transparent',
     alignItems: 'center', // Ensure horizontal centering
     justifyContent: 'center', // Ensure vertical centering
@@ -49,7 +49,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   const finalChipStyle = {
     ...chipStyle,
     backgroundColor: 'transparent', // Always transparent
-    borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
+    borderColor: isSelected ? designTokens.colors.accent : designTokens.colors.border,
   };
 
   return (
@@ -65,7 +65,7 @@ export const TagChip: React.FC<TagChipProps> = ({
           fontSize: 12,
           fontWeight: '500' as const,
           fontFamily: 'Ubuntu_500Medium',
-          color: isSelected ? tokens.colors.accent : tokens.colors.text,
+          color: isSelected ? designTokens.colors.accent : designTokens.colors.text,
           textAlign: 'center' as const,
           paddingHorizontal: 0
         }} 

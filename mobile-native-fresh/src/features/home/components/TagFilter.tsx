@@ -7,8 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../../theme/ThemeProvider';
-import { RFValue } from "react-native-responsive-fontsize";
+import { designTokens } from '../../../theme/tokens';
 
 interface TagFilterProps {
   tags: string[];
@@ -18,6 +17,63 @@ interface TagFilterProps {
   totalCount: number;
 }
 
+const getStyles = () => StyleSheet.create({
+  container: {
+    marginBottom: designTokens.spacing.lg ?? 20,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: designTokens.spacing.sm ?? 10,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 8,
+    color: designTokens.colors.textSecondary ?? '#888',
+    marginLeft: designTokens.spacing.sm ?? 10,
+    textTransform: 'lowercase',
+  },
+  moreButton: {
+    paddingHorizontal: designTokens.spacing.sm ?? 10,
+  },
+  moreText: {
+    fontSize: 8,
+    color: designTokens.colors.textSecondary ?? '#888',
+  },
+  scrollContent: {
+    paddingHorizontal: designTokens.spacing.lg ?? 20,
+  },
+  tagChip: {
+    paddingHorizontal: designTokens.spacing.md ?? 10,
+    paddingVertical: designTokens.spacing.sm ?? 5,
+    borderRadius: 8,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: designTokens.colors.border ?? '#888',
+    marginRight: designTokens.spacing.sm ?? 10,
+    minHeight: 32,
+    justifyContent: 'center',
+  },
+  tagChipSelected: {
+    backgroundColor: designTokens.colors.accent ?? '#FFD500',
+    borderColor: designTokens.colors.accent ?? '#FFD500',
+  },
+  tagText: {
+    fontSize: 10,
+    color: designTokens.colors.textSecondary ?? '#888',
+    textTransform: 'lowercase',
+    fontWeight: '400',
+  },
+  tagTextSelected: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+});
+
 export const TagFilter: React.FC<TagFilterProps> = ({
   tags,
   selectedTag,
@@ -25,21 +81,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   onTagPress,
   totalCount,
 }) => {
-  const { tokens } = useTheme();
-  const styles = getStyles(tokens);
-  const colorArray = [
-    tokens?.colors?.accent ?? '#FFD500',
-    tokens?.colors?.success ?? '#4CAF50',
-    tokens?.colors?.brand ?? '#0057FF',
-    tokens?.colors?.danger ?? '#FF3B30',
-    tokens?.colors?.warning ?? '#FF9500',
-    tokens?.colors?.textSecondary ?? '#888',
-  ];
-
-  const getTagColor = (tag: string) => {
-    const index = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colorArray.length;
-    return colorArray[index];
-  };
+  const styles = getStyles();
 
   const getTagCount = (tag: string) => {
     // This would need to be passed from parent or calculated
@@ -59,7 +101,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Ionicons name="filter-outline" size={16} color={tokens?.colors?.textSecondary ?? '#888'} />
+          <Ionicons name="filter-outline" size={16} color={designTokens.colors.textSecondary ?? '#888'} />
           <Text style={styles.headerText}>tags</Text>
         </View>
         <TouchableOpacity style={styles.moreButton}>
@@ -113,61 +155,4 @@ export const TagFilter: React.FC<TagFilterProps> = ({
       </ScrollView>
     </View>
   );
-};
-
-const getStyles = (tokens: any) => StyleSheet.create({
-  container: {
-    marginBottom: tokens?.spacing?.lg ?? 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: tokens?.spacing?.sm ?? 10,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 8,
-    color: tokens?.colors?.textSecondary ?? '#888',
-    marginLeft: tokens?.spacing?.sm ?? 10,
-    textTransform: 'lowercase',
-  },
-  moreButton: {
-    paddingHorizontal: tokens?.spacing?.sm ?? 10,
-  },
-  moreText: {
-    fontSize: 8,
-    color: tokens?.colors?.textSecondary ?? '#888',
-  },
-  scrollContent: {
-    paddingHorizontal: tokens?.spacing?.lg ?? 20,
-  },
-  tagChip: {
-    paddingHorizontal: tokens?.spacing?.md ?? 10,
-    paddingVertical: tokens?.spacing?.sm ?? 5,
-    borderRadius: 8,
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: tokens?.colors?.border ?? '#888',
-    marginRight: tokens?.spacing?.sm ?? 10,
-    minHeight: 32,
-    justifyContent: 'center',
-  },
-  tagChipSelected: {
-    backgroundColor: tokens?.colors?.accent ?? '#FFD500',
-    borderColor: tokens?.colors?.accent ?? '#FFD500',
-  },
-  tagText: {
-    fontSize: 10,
-    color: tokens?.colors?.textSecondary ?? '#888',
-    textTransform: 'lowercase',
-    fontWeight: '400',
-  },
-  tagTextSelected: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-}); 
+}; 

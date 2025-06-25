@@ -14,12 +14,12 @@ interface AIInsight {
   type: 'summary' | 'connections' | 'recommendations';
   title: string;
   content: string;
-  items?: Array<{
+  items?: {
     title: string;
     description: string;
     url?: string;
     type: 'book' | 'podcast' | 'article';
-  }>;
+  }[];
 }
 
 export default function AIAssistant() {

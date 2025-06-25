@@ -19,6 +19,233 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NavigationProp, RouteProp } from '../../../navigation/types';
 import { apiService } from '../../../services/api';
+import { designTokens } from '../../../theme/tokens';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: designTokens.colors.background,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: designTokens.colors.background,
+  },
+  loadingText: {
+    marginTop: designTokens.spacing.md,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.textSecondary,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: designTokens.spacing.lg,
+    paddingVertical: designTokens.spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: designTokens.colors.border,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButton: {
+    marginRight: designTokens.spacing.md,
+  },
+  headerTitle: {
+    fontSize: designTokens.typography.fontSize.heading,
+    fontWeight: '700',
+    color: designTokens.colors.text,
+    fontFamily: designTokens.typography.fontFamily.heading,
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  actionButton: {
+    padding: designTokens.spacing.sm,
+    marginLeft: designTokens.spacing.sm,
+  },
+  content: {
+    flex: 1,
+  },
+  contentContainer: {
+    padding: designTokens.spacing.lg,
+  },
+  titleCard: {
+    marginBottom: designTokens.spacing.md,
+  },
+  title: {
+    fontSize: designTokens.typography.fontSize.xl,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.md,
+  },
+  taskStatus: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: designTokens.spacing.sm,
+    paddingHorizontal: designTokens.spacing.md,
+    borderRadius: designTokens.spacing.sm,
+    backgroundColor: designTokens.colors.surface,
+    borderWidth: 1,
+    borderColor: designTokens.colors.border,
+  },
+  taskCompleted: {
+    backgroundColor: designTokens.colors.accent,
+    borderColor: designTokens.colors.accent,
+  },
+  taskStatusText: {
+    marginLeft: designTokens.spacing.sm,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.text,
+  },
+  taskCompletedText: {
+    color: designTokens.colors.background,
+  },
+  contentCard: {
+    marginBottom: designTokens.spacing.md,
+  },
+  contentText: {
+    fontSize: designTokens.typography.fontSize.body,
+    lineHeight: 24,
+    color: designTokens.colors.text,
+  },
+  aiCard: {
+    marginBottom: designTokens.spacing.md,
+  },
+  aiHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: designTokens.spacing.md,
+  },
+  aiTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  aiTitle: {
+    marginLeft: designTokens.spacing.sm,
+    fontSize: designTokens.typography.fontSize.lg,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+  },
+  insightsContainer: {
+    gap: designTokens.spacing.md,
+  },
+  insightItem: {
+    padding: designTokens.spacing.md,
+    backgroundColor: designTokens.colors.surface,
+    borderRadius: designTokens.spacing.sm,
+    borderWidth: 1,
+    borderColor: designTokens.colors.border,
+  },
+  insightHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: designTokens.spacing.sm,
+  },
+  insightType: {
+    paddingHorizontal: designTokens.spacing.sm,
+    paddingVertical: designTokens.spacing.xs,
+    borderRadius: designTokens.spacing.xs,
+  },
+  insightTypeText: {
+    fontSize: designTokens.typography.fontSize.xs,
+    fontWeight: '600',
+    color: designTokens.colors.background,
+  },
+  actionableBadge: {
+    marginLeft: designTokens.spacing.sm,
+    paddingHorizontal: designTokens.spacing.sm,
+    paddingVertical: designTokens.spacing.xs,
+    borderRadius: designTokens.spacing.xs,
+    backgroundColor: designTokens.colors.success,
+  },
+  actionableText: {
+    fontSize: designTokens.typography.fontSize.xs,
+    fontWeight: '600',
+    color: designTokens.colors.background,
+  },
+  insightTitle: {
+    fontSize: designTokens.typography.fontSize.body,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.xs,
+  },
+  insightDescription: {
+    fontSize: designTokens.typography.fontSize.sm,
+    color: designTokens.colors.textSecondary,
+    lineHeight: 20,
+  },
+  aiEmptyText: {
+    fontSize: designTokens.typography.fontSize.sm,
+    color: designTokens.colors.textSecondary,
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+  suggestionsContainer: {
+    gap: designTokens.spacing.md,
+  },
+  suggestionSection: {
+    marginBottom: designTokens.spacing.md,
+  },
+  suggestionLabel: {
+    fontSize: designTokens.typography.fontSize.body,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.sm,
+  },
+  suggestedTags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: designTokens.spacing.xs,
+  },
+  contentSuggestion: {
+    padding: designTokens.spacing.sm,
+    backgroundColor: designTokens.colors.surface,
+    borderRadius: designTokens.spacing.sm,
+    marginBottom: designTokens.spacing.xs,
+  },
+  contentSuggestionText: {
+    fontSize: designTokens.typography.fontSize.sm,
+    color: designTokens.colors.text,
+  },
+  metadataCard: {
+    marginBottom: designTokens.spacing.md,
+  },
+  metadataItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: designTokens.spacing.sm,
+  },
+  metadataText: {
+    marginLeft: designTokens.spacing.sm,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.text,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: designTokens.spacing.xs,
+    marginTop: designTokens.spacing.sm,
+  },
+  tagsCard: {
+    marginBottom: designTokens.spacing.md,
+  },
+  sectionTitle: {
+    fontSize: designTokens.typography.fontSize.heading,
+    fontWeight: '600',
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.md,
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    gap: designTokens.spacing.md,
+    marginTop: designTokens.spacing.lg,
+  },
+});
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -182,7 +409,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   if (loading || !thoughtmark) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={tokens?.colors?.accent ?? '#FFD500'} />
+        <ActivityIndicator size="large" color={designTokens.colors.accent ?? '#FFD500'} />
         <Text style={styles.loadingText}>Loading thoughtmark...</Text>
       </View>
     );
@@ -197,7 +424,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color={tokens?.text ?? '#F5F5F7'} />
+            <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         </View>
@@ -211,7 +438,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
-              color={thoughtmark.isPinned ? tokens?.accent ?? '#FFD500' : tokens?.textSecondary ?? '#6B7280'} 
+              color={thoughtmark.isPinned ? designTokens.colors.accent ?? '#FFD500' : designTokens.colors.textSecondary ?? '#6B7280'} 
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -220,7 +447,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Edit thoughtmark"
           >
-            <Ionicons name="create-outline" size={20} color={tokens?.textSecondary ?? '#6B7280'} />
+            <Ionicons name="create-outline" size={20} color={designTokens.colors.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
@@ -228,7 +455,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Delete thoughtmark"
           >
-            <Ionicons name="trash-outline" size={20} color={tokens?.accent ?? '#FFD500'} />
+            <Ionicons name="trash-outline" size={20} color={designTokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -248,9 +475,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
-                  color={thoughtmark.isCompleted ? tokens?.accent ?? '#FFD500' : tokens?.textSecondary ?? '#6B7280'} 
+                  color={thoughtmark.isCompleted ? designTokens.colors.accent ?? '#FFD500' : designTokens.colors.textSecondary ?? '#6B7280'} 
                 />
-                <Text style={[styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText]}>
+                <Text style={StyleSheet.flatten([styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText])}>
                   {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
                 </Text>
               </TouchableOpacity>
@@ -271,7 +498,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="sparkles" size={16} color={tokens?.accent ?? '#FFD500'} />
+                  <Ionicons name="sparkles" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Insights</Text>
                 </View>
                 <TouchableOpacity
@@ -281,9 +508,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI insights"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={tokens?.accent ?? '#FFD500'} />
+                    <ActivityIndicator size="small" color={designTokens.colors.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens?.accent ?? '#FFD500'} />
+                    <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -322,7 +549,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="bulb-outline" size={16} color={tokens?.accent ?? '#FFD500'} />
+                  <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Suggestions</Text>
                 </View>
                 <TouchableOpacity
@@ -332,9 +559,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI suggestions"
                 >
                   {isGeneratingAI ? (
-                    <ActivityIndicator size="small" color={tokens?.accent ?? '#FFD500'} />
+                    <ActivityIndicator size="small" color={designTokens.colors.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens?.accent ?? '#FFD500'} />
+                    <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -376,30 +603,30 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <Card style={styles.metadataCard}>
           <CardContent>
             <View style={styles.metadataItem}>
-              <Ionicons name="folder-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
-              <Text style={styles.metadataLabel}>Bin:</Text>
-              <Text style={styles.metadataValue}>{getBinName(thoughtmark.binId)}</Text>
+              <Ionicons name="folder-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
+              <Text style={styles.metadataText}>Bin:</Text>
+              <Text style={styles.metadataText}>{getBinName(thoughtmark.binId)}</Text>
             </View>
             
             <View style={styles.metadataItem}>
-              <Ionicons name="time-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
-              <Text style={styles.metadataLabel}>Created:</Text>
-              <Text style={styles.metadataValue}>{formatDate(thoughtmark.createdAt)}</Text>
+              <Ionicons name="time-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
+              <Text style={styles.metadataText}>Created:</Text>
+              <Text style={styles.metadataText}>{formatDate(thoughtmark.createdAt)}</Text>
             </View>
             
             {thoughtmark.updatedAt !== thoughtmark.createdAt && (
               <View style={styles.metadataItem}>
-                <Ionicons name="refresh-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
-                <Text style={styles.metadataLabel}>Updated:</Text>
-                <Text style={styles.metadataValue}>{formatDate(thoughtmark.updatedAt)}</Text>
+                <Ionicons name="refresh-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
+                <Text style={styles.metadataText}>Updated:</Text>
+                <Text style={styles.metadataText}>{formatDate(thoughtmark.updatedAt)}</Text>
               </View>
             )}
             
             {thoughtmark.dueDate && (
               <View style={styles.metadataItem}>
-                <Ionicons name="calendar-outline" size={16} color={tokens?.textSecondary ?? '#6B7280'} />
-                <Text style={styles.metadataLabel}>Due:</Text>
-                <Text style={styles.metadataValue}>{formatDate(thoughtmark.dueDate)}</Text>
+                <Ionicons name="calendar-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
+                <Text style={styles.metadataText}>Due:</Text>
+                <Text style={styles.metadataText}>{formatDate(thoughtmark.dueDate)}</Text>
               </View>
             )}
           </CardContent>
@@ -452,225 +679,4 @@ const getInsightTypeColor = (type: string) => {
     case 'connection': return '#8B5CF6';
     default: return '#6B7280';
   }
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: tokens?.background ?? '#0D0D0F',
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: tokens?.spacing.md,
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.textSecondary ?? '#6B7280',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: tokens?.spacing.lg,
-    paddingTop: tokens?.spacing.xl,
-    paddingBottom: tokens?.spacing.md,
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButton: {
-    marginRight: tokens?.spacing.md,
-  },
-  headerTitle: {
-    fontSize: tokens?.typography.heading.fontSize,
-    fontWeight: '700',
-    color: tokens?.text ?? '#F5F5F7',
-  },
-  headerActions: {
-    flexDirection: 'row',
-    gap: tokens?.spacing.sm,
-  },
-  actionButton: {
-    padding: tokens?.spacing.sm,
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: tokens?.spacing.lg,
-    paddingBottom: tokens?.spacing.xl,
-  },
-  titleCard: {
-    marginBottom: tokens?.spacing.md,
-  },
-  title: {
-    fontSize: tokens?.typography.heading.fontSize,
-    fontWeight: '700',
-    color: tokens?.text ?? '#F5F5F7',
-    marginBottom: tokens?.spacing.md,
-  },
-  taskStatus: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: tokens?.spacing.sm,
-  },
-  taskCompleted: {
-    opacity: 0.7,
-  },
-  taskStatusText: {
-    marginLeft: tokens?.spacing.sm,
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.textSecondary ?? '#6B7280',
-  },
-  taskCompletedText: {
-    color: tokens?.accent ?? '#FFD500',
-    textDecorationLine: 'line-through',
-  },
-  contentCard: {
-    marginBottom: tokens?.spacing.md,
-  },
-  contentText: {
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.text ?? '#F5F5F7',
-    lineHeight: 24,
-  },
-  aiCard: {
-    marginBottom: tokens?.spacing.md,
-  },
-  aiHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: tokens?.spacing.md,
-  },
-  aiTitleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  aiTitle: {
-    fontSize: tokens?.typography.subheading.fontSize,
-    fontWeight: '600',
-    color: tokens?.text ?? '#F5F5F7',
-    marginLeft: tokens?.spacing.sm,
-  },
-  aiEmptyText: {
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.textSecondary ?? '#6B7280',
-    fontStyle: 'italic',
-    textAlign: 'center',
-  },
-  insightsContainer: {
-    gap: tokens?.spacing.md,
-  },
-  insightItem: {
-    padding: tokens?.spacing.md,
-    backgroundColor: 'rgba(59, 130, 246, 0.05)',
-    borderRadius: tokens?.spacing.sm,
-  },
-  insightHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: tokens?.spacing.sm,
-  },
-  insightType: {
-    paddingHorizontal: tokens?.spacing.sm,
-    paddingVertical: tokens?.spacing.xs,
-    borderRadius: tokens?.spacing.xs,
-  },
-  insightTypeText: {
-    fontSize: 10,
-    color: tokens?.background ?? '#0D0D0F',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-  actionableBadge: {
-    backgroundColor: '#10B981',
-    paddingHorizontal: tokens?.spacing.sm,
-    paddingVertical: tokens?.spacing.xs,
-    borderRadius: tokens?.spacing.xs,
-  },
-  actionableText: {
-    fontSize: 10,
-    color: tokens?.background ?? '#0D0D0F',
-    fontWeight: '600',
-  },
-  insightTitle: {
-    fontSize: tokens?.typography.body.fontSize,
-    fontWeight: '600',
-    color: tokens?.text ?? '#F5F5F7',
-    marginBottom: tokens?.spacing.xs,
-  },
-  insightDescription: {
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.textSecondary ?? '#6B7280',
-  },
-  suggestionsContainer: {
-    gap: tokens?.spacing.md,
-  },
-  suggestionSection: {
-    gap: tokens?.spacing.sm,
-  },
-  suggestionLabel: {
-    fontSize: tokens?.typography.body.fontSize,
-    fontWeight: '600',
-    color: tokens?.text ?? '#F5F5F7',
-  },
-  suggestedTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: tokens?.spacing.sm,
-  },
-  contentSuggestion: {
-    padding: tokens?.spacing.sm,
-    backgroundColor: 'rgba(59, 130, 246, 0.05)',
-    borderRadius: tokens?.spacing.sm,
-  },
-  contentSuggestionText: {
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.text ?? '#F5F5F7',
-  },
-  metadataCard: {
-    marginBottom: tokens?.spacing.md,
-  },
-  metadataItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: tokens?.spacing.sm,
-  },
-  metadataLabel: {
-    fontSize: tokens?.typography.body.fontSize,
-    fontWeight: '600',
-    color: tokens?.text ?? '#F5F5F7',
-    marginLeft: tokens?.spacing.sm,
-    marginRight: tokens?.spacing.sm,
-    minWidth: 80,
-  },
-  metadataValue: {
-    fontSize: tokens?.typography.body.fontSize,
-    color: tokens?.textSecondary ?? '#6B7280',
-    flex: 1,
-  },
-  tagsCard: {
-    marginBottom: tokens?.spacing.md,
-  },
-  sectionTitle: {
-    fontSize: tokens?.typography.subheading.fontSize,
-    fontWeight: '600',
-    color: tokens?.text ?? '#F5F5F7',
-    marginBottom: tokens?.spacing.md,
-  },
-  tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: tokens?.spacing.sm,
-  },
-  actionsContainer: {
-    flexDirection: 'row',
-    gap: tokens?.spacing.md,
-    marginTop: tokens?.spacing.lg,
-  },
-}); 
+}; 

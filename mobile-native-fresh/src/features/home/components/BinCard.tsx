@@ -25,19 +25,19 @@ export const BinCard: React.FC<BinCardProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, {
-        width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
+        width: (width - designTokens.spacing.lg * 2 - designTokens.spacing.sm) / 2,
         height: 70,
-        backgroundColor: tokens.colors.backgroundSecondary,
-        borderRadius: tokens.radius.md * 1.34,
-        marginBottom: tokens.spacing.sm * 1.34,
+        backgroundColor: designTokens.colors.backgroundSecondary,
+        borderRadius: designTokens.radius.md * 1.34,
+        marginBottom: designTokens.spacing.sm * 1.34,
         borderWidth: 1,
-        borderColor: tokens.colors.border,
+        borderColor: designTokens.colors.border,
       }]}
       onPress={onPress}
       activeOpacity={0.7}
     >
       <View style={[styles.content, {
-        paddingHorizontal: tokens.spacing.md * 1.34,
+        paddingHorizontal: designTokens.spacing.md * 1.34,
       }]}>
         <Text 
           variant="body" 
@@ -55,7 +55,7 @@ export const BinCard: React.FC<BinCardProps> = ({
           variant="caption" 
           size="xs"
           style={{
-            color: tokens.colors.accent,
+            color: designTokens.colors.accent,
             fontWeight: '500',
           }}
         >

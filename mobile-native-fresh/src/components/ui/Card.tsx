@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, ViewStyle, Text } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { cardVariants, mergeVariantStyles } from '../../theme/variants';
+import { getCardVariants, mergeVariantStyles } from '../../theme/variants';
+import { designTokens } from '../../theme/tokens';
 
 interface CardProps {
   variant?: 'default' | 'glass' | 'elevated' | 'interactive';
@@ -23,6 +24,7 @@ export const Card: React.FC<CardProps> = ({
   const { tokens } = useTheme();
 
   // Get variant styles
+  const cardVariants = getCardVariants(tokens);
   const baseStyle = cardVariants.base;
   const variantStyle = cardVariants.variants.variant[variant];
   const sizeStyle = cardVariants.variants.size[size];
@@ -45,8 +47,8 @@ export const Card: React.FC<CardProps> = ({
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>
@@ -88,9 +90,9 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.lg,
-          fontWeight: tokens.typography.fontWeight.semibold,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.lg,
+          fontWeight: designTokens.typography.fontWeight.semibold,
         }}>
           {children}
         </Text>
@@ -103,9 +105,9 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
     <View
       style={[
         {
-          paddingBottom: tokens.spacing.md,
+          paddingBottom: designTokens.spacing.md,
           borderBottomWidth: 1,
-          borderBottomColor: tokens.colors.divider,
+          borderBottomColor: designTokens.colors.divider,
         },
         style,
       ]}
@@ -126,8 +128,8 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>
@@ -140,7 +142,7 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
     <View
       style={[
         {
-          paddingTop: tokens.spacing.md,
+          paddingTop: designTokens.spacing.md,
         },
         style,
       ]}
@@ -161,8 +163,8 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>
@@ -175,9 +177,9 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
     <View
       style={[
         {
-          paddingTop: tokens.spacing.md,
+          paddingTop: designTokens.spacing.md,
           borderTopWidth: 1,
-          borderTopColor: tokens.colors.divider,
+          borderTopColor: designTokens.colors.divider,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',

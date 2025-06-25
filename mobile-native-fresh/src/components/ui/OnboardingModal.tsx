@@ -21,12 +21,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={43} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={43} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
@@ -41,7 +41,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={43} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
@@ -77,11 +77,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       accessible={true}
       accessibilityLabel={steps[currentStep].title}
     >
-      <View style={[styles.overlay, { backgroundColor: tokens.colors.background + 'E6' }]}> {/* 90% opacity */}
+      <View style={[styles.overlay, { backgroundColor: designTokens.colors.background + 'E6' }]}> {/* 90% opacity */}
         <View style={[styles.card, {
-          backgroundColor: tokens.colors.backgroundSecondary,
-          borderRadius: tokens.radius.lg,
-          padding: tokens.spacing.xl,
+          backgroundColor: designTokens.colors.backgroundSecondary,
+          borderRadius: designTokens.radius.lg,
+          padding: designTokens.spacing.xl,
           maxWidth: 500,
         }]}
         >
@@ -91,12 +91,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               <Text style={{
                 fontWeight: 'bold',
                 color: '#222',
-                fontSize: 16, // tokens.typography.fontSize.sm * 1.34
+                fontSize: 16, // designTokens.typography.fontSize.sm * 1.34
               }}>{currentStep + 1}</Text>
             </View>
-            <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
-              <Heading level={1} style={{ color: tokens.colors.text }}>{steps[currentStep].title}</Heading>
-              <Caption style={{ color: tokens.colors.textSecondary }}>{`${currentStep + 1} of ${steps.length}`}</Caption>
+            <View style={{ flex: 1, marginLeft: designTokens.spacing.md }}>
+              <Heading level={1} style={{ color: designTokens.colors.text }}>{steps[currentStep].title}</Heading>
+              <Caption style={{ color: designTokens.colors.textSecondary }}>{`${currentStep + 1} of ${steps.length}`}</Caption>
             </View>
           </View>
 
@@ -104,11 +104,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           <View style={styles.iconContainer}>{steps[currentStep].icon}</View>
 
           {/* Description */}
-          <Text align="center" style={{ color: tokens.colors.text, marginBottom: tokens.spacing.lg }}>{steps[currentStep].description}</Text>
+          <Text align="center" style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.lg }}>{steps[currentStep].description}</Text>
 
           {/* Divider/accent below text chunk */}
-          <View style={{ alignItems: 'center', marginBottom: tokens.spacing.lg }}>
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: tokens.colors.accent }} />
+          <View style={{ alignItems: 'center', marginBottom: designTokens.spacing.lg }}>
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: designTokens.colors.accent }} />
           </View>
 
           {/* Progress Dots */}
@@ -120,7 +120,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                   styles.dot,
                   idx === currentStep
                     ? { backgroundColor: '#C6D600' }
-                    : { backgroundColor: tokens.colors.textMuted },
+                    : { backgroundColor: designTokens.colors.textMuted },
                 ]}
               />
             ))}
@@ -135,9 +135,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 borderColor: '#FFD700',
                 borderWidth: 2,
                 backgroundColor: 'transparent',
-                borderRadius: tokens.radius.md,
-                paddingHorizontal: tokens.spacing.xl,
-                marginBottom: tokens.spacing.lg,
+                borderRadius: designTokens.radius.md,
+                paddingHorizontal: designTokens.spacing.xl,
+                marginBottom: designTokens.spacing.lg,
                 width: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -149,15 +149,15 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           )}
 
           {/* Navigation Buttons */}
-          <View style={[styles.buttonRow, { gap: tokens.spacing.md }]}> 
+          <View style={[styles.buttonRow, { gap: designTokens.spacing.md }]}> 
             {/* Previous Button */}
             <Button
               variant="ghost"
               onPress={handlePrevious}
               disabled={currentStep === 0}
               style={{ flexDirection: 'row', alignItems: 'center', opacity: currentStep === 0 ? 0.5 : 1 }}
-              textStyle={{ color: tokens.colors.textSecondary, fontWeight: 'bold' }}
-              leftIcon={<Ionicons name="arrow-back" size={27} color={tokens.colors.textSecondary} />}
+              textStyle={{ color: designTokens.colors.textSecondary, fontWeight: 'bold' }}
+              leftIcon={<Ionicons name="arrow-back" size={27} color={designTokens.colors.textSecondary} />}
             >
               Previous
             </Button>
@@ -166,20 +166,20 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               <Button
                 onPress={onClose}
                 style={{
-                  backgroundColor: tokens.colors.accent,
-                  borderRadius: tokens.radius.md,
-                  paddingHorizontal: tokens.spacing.xl,
+                  backgroundColor: designTokens.colors.accent,
+                  borderRadius: designTokens.radius.md,
+                  paddingHorizontal: designTokens.spacing.xl,
                 }}
-                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
+                textStyle={{ color: designTokens.colors.text, fontWeight: 'bold' }}
               >
                 Finish
               </Button>
             ) : (
               <Button
                 onPress={handleNext}
-                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: tokens.radius.md, paddingHorizontal: tokens.spacing.xl }}
-                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
-                rightIcon={<Ionicons name="arrow-forward" size={27} color={tokens.colors.text} />}
+                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: designTokens.colors.accent, borderRadius: designTokens.radius.md, paddingHorizontal: designTokens.spacing.xl }}
+                textStyle={{ color: designTokens.colors.text, fontWeight: 'bold' }}
+                rightIcon={<Ionicons name="arrow-forward" size={27} color={designTokens.colors.text} />}
               >
                 {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
               </Button>

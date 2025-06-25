@@ -30,7 +30,7 @@
   "useGitHubCopilot": true,
   "autoSave": true,
   "designSystem": {
-    "tokensFile": "src/theme/tokens.ts",
+    "tokensFile": "src/theme/designTokens.ts",
     "variantsFile": "src/theme/variants.ts",
     "themeProvider": "src/theme/ThemeProvider.tsx",
     "uiComponentsPath": "src/components/ui/"

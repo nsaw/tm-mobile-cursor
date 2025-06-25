@@ -100,42 +100,42 @@ export const ContentScreen: React.FC = () => {
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: designTokens.colors.background,
   },
   content: {
-    padding: tokens.spacing.md,
+    padding: designTokens.spacing.md,
   },
   screenTitle: {
-    ...tokens.typography.heading,
-    marginBottom: tokens.spacing.sm,
+    ...designTokens.typography.heading,
+    marginBottom: designTokens.spacing.sm,
   },
   screenSubtitle: {
-    ...tokens.typography.body,
-    marginBottom: tokens.spacing.lg,
-    color: tokens.colors.textSecondary,
+    ...designTokens.typography.body,
+    marginBottom: designTokens.spacing.lg,
+    color: designTokens.colors.textSecondary,
   },
   card: {
     flexDirection: 'row',
-    backgroundColor: tokens.colors.card,
+    backgroundColor: designTokens.colors.card,
     borderRadius: 12,
-    padding: tokens.spacing.md,
+    padding: designTokens.spacing.md,
     alignItems: 'flex-start',
-    marginBottom: tokens.spacing.md,
+    marginBottom: designTokens.spacing.md,
     elevation: 2,
   },
   cardIconContainer: {
-    marginRight: tokens.spacing.md,
+    marginRight: designTokens.spacing.md,
   },
   cardTextContainer: {
     flex: 1,
   },
   cardTitle: {
-    ...tokens.typography.subheading,
-    marginBottom: tokens.spacing.xs,
-    color: tokens.colors.text,
+    ...designTokens.typography.subheading,
+    marginBottom: designTokens.spacing.xs,
+    color: designTokens.colors.text,
   },
   cardDescription: {
-    ...tokens.typography.body,
-    color: tokens.colors.textSecondary,
+    ...designTokens.typography.body,
+    color: designTokens.colors.textSecondary,
   },
 });

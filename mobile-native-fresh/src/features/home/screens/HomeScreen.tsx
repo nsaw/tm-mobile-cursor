@@ -165,27 +165,27 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       <View style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: tokens.spacing.lg,
-        paddingVertical: tokens.spacing.md,
+        paddingHorizontal: designTokens.spacing.lg,
+        paddingVertical: designTokens.spacing.md,
       }}>
         <Text variant="heading" size="2xl">Thoughtmarks</Text>
         <TouchableOpacity 
           style={{
             width: 40,
             height: 40,
-            borderRadius: tokens.radius.full,
-            backgroundColor: tokens.colors.backgroundSecondary,
+            borderRadius: designTokens.radius.full,
+            backgroundColor: designTokens.colors.backgroundSecondary,
             justifyContent: 'center',
             alignItems: 'center',
           }} 
           onPress={handleProfilePress}
         >
-          <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
+          <Ionicons name="person-circle-outline" size={24} color={designTokens.colors.text} />
         </TouchableOpacity>
       </View>
 
@@ -222,13 +222,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         ListHeaderComponent={
           <>
             {pinnedThoughtmarks.length > 0 && (
-              <View style={{ marginBottom: tokens.spacing.lg }}>
+              <View style={{ marginBottom: designTokens.spacing.lg }}>
                 <Text 
                   variant="subheading" 
                   size="lg"
                   style={{
-                    paddingHorizontal: tokens.spacing.lg,
-                    marginBottom: tokens.spacing.sm,
+                    paddingHorizontal: designTokens.spacing.lg,
+                    marginBottom: designTokens.spacing.sm,
                   }}
                 >
                   Pinned
@@ -239,19 +239,19 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+                  contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
                 />
               </View>
             )}
             
             {recentThoughtmarks.length > 0 && (
-              <View style={{ marginBottom: tokens.spacing.lg }}>
+              <View style={{ marginBottom: designTokens.spacing.lg }}>
                 <Text 
                   variant="subheading" 
                   size="lg"
                   style={{
-                    paddingHorizontal: tokens.spacing.lg,
-                    marginBottom: tokens.spacing.sm,
+                    paddingHorizontal: designTokens.spacing.lg,
+                    marginBottom: designTokens.spacing.sm,
                   }}
                 >
                   Recent
@@ -262,19 +262,19 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+                  contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
                 />
               </View>
             )}
 
             {bins.length > 0 && (
-              <View style={{ marginBottom: tokens.spacing.lg }}>
+              <View style={{ marginBottom: designTokens.spacing.lg }}>
                 <Text 
                   variant="subheading" 
                   size="lg"
                   style={{
-                    paddingHorizontal: tokens.spacing.lg,
-                    marginBottom: tokens.spacing.sm,
+                    paddingHorizontal: designTokens.spacing.lg,
+                    marginBottom: designTokens.spacing.sm,
                   }}
                 >
                   Bins
@@ -289,19 +289,19 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                       style={{
                         width: 80,
                         height: 80,
-                        borderRadius: tokens.radius.md,
-                        marginHorizontal: tokens.spacing.xs,
+                        borderRadius: designTokens.radius.md,
+                        marginHorizontal: designTokens.spacing.xs,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: item.color || tokens.colors.surface,
+                        backgroundColor: item.color || designTokens.colors.surface,
                       }}
                       onPress={() => handleBinPress(item)}
                     >
                       <Ionicons 
                         name={item.icon || "folder-outline"} 
                         size={24} 
-                        color={tokens.colors.text} 
-                        style={{ marginBottom: tokens.spacing.xs }}
+                        color={designTokens.colors.text} 
+                        style={{ marginBottom: designTokens.spacing.xs }}
                       />
                       <Text variant="caption" size="xs" style={{ textAlign: 'center' }}>
                         {item.name}
@@ -312,13 +312,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               </View>
             )}
 
-            <View style={{ marginBottom: tokens.spacing.lg }}>
+            <View style={{ marginBottom: designTokens.spacing.lg }}>
               <Text 
                 variant="subheading" 
                 size="lg"
                 style={{
-                  paddingHorizontal: tokens.spacing.lg,
-                  marginBottom: tokens.spacing.sm,
+                  paddingHorizontal: designTokens.spacing.lg,
+                  marginBottom: designTokens.spacing.sm,
                 }}
               >
                 All Thoughtmarks
@@ -331,9 +331,9 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            paddingHorizontal: tokens.spacing.lg,
+            paddingHorizontal: designTokens.spacing.lg,
           }}>
-            <Text variant="body" style={{ textAlign: 'center', marginBottom: tokens.spacing.lg }}>
+            <Text variant="body" style={{ textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
               {thoughtmarksLoading ? 'Loading...' : 'No thoughtmarks yet'}
             </Text>
             {!thoughtmarksLoading && (
@@ -343,7 +343,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             )}
           </View>
         }
-        contentContainerStyle={{ paddingBottom: tokens.spacing.xl }}
+        contentContainerStyle={{ paddingBottom: designTokens.spacing.xl }}
       />
     </SafeAreaView>
   );

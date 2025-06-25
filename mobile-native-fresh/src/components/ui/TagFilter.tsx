@@ -23,11 +23,11 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   }
 
   return (
-    <View style={{ marginVertical: tokens.spacing.sm }}>
+    <View style={{ marginVertical: designTokens.spacing.sm }}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+        contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
       >
         {tags.map((tag) => (
           <TagChip

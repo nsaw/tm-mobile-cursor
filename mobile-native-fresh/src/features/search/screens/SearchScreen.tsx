@@ -208,17 +208,17 @@ export const SearchScreen: React.FC = () => {
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Ionicons name="search" size={20} color={tokens.colors.textSecondary} style={styles.searchIcon} />
+          <Ionicons name="search" size={20} color={designTokens.colors.textSecondary} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search thoughtmarks, tags, or content..."
-            placeholderTextColor={tokens.colors.textSecondary}
+            placeholderTextColor={designTokens.colors.textSecondary}
             value={searchQuery}
             onChangeText={handleSearch}
             autoFocus
           />
           {isSearching && (
-            <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.searchSpinner} />
+            <ActivityIndicator size="small" color={designTokens.colors.accent} style={styles.searchSpinner} />
           )}
         </View>
 
@@ -233,9 +233,9 @@ export const SearchScreen: React.FC = () => {
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
               size={16} 
-              color={useAISearch ? tokens.colors.accent : tokens.colors.textSecondary} 
+              color={useAISearch ? designTokens.colors.accent : designTokens.colors.textSecondary} 
             />
-            <Text style={[styles.aiToggleText, { color: useAISearch ? tokens.colors.accent : tokens.colors.textSecondary }]}>
+            <Text style={[styles.aiToggleText, { color: useAISearch ? designTokens.colors.accent : designTokens.colors.textSecondary }]}>
               AI Enhanced
             </Text>
           </TouchableOpacity>
@@ -253,7 +253,7 @@ export const SearchScreen: React.FC = () => {
         
         {searchQuery && !isSearching && searchResults.length === 0 && (
           <View style={styles.noResults}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.noResultsTitle}>No results found</Text>
             <Text style={styles.noResultsSubtitle}>
               Try searching with different keywords or check your spelling
@@ -263,7 +263,7 @@ export const SearchScreen: React.FC = () => {
 
         {!searchQuery && (
           <View style={styles.initialState}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.initialStateTitle}>Search your thoughtmarks</Text>
             <Text style={styles.initialStateSubtitle}>
               Search by title, content, or tags to find what you're looking for
@@ -282,9 +282,9 @@ export const SearchScreen: React.FC = () => {
                       disabled={isGeneratingSuggestions}
                     >
                       {isGeneratingSuggestions ? (
-                        <ActivityIndicator size="small" color={tokens.colors.accent} />
+                        <ActivityIndicator size="small" color={designTokens.colors.accent} />
                       ) : (
-                        <Ionicons name="refresh" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="refresh" size={16} color={designTokens.colors.accent} />
                       )}
                     </Button>
                   </View>
@@ -298,7 +298,7 @@ export const SearchScreen: React.FC = () => {
                         accessibilityRole="button"
                         accessibilityLabel={`Search for ${suggestion.query}`}
                       >
-                        <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
                         <Text style={styles.suggestionReason}>{suggestion.reason}</Text>
                       </TouchableOpacity>
@@ -367,140 +367,140 @@ export const SearchScreen: React.FC = () => {
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: designTokens.colors.background,
   },
   searchContainer: {
-    paddingHorizontal: tokens.spacing.lg,
-    marginBottom: tokens.spacing.md,
+    paddingHorizontal: designTokens.spacing.lg,
+    marginBottom: designTokens.spacing.md,
   },
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: tokens.colors.card,
-    borderRadius: tokens.spacing.md,
-    paddingHorizontal: tokens.spacing.md,
-    paddingVertical: tokens.spacing.sm,
+    backgroundColor: designTokens.colors.card,
+    borderRadius: designTokens.spacing.md,
+    paddingHorizontal: designTokens.spacing.md,
+    paddingVertical: designTokens.spacing.sm,
     borderWidth: 1,
-    borderColor: tokens.colors.border,
-    marginBottom: tokens.spacing.sm,
+    borderColor: designTokens.colors.border,
+    marginBottom: designTokens.spacing.sm,
   },
   searchInput: {
     flex: 1,
-    fontSize: tokens.typography.body.fontSize,
-    color: tokens.colors.text,
-    marginLeft: tokens.spacing.sm,
+    fontSize: designTokens.typography.body.fontSize,
+    color: designTokens.colors.text,
+    marginLeft: designTokens.spacing.sm,
   },
   searchIcon: {
-    marginRight: tokens.spacing.sm,
+    marginRight: designTokens.spacing.sm,
   },
   searchSpinner: {
-    marginLeft: tokens.spacing.sm,
+    marginLeft: designTokens.spacing.sm,
   },
   aiToggle: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    paddingHorizontal: tokens.spacing.sm,
-    paddingVertical: tokens.spacing.xs,
-    borderRadius: tokens.spacing.sm,
-    backgroundColor: tokens.colors.card,
+    paddingHorizontal: designTokens.spacing.sm,
+    paddingVertical: designTokens.spacing.xs,
+    borderRadius: designTokens.spacing.sm,
+    backgroundColor: designTokens.colors.card,
   },
   aiToggleActive: {
-    backgroundColor: tokens.colors.accent + '20',
+    backgroundColor: designTokens.colors.accent + '20',
   },
   aiToggleText: {
     fontSize: 12,
     fontWeight: '500',
-    marginLeft: tokens.spacing.xs,
-    color: tokens.colors.text,
+    marginLeft: designTokens.spacing.xs,
+    color: designTokens.colors.text,
   },
   resultsContainer: {
     flex: 1,
-    paddingHorizontal: tokens.spacing.lg,
+    paddingHorizontal: designTokens.spacing.lg,
   },
   resultsCount: {
-    fontSize: tokens.typography.body.fontSize * 0.8,
-    color: tokens.colors.textSecondary,
-    marginBottom: tokens.spacing.md,
+    fontSize: designTokens.typography.body.fontSize * 0.8,
+    color: designTokens.colors.textSecondary,
+    marginBottom: designTokens.spacing.md,
   },
   noResults: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: tokens.spacing.xl,
+    paddingVertical: designTokens.spacing.xl,
   },
   noResultsTitle: {
-    fontSize: tokens.typography.heading.fontSize,
+    fontSize: designTokens.typography.heading.fontSize,
     fontWeight: '600',
-    color: tokens.colors.text,
-    marginTop: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    color: designTokens.colors.text,
+    marginTop: designTokens.spacing.md,
+    marginBottom: designTokens.spacing.sm,
   },
   noResultsSubtitle: {
-    fontSize: tokens.typography.body.fontSize,
-    color: tokens.colors.textSecondary,
+    fontSize: designTokens.typography.body.fontSize,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: tokens.spacing.lg,
+    paddingHorizontal: designTokens.spacing.lg,
   },
   initialState: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: tokens.spacing.xl,
+    paddingVertical: designTokens.spacing.xl,
   },
   initialStateTitle: {
-    fontSize: tokens.typography.heading.fontSize,
+    fontSize: designTokens.typography.heading.fontSize,
     fontWeight: '600',
-    color: tokens.colors.text,
-    marginTop: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    color: designTokens.colors.text,
+    marginTop: designTokens.spacing.md,
+    marginBottom: designTokens.spacing.sm,
   },
   initialStateSubtitle: {
-    fontSize: tokens.typography.body.fontSize,
-    color: tokens.colors.textSecondary,
+    fontSize: designTokens.typography.body.fontSize,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: tokens.spacing.lg,
-    marginBottom: tokens.spacing.xl,
+    paddingHorizontal: designTokens.spacing.lg,
+    marginBottom: designTokens.spacing.xl,
   },
   suggestionsCard: {
-    marginBottom: tokens.spacing.lg,
+    marginBottom: designTokens.spacing.lg,
     width: '100%',
   },
   suggestionsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: designTokens.spacing.md,
   },
   suggestionsTitle: {
-    fontSize: tokens.typography.subheading.fontSize,
+    fontSize: designTokens.typography.subheading.fontSize,
     fontWeight: '600',
-    color: tokens.colors.text,
-    marginBottom: tokens.spacing.sm,
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.sm,
   },
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingVertical: tokens.spacing.sm,
+    paddingVertical: designTokens.spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: tokens.colors.border,
+    borderBottomColor: designTokens.colors.border,
   },
   suggestionText: {
     flex: 1,
-    fontSize: tokens.typography.body.fontSize,
-    color: tokens.colors.text,
-    marginLeft: tokens.spacing.sm,
+    fontSize: designTokens.typography.body.fontSize,
+    color: designTokens.colors.text,
+    marginLeft: designTokens.spacing.sm,
     fontWeight: '500',
   },
   suggestionReason: {
-    fontSize: tokens.typography.body.fontSize * 0.8,
-    color: tokens.colors.textSecondary,
-    marginLeft: tokens.spacing.sm,
-    marginTop: tokens.spacing.xs,
+    fontSize: designTokens.typography.body.fontSize * 0.8,
+    color: designTokens.colors.textSecondary,
+    marginLeft: designTokens.spacing.sm,
+    marginTop: designTokens.spacing.xs,
   },
   suggestionsEmpty: {
-    fontSize: tokens.typography.body.fontSize,
-    color: tokens.colors.textSecondary,
+    fontSize: designTokens.typography.body.fontSize,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
     fontStyle: 'italic',
   },
@@ -508,17 +508,17 @@ const getStyles = (tokens: any) => StyleSheet.create({
     width: '100%',
   },
   recentTitle: {
-    fontSize: tokens.typography.subheading.fontSize,
+    fontSize: designTokens.typography.subheading.fontSize,
     fontWeight: '600',
-    color: tokens.colors.text,
-    marginBottom: tokens.spacing.sm,
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.sm,
   },
   recentTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: designTokens.spacing.sm,
   },
   resultsList: {
-    paddingBottom: tokens.spacing.xl,
+    paddingBottom: designTokens.spacing.xl,
   },
 }); 

@@ -104,33 +104,33 @@ const resources = [
 const HowToScreen: React.FC = () => {
   const { tokens } = useTheme();
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }} contentContainerStyle={{ padding: tokens.spacing.lg }}>
-      <Heading level={1} style={{ color: tokens.colors.text, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
+    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }} contentContainerStyle={{ padding: designTokens.spacing.lg }}>
+      <Heading level={1} style={{ color: designTokens.colors.text, textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
         Help & Support
       </Heading>
-      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.xl }}>
+      <Caption style={{ color: designTokens.colors.textMuted, textAlign: 'center', marginBottom: designTokens.spacing.xl }}>
         Get assistance and find answers to make the most of Thoughtmarks
       </Caption>
 
       {/* Help Categories */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
+      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
         Quick Help
       </Heading>
-      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {helpCategories.map((cat, idx) => (
-          <Card key={cat.title} style={{ padding: tokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <cat.icon size={28} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <Card key={cat.title} style={{ padding: designTokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
+              <cat.icon size={28} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
               <View>
-                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{cat.title}</Text>
-                <Caption style={{ color: tokens.colors.textMuted }}>{cat.description}</Caption>
+                <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{cat.title}</Text>
+                <Caption style={{ color: designTokens.colors.textMuted }}>{cat.description}</Caption>
               </View>
             </View>
             <View style={{ marginLeft: 36 }}>
               {cat.items.map((item, i) => (
                 <View key={item} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-                  <CheckCircle size={14} color={tokens.colors.success} style={{ marginRight: 6 }} />
-                  <Text style={{ color: tokens.colors.textSecondary, fontSize: tokens.typography.fontSize.sm }}>{item}</Text>
+                  <CheckCircle size={14} color={designTokens.colors.success} style={{ marginRight: 6 }} />
+                  <Text style={{ color: designTokens.colors.textSecondary, fontSize: designTokens.typography.fontSize.sm }}>{item}</Text>
                 </View>
               ))}
             </View>
@@ -139,43 +139,43 @@ const HowToScreen: React.FC = () => {
       </View>
 
       {/* FAQ */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
+      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
         Frequently Asked Questions
       </Heading>
-      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {faqs.map((faq, idx) => (
-          <Card key={faq.question} style={{ padding: tokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <faq.icon size={22} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
-              <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{faq.question}</Text>
+          <Card key={faq.question} style={{ padding: designTokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
+              <faq.icon size={22} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
+              <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{faq.question}</Text>
             </View>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.xs }}>{faq.answer}</Text>
-            <Caption style={{ color: tokens.colors.textMuted }}>{faq.category}</Caption>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.xs }}>{faq.answer}</Text>
+            <Caption style={{ color: designTokens.colors.textMuted }}>{faq.category}</Caption>
           </Card>
         ))}
       </View>
 
       {/* Resources */}
-      <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.md }}>
+      <Heading level={2} style={{ color: designTokens.colors.text, marginBottom: designTokens.spacing.md }}>
         Additional Resources
       </Heading>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {resources.map((res) => (
-          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
-            <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
-            <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
-            <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center' }}>{res.description}</Caption>
+          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: designTokens.spacing.md }} onPress={res.onPress}>
+            <res.icon size={32} color={designTokens.colors.accent} style={{ marginBottom: designTokens.spacing.sm }} />
+            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
+            <Caption style={{ color: designTokens.colors.textMuted, textAlign: 'center' }}>{res.description}</Caption>
           </Card>
         ))}
       </View>
 
       {/* Support Response Notice */}
-      <Card style={{ backgroundColor: tokens.colors.accentMuted, borderColor: tokens.colors.accent, padding: tokens.spacing.md }}>
+      <Card style={{ backgroundColor: designTokens.colors.accentMuted, borderColor: designTokens.colors.accent, padding: designTokens.spacing.md }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <HelpCircle size={20} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <HelpCircle size={20} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
           <View>
-            <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
-            <Caption style={{ color: tokens.colors.textMuted }}>
+            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
+            <Caption style={{ color: designTokens.colors.textMuted }}>
               We typically respond to support requests within 24 hours. For urgent issues, please email us directly.
             </Caption>
           </View>

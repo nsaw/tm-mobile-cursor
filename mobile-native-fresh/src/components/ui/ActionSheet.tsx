@@ -54,19 +54,19 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
         }}>
           <TouchableWithoutFeedback>
             <View style={{
-              backgroundColor: tokens.colors.backgroundSecondary,
-              borderTopLeftRadius: tokens.radius.lg,
-              borderTopRightRadius: tokens.radius.lg,
-              paddingBottom: tokens.spacing.lg,
+              backgroundColor: designTokens.colors.backgroundSecondary,
+              borderTopLeftRadius: designTokens.radius.lg,
+              borderTopRightRadius: designTokens.radius.lg,
+              paddingBottom: designTokens.spacing.lg,
               maxWidth: Dimensions.get('window').width,
               width: '100%',
             }}>
               {title && (
                 <View style={{
-                  paddingVertical: tokens.spacing.md,
-                  paddingHorizontal: tokens.spacing.lg,
+                  paddingVertical: designTokens.spacing.md,
+                  paddingHorizontal: designTokens.spacing.lg,
                   borderBottomWidth: 1,
-                  borderBottomColor: tokens.colors.border,
+                  borderBottomColor: designTokens.colors.border,
                 }}>
                   <Text variant="subheading" style={{ textAlign: 'center' }}>{title}</Text>
                 </View>
@@ -76,10 +76,10 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 <TouchableOpacity
                   key={index}
                   style={{
-                    paddingVertical: tokens.spacing.md,
-                    paddingHorizontal: tokens.spacing.lg,
+                    paddingVertical: designTokens.spacing.md,
+                    paddingHorizontal: designTokens.spacing.lg,
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
-                    borderBottomColor: tokens.colors.border,
+                    borderBottomColor: designTokens.colors.border,
                   }}
                   onPress={() => handleItemPress(item)}
                   accessibilityRole="button"
@@ -93,15 +93,15 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                       <Ionicons
                         name={item.icon as any}
                         size={16}
-                        color={item.destructive ? tokens.colors.danger : tokens.colors.text}
-                        style={{ marginRight: tokens.spacing.sm }}
+                        color={item.destructive ? designTokens.colors.danger : designTokens.colors.text}
+                        style={{ marginRight: designTokens.spacing.sm }}
                       />
                     )}
                     <Text 
                       variant="body" 
                       style={{
                         textAlign: 'center',
-                        color: item.destructive ? tokens.colors.danger : tokens.colors.text,
+                        color: item.destructive ? designTokens.colors.danger : designTokens.colors.text,
                       }}
                     >
                       {item.label}
@@ -112,11 +112,11 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               
               <TouchableOpacity
                 style={{
-                  paddingVertical: tokens.spacing.md,
-                  paddingHorizontal: tokens.spacing.lg,
-                  marginTop: tokens.spacing.sm,
+                  paddingVertical: designTokens.spacing.md,
+                  paddingHorizontal: designTokens.spacing.lg,
+                  marginTop: designTokens.spacing.sm,
                   borderTopWidth: 8,
-                  borderTopColor: tokens.colors.border,
+                  borderTopColor: designTokens.colors.border,
                 }}
                 onPress={onClose}
                 accessibilityRole="button"
@@ -126,7 +126,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   variant="body" 
                   style={{
                     textAlign: 'center',
-                    color: tokens.colors.accent,
+                    color: designTokens.colors.accent,
                     fontWeight: '600',
                   }}
                 >

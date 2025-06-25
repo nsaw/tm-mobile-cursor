@@ -46,18 +46,18 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
     switch (style) {
       case 'destructive':
         return {
-          backgroundColor: tokens.colors.danger,
-          borderColor: tokens.colors.danger,
+          backgroundColor: designTokens.colors.danger,
+          borderColor: designTokens.colors.danger,
         };
       case 'cancel':
         return {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.border,
+          borderColor: designTokens.colors.border,
         };
       default:
         return {
-          backgroundColor: tokens.colors.accent,
-          borderColor: tokens.colors.accent,
+          backgroundColor: designTokens.colors.accent,
+          borderColor: designTokens.colors.accent,
         };
     }
   };
@@ -67,7 +67,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       case 'destructive':
         return { color: '#FFFFFF' };
       case 'cancel':
-        return { color: tokens.colors.textSecondary };
+        return { color: designTokens.colors.textSecondary };
       default:
         return { color: '#FFFFFF' };
     }
@@ -81,10 +81,10 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       onRequestClose={onDismiss}
     >
       <View style={styles.overlay}>
-        <View style={[styles.container, { backgroundColor: tokens.colors.backgroundSecondary }]}>
+        <View style={[styles.container, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
           <View style={styles.header}>
-            <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
-            <Text style={[styles.message, { color: tokens.colors.textSecondary }]}>{message}</Text>
+            <Text style={[styles.title, { color: designTokens.colors.text }]}>{title}</Text>
+            <Text style={[styles.message, { color: designTokens.colors.textSecondary }]}>{message}</Text>
           </View>
           
           <View style={styles.buttonContainer}>
