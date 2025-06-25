@@ -19,7 +19,11 @@
     "lint:check-jsx": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep -E '(no-text-outside-text|no-inline-colors|enforce-theme-hook)' | wc -l",
     "lint:fix-accessibility": "node scripts/fix-accessibility.cjs",
     "lint:fix-all": "npm run lint:fix-text && npm run lint:fix-accessibility && npm run lint:check-theme && npm run lint:fix",
-    "pre-commit": "npm run lint:fix-all"
+    "pre-commit": "npm run lint:fix-all",
+    "fix:text-errors": "node scripts/auto-fix-text-errors.cjs",
+    "auto:fix": "npm run fix:text-errors",
+    "watch:text-errors": "node scripts/watch-text-errors.cjs",
+    "watch:fix": "npm run watch:text-errors"
   },
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.4.1",
@@ -80,6 +84,13 @@
     "typescript": "~5.8.3"
   },
   "private": true,
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": ["react-native-responsive-fontsize", "firebase", "react-native-vector-icons"]
+      }
+    }
+  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",

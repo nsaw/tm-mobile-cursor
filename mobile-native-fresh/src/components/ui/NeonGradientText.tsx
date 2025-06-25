@@ -58,7 +58,7 @@ const getStyles = (tokens: any) => StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Ubuntu',
     textShadowColor: '#C6D600',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: { width: 8, height: 8 }, // 45deg angle
     textShadowRadius: 11, // 8 * 1.34
   },
 }); 

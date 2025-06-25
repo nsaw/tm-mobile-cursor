@@ -73,9 +73,10 @@ module.exports = {
       },
     ],
     // Custom JSX enforcement rules
-    'thoughtmarks/no-text-outside-text': 'error',
-    'thoughtmarks/no-inline-colors': 'error',
-    'thoughtmarks/enforce-theme-hook': 'error',
+    'thoughtmarks/no-direct-design-tokens': 'error',
+    'thoughtmarks/no-global-theme': 'error',
+    'thoughtmarks/require-use-theme': 'error',
+    'thoughtmarks/no-circular-text': 'error',
     // Accessibility rules
     'jsx-a11y/accessible-emoji': 'warn',
     'jsx-a11y/alt-text': 'error',

@@ -21,7 +21,9 @@ import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
 // import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
-SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync().catch(() => {
+  /* ignore */
+})
 
 function AppContent() {
   const { tokens } = useTheme();
@@ -88,16 +90,25 @@ export default function App() {
 
   // Once fonts finish loading, hide the splash
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync().catch(() => {
-        /* ignore */
-      })
-    }
-  }, [fontsLoaded])
+    const hideSplash = async () => {
+      try {
+        if (fontsLoaded) {
+          console.log('Fonts loaded, hiding splash screen...');
+          await SplashScreen.hideAsync();
+          console.log('Splash screen hidden successfully');
+        }
+      } catch (error) {
+        console.error('Error hiding splash screen:', error);
+      }
+    };
+
+    hideSplash();
+  }, [fontsLoaded]);
 
   // Don't render anything until fonts are ready
   if (!fontsLoaded) {
-    return null
+    console.log('Fonts not loaded yet, showing splash screen...');
+    return null;
   }
 
   return (

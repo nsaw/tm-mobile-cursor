@@ -222,6 +222,15 @@ export function getTextVariants(tokens: DesignTokens) {
           color: tokens.colors.textSecondary,
           lineHeight: tokens.typography.fontSize.xs * 1.5,
         },
+        // 'tagline' is for secondary/subtitle text (onboarding descriptions, empty state subtitles, etc)
+        tagline: {
+          fontSize: tokens.typography.fontSize.sm, // smaller than body, larger than caption
+          fontWeight: tokens.typography.fontWeight.normal, // lighter weight
+          color: tokens.colors.textSecondary,
+          fontFamily: tokens.typography.fontFamily.body,
+          letterSpacing: 0.2,
+          lineHeight: tokens.typography.fontSize.sm * 1.6,
+        },
       },
       size: {
         xs: {

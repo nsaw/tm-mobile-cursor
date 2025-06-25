@@ -95,16 +95,22 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                }}>{currentStep + 1}</Text>
             </View>
             <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
-              <Heading>{steps[currentStep].title}</Heading>
-              <Caption>{`${currentStep + 1} of ${steps.length}`}</Caption>
+              <Text variant="heading" style={{ marginBottom: 4 }}>
+                {steps[currentStep].title}
+              </Text>
+              <Caption><Text>{`${currentStep + 1} of ${steps.length}`}</Text></Caption>
             </View>
           </View>
 
-          {/* Icon */}
-          <View>{steps[currentStep].icon}</View>
+          {/* Icon - Centered with flex and padding */}
+          <View style={styles.iconContainer}>
+            {steps[currentStep].icon}
+          </View>
 
-          {/* Description */}
-          <Text style={{ color: tokens.colors.text, marginBottom: tokens.spacing.lg, textAlign: 'center' }}>{steps[currentStep].description}</Text>
+          {/* Description - Using tagline variant */}
+          <Text variant="tagline" style={{ marginBottom: tokens.spacing.lg, textAlign: 'center' }} numberOfLines={3}>
+            {steps[currentStep].description}
+          </Text>
 
           {/* Divider/accent below text chunk */}
           <View style={{ alignItems: 'center', marginBottom: tokens.spacing.lg }}>
@@ -143,7 +149,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               }}
               textStyle={{ color: '#FFD700', fontWeight: 'bold' }}
             >
-              Upgrade Now
+              <Text>Upgrade Now</Text>
             </Button>
           )}
 
@@ -158,11 +164,18 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               textStyle={{ color: tokens.colors.textSecondary, fontWeight: 'bold' }}
               leftIcon={<Ionicons name="arrow-back" size={27} color={tokens.colors.textSecondary} />}
             >
-              Previous
+              <Text>Previous</Text>
             </Button>
-            {/* Step 6/6: Finish Button */}
+            {/* Next/Finish Button */}
             {steps[currentStep].premium && !isPremium ? (
-              <Button>Finish</Button>
+              <Button
+                onPress={onClose}
+                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: tokens.radius.md, paddingHorizontal: tokens.spacing.xl }}
+                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
+                rightIcon={<Ionicons name="checkmark" size={27} color={tokens.colors.text} />}
+              >
+                <Text>Finish</Text>
+              </Button>
             ) : (
               <Button
                 onPress={handleNext}
@@ -170,12 +183,10 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
                 rightIcon={<Ionicons name="arrow-forward" size={27} color={tokens.colors.text} />}
               >
-                {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
+                <Text>{currentStep === steps.length - 1 ? 'Get Started' : 'Next'}</Text>
               </Button>
             )}
           </View>
-
-          <Button onPress={onClose}>Close</Button>
         </View>
       </View>
     </Modal>
@@ -207,6 +218,12 @@ const styles = StyleSheet.create({
   stepCircleText: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 21, // 16 * 1.34
+    marginBottom: 16, // 12 * 1.34
   },
   progressDots: {
     flexDirection: 'row',
