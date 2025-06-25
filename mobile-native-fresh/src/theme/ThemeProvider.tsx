@@ -1,8 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { designTokens, DesignTokens } from './tokens';
+import { buttonVariants, cardVariants, inputVariants, textVariants, badgeVariants } from './variants';
 
 interface ThemeContextType {
   tokens: DesignTokens;
+  variants: {
+    buttonVariants: typeof buttonVariants;
+    cardVariants: typeof cardVariants;
+    inputVariants: typeof inputVariants;
+    textVariants: typeof textVariants;
+    badgeVariants: typeof badgeVariants;
+  };
   isFluidTheme: boolean;
   toggleTheme: () => void;
   isDarkMode: boolean;
@@ -53,6 +61,13 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const contextValue: ThemeContextType = {
     tokens: designTokens,
+    variants: {
+      buttonVariants,
+      cardVariants,
+      inputVariants,
+      textVariants,
+      badgeVariants,
+    },
     isFluidTheme,
     toggleTheme,
     isDarkMode,

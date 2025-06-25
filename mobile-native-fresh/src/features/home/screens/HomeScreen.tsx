@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
   RefreshControl,
@@ -15,7 +13,9 @@ import { ThoughtmarkList } from '../components/ThoughtmarkList';
 import { QuickActions } from '../components/QuickActions';
 import { SearchBar } from '../components/SearchBar';
 import { TagFilter } from '../../../components/ui/TagFilter';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { Text } from '../../../components/ui/Text';
+import { Button } from '../../../components/ui/Button';
+import { useTheme } from '../../../theme/ThemeProvider';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -24,6 +24,8 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [selectedBin, setSelectedBin] = useState<Bin | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+
+  const { tokens } = useTheme();
 
   const {
     thoughtmarks,
@@ -163,11 +165,27 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Thoughtmarks</Text>
-        <TouchableOpacity style={styles.profileButton} onPress={handleProfilePress}>
-          <Ionicons name="person-circle-outline" size={24} color={colors.text} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+      }}>
+        <Text variant="heading" size="2xl">Thoughtmarks</Text>
+        <TouchableOpacity 
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            backgroundColor: tokens.colors.backgroundSecondary,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }} 
+          onPress={handleProfilePress}
+        >
+          <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
       </View>
 
@@ -204,36 +222,63 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         ListHeaderComponent={
           <>
             {pinnedThoughtmarks.length > 0 && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Pinned</Text>
+              <View style={{ marginBottom: tokens.spacing.lg }}>
+                <Text 
+                  variant="subheading" 
+                  size="lg"
+                  style={{
+                    paddingHorizontal: tokens.spacing.lg,
+                    marginBottom: tokens.spacing.sm,
+                  }}
+                >
+                  Pinned
+                </Text>
                 <FlatList
                   data={pinnedThoughtmarks}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={styles.horizontalList}
+                  contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
                 />
               </View>
             )}
             
             {recentThoughtmarks.length > 0 && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Recent</Text>
+              <View style={{ marginBottom: tokens.spacing.lg }}>
+                <Text 
+                  variant="subheading" 
+                  size="lg"
+                  style={{
+                    paddingHorizontal: tokens.spacing.lg,
+                    marginBottom: tokens.spacing.sm,
+                  }}
+                >
+                  Recent
+                </Text>
                 <FlatList
                   data={recentThoughtmarks}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={renderThoughtmarkCard}
-                  contentContainerStyle={styles.horizontalList}
+                  contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
                 />
               </View>
             )}
 
             {bins.length > 0 && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Bins</Text>
+              <View style={{ marginBottom: tokens.spacing.lg }}>
+                <Text 
+                  variant="subheading" 
+                  size="lg"
+                  style={{
+                    paddingHorizontal: tokens.spacing.lg,
+                    marginBottom: tokens.spacing.sm,
+                  }}
+                >
+                  Bins
+                </Text>
                 <FlatList
                   data={bins.filter(bin => !bin.isArchived && !bin.isDeleted)}
                   horizontal
@@ -241,16 +286,24 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity
-                      style={[styles.binCard, { backgroundColor: item.color || '#f0f0f0' }]}
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: tokens.radius.md,
+                        marginHorizontal: tokens.spacing.xs,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: item.color || tokens.colors.surface,
+                      }}
                       onPress={() => handleBinPress(item)}
                     >
                       <Ionicons 
                         name={item.icon || "folder-outline"} 
                         size={24} 
-                        color={colors.text} 
-                        style={styles.binIcon}
+                        color={tokens.colors.text} 
+                        style={{ marginBottom: tokens.spacing.xs }}
                       />
-                      <Text style={styles.binName} numberOfLines={1}>
+                      <Text variant="caption" size="xs" style={{ textAlign: 'center' }}>
                         {item.name}
                       </Text>
                     </TouchableOpacity>
@@ -259,106 +312,39 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               </View>
             )}
 
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>All Thoughtmarks</Text>
+            <View style={{ marginBottom: tokens.spacing.lg }}>
+              <Text 
+                variant="subheading" 
+                size="lg"
+                style={{
+                  paddingHorizontal: tokens.spacing.lg,
+                  marginBottom: tokens.spacing.sm,
+                }}
+              >
+                All Thoughtmarks
+              </Text>
             </View>
           </>
         }
         ListEmptyComponent={
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyStateText}>
+          <View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: tokens.spacing.lg,
+          }}>
+            <Text variant="body" style={{ textAlign: 'center', marginBottom: tokens.spacing.lg }}>
               {thoughtmarksLoading ? 'Loading...' : 'No thoughtmarks yet'}
             </Text>
             {!thoughtmarksLoading && (
-              <TouchableOpacity style={styles.createButton} onPress={handleCreateNew}>
-                <Text style={styles.createButtonText}>Create your first thoughtmark</Text>
-              </TouchableOpacity>
+              <Button variant="primary" onPress={handleCreateNew}>
+                Create your first thoughtmark
+              </Button>
             )}
           </View>
         }
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={{ paddingBottom: tokens.spacing.xl }}
       />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-  },
-  title: {
-    ...typography.heading,
-    color: colors.text,
-  },
-  profileButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.card,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  section: {
-    marginBottom: spacing.lg,
-  },
-  sectionTitle: {
-    ...typography.subheading,
-    color: colors.text,
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.sm,
-  },
-  horizontalList: {
-    paddingHorizontal: spacing.md,
-  },
-  binCard: {
-    width: 80,
-    height: 80,
-    borderRadius: 12,
-    marginHorizontal: spacing.xs,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  binIcon: {
-    fontSize: 24,
-    marginBottom: spacing.xs,
-  },
-  binName: {
-    fontSize: 12,
-    color: colors.text,
-    textAlign: 'center',
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-  },
-  emptyStateText: {
-    ...typography.body,
-    color: colors.subtext,
-    textAlign: 'center',
-    marginBottom: spacing.lg,
-  },
-  createButton: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderRadius: 8,
-  },
-  createButtonText: {
-    ...typography.body,
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-  listContent: {
-    paddingBottom: spacing.xl,
-  },
-});

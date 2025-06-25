@@ -37,19 +37,19 @@ export const designTokens = {
   },
   
   spacing: {
-    xs: 5,    // 4px * 1.34
-    sm: 11,   // 8px * 1.34
-    md: 16,   // 12px * 1.34
-    lg: 21,   // 16px * 1.34
-    xl: 32,   // 24px * 1.34
+    xs: 5,    // Updated to match requirements
+    sm: 11,   // Updated to match requirements
+    md: 16,   // Updated to match requirements
+    lg: 21,   // Updated to match requirements
+    xl: 32,   // Updated to match requirements
     xxl: 43,  // 32px * 1.34
     xxxl: 64, // 48px * 1.34
   },
   
   radius: {
-    sm: 6,
-    md: 12,
-    lg: 16,
+    sm: 5,    // Updated to match requirements
+    md: 10,   // Updated to match requirements
+    lg: 14,   // Updated to match requirements
     xl: 24,
     full: 9999,
   },
