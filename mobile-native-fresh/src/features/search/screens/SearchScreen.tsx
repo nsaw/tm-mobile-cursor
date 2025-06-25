@@ -225,6 +225,8 @@ export const SearchScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
             onPress={() => setUseAISearch(!useAISearch)}
+            accessibilityRole="button"
+            accessibilityLabel={`${useAISearch ? 'Disable' : 'Enable'} AI enhanced search`}
           >
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
@@ -291,6 +293,8 @@ export const SearchScreen: React.FC = () => {
                         key={index}
                         style={styles.suggestionItem}
                         onPress={() => handleSuggestionPress(suggestion)}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Search for ${suggestion.query}`}
                       >
                         <Ionicons name="bulb-outline" size={16} color={colors.primary} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
@@ -315,6 +319,8 @@ export const SearchScreen: React.FC = () => {
                     <TouchableOpacity
                       key={index}
                       onPress={() => handleRecentSearchPress(query)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Search for ${query}`}
                     >
                       <TagChip
                         tag={query}

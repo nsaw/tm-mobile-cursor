@@ -337,6 +337,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     localTagFilter === 'all' && styles.tagChipActive
                   ]}
                   onPress={() => handleLocalTagPress('all')}
+                  accessibilityRole="button"
+                  accessibilityLabel={`filter by tag: all`}
                 >
                   <Text style={[
                     styles.tagChipText,
@@ -354,6 +356,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       localTagFilter === tag && styles.tagChipActive
                     ]}
                     onPress={() => handleLocalTagPress(tag)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
                   >
                     <Text style={[
                       styles.tagChipText,

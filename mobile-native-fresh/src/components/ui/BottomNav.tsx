@@ -100,6 +100,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     onNavigate(path);
                   }
                 }}
+                accessibilityRole="button"
+                accessibilityLabel={`${label} ${isActive ? 'selected' : ''}`}
               >
                 {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && <View style={styles.activeGlow} />}
@@ -122,6 +124,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   onNavigate('/create');
                 }
               }}
+              accessibilityRole="button"
+              accessibilityLabel="Create new thoughtmark"
             >
               <MaterialCommunityIcons name="plus" size={47} color="#007AFF" />
             </TouchableOpacity>

@@ -57,6 +57,8 @@ export const TagChip: React.FC<TagChipProps> = ({
       style={[styles.container, chipStyle, compactStyle]}
       onPress={() => onPress?.(tag)}
       activeOpacity={0.7}
+      accessibilityRole="button"
+      accessibilityLabel={`tag: ${tag.toLowerCase()}`}
     >
       <Text 
         style={{

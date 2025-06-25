@@ -70,6 +70,8 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       style={[getButtonStyle(), loading && styles.buttonDisabled]}
       onPress={onPress}
       disabled={loading}
+      accessibilityRole="button"
+      accessibilityLabel={text || getDefaultText()}
     >
       {loading ? (
         <ActivityIndicator 

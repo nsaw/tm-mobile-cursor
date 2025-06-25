@@ -42,6 +42,8 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       transparent
       animationType="fade"
       onRequestClose={onClose}
+      accessible={true}
+      accessibilityLabel={title || 'Action menu'}
     >
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay}>
@@ -62,6 +64,8 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     index === items.length - 1 && styles.lastItem,
                   ]}
                   onPress={() => handleItemPress(item)}
+                  accessibilityRole="button"
+                  accessibilityLabel={item.label}
                 >
                   <View style={styles.itemContent}>
                     {item.icon && (
@@ -85,6 +89,8 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               <TouchableOpacity
                 style={[styles.item, styles.cancelItem]}
                 onPress={onClose}
+                accessibilityRole="button"
+                accessibilityLabel="Cancel"
               >
                 <Text style={styles.cancelText}>Cancel</Text>
               </TouchableOpacity>

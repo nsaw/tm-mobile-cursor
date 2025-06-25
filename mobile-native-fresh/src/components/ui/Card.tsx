@@ -62,6 +62,7 @@ export const Card: React.FC<CardProps> = ({
         onTouchEnd={onPress}
         accessible={true}
         accessibilityRole="button"
+        accessibilityLabel="Card"
       >
         {renderChildren()}
       </View>

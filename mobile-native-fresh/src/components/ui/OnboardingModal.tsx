@@ -71,9 +71,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
   return (
     <Modal
       visible={visible}
-      animationType="fade"
+      animationType="slide"
       transparent
-      onRequestClose={() => {}}
+      onRequestClose={onClose}
+      accessible={true}
+      accessibilityLabel={steps[currentStep].title}
     >
       <View style={[styles.overlay, { backgroundColor: tokens.colors.background + 'E6' }]}> {/* 90% opacity */}
         <View style={[styles.card, {
@@ -183,6 +185,13 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               </Button>
             )}
           </View>
+
+          <Button
+            variant="ghost"
+            onPress={onClose}
+          >
+            Close
+          </Button>
         </View>
       </View>
     </Modal>

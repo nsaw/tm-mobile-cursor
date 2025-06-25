@@ -117,9 +117,17 @@ const MainStack = () => (
       <Stack.Screen 
         name="CreateBin" 
         component={CreateBinScreen}
-        options={{ presentation: 'modal' }}
+        options={{
+          headerShown: false
+        }}
       />
-      <Stack.Screen name="BinDetail" component={BinDetailScreen} />
+      <Stack.Screen
+        name="BinDetail"
+        component={BinDetailScreen}
+        options={{
+          headerShown: false
+        }}
+      />
       <Stack.Screen 
         name="VoiceRecord" 
         component={VoiceRecordScreen}

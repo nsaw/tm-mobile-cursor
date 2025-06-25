@@ -281,6 +281,8 @@ export const AIToolsScreen: React.FC = () => {
                         marginRight: tokens.spacing.xs,
                         marginBottom: tokens.spacing.xs,
                       }}
+                      accessibilityRole="button"
+                      accessibilityLabel={`View thoughtmark ${thoughtmarkId}`}
                     >
                       <Text style={{ color: tokens.colors.accent, fontSize: 12 }}>
                         #{thoughtmarkId}
@@ -303,6 +305,8 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => navigation.goBack()}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
@@ -343,6 +347,8 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
             onPress={() => navigation.navigate('Subscribe' as never)}
+            accessibilityRole="button"
+            accessibilityLabel="Upgrade to Premium"
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
             <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
@@ -358,7 +364,12 @@ export const AIToolsScreen: React.FC = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
         <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>

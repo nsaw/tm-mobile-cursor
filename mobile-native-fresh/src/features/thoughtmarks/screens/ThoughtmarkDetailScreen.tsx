@@ -204,6 +204,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
           <TouchableOpacity
             style={styles.actionButton}
             onPress={handlePin}
+            accessibilityRole="button"
+            accessibilityLabel={thoughtmark.isPinned ? "Unpin thoughtmark" : "Pin thoughtmark"}
           >
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
@@ -214,12 +216,16 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
           <TouchableOpacity
             style={styles.actionButton}
             onPress={handleEdit}
+            accessibilityRole="button"
+            accessibilityLabel="Edit thoughtmark"
           >
             <Ionicons name="create-outline" size={20} color={colors.subtext} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
             onPress={handleDelete}
+            accessibilityRole="button"
+            accessibilityLabel="Delete thoughtmark"
           >
             <Ionicons name="trash-outline" size={20} color={colors.primary} />
           </TouchableOpacity>
@@ -235,6 +241,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
               <TouchableOpacity
                 style={[styles.taskStatus, thoughtmark.isCompleted && styles.taskCompleted]}
                 onPress={handleComplete}
+                accessibilityRole="button"
+                accessibilityLabel={thoughtmark.isCompleted ? "Mark task as incomplete" : "Mark task as complete"}
               >
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
@@ -268,6 +276,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <TouchableOpacity
                   onPress={generateAIInsights}
                   disabled={isGeneratingAI}
+                  accessibilityRole="button"
+                  accessibilityLabel="Generate AI insights"
                 >
                   {isGeneratingAI ? (
                     <ActivityIndicator size="small" color={colors.primary} />
@@ -317,6 +327,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <TouchableOpacity
                   onPress={generateAISuggestions}
                   disabled={isGeneratingAI}
+                  accessibilityRole="button"
+                  accessibilityLabel="Generate AI suggestions"
                 >
                   {isGeneratingAI ? (
                     <ActivityIndicator size="small" color={colors.primary} />

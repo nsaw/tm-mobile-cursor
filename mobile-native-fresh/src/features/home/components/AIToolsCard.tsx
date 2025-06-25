@@ -13,17 +13,23 @@ import { designTokens } from '../../../theme/tokens';
 interface AIToolsCardProps {
   onPress: () => void;
   isPremium?: boolean;
+  title: string;
+  description: string;
 }
 
 export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   onPress,
   isPremium = false,
+  title,
+  description,
 }) => {
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
       activeOpacity={0.7}
+      accessibilityRole="button"
+      accessibilityLabel={`AI tools card: ${title}`}
     >
       <View style={styles.content}>
         <View style={styles.leftContent}>
