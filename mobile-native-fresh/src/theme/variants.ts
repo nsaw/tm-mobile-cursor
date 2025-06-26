@@ -179,87 +179,112 @@ export function getInputVariants(tokens: DesignTokens) {
   );
 }
 
-// Text variants (dynamic)
+// Text variants (dynamic) - LIQUID theme principles
 export function getTextVariants(tokens: DesignTokens) {
   return createVariantStyles(
     {
       color: tokens.colors.text,
       fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.body, // Base size for all text
     },
     {
       variant: {
+        // Primary text - normal weight, full opacity
         body: {
-          fontSize: tokens.typography.fontSize.sm,
           fontWeight: tokens.typography.fontWeight.normal,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
+          opacity: 1,
+          lineHeight: tokens.typography.fontSize.body * 1.6,
         },
+        // Headings - bold weight, full opacity, uppercase
         heading: {
-          fontSize: tokens.typography.fontSize.xl,
           fontWeight: tokens.typography.fontWeight.bold,
           fontFamily: tokens.typography.fontFamily.heading,
-          lineHeight: tokens.typography.fontSize.xl * 1.3,
+          opacity: 1,
+          textTransform: 'uppercase' as const,
+          letterSpacing: 0.5,
+          lineHeight: tokens.typography.fontSize.body * 1.3,
         },
+        // Titles - extra bold weight, full opacity, uppercase
         title: {
-          fontSize: tokens.typography.fontSize['3xl'],
-          fontWeight: tokens.typography.fontWeight.bold,
-          fontFamily: tokens.typography.fontFamily.body,
-          lineHeight: tokens.typography.fontSize['3xl'] * 1.2,
+          fontWeight: '900' as const,
+          opacity: 1,
+          textTransform: 'uppercase' as const,
+          letterSpacing: 0.5,
+          lineHeight: tokens.typography.fontSize.body * 1.2,
         },
+        // Subtitles - medium weight, high opacity
         subtitle: {
-          fontSize: tokens.typography.fontSize.lg,
-          fontWeight: tokens.typography.fontWeight.normal,
-          lineHeight: tokens.typography.fontSize.lg * 1.4,
-        },
-        caption: {
-          fontSize: tokens.typography.fontSize.xs,
-          fontWeight: tokens.typography.fontWeight.normal,
-          color: tokens.colors.textMuted,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
-        },
-        muted: {
-          fontSize: tokens.typography.fontSize.xs,
-          fontWeight: tokens.typography.fontWeight.normal,
-          color: tokens.colors.textSecondary,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
-        },
-        // 'tagline' is for secondary/subtitle text (onboarding descriptions, empty state subtitles, etc)
-        tagline: {
-          fontSize: tokens.typography.fontSize.sm, // smaller than body, larger than caption
-          fontWeight: tokens.typography.fontWeight.normal, // lighter weight
-          color: tokens.colors.textSecondary,
-          fontFamily: tokens.typography.fontFamily.body,
-          letterSpacing: 0.2,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
-        },
-      },
-      size: {
-        xs: {
-          fontSize: tokens.typography.fontSize.xs - 2,
-          lineHeight: (tokens.typography.fontSize.xs - 2) * 1.5,
-        },
-        sm: {
-          fontSize: tokens.typography.fontSize.xs,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
-        },
-        md: {
-          fontSize: tokens.typography.fontSize.sm,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
-        },
-        lg: {
-          fontSize: tokens.typography.fontSize.body,
+          fontWeight: tokens.typography.fontWeight.medium,
+          opacity: 0.9,
           lineHeight: tokens.typography.fontSize.body * 1.4,
         },
+        // Captions - normal weight, reduced opacity
+        caption: {
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.textMuted,
+          opacity: 0.8,
+          lineHeight: tokens.typography.fontSize.body * 1.5,
+        },
+        // Muted text - normal weight, low opacity
+        muted: {
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.textSecondary,
+          opacity: 0.7,
+          lineHeight: tokens.typography.fontSize.body * 1.5,
+        },
+        // Tagline - medium weight, reduced opacity, lowercase
+        tagline: {
+          fontWeight: tokens.typography.fontWeight.medium,
+          color: tokens.colors.textSecondary,
+          opacity: 0.8,
+          textTransform: 'lowercase' as const,
+          letterSpacing: 0.2,
+          lineHeight: tokens.typography.fontSize.body * 1.6,
+        },
+        // Button text - medium weight, high opacity
+        button: {
+          fontWeight: tokens.typography.fontWeight.medium,
+          opacity: 0.9,
+          lineHeight: tokens.typography.fontSize.body * 1.4,
+        },
+        // Section headers - semibold weight, high opacity, uppercase
+        section: {
+          fontWeight: tokens.typography.fontWeight.semibold,
+          opacity: 0.85,
+          textTransform: 'uppercase' as const,
+          letterSpacing: 0.5,
+          lineHeight: tokens.typography.fontSize.body * 1.3,
+        },
+      },
+      // Size variants are minimal - only for extreme cases
+      size: {
+        xs: {
+          fontSize: tokens.typography.fontSize.body - 2,
+          lineHeight: (tokens.typography.fontSize.body - 2) * 1.5,
+        },
+        sm: {
+          fontSize: tokens.typography.fontSize.body - 1,
+          lineHeight: (tokens.typography.fontSize.body - 1) * 1.5,
+        },
+        md: {
+          fontSize: tokens.typography.fontSize.body,
+          lineHeight: tokens.typography.fontSize.body * 1.5,
+        },
+        lg: {
+          fontSize: tokens.typography.fontSize.body + 1,
+          lineHeight: (tokens.typography.fontSize.body + 1) * 1.4,
+        },
         xl: {
-          fontSize: tokens.typography.fontSize.xl + 2,
-          lineHeight: (tokens.typography.fontSize.xl + 2) * 1.3,
+          fontSize: tokens.typography.fontSize.body + 2,
+          lineHeight: (tokens.typography.fontSize.body + 2) * 1.3,
         },
         '2xl': {
-          fontSize: tokens.typography.fontSize['2xl'] + 2,
-          lineHeight: (tokens.typography.fontSize['2xl'] + 2) * 1.3,
+          fontSize: tokens.typography.fontSize.body + 4,
+          lineHeight: (tokens.typography.fontSize.body + 4) * 1.3,
         },
         '3xl': {
-          fontSize: tokens.typography.fontSize['3xl'] + 2,
-          lineHeight: (tokens.typography.fontSize['3xl'] + 2) * 1.2,
+          fontSize: tokens.typography.fontSize.body + 6,
+          lineHeight: (tokens.typography.fontSize.body + 6) * 1.2,
         },
       },
     }

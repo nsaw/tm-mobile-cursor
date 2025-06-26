@@ -83,7 +83,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
                     borderBottomColor: tokens.colors.border,
                   }}
-                  onPress={() => handleItemPress(item)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleItemPress(item)}
                   accessibilityRole="button"
                   accessible={true}
                   accessibilityLabel={item.label}

@@ -28,6 +28,8 @@ import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
+import { Text as CustomText, SectionHeader, ButtonText } from '../../../components/ui/Text';
+import { spacingTokens } from '../../../theme/spacing';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 const { width } = Dimensions.get('window');
@@ -950,9 +952,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   // Check if we should render fallback
   if (shouldRenderFallback) {
     return (
-      <View style={styles.container}>
-        {renderFallbackContent()}
-      </View>
+      <View><Text>{renderFallbackContent()}</Text></View>
     );
   }
 
@@ -961,7 +961,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       <OnboardingModal
         visible={showOnboarding}
         onClose={handleOnboardingClose}
-        isDemo={!!(user && (user.isTestUser || (user.email && user.email.includes('demo'))))}
       />
       <ScrollView
         style={styles.scrollView}
@@ -983,7 +982,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
-              <Text style={styles.title} numberOfLines={1}>THOUGHTMARKS</Text>
+              <CustomText variant="title" numberOfLines={1}>THOUGHTMARKS</CustomText>
               <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
             </View>
           </View>

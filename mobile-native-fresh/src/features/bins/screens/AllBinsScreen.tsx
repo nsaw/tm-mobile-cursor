@@ -121,7 +121,7 @@ export const AllBinsScreen: React.FC = () => {
         borderWidth: 1,
         borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() => setSortBy(sortType as SortType)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSortBy(sortType as SortType)}
     >
       <Text 
         variant="body" 
@@ -372,7 +372,7 @@ export const AllBinsScreen: React.FC = () => {
           <FlatList
             data={sortedBins}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleBinPress(item)}>
+              <TouchableOpacity onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(item)}>
                 <BinCard bin={item} onPress={() => handleBinPress(item)} />
               </TouchableOpacity>
             )}

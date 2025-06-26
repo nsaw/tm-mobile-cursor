@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getBadgeVariants, mergeVariantStyles } from '../../theme/variants';
+import { Text } from './Text';
 
 interface TagChipProps {
   tag: string;
@@ -58,12 +59,11 @@ export const TagChip: React.FC<TagChipProps> = ({
       accessibilityLabel={`tag: ${tag.toLowerCase()}`}
     >
       <Text 
+        variant="caption"
+        weight="medium"
         style={{
-          fontSize: 12,
-          fontWeight: '500' as const,
-          fontFamily: 'Ubuntu_500Medium',
           color: isSelected ? tokens.colors.accent : tokens.colors.text,
-          textAlign: 'center' as const,
+          textAlign: 'center',
           paddingHorizontal: 0
         }} 
         numberOfLines={1}
@@ -78,10 +78,5 @@ const styles = StyleSheet.create({
   container: {
     marginRight: 8, // Reduced from 11 to work better in horizontal scrolling
     marginBottom: 0, // Removed bottom margin for horizontal layout
-  },
-  text: {
-    fontSize: 10, // Increased from 8 to 10
-    fontWeight: '500',
-    textAlign: 'center',
   },
 }); 

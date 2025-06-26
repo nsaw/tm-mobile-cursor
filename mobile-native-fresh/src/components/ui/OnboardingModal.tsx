@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle, Text } from 'react-native';
 import { Brain, Mic, Search } from 'lucide-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -24,7 +24,7 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
+const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLabel="Modal"> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
   const { tokens, typography } = useTheme();
   return (
     <TouchableOpacity
@@ -47,7 +47,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
       accessibilityRole="button"
       accessible={true}
       disabled={disabled}
-    >
+     accessibilityLabel="Button">
       {!iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,
@@ -170,9 +170,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             color: tokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
-          <View style={{ alignItems: 'center', marginTop: tokens.spacing.xl, marginBottom: tokens.spacing.xl }}>
-            {React.cloneElement(steps[currentStep].icon, { size: iconSize })}
-          </View>
+          <View><Text>{React.cloneElement(steps[currentStep].icon, { size: iconSize })}</Text></View>
           {/* Body Text */}
           <Text style={{
             ...typography.body,
@@ -185,36 +183,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Pagination Dots */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View key={i} style={{
-                width: 6 * 0.6,
-                height: 6 * 0.6,
-                borderRadius: 3 * 0.6,
-                marginHorizontal: 2,
-                backgroundColor: i === currentStep ? tokens.colors.accent : tokens.colors.textSecondary,
-                opacity: i === currentStep ? 1 : 0.5,
-              }} />
-            ))}
-          </View>
+              <View><Text>))}</Text></View>
           {/* Buttons */}
           <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
-            <ModalButton
-              onPress={handlePrevious}
-              icon="arrow-left"
-              style={{ backgroundColor: tokens.colors.background, borderWidth: 1, borderColor: tokens.colors.accent, marginRight: tokens.spacing.sm, flex: 1, minWidth: 0 }}
-              disabled={currentStep === 0}
-              textStyle={onboardingButtonText}
-            >
-              Previous
-            </ModalButton>
-            <ModalButton
-              onPress={handleNext}
-              style={{ backgroundColor: tokens.colors.accent, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center', alignItems: 'center', gap: tokens.spacing.sm, flex: 1, minWidth: 0, marginLeft: tokens.spacing.sm }}
-              icon="arrow-right"
-              iconRight
-              textStyle={onboardingButtonText}
-            >
-              {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ModalButton>
+            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>Previous</Text></ModalButton>
+            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
           </View>
         </View>
       </View>

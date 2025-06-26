@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Pressable, Text, ViewStyle, TextStyle } from 'react-native';
+import { Pressable, ViewStyle, TextStyle } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
+import { ButtonText } from './Text';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';
@@ -107,33 +108,29 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       }}
     >
       {leftIcon && (
-        <Text style={{ marginRight: tokens.spacing.sm, color: textColor }}>
+        <ButtonText style={{ marginRight: tokens.spacing.sm, color: textColor }}>
           {leftIcon}
-        </Text>
+        </ButtonText>
       )}
       
       {typeof children === 'string' ? (
-        <Text
-          style={[
-            {
-              color: textColor,
-              fontSize: tokens.typography.fontSize.lg,
-              fontWeight: tokens.typography.fontWeight.medium,
-              textAlign: 'center',
-            },
-            textStyle,
-          ]}
+        <ButtonText
+          style={{
+            color: textColor,
+            textAlign: 'center',
+            ...textStyle,
+          }}
         >
           {children}
-        </Text>
+        </ButtonText>
       ) : (
         children
       )}
       
       {rightIcon && (
-        <Text style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
+        <ButtonText style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
           {rightIcon}
-        </Text>
+        </ButtonText>
       )}
     </Pressable>
   );
