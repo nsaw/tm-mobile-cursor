@@ -6,6 +6,8 @@ import {
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { StackNavigationProp } from '@react-navigation/stack';
+import type { RootStackParamList } from '../../../navigation/types';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
@@ -17,7 +19,12 @@ import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 
-export const HomeScreen = ({ navigation }: { navigation: any }) => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Dashboard'>;
+interface HomeScreenProps {
+  navigation: HomeScreenNavigationProp;
+}
+
+export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBin, setSelectedBin] = useState<Bin | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);

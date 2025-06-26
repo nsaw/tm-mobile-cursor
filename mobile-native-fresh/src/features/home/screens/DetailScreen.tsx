@@ -8,6 +8,8 @@ import { Text ,
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import type { RootStackParamList } from '../../../navigation/types';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { NavigationProp, RouteProp } from '../../../navigation/types';
@@ -17,14 +19,14 @@ import { useAuth } from '../../auth/hooks/useAuth';
 
 export const DetailScreen: React.FC = () => {
   const { tokens } = useTheme();
-  const navigation = useNavigation<NavigationProp>();
-  const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'ThoughtmarkDetail'>>();
+  const route = useRoute<RouteProp<'ThoughtmarkDetail'>>();
   const { thoughtmarkId } = route.params;
   const { thoughtmarks, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
   const { user } = useAuth();
 
-  const thoughtmark = thoughtmarks.find(t => t.id === parseInt(thoughtmarkId));
+  const thoughtmark = thoughtmarks.find(t => String(t.id) === thoughtmarkId);
 
   const styles = StyleSheet.create({
     container: {
@@ -155,7 +157,7 @@ export const DetailScreen: React.FC = () => {
   };
 
   const handleEdit = () => {
-    navigation.navigate('EditThoughtmark', { thoughtmarkId: thoughtmark.id.toString() });
+    navigation.navigate('UnifiedThoughtmark', { thoughtmarkId: thoughtmark.id.toString() });
   };
 
   const handleShare = () => {
