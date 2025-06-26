@@ -1,4 +1,4 @@
-import { Text ,
+import {
   View,
   TouchableOpacity,
   StyleSheet,
@@ -7,6 +7,8 @@ import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
+import { Text, SectionHeader } from '../../../components/ui/Text';
+import { spacingTokens } from '../../../theme/spacing';
 
 interface AIToolsCardProps {
   onPress: () => void;
@@ -21,18 +23,18 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   subtitle = "Generate insights and suggestions",
   icon = "crown",
 }) => {
-  const { tokens, spacing } = useTheme();
+  const { tokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       backgroundColor: 'transparent',
       borderRadius: 12,
-      paddingVertical: spacing.cardPaddingVertical,
-      paddingLeft: spacing.cardPaddingHorizontal,
-      paddingRight: spacing.cardPaddingHorizontal,
+      paddingVertical: spacingTokens.cardPaddingVertical,
+      paddingLeft: spacingTokens.cardPaddingHorizontal,
+      paddingRight: spacingTokens.cardPaddingHorizontal,
       marginHorizontal: 0,
-      marginTop: spacing.sectionHeaderMarginBottom,
-      marginBottom: spacing.cardMarginBottom,
+      marginTop: spacingTokens.sectionHeaderMarginBottom,
+      marginBottom: spacingTokens.cardMarginBottom,
       borderWidth: 0.25,
       borderColor: '#FFD700',
       flexDirection: 'row',
@@ -46,22 +48,17 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     },
     content: {
       flex: 1,
-      marginRight: spacing.iconMarginRight,
+      marginRight: spacingTokens.iconMarginRight,
       flexDirection: 'row',
       alignItems: 'center',
     },
     title: {
-      fontSize: tokens.typography.fontSize.lg,
-      fontWeight: tokens.typography.fontWeight.semibold,
       color: '#FFD700',
-      marginBottom: spacing.textMarginBottom,
-      textTransform: 'uppercase',
+      marginBottom: spacingTokens.textMarginBottom,
       marginTop: 0,
       marginLeft: 0,
     },
     subtitle: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: tokens.typography.fontWeight.normal,
       color: tokens.colors.textSecondary,
       lineHeight: 16,
     },
@@ -74,8 +71,8 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="AI Tools">
       <View style={styles.content}>
         <View>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subtitle}>{subtitle}</Text>
+          <SectionHeader style={styles.title}>{title}</SectionHeader>
+          <Text variant="body" style={styles.subtitle}>{subtitle}</Text>
         </View>
       </View>
       <MaterialCommunityIcons name="crown" size={20} style={styles.crownIcon} />

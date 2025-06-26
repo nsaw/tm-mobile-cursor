@@ -1,16 +1,16 @@
 
 # JSX Style Role Audit Report
-Generated: 2025-06-26T20:42:37.358Z
+Generated: 2025-06-26T21:42:38.369Z
 
 ## Summary
 - Total files scanned: 78
 - Files with components: 51
-- Total components found: 607
+- Total components found: 606
 - Components with roles: 0
-- Components without roles: 607
+- Components without roles: 606
 - Invalid roles: 0
 
-## Issues Found (607)
+## Issues Found (606)
 
 ### MISSING_ROLE
 - **File:** src/navigation/AppNavigator.tsx:53
@@ -1648,42 +1648,37 @@ Generated: 2025-06-26T20:42:37.358Z
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
+- **File:** src/features/home/screens/DashboardScreen.tsx:971
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="header"
+
+### MISSING_ROLE
 - **File:** src/features/home/screens/DashboardScreen.tsx:972
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="header"
 
 ### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:973
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="header"
-
-### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:985
+- **File:** src/features/home/screens/DashboardScreen.tsx:984
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:986
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="heading"
-
-### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:990
+- **File:** src/features/home/screens/DashboardScreen.tsx:989
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="header"
+
+### MISSING_ROLE
+- **File:** src/features/home/screens/DashboardScreen.tsx:1016
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
 - **File:** src/features/home/screens/DashboardScreen.tsx:1017
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:1018
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/features/home/screens/DashboardScreen.tsx:1023
+- **File:** src/features/home/screens/DashboardScreen.tsx:1022
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 

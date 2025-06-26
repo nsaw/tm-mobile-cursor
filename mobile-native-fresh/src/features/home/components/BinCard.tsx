@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
+import { spacingTokens } from '../../../theme/spacing';
 
 interface BinCardProps {
   bin: {
@@ -34,29 +35,25 @@ export const BinCard: React.FC<BinCardProps> = ({
       aspectRatio: 1,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md * 1.34,
-      marginBottom: tokens.spacing.sm * 1.34,
+      marginBottom: spacingTokens.cardMarginBottom,
       borderWidth: 1,
       borderColor: tokens.colors.borderHover,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.md * 1.34,
+      padding: spacingTokens.cardPaddingHorizontal,
     },
     icon: {
       fontSize: 32,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: spacingTokens.textMarginBottom,
     },
     name: {
-      fontSize: tokens.typography.fontSize.xs,
-      fontWeight: tokens.typography.fontWeight.light,
       color: tokens.colors.accent,
       textAlign: 'center',
-      marginBottom: tokens.spacing.xs,
+      marginBottom: spacingTokens.textMarginBottom,
     },
     count: {
-      fontSize: tokens.typography.fontSize.xs,
       color: tokens.colors.textSecondary,
       textAlign: 'center',
-      fontWeight: tokens.typography.fontWeight.light,
     },
   });
 
@@ -67,8 +64,8 @@ export const BinCard: React.FC<BinCardProps> = ({
         size={32} 
         style={[styles.icon, { color: bin.color || tokens.colors.accent }]} 
       />
-      <Text style={styles.name}>{bin.name}</Text>
-      <Text style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
+      <Text variant="subtitle" style={styles.name}>{bin.name}</Text>
+      <Text variant="caption" style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
     </TouchableOpacity>
   );
 }; 
