@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   View,
   ScrollView,
@@ -7,20 +6,20 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons , MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
 import type { NavigationProp } from '../../../navigation/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { Card, CardHeader, CardContent, CardFooter } from '../../../components/ui/Card';
+import { Card, CardContent } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
-import { Heading, Caption, Text } from '../../../components/ui/Text';
+import { Heading, Text } from '../../../components/ui/Text';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { TagChip } from '../../../components/ui/TagChip';
 import { apiService } from '../../../services/api';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Define the AIInsight type
 type AIInsight = {
@@ -272,7 +271,7 @@ export const AIToolsScreen: React.FC = () => {
                   {item.relatedThoughtmarks.map((thoughtmarkId: number, idx: number) => (
                     <TouchableOpacity
                       key={idx}
-                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
+                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId} as never)}
                       style={{
                         backgroundColor: tokens.colors.accent + '20',
                         paddingHorizontal: tokens.spacing.sm,
@@ -281,8 +280,6 @@ export const AIToolsScreen: React.FC = () => {
                         marginRight: tokens.spacing.xs,
                         marginBottom: tokens.spacing.xs,
                       }}
-                      accessibilityRole="button"
-                      accessibilityLabel={`View thoughtmark ${thoughtmarkId}`}
                     >
                       <Text style={{ color: tokens.colors.accent, fontSize: 12 }}>
                         #{thoughtmarkId}
@@ -305,8 +302,6 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => navigation.goBack()}
-            accessibilityRole="button"
-            accessibilityLabel="Go back"
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
@@ -347,8 +342,6 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
             onPress={() => navigation.navigate('Subscribe' as never)}
-            accessibilityRole="button"
-            accessibilityLabel="Upgrade to Premium"
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
             <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
@@ -367,8 +360,6 @@ export const AIToolsScreen: React.FC = () => {
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
-          accessibilityRole="button"
-          accessibilityLabel="Go back"
         >
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
@@ -384,7 +375,7 @@ export const AIToolsScreen: React.FC = () => {
         {/* AI Insights */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
           <CardContent>
-            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>AI Insights</Heading>
+            <Heading><Text>AI Insights</Text></Heading>
             <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
               Get a summary of your recent thoughtmarks, trends, and patterns discovered by AI.
             </Text>
@@ -411,7 +402,7 @@ export const AIToolsScreen: React.FC = () => {
         {/* Smart Sorting */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
           <CardContent>
-            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Smart Sorting</Heading>
+            <Heading><Text>Smart Sorting</Text></Heading>
             <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
               Let AI automatically organize your thoughtmarks into the most relevant bins.
             </Text>
@@ -438,7 +429,7 @@ export const AIToolsScreen: React.FC = () => {
         {/* AI Recommendations */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
           <CardContent>
-            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>AI Recommendations</Heading>
+            <Heading><Text>AI Recommendations</Text></Heading>
             <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
               Get personalized suggestions for next actions, topics, or organization improvements.
             </Text>
@@ -465,7 +456,7 @@ export const AIToolsScreen: React.FC = () => {
         {/* Learning Resources */}
         <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
           <CardContent>
-            <Heading level={2} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Learning Resources</Heading>
+            <Heading><Text>Learning Resources</Text></Heading>
             <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
               Discover personalized learning materials and resources based on your thoughtmarks.
             </Text>

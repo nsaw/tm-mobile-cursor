@@ -1,76 +1,84 @@
-import React from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { colors, spacing, typography } from '../../../theme/theme';
-import { designTokens } from '../../../theme/tokens';
+
+import { useTheme } from '../../../theme/ThemeProvider';
 
 interface AIToolsCardProps {
   onPress: () => void;
-  isPremium?: boolean;
-  title: string;
-  description: string;
+  title?: string;
+  subtitle?: string;
+  icon?: string;
 }
 
 export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   onPress,
-  isPremium = false,
-  title,
-  description,
+  title = "AI TOOLS",
+  subtitle = "Generate insights and suggestions",
+  icon = "crown",
 }) => {
+  const { tokens, spacing } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'transparent',
+      borderRadius: 12,
+      paddingVertical: spacing.cardPaddingVertical,
+      paddingLeft: spacing.cardPaddingHorizontal,
+      paddingRight: spacing.cardPaddingHorizontal,
+      marginHorizontal: 0,
+      marginTop: spacing.sectionHeaderMarginBottom,
+      marginBottom: spacing.cardMarginBottom,
+      borderWidth: 0.25,
+      borderColor: '#FFD700',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      shadowColor: '#FFD700',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    content: {
+      flex: 1,
+      marginRight: spacing.iconMarginRight,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    title: {
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: tokens.typography.fontWeight.semibold,
+      color: '#FFD700',
+      marginBottom: spacing.textMarginBottom,
+      textTransform: 'uppercase',
+      marginTop: 0,
+      marginLeft: 0,
+    },
+    subtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: tokens.typography.fontWeight.normal,
+      color: tokens.colors.textSecondary,
+      lineHeight: 16,
+    },
+    crownIcon: {
+      color: '#FFD700',
+    },
+  });
+
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      activeOpacity={0.7}
-      accessibilityRole="button"
-      accessibilityLabel={`AI tools card: ${title}`}
-    >
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="AI Tools">
       <View style={styles.content}>
-        <View style={styles.leftContent}>
-          <MaterialCommunityIcons name="crown-outline" size={32} color="rgba(255, 221, 0, 0.6)" />
-          <Text style={styles.title}>AI TOOLS</Text>
-          {isPremium && (
-            <Ionicons name="diamond" size={21} color="rgba(252, 211, 77, 0.6)" />
-          )}
+        <View>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-        <Ionicons name="arrow-forward" size={27} color="rgba(252, 211, 77, 0.6)" />
       </View>
+      <MaterialCommunityIcons name="crown" size={20} style={styles.crownIcon} />
     </TouchableOpacity>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'transparent',
-    borderRadius: 11,
-    paddingVertical: spacing.md * 0.7,
-    paddingHorizontal: spacing.lg * 1.34,
-    borderWidth: 3,
-    borderColor: 'rgba(255, 221, 0, 0.25)',
-    minHeight: 75,
-  },
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  leftContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 18,
-    color: 'rgba(255, 221, 0, 0.7)',
-    fontWeight: '700',
-    marginLeft: spacing.sm * 1.34,
-    marginRight: spacing.xs * 1.34,
-    textTransform: 'uppercase',
-    fontFamily: designTokens.typography.fontFamily.heading,
-  },
-}); 
+}; 

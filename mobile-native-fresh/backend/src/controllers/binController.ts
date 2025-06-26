@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
+import { eq } from 'drizzle-orm';
+
 import { db } from '../db';
 import { bins } from '../db/schema';
-import { eq } from 'drizzle-orm';
 
 export const binController = {
   async getBins(req: Request, res: Response) {

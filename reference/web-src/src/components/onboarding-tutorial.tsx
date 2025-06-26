@@ -567,7 +567,7 @@ function OnboardingTutorialLegacy({ isOpen, onClose }: OnboardingTutorialProps) 
               </motion.div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
       )}
 
       {/* Floating navigation for tooltip mode */}
@@ -616,7 +616,6 @@ function OnboardingTutorialLegacy({ isOpen, onClose }: OnboardingTutorialProps) 
             {currentStep === tutorialSteps.length - 1 ? "Finish" : "Next"}
             <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
-
 
         </motion.div>
       )}

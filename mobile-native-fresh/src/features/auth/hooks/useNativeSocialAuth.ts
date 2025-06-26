@@ -1,9 +1,10 @@
 import * as Google from 'expo-auth-session/providers/google';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { useEffect } from 'react';
-import { auth, GoogleAuthProvider, OAuthProvider } from '../../../config/firebase';
 import Constants from 'expo-constants';
 import { signInWithCredential } from 'firebase/auth';
+
+import { auth, GoogleAuthProvider, OAuthProvider } from '../../../config/firebase';
 
 // Get client IDs from app.json extra
 const ANDROID_CLIENT_ID = Constants.expoConfig?.extra?.googleAndroidClientId;

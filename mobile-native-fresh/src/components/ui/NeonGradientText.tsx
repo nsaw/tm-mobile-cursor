@@ -1,60 +1,52 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, Text, StyleSheet } from 'react-native';
-import { colors, typography } from '../../theme/theme';
+import React from 'react';
+import { StyleSheet, TextStyle } from 'react-native';
+
+import { useTheme } from '../../theme/ThemeProvider';
+import { Text } from './Text';
 
 interface NeonGradientTextProps {
-  children: string;
-  style?: any;
+  children: React.ReactNode;
+  style?: TextStyle;
+  variant?: 'tagline' | 'body' | 'heading' | 'title' | 'subtitle' | 'caption' | 'muted';
+  numberOfLines?: number;
 }
 
 export const NeonGradientText: React.FC<NeonGradientTextProps> = ({ 
   children, 
-  style 
+  style,
+  variant = 'tagline',
+  numberOfLines
 }) => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
+  const { typography } = useTheme();
 
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.timing(animatedValue, {
-        toValue: 1,
-        duration: 4000, // 4 seconds to match the original CSS animation
-        useNativeDriver: false,
-      })
-    );
-    animation.start();
-
-    return () => animation.stop();
-  }, [animatedValue]);
-
-  const gradientColors = ['#C6D600', '#00FFFF', '#FF00FF', '#C6D600'];
-  
-  const interpolatedColor = animatedValue.interpolate({
-    inputRange: [0, 0.33, 0.66, 1],
-    outputRange: gradientColors,
-  });
+  const neonStyle: TextStyle = {
+    ...typography.tagline, // Use tagline variant from new typography tokens
+    color: '#C6D600',
+    // Remove glow effects for tagline variant
+    // Gradient direction: 45 degrees (start: 0,0 to end: 1,1)
+    ...style,
+  };
 
   return (
-    <Animated.Text
-      style={[
-        styles.neonText,
-        {
-          color: interpolatedColor,
-        },
-        style,
-      ]}
+    <Text
+      variant={variant}
+      style={neonStyle}
+      numberOfLines={numberOfLines}
     >
       {children}
-    </Animated.Text>
+    </Text>
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   neonText: {
-    fontSize: 22, // Increased from 19 to 22 for better readability
-    fontWeight: '700',
-    fontFamily: 'Ubuntu',
+    fontSize: tokens.typography.fontSize.sm, // Use tagline variant size
+    fontWeight: tokens.typography.fontWeight.medium, // Medium weight for tagline
+    fontFamily: tokens.typography.fontFamily.body,
+    color: '#C6D600', // Use the accent color directly
     textShadowColor: '#C6D600',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 11, // 8 * 1.34
+    textShadowOffset: { width: 1, height: 1 }, // 45deg angle (1,1)
+    textShadowRadius: 2,
+    letterSpacing: 0.2,
   },
 }); 

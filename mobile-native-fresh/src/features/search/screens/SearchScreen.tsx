@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -9,10 +7,12 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { colors, spacing, typography } from '../../../theme/theme';
+
+import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../home/components/ThoughtmarkCard';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { useAuth } from '../../auth/hooks/useAuth';
@@ -41,7 +41,9 @@ export const SearchScreen: React.FC = () => {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const { showVoiceRecorder } = useVoiceRecorder();
+  const { tokens } = useTheme();
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
+  const styles = getStyles(tokens);
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -206,17 +208,17 @@ export const SearchScreen: React.FC = () => {
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Ionicons name="search" size={20} color={colors.subtext} style={styles.searchIcon} />
+          <Ionicons name="search" size={20} color={tokens.colors.textSecondary} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search thoughtmarks, tags, or content..."
-            placeholderTextColor={colors.subtext}
+            placeholderTextColor={tokens.colors.textSecondary}
             value={searchQuery}
             onChangeText={handleSearch}
             autoFocus
           />
           {isSearching && (
-            <ActivityIndicator size="small" color={colors.primary} style={styles.searchSpinner} />
+            <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.searchSpinner} />
           )}
         </View>
 
@@ -225,15 +227,13 @@ export const SearchScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
             onPress={() => setUseAISearch(!useAISearch)}
-            accessibilityRole="button"
-            accessibilityLabel={`${useAISearch ? 'Disable' : 'Enable'} AI enhanced search`}
           >
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
               size={16} 
-              color={useAISearch ? colors.primary : colors.subtext} 
+              color={useAISearch ? tokens.colors.accent : tokens.colors.textSecondary} 
             />
-            <Text style={[styles.aiToggleText, { color: useAISearch ? colors.primary : colors.subtext }]}>
+            <Text style={[styles.aiToggleText, { color: useAISearch ? tokens.colors.accent : tokens.colors.textSecondary }]}>
               AI Enhanced
             </Text>
           </TouchableOpacity>
@@ -251,7 +251,7 @@ export const SearchScreen: React.FC = () => {
         
         {searchQuery && !isSearching && searchResults.length === 0 && (
           <View style={styles.noResults}>
-            <Ionicons name="search" size={48} color={colors.subtext} />
+            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
             <Text style={styles.noResultsTitle}>No results found</Text>
             <Text style={styles.noResultsSubtitle}>
               Try searching with different keywords or check your spelling
@@ -261,7 +261,7 @@ export const SearchScreen: React.FC = () => {
 
         {!searchQuery && (
           <View style={styles.initialState}>
-            <Ionicons name="search" size={48} color={colors.subtext} />
+            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
             <Text style={styles.initialStateTitle}>Search your thoughtmarks</Text>
             <Text style={styles.initialStateSubtitle}>
               Search by title, content, or tags to find what you're looking for
@@ -280,9 +280,9 @@ export const SearchScreen: React.FC = () => {
                       disabled={isGeneratingSuggestions}
                     >
                       {isGeneratingSuggestions ? (
-                        <ActivityIndicator size="small" color={colors.primary} />
+                        <ActivityIndicator size="small" color={tokens.colors.accent} />
                       ) : (
-                        <Ionicons name="refresh" size={16} color={colors.primary} />
+                        <Ionicons name="refresh" size={16} color={tokens.colors.accent} />
                       )}
                     </Button>
                   </View>
@@ -293,10 +293,8 @@ export const SearchScreen: React.FC = () => {
                         key={index}
                         style={styles.suggestionItem}
                         onPress={() => handleSuggestionPress(suggestion)}
-                        accessibilityRole="button"
-                        accessibilityLabel={`Search for ${suggestion.query}`}
                       >
-                        <Ionicons name="bulb-outline" size={16} color={colors.primary} />
+                        <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
                         <Text style={styles.suggestionReason}>{suggestion.reason}</Text>
                       </TouchableOpacity>
@@ -319,8 +317,6 @@ export const SearchScreen: React.FC = () => {
                     <TouchableOpacity
                       key={index}
                       onPress={() => handleRecentSearchPress(query)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`Search for ${query}`}
                     >
                       <TagChip
                         tag={query}
@@ -362,141 +358,143 @@ export const SearchScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens.colors.background,
   },
   searchContainer: {
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.md,
+    paddingHorizontal: tokens.spacing.lg,
+    marginBottom: tokens.spacing.md,
   },
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.card,
-    borderRadius: spacing.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    backgroundColor: tokens.colors.surface,
+    borderRadius: tokens.spacing.md,
+    paddingHorizontal: tokens.spacing.md,
+    paddingVertical: tokens.spacing.sm,
     borderWidth: 1,
-    borderColor: colors.border,
-    marginBottom: spacing.sm,
+    borderColor: tokens.colors.border,
+    marginBottom: tokens.spacing.sm,
   },
   searchInput: {
     flex: 1,
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-    marginLeft: spacing.sm,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.text,
+    marginLeft: tokens.spacing.sm,
   },
   searchIcon: {
-    marginRight: spacing.sm,
+    marginRight: tokens.spacing.sm,
   },
   searchSpinner: {
-    marginLeft: spacing.sm,
+    marginLeft: tokens.spacing.sm,
   },
   aiToggle: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.sm,
-    backgroundColor: colors.card,
+    paddingHorizontal: tokens.spacing.sm,
+    paddingVertical: tokens.spacing.xs,
+    borderRadius: tokens.spacing.sm,
+    backgroundColor: tokens.colors.surface,
   },
   aiToggleActive: {
-    backgroundColor: colors.primary + '20',
+    backgroundColor: tokens.colors.accent + '20',
   },
   aiToggleText: {
     fontSize: 12,
     fontWeight: '500',
-    marginLeft: spacing.xs,
+    marginLeft: tokens.spacing.xs,
+    color: tokens.colors.text,
   },
   resultsContainer: {
     flex: 1,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: tokens.spacing.lg,
   },
   resultsCount: {
-    fontSize: typography.body.fontSize * 0.8,
-    color: colors.subtext,
-    marginBottom: spacing.md,
+    fontSize: tokens.typography.fontSize.body * 0.8,
+    color: tokens.colors.textSecondary,
+    marginBottom: tokens.spacing.md,
   },
   noResults: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: spacing.xl,
+    paddingVertical: tokens.spacing.xl,
   },
   noResultsTitle: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens.typography.fontSize.heading,
     fontWeight: '600',
-    color: colors.text,
-    marginTop: spacing.md,
-    marginBottom: spacing.sm,
+    color: tokens.colors.text,
+    marginTop: tokens.spacing.md,
+    marginBottom: tokens.spacing.sm,
   },
   noResultsSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: tokens.spacing.lg,
   },
   initialState: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: spacing.xl,
+    paddingVertical: tokens.spacing.xl,
   },
   initialStateTitle: {
-    fontSize: typography.heading.fontSize,
+    fontSize: tokens.typography.fontSize.heading,
     fontWeight: '600',
-    color: colors.text,
-    marginTop: spacing.md,
-    marginBottom: spacing.sm,
+    color: tokens.colors.text,
+    marginTop: tokens.spacing.md,
+    marginBottom: tokens.spacing.sm,
   },
   initialStateSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.xl,
+    paddingHorizontal: tokens.spacing.lg,
+    marginBottom: tokens.spacing.xl,
   },
   suggestionsCard: {
-    marginBottom: spacing.lg,
+    marginBottom: tokens.spacing.lg,
     width: '100%',
   },
   suggestionsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   suggestionsTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens.typography.fontSize.lg,
     fontWeight: '600',
-    color: colors.text,
+    color: tokens.colors.text,
+    marginBottom: tokens.spacing.sm,
   },
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingVertical: spacing.sm,
+    paddingVertical: tokens.spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomColor: tokens.colors.border,
   },
   suggestionText: {
     flex: 1,
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-    marginLeft: spacing.sm,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.text,
+    marginLeft: tokens.spacing.sm,
     fontWeight: '500',
   },
   suggestionReason: {
-    fontSize: typography.body.fontSize * 0.8,
-    color: colors.subtext,
-    marginLeft: spacing.sm,
-    marginTop: spacing.xs,
+    fontSize: tokens.typography.fontSize.body * 0.8,
+    color: tokens.colors.textSecondary,
+    marginLeft: tokens.spacing.sm,
+    marginTop: tokens.spacing.xs,
   },
   suggestionsEmpty: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
     fontStyle: 'italic',
   },
@@ -504,17 +502,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   recentTitle: {
-    fontSize: typography.subheading.fontSize,
+    fontSize: tokens.typography.fontSize.lg,
     fontWeight: '600',
-    color: colors.text,
-    marginBottom: spacing.sm,
+    color: tokens.colors.text,
+    marginBottom: tokens.spacing.sm,
   },
   recentTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: tokens.spacing.sm,
   },
   resultsList: {
-    paddingBottom: spacing.xl,
+    paddingBottom: tokens.spacing.xl,
   },
 }); 

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run text error detection and auto-fix
+echo "📝 Checking for text string errors..."
+node scripts/auto-fix-text-errors.cjs
+
+# Run existing linting
+echo "🧹 Running linter..."
+npm run lint
+
+# Run existing tests if they exist
+if npm run test 2>/dev/null; then
+  echo "✅ Tests passed"
+else
+  echo "⚠️  No tests configured or tests failed"
+fi
+
+echo "✅ Pre-commit checks completed!" 

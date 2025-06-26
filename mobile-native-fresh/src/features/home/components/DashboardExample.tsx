@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
 import { DashboardScreen } from '../screens/DashboardScreen';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 
 // Mock navigation for the example
 const mockNavigation = {
@@ -14,34 +15,38 @@ const mockNavigation = {
 };
 
 export const DashboardExample: React.FC = () => {
+  const { tokens } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+    },
+    header: {
+      fontFamily: tokens.typography.fontFamily.heading,
+      fontSize: tokens.typography.fontSize.heading,
+      color: tokens.colors.text ?? '#FFFFFF',
+      textAlign: 'center',
+      padding: tokens.spacing.lg,
+    },
+    body: {
+      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary ?? '#808080',
+      textAlign: 'center',
+      paddingHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
+    },
+  });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dashboard Example</Text>
-      <Text style={styles.subtitle}>
-        This demonstrates the complete dashboard with all components
+      <Text style={styles.header}>Dashboard Example</Text>
+      <Text style={styles.body}>
+        This is an example dashboard component. Replace this with your actual dashboard content.
       </Text>
       
       <DashboardScreen navigation={mockNavigation} />
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  title: {
-    ...typography.heading,
-    color: colors.text,
-    textAlign: 'center',
-    padding: spacing.lg,
-  },
-  subtitle: {
-    ...typography.body,
-    color: colors.subtext,
-    textAlign: 'center',
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.md,
-  },
-}); 
+}; 

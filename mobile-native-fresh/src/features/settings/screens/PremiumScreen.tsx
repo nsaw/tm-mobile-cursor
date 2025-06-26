@@ -1,26 +1,61 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Crown } from 'lucide-react-native';
+
 import { useTheme } from '../../../theme/ThemeProvider';
-import { Text, Heading, Caption } from '../../../components/ui/Text';
+import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PremiumScreen: React.FC = () => {
+export const PremiumScreen: React.FC = () => {
   const { tokens } = useTheme();
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: tokens.colors.background, padding: tokens.spacing.xl }}>
-      <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: '#FFD70033', alignItems: 'center', justifyContent: 'center', marginBottom: tokens.spacing.lg }}>
-        <MaterialCommunityIcons name="crown-outline" size={36} color="#FFD700" />
-      </View>
-      <Heading level={1} style={{ color: tokens.colors.text, marginBottom: tokens.spacing.sm }}>Premium Features</Heading>
-      <Caption style={{ color: tokens.colors.textMuted, textAlign: 'center', marginBottom: tokens.spacing.lg }}>
-        Unlock advanced AI, unlimited bins, priority support, and more.
-      </Caption>
-      <Button style={{ width: 180, backgroundColor: '#FFD700' }}>
-        <Text style={{ color: tokens.colors.background, fontWeight: '700', textAlign: 'center' }}>Upgrade Now</Text>
-      </Button>
-    </View>
-  );
-};
 
-export default PremiumScreen; 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.background,
+      padding: tokens.spacing.xl,
+    },
+    iconContainer: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: tokens.colors.accentMuted,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    title: {
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+    },
+    subtitle: {
+      color: tokens.colors.textMuted,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    button: {
+      width: 180,
+      backgroundColor: tokens.colors.accent,
+    },
+  });
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={styles.container}>
+        <View style={styles.iconContainer}>
+          <Crown size={32} color={tokens.colors.background} />
+        </View>
+        
+        <Heading><Text>Premium Features</Text></Heading>
+        <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
+        
+        <Button style={styles.button}>
+          <Text style={{ color: tokens.colors.background, fontWeight: '700', textAlign: 'center' }}>Upgrade Now</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
+  );
+}; 

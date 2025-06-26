@@ -14,13 +14,27 @@ import {
   Ubuntu_500Medium,
   Ubuntu_700Bold
 } from '@expo-google-fonts/ubuntu'
-import { AppNavigator } from './src/navigation/AppNavigator'
-import { ThemeProvider } from './src/theme/ThemeProvider'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+
+import { AppNavigator } from './src/navigation/AppNavigator'
+import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
 // import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
-SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync().catch(() => {
+  /* ignore */
+})
+
+function AppContent() {
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <StatusBar style="light" />
+      <AppNavigator />
+    </SafeAreaView>
+  )
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -76,25 +90,31 @@ export default function App() {
 
   // Once fonts finish loading, hide the splash
   useEffect(() => {
+    const hideSplash = async () => {
+      try {
     if (fontsLoaded) {
-      SplashScreen.hideAsync().catch(() => {
-        /* ignore */
-      })
-    }
-  }, [fontsLoaded])
+          console.log('Fonts loaded, hiding splash screen...');
+          await SplashScreen.hideAsync();
+          console.log('Splash screen hidden successfully');
+        }
+      } catch (error) {
+        console.error('Error hiding splash screen:', error);
+      }
+    };
+
+    hideSplash();
+  }, [fontsLoaded]);
 
   // Don't render anything until fonts are ready
   if (!fontsLoaded) {
-    return null
+    console.log('Fonts not loaded yet, showing splash screen...');
+    return null;
   }
 
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#181818' }}>
-          <StatusBar style="light" />
-          <AppNavigator />
-        </SafeAreaView>
+        <AppContent />
       </ThemeProvider>
     </SafeAreaProvider>
   )

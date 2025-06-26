@@ -28,7 +28,7 @@ export const formatDate = (dateString: string, format: 'relative' | 'short' | 'l
 };
 
 // Text truncation utility
-export const truncateText = (text: string, maxLength: number = 120) => {
+export const truncateText = (text: string, maxLength = 120) => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength).trim() + '...';
 };
@@ -86,7 +86,7 @@ export const sortBy = <T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 
 };
 
 // Color utilities
-export const hexToRgba = (hex: string, alpha: number = 1): string => {
+export const hexToRgba = (hex: string, alpha = 1): string => {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);

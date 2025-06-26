@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { thoughtmarkController } from '../controllers/thoughtmarkController';
 import { authMiddleware } from '../middleware/authMiddleware';
 

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
-import { useTheme } from '../../theme/ThemeProvider';
-import { Button } from '../ui/Button';
-import { Text, Heading, Caption } from '../ui/Text';
-import { Brain, Mic, Lightbulb, Search } from 'lucide-react-native';
+import { Brain, Mic, Search } from 'lucide-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { useTheme } from '../../theme/ThemeProvider';
+import { Button } from '../ui/Button';
+import { Text } from '../ui/Text';
 
 interface OnboardingModalProps {
   visible: boolean;
@@ -15,38 +16,38 @@ interface OnboardingModalProps {
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClose }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const { tokens } = useTheme();
+  const { typography, spacing } = useTheme();
 
   const steps = [
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={90} color="#3B82F6" strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={90} color="#3B82F6" strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
       description: "Enable voice commands like 'Hey Siri, capture thoughtmark' or 'Hey Siri, add to thoughtmarks' from anywhere on your device. You can set this up now or later in Settings.",
-      icon: <Ionicons name="phone-portrait-outline" size={43} color="#60A5FA" />,
+      icon: <Ionicons name="phone-portrait-outline" size={90} color="#60A5FA" />,
     },
     {
       title: 'Organize with Smart Bins',
       description: 'AI automatically categorizes your thoughts into relevant bins. You can also create custom bins for specific projects.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={90} color="#FFD700" />,
     },
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={90} color="#3B82F6" strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
       description: 'Access advanced AI, unlimited bins, priority support, and more.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={90} color="#FFD700" />,
       premium: true,
     },
   ];
@@ -77,52 +78,79 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       accessible={true}
       accessibilityLabel={steps[currentStep].title}
     >
-      <View style={[styles.overlay, { backgroundColor: tokens.colors.background + 'E6' }]}> {/* 90% opacity */}
+      <View style={[styles.overlay, { backgroundColor: '#000000E6' }]}> {/* 90% opacity */}
         <View style={[styles.card, {
-          backgroundColor: tokens.colors.backgroundSecondary,
-          borderRadius: tokens.radius.lg,
-          padding: tokens.spacing.xl,
+          backgroundColor: '#1F2937',
+          borderRadius: 12,
+          padding: spacing.modalPaddingHorizontal,
           maxWidth: 500,
+          minHeight: 400, // Ensure minimum height
         }]}
         >
-          {/* Step Indicator */}
-          <View style={styles.stepHeader}>
-            <View style={[styles.stepCircle, { backgroundColor: '#C6D600' }]}> {/* Accent color */}
-              <Text style={{
-                fontWeight: 'bold',
-                color: '#222',
-                fontSize: 16, // tokens.typography.fontSize.sm * 1.34
-              }}>{currentStep + 1}</Text>
-            </View>
-            <View style={{ flex: 1, marginLeft: tokens.spacing.md }}>
-              <Heading level={1} style={{ color: tokens.colors.text }}>{steps[currentStep].title}</Heading>
-              <Caption style={{ color: tokens.colors.textSecondary }}>{`${currentStep + 1} of ${steps.length}`}</Caption>
-            </View>
+          {/* Centered Heading */}
+          <View style={styles.centeredHeader}>
+            <Text variant="heading" style={{ 
+              marginBottom: 4,
+              textAlign: 'center',
+              color: '#FFFFFF',
+              fontSize: 16,
+              fontWeight: '900',
+              fontFamily: 'Ubuntu_700Bold',
+              letterSpacing: 0.5,
+              textTransform: 'uppercase',
+            }}>
+              {steps[currentStep].title}
+            </Text>
+            <Text style={{
+              ...typography.small,
+              color: '#6B7280',
+              textAlign: 'center',
+              opacity: 0.7,
+            }}>
+              {`${currentStep + 1} of ${steps.length}`}
+            </Text>
           </View>
 
-          {/* Icon */}
-          <View style={styles.iconContainer}>{steps[currentStep].icon}</View>
+          {/* Icon - Enlarged and centered */}
+          <View style={[styles.iconContainer, { 
+            alignSelf: 'center',
+            marginTop: spacing.modalPaddingVertical * 0.5, // Reduced by half
+            marginBottom: spacing.modalPaddingVertical * 0.5, // Reduced by half
+          }]}>
+            {steps[currentStep].icon}
+          </View>
 
-          {/* Description */}
-          <Text align="center" style={{ color: tokens.colors.text, marginBottom: tokens.spacing.lg }}>{steps[currentStep].description}</Text>
+          {/* Description - Increased font size */}
+          <Text 
+            variant="body" 
+            style={{ 
+              marginBottom: spacing.modalPaddingVertical, 
+              textAlign: 'center',
+              paddingVertical: spacing.modalPaddingVertical,
+              ...typography.body,
+              lineHeight: 24, // Improved line height
+            }} 
+            numberOfLines={4}
+          >
+            {steps[currentStep].description}
+          </Text>
 
           {/* Divider/accent below text chunk */}
-          <View style={{ alignItems: 'center', marginBottom: tokens.spacing.lg }}>
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: tokens.colors.accent }} />
+          <View style={{ alignItems: 'center', marginBottom: spacing.modalPaddingVertical }}>
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: '#3B82F6' }} />
           </View>
 
           {/* Progress Dots */}
           <View style={styles.progressDots}>
             {steps.map((_, idx) => (
-              <View
-                key={idx}
-                style={[
+              <View key={idx}>
+                <View style={[
                   styles.dot,
-                  idx === currentStep
-                    ? { backgroundColor: '#C6D600' }
-                    : { backgroundColor: tokens.colors.textMuted },
-                ]}
-              />
+                  {
+                    backgroundColor: idx === currentStep ? '#3B82F6' : '#374151',
+                  }
+                ]} />
+              </View>
             ))}
           </View>
 
@@ -135,63 +163,53 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 borderColor: '#FFD700',
                 borderWidth: 2,
                 backgroundColor: 'transparent',
-                borderRadius: tokens.radius.md,
-                paddingHorizontal: tokens.spacing.xl,
-                marginBottom: tokens.spacing.lg,
+                borderRadius: 8,
+                paddingHorizontal: spacing.modalPaddingHorizontal,
+                marginBottom: spacing.modalPaddingVertical,
                 width: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
               textStyle={{ color: '#FFD700', fontWeight: 'bold' }}
             >
-              Upgrade Now
+              <Text>Upgrade now</Text>
             </Button>
           )}
 
           {/* Navigation Buttons */}
-          <View style={[styles.buttonRow, { gap: tokens.spacing.md }]}> 
+          <View style={[styles.buttonRow, { gap: spacing.buttonPadding }]}> 
             {/* Previous Button */}
             <Button
               variant="ghost"
               onPress={handlePrevious}
               disabled={currentStep === 0}
               style={{ flexDirection: 'row', alignItems: 'center', opacity: currentStep === 0 ? 0.5 : 1 }}
-              textStyle={{ color: tokens.colors.textSecondary, fontWeight: 'bold' }}
-              leftIcon={<Ionicons name="arrow-back" size={27} color={tokens.colors.textSecondary} />}
+              textStyle={{ color: '#6B7280', fontWeight: 'bold' }}
+              leftIcon={<Ionicons name="arrow-back" size={27} color="#6B7280" />}
             >
-              Previous
+              <Text>Previous</Text>
             </Button>
-            {/* Step 6/6: Finish Button */}
+            {/* Next/Finish Button */}
             {steps[currentStep].premium && !isPremium ? (
               <Button
                 onPress={onClose}
-                style={{
-                  backgroundColor: tokens.colors.accent,
-                  borderRadius: tokens.radius.md,
-                  paddingHorizontal: tokens.spacing.xl,
-                }}
-                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
+                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#3B82F6', borderRadius: 8, paddingHorizontal: spacing.modalPaddingHorizontal }}
+                textStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
+                rightIcon={<Ionicons name="checkmark" size={27} color="#FFFFFF" />}
               >
-                Finish
+                <Text>Finish</Text>
               </Button>
             ) : (
               <Button
                 onPress={handleNext}
-                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: tokens.radius.md, paddingHorizontal: tokens.spacing.xl }}
-                textStyle={{ color: tokens.colors.text, fontWeight: 'bold' }}
-                rightIcon={<Ionicons name="arrow-forward" size={27} color={tokens.colors.text} />}
+                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#3B82F6', borderRadius: 8, paddingHorizontal: spacing.modalPaddingHorizontal }}
+                textStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
+                rightIcon={<Ionicons name="arrow-forward" size={27} color="#FFFFFF" />}
               >
-                {currentStep === steps.length - 1 ? 'Get Started' : 'Next'}
+                <Text>{currentStep === steps.length - 1 ? 'Get started' : 'Next'}</Text>
               </Button>
             )}
           </View>
-
-          <Button
-            variant="ghost"
-            onPress={onClose}
-          >
-            Close
-          </Button>
         </View>
       </View>
     </Modal>
@@ -208,40 +226,30 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'stretch',
   },
-  stepHeader: {
-    flexDirection: 'row',
+  centeredHeader: {
     alignItems: 'center',
-    marginBottom: 21, // 16 * 1.34
-  },
-  stepCircle: {
-    width: 48, // 36 * 1.34
-    height: 48, // 36 * 1.34
-    borderRadius: 24, // 18 * 1.34
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  stepCircleText: {
-    fontWeight: 'bold',
+    marginBottom: 24,
   },
   iconContainer: {
     alignItems: 'center',
-    marginBottom: 21, // 16 * 1.34
+    justifyContent: 'center',
+    paddingVertical: 21, // 16 * 1.34
+    marginBottom: 16, // 12 * 1.34
   },
   progressDots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 21, // 16 * 1.34
+    gap: 8,
+    marginBottom: 24,
   },
   dot: {
-    width: 13, // 10 * 1.34
-    height: 13, // 10 * 1.34
-    borderRadius: 7, // 5 * 1.34
-    marginHorizontal: 4, // 3 * 1.34
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 11, // 8 * 1.34
   },
 }); 

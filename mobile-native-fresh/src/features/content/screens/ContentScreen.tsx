@@ -1,19 +1,12 @@
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import {
-  useNavigation,
-  NavigationProp,
-} from '@react-navigation/native';
+
+import { useTheme } from '../../../theme/ThemeProvider';
+import { Text } from '../../../components/ui/Text';
 import { RootStackParamList } from '../../../navigation/types';
-import { colors, spacing, typography } from '../../../theme/theme';
 
 type ContentPage = {
   title: string;
@@ -24,10 +17,60 @@ type ContentPage = {
 };
 
 // tell TS what routes we can navigate to
-type ContentScreenNavigationProp = NavigationProp<RootStackParamList>;
+type ContentScreenNavigationProp = NavigationProp<RootStackParamList, 'Content'>;
 
 export const ContentScreen: React.FC = () => {
   const navigation = useNavigation<ContentScreenNavigationProp>();
+  const { tokens } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background,
+    },
+    content: {
+      padding: tokens.spacing.md,
+    },
+    title: {
+      fontFamily: tokens.typography.fontFamily.heading,
+      fontSize: tokens.typography.fontSize.heading,
+      fontWeight: tokens.typography.fontWeight.bold,
+      marginBottom: tokens.spacing.sm,
+    },
+    description: {
+      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.body,
+      marginBottom: tokens.spacing.lg,
+      color: tokens.colors.textSecondary,
+    },
+    card: {
+      flexDirection: 'row',
+      backgroundColor: tokens.colors.surface,
+      borderRadius: 12,
+      padding: tokens.spacing.md,
+      alignItems: 'flex-start',
+      marginBottom: tokens.spacing.md,
+      elevation: 2,
+    },
+    tag: {
+      marginRight: tokens.spacing.md,
+    },
+    cardTextContainer: {
+      flex: 1,
+    },
+    subtitle: {
+      fontFamily: tokens.typography.fontFamily.heading,
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: tokens.typography.fontWeight.semibold,
+      marginBottom: tokens.spacing.xs,
+      color: tokens.colors.text,
+    },
+    body: {
+      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+    },
+  });
 
   const contentPages: ContentPage[] = [
     {
@@ -70,8 +113,8 @@ export const ContentScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.screenTitle}>Content Management</Text>
-        <Text style={styles.screenSubtitle}>
+        <Text style={styles.title}>Content Management</Text>
+        <Text style={styles.description}>
           Create, organize, and manage your thoughtmarks and bins. Archive and trash are shared spaces for both content types.
         </Text>
 
@@ -81,12 +124,12 @@ export const ContentScreen: React.FC = () => {
             style={styles.card}
             onPress={() => navigation.navigate(page.route as any)}
           >
-            <View style={styles.cardIconContainer}>
+            <View style={styles.tag}>
               <Feather name={page.iconName} size={24} color={page.iconColor} />
             </View>
             <View style={styles.cardTextContainer}>
-              <Text style={styles.cardTitle}>{page.title}</Text>
-              <Text style={styles.cardDescription}>{page.description}</Text>
+              <Text style={styles.subtitle}>{page.title}</Text>
+              <Text style={styles.body}>{page.description}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -94,47 +137,3 @@ export const ContentScreen: React.FC = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  content: {
-    padding: spacing.md,
-  },
-  screenTitle: {
-    ...typography.heading,
-    color: colors.text,
-    marginBottom: spacing.sm,
-  },
-  screenSubtitle: {
-    ...typography.body,
-    color: colors.subtext,
-    marginBottom: spacing.lg,
-  },
-  card: {
-    flexDirection: 'row',
-    backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: spacing.md,
-    alignItems: 'flex-start',
-    marginBottom: spacing.md,
-    elevation: 2,
-  },
-  cardIconContainer: {
-    marginRight: spacing.md,
-  },
-  cardTextContainer: {
-    flex: 1,
-  },
-  cardTitle: {
-    ...typography.subheading,
-    color: colors.text,
-    marginBottom: spacing.xs,
-  },
-  cardDescription: {
-    ...typography.body,
-    color: colors.subtext,
-  },
-});

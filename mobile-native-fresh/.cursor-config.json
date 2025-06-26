@@ -2,25 +2,25 @@
   "defaultAgent": "thoughtmarks-dev",
   "agents": {
     "thoughtmarks-dev": {
-      "name": "🧠 Thoughtmarks Dev",
+      "name": "\ud83e\udde0 Thoughtmarks Dev",
       "model": "gpt-4",
       "temperature": 0.3,
       "prompt": "You are the lead developer of Thoughtmarks, a mobile-first, cross-platform cognitive bookmarking app built with React, React Native, TypeScript, Tailwind, and GPT-powered features. The app uses a fluid visual theme, prioritizes clarity, accessibility, and smooth mobile interactions. Always favor readable, modular code. Avoid inline styles and verbose logic. Use Tailwind CSS and React Native idioms where appropriate. The UI includes gesture-driven modals, voice input, and swipe-based cards. When vague direction is given, interpret it visually, not literally. Avoid overengineering."
     },
     "refactor-ui-agent": {
-      "name": "🧼 UI Refactor Agent",
+      "name": "\ud83e\uddfc UI Refactor Agent",
       "model": "gpt-4",
       "temperature": 0.2,
-      "prompt": "You’re cleaning up Thoughtmarks UI code. Your goal is to improve clarity, consistency, and layout polish. Eliminate unnecessary code. Apply the fluid theme and improve visual rhythm without changing layout unless broken. Always use Tailwind CSS where applicable, and maintain cross-platform compatibility. Never break gesture or accessibility features."
+      "prompt": "You\u2019re cleaning up Thoughtmarks UI code. Your goal is to improve clarity, consistency, and layout polish. Eliminate unnecessary code. Apply the fluid theme and improve visual rhythm without changing layout unless broken. Always use Tailwind CSS where applicable, and maintain cross-platform compatibility. Never break gesture or accessibility features."
     },
     "swiftui-migration-consultant": {
-      "name": "📱 SwiftUI Consultant",
+      "name": "\ud83d\udcf1 SwiftUI Consultant",
       "model": "gpt-4",
       "temperature": 0.4,
       "prompt": "You are consulting on migrating parts of a React Native app (Thoughtmarks) to SwiftUI where necessary (e.g., native wrappers or performance bottlenecks). Provide idiomatic SwiftUI code with built-in accessibility and animation support. Only suggest migration when there's a meaningful benefit. Otherwise, recommend keeping the feature in React Native."
     },
     "quick-edit-agent": {
-      "name": "⚡ Quick Fixes (Mini)",
+      "name": "\u26a1 Quick Fixes (Mini)",
       "model": "gpt-4-mini-high",
       "temperature": 0.25,
       "prompt": "You are a fast, accurate code assistant for Thoughtmarks. Fix bugs, add missing types, comment functions, and clean up obvious issues. Do not rewrite architecture or styling unless asked. Stick to small, precise changes. Prioritize Tailwind, TypeScript, and React Native compatibility."
@@ -28,5 +28,51 @@
   },
   "theme": "cursor-dark",
   "useGitHubCopilot": true,
-  "autoSave": true
+  "autoSave": true,
+  "designSystem": {
+    "tokensFile": "src/theme/designTokens.ts",
+    "variantsFile": "src/theme/variants.ts",
+    "themeProvider": "src/theme/ThemeProvider.tsx",
+    "uiComponentsPath": "src/components/ui/"
+  },
+  "style": {
+    "enforceTokenUsage": true,
+    "disallowInlineOverrides": true,
+    "fallbackSafeAccess": true,
+    "guardTokenAccess": {
+      "disallowGlobalTokenRefs": true,
+      "allowedPattern": "^tokens\\?.[a-z]+\\?.[a-z]+(\\s|\\)|\\]|$)"
+    }
+  },
+  "consoleWatch": {
+    "autoFixPatterns": [
+      "ReferenceError: Property 'tokens' doesn't exist",
+      "Cannot read property .* of undefined",
+      "Text strings must be rendered within a <Text>"
+    ],
+    "autoContinue": true
+  },
+  "devServer": {
+    "suppressRestartOn": [
+      "src/theme/*.ts",
+      "src/utils/*.ts",
+      "src/types/*.ts"
+    ],
+    "applySilently": true,
+    "onReloadHang": "background"
+  },
+  "tasks": {
+    "overhaul-ui-system": {
+      "autoCommit": true,
+      "checkpoints": [
+        "Visual Hierarchy",
+        "Layout Simplification",
+        "Native Visual Language",
+        "Motion + UX Feedback",
+        "Readability + Tag UX",
+        "Native Optimization",
+        "Final Cleanup"
+      ]
+    }
+  }
 }

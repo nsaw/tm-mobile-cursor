@@ -1,59 +1,169 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView,
   Alert,
-  Share,
 } from 'react-native';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { useTheme } from '../../../theme/ThemeProvider';
+import { NavigationProp, RouteProp } from '../../../navigation/types';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import type { Thoughtmark } from '../../../types';
+import { useAuth } from '../../auth/hooks/useAuth';
 
-export const DetailScreen = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { thoughtmarkId } = route.params as { thoughtmarkId: number };
-  const { thoughtmarks, deleteThoughtmark } = useThoughtmarks();
+export const DetailScreen: React.FC = () => {
+  const { tokens } = useTheme();
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
+  const { thoughtmarkId } = route.params;
+  const { thoughtmarks, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
-  
-  const thoughtmark = thoughtmarks.find(t => t.id === thoughtmarkId);
-  const bin = thoughtmark ? bins.find(b => b.id === thoughtmark.binId) : null;
+  const { user } = useAuth();
 
-  const handleBack = () => {
-    navigation.goBack();
+  const thoughtmark = thoughtmarks.find(t => t.id === parseInt(thoughtmarkId));
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+    },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+      borderBottomWidth: 1,
+      borderBottomColor: tokens.colors.border ?? '#000',
+    },
+    backButton: {
+      padding: tokens.spacing.sm,
+    },
+    headerTitle: {
+      fontSize: tokens.typography.fontSize.heading,
+      fontFamily: tokens.typography.fontFamily.heading,
+      fontWeight: tokens.typography.fontWeight.bold,
+      color: tokens.colors.text ?? '#000',
+      marginBottom: tokens.spacing.md,
+    },
+    headerActions: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    actionButton: {
+      padding: tokens.spacing.sm,
+      marginLeft: tokens.spacing.xs,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+    },
+    title: {
+      fontSize: tokens.typography.fontSize.body,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.colors.text ?? '#000',
+      marginBottom: tokens.spacing.md,
+    },
+    contentText: {
+      fontSize: tokens.typography.fontSize.body,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.colors.textSecondary ?? '#000',
+      marginLeft: tokens.spacing.xs,
+      marginBottom: tokens.spacing.md,
+    },
+    tagsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      backgroundColor: tokens.colors.surface ?? '#000',
+      paddingHorizontal: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.xs,
+      borderRadius: tokens.spacing.sm,
+      marginRight: tokens.spacing.xs,
+      marginBottom: tokens.spacing.xs,
+    },
+    tagText: {
+      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.xs,
+      color: tokens.colors.textSecondary ?? '#000',
+    },
+    contentCard: {
+      backgroundColor: tokens.colors.surface ?? '#000',
+      padding: tokens.spacing.md,
+      borderRadius: tokens.spacing.md,
+      marginBottom: tokens.spacing.lg,
+    },
+    contentTitle: {
+      fontSize: tokens.typography.fontSize.body,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.colors.text ?? '#000',
+      marginLeft: tokens.spacing.sm,
+    },
+    contentSubtitle: {
+      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary ?? '#000',
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+      borderTopWidth: 1,
+      borderTopColor: tokens.colors.border ?? '#000',
+    },
+    footerButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: tokens.spacing.sm,
+    },
+    footerButtonText: {
+      fontSize: tokens.typography.fontSize.body,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.colors.danger ?? '#EF4444',
+      marginLeft: tokens.spacing.xs,
+    },
+    footerButtonText2: {
+      fontSize: tokens.typography.fontSize.body,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.colors.danger ?? '#EF4444',
+    },
+    spacer: {
+      marginTop: tokens.spacing.xl,
+    },
+  });
+
+  if (!thoughtmark) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Thoughtmark not found</Text>
+      </View>
+    );
+  }
+
+  const handlePin = async () => {
+    try {
+      await updateThoughtmark(thoughtmark.id, { isPinned: !thoughtmark.isPinned });
+    } catch (error) {
+      Alert.alert('Error', 'Failed to update thoughtmark');
+    }
   };
 
   const handleEdit = () => {
-    if (thoughtmark?.id) {
-      (navigation as any).navigate('CreateThoughtmark', { 
-        thoughtmarkId: thoughtmark.id 
-      });
-    }
+    navigation.navigate('EditThoughtmark', { thoughtmarkId: thoughtmark.id.toString() });
   };
 
-  const handleShare = async () => {
-    if (!thoughtmark) return;
-    
-    try {
-      await Share.share({
-        message: `${thoughtmark.title}\n\n${thoughtmark.content}`,
-        title: thoughtmark.title,
-      });
-    } catch (error) {
-      Alert.alert('Error', 'Failed to share thoughtmark');
-    }
+  const handleShare = () => {
+    // Implement share functionality
+    Alert.alert('Share', 'Share functionality coming soon');
   };
 
-  const handleDelete = () => {
-    if (!thoughtmark) return;
-    
+  const handleDelete = async () => {
     Alert.alert(
       'Delete Thoughtmark',
       'Are you sure you want to delete this thoughtmark?',
@@ -75,197 +185,86 @@ export const DetailScreen = () => {
     );
   };
 
-  if (!thoughtmark) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.errorText}>Thoughtmark not found</Text>
-      </View>
-    );
-  }
+  const getBinName = (binId: number) => {
+    const bin = bins.find(b => b.id === binId);
+    return bin?.name || 'Unknown Bin';
+  };
 
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.headerButton} onPress={handleBack}>
-          <Ionicons name="arrow-back" size={24} color={colors.text} />
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
         </TouchableOpacity>
-        
+        <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         <View style={styles.headerActions}>
-          {thoughtmark.isPinned && (
-            <Ionicons name="pin" size={20} color={colors.primary} />
-          )}
-          
-          <TouchableOpacity style={styles.headerButton} onPress={handleEdit}>
-            <Ionicons name="create-outline" size={24} color={colors.text} />
+          <TouchableOpacity style={styles.actionButton} onPress={handlePin}>
+            <Ionicons name="pin" size={20} color={tokens.colors.accent ?? '#000'} />
           </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.headerButton} onPress={handleShare}>
-            <Ionicons name="share-outline" size={24} color={colors.text} />
+          <TouchableOpacity style={styles.actionButton} onPress={handleEdit}>
+            <Ionicons name="create-outline" size={24} color={tokens.colors.text ?? '#000'} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
+            <Ionicons name="share-outline" size={24} color={tokens.colors.text ?? '#000'} />
           </TouchableOpacity>
         </View>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>{thoughtmark.title || 'Untitled'}</Text>
-        
-        {bin && (
-          <View style={styles.binInfo}>
-            <Ionicons name="folder-outline" size={16} color={colors.subtext} />
-            <Text style={styles.binName}>{bin.name}</Text>
+      {/* Content */}
+      <ScrollView style={styles.content}>
+        {/* Bin Info */}
+        <View style={styles.contentCard}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="folder-outline" size={16} color={tokens.colors.textSecondary ?? '#000'} />
+            <Text style={styles.contentTitle}>Bin: {getBinName(thoughtmark.binId)}</Text>
           </View>
-        )}
-        
+        </View>
+
+        {/* Title */}
+        <Text style={styles.title}>{thoughtmark.title}</Text>
+
+        {/* Content */}
+        <View style={styles.contentCard}>
+          <Text style={styles.contentSubtitle}>{thoughtmark.content}</Text>
+        </View>
+
+        {/* Tags */}
         {thoughtmark.tags && thoughtmark.tags.length > 0 && (
-          <View style={styles.tagsContainer}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: tokens.spacing.lg }}>
             {thoughtmark.tags.map((tag, index) => (
-              <View key={index} style={styles.tag}>
+              <View key={index} style={styles.tagsContainer}>
                 <Text style={styles.tagText}>#{tag}</Text>
               </View>
             ))}
           </View>
         )}
-        
-        <Text style={styles.contentText}>{thoughtmark.content || 'No content'}</Text>
-        
+
+        {/* Task Status */}
         {thoughtmark.isTask && (
-          <View style={styles.taskInfo}>
-            <Ionicons 
-              name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
-              size={20} 
-              color={thoughtmark.isCompleted ? colors.primary : colors.subtext} 
-            />
-            <Text style={styles.taskText}>
-              {thoughtmark.isCompleted ? 'Completed' : 'Pending'}
-            </Text>
-            {thoughtmark.dueDate && (
-              <Text style={styles.dueDate}>
-                Due: {(() => {
-                  try {
-                    return new Date(thoughtmark.dueDate).toLocaleDateString();
-                  } catch (error) {
-                    return 'Invalid date';
-                  }
-                })()}
+          <View style={styles.contentCard}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons
+                name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"}
+                size={20}
+                color={thoughtmark.isCompleted ? tokens.colors.accent ?? '#000' : tokens.colors.textSecondary ?? '#000'}
+              />
+              <Text style={styles.contentTitle}>
+                {thoughtmark.isCompleted ? 'Completed' : 'Pending'}
               </Text>
-            )}
+            </View>
           </View>
         )}
       </ScrollView>
-      
+
+      {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-          <Ionicons name="trash-outline" size={20} color="#EF4444" />
-          <Text style={styles.deleteButtonText}>Delete</Text>
+        <TouchableOpacity style={styles.footerButton} onPress={handleDelete}>
+          <Ionicons name="trash-outline" size={20} color={tokens.colors.danger ?? '#EF4444'} />
+          <Text style={styles.footerButtonText}>Delete</Text>
         </TouchableOpacity>
+        <View style={styles.spacer} />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  headerButton: {
-    padding: spacing.sm,
-  },
-  headerActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: spacing.lg,
-  },
-  title: {
-    ...typography.heading,
-    color: colors.text,
-    marginBottom: spacing.md,
-  },
-  binInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  binName: {
-    ...typography.body,
-    color: colors.subtext,
-    marginLeft: spacing.xs,
-  },
-  tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: spacing.md,
-  },
-  tag: {
-    backgroundColor: colors.card,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: spacing.sm,
-    marginRight: spacing.xs,
-    marginBottom: spacing.xs,
-  },
-  tagText: {
-    ...typography.body,
-    fontSize: 12,
-    color: colors.subtext,
-  },
-  contentText: {
-    ...typography.body,
-    color: colors.text,
-    lineHeight: 24,
-    marginBottom: spacing.lg,
-  },
-  taskInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.card,
-    padding: spacing.md,
-    borderRadius: spacing.md,
-    marginBottom: spacing.lg,
-  },
-  taskText: {
-    ...typography.body,
-    color: colors.text,
-    marginLeft: spacing.sm,
-    flex: 1,
-  },
-  dueDate: {
-    ...typography.body,
-    fontSize: 12,
-    color: colors.subtext,
-  },
-  footer: {
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
-  },
-  deleteButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: spacing.sm,
-  },
-  deleteButtonText: {
-    ...typography.body,
-    color: "#EF4444",
-    marginLeft: spacing.xs,
-  },
-  errorText: {
-    ...typography.body,
-    color: "#EF4444",
-    textAlign: 'center',
-    marginTop: spacing.xl,
-  },
-});

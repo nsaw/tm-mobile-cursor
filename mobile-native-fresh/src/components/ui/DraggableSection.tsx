@@ -1,19 +1,19 @@
-import React, { useState, useRef } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Animated,
   Vibration,
 } from 'react-native';
+import React, { useState, useRef } from 'react';
 import {
   PanGestureHandler,
   State,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../theme/theme';
+
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface DraggableSectionProps {
   id: string;
@@ -46,12 +46,13 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
+  const { typography, spacing } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const elevationAnim = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
-  const opacityAnim = useRef(new Animated.Value(1)).current;
+  const opacityAnim = useRef(new Animated.Value(0.5)).current;
   const panRef = useRef(null);
 
   const handleLongPress = () => {
@@ -115,7 +116,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
       // Add subtle press feedback
       setIsPressing(true);
       Animated.timing(opacityAnim, {
-        toValue: 0.7,
+        toValue: 1,
         duration: 100,
         useNativeDriver: true,
       }).start();
@@ -191,23 +192,21 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               onPressOut={handlePressOut}
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={colors.subtext} style={styles.chevronIcon} />
-                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim }]}>
+                <Ionicons name="chevron-down" size={16} color="#6B7280" style={styles.chevronIcon} />
+                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: '#374151' }]}>
                   {title}
                 </Animated.Text>
               </View>
               
               <View style={styles.headerRight}>
-                <Ionicons name="menu-outline" size={16} color={colors.subtext} style={styles.dragHandle} />
+                <Ionicons name="menu-outline" size={16} color="#6B7280" style={styles.dragHandle} />
               </View>
             </TouchableOpacity>
 
             {isExpanded && (
-              <View style={styles.sectionContent}>
-                {children}
-              </View>
+              <View><Text>{children}</Text></View>
             )}
           </Animated.View>
         </PanGestureHandler>
@@ -218,9 +217,9 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: spacing.lg * 0.47,
-    backgroundColor: 'transparent', // Removed custom background color
-    borderRadius: 11, // 8 * 1.34
+    marginBottom: 8,
+    backgroundColor: 'transparent',
+    borderRadius: 11,
   },
   dragging: {
     opacity: 0.8,
@@ -230,9 +229,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: spacing.md * 1.34,
-    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
-    paddingBottom: spacing.sm * 1.34, // Reduced bottom padding
+    paddingVertical: 21,
+    paddingHorizontal: 11,
+    paddingBottom: 11,
   },
   headerLeft: {
     flexDirection: 'row',
@@ -240,13 +239,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   chevronIcon: {
-    marginRight: spacing.sm * 1.34,
+    marginRight: 11,
   },
   sectionTitle: {
-    fontSize: 22, // Increased from 18 to 22 for better readability
+    fontSize: 20,
     fontWeight: '700',
-    color: colors.text,
-    letterSpacing: 0.7, // 0.5 * 1.34
+    letterSpacing: 0.7,
     fontFamily: 'Ubuntu_700Bold',
     flex: 1,
   },
@@ -255,10 +253,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionContent: {
-    paddingHorizontal: spacing.sm, // Changed from spacing.lg * 1.34 to match AI Tools button
-    paddingBottom: spacing.md * 1.34,
+    paddingHorizontal: 11,
+    paddingBottom: 21,
   },
   dragHandle: {
-    marginLeft: spacing.sm * 1.34,
+    marginLeft: 11,
   },
 }); 

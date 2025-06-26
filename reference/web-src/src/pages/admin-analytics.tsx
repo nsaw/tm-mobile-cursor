@@ -29,10 +29,10 @@ interface AnalyticsSummary {
     };
   };
   insights: string[];
-  topIssues: Array<{
+  topIssues: {
     description: string;
     occurrences: number;
-  }>;
+  }[];
 }
 
 export default function AdminAnalytics() {

@@ -1,5 +1,5 @@
+import { Text , StyleSheet, ViewStyle } from 'react-native';
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
 import { BlurView } from 'expo-blur';
 
 interface GlassmorphicContainerProps {
@@ -34,27 +34,7 @@ export const GlassmorphicContainer: React.FC<GlassmorphicContainerProps> = ({
   overflow = 'hidden',
 }) => {
   return (
-    <BlurView 
-      intensity={intensity} 
-      tint={tint} 
-      style={[
-        styles.container,
-        {
-          backgroundColor,
-          ...(borderRadius !== undefined ? { borderRadius } : {}),
-          ...(borderTopLeftRadius !== undefined ? { borderTopLeftRadius } : {}),
-          ...(borderTopRightRadius !== undefined ? { borderTopRightRadius } : {}),
-          ...(borderBottomLeftRadius !== undefined ? { borderBottomLeftRadius } : {}),
-          ...(borderBottomRightRadius !== undefined ? { borderBottomRightRadius } : {}),
-          ...(borderWidth !== undefined ? { borderWidth } : {}),
-          ...(borderColor !== undefined ? { borderColor } : {}),
-          overflow,
-        },
-        style,
-      ]}
-    >
-      {children}
-    </BlurView>
+    <BlurView><Text>{children}</Text></BlurView>
   );
 };
 

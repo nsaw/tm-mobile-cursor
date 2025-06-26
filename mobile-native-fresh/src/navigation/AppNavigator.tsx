@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useAuth } from '../features/auth/hooks/useAuth';
-import { ContentScreen } from '../features/content/screens/ContentScreen';
-import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
-import { LoadingScreen } from '../components/ui/LoadingScreen';
-import { RootStackParamList } from './types';
-import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { View } from 'react-native';
+
+import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
+import { LoadingScreen } from '../components/ui/LoadingScreen';
+import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
+import { ContentScreen } from '../features/content/screens/ContentScreen';
+import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
 
 // Auth Screens
@@ -16,21 +16,20 @@ import { SignUpScreen } from '../features/auth/screens/SignUp';
 
 // Home Screens
 import { DashboardScreen } from '../features/home/screens/DashboardScreen';
-import { DetailScreen } from '../features/home/screens/DetailScreen';
 
 // AI Screens
 import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
 
 // Settings Screens
 import { SettingsScreen } from '../features/settings/screens/SettingsScreen';
-import ProfileScreen from '../features/settings/screens/ProfileScreen';
-import PremiumScreen from '../features/settings/screens/PremiumScreen';
-import HelpScreen from '../features/settings/screens/HelpScreen';
-import TermsScreen from '../features/settings/screens/TermsScreen';
-import PrivacyScreen from '../features/settings/screens/PrivacyScreen';
-import SecurityScreen from '../features/settings/screens/SecurityScreen';
+import { ProfileScreen } from '../features/settings/screens/ProfileScreen';
+import { PremiumScreen } from '../features/settings/screens/PremiumScreen';
+import { HelpScreen } from '../features/settings/screens/HelpScreen';
+import { TermsScreen } from '../features/settings/screens/TermsScreen';
+import { PrivacyScreen } from '../features/settings/screens/PrivacyScreen';
+import { SecurityScreen } from '../features/settings/screens/SecurityScreen';
 import ThemeScreen from '../features/settings/screens/ThemeScreen';
-import ExportScreen from '../features/settings/screens/ExportScreen';
+import { ExportScreen } from '../features/settings/screens/ExportScreen';
 import ContactScreen from '../features/settings/screens/ContactScreen';
 import HowToScreen from '../features/settings/screens/HowToScreen';
 import { AdminDashboardScreen } from '../features/settings/screens/AdminDashboardScreen';
@@ -45,47 +44,44 @@ import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/Unifi
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
+import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
+
+import { RootStackParamList } from './types';
 
 // Placeholder screens - to be implemented
-const CreateBinScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Create Bin Screen</Text>
-  </View>
-);
-
 const BinDetailScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Bin Detail Screen</Text>
+    <Text variant="heading" size="lg">Bin Detail Screen</Text>
   </View>
 );
 
 const VoiceRecordScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Voice Record Screen</Text>
+    <Text variant="heading" size="lg">Voice Record Screen</Text>
   </View>
 );
 
 const TasksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Tasks Screen</Text>
+    <Text variant="heading" size="lg">Tasks Screen</Text>
   </View>
 );
 
 const BinsScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Bins Screen</Text>
+    <Text variant="heading" size="lg">Bins Screen</Text>
   </View>
 );
 
 const ThoughtmarksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Thoughtmarks Screen</Text>
+    <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
   </View>
 );
 
 const ArchiveScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Archive Screen</Text>
+    <Text variant="heading" size="lg">Archive Screen</Text>
   </View>
 );
 
@@ -157,7 +153,7 @@ const AuthStack = () => (
   <Stack.Navigator 
     screenOptions={{ 
       headerShown: false,
-      cardStyle: { backgroundColor: '#ffffff' }
+      cardStyle: { backgroundColor: '#181818' }
     }}
   >
     <Stack.Screen name="SignIn" component={SignInScreen} />

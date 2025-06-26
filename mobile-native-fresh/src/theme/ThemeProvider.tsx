@@ -1,8 +1,29 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+
 import { designTokens, DesignTokens } from './tokens';
+import { typographyTokens } from './typography';
+import { buttonStyles } from './buttonStyles';
+import { spacingTokens } from './spacing';
+import { 
+  getButtonVariants, 
+  getCardVariants, 
+  getInputVariants, 
+  getTextVariants, 
+  getBadgeVariants 
+} from './variants';
 
 interface ThemeContextType {
   tokens: DesignTokens;
+  typography: typeof typographyTokens;
+  buttonStyles: typeof buttonStyles;
+  spacing: typeof spacingTokens;
+  variants: {
+    buttonVariants: ReturnType<typeof getButtonVariants>;
+    cardVariants: ReturnType<typeof getCardVariants>;
+    inputVariants: ReturnType<typeof getInputVariants>;
+    textVariants: ReturnType<typeof getTextVariants>;
+    badgeVariants: ReturnType<typeof getBadgeVariants>;
+  };
   isFluidTheme: boolean;
   toggleTheme: () => void;
   isDarkMode: boolean;
@@ -53,6 +74,16 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const contextValue: ThemeContextType = {
     tokens: designTokens,
+    typography: typographyTokens,
+    buttonStyles: buttonStyles,
+    spacing: spacingTokens,
+    variants: {
+      buttonVariants: getButtonVariants(designTokens),
+      cardVariants: getCardVariants(designTokens),
+      inputVariants: getInputVariants(designTokens),
+      textVariants: getTextVariants(designTokens),
+      badgeVariants: getBadgeVariants(designTokens),
+    },
     isFluidTheme,
     toggleTheme,
     isDarkMode,

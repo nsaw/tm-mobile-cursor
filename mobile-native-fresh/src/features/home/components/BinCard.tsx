@@ -1,72 +1,73 @@
-import React from 'react';
 import {
-  View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { colors, spacing, typography } from '../../../theme/theme';
-import { designTokens } from '../../../theme/tokens';
-import { Bin } from '../../../types';
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
-const { width } = Dimensions.get('window');
+import { useTheme } from '../../../theme/ThemeProvider';
+import { Text } from '../../../components/ui/Text';
 
 interface BinCardProps {
-  bin: Bin;
+  bin: {
+    id: number;
+    name: string;
+    icon: string;
+    color?: string;
+    thoughtmarkCount: number;
+  };
   onPress: () => void;
 }
+
+const { width } = Dimensions.get('window');
 
 export const BinCard: React.FC<BinCardProps> = ({
   bin,
   onPress,
 }) => {
+  const { tokens } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
+      aspectRatio: 1,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderRadius: tokens.radius.md * 1.34,
+      marginBottom: tokens.spacing.sm * 1.34,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: tokens.spacing.md * 1.34,
+    },
+    icon: {
+      fontSize: 32,
+      marginBottom: tokens.spacing.sm,
+    },
+    name: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: tokens.colors.accent,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.xs,
+    },
+    count: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+    },
+  });
+
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      activeOpacity={0.7}
-    >
-      <View style={styles.content}>
-        <Text style={styles.name} numberOfLines={1}>
-          {bin.name}
-        </Text>
-        <Text style={styles.count}>
-          {bin.thoughtmarkCount || 0}
-        </Text>
-      </View>
+    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+      <Ionicons 
+        name={bin.icon as any} 
+        size={32} 
+        style={[styles.icon, { color: bin.color || tokens.colors.accent }]} 
+      />
+      <Text style={styles.name}>{bin.name}</Text>
+      <Text style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
     </TouchableOpacity>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    width: (width - spacing.lg * 2 - spacing.sm) / 2,
-    height: 70,
-    backgroundColor: colors.card,
-    borderRadius: designTokens.radius.md * 1.34,
-    marginBottom: spacing.sm * 1.34,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  content: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: spacing.md * 1.34,
-  },
-  name: {
-    ...typography.body,
-    color: colors.text,
-    fontWeight: '600',
-    fontSize: 14,
-    flex: 1,
-    textTransform: 'capitalize',
-  },
-  count: {
-    fontSize: 9,
-    color: colors.primary,
-    fontWeight: '500',
-  },
-}); 
+}; 

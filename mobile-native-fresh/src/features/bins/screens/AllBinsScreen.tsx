@@ -1,37 +1,42 @@
-import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
-  StyleSheet,
-  ScrollView,
   TouchableOpacity,
+  StyleSheet,
   FlatList,
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import type { NavigationProp } from '../../../navigation/types';
+import { useTheme } from '../../../theme/ThemeProvider';
+import { useBins } from '../../home/hooks/useBins';
+import { Text } from '../../../components/ui/Text';
+import { Button } from '../../../components/ui/Button';
 import { Card } from '../../../components/ui/Card';
 import { BinCard } from '../../home/components/BinCard';
-import { useBins } from '../../home/hooks/useBins';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigation/types';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
+type SortType = 'name' | 'created' | 'updated';
+
 export const AllBinsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
+  const { tokens } = useTheme();
   const { bins, loading, fetchBins } = useBins();
   const { thoughtmarks } = useThoughtmarks();
   
   const [refreshing, setRefreshing] = useState(false);
-  const [sortBy, setSortBy] = useState<'name' | 'count' | 'date'>('name');
+  const [sortBy, setSortBy] = useState<SortType>('name');
 
   const { showVoiceRecorder } = useVoiceRecorder();
 
@@ -108,37 +113,223 @@ export const AllBinsScreen: React.FC = () => {
 
   const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) => (
     <TouchableOpacity
-      style={[styles.sortButton, sortBy === sortType && styles.sortButtonActive]}
-      onPress={() => setSortBy(sortType)}
+      style={{
+        paddingHorizontal: tokens.spacing.md,
+        paddingVertical: tokens.spacing.sm,
+        borderRadius: tokens.radius.sm,
+        backgroundColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.backgroundSecondary,
+        borderWidth: 1,
+        borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
+      }}
+      onPress={() => setSortBy(sortType as SortType)}
     >
-      <Text style={[styles.sortButtonText, sortBy === sortType && styles.sortButtonTextActive]}>
+      <Text 
+        variant="body" 
+        style={{
+          color: sortBy === sortType ? tokens.colors.background : tokens.colors.text,
+          fontWeight: '500',
+        }}
+      >
         {label}
       </Text>
     </TouchableOpacity>
   );
 
   const renderBinStats = () => (
-    <View style={styles.statsContainer}>
-      <Card style={styles.statsCard}>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{bins.length}</Text>
-          <Text style={styles.statLabel}>Total Bins</Text>
-        </View>
-        <View style={styles.statDivider} />
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{thoughtmarks.length}</Text>
-          <Text style={styles.statLabel}>Total Thoughtmarks</Text>
-        </View>
-        <View style={styles.statDivider} />
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>
-            {bins.length > 0 ? Math.round(thoughtmarks.length / bins.length) : 0}
-          </Text>
-          <Text style={styles.statLabel}>Avg per Bin</Text>
+    <View style={{
+      paddingHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
+    }}>
+      <Card style={{ padding: tokens.spacing.lg }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+          <View style={{
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
+              }}
+            >
+              {bins.length}
+            </Text>
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
+              Total Bins
+            </Text>
+          </View>
+          <View style={{
+            width: 1,
+            backgroundColor: tokens.colors.border,
+            marginHorizontal: tokens.spacing.md,
+          }} />
+          <View style={{
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
+              }}
+            >
+              {thoughtmarks.length}
+            </Text>
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
+              Total Thoughtmarks
+            </Text>
+          </View>
+          <View style={{
+            width: 1,
+            backgroundColor: tokens.colors.border,
+            marginHorizontal: tokens.spacing.md,
+          }} />
+          <View style={{
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: tokens.colors.accent,
+                marginBottom: tokens.spacing.xs,
+              }}
+            >
+              {bins.length > 0 ? Math.round(thoughtmarks.length / bins.length) : 0}
+            </Text>
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
+              Avg per Bin
+            </Text>
+          </View>
         </View>
       </Card>
     </View>
   );
+
+  const styles = StyleSheet.create({
+    sortButton: {
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+      borderRadius: tokens.radius.sm,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      marginRight: tokens.spacing.sm,
+    },
+    sortButtonActive: {
+      backgroundColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent,
+    },
+    sortButtonText: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: tokens.colors.text,
+    },
+    sortButtonTextActive: {
+      color: tokens.colors.background,
+    },
+    sortContainer: {
+      paddingHorizontal: tokens.spacing.lg,
+      marginBottom: tokens.spacing.md,
+    },
+    binCard: {
+      padding: tokens.spacing.lg,
+    },
+    binIcon: {
+      color: tokens.colors.accent,
+      marginBottom: tokens.spacing.xs,
+    },
+    binDivider: {
+      height: 1,
+      backgroundColor: tokens.colors.border,
+      marginHorizontal: tokens.spacing.md,
+    },
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background,
+    },
+    header: {
+      paddingHorizontal: tokens.spacing.lg,
+      paddingBottom: tokens.spacing.md,
+    },
+    headerTitle: {
+      fontSize: tokens.typography.fontSize.xl,
+      fontWeight: tokens.typography.fontWeight.bold,
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+    },
+    headerSubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: tokens.spacing.lg,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: tokens.spacing.lg,
+    },
+    emptyIcon: {
+      marginBottom: tokens.spacing.md,
+    },
+    emptyTitle: {
+      fontSize: tokens.typography.fontSize.xl,
+      fontWeight: tokens.typography.fontWeight.bold,
+      color: tokens.colors.text,
+      marginTop: tokens.spacing.md,
+      marginBottom: tokens.spacing.sm,
+      textAlign: 'center',
+    },
+    emptySubtitle: {
+      fontSize: tokens.typography.fontSize.body,
+      color: tokens.colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: tokens.spacing.lg,
+    },
+    createButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: tokens.colors.accent,
+      paddingVertical: tokens.spacing.lg,
+      borderRadius: tokens.radius.md,
+      marginBottom: tokens.spacing.xl,
+    },
+    createButtonText: {
+      marginLeft: tokens.spacing.sm,
+    },
+    listContainer: {
+      paddingBottom: tokens.spacing.xl,
+    },
+    refreshControl: {
+      colors: [tokens.colors.accent],
+      tintColor: tokens.colors.accent,
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -148,21 +339,34 @@ export const AllBinsScreen: React.FC = () => {
       {renderBinStats()}
 
       {/* Controls */}
-      <View style={styles.controls}>
-        <Text style={styles.filterLabel}>Sort by:</Text>
-        <View style={styles.sortButtons}>
-          {renderSortButton('name', 'Name')}
+      <View style={styles.sortContainer}>
+        <Text 
+          variant="body" 
+          style={{
+            fontWeight: '600',
+            marginBottom: tokens.spacing.sm,
+          }}
+        >
+          Sort by:
+        </Text>
+        <View><Text>{renderSortButton('name', 'Name')}
           {renderSortButton('count', 'Count')}
-          {renderSortButton('date', 'Date')}
-        </View>
+          {renderSortButton('date', 'Date')}</Text></View>
       </View>
 
       {/* Bins List */}
-      <View style={styles.listContainer}>
+      <View style={styles.content}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={colors.primary} />
-            <Text style={styles.loadingText}>Loading bins...</Text>
+            <ActivityIndicator size="large" color={tokens.colors.accent} />
+            <Text 
+              variant="body" 
+              style={{
+                marginTop: tokens.spacing.md,
+              }}
+            >
+              Loading bins...
+            </Text>
           </View>
         ) : (
           <FlatList
@@ -173,30 +377,35 @@ export const AllBinsScreen: React.FC = () => {
               </TouchableOpacity>
             )}
             keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={styles.listContent}
+            contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                colors={[colors.primary]}
-                tintColor={colors.primary}
+                colors={[tokens.colors.accent]}
+                tintColor={tokens.colors.accent}
               />
             }
             ListEmptyComponent={
-              <View style={styles.emptyState}>
-                <Ionicons name="folder" size={64} color={colors.subtext} />
-                <Text style={styles.emptyStateTitle}>No bins found</Text>
-                <Text style={styles.emptyStateSubtitle}>
+              <View style={styles.emptyContainer}>
+                <Ionicons name="folder" size={64} color={tokens.colors.textMuted} />
+                <Text 
+                  variant="subheading" 
+                  style={styles.emptyTitle}
+                >
+                  No bins found
+                </Text>
+                <Text 
+                  variant="body" 
+                  style={styles.emptySubtitle}
+                >
                   Create your first bin to organize your thoughtmarks
                 </Text>
-                <TouchableOpacity
-                  style={styles.createButton}
-                  onPress={handleCreateBin}
-                >
-                  <Ionicons name="add" size={20} color={colors.background} />
+                <Button variant="primary" onPress={handleCreateBin}>
+                  <Ionicons name="add" size={20} color={tokens.colors.background} />
                   <Text style={styles.createButtonText}>Create Bin</Text>
-                </TouchableOpacity>
+                </Button>
               </View>
             }
           />
@@ -212,122 +421,4 @@ export const AllBinsScreen: React.FC = () => {
       />
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  statsContainer: {
-    paddingHorizontal: spacing.lg,
-    marginBottom: spacing.md,
-  },
-  statsCard: {
-    padding: spacing.lg,
-  },
-  statItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  statNumber: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.primary,
-    marginBottom: spacing.xs,
-  },
-  statLabel: {
-    fontSize: 12,
-    color: colors.subtext,
-    textAlign: 'center',
-  },
-  statDivider: {
-    width: 1,
-    backgroundColor: colors.border,
-    marginHorizontal: spacing.md,
-  },
-  controls: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-  },
-  filterLabel: {
-    fontSize: typography.body.fontSize,
-    fontWeight: '600',
-    color: colors.text,
-    marginBottom: spacing.sm,
-  },
-  sortButtons: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-  },
-  sortButton: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: spacing.sm,
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  sortButtonActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  sortButtonText: {
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-    fontWeight: '500',
-  },
-  sortButtonTextActive: {
-    color: colors.background,
-  },
-  listContainer: {
-    flex: 1,
-    paddingHorizontal: spacing.lg,
-  },
-  listContent: {
-    paddingBottom: spacing.xl,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: spacing.md,
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: spacing.xl,
-  },
-  emptyStateTitle: {
-    fontSize: typography.subheading.fontSize,
-    fontWeight: '600',
-    color: colors.text,
-    marginTop: spacing.md,
-    marginBottom: spacing.sm,
-  },
-  emptyStateSubtitle: {
-    fontSize: typography.body.fontSize,
-    color: colors.subtext,
-    textAlign: 'center',
-    marginBottom: spacing.lg,
-  },
-  createButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.primary,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderRadius: spacing.md,
-  },
-  createButtonText: {
-    fontSize: typography.body.fontSize,
-    fontWeight: '600',
-    color: colors.background,
-    marginLeft: spacing.sm,
-  },
-}); 
+}; 

@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { TagChip } from './TagChip';
+
 import { useTheme } from '../../theme/ThemeProvider';
+
+import { TagChip } from './TagChip';
 
 interface TagFilterProps {
   tags: string[];
@@ -23,11 +25,11 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{ marginVertical: tokens.spacing.sm }}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
       >
         {tags.map((tag) => (
           <TagChip

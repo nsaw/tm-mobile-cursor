@@ -9,7 +9,8 @@ import {
 import { BlurView } from 'expo-blur';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing } from '../../theme/theme';
+
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface FloatingActionButtonProps {
   onPress?: () => void;
@@ -23,6 +24,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   isRecording = false,
 }) => {
   const insets = useSafeAreaInsets();
+  const { tokens } = useTheme();
   const [scaleValue] = useState(new Animated.Value(1));
 
   const handlePress = () => {
@@ -61,18 +63,38 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 
   return (
     <View style={[styles.container, { bottom: insets.bottom + 70 }]}>
-      <BlurView intensity={70} tint="dark" style={styles.blurContainer}>
-        <Animated.View style={[styles.fab, { transform: [{ scale: scaleValue }] }]}>
+      <BlurView intensity={70} tint="dark" style={[styles.blurContainer, { backgroundColor: tokens.colors.backgroundSecondary }]}>
+        <Animated.View style={[styles.fab, { 
+          transform: [{ scale: scaleValue }],
+          backgroundColor: tokens.colors.backgroundSecondary,
+          shadowColor: tokens.colors.accent,
+          shadowOffset: {
+            width: 0,
+            height: 8,
+          },
+          shadowOpacity: 0.6,
+          shadowRadius: 24,
+          elevation: 16,
+        }]}>
           <TouchableOpacity
-            style={styles.fabButton}
+            style={[styles.fabButton, {
+              shadowColor: tokens.colors.accent,
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },
+              shadowOpacity: 0.4,
+              shadowRadius: 20,
+              elevation: 12,
+            }]}
             onPress={handlePress}
             onLongPress={handleLongPress}
             activeOpacity={0.8}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}
-              color="#007AFF"
+              color={tokens.colors.accent}
             />
           </TouchableOpacity>
         </Animated.View>
@@ -80,8 +102,8 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       
       {/* Voice recording indicator */}
       {isRecording && (
-        <View style={styles.recordingIndicator}>
-          <View style={styles.recordingDot} />
+        <View style={[styles.recordingIndicator, { backgroundColor: tokens.colors.danger }]}>
+          <View style={[styles.recordingDot, { backgroundColor: tokens.colors.background }]} />
         </View>
       )}
     </View>
@@ -99,22 +121,11 @@ const styles = StyleSheet.create({
   blurContainer: {
     borderRadius: 16, // Squircle shape
     overflow: 'hidden',
-    backgroundColor: 'rgba(24, 24, 24, 0.3)',
   },
   fab: {
     width: 60,
     height: 60,
     borderRadius: 16, // Squircle shape
-    // Dark square background
-    backgroundColor: '#1C1C1E',
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 24,
-    elevation: 16,
   },
   fabButton: {
     width: '100%',
@@ -123,15 +134,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    // Round blue glow effect
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 20,
-    elevation: 12,
   },
   recordingIndicator: {
     position: 'absolute',
@@ -140,7 +142,6 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: '#FF3B30',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -148,6 +149,5 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#000000',
   },
 }); 

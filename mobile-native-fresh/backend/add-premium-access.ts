@@ -1,6 +1,7 @@
+import { eq, or, like } from 'drizzle-orm';
+
 import { db } from './src/db/index';
 import { users } from './src/db/schema';
-import { eq, or, like } from 'drizzle-orm';
 
 async function addPremiumAccess() {
   try {

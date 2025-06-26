@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   TextInput,
   ScrollView,
   TouchableOpacity,
@@ -11,10 +9,12 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';

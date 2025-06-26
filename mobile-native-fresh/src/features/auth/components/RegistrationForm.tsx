@@ -1,16 +1,16 @@
-// src/features/auth/components/RegistrationForm.tsx
-import React, { useState } from 'react'
-import {
+import { Text ,
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-} from 'react-native'
-import { colors, spacing, typography } from '../../../theme/theme'
-import { designTokens } from '../../../theme/tokens'
+} from 'react-native';
+// src/features/auth/components/RegistrationForm.tsx
+import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+
+import { useTheme } from '../../../theme/ThemeProvider'
+import { colors, spacing, typography } from '../../../theme/theme'
 
 interface RegistrationFormProps {
   onSubmit: (
@@ -26,6 +26,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onSubmit,
   loading = false,
 }) => {
+  const { tokens } = useTheme();
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -33,6 +34,79 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
+
+  const styles = StyleSheet.create({
+    container: {
+      width: '100%',
+    },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    inputContainer: {
+      marginBottom: spacing.md,
+    },
+    halfWidth: {
+      width: '48%',
+    },
+    label: {
+      ...typography.body,
+      color: colors.text,
+      marginBottom: spacing.xs,
+    },
+    input: {
+      backgroundColor: colors.card,
+      color: colors.text,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: tokens.radius.md,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      fontSize: typography.body.fontSize,
+    },
+    inputError: {
+      borderColor: '#ff4444',
+    },
+    passwordContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: colors.card,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: tokens.radius.md,
+    },
+    passwordInput: {
+      flex: 1,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      fontSize: typography.body.fontSize,
+      color: colors.text,
+    },
+    eyeButton: {
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+    },
+    errorText: {
+      color: '#ff4444',
+      fontSize: 14,
+      marginTop: spacing.xs,
+    },
+    submitButton: {
+      backgroundColor: colors.primary,
+      borderRadius: tokens.radius.md,
+      paddingVertical: spacing.sm * 1.5,
+      alignItems: 'center',
+      marginTop: spacing.sm,
+    },
+    submitButtonDisabled: {
+      backgroundColor: '#555555',
+    },
+    submitButtonText: {
+      ...typography.body,
+      color: '#ffffff',
+      fontWeight: '600',
+    },
+  });
 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {}
@@ -191,76 +265,3 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     </View>
   )
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  inputContainer: {
-    marginBottom: spacing.md,
-  },
-  halfWidth: {
-    width: '48%',
-  },
-  label: {
-    ...typography.body,
-    color: colors.text,
-    marginBottom: spacing.xs,
-  },
-  input: {
-    backgroundColor: colors.card,
-    color: colors.text,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: designTokens.radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    fontSize: typography.body.fontSize,
-  },
-  inputError: {
-    borderColor: '#ff4444',
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: designTokens.radius.md,
-  },
-  passwordInput: {
-    flex: 1,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    fontSize: typography.body.fontSize,
-    color: colors.text,
-  },
-  eyeButton: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-  },
-  errorText: {
-    color: '#ff4444',
-    fontSize: 14,
-    marginTop: spacing.xs,
-  },
-  submitButton: {
-    backgroundColor: colors.primary,
-    borderRadius: designTokens.radius.md,
-    paddingVertical: spacing.sm * 1.5,
-    alignItems: 'center',
-    marginTop: spacing.sm,
-  },
-  submitButtonDisabled: {
-    backgroundColor: '#555555',
-  },
-  submitButtonText: {
-    ...typography.body,
-    color: '#ffffff',
-    fontWeight: '600',
-  },
-})

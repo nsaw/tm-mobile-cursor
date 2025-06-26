@@ -2,6 +2,10 @@
 import posthog from 'posthog-js';
 import * as Sentry from '@sentry/react';
 
+// React hook for analytics
+import { useEffect, useCallback } from 'react';
+import { useLocation } from 'wouter';
+
 declare global {
   interface Window {
     dataLayer: any[];
@@ -372,10 +376,6 @@ class Analytics {
 
 // Create global analytics instance
 export const analytics = new Analytics();
-
-// React hook for analytics
-import { useEffect, useCallback } from 'react';
-import { useLocation } from 'wouter';
 
 export const useAnalytics = () => {
   const [location] = useLocation();

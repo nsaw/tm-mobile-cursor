@@ -1,23 +1,22 @@
 {
   "expo": {
     "scheme": "thoughtmarks",
-    "entryPoint": "App.tsx",
-    "name": "mobile-native-fresh",
-    "slug": "mobile-native-fresh",
+    "name": "Thoughtmarks",
+    "slug": "thoughtmarks",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/brain-bookmark.png",
       "resizeMode": "contain",
       "backgroundColor": "#181818"
     },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thoughtmarks.app",
-      "teamId": "72SVDSY448"
+      "bundleIdentifier": "com.thoughtmarks.app"
     },
     "android": {
       "adaptiveIcon": {

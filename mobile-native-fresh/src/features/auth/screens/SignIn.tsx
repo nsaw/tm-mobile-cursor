@@ -1,8 +1,5 @@
-// src/features/auth/screens/SignIn.tsx
-import React, { useState } from 'react';
-import {
+import { Text ,
   View,
-  Text,
   Image,
   Alert,
   Platform,
@@ -10,19 +7,25 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+// src/features/auth/screens/SignIn.tsx
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { useAuth } from '../hooks/useAuth';
 import { LoginForm } from '../components/LoginForm';
 import { OAuthButton } from '../components/OAuthButton';
-import { colors, spacing, typography } from '../../../theme/theme';
+import { useTheme } from '../../../theme/ThemeProvider';
 import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 
 const logo = require('../../../../assets/logo.png');
 
 export const SignInScreen: React.FC = () => {
+  const { tokens } = useTheme();
   const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
+
+  const styles = getStyles(tokens);
 
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
@@ -96,14 +99,12 @@ export const SignInScreen: React.FC = () => {
           <OAuthButton
             provider="google"
             onPress={handleGoogleSignIn}
-            loading={isLoading || loading}
           />
 
           {Platform.OS === 'ios' && (
             <OAuthButton
               provider="apple"
               onPress={handleAppleSignIn}
-              loading={isLoading || loading}
             />
           )}
 
@@ -113,7 +114,7 @@ export const SignInScreen: React.FC = () => {
               style={styles.primaryButton}
               onPress={handleDemoSignIn}
               disabled={isLoading || loading}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Text style={styles.primaryButtonText}>Demo Login</Text>
             </TouchableOpacity>
           </View>
@@ -123,93 +124,82 @@ export const SignInScreen: React.FC = () => {
   );
 };
 
-export const styles = StyleSheet.create({
+const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: tokens.colors.background,
   },
   keyboard: {
     flex: 1,
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: tokens.spacing.md,
     justifyContent: 'center',
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: spacing.xl,
+    marginBottom: tokens.spacing.xl,
   },
   logo: {
     width: 120,
     height: 120,
   },
   title: {
-    ...typography.heading,
-    color: colors.text,
+    fontSize: tokens.typography.fontSize.heading,
+    fontWeight: tokens.typography.fontWeight.bold,
+    color: tokens.colors.text,
     textAlign: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: tokens.spacing.sm,
   },
   subtitle: {
-    ...typography.body,
-    color: colors.subtext,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: tokens.spacing.lg,
   },
   formContainer: {
-    backgroundColor: colors.card,
+    backgroundColor: tokens.colors.surface,
     borderRadius: 16,
-    padding: spacing.md,
-    marginHorizontal: spacing.sm,
+    padding: tokens.spacing.md,
+    marginHorizontal: tokens.spacing.sm,
     shadowColor: '#000',
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
   },
   input: {
-    backgroundColor: colors.inputBackground,   // NEW
-    color: colors.text,                        // NEW
+    backgroundColor: tokens.colors.backgroundSecondary,
+    color: tokens.colors.text,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: tokens.colors.border,
     borderRadius: 8,
-    paddingVertical: spacing.sm * 1.5,
-    paddingHorizontal: spacing.md,
-    marginBottom: spacing.md,
+    paddingVertical: tokens.spacing.sm * 1.5,
+    paddingHorizontal: tokens.spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   primaryButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: tokens.colors.accent,
     borderRadius: 8,
-    paddingVertical: spacing.sm * 1.5,
+    paddingVertical: tokens.spacing.sm * 1.5,
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   primaryButtonText: {
-    ...typography.body,
+    fontSize: tokens.typography.fontSize.body,
     color: '#ffffff',
     fontWeight: '600',
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: spacing.lg,
+    marginVertical: tokens.spacing.lg,
   },
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.border,
+    backgroundColor: tokens.colors.border,
   },
   dividerText: {
-    marginHorizontal: spacing.sm,
-    ...typography.body,
-    color: colors.subtext,                    // switched to subtext
+    marginHorizontal: tokens.spacing.sm,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
   },
-  oauthButton: {
-    backgroundColor: colors.background,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 8,
-    paddingVertical: spacing.sm * 1.5,
-    marginBottom: spacing.md,
-  },
-  oauthButtonText: {
-    ...typography.body,
-    color: colors.text,
-  },
-})
+});

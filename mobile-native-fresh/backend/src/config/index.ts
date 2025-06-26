@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+
 import { getDatabaseConfig } from './database';
 
 dotenv.config();

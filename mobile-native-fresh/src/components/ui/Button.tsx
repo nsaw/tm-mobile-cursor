@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Pressable, Text, ViewStyle, TextStyle } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
-import { buttonVariants, mergeVariantStyles } from '../../theme/variants';
+import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';
@@ -31,6 +32,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const [isPressed, setIsPressed] = useState(false);
 
   // Get variant styles
+  const buttonVariants = getButtonVariants(tokens);
   const baseStyle = buttonVariants.base;
   const variantStyle = buttonVariants.variants.variant[variant];
   const sizeStyle = buttonVariants.variants.size[size];
@@ -71,7 +73,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const getTextColor = () => {
     switch (variant) {
       case 'primary':
-        return tokens.colors.accent; // Blue text for outline style
+        return tokens.colors.accent;
       case 'secondary':
         return tokens.colors.text;
       case 'outline':
@@ -96,6 +98,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel="Button"
       android_ripple={{
         color: tokens.colors.surfaceHover,
         borderless: false,

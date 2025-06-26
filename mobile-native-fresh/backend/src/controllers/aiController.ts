@@ -1,10 +1,11 @@
-console.log('AI CONTROLLER FILE LOADED');
 import { Request, Response } from 'express';
-import { db } from '../db';
-import { thoughtmarks } from '../db/schema';
 import { eq, inArray, desc } from 'drizzle-orm';
 import OpenAI from 'openai';
+
+import { db } from '../db';
+import { thoughtmarks } from '../db/schema';
 import { config } from '../config';
+console.log('AI CONTROLLER FILE LOADED');
 
 const openai = new OpenAI({ apiKey: config.openai.apiKey });
 
