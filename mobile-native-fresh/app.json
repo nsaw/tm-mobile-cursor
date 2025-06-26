@@ -5,13 +5,13 @@
     "slug": "thoughtmarks",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#181818"
+      "backgroundColor": "#0D0D0D"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -20,8 +20,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#181818"
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#0D0D0D"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.thoughtmarks.app"

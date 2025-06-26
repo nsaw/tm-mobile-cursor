@@ -79,141 +79,49 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       accessibilityLabel={steps[currentStep].title}
     >
       <View style={[styles.overlay, { backgroundColor: '#000000E6' }]}> {/* 90% opacity */}
-        <View style={[styles.card, {
-          backgroundColor: '#2D3748',
-          borderRadius: 12,
-          padding: spacing.modalPaddingHorizontal,
-          maxWidth: 500,
-          minHeight: 400,
-        }]}
-        >
-          {/* Centered Heading */}
-          <View style={styles.centeredHeader}>
-            <Text variant="heading" style={{ 
-              marginBottom: 4,
-              textAlign: 'center',
-              color: tokens.colors.text,
-              fontSize: tokens.typography.fontSize.heading,
-              fontWeight: tokens.typography.fontWeight.bold,
-              fontFamily: 'Ubuntu_700Bold',
-              letterSpacing: 0.5,
-              textTransform: 'uppercase',
-            }}>
-              {steps[currentStep].title}
-            </Text>
-            <Text style={{
-              ...typography.small,
-              color: tokens.colors.textSecondary,
-              textAlign: 'center',
-              opacity: 0.9,
-              fontSize: tokens.typography.fontSize.sm,
-            }}>
-              {`${currentStep + 1} of ${steps.length}`}
-            </Text>
-          </View>
-
-          {/* Icon - Enlarged and centered */}
-          <View style={[styles.iconContainer, { 
-            alignSelf: 'center',
-            marginTop: spacing.modalPaddingVertical * 0.5,
-            marginBottom: spacing.modalPaddingVertical * 0.5,
-          }]}>
+        <View style={{
+          paddingVertical: spacing.modalPaddingVertical * 2, // 2x vertical padding
+          marginHorizontal: spacing.modalPaddingHorizontal, // horizontal margin
+          width: '90%', // 90% width
+          alignSelf: 'center',
+          backgroundColor: tokens.colors.backgroundSecondary,
+          borderRadius: tokens.radius.lg,
+        }}>
+          {/* Icon - larger */}
+          <View style={{ alignItems: 'center', marginBottom: spacing.modalPaddingVertical }}>
             {steps[currentStep].icon}
           </View>
-
-          {/* Description - Increased font size and better contrast */}
-          <Text 
-            variant="body" 
-            style={{ 
-              marginBottom: spacing.modalPaddingVertical, 
-              textAlign: 'center',
-              paddingVertical: spacing.modalPaddingVertical,
-              ...typography.body,
-              lineHeight: 24,
-              color: tokens.colors.text,
-              fontSize: tokens.typography.fontSize.body + 2,
-            }} 
-            numberOfLines={4}
-          >
-            {steps[currentStep].description}
-          </Text>
-
-          {/* Divider/accent below text chunk */}
-          <View style={{ alignItems: 'center', marginBottom: spacing.modalPaddingVertical }}>
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: tokens.colors.accent }} />
-          </View>
-
-          {/* Progress Dots - Improved visibility */}
-          <View style={styles.progressDots}>
-            {steps.map((_, idx) => (
-              <View key={idx}>
-                <View style={[
-                  styles.dot,
-                  {
-                    backgroundColor: idx === currentStep ? tokens.colors.accent : tokens.colors.borderHover,
-                  }
-                ]} />
-              </View>
+          {/* Title */}
+          <Text variant="heading" style={{
+            ...typography.sectionTitle,
+            fontSize: tokens.typography.fontSize.heading,
+            textAlign: 'center',
+            color: tokens.colors.text,
+            marginBottom: spacing.textMarginBottom,
+          }}>{steps[currentStep].title}</Text>
+          {/* Body/Content */}
+          <Text variant="body" style={{
+            ...typography.body,
+            fontSize: tokens.typography.fontSize.body + 2,
+            lineHeight: 24,
+            textAlign: 'center',
+            color: tokens.colors.textSecondary,
+            marginBottom: spacing.modalPaddingVertical,
+          }}>{steps[currentStep].description}</Text>
+          {/* Pagination Dots - smaller */}
+          <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8, marginBottom: spacing.modalPaddingVertical }}>
+            {steps.map((_, i) => (
+              <View key={i} style={{
+                width: 6, height: 6, borderRadius: 3, marginHorizontal: 2,
+                backgroundColor: i === currentStep ? tokens.colors.accent : tokens.colors.border,
+                opacity: i === currentStep ? 1 : 0.5,
+              }} />
             ))}
           </View>
-
-          {/* Step 6/6: Premium Upsell Button (full width, yellow outline, yellow text, below dots) */}
-          {steps[currentStep].premium && !isPremium && (
-            <Button
-              variant="outline"
-              onPress={() => {/* TODO: navigate to premium/upgrade */}}
-              style={{
-                borderColor: '#FFD700',
-                borderWidth: 2,
-                backgroundColor: 'transparent',
-                borderRadius: 8,
-                paddingHorizontal: spacing.modalPaddingHorizontal,
-                paddingVertical: spacing.modalPaddingVertical,
-                marginBottom: spacing.modalPaddingVertical,
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: 48,
-              }}
-              textStyle={{ color: '#FFD700', fontWeight: 'bold', fontSize: tokens.typography.fontSize.body }}
-            >
-              <Text>Upgrade now</Text>
-            </Button>
-          )}
-
-          {/* Navigation Buttons */}
-          <View style={[styles.buttonRow, { gap: spacing.buttonPadding }]}> 
-            {/* Previous Button */}
-            <Button
-              variant="ghost"
-              onPress={handlePrevious}
-              disabled={currentStep === 0}
-              style={{ flexDirection: 'row', alignItems: 'center', opacity: currentStep === 0 ? 0.5 : 1 }}
-              textStyle={{ color: tokens.colors.textSecondary, fontWeight: 'bold' }}
-              leftIcon={<Ionicons name="arrow-back" size={27} color={tokens.colors.textSecondary} />}
-            >
-              <Text>Previous</Text>
-            </Button>
-            {/* Next/Finish Button */}
-            {steps[currentStep].premium && !isPremium ? (
-              <Button
-                onPress={onClose}
-                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: 8, paddingHorizontal: spacing.modalPaddingHorizontal }}
-                textStyle={{ color: tokens.colors.buttonText, fontWeight: 'bold' }}
-                rightIcon={<Ionicons name="checkmark" size={27} color={tokens.colors.buttonText} />}
-              >
-                <Text>Finish</Text>
-              </Button>
-            ) : (
-              <Button
-                onPress={handleNext}
-                style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.colors.accent, borderRadius: 8, paddingHorizontal: spacing.modalPaddingHorizontal }}
-                textStyle={{ color: tokens.colors.buttonText, fontWeight: 'bold' }}
-                rightIcon={<Ionicons name="arrow-forward" size={27} color={tokens.colors.buttonText} />}
-              >
-                <Text>{currentStep === steps.length - 1 ? 'Get started' : 'Next'}</Text>
-              </Button>
-            )}
+          {/* Buttons - 3x horizontal margin, 12pt text */}
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: spacing.modalPaddingHorizontal * 3 }}>
+            <Button style={{ flex: 1, marginRight: spacing.modalPaddingHorizontal / 2 }} textStyle={{ fontSize: 12 }} onPress={handlePrevious}>Previous</Button>
+            <Button style={{ flex: 1, marginLeft: spacing.modalPaddingHorizontal / 2 }} textStyle={{ fontSize: 12 }} onPress={handleNext}>Next</Button>
           </View>
         </View>
       </View>
