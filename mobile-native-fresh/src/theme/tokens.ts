@@ -3,36 +3,37 @@
 
 export const designTokens = {
   colors: {
-    // Base dark foundation (matching web app)
+    // Base dark foundation - grayscale
     background: '#181818',
-    backgroundSecondary: '#1a1a1e', // Updated to match card color
+    backgroundSecondary: '#1a1a1e',
     surface: 'rgba(255,255,255,.04)',
     surfaceHover: 'rgba(255,255,255,0.08)',
     
-    // Muted accent colors - refined palette
-    accent: '#3B82F6', // blue-500 - more blue than the previous slate-blue
-    accentHover: '#4B92F6', // slightly lighter blue
-    accentMuted: '#2B72E6', // darker blue variant
+    // Accent colors for CTA/highlight only
+    accent: '#FFD500', // Primary accent for CTA
+    accentAlt: '#007BFF', // Secondary accent for highlights
+    accentHover: '#FFE033', // Hover state for primary accent
+    accentMuted: '#E6C200', // Muted variant
     
-    // Secondary accents - muted palette
-    success: '#39675B', // deep teal
-    warning: '#806F4C', // dark mustard
-    danger: '#7A2C3B', // rich burgundy
+    // Secondary accents - grayscale
+    success: '#4A4A4A', // Grayscale success
+    warning: '#6A6A6A', // Grayscale warning
+    danger: '#8A8A8A', // Grayscale danger
     
-    // Text hierarchy - improved contrast
-    text: '#E0E0E0', // Updated to match request
-    textSecondary: '#A0A0A0', // Updated to match request
-    textMuted: '#808080', // Adjusted for better hierarchy
-    textDisabled: '#606060', // Improved disabled text contrast
+    // Text hierarchy - grayscale
+    text: '#E0E0E0',
+    textSecondary: '#A0A0A0',
+    textMuted: '#808080',
+    textDisabled: '#606060',
     
-    // Borders and dividers
-    border: '#2E2E2E', // Updated to match request
-    borderHover: 'rgba(255,255,255,0.25)', // More visible hover borders
-    divider: 'rgba(255,255,255,0.08)', // Better divider visibility
+    // Borders and dividers - grayscale
+    border: '#2E2E2E',
+    borderHover: 'rgba(255,255,255,0.25)',
+    divider: 'rgba(255,255,255,0.08)',
     
-    // Brand colors (matching web app)
-    brand: '#5C6A24', // olive green
-    brandHover: '#6C7A34', // slightly lighter
+    // Brand colors - grayscale
+    brand: '#5A5A5A', // Grayscale brand
+    brandHover: '#6A6A6A', // Grayscale brand hover
     buttonText: '#fff',
   },
   

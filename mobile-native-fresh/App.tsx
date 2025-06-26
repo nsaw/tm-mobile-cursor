@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar'
+import { StatusBar } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import {
@@ -30,7 +30,11 @@ function AppContent() {
   
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
-      <StatusBar style="light" />
+      <StatusBar 
+        barStyle="light-content"
+        translucent={true}
+        backgroundColor="transparent"
+      />
       <AppNavigator />
     </SafeAreaView>
   )
