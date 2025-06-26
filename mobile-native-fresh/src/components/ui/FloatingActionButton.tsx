@@ -28,18 +28,19 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   const [scaleValue] = useState(new Animated.Value(1));
 
   const handlePress = () => {
+    // Haptic feedback
     Vibration.vibrate(50);
     
-    // Animate the button press with scale and pulse
+    // Animate the button press with scale and ease timing
     Animated.sequence([
       Animated.timing(scaleValue, {
         toValue: 0.95,
-        duration: 100,
+        duration: 150,
         useNativeDriver: true,
       }),
       Animated.timing(scaleValue, {
         toValue: 1.05,
-        duration: 100,
+        duration: 150,
         useNativeDriver: true,
       }),
       Animated.timing(scaleValue, {
@@ -55,6 +56,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   };
 
   const handleLongPress = () => {
+    // Haptic feedback for long press
     Vibration.vibrate(100);
     if (onVoiceRecord) {
       onVoiceRecord();

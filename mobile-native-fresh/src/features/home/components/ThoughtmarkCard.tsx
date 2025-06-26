@@ -75,7 +75,6 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
 export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   thoughtmark,
   onEdit,
-  onDelete,
   onArchive,
   onClick,
   selected,
@@ -88,6 +87,26 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [isLongPressing, setIsLongPressing] = useState(false);
   const { tokens } = useTheme();
+
+  // Mount animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(20)).current;
+
+  // Start mount animation on component mount
+  React.useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
 
   const handleLongPress = () => {
     Vibration.vibrate(50);
@@ -166,7 +185,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
     {
       label: 'View',
       icon: 'eye-outline',
-      onPress: onClick || (() => {}),
+      onPress: onClick || (() => console.log('No onClick handler')),
     },
     ...(onEdit ? [{
       label: 'Edit',
@@ -192,177 +211,184 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 
   return (
     <>
-      <TouchableOpacity
-        style={[
-          {
-            backgroundColor: selected 
-              ? `${tokens.colors.accent}33` 
-              : tokens.colors.backgroundSecondary,
-            borderRadius: tokens.radius.sm,
-            padding: tokens.spacing.sm,
-            borderWidth: 1,
-            borderColor: tokens.colors.border,
-            position: 'relative',
-          },
-          style,
-        ]}
-        onPress={handleCardPress}
-        onLongPress={handleLongPress}
-        onPressOut={handlePressOut}
-        activeOpacity={0.7}
-        accessibilityRole="button"
-        accessible={true}
-        accessibilityLabel="Thoughtmark card"
+      <Animated.View
+        style={{
+          opacity: fadeAnim,
+          transform: [{ translateY: slideAnim }],
+        }}
       >
-        <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
-          {/* Header */}
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-            justifyContent: 'space-between',
-          }}>
-            {/* Left: Checkbox */}
+        <TouchableOpacity
+          style={[
+            {
+              backgroundColor: selected 
+                ? `${tokens.colors.accent}33` 
+                : tokens.colors.backgroundSecondary,
+              borderRadius: tokens.radius.sm,
+              padding: tokens.spacing.sm,
+              borderWidth: 1,
+              borderColor: tokens.colors.border,
+              position: 'relative',
+            },
+            style,
+          ]}
+          onPress={handleCardPress}
+          onLongPress={handleLongPress}
+          onPressOut={handlePressOut}
+          activeOpacity={0.7}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Thoughtmark card"
+        >
+          <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
+            {/* Header */}
             <View style={{
               flexDirection: 'row',
               alignItems: 'center',
-              marginRight: tokens.spacing.sm,
+              marginBottom: 8,
+              justifyContent: 'space-between',
             }}>
-              <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
-              {selected && (
-                <TouchableOpacity
-                  style={{ marginRight: tokens.spacing.xs }}
-                  onPress={() => onSelectionToggle?.()}
-                  accessibilityRole="button"
-                  accessible={true}
-                  accessibilityLabel="Toggle selection"
-                >
-                  <Ionicons
-                    name={selected ? 'checkbox' : 'square-outline'}
-                    size={16}
-                    color={tokens.colors.accent}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-
-            {/* Center: Title */}
-            <View style={{
-              flex: 1,
-              justifyContent: 'center',
-              marginRight: tokens.spacing.sm,
-            }}>
-              <Text 
-                variant="subheading" 
-                size="md"
-                style={{ 
-                  textAlign: 'left',
-                  textTransform: 'capitalize',
-                }}
-                numberOfLines={1}
-              >
-                {thoughtmark.title || 'Untitled'}
-              </Text>
-            </View>
-
-            {/* Right: Date, Similarity, Dropdown */}
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexShrink: 0,
-              marginLeft: 'auto',
-            }}>
-              {similarity !== undefined && (
-                <View style={{
-                  backgroundColor: `${tokens.colors.brand}33`,
-                  paddingHorizontal: tokens.spacing.sm,
-                  paddingVertical: tokens.spacing.xs,
-                  borderRadius: tokens.radius.md,
-                  marginRight: tokens.spacing.sm,
-                }}>
-                  <Text 
-                    variant="caption" 
-                    size="xs"
-                    style={{ 
-                      color: tokens.colors.brand,
-                      fontWeight: '600',
-                    }}
-                  >
-                    {Math.round(similarity * 100)}% match
-                  </Text>
-                </View>
-              )}
-              <Text 
-                variant="caption" 
-                size="xs"
-                style={{ 
-                  marginRight: 5,
-                }}
-              >
-                {formatDate(thoughtmark.createdAt)}
-              </Text>
-              <TouchableOpacity
-                style={{ padding: tokens.spacing.xs }}
-                onPress={() => setShowContextMenu(true)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Open context menu"
-              >
-                <Ionicons
-                  name="ellipsis-vertical"
-                  size={16}
-                  color={tokens.colors.textMuted}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Content */}
-          <Text 
-            variant="body" 
-            size="sm"
-            style={{ 
-              marginBottom: 11,
-              lineHeight: 28,
-            }}
-            numberOfLines={2}
-          >
-            {thoughtmark.content || 'No content'}
-          </Text>
-
-          {/* Footer */}
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-          }}>
-            <ScrollView 
-              horizontal 
-              showsHorizontalScrollIndicator={false}
-              style={{ flex: 1, marginRight: tokens.spacing.sm }}
-              contentContainerStyle={{
+              {/* Left: Checkbox */}
+              <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                paddingRight: tokens.spacing.sm,
+                marginRight: tokens.spacing.sm,
+              }}>
+                <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
+                {selected && (
+                  <TouchableOpacity
+                    style={{ marginRight: tokens.spacing.xs }}
+                    onPress={() => onSelectionToggle?.()}
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="Toggle selection"
+                  >
+                    <Ionicons
+                      name={selected ? 'checkbox' : 'square-outline'}
+                      size={16}
+                      color={tokens.colors.accent}
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
+
+              {/* Center: Title */}
+              <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                marginRight: tokens.spacing.sm,
+              }}>
+                <Text 
+                  variant="heading" 
+                  size="md"
+                  style={{ 
+                    textAlign: 'left',
+                    textTransform: 'capitalize',
+                  }}
+                  numberOfLines={1}
+                >
+                  {thoughtmark.title || 'Untitled'}
+                </Text>
+              </View>
+
+              {/* Right: Date, Similarity, Dropdown */}
+              <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexShrink: 0,
+                marginLeft: 'auto',
+              }}>
+                {similarity !== undefined && (
+                  <View style={{
+                    backgroundColor: `${tokens.colors.brand}33`,
+                    paddingHorizontal: tokens.spacing.sm,
+                    paddingVertical: tokens.spacing.xs,
+                    borderRadius: tokens.radius.md,
+                    marginRight: tokens.spacing.sm,
+                  }}>
+                    <Text 
+                      variant="caption" 
+                      size="xs"
+                      style={{ 
+                        color: tokens.colors.brand,
+                        fontWeight: '600',
+                      }}
+                    >
+                      {Math.round(similarity * 100)}% match
+                    </Text>
+                  </View>
+                )}
+                <Text 
+                  variant="caption" 
+                  size="xs"
+                  style={{ 
+                    marginRight: 5,
+                  }}
+                >
+                  {formatDate(thoughtmark.createdAt)}
+                </Text>
+                <TouchableOpacity
+                  style={{ padding: tokens.spacing.xs }}
+                  onPress={() => setShowContextMenu(true)}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Open context menu"
+                >
+                  <Ionicons
+                    name="ellipsis-vertical"
+                    size={16}
+                    color={tokens.colors.textMuted}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Content */}
+            <Text 
+              variant="body" 
+              size="sm"
+              style={{ 
+                marginBottom: 11,
+                lineHeight: 28,
               }}
+              numberOfLines={2}
             >
-              {(thoughtmark.tags || []).map((tag: string) => (
-                <TagChip key={tag} tag={tag} />
-              ))}
-            </ScrollView>
-            
-            {thoughtmark.binName && thoughtmark.binName.trim() && (
-              <Text 
-                variant="caption" 
-                size="xs"
-                style={{ marginLeft: 11 }}
+              {thoughtmark.content || 'No content'}
+            </Text>
+
+            {/* Footer */}
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+            }}>
+              <ScrollView 
+                horizontal 
+                showsHorizontalScrollIndicator={false}
+                style={{ flex: 1, marginRight: tokens.spacing.sm }}
+                contentContainerStyle={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingRight: tokens.spacing.sm,
+                }}
               >
-                {thoughtmark.binName}
-              </Text>
-            )}
+                {(thoughtmark.tags || []).map((tag: string) => (
+                  <TagChip key={tag} tag={tag} />
+                ))}
+              </ScrollView>
+              
+              {thoughtmark.binName && thoughtmark.binName.trim() && (
+                <Text 
+                  variant="caption" 
+                  size="xs"
+                  style={{ marginLeft: 11 }}
+                >
+                  {thoughtmark.binName}
+                </Text>
+              )}
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Animated.View>
 
       <ActionSheet
         visible={showContextMenu}

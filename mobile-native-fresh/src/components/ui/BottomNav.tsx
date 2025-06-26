@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
+  Vibration,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Brain } from 'lucide-react-native';
@@ -11,7 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '../../theme/ThemeProvider';
 
-const { width } = Dimensions.get('window');
+const { width: _width } = Dimensions.get('window');
 
 interface BottomNavProps {
   onNavigate: (path: string) => void;
@@ -32,8 +33,24 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   const { tokens } = useTheme();
 
   const handleAIToolsClick = () => {
+    // Haptic feedback for AI tools
+    Vibration.vibrate(50);
     // TODO: Check if user is premium
     onNavigate('/ai-tools');
+  };
+
+  const handleNavigation = (path: string) => {
+    // Haptic feedback for navigation
+    Vibration.vibrate(30);
+    onNavigate(path);
+  };
+
+  const handleVoiceRecord = () => {
+    // Haptic feedback for voice recording
+    Vibration.vibrate(100);
+    if (onVoiceRecord) {
+      onVoiceRecord();
+    }
   };
 
   const navItems = [
@@ -114,8 +131,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           paddingHorizontal: tokens.spacing.lg,
           minHeight: 107,
         }}>
-          {navItems.map((item, index) => {
-            const { icon, label, path, action, iconType } = item;
+          {navItems.map((item, _index) => {
+            const { label, path, action } = item;
             const isActive = currentRoute === path;
             const isVoice = action === 'voice';
             const isHome = path === '/';
@@ -136,11 +153,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 }}
                 onPress={() => {
                   if (isVoice && onVoiceRecord) {
-                    onVoiceRecord();
+                    handleVoiceRecord();
                   } else if (action === 'ai-tools') {
                     handleAIToolsClick();
                   } else if (path) {
-                    onNavigate(path);
+                    handleNavigation(path);
                   }
                 }}
                 accessibilityRole="button"
@@ -231,7 +248,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 if (onCreateNew) {
                   onCreateNew();
                 } else {
-                  onNavigate('/create');
+                  handleNavigation('/create');
                 }
               }}
               accessibilityRole="button"
