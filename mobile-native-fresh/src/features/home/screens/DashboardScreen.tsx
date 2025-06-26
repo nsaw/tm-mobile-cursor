@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image,
   Dimensions,
   useWindowDimensions,
   Animated,
@@ -971,9 +970,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Image
-              source={{ uri: 'https://raw.githubusercontent.com/nsaw/imageSrc/main/IMG_4663.jpeg' }}
-              style={styles.logo}
+            <Ionicons 
+              name="bulb-outline" 
+              size={32} 
+              color={tokens.colors.accent} 
+              style={{ marginRight: tokens.spacing.sm }}
             />
             <View style={styles.titleContainer}>
               <Text style={styles.title} numberOfLines={1}>THOUGHTMARKS</Text>

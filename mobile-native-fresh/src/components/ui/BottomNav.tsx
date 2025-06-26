@@ -33,15 +33,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
   const handleAIToolsClick = () => {
     // TODO: Check if user is premium
-    onNavigate('/ai-tools');
+    onNavigate('AITools');
   };
 
   const navItems = [
-    { icon: 'home-outline', label: 'Home', path: '/', iconType: 'material' },
-    { icon: 'magnify', label: 'Search', path: '/search', iconType: 'material' },
+    { icon: 'home-outline', label: 'Home', path: 'Dashboard', iconType: 'material' },
+    { icon: 'magnify', label: 'Search', path: 'Search', iconType: 'material' },
     { icon: 'microphone-outline', label: 'Voice', action: 'voice', iconType: 'material' },
     { icon: 'crown-outline', label: 'AI', action: 'ai-tools', iconType: 'material' },
-    { icon: 'brain', label: 'All', path: '/all-thoughtmarks', iconType: 'lucide' },
+    { icon: 'brain', label: 'All', path: 'AllThoughtmarks', iconType: 'lucide' },
   ];
 
   const renderIcon = (item: any, isActive: boolean, isHome: boolean, isVoice: boolean) => {
@@ -231,7 +231,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 if (onCreateNew) {
                   onCreateNew();
                 } else {
-                  onNavigate('/create');
+                  onNavigate('CreateThoughtmark');
                 }
               }}
               accessibilityRole="button"

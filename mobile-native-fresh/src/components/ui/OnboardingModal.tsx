@@ -93,7 +93,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               marginBottom: 4,
               textAlign: 'center',
               color: tokens.colors.text,
-              fontSize: tokens.typography.fontSize.xl,
+              fontSize: tokens.typography.fontSize.heading,
               fontWeight: tokens.typography.fontWeight.bold,
               fontFamily: 'Ubuntu_700Bold',
               letterSpacing: 0.5,
@@ -106,6 +106,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               color: tokens.colors.textSecondary,
               textAlign: 'center',
               opacity: 0.9,
+              fontSize: tokens.typography.fontSize.sm,
             }}>
               {`${currentStep + 1} of ${steps.length}`}
             </Text>
@@ -130,7 +131,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               ...typography.body,
               lineHeight: 24,
               color: tokens.colors.text,
-              fontSize: 15,
+              fontSize: tokens.typography.fontSize.body,
             }} 
             numberOfLines={4}
           >
@@ -139,17 +140,17 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
 
           {/* Divider/accent below text chunk */}
           <View style={{ alignItems: 'center', marginBottom: spacing.modalPaddingVertical }}>
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: '#3B82F6' }} />
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: tokens.colors.accent }} />
           </View>
 
-          {/* Progress Dots */}
+          {/* Progress Dots - Improved visibility */}
           <View style={styles.progressDots}>
             {steps.map((_, idx) => (
               <View key={idx}>
                 <View style={[
                   styles.dot,
                   {
-                    backgroundColor: idx === currentStep ? tokens.colors.accent : tokens.colors.border,
+                    backgroundColor: idx === currentStep ? tokens.colors.accent : tokens.colors.borderHover,
                   }
                 ]} />
               </View>
@@ -167,12 +168,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 backgroundColor: 'transparent',
                 borderRadius: 8,
                 paddingHorizontal: spacing.modalPaddingHorizontal,
+                paddingVertical: spacing.modalPaddingVertical,
                 marginBottom: spacing.modalPaddingVertical,
                 width: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
+                minHeight: 48,
               }}
-              textStyle={{ color: '#FFD700', fontWeight: 'bold' }}
+              textStyle={{ color: '#FFD700', fontWeight: 'bold', fontSize: tokens.typography.fontSize.body }}
             >
               <Text>Upgrade now</Text>
             </Button>
@@ -241,17 +244,18 @@ const styles = StyleSheet.create({
   progressDots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 8,
+    gap: 12,
     marginBottom: 24,
   },
   dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 8,
   },
 }); 
