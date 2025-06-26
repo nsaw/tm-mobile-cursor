@@ -43,6 +43,26 @@ const { tokens } = useTheme();
 const { tokens } = useTheme();
 
 const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
   const [searchQuery, setSearchQuery] = useState(value || '');
 
   const styles = StyleSheet.create({

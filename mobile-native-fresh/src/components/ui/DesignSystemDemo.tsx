@@ -31,6 +31,26 @@ const { tokens } = useTheme();
 
 const { tokens } = useTheme();
 
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <View style={{ padding: tokens.spacing.lg }}>
