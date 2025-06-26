@@ -17,10 +17,10 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
   variant = 'tagline',
   numberOfLines
 }) => {
-  const { tokens } = useTheme();
+  const { typography } = useTheme();
 
   const neonStyle: TextStyle = {
-    ...tokens.typography.tagline, // Use tagline variant from tokens
+    ...typography.tagline, // Use tagline variant from new typography tokens
     color: '#C6D600',
     // Remove glow effects for tagline variant
     // Gradient direction: 45 degrees (start: 0,0 to end: 1,1)

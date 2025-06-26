@@ -38,7 +38,7 @@ interface DashboardScreenProps {
 
 export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
   const { width: windowWidth } = useWindowDimensions();
-  const { tokens } = useTheme();
+  const { typography, buttonStyles, spacing, tokens } = useTheme();
   const [refreshing, setRefreshing] = useState(false);
   const [selectedTag, setSelectedTag] = useState<string>('all');
   const [localTagFilter, setLocalTagFilter] = useState<string>('all');
@@ -572,7 +572,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     scrollView: {
       flex: 1,
-      width: '100%',
     },
     scrollContent: {
       paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
@@ -592,7 +591,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       alignItems: 'center',
       flex: 1,
     },
-    logo: {
+    avatar: {
       width: 64, // 48 * 1.34
       height: 64, // 48 * 1.34
       borderRadius: 13, // 10 * 1.34
@@ -600,7 +599,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     titleContainer: {
       flex: 1,
-      flexShrink: 1, // Allow shrinking to prevent overflow
+      marginLeft: tokens.spacing.sm,
     },
     title: {
       fontSize: RFValue(16),
@@ -610,7 +609,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
       textTransform: 'uppercase',
       fontFamily: 'Ubuntu_700Bold',
-      flexShrink: 1, // Allow shrinking to prevent overflow
+      flexShrink: 1,
     },
     subtitle: {
       fontSize: RFValue(10),
@@ -630,11 +629,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       shadowColor: tokens.colors.text,
       shadowOffset: {
         width: 0,
-        height: .75,
+        height: 2,
       },
       shadowOpacity: 0.1,
-      shadowRadius: 2,
-      elevation: 1,
+      shadowRadius: 4,
+      elevation: 3,
     },
     settingsButton: {
       padding: tokens.spacing.sm,
@@ -671,7 +670,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       color: tokens.colors.accent,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
-      opacity: 0.8, // Added 80% opacity for text below h3
+      opacity: 0.8,
     },
     tasksList: {
       // Styles for tasks list
@@ -990,7 +989,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 accessible={true}
                 accessibilityLabel="Button"
               >
-                <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
+                <Ionicons name="information-circle-outline" size={27} color={typography.colors.textSecondary} />
               </TouchableOpacity>
             </Animated.View>
             <TouchableOpacity
@@ -1000,7 +999,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessible={true}
               accessibilityLabel="Button"
             >
-              <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
+              <Ionicons name="settings-outline" size={32} color={typography.colors.textSecondary} />
             </TouchableOpacity>
           </View>
         </View>

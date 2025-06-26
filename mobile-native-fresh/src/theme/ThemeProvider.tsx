@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import { designTokens, DesignTokens } from './tokens';
+import { typographyTokens } from './typography';
+import { buttonStyles } from './buttonStyles';
+import { spacingTokens } from './spacing';
 import { 
   getButtonVariants, 
   getCardVariants, 
@@ -11,6 +14,9 @@ import {
 
 interface ThemeContextType {
   tokens: DesignTokens;
+  typography: typeof typographyTokens;
+  buttonStyles: typeof buttonStyles;
+  spacing: typeof spacingTokens;
   variants: {
     buttonVariants: ReturnType<typeof getButtonVariants>;
     cardVariants: ReturnType<typeof getCardVariants>;
@@ -68,6 +74,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const contextValue: ThemeContextType = {
     tokens: designTokens,
+    typography: typographyTokens,
+    buttonStyles: buttonStyles,
+    spacing: spacingTokens,
     variants: {
       buttonVariants: getButtonVariants(designTokens),
       cardVariants: getCardVariants(designTokens),

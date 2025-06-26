@@ -92,7 +92,7 @@ export default function App() {
   useEffect(() => {
     const hideSplash = async () => {
       try {
-        if (fontsLoaded) {
+    if (fontsLoaded) {
           console.log('Fonts loaded, hiding splash screen...');
           await SplashScreen.hideAsync();
           console.log('Splash screen hidden successfully');

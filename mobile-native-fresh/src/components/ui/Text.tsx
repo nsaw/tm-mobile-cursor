@@ -48,28 +48,28 @@ export const Text: React.FC<TextProps> = ({
   textComponentStack.add(componentId);
 
   try {
-    // Get variant styles
-    const textVariants = getTextVariants(tokens);
-    const baseStyle = textVariants.base;
-    const variantStyle = textVariants.variants.variant[variant];
-    const sizeStyle = size ? textVariants.variants.size[size] : {};
+  // Get variant styles
+  const textVariants = getTextVariants(tokens);
+  const baseStyle = textVariants.base;
+  const variantStyle = textVariants.variants.variant[variant];
+  const sizeStyle = size ? textVariants.variants.size[size] : {};
 
-    // Merge all styles
-    const textStyle = mergeVariantStyles(baseStyle, {
-      variant: variantStyle,
-      size: sizeStyle,
-    });
+  // Merge all styles
+  const textStyle = mergeVariantStyles(baseStyle, {
+    variant: variantStyle,
+    size: sizeStyle,
+  });
 
-    // Apply custom overrides
-    const finalTextStyle = {
-      ...textStyle,
-      color: color || textStyle.color,
-      fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
-      textAlign: align,
-      ...style,
-    };
+  // Apply custom overrides
+  const finalTextStyle = {
+    ...textStyle,
+    color: color || textStyle.color,
+    fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
+    textAlign: align,
+    ...style,
+  };
 
-    return (
+  return (
       <RNText
         style={finalTextStyle}
         numberOfLines={numberOfLines}
@@ -77,7 +77,7 @@ export const Text: React.FC<TextProps> = ({
       >
         {children}
       </RNText>
-    );
+  );
   } finally {
     // Always remove from stack, even if an error occurs
     textComponentStack.delete(componentId);
@@ -125,6 +125,6 @@ export const Caption: React.FC<Omit<TextProps, 'variant'>> = (props) => (
 
 export const Label: React.FC<Omit<TextProps, 'variant'>> = (props) => (
   <Text variant="caption" {...props} />
-);
+); 
 
 // 'tagline' variant is for secondary/subtitle text (onboarding descriptions, empty state subtitles, etc) 
