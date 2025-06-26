@@ -349,6 +349,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               style={{ 
                 marginBottom: 11,
                 lineHeight: 28,
+                maxWidth: 280, // Approximately 75 characters width
               }}
               numberOfLines={2}
             >
@@ -360,6 +361,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'flex-end',
+              marginTop: tokens.spacing.sm,
             }}>
               <ScrollView 
                 horizontal 
@@ -369,6 +371,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                   flexDirection: 'row',
                   alignItems: 'center',
                   paddingRight: tokens.spacing.sm,
+                  paddingVertical: tokens.spacing.xs,
                 }}
               >
                 {(thoughtmark.tags || []).map((tag: string) => (
@@ -380,7 +383,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                 <Text 
                   variant="caption" 
                   size="xs"
-                  style={{ marginLeft: 11 }}
+                  style={{ marginLeft: tokens.spacing.sm }}
                 >
                   {thoughtmark.binName}
                 </Text>

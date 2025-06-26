@@ -340,13 +340,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
+                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ marginLeft: tokens.spacing.sm }} />
                 </TouchableOpacity>
               </View>
               <ScrollView 
                 horizontal 
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.tagsScrollContent}
+                style={styles.tagsScrollView}
+                contentContainerStyle={styles.tagsContent}
               >
                 <TouchableOpacity
                   style={[
@@ -356,16 +357,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   onPress={() => handleLocalTagPress('all')}
                   accessibilityRole="button"
                   accessible={true}
-                  accessibilityLabel={`filter by tag: all`}
+                  accessibilityLabel="All tags filter"
                 >
                   <Text style={[
-                    styles.tagChipText,
-                    localTagFilter === 'all' && styles.tagChipTextActive
+                    styles.tagText,
+                    localTagFilter === 'all' && styles.tagTextActive
                   ]}>
-                    all ({thoughtmarks.filter(t => !t.isDeleted).length})
+                    All
                   </Text>
                 </TouchableOpacity>
-                
                 {allTags.map((tag) => (
                   <TouchableOpacity
                     key={tag}
@@ -376,57 +376,53 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     onPress={() => handleLocalTagPress(tag)}
                     accessibilityRole="button"
                     accessible={true}
-                    accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
+                    accessibilityLabel={`Filter by ${tag} tag`}
                   >
                     <Text style={[
-                      styles.tagChipText,
-                      localTagFilter === tag && styles.tagChipTextActive
+                      styles.tagText,
+                      localTagFilter === tag && styles.tagTextActive
                     ]}>
-                      {tag.toLowerCase()}
+                      #{tag}
                     </Text>
                   </TouchableOpacity>
                 ))}
               </ScrollView>
             </View>
 
-            {/* Recent Thoughtmarks List - Flattened structure */}
-            {recentThoughtmarks.length > 0 ? (
-              <>
-                {recentThoughtmarks.map((thoughtmark, idx) => (
+            {/* Recent Thoughtmarks */}
+            <View style={styles.sectionContainer}>
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Recent Thoughtmarks</Text>
+                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="View all thoughtmarks">
+                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} />
+                </TouchableOpacity>
+              </View>
+              {recentThoughtmarks.length > 0 ? (
+                recentThoughtmarks.map((thoughtmark) => (
                   <ThoughtmarkCard
                     key={thoughtmark.id}
                     thoughtmark={thoughtmark}
-                    pinned={thoughtmark.isPinned}
                     onClick={() => handleThoughtmarkPress(thoughtmark)}
                     onEdit={() => handleThoughtmarkEdit(thoughtmark)}
                     onPinToggle={handlePinToggle}
-                    style={idx !== recentThoughtmarks.length - 1 ? { marginBottom: tokens.spacing.sm } : undefined}
+                    style={styles.thoughtmarkCard}
                   />
-                ))}
-                
-                {/* View More Card - Flattened */}
-                <TouchableOpacity
-                  style={styles.viewMoreCard}
-                  onPress={handleViewAllThoughtmarks}
-                  accessibilityRole="button"
-                  accessible={true}
-                  accessibilityLabel="Button"
-                >
-                  <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
-                  <Text style={styles.viewMoreText}>View all thoughtmarks</Text>
-                  <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
-                </TouchableOpacity>
-              </>
-            ) : (
-              <View style={styles.emptyState}>
-                <Text style={styles.emptyStateText}>
-                  {localTagFilter === 'all' 
-                    ? 'No thoughtmarks yet. Tap the button below to create your first one!' 
-                    : `No thoughtmarks with "${localTagFilter}" tag found.`
-                  }
-                </Text>
-              </View>
-            )}
+                ))
+              ) : (
+                <View style={styles.emptyState}>
+                  <Text style={styles.emptyStateText}>No thoughtmarks yet</Text>
+                  <TouchableOpacity
+                    style={styles.createButton}
+                    onPress={handleCreateNew}
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="Create new thoughtmark"
+                  >
+                    <Text style={styles.createButtonText}>Create your first thoughtmark</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
           </>
         );
       
@@ -880,7 +876,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     tagsContainer: {
       marginBottom: tokens.spacing.sm * 1.34,
     },
-    tagsScrollContent: {
+    tagsScrollView: {
+      marginBottom: tokens.spacing.sm * 1.34,
+    },
+    tagsContent: {
       paddingHorizontal: tokens.spacing.sm,
       paddingVertical: tokens.spacing.xs * 1.34,
     },
@@ -896,14 +895,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       backgroundColor: 'transparent',
       borderColor: tokens.colors.accent,
     },
-    tagChipText: {
+    tagText: {
       fontSize: RFValue(10),
       color: tokens.colors.text,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       opacity: 0.8,
     },
-    tagChipTextActive: {
+    tagTextActive: {
       color: tokens.colors.accent,
       opacity: 0.8,
     },
@@ -928,6 +927,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       opacity: 0.8,
+    },
+    sectionContainer: {
+      marginBottom: tokens.spacing.md,
+    },
+    thoughtmarkCard: {
+      marginBottom: tokens.spacing.sm,
+    },
+    createButton: {
+      padding: tokens.spacing.md,
+      backgroundColor: tokens.colors.accent,
+      borderRadius: tokens.radius.md,
+      marginTop: tokens.spacing.sm,
+    },
+    createButtonText: {
+      fontSize: RFValue(14),
+      color: tokens.colors.background,
+      fontWeight: '500',
+      fontFamily: 'Ubuntu_500Medium',
     },
   });
 
