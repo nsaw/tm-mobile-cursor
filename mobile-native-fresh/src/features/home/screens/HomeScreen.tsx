@@ -83,7 +83,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const handleCreateNew = () => {
-    navigation.navigate('CreateThoughtmark');
+    navigation.navigate('CreateThoughtmark', {});
   };
 
   const handleBinPress = (bin: Bin) => {
