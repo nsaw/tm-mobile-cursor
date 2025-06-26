@@ -1,16 +1,16 @@
 
 # JSX Style Role Audit Report
-Generated: 2025-06-26T21:42:38.369Z
+Generated: 2025-06-26T22:42:39.332Z
 
 ## Summary
 - Total files scanned: 78
 - Files with components: 51
-- Total components found: 606
+- Total components found: 605
 - Components with roles: 0
-- Components without roles: 606
+- Components without roles: 605
 - Invalid roles: 0
 
-## Issues Found (606)
+## Issues Found (605)
 
 ### MISSING_ROLE
 - **File:** src/navigation/AppNavigator.tsx:53
@@ -1863,37 +1863,32 @@ Generated: 2025-06-26T21:42:38.369Z
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/BinCard.tsx:64
+- **File:** src/features/home/components/BinCard.tsx:61
 - **Message:** Missing role prop for TouchableOpacity component
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/BinCard.tsx:70
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/home/components/BinCard.tsx:71
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/home/components/AIToolsCard.tsx:74
-- **Message:** Missing role prop for TouchableOpacity component
-- **Suggestion:** Add role="button"
-
-### MISSING_ROLE
-- **File:** src/features/home/components/AIToolsCard.tsx:75
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/home/components/AIToolsCard.tsx:77
+- **File:** src/features/home/components/BinCard.tsx:67
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/AIToolsCard.tsx:78
+- **File:** src/features/home/components/BinCard.tsx:68
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="caption"
+
+### MISSING_ROLE
+- **File:** src/features/home/components/AIToolsCard.tsx:71
+- **Message:** Missing role prop for TouchableOpacity component
+- **Suggestion:** Add role="button"
+
+### MISSING_ROLE
+- **File:** src/features/home/components/AIToolsCard.tsx:72
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/home/components/AIToolsCard.tsx:75
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
@@ -1928,72 +1923,72 @@ Generated: 2025-06-26T21:42:38.369Z
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:291
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:275
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:315
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:299
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:342
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:326
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:343
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:327
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:369
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:353
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:370
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:354
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:397
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:381
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:398
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:382
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:383
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:385
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:386
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="body"
+
+### MISSING_ROLE
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:388
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
 - **File:** src/features/bins/screens/CreateBinScreen.tsx:399
 - **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:401
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:402
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:404
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:415
-- **Message:** Missing role prop for View component
 - **Suggestion:** Add role="modal"
 
 ### MISSING_ROLE
-- **File:** src/features/bins/screens/CreateBinScreen.tsx:417
+- **File:** src/features/bins/screens/CreateBinScreen.tsx:401
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 

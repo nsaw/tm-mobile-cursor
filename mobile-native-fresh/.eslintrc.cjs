@@ -71,21 +71,8 @@ module.exports = {
       {
         patterns: [
           {
-            group: ['./tokens', '../theme/tokens'],
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
-          },
-        ],
-        paths: [
-          {
-            name: './tokens',
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
-          },
-          {
-            name: '../theme/tokens',
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
+            group: ['**/designTokens', '**/tokens'],
+            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components.'
           },
         ],
       },
@@ -94,7 +81,7 @@ module.exports = {
     'thoughtmarks/no-direct-design-tokens': 'error',
     'thoughtmarks/no-global-theme': 'error',
     'thoughtmarks/require-use-theme': 'error',
-    // 'thoughtmarks/no-circular-text': 'error', // Temporarily disabled due to rule syntax issue
+    // 'thoughtmarks/no-circular-text': 'error', // Temporarily disabled due to rule implementation issue
     // Custom text wrapping rule
     'thoughtmarks/enforce-text-wrapping': 'error',
     // Accessibility rules
