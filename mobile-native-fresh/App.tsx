@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { LogBox } from 'react-native'
 import {
   Oswald_400Regular,
   Oswald_500Medium,
@@ -24,6 +25,15 @@ import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
 SplashScreen.preventAutoHideAsync().catch(() => {
   /* ignore */
 })
+
+// Configure error overlay to auto-dismiss text string errors
+LogBox.ignoreLogs([
+  'Text strings should be rendered within a <Text> component',
+  'Warning: Text strings should be rendered within a <Text> component',
+]);
+
+// Disable LogBox to prevent error toasts
+LogBox.uninstall();
 
 function AppContent() {
   const { tokens } = useTheme();

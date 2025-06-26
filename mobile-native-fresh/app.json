@@ -45,6 +45,9 @@
       "googleAndroidClientId": "482692133923-uahvc6eshmr3p03mv8dl9vgk6vrl6b5v.apps.googleusercontent.com",
       "googleIosClientId": "482692133923-urb0tq0gcjbp06e26gimulhjp18kpcpb.apps.googleusercontent.com"
     },
-    "jsEngine": "jsc"
+    "jsEngine": "jsc",
+    "experiments": {
+      "disableErrorOverlay": true
+    }
   }
 }

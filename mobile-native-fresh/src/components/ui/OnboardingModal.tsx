@@ -131,7 +131,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               ...typography.body,
               lineHeight: 24,
               color: tokens.colors.text,
-              fontSize: tokens.typography.fontSize.body,
+              fontSize: tokens.typography.fontSize.body + 2,
             }} 
             numberOfLines={4}
           >
