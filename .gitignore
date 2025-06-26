@@ -1,16 +1,39 @@
-# Node modules
-node_modules/
 
-# Expo / React Native
-.expo/
-.expo-shared/
-android/
-ios/
-web-build/
-dist/
-
-# Environment
+.DS_Store
 .env
+.env.*.local
+.env.local
+.expo-shared/
+.expo/
+.history/
+.replit
+.vscode/
+*.keystore
+*.log
+# Bundler
+# Environment
+# Expo
+# Expo / React Native
+# Logs
+# macOS
+# Node
+# Node modules
+# React Native
+# Replit
+# VS Code
+android/
+android/.gradle/
+android/.idea/
+android/app/build/
+build/
+dist/
+ios/
+ios/build/
+logs
+node_modules/
 npm-debug.log*
+pnpm-debug.log*
+reference/replit-build
+web-build/
 yarn-debug.log*
 yarn-error.log*
