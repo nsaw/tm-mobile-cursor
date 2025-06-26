@@ -44,16 +44,11 @@ import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/Unifi
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
+import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
 
 import { RootStackParamList } from './types';
 
 // Placeholder screens - to be implemented
-const CreateBinScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Create Bin Screen</Text>
-  </View>
-);
-
 const BinDetailScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bin Detail Screen</Text>

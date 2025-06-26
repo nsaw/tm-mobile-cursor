@@ -5,6 +5,7 @@ import { Text ,
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 
@@ -17,7 +18,7 @@ interface AIToolsCardProps {
 
 export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   onPress,
-  title = "AI Tools",
+  title = "AI TOOLS",
   subtitle = "Generate insights and suggestions",
   icon = "sparkles",
 }) => {
@@ -28,10 +29,12 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       backgroundColor: tokens.colors.surface ?? '#fff',
       borderRadius: tokens.radius.md,
       paddingVertical: tokens.spacing.md * 0.7,
-      paddingHorizontal: tokens.spacing.lg * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
       marginHorizontal: 0,
+      marginTop: tokens.spacing.md,
       marginBottom: tokens.spacing.md,
-      borderWidth: 1,
+      borderWidth: .25,
       borderColor: '#FFD700',
       flexDirection: 'row',
       alignItems: 'center',
@@ -55,32 +58,27 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       fontWeight: '600',
       color: '#FFD700',
       marginBottom: tokens.spacing.xs,
-      marginLeft: tokens.spacing.sm,
+      textTransform: 'uppercase',
     },
     subtitle: {
       fontSize: tokens.typography.fontSize.sm,
       color: tokens.colors.textSecondary,
       lineHeight: 16,
     },
-    icon: {
-      color: tokens.colors.accent,
-    },
     crownIcon: {
       color: '#FFD700',
-      marginRight: tokens.spacing.xs,
     },
   });
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <View style={styles.content}>
-        <Ionicons name={"crown" as any} size={20} style={styles.crownIcon} />
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
       </View>
-      <Ionicons name={icon as any} size={24} style={styles.icon} />
+      <MaterialCommunityIcons name={"crown" as any} size={20} style={styles.crownIcon} />
     </TouchableOpacity>
   );
 }; 

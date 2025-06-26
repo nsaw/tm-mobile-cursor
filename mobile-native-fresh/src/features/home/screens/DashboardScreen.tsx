@@ -340,7 +340,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-                  <Ionicons name="arrow-forward" size={14} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
+                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
               <ScrollView 
@@ -414,9 +414,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   accessible={true}
                   accessibilityLabel="Button"
                 >
-                  <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
-                  <Text style={styles.viewMoreText}>VIEW ALL THOUGHTMARKS</Text>
                   <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
+                  <Text style={styles.viewMoreText}>View All Thoughtmarks</Text>
+                  <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
                 </TouchableOpacity>
               </>
             ) : (
@@ -494,24 +494,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       </TouchableOpacity>
                     );
                   })}
-                  
-                  {/* New Bin Button */}
+                </ScrollView>
+                
+                {/* Special sections below horizontal scroll */}
+                <View style={styles.specialBinsContainer}>
+                  {/* New Bin Button - Moved to specialty section */}
                   <TouchableOpacity
-                    style={styles.newBinCardHorizontal}
+                    style={styles.specialBinCard}
                     onPress={handleCreateBin}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel="Create new bin"
                   >
-                    <View style={styles.newBinCardContentHorizontal}>
+                    <View style={styles.specialBinCardContent}>
+                      <Text style={styles.specialBinCardText}>New Bin</Text>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
-                      <Text style={styles.newBinTextHorizontal}>New Bin</Text>
                     </View>
                   </TouchableOpacity>
-                </ScrollView>
-                
-                {/* Special sections below horizontal scroll */}
-                <View style={styles.specialBinsContainer}>
+                  
                   {/* Saved to Sort Later */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
@@ -584,8 +584,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
-      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
+      marginBottom: tokens.spacing.lg * 0.25, // Reduced from spacing.lg
+      paddingHorizontal: tokens.spacing.page * 0.25, // Reduced by half
     },
     headerLeft: {
       flexDirection: 'row',
@@ -600,15 +600,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     titleContainer: {
       flex: 1,
+      flexShrink: 1, // Allow shrinking to prevent overflow
     },
     title: {
-      fontSize: RFValue(18),
+      fontSize: RFValue(16),
       fontWeight: '900',
       color: tokens.colors.text,
       opacity: 0.9, // Added 90% opacity for h2 text
       letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
       textTransform: 'uppercase',
       fontFamily: 'Ubuntu_700Bold',
+      flexShrink: 1, // Allow shrinking to prevent overflow
     },
     subtitle: {
       fontSize: RFValue(10),
@@ -617,28 +619,28 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginLeft: 21, // Indent the tagline - 16 * 1.34
       fontFamily: 'Ubuntu_400Regular',
       opacity: 0.8, // Added 80% opacity for text below h3
+      flexShrink: 1, // Allow shrinking to prevent overflow
     },
     headerRight: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     infoButton: {
-      padding: tokens.spacing.sm * 1.34,
+      padding: tokens.spacing.sm,
       shadowColor: tokens.colors.text,
       shadowOffset: {
         width: 0,
-        height: 1,
+        height: .75,
       },
       shadowOpacity: 0.1,
       shadowRadius: 2,
       elevation: 1,
     },
     settingsButton: {
-      padding: tokens.spacing.sm * 1.34,
+      padding: tokens.spacing.sm,
     },
     aiToolsContainer: {
       marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
-      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
     },
     section: {
       marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
@@ -653,9 +655,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(18),
       fontWeight: '600',
       color: tokens.colors.textSecondary,
-      opacity: 0.7,
       letterSpacing: 0.5,
       fontFamily: 'Ubuntu_600SemiBold',
+      opacity: 0.7,
     },
     sectionHeaderRight: {
       flexDirection: 'row',
@@ -753,11 +755,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     specialBinCard: {
       width: '100%',
       height: 70,
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: 'transparent',
       borderRadius: tokens.radius.md,
       borderWidth: 1,
-      borderColor: tokens.colors.accentHover,
-      padding: tokens.spacing.sm * 1.34,
+      borderColor: tokens.colors.accent,
+      paddingTop: tokens.spacing.sm * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
       marginBottom: tokens.spacing.sm * 1.34,
       justifyContent: 'center',
     },
@@ -768,13 +773,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       width: '100%',
     },
     specialBinCardText: {
-      fontSize: RFValue(14),
-      color: tokens.colors.text,
+      fontSize: RFValue(12.5),
+      color: tokens.colors.accent,
       fontWeight: '500',
       opacity: 0.8,
     },
     specialBinCardCount: {
-      fontSize: RFValue(11),
+      fontSize: RFValue(12.5),
       color: tokens.colors.accent,
       opacity: 0.8,
     },
@@ -783,7 +788,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       height: 70,
       backgroundColor: 'transparent',
       borderRadius: tokens.radius.md,
-      padding: tokens.spacing.sm * 1.34,
+      paddingTop: tokens.spacing.sm * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
       marginBottom: tokens.spacing.sm * 1.34,
       justifyContent: 'center',
       borderWidth: 1,
@@ -796,7 +804,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       width: '100%',
     },
     archiveCardText: {
-      fontSize: RFValue(14),
+      fontSize: RFValue(12),
       color: tokens.colors.text,
       fontWeight: '500',
       opacity: 0.8,
@@ -804,15 +812,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     viewMoreCard: {
       backgroundColor: 'transparent',
       borderRadius: tokens.radius.md,
-      padding: tokens.spacing.md * 1.34,
-      alignItems: 'center',
+      paddingTop: tokens.spacing.sm * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
       marginTop: tokens.spacing.md * 1.34,
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: tokens.colors.accent,
-      borderStyle: 'dashed',
-      height: 80,
+      height: 70,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
     },
     viewMoreText: {
       fontSize: RFValue(14),
@@ -912,7 +922,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginBottom: tokens.spacing.md * 1.34,
     },
     tagsTitle: {
-      fontSize: RFValue(12),
+      fontSize: RFValue(10),
       fontWeight: '400',
       color: tokens.colors.textSecondary,
       letterSpacing: 0.7,
@@ -967,8 +977,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               style={styles.logo}
             />
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>THOUGHTMARKS</Text>
-              <NeonGradientText variant="tagline">bookmarks for your brain</NeonGradientText>
+              <Text style={styles.title} numberOfLines={1}>THOUGHTMARKS</Text>
+              <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>

@@ -52,7 +52,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const elevationAnim = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
-  const opacityAnim = useRef(new Animated.Value(1)).current;
+  const opacityAnim = useRef(new Animated.Value(0.5)).current;
   const panRef = useRef(null);
 
   const handleLongPress = () => {
@@ -116,7 +116,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
       // Add subtle press feedback
       setIsPressing(true);
       Animated.timing(opacityAnim, {
-        toValue: 0.7,
+        toValue: 1,
         duration: 100,
         useNativeDriver: true,
       }).start();
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     marginRight: 11,
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '700',
     letterSpacing: 0.7,
     fontFamily: 'Ubuntu_700Bold',

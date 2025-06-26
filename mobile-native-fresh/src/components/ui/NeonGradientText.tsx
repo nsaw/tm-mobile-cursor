@@ -8,12 +8,14 @@ interface NeonGradientTextProps {
   children: React.ReactNode;
   style?: TextStyle;
   variant?: 'tagline' | 'body' | 'heading' | 'title' | 'subtitle' | 'caption' | 'muted';
+  numberOfLines?: number;
 }
 
 export const NeonGradientText: React.FC<NeonGradientTextProps> = ({ 
   children, 
   style,
-  variant = 'tagline'
+  variant = 'tagline',
+  numberOfLines
 }) => {
   const { tokens } = useTheme();
 
@@ -29,6 +31,7 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
     <Text
       variant={variant}
       style={neonStyle}
+      numberOfLines={numberOfLines}
     >
       {children}
     </Text>

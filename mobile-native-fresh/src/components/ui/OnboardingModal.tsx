@@ -22,32 +22,32 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={90} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={90} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
       description: "Enable voice commands like 'Hey Siri, capture thoughtmark' or 'Hey Siri, add to thoughtmarks' from anywhere on your device. You can set this up now or later in Settings.",
-      icon: <Ionicons name="phone-portrait-outline" size={43} color="#60A5FA" />,
+      icon: <Ionicons name="phone-portrait-outline" size={90} color="#60A5FA" />,
     },
     {
       title: 'Organize with Smart Bins',
       description: 'AI automatically categorizes your thoughts into relevant bins. You can also create custom bins for specific projects.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={90} color="#FFD700" />,
     },
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={43} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={90} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
       description: 'Access advanced AI, unlimited bins, priority support, and more.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={43} color="#FFD700" />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={90} color="#FFD700" />,
       premium: true,
     },
   ];
@@ -96,18 +96,23 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             }}>
               {steps[currentStep].title}
             </Text>
+            <Text style={{
+              fontSize: tokens.typography.fontSize.sm,
+              color: tokens.colors.textSecondary,
+              textAlign: 'center',
+              opacity: 0.7,
+            }}>
+              {`${currentStep + 1} of ${steps.length}`}
+            </Text>
           </View>
 
           {/* Icon - Enlarged and centered */}
           <View style={[styles.iconContainer, { 
             alignSelf: 'center',
-            marginTop: tokens.spacing.lg,
-            marginBottom: tokens.spacing.lg,
+            marginTop: tokens.spacing.lg * 0.5, // Reduced by half
+            marginBottom: tokens.spacing.lg * 0.5, // Reduced by half
           }]}>
-            {React.cloneElement(steps[currentStep].icon, {
-              size: 54, // Enlarged by 1.25x (43 * 1.25)
-              ...(steps[currentStep].icon.props || {})
-            })}
+            {steps[currentStep].icon}
           </View>
 
           {/* Description - Increased font size */}
