@@ -415,7 +415,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   accessibilityLabel="Button"
                 >
                   <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
-                  <Text style={styles.viewMoreText}>View All Thoughtmarks</Text>
+                  <Text style={styles.viewMoreText}>View all thoughtmarks</Text>
                   <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
                 </TouchableOpacity>
               </>
@@ -507,7 +507,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessibilityLabel="Create new bin"
                   >
                     <View style={styles.specialBinCardContent}>
-                      <Text style={styles.specialBinCardText}>New Bin</Text>
+                      <Text style={styles.specialBinCardText}>New bin</Text>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
                     </View>
                   </TouchableOpacity>
@@ -526,7 +526,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessibilityLabel="Saved to sort later"
                   >
                     <View style={styles.specialBinCardContent}>
-                      <Text style={styles.specialBinCardText}>Saved to Sort Later</Text>
+                      <Text style={styles.specialBinCardText}>Saved to sort later</Text>
                       <Text style={styles.specialBinCardCount}>
                         {bins.find((b: any) => b.name === 'Sort Later')?.thoughtmarkCount || 0}
                       </Text>
@@ -542,7 +542,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessibilityLabel="View archive"
                   >
                     <View style={styles.archiveCardContent}>
-                      <Text style={styles.archiveCardText}>View Archive</Text>
+                      <Text style={styles.archiveCardText}>View archive</Text>
                       <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
                     </View>
                   </TouchableOpacity>

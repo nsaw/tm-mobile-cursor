@@ -167,7 +167,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               }}
               textStyle={{ color: '#FFD700', fontWeight: 'bold' }}
             >
-              <Text>Upgrade Now</Text>
+              <Text>Upgrade now</Text>
             </Button>
           )}
 
@@ -201,7 +201,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 textStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
                 rightIcon={<Ionicons name="arrow-forward" size={27} color="#FFFFFF" />}
               >
-                <Text>{currentStep === steps.length - 1 ? 'Get Started' : 'Next'}</Text>
+                <Text>{currentStep === steps.length - 1 ? 'Get started' : 'Next'}</Text>
               </Button>
             )}
           </View>
