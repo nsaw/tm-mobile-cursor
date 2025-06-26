@@ -8,6 +8,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import type { RootStackParamList } from '../../../navigation/types';
+import { ROUTES } from '../../../navigation/routes';
+import type { IoniconsGlyphs } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
@@ -87,7 +89,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const handleBinPress = (bin: Bin) => {
     setSelectedBin(bin);
-    navigation.navigate('BinDetail', { binId: bin.id });
+    navigation.navigate('BinDetail', { binId: bin.id, binName: bin.name });
   };
 
   const handleTagPress = (tag: string) => {
@@ -170,11 +172,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     navigation.navigate('Bins');
   };
 
-  const handleNavigate = (route: string) => {
+  const handleNavigate = (route: keyof RootStackParamList) => {
     navigation.navigate(route);
   };
 
-  const quickActions = [
+  const quickActions: { title: string; icon: any; onPress: () => void; color: string }[] = [
     {
       title: 'Create Thoughtmark',
       icon: 'create',
@@ -232,11 +234,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         {/* Quick Actions */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg ?? 16,
             }}
           >
             Quick Actions
@@ -286,11 +288,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         {/* Recent Thoughtmarks */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg ?? 16,
             }}
           >
             Recent Thoughtmarks
@@ -313,7 +315,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 onPress={() => handleThoughtmarkPress(thoughtmark)}
               >
                 <Text 
-                  variant="subheading" 
+                  variant="heading" 
                   size="sm"
                   style={{ 
                     marginBottom: tokens.spacing.xs,
@@ -341,11 +343,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         {/* Stats */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg ?? 16,
             }}
           >
             Your Stats
@@ -385,11 +387,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         {/* Tips */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg ?? 16,
             }}
           >
             Tips & Tricks

@@ -26,7 +26,7 @@ export const DetailScreen: React.FC = () => {
   const { bins } = useBins();
   const { user } = useAuth();
 
-  const thoughtmark = thoughtmarks.find(t => String(t.id) === thoughtmarkId);
+  const thoughtmark = thoughtmarks.find(t => String(t.id) === String(thoughtmarkId));
 
   const styles = StyleSheet.create({
     container: {
@@ -37,7 +37,7 @@ export const DetailScreen: React.FC = () => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: tokens.spacing.lg,
+      paddingHorizontal: tokens.spacing.lg ?? 16,
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border ?? '#000',
@@ -62,7 +62,7 @@ export const DetailScreen: React.FC = () => {
     },
     content: {
       flex: 1,
-      paddingHorizontal: tokens.spacing.lg,
+      paddingHorizontal: tokens.spacing.lg ?? 16,
       paddingVertical: tokens.spacing.md,
     },
     title: {
@@ -114,7 +114,7 @@ export const DetailScreen: React.FC = () => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing.lg,
+      paddingHorizontal: tokens.spacing.lg ?? 16,
       paddingVertical: tokens.spacing.md,
       borderTopWidth: 1,
       borderTopColor: tokens.colors.border ?? '#000',
