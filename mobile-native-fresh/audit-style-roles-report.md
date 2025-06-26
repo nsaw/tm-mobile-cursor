@@ -1,0 +1,781 @@
+
+# JSX Style Role Audit Report
+Generated: 2025-06-26T20:16:58.344Z
+
+## Summary
+- Files scanned: 78/78
+- Total layout components: 360
+- Components with roles: 0
+- Components without roles: 360
+- Style violations: 190
+- AutoRoleView candidates: 28
+- Role compliance rate: 0%
+
+## Issues (731)
+- **ERROR** [style]: src/theme/variants.ts:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/theme/typography.ts:9 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/typography.ts:21 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/typography.ts:40 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/typography.ts:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/theme/spacing.ts:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/theme/buttonStyles.ts:11 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:29 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:37 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:52 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:61 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:69 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:87 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:99 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/theme/buttonStyles.ts:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/navigation/AppNavigator.tsx:156 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:926 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/settings/screens/SettingsScreen.tsx:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/features/home/screens/DashboardScreen.tsx:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/features/home/hooks/useBins.ts:13 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/hooks/useBins.ts:27 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/hooks/useBins.ts:41 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/hooks/useBins.ts:55 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/components/AIToolsCard.tsx:37 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/components/AIToolsCard.tsx:56 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/components/AIToolsCard.tsx:69 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/home/components/AIToolsCard.tsx:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/features/bins/screens/CreateBinScreen.tsx:197 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/screens/SignUp.tsx:127 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/screens/SignIn.tsx:187 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/RegistrationForm.tsx:68 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/RegistrationForm.tsx:90 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/RegistrationForm.tsx:102 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/RegistrationForm.tsx:106 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/LoginForm.tsx:50 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/LoginForm.tsx:72 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/LoginForm.tsx:84 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/features/auth/components/LoginForm.tsx:88 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/VoiceRecorder.tsx:462 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/VoiceRecorder.tsx:475 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/OnboardingModal.tsx:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/components/ui/NeonGradientText.tsx:24 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/NeonGradientText.tsx:46 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/NeonGradientText.tsx:0 - File uses tokens but missing useTheme() hook
+- **ERROR** [style]: src/components/ui/LoadingScreen.tsx:244 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/LoadingScreen.tsx:265 - Hardcoded color detected. Use tokens.colors instead.
+- **ERROR** [style]: src/components/ui/DraggableSection.tsx:0 - File uses tokens but missing useTheme() hook
+- **WARNING** [style]: src/theme/tokens.ts:105 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/tokens.ts:111 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/tokens.ts:117 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/tokens.ts:123 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/buttonStyles.ts:7 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/buttonStyles.ts:53 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/theme/buttonStyles.ts:77 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:53 - View component missing semantic role assignment
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:59 - View component missing semantic role assignment
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:65 - View component missing semantic role assignment
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:71 - View component missing semantic role assignment
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:77 - View component missing semantic role assignment
+- **WARNING** [role]: src/navigation/AppNavigator.tsx:83 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:373 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:374 - KeyboardAvoidingView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:390 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:397 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:409 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:410 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:429 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:431 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:438 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:441 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:445 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:462 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:466 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:485 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:516 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:535 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:559 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:563 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:603 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:639 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:643 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:645 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:690 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:694 - ScrollView component missing semantic role assignment
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:751 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:778 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:807 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:825 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:852 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:861 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:939 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:954 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:959 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:414 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:422 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:424 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:425 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:434 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:466 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:502 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:503 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:522 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:524 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:525 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:526 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:530 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:553 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:554 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:573 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:575 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:577 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:586 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:589 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:608 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:614 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:621 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:629 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:643 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:653 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:661 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:324 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:326 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:357 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:366 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:368 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:370 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:372 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:378 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:380 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:404 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:406 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:438 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:440 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:445 - FlatList component missing semantic role assignment
+- **WARNING** [role]: src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx:466 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ThemeScreen.tsx:13 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ThemeScreen.tsx:20 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/ThemeScreen.tsx:21 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ThemeScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/TermsScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/TermsScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/TermsScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/TermsScreen.tsx:46 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/TermsScreen.tsx:47 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/TermsScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:180 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:182 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:187 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:353 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:354 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:356 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:357 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:375 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/SettingsScreen.tsx:376 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:426 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:451 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:467 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:510 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:526 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:557 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:615 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:634 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:654 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:660 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:672 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:673 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SettingsScreen.tsx:685 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/SecurityScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/SecurityScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/SecurityScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/SecurityScreen.tsx:47 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SecurityScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/SecurityScreen.tsx:49 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/ProfileScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ProfileScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ProfileScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/ProfileScreen.tsx:47 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ProfileScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ProfileScreen.tsx:49 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/PrivacyScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/PrivacyScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/PrivacyScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/PrivacyScreen.tsx:46 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/PrivacyScreen.tsx:47 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/PrivacyScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/PremiumScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/PremiumScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/PremiumScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/PremiumScreen.tsx:46 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/PremiumScreen.tsx:47 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/PremiumScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:164 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:172 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:175 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:177 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:182 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:184 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:197 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:200 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:202 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:215 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:227 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HowToScreen.tsx:229 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/HelpScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/HelpScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/HelpScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/HelpScreen.tsx:46 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HelpScreen.tsx:47 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/HelpScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/ExportScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ExportScreen.tsx:23 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ExportScreen.tsx:40 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/ExportScreen.tsx:47 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ExportScreen.tsx:48 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ExportScreen.tsx:49 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ContactScreen.tsx:13 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/ContactScreen.tsx:20 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/settings/screens/ContactScreen.tsx:21 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/ContactScreen.tsx:22 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/settings/screens/AdminDashboardScreen.tsx:46 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:119 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:120 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:162 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:163 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:165 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:173 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/settings/screens/AdminDashboardScreen.tsx:194 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:198 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:209 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:210 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:244 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:253 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:263 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:274 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:313 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:315 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/search/screens/SearchScreen.tsx:334 - FlatList component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:194 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:199 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:226 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:237 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:252 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/home/screens/HomeScreen.tsx:253 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/HomeScreen.tsx:254 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:280 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:291 - ScrollView component missing semantic role assignment
+- **WARNING** [style]: src/features/home/screens/HomeScreen.tsx:300 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:335 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:346 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:351 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:359 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:367 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:379 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/HomeScreen.tsx:390 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:143 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:194 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:196 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:201 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:215 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:217 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:218 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:228 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:234 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:236 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:245 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:246 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:261 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DetailScreen.tsx:266 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:337 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:339 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:340 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:346 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:395 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:423 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:437 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:452 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:454 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:460 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:468 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:488 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:500 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:509 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:528 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:544 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:595 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:596 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:631 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:632 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:682 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:694 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:695 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:701 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:702 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:728 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:729 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:756 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:787 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:821 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:859 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:860 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:872 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:873 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:943 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:953 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:960 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:966 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:972 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:973 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:977 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/screens/DashboardScreen.tsx:978 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:985 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:990 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:1017 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/screens/DashboardScreen.tsx:1023 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkList.tsx:35 - FlatList component missing semantic role assignment
+- **WARNING** [style]: src/features/home/components/ThoughtmarkList.tsx:52 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/ThoughtmarkList.tsx:55 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/ThoughtmarkList.tsx:59 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/ThoughtmarkList.tsx:60 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/ThoughtmarkCard.tsx:58 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:217 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:219 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:226 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:250 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:271 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:278 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:337 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/ThoughtmarkCard.tsx:342 - ScrollView component missing semantic role assignment
+- **WARNING** [style]: src/features/home/components/TaskCard.tsx:36 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/TaskCard.tsx:37 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/TaskCard.tsx:80 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/home/components/TaskCard.tsx:81 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/components/TaskCard.tsx:154 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TaskCard.tsx:155 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TaskCard.tsx:179 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TagFilter.tsx:86 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TagFilter.tsx:87 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TagFilter.tsx:88 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TagFilter.tsx:99 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/TagFilter.tsx:104 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/SearchBar.tsx:72 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/SearchBar.tsx:73 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/QuickActions.tsx:57 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/DashboardExample.tsx:43 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/home/components/AIToolsCard.tsx:42 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/home/components/AIToolsCard.tsx:75 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/home/components/AIToolsCard.tsx:76 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/content/screens/ContentScreen.tsx:114 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/content/screens/ContentScreen.tsx:115 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/content/screens/ContentScreen.tsx:127 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/content/screens/ContentScreen.tsx:130 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:154 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:161 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:171 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:179 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:188 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:189 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:206 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:207 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:220 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:260 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:261 - KeyboardAvoidingView component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:282 - ScrollView component missing semantic role assignment
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:295 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:319 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/bins/screens/CreateBinScreen.tsx:325 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:343 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:370 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:398 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:399 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:401 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/CreateBinScreen.tsx:415 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:139 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:144 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:148 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:169 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/bins/screens/AllBinsScreen.tsx:170 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:174 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:195 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/bins/screens/AllBinsScreen.tsx:196 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:200 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/bins/screens/AllBinsScreen.tsx:259 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:335 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:342 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:352 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:358 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:360 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:372 - FlatList component missing semantic role assignment
+- **WARNING** [role]: src/features/bins/screens/AllBinsScreen.tsx:391 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/auth/screens/SignUp.tsx:86 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/auth/screens/SignUp.tsx:87 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/auth/screens/SignUp.tsx:137 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:156 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:157 - KeyboardAvoidingView component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:161 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:165 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:172 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:178 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:179 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignUp.tsx:181 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:75 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:76 - KeyboardAvoidingView component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:80 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:87 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:93 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:94 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:96 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/screens/SignIn.tsx:112 - View component missing semantic role assignment
+- **WARNING** [style]: src/features/auth/screens/SignIn.tsx:142 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/auth/screens/SignIn.tsx:143 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/auth/screens/SignIn.tsx:197 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:148 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:149 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:150 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:167 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:182 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:201 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:203 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/RegistrationForm.tsx:232 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/LoginForm.tsx:119 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/LoginForm.tsx:120 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/LoginForm.tsx:137 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/auth/components/LoginForm.tsx:139 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:242 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:249 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:250 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:266 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:270 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:300 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:301 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:309 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:312 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:321 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:322 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:328 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:334 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:357 - SafeAreaView component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:359 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:367 - View component missing semantic role assignment
+- **WARNING** [role]: src/features/ai/screens/AIToolsScreen.tsx:370 - ScrollView component missing semantic role assignment
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:512 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:519 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:567 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:578 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:667 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:668 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:675 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/features/ai/screens/AIToolsScreen.tsx:676 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:311 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:329 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:373 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:374 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:459 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:460 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:466 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:472 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:473 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:490 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:491 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:492 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:493 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/VoiceRecorder.tsx:493 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:527 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/VoiceRecorder.tsx:550 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/TagFilter.tsx:28 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/TagFilter.tsx:29 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:136 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:142 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:173 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:186 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:188 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/OnboardingModal.tsx:189 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/OnboardingModal.tsx:190 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/OnboardingModal.tsx:199 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/NeonGradientText.tsx:48 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/ModernHeader.tsx:34 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/ModernHeader.tsx:46 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/ModernHeader.tsx:47 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/ModernHeader.tsx:57 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/ModernHeader.tsx:63 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/ModernHeader.tsx:81 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/LoadingScreen.tsx:163 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/LoadingScreen.tsx:176 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/LoadingScreen.tsx:188 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:215 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:216 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:223 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:224 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:231 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:242 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:243 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:256 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/LoadingScreen.tsx:257 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/FloatingActionButton.tsx:65 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:72 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:73 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:83 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:84 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/FloatingActionButton.tsx:105 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/FloatingActionButton.tsx:106 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:126 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:127 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:142 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:143 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:149 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/FloatingActionButton.tsx:150 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DraggableSection.tsx:196 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DraggableSection.tsx:203 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DraggableSection.tsx:209 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:15 - ScrollView component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:16 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:25 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:45 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:81 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:109 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:145 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:146 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:147 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:148 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/DesignSystemDemo.tsx:148 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:151 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:152 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/DesignSystemDemo.tsx:152 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:155 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:156 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/DesignSystemDemo.tsx:156 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:159 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:160 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/DesignSystemDemo.tsx:160 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:163 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DesignSystemDemo.tsx:164 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/DesignSystemDemo.tsx:164 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/DarkAlertDialog.tsx:129 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DarkAlertDialog.tsx:130 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/DarkAlertDialog.tsx:134 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/Card.tsx:62 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/Card.tsx:67 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/Card.tsx:95 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/Card.tsx:121 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/Card.tsx:147 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:78 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:89 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:98 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:109 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:151 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:171 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/BottomNav.tsx:180 - View component missing semantic role assignment
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:181 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:182 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:184 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:195 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:196 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:208 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:209 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:219 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [style]: src/components/ui/BottomNav.tsx:220 - Hardcoded dimension detected. Use tokens.spacing instead.
+- **WARNING** [role]: src/components/ui/ActionSheet.tsx:52 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/ActionSheet.tsx:58 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/ActionSheet.tsx:67 - View component missing semantic role assignment
+- **WARNING** [role]: src/components/ui/ActionSheet.tsx:91 - View component missing semantic role assignment
+- **INFO** [style]: src/navigation/AppNavigator.tsx:53 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/navigation/AppNavigator.tsx:59 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/navigation/AppNavigator.tsx:65 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/navigation/AppNavigator.tsx:71 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/navigation/AppNavigator.tsx:77 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/navigation/AppNavigator.tsx:83 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:373 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:375 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx:391 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx:661 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/TermsScreen.tsx:46 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/TermsScreen.tsx:56 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/SettingsScreen.tsx:353 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/SettingsScreen.tsx:370 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/SecurityScreen.tsx:47 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/SecurityScreen.tsx:57 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/ProfileScreen.tsx:47 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/ProfileScreen.tsx:57 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/PrivacyScreen.tsx:46 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/PrivacyScreen.tsx:56 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/PremiumScreen.tsx:46 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/PremiumScreen.tsx:56 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:164 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:172 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:174 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:175 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:176 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:177 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:178 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:182 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:184 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:185 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:186 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:197 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:199 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:200 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:201 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:202 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:203 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:204 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:215 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:217 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:218 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:219 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:226 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:227 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:228 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:229 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HowToScreen.tsx:230 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HelpScreen.tsx:46 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/HelpScreen.tsx:56 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/ExportScreen.tsx:47 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/settings/screens/ExportScreen.tsx:57 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:194 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:220 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:226 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:280 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:335 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:351 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:352 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:355 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:359 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:360 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:363 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:367 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:368 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:371 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:379 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/HomeScreen.tsx:393 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/DetailScreen.tsx:218 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/DetailScreen.tsx:234 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/DetailScreen.tsx:246 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/screens/DashboardScreen.tsx:343 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:58 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:217 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:234 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:307 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:345 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/ThoughtmarkCard.tsx:361 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/home/components/TagFilter.tsx:88 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/bins/screens/AllBinsScreen.tsx:143 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/bins/screens/AllBinsScreen.tsx:164 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/bins/screens/AllBinsScreen.tsx:190 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/bins/screens/AllBinsScreen.tsx:216 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/auth/screens/SignIn.tsx:112 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:240 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:242 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:247 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:249 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:250 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:251 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:262 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:266 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:267 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:270 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:284 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:308 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:314 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:317 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:324 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:330 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:336 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:347 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:357 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:366 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:376 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:379 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:382 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:385 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:386 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:389 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:395 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:403 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:406 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:409 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:412 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:413 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:416 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:422 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:430 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:433 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:436 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:439 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:440 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:443 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:449 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:457 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:460 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:463 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:466 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:467 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:470 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/features/ai/screens/AIToolsScreen.tsx:476 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/VoiceRecorder.tsx:493 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/TagFilter.tsx:28 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:51 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:60 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:173 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:186 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:199 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:203 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/OnboardingModal.tsx:211 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/ModernHeader.tsx:81 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:15 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:16 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:18 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:25 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:32 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:38 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:45 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:74 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:81 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:102 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:109 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:138 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:145 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:146 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:147 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:148 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:151 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:152 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:155 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:156 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:159 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:160 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:163 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/DesignSystemDemo.tsx:164 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/Button.tsx:110 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/Button.tsx:134 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/ActionSheet.tsx:73 - Inline styles detected. Consider using StyleSheet or themed styles.
+- **INFO** [style]: src/components/ui/ActionSheet.tsx:100 - Inline styles detected. Consider using StyleSheet or themed styles.
+
+## AutoRoleView Suggestions (28)
+- Consider implementing AutoRoleView pattern in src/navigation/AppNavigator.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/settings/screens/SettingsScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/settings/screens/HowToScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/settings/screens/AdminDashboardScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/search/screens/SearchScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/home/screens/HomeScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/home/screens/DetailScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/home/screens/DashboardScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/home/components/ThoughtmarkCard.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/home/components/TagFilter.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/content/screens/ContentScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/bins/screens/CreateBinScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/bins/screens/AllBinsScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/auth/screens/SignUp.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/auth/screens/SignIn.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/auth/components/RegistrationForm.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/auth/components/LoginForm.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/features/ai/screens/AIToolsScreen.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/VoiceRecorder.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/OnboardingModal.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/ModernHeader.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/DesignSystemDemo.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/Card.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/BottomNav.tsx - detected true layout components without roles
+- Consider implementing AutoRoleView pattern in src/components/ui/ActionSheet.tsx - detected true layout components without roles
+
+## Next Steps
+1. Address all ERROR level issues immediately
+2. Review WARNING level issues for accessibility compliance
+3. Consider implementing AutoRoleView pattern for complex layouts
+4. Ensure all interactive elements have proper semantic roles
