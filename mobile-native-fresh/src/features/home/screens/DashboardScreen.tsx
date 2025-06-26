@@ -334,8 +334,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       
       case 'recent-thoughtmarks':
         return (
-          <View>
-            {/* Tags Filter - Moved here from separate section */}
+          <>
+            {/* Tags Filter - Flattened structure */}
             <View style={styles.tagsContainer}>
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
@@ -389,24 +389,22 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               </ScrollView>
             </View>
 
-            {/* Recent Thoughtmarks List */}
+            {/* Recent Thoughtmarks List - Flattened structure */}
             {recentThoughtmarks.length > 0 ? (
               <>
-                <View style={styles.thoughtmarksList}>
-                  {recentThoughtmarks.map((thoughtmark, idx, arr) => (
-                    <ThoughtmarkCard
-                      key={thoughtmark.id}
-                      thoughtmark={thoughtmark}
-                      pinned={thoughtmark.isPinned}
-                      onClick={() => handleThoughtmarkPress(thoughtmark)}
-                      onEdit={() => handleThoughtmarkEdit(thoughtmark)}
-                      onPinToggle={handlePinToggle}
-                      style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
-                    />
-                  ))}
-                </View>
+                {recentThoughtmarks.map((thoughtmark, idx) => (
+                  <ThoughtmarkCard
+                    key={thoughtmark.id}
+                    thoughtmark={thoughtmark}
+                    pinned={thoughtmark.isPinned}
+                    onClick={() => handleThoughtmarkPress(thoughtmark)}
+                    onEdit={() => handleThoughtmarkEdit(thoughtmark)}
+                    onPinToggle={handlePinToggle}
+                    style={idx !== recentThoughtmarks.length - 1 ? { marginBottom: tokens.spacing.sm } : undefined}
+                  />
+                ))}
                 
-                {/* View More Card - Reduced height */}
+                {/* View More Card - Flattened */}
                 <TouchableOpacity
                   style={styles.viewMoreCard}
                   onPress={handleViewAllThoughtmarks}
@@ -429,27 +427,27 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 </Text>
               </View>
             )}
-          </View>
+          </>
         );
       
       case 'tasks':
         return activeTasks.length > 0 ? (
-          <View style={styles.tasksList}>
-            {activeTasks.slice(0, 5).map((task, idx, arr) => (
+          <>
+            {activeTasks.slice(0, 5).map((task, idx) => (
               <TaskCard
                 key={task.id}
                 task={task}
                 onPress={() => handleThoughtmarkPress(task)}
                 onToggle={() => handleTaskToggle(task)}
-                style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
+                style={idx !== Math.min(activeTasks.length, 5) - 1 ? { marginBottom: tokens.spacing.sm } : undefined}
               />
             ))}
-          </View>
+          </>
         ) : null;
       
       case 'bins':
         return (
-          <View style={styles.binsContainer}>
+          <>
             {binsLoading ? (
               <ScrollView 
                 horizontal 
@@ -464,16 +462,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               </ScrollView>
             ) : (
               <>
-                {/* Template bins in horizontal scroll */}
+                {/* Template bins in horizontal scroll - Flattened */}
                 <ScrollView 
                   horizontal 
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.binsHorizontalContent}
-                  snapToInterval={160} // Card width + margin
+                  snapToInterval={160}
                   decelerationRate="fast"
                 >
                   {['Relevant', 'Life Hacks', 'Quotes', 'Inspiration', 'Circle Back', 'Revelations', 'Funny', 'Stories', 'Half-Baked', 'Team-Up', 'Newsworthy'].map((binName) => {
-                    // Find the template bin (preferring lower ID for original)
                     const bin = bins.filter(b => b.name === binName).sort((a: any, b: any) => a.id - b.id)[0];
                     if (!bin) return null;
                     return (
@@ -496,9 +493,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   })}
                 </ScrollView>
                 
-                {/* Special sections below horizontal scroll */}
+                {/* Special sections - Flattened structure */}
                 <View style={styles.specialBinsContainer}>
-                  {/* New Bin Button - Moved to specialty section */}
+                  {/* New Bin Button */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
                     onPress={handleCreateBin}
@@ -549,7 +546,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 </View>
               </>
             )}
-          </View>
+          </>
         );
       
       default:
@@ -574,27 +571,27 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       flex: 1,
     },
     scrollContent: {
-      paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
-      paddingBottom: 120, // Increased padding to account for nav bar + safe area
-      minHeight: '100%', // Ensure content fills the scroll view
-      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
+      paddingTop: tokens.spacing.lg,
+      paddingBottom: 120,
+      minHeight: '100%',
+      paddingHorizontal: tokens.spacing.page,
     },
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.lg * 0.25, // Reduced from spacing.lg
-      paddingHorizontal: tokens.spacing.page * 0.25, // Reduced by half
+      marginBottom: tokens.spacing.md,
+      paddingHorizontal: tokens.spacing.page * 0.25,
     },
     headerLeft: {
       flexDirection: 'row',
       alignItems: 'center',
       flex: 1,
     },
-    avatar: {
-      width: 64, // 48 * 1.34
-      height: 64, // 48 * 1.34
-      borderRadius: 13, // 10 * 1.34
+    logo: {
+      width: 64,
+      height: 64,
+      borderRadius: 13,
       marginRight: tokens.spacing.sm,
     },
     titleContainer: {
@@ -605,8 +602,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(16),
       fontWeight: '900',
       color: tokens.colors.text,
-      opacity: 0.9, // Added 90% opacity for h2 text
-      letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
+      opacity: 0.7,
+      letterSpacing: 0.5,
       textTransform: 'uppercase',
       fontFamily: 'Ubuntu_700Bold',
       flexShrink: 1,
@@ -614,11 +611,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     subtitle: {
       fontSize: RFValue(10),
       fontWeight: '400',
-      marginTop: -5, // Reduced spacing between title and tagline
-      marginLeft: 21, // Indent the tagline - 16 * 1.34
+      marginTop: -5,
+      marginLeft: 21,
       fontFamily: 'Ubuntu_400Regular',
-      opacity: 0.8, // Added 80% opacity for text below h3
-      flexShrink: 1, // Allow shrinking to prevent overflow
+      opacity: 0.7,
+      flexShrink: 1,
     },
     headerRight: {
       flexDirection: 'row',
@@ -639,16 +636,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       padding: tokens.spacing.sm,
     },
     aiToolsContainer: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+      marginBottom: tokens.spacing.md,
     },
     section: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+      marginBottom: tokens.spacing.md,
     },
     sectionHeader: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.md * 0.5, // Reduced from spacing.md
+      marginBottom: tokens.spacing.md,
     },
     sectionTitle: {
       fontSize: RFValue(18),
@@ -670,32 +667,26 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       color: tokens.colors.accent,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
-      opacity: 0.8,
-    },
-    tasksList: {
-      // Styles for tasks list
-    },
-    thoughtmarksList: {
-      // Styles for thoughtmarks list
+      opacity: 0.7,
     },
     separator: {
       height: 1,
       backgroundColor: tokens.colors.border,
-      marginVertical: tokens.spacing.sm,
+      marginVertical: tokens.spacing.md,
     },
     binsContainer: {
       // Styles for the bins container
     },
     binsHorizontalContent: {
-      paddingHorizontal: tokens.spacing.page, // Page-level padding
-      paddingVertical: tokens.spacing.sm,
+      paddingHorizontal: tokens.spacing.page,
+      paddingVertical: tokens.spacing.md,
     },
     binCardSkeletonHorizontal: {
       width: 160,
       height: 70,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
-      marginRight: tokens.spacing.md, // Increased spacing
+      marginRight: tokens.spacing.md,
     },
     binCardHorizontal: {
       width: 160,
@@ -703,7 +694,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
       padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.md, // Increased spacing
+      marginRight: tokens.spacing.md,
       justifyContent: 'center',
     },
     binCardContentHorizontal: {
@@ -713,16 +704,18 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       width: '100%',
     },
     binCardNameHorizontal: {
-      fontSize: RFValue(14), // Reduced from 16
+      fontSize: RFValue(14),
       fontWeight: '600',
       color: tokens.colors.text,
       marginBottom: 2,
       fontFamily: 'Ubuntu_600SemiBold',
+      opacity: 0.7,
     },
     binCardCountHorizontal: {
-      fontSize: RFValue(12), // Reduced from 13
+      fontSize: RFValue(12),
       color: tokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
+      opacity: 0.7,
     },
     newBinCardHorizontal: {
       width: 160,
@@ -733,7 +726,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       borderColor: tokens.colors.textMuted,
       borderStyle: 'dashed',
       padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.md, // Increased spacing
+      marginRight: tokens.spacing.md,
       justifyContent: 'center',
     },
     newBinCardContentHorizontal: {
@@ -746,10 +739,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       fontSize: RFValue(14),
       color: tokens.colors.accent,
       fontWeight: '500',
-      opacity: 0.8,
+      opacity: 0.7,
     },
     specialBinsContainer: {
-      marginTop: tokens.spacing.md * 1.34,
+      marginTop: tokens.spacing.md,
     },
     specialBinCard: {
       width: '100%',
@@ -989,7 +982,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 accessible={true}
                 accessibilityLabel="Button"
               >
-                <Ionicons name="information-circle-outline" size={27} color={typography.colors.textSecondary} />
+                <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
               </TouchableOpacity>
             </Animated.View>
             <TouchableOpacity
@@ -999,7 +992,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessible={true}
               accessibilityLabel="Button"
             >
-              <Ionicons name="settings-outline" size={32} color={typography.colors.textSecondary} />
+              <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
         </View>
