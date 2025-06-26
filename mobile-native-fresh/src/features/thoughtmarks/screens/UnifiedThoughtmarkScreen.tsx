@@ -414,7 +414,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     </Text>
                   </View>
                   <TouchableOpacity
-                    onPress={() => setShowAIPanel(!showAIPanel)}
+                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowAIPanel(!showAIPanel)}
                     style={styles.aiToggleButton}
                   >
                     <Ionicons 
@@ -467,7 +467,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                               {autoTags.map((tag, index) => (
                                 <TouchableOpacity
                                   key={index}
-                                  onPress={() => toggleTag(tag)}
+                                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> toggleTag(tag)}
                                 >
                                   <TagChip
                                     tag={tag}
@@ -490,7 +490,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                               <TouchableOpacity
                                 key={index}
                                 style={styles.contentSuggestion}
-                                onPress={() => applyAISuggestion('content', suggestion)}
+                                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> applyAISuggestion('content', suggestion)}
                               >
                                 <Text style={[styles.contentSuggestionText, { color: tokens.colors.text }]}>
                                   {suggestion}
@@ -572,7 +572,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               {tags.length < 5 && (
                 <TouchableOpacity
                   style={[styles.addTagButton, { borderColor: tokens.colors.border }]}
-                  onPress={() => {
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
                     Alert.prompt(
                       'Add Tag',
                       'Enter a new tag:',
@@ -604,7 +604,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
             <TouchableOpacity
               style={[styles.actionButton, isTask && styles.actionButtonActive]}
               onPress={toggleTask}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons 
                 name={isTask ? "checkmark-circle" : "checkmark-circle-outline"} 
                 size={20} 
@@ -620,7 +620,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
             <TouchableOpacity
               style={[styles.actionButton, isPinned && styles.actionButtonActive]}
               onPress={togglePin}
-            >
+             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons 
                 name={isPinned ? "pin" : "pin-outline"} 
                 size={20} 
@@ -647,14 +647,14 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     <Text style={[styles.dueDateText, { color: tokens.colors.text }]}>
                       {formatDueDate(dueDate)}
                     </Text>
-                    <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton}>
+                    <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                       <Ionicons name="close-circle" size={16} color={tokens.colors.textSecondary} />
                     </TouchableOpacity>
                   </View>
                 ) : (
                   <TouchableOpacity
                     style={[styles.setDueDateButton, { borderColor: tokens.colors.border }]}
-                    onPress={() => setShowDatePicker(true)}
+                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowDatePicker(true)}
                   >
                     <Ionicons name="calendar-outline" size={16} color={tokens.colors.textSecondary} />
                     <Text style={[styles.setDueDateText, { color: tokens.colors.textSecondary }]}>
@@ -702,7 +702,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   !selectedBinId && styles.binOptionActive,
                   { borderColor: tokens.colors.border }
                 ]}
-                onPress={() => setSelectedBinId(undefined)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedBinId(undefined)}
               >
                 <Text style={[styles.binOptionText, { 
                   color: !selectedBinId ? tokens.colors.accent : tokens.colors.textSecondary 
@@ -718,7 +718,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     selectedBinId === bin.id && styles.binOptionActive,
                     { borderColor: tokens.colors.border }
                   ]}
-                  onPress={() => setSelectedBinId(bin.id)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedBinId(bin.id)}
                 >
                   <Text style={[styles.binOptionText, { 
                     color: selectedBinId === bin.id ? tokens.colors.accent : tokens.colors.textSecondary 

@@ -165,7 +165,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
           >
             <Ionicons name="arrow-back" size={24} color={getIconColor('text')} />
           </TouchableOpacity>
