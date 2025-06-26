@@ -1,5 +1,3 @@
-import { DesignTokens } from './tokens';
-
 // Utility function to create variant styles
 function createVariantStyles<T extends Record<string, any>>(
   base: any,
@@ -9,11 +7,11 @@ function createVariantStyles<T extends Record<string, any>>(
 }
 
 // Button variants (dynamic)
-export function getButtonVariants(tokens: DesignTokens) {
+export function getButtonVariants(tokens: any) {
   return createVariantStyles(
     {
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: tokens?.spacing?.lg || 21,
+      paddingVertical: tokens?.spacing?.md || 16,
       flexDirection: 'row' as const,
       alignItems: 'center' as const,
       justifyContent: 'center' as const,
@@ -23,12 +21,12 @@ export function getButtonVariants(tokens: DesignTokens) {
       variant: {
         primary: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.accent,
+          borderColor: tokens?.colors?.accent || '#3B82F6',
           borderWidth: 1,
         },
         secondary: {
-          backgroundColor: tokens.colors.surface,
-          borderColor: tokens.colors.border,
+          backgroundColor: tokens?.colors?.surface || 'rgba(255,255,255,.04)',
+          borderColor: tokens?.colors?.border || '#2E2E2E',
           borderWidth: 1,
         },
         ghost: {
@@ -38,43 +36,43 @@ export function getButtonVariants(tokens: DesignTokens) {
         },
         destructive: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.danger,
+          borderColor: tokens?.colors?.danger || '#7A2C3B',
           borderWidth: 1,
         },
         outline: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.border,
+          borderColor: tokens?.colors?.border || '#2E2E2E',
           borderWidth: 1,
         },
         brand: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.brand,
+          borderColor: tokens?.colors?.brand || '#5C6A24',
           borderWidth: 1,
         },
       },
       size: {
         sm: {
           borderRadius: 8,
-          paddingHorizontal: tokens.spacing.md,
-          paddingVertical: tokens.spacing.sm,
+          paddingHorizontal: tokens?.spacing?.md || 16,
+          paddingVertical: tokens?.spacing?.sm || 11,
           minHeight: 36,
         },
         md: {
           borderRadius: 8,
-          paddingHorizontal: tokens.spacing.lg,
-          paddingVertical: tokens.spacing.md,
+          paddingHorizontal: tokens?.spacing?.lg || 21,
+          paddingVertical: tokens?.spacing?.md || 16,
           minHeight: 44,
         },
         lg: {
           borderRadius: 8,
-          paddingHorizontal: tokens.spacing.xl,
-          paddingVertical: tokens.spacing.lg,
+          paddingHorizontal: tokens?.spacing?.xl || 32,
+          paddingVertical: tokens?.spacing?.lg || 21,
           minHeight: 52,
         },
         icon: {
-          borderRadius: tokens.radius.full,
-          paddingHorizontal: tokens.spacing.md,
-          paddingVertical: tokens.spacing.md,
+          borderRadius: tokens?.radius?.full || 9999,
+          paddingHorizontal: tokens?.spacing?.md || 16,
+          paddingVertical: tokens?.spacing?.md || 16,
           minHeight: 44,
           minWidth: 44,
         },
@@ -84,44 +82,47 @@ export function getButtonVariants(tokens: DesignTokens) {
 }
 
 // Card variants (dynamic)
-export function getCardVariants(tokens: DesignTokens) {
+export function getCardVariants(tokens: any) {
   return createVariantStyles(
     {
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderColor: tokens.colors.border,
+      backgroundColor: tokens?.colors?.backgroundSecondary || '#1a1a1e',
+      borderColor: tokens?.colors?.border || '#2E2E2E',
       borderWidth: 1,
-      padding: tokens.spacing.lg,
+      padding: tokens?.spacing?.lg || 21,
     },
     {
       variant: {
         default: {
-          backgroundColor: tokens.colors.backgroundSecondary,
+          backgroundColor: tokens?.colors?.backgroundSecondary || '#1a1a1e',
         },
         glass: {
           backgroundColor: 'rgba(26, 26, 30, 0.9)',
           borderColor: 'rgba(255,255,255,0.25)',
         },
         elevated: {
-          backgroundColor: tokens.colors.backgroundSecondary,
-          ...tokens.shadows.md,
+          backgroundColor: tokens?.colors?.backgroundSecondary || '#1a1a1e',
+          shadowOffset: { width: 0, height: 4 },
+          shadowRadius: 6,
+          shadowOpacity: 0.4,
+          elevation: 3,
         },
         interactive: {
-          backgroundColor: tokens.colors.backgroundSecondary,
-          borderColor: tokens.colors.borderHover,
+          backgroundColor: tokens?.colors?.backgroundSecondary || '#1a1a1e',
+          borderColor: tokens?.colors?.borderHover || 'rgba(255,255,255,0.25)',
         },
       },
       size: {
         sm: {
-          borderRadius: tokens.radius.sm,
-          padding: tokens.spacing.md,
+          borderRadius: tokens?.radius?.sm || 5,
+          padding: tokens?.spacing?.md || 16,
         },
         md: {
-          borderRadius: tokens.radius.md,
-          padding: tokens.spacing.lg,
+          borderRadius: tokens?.radius?.md || 10,
+          padding: tokens?.spacing?.lg || 21,
         },
         lg: {
-          borderRadius: tokens.radius.lg,
-          padding: tokens.spacing.xl,
+          borderRadius: tokens?.radius?.lg || 14,
+          padding: tokens?.spacing?.xl || 32,
         },
       },
     }
@@ -129,50 +130,50 @@ export function getCardVariants(tokens: DesignTokens) {
 }
 
 // Input variants (dynamic)
-export function getInputVariants(tokens: DesignTokens) {
+export function getInputVariants(tokens: any) {
   return createVariantStyles(
     {
-      borderRadius: tokens.radius.lg,
+      borderRadius: tokens?.radius?.lg || 14,
       borderWidth: 1,
-      paddingHorizontal: tokens.spacing.md,
-      paddingVertical: tokens.spacing.sm,
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.text,
-      backgroundColor: tokens.colors.surface,
-      borderColor: tokens.colors.border,
+      paddingHorizontal: tokens?.spacing?.md || 16,
+      paddingVertical: tokens?.spacing?.sm || 11,
+      fontSize: tokens?.typography?.fontSize?.body || 16,
+      fontFamily: tokens?.typography?.fontFamily?.body || 'Ubuntu',
+      color: tokens?.colors?.text || '#E0E0E0',
+      backgroundColor: tokens?.colors?.surface || 'rgba(255,255,255,.04)',
+      borderColor: tokens?.colors?.border || '#2E2E2E',
       minHeight: 44,
     },
     {
       variant: {
         default: {},
         filled: {
-          backgroundColor: tokens.colors.backgroundSecondary,
+          backgroundColor: tokens?.colors?.backgroundSecondary || '#1a1a1e',
           borderColor: 'transparent',
         },
         outline: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.border,
+          borderColor: tokens?.colors?.border || '#2E2E2E',
         },
       },
       size: {
         sm: {
-          paddingHorizontal: tokens.spacing.sm,
-          paddingVertical: tokens.spacing.xs,
+          paddingHorizontal: tokens?.spacing?.sm || 11,
+          paddingVertical: tokens?.spacing?.xs || 5,
           minHeight: 36,
-          fontSize: tokens.typography.fontSize.sm,
+          fontSize: tokens?.typography?.fontSize?.sm || 14,
         },
         md: {
-          paddingHorizontal: tokens.spacing.md,
-          paddingVertical: tokens.spacing.sm,
+          paddingHorizontal: tokens?.spacing?.md || 16,
+          paddingVertical: tokens?.spacing?.sm || 11,
           minHeight: 44,
-          fontSize: tokens.typography.fontSize.body,
+          fontSize: tokens?.typography?.fontSize?.body || 16,
         },
         lg: {
-          paddingHorizontal: tokens.spacing.lg,
-          paddingVertical: tokens.spacing.md,
+          paddingHorizontal: tokens?.spacing?.lg || 21,
+          paddingVertical: tokens?.spacing?.md || 16,
           minHeight: 52,
-          fontSize: tokens.typography.fontSize.lg,
+          fontSize: tokens?.typography?.fontSize?.lg || 18,
         },
       },
     }
@@ -180,86 +181,118 @@ export function getInputVariants(tokens: DesignTokens) {
 }
 
 // Text variants (dynamic)
-export function getTextVariants(tokens: DesignTokens) {
+export function getTextVariants(tokens: any) {
   return createVariantStyles(
     {
-      color: tokens.colors.text,
-      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens?.colors?.text || '#E0E0E0',
+      fontFamily: tokens?.typography?.fontFamily?.body || 'Ubuntu',
+      opacity: 0.7, // Apply opacity to all non-CTA text
     },
     {
       variant: {
         body: {
-          fontSize: tokens.typography.fontSize.sm,
-          fontWeight: tokens.typography.fontWeight.normal,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
+          fontSize: tokens?.typography?.fontSize?.sm || 14,
+          fontWeight: tokens?.typography?.fontWeight?.normal || '400',
+          lineHeight: (tokens?.typography?.fontSize?.sm || 14) * 1.6,
+          opacity: 0.7,
         },
         heading: {
-          fontSize: tokens.typography.fontSize.xl,
-          fontWeight: tokens.typography.fontWeight.bold,
-          fontFamily: tokens.typography.fontFamily.heading,
-          lineHeight: tokens.typography.fontSize.xl * 1.3,
+          fontSize: 18, // Lowered from xl (20) to 18px
+          fontWeight: tokens?.typography?.fontWeight?.bold || '700',
+          fontFamily: tokens?.typography?.fontFamily?.heading || 'Oswald',
+          lineHeight: 18 * 1.3,
+          opacity: 0.7,
         },
         title: {
-          fontSize: tokens.typography.fontSize['3xl'],
-          fontWeight: tokens.typography.fontWeight.bold,
-          fontFamily: tokens.typography.fontFamily.body,
-          lineHeight: tokens.typography.fontSize['3xl'] * 1.2,
+          fontSize: tokens?.typography?.fontSize?.['3xl'] || 32,
+          fontWeight: tokens?.typography?.fontWeight?.bold || '700',
+          fontFamily: tokens?.typography?.fontFamily?.body || 'Ubuntu',
+          lineHeight: (tokens?.typography?.fontSize?.['3xl'] || 32) * 1.2,
+          opacity: 0.7,
         },
         subtitle: {
-          fontSize: tokens.typography.fontSize.lg,
-          fontWeight: tokens.typography.fontWeight.normal,
-          lineHeight: tokens.typography.fontSize.lg * 1.4,
+          fontSize: 16, // Lowered from lg (18) to 16px
+          fontWeight: tokens?.typography?.fontWeight?.normal || '400',
+          lineHeight: 16 * 1.4,
+          opacity: 0.7,
         },
         caption: {
-          fontSize: tokens.typography.fontSize.xs,
-          fontWeight: tokens.typography.fontWeight.normal,
-          color: tokens.colors.textMuted,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
+          fontSize: tokens?.typography?.fontSize?.xs || 12,
+          fontWeight: tokens?.typography?.fontWeight?.normal || '400',
+          color: tokens?.colors?.textMuted || '#808080',
+          lineHeight: (tokens?.typography?.fontSize?.xs || 12) * 1.5,
+          opacity: 0.7,
         },
         muted: {
-          fontSize: tokens.typography.fontSize.xs,
-          fontWeight: tokens.typography.fontWeight.normal,
-          color: tokens.colors.textSecondary,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
+          fontSize: tokens?.typography?.fontSize?.xs || 12,
+          fontWeight: tokens?.typography?.fontWeight?.normal || '400',
+          color: tokens?.colors?.textSecondary || '#A0A0A0',
+          lineHeight: (tokens?.typography?.fontSize?.xs || 12) * 1.5,
+          opacity: 0.7,
         },
         // 'tagline' is for secondary/subtitle text (onboarding descriptions, empty state subtitles, etc)
         tagline: {
-          fontSize: tokens.typography.fontSize.sm, // smaller than body, larger than caption
-          fontWeight: tokens.typography.fontWeight.normal, // lighter weight
-          color: tokens.colors.textSecondary,
-          fontFamily: tokens.typography.fontFamily.body,
+          fontSize: tokens?.typography?.fontSize?.sm || 14,
+          fontWeight: tokens?.typography?.fontWeight?.normal || '400',
+          color: tokens?.colors?.textSecondary || '#A0A0A0',
+          fontFamily: tokens?.typography?.fontFamily?.body || 'Ubuntu',
           letterSpacing: 0.2,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
+          lineHeight: (tokens?.typography?.fontSize?.sm || 14) * 1.6,
+          opacity: 0.7,
+        },
+        // CTA variants with full opacity and bold Oswald font
+        cta: {
+          fontSize: 18, // h2 size for CTA
+          fontWeight: tokens?.typography?.fontWeight?.bold || '700',
+          fontFamily: tokens?.typography?.fontFamily?.heading || 'Oswald',
+          lineHeight: 18 * 1.3,
+          opacity: 1, // Full opacity for CTA
+          color: tokens?.colors?.text || '#E0E0E0', // Max contrast
+        },
+        ctaSecondary: {
+          fontSize: 16, // h3 size for secondary CTA
+          fontWeight: tokens?.typography?.fontWeight?.bold || '700',
+          fontFamily: tokens?.typography?.fontFamily?.heading || 'Oswald',
+          lineHeight: 16 * 1.4,
+          opacity: 1, // Full opacity for CTA
+          color: tokens?.colors?.text || '#E0E0E0', // Max contrast
         },
       },
       size: {
         xs: {
-          fontSize: tokens.typography.fontSize.xs - 2,
-          lineHeight: (tokens.typography.fontSize.xs - 2) * 1.5,
+          fontSize: (tokens?.typography?.fontSize?.xs || 12) - 2,
+          lineHeight: ((tokens?.typography?.fontSize?.xs || 12) - 2) * 1.5,
+          opacity: 0.7,
         },
         sm: {
-          fontSize: tokens.typography.fontSize.xs,
-          lineHeight: tokens.typography.fontSize.xs * 1.5,
+          fontSize: tokens?.typography?.fontSize?.xs || 12,
+          lineHeight: (tokens?.typography?.fontSize?.xs || 12) * 1.5,
+          opacity: 0.7,
         },
         md: {
-          fontSize: tokens.typography.fontSize.sm,
-          lineHeight: tokens.typography.fontSize.sm * 1.6,
+          fontSize: tokens?.typography?.fontSize?.sm || 14,
+          lineHeight: (tokens?.typography?.fontSize?.sm || 14) * 1.6,
+          opacity: 0.7,
         },
         lg: {
-          fontSize: tokens.typography.fontSize.body,
-          lineHeight: tokens.typography.fontSize.body * 1.4,
+          fontSize: tokens?.typography?.fontSize?.body || 16,
+          lineHeight: (tokens?.typography?.fontSize?.body || 16) * 1.4,
+          opacity: 0.7,
         },
         xl: {
-          fontSize: tokens.typography.fontSize.xl + 2,
-          lineHeight: (tokens.typography.fontSize.xl + 2) * 1.3,
+          fontSize: (tokens?.typography?.fontSize?.xl || 20) + 2,
+          lineHeight: ((tokens?.typography?.fontSize?.xl || 20) + 2) * 1.3,
+          opacity: 0.7,
         },
         '2xl': {
-          fontSize: tokens.typography.fontSize['2xl'] + 2,
-          lineHeight: (tokens.typography.fontSize['2xl'] + 2) * 1.3,
+          fontSize: (tokens?.typography?.fontSize?.['2xl'] || 28) + 2,
+          lineHeight: ((tokens?.typography?.fontSize?.['2xl'] || 28) + 2) * 1.3,
+          opacity: 0.7,
         },
         '3xl': {
-          fontSize: tokens.typography.fontSize['3xl'] + 2,
-          lineHeight: (tokens.typography.fontSize['3xl'] + 2) * 1.2,
+          fontSize: (tokens?.typography?.fontSize?.['3xl'] || 32) + 2,
+          lineHeight: ((tokens?.typography?.fontSize?.['3xl'] || 32) + 2) * 1.2,
+          opacity: 0.7,
         },
       },
     }
@@ -267,40 +300,40 @@ export function getTextVariants(tokens: DesignTokens) {
 }
 
 // Badge variants (dynamic)
-export function getBadgeVariants(tokens: DesignTokens) {
+export function getBadgeVariants(tokens: any) {
   return createVariantStyles(
     {
-      borderRadius: tokens.radius.full,
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs,
-      fontSize: tokens.typography.fontSize.xs,
-      fontWeight: tokens.typography.fontWeight.medium,
+      borderRadius: tokens?.radius?.full || 9999,
+      paddingHorizontal: tokens?.spacing?.sm || 11,
+      paddingVertical: tokens?.spacing?.xs || 5,
+      fontSize: tokens?.typography?.fontSize?.xs || 12,
+      fontWeight: tokens?.typography?.fontWeight?.medium || '500',
     },
     {
       variant: {
         default: {
-          backgroundColor: tokens.colors.surface,
-          borderColor: tokens.colors.border,
+          backgroundColor: tokens?.colors?.surface || 'rgba(255,255,255,.04)',
+          borderColor: tokens?.colors?.border || '#2E2E2E',
           borderWidth: 1,
         },
         primary: {
-          backgroundColor: tokens.colors.accent,
-          borderColor: tokens.colors.accent,
+          backgroundColor: tokens?.colors?.accent || '#3B82F6',
+          borderColor: tokens?.colors?.accent || '#3B82F6',
           borderWidth: 1,
         },
         secondary: {
-          backgroundColor: tokens.colors.surface,
-          borderColor: tokens.colors.border,
+          backgroundColor: tokens?.colors?.surface || 'rgba(255,255,255,.04)',
+          borderColor: tokens?.colors?.border || '#2E2E2E',
           borderWidth: 1,
         },
         destructive: {
-          backgroundColor: tokens.colors.danger,
-          borderColor: tokens.colors.danger,
+          backgroundColor: tokens?.colors?.danger || '#7A2C3B',
+          borderColor: tokens?.colors?.danger || '#7A2C3B',
           borderWidth: 1,
         },
         outline: {
           backgroundColor: 'transparent',
-          borderColor: tokens.colors.border,
+          borderColor: tokens?.colors?.border || '#2E2E2E',
           borderWidth: 1,
         },
       },
