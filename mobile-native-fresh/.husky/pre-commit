@@ -1,7 +1,10 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
 echo "🔍 Running pre-commit checks..."
+
+# Remove junk files before commit
+git ls-files --deleted -o -i --exclude-standard | grep -E '\.DS_Store|Thumbs\.db|Desktop\.ini|\.AppleDouble|\.LSOverride|~$' | xargs -I{} git rm --cached {} 2>/dev/null
 
 # Run text error detection and auto-fix
 echo "📝 Checking for text string errors..."
