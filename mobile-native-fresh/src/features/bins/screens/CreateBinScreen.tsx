@@ -22,6 +22,7 @@ import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { BinFormData } from '../../../types';
+import { spacingTokens } from '../../../theme/spacing';
 
 // Predefined colors and icons for bin creation
 const BIN_COLORS = [
@@ -72,7 +73,7 @@ export const CreateBinScreen: React.FC = () => {
   const [alertConfig, setAlertConfig] = useState({
     title: '',
     message: '',
-    buttons: [] as any[],
+    onConfirm: () => {},
   });
 
   const handleSave = async () => {
@@ -110,21 +111,10 @@ export const CreateBinScreen: React.FC = () => {
       setAlertConfig({
         title: 'Discard Changes?',
         message: 'You have unsaved changes. Are you sure you want to discard them?',
-        buttons: [
-          {
-            text: 'Keep Editing',
-            onPress: () => setShowAlertDialog(false),
-            style: 'cancel',
-          },
-          {
-            text: 'Discard',
-            onPress: () => {
-              setShowAlertDialog(false);
-              navigation.goBack();
-            },
-            style: 'destructive',
-          },
-        ],
+        onConfirm: () => {
+          setShowAlertDialog(false);
+          navigation.goBack();
+        },
       });
       setShowAlertDialog(true);
     } else {
@@ -151,19 +141,19 @@ export const CreateBinScreen: React.FC = () => {
       flex: 1,
     },
     scrollContent: {
-      padding: 16,
+      padding: spacingTokens.pagePaddingHorizontal,
       paddingBottom: 100,
     },
     card: {
-      marginBottom: 16,
+      marginBottom: spacingTokens.cardMarginBottom,
     },
     cardContent: {
-      padding: 16,
+      padding: spacingTokens.cardPaddingHorizontal,
     },
     label: {
       fontSize: 16,
       fontWeight: '600',
-      marginBottom: 8,
+      marginBottom: spacingTokens.textMarginBottom,
       color: tokens.colors.text,
     },
     textInput: {
@@ -266,16 +256,10 @@ export const CreateBinScreen: React.FC = () => {
         <ModernHeader
           title={getHeaderTitle()}
           subtitle={getHeaderSubtitle()}
-          leftAction={{
-            icon: 'close',
-            onPress: handleCancel,
-            accessibilityLabel: 'Cancel',
-          }}
+          onBack={handleCancel}
           rightAction={{
             icon: 'checkmark',
             onPress: handleSave,
-            disabled: isSubmitting || !name.trim(),
-            accessibilityLabel: 'Save bin',
           }}
         />
 
@@ -292,7 +276,7 @@ export const CreateBinScreen: React.FC = () => {
               <TextInput
                 style={{
                   fontSize: 16,
-                  padding: 12,
+                  padding: spacingTokens.buttonPadding,
                   borderWidth: 1,
                   borderColor: tokens.colors.border,
                   borderRadius: 8,
@@ -316,7 +300,7 @@ export const CreateBinScreen: React.FC = () => {
               <TextInput
                 style={[{
                   fontSize: 16,
-                  padding: 12,
+                  padding: spacingTokens.buttonPadding,
                   borderWidth: 1,
                   borderColor: tokens.colors.border,
                   borderRadius: 8,
@@ -349,7 +333,7 @@ export const CreateBinScreen: React.FC = () => {
                       { backgroundColor: color },
                       selectedColor === color && styles.colorOptionSelected,
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedColor(color)}
+                    onPress={() => setSelectedColor(color)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`Select color ${color}`}
@@ -375,7 +359,7 @@ export const CreateBinScreen: React.FC = () => {
                       styles.iconOption,
                       selectedIcon === icon && styles.iconOptionSelected,
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedIcon(icon)}
+                    onPress={() => setSelectedIcon(icon)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`Select icon ${icon}`}
@@ -424,8 +408,13 @@ export const CreateBinScreen: React.FC = () => {
         visible={showAlertDialog}
         title={alertConfig.title}
         message={alertConfig.message}
-        buttons={alertConfig.buttons}
-        onDismiss={() => setShowAlertDialog(false)}
+        onConfirm={() => {
+          setShowAlertDialog(false);
+          if (alertConfig.onConfirm) {
+            alertConfig.onConfirm();
+          }
+        }}
+        onCancel={() => setShowAlertDialog(false)}
       />
     </SafeAreaView>
   );
