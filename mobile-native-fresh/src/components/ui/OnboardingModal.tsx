@@ -15,6 +15,7 @@ interface ModalButtonProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
+  iconRight?: boolean;
 }
 
 interface OnboardingModalProps {
@@ -22,7 +23,7 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled }) => {
+const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight }) => {
   const { tokens, typography } = useTheme();
   return (
     <TouchableOpacity
@@ -46,7 +47,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
       accessible={true}
       disabled={disabled}
     >
-      {icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginRight: 8 }} />}
+      {!iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,
         fontSize: 12,
@@ -54,6 +55,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
         textAlign: 'center',
         fontWeight: '600',
       }}>{children}</Text>
+      {iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginLeft: 8 }} />}
     </TouchableOpacity>
   );
 };
@@ -62,36 +64,38 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
   const [currentStep, setCurrentStep] = useState(0);
   const { typography, spacing, tokens } = useTheme();
 
+  const iconSize = tokens.spacing.xxxl * 2;
+
   const steps = [
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
       description: "Enable voice commands like 'Hey Siri, capture thoughtmark' or 'Hey Siri, add to thoughtmarks' from anywhere on your device. You can set this up now or later in Settings.",
-      icon: <Ionicons name="phone-portrait-outline" size={tokens.iconSize.xl} color={tokens.colors.accent} />,
+      icon: <Ionicons name="phone-portrait-outline" size={iconSize} color={tokens.colors.accent} />,
     },
     {
       title: 'Organize with Smart Bins',
       description: 'AI automatically categorizes your thoughts into relevant bins. You can also create custom bins for specific projects.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={tokens.iconSize.xl} color={tokens.colors.accent} />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={tokens.colors.accent} />,
     },
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={tokens.iconSize.xl} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
       description: 'Access advanced AI, unlimited bins, priority support, and more.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={tokens.iconSize.xl} color={tokens.colors.accent} />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={tokens.colors.accent} />,
       premium: true,
     },
   ];
@@ -128,18 +132,21 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
         <View style={{
           width: screenWidth * 0.9,
           paddingHorizontal: spacing.pagePaddingHorizontal,
-          paddingTop: tokens.spacing.lg,
-          paddingBottom: tokens.spacing.lg,
+          paddingTop: tokens.spacing.xxxl,
+          paddingBottom: tokens.spacing.xxxl,
           backgroundColor: tokens.colors.backgroundSecondary,
           borderRadius: tokens.radius.lg,
           alignItems: 'center',
         }}>
           {/* Title */}
           <Text style={{
-            ...typography.sectionTitle,
+            fontFamily: 'Oswald',
+            fontSize: (typography.sectionTitle.fontSize || 24) + 2,
+            fontWeight: '700',
+            textTransform: 'uppercase',
             opacity: 0.85,
             textAlign: 'center',
-            marginBottom: tokens.spacing.sm,
+            marginBottom: tokens.spacing.lg,
             color: tokens.colors.text,
           }}>{steps[currentStep].title}</Text>
           {/* Pagination Label */}
@@ -150,13 +157,13 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             color: tokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
-          <View style={{ alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-            {steps[currentStep].icon}
+          <View style={{ alignItems: 'center', marginTop: tokens.spacing.xl, marginBottom: tokens.spacing.xl }}>
+            {React.cloneElement(steps[currentStep].icon, { size: iconSize })}
           </View>
           {/* Body Text */}
           <Text style={{
             ...typography.body,
-            fontSize: (typography.body.fontSize || 16) + 2,
+            fontSize: (typography.body.fontSize || 16) - 2,
             lineHeight: 24,
             textAlign: 'center',
             color: tokens.colors.textSecondary,
@@ -176,19 +183,20 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             ))}
           </View>
           {/* Buttons */}
-          <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.md }}>
+          <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
             <ModalButton
               onPress={handlePrevious}
               icon="arrow-left"
-              style={{ backgroundColor: tokens.colors.background, borderWidth: 1, borderColor: tokens.colors.accent }}
+              style={{ backgroundColor: tokens.colors.background, borderWidth: 1, borderColor: tokens.colors.accent, marginRight: tokens.spacing.sm }}
               disabled={currentStep === 0}
             >
               Previous
             </ModalButton>
             <ModalButton
               onPress={handleNext}
+              style={{ backgroundColor: tokens.colors.accent, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center', alignItems: 'center', gap: tokens.spacing.sm, minWidth: 120 }}
               icon="arrow-right"
-              style={{ backgroundColor: tokens.colors.accent }}
+              iconRight
             >
               {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ModalButton>
