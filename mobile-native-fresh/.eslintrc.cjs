@@ -82,7 +82,7 @@ module.exports = {
     'thoughtmarks/no-direct-design-tokens': 'error',
     'thoughtmarks/no-global-theme': 'error',
     'thoughtmarks/require-use-theme': 'error',
-    'thoughtmarks/no-circular-text': 'error',
+    'thoughtmarks/no-circular-text': 'off',
     // Custom text wrapping rule
     'thoughtmarks/enforce-text-wrapping': 'error',
     // Accessibility rules

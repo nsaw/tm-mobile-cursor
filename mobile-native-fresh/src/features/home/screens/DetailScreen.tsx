@@ -194,18 +194,18 @@ export const DetailScreen: React.FC = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}>
+        <TouchableOpacity style={styles.backButton} onPress={navigation.goBack}>
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.actionButton} onPress={handlePin} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <TouchableOpacity style={styles.actionButton} onPress={handlePin}>
             <Ionicons name="pin" size={20} color={tokens.colors.accent ?? '#000'} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton} onPress={handleEdit} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <TouchableOpacity style={styles.actionButton} onPress={handleEdit}>
             <Ionicons name="create-outline" size={24} color={tokens.colors.text ?? '#000'} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton} onPress={handleShare} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
             <Ionicons name="share-outline" size={24} color={tokens.colors.text ?? '#000'} />
           </TouchableOpacity>
         </View>
@@ -259,7 +259,7 @@ export const DetailScreen: React.FC = () => {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton} onPress={handleDelete} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        <TouchableOpacity style={styles.footerButton} onPress={handleDelete}>
           <Ionicons name="trash-outline" size={20} color={tokens.colors.danger ?? '#EF4444'} />
           <Text style={styles.footerButtonText}>Delete</Text>
         </TouchableOpacity>
