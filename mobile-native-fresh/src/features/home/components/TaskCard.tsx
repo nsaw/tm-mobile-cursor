@@ -139,7 +139,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     >
       <TouchableOpacity
         style={styles.checkbox}
-        onPress={(e) => {
+        onPress={(e) = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
           e.stopPropagation();
           onToggle();
         }}

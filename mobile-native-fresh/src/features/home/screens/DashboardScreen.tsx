@@ -353,7 +353,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     styles.tagChip,
                     localTagFilter === 'all' && styles.tagChipActive
                   ]}
-                  onPress={() => handleLocalTagPress('all')}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress('all')}
                   accessibilityRole="button"
                   accessible={true}
                   accessibilityLabel={`filter by tag: all`}
@@ -373,7 +373,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       styles.tagChip,
                       localTagFilter === tag && styles.tagChipActive
                     ]}
-                    onPress={() => handleLocalTagPress(tag)}
+                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress(tag)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
@@ -480,7 +480,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       <TouchableOpacity
                         key={bin.id}
                         style={styles.binCardHorizontal}
-                        onPress={() => handleBinPress(bin)}
+                        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(bin)}
                         accessibilityRole="button"
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
@@ -515,7 +515,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Saved to Sort Later */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
-                    onPress={() => {
+                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
                       const sortLaterBin = bins.find((b: any) => b.name === 'Sort Later');
                       if (sortLaterBin) {
                         handleBinPress(sortLaterBin);
@@ -536,7 +536,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Archive */}
                   <TouchableOpacity
                     style={styles.archiveCard}
-                    onPress={() => navigation.navigate('Archive')}
+                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Archive')}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel="View archive"
@@ -950,9 +950,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   // Check if we should render fallback
   if (shouldRenderFallback) {
     return (
-      <View style={styles.container}>
-        {renderFallbackContent()}
-      </View>
+      <View><Text>{renderFallbackContent()}</Text></View>
     );
   }
 
@@ -1001,7 +999,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             </Animated.View>
             <TouchableOpacity
               style={styles.settingsButton}
-              onPress={() => navigation.navigate('Settings')}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Settings')}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Button"

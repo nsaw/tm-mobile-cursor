@@ -23,7 +23,47 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onVoiceRecord,
   isRecording = false,
 }) => {
-  const insets = useSafeAreaInsets();
+  const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const insets = useSafeAreaInsets();
   const { tokens } = useTheme();
   const [scaleValue] = useState(new Animated.Value(1));
 

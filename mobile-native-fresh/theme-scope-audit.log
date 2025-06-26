@@ -1,0 +1,56 @@
+nohup: ignoring input
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+0
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+3
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+3
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+3
+
+> mobile-native-fresh@1.0.0 lint:check-theme
+> eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l
+
+3

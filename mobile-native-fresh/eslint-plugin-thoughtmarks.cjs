@@ -218,9 +218,12 @@ module.exports = {
         }
 
         return {
-          JSXElement: {
-            enter: checkForCircularText,
-            exit: exitJSXElement,
+          JSXElement(node) {
+            checkForCircularText(node);
+          },
+          
+          'JSXElement:exit'(node) {
+            exitJSXElement(node);
           },
           
           // Also check for Text component usage in JSX expressions

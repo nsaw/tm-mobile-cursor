@@ -11,6 +11,46 @@ import { Card, CardHeader, CardContent } from './Card';
 export const DesignSystemDemo: React.FC = () => {
   const { tokens } = useTheme();
 
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <View style={{ padding: tokens.spacing.lg }}>
@@ -43,29 +83,17 @@ export const DesignSystemDemo: React.FC = () => {
           
           <CardContent>
             <View style={{ gap: tokens.spacing.md }}>
-              <Button variant="primary" onPress={() => console.log('Primary pressed')}>
-                Primary Button
-              </Button>
+              <Button variant="primary" onPress={() => console.log('Primary pressed')}><Text>Primary Button</Text></Button>
               
-              <Button variant="secondary" onPress={() => console.log('Secondary pressed')}>
-                Secondary Button
-              </Button>
+              <Button variant="secondary" onPress={() => console.log('Secondary pressed')}><Text>Secondary Button</Text></Button>
               
-              <Button variant="outline" onPress={() => console.log('Outline pressed')}>
-                Outline Button
-              </Button>
+              <Button variant="outline" onPress={() => console.log('Outline pressed')}><Text>Outline Button</Text></Button>
               
-              <Button variant="ghost" onPress={() => console.log('Ghost pressed')}>
-                Ghost Button
-              </Button>
+              <Button variant="ghost" onPress={() => console.log('Ghost pressed')}><Text>Ghost Button</Text></Button>
               
-              <Button variant="destructive" onPress={() => console.log('Destructive pressed')}>
-                Destructive Button
-              </Button>
+              <Button variant="destructive" onPress={() => console.log('Destructive pressed')}><Text>Destructive Button</Text></Button>
               
-              <Button variant="brand" onPress={() => console.log('Brand pressed')}>
-                Brand Button
-              </Button>
+              <Button variant="brand" onPress={() => console.log('Brand pressed')}><Text>Brand Button</Text></Button>
             </View>
           </CardContent>
         </Card>
@@ -79,17 +107,11 @@ export const DesignSystemDemo: React.FC = () => {
           
           <CardContent>
             <View style={{ gap: tokens.spacing.md }}>
-              <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}>
-                Small Button
-              </Button>
+              <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>
               
-              <Button variant="primary" size="md" onPress={() => console.log('Medium pressed')}>
-                Medium Button
-              </Button>
+              <Button variant="primary" size="md" onPress={() => console.log('Medium pressed')}><Text>Medium Button</Text></Button>
               
-              <Button variant="primary" size="lg" onPress={() => console.log('Large pressed')}>
-                Large Button
-              </Button>
+              <Button variant="primary" size="lg" onPress={() => console.log('Large pressed')}><Text>Large Button</Text></Button>
               
               <Button variant="primary" size="icon" onPress={() => console.log('Icon pressed')}>
                 <Ionicons name="flame" size={20} color="#FFFFFF" />
