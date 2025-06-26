@@ -21,7 +21,7 @@ import { useTheme } from '../../../theme/ThemeProvider';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 export const SettingsScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  const { tokens, typography } = useTheme();
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
   
@@ -223,28 +223,22 @@ export const SettingsScreen: React.FC = () => {
       marginRight: tokens.spacing.md,
     },
     headerTitle: {
-      fontSize: tokens.typography.fontSize.heading,
-      fontWeight: '700',
+      ...typography.title,
       color: tokens.colors.text,
-      fontFamily: tokens.typography.fontFamily.heading,
     },
     headerSubtitle: {
-      fontSize: tokens.typography.fontSize.sm,
+      ...typography.body,
       color: tokens.colors.textSecondary,
-      fontFamily: tokens.typography.fontFamily.body,
     },
     section: {
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.xxl,
     },
     sectionTitle: {
-      fontSize: tokens.typography.fontSize.sm,
-      fontWeight: '600',
+      ...typography.sectionTitle,
       color: tokens.colors.textSecondary,
       marginBottom: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.lg,
-      fontFamily: tokens.typography.fontFamily.body,
       textTransform: 'uppercase',
-      letterSpacing: 1,
     },
     sectionCard: {
       marginHorizontal: tokens.spacing.lg,
@@ -257,6 +251,7 @@ export const SettingsScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border,
+      minHeight: 44,
     },
     settingItemLeft: {
       flexDirection: 'row',
@@ -268,16 +263,14 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingItemTitle: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: '600',
+      ...typography.body,
       color: tokens.colors.text,
-      fontFamily: tokens.typography.fontFamily.body,
+      opacity: 0.85,
     },
     settingItemSubtitle: {
-      fontSize: tokens.typography.fontSize.sm,
+      ...typography.small,
       color: tokens.colors.textSecondary,
       marginTop: 2,
-      fontFamily: tokens.typography.fontFamily.body,
     },
     settingItemRight: {
       alignItems: 'center',
@@ -374,7 +367,7 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={{ alignItems: 'center', padding: tokens.spacing.xl, marginBottom: tokens.spacing.lg }}>
+        <Card style={{ alignItems: 'center', paddingHorizontal: tokens.spacing.page, paddingVertical: tokens.spacing.lg, marginBottom: tokens.spacing.xxl }}>
           {(() => {
             return (
               <>
@@ -388,10 +381,8 @@ export const SettingsScreen: React.FC = () => {
                 </View>
                 {/* Title */}
                 <Text style={{
-                  fontFamily: tokens.typography.fontFamily.heading ?? 'Arial',
-                  fontSize: 22,
-                  fontWeight: '700',
-                  color: tokens.colors.text ?? '#000',
+                  ...typography.sectionTitle,
+                  color: tokens.colors.text,
                   textAlign: 'center',
                   marginBottom: tokens.spacing.sm,
                 }}>
@@ -399,9 +390,8 @@ export const SettingsScreen: React.FC = () => {
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
-                  fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
-                  fontSize: 12,
-                  color: tokens.colors.textSecondary ?? '#666',
+                  ...typography.body,
+                  color: tokens.colors.textSecondary,
                   textAlign: 'center',
                   marginBottom: tokens.spacing.md,
                 }}>
@@ -412,15 +402,15 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens.colors.accent ?? '#000',
+                    backgroundColor: tokens.colors.accent,
                     paddingVertical: tokens.spacing.sm,
-                    borderRadius: 8,
+                    borderRadius: tokens.radius.md,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
-                  <Text style={{ fontFamily: tokens.typography.fontFamily.body ?? 'Arial',
-                    fontWeight: '600',
-                    color: tokens.colors.text,
+                  <Text style={{
+                    ...typography.buttonText,
+                    color: tokens.colors.buttonText,
                     textAlign: 'center',
                     width: '100%',
                    }}>
