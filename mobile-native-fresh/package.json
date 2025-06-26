@@ -24,7 +24,8 @@
     "fix:text-errors": "node scripts/auto-fix-text-errors.cjs",
     "auto:fix": "npm run fix:text-errors",
     "watch:text-errors": "node scripts/watch-text-errors.cjs",
-    "watch:fix": "npm run watch:text-errors"
+    "watch:fix": "npm run watch:text-errors",
+    "watch:lint-fix": "node scripts/watch-lint-fix.cjs"
   },
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.4.1",
