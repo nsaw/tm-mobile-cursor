@@ -8,6 +8,7 @@ import {
   Dimensions,
   useWindowDimensions,
   Animated,
+  Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -970,11 +971,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Ionicons 
-              name="bulb-outline" 
-              size={32} 
-              color={tokens.colors.accent} 
-              style={{ marginRight: tokens.spacing.sm }}
+            <Image
+              source={require('../../../../assets/logo.png')}
+              style={{
+                width: 32,
+                height: 32,
+                marginRight: tokens.spacing.sm,
+                borderRadius: 8,
+              }}
+              resizeMode="contain"
+              accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
               <Text style={styles.title} numberOfLines={1}>THOUGHTMARKS</Text>
