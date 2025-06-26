@@ -92,7 +92,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             <Text variant="heading" style={{ 
               marginBottom: 4,
               textAlign: 'center',
-              ...typography.title,
+              color: '#FFFFFF',
+              fontSize: 16,
+              fontWeight: '900',
+              fontFamily: 'Ubuntu_700Bold',
+              letterSpacing: 0.5,
+              textTransform: 'uppercase',
             }}>
               {steps[currentStep].title}
             </Text>

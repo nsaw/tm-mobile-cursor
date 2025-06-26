@@ -20,7 +20,7 @@ export const typographyTokens = {
     fontFamily: 'Ubuntu_600SemiBold',
     color: '#6B7280', // tokens.colors.textSecondary
     letterSpacing: 0.5,
-    opacity: 0.7,
+    opacity: 0.85,
   },
   
   // Tagline (NeonGradientText variant)

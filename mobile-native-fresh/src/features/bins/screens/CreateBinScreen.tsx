@@ -140,6 +140,122 @@ export const CreateBinScreen: React.FC = () => {
     return 'Organize your thoughtmarks into categories';
   };
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    keyboardAvoidingView: {
+      flex: 1,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    scrollContent: {
+      padding: 16,
+      paddingBottom: 100,
+    },
+    card: {
+      marginBottom: 16,
+    },
+    cardContent: {
+      padding: 16,
+    },
+    label: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 8,
+      color: tokens.colors.text,
+    },
+    textInput: {
+      fontSize: 16,
+      padding: 12,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      borderRadius: 8,
+      backgroundColor: tokens.colors.surface,
+      color: tokens.colors.text,
+    },
+    textArea: {
+      height: 80,
+      textAlignVertical: 'top',
+    },
+    colorGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 12,
+    },
+    colorOption: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderWidth: 2,
+      borderColor: 'transparent',
+    },
+    colorOptionSelected: {
+      borderColor: '#FFFFFF',
+      borderWidth: 3,
+    },
+    iconGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 12,
+    },
+    iconOption: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.surface,
+      borderWidth: 2,
+      borderColor: 'transparent',
+    },
+    iconOptionSelected: {
+      borderColor: tokens.colors.accent,
+      backgroundColor: tokens.colors.surfaceHover,
+    },
+    previewBin: {
+      padding: 16,
+      borderRadius: 12,
+      marginTop: 8,
+    },
+    previewContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    previewText: {
+      marginLeft: 12,
+      flex: 1,
+    },
+    previewName: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: 'white',
+      marginBottom: 2,
+    },
+    previewDescription: {
+      fontSize: 14,
+      color: 'rgba(255, 255, 255, 0.8)',
+    },
+    loadingOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      color: 'white',
+      marginTop: 12,
+      fontSize: 16,
+    },
+  });
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
       <KeyboardAvoidingView 
@@ -174,7 +290,15 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Bin Name *</Text>
               <TextInput
-                style={styles.textInput}
+                style={[{
+                  fontSize: 16,
+                  padding: 12,
+                  borderWidth: 1,
+                  borderColor: tokens.colors.border,
+                  borderRadius: 8,
+                  backgroundColor: tokens.colors.surface,
+                  color: tokens.colors.text,
+                }, styles.textArea]}
                 value={name}
                 onChangeText={setName}
                 placeholder="Enter bin name..."
@@ -190,7 +314,17 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Description (Optional)</Text>
               <TextInput
-                style={[styles.textInput, styles.textArea]}
+                style={[{
+                  fontSize: 16,
+                  padding: 12,
+                  borderWidth: 1,
+                  borderColor: tokens.colors.border,
+                  borderRadius: 8,
+                  backgroundColor: tokens.colors.surface,
+                  color: tokens.colors.text,
+                  height: 80,
+                  textAlignVertical: 'top',
+                }]}
                 value={description}
                 onChangeText={setDescription}
                 placeholder="Describe what this bin is for..."
@@ -295,120 +429,4 @@ export const CreateBinScreen: React.FC = () => {
       />
     </SafeAreaView>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  keyboardAvoidingView: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 16,
-    paddingBottom: 100,
-  },
-  card: {
-    marginBottom: 16,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
-    color: '#374151',
-  },
-  textInput: {
-    fontSize: 16,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 8,
-    backgroundColor: '#FFFFFF',
-    color: '#374151',
-  },
-  textArea: {
-    height: 80,
-    textAlignVertical: 'top',
-  },
-  colorGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  colorOption: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  colorOptionSelected: {
-    borderColor: '#FFFFFF',
-    borderWidth: 3,
-  },
-  iconGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  iconOption: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F3F4F6',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  iconOptionSelected: {
-    borderColor: '#3B82F6',
-    backgroundColor: '#EFF6FF',
-  },
-  previewBin: {
-    padding: 16,
-    borderRadius: 12,
-    marginTop: 8,
-  },
-  previewContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  previewText: {
-    marginLeft: 12,
-    flex: 1,
-  },
-  previewName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: 2,
-  },
-  previewDescription: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.8)',
-  },
-  loadingOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    color: 'white',
-    marginTop: 12,
-    fontSize: 16,
-  },
-}); 
+}; 

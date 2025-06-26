@@ -25,7 +25,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       paddingVertical: tokens.spacing.md,
       paddingHorizontal: tokens.spacing.lg,
       borderRadius: tokens.radius.md,
-      backgroundColor: provider === 'google' ? '#fff' : '#000',
+      backgroundColor: provider === 'google' ? tokens.colors.surface : tokens.colors.background,
       borderWidth: 1,
       borderColor: provider === 'google' ? tokens.colors.border : 'transparent',
       opacity: disabled ? 0.6 : 1,
@@ -36,7 +36,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
     text: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: tokens.typography.fontWeight.semibold,
-      color: provider === 'google' ? '#000' : '#fff',
+      color: provider === 'google' ? tokens.colors.text : tokens.colors.text,
     },
   });
 

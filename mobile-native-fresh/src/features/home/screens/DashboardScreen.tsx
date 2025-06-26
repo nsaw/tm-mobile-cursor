@@ -989,7 +989,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 accessible={true}
                 accessibilityLabel="Button"
               >
-                <Ionicons name="information-circle-outline" size={27} color={typography.colors.textSecondary} />
+                <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
               </TouchableOpacity>
             </Animated.View>
             <TouchableOpacity
@@ -999,7 +999,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessible={true}
               accessibilityLabel="Button"
             >
-              <Ionicons name="settings-outline" size={32} color={typography.colors.textSecondary} />
+              <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
         </View>

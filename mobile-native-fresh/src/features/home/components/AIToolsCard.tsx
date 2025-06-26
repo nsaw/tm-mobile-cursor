@@ -21,11 +21,11 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   subtitle = "Generate insights and suggestions",
   icon = "crown",
 }) => {
-  const { typography, spacing } = useTheme();
+  const { tokens, spacing } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#fff',
+      backgroundColor: 'transparent',
       borderRadius: 12,
       paddingVertical: spacing.cardPaddingVertical,
       paddingLeft: spacing.cardPaddingHorizontal,
@@ -51,7 +51,8 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       alignItems: 'center',
     },
     title: {
-      ...typography.sectionTitle,
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: tokens.typography.fontWeight.semibold,
       color: '#FFD700',
       marginBottom: spacing.textMarginBottom,
       textTransform: 'uppercase',
@@ -59,8 +60,9 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       marginLeft: 0,
     },
     subtitle: {
-      ...typography.body,
-      color: '#6B7280',
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: tokens.typography.fontWeight.normal,
+      color: tokens.colors.textSecondary,
       lineHeight: 16,
     },
     crownIcon: {
