@@ -75,6 +75,129 @@ export const CreateBinScreen: React.FC = () => {
     buttons: [] as any[],
   });
 
+  const getStyles = (tokens: any) => StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.colors.background,
+    },
+    keyboardAvoidingView: {
+      flex: 1,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    scrollContent: {
+      padding: tokens.spacing.md,
+      paddingBottom: 100,
+    },
+    card: {
+      marginBottom: tokens.spacing.md,
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.radius.md,
+      padding: tokens.spacing.md,
+    },
+    cardContent: {
+      padding: tokens.spacing.md,
+    },
+    label: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      marginBottom: tokens.spacing.sm,
+      color: tokens.colors.text,
+    },
+    textInput: {
+      fontSize: tokens.typography.fontSize.body,
+      padding: tokens.spacing.sm,
+      borderWidth: 1,
+      borderColor: tokens.colors.border,
+      borderRadius: tokens.radius.sm,
+      backgroundColor: tokens.colors.backgroundSecondary,
+      color: tokens.colors.text,
+    },
+    textArea: {
+      height: 80,
+      textAlignVertical: 'top',
+    },
+    colorGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: tokens.spacing.sm,
+    },
+    colorOption: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderWidth: 2,
+      borderColor: 'transparent',
+    },
+    colorOptionSelected: {
+      borderColor: tokens.colors.text,
+      borderWidth: 3,
+    },
+    iconGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: tokens.spacing.sm,
+    },
+    iconOption: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: tokens.colors.surface,
+      borderWidth: 2,
+      borderColor: 'transparent',
+    },
+    iconOptionSelected: {
+      borderColor: tokens.colors.accent,
+      backgroundColor: tokens.colors.accent + '20',
+    },
+    previewBin: {
+      padding: tokens.spacing.md,
+      borderRadius: tokens.radius.md,
+      marginTop: tokens.spacing.sm,
+      backgroundColor: selectedColor,
+    },
+    previewContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    previewText: {
+      marginLeft: tokens.spacing.sm,
+      flex: 1,
+    },
+    previewName: {
+      fontSize: tokens.typography.fontSize.body,
+      fontWeight: '600',
+      color: 'white',
+      marginBottom: 2,
+    },
+    previewDescription: {
+      fontSize: tokens.typography.fontSize.sm,
+      color: 'rgba(255, 255, 255, 0.8)',
+    },
+    loadingOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      color: 'white',
+      marginTop: 12,
+      fontSize: 16,
+    },
+  });
+
+  const styles = getStyles(tokens);
+
   const handleSave = async () => {
     if (!name.trim()) {
       Alert.alert('Name Required', 'Please enter a name for your bin.');
@@ -141,7 +264,7 @@ export const CreateBinScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView 
         style={styles.keyboardAvoidingView}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -295,120 +418,4 @@ export const CreateBinScreen: React.FC = () => {
       />
     </SafeAreaView>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  keyboardAvoidingView: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 16,
-    paddingBottom: 100,
-  },
-  card: {
-    marginBottom: 16,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
-    color: '#374151',
-  },
-  textInput: {
-    fontSize: 16,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 8,
-    backgroundColor: '#FFFFFF',
-    color: '#374151',
-  },
-  textArea: {
-    height: 80,
-    textAlignVertical: 'top',
-  },
-  colorGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  colorOption: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  colorOptionSelected: {
-    borderColor: '#FFFFFF',
-    borderWidth: 3,
-  },
-  iconGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  iconOption: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F3F4F6',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  iconOptionSelected: {
-    borderColor: '#3B82F6',
-    backgroundColor: '#EFF6FF',
-  },
-  previewBin: {
-    padding: 16,
-    borderRadius: 12,
-    marginTop: 8,
-  },
-  previewContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  previewText: {
-    marginLeft: 12,
-    flex: 1,
-  },
-  previewName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: 2,
-  },
-  previewDescription: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.8)',
-  },
-  loadingOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    color: 'white',
-    marginTop: 12,
-    fontSize: 16,
-  },
-}); 
+}; 
