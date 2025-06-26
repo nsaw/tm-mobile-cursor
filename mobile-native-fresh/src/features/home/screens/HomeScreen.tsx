@@ -172,7 +172,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const handleNavigate = (route: keyof RootStackParamList) => {
-    navigation.navigate(route as any);
+    navigation.navigate(route);
   };
 
   const quickActions: { title: string; icon: any; onPress: () => void; color: string }[] = [
