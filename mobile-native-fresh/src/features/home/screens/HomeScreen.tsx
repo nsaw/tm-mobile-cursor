@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import type { RootStackParamList } from '../../../navigation/types';
 import { ROUTES } from '../../../navigation/routes';
-import type { IoniconsGlyphs } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
@@ -173,7 +172,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const handleNavigate = (route: keyof RootStackParamList) => {
-    navigation.navigate(route);
+    navigation.navigate(route as any);
   };
 
   const quickActions: { title: string; icon: any; onPress: () => void; color: string }[] = [
@@ -408,7 +407,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
       {/* Bottom Navigation */}
       <BottomNav
-        onNavigate={handleNavigate}
+        onNavigate={(route: string) => handleNavigate(route as keyof RootStackParamList)}
         onVoiceRecord={handleVoiceRecord}
         showCreateButton={true}
         currentRoute="/"

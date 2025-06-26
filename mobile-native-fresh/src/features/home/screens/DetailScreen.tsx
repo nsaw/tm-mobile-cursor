@@ -41,6 +41,7 @@ export const DetailScreen: React.FC = () => {
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border ?? '#000',
+      borderRadius: tokens.radius?.full ?? 9999,
     },
     backButton: {
       padding: tokens.spacing.sm,
