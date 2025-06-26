@@ -36,7 +36,7 @@ export const BinCard: React.FC<BinCardProps> = ({
       borderRadius: tokens.radius.md * 1.34,
       marginBottom: tokens.spacing.sm * 1.34,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.borderHover,
       justifyContent: 'center',
       alignItems: 'center',
       padding: tokens.spacing.md * 1.34,
@@ -46,16 +46,17 @@ export const BinCard: React.FC<BinCardProps> = ({
       marginBottom: tokens.spacing.sm,
     },
     name: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: '600',
+      fontSize: tokens.typography.fontSize.xs,
+      fontWeight: tokens.typography.fontWeight.light,
       color: tokens.colors.accent,
       textAlign: 'center',
       marginBottom: tokens.spacing.xs,
     },
     count: {
-      fontSize: tokens.typography.fontSize.sm,
+      fontSize: tokens.typography.fontSize.xs,
       color: tokens.colors.textSecondary,
       textAlign: 'center',
+      fontWeight: tokens.typography.fontWeight.light,
     },
   });
 

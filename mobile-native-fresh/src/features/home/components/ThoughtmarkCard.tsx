@@ -253,11 +253,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               marginRight: tokens.spacing.sm,
             }}>
               <Text 
-                variant="subheading" 
+                variant="subtitle" 
                 size="md"
+                weight="medium"
                 style={{ 
                   textAlign: 'left',
                   textTransform: 'capitalize',
+                  fontSize: tokens.typography.fontSize.sm + 2,
                 }}
                 numberOfLines={1}
               >
@@ -324,6 +326,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             style={{ 
               marginBottom: 11,
               lineHeight: 28,
+              fontSize: tokens.typography.fontSize.sm + 1,
             }}
             numberOfLines={2}
           >

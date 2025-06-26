@@ -9,7 +9,7 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/brain-bookmark.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#181818"
     },

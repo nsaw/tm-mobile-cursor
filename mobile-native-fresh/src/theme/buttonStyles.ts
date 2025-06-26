@@ -25,17 +25,17 @@ export const buttonStyles = {
   },
   
   specialBinCardText: {
-    fontSize: RFValue(12.5),
+    fontSize: RFValue(10),
     color: '#3B82F6', // tokens.colors.accent
-    fontWeight: '500' as const,
-    fontFamily: 'Ubuntu_500Medium',
+    fontWeight: '300' as const,
+    fontFamily: 'Ubuntu_300Light',
     opacity: 0.8,
   },
   
   specialBinCardCount: {
-    fontSize: RFValue(12.5),
+    fontSize: RFValue(9),
     color: '#3B82F6', // tokens.colors.accent
-    fontFamily: 'Ubuntu_500Medium',
+    fontFamily: 'Ubuntu_300Light',
     opacity: 0.8,
   },
   
