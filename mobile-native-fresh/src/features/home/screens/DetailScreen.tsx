@@ -63,7 +63,7 @@ export const DetailScreen: React.FC = () => {
     },
     content: {
       flex: 1,
-      paddingHorizontal: tokens.spacing && typeof tokens.spacing.lg === 'number' ? tokens.spacing.lg : 16,
+      paddingHorizontal: typeof tokens.spacing?.lg === 'number' ? tokens.spacing.lg : 16,
       paddingVertical: tokens.spacing && typeof tokens.spacing.md === 'number' ? tokens.spacing.md : 12,
     },
     title: {
@@ -98,7 +98,7 @@ export const DetailScreen: React.FC = () => {
       backgroundColor: tokens.colors.surface ?? '#000',
       padding: tokens.spacing && typeof tokens.spacing.md === 'number' ? tokens.spacing.md : 16,
       borderRadius: tokens.spacing && typeof tokens.spacing.md === 'number' ? tokens.spacing.md : 16,
-      marginBottom: tokens.spacing && typeof tokens.spacing.lg === 'number' ? tokens.spacing.lg : 16,
+      marginBottom: typeof tokens.spacing?.lg === 'number' ? tokens.spacing.lg : 16,
     },
     contentTitle: {
       fontSize: tokens.typography.fontSize.body,
@@ -115,7 +115,7 @@ export const DetailScreen: React.FC = () => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing && typeof tokens.spacing.lg === 'number' ? tokens.spacing.lg : 16,
+      paddingHorizontal: typeof tokens.spacing?.lg === 'number' ? tokens.spacing.lg : 16,
       paddingVertical: tokens.spacing && typeof tokens.spacing.md === 'number' ? tokens.spacing.md : 12,
       borderTopWidth: 1,
       borderTopColor: tokens.colors && typeof tokens.colors.border === 'string' ? tokens.colors.border : '#000',
@@ -234,7 +234,7 @@ export const DetailScreen: React.FC = () => {
 
         {/* Tags */}
         {thoughtmark.tags && thoughtmark.tags.length > 0 && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: tokens.spacing && typeof tokens.spacing.lg === 'number' ? tokens.spacing.lg : 16 }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: typeof tokens.spacing?.lg === 'number' ? tokens.spacing.lg : 16 }}>
             {thoughtmark.tags.map((tag, index) => (
               <View key={index} style={styles.tagsContainer}>
                 <Text style={styles.tagText}>#{tag}</Text>

@@ -407,7 +407,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
       {/* Bottom Navigation */}
       <BottomNav
-        onNavigate={(route: string) => handleNavigate(route as keyof RootStackParamList)}
+        onNavigate={(route: string) => navigation.navigate(route as any, undefined)}
         onVoiceRecord={handleVoiceRecord}
         showCreateButton={true}
         currentRoute="/"
