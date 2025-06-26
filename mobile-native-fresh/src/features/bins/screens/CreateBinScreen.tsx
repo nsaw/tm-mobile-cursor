@@ -290,7 +290,7 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Bin Name *</Text>
               <TextInput
-                style={[{
+                style={{
                   fontSize: 16,
                   padding: 12,
                   borderWidth: 1,
@@ -298,7 +298,7 @@ export const CreateBinScreen: React.FC = () => {
                   borderRadius: 8,
                   backgroundColor: tokens.colors.surface,
                   color: tokens.colors.text,
-                }, styles.textArea]}
+                }}
                 value={name}
                 onChangeText={setName}
                 placeholder="Enter bin name..."
