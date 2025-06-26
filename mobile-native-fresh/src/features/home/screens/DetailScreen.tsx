@@ -188,7 +188,8 @@ export const DetailScreen: React.FC = () => {
     );
   };
 
-  const getBinName = (binId: number) => {
+  const getBinName = (binId?: number) => {
+    if (typeof binId !== 'number') return 'Unknown Bin';
     const bin = bins.find(b => b.id === binId);
     return bin?.name || 'Unknown Bin';
   };
@@ -220,7 +221,7 @@ export const DetailScreen: React.FC = () => {
         <View style={styles.contentCard}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Ionicons name="folder-outline" size={16} color={tokens.colors.textSecondary ?? '#000'} />
-            <Text style={styles.contentTitle}>Bin: {getBinName(thoughtmark.binId)}</Text>
+            <Text style={styles.contentTitle}>Bin: {getBinName(typeof thoughtmark.binId === 'number' ? thoughtmark.binId : undefined)}</Text>
           </View>
         </View>
 
