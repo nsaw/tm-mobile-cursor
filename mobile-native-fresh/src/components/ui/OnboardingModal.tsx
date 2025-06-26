@@ -16,6 +16,7 @@ interface ModalButtonProps {
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   iconRight?: boolean;
+  textStyle?: any;
 }
 
 interface OnboardingModalProps {
@@ -23,7 +24,7 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight }) => {
+const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
   const { tokens, typography } = useTheme();
   return (
     <TouchableOpacity
@@ -54,6 +55,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
         color: tokens.colors.buttonText,
         textAlign: 'center',
         fontWeight: '600',
+        ...textStyle,
       }}>{children}</Text>
       {iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginLeft: 8 }} />}
     </TouchableOpacity>
@@ -114,6 +116,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
     }
   };
 
+  // Button text size for onboarding
+  const onboardingButtonText = {
+    ...typography.buttonText,
+    fontSize: 14,
+    textAlign: 'center',
+    alignSelf: 'center',
+  };
+
   return (
     <Modal
       visible={visible}
@@ -130,10 +140,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
         backgroundColor: '#000000E6',
       }}>
         <View style={{
-          width: screenWidth * 0.9,
+          width: '90%',
+          marginHorizontal: 'auto',
           paddingHorizontal: spacing.pagePaddingHorizontal,
-          paddingTop: tokens.spacing.xxxl,
-          paddingBottom: tokens.spacing.xxxl,
+          paddingTop: tokens.spacing.xl,
+          paddingBottom: tokens.spacing.xl,
           backgroundColor: tokens.colors.backgroundSecondary,
           borderRadius: tokens.radius.lg,
           alignItems: 'center',
@@ -141,13 +152,15 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Title */}
           <Text style={{
             fontFamily: 'Oswald',
-            fontSize: (typography.sectionTitle.fontSize || 24) + 2,
+            fontSize: ((typography.sectionTitle?.fontSize || 16) + 2),
             fontWeight: '700',
             textTransform: 'uppercase',
             opacity: 0.85,
             textAlign: 'center',
             marginBottom: tokens.spacing.lg,
             color: tokens.colors.text,
+            paddingVertical: tokens.spacing.sm,
+            lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8),
           }}>{steps[currentStep].title}</Text>
           {/* Pagination Label */}
           <Text style={{
@@ -187,16 +200,18 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             <ModalButton
               onPress={handlePrevious}
               icon="arrow-left"
-              style={{ backgroundColor: tokens.colors.background, borderWidth: 1, borderColor: tokens.colors.accent, marginRight: tokens.spacing.sm }}
+              style={{ backgroundColor: tokens.colors.background, borderWidth: 1, borderColor: tokens.colors.accent, marginRight: tokens.spacing.sm, flex: 1, minWidth: 0 }}
               disabled={currentStep === 0}
+              textStyle={onboardingButtonText}
             >
               Previous
             </ModalButton>
             <ModalButton
               onPress={handleNext}
-              style={{ backgroundColor: tokens.colors.accent, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center', alignItems: 'center', gap: tokens.spacing.sm, minWidth: 120 }}
+              style={{ backgroundColor: tokens.colors.accent, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center', alignItems: 'center', gap: tokens.spacing.sm, flex: 1, minWidth: 0, marginLeft: tokens.spacing.sm }}
               icon="arrow-right"
               iconRight
+              textStyle={onboardingButtonText}
             >
               {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ModalButton>
