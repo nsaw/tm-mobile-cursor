@@ -64,6 +64,27 @@ cd react-native && npm start
 - **Platform READMEs** - Specific setup instructions for each platform
 - **API Documentation** - Complete endpoint reference
 
+## Rollback History
+
+### v1.2.2_visual-polish Baseline (Current)
+**Date**: 2024-12-26  
+**Reason**: Rolled back from v1.3.1 to preserve visual polish and stability  
+**What was preserved**: 
+- OnboardingModal extracted to `.backup/onboardingModal_v1.3.1/`
+- All experimental theme changes reverted
+- Visual baseline confirmed working
+
+**Backup Strategy**:
+- `.backup/` - Contains isolated components for future transplant
+- `archive/` - Contains experimental code and failed attempts
+- Both folders are git-ignored for local development
+
+**Tags**: 
+- `v1.2.2_visual-polish` - Current stable baseline
+- `pre-modal-cherry-pick-snapshot` - Pre-rollback state
+- `modal-cherry-picked-and-archived` - Modal extraction complete
+- `rollback-v1.2.2_visual-polish` - Rollback confirmation
+
 ## Production Deployment
 
 ### Web Application
