@@ -22,49 +22,9 @@ const logo = require('../../../../assets/logo.png');
 
 export const SignUpScreen: React.FC = () => {
   const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { signUp, loading } = useAuth();
+  const { signUp, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
-  const { tokens } = useTheme();
 
   const handleEmailSignUp = async (
     email: string,
@@ -212,7 +172,7 @@ const { signUp, loading } = useAuth();
           <View style={styles.formContainer}>
             <RegistrationForm
               onSubmit={handleEmailSignUp}
-              loading={isLoading || loading}
+              
             />
 
             <View style={styles.divider}>
@@ -224,14 +184,14 @@ const { signUp, loading } = useAuth();
             <OAuthButton
               provider="google"
               onPress={handleGoogleSignUp}
-              loading={isLoading || loading}
+              
             />
 
             {Platform.OS === 'ios' && (
               <OAuthButton
                 provider="apple"
                 onPress={handleAppleSignUp}
-                loading={isLoading || loading}
+                
               />
             )}
           </View>

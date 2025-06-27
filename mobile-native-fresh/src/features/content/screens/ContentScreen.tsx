@@ -122,7 +122,7 @@ export const ContentScreen: React.FC = () => {
           <TouchableOpacity
             key={page.route}
             style={styles.card}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate(page.route as any)}
+            onPress={() => navigation.navigate(page.route as any)} accessibilityRole="button" accessible={true} 
           >
             <View style={styles.tag}>
               <Feather name={page.iconName} size={24} color={page.iconColor} />

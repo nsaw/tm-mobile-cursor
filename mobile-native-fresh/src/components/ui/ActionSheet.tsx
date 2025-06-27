@@ -70,7 +70,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   borderBottomWidth: 1,
                   borderBottomColor: tokens.colors.border,
                 }}>
-                  <Text variant="subheading" style={{ textAlign: 'center' }}>{title}</Text>
+                  <Text variant="heading" style={{ textAlign: 'center' }}>{title}</Text>
                 </View>
               )}
               
@@ -83,7 +83,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
                     borderBottomColor: tokens.colors.border,
                   }}
-                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleItemPress(item)}
+                  onPress={() => handleItemPress(item)} accessibilityRole="button" accessible={true} 
                   accessibilityRole="button"
                   accessible={true}
                   accessibilityLabel={item.label}
@@ -123,7 +123,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 }}
                 onPress={onClose}
                 accessibilityRole="button"
-                accessibilityLabel="Cancel"
+                
                accessible={true}>
                 <Text 
                   variant="body" 

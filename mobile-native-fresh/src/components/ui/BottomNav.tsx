@@ -232,7 +232,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 }
               }}
               accessibilityRole="button"
-              accessibilityLabel="Create new thoughtmark"
+              
             >
               <MaterialCommunityIcons name="plus" size={47} color={tokens.colors.accent} />
             </TouchableOpacity>

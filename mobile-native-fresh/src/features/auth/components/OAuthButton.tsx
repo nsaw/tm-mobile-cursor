@@ -68,7 +68,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.8}
-     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+     accessibilityRole="button" accessible={true} >
       <Ionicons
         name={config.icon as any}
         size={20}

@@ -114,7 +114,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       transparent
       animationType="fade"
       onRequestClose={onCancel}
-     accessible={false} accessibilityLabel="Modal">
+     accessible={false} >
       <AutoRoleView style={styles.modalOverlay} forceRole="modal">
         <AutoRoleView style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]} forceRole="card">
           <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
@@ -124,7 +124,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button" accessible={true} >
               <Text style={[styles.buttonText, styles.cancelButtonText]}>
                 {cancelText}
               </Text>
@@ -133,7 +133,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, getButtonStyle()]}
               onPress={onConfirm}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button" accessible={true} >
               <Text style={[styles.buttonText, styles.confirmButtonText]}>
                 {confirmText}
               </Text>

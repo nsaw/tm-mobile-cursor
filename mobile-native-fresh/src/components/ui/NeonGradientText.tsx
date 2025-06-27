@@ -32,7 +32,7 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
     <Text
       variant={variant}
       style={neonStyle}
-      numberOfLines={numberOfLines}
+      _numberOfLines={numberOfLines}
     >
       {children}
     </Text>

@@ -78,7 +78,6 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
@@ -107,7 +106,6 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
@@ -135,7 +133,6 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {

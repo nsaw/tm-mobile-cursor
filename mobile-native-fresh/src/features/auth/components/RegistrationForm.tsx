@@ -215,7 +215,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowPassword(!showPassword)}
+            onPress={() => setShowPassword(!showPassword)} accessibilityRole="button" accessible={true} 
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 
@@ -255,7 +255,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         ]}
         onPress={handleSubmit}
         disabled={loading}
-       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+       accessibilityRole="button" accessible={true} >
         {loading ? (
           <ActivityIndicator color="#ffffff" />
         ) : (

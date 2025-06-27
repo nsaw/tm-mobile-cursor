@@ -1,0 +1,30 @@
+{
+  "branch": "feature/premium-access-control",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Resume in background",
+  "notes": [
+    "\u2705 Pre-check: Confirm PermissionManager exports all role checks",
+    "\ud83e\udde0 Mission: Audit and enforce wrapper logic for premium/role-restricted components",
+    "\ud83c\udfaf Goal: Ensure all premium features are gated consistently",
+    "\ud83d\udccc Context: App has multiple roles and trial states managed via Firebase",
+    "\ud83d\udca5 Bug: Some pages render content without gating fallback on role edge cases",
+    "\ud83d\udd27 Fix Summary: Use <PremiumFeatureWrapper> or <AccessGate> consistently",
+    "\ud83d\udd10 Relevance: Security and paywall enforcement"
+  ],
+  "phases": [
+    {
+      "section": "Gated Feature Audit",
+      "actions": [
+        "Search for SmartInsightsPanel, AIInsights, SemanticSearch, Export tools",
+        "Wrap all usage in PermissionManager role-based checks or feature wrappers"
+      ],
+      "commit": "fix: gated features consistently wrapped",
+      "tag": "v1.3.0_roles-enforced"
+    }
+  ],
+  "final": {
+    "commit": "chore: permission wrappers applied to all premium features",
+    "tag": "v1.3.0_roles-audited"
+  }
+}

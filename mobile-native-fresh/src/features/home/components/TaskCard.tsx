@@ -134,17 +134,17 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}
-      accessibilityLabel="Task card"
+      
     >
       <TouchableOpacity
         style={styles.checkbox}
-        onPress={(e) = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+        onPress={e => {
           e.stopPropagation();
           onToggle();
         }}
         accessibilityRole="button"
         accessible={true}
-        accessibilityLabel="Toggle task completion"
+        
       >
         {task.isCompleted && (
           <Ionicons name="checkmark" size={16} color={tokens.colors.background} />
@@ -156,7 +156,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             variant={isCompleted ? "muted" : "body"}
             weight={isCompleted ? "normal" : "semibold"}
             style={styles.title}
-            numberOfLines={1}
+            _numberOfLines={1}
           >
             {task.title || 'Untitled Task'}
           </Text>
@@ -173,7 +173,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <Text
             variant="muted"
             style={styles.contentText}
-            numberOfLines={2}
+            _numberOfLines={2}
           >
             {task.content}
           </Text>

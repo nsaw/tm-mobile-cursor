@@ -74,7 +74,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 backgroundColor: tokens.colors.surface,
               }} 
               onPress={onBack}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button" accessible={true} >
               <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
             </TouchableOpacity>
           )}
@@ -91,7 +91,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {subtitle && (
               <Text 
                 variant="body" 
-                size="sm"
+                
                 style={{ 
                   marginTop: 1,
                 }}
@@ -110,7 +110,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               backgroundColor: tokens.colors.surface,
             }} 
             onPress={rightAction.onPress}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+           accessibilityRole="button" accessible={true} >
             <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
           </TouchableOpacity>
         )}

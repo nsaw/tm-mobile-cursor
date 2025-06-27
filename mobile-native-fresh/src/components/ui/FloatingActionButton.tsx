@@ -24,47 +24,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   isRecording = false,
 }) => {
   const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const insets = useSafeAreaInsets();
-  const { tokens } = useTheme();
+  const insets = useSafeAreaInsets();
   const [scaleValue] = useState(new Animated.Value(1));
 
   const handlePress = () => {
@@ -130,7 +90,7 @@ const insets = useSafeAreaInsets();
             onPress={handlePress}
             onLongPress={handleLongPress}
             activeOpacity={0.8}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+           accessibilityRole="button" accessible={true} >
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}

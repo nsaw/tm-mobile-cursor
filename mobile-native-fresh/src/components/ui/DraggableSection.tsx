@@ -48,43 +48,24 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
 }) => {
   const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
 const { typography, spacing, tokens } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
@@ -232,7 +213,7 @@ const { typography, spacing, tokens } = useTheme();
               onPressOut={handlePressOut}
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button" accessible={true} >
               <View style={styles.headerLeft}>
                 <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>

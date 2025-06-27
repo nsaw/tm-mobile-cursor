@@ -121,7 +121,7 @@ export const AllBinsScreen: React.FC = () => {
         borderWidth: 1,
         borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSortBy(sortType as SortType)}
+      onPress={() => setSortBy(sortType as SortType)} accessibilityRole="button" accessible={true} 
     >
       <Text 
         variant="body" 
@@ -372,7 +372,7 @@ export const AllBinsScreen: React.FC = () => {
           <FlatList
             data={sortedBins}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(item)}>
+              <TouchableOpacity onPress={() => handleBinPress(item)} accessibilityRole="button" accessible={true} >
                 <BinCard bin={item} onPress={() => handleBinPress(item)} />
               </TouchableOpacity>
             )}
@@ -391,7 +391,7 @@ export const AllBinsScreen: React.FC = () => {
               <View style={styles.emptyContainer}>
                 <Ionicons name="folder" size={64} color={tokens.colors.textMuted} />
                 <Text 
-                  variant="subheading" 
+                  variant="heading" 
                   style={styles.emptyTitle}
                 >
                   No bins found

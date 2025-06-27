@@ -68,7 +68,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="AI Tools">
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} >
       <View style={styles.content}>
         <View>
           <SectionHeader><Text>{title}</Text></SectionHeader>

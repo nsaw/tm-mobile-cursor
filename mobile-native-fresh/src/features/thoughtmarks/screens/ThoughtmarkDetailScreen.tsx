@@ -425,7 +425,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <View style={styles.headerContent}>
           <TouchableOpacity 
             style={styles.backButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+            onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>
@@ -448,7 +448,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.actionButton}
             onPress={handleEdit}
             accessibilityRole="button"
-            accessibilityLabel="Edit thoughtmark"
+            
            accessible={true}>
             <Ionicons name="create-outline" size={20} color={tokens.colors.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
@@ -456,7 +456,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.actionButton}
             onPress={handleDelete}
             accessibilityRole="button"
-            accessibilityLabel="Delete thoughtmark"
+            
            accessible={true}>
             <Ionicons name="trash-outline" size={20} color={tokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
@@ -508,7 +508,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   onPress={generateAIInsights}
                   disabled={generatingAI}
                   accessibilityRole="button"
-                  accessibilityLabel="Generate AI insights"
+                  
                  accessible={true}>
                   {generatingAI ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
@@ -559,7 +559,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   onPress={generateAISuggestions}
                   disabled={generatingSuggestions}
                   accessibilityRole="button"
-                  accessibilityLabel="Generate AI suggestions"
+                  
                  accessible={true}>
                   {generatingSuggestions ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
@@ -576,7 +576,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                       <Text style={styles.suggestionLabel}>Suggested Tags:</Text>
                       <View style={styles.suggestedTags}>
                         {aiSuggestions.suggestedTags.map((tag: string, index: number) => (
-                          <TagChip key={index} tag={tag} variant="outline" size="sm" />
+                          <TagChip key={index} tag={tag} variant="outline"  />
                         ))}
                       </View>
                     </View>
@@ -642,7 +642,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
               <Text style={styles.sectionTitle}>Tags</Text>
               <View style={styles.tagsContainer}>
                 {thoughtmark.tags.map((tag: string, index: number) => (
-                  <TagChip key={index} tag={tag} variant="primary" size="sm" />
+                  <TagChip key={index} tag={tag} variant="primary"  />
                 ))}
               </View>
             </CardContent>

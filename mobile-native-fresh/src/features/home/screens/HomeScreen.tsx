@@ -214,7 +214,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             backgroundColor: tokens.colors.backgroundSecondary,
             marginBottom: tokens.spacing.lg,
           }}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Account' as any)}
+          onPress={() => navigation.navigate('Account' as any)} accessibilityRole="button" accessible={true} 
         >
           <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
           <Text style={{ marginLeft: tokens.spacing.sm, fontWeight: '600' }}>
@@ -225,7 +225,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         {/* Quick Actions */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
@@ -248,7 +248,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   minWidth: 80,
                 }}
                 onPress={action.onPress}
-               accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+               accessibilityRole="button" accessible={true} >
                 <View style={{
                   width: 60,
                   height: 60,
@@ -263,7 +263,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                 </View>
                 <Text 
                   variant="caption" 
-                  size="sm"
+                  
                   style={{ 
                     textAlign: 'center',
                     marginBottom: tokens.spacing.xs,
@@ -279,7 +279,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         {/* Recent Thoughtmarks */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
@@ -303,26 +303,29 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   backgroundColor: tokens.colors.surface,
                   borderRadius: tokens.radius.md,
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+                onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+                accessibilityRole="button"
+                accessible={true}
+                
               >
                 <Text 
-                  variant="subheading" 
-                  size="sm"
+                  variant="heading" 
+                  
                   style={{ 
                     marginBottom: tokens.spacing.xs,
                     fontWeight: '600',
                   }}
-                  numberOfLines={1}
+                  _numberOfLines={1}
                 >
                   {thoughtmark.title}
                 </Text>
                 <Text 
                   variant="body" 
-                  size="sm"
+                  
                   style={{ 
                     color: tokens.colors.textSecondary,
                   }}
-                  numberOfLines={2}
+                  _numberOfLines={2}
                 >
                   {thoughtmark.content}
                 </Text>
@@ -334,7 +337,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         {/* Stats */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
@@ -352,7 +355,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {thoughtmarks.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
                 Thoughtmarks
               </Text>
             </View>
@@ -360,7 +363,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {bins.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
                 Bins
               </Text>
             </View>
@@ -368,7 +371,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {tags.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
                 Tags
               </Text>
             </View>
@@ -378,7 +381,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         {/* Tips */}
         <View style={{ marginBottom: tokens.spacing.lg }}>
           <Text 
-            variant="subheading" 
+            variant="heading" 
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,

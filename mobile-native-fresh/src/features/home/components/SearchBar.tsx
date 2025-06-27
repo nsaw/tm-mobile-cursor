@@ -24,45 +24,25 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
   const [searchQuery, setSearchQuery] = useState(value || '');
 
   const styles = StyleSheet.create({
@@ -128,7 +108,7 @@ const { tokens } = useTheme();
           autoCorrect={false}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button" accessible={true} >
             <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
           </TouchableOpacity>
         )}

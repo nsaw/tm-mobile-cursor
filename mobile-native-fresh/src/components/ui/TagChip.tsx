@@ -52,7 +52,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(tag)}
+      onPress={() => onPress?.(tag)} accessibilityRole="button" accessible={true} 
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}
@@ -66,7 +66,7 @@ export const TagChip: React.FC<TagChipProps> = ({
           textAlign: 'center',
           paddingHorizontal: 0
         }} 
-        numberOfLines={1}
+        _numberOfLines={1}
       >
         #{tag.toLowerCase()}
       </Text>

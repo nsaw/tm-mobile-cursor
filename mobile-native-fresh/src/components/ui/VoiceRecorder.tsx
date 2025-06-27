@@ -486,13 +486,13 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       transparent
       animationType="fade"
       onRequestClose={cancelRecording}
-     accessible={false} accessibilityLabel="Modal">
+     accessible={false} >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View style={styles.header}>
             <View style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} >
               <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
@@ -507,7 +507,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             ]}
             onPress={isRecording ? stopRecording : startRecording}
             disabled={isProcessing}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+           accessibilityRole="button" accessible={true} >
             <Ionicons
               name={isRecording ? "stop" : "mic"}
               size={32}
@@ -535,7 +535,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </Text>
           )}
 
-          <TouchableOpacity style={styles.testButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> Speech.speak("This is a test of the voice recorder functionality.")}>
+          <TouchableOpacity style={styles.testButton} onPress={() => Speech.speak("This is a test of the voice recorder functionality.")} accessibilityRole="button" accessible={true} >
             <Ionicons name="flask" size={16} color={tokens.colors.accent} />
             <Text style={styles.testButtonText}>Test Audio</Text>
           </TouchableOpacity>
@@ -548,14 +548,14 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
           {transcript && (
             <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.actionButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+              <TouchableOpacity style={styles.actionButton} onPress={() => {
                 onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
                 onClose();
-              }}>
+              }} accessibilityRole="button" accessible={true} >
                 <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
                 <Text style={styles.actionButtonText}>Use</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} >
                 <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>

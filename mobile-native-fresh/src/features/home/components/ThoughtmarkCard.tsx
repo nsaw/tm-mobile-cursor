@@ -87,7 +87,6 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
 }: ThoughtmarkCardProps) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [isLongPressing, setIsLongPressing] = useState(false);
-  const { tokens } = useTheme();
 
   const handleLongPress = () => {
     Vibration.vibrate(50);
@@ -212,7 +211,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         activeOpacity={0.7}
         accessibilityRole="button"
         accessible={true}
-        accessibilityLabel="Thoughtmark card"
+        
       >
         <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
           {/* Header */}
@@ -232,10 +231,10 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               {selected && (
                 <TouchableOpacity
                   style={{ marginRight: tokens.spacing.xs }}
-                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onSelectionToggle?.()}
+                  onPress={() => onSelectionToggle?.()} accessibilityRole="button" accessible={true} 
                   accessibilityRole="button"
                   accessible={true}
-                  accessibilityLabel="Toggle selection"
+                  
                 >
                   <Ionicons
                     name={selected ? 'checkbox' : 'square-outline'}
@@ -261,7 +260,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                   textTransform: 'capitalize',
                   fontSize: tokens.typography.fontSize.sm + 2,
                 }}
-                numberOfLines={1}
+                _numberOfLines={1}
               >
                 {thoughtmark.title || 'Untitled'}
               </Text>
@@ -305,10 +304,10 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               </Text>
               <TouchableOpacity
                 style={{ padding: tokens.spacing.xs }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowContextMenu(true)}
+                onPress={() => setShowContextMenu(true)} accessibilityRole="button" accessible={true} 
                 accessibilityRole="button"
                 accessible={true}
-                accessibilityLabel="Open context menu"
+                
               >
                 <Ionicons
                   name="ellipsis-vertical"
@@ -322,13 +321,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
           {/* Content */}
           <Text 
             variant="body" 
-            size="sm"
+            
             style={{ 
               marginBottom: 11,
               lineHeight: 28,
               fontSize: tokens.typography.fontSize.sm + 1,
             }}
-            numberOfLines={2}
+            _numberOfLines={2}
           >
             {thoughtmark.content || 'No content'}
           </Text>

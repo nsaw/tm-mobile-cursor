@@ -11,46 +11,6 @@ import { Card, CardHeader, CardContent } from './Card';
 export const DesignSystemDemo: React.FC = () => {
   const { tokens } = useTheme();
 
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
   return (
     <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <View style={{ padding: tokens.spacing.lg }}>
@@ -69,7 +29,7 @@ const { tokens } = useTheme();
               <Subheading><Text>Subheading Text</Text></Subheading>
               <BodyText><Text>Body text with normal weight and size</Text></BodyText>
               <Caption><Text>Caption text for secondary information</Text></Caption>
-              <Text variant="label" style={{ color: tokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
+              <Text variant="body" style={{ color: tokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
             </View>
           </CardContent>
         </Card>
@@ -107,7 +67,7 @@ const { tokens } = useTheme();
           
           <CardContent>
             <View style={{ gap: tokens.spacing.md }}>
-              <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>
+              <Button variant="primary"  onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>
               
               <Button variant="primary" size="md" onPress={() => console.log('Medium pressed')}><Text>Medium Button</Text></Button>
               
