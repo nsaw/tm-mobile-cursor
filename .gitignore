@@ -23,6 +23,7 @@ dist/
 
 # Environment
 .env
+.env.local
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -31,3 +32,13 @@ cursor-uploads/client_secret_*.json
 # Local backup and archive folders
 .backup/
 archive/
+
+# Versioned task folders
+tasks/v*/
+
+# Log files
+*.log
+
+# Cursor specific
+.cursor/
+cursor-uploads/
