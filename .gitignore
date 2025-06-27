@@ -42,3 +42,9 @@ tasks/v*/
 # Cursor specific
 .cursor/
 cursor-uploads/
+
+# Reference/Replit build
+reference/replit-build/
+
+# TM Mobile clone
+tm-mobile-clone/
