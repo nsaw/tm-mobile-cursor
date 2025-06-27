@@ -35,6 +35,10 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
 
   const thoughtmark = thoughtmarks.find(t => t.id === parseInt(thoughtmarkId));
 
+  // Add state for AI insights and suggestions
+  const [aiInsights, setAiInsights] = useState<any[]>([]);
+  const [aiSuggestions, setAiSuggestions] = useState<any>(null);
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -202,75 +206,47 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
     suggestionsContainer: {
       gap: tokens.spacing.md,
     },
-    suggestionSection: {
-      marginBottom: tokens.spacing.md,
-    },
-    suggestionLabel: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
-    },
-    suggestedTags: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: tokens.spacing.sm,
-    },
-    suggestedBins: {
-      gap: tokens.spacing.sm,
-    },
-    suggestedBin: {
-      padding: tokens.spacing.sm,
+    suggestionItem: {
+      padding: tokens.spacing.md,
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.spacing.sm,
       borderWidth: 1,
       borderColor: tokens.colors.border,
     },
-    suggestedBinText: {
-      fontSize: tokens.typography.fontSize.sm,
+    suggestionText: {
+      fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.text,
     },
-    suggestedBinName: {
-      fontWeight: '600',
-      color: tokens.colors.accent,
+    metadataCard: {
+      marginBottom: tokens.spacing.md,
     },
-    actionsContainer: {
-      flexDirection: 'row',
-      gap: tokens.spacing.sm,
-      marginTop: tokens.spacing.lg,
-    },
-    actionButtonContainer: {
-      flex: 1,
-    },
-    metadataContainer: {
+    metadataItem: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginTop: tokens.spacing.md,
-      paddingTop: tokens.spacing.md,
-      borderTopWidth: 1,
-      borderTopColor: tokens.colors.border,
+      paddingVertical: tokens.spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: tokens.colors.border,
     },
     metadataText: {
       fontSize: tokens.typography.fontSize.xs,
       color: tokens.colors.textSecondary,
     },
-    binBadge: {
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs,
-      backgroundColor: tokens.colors.accent,
-      borderRadius: tokens.spacing.xs,
+    tagsCard: {
+      marginBottom: tokens.spacing.md,
     },
-    binBadgeText: {
-      fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.background,
+    sectionTitle: {
+      fontSize: tokens.typography.fontSize.lg,
       fontWeight: '600',
+      color: tokens.colors.text,
+      marginBottom: tokens.spacing.md,
+    },
+    tagsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: tokens.spacing.sm,
     },
   });
-
-  useEffect(() => {
-    loadThoughtmark();
-  }, [thoughtmarkId]);
 
   useEffect(() => {
     console.log('ThoughtmarkDetailScreen - thoughtmarkId:', thoughtmarkId);
@@ -282,16 +258,6 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       generateAIInsights();
     }
   }, [thoughtmark, user?.isPremium]);
-
-  const loadThoughtmark = async () => {
-    try {
-      const data = await getThoughtmark(thoughtmarkId);
-      setThoughtmark(data);
-    } catch (error) {
-      console.error('Error loading thoughtmark:', error);
-      Alert.alert('Error', 'Failed to load thoughtmark');
-    }
-  };
 
   const generateAIInsights = async () => {
     if (!thoughtmark || !user?.isPremium) return;
@@ -334,6 +300,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   };
 
   const handleEdit = () => {
+    if (!thoughtmark) return;
     navigation.navigate('CreateThoughtmark', { 
       thoughtmarkId: thoughtmark.id 
     });
@@ -351,7 +318,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
           text: 'Delete',
           style: 'destructive',
           onPress: async () => {
-            setIsLoading(true);
+            setLoading(true);
             try {
               await deleteThoughtmark(thoughtmark.id);
               Alert.alert('Success', 'Thoughtmark deleted successfully');
@@ -360,7 +327,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
               console.error('Error deleting thoughtmark:', error);
               Alert.alert('Error', 'Failed to delete thoughtmark');
             } finally {
-              setIsLoading(false);
+              setLoading(false);
             }
           }
         }
@@ -374,7 +341,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
     try {
       const updatedThoughtmark = { ...thoughtmark, isPinned: !thoughtmark.isPinned };
       await updateThoughtmark(thoughtmark.id, updatedThoughtmark);
-      setThoughtmark(updatedThoughtmark);
+      // Note: The thoughtmark will be updated in the global state
     } catch (error) {
       console.error('Error pinning thoughtmark:', error);
       Alert.alert('Error', 'Failed to update thoughtmark');
@@ -387,7 +354,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
     try {
       const updatedThoughtmark = { ...thoughtmark, isCompleted: !thoughtmark.isCompleted };
       await updateThoughtmark(thoughtmark.id, updatedThoughtmark);
-      setThoughtmark(updatedThoughtmark);
+      // Note: The thoughtmark will be updated in the global state
     } catch (error) {
       console.error('Error completing thoughtmark:', error);
       Alert.alert('Error', 'Failed to update thoughtmark');
@@ -575,9 +542,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
               {aiSuggestions ? (
                 <View style={styles.suggestionsContainer}>
                   {aiSuggestions.suggestedTags && aiSuggestions.suggestedTags.length > 0 && (
-                    <View style={styles.suggestionSection}>
-                      <Text style={styles.suggestionLabel}>Suggested Tags:</Text>
-                      <View style={styles.suggestedTags}>
+                    <View style={styles.suggestionItem}>
+                      <Text style={styles.suggestionText}>Suggested Tags:</Text>
+                      <View style={styles.tagsContainer}>
                         {aiSuggestions.suggestedTags.map((tag: string, index: number) => (
                           <TagChip key={index} tag={tag} variant="outline" size="sm" />
                         ))}
@@ -586,11 +553,11 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   )}
                   
                   {aiSuggestions.contentSuggestions && aiSuggestions.contentSuggestions.length > 0 && (
-                    <View style={styles.suggestionSection}>
-                      <Text style={styles.suggestionLabel}>Content Ideas:</Text>
+                    <View style={styles.suggestionItem}>
+                      <Text style={styles.suggestionText}>Content Ideas:</Text>
                       {aiSuggestions.contentSuggestions.map((suggestion: string, index: number) => (
-                        <View key={index} style={styles.contentSuggestion}>
-                          <Text style={styles.contentSuggestionText}>{suggestion}</Text>
+                        <View key={index} style={styles.suggestionItem}>
+                          <Text style={styles.suggestionText}>{suggestion}</Text>
                         </View>
                       ))}
                     </View>

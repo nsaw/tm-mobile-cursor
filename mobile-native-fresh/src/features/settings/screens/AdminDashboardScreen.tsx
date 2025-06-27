@@ -225,7 +225,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={handleImportData}
-                leftIcon={<Ionicons name="upload-outline" size={16} color={getIconColor('accent')} />}
+                leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
               >
                 Import Data

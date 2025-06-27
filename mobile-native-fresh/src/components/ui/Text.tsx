@@ -113,7 +113,7 @@ export const Text: React.FC<TextProps> = ({
     if (size && size in tokens.typography.fontSize) {
       const fontSize = tokens.typography.fontSize[size as keyof typeof tokens.typography.fontSize];
       baseStyle.fontSize = fontSize;
-      baseStyle.lineHeight = fontSize * tokens.typography.lineHeight.normal as any;
+      baseStyle.lineHeight = (fontSize * tokens.typography.lineHeight.normal) as any;
     }
 
     // Apply weight override if provided

@@ -170,19 +170,19 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const quickActions = [
     {
       title: 'Create Thoughtmark',
-      icon: 'create',
+      icon: 'add-circle-outline',
       onPress: handleCreateNew,
       color: tokens.colors.accent,
     },
     {
       title: 'Voice Record',
-      icon: 'mic',
+      icon: 'mic-outline',
       onPress: handleVoiceRecord,
       color: tokens.colors.accent,
     },
     {
       title: 'View Bins',
-      icon: 'folder',
+      icon: 'folder-outline',
       onPress: handleViewBins,
       color: tokens.colors.accent,
     },
@@ -262,7 +262,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   justifyContent: 'center',
                   marginBottom: tokens.spacing.xs,
                 }}>
-                  <Ionicons name={action.icon} size={24} color={tokens.colors.text} />
+                  <Ionicons name={action.icon as any} size={24} color={tokens.colors.text} />
                 </View>
                 <Text 
                   variant="caption" 
