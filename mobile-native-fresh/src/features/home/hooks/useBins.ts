@@ -95,8 +95,8 @@ export const useBins = () => {
         console.log('API failed, using template data. Error:', response.error);
         setBins(templateBins);
       }
-    } catch (error) {
-      console.error('Error fetching bins:', error);
+    } catch (err) {
+      console.error('Error fetching bins:', err);
       setError('Failed to fetch bins');
       setBins(templateBins);
     } finally {

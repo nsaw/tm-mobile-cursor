@@ -1,6 +1,6 @@
 
 # JSX Style Role Audit Report
-Generated: 2025-06-26T22:42:39.332Z
+Generated: 2025-06-26T23:42:40.406Z
 
 ## Summary
 - Total files scanned: 78
@@ -963,87 +963,87 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:172
+- **File:** src/features/settings/screens/HowToScreen.tsx:212
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:175
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="list"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:177
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:178
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="heading"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:182
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:184
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="list"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:186
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:197
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:200
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="list"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:202
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:203
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:204
-- **Message:** Missing role prop for Text component
-- **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
 - **File:** src/features/settings/screens/HowToScreen.tsx:215
 - **Message:** Missing role prop for View component
+- **Suggestion:** Add role="list"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:217
+- **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:219
+- **File:** src/features/settings/screens/HowToScreen.tsx:218
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:227
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="list"
-
-### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:229
+- **File:** src/features/settings/screens/HowToScreen.tsx:222
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/settings/screens/HowToScreen.tsx:230
+- **File:** src/features/settings/screens/HowToScreen.tsx:224
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="list"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:226
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="body"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:237
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:240
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="list"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:242
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:243
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="body"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:244
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="body"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:255
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:259
+- **Message:** Missing role prop for Text component
+- **Suggestion:** Add role="heading"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:267
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="list"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:269
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/features/settings/screens/HowToScreen.tsx:270
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 
@@ -1813,17 +1813,17 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/SearchBar.tsx:72
+- **File:** src/features/home/components/SearchBar.tsx:112
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/SearchBar.tsx:73
+- **File:** src/features/home/components/SearchBar.tsx:113
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/home/components/SearchBar.tsx:91
+- **File:** src/features/home/components/SearchBar.tsx:131
 - **Message:** Missing role prop for TouchableOpacity component
 - **Suggestion:** Add role="button"
 
@@ -2118,42 +2118,42 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:165
+- **File:** src/features/auth/screens/SignUp.tsx:205
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:169
+- **File:** src/features/auth/screens/SignUp.tsx:209
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:170
+- **File:** src/features/auth/screens/SignUp.tsx:210
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:172
+- **File:** src/features/auth/screens/SignUp.tsx:212
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:178
+- **File:** src/features/auth/screens/SignUp.tsx:218
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:179
+- **File:** src/features/auth/screens/SignUp.tsx:219
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:180
+- **File:** src/features/auth/screens/SignUp.tsx:220
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/features/auth/screens/SignUp.tsx:181
+- **File:** src/features/auth/screens/SignUp.tsx:221
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
@@ -2668,32 +2668,32 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:92
+- **File:** src/components/ui/Text.tsx:86
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:96
+- **File:** src/components/ui/Text.tsx:90
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:100
+- **File:** src/components/ui/Text.tsx:94
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="caption"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:104
+- **File:** src/components/ui/Text.tsx:98
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="caption"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:108
+- **File:** src/components/ui/Text.tsx:102
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/Text.tsx:112
+- **File:** src/components/ui/Text.tsx:106
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 
@@ -2788,22 +2788,17 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/LoadingScreen.tsx:163
+- **File:** src/components/ui/LoadingScreen.tsx:203
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/LoadingScreen.tsx:176
+- **File:** src/components/ui/LoadingScreen.tsx:216
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/LoadingScreen.tsx:188
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/components/ui/FloatingActionButton.tsx:65
+- **File:** src/components/ui/LoadingScreen.tsx:228
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
@@ -2813,42 +2808,42 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/FloatingActionButton.tsx:106
+- **File:** src/components/ui/FloatingActionButton.tsx:145
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DraggableSection.tsx:196
+- **File:** src/components/ui/FloatingActionButton.tsx:146
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/components/ui/DraggableSection.tsx:236
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="header"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DraggableSection.tsx:203
+- **File:** src/components/ui/DraggableSection.tsx:243
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="header"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:16
+- **File:** src/components/ui/DesignSystemDemo.tsx:56
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:25
+- **File:** src/components/ui/DesignSystemDemo.tsx:65
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:32
+- **File:** src/components/ui/DesignSystemDemo.tsx:72
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="label"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:45
-- **Message:** Missing role prop for View component
-- **Suggestion:** Add role="container"
-
-### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:81
+- **File:** src/components/ui/DesignSystemDemo.tsx:85
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
@@ -2858,97 +2853,102 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:145
+- **File:** src/components/ui/DesignSystemDemo.tsx:131
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:146
+- **File:** src/components/ui/DesignSystemDemo.tsx:167
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:147
+- **File:** src/components/ui/DesignSystemDemo.tsx:168
+- **Message:** Missing role prop for View component
+- **Suggestion:** Add role="container"
+
+### MISSING_ROLE
+- **File:** src/components/ui/DesignSystemDemo.tsx:169
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="list"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:148
+- **File:** src/components/ui/DesignSystemDemo.tsx:170
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:151
+- **File:** src/components/ui/DesignSystemDemo.tsx:173
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="list"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:152
+- **File:** src/components/ui/DesignSystemDemo.tsx:174
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:155
+- **File:** src/components/ui/DesignSystemDemo.tsx:177
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="list"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:156
+- **File:** src/components/ui/DesignSystemDemo.tsx:178
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:159
+- **File:** src/components/ui/DesignSystemDemo.tsx:181
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="list"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:160
+- **File:** src/components/ui/DesignSystemDemo.tsx:182
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:163
+- **File:** src/components/ui/DesignSystemDemo.tsx:185
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="list"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DesignSystemDemo.tsx:164
+- **File:** src/components/ui/DesignSystemDemo.tsx:186
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="container"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:129
+- **File:** src/components/ui/DarkAlertDialog.tsx:171
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="modal"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:130
+- **File:** src/components/ui/DarkAlertDialog.tsx:172
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="modal"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:131
+- **File:** src/components/ui/DarkAlertDialog.tsx:173
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="heading"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:132
+- **File:** src/components/ui/DarkAlertDialog.tsx:174
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="body"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:134
+- **File:** src/components/ui/DarkAlertDialog.tsx:176
 - **Message:** Missing role prop for View component
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:139
+- **File:** src/components/ui/DarkAlertDialog.tsx:181
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="button"
 
 ### MISSING_ROLE
-- **File:** src/components/ui/DarkAlertDialog.tsx:148
+- **File:** src/components/ui/DarkAlertDialog.tsx:190
 - **Message:** Missing role prop for Text component
 - **Suggestion:** Add role="button"
 
@@ -3061,19 +3061,19 @@ Generated: 2025-06-26T22:42:39.332Z
 - **Message:** Hardcoded styling found: fontWeight: '700'. Consider using role-based styling system.
 
 ### HARDCODED_STYLING
-- **File:** src/features/settings/screens/HowToScreen.tsx:178
+- **File:** src/features/settings/screens/HowToScreen.tsx:218
 - **Message:** Hardcoded styling found: fontWeight: 'bold'. Consider using role-based styling system.
 
 ### HARDCODED_STYLING
-- **File:** src/features/settings/screens/HowToScreen.tsx:203
+- **File:** src/features/settings/screens/HowToScreen.tsx:243
 - **Message:** Hardcoded styling found: fontWeight: 'bold'. Consider using role-based styling system.
 
 ### HARDCODED_STYLING
-- **File:** src/features/settings/screens/HowToScreen.tsx:219
+- **File:** src/features/settings/screens/HowToScreen.tsx:259
 - **Message:** Hardcoded styling found: fontWeight: 'bold'. Consider using role-based styling system.
 
 ### HARDCODED_STYLING
-- **File:** src/features/settings/screens/HowToScreen.tsx:230
+- **File:** src/features/settings/screens/HowToScreen.tsx:270
 - **Message:** Hardcoded styling found: fontWeight: 'bold'. Consider using role-based styling system.
 
 ### HARDCODED_STYLING

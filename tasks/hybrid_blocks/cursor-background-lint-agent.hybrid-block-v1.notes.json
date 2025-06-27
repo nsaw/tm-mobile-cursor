@@ -32,6 +32,13 @@
   "final": {
     "commit": "chore: background lint/watch agents running",
     "tag": "v1.2.2_background-lint-agent-live",
-    "notes": "This agent loops lint, theme scope, and accessibility audits every 10s. Safe to run continuously in background to fix regressions during big refactors."
+    "notes": [
+      "\u2705 PRE-CHECK: Confirm no other background agents are running",
+      "\ud83e\udde0 MISSION: Automate lint:fix-all pass during development",
+      "\ud83c\udfaf GOAL: Ensure JSX, theme, and text errors are resolved continuously",
+      "\ud83d\udccc CONTEXT: Linting issues often go unnoticed; this reduces regressions and keeps token usage compliant",
+      "\ud83d\udd27 FIX: Repeatedly runs `npm run lint:fix-all` scoped to appropriate folders",
+      "\ud83d\udd10 THEME: Keeps token scoping valid and ensures all components use <Text> correctly"
+    ]
   }
 }

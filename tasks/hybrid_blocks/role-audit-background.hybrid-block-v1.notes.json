@@ -19,6 +19,13 @@
   "final": {
     "commit": "chore: style role scan locked",
     "tag": "v1.2.2_style-role-audit-final",
-    "notes": "Ensures all View/Text usage conforms to role-based JSX system"
+    "notes": [
+      "\u2705 PRE-CHECK: Ensure all major refactor and UI cleanup passes are complete first",
+      "\ud83e\udde0 MISSION: Scan for missing roles, labels, and accessibility props across Views and Pressables",
+      "\ud83c\udfaf GOAL: Pre-enforcement scan for candidate components to upgrade to AutoRoleView",
+      "\ud83d\udccc CONTEXT: Many components lack a11y props, especially in cards, lists, and layouts",
+      "\ud83d\udd27 FIX: Flags non-compliant elements using `audit-style-roles.ts`",
+      "\ud83d\udd10 ACCESSIBILITY: This is prep for large-scale upgrade to WCAG-compliant roles"
+    ]
   }
 }

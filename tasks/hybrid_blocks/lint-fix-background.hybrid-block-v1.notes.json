@@ -1,0 +1,30 @@
+{
+  "branch": "chore/lint-fix-background",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Run and Watch ESLint",
+      "actions": [
+        "Continuously run `npm run lint:fix-all` in watch mode",
+        "Auto-commit minor fixes",
+        "Ignore theme, types, and util file changes for restart"
+      ],
+      "commit": "chore: background lint autofix enabled",
+      "tag": "v1.2.2_lint-watch"
+    }
+  ],
+  "final": {
+    "commit": "chore: lint fix loop active",
+    "tag": "v1.2.2_lint-loop",
+    "notes": [
+      "\u2705 PRE-CHECK: Stop any existing background Cursor tasks",
+      "\ud83e\udde0 MISSION: Loop continuous `lint:fix-all` enforcement during UI polish and JSX repair",
+      "\ud83c\udfaf GOAL: Maintain perfect lint state during token, JSX, and accessibility work",
+      "\ud83d\udccc CONTEXT: Lint breaks frequently during refactors; this prevents cascading issues",
+      "\ud83d\udd27 FIX: Background task uses console pattern watching and `npm run lint:fix-all` command",
+      "\ud83d\udd10 THEME: Critical for JSX <Text> wrapping, `tokens.colors` usage, and accessibility enforcement"
+    ]
+  }
+}

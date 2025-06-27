@@ -10,9 +10,7 @@ function createVariantStyles<T extends Record<string, any>>(
 
 // Button variants (dynamic)
 export function getButtonVariants(tokens: DesignTokens) {
-  const { tokens } = useTheme();
-
-return createVariantStyles(
+  return createVariantStyles(
     {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
@@ -87,9 +85,7 @@ return createVariantStyles(
 
 // Card variants (dynamic)
 export function getCardVariants(tokens: DesignTokens) {
-  const { tokens } = useTheme();
-
-return createVariantStyles(
+  return createVariantStyles(
     {
       backgroundColor: tokens.colors.backgroundSecondary,
       borderColor: tokens.colors.border,
@@ -134,9 +130,7 @@ return createVariantStyles(
 
 // Input variants (dynamic)
 export function getInputVariants(tokens: DesignTokens) {
-  const { tokens } = useTheme();
-
-return createVariantStyles(
+  return createVariantStyles(
     {
       borderRadius: tokens.radius.lg,
       borderWidth: 1,
@@ -187,9 +181,7 @@ return createVariantStyles(
 
 // Text variants (dynamic) - LIQUID theme principles
 export function getTextVariants(tokens: DesignTokens) {
-  const { tokens } = useTheme();
-
-return createVariantStyles(
+  return createVariantStyles(
     {
       color: tokens.colors.text,
       fontFamily: tokens.typography.fontFamily.body,
@@ -301,9 +293,7 @@ return createVariantStyles(
 
 // Badge variants (dynamic)
 export function getBadgeVariants(tokens: DesignTokens) {
-  const { tokens } = useTheme();
-
-return createVariantStyles(
+  return createVariantStyles(
     {
       borderRadius: tokens.radius.full,
       paddingHorizontal: tokens.spacing.sm,

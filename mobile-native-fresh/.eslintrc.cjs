@@ -48,6 +48,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-redeclare': 'error',
+    '@typescript-eslint/no-shadow': 'error',
     // Enforce consistent imports
     'import/no-duplicates': 'error',
     'import/order': ['error', { 'newlines-between': 'always' }],
@@ -124,6 +125,8 @@ module.exports = {
       files: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts'],
       rules: {
         'no-restricted-imports': 'off',
+        'thoughtmarks/require-use-theme': 'off',
+        'thoughtmarks/no-global-theme': 'off',
       },
     },
   ],

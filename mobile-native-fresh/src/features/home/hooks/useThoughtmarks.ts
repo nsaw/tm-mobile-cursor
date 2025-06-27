@@ -33,8 +33,8 @@ export const useThoughtmarks = () => {
         // If API fails, show empty list
         setThoughtmarks([]);
       }
-    } catch (error) {
-      console.error('Error fetching thoughtmarks:', error);
+    } catch (err) {
+      console.error('Error fetching thoughtmarks:', err);
       setError('Failed to fetch thoughtmarks');
       setThoughtmarks([]);
     } finally {

@@ -1,0 +1,31 @@
+{
+  "branch": "fix/theme-tokens-variant-duplication",
+  "mode": "auto",
+  "watchConsole": true,
+  "phases": [
+    {
+      "section": "Fix Duplicate Token Declaration",
+      "actions": [
+        "Open src/theme/variants.ts",
+        "If function receives `tokens` as a parameter, remove the `const { tokens } = useTheme()` call",
+        "OR if useTheme() is preferred, remove the `tokens: DesignTokens` argument",
+        "Ensure only one declaration exists for `tokens` in any function"
+      ],
+      "commit": "fix: resolve shadowed tokens bug in getButtonVariants",
+      "tag": "v1.2.2_fix-shadowed-tokens"
+    }
+  ],
+  "final": {
+    "commit": "chore: resolved shadowing bug in theme variant tokens logic",
+    "tag": "v1.2.2_token-variant-bugfix",
+    "notes": [
+      "\u2705 PRE-CHECK: Confirm `src/theme/variants.ts` is excluded from theme lint rule `no-global-theme/tokens`",
+      "\ud83e\udde0 MISSION: Fix `tokens` shadowing bug inside `getButtonVariants()` function",
+      "\ud83c\udfaf GOAL: Avoid variable collision by removing redundant `useTheme()` call or injected prop",
+      "\ud83d\udccc CONTEXT: This theme file intentionally uses top-level token access; strict scoping rules are bypassed for now",
+      "\ud83d\udca5 BUG: `tokens` was declared twice \u2014 once as a function argument, and again via `const { tokens } = useTheme()`",
+      "\ud83d\udd27 FIX: Pick one method \u2014 either inject `tokens` via props or use `useTheme()` \u2014 not both",
+      "\ud83d\udd10 RELEVANCE: Not a theme scope enforcement target. This is a functional bug fix scoped to duplication inside a utility file"
+    ]
+  }
+}

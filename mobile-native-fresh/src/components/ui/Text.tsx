@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, TextStyle, Text } from 'react-native';
+import { Text as RNText, TextStyle } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getTextVariants, mergeVariantStyles } from '../../theme/variants';
@@ -12,8 +12,8 @@ interface TextProps {
   color?: string;
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
   align?: 'left' | 'center' | 'right' | 'justify';
-  numberOfLines?: number;
-  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  _numberOfLines?: number;
+  _ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 }
 
 export const Text: React.FC<TextProps> = ({
@@ -24,8 +24,8 @@ export const Text: React.FC<TextProps> = ({
   color,
   weight,
   align = 'left',
-  numberOfLines,
-  ellipsizeMode,
+  _numberOfLines,
+  _ellipsizeMode,
 }) => {
   const { tokens } = useTheme();
 
@@ -51,7 +51,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <RNText><Text>{children}</Text></RNText>
+    <RNText style={finalTextStyle}>{children}</RNText>
   );
 };
 

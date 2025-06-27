@@ -48,6 +48,13 @@
   "final": {
     "commit": "chore: polish pass complete \u2014 v1.2.2_visual-polish",
     "tag": "v1.2.2_visual-polish",
-    "notes": "This polish pass preserves layout structure and architecture introduced in 1.2. Only spacing, wrapping, and visual hierarchy were corrected. Typography tokens and spacing scale are now compliant with the fluid theme."
+    "notes": [
+      "\u2705 PRE-CHECK: Run after Liquid restoration and role enforcement",
+      "\ud83e\udde0 MISSION: Lock in final UI structure and spacing ahead of v1.2.2 freeze",
+      "\ud83c\udfaf GOAL: Ensure readability, wrapping, SafeArea, FAB, and alignment are visually clean",
+      "\ud83d\udccc CONTEXT: Many regressions occur after card updates or onboarding refactors",
+      "\ud83d\udd27 FIX: Reapplies spacing tokens, fixes icon alignment, cleans up visual rhythm",
+      "\ud83d\udd10 THEME: This is a visual lock pass, scoped to presentation, not structure"
+    ]
   }
 }

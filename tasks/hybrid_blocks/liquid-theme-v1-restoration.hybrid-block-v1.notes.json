@@ -30,6 +30,13 @@
   "final": {
     "commit": "chore: v1.2.2 liquid theme restored",
     "tag": "v1.2.2_liquid-theme-final",
-    "notes": "This task enforces weight, casing, opacity structure from original fluid design without altering component layout."
+    "notes": [
+      "\u2705 PRE-CHECK: Snapshot current working branch before applying visual updates",
+      "\ud83e\udde0 MISSION: Restore Liquid Theme v1's visual rhythm and hierarchy (casing, weight, opacity)",
+      "\ud83c\udfaf GOAL: Ensure consistency in cards, sections, modal overlays, and readability scaffolds",
+      "\ud83d\udccc CONTEXT: Post-token-migration, casing and weight became visually diluted",
+      "\ud83d\udd27 FIX: Applies consistent typography, spacing, and surface visuals across app screens",
+      "\ud83d\udd10 THEME: Critical to enforcing visual polish rules under dynamic theme context"
+    ]
   }
 }

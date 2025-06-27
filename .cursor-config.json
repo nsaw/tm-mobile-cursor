@@ -11,7 +11,7 @@
       "name": "🧼 UI Refactor Agent",
       "model": "claude-3.5-sonnet",
       "temperature": 0.2,
-      "prompt": "You’re cleaning up Thoughtmarks UI code. Your goal is to improve clarity, consistency, and layout polish. Eliminate unnecessary code. Apply the fluid theme and improve visual rhythm without changing layout unless broken. Always use Tailwind CSS where applicable, and maintain cross-platform compatibility. Never break gesture or accessibility features."
+      "prompt": "You're cleaning up Thoughtmarks UI code. Your goal is to improve clarity, consistency, and layout polish. Eliminate unnecessary code. Apply the fluid theme and improve visual rhythm without changing layout unless broken. Always use Tailwind CSS where applicable, and maintain cross-platform compatibility. Never break gesture or accessibility features."
     },
     "swiftui-migration-consultant": {
       "name": "📱 SwiftUI Consultant",
@@ -80,45 +80,31 @@
       "no-global-theme/tokens": "error"
     }
   },
-    "guard-theme-scope": {
-      "description": "Ensure tokens.colors usage is scoped to component functions only",
-      "autoCommit": true,
-      "scope": ["src/components/ui/", "src/features/"],
-      "watchConsole": true,
-      "autoContinue": true,
-      "command": "Audit and refactor all top-level theme token usage. Replace any static references to tokens.colors.* outside component scope with getStyles(tokens) factories or inline useTheme(). Fix StyleSheet.create() definitions as needed."
-    },
+  "guard-theme-scope": {
+    "description": "Ensure tokens.colors usage is scoped to component functions only",
+    "autoCommit": true,
+    "scope": ["src/components/ui/", "src/features/"],
+    "watchConsole": true,
+    "autoContinue": true,
+    "command": "Audit and refactor all top-level theme token usage. Replace any static references to tokens.colors.* outside component scope with getStyles(tokens) factories or inline useTheme(). Fix StyleSheet.create() definitions as needed."
   },
-    "overrides": [
-      {
-        "files": ["**/*.tsx", "**/*.ts"],
-        "rules": {
-          "no-global-theme/tokens": [
-            "error",
-            {
-              "message": "Avoid top-level access to tokens.colors.*. Wrap inside getStyles(tokens) or call useTheme() inside components."
-            }
-          ]
-        }
+  "overrides": [
+    {
+      "files": ["**/*.tsx", "**/*.ts"],
+      "rules": {
+        "no-global-theme/tokens": [
+          "error",
+          {
+            "message": "Avoid top-level access to tokens.colors.*. Wrap inside getStyles(tokens) or call useTheme() inside components."
+          }
+        ]
       }
-    ]
-  },
-  "consoleWatch": {
-    "autoFixPatterns": [
-      "ReferenceError: Property 'tokens' doesn't exist",
-      "Cannot read property .* of undefined",
-      "Text strings must be rendered within a <Text>"
-    ],
-    "autoContinue": true
-  },
-  "devServer": {
-    "suppressRestartOn": [
-      "src/theme/*.ts",
-      "src/utils/*.ts",
-      "src/types/*.ts"
-    ],
-    "applySilently": true,
-    "onReloadHang": "background"
-  }
-}
+    },
+    {
+      "files": ["src/theme/*.ts"],
+      "rules": {
+        "no-global-theme/tokens": "off"
+      }
+    }
+  ]
 }

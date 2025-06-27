@@ -1,149 +1,14 @@
 import React from 'react';
-import { View, ScrollView, Linking } from 'react-native';
-import { Brain, Mic, FileText, Lightbulb, Search, Book, Users, Mail, HelpCircle, CheckCircle } from 'lucide-react-native';
+import { View, ScrollView } from 'react-native';
+import { HelpCircle, CheckCircle } from 'lucide-react-native';
 import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Card } from '../../../components/ui/Card';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 
-const helpCategories = [
-  {
-    title: 'Getting Started',
-    description: 'Learn the basics of Thoughtmarks',
-    icon: Lightbulb,
-    items: [
-      'Creating your first thoughtmark',
-      'Understanding bins and organization',
-      'Setting up voice capture',
-      'Navigating the interface',
-    ],
-  },
-  {
-    title: 'Voice Features',
-    description: 'Master hands-free capture',
-    icon: Mic,
-    items: [
-      'Siri shortcut installation',
-      'Voice commands and phrases',
-      'Background voice processing',
-      'Troubleshooting voice issues',
-    ],
-  },
-  {
-    title: 'AI & Smart Features',
-    description: 'Leverage intelligent tools',
-    icon: Brain,
-    items: [
-      'Auto-categorization',
-      'Semantic search',
-      'Pattern recognition',
-      'AI insights and tips',
-    ],
-  },
-  {
-    title: 'Organization & Workflow',
-    description: 'Optimize your knowledge management',
-    icon: FileText,
-    items: [
-      'Creating and managing bins',
-      'Tagging strategies',
-      'Archive and cleanup',
-      'Collaboration features',
-    ],
-  },
-];
-
-const faqs = [
-  {
-    question: 'How do I set up Siri voice capture?',
-    answer: "Go to Settings > Voice & Shortcuts and tap 'Quick Siri Setup' to install the shortcut.",
-    icon: Mic,
-    category: 'Voice',
-  },
-  {
-    question: 'How does AI categorization work?',
-    answer: 'Our AI analyzes your thoughtmarks and automatically sorts them into relevant bins based on content and context.',
-    icon: Brain,
-    category: 'AI',
-  },
-  {
-    question: 'Can I organize thoughtmarks into custom bins?',
-    answer: 'Yes! Create custom bins from the All Bins page or when creating a new thoughtmark.',
-    icon: FileText,
-    category: 'Organization',
-  },
-  {
-    question: 'How do I search for specific thoughtmarks?',
-    answer: 'Use the search function to find thoughtmarks by keywords, content, or semantic meaning.',
-    icon: Search,
-    category: 'Search',
-  },
-];
-
-const resources = [
-  {
-    title: 'Documentation',
-    description: 'Comprehensive guides and tutorials',
-    icon: Book,
-    onPress: () => Linking.openURL('https://thoughtmarks.app/docs'),
-  },
-  {
-    title: 'Community',
-    description: 'Connect with other users',
-    icon: Users,
-    onPress: () => Linking.openURL('https://community.thoughtmarks.app'),
-  },
-  {
-    title: 'Direct Email',
-    description: 'support@thoughtmarks.app',
-    icon: Mail,
-    onPress: () => Linking.openURL('mailto:support@thoughtmarks.app'),
-  },
-];
-
 const HowToScreen: React.FC = () => {
   const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
 
   const categories = [
     {
@@ -170,7 +35,7 @@ const { tokens } = useTheme();
     },
   ];
 
-  const faqs = [
+  const localFaqs = [
     {
       question: 'How do I create a thoughtmark?',
       answer: 'Tap the + button and start typing or use voice recording.',
@@ -185,18 +50,22 @@ const { tokens } = useTheme();
     },
   ];
 
-  const resources = [
+  const localResources = [
     {
       title: 'Video Tutorials',
       description: 'Step-by-step guides',
       icon: Ionicons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement video tutorials
+      },
     },
     {
       title: 'User Guide',
       description: 'Comprehensive documentation',
       icon: MaterialCommunityIcons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement user guide
+      },
     },
   ];
 
@@ -235,7 +104,7 @@ const { tokens } = useTheme();
       <Heading><Text>Frequently Asked Questions</Text></Heading>
       
       <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
-        {faqs.map((faq) => (
+        {localFaqs.map((faq) => (
           <Card key={faq.question} style={{ padding: tokens.spacing.md }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
               <faq.icon size={22} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
@@ -253,7 +122,7 @@ const { tokens } = useTheme();
       <Heading><Text>Additional Resources</Text></Heading>
       
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
-        {resources.map((res) => (
+        {localResources.map((res) => (
           <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
             <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
             <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
