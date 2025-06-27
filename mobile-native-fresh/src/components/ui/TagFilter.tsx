@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import AutoRoleView from '../wrappers/AutoRoleView';
 
 import { TagChip } from './TagChip';
 
@@ -25,7 +26,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   }
 
   return (
-    <View style={{ marginVertical: tokens.spacing.sm }}>
+    <AutoRoleView style={{ marginVertical: tokens.spacing.sm }} forceRole="section">
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -38,7 +39,6 @@ export const TagFilter: React.FC<TagFilterProps> = ({
             isSelected={selectedTags.includes(tag)}
             onPress={onTagPress}
             variant={selectedTags.includes(tag) ? 'primary' : 'default'}
-            size="sm"
           />
         ))}
         {selectedTags.length > 0 && onClearAll && (
@@ -46,19 +46,9 @@ export const TagFilter: React.FC<TagFilterProps> = ({
             tag="Clear All"
             onPress={onClearAll}
             variant="outline"
-            size="sm"
           />
         )}
       </ScrollView>
-    </View>
+    </AutoRoleView>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 8,
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-  },
-}); 
+}; 

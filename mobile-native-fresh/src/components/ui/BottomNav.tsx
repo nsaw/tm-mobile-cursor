@@ -1,17 +1,14 @@
-import React from 'react';
 import {
-  View,
   TouchableOpacity,
-  Dimensions,
   Platform,
+  useSafeAreaInsets,
 } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Brain } from 'lucide-react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '../../theme/ThemeProvider';
-
-const { width } = Dimensions.get('window');
+import AutoRoleView from '../wrappers/AutoRoleView';
 
 interface BottomNavProps {
   onNavigate: (path: string) => void;
@@ -28,20 +25,20 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   currentRoute = '/',
   onCreateNew,
 }) => {
-  const insets = useSafeAreaInsets();
   const { tokens } = useTheme();
+  const insets = useSafeAreaInsets();
 
   const handleAIToolsClick = () => {
-    // TODO: Check if user is premium
-    onNavigate('AITools');
+    // TODO: Implement AI tools modal
+    console.log('AI Tools clicked');
   };
 
   const navItems = [
-    { icon: 'home-outline', label: 'Home', path: 'Dashboard', iconType: 'material' },
-    { icon: 'magnify', label: 'Search', path: 'Search', iconType: 'material' },
-    { icon: 'microphone-outline', label: 'Voice', action: 'voice', iconType: 'material' },
-    { icon: 'crown-outline', label: 'AI', action: 'ai-tools', iconType: 'material' },
-    { icon: 'brain', label: 'All', path: 'AllThoughtmarks', iconType: 'lucide' },
+    { icon: 'home', label: 'Home', path: '/', iconType: 'material' },
+    { icon: 'magnify', label: 'Search', path: '/search', iconType: 'material' },
+    { icon: 'plus', label: 'Create', action: 'create', iconType: 'material' },
+    { icon: 'microphone', label: 'Voice', action: 'voice', iconType: 'material' },
+    { icon: Brain, label: 'AI Tools', action: 'ai-tools', iconType: 'lucide' },
   ];
 
   const renderIcon = (item: any, isActive: boolean, isHome: boolean, isVoice: boolean) => {
@@ -75,7 +72,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   };
 
   return (
-    <View style={{
+    <AutoRoleView style={{
       position: 'absolute',
       bottom: 0,
       left: 0,
@@ -85,8 +82,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       width: '100%',
       zIndex: tokens.zIndex.modal,
       paddingBottom: 0,
-    }}>
-      <View style={{
+    }} forceRole="navigation">
+      <AutoRoleView style={{
         backgroundColor: tokens.colors.backgroundSecondary,
         borderTopWidth: 1,
         borderTopColor: tokens.colors.divider,
@@ -105,17 +102,17 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             elevation: 12,
           },
         }),
-      }}>
-        <View style={{
+      }} forceRole="section">
+        <AutoRoleView style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
           paddingVertical: tokens.spacing.md,
           paddingHorizontal: tokens.spacing.lg,
           minHeight: 107,
-        }}>
-          {navItems.map((item, index) => {
-            const { icon, label, path, action, iconType } = item;
+        }} forceRole="container">
+          {navItems.map((item, _index) => {
+            const { label, path, action } = item;
             const isActive = currentRoute === path;
             const isVoice = action === 'voice';
             const isHome = path === '/';
@@ -134,7 +131,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   minWidth: 59,
                   position: 'relative',
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                onPress={() => {
                   if (isVoice && onVoiceRecord) {
                     onVoiceRecord();
                   } else if (action === 'ai-tools') {
@@ -148,7 +145,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               >
                 {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && (
-                  <View style={{
+                  <AutoRoleView style={{
                     position: 'absolute',
                     top: -2,
                     left: -2,
@@ -158,17 +155,17 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     backgroundColor: `${tokens.colors.accent}1A`,
                     borderWidth: 1,
                     borderColor: `${tokens.colors.accent}4D`,
-                  }} />
+                  }} forceRole="badge" />
                 )}
               </TouchableOpacity>
             );
           })}
-        </View>
-      </View>
+        </AutoRoleView>
+      </AutoRoleView>
 
       {/* Floating New Thoughtmark Button */}
       {showCreateButton && currentRoute !== '/' && (
-        <View style={{
+        <AutoRoleView style={{
           position: 'absolute',
           left: '50%',
           transform: [{ translateX: -43 }],
@@ -176,8 +173,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           bottom: (insets.bottom + 40) * 1.34,
-        }}>
-          <View style={{
+        }} forceRole="button">
+          <AutoRoleView style={{
             width: 83,
             height: 83,
             borderRadius: 56,
@@ -202,7 +199,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 elevation: 27,
               },
             }),
-          }}>
+          }} forceRole="button-wrapper">
             <TouchableOpacity
               style={{
                 width: 78,
@@ -227,7 +224,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   },
                 }),
               }}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+              onPress={() => {
                 if (onCreateNew) {
                   onCreateNew();
                 } else {
@@ -239,9 +236,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             >
               <MaterialCommunityIcons name="plus" size={47} color={tokens.colors.accent} />
             </TouchableOpacity>
-          </View>
-        </View>
+          </AutoRoleView>
+        </AutoRoleView>
       )}
-    </View>
+    </AutoRoleView>
   );
 }; 

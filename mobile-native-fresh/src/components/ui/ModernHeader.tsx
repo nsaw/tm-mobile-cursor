@@ -1,5 +1,4 @@
 import {
-  View,
   TouchableOpacity,
   Platform,
 } from 'react-native';
@@ -7,6 +6,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import AutoRoleView from '../wrappers/AutoRoleView';
 
 import { Text } from './Text';
 
@@ -31,7 +31,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   const { tokens } = useTheme();
 
   return (
-    <View style={{
+    <AutoRoleView style={{
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.divider,
@@ -53,18 +53,18 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
           elevation: 8,
         },
       }),
-    }}>
-      <View style={{
+    }} forceRole="header">
+      <AutoRoleView style={{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         minHeight: 32,
-      }}>
-        <View style={{
+      }} forceRole="section">
+        <AutoRoleView style={{
           flexDirection: 'row',
           alignItems: 'center',
           flex: 1,
-        }}>
+        }} forceRole="container">
           {showBackButton && onBack && (
             <TouchableOpacity 
               style={{
@@ -78,9 +78,9 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
             </TouchableOpacity>
           )}
-          <View style={{ flex: 1 }}>
+          <AutoRoleView style={{ flex: 1 }} forceRole="section">
             <Text 
-              variant="heading2" 
+              variant="heading" 
               style={{ 
                 textTransform: 'uppercase',
                 letterSpacing: 1,
@@ -99,8 +99,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 {subtitle}
               </Text>
             )}
-          </View>
-        </View>
+          </AutoRoleView>
+        </AutoRoleView>
         
         {rightAction && (
           <TouchableOpacity 
@@ -114,7 +114,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
           </TouchableOpacity>
         )}
-      </View>
-    </View>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 }; 

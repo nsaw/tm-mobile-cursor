@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, ViewStyle, Text } from 'react-native';
+import { ViewStyle, Text } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getCardVariants, mergeVariantStyles } from '../../theme/variants';
+import AutoRoleView from '../wrappers/AutoRoleView';
 
 interface CardProps {
   variant?: 'default' | 'glass' | 'elevated' | 'interactive';
@@ -59,12 +60,16 @@ export const Card: React.FC<CardProps> = ({
 
   if (onPress && !disabled) {
     return (
-      <View><Text>{renderChildren()}</Text></View>
+      <AutoRoleView style={finalCardStyle} forceRole="card">
+        {renderChildren()}
+      </AutoRoleView>
     );
   }
 
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView style={finalCardStyle} forceRole="card">
+      {renderChildren()}
+    </AutoRoleView>
   );
 };
 
@@ -92,7 +97,9 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView style={style} forceRole="header">
+      {renderChildren()}
+    </AutoRoleView>
   );
 };
 
@@ -118,7 +125,9 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView style={style} forceRole="section">
+      {renderChildren()}
+    </AutoRoleView>
   );
 };
 
@@ -144,6 +153,8 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView style={style} forceRole="footer">
+      {renderChildren()}
+    </AutoRoleView>
   );
 }; 
