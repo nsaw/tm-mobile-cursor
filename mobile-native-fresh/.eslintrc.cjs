@@ -65,30 +65,27 @@ module.exports = {
     'react-native/no-unused-styles': 'warn',
     'react-native/split-platform-components': 'warn',
     'react-native/no-color-literals': 'warn',
+    // React JSX rules to prevent bad prop placement
+    'react/jsx-no-bind': [
+      'error',
+      {
+        'allowArrowFunctions': true,
+        'allowFunctions': false,
+        'allowBind': false,
+        'ignoreRefs': true
+      }
+    ],
     // Custom theming architecture rules (inlined)
     'no-restricted-imports': [
       'error',
       {
         patterns: [
           {
-            group: ['./tokens', '../theme/tokens'],
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
-          },
-        ],
-        paths: [
-          {
-            name: './tokens',
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
-          },
-          {
-            name: '../theme/tokens',
-            message: 'Do not import designTokens or tokens directly. Use useTheme() inside components',
-            allowTypeImports: true,
-          },
-        ],
-      },
+            group: ['**/designTokens', '**/tokens'],
+            message: "Direct import of design tokens is forbidden. Use useTheme() hook instead."
+          }
+        ]
+      }
     ],
     // Custom JSX enforcement rules
     'thoughtmarks/no-direct-design-tokens': 'error',

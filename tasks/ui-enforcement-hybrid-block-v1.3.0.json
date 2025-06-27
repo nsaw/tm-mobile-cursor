@@ -1,0 +1,87 @@
+{
+    "notes": [
+      "🏹 MISSION: UI Enforcement & Visual Polish",
+      "🎯 GOAL: Enforce full UI, theming, and accessibility compliance across all screens in v1.3",
+      "🚨 SAFETY ENFORCEMENT 🚨",
+      "✅ Before applying changes, parse each modified file and ensure valid JS/TS syntax.",
+      "✅ If a file fails to parse, immediately revert changes for that file and skip.",
+      "✅ After bulk changes, run a global build or type-check to verify project integrity.",
+      "✅ No commit or push if any fatal syntax error is found post-pass.",
+      "✅ Alert the user (with file/line numbers) for any files not auto-fixable—manual review required.",
+      "✅ Lint and run tests after all refactors, before commit/push.",
+      "✅ All text must be wrapped in <Text> components. All colors and spacing must use tokens from useTheme().",
+      "✅ Accessibility props required: accessibilityRole, accessible, accessibilityLabel on all touchables.",
+      "✅ Enforce UI/UX guidelines: Use only centralized typography, spacing, and color tokens. No hardcoded values.",
+      "✅ Confirm all navigation routes are valid and type-safe.",
+      "📌 BEFORE ANY FILE CHANGES: Commit a rollback checkpoint for full Git recovery. Use descriptive tags and commit messages for easy rollback."
+    ],
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "postMutationBuild": "tsc --noEmit && npm run lint",
+    "blockCommitOnError": true,
+    "alertUserOnParseFail": true,
+    "preCommit": {
+      "before": [
+        "git add .",
+        "git commit -m \"chore(rollback): full snapshot before UI enforcement v1.3\"",
+        "git tag v1.3.0_pre-ui-enforcement-ROLLBACK",
+        "git push origin v1.3.0_pre-ui-enforcement-ROLLBACK"
+      ]
+    },
+    "branch": "fix/v1.3.0_ui-enforcement",
+    "mode": "auto",
+    "watchConsole": true,
+    "onReloadHang": "Move to background and resume automatically",
+    "phases": [
+      {
+        "section": "Text & Readability Enforcement",
+        "actions": [
+          "Wrap all unwrapped strings in <Text> components (see JSX_ENFORCEMENT_COMPLETE.md)",
+          "Auto-import missing Text from react-native",
+          "Fix layout clipping due to missing numberOfLines or flexShrink",
+          "Apply typography tokens to titles, section headers, body text (see ui-guidelines.md)"
+        ],
+        "commit": "fix: enforce text wrapping and readability",
+        "tag": "v1.3.0_text-fix"
+      },
+      {
+        "section": "Spacing, Layout, and Theming Enforcement",
+        "actions": [
+          "Replace all hardcoded spacing/margin/padding with spacing tokens from useTheme()",
+          "Update all card/button/fab layouts to use standardized style objects from theme",
+          "Enforce pagePaddingHorizontal on all screen containers",
+          "Replace any inline/static colors with tokens.colors from useTheme() (see THEMING_ENFORCEMENT_SUMMARY.md and THEMING_GUIDE.md)"
+        ],
+        "commit": "fix: theming, spacing, and layout enforcement",
+        "tag": "v1.3.0_spacing-theme"
+      },
+      {
+        "section": "Accessibility & Interaction",
+        "actions": [
+          "Add accessibilityRole, accessible, and accessibilityLabel to all touchables and pressables",
+          "Fix modals and SVG elements with missing accessibility props",
+          "Ensure all clickable elements pass audit script (see scripts/audit-clickable-elements.js)",
+          "Validate all navigation calls use constants from routes manifest"
+        ],
+        "commit": "fix: accessibility and interaction compliance",
+        "tag": "v1.3.0_a11y-fix"
+      },
+      {
+        "section": "Final Lint, Test, and Documentation Pass",
+        "actions": [
+          "Run npm run lint and npm run test:unit on entire codebase",
+          "Run scripts/verify-theming-architecture.sh",
+          "Alert user to any non-auto-fixable files, with file and line numbers",
+          "Update docs/ui-guidelines.md and CHANGELOG if any patterns or enforcement logic changed"
+        ],
+        "commit": "chore: final lint, test, and documentation update",
+        "tag": "v1.3.0_final-polish"
+      }
+    ],
+    "final": {
+      "commit": "chore: enforcement and polish complete — v1.3.0_ui-enforced",
+      "tag": "v1.3.0_ui-enforced",
+      "notes": "All text wrapping, theming, spacing, and accessibility standards enforced and validated. Rollback snapshot created pre-operation. No manual intervention required except as alerted. Architecture is now locked and ready for further feature development."
+    }
+  }
+  

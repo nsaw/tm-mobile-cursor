@@ -20,11 +20,13 @@
     "lint:fix-accessibility": "node scripts/fix-accessibility.cjs",
     "lint:fix-all": "npm run lint:fix-text && npm run lint:fix-accessibility && npm run lint:check-theme && npm run lint:fix",
     "lint:enforce-text-wrapping": "eslint . --ext .ts,.tsx --rule 'thoughtmarks/enforce-text-wrapping: error' --fix",
+    "lint:check-accessibility-props": "node scripts/check-accessibility-props.cjs",
     "pre-commit": "npm run lint:fix-all && node scripts/scan-unwrapped-text.cjs",
     "fix:text-errors": "node scripts/auto-fix-text-errors.cjs",
     "auto:fix": "npm run fix:text-errors",
     "watch:text-errors": "node scripts/watch-text-errors.cjs",
-    "watch:fix": "npm run watch:text-errors"
+    "watch:fix": "npm run watch:text-errors",
+    "test:safeguards": "npm run lint:check-accessibility-props && npm run lint"
   },
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.4.1",

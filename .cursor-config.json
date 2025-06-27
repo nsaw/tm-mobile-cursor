@@ -44,6 +44,21 @@
       "allowedPattern": "^tokens\\?.[a-zA-Z]+\\?.[a-zA-Z]+(\\s|\\)|\\]|\\'|\"|$)"
     }
   },
+  // 🚨 SAFETY ENFORCEMENT: Do not commit or proceed if parse/build fails post-mutation
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit || npm run lint",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "notes": [
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Before applying changes, parse each modified file and ensure valid JS/TS syntax.",
+    "✅ If file fails to parse, immediately revert changes for that file and skip.",
+    "✅ After bulk changes, run a global build or type-check to verify project integrity.",
+    "✅ No commit or push if any fatal syntax error is found post-pass.",
+    "✅ Alert the user (with file/line numbers) for any files not auto-fixable—manual review required.",
+    "✅ Lint and run tests after all refactors, before commit/push."
+  ],
   "consoleWatch": {
     "autoFixPatterns": [
       "ReferenceError: Property 'tokens' doesn't exist",
@@ -77,48 +92,34 @@
   },
   "eslint": {
     "rules": {
-      "no-global-theme/tokens": "error"
-    }
-  },
-    "guard-theme-scope": {
-      "description": "Ensure tokens.colors usage is scoped to component functions only",
-      "autoCommit": true,
-      "scope": ["src/components/ui/", "src/features/"],
-      "watchConsole": true,
-      "autoContinue": true,
-      "command": "Audit and refactor all top-level theme token usage. Replace any static references to tokens.colors.* outside component scope with getStyles(tokens) factories or inline useTheme(). Fix StyleSheet.create() definitions as needed."
+      "no-global-theme/tokens": "error",
+      "no-inline-accessibility-props-in-function/no-inline-accessibility-props-in-function": "error"
     },
-  },
-    "overrides": [
-      {
-        "files": ["**/*.tsx", "**/*.ts"],
-        "rules": {
-          "no-global-theme/tokens": [
-            "error",
-            {
-              "message": "Avoid top-level access to tokens.colors.*. Wrap inside getStyles(tokens) or call useTheme() inside components."
-            }
-          ]
-        }
-      }
+    "plugins": [
+      "react",
+      "no-inline-accessibility-props-in-function"
     ]
   },
-  "consoleWatch": {
-    "autoFixPatterns": [
-      "ReferenceError: Property 'tokens' doesn't exist",
-      "Cannot read property .* of undefined",
-      "Text strings must be rendered within a <Text>"
-    ],
-    "autoContinue": true
+  "guard-theme-scope": {
+    "description": "Ensure tokens.colors usage is scoped to component functions only",
+    "autoCommit": true,
+    "scope": ["src/components/ui/", "src/features/"],
+    "watchConsole": true,
+    "autoContinue": true,
+    "command": "Audit and refactor all top-level theme token usage. Replace any static references to tokens.colors.* outside component scope with getStyles(tokens) factories or inline useTheme(). Fix StyleSheet.create() definitions as needed."
   },
-  "devServer": {
-    "suppressRestartOn": [
-      "src/theme/*.ts",
-      "src/utils/*.ts",
-      "src/types/*.ts"
-    ],
-    "applySilently": true,
-    "onReloadHang": "background"
-  }
-}
+  "overrides": [
+    {
+      "files": ["**/*.tsx", "**/*.ts"],
+      "rules": {
+        "no-global-theme/tokens": [
+          "error",
+          {
+            "message": "Avoid top-level access to tokens.colors.*. Wrap inside getStyles(tokens) or call useTheme() inside components."
+          }
+        ],
+        "no-inline-accessibility-props-in-function/no-inline-accessibility-props-in-function": "error"
+      }
+    }
+  ]
 }
