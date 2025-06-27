@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   FlatList,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 
 import type { Thoughtmark } from '../../../types';
@@ -21,8 +21,8 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
   onThoughtmarkPress,
   onPinToggle,
   horizontal = false,
-  showsScrollIndicator = true,
-}) => {
+  showsScrollIndicator = true
+}) => {;
   const renderThoughtmark = ({ item }: { item: Thoughtmark }) => (
     <ThoughtmarkCard
       thoughtmark={item}
@@ -43,20 +43,20 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
     />
   );
 };
-
-const styles = StyleSheet.create({
+;
+  const styles = StyleSheet.create({
   horizontalContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   verticalContainer: {
-    padding: 16,
+    padding: 16
   },
   horizontalCard: {
     width: 250,
-    marginRight: 12,
+    marginRight: 12
   },
   separator: {
     height: 12,
-    width: 12,
-  },
+    width: 12
+  }
 });

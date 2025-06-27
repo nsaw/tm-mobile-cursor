@@ -10,7 +10,7 @@ interface Props extends AccessibilityProps {
   forceRole?: StyleRole;
   accessible?: boolean;
   accessibilityLabel?: string;
-}
+};
 
 const AutoRoleView: React.FC<Props> = ({
   children,
@@ -20,19 +20,19 @@ const AutoRoleView: React.FC<Props> = ({
   accessibilityLabel,
   ...accessibilityProps
 }) => {
-  
+  const { tokens } = useTheme();
   const flattened = StyleSheet.flatten(style) || {};
   const role = forceRole || classifyStyleRole(flattened);
 
   const spacingStyles: ViewStyle = {
     ...(role === 'card' && {
       paddingVertical: tokens.spacing.lg,
-      paddingHorizontal: tokens.spacing.lg,
+      paddingHorizontal: tokens.spacing.lg
     }),
     ...(role === 'section' && {
       marginBottom: tokens.spacing.xl,
-      paddingHorizontal: tokens.spacing.lg,
-    }),
+      paddingHorizontal: tokens.spacing.lg
+    })
   };
 
   const combined = [flattened, spacingStyles];
@@ -41,7 +41,7 @@ const AutoRoleView: React.FC<Props> = ({
     accessible,
     accessibilityLabel,
     accessibilityRole: role === 'button-wrapper' ? ('button' as AccessibilityRole) : undefined,
-    ...accessibilityProps,
+    ...accessibilityProps
   };
 
   return (

@@ -4,8 +4,8 @@ import type { Bin, BinFormData } from '../../../types';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';
 
-// Template data for new user onboarding
-const templateBins = [
+// Template data for new user onboarding;
+  const templateBins = [
   {
     id: 1,
     name: 'Work & Projects',
@@ -18,7 +18,7 @@ const templateBins = [
     isDeleted: false,
     sortOrder: 1,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const templateBins = [
     isDeleted: false,
     sortOrder: 2,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const templateBins = [
     isDeleted: false,
     sortOrder: 3,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
   {
     id: 4,
@@ -60,17 +60,17 @@ const templateBins = [
     isDeleted: false,
     sortOrder: 4,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
 ];
 
-export const useBins = () => {
+export const useBins = () => {;
   const [bins, setBins] = useState<Bin[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { isAuthenticated } = useAuth();
   const fetchBinsRef = useRef<boolean>(false);
-
+;
   const fetchBins = useCallback(async () => {
     if (!isAuthenticated) return;
 
@@ -103,35 +103,35 @@ export const useBins = () => {
       setLoading(false);
     }
   }, [isAuthenticated]);
-
-  const getBin = useCallback(async (id: number): Promise<Bin> => {
-    const response = await apiService.getBin(id);
+;
+  const getBin = useCallback(async (id: number): Promise<Bin> => {;
+  const response = await apiService.getBin(id);
     if (response.success && response.data) {
       return response.data;
     }
     throw new Error(response.error || 'Failed to fetch bin');
   }, []);
-
-  const createBin = useCallback(async (data: BinFormData): Promise<Bin> => {
-    const response = await apiService.createBin(data);
+;
+  const createBin = useCallback(async (data: BinFormData): Promise<Bin> => {;
+  const response = await apiService.createBin(data);
     if (response.success && response.data) {
       await fetchBins(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to create bin');
   }, [fetchBins]);
-
-  const updateBin = useCallback(async (id: number, data: Partial<BinFormData>): Promise<Bin> => {
-    const response = await apiService.updateBin(id, data);
+;
+  const updateBin = useCallback(async (id: number, data: Partial<BinFormData>): Promise<Bin> => {;
+  const response = await apiService.updateBin(id, data);
     if (response.success && response.data) {
       await fetchBins(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to update bin');
   }, [fetchBins]);
-
-  const deleteBin = useCallback(async (id: number): Promise<void> => {
-    const response = await apiService.deleteBin(id);
+;
+  const deleteBin = useCallback(async (id: number): Promise<void> => {;
+  const response = await apiService.deleteBin(id);
     if (response.success) {
       await fetchBins(); // Refresh the list
     } else {
@@ -158,6 +158,6 @@ export const useBins = () => {
     getBin,
     createBin,
     updateBin,
-    deleteBin,
+    deleteBin
   };
 };

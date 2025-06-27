@@ -9,14 +9,15 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/fullscreen-splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#0D0D0D"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thoughtmarks.app"
+      "bundleIdentifier": "com.thoughtmarks.app",
+      "backgroundColor": "#0D0D0D"
     },
     "android": {
       "adaptiveIcon": {

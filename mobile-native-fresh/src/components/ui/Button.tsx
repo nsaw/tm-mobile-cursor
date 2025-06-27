@@ -3,7 +3,6 @@ import { Pressable, ViewStyle, TextStyle, Text } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
-import { ButtonText } from './Text';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';
@@ -18,6 +17,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+  const { tokens } = useTheme();
   const {
     variant = 'primary',
     size = 'md',
@@ -27,9 +27,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     style,
     textStyle,
     leftIcon,
-    rightIcon,
+    rightIcon
   } = props;
-  
+
   const [isPressed, setIsPressed] = useState(false);
 
   // Get variant styles
@@ -41,7 +41,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   // Merge all styles
   const buttonStyle = mergeVariantStyles(baseStyle, {
     variant: variantStyle,
-    size: sizeStyle,
+    size: sizeStyle
   });
 
   // Only allow margin and padding to be overridden by style prop, not borderRadius
@@ -96,29 +96,27 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <Pressable
       style={finalButtonStyle}
       onPress={disabled ? undefined : onPress}
-      onPressIn={() => setIsPressed(true)} accessibilityRole="button"  
+      onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       accessibilityRole="button"
-      
-      
       android_ripple={{
         color: tokens.colors.surfaceHover,
-        borderless: false,
+        borderless: false
       }}
     >
       {leftIcon && (
-        <ButtonText><Text>{leftIcon}</Text></ButtonText>
+        <Text>{leftIcon}</Text>
       )}
       
       {typeof children === 'string' ? (
-        <ButtonText><Text>{children}</Text></ButtonText>
+        <Text style={[{ color: textColor }, textStyle]}>{children}</Text>
       ) : (
         children
       )}
       
       {rightIcon && (
-        <ButtonText><Text>{rightIcon}</Text></ButtonText>
+        <Text>{rightIcon}</Text>
       )}
     </Pressable>
   );

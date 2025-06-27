@@ -1,6 +1,6 @@
 import {
   TouchableOpacity,
-  Platform,
+  Platform
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -26,9 +26,9 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   subtitle,
   onBack,
   rightAction,
-  showBackButton = true,
+  showBackButton = true
 }) => {
-  
+  const { tokens } = useTheme();
 
   return (
     <AutoRoleView style={{
@@ -44,26 +44,26 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
           shadowColor: '#000000',
           shadowOffset: {
             width: 0,
-            height: 2,
+            height: 2
           },
           shadowOpacity: 0.3,
-          shadowRadius: 8,
+          shadowRadius: 8
         },
         android: {
-          elevation: 8,
-        },
-      }),
+          elevation: 8
+        }
+      })
     }} forceRole="header">
       <AutoRoleView style={{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        minHeight: 32,
+        minHeight: 32
       }} forceRole="section">
         <AutoRoleView style={{
           flexDirection: 'row',
           alignItems: 'center',
-          flex: 1,
+          flex: 1
         }} forceRole="container">
           {showBackButton && onBack && (
             <TouchableOpacity 
@@ -71,11 +71,11 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 marginRight: tokens.spacing.md,
                 padding: tokens.spacing.xs,
                 borderRadius: tokens.radius.sm,
-                backgroundColor: tokens.colors.surface,
+                backgroundColor: tokens.colors.surface
               }} 
               onPress={onBack}
              accessibilityRole="button"  >
-              <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
+              <Ionicons name="arrow-back" size={20} color={tokens?.colors?.text ?? "#000000"} />
             </TouchableOpacity>
           )}
           <AutoRoleView style={{ flex: 1 }} forceRole="section">
@@ -83,7 +83,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               variant="heading" 
               style={{ 
                 textTransform: 'uppercase',
-                letterSpacing: 1,
+                letterSpacing: 1
               }}
             >
               {title}
@@ -93,7 +93,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 variant="body" 
                 
                 style={{ 
-                  marginTop: 1,
+                  marginTop: 1
                 }}
               >
                 {subtitle}
@@ -107,11 +107,11 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             style={{
               padding: tokens.spacing.xs,
               borderRadius: tokens.radius.sm,
-              backgroundColor: tokens.colors.surface,
+              backgroundColor: tokens.colors.surface
             }} 
             onPress={rightAction.onPress}
            accessibilityRole="button"  >
-            <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
+            <Ionicons name={rightAction.icon as any} size={20} color={tokens?.colors?.text ?? "#000000"} />
           </TouchableOpacity>
         )}
       </AutoRoleView>

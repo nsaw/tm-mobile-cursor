@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -30,10 +30,10 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
   visible,
   onClose,
   items,
-  title,
+  title
 }) => {
+  const { tokens } = useTheme();
   
-
   const handleItemPress = (item: ActionSheetItem) => {
     item.onPress();
     onClose();
@@ -45,14 +45,13 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       transparent
       animationType="fade"
       onRequestClose={onClose}
-      
-      
+
     >
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={{
           flex: 1,
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-end'
         }}>
           <TouchableWithoutFeedback>
             <View style={{
@@ -61,14 +60,14 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               borderTopRightRadius: tokens.radius.lg,
               paddingBottom: tokens.spacing.lg,
               maxWidth: Dimensions.get('window').width,
-              width: '100%',
+              width: '100%'
             }}>
               {title && (
                 <View style={{
                   paddingVertical: tokens.spacing.md,
                   paddingHorizontal: tokens.spacing.lg,
                   borderBottomWidth: 1,
-                  borderBottomColor: tokens.colors.border,
+                  borderBottomColor: tokens.colors.border
                 }}>
                   <Text variant="heading" style={{ textAlign: 'center' }}>{title}</Text>
                 </View>
@@ -81,12 +80,12 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     paddingVertical: tokens.spacing.md,
                     paddingHorizontal: tokens.spacing.lg,
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
-                    borderBottomColor: tokens.colors.border,
+                    borderBottomColor: tokens.colors.border
                   }}
                   onPress={() => handleItemPress(item)} accessibilityRole="button" >
                   <View style={{
                     flexDirection: 'row',
-                    alignItems: 'center',
+                    alignItems: 'center'
                   }}>
                     {item.icon && (
                       <Ionicons
@@ -100,7 +99,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                       variant="body" 
                       style={{
                         textAlign: 'center',
-                        color: item.destructive ? tokens.colors.danger : tokens.colors.text,
+                        color: item.destructive ? tokens.colors.danger : tokens.colors.text
                       }}
                     >
                       {item.label}
@@ -115,7 +114,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   paddingHorizontal: tokens.spacing.lg,
                   marginTop: tokens.spacing.sm,
                   borderTopWidth: 8,
-                  borderTopColor: tokens.colors.border,
+                  borderTopColor: tokens.colors.border
                 }}
                 onPress={onClose}
                 accessibilityRole="button"
@@ -126,7 +125,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   style={{
                     textAlign: 'center',
                     color: tokens.colors.accent,
-                    fontWeight: '600',
+                    fontWeight: '600'
                   }}
                 >
                   Cancel

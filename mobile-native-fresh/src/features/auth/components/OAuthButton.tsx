@@ -13,10 +13,10 @@ interface OAuthButtonProps {
 export const OAuthButton: React.FC<OAuthButtonProps> = ({
   provider,
   onPress,
-  disabled = false,
+  disabled = false
 }) => {
+  const { tokens } = useTheme();
   
-
   const styles = StyleSheet.create({
     button: {
       flexDirection: 'row',
@@ -28,16 +28,16 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       backgroundColor: provider === 'google' ? tokens.colors.surface : tokens.colors.background,
       borderWidth: 1,
       borderColor: provider === 'google' ? tokens.colors.border : 'transparent',
-      opacity: disabled ? 0.6 : 1,
+      opacity: disabled ? 0.6 : 1
     },
     icon: {
-      marginRight: tokens.spacing.sm,
+      marginRight: tokens.spacing.sm
     },
     text: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: tokens.typography.fontWeight.semibold,
-      color: provider === 'google' ? tokens.colors.text : tokens.colors.text,
-    },
+      color: provider === 'google' ? tokens.colors.text : tokens.colors.text
+    }
   });
 
   const getProviderConfig = () => {
@@ -45,17 +45,17 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       case 'google':
         return {
           icon: 'logo-google',
-          text: 'Continue with Google',
+          text: 'Continue with Google'
         };
       case 'apple':
         return {
           icon: 'logo-apple',
-          text: 'Continue with Apple',
+          text: 'Continue with Apple'
         };
       default:
         return {
           icon: 'help-circle',
-          text: 'Continue',
+          text: 'Continue'
         };
     }
   };

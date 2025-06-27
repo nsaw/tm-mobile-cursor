@@ -5,43 +5,43 @@ export const ROUTES = {
   // Authentication Routes
   AUTH: {
     SIGN_IN: 'SignIn',
-    SIGN_UP: 'SignUp',
+    SIGN_UP: 'SignUp'
   },
 
   // Main App Routes
   MAIN: {
     DASHBOARD: 'Dashboard',
     SEARCH: 'Search',
-    AI_TOOLS: 'AITools',
+    AI_TOOLS: 'AITools'
   },
 
   // Thoughtmarks Routes
   THOUGHTMARKS: {
     ALL: 'AllThoughtmarks',
     DETAIL: 'ThoughtmarkDetail',
-    CREATE: 'CreateThoughtmark',
+    CREATE: 'CreateThoughtmark'
   },
 
   // Bins Routes
   BINS: {
     ALL: 'AllBins',
     CREATE: 'CreateBin',
-    DETAIL: 'BinDetail',
+    DETAIL: 'BinDetail'
   },
 
   // Tasks Routes
   TASKS: {
-    ALL: 'Tasks',
+    ALL: 'Tasks'
   },
 
   // Content Routes
   CONTENT: {
-    MAIN: 'Content',
+    MAIN: 'Content'
   },
 
   // Voice Routes
   VOICE: {
-    RECORD: 'VoiceRecord',
+    RECORD: 'VoiceRecord'
   },
 
   // Settings Routes
@@ -57,18 +57,18 @@ export const ROUTES = {
     EXPORT: 'Export',
     CONTACT: 'Contact',
     HOW_TO: 'HowTo',
-    ADMIN: 'AdminDashboard',
+    ADMIN: 'AdminDashboard'
   },
 
   // Archive Routes
   ARCHIVE: {
-    MAIN: 'Archive',
+    MAIN: 'Archive'
   },
 
   // Development Routes
   DEV: {
-    DESIGN_SYSTEM: 'DesignSystemDemo',
-  },
+    DESIGN_SYSTEM: 'DesignSystemDemo'
+  }
 } as const;
 
 // Route parameter types for type safety
@@ -110,7 +110,7 @@ export const ROUTE_DESCRIPTIONS = {
   [ROUTES.SETTINGS.HOW_TO]: 'How-to guides and tutorials',
   [ROUTES.SETTINGS.ADMIN]: 'Admin dashboard for administrators',
   [ROUTES.ARCHIVE.MAIN]: 'Archived thoughtmarks',
-  [ROUTES.DEV.DESIGN_SYSTEM]: 'Design system demonstration',
+  [ROUTES.DEV.DESIGN_SYSTEM]: 'Design system demonstration'
 } as const;
 
 // Navigation helper functions
@@ -138,5 +138,5 @@ export const navigateTo = {
   contact: () => ROUTES.SETTINGS.CONTACT,
   howTo: () => ROUTES.SETTINGS.HOW_TO,
   admin: () => ROUTES.SETTINGS.ADMIN,
-  archive: () => ROUTES.ARCHIVE.MAIN,
+  archive: () => ROUTES.ARCHIVE.MAIN
 } as const; 

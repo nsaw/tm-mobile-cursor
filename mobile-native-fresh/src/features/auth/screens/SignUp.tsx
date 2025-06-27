@@ -5,7 +5,7 @@ import { Text ,
   Platform,
   KeyboardAvoidingView,
   ScrollView,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 // src/features/auth/screens/SignUp.tsx
 import React, { useState } from 'react';
@@ -17,15 +17,16 @@ import { RegistrationForm } from '../components/RegistrationForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { useTheme } from '../../../theme/ThemeProvider';
+;
+  const logo = require('../../../../assets/logo.png');
 
-const logo = require('../../../../assets/logo.png');
-
-export const SignUpScreen: React.FC = () => {
-  
+export const SignUpScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const { signUp, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
-
+;
   const handleEmailSignUp = async (
     email: string,
     password: string,
@@ -41,7 +42,7 @@ export const SignUpScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const handleGoogleSignUp = async () => {
     try {
       setIsLoading(true);
@@ -52,7 +53,7 @@ export const SignUpScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const handleAppleSignUp = async () => {
     try {
       setIsLoading(true);
@@ -63,40 +64,40 @@ export const SignUpScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: colors.background
     },
     keyboard: {
       flex: 1,
       paddingHorizontal: spacing.md,
-      justifyContent: 'center',
+      justifyContent: 'center'
     },
     scrollContent: {
       flexGrow: 1,
-      justifyContent: 'center',
+      justifyContent: 'center'
     },
     logoContainer: {
       alignItems: 'center',
-      marginBottom: spacing.xl,
+      marginBottom: spacing.xl
     },
     logo: {
       width: 100,
-      height: 100,
+      height: 100
     },
     title: {
       ...typography.heading,
       color: colors.text,
       textAlign: 'center',
-      marginBottom: spacing.sm,
+      marginBottom: spacing.sm
     },
     subtitle: {
       ...typography.body,
       color: colors.subtext,
       textAlign: 'center',
-      marginBottom: spacing.lg,
+      marginBottom: spacing.lg
     },
     formContainer: {
       backgroundColor: colors.card,
@@ -105,7 +106,7 @@ export const SignUpScreen: React.FC = () => {
       shadowColor: '#000',
       shadowOpacity: 0.05,
       shadowRadius: 10,
-      elevation: 3,
+      elevation: 3
     },
     input: {
       borderWidth: 1,
@@ -113,34 +114,34 @@ export const SignUpScreen: React.FC = () => {
       borderRadius: tokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       paddingHorizontal: spacing.md,
-      marginBottom: spacing.md,
+      marginBottom: spacing.md
     },
     primaryButton: {
       backgroundColor: colors.primary,
       borderRadius: tokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       alignItems: 'center',
-      marginBottom: spacing.md,
+      marginBottom: spacing.md
     },
     primaryButtonText: {
       ...typography.body,
       color: '#fff',
-      fontWeight: '600',
+      fontWeight: '600'
     },
     divider: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginVertical: spacing.lg,
+      marginVertical: spacing.lg
     },
     dividerLine: {
       flex: 1,
       height: 1,
-      backgroundColor: colors.border,
+      backgroundColor: colors.border
     },
     dividerText: {
       marginHorizontal: spacing.sm,
       ...typography.body,
-      color: colors.border,
+      color: colors.border
     },
     oauthButton: {
       backgroundColor: colors.background,
@@ -148,8 +149,8 @@ export const SignUpScreen: React.FC = () => {
       borderColor: colors.border,
       borderRadius: tokens.radius.md,
       paddingVertical: spacing.sm * 2,
-      marginBottom: spacing.sm,
-    },
+      marginBottom: spacing.sm
+    }
   });
 
   return (

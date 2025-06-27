@@ -48,52 +48,52 @@ import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
 
 import { RootStackParamList } from './types';
 
-// Placeholder screens - to be implemented
-const BinDetailScreen = () => (
+// Placeholder screens - to be implemented;
+  const BinDetailScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bin Detail Screen</Text>
   </View>
 );
-
-const VoiceRecordScreen = () => (
+;
+  const VoiceRecordScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Voice Record Screen</Text>
   </View>
 );
-
-const TasksScreen = () => (
+;
+  const TasksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Tasks Screen</Text>
   </View>
 );
-
-const BinsScreen = () => (
+;
+  const BinsScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bins Screen</Text>
   </View>
 );
-
-const ThoughtmarksScreen = () => (
+;
+  const ThoughtmarksScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
   </View>
 );
-
-const ArchiveScreen = () => (
+;
+  const ArchiveScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Archive Screen</Text>
   </View>
 );
 
-// Loading Screen Wrapper for React Navigation
-const LoadingScreenWrapper = () => (
+// Loading Screen Wrapper for React Navigation;
+  const LoadingScreenWrapper = () => (
   <LoadingScreen isVisible={true} message="Loading Thoughtmarks..." />
 );
+;
+  const Stack = createStackNavigator<RootStackParamList>();
 
-const Stack = createStackNavigator<RootStackParamList>();
-
-// Main Stack Navigator (for authenticated users)
-const MainStack = () => (
+// Main Stack Navigator (for authenticated users);
+  const MainStack = () => (
   <VoiceRecorderProvider>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
@@ -148,8 +148,8 @@ const MainStack = () => (
   </VoiceRecorderProvider>
 );
 
-// Auth Stack Navigator (for unauthenticated users)
-const AuthStack = () => (
+// Auth Stack Navigator (for unauthenticated users);
+  const AuthStack = () => (
   <Stack.Navigator 
     screenOptions={{ 
       headerShown: false,
@@ -162,7 +162,7 @@ const AuthStack = () => (
 );
 
 // Main App Navigator
-export const AppNavigator = () => {
+export const AppNavigator = () => {;
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {

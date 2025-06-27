@@ -5,7 +5,7 @@ import { Text ,
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-  Alert,
+  Alert
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -28,7 +28,8 @@ import { RootStackParamList } from '../../../navigation/types';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-export const SearchScreen: React.FC = () => {
+export const SearchScreen: React.FC = () => {;
+  const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
   const { thoughtmarks } = useThoughtmarks();
   const { user } = useAuth();
@@ -39,12 +40,12 @@ export const SearchScreen: React.FC = () => {
   const [aiSuggestions, setAiSuggestions] = useState<any[]>([]);
   const [isGeneratingSuggestions, setIsGeneratingSuggestions] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-
+;
   const { showVoiceRecorder } = useVoiceRecorder();
-  
+;
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
   const styles = getStyles(tokens);
-
+;
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setIsSearching(true);
@@ -64,9 +65,9 @@ export const SearchScreen: React.FC = () => {
       setRecentSearches(prev => [query, ...prev.slice(0, 4)]);
     }
 
-    // Basic search
-    const basicResults = thoughtmarks.filter((thoughtmark: any) => {
-      const searchLower = query.toLowerCase();
+    // Basic search;
+  const basicResults = thoughtmarks.filter((thoughtmark: any) => {;
+  const searchLower = query.toLowerCase();
       return (
         thoughtmark.title.toLowerCase().includes(searchLower) ||
         thoughtmark.content.toLowerCase().includes(searchLower) ||
@@ -78,13 +79,13 @@ export const SearchScreen: React.FC = () => {
 
     // AI-enhanced search if enabled and user has premium
     if (useAISearch && hasPremiumAccess && query.length > 3) {
-      try {
-        const aiResults = await apiService.semanticSearch(query);
-        if (aiResults.success && aiResults.data && typeof aiResults.data === 'object' && 'results' in aiResults.data) {
-          const results = (aiResults.data as any).results;
+      try {;
+  const aiResults = await apiService.semanticSearch(query);
+        if (aiResults.success && aiResults.data && typeof aiResults.data === 'object' && 'results' in aiResults.data) {;
+  const results = (aiResults.data as any).results;
           if (Array.isArray(results)) {
-            // Merge AI results with basic results, prioritizing AI matches
-            const aiResultIds = new Set(results.map((r: any) => r.id));
+            // Merge AI results with basic results, prioritizing AI matches;
+  const aiResultIds = new Set(results.map((r: any) => r.id));
             const basicOnly = basicResults.filter(r => !aiResultIds.has(r.id));
             const mergedResults = [...results, ...basicOnly];
             setSearchResults(mergedResults);
@@ -98,7 +99,7 @@ export const SearchScreen: React.FC = () => {
 
     setIsSearching(false);
   };
-
+;
   const generateSearchSuggestions = async () => {
     if (!hasPremiumAccess) {
       Alert.alert(
@@ -113,10 +114,10 @@ export const SearchScreen: React.FC = () => {
     }
 
     setIsGeneratingSuggestions(true);
-    try {
-      const result = await apiService.generateSearchSuggestions();
-      if (result.success && result.data && typeof result.data === 'object' && 'suggestions' in result.data) {
-        const suggestions = (result.data as any).suggestions;
+    try {;
+  const result = await apiService.generateSearchSuggestions();
+      if (result.success && result.data && typeof result.data === 'object' && 'suggestions' in result.data) {;
+  const suggestions = (result.data as any).suggestions;
         if (Array.isArray(suggestions)) {
           setAiSuggestions(suggestions);
         }
@@ -128,27 +129,27 @@ export const SearchScreen: React.FC = () => {
       setIsGeneratingSuggestions(false);
     }
   };
-
+;
   const handleThoughtmarkPress = (thoughtmark: any) => {
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
-
+;
   const handleClearSearch = () => {
     setSearchQuery('');
     setSearchResults([]);
     setAiSuggestions([]);
   };
-
+;
   const handleSuggestionPress = (suggestion: any) => {
     setSearchQuery(suggestion.query);
     handleSearch(suggestion.query);
   };
-
+;
   const handleRecentSearchPress = (recentQuery: string) => {
     setSearchQuery(recentQuery);
     handleSearch(recentQuery);
   };
-
+;
   const handleNavigate = (path: string) => {
     switch (path) {
       case '/':
@@ -172,15 +173,15 @@ export const SearchScreen: React.FC = () => {
         break;
     }
   };
-
+;
   const handleVoiceRecord = () => {
     showVoiceRecorder();
   };
-
+;
   const handleCreateThoughtmark = () => {
     navigation.navigate('CreateThoughtmark' as any);
   };
-
+;
   const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
     try {
       // TODO: Implement API call to toggle pin status
@@ -208,7 +209,7 @@ export const SearchScreen: React.FC = () => {
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Ionicons name="search" size={20} color={tokens.colors.textSecondary} style={styles.searchIcon} />
+          <Ionicons name="search" size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search thoughtmarks, tags, or content..."
@@ -218,7 +219,7 @@ export const SearchScreen: React.FC = () => {
             autoFocus
           />
           {isSearching && (
-            <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.searchSpinner} />
+            <ActivityIndicator size="small" color={tokens?.colors?.accent ?? "#000000"} style={styles.searchSpinner} />
           )}
         </View>
 
@@ -251,7 +252,7 @@ export const SearchScreen: React.FC = () => {
         
         {searchQuery && !isSearching && searchResults.length === 0 && (
           <View style={styles.noResults}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={tokens?.colors?.textSecondary ?? "#000000"} />
             <Text style={styles.noResultsTitle}>No results found</Text>
             <Text style={styles.noResultsSubtitle}>
               Try searching with different keywords or check your spelling
@@ -261,7 +262,7 @@ export const SearchScreen: React.FC = () => {
 
         {!searchQuery && (
           <View style={styles.initialState}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={tokens?.colors?.textSecondary ?? "#000000"} />
             <Text style={styles.initialStateTitle}>Search your thoughtmarks</Text>
             <Text style={styles.initialStateSubtitle}>
               Search by title, content, or tags to find what you're looking for
@@ -280,9 +281,9 @@ export const SearchScreen: React.FC = () => {
                       disabled={isGeneratingSuggestions}
                     >
                       {isGeneratingSuggestions ? (
-                        <ActivityIndicator size="small" color={tokens.colors.accent} />
+                        <ActivityIndicator size="small" color={tokens?.colors?.accent ?? "#000000"} />
                       ) : (
-                        <Ionicons name="refresh" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="refresh" size={16} color={tokens?.colors?.accent ?? "#000000"} />
                       )}
                     </Button>
                   </View>
@@ -294,7 +295,7 @@ export const SearchScreen: React.FC = () => {
                         style={styles.suggestionItem}
                         onPress={() => handleSuggestionPress(suggestion)} accessibilityRole="button"  
                       >
-                        <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="bulb-outline" size={16} color={tokens?.colors?.accent ?? "#000000"} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
                         <Text style={styles.suggestionReason}>{suggestion.reason}</Text>
                       </TouchableOpacity>
@@ -357,15 +358,15 @@ export const SearchScreen: React.FC = () => {
     </View>
   );
 };
-
-const getStyles = (tokens: any) => StyleSheet.create({
+;
+  const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: tokens.colors.background
   },
   searchContainer: {
     paddingHorizontal: tokens.spacing.lg,
-    marginBottom: tokens.spacing.md,
+    marginBottom: tokens.spacing.md
   },
   searchInputContainer: {
     flexDirection: 'row',
@@ -376,19 +377,19 @@ const getStyles = (tokens: any) => StyleSheet.create({
     paddingVertical: tokens.spacing.sm,
     borderWidth: 1,
     borderColor: tokens.colors.border,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   searchInput: {
     flex: 1,
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.text,
-    marginLeft: tokens.spacing.sm,
+    marginLeft: tokens.spacing.sm
   },
   searchIcon: {
-    marginRight: tokens.spacing.sm,
+    marginRight: tokens.spacing.sm
   },
   searchSpinner: {
-    marginLeft: tokens.spacing.sm,
+    marginLeft: tokens.spacing.sm
   },
   aiToggle: {
     flexDirection: 'row',
@@ -397,122 +398,122 @@ const getStyles = (tokens: any) => StyleSheet.create({
     paddingHorizontal: tokens.spacing.sm,
     paddingVertical: tokens.spacing.xs,
     borderRadius: tokens.spacing.sm,
-    backgroundColor: tokens.colors.surface,
+    backgroundColor: tokens.colors.surface
   },
   aiToggleActive: {
-    backgroundColor: tokens.colors.accent + '20',
+    backgroundColor: tokens.colors.accent + '20'
   },
   aiToggleText: {
     fontSize: 12,
     fontWeight: '500',
     marginLeft: tokens.spacing.xs,
-    color: tokens.colors.text,
+    color: tokens.colors.text
   },
   resultsContainer: {
     flex: 1,
-    paddingHorizontal: tokens.spacing.lg,
+    paddingHorizontal: tokens.spacing.lg
   },
   resultsCount: {
     fontSize: tokens.typography.fontSize.body * 0.8,
     color: tokens.colors.textSecondary,
-    marginBottom: tokens.spacing.md,
+    marginBottom: tokens.spacing.md
   },
   noResults: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: tokens.spacing.xl,
+    paddingVertical: tokens.spacing.xl
   },
   noResultsTitle: {
     fontSize: tokens.typography.fontSize.heading,
     fontWeight: '600',
     color: tokens.colors.text,
     marginTop: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   noResultsSubtitle: {
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: tokens.spacing.lg,
+    paddingHorizontal: tokens.spacing.lg
   },
   initialState: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: tokens.spacing.xl,
+    paddingVertical: tokens.spacing.xl
   },
   initialStateTitle: {
     fontSize: tokens.typography.fontSize.heading,
     fontWeight: '600',
     color: tokens.colors.text,
     marginTop: tokens.spacing.md,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   initialStateSubtitle: {
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.textSecondary,
     textAlign: 'center',
     paddingHorizontal: tokens.spacing.lg,
-    marginBottom: tokens.spacing.xl,
+    marginBottom: tokens.spacing.xl
   },
   suggestionsCard: {
     marginBottom: tokens.spacing.lg,
-    width: '100%',
+    width: '100%'
   },
   suggestionsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: tokens.spacing.md
   },
   suggestionsTitle: {
     fontSize: tokens.typography.fontSize.lg,
     fontWeight: '600',
     color: tokens.colors.text,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     paddingVertical: tokens.spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: tokens.colors.border,
+    borderBottomColor: tokens.colors.border
   },
   suggestionText: {
     flex: 1,
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.text,
     marginLeft: tokens.spacing.sm,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   suggestionReason: {
     fontSize: tokens.typography.fontSize.body * 0.8,
     color: tokens.colors.textSecondary,
     marginLeft: tokens.spacing.sm,
-    marginTop: tokens.spacing.xs,
+    marginTop: tokens.spacing.xs
   },
   suggestionsEmpty: {
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.textSecondary,
     textAlign: 'center',
-    fontStyle: 'italic',
+    fontStyle: 'italic'
   },
   recentSearches: {
-    width: '100%',
+    width: '100%'
   },
   recentTitle: {
     fontSize: tokens.typography.fontSize.lg,
     fontWeight: '600',
     color: tokens.colors.text,
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   recentTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: tokens.spacing.sm,
+    gap: tokens.spacing.sm
   },
   resultsList: {
-    paddingBottom: tokens.spacing.xl,
-  },
+    paddingBottom: tokens.spacing.xl
+  }
 }); 

@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,7 +22,11 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
-  
+  const getThoughtmark = async (id: any) => { return null; };
+  const [isLoading, setIsLoading] = useState(false);
+  const [aiSuggestions, setAiSuggestions] = useState(null);
+  const [aiInsights, setAiInsights] = useState([]);
+  const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
   const { thoughtmarkId } = route.params;
@@ -36,20 +40,48 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   const thoughtmark = thoughtmarks.find(t => t.id === parseInt(thoughtmarkId));
 
   const styles = StyleSheet.create({
+    tagsCard: {
+      marginTop: 16
+    },
+    sectionTitle: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 12
+    },
+    tagsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 8
+    },
+    metadataCard: {
+      marginTop: 16
+    },
+    metadataItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 8
+    },
+    contentSuggestion: {
+      padding: 8,
+      marginBottom: 8
+    },
+    contentSuggestionText: {
+      fontSize: 14
+    },
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: tokens.colors.background
     },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: tokens.colors.background,
+      backgroundColor: tokens.colors.background
     },
     loadingText: {
       marginTop: tokens.spacing.md,
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
+      color: tokens.colors.textSecondary
     },
     header: {
       flexDirection: 'row',
@@ -58,43 +90,43 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: tokens.colors.border
     },
     headerContent: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     backButton: {
-      marginRight: tokens.spacing.md,
+      marginRight: tokens.spacing.md
     },
     headerTitle: {
       fontSize: tokens.typography.fontSize.heading,
       fontWeight: '700',
       color: tokens.colors.text,
-      fontFamily: tokens.typography.fontFamily.heading,
+      fontFamily: tokens.typography.fontFamily.heading
     },
     headerActions: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     actionButton: {
       padding: tokens.spacing.sm,
-      marginLeft: tokens.spacing.sm,
+      marginLeft: tokens.spacing.sm
     },
     content: {
-      flex: 1,
+      flex: 1
     },
     contentContainer: {
-      padding: tokens.spacing.lg,
+      padding: tokens.spacing.lg
     },
     titleCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     title: {
       fontSize: tokens.typography.fontSize.xl,
       fontWeight: '600',
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     taskStatus: {
       flexDirection: 'row',
@@ -104,143 +136,143 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       borderRadius: tokens.spacing.sm,
       backgroundColor: tokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.border
     },
     taskCompleted: {
       backgroundColor: tokens.colors.accent,
-      borderColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent
     },
     taskStatusText: {
       marginLeft: tokens.spacing.sm,
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     taskCompletedText: {
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     contentCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     contentText: {
       fontSize: tokens.typography.fontSize.body,
       lineHeight: 24,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     aiCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     aiHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     aiTitleContainer: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     aiTitle: {
       marginLeft: tokens.spacing.sm,
       fontSize: tokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     insightsContainer: {
-      gap: tokens.spacing.md,
+      gap: tokens.spacing.md
     },
     insightItem: {
       padding: tokens.spacing.md,
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.spacing.sm,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.border
     },
     insightHeader: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     insightType: {
       paddingHorizontal: tokens.spacing.sm,
       paddingVertical: tokens.spacing.xs,
-      borderRadius: tokens.spacing.xs,
+      borderRadius: tokens.spacing.xs
     },
     insightTypeText: {
       fontSize: tokens.typography.fontSize.xs,
       fontWeight: '600',
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     actionableBadge: {
       marginLeft: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.sm,
       paddingVertical: tokens.spacing.xs,
       borderRadius: tokens.spacing.xs,
-      backgroundColor: tokens.colors.success,
+      backgroundColor: tokens.colors.success
     },
     actionableText: {
       fontSize: tokens.typography.fontSize.xs,
       fontWeight: '600',
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     insightTitle: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: '600',
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.xs,
+      marginBottom: tokens.spacing.xs
     },
     insightDescription: {
       fontSize: tokens.typography.fontSize.sm,
       color: tokens.colors.textSecondary,
-      lineHeight: 20,
+      lineHeight: 20
     },
     aiEmptyText: {
       fontSize: tokens.typography.fontSize.sm,
       color: tokens.colors.textSecondary,
       textAlign: 'center',
-      fontStyle: 'italic',
+      fontStyle: 'italic'
     },
     suggestionsContainer: {
-      gap: tokens.spacing.md,
+      gap: tokens.spacing.md
     },
     suggestionSection: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     suggestionLabel: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: '600',
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     suggestedTags: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: tokens.spacing.sm,
+      gap: tokens.spacing.sm
     },
     suggestedBins: {
-      gap: tokens.spacing.sm,
+      gap: tokens.spacing.sm
     },
     suggestedBin: {
       padding: tokens.spacing.sm,
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.spacing.sm,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.border
     },
     suggestedBinText: {
       fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     suggestedBinName: {
       fontWeight: '600',
-      color: tokens.colors.accent,
+      color: tokens.colors.accent
     },
     actionsContainer: {
       flexDirection: 'row',
       gap: tokens.spacing.sm,
-      marginTop: tokens.spacing.lg,
+      marginTop: tokens.spacing.lg
     },
     actionButtonContainer: {
-      flex: 1,
+      flex: 1
     },
     metadataContainer: {
       flexDirection: 'row',
@@ -249,23 +281,23 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       marginTop: tokens.spacing.md,
       paddingTop: tokens.spacing.md,
       borderTopWidth: 1,
-      borderTopColor: tokens.colors.border,
+      borderTopColor: tokens.colors.border
     },
     metadataText: {
       fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.textSecondary,
+      color: tokens.colors.textSecondary
     },
     binBadge: {
       paddingHorizontal: tokens.spacing.sm,
       paddingVertical: tokens.spacing.xs,
       backgroundColor: tokens.colors.accent,
-      borderRadius: tokens.spacing.xs,
+      borderRadius: tokens.spacing.xs
     },
     binBadgeText: {
       fontSize: tokens.typography.fontSize.xs,
       color: tokens.colors.background,
-      fontWeight: '600',
-    },
+      fontWeight: '600'
+    }
   });
 
   useEffect(() => {
@@ -320,7 +352,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       const result = await apiService.generateThoughtmarkSuggestions({
         content: thoughtmark.content,
         title: thoughtmark.title,
-        tags: thoughtmark.tags,
+        tags: thoughtmark.tags
       });
 
       if (result.success && result.data && typeof result.data === 'object') {
@@ -405,7 +437,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit',
+      minute: '2-digit'
     });
   };
 

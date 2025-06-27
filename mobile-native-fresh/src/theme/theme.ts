@@ -6,7 +6,7 @@ export const colors = {
   inputBackground:'#aaaaaa',
   text:           '#E0E0E0',
   subtext:        '#A0A0A0',
-  border:         '#2E2E2E',
+  border:         '#2E2E2E'
 }
 
 export const spacing = {
@@ -20,5 +20,5 @@ export const typography = {
   heading2:   { fontFamily: 'Ubuntu_700Bold',   fontSize: 32 },
   heading3:   { fontFamily: 'Ubuntu_500Medium', fontSize: 24 },
   caption:    { fontFamily: 'Ubuntu_400Regular',fontSize: 19 },
-  small:      { fontFamily: 'Ubuntu_400Regular',fontSize: 16 },
+  small:      { fontFamily: 'Ubuntu_400Regular',fontSize: 16 }
 }

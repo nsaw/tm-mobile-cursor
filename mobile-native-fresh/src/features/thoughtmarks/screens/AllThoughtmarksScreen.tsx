@@ -5,7 +5,7 @@ import { Text ,
   TouchableOpacity,
   FlatList,
   RefreshControl,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,51 +20,52 @@ import { BottomNav } from '../../../components/ui/BottomNav';
 import { RootStackParamList } from '../../../navigation/types';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 
-export const AllThoughtmarksScreen: React.FC = () => {
-  
+export const AllThoughtmarksScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const navigation = useNavigation<any>();
   const route = useRoute<RouteProp<RootStackParamList, 'AllThoughtmarks'>>();
   const { thoughtmarks, loading, fetchThoughtmarks } = useThoughtmarks();
   const { bins } = useBins();
 
-  // Get filter parameters from navigation
+  // Get filter parameters from navigation;
   const filterParams = route.params;
-  
+;
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedBin, setSelectedBin] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'date' | 'title' | 'pinned'>('date');
   const [refreshing, setRefreshing] = useState(false);
-
+;
   const { showVoiceRecorder } = useVoiceRecorder();
-
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: tokens.colors.background ?? '#0D0D0F'
     },
     controls: {
       paddingHorizontal: tokens.spacing.lg,
-      paddingBottom: tokens.spacing.sm,
+      paddingBottom: tokens.spacing.sm
     },
     filterRow: {
       flexDirection: 'row',
       gap: tokens.spacing.md,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     filterDropdown: {
       flex: 1,
-      alignItems: 'flex-start',
+      alignItems: 'flex-start'
     },
     filterLabel: {
       fontSize: 12,
       fontWeight: '600',
       color: tokens.colors.text ?? '#F5F5F7',
       marginBottom: tokens.spacing.xs,
-      opacity: 0.8,
+      opacity: 0.8
     },
     dropdownContainer: {
       flexDirection: 'row',
-      gap: tokens.spacing.xs,
+      gap: tokens.spacing.xs
     },
     dropdownButton: {
       paddingHorizontal: tokens.spacing.sm,
@@ -72,19 +73,19 @@ export const AllThoughtmarksScreen: React.FC = () => {
       borderRadius: 6,
       backgroundColor: tokens.colors.surface ?? '#2C2C2E',
       borderWidth: 1,
-      borderColor: tokens.colors.border ?? '#2C2C2E',
+      borderColor: tokens.colors.border ?? '#2C2C2E'
     },
     dropdownButtonActive: {
       backgroundColor: tokens.colors.accent ?? '#FFD500',
-      borderColor: tokens.colors.accent ?? '#FFD500',
+      borderColor: tokens.colors.accent ?? '#FFD500'
     },
     dropdownButtonText: {
       fontSize: 11,
       color: tokens.colors.text ?? '#F5F5F7',
-      fontWeight: '500',
+      fontWeight: '500'
     },
     dropdownButtonTextActive: {
-      color: tokens.colors.background ?? '#0D0D0F',
+      color: tokens.colors.background ?? '#0D0D0F'
     },
     sortButton: {
       paddingHorizontal: tokens.spacing.sm,
@@ -92,22 +93,22 @@ export const AllThoughtmarksScreen: React.FC = () => {
       borderRadius: 6,
       backgroundColor: tokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.border
     },
     sortButtonActive: {
       backgroundColor: tokens.colors.accent,
-      borderColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent
     },
     sortButtonText: {
       fontSize: 11,
       color: tokens.colors.text,
-      fontWeight: '500',
+      fontWeight: '500'
     },
     sortButtonTextActive: {
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     binFilterContainer: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     binFilterButton: {
       flexDirection: 'row',
@@ -118,58 +119,58 @@ export const AllThoughtmarksScreen: React.FC = () => {
       borderRadius: tokens.spacing.sm,
       backgroundColor: tokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: tokens.colors.border
     },
     binFilterButtonActive: {
       backgroundColor: tokens.colors.accent,
-      borderColor: tokens.colors.accent,
+      borderColor: tokens.colors.accent
     },
     binFilterIcon: {
-      marginRight: tokens.spacing.xs,
+      marginRight: tokens.spacing.xs
     },
     binFilterText: {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.text,
-      fontWeight: '500',
+      fontWeight: '500'
     },
     binFilterTextActive: {
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     listContainer: {
       flex: 1,
-      paddingHorizontal: tokens.spacing.lg,
+      paddingHorizontal: tokens.spacing.lg
     },
     listContent: {
-      paddingBottom: tokens.spacing.lg,
+      paddingBottom: tokens.spacing.lg
     },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     loadingText: {
       marginTop: tokens.spacing.md,
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
+      color: tokens.colors.textSecondary
     },
     emptyState: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.xl,
+      paddingVertical: tokens.spacing.xl
     },
     emptyStateTitle: {
       fontSize: tokens.typography.fontSize.lg,
       fontWeight: '600',
       color: tokens.colors.text,
       marginTop: tokens.spacing.md,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     emptyStateSubtitle: {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     createButton: {
       flexDirection: 'row',
@@ -177,14 +178,14 @@ export const AllThoughtmarksScreen: React.FC = () => {
       backgroundColor: tokens.colors.accent,
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
-      borderRadius: tokens.spacing.md,
+      borderRadius: tokens.spacing.md
     },
     createButtonText: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: '600',
       color: tokens.colors.background,
-      marginLeft: tokens.spacing.sm,
-    },
+      marginLeft: tokens.spacing.sm
+    }
   });
 
   // Apply initial filters from navigation params
@@ -206,26 +207,26 @@ export const AllThoughtmarksScreen: React.FC = () => {
     }
   }, [filterParams]);
 
-  // Get all unique tags from thoughtmarks
+  // Get all unique tags from thoughtmarks;
   const allTags = Array.from(
     new Set(thoughtmarks.flatMap((t: any) => t.tags || []))
   ).sort();
 
-  // Filter thoughtmarks based on selected tags and bin
-  const filteredThoughtmarks = thoughtmarks.filter((thoughtmark: any) => {
-    const matchesTags = selectedTags.length === 0 || 
+  // Filter thoughtmarks based on selected tags and bin;
+  const filteredThoughtmarks = thoughtmarks.filter((thoughtmark: any) => {;
+  const matchesTags = selectedTags.length === 0 || 
       selectedTags.some(tag => thoughtmark.tags?.includes(tag));
     const matchesBin = !selectedBin || thoughtmark.binId === parseInt(selectedBin);
     
-    // Additional filter for tasks if specified
-    const matchesTaskFilter = !filterParams?.filter || 
+    // Additional filter for tasks if specified;
+  const matchesTaskFilter = !filterParams?.filter || 
       filterParams.filter !== 'tasks' || 
       thoughtmark.isTask;
     
     return matchesTags && matchesBin && matchesTaskFilter && !thoughtmark.isDeleted;
   });
 
-  // Sort thoughtmarks
+  // Sort thoughtmarks;
   const sortedThoughtmarks = [...filteredThoughtmarks].sort((a: any, b: any) => {
     if (sortBy === 'pinned') {
       if (a.isPinned && !b.isPinned) return -1;
@@ -237,21 +238,21 @@ export const AllThoughtmarksScreen: React.FC = () => {
     // Default: sort by date (newest first)
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
-
+;
   const handleRefresh = async () => {
     setRefreshing(true);
     await fetchThoughtmarks();
     setRefreshing(false);
   };
-
+;
   const handleThoughtmarkPress = (thoughtmark: any) => {
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
-
+;
   const handleCreateThoughtmark = () => {
     navigation.navigate('CreateThoughtmark' as any);
   };
-
+;
   const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
     try {
       // TODO: Implement API call to toggle pin status
@@ -264,7 +265,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       console.error('Failed to toggle pin status:', error);
     }
   };
-
+;
   const handleNavigate = (path: string) => {
     switch (path) {
       case '/':
@@ -288,16 +289,16 @@ export const AllThoughtmarksScreen: React.FC = () => {
         break;
     }
   };
-
+;
   const handleVoiceRecord = () => {
     showVoiceRecorder();
   };
 
-  // Get header title based on filters
+  // Get header title based on filters;
   const getHeaderTitle = () => {
     return 'THOUGHTMARKS';
   };
-
+;
   const getHeaderSubtitle = () => {
     if (filterParams?.filter === 'tasks') {
       return 'Your active tasks and to-dos';
@@ -308,7 +309,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
     }
     return `${sortedThoughtmarks.length} thoughtmark${sortedThoughtmarks.length !== 1 ? 's' : ''}`;
   };
-
+;
   const renderSortButton = (sortType: 'date' | 'title' | 'pinned', label: string) => (
     <TouchableOpacity
       style={[styles.sortButton, sortBy === sortType && styles.sortButtonActive]}
@@ -319,7 +320,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       </Text>
     </TouchableOpacity>
   );
-
+;
   const renderBinFilter = () => (
     <View style={styles.binFilterContainer}>
       <Text style={styles.filterLabel}>Filter by Bin:</Text>
@@ -424,8 +425,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     }
                   }}
                   accessibilityRole="button"
-                  
-                  
+
                 >
                   <Text style={[styles.dropdownButtonText, selectedTags.includes(tag) && styles.dropdownButtonTextActive]}>
                     {tag}
@@ -441,7 +441,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <View style={styles.listContainer}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={tokens.colors.accent} />
+            <ActivityIndicator size="large" color={tokens?.colors?.accent ?? "#000000"} />
             <Text style={styles.loadingText}>Loading thoughtmarks...</Text>
           </View>
         ) : (
@@ -467,7 +467,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             }
             ListEmptyComponent={
               <View style={styles.emptyState}>
-                <Ionicons name="document-text" size={64} color={tokens.colors.textSecondary} />
+                <Ionicons name="document-text" size={64} color={tokens?.colors?.textSecondary ?? "#000000"} />
                 <Text style={styles.emptyStateTitle}>No thoughtmarks found</Text>
                 <Text style={styles.emptyStateSubtitle}>
                   {selectedTags.length > 0 || selectedBin 
@@ -480,7 +480,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     style={styles.createButton}
                     onPress={handleCreateThoughtmark}
                    accessibilityRole="button"  >
-                    <Ionicons name="add" size={20} color={tokens.colors.background} />
+                    <Ionicons name="add" size={20} color={tokens?.colors?.background ?? "#000000"} />
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>
                 )}

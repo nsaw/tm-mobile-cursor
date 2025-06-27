@@ -7,7 +7,7 @@ import { Text,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,10 +22,8 @@ import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { BinFormData } from '../../../types';
-import { spacingTokens } from '../../../theme/spacing';
-
-// Predefined colors and icons for bin creation
-const BIN_COLORS = [
+;
+  const BIN_COLORS = [
   '#3B82F6', // Blue
   '#10B981', // Green
   '#F59E0B', // Yellow
@@ -35,8 +33,8 @@ const BIN_COLORS = [
   '#F97316', // Orange
   '#EC4899', // Pink
 ];
-
-const BIN_ICONS = [
+;
+  const BIN_ICONS = [
   'briefcase-outline',
   'person-outline',
   'bulb-outline',
@@ -55,28 +53,27 @@ const BIN_ICONS = [
   'gift-outline',
 ];
 
-export const CreateBinScreen: React.FC = () => {
-  
+export const CreateBinScreen: React.FC = () => {;
+  const { tokens } = useTheme();
   const navigation = useNavigation();
   const { user } = useAuth();
   const { createBin } = useBins();
-  
 
-  // Form state
+  // Form state;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedColor, setSelectedColor] = useState(BIN_COLORS[0]);
   const [selectedIcon, setSelectedIcon] = useState(BIN_ICONS[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Custom alert dialog state
+  // Custom alert dialog state;
   const [showAlertDialog, setShowAlertDialog] = useState(false);
   const [alertConfig, setAlertConfig] = useState({
     title: '',
     message: '',
-    onConfirm: () => {},
+    onConfirm: () => {}
   });
-
+;
   const handleSave = async () => {
     if (!name.trim()) {
       Alert.alert('Name Required', 'Please enter a name for your bin.');
@@ -85,15 +82,15 @@ export const CreateBinScreen: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      const binData: BinFormData = {
+    try {;
+  const binData: BinFormData = {
         name: name.trim(),
         description: description.trim() || undefined,
         color: selectedColor,
-        icon: selectedIcon,
+        icon: selectedIcon
       };
-
-      const newBin = await createBin(binData);
+;
+  const newBin = await createBin(binData);
       Alert.alert('Success', 'Bin created successfully!');
       
       // Navigate back to dashboard
@@ -106,7 +103,7 @@ export const CreateBinScreen: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
+;
   const handleCancel = () => {
     if (name.trim() || description.trim()) {
       setAlertConfig({
@@ -115,47 +112,47 @@ export const CreateBinScreen: React.FC = () => {
         onConfirm: () => {
           setShowAlertDialog(false);
           navigation.goBack();
-        },
+        }
       });
       setShowAlertDialog(true);
     } else {
       navigation.goBack();
     }
   };
-
+;
   const getHeaderTitle = () => {
     return 'Create New Bin';
   };
-
+;
   const getHeaderSubtitle = () => {
     return 'Organize your thoughtmarks into categories';
   };
-
+;
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 1
     },
     keyboardAvoidingView: {
-      flex: 1,
+      flex: 1
     },
     scrollView: {
-      flex: 1,
+      flex: 1
     },
     scrollContent: {
-      padding: spacingTokens.pagePaddingHorizontal,
-      paddingBottom: 100,
+      padding: tokens.spacing.lg,
+      paddingBottom: 100
     },
     card: {
-      marginBottom: spacingTokens.cardMarginBottom,
+      marginBottom: tokens.spacing.lg
     },
     cardContent: {
-      padding: spacingTokens.cardPaddingHorizontal,
+      padding: tokens.spacing.lg
     },
     label: {
       fontSize: 16,
       fontWeight: '600',
-      marginBottom: spacingTokens.textMarginBottom,
-      color: tokens.colors.text,
+      marginBottom: tokens.spacing.sm,
+      color: tokens.colors.text
     },
     textInput: {
       fontSize: 16,
@@ -164,16 +161,16 @@ export const CreateBinScreen: React.FC = () => {
       borderColor: tokens.colors.border,
       borderRadius: 8,
       backgroundColor: tokens.colors.surface,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     textArea: {
       height: 80,
-      textAlignVertical: 'top',
+      textAlignVertical: 'top'
     },
     colorGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 12,
+      gap: 12
     },
     colorOption: {
       width: 40,
@@ -182,16 +179,16 @@ export const CreateBinScreen: React.FC = () => {
       justifyContent: 'center',
       alignItems: 'center',
       borderWidth: 2,
-      borderColor: 'transparent',
+      borderColor: 'transparent'
     },
     colorOptionSelected: {
       borderColor: '#FFFFFF',
-      borderWidth: 3,
+      borderWidth: 3
     },
     iconGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 12,
+      gap: 12
     },
     iconOption: {
       width: 48,
@@ -201,50 +198,46 @@ export const CreateBinScreen: React.FC = () => {
       alignItems: 'center',
       backgroundColor: tokens.colors.surface,
       borderWidth: 2,
-      borderColor: 'transparent',
+      borderColor: 'transparent'
     },
     iconOptionSelected: {
       borderColor: tokens.colors.accent,
-      backgroundColor: tokens.colors.surfaceHover,
+      backgroundColor: tokens.colors.surfaceHover
     },
     previewBin: {
       padding: 16,
       borderRadius: 12,
-      marginTop: 8,
+      marginTop: 8
     },
     previewContent: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     previewText: {
       marginLeft: 12,
-      flex: 1,
+      flex: 1
     },
     previewName: {
       fontSize: 16,
       fontWeight: '600',
-      color: 'white',
-      marginBottom: 2,
+      color: tokens.colors.text
     },
     previewDescription: {
       fontSize: 14,
-      color: 'rgba(255, 255, 255, 0.8)',
+      color: tokens.colors.textSecondary,
+      marginTop: 2
     },
-    loadingOverlay: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      justifyContent: 'center',
-      alignItems: 'center',
+    buttonRow: {
+      flexDirection: 'row',
+      gap: tokens.spacing.md,
+      marginTop: tokens.spacing.xl
     },
-    loadingText: {
-      color: 'white',
-      marginTop: 12,
-      fontSize: 16,
+    cancelButton: {
+      flex: 1
     },
+    saveButton: {
+      flex: 2
+    }
   });
 
   return (
@@ -260,7 +253,7 @@ export const CreateBinScreen: React.FC = () => {
           onBack={handleCancel}
           rightAction={{
             icon: 'checkmark',
-            onPress: handleSave,
+            onPress: handleSave
           }}
         />
 
@@ -273,23 +266,14 @@ export const CreateBinScreen: React.FC = () => {
           {/* Name Input */}
           <Card style={styles.card}>
             <CardContent style={styles.cardContent}>
-              <Text style={styles.label}>Bin Name *</Text>
+              <Text style={styles.label}>Name *</Text>
               <TextInput
-                style={{
-                  fontSize: 16,
-                  padding: spacingTokens.buttonPadding,
-                  borderWidth: 1,
-                  borderColor: tokens.colors.border,
-                  borderRadius: 8,
-                  backgroundColor: tokens.colors.surface,
-                  color: tokens.colors.text,
-                }}
+                style={styles.textInput}
                 value={name}
                 onChangeText={setName}
-                placeholder="Enter bin name..."
-                placeholderTextColor={tokens.colors.textMuted}
+                placeholder="Enter bin name"
+                placeholderTextColor={tokens.colors.textSecondary}
                 maxLength={50}
-                autoFocus
               />
             </CardContent>
           </Card>
@@ -299,23 +283,12 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Description (Optional)</Text>
               <TextInput
-                style={[{
-                  fontSize: 16,
-                  padding: spacingTokens.buttonPadding,
-                  borderWidth: 1,
-                  borderColor: tokens.colors.border,
-                  borderRadius: 8,
-                  backgroundColor: tokens.colors.surface,
-                  color: tokens.colors.text,
-                  height: 80,
-                  textAlignVertical: 'top',
-                }]}
+                style={[styles.textInput, styles.textArea]}
                 value={description}
                 onChangeText={setDescription}
-                placeholder="Describe what this bin is for..."
-                placeholderTextColor={tokens.colors.textMuted}
+                placeholder="Describe what this bin is for"
+                placeholderTextColor={tokens.colors.textSecondary}
                 multiline
-                numberOfLines={3}
                 maxLength={200}
               />
             </CardContent>
@@ -326,21 +299,18 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Color</Text>
               <View style={styles.colorGrid}>
-                {BIN_COLORS.map((color) => (
+                {BIN_COLORS.map((color, index) => (
                   <TouchableOpacity
-                    key={color}
+                    key={index}
                     style={[
                       styles.colorOption,
                       { backgroundColor: color },
-                      selectedColor === color && styles.colorOptionSelected,
+                      selectedColor === color && styles.colorOptionSelected
                     ]}
                     onPress={() => setSelectedColor(color)}
                     accessibilityRole="button"
-                  >
-                    {selectedColor === color && (
-                      <Ionicons name="checkmark" size={20} color="white" />
-                    )}
-                  </TouchableOpacity>
+                    accessibilityLabel={`Select ${color} color`}
+                  />
                 ))}
               </View>
             </CardContent>
@@ -351,15 +321,16 @@ export const CreateBinScreen: React.FC = () => {
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Icon</Text>
               <View style={styles.iconGrid}>
-                {BIN_ICONS.map((icon) => (
+                {BIN_ICONS.map((icon, index) => (
                   <TouchableOpacity
-                    key={icon}
+                    key={index}
                     style={[
                       styles.iconOption,
-                      selectedIcon === icon && styles.iconOptionSelected,
+                      selectedIcon === icon && styles.iconOptionSelected
                     ]}
                     onPress={() => setSelectedIcon(icon)}
                     accessibilityRole="button"
+                    accessibilityLabel={`Select ${icon} icon`}
                   >
                     <Ionicons 
                       name={icon as any} 
@@ -378,40 +349,54 @@ export const CreateBinScreen: React.FC = () => {
               <Text style={styles.label}>Preview</Text>
               <View style={[styles.previewBin, { backgroundColor: selectedColor }]}>
                 <View style={styles.previewContent}>
-                  <Ionicons name={selectedIcon as any} size={24} color="white" />
+                  <Ionicons 
+                    name={selectedIcon as any} 
+                    size={24} 
+                    color="#FFFFFF" 
+                  />
                   <View style={styles.previewText}>
-                    <Text style={styles.previewName}>{name || 'Bin Name'}</Text>
-                    {description && (
-                      <Text style={styles.previewDescription}>{description}</Text>
-                    )}
+                    <Text style={[styles.previewName, { color: '#FFFFFF' }]}>
+                      {name || 'Bin Name'}
+                    </Text>
+                    <Text style={[styles.previewDescription, { color: '#FFFFFFCC' }]}>
+                      {description || 'Description'}
+                    </Text>
                   </View>
                 </View>
               </View>
             </CardContent>
           </Card>
-        </ScrollView>
 
-        {/* Loading Overlay */}
-        {isSubmitting && (
-          <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color={tokens.colors.accent} />
-            <Text style={styles.loadingText}>Creating bin...</Text>
+          {/* Action Buttons */}
+          <View style={styles.buttonRow}>
+            <Button
+              variant="outline"
+              onPress={handleCancel}
+              style={styles.cancelButton}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              onPress={handleSave}
+              disabled={isSubmitting || !name.trim()}
+              style={styles.saveButton}
+            >
+              {isSubmitting ? 'Creating...' : 'Create Bin'}
+            </Button>
           </View>
-        )}
+        </ScrollView>
       </KeyboardAvoidingView>
 
-      {/* Alert Dialog */}
       <DarkAlertDialog
         visible={showAlertDialog}
         title={alertConfig.title}
         message={alertConfig.message}
-        onConfirm={() => {
-          setShowAlertDialog(false);
-          if (alertConfig.onConfirm) {
-            alertConfig.onConfirm();
-          }
-        }}
+        confirmText="Discard"
+        cancelText="Keep Editing"
+        onConfirm={alertConfig.onConfirm}
         onCancel={() => setShowAlertDialog(false)}
+        type="warning"
       />
     </SafeAreaView>
   );

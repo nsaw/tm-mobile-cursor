@@ -19,29 +19,29 @@ type ContentPage = {
 // tell TS what routes we can navigate to
 type ContentScreenNavigationProp = NavigationProp<RootStackParamList, 'Content'>;
 
-export const ContentScreen: React.FC = () => {
+export const ContentScreen: React.FC = () => {;
+  const { tokens } = useTheme();
   const navigation = useNavigation<ContentScreenNavigationProp>();
-  
-
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: tokens.colors.background
     },
     content: {
-      padding: tokens.spacing.md,
+      padding: tokens.spacing.md
     },
     title: {
       fontFamily: tokens.typography.fontFamily.heading,
       fontSize: tokens.typography.fontSize.heading,
       fontWeight: tokens.typography.fontWeight.bold,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     description: {
       fontFamily: tokens.typography.fontFamily.body,
       fontSize: tokens.typography.fontSize.body,
       marginBottom: tokens.spacing.lg,
-      color: tokens.colors.textSecondary,
+      color: tokens.colors.textSecondary
     },
     card: {
       flexDirection: 'row',
@@ -50,63 +50,63 @@ export const ContentScreen: React.FC = () => {
       padding: tokens.spacing.md,
       alignItems: 'flex-start',
       marginBottom: tokens.spacing.md,
-      elevation: 2,
+      elevation: 2
     },
     tag: {
-      marginRight: tokens.spacing.md,
+      marginRight: tokens.spacing.md
     },
     cardTextContainer: {
-      flex: 1,
+      flex: 1
     },
     subtitle: {
       fontFamily: tokens.typography.fontFamily.heading,
       fontSize: tokens.typography.fontSize.lg,
       fontWeight: tokens.typography.fontWeight.semibold,
       marginBottom: tokens.spacing.xs,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     body: {
       fontFamily: tokens.typography.fontFamily.body,
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
-    },
+      color: tokens.colors.textSecondary
+    }
   });
-
+;
   const contentPages: ContentPage[] = [
     {
       title: 'Create Thoughtmark',
       description: 'Create a new thoughtmark to capture your ideas',
       route: 'CreateThoughtmark',
       iconName: 'plus',
-      iconColor: '#22c55e',
+      iconColor: '#22c55e'
     },
     {
       title: 'All Thoughtmarks',
       description: 'Browse and manage all your thoughtmarks',
       route: 'Dashboard',
       iconName: 'list',
-      iconColor: '#3b82f6',
+      iconColor: '#3b82f6'
     },
     {
       title: 'Archive',
       description: 'View archived thoughtmarks and bins',
       route: 'Archive',
       iconName: 'archive',
-      iconColor: '#eab308',
+      iconColor: '#eab308'
     },
     {
       title: 'Recently Deleted',
       description: 'Recover deleted thoughtmarks and bins',
       route: 'Archive',
       iconName: 'rotate-ccw',
-      iconColor: '#ef4444',
+      iconColor: '#ef4444'
     },
     {
       title: 'Search',
       description: 'Search through your thoughtmarks',
       route: 'Search',
       iconName: 'search',
-      iconColor: '#a855f7',
+      iconColor: '#a855f7'
     },
   ];
 

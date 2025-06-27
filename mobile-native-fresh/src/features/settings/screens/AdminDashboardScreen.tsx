@@ -3,7 +3,7 @@ import { Text ,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
+  Alert
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,17 +13,17 @@ import { Button } from '../../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../../components/ui/Card';
 import { useAuth } from '../../auth/hooks/useAuth';
 
-export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
+export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {;
+  const { tokens } = useTheme();
   const { user } = useAuth();
-  
-
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: tokens.colors.background ?? '#0D0D0F'
     },
     scrollView: {
-      flex: 1,
+      flex: 1
     },
     header: {
       flexDirection: 'row',
@@ -31,71 +31,71 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
       justifyContent: 'space-between',
       padding: tokens.spacing.lg,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border ?? '#000',
+      borderBottomColor: tokens.colors.border ?? '#000'
     },
     backButton: {
-      padding: tokens.spacing.sm,
+      padding: tokens.spacing.sm
     },
     title: {
       fontSize: tokens.typography.fontSize.heading,
       fontWeight: '700',
       color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      fontFamily: tokens.typography.fontFamily.heading
     },
     headerRight: {
-      width: 48,
+      width: 48
     },
     accessDenied: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.xl,
+      padding: tokens.spacing.xl
     },
     accessDeniedTitle: {
       fontSize: tokens.typography.fontSize.heading,
       fontWeight: '700',
       color: tokens.colors.danger ?? '#FF3B30',
       marginTop: tokens.spacing.md,
-      fontFamily: tokens.typography.fontFamily.heading,
+      fontFamily: tokens.typography.fontFamily.heading
     },
     accessDeniedText: {
       fontSize: tokens.typography.fontSize.sm,
       color: tokens.colors.textSecondary ?? '#666',
       textAlign: 'center',
       marginTop: tokens.spacing.sm,
-      fontFamily: tokens.typography.fontFamily.body,
+      fontFamily: tokens.typography.fontFamily.body
     },
     adminInfoCard: {
-      margin: tokens.spacing.lg,
+      margin: tokens.spacing.lg
     },
     adminInfoTitle: {
       fontSize: tokens.typography.fontSize.xl,
       fontWeight: '600',
       color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      fontFamily: tokens.typography.fontFamily.heading
     },
     adminInfoText: {
       fontSize: tokens.typography.fontSize.sm,
       color: tokens.colors.textSecondary ?? '#666',
-      fontFamily: tokens.typography.fontFamily.body,
+      fontFamily: tokens.typography.fontFamily.body
     },
     section: {
-      margin: tokens.spacing.lg,
+      margin: tokens.spacing.lg
     },
     sectionTitle: {
       fontSize: tokens.typography.fontSize.xl,
       fontWeight: '600',
       color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      fontFamily: tokens.typography.fontFamily.heading
     },
     buttonGrid: {
-      gap: tokens.spacing.md,
+      gap: tokens.spacing.md
     },
     adminButton: {
-      justifyContent: 'flex-start',
-    },
+      justifyContent: 'flex-start'
+    }
   });
-
+;
   const getIconColor = (type: 'danger' | 'accent' | 'background' | 'text') => {
     switch (type) {
       case 'danger':
@@ -111,7 +111,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
     }
   };
 
-  // Check if user is admin (you can customize this logic)
+  // Check if user is admin (you can customize this logic);
   const isAdmin = user?.email?.includes('admin') || user?.isAdmin || false;
 
   if (!isAdmin) {
@@ -126,12 +126,11 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
         </View>
       </View>
     );
-  }
-
+  };
   const handleDesignSystemDemo = () => {
     navigation.navigate('DesignSystemDemo');
   };
-
+;
   const handleDatabaseReset = () => {
     Alert.alert(
       'Reset Database',
@@ -144,16 +143,16 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
           onPress: () => {
             // Implement database reset logic here
             Alert.alert('Success', 'Database has been reset to demo state.');
-          },
+          }
         },
       ]
     );
   };
-
+;
   const handleExportData = () => {
     Alert.alert('Export Data', 'Data export functionality coming soon.');
   };
-
+;
   const handleImportData = () => {
     Alert.alert('Import Data', 'Data import functionality coming soon.');
   };

@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   Animated,
-  Vibration,
+  Vibration
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,9 +21,9 @@ interface FloatingActionButtonProps {
 export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onPress,
   onVoiceRecord,
-  isRecording = false,
+  isRecording = false
 }) => {
-  
+  const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
   const [scaleValue] = useState(new Animated.Value(1));
 
@@ -35,17 +35,17 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       Animated.timing(scaleValue, {
         toValue: 0.95,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
       Animated.timing(scaleValue, {
         toValue: 1.05,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
       Animated.timing(scaleValue, {
         toValue: 1,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
     ]).start();
 
@@ -70,22 +70,22 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
           shadowColor: tokens.colors.accent,
           shadowOffset: {
             width: 0,
-            height: 8,
+            height: 8
           },
           shadowOpacity: 0.6,
           shadowRadius: 24,
-          elevation: 16,
+          elevation: 16
         }]}>
           <TouchableOpacity
             style={[styles.fabButton, {
               shadowColor: tokens.colors.accent,
               shadowOffset: {
                 width: 0,
-                height: 0,
+                height: 0
               },
               shadowOpacity: 0.4,
               shadowRadius: 20,
-              elevation: 12,
+              elevation: 12
             }]}
             onPress={handlePress}
             onLongPress={handleLongPress}
@@ -94,7 +94,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}
-              color={tokens.colors.accent}
+              color={tokens?.colors?.accent ?? "#000000"}
             />
           </TouchableOpacity>
         </Animated.View>
@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
     left: '50%',
     transform: [{ translateX: -30 }], // Center the button (60/2)
     zIndex: 40,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   blurContainer: {
     borderRadius: 16, // Squircle shape
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   fab: {
     width: 60,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 16, // Squircle shape
     backgroundColor: 'transparent',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   recordingIndicator: {
     position: 'absolute',
@@ -143,11 +143,11 @@ const styles = StyleSheet.create({
     height: 16,
     borderRadius: 8,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   recordingDot: {
     width: 8,
     height: 8,
-    borderRadius: 4,
-  },
+    borderRadius: 4
+  }
 }); 

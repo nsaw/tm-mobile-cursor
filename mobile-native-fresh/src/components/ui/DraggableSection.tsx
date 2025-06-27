@@ -3,13 +3,13 @@ import { Text ,
   TouchableOpacity,
   StyleSheet,
   Animated,
-  Vibration,
+  Vibration
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import {
   PanGestureHandler,
   State,
-  GestureHandlerRootView,
+  GestureHandlerRootView
 } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -44,30 +44,9 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   showViewAll = false,
   onViewAll,
   onReorder,
-  totalSections,
-}) => {
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const { typography, spacing, tokens } = useTheme();
+  totalSections
+}) => {;
+  const { typography, spacing, tokens } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -75,7 +54,7 @@ const { typography, spacing, tokens } = useTheme();
   const translateY = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0.5)).current;
   const panRef = useRef(null);
-
+;
   const handleLongPress = () => {
     Vibration.vibrate(50);
     setIsLongPressing(true);
@@ -86,16 +65,16 @@ const { typography, spacing, tokens } = useTheme();
       Animated.timing(scaleAnim, {
         toValue: 1.02,
         duration: 200,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
       Animated.timing(elevationAnim, {
         toValue: 8,
         duration: 200,
-        useNativeDriver: false,
+        useNativeDriver: false
       }),
     ]).start();
   };
-
+;
   const handlePressOut = () => {
     if (isLongPressing) {
       setIsLongPressing(false);
@@ -106,17 +85,17 @@ const { typography, spacing, tokens } = useTheme();
         Animated.timing(scaleAnim, {
           toValue: 1,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: true
         }),
         Animated.timing(elevationAnim, {
           toValue: 0,
           duration: 200,
-          useNativeDriver: false,
+          useNativeDriver: false
         }),
         Animated.timing(translateY, {
           toValue: 0,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: true
         }),
       ]).start();
     }
@@ -127,11 +106,11 @@ const { typography, spacing, tokens } = useTheme();
       Animated.timing(opacityAnim, {
         toValue: 1,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: true
       }).start();
     }
   };
-
+;
   const handlePress = () => {
     if (!isLongPressing) {
       // Add subtle press feedback
@@ -139,7 +118,7 @@ const { typography, spacing, tokens } = useTheme();
       Animated.timing(opacityAnim, {
         toValue: 1,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }).start();
       
       // Navigate to view all if available, otherwise toggle
@@ -150,18 +129,18 @@ const { typography, spacing, tokens } = useTheme();
       }
     }
   };
-
+;
   const onGestureEvent = Animated.event(
     [{ nativeEvent: { translationY: translateY } }],
     { useNativeDriver: true }
   );
-
+;
   const onHandlerStateChange = (event: any) => {
     if (event.nativeEvent.state === State.END) {
-      // Calculate new position based on translation
-      const translationY = event.nativeEvent.translationY;
-      const sectionHeight = 100; // Approximate section height
-      const newIndex = Math.max(0, Math.min(totalSections - 1, 
+      // Calculate new position based on translation;
+  const translationY = event.nativeEvent.translationY;
+      const sectionHeight = 100; // Approximate section height;
+  const newIndex = Math.max(0, Math.min(totalSections - 1, 
         Math.round(index + translationY / sectionHeight)
       ));
       
@@ -173,7 +152,7 @@ const { typography, spacing, tokens } = useTheme();
       Animated.timing(translateY, {
         toValue: 0,
         duration: 200,
-        useNativeDriver: true,
+        useNativeDriver: true
       }).start();
       
       handlePressOut();
@@ -193,8 +172,8 @@ const { typography, spacing, tokens } = useTheme();
             elevation: elevationAnim,
             shadowOpacity: elevationAnim.interpolate({
               inputRange: [0, 8],
-              outputRange: [0, 0.3],
-            }),
+              outputRange: [0, 0.3]
+            })
           },
           isDragging && styles.dragging,
         ]}
@@ -215,7 +194,7 @@ const { typography, spacing, tokens } = useTheme();
               delayLongPress={500}
              accessibilityRole="button"  >
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
+                <Ionicons name="chevron-down" size={16} color={tokens?.colors?.textSecondary ?? "#000000"} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>
                   {title}
                 </Animated.Text>
@@ -235,16 +214,16 @@ const { typography, spacing, tokens } = useTheme();
     </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
+;
+  const styles = StyleSheet.create({
   container: {
     marginBottom: 8,
     backgroundColor: 'transparent',
-    borderRadius: 11,
+    borderRadius: 11
   },
   dragging: {
     opacity: 0.8,
-    zIndex: 1000,
+    zIndex: 1000
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -252,32 +231,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 21,
     paddingHorizontal: 11,
-    paddingBottom: 11,
+    paddingBottom: 11
   },
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
+    flex: 1
   },
   chevronIcon: {
-    marginRight: 11,
+    marginRight: 11
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
     letterSpacing: 0.7,
     fontFamily: 'Ubuntu_700Bold',
-    flex: 1,
+    flex: 1
   },
   headerRight: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   sectionContent: {
     paddingHorizontal: 11,
-    paddingBottom: 21,
+    paddingBottom: 21
   },
   dragHandle: {
-    marginLeft: 11,
-  },
+    marginLeft: 11
+  }
 }); 

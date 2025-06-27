@@ -13,16 +13,14 @@ interface QuickActionsProps {
 export const QuickActions: React.FC<QuickActionsProps> = ({
   onCreateThoughtmark,
   onVoiceRecord,
-  onOpenBins,
-}) => {
-  
-
+  onOpenBins
+}) => {;
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       justifyContent: 'space-around',
       paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingVertical: tokens.spacing.md
     },
     actionButton: {
       alignItems: 'center',
@@ -30,10 +28,10 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
       backgroundColor: tokens.colors.accent,
       padding: tokens.spacing.md,
       borderRadius: tokens.radius.md,
-      minWidth: 80,
+      minWidth: 80
     },
     actionIcon: {
-      color: tokens.colors.background,
+      color: tokens.colors.background
     },
     actionButton2: {
       alignItems: 'center',
@@ -41,7 +39,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
       backgroundColor: tokens.colors.accent,
       padding: tokens.spacing.md,
       borderRadius: tokens.radius.md,
-      minWidth: 80,
+      minWidth: 80
     },
     actionButton3: {
       alignItems: 'center',
@@ -49,22 +47,22 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
       backgroundColor: tokens.colors.accent,
       padding: tokens.spacing.md,
       borderRadius: tokens.radius.md,
-      minWidth: 80,
-    },
+      minWidth: 80
+    }
   });
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark} accessibilityRole="button"  >
-        <Ionicons name="create-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="create-outline" size={24} color={tokens?.colors?.background ?? "#000000"} />
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.actionButton2} onPress={onVoiceRecord} accessibilityRole="button"  >
-        <Ionicons name="mic-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="mic-outline" size={24} color={tokens?.colors?.background ?? "#000000"} />
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.actionButton3} onPress={onOpenBins} accessibilityRole="button"  >
-        <Ionicons name="folder-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="folder-outline" size={24} color={tokens?.colors?.background ?? "#000000"} />
       </TouchableOpacity>
     </View>
   );

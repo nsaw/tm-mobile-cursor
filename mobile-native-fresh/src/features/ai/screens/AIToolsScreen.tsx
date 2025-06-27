@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  Alert,
+  Alert
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -32,11 +32,12 @@ type AIInsight = {
   relatedThoughtmarks?: number[];
 };
 
-export const AIToolsScreen: React.FC = () => {
+export const AIToolsScreen: React.FC = () => {;
+  const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
-  
+;
   const { user } = useAuth();
-
+;
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
   const [isSmartSorting, setIsSmartSorting] = useState(false);
   const [isGeneratingRecommendations, setIsGeneratingRecommendations] = useState(false);
@@ -45,9 +46,9 @@ export const AIToolsScreen: React.FC = () => {
   const [smartSortResults, setSmartSortResults] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<any>(null);
   const [learningResources, setLearningResources] = useState<any>(null);
-
+;
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
-
+;
   const generateInsights = async () => {
     console.log('[AIToolsScreen] generateInsights called');
     if (!hasPremiumAccess) {
@@ -63,8 +64,8 @@ export const AIToolsScreen: React.FC = () => {
     }
 
     setIsGeneratingInsights(true);
-    try {
-      const result = await apiService.generateInsights();
+    try {;
+  const result = await apiService.generateInsights();
       console.log('[AIToolsScreen] API result:', result);
       setInsights(Array.isArray(result.data.insights) ? result.data.insights : []);
       console.log('[AIToolsScreen] insights after set:', Array.isArray(result.data.insights) ? result.data.insights : []);
@@ -79,7 +80,7 @@ export const AIToolsScreen: React.FC = () => {
       setIsGeneratingInsights(false);
     }
   };
-
+;
   const performSmartSorting = async () => {
     if (!hasPremiumAccess) {
       Alert.alert(
@@ -94,8 +95,8 @@ export const AIToolsScreen: React.FC = () => {
     }
 
     setIsSmartSorting(true);
-    try {
-      const result = await apiService.smartSort();
+    try {;
+  const result = await apiService.smartSort();
       if (result.success) {
         setSmartSortResults(result.data);
         Alert.alert(
@@ -113,7 +114,7 @@ export const AIToolsScreen: React.FC = () => {
       setIsSmartSorting(false);
     }
   };
-
+;
   const generateRecommendations = async () => {
     if (!hasPremiumAccess) {
       Alert.alert(
@@ -128,8 +129,8 @@ export const AIToolsScreen: React.FC = () => {
     }
 
     setIsGeneratingRecommendations(true);
-    try {
-      const result = await apiService.recommendations();
+    try {;
+  const result = await apiService.recommendations();
       if (result.success) {
         setRecommendations(result.data);
         Alert.alert(
@@ -147,7 +148,7 @@ export const AIToolsScreen: React.FC = () => {
       setIsGeneratingRecommendations(false);
     }
   };
-
+;
   const generateLearningResources = async () => {
     if (!hasPremiumAccess) {
       Alert.alert(
@@ -162,8 +163,8 @@ export const AIToolsScreen: React.FC = () => {
     }
 
     setIsGeneratingLearningResources(true);
-    try {
-      const result = await apiService.learningResources();
+    try {;
+  const result = await apiService.learningResources();
       if (result.success) {
         setLearningResources(result.data);
         Alert.alert(
@@ -181,7 +182,7 @@ export const AIToolsScreen: React.FC = () => {
       setIsGeneratingLearningResources(false);
     }
   };
-
+;
   const handleNavigate = (path: string) => {
     switch (path) {
       case '/':
@@ -205,7 +206,7 @@ export const AIToolsScreen: React.FC = () => {
         break;
     }
   };
-
+;
   const getIconForType = (type: string) => {
     switch (type) {
       case 'pattern':
@@ -220,7 +221,7 @@ export const AIToolsScreen: React.FC = () => {
         return 'lightbulb-outline';
     }
   };
-
+;
   const getIconColorForType = (type: string) => {
     switch (type) {
       case 'pattern':
@@ -235,7 +236,7 @@ export const AIToolsScreen: React.FC = () => {
         return tokens.colors.accent;
     }
   };
-
+;
   const renderAICard = (item: any, index: number, type: string) => (
     <Card key={index} style={{ marginBottom: tokens.spacing.md }}>
       <CardContent>
@@ -273,15 +274,14 @@ export const AIToolsScreen: React.FC = () => {
                       key={idx}
                       onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId })}
                       accessibilityRole="button"
-                      
-                      
+
                       style={{
                         backgroundColor: tokens.colors.accent + '20',
                         paddingHorizontal: tokens.spacing.sm,
                         paddingVertical: tokens.spacing.xs,
                         borderRadius: tokens.radius.sm,
                         marginRight: tokens.spacing.xs,
-                        marginBottom: tokens.spacing.xs,
+                        marginBottom: tokens.spacing.xs
                       }}
                     >
                       <Text style={{ color: tokens.colors.accent, fontSize: 12 }}>
@@ -306,14 +306,14 @@ export const AIToolsScreen: React.FC = () => {
             style={styles.backButton}
             onPress={() => navigation.goBack()} accessibilityRole="button"  
           >
-            <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+            <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? "#000000"} />
           </TouchableOpacity>
           <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>
           <View style={styles.headerSpacer} />
         </View>
 
         <View style={styles.upgradeContainer}>
-          <Ionicons name="star" size={64} color={tokens.colors.accent} />
+          <Ionicons name="star" size={64} color={tokens?.colors?.accent ?? "#000000"} />
           <Text style={{ ...styles.upgradeTitle, color: tokens.colors.text }}>
             Upgrade to Premium
           </Text>
@@ -323,19 +323,19 @@ export const AIToolsScreen: React.FC = () => {
           
           <View style={styles.featuresList}>
             <View style={styles.featureItem}>
-              <Ionicons name="bulb" size={20} color={tokens.colors.accent} />
+              <Ionicons name="bulb" size={20} color={tokens?.colors?.accent ?? "#000000"} />
               <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Intelligent pattern recognition
               </Text>
             </View>
             <View style={styles.featureItem}>
-              <Ionicons name="trending-up" size={20} color={tokens.colors.accent} />
+              <Ionicons name="trending-up" size={20} color={tokens?.colors?.accent ?? "#000000"} />
               <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Smart content organization
               </Text>
             </View>
             <View style={styles.featureItem}>
-              <Ionicons name="book" size={20} color={tokens.colors.accent} />
+              <Ionicons name="book" size={20} color={tokens?.colors?.accent ?? "#000000"} />
               <Text style={{ ...styles.featureText, color: tokens.colors.textSecondary }}>
                 Personalized learning recommendations
               </Text>
@@ -346,7 +346,7 @@ export const AIToolsScreen: React.FC = () => {
             style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
             onPress={() => navigation.navigate('Subscribe' as never)} accessibilityRole="button"  
           >
-            <Ionicons name="star" size={20} color={tokens.colors.text} />
+            <Ionicons name="star" size={20} color={tokens?.colors?.text ?? "#000000"} />
             <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
               Upgrade to Premium
             </Text>
@@ -364,7 +364,7 @@ export const AIToolsScreen: React.FC = () => {
           style={styles.backButton}
           onPress={() => navigation.goBack()} accessibilityRole="button"  
         >
-          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+          <Ionicons name="arrow-back" size={24} color={tokens?.colors?.text ?? "#000000"} />
         </TouchableOpacity>
         <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>
         <View style={styles.headerSpacer} />
@@ -385,7 +385,7 @@ export const AIToolsScreen: React.FC = () => {
             <Button onPress={generateInsights} disabled={isGeneratingInsights} style={{ marginBottom: tokens.spacing.md }}>
               {isGeneratingInsights ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <ActivityIndicator color={tokens?.colors?.background ?? "#000000"} style={{ marginRight: 8 }} />
                   <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
@@ -412,7 +412,7 @@ export const AIToolsScreen: React.FC = () => {
             <Button onPress={performSmartSorting} disabled={isSmartSorting} style={{ marginBottom: tokens.spacing.md }}>
               {isSmartSorting ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <ActivityIndicator color={tokens?.colors?.background ?? "#000000"} style={{ marginRight: 8 }} />
                   <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Sorting...</Text>
                 </>
               ) : (
@@ -439,7 +439,7 @@ export const AIToolsScreen: React.FC = () => {
             <Button onPress={generateRecommendations} disabled={isGeneratingRecommendations} style={{ marginBottom: tokens.spacing.md }}>
               {isGeneratingRecommendations ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <ActivityIndicator color={tokens?.colors?.background ?? "#000000"} style={{ marginRight: 8 }} />
                   <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
@@ -466,7 +466,7 @@ export const AIToolsScreen: React.FC = () => {
             <Button onPress={generateLearningResources} disabled={isGeneratingLearningResources} style={{ marginBottom: tokens.spacing.md }}>
               {isGeneratingLearningResources ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
+                  <ActivityIndicator color={tokens?.colors?.background ?? "#000000"} style={{ marginRight: 8 }} />
                   <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
@@ -497,10 +497,10 @@ export const AIToolsScreen: React.FC = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
+;
+  const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   header: {
     flexDirection: 'row',
@@ -509,71 +509,71 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#2E2E2E',
+    borderBottomColor: '#2E2E2E'
   },
   backButton: {
-    padding: 8,
+    padding: 8
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   headerSpacer: {
-    width: 40,
+    width: 40
   },
   upgradeContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 32,
+    paddingHorizontal: 32
   },
   upgradeTitle: {
     fontSize: 24,
     fontWeight: '600',
     marginTop: 16,
-    marginBottom: 8,
+    marginBottom: 8
   },
   upgradeDescription: {
     fontSize: 16,
     textAlign: 'center',
     lineHeight: 24,
-    marginBottom: 32,
+    marginBottom: 32
   },
   featuresList: {
     width: '100%',
-    marginBottom: 32,
+    marginBottom: 32
   },
   featureItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 16
   },
   featureText: {
     fontSize: 16,
-    marginLeft: 12,
+    marginLeft: 12
   },
   upgradeButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
     paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingVertical: 12
   },
   upgradeButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   scrollView: {
-    flex: 1,
+    flex: 1
   },
   content: {
-    padding: 16,
+    padding: 16
   },
   toolsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
-    marginBottom: 24,
+    marginBottom: 24
   },
   toolCard: {
     flex: 1,
@@ -581,87 +581,87 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
-    position: 'relative',
+    position: 'relative'
   },
   toolIcon: {
-    marginBottom: 12,
+    marginBottom: 12
   },
   toolTitle: {
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   toolDescription: {
     fontSize: 14,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 20
   },
   toolLoader: {
     position: 'absolute',
     top: 12,
-    right: 12,
+    right: 12
   },
   resultsCard: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   resultsTitle: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 16,
+    marginBottom: 16
   },
   insightsSection: {
-    marginBottom: 20,
+    marginBottom: 20
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    marginBottom: 12,
+    marginBottom: 12
   },
   patternItem: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   patternHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 4,
+    marginBottom: 4
   },
   patternType: {
     fontSize: 14,
     fontWeight: '600',
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   confidenceText: {
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   patternDescription: {
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: 20
   },
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 8,
+    marginBottom: 8
   },
   suggestionText: {
     fontSize: 14,
     lineHeight: 20,
     marginLeft: 8,
-    flex: 1,
+    flex: 1
   },
   recommendationItem: {
-    marginBottom: 12,
+    marginBottom: 12
   },
   recommendationTitle: {
     fontSize: 14,
     fontWeight: '600',
-    marginBottom: 4,
+    marginBottom: 4
   },
   recommendationReason: {
     fontSize: 12,
-    lineHeight: 16,
+    lineHeight: 16
   },
   fab: {
     position: 'absolute',
@@ -676,9 +676,9 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
     shadowOpacity: 0.3,
-    shadowRadius: 8,
-  },
+    shadowRadius: 8
+  }
 }); 

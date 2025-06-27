@@ -72,22 +72,25 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // TODO: Save to AsyncStorage
   };
 
+  // Ensure designTokens is available before creating context
+  const tokens = designTokens;
+
   const contextValue: ThemeContextType = {
-    tokens: designTokens,
+    tokens,
     typography: typographyTokens,
     buttonStyles: buttonStyles,
     spacing: spacingTokens,
     variants: {
-      buttonVariants: getButtonVariants(designTokens),
-      cardVariants: getCardVariants(designTokens),
-      inputVariants: getInputVariants(designTokens),
-      textVariants: getTextVariants(designTokens),
-      badgeVariants: getBadgeVariants(designTokens),
+      buttonVariants: getButtonVariants(tokens),
+      cardVariants: getCardVariants(tokens),
+      inputVariants: getInputVariants(tokens),
+      textVariants: getTextVariants(tokens),
+      badgeVariants: getBadgeVariants(tokens)
     },
     isFluidTheme,
     toggleTheme,
     isDarkMode,
-    toggleDarkMode,
+    toggleDarkMode
   };
 
   return (

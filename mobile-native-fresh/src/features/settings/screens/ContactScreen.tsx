@@ -5,9 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
-
-const ContactScreen: React.FC = () => {
-  
+;
+  const ContactScreen: React.FC = () => {
 
   return (
     <View style={{ 
@@ -26,7 +25,7 @@ const ContactScreen: React.FC = () => {
         justifyContent: 'center', 
         marginBottom: tokens.spacing.lg 
       }}>
-        <Ionicons name="mail-outline" size={32} color={tokens.colors.background} />
+        <Ionicons name="mail-outline" size={32} color={tokens?.colors?.background ?? "#000000"} />
       </View>
       
       <Heading><Text>Contact Support</Text></Heading>

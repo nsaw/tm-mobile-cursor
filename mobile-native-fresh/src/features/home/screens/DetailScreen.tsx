@@ -3,7 +3,7 @@ import { Text ,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert,
+  Alert
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,21 +15,22 @@ import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
 
-export const DetailScreen: React.FC = () => {
-  
+export const DetailScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
   const { thoughtmarkId } = route.params;
   const { thoughtmarks, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
   const { user } = useAuth();
-
+;
   const thoughtmark = thoughtmarks.find(t => t.id === parseInt(thoughtmarkId));
-
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: tokens.colors.background ?? '#0D0D0F'
     },
     header: {
       flexDirection: 'row',
@@ -38,43 +39,43 @@ export const DetailScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border ?? '#000',
+      borderBottomColor: tokens.colors.border ?? '#000'
     },
     backButton: {
-      padding: tokens.spacing.sm,
+      padding: tokens.spacing.sm
     },
     headerTitle: {
       fontSize: tokens.typography.fontSize.heading,
       fontFamily: tokens.typography.fontFamily.heading,
       fontWeight: tokens.typography.fontWeight.bold,
       color: tokens.colors.text ?? '#000',
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     headerActions: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'center'
     },
     actionButton: {
       padding: tokens.spacing.sm,
-      marginLeft: tokens.spacing.xs,
+      marginLeft: tokens.spacing.xs
     },
     content: {
       flex: 1,
       paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingVertical: tokens.spacing.md
     },
     title: {
       fontSize: tokens.typography.fontSize.body,
       fontFamily: tokens.typography.fontFamily.body,
       color: tokens.colors.text ?? '#000',
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     contentText: {
       fontSize: tokens.typography.fontSize.body,
       fontFamily: tokens.typography.fontFamily.body,
       color: tokens.colors.textSecondary ?? '#000',
       marginLeft: tokens.spacing.xs,
-      marginBottom: tokens.spacing.md,
+      marginBottom: tokens.spacing.md
     },
     tagsContainer: {
       flexDirection: 'row',
@@ -84,29 +85,29 @@ export const DetailScreen: React.FC = () => {
       paddingVertical: tokens.spacing.xs,
       borderRadius: tokens.spacing.sm,
       marginRight: tokens.spacing.xs,
-      marginBottom: tokens.spacing.xs,
+      marginBottom: tokens.spacing.xs
     },
     tagText: {
       fontFamily: tokens.typography.fontFamily.body,
       fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.textSecondary ?? '#000',
+      color: tokens.colors.textSecondary ?? '#000'
     },
     contentCard: {
       backgroundColor: tokens.colors.surface ?? '#000',
       padding: tokens.spacing.md,
       borderRadius: tokens.spacing.md,
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     contentTitle: {
       fontSize: tokens.typography.fontSize.body,
       fontFamily: tokens.typography.fontFamily.body,
       color: tokens.colors.text ?? '#000',
-      marginLeft: tokens.spacing.sm,
+      marginLeft: tokens.spacing.sm
     },
     contentSubtitle: {
       fontFamily: tokens.typography.fontFamily.body,
       fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#000',
+      color: tokens.colors.textSecondary ?? '#000'
     },
     footer: {
       flexDirection: 'row',
@@ -115,27 +116,27 @@ export const DetailScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
       borderTopWidth: 1,
-      borderTopColor: tokens.colors.border ?? '#000',
+      borderTopColor: tokens.colors.border ?? '#000'
     },
     footerButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.sm
     },
     footerButtonText: {
       fontSize: tokens.typography.fontSize.body,
       fontFamily: tokens.typography.fontFamily.body,
       color: tokens.colors.danger ?? '#EF4444',
-      marginLeft: tokens.spacing.xs,
+      marginLeft: tokens.spacing.xs
     },
     footerButtonText2: {
       fontSize: tokens.typography.fontSize.body,
       fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.danger ?? '#EF4444',
+      color: tokens.colors.danger ?? '#EF4444'
     },
     spacer: {
-      marginTop: tokens.spacing.xl,
-    },
+      marginTop: tokens.spacing.xl
+    }
   });
 
   if (!thoughtmark) {
@@ -144,8 +145,7 @@ export const DetailScreen: React.FC = () => {
         <Text style={styles.title}>Thoughtmark not found</Text>
       </View>
     );
-  }
-
+  };
   const handlePin = async () => {
     try {
       await updateThoughtmark(thoughtmark.id, { isPinned: !thoughtmark.isPinned });
@@ -153,16 +153,16 @@ export const DetailScreen: React.FC = () => {
       Alert.alert('Error', 'Failed to update thoughtmark');
     }
   };
-
+;
   const handleEdit = () => {
     navigation.navigate('EditThoughtmark', { thoughtmarkId: thoughtmark.id.toString() });
   };
-
+;
   const handleShare = () => {
     // Implement share functionality
     Alert.alert('Share', 'Share functionality coming soon');
   };
-
+;
   const handleDelete = async () => {
     Alert.alert(
       'Delete Thoughtmark',
@@ -179,14 +179,14 @@ export const DetailScreen: React.FC = () => {
             } catch (error) {
               Alert.alert('Error', 'Failed to delete thoughtmark');
             }
-          },
+          }
         },
       ]
     );
   };
-
-  const getBinName = (binId: number) => {
-    const bin = bins.find(b => b.id === binId);
+;
+  const getBinName = (binId: number) => {;
+  const bin = bins.find(b => b.id === binId);
     return bin?.name || 'Unknown Bin';
   };
 

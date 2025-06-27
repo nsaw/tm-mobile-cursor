@@ -34,8 +34,8 @@ export const signUpWithEmail = async (
   email: string, 
   password: string
 ): Promise<UserCredential> => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  try {;
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     return userCredential;
   } catch (error: any) {
     throw {
@@ -52,8 +52,8 @@ export const signInWithEmail = async (
   email: string, 
   password: string
 ): Promise<UserCredential> => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  try {;
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential;
   } catch (error: any) {
     throw {
@@ -81,9 +81,8 @@ export const resetPassword = async (email: string): Promise<void> => {
  * Update user password
  */
 export const updateUserPassword = async (newPassword: string): Promise<void> => {
-  try {
-    const user = auth.currentUser;
-    if (!user) {
+  try {;
+  if (!user) {
       throw { code: 'auth/no-user', message: 'No user is currently signed in' };
     }
     await updatePassword(user, newPassword);
@@ -125,8 +124,8 @@ export const onAuthStateChanged = (callback: (user: FirebaseUser | null) => void
 
 /**
  * Convert Firebase error codes to user-friendly messages
- */
-const getAuthErrorMessage = (code: string): string => {
+ */;
+  const getAuthErrorMessage = (code: string): string => {
   switch (code) {
     case 'auth/user-not-found':
       return 'No account found with this email address';
@@ -156,7 +155,7 @@ const getAuthErrorMessage = (code: string): string => {
 /**
  * Validate email format
  */
-export const isValidEmail = (email: string): boolean => {
+export const isValidEmail = (email: string): boolean => {;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };

@@ -17,9 +17,9 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   tags,
   selectedTags,
   onTagPress,
-  onClearAll,
+  onClearAll
 }) => {
-  
+  const { tokens } = useTheme();
 
   if (tags.length === 0) {
     return null;

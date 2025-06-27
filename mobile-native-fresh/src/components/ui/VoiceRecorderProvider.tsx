@@ -9,11 +9,10 @@ import { VoiceRecorder } from './VoiceRecorder';
 interface VoiceRecorderContextType {
   showVoiceRecorder: () => void;
   hideVoiceRecorder: () => void;
-}
+};
+  const VoiceRecorderContext = createContext<VoiceRecorderContextType | undefined>(undefined);
 
-const VoiceRecorderContext = createContext<VoiceRecorderContextType | undefined>(undefined);
-
-export const useVoiceRecorder = () => {
+export const useVoiceRecorder = () => {;
   const context = useContext(VoiceRecorderContext);
   if (!context) {
     throw new Error('useVoiceRecorder must be used within a VoiceRecorderProvider');
@@ -27,13 +26,13 @@ interface VoiceRecorderProviderProps {
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ children }) => {
+export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ children }) => {;
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation<NavigationProp>();
-
+;
   const showVoiceRecorder = () => setIsVisible(true);
   const hideVoiceRecorder = () => setIsVisible(false);
-
+;
   const handleVoiceComplete = (thoughtmarkId?: number, transcript?: string, aiTitle?: string) => {
     setIsVisible(false);
     if (transcript && aiTitle) {
@@ -41,7 +40,7 @@ export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ ch
       navigation.navigate('CreateThoughtmark', {
         content: transcript,
         title: aiTitle,
-        isVoiceNote: true,
+        isVoiceNote: true
       });
     }
   };

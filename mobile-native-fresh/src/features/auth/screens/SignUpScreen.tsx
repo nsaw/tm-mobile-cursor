@@ -26,8 +26,8 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
   visible,
   onClose,
   onSwitchToSignIn,
-  onSuccess,
-}) => {
+  onSuccess
+}) => {;
   const { tokens, typography, spacing } = useTheme();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,9 +42,9 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
     password?: string; 
     confirmPassword?: string 
   }>({});
-
-  const validateForm = () => {
-    const newErrors: { 
+;
+  const validateForm = () => {;
+  const newErrors: { 
       displayName?: string; 
       email?: string; 
       password?: string; 
@@ -63,8 +63,8 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
 
     if (!password) {
       newErrors.password = 'Password is required';
-    } else {
-      const passwordValidation = isValidPassword(password);
+    } else {;
+  const passwordValidation = isValidPassword(password);
       if (!passwordValidation.isValid) {
         newErrors.password = passwordValidation.message;
       }
@@ -79,7 +79,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+;
   const handleSignUp = async () => {
     if (!validateForm()) return;
 
@@ -100,8 +100,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
       animationType="slide"
       transparent
       onRequestClose={onClose}
-      
-      
+
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -115,7 +114,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#000000E6',
+            backgroundColor: '#000000E6'
           }} forceRole="modal">
             <AutoRoleView style={{
               width: '90%',
@@ -126,7 +125,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               paddingBottom: tokens.spacing.xl,
               backgroundColor: tokens.colors.backgroundSecondary,
               borderRadius: tokens.radius.lg,
-              alignItems: 'center',
+              alignItems: 'center'
             }} forceRole="card">
               {/* Title */}
               <Text style={{
@@ -139,7 +138,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                 marginBottom: tokens.spacing.lg,
                 color: tokens.colors.text,
                 paddingVertical: tokens.spacing.sm,
-                lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8),
+                lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8)
               }}>
                 Create Account
               </Text>
@@ -147,7 +146,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               {/* Display Name Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.md,
+                marginBottom: tokens.spacing.md
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -156,15 +155,15 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   borderColor: errors.displayName ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <User size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <User size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Display Name"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -179,7 +178,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.displayName}
                   </Text>
@@ -189,7 +188,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               {/* Email Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.md,
+                marginBottom: tokens.spacing.md
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -198,15 +197,15 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   borderColor: errors.email ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <Mail size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <Mail size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Email"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -222,7 +221,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.email}
                   </Text>
@@ -232,7 +231,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               {/* Password Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.md,
+                marginBottom: tokens.spacing.md
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -241,15 +240,15 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   borderColor: errors.password ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <Lock size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <Lock size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Password"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -266,9 +265,9 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     
                   >
                     {showPassword ? (
-                      <EyeOff size={20} color={tokens.colors.textSecondary} />
+                      <EyeOff size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     ) : (
-                      <Eye size={20} color={tokens.colors.textSecondary} />
+                      <Eye size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     )}
                   </TouchableOpacity>
                 </AutoRoleView>
@@ -276,7 +275,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.password}
                   </Text>
@@ -286,7 +285,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               {/* Confirm Password Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.lg,
+                marginBottom: tokens.spacing.lg
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -295,15 +294,15 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   borderColor: errors.confirmPassword ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <Lock size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <Lock size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Confirm Password"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -320,9 +319,9 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     
                   >
                     {showConfirmPassword ? (
-                      <EyeOff size={20} color={tokens.colors.textSecondary} />
+                      <EyeOff size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     ) : (
-                      <Eye size={20} color={tokens.colors.textSecondary} />
+                      <Eye size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     )}
                   </TouchableOpacity>
                 </AutoRoleView>
@@ -330,7 +329,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.confirmPassword}
                   </Text>
@@ -349,7 +348,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   opacity: loading ? 0.5 : 1,
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: tokens.spacing.md
                 }}
                 accessibilityRole="button"
                 
@@ -357,7 +356,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                 <Text style={{
                   color: tokens.colors.buttonText || tokens.colors.background,
                   fontSize: typography.buttonText.fontSize,
-                  fontWeight: '600',
+                  fontWeight: '600'
                 }}>
                   {loading ? 'Creating Account...' : 'Create Account'}
                 </Text>
@@ -367,11 +366,11 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
               <AutoRoleView style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }} forceRole="section">
                 <Text style={{
                   color: tokens.colors.textSecondary,
-                  fontSize: typography.body.fontSize,
+                  fontSize: typography.body.fontSize
                 }}>
                   Already have an account?{' '}
                 </Text>
@@ -383,7 +382,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.accent,
                     fontSize: typography.body.fontSize,
-                    fontWeight: '600',
+                    fontWeight: '600'
                   }}>
                     Sign In
                   </Text>

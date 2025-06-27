@@ -22,7 +22,7 @@ export type StyleRole =
 /**
  * Analyzes style properties to determine the appropriate role for a component
  */
-export function classifyStyleRole(style: ViewStyle): StyleRole {
+export function classifyStyleRole(style: ViewStyle): StyleRole {;
   const flattened = style || {};
   
   // Check for card-like styling

@@ -5,7 +5,7 @@ import {
   Vibration,
   ViewStyle,
   Animated,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -31,8 +31,8 @@ interface ThoughtmarkCardProps {
 
 // PinIcon component with animation
 const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, onPress }) => {
+  const { tokens } = useTheme();
   const scaleAnim = useRef(new Animated.Value(1)).current;
-  
 
   const handlePress = () => {
     // Animate scale on press
@@ -40,12 +40,12 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
       Animated.timing(scaleAnim, {
         toValue: 1.2,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
       Animated.timing(scaleAnim, {
         toValue: 1,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: true
       }),
     ]).start();
     
@@ -58,8 +58,6 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
       style={{ marginRight: tokens.spacing.xs, padding: 2 }}
       activeOpacity={0.7}
       accessibilityRole="button"
-      
-      
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <FontAwesome
@@ -83,8 +81,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   similarity,
   onSelectionToggle,
   onPinToggle,
-  style,
+  style
 }: ThoughtmarkCardProps) => {
+  const { tokens } = useTheme();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [isLongPressing, setIsLongPressing] = useState(false);
 
@@ -140,8 +139,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         month: 'short', 
         day: 'numeric' 
       });
-    }
-
+    };
     const createdDate = new Date(dateString);
     const now = new Date();
     const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -165,27 +163,27 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
     {
       label: 'View',
       icon: 'eye-outline',
-      onPress: onClick || (() => {}),
+      onPress: onClick || (() => {})
     },
     ...(onEdit ? [{
       label: 'Edit',
       icon: 'create-outline',
-      onPress: onEdit,
+      onPress: onEdit
     }] : []),
     {
       label: pinned ? 'Unpin' : 'Pin to top',
       icon: 'pin-outline',
-      onPress: handleTogglePin,
+      onPress: handleTogglePin
     },
     {
       label: 'Share',
       icon: 'share-outline',
-      onPress: handleShare,
+      onPress: handleShare
     },
     ...(onArchive ? [{
       label: 'Archive',
       icon: 'archive-outline',
-      onPress: onArchive,
+      onPress: onArchive
     }] : []),
   ];
 
@@ -201,7 +199,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             padding: tokens.spacing.sm,
             borderWidth: 1,
             borderColor: tokens.colors.border,
-            position: 'relative',
+            position: 'relative'
           },
           style,
         ]}
@@ -210,8 +208,6 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onPressOut={handlePressOut}
         activeOpacity={0.7}
         accessibilityRole="button"
-        
-        
       >
         <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
           {/* Header */}
@@ -219,13 +215,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             flexDirection: 'row',
             alignItems: 'center',
             marginBottom: 8,
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}>
             {/* Left: Checkbox */}
             <View style={{
               flexDirection: 'row',
               alignItems: 'center',
-              marginRight: tokens.spacing.sm,
+              marginRight: tokens.spacing.sm
             }}>
               <PinIcon pinned={pinned || false} onPress={handleTogglePin} />
               {selected && (
@@ -235,7 +231,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                   <Ionicons
                     name={selected ? 'checkbox' : 'square-outline'}
                     size={16}
-                    color={tokens.colors.accent}
+                    color={tokens?.colors?.accent ?? "#000000"}
                   />
                 </TouchableOpacity>
               )}
@@ -245,16 +241,15 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             <View style={{
               flex: 1,
               justifyContent: 'center',
-              marginRight: tokens.spacing.sm,
+              marginRight: tokens.spacing.sm
             }}>
               <Text 
-                variant="subtitle" 
                 size="md"
                 weight="medium"
                 style={{ 
                   textAlign: 'left',
                   textTransform: 'capitalize',
-                  fontSize: tokens.typography.fontSize.sm + 2,
+                  fontSize: tokens.typography.fontSize.sm + 2
                 }}
                 numberOfLines={1}
               >
@@ -267,7 +262,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               flexDirection: 'row',
               alignItems: 'center',
               flexShrink: 0,
-              marginLeft: 'auto',
+              marginLeft: 'auto'
             }}>
               {similarity !== undefined && (
                 <View style={{
@@ -275,14 +270,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                   paddingHorizontal: tokens.spacing.sm,
                   paddingVertical: tokens.spacing.xs,
                   borderRadius: tokens.radius.md,
-                  marginRight: tokens.spacing.sm,
+                  marginRight: tokens.spacing.sm
                 }}>
                   <Text 
-                    variant="caption" 
                     size="xs"
                     style={{ 
                       color: tokens.colors.brand,
-                      fontWeight: '600',
+                      fontWeight: '600'
                     }}
                   >
                     {Math.round(similarity * 100)}% match
@@ -290,10 +284,9 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                 </View>
               )}
               <Text 
-                variant="caption" 
                 size="xs"
                 style={{ 
-                  marginRight: 5,
+                  marginRight: 5
                 }}
               >
                 {formatDate(thoughtmark.createdAt)}
@@ -304,7 +297,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                 <Ionicons
                   name="ellipsis-vertical"
                   size={16}
-                  color={tokens.colors.textMuted}
+                  color={tokens?.colors?.textMuted ?? "#000000"}
                 />
               </TouchableOpacity>
             </View>
@@ -313,11 +306,10 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
           {/* Content */}
           <Text 
             variant="body" 
-            
             style={{ 
               marginBottom: 11,
               lineHeight: 28,
-              fontSize: tokens.typography.fontSize.sm + 1,
+              fontSize: tokens.typography.fontSize.sm + 1
             }}
             numberOfLines={2}
           >
@@ -328,7 +320,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
           <View style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'flex-end',
+            alignItems: 'flex-end'
           }}>
             <ScrollView 
               horizontal 
@@ -337,7 +329,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               contentContainerStyle={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                paddingRight: tokens.spacing.sm,
+                paddingRight: tokens.spacing.sm
               }}
             >
               {(thoughtmark.tags || []).map((tag: string) => (
@@ -347,7 +339,6 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
             
             {thoughtmark.binName && thoughtmark.binName.trim() && (
               <Text 
-                variant="caption" 
                 size="xs"
                 style={{ marginLeft: 11 }}
               >

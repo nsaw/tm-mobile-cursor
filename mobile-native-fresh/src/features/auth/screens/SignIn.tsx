@@ -5,7 +5,7 @@ import { Text ,
   Platform,
   KeyboardAvoidingView,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 // src/features/auth/screens/SignIn.tsx
 import React, { useState } from 'react';
@@ -16,17 +16,18 @@ import { LoginForm } from '../components/LoginForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
+;
+  const logo = require('../../../../assets/logo.png');
 
-const logo = require('../../../../assets/logo.png');
-
-export const SignInScreen: React.FC = () => {
-  
+export const SignInScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
-
+;
   const styles = getStyles(tokens);
-
+;
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
       setIsLoading(true);
@@ -37,7 +38,7 @@ export const SignInScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
@@ -48,7 +49,7 @@ export const SignInScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const handleAppleSignIn = async () => {
     try {
       setIsLoading(true);
@@ -59,7 +60,7 @@ export const SignInScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
+;
   const handleDemoSignIn = async () => {
     try {
       setIsLoading(true);
@@ -123,37 +124,37 @@ export const SignInScreen: React.FC = () => {
     </SafeAreaView>
   );
 };
-
-const getStyles = (tokens: any) => StyleSheet.create({
+;
+  const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: tokens.colors.background
   },
   keyboard: {
     flex: 1,
     paddingHorizontal: tokens.spacing.md,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: tokens.spacing.xl,
+    marginBottom: tokens.spacing.xl
   },
   logo: {
     width: 120,
-    height: 120,
+    height: 120
   },
   title: {
     fontSize: tokens.typography.fontSize.heading,
     fontWeight: tokens.typography.fontWeight.bold,
     color: tokens.colors.text,
     textAlign: 'center',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: tokens.spacing.sm
   },
   subtitle: {
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: tokens.spacing.lg
   },
   formContainer: {
     backgroundColor: tokens.colors.surface,
@@ -163,7 +164,7 @@ const getStyles = (tokens: any) => StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.3,
     shadowRadius: 8,
-    elevation: 6,
+    elevation: 6
   },
   input: {
     backgroundColor: tokens.colors.backgroundSecondary,
@@ -173,33 +174,33 @@ const getStyles = (tokens: any) => StyleSheet.create({
     borderRadius: 8,
     paddingVertical: tokens.spacing.sm * 1.5,
     paddingHorizontal: tokens.spacing.md,
-    marginBottom: tokens.spacing.md,
+    marginBottom: tokens.spacing.md
   },
   primaryButton: {
     backgroundColor: tokens.colors.accent,
     borderRadius: 8,
     paddingVertical: tokens.spacing.sm * 1.5,
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: tokens.spacing.md
   },
   primaryButtonText: {
     fontSize: tokens.typography.fontSize.body,
     color: '#ffffff',
-    fontWeight: '600',
+    fontWeight: '600'
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: tokens.spacing.lg,
+    marginVertical: tokens.spacing.lg
   },
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: tokens.colors.border,
+    backgroundColor: tokens.colors.border
   },
   dividerText: {
     marginHorizontal: tokens.spacing.sm,
     fontSize: tokens.typography.fontSize.body,
-    color: tokens.colors.textSecondary,
-  },
+    color: tokens.colors.textSecondary
+  }
 });

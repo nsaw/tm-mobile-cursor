@@ -25,29 +25,29 @@ export const Text: React.FC<TextProps> = ({
   weight,
   align = 'left',
   _numberOfLines,
-  _ellipsizeMode,
+  _ellipsizeMode
 }) => {
-  
+  const { tokens } = useTheme();
 
-  // Get variant styles
+  // Get variant styles;
   const textVariants = getTextVariants(tokens);
   const baseStyle = textVariants.base;
   const variantStyle = textVariants.variants.variant[variant];
   const sizeStyle = size ? textVariants.variants.size[size] : {};
 
-  // Merge all styles
+  // Merge all styles;
   const textStyle = mergeVariantStyles(baseStyle, {
     variant: variantStyle,
-    size: sizeStyle,
+    size: sizeStyle
   });
 
-  // Apply custom overrides
+  // Apply custom overrides;
   const finalTextStyle = {
     ...textStyle,
     color: color || textStyle.color,
     fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
     textAlign: align,
-    ...style,
+    ...style
   };
 
   return (
@@ -60,7 +60,7 @@ export const Heading: React.FC<Omit<TextProps, 'variant'> & { level?: 1 | 2 | 3 
   level = 1,
   children,
   ...props
-}) => {
+}) => {;
   const getSize = () => {
     switch (level) {
       case 1: return '3xl';
@@ -83,7 +83,7 @@ export const Heading: React.FC<Omit<TextProps, 'variant'> & { level?: 1 | 2 | 3 
 };
 
 export const Subheading: React.FC<Omit<TextProps, 'variant'>> = (props) => (
-  <Text variant="subtitle" {...props} />
+  <Text  {...props} />
 );
 
 export const BodyText: React.FC<Omit<TextProps, 'variant'>> = (props) => (
@@ -91,11 +91,11 @@ export const BodyText: React.FC<Omit<TextProps, 'variant'>> = (props) => (
 );
 
 export const Caption: React.FC<Omit<TextProps, 'variant'>> = (props) => (
-  <Text variant="caption" {...props} />
+  <Text  {...props} />
 );
 
 export const Label: React.FC<Omit<TextProps, 'variant'>> = (props) => (
-  <Text variant="caption" {...props} />
+  <Text  {...props} />
 );
 
 export const ButtonText: React.FC<Omit<TextProps, 'variant'>> = (props) => (

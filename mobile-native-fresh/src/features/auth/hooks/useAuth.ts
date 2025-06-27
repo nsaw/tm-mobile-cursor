@@ -15,7 +15,7 @@ import type { User, AuthState } from '../../../types';
 const STORAGE_KEYS = {
   USER: '@thoughtmarks_user',
   TOKEN: '@thoughtmarks_token',
-  REFRESH_TOKEN: '@thoughtmarks_refresh_token',
+  REFRESH_TOKEN: '@thoughtmarks_refresh_token'
 };
 
 export const useAuth = () => {
@@ -23,7 +23,7 @@ export const useAuth = () => {
     user: null,
     isAuthenticated: false,
     loading: true,
-    guestMode: false,
+    guestMode: false
   });
 
   // Initialize auth state from Firebase
@@ -32,7 +32,7 @@ export const useAuth = () => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       console.log('🔐 Auth: Firebase auth state changed:', firebaseUser ? 'User logged in' : 'No user');
       if (firebaseUser) {
-        // Convert Firebase user to our User type
+        // Convert Firebase user to our User type;
         const user: User = {
           id: firebaseUser.uid,
           email: firebaseUser.email || '',
@@ -41,7 +41,7 @@ export const useAuth = () => {
           isPremium: false, // Default to false, can be updated from backend
           isTestUser: false,
           createdAt: firebaseUser.metadata.creationTime || new Date().toISOString(),
-          updatedAt: firebaseUser.metadata.lastSignInTime || new Date().toISOString(),
+          updatedAt: firebaseUser.metadata.lastSignInTime || new Date().toISOString()
         };
 
         // Get custom token from backend for API access
@@ -56,7 +56,7 @@ export const useAuth = () => {
               user: updatedUser,
               isAuthenticated: true,
               loading: false,
-              guestMode: false,
+              guestMode: false
             });
           } else {
             // Use Firebase user data if backend validation fails
@@ -65,7 +65,7 @@ export const useAuth = () => {
               user,
               isAuthenticated: true,
               loading: false,
-              guestMode: false,
+              guestMode: false
             });
           }
         } catch (error) {
@@ -77,7 +77,7 @@ export const useAuth = () => {
             user,
             isAuthenticated: true,
             loading: false,
-            guestMode: false,
+            guestMode: false
           });
         }
       } else {
@@ -103,8 +103,7 @@ export const useAuth = () => {
       if (res.success && res.data && res.data.user && res.data.token) {
         // Ensure token is a string and user is an object
         const token = String(res.data.token);
-        const user = res.data.user as User;
-        
+        const user = res.data.user;
         console.log('🔐 Auth: Storing auth data:', { 
           user: user, 
           token: token,
@@ -116,7 +115,7 @@ export const useAuth = () => {
           user: user,
           isAuthenticated: true,
           loading: false,
-          guestMode: false,
+          guestMode: false
         });
         console.log('🔐 Auth: Demo login successful!');
       } else {
@@ -193,7 +192,7 @@ export const useAuth = () => {
         user: null,
         isAuthenticated: false,
         loading: false,
-        guestMode: true,
+        guestMode: true
       });
     } catch (error: any) {
       throw new Error(error.message || 'Sign out failed');
@@ -205,7 +204,7 @@ export const useAuth = () => {
       user: null,
       isAuthenticated: false,
       loading: false,
-      guestMode: true,
+      guestMode: true
     });
   };
 
@@ -242,6 +241,6 @@ export const useAuth = () => {
     signOut,
     enableGuestMode,
     disableGuestMode,
-    signInWithDemo,
+    signInWithDemo
   };
 };

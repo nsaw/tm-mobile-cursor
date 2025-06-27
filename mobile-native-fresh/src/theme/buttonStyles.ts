@@ -14,14 +14,14 @@ export const buttonStyles = {
     paddingLeft: 30, // tokens.spacing.sm * 2.5
     paddingRight: 30, // tokens.spacing.sm * 2.5
     marginBottom: 16, // tokens.spacing.sm * 1.34
-    justifyContent: 'center' as const,
+    justifyContent: 'center' as const
   },
   
   specialBinCardContent: {
     flexDirection: 'row' as const,
     alignItems: 'center' as const,
     justifyContent: 'space-between' as const,
-    width: '100%',
+    width: '100%'
   },
   
   specialBinCardText: {
@@ -29,14 +29,14 @@ export const buttonStyles = {
     color: '#3B82F6', // tokens.colors.accent
     fontWeight: '300' as const,
     fontFamily: 'Ubuntu_300Light',
-    opacity: 0.8,
+    opacity: 0.8
   },
   
   specialBinCardCount: {
     fontSize: RFValue(9),
     color: '#3B82F6', // tokens.colors.accent
     fontFamily: 'Ubuntu_300Light',
-    opacity: 0.8,
+    opacity: 0.8
   },
   
   // View More Card
@@ -53,7 +53,7 @@ export const buttonStyles = {
     height: 70,
     flexDirection: 'row' as const,
     justifyContent: 'space-between' as const,
-    alignItems: 'center' as const,
+    alignItems: 'center' as const
   },
   
   viewMoreText: {
@@ -61,14 +61,14 @@ export const buttonStyles = {
     color: '#3B82F6', // tokens.colors.accent
     fontWeight: '600' as const,
     fontFamily: 'Ubuntu_600SemiBold',
-    opacity: 0.8,
+    opacity: 0.8
   },
   
   viewMoreCount: {
     fontSize: RFValue(11),
     color: '#6B7280', // tokens.colors.textSecondary
     fontFamily: 'Ubuntu_400Regular',
-    opacity: 0.8,
+    opacity: 0.8
   },
   
   // Archive Card
@@ -91,7 +91,7 @@ export const buttonStyles = {
     flexDirection: 'row' as const,
     alignItems: 'center' as const,
     justifyContent: 'space-between' as const,
-    width: '100%',
+    width: '100%'
   },
   
   archiveCardText: {
@@ -99,6 +99,6 @@ export const buttonStyles = {
     color: '#374151', // tokens.colors.text
     fontWeight: '500' as const,
     fontFamily: 'Ubuntu_500Medium',
-    opacity: 0.8,
-  },
+    opacity: 0.8
+  }
 }; 

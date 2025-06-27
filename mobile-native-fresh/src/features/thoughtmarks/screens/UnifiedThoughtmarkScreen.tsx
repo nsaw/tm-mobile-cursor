@@ -7,7 +7,7 @@ import { Text ,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -33,19 +33,20 @@ interface RouteParams {
   isVoiceNote?: boolean;
 }
 
-export const UnifiedThoughtmarkScreen: React.FC = () => {
-  
+export const UnifiedThoughtmarkScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const navigation = useNavigation();
   const route = useRoute();
   const { user } = useAuth();
   const { createThoughtmark, updateThoughtmark, thoughtmarks, loading } = useThoughtmarks();
   const { bins } = useBins();
-
+;
   const params = route.params as RouteParams | undefined;
   const isEditing = !!(params?.thoughtmarkId);
   const isVoiceNote = params?.isVoiceNote || false;
 
-  // Form state
+  // Form state;
   const [title, setTitle] = useState(params?.title || '');
   const [content, setContent] = useState(params?.content || '');
   const [selectedBinId, setSelectedBinId] = useState<number | undefined>();
@@ -56,7 +57,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
   const [isPinned, setIsPinned] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // AI features state
+  // AI features state;
   const [aiSuggestions, setAiSuggestions] = useState<any>(null);
   const [isGeneratingSuggestions, setIsGeneratingSuggestions] = useState(false);
   const [showAIPanel, setShowAIPanel] = useState(false);
@@ -64,21 +65,21 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
   const [autoTags, setAutoTags] = useState<string[]>([]);
   const [contentSuggestions, setContentSuggestions] = useState<string[]>([]);
 
-  // Date picker state
+  // Date picker state;
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
 
-  // Custom alert dialog state
+  // Custom alert dialog state;
   const [showAlertDialog, setShowAlertDialog] = useState(false);
   const [alertConfig, setAlertConfig] = useState({
     title: '',
     message: '',
-    buttons: [] as any[],
+    buttons: [] as any[]
   });
-
+;
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
 
-  // Find existing thoughtmark if editing
+  // Find existing thoughtmark if editing;
   const existingThoughtmark = isEditing && params?.thoughtmarkId
     ? thoughtmarks.find(t => t.id === params.thoughtmarkId)
     : null;
@@ -99,28 +100,28 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
   // Generate AI suggestions when content changes
   useEffect(() => {
-    if (content.length > 20 && hasPremiumAccess) {
-      const timeoutId = setTimeout(() => {
+    if (content.length > 20 && hasPremiumAccess) {;
+  const timeoutId = setTimeout(() => {
         generateAISuggestions();
       }, 2000); // Debounce for 2 seconds
 
       return () => clearTimeout(timeoutId);
     }
   }, [content, hasPremiumAccess]);
-
+;
   const generateAISuggestions = async () => {
     if (!hasPremiumAccess || !content.trim()) return;
 
     setIsGeneratingSuggestions(true);
-    try {
-      const result = await apiService.generateThoughtmarkSuggestions({
+    try {;
+  const result = await apiService.generateThoughtmarkSuggestions({
         content: content.trim(),
         title: title.trim(),
-        tags: tags,
+        tags: tags
       });
 
-      if (result.success && result.data && typeof result.data === 'object') {
-        const data = result.data as any;
+      if (result.success && result.data && typeof result.data === 'object') {;
+  const data = result.data as any;
         setAiSuggestions(data);
         setAutoTitle(data.suggestedTitle || '');
         setAutoTags(data.suggestedTags || []);
@@ -132,7 +133,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setIsGeneratingSuggestions(false);
     }
   };
-
+;
   const applyAISuggestion = (type: 'title' | 'tags' | 'content', value: string | string[]) => {
     switch (type) {
       case 'title':
@@ -146,7 +147,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         break;
     }
   };
-
+;
   const handleSave = async () => {
     if (!content.trim()) {
       Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
@@ -155,8 +156,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      const thoughtmarkData = {
+    try {;
+  const thoughtmarkData = {
         title: title.trim() || 'Untitled Thoughtmark',
         content: content.trim(),
         tags,
@@ -164,14 +165,14 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         isTask,
         isCompleted,
         dueDate: dueDate?.toISOString() || null,
-        isPinned,
+        isPinned
       };
 
       if (isEditing && existingThoughtmark) {
         await updateThoughtmark(existingThoughtmark.id, thoughtmarkData);
         Alert.alert('Success', 'Thoughtmark updated successfully!');
-      } else {
-        const newThoughtmark = await createThoughtmark(thoughtmarkData);
+      } else {;
+  const newThoughtmark = await createThoughtmark(thoughtmarkData);
         Alert.alert('Success', 'Thoughtmark created successfully!');
         
         // Navigate to detail view for new thoughtmarks
@@ -193,7 +194,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
+;
   const handleCancel = () => {
     if (title.trim() || content.trim()) {
       setAlertConfig({
@@ -203,26 +204,26 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           {
             text: 'Discard',
             style: 'destructive',
-            onPress: () => navigation.goBack(),
+            onPress: () => navigation.goBack()
           },
           {
             text: 'Save & Exit',
             style: 'default',
-            onPress: handleSaveAndExit,
+            onPress: handleSaveAndExit
           },
           {
             text: 'Save & New',
             style: 'default',
-            onPress: handleSaveAndNew,
+            onPress: handleSaveAndNew
           },
-        ],
+        ]
       });
       setShowAlertDialog(true);
     } else {
       navigation.goBack();
     }
   };
-
+;
   const handleSaveAndExit = async () => {
     if (!content.trim()) {
       Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
@@ -231,8 +232,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      const thoughtmarkData = {
+    try {;
+  const thoughtmarkData = {
         title: title.trim() || 'Untitled Thoughtmark',
         content: content.trim(),
         tags,
@@ -240,7 +241,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         isTask,
         isCompleted,
         dueDate: dueDate?.toISOString() || null,
-        isPinned,
+        isPinned
       };
 
       if (isEditing && existingThoughtmark) {
@@ -260,7 +261,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
+;
   const handleSaveAndNew = async () => {
     if (!content.trim()) {
       Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
@@ -269,8 +270,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      const thoughtmarkData = {
+    try {;
+  const thoughtmarkData = {
         title: title.trim() || 'Untitled Thoughtmark',
         content: content.trim(),
         tags,
@@ -278,7 +279,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         isTask,
         isCompleted,
         dueDate: dueDate?.toISOString() || null,
-        isPinned,
+        isPinned
       };
 
       if (isEditing && existingThoughtmark) {
@@ -310,7 +311,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
+;
   const toggleTag = (tag: string) => {
     setTags(prev => 
       prev.includes(tag) 
@@ -318,7 +319,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         : [...prev, tag]
     );
   };
-
+;
   const toggleTask = () => {
     setIsTask(!isTask);
     if (isTask) {
@@ -326,11 +327,11 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setDueDate(null);
     }
   };
-
+;
   const togglePin = () => {
     setIsPinned(!isPinned);
   };
-
+;
   const handleDateChange = (event: any, selectedDate?: Date) => {
     setShowDatePicker(false);
     if (selectedDate) {
@@ -339,31 +340,31 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
       setShowTimePicker(true);
     }
   };
-
+;
   const handleTimeChange = (event: any, selectedTime?: Date) => {
     setShowTimePicker(false);
     if (selectedTime && dueDate) {
-      // Combine the selected date with the selected time
-      const combinedDateTime = new Date(dueDate);
+      // Combine the selected date with the selected time;
+  const combinedDateTime = new Date(dueDate);
       combinedDateTime.setHours(selectedTime.getHours());
       combinedDateTime.setMinutes(selectedTime.getMinutes());
       setDueDate(combinedDateTime);
     }
   };
-
+;
   const clearDueDate = () => {
     setDueDate(null);
   };
-
+;
   const formatDueDate = (date: Date) => {
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
-
+;
   const getHeaderTitle = () => {
     if (isVoiceNote) return 'Voice Note';
     return isEditing ? 'Edit Thoughtmark' : 'New Thoughtmark';
   };
-
+;
   const getHeaderSubtitle = () => {
     if (isVoiceNote) return 'Review and edit your voice note';
     return isEditing ? 'Update your thoughtmark' : 'Capture your thoughts';
@@ -395,7 +396,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           {/* Voice Note Indicator */}
           {isVoiceNote && (
             <View style={[styles.voiceIndicator, { backgroundColor: tokens.colors.surface }]}>
-              <Ionicons name="mic" size={20} color={tokens.colors.accent} />
+              <Ionicons name="mic" size={20} color={tokens?.colors?.accent ?? "#000000"} />
               <Text style={[styles.voiceIndicatorText, { color: tokens.colors.textSecondary }]}>
                 Voice note captured
               </Text>
@@ -408,7 +409,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <CardContent>
                 <View style={styles.aiPanelHeader}>
                   <View style={styles.aiPanelTitle}>
-                    <Ionicons name="sparkles" size={16} color={tokens.colors.accent} />
+                    <Ionicons name="sparkles" size={16} color={tokens?.colors?.accent ?? "#000000"} />
                     <Text style={[styles.aiPanelTitleText, { color: tokens.colors.text }]}>
                       AI Assistant
                     </Text>
@@ -420,7 +421,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     <Ionicons 
                       name={showAIPanel ? "chevron-up" : "chevron-down"} 
                       size={16} 
-                      color={tokens.colors.textSecondary} 
+                      color={tokens?.colors?.textSecondary ?? "#000000"} 
                     />
                   </TouchableOpacity>
                 </View>
@@ -429,7 +430,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   <View style={styles.aiPanelContent}>
                     {isGeneratingSuggestions ? (
                       <View style={styles.aiLoading}>
-                        <ActivityIndicator size="small" color={tokens.colors.accent} />
+                        <ActivityIndicator size="small" color={tokens?.colors?.accent ?? "#000000"} />
                         <Text style={[styles.aiLoadingText, { color: tokens.colors.textSecondary }]}>
                           Analyzing your content...
                         </Text>
@@ -451,7 +452,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                 
                                 onPress={() => applyAISuggestion('title', autoTitle)}
                               >
-                                <Ionicons name="checkmark" size={14} color={tokens.colors.accent} />
+                                <Ionicons name="checkmark" size={14} color={tokens?.colors?.accent ?? "#000000"} />
                               </Button>
                             </View>
                           </View>
@@ -495,7 +496,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                 <Text style={[styles.contentSuggestionText, { color: tokens.colors.text }]}>
                                   {suggestion}
                                 </Text>
-                                <Ionicons name="add" size={14} color={tokens.colors.accent} />
+                                <Ionicons name="add" size={14} color={tokens?.colors?.accent ?? "#000000"} />
                               </TouchableOpacity>
                             ))}
                           </View>
@@ -590,7 +591,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     );
                   }}
                 >
-                  <Ionicons name="add" size={16} color={tokens.colors.textSecondary} />
+                  <Ionicons name="add" size={16} color={tokens?.colors?.textSecondary ?? "#000000"} />
                   <Text style={[styles.addTagText, { color: tokens.colors.textSecondary }]}>
                     Add Tag
                   </Text>
@@ -643,12 +644,12 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <View style={styles.dueDateContainer}>
                 {dueDate ? (
                   <View style={styles.dueDateDisplay}>
-                    <Ionicons name="calendar" size={16} color={tokens.colors.accent} />
+                    <Ionicons name="calendar" size={16} color={tokens?.colors?.accent ?? "#000000"} />
                     <Text style={[styles.dueDateText, { color: tokens.colors.text }]}>
                       {formatDueDate(dueDate)}
                     </Text>
                     <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton} accessibilityRole="button"  >
-                      <Ionicons name="close-circle" size={16} color={tokens.colors.textSecondary} />
+                      <Ionicons name="close-circle" size={16} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     </TouchableOpacity>
                   </View>
                 ) : (
@@ -656,7 +657,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     style={[styles.setDueDateButton, { borderColor: tokens.colors.border }]}
                     onPress={() => setShowDatePicker(true)} accessibilityRole="button"  
                   >
-                    <Ionicons name="calendar-outline" size={16} color={tokens.colors.textSecondary} />
+                    <Ionicons name="calendar-outline" size={16} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     <Text style={[styles.setDueDateText, { color: tokens.colors.textSecondary }]}>
                       Set Due Date
                     </Text>
@@ -737,68 +738,68 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         visible={showAlertDialog}
         title={alertConfig.title}
         message={alertConfig.message}
-        
-        
+        onConfirm={alertConfig.onConfirm}
+        onCancel={alertConfig.onCancel}
       />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
+;
+  const styles = StyleSheet.create({
   voiceIndicator: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 16
   },
   voiceIndicatorText: {
     marginLeft: 8,
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   aiPanel: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   aiPanelHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   aiPanelTitle: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   aiPanelTitleText: {
     marginLeft: 8,
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '600'
   },
   aiToggleButton: {
-    padding: 4,
+    padding: 4
   },
   aiPanelContent: {
-    marginTop: 12,
+    marginTop: 12
   },
   aiLoading: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   aiLoadingText: {
     marginLeft: 8,
-    fontSize: 14,
+    fontSize: 14
   },
   aiSuggestions: {
-    gap: 12,
+    gap: 12
   },
   suggestionItem: {
-    gap: 8,
+    gap: 8
   },
   suggestionLabel: {
     fontSize: 12,
     fontWeight: '500',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase'
   },
   suggestionAction: {
     flexDirection: 'row',
@@ -806,17 +807,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 8,
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderRadius: 6,
+    borderRadius: 6
   },
   suggestionText: {
     flex: 1,
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   suggestionTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 8
   },
   contentSuggestion: {
     flexDirection: 'row',
@@ -825,26 +826,26 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
     borderRadius: 6,
-    marginTop: 4,
+    marginTop: 4
   },
   contentSuggestionText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 14
   },
   aiEmptyText: {
     fontSize: 14,
     fontStyle: 'italic',
     textAlign: 'center',
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   inputGroup: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   label: {
     fontSize: 12,
     fontWeight: '600',
     marginBottom: 6,
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   titleInput: {
     borderWidth: 1,
@@ -853,7 +854,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     fontFamily: 'Ubuntu',
-    lineHeight: 15,
+    lineHeight: 15
   },
   contentInput: {
     borderWidth: 1,
@@ -862,18 +863,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Ubuntu',
     lineHeight: 15,
-    minHeight: 60,
+    minHeight: 60
   },
   charCount: {
     fontSize: 10,
     textAlign: 'right',
     marginTop: 2,
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 4,
+    gap: 4
   },
   addTagButton: {
     flexDirection: 'row',
@@ -883,17 +884,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 3,
-    gap: 4,
+    gap: 4
   },
   addTagText: {
     fontSize: 11,
     fontWeight: '500',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   quickActions: {
     flexDirection: 'row',
     gap: 6,
-    marginBottom: 10,
+    marginBottom: 10
   },
   actionButton: {
     flexDirection: 'row',
@@ -901,34 +902,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 3,
     borderRadius: 6,
-    gap: 3,
+    gap: 3
   },
   actionButtonActive: {
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(59, 130, 246, 0.1)'
   },
   actionText: {
     fontSize: 11,
     fontWeight: '500',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   binsContainer: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   binOption: {
     borderWidth: 1,
     borderRadius: 6,
     paddingHorizontal: 8,
     paddingVertical: 4,
-    marginRight: 4,
+    marginRight: 4
   },
   binOptionActive: {
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderColor: '#3B82F6',
+    borderColor: '#3B82F6'
   },
   binOptionText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   dueDateContainer: {
     flexDirection: 'row',
@@ -936,22 +937,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(59, 130, 246, 0.1)',
     borderRadius: 6,
-    padding: 8,
+    padding: 8
   },
   dueDateDisplay: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    flex: 1,
+    flex: 1
   },
   dueDateText: {
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu'
   },
   clearDueDateButton: {
-    padding: 2,
+    padding: 2
   },
   setDueDateButton: {
     flexDirection: 'row',
@@ -961,11 +962,11 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
     borderRadius: 6,
     gap: 4,
-    flex: 1,
+    flex: 1
   },
   setDueDateText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: 'Ubuntu',
-  },
+    fontFamily: 'Ubuntu'
+  }
 }); 

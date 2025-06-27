@@ -1,18 +1,17 @@
 import {
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
+  Dimensions
 } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
 
 interface BinCardProps {
   bin: {
-    id: number;
+    id: string;
     name: string;
     icon: string;
     color?: string;
@@ -21,51 +20,57 @@ interface BinCardProps {
   onPress: () => void;
 }
 
-const { width } = Dimensions.get('window');
-
 export const BinCard: React.FC<BinCardProps> = ({
   bin,
-  onPress,
-}) => {
-  
-
+  onPress
+}) => {;
+  const { tokens } = useTheme();
+  const { width } = Dimensions.get('window');
+;
   const styles = StyleSheet.create({
     container: {
       width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
       aspectRatio: 1,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md * 1.34,
-      marginBottom: spacingTokens.cardMarginBottom,
+      marginBottom: tokens.spacing.lg,
       borderWidth: 1,
       borderColor: tokens.colors.borderHover,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: spacingTokens.cardPaddingHorizontal,
+      padding: tokens.spacing.lg
     },
     icon: {
       fontSize: 32,
-      marginBottom: spacingTokens.textMarginBottom,
+      marginBottom: tokens.spacing.sm
     },
     name: {
       color: tokens.colors.accent,
       textAlign: 'center',
-      marginBottom: spacingTokens.textMarginBottom,
+      marginBottom: tokens.spacing.sm,
+      fontSize: tokens.typography.fontSize.md,
+      fontWeight: '600'
     },
     count: {
       color: tokens.colors.textSecondary,
       textAlign: 'center',
-    },
+      fontSize: tokens.typography.fontSize.sm
+    }
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button"  >
+    <TouchableOpacity 
+      style={styles.container} 
+      onPress={onPress} 
+      accessibilityRole="button"
+    >
       <Ionicons 
         name={bin.icon as any} 
         size={32} 
         style={[styles.icon, { color: bin.color || tokens.colors.accent }]} 
       />
-      <Text variant="subtitle" style={styles.name}>{bin.name}</Text>
-      <Text variant="caption" style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
+      <Text style={styles.name}>{bin.name}</Text>
+      <Text style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
     </TouchableOpacity>
   );
 }; 

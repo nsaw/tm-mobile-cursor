@@ -16,10 +16,9 @@ export const TagChip: React.FC<TagChipProps> = ({
   tag,
   isSelected = false,
   onPress,
-  variant = 'outline',
+  variant = 'outline'
 }: TagChipProps) => {
-  
-  
+  const { tokens } = useTheme();
 
   // Guard against undefined tokens
   if (!tokens) {
@@ -27,18 +26,18 @@ export const TagChip: React.FC<TagChipProps> = ({
     return null;
   }
 
-  // Get variant styles using the function with tokens
+  // Get variant styles using the function with tokens;
   const badgeVariants = getBadgeVariants(tokens);
   const baseStyle = badgeVariants.base;
   const variantStyles: Record<string, unknown> = badgeVariants.variants.variant;
   const variantStyle = variantStyles[variant] || variantStyles.outline;
 
-  // Merge all styles first
+  // Merge all styles first;
   const chipStyle = mergeVariantStyles(baseStyle, {
-    variant: variantStyle,
+    variant: variantStyle
   });
   
-  // Compact outlined style overrides - scaled by 1.34
+  // Compact outlined style overrides - scaled by 1.34;
   const compactStyle = {
     paddingHorizontal: tokens.spacing.md * 1.34,
     paddingVertical: tokens.spacing.sm, // Equal top and bottom padding for proper centering
@@ -58,14 +57,14 @@ export const TagChip: React.FC<TagChipProps> = ({
       activeOpacity={0.7}
     >
       <Text 
-        variant="caption"
+        
         weight="medium"
         style={{
           color: isSelected ? tokens.colors.accent : tokens.colors.text,
           textAlign: 'center',
           paddingHorizontal: 0
         }} 
-        numberOfLines={1}
+        _numberOfLines={1}
       >
         #{tag.toLowerCase()}
       </Text>
@@ -77,5 +76,5 @@ const styles = StyleSheet.create({
   container: {
     marginRight: 8, // Reduced from 11 to work better in horizontal scrolling
     marginBottom: 0, // Removed bottom margin for horizontal layout
-  },
+  }
 }); 

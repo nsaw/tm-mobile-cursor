@@ -5,7 +5,7 @@ import { Text ,
   TouchableOpacity,
   Alert,
   Switch,
-  TextInput,
+  TextInput
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,7 +24,7 @@ export const SettingsScreen: React.FC = () => {
   const { tokens, typography } = useTheme();
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
-  
+
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -74,7 +74,7 @@ export const SettingsScreen: React.FC = () => {
     }
   };
 
-  // Save Siri phrase preference
+  // Save Siri phrase preference;
   const handleSiriPhraseSave = () => {
     setSiriTriggerPhrase(tempSiriPhrase);
     AsyncStorage.setItem('siriTriggerPhrase', tempSiriPhrase);
@@ -85,7 +85,7 @@ export const SettingsScreen: React.FC = () => {
     );
   };
 
-  // Handle sign out
+  // Handle sign out;
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -102,7 +102,7 @@ export const SettingsScreen: React.FC = () => {
     }
   };
 
-  // Handle account deletion
+  // Handle account deletion;
   const handleDeleteAccount = async () => {
     if (!user) return;
     
@@ -132,16 +132,6 @@ export const SettingsScreen: React.FC = () => {
         }
       ]
     );
-  };
-
-  const handleDonateShortcuts = async () => {
-    // Siri shortcuts functionality removed due to React version conflicts
-    Alert.alert('Siri Shortcuts', 'Siri shortcuts functionality is temporarily disabled.');
-  };
-
-  const handleClearShortcuts = async () => {
-    // Siri shortcuts functionality removed due to React version conflicts
-    Alert.alert('Siri Shortcuts', 'Siri shortcuts functionality is temporarily disabled.');
   };
 
   const SettingItem = ({ 
@@ -176,7 +166,8 @@ export const SettingsScreen: React.FC = () => {
         style={styles.settingItem} 
         onPress={onPress}
         disabled={!onPress}
-       accessibilityRole="button"  >
+        accessibilityRole="button"
+      >
         <View style={styles.settingItemLeft}>
           {iconElement}
           <View style={styles.settingItemText}>
@@ -203,45 +194,45 @@ export const SettingsScreen: React.FC = () => {
 
   const styles = StyleSheet.create({
     scrollView: {
-      flex: 1,
+      flex: 1
     },
     scrollContent: {
-      paddingBottom: tokens.spacing.xl,
+      paddingBottom: tokens.spacing.xl
     },
     header: {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: tokens.colors.border
     },
     headerContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     backButton: {
-      marginRight: tokens.spacing.md,
+      marginRight: tokens.spacing.md
     },
     headerTitle: {
       ...typography.title,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     headerSubtitle: {
       ...typography.body,
-      color: tokens.colors.textSecondary,
+      color: tokens.colors.textSecondary
     },
     section: {
-      marginBottom: tokens.spacing.xxl,
+      marginBottom: tokens.spacing.xxl
     },
     sectionTitle: {
       ...typography.sectionTitle,
       color: tokens.colors.textSecondary,
       marginBottom: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.lg,
-      textTransform: 'uppercase',
+      textTransform: 'uppercase'
     },
     sectionCard: {
-      marginHorizontal: tokens.spacing.lg,
+      marginHorizontal: tokens.spacing.lg
     },
     settingItem: {
       flexDirection: 'row',
@@ -251,41 +242,41 @@ export const SettingsScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border,
-      minHeight: 44,
+      minHeight: 44
     },
     settingItemLeft: {
       flexDirection: 'row',
       alignItems: 'center',
-      flex: 1,
+      flex: 1
     },
     settingItemText: {
       marginLeft: tokens.spacing.md,
-      flex: 1,
+      flex: 1
     },
     settingItemTitle: {
       ...typography.body,
       color: tokens.colors.text,
-      opacity: 0.85,
+      opacity: 0.85
     },
     settingItemSubtitle: {
       ...typography.small,
       color: tokens.colors.textSecondary,
-      marginTop: 2,
+      marginTop: 2
     },
     settingItemRight: {
-      alignItems: 'center',
+      alignItems: 'center'
     },
     expandedSettings: {
-      backgroundColor: tokens.colors.backgroundSecondary,
+      backgroundColor: tokens.colors.backgroundSecondary
     },
     settingLeft: {
       flexDirection: 'row',
       alignItems: 'center',
-      flex: 1,
+      flex: 1
     },
     settingText: {
       marginLeft: tokens.spacing.md,
-      flex: 1,
+      flex: 1
     },
     modalOverlay: {
       position: 'absolute',
@@ -296,25 +287,25 @@ export const SettingsScreen: React.FC = () => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.lg,
+      padding: tokens.spacing.lg
     },
     modalContent: {
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.spacing.md,
       padding: tokens.spacing.lg,
       width: '100%',
-      maxWidth: 400,
+      maxWidth: 400
     },
     modalTitle: {
       fontSize: tokens.typography.fontSize.lg,
       fontWeight: '600',
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     modalSubtitle: {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     modalInput: {
       borderWidth: 1,
@@ -324,29 +315,29 @@ export const SettingsScreen: React.FC = () => {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.text,
       backgroundColor: tokens.colors.background,
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     modalButtons: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      gap: tokens.spacing.md,
+      gap: tokens.spacing.md
     },
     modalButton: {
       paddingVertical: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm,
+      borderRadius: tokens.spacing.sm
     },
     modalButtonText: {
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      color: tokens.colors.text
     },
     modalButtonPrimary: {
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: tokens.colors.accent
     },
     modalButtonTextPrimary: {
       color: tokens.colors.background,
-      fontWeight: '500',
-    },
+      fontWeight: '500'
+    }
   });
 
   return (
@@ -375,7 +366,7 @@ export const SettingsScreen: React.FC = () => {
                 <View style={{
                   width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
                   backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
-                  alignItems: 'center', justifyContent: 'center',
+                  alignItems: 'center', justifyContent: 'center'
                 }}>
                   <Brain size={28} />
                 </View>
@@ -384,7 +375,7 @@ export const SettingsScreen: React.FC = () => {
                   ...typography.sectionTitle,
                   color: tokens.colors.text,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.sm,
+                  marginBottom: tokens.spacing.sm
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
@@ -393,7 +384,7 @@ export const SettingsScreen: React.FC = () => {
                   ...typography.body,
                   color: tokens.colors.textSecondary,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: tokens.spacing.md
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -404,7 +395,7 @@ export const SettingsScreen: React.FC = () => {
                     minWidth: '50%',
                     backgroundColor: tokens.colors.accent,
                     paddingVertical: tokens.spacing.sm,
-                    borderRadius: tokens.radius.md,
+                    borderRadius: tokens.radius.md
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
@@ -412,7 +403,7 @@ export const SettingsScreen: React.FC = () => {
                     ...typography.buttonText,
                     color: tokens.colors.buttonText,
                     textAlign: 'center',
-                    width: '100%',
+                    width: '100%'
                    }}>
                     User Guide
                   </Text>

@@ -4,13 +4,13 @@ import { apiService } from '../../../services/api';
 import type { Thoughtmark, ThoughtmarkFormData } from '../../../types';
 import { useAuth } from '../../auth/hooks/useAuth';
 
-export const useThoughtmarks = () => {
+export const useThoughtmarks = () => {;
   const [thoughtmarks, setThoughtmarks] = useState<Thoughtmark[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { isAuthenticated } = useAuth();
   const fetchThoughtmarksRef = useRef<boolean>(false);
-
+;
   const fetchThoughtmarks = useCallback(async () => {
     if (!isAuthenticated) return;
 
@@ -41,60 +41,60 @@ export const useThoughtmarks = () => {
       setLoading(false);
     }
   }, [isAuthenticated]);
-
-  const getThoughtmark = useCallback(async (id: number): Promise<Thoughtmark> => {
-    const response = await apiService.getThoughtmark(id);
+;
+  const getThoughtmark = useCallback(async (id: number): Promise<Thoughtmark> => {;
+  const response = await apiService.getThoughtmark(id);
     if (response.success && response.data) {
       return response.data;
     }
     throw new Error(response.error || 'Failed to fetch thoughtmark');
   }, []);
-
-  const createThoughtmark = useCallback(async (data: ThoughtmarkFormData): Promise<Thoughtmark> => {
-    const response = await apiService.createThoughtmark(data);
+;
+  const createThoughtmark = useCallback(async (data: ThoughtmarkFormData): Promise<Thoughtmark> => {;
+  const response = await apiService.createThoughtmark(data);
     if (response.success && response.data) {
       await fetchThoughtmarks(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to create thoughtmark');
   }, [fetchThoughtmarks]);
-
-  const updateThoughtmark = useCallback(async (id: number, data: Partial<ThoughtmarkFormData>): Promise<Thoughtmark> => {
-    const response = await apiService.updateThoughtmark(id, data);
+;
+  const updateThoughtmark = useCallback(async (id: number, data: Partial<ThoughtmarkFormData>): Promise<Thoughtmark> => {;
+  const response = await apiService.updateThoughtmark(id, data);
     if (response.success && response.data) {
       await fetchThoughtmarks(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to update thoughtmark');
   }, [fetchThoughtmarks]);
-
-  const deleteThoughtmark = useCallback(async (id: number): Promise<void> => {
-    const response = await apiService.deleteThoughtmark(id);
+;
+  const deleteThoughtmark = useCallback(async (id: number): Promise<void> => {;
+  const response = await apiService.deleteThoughtmark(id);
     if (response.success) {
       await fetchThoughtmarks(); // Refresh the list
     } else {
       throw new Error(response.error || 'Failed to delete thoughtmark');
     }
   }, [fetchThoughtmarks]);
-
-  const togglePin = useCallback(async (id: number): Promise<Thoughtmark> => {
-    const response = await apiService.togglePin(id);
+;
+  const togglePin = useCallback(async (id: number): Promise<Thoughtmark> => {;
+  const response = await apiService.togglePin(id);
     if (response.success && response.data) {
       await fetchThoughtmarks(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to toggle pin');
   }, [fetchThoughtmarks]);
-
-  const toggleArchive = useCallback(async (id: number): Promise<Thoughtmark> => {
-    const response = await apiService.toggleArchive(id);
+;
+  const toggleArchive = useCallback(async (id: number): Promise<Thoughtmark> => {;
+  const response = await apiService.toggleArchive(id);
     if (response.success && response.data) {
       await fetchThoughtmarks(); // Refresh the list
       return response.data;
     }
     throw new Error(response.error || 'Failed to toggle archive');
   }, [fetchThoughtmarks]);
-
+;
   const searchThoughtmarks = useCallback(async (query: string): Promise<void> => {
     if (!isAuthenticated) return;
 
@@ -108,8 +108,8 @@ export const useThoughtmarks = () => {
       } else {
         throw new Error(response.error || 'Failed to search thoughtmarks');
       }
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to search thoughtmarks';
+    } catch (err) {;
+  const errorMessage = err instanceof Error ? err.message : 'Failed to search thoughtmarks';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -138,6 +138,6 @@ export const useThoughtmarks = () => {
     deleteThoughtmark,
     togglePin,
     toggleArchive,
-    searchThoughtmarks,
+    searchThoughtmarks
   };
 };

@@ -1,15 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { User, Thoughtmark, Bin, APIResponse, ThoughtmarkFormData, BinFormData } from '../types';
-
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+;
+  const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
 
 class ApiService {
-  private async getAuthHeaders(): Promise<HeadersInit> {
-    const token = await AsyncStorage.getItem('@thoughtmarks_token');
-    
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
+  private async getAuthHeaders(): Promise<HeadersInit> {;
+  const token = await AsyncStorage.getItem('@thoughtmarks_token');
+;
+  const headers: HeadersInit = {
+      'Content-Type': 'application/json'
     };
 
     if (token) {
@@ -23,40 +23,40 @@ class ApiService {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<APIResponse<T>> {
-    try {
-      const url = `${API_BASE_URL}${endpoint}`;
+    try {;
+  const url = `${API_BASE_URL}${endpoint}`;
       const headers = await this.getAuthHeaders();
-      
-      const response = await fetch(url, {
+;
+  const response = await fetch(url, {
         ...options,
         headers: {
           ...headers,
-          ...options.headers,
-        },
+          ...options.headers
+        }
       });
-
-      const responseData = await response.json();
+;
+  const responseData = await response.json();
 
       if (!response.ok) {
         return {
           success: false,
-          error: responseData.error || responseData.message || `HTTP ${response.status}`,
+          error: responseData.error || responseData.message || `HTTP ${response.status}`
         };
       }
 
       // Handle nested response structure from backend
       // Backend returns: { success: true, data: { ... } }
-      // We want to return: { success: true, data: { ... } }
-      const data = responseData.data || responseData;
+      // We want to return: { success: true, data: { ... } };
+  const data = responseData.data || responseData;
 
       return {
         success: true,
-        data,
+        data
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Network error',
+        error: error instanceof Error ? error.message : 'Network error'
       };
     }
   }
@@ -65,7 +65,7 @@ class ApiService {
   async signIn(email: string, password: string): Promise<APIResponse<{ user: User; token: string }>> {
     return this.makeRequest('/api/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password })
     });
   }
 
@@ -77,34 +77,34 @@ class ApiService {
   ): Promise<APIResponse<{ user: User; token: string }>> {
     return this.makeRequest('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password, firstName, lastName }),
+      body: JSON.stringify({ email, password, firstName, lastName })
     });
   }
 
   async signInWithGoogle(accessToken: string): Promise<APIResponse<{ user: User; token: string }>> {
     return this.makeRequest('/api/auth/google', {
       method: 'POST',
-      body: JSON.stringify({ accessToken }),
+      body: JSON.stringify({ accessToken })
     });
   }
 
   async signInWithApple(credential: any): Promise<APIResponse<{ user: User; token: string }>> {
     return this.makeRequest('/api/auth/apple', {
       method: 'POST',
-      body: JSON.stringify({ credential }),
+      body: JSON.stringify({ credential })
     });
   }
 
   async validateToken(token: string): Promise<APIResponse<User>> {
     return this.makeRequest('/api/auth/validate', {
       method: 'POST',
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ token })
     });
   }
 
   async demoLogin(): Promise<APIResponse<{ user: User; token: string }>> {
     return this.makeRequest('/api/auth/demo', {
-      method: 'POST',
+      method: 'POST'
     });
   }
 
@@ -116,7 +116,7 @@ class ApiService {
   async updateUserProfile(updates: Partial<User>): Promise<APIResponse<User>> {
     return this.makeRequest('/api/users/profile', {
       method: 'PATCH',
-      body: JSON.stringify(updates),
+      body: JSON.stringify(updates)
     });
   }
 
@@ -130,13 +130,13 @@ class ApiService {
   ): Promise<APIResponse<User>> {
     return this.makeRequest('/api/users/profile', {
       method: 'PATCH',
-      body: JSON.stringify(preferences),
+      body: JSON.stringify(preferences)
     });
   }
 
   async deleteUserAccount(): Promise<APIResponse<boolean>> {
     return this.makeRequest('/api/users/profile', {
-      method: 'DELETE',
+      method: 'DELETE'
     });
   }
 
@@ -152,32 +152,32 @@ class ApiService {
   async createThoughtmark(data: ThoughtmarkFormData): Promise<APIResponse<Thoughtmark>> {
     return this.makeRequest('/api/thoughtmarks', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
   }
 
   async updateThoughtmark(id: number, data: Partial<ThoughtmarkFormData>): Promise<APIResponse<Thoughtmark>> {
     return this.makeRequest(`/api/thoughtmarks/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
   }
 
   async deleteThoughtmark(id: number): Promise<APIResponse<boolean>> {
     return this.makeRequest(`/api/thoughtmarks/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     });
   }
 
   async togglePin(id: number): Promise<APIResponse<Thoughtmark>> {
     return this.makeRequest(`/api/thoughtmarks/${id}/toggle-pin`, {
-      method: 'POST',
+      method: 'POST'
     });
   }
 
   async toggleArchive(id: number): Promise<APIResponse<Thoughtmark>> {
     return this.makeRequest(`/api/thoughtmarks/${id}/toggle-archive`, {
-      method: 'POST',
+      method: 'POST'
     });
   }
 
@@ -197,132 +197,132 @@ class ApiService {
   async createBin(data: BinFormData): Promise<APIResponse<Bin>> {
     return this.makeRequest('/api/bins', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
   }
 
   async updateBin(id: number, data: Partial<BinFormData>): Promise<APIResponse<Bin>> {
     return this.makeRequest(`/api/bins/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
   }
 
   async deleteBin(id: number): Promise<APIResponse<boolean>> {
     return this.makeRequest(`/api/bins/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     });
   }
 
   // AI methods (for later)
-  async generateInsights(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
-    const response = await this.makeRequest('/api/ai/insights', {
+  async generateInsights(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {;
+  const response = await this.makeRequest('/api/ai/insights', {
       method: 'POST',
-      body: JSON.stringify({ thoughtmarkIds }),
+      body: JSON.stringify({ thoughtmarkIds })
     });
     console.log('[apiService.generateInsights] Raw response:', response);
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
-  async smartSort(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
-    const response = await this.makeRequest('/api/ai/smart-sort', {
+  async smartSort(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {;
+  const response = await this.makeRequest('/api/ai/smart-sort', {
       method: 'POST',
-      body: JSON.stringify({ thoughtmarkIds }),
+      body: JSON.stringify({ thoughtmarkIds })
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
-  async recommendations(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
-    const response = await this.makeRequest('/api/ai/recommendations', {
+  async recommendations(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {;
+  const response = await this.makeRequest('/api/ai/recommendations', {
       method: 'POST',
-      body: JSON.stringify({ thoughtmarkIds }),
+      body: JSON.stringify({ thoughtmarkIds })
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
-  async learningResources(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {
-    const response = await this.makeRequest('/api/ai/learning-resources', {
+  async learningResources(thoughtmarkIds?: string[]): Promise<APIResponse<any>> {;
+  const response = await this.makeRequest('/api/ai/learning-resources', {
       method: 'POST',
-      body: JSON.stringify({ thoughtmarkIds }),
+      body: JSON.stringify({ thoughtmarkIds })
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
   async categorizeThoughtmark(content: string): Promise<APIResponse<string[]>> {
     return this.makeRequest('/api/ai/categorize', {
       method: 'POST',
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ content })
     });
   }
 
   async summarizeThoughtmark(content: string): Promise<APIResponse<string>> {
     return this.makeRequest('/api/ai/summarize', {
       method: 'POST',
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ content })
     });
   }
 
   // Voice processing (for later)
-  async uploadVoiceNote(formData: FormData): Promise<APIResponse<{ url: string; transcription: string }>> {
-    const token = await AsyncStorage.getItem('@thoughtmarks_token');
+  async uploadVoiceNote(formData: FormData): Promise<APIResponse<{ url: string; transcription: string }>> {;
+  const token = await AsyncStorage.getItem('@thoughtmarks_token');
     
     return this.makeRequest('/api/ai/process-voice', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`
       },
-      body: formData,
+      body: formData
     });
   }
 
-  async semanticSearch(query: string) {
-    const response = await this.makeRequest('/api/ai/semantic-search', {
+  async semanticSearch(query: string) {;
+  const response = await this.makeRequest('/api/ai/semantic-search', {
       method: 'POST',
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query })
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
-  async generateSearchSuggestions() {
-    const response = await this.makeRequest('/api/ai/search-suggestions', {
-      method: 'POST',
+  async generateSearchSuggestions() {;
+  const response = await this.makeRequest('/api/ai/search-suggestions', {
+      method: 'POST'
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 
-  async generateThoughtmarkSuggestions(data: { content: string; title?: string; tags?: string[] }) {
-    const response = await this.makeRequest('/api/ai/thoughtmark-suggestions', {
+  async generateThoughtmarkSuggestions(data: { content: string; title?: string; tags?: string[] }) {;
+  const response = await this.makeRequest('/api/ai/thoughtmark-suggestions', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
     return {
       success: response.success,
       data: response.data,
-      error: response.error,
+      error: response.error
     };
   }
 }

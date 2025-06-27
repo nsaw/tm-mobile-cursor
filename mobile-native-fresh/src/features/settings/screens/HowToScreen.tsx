@@ -8,8 +8,7 @@ import { Card } from '../../../components/ui/Card';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 
 const HowToScreen: React.FC = () => {
-  
-
+  const { tokens } = useTheme();
   const categories = [
     {
       title: 'Getting Started',
@@ -20,7 +19,7 @@ const HowToScreen: React.FC = () => {
         'Organize with bins',
         'Use tags for better organization',
         'Search and find content quickly',
-      ],
+      ]
     },
     {
       title: 'Advanced Features',
@@ -31,7 +30,7 @@ const HowToScreen: React.FC = () => {
         'AI-powered search',
         'Export and backup',
         'Customize your experience',
-      ],
+      ]
     },
   ];
 
@@ -40,13 +39,13 @@ const HowToScreen: React.FC = () => {
       question: 'How do I create a thoughtmark?',
       answer: 'Tap the + button and start typing or use voice recording.',
       category: 'Basics',
-      icon: Feather,
+      icon: Feather
     },
     {
       question: 'Can I organize my thoughtmarks?',
       answer: 'Yes! Use bins to group related thoughtmarks together.',
       category: 'Organization',
-      icon: Feather,
+      icon: Feather
     },
   ];
 
@@ -57,7 +56,7 @@ const HowToScreen: React.FC = () => {
       icon: Ionicons,
       onPress: () => {
         // TODO: Implement video tutorials
-      },
+      }
     },
     {
       title: 'User Guide',
@@ -65,7 +64,7 @@ const HowToScreen: React.FC = () => {
       icon: MaterialCommunityIcons,
       onPress: () => {
         // TODO: Implement user guide
-      },
+      }
     },
   ];
 
@@ -82,7 +81,7 @@ const HowToScreen: React.FC = () => {
         {categories.map((cat) => (
           <Card key={cat.title} style={{ padding: tokens.spacing.md }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <cat.icon size={28} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+              <cat.icon size={28} color={tokens?.colors?.accent ?? "#000000"} style={{ marginRight: tokens.spacing.md }} />
               <View style={{ flex: 1 }}>
                 <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{cat.title}</Text>
                 <Caption><Text>{cat.description}</Text></Caption>
@@ -91,7 +90,7 @@ const HowToScreen: React.FC = () => {
             <View style={{ gap: tokens.spacing.xs }}>
               {cat.items.map((item, index) => (
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <CheckCircle size={14} color={tokens.colors.success} style={{ marginRight: 6 }} />
+                  <CheckCircle size={14} color={tokens?.colors?.success ?? "#000000"} style={{ marginRight: 6 }} />
                   <Text style={{ color: tokens.colors.textSecondary, fontSize: tokens.typography.fontSize.sm }}>{item}</Text>
                 </View>
               ))}
@@ -107,7 +106,7 @@ const HowToScreen: React.FC = () => {
         {localFaqs.map((faq) => (
           <Card key={faq.question} style={{ padding: tokens.spacing.md }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <faq.icon size={22} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+              <faq.icon size={22} color={tokens?.colors?.accent ?? "#000000"} style={{ marginRight: tokens.spacing.md }} />
               <View style={{ flex: 1 }}>
                 <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{faq.question}</Text>
                 <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.xs }}>{faq.answer}</Text>
@@ -124,7 +123,7 @@ const HowToScreen: React.FC = () => {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
         {localResources.map((res) => (
           <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
-            <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
+            <res.icon size={32} color={tokens?.colors?.accent ?? "#000000"} style={{ marginBottom: tokens.spacing.sm }} />
             <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
             <Caption><Text>{res.description}</Text></Caption>
           </Card>
@@ -134,7 +133,7 @@ const HowToScreen: React.FC = () => {
       {/* Support Info */}
       <Card style={{ backgroundColor: tokens.colors.accentMuted, borderColor: tokens.colors.accent, padding: tokens.spacing.md }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <HelpCircle size={20} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <HelpCircle size={20} color={tokens?.colors?.accent ?? "#000000"} style={{ marginRight: tokens.spacing.md }} />
           <View style={{ flex: 1 }}>
             <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
             <Caption><Text>We typically respond to support requests within 24 hours during business days.</Text></Caption>

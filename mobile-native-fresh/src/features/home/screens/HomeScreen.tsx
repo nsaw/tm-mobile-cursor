@@ -1,7 +1,7 @@
 import {
   View,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,46 +17,45 @@ import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 
-export const HomeScreen = ({ navigation }: { navigation: any }) => {
+export const HomeScreen = ({ navigation }: { navigation: any }) => {;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBin, setSelectedBin] = useState<Bin | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
-
-  
+;
   const { user } = useAuth();
-
+;
   const {
     thoughtmarks,
     loading: thoughtmarksLoading,
     error: thoughtmarksError,
     fetchThoughtmarks,
-    searchThoughtmarks,
+    searchThoughtmarks
   } = useThoughtmarks();
-
+;
   const {
     bins,
     loading: binsLoading,
-    fetchBins,
+    fetchBins
   } = useBins();
 
   useEffect(() => {
     loadInitialData();
   }, []);
-
+;
   const loadInitialData = async () => {
     await Promise.all([
       fetchThoughtmarks(),
       fetchBins(),
     ]);
   };
-
+;
   const handleRefresh = async () => {
     setRefreshing(true);
     await loadInitialData();
     setRefreshing(false);
   };
-
+;
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     if (query.trim()) {
@@ -65,24 +64,24 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
       await fetchThoughtmarks();
     }
   };
-
+;
   const handleThoughtmarkPress = (thoughtmark: Thoughtmark) => {
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
-
+;
   const handleThoughtmarkEdit = (thoughtmark: Thoughtmark) => {
     navigation.navigate('CreateThoughtmark', { thoughtmarkId: thoughtmark.id });
   };
-
+;
   const handleCreateNew = () => {
     navigation.navigate('CreateThoughtmark');
   };
-
+;
   const handleBinPress = (bin: Bin) => {
     setSelectedBin(bin);
     navigation.navigate('BinDetail', { binId: bin.id });
   };
-
+;
   const handleTagPress = (tag: string) => {
     setSelectedTags(prev => 
       prev.includes(tag) 
@@ -90,11 +89,11 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         : [...prev, tag]
     );
   };
-
+;
   const handleClearAllTags = () => {
     setSelectedTags([]);
   };
-
+;
   const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
     try {
       // TODO: Implement API call to toggle pin status
@@ -108,13 +107,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
-  // Convert Thoughtmark to ThoughtmarkWithBin by adding binName
+  // Convert Thoughtmark to ThoughtmarkWithBin by adding binName;
   const thoughtmarksWithBin: ThoughtmarkWithBin[] = thoughtmarks.map(tm => ({
     ...tm,
-    binName: bins.find(bin => bin.id === tm.binId)?.name,
+    binName: bins.find(bin => bin.id === tm.binId)?.name
   }));
 
-  // Get all unique tags from thoughtmarks
+  // Get all unique tags from thoughtmarks;
   const allTags = Array.from(
     new Set(
       thoughtmarks
@@ -123,21 +122,21 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
     )
   ).sort();
 
-  // Filter thoughtmarks by selected bin and tags
-  const filteredThoughtmarks = thoughtmarksWithBin.filter(tm => {
-    const matchesBin = !selectedBin || tm.binId === selectedBin.id;
+  // Filter thoughtmarks by selected bin and tags;
+  const filteredThoughtmarks = thoughtmarksWithBin.filter(tm => {;
+  const matchesBin = !selectedBin || tm.binId === selectedBin.id;
     const matchesTags = selectedTags.length === 0 || 
       selectedTags.some(tag => tm.tags.includes(tag));
     return matchesBin && matchesTags;
   });
-
+;
   const recentThoughtmarks = filteredThoughtmarks
     .filter(tm => !tm.isArchived && !tm.isDeleted)
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 5);
-
+;
   const pinnedThoughtmarks = filteredThoughtmarks.filter(tm => tm.isPinned);
-
+;
   const renderThoughtmarkCard = ({ item }: { item: ThoughtmarkWithBin }) => (
     <ThoughtmarkCard
       thoughtmark={item}
@@ -150,44 +149,44 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
       onPinToggle={handlePinToggle}
     />
   );
-
+;
   const handleProfilePress = () => {
     navigation.navigate('Profile');
   };
-
+;
   const handleVoiceRecord = () => {
     navigation.navigate('VoiceRecord');
   };
-
+;
   const handleViewBins = () => {
     navigation.navigate('Bins');
   };
-
+;
   const handleNavigate = (route: string) => {
     navigation.navigate(route);
   };
-
+;
   const quickActions = [
     {
       title: 'Create Thoughtmark',
       icon: 'create',
       onPress: handleCreateNew,
-      color: tokens.colors.accent,
+      color: tokens.colors.accent
     },
     {
       title: 'Voice Record',
       icon: 'mic',
       onPress: handleVoiceRecord,
-      color: tokens.colors.accent,
+      color: tokens.colors.accent
     },
     {
       title: 'View Bins',
       icon: 'folder',
       onPress: handleViewBins,
-      color: tokens.colors.accent,
+      color: tokens.colors.accent
     },
   ];
-
+;
   const tags = allTags;
 
   return (
@@ -200,7 +199,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         style={{ 
           flex: 1,
           paddingHorizontal: tokens.spacing.lg,
-          paddingVertical: tokens.spacing.md,
+          paddingVertical: tokens.spacing.md
         }}
         showsVerticalScrollIndicator={false}
       >
@@ -212,11 +211,11 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             paddingVertical: tokens.spacing.sm,
             borderRadius: tokens.radius.full,
             backgroundColor: tokens.colors.backgroundSecondary,
-            marginBottom: tokens.spacing.lg,
+            marginBottom: tokens.spacing.lg
           }}
           onPress={() => navigation.navigate('Account' as any)} accessibilityRole="button"  
         >
-          <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
+          <Ionicons name="person-circle-outline" size={24} color={tokens?.colors?.text ?? "#000000"} />
           <Text style={{ marginLeft: tokens.spacing.sm, fontWeight: '600' }}>
             {user?.firstName || 'User'}
           </Text>
@@ -229,7 +228,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg
             }}
           >
             Quick Actions
@@ -245,7 +244,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                 style={{
                   alignItems: 'center',
                   marginRight: tokens.spacing.lg,
-                  minWidth: 80,
+                  minWidth: 80
                 }}
                 onPress={action.onPress}
                accessibilityRole="button"  >
@@ -257,16 +256,16 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   backgroundColor: action.color || tokens.colors.surface,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: tokens.spacing.xs,
+                  marginBottom: tokens.spacing.xs
                 }}>
-                  <Ionicons name={action.icon} size={24} color={tokens.colors.text} />
+                  <Ionicons name={action.icon} size={24} color={tokens?.colors?.text ?? "#000000"} />
                 </View>
                 <Text 
-                  variant="caption" 
+                   
                   
                   style={{ 
                     textAlign: 'center',
-                    marginBottom: tokens.spacing.xs,
+                    marginBottom: tokens.spacing.xs
                   }}
                 >
                   {action.title}
@@ -283,7 +282,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg
             }}
           >
             Recent Thoughtmarks
@@ -301,19 +300,18 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   marginRight: tokens.spacing.md,
                   padding: tokens.spacing.md,
                   backgroundColor: tokens.colors.surface,
-                  borderRadius: tokens.radius.md,
+                  borderRadius: tokens.radius.md
                 }}
                 onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
                 accessibilityRole="button"
-                
-                
+
               >
                 <Text 
                   variant="heading" 
                   
                   style={{ 
                     marginBottom: tokens.spacing.xs,
-                    fontWeight: '600',
+                    fontWeight: '600'
                   }}
                   numberOfLines={1}
                 >
@@ -323,7 +321,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   variant="body" 
                   
                   style={{ 
-                    color: tokens.colors.textSecondary,
+                    color: tokens.colors.textSecondary
                   }}
                   numberOfLines={2}
                 >
@@ -341,7 +339,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg
             }}
           >
             Your Stats
@@ -349,13 +347,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
           <View style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-            paddingHorizontal: tokens.spacing.lg,
+            paddingHorizontal: tokens.spacing.lg
           }}>
             <View style={{ alignItems: 'center' }}>
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {thoughtmarks.length}
               </Text>
-              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
+              <Text   style={{ color: tokens.colors.textSecondary }}>
                 Thoughtmarks
               </Text>
             </View>
@@ -363,7 +361,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {bins.length}
               </Text>
-              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
+              <Text   style={{ color: tokens.colors.textSecondary }}>
                 Bins
               </Text>
             </View>
@@ -371,7 +369,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
                 {tags.length}
               </Text>
-              <Text variant="caption"  style={{ color: tokens.colors.textSecondary }}>
+              <Text   style={{ color: tokens.colors.textSecondary }}>
                 Tags
               </Text>
             </View>
@@ -385,13 +383,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             size="lg"
             style={{ 
               marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              paddingHorizontal: tokens.spacing.lg
             }}
           >
             Tips & Tricks
           </Text>
           <View style={{
-            paddingHorizontal: tokens.spacing.lg,
+            paddingHorizontal: tokens.spacing.lg
           }}>
             <Text variant="body" style={{ textAlign: 'center', marginBottom: tokens.spacing.lg }}>
               Use voice recording to quickly capture ideas on the go. Long press any thoughtmark for quick actions.

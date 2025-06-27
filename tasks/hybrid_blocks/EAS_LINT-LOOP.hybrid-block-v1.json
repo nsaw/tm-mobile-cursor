@@ -1,0 +1,120 @@
+{
+  "branch": "feature/voice-capture-complete",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "notes": [
+    {
+      "\ud83d\udccc PRE-CHECK": "Tag rollback for full git recovery"
+    },
+    {
+      "\ud83e\udde0 MISSION": "Voice-to-Thoughtmark Full Capture System"
+    },
+    {
+      "\ud83c\udfaf GOAL": "Complete Siri/Google voice dictation capture with auto-title, tag, bin, and UI setup"
+    },
+    {
+      "\u2705 PRE-CHECK": "Run before operation to tag rollback"
+    },
+    {
+      "\u2705 DO NOT STOP": "Execute full block in order"
+    },
+    {
+      "\u2705 BACKGROUND": "Autofill, AI title, and background-aware flows included"
+    }
+  ],
+  "phases": [
+    {
+      "section": "Install Dependencies + Generate Helper Files",
+      "actions": [
+        "Install required polyfill: `npm install url` (for deep link parsing)",
+        "Create `src/navigation/deepLinks.ts` from downloaded template",
+        "Create `src/utils/suggestTitleFromBody.ts` for title autofill",
+        "Create `src/voice/androidCapture.ts` for Android intent hooks",
+        "Create `scripts/lint-voice-capture.ts` to validate hook presence and endpoint mapping",
+        "While implementing, run in parallel: `while true; do ts-node scripts/lint-voice-capture.ts; sleep 4; clear; done`"
+      ],
+      "commit": "chore: setup voice capture helpers and linter",
+      "tag": "v1.3.3_voice-capture-helpers",
+      "notes": [
+        "\ud83d\udca1 Linter will continuously check for endpoint + file integrity",
+        "\ud83d\udee0\ufe0f Run this in a separate terminal window during full integration phase"
+      ]
+    },
+    {
+      "section": "Shortcut + Deep Link Infrastructure",
+      "actions": [
+        "In `src/navigation/deepLinks.ts`, register deep link `thoughtmarks://capture?text=`",
+        "Pass decoded text to `NewThoughtmarkScreen` via route.params.body",
+        "Set flag route.params.voiceCapture=true to trigger autofill",
+        "In Android, register `intent-filter` for ACTION_VIEW with scheme thoughtmarks"
+      ],
+      "commit": "feat: universal capture deep link handler",
+      "tag": "v1.3.3_deeplink-handler"
+    },
+    {
+      "section": "Thoughtmark Autofill Logic",
+      "actions": [
+        "In `NewThoughtmarkScreen.tsx`, if `voiceCapture === true`, auto-fill:",
+        "\u2192 context/body from route.params.body",
+        "\u2192 tags: ['#voice-to-tm', '#sort later']",
+        "\u2192 bin: 'Sort Later' via defaultBinSelector() helper",
+        "\u2192 title: use `suggestTitleFromBody(text: string)` from `ai/utils/titleSuggester.ts`",
+        "Auto-save on mount, but keep editor open"
+      ],
+      "commit": "feat: autofill voice content + AI title + auto-save",
+      "tag": "v1.3.3_autofill-autosave"
+    },
+    {
+      "section": "Bottom Nav Manual Trigger Hook",
+      "actions": [
+        "Connect middle red mic icon in BottomNavBar to route user to `NewThoughtmarkScreen` with:",
+        "\u2192 voiceCapture: true",
+        "\u2192 body: '' (empty string triggers real-time dictation modal fallback)",
+        "Display dictation modal or shortcut redirect fallback if empty"
+      ],
+      "commit": "feat: bottom mic icon routes to voice capture flow",
+      "tag": "v1.3.3_manual-mic-trigger"
+    },
+    {
+      "section": "Siri Shortcut One-Click Setup",
+      "actions": [
+        "In `src/features/onboarding/components/ShortcutPanel.tsx`, add card: 'Capture Thoughts with Siri'",
+        "Add button: 'Set Up Siri Shortcut'",
+        "Button opens `https://www.icloud.com/shortcuts/e860df7cc2dd437aa76d0bb4f7b9b5f3` in Safari",
+        "In Settings, add toggle panel to rename shortcut trigger",
+        "Suggest: 'Capture this thought', 'Remember this', 'Note this moment'"
+      ],
+      "commit": "feat: Siri shortcut setup UI in onboarding + settings",
+      "tag": "v1.3.3_siri-shortcut-ui"
+    },
+    {
+      "section": "Google Assistant / Android Fallback",
+      "actions": [
+        "Stub handler in `src/voice/androidCapture.ts` for parsing intent via `Linking.getInitialURL()`",
+        "If detected from ACTION_VIEW with scheme thoughtmarks://capture, route into same screen as iOS",
+        "Display friendly alert: 'Voice capture enabled \u2014 Say \u201cHey Google, open Thoughtmarks\u201d to begin.'",
+        "Stub: `setupGoogleShortcut()` \u2014 leave TODO for App Actions integration in next block"
+      ],
+      "commit": "feat: Android fallback + future shortcut stubs",
+      "tag": "v1.3.3_android-voice-hook"
+    },
+    {
+      "section": "Styling, Theming, Tags, and Tokens",
+      "actions": [
+        "All new screens use `useTheme()` exclusively",
+        "Capture badge: `NeonGradientText` with `typography.tagline` and `tokens.colors.accent`",
+        "Spacing via `spacing.modalPaddingHorizontal` and `spacing.md`",
+        "Auto-set tags programmatically using `tags.push(...)` and prevent duplicates",
+        "Save timestamp as `createdAt` when auto-saving"
+      ],
+      "commit": "style: tokenized capture layout + accessibility",
+      "tag": "v1.3.3_style-theme-token"
+    }
+  ],
+  "final": {
+    "commit": "chore: voice capture fully integrated + themed",
+    "tag": "v1.3.3_voice-capture-integrated",
+    "notes": "Voice-to-Thoughtmark flow is now one-tap setup via Siri, mic icon, or Google Assistant stub. Full autofill, tagging, AI title, and bin assignment working across mobile platforms with onboarding integration."
+  }
+}

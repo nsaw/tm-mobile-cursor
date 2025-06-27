@@ -33,7 +33,7 @@ export const designTokens = {
     // Brand colors (matching web app)
     brand: '#5C6A24', // olive green
     brandHover: '#6C7A34', // slightly lighter
-    buttonText: '#fff',
+    buttonText: '#fff'
   },
   
   spacing: {
@@ -52,13 +52,13 @@ export const designTokens = {
     md: 10,   // Updated to match requirements
     lg: 14,   // Updated to match requirements
     xl: 24,
-    full: 9999,
+    full: 9999
   },
   
   typography: {
     fontFamily: {
       heading: 'Oswald',
-      body: 'Ubuntu',
+      body: 'Ubuntu'
     },
     fontSize: {
       xs: 12,
@@ -68,19 +68,19 @@ export const designTokens = {
       xl: 20,
       heading: 24,
       '2xl': 28,
-      '3xl': 32,
+      '3xl': 32
     },
     fontWeight: {
       light: '300',
       normal: '400',
       medium: '500',
       semibold: '600',
-      bold: '700',
+      bold: '700'
     },
     lineHeight: {
       tight: 1.2,
       normal: 1.5,
-      relaxed: 1.75,
+      relaxed: 1.75
     },
     // Heading 2 specific styles
     heading2: {
@@ -88,7 +88,7 @@ export const designTokens = {
       fontSize: 28,
       fontWeight: '700',
       textTransform: 'uppercase' as const,
-      letterSpacing: 1,
+      letterSpacing: 1
     },
     // Tagline variant
     tagline: {
@@ -96,8 +96,8 @@ export const designTokens = {
       fontSize: 12,
       fontWeight: '500',
       opacity: 0.8,
-      letterSpacing: 0.5,
-    },
+      letterSpacing: 0.5
+    }
   },
   
   shadows: {
@@ -105,33 +105,33 @@ export const designTokens = {
       shadowOffset: { width: 0, height: 1 },
       shadowRadius: 2,
       shadowOpacity: 0.3,
-      elevation: 1,
+      elevation: 1
     },
     md: {
       shadowOffset: { width: 0, height: 4 },
       shadowRadius: 6,
       shadowOpacity: 0.4,
-      elevation: 3,
+      elevation: 3
     },
     lg: {
       shadowOffset: { width: 0, height: 10 },
       shadowRadius: 15,
       shadowOpacity: 0.5,
-      elevation: 5,
+      elevation: 5
     },
     inner: {
       shadowOffset: { width: 0, height: 2 },
       shadowRadius: 4,
       shadowOpacity: 0.3,
-      elevation: 2,
-    },
+      elevation: 2
+    }
   },
   
   // Animation durations (matching web app)
   animations: {
     fast: 150,
     normal: 250,
-    slow: 350,
+    slow: 350
   },
   
   // Icon sizes
@@ -150,8 +150,8 @@ export const designTokens = {
     overlay: 100,
     modal: 200,
     tooltip: 300,
-    toast: 400,
-  },
+    toast: 400
+  }
 } as const;
 
 export type DesignTokens = typeof designTokens; 

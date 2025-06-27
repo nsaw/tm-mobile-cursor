@@ -2,7 +2,7 @@ import { Text ,
   View,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,43 +20,42 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   tags,
   selectedTags,
   onTagToggle,
-  onClearAll,
-}) => {
-  
+  onClearAll
+}) => {;
   const [showAllTags, setShowAllTags] = useState(false);
-
+;
   const styles = StyleSheet.create({
     container: {
-      marginBottom: tokens.spacing.lg ?? 20,
+      marginBottom: tokens.spacing.lg ?? 20
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm ?? 10,
+      marginBottom: tokens.spacing.sm ?? 10
     },
     title: {
       fontSize: tokens.typography.fontSize.body,
       fontWeight: tokens.typography.fontWeight.semibold,
       color: tokens.colors.textSecondary ?? '#888',
-      marginLeft: tokens.spacing.sm ?? 10,
+      marginLeft: tokens.spacing.sm ?? 10
     },
     clearButton: {
-      paddingHorizontal: tokens.spacing.sm ?? 10,
+      paddingHorizontal: tokens.spacing.sm ?? 10
     },
     clearText: {
       fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#888',
+      color: tokens.colors.textSecondary ?? '#888'
     },
     tagsContainer: {
-      paddingHorizontal: tokens.spacing.lg ?? 20,
+      paddingHorizontal: tokens.spacing.lg ?? 20
     },
     tagRow: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       gap: tokens.spacing.md ?? 10,
       paddingHorizontal: tokens.spacing.md ?? 10,
-      paddingVertical: tokens.spacing.sm ?? 5,
+      paddingVertical: tokens.spacing.sm ?? 5
     },
     tag: {
       paddingHorizontal: tokens.spacing.lg ?? 20,
@@ -64,21 +63,21 @@ export const TagFilter: React.FC<TagFilterProps> = ({
       borderRadius: tokens.radius.md ?? 20,
       borderWidth: 1,
       borderColor: tokens.colors.border ?? '#888',
-      marginRight: tokens.spacing.sm ?? 10,
+      marginRight: tokens.spacing.sm ?? 10
     },
     tagSelected: {
       backgroundColor: tokens.colors.accent ?? '#FFD500',
-      borderColor: tokens.colors.accent ?? '#FFD500',
+      borderColor: tokens.colors.accent ?? '#FFD500'
     },
     tagText: {
       fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#888',
+      color: tokens.colors.textSecondary ?? '#888'
     },
     filterIcon: {
-      marginRight: tokens.spacing.xs,
-    },
+      marginRight: tokens.spacing.xs
+    }
   });
-
+;
   const displayedTags = showAllTags ? tags : tags.slice(0, 5);
   const hasMoreTags = tags.length > 5;
 

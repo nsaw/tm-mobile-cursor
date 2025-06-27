@@ -1,6 +1,6 @@
 import {
   TouchableOpacity,
-  Platform,
+  Platform
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import React from 'react';
@@ -23,9 +23,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onVoiceRecord,
   showCreateButton = true,
   currentRoute = '/',
-  onCreateNew,
+  onCreateNew
 }) => {
-  
+  const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
 
   const handleAIToolsClick = () => {
@@ -81,7 +81,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       alignSelf: 'center',
       width: '100%',
       zIndex: tokens.zIndex.modal,
-      paddingBottom: 0,
+      paddingBottom: 0
     }} forceRole="navigation">
       <AutoRoleView style={{
         backgroundColor: tokens.colors.backgroundSecondary,
@@ -93,15 +93,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             shadowColor: '#000000',
             shadowOffset: {
               width: 0,
-              height: -2,
+              height: -2
             },
             shadowOpacity: 0.3,
-            shadowRadius: 8,
+            shadowRadius: 8
           },
           android: {
-            elevation: 12,
-          },
-        }),
+            elevation: 12
+          }
+        })
       }} forceRole="section">
         <AutoRoleView style={{
           flexDirection: 'row',
@@ -109,7 +109,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           alignItems: 'center',
           paddingVertical: tokens.spacing.md,
           paddingHorizontal: tokens.spacing.lg,
-          minHeight: 107,
+          minHeight: 107
         }} forceRole="container">
           {navItems.map((item, _index) => {
             const { label, path, action } = item;
@@ -129,7 +129,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   backgroundColor: 'transparent',
                   minHeight: 59,
                   minWidth: 59,
-                  position: 'relative',
+                  position: 'relative'
                 }}
                 onPress={() => {
                   if (isVoice && onVoiceRecord) {
@@ -153,9 +153,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     borderRadius: tokens.radius.md,
                     backgroundColor: `${tokens.colors.accent}1A`,
                     borderWidth: 1,
-                    borderColor: `${tokens.colors.accent}4D`,
+                    borderColor: `${tokens.colors.accent}4D`
                   }} forceRole="badge">
-                    {/* Empty children for badge */}
+                    0
                   </AutoRoleView>
                 )}
               </TouchableOpacity>
@@ -173,7 +173,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           zIndex: tokens.zIndex.tooltip,
           alignItems: 'center',
           justifyContent: 'center',
-          bottom: (insets.bottom + 40) * 1.34,
+          bottom: (insets.bottom + 40) * 1.34
         }} forceRole="button">
           <AutoRoleView style={{
             width: 83,
@@ -191,15 +191,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 shadowColor: tokens.colors.accent,
                 shadowOffset: {
                   width: 0,
-                  height: 0,
+                  height: 0
                 },
                 shadowOpacity: 0.6,
-                shadowRadius: 32,
+                shadowRadius: 32
               },
               android: {
-                elevation: 27,
-              },
-            }),
+                elevation: 27
+              }
+            })
           }} forceRole="button-wrapper">
             <TouchableOpacity
               style={{
@@ -215,15 +215,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     shadowColor: '#000000',
                     shadowOffset: {
                       width: 0,
-                      height: 5,
+                      height: 5
                     },
                     shadowOpacity: 0.4,
-                    shadowRadius: 16,
+                    shadowRadius: 16
                   },
                   android: {
-                    elevation: 16,
-                  },
-                }),
+                    elevation: 16
+                  }
+                })
               }}
               onPress={() => {
                 if (onCreateNew) {
@@ -234,7 +234,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               }}
               accessibilityRole="button"
             >
-              <MaterialCommunityIcons name="plus" size={47} color={tokens.colors.accent} />
+              <MaterialCommunityIcons name="plus" size={47} color={tokens?.colors?.accent ?? "#000000"} />
             </TouchableOpacity>
           </AutoRoleView>
         </AutoRoleView>

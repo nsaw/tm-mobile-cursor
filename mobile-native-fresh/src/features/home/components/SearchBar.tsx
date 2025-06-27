@@ -2,7 +2,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,35 +20,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
   placeholder = 'Search...',
   value,
-  onChangeText,
-}) => {
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  onChangeText
+}) => {;
   const [searchQuery, setSearchQuery] = useState(value || '');
-
+;
   const styles = StyleSheet.create({
     container: {
       paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingVertical: tokens.spacing.md
     },
     searchContainer: {
       flexDirection: 'row',
@@ -56,22 +35,22 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.radius.md,
       paddingHorizontal: tokens.spacing.md,
-      paddingVertical: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.sm
     },
     searchIcon: {
-      marginRight: tokens.spacing.sm,
+      marginRight: tokens.spacing.sm
     },
     searchInput: {
       flex: 1,
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.text,
-      paddingVertical: tokens.spacing.xs,
+      paddingVertical: tokens.spacing.xs
     },
     clearButton: {
-      padding: tokens.spacing.xs,
-    },
+      padding: tokens.spacing.xs
+    }
   });
-
+;
   const handleSearch = (text: string) => {
     setSearchQuery(text);
     if (onChangeText) {
@@ -79,7 +58,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
     onSearch(text);
   };
-
+;
   const handleClear = () => {
     setSearchQuery('');
     if (onChangeText) {
@@ -94,7 +73,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <Ionicons 
           name="search" 
           size={20} 
-          color={tokens.colors.textMuted}
+          color={tokens?.colors?.textMuted ?? "#000000"}
           style={styles.searchIcon}
         />
         <TextInput
@@ -109,7 +88,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         />
         {searchQuery.length > 0 && (
           <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button"  >
-            <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
+            <Ionicons name="close-circle" size={20} color={tokens?.colors?.textMuted ?? "#000000"} />
           </TouchableOpacity>
         )}
       </View>

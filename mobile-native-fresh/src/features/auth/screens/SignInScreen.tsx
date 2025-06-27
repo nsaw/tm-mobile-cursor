@@ -26,17 +26,17 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
   visible,
   onClose,
   onSwitchToSignUp,
-  onSuccess,
-}) => {
+  onSuccess
+}) => {;
   const { tokens, typography, spacing } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
-
-  const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
+;
+  const validateForm = () => {;
+  const newErrors: { email?: string; password?: string } = {};
 
     if (!email) {
       newErrors.email = 'Email is required';
@@ -46,8 +46,8 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
 
     if (!password) {
       newErrors.password = 'Password is required';
-    } else {
-      const passwordValidation = isValidPassword(password);
+    } else {;
+  const passwordValidation = isValidPassword(password);
       if (!passwordValidation.isValid) {
         newErrors.password = passwordValidation.message;
       }
@@ -56,7 +56,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+;
   const handleSignIn = async () => {
     if (!validateForm()) return;
 
@@ -70,7 +70,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
       setLoading(false);
     }
   };
-
+;
   const handleForgotPassword = () => {
     // TODO: Navigate to forgot password screen
     Alert.alert('Forgot Password', 'Password reset functionality coming soon');
@@ -82,8 +82,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
       animationType="slide"
       transparent
       onRequestClose={onClose}
-      
-      
+
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -97,7 +96,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#000000E6',
+            backgroundColor: '#000000E6'
           }} forceRole="modal">
             <AutoRoleView style={{
               width: '90%',
@@ -108,7 +107,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
               paddingBottom: tokens.spacing.xl,
               backgroundColor: tokens.colors.backgroundSecondary,
               borderRadius: tokens.radius.lg,
-              alignItems: 'center',
+              alignItems: 'center'
             }} forceRole="card">
               {/* Title */}
               <Text style={{
@@ -121,7 +120,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                 marginBottom: tokens.spacing.lg,
                 color: tokens.colors.text,
                 paddingVertical: tokens.spacing.sm,
-                lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8),
+                lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8)
               }}>
                 Sign In
               </Text>
@@ -129,7 +128,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
               {/* Email Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.md,
+                marginBottom: tokens.spacing.md
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -138,15 +137,15 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   borderColor: errors.email ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <Mail size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <Mail size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Email"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -162,7 +161,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.email}
                   </Text>
@@ -172,7 +171,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
               {/* Password Input */}
               <AutoRoleView style={{
                 width: '100%',
-                marginBottom: tokens.spacing.lg,
+                marginBottom: tokens.spacing.lg
               }} forceRole="input">
                 <AutoRoleView style={{
                   flexDirection: 'row',
@@ -181,15 +180,15 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   borderColor: errors.password ? tokens.colors.danger : tokens.colors.border,
                   borderRadius: tokens.radius.md,
                   paddingHorizontal: tokens.spacing.md,
-                  backgroundColor: tokens.colors.background,
+                  backgroundColor: tokens.colors.background
                 }} forceRole="input">
-                  <Lock size={20} color={tokens.colors.textSecondary} style={{ marginRight: tokens.spacing.sm }} />
+                  <Lock size={20} color={tokens?.colors?.textSecondary ?? "#000000"} style={{ marginRight: tokens.spacing.sm }} />
                   <TextInput
                     style={{
                       flex: 1,
                       color: tokens.colors.text,
                       fontSize: typography.body.fontSize,
-                      paddingVertical: tokens.spacing.md,
+                      paddingVertical: tokens.spacing.md
                     }}
                     placeholder="Password"
                     placeholderTextColor={tokens.colors.textSecondary}
@@ -206,9 +205,9 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                     
                   >
                     {showPassword ? (
-                      <EyeOff size={20} color={tokens.colors.textSecondary} />
+                      <EyeOff size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     ) : (
-                      <Eye size={20} color={tokens.colors.textSecondary} />
+                      <Eye size={20} color={tokens?.colors?.textSecondary ?? "#000000"} />
                     )}
                   </TouchableOpacity>
                 </AutoRoleView>
@@ -216,7 +215,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.danger,
                     fontSize: typography.small.fontSize,
-                    marginTop: tokens.spacing.xs,
+                    marginTop: tokens.spacing.xs
                   }}>
                     {errors.password}
                   </Text>
@@ -228,7 +227,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                 onPress={handleForgotPassword}
                 style={{
                   alignSelf: 'flex-end',
-                  marginBottom: tokens.spacing.lg,
+                  marginBottom: tokens.spacing.lg
                 }}
                 accessibilityRole="button"
                 
@@ -236,7 +235,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                 <Text style={{
                   color: tokens.colors.accent,
                   fontSize: typography.small.fontSize,
-                  textDecorationLine: 'underline',
+                  textDecorationLine: 'underline'
                 }}>
                   Forgot Password?
                 </Text>
@@ -254,7 +253,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   opacity: loading ? 0.5 : 1,
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: tokens.spacing.md
                 }}
                 accessibilityRole="button"
                 
@@ -262,7 +261,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                 <Text style={{
                   color: tokens.colors.buttonText || tokens.colors.background,
                   fontSize: typography.buttonText.fontSize,
-                  fontWeight: '600',
+                  fontWeight: '600'
                 }}>
                   {loading ? 'Signing In...' : 'Sign In'}
                 </Text>
@@ -272,11 +271,11 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
               <AutoRoleView style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }} forceRole="section">
                 <Text style={{
                   color: tokens.colors.textSecondary,
-                  fontSize: typography.body.fontSize,
+                  fontSize: typography.body.fontSize
                 }}>
                   Don't have an account?{' '}
                 </Text>
@@ -288,7 +287,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   <Text style={{
                     color: tokens.colors.accent,
                     fontSize: typography.body.fontSize,
-                    fontWeight: '600',
+                    fontWeight: '600'
                   }}>
                     Sign Up
                   </Text>

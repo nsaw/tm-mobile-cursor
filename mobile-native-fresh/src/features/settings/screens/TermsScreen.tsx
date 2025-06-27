@@ -7,16 +7,16 @@ import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 
-export const TermsScreen: React.FC = () => {
-  
-
+export const TermsScreen: React.FC = () => {;
+  const { tokens } = useTheme();
+;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: tokens.colors.background,
-      padding: tokens.spacing.xl,
+      padding: tokens.spacing.xl
     },
     iconContainer: {
       width: 64,
@@ -25,28 +25,28 @@ export const TermsScreen: React.FC = () => {
       backgroundColor: tokens.colors.accentMuted,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     title: {
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      marginBottom: tokens.spacing.sm
     },
     subtitle: {
       color: tokens.colors.textMuted,
       textAlign: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: tokens.spacing.lg
     },
     button: {
       width: 180,
-      backgroundColor: tokens.colors.accent,
-    },
+      backgroundColor: tokens.colors.accent
+    }
   });
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="file-document-outline" size={32} color={tokens.colors.background} />
+          <MaterialCommunityIcons name="file-document-outline" size={32} color={tokens?.colors?.background ?? "#000000"} />
       </View>
         
         <Heading><Text>Terms of Service</Text></Heading>

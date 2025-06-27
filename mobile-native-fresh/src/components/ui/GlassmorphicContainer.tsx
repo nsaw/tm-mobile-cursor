@@ -31,15 +31,15 @@ export const GlassmorphicContainer: React.FC<GlassmorphicContainerProps> = ({
   borderWidth,
   borderColor,
   style,
-  overflow = 'hidden',
+  overflow = 'hidden'
 }) => {
   return (
     <BlurView><Text>{children}</Text></BlurView>
   );
 };
-
-const styles = StyleSheet.create({
+;
+  const styles = StyleSheet.create({
   container: {
     // Base glassmorphic styling
-  },
+  }
 }); 

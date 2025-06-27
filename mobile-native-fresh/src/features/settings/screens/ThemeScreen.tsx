@@ -7,7 +7,7 @@ import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 
 const ThemeScreen: React.FC = () => {
-  
+  const { tokens } = useTheme();
 
   return (
     <View style={{ 
@@ -26,7 +26,7 @@ const ThemeScreen: React.FC = () => {
         justifyContent: 'center', 
         marginBottom: tokens.spacing.lg 
       }}>
-        <MaterialCommunityIcons name="palette-outline" size={32} color={tokens.colors.background} />
+        <MaterialCommunityIcons name="palette-outline" size={32} color={tokens?.colors?.background ?? "#000000"} />
       </View>
       
       <Heading><Text>Theme</Text></Heading>
