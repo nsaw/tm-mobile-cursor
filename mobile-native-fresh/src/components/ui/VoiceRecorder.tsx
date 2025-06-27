@@ -535,7 +535,12 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </Text>
           )}
 
-          <TouchableOpacity style={styles.testButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> Speech.speak("This is a test of the voice recorder functionality.")}>
+          <TouchableOpacity style={styles.testButton} 
+            onPress={() => Speech.speak("This is a test of the voice recorder functionality.")}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Button"
+          >
             <Ionicons name="flask" size={16} color={tokens.colors.accent} />
             <Text style={styles.testButtonText}>Test Audio</Text>
           </TouchableOpacity>
@@ -548,14 +553,26 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
           {transcript && (
             <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.actionButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
-                onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
-                onClose();
-              }}>
+              <TouchableOpacity 
+                style={styles.actionButton} 
+                onPress={() => {
+                  onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
+                  onClose();
+                }}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+              >
                 <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
                 <Text style={styles.actionButtonText}>Use</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+              <TouchableOpacity 
+                style={styles.actionButton} 
+                onPress={cancelRecording} 
+                accessibilityRole="button" 
+                accessible={true} 
+                accessibilityLabel="Button"
+              >
                 <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>

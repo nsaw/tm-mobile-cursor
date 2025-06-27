@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons , MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import type { NavigationProp } from '../../../navigation/types';
@@ -65,9 +65,7 @@ export const AIToolsScreen: React.FC = () => {
     setIsGeneratingInsights(true);
     try {
       const result = await apiService.generateInsights();
-      console.log('[AIToolsScreen] API result:', result);
       setInsights(Array.isArray(result.data.insights) ? result.data.insights : []);
-      console.log('[AIToolsScreen] insights after set:', Array.isArray(result.data.insights) ? result.data.insights : []);
       Alert.alert(
         'Insights Generated',
         'Your AI insights have been generated successfully!'
@@ -271,19 +269,17 @@ export const AIToolsScreen: React.FC = () => {
                   {item.relatedThoughtmarks.map((thoughtmarkId: number, idx: number) => (
                     <TouchableOpacity
                       key={idx}
-                      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId} as never)}
+                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
+                      accessibilityRole="button"
+                      accessible={true}
+                      accessibilityLabel="Open thoughtmark detail"
                       style={{
                         backgroundColor: tokens.colors.accent + '20',
                         paddingHorizontal: tokens.spacing.sm,
-                        paddingVertical: tokens.spacing.xs,
-                        borderRadius: tokens.radius.sm,
-                        marginRight: tokens.spacing.xs,
-                        marginBottom: tokens.spacing.xs,
+                        // ...other styles
                       }}
                     >
-                      <Text style={{ color: tokens.colors.accent, fontSize: 12 }}>
-                        #{thoughtmarkId}
-                      </Text>
+                      {/* ...child content */}
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -301,7 +297,10 @@ export const AIToolsScreen: React.FC = () => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+            onPress={() => navigation.goBack()}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Go back"
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
@@ -341,7 +340,10 @@ export const AIToolsScreen: React.FC = () => {
 
           <TouchableOpacity
             style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Subscribe' as never)}
+            onPress={() => navigation.navigate('Subscribe' as never)}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Upgrade to Premium"
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
             <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
@@ -359,7 +361,10 @@ export const AIToolsScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
         >
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
@@ -484,7 +489,10 @@ export const AIToolsScreen: React.FC = () => {
       {/* Floating Action Button */}
       <TouchableOpacity
         style={[styles.fab, { backgroundColor: tokens.colors.accent }]}
-        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('CreateThoughtmark' as never)}
+        onPress={() => navigation.navigate('CreateThoughtmark' as never)}
+        accessibilityRole="button"
+        accessible={true}
+        accessibilityLabel="Create new thoughtmark"
       >
         <Ionicons name="add" size={24} color="#FFFFFF" />
       </TouchableOpacity>
@@ -678,4 +686,4 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
   },
-}); 
+});

@@ -24,9 +24,7 @@ import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 import { RootStackParamList } from '../../../navigation/types';
 
-type NavigationProp = StackNavigationProp<RootStackParamList>;
-
-type SortType = 'name' | 'created' | 'updated';
+type SortType = 'name' | 'count' | 'date' | 'created' | 'updated';
 
 export const AllBinsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -121,8 +119,11 @@ export const AllBinsScreen: React.FC = () => {
         borderWidth: 1,
         borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSortBy(sortType as SortType)}
-    >
+      onPress={() => setSortBy(sortType as SortType)}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel={sortType}
+          >
       <Text 
         variant="body" 
         style={{
@@ -325,10 +326,6 @@ export const AllBinsScreen: React.FC = () => {
     listContainer: {
       paddingBottom: tokens.spacing.xl,
     },
-    refreshControl: {
-      colors: [tokens.colors.accent],
-      tintColor: tokens.colors.accent,
-    },
   });
 
   return (
@@ -372,7 +369,12 @@ export const AllBinsScreen: React.FC = () => {
           <FlatList
             data={sortedBins}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(item)}>
+              <TouchableOpacity 
+                onPress={() => handleBinPress(item)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+              >
                 <BinCard bin={item} onPress={() => handleBinPress(item)} />
               </TouchableOpacity>
             )}
@@ -391,7 +393,7 @@ export const AllBinsScreen: React.FC = () => {
               <View style={styles.emptyContainer}>
                 <Ionicons name="folder" size={64} color={tokens.colors.textMuted} />
                 <Text 
-                  variant="subheading" 
+                  variant="heading" 
                   style={styles.emptyTitle}
                 >
                   No bins found

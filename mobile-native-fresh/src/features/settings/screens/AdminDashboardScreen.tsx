@@ -163,12 +163,15 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
-          >
-            <Ionicons name="arrow-back" size={24} color={getIconColor('text')} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={getIconColor('text')} />
+        </TouchableOpacity>
           <Text style={styles.title}>Admin Dashboard</Text>
           <View style={styles.headerRight} />
         </View>

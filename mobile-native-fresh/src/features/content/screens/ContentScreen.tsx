@@ -119,20 +119,24 @@ export const ContentScreen: React.FC = () => {
         </Text>
 
         {contentPages.map((page) => (
-          <TouchableOpacity
-            key={page.route}
-            style={styles.card}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate(page.route as any)}
-          >
-            <View style={styles.tag}>
-              <Feather name={page.iconName} size={24} color={page.iconColor} />
-            </View>
-            <View style={styles.cardTextContainer}>
-              <Text style={styles.subtitle}>{page.title}</Text>
-              <Text style={styles.body}>{page.description}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        <TouchableOpacity
+          key={page.route}
+          style={styles.card}
+          onPress={() => navigation.navigate(page.route as any)}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel={page.title}
+        >
+          <View style={styles.tag}>
+            <Feather name={page.iconName} size={24} color={page.iconColor} />
+          </View>
+          <View style={styles.cardTextContainer}>
+            <Text style={styles.subtitle}>{page.title}</Text>
+            <Text style={styles.body}>{page.description}</Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+
       </ScrollView>
     </SafeAreaView>
   );

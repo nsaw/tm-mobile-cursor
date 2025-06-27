@@ -134,7 +134,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   minWidth: 59,
                   position: 'relative',
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                onPress={() => {
                   if (isVoice && onVoiceRecord) {
                     onVoiceRecord();
                   } else if (action === 'ai-tools') {
@@ -144,7 +144,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   }
                 }}
                 accessibilityRole="button"
-                accessibilityLabel={`${label} ${isActive ? 'selected' : ''}`}
+                accessible={true}
+                accessibilityLabel="Button"
               >
                 {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && (
@@ -227,7 +228,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   },
                 }),
               }}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+              onPress={() => {
                 if (onCreateNew) {
                   onCreateNew();
                 } else {

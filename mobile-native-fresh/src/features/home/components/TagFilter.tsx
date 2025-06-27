@@ -109,7 +109,10 @@ export const TagFilter: React.FC<TagFilterProps> = ({
                 styles.tag,
                 selectedTags.includes(tag) && styles.tagSelected,
               ]}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onTagToggle(tag)}
+              onPress={() => onTagToggle(tag)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
             >
               <Text style={[
                 styles.tagText,
@@ -123,7 +126,10 @@ export const TagFilter: React.FC<TagFilterProps> = ({
           {hasMoreTags && (
             <TouchableOpacity
               style={styles.tag}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowAllTags(!showAllTags)}
+              onPress={() => setShowAllTags(!showAllTags)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
             >
               <Text style={styles.tagText}>
                 {showAllTags ? 'Show less' : `+${tags.length - 5} more`}
