@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 
 export interface TextProps extends RNTextProps {
@@ -19,14 +19,15 @@ export const Text: React.FC<TextProps> = ({
 }) => {
   const { tokens } = useTheme();
   
-  const getVariantStyle = () => {
+  const getVariantStyle = (): TextStyle => {
     // Map missing variants to existing ones
     const mappedVariant = variant === 'subheading' ? 'subtitle' : 
                          variant === 'heading2' ? 'heading' : 
                          variant === 'label' ? 'caption' : 
                          variant;
     
-    let baseStyle;
+    let baseStyle: TextStyle;
+    
     switch (mappedVariant) {
       case 'heading':
         baseStyle = {
@@ -113,7 +114,7 @@ export const Text: React.FC<TextProps> = ({
     if (size && size in tokens.typography.fontSize) {
       const fontSize = tokens.typography.fontSize[size as keyof typeof tokens.typography.fontSize];
       baseStyle.fontSize = fontSize;
-      baseStyle.lineHeight = (fontSize * tokens.typography.lineHeight.normal) as any;
+      baseStyle.lineHeight = fontSize * tokens.typography.lineHeight.normal;
     }
 
     // Apply weight override if provided

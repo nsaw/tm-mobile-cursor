@@ -761,8 +761,26 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         visible={showAlertDialog}
         title={alertConfig.title}
         message={alertConfig.message}
-        buttons={alertConfig.buttons}
-        onDismiss={() => setShowAlertDialog(false)}
+        onConfirm={() => {
+          setShowAlertDialog(false);
+          if (alertConfig.buttons && alertConfig.buttons.length > 0) {
+            const confirmButton = alertConfig.buttons.find(btn => btn.style !== 'destructive');
+            if (confirmButton && confirmButton.onPress) {
+              confirmButton.onPress();
+            }
+          }
+        }}
+        onCancel={() => {
+          setShowAlertDialog(false);
+          if (alertConfig.buttons && alertConfig.buttons.length > 0) {
+            const cancelButton = alertConfig.buttons.find(btn => btn.style === 'destructive');
+            if (cancelButton && cancelButton.onPress) {
+              cancelButton.onPress();
+            }
+          }
+        }}
+        confirmText="Save"
+        cancelText="Discard"
       />
     </SafeAreaView>
   );

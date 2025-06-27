@@ -246,6 +246,13 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       flexWrap: 'wrap',
       gap: tokens.spacing.sm,
     },
+    actionsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: tokens.spacing.md,
+      gap: tokens.spacing.md,
+    },
   });
 
   useEffect(() => {
@@ -361,7 +368,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
     }
   };
 
-  const getBinName = (binId: number) => {
+  const getBinName = (binId: number | undefined) => {
+    if (!binId) return 'No Bin';
     const bin = bins.find((b: any) => b.id === binId);
     return bin ? bin.name : 'Unknown Bin';
   };
