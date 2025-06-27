@@ -10,6 +10,7 @@ interface TagChipProps {
   isSelected?: boolean;
   onPress?: (tag: string) => void;
   variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export const TagChip: React.FC<TagChipProps> = ({
@@ -17,6 +18,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   isSelected = false,
   onPress,
   variant = 'outline',
+  size = 'md',
 }: TagChipProps) => {
   const { tokens } = useTheme();
 
@@ -38,15 +40,36 @@ export const TagChip: React.FC<TagChipProps> = ({
   });
   
   // Compact outlined style overrides - scaled by 1.34
+  const getSizeStyle = () => {
+    switch (size) {
+      case 'sm':
+        return {
+          paddingHorizontal: tokens.spacing.sm,
+          paddingVertical: tokens.spacing.xs,
+          borderRadius: 6,
+        };
+      case 'lg':
+        return {
+          paddingHorizontal: tokens.spacing.lg,
+          paddingVertical: tokens.spacing.md,
+          borderRadius: 10,
+        };
+      default: // md
+        return {
+          paddingHorizontal: tokens.spacing.md * 1.34,
+          paddingVertical: tokens.spacing.sm,
+          borderRadius: 8,
+        };
+    }
+  };
+
   const compactStyle = {
-    paddingHorizontal: tokens.spacing.md * 1.34,
-    paddingVertical: tokens.spacing.sm, // Equal top and bottom padding for proper centering
-    borderRadius: 8, // 6 * 1.34
+    ...getSizeStyle(),
     borderWidth: 1,
     borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
     backgroundColor: isSelected ? 'transparent' : 'transparent',
-    alignItems: 'center', // Ensure horizontal centering
-    justifyContent: 'center', // Ensure vertical centering
+    alignItems: 'center',
+    justifyContent: 'center',
   };
 
   return (

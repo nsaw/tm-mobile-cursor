@@ -8,12 +8,14 @@ interface OAuthButtonProps {
   provider: 'google' | 'apple';
   onPress: () => void;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 export const OAuthButton: React.FC<OAuthButtonProps> = ({
   provider,
   onPress,
   disabled = false,
+  loading = false,
 }) => {
   const { tokens } = useTheme();
 
@@ -66,16 +68,21 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
     <TouchableOpacity
       style={styles.button}
       onPress={onPress}
-      disabled={disabled}
+      disabled={disabled || loading}
       activeOpacity={0.8}
-     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+      accessibilityRole="button" 
+      accessible={true} 
+      accessibilityLabel="Button"
+    >
       <Ionicons
-        name={config.icon as any}
+        name={loading ? 'hourglass-outline' : config.icon as any}
         size={20}
         color={provider === 'google' ? '#000' : '#fff'}
         style={styles.icon}
       />
-      <Text style={styles.text}>{config.text}</Text>
+      <Text style={styles.text}>
+        {loading ? 'Loading...' : config.text}
+      </Text>
     </TouchableOpacity>
   );
 };

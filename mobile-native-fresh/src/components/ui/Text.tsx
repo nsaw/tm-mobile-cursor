@@ -1,60 +1,133 @@
 import React from 'react';
-import { Text as RNText, TextStyle } from 'react-native';
-
+import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { getTextVariants, mergeVariantStyles } from '../../theme/variants';
 
-interface TextProps {
-  variant?: 'body' | 'heading' | 'title' | 'subtitle' | 'caption' | 'muted' | 'tagline' | 'button' | 'section';
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  children: React.ReactNode;
-  style?: TextStyle;
-  color?: string;
+export interface TextProps extends RNTextProps {
+  variant?: 'body' | 'heading' | 'title' | 'subtitle' | 'subheading' | 'heading2' | 'label' | 'caption' | 'muted' | 'tagline' | 'button' | 'section';
+  size?: 'xs' | 'sm' | 'body' | 'lg' | 'xl' | 'heading' | '2xl' | '3xl';
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
-  align?: 'left' | 'center' | 'right' | 'justify';
-  numberOfLines?: number;
-  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  children: React.ReactNode;
 }
 
-export const Text: React.FC<TextProps> = ({
-  variant = 'body',
+export const Text: React.FC<TextProps> = ({ 
+  variant = 'body', 
   size,
-  children,
-  style,
-  color,
   weight,
-  align = 'left',
-  numberOfLines,
-  ellipsizeMode,
+  style, 
+  children, 
+  ...props 
 }) => {
   const { tokens } = useTheme();
+  
+  const getVariantStyle = () => {
+    // Map missing variants to existing ones
+    const mappedVariant = variant === 'subheading' ? 'subtitle' : 
+                         variant === 'heading2' ? 'heading' : 
+                         variant === 'label' ? 'caption' : 
+                         variant;
+    
+    let baseStyle;
+    switch (mappedVariant) {
+      case 'heading':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.heading,
+          fontWeight: tokens.typography.fontWeight.bold,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.heading * tokens.typography.lineHeight.tight,
+        };
+        break;
+      case 'title':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.lg,
+          fontWeight: tokens.typography.fontWeight.semibold,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.lg * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'subtitle':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.body,
+          fontWeight: tokens.typography.fontWeight.medium,
+          color: tokens.colors.textSecondary,
+          lineHeight: tokens.typography.fontSize.body * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'body':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.body,
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.body * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'caption':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.xs,
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.textSecondary,
+          lineHeight: tokens.typography.fontSize.xs * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'muted':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.sm,
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.textMuted,
+          lineHeight: tokens.typography.fontSize.sm * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'tagline':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.xl,
+          fontWeight: tokens.typography.fontWeight.light,
+          color: tokens.colors.textSecondary,
+          lineHeight: tokens.typography.fontSize.xl * tokens.typography.lineHeight.relaxed,
+        };
+        break;
+      case 'button':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.sm,
+          fontWeight: tokens.typography.fontWeight.medium,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.sm * tokens.typography.lineHeight.normal,
+        };
+        break;
+      case 'section':
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.lg,
+          fontWeight: tokens.typography.fontWeight.semibold,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.lg * tokens.typography.lineHeight.normal,
+        };
+        break;
+      default:
+        baseStyle = {
+          fontSize: tokens.typography.fontSize.body,
+          fontWeight: tokens.typography.fontWeight.normal,
+          color: tokens.colors.text,
+          lineHeight: tokens.typography.fontSize.body * tokens.typography.lineHeight.normal,
+        };
+    }
 
-  // Get variant styles
-  const textVariants = getTextVariants(tokens);
-  const baseStyle = textVariants.base;
-  const variantStyle = textVariants.variants.variant[variant];
-  const sizeStyle = size ? textVariants.variants.size[size] : {};
+    // Apply size override if provided
+    if (size && size in tokens.typography.fontSize) {
+      const fontSize = tokens.typography.fontSize[size as keyof typeof tokens.typography.fontSize];
+      baseStyle.fontSize = fontSize;
+      baseStyle.lineHeight = fontSize * tokens.typography.lineHeight.normal as any;
+    }
 
-  // Merge all styles
-  const textStyle = mergeVariantStyles(baseStyle, {
-    variant: variantStyle,
-    size: sizeStyle,
-  });
+    // Apply weight override if provided
+    if (weight && weight in tokens.typography.fontWeight) {
+      baseStyle.fontWeight = tokens.typography.fontWeight[weight as keyof typeof tokens.typography.fontWeight];
+    }
 
-  // Apply custom overrides
-  const finalTextStyle = {
-    ...textStyle,
-    color: color || textStyle.color,
-    fontWeight: weight ? tokens.typography.fontWeight[weight] : textStyle.fontWeight,
-    textAlign: align,
-    ...style,
+    return baseStyle;
   };
 
   return (
     <RNText
-      style={finalTextStyle}
-      numberOfLines={numberOfLines}
-      ellipsizeMode={ellipsizeMode}
+      style={[getVariantStyle(), style]}
+      {...props}
     >
       {children}
     </RNText>

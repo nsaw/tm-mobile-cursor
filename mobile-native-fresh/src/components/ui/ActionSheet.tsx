@@ -82,13 +82,14 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     paddingHorizontal: tokens.spacing.lg,
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
                     borderBottomColor: tokens.colors.border,
+                    backgroundColor: item.destructive ? tokens.colors.danger : tokens.colors.surface,
                   }}
-                  onPress={() => handleItemPress(item)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+                  onPress={() => {
+                    handleItemPress(item);
+                    onClose();
+                  }}
                   accessibilityRole="button"
-                  accessible={true}
+                  accessible
                   accessibilityLabel={item.label}
                 >
                   <View style={{
@@ -126,8 +127,9 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 }}
                 onPress={onClose}
                 accessibilityRole="button"
+                accessible
                 accessibilityLabel="Cancel"
-               accessible={true}>
+              >
                 <Text 
                   variant="body" 
                   style={{

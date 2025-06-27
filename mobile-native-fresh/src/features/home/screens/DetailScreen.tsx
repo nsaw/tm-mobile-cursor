@@ -18,7 +18,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 export const DetailScreen: React.FC = () => {
   const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
-  const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
+  const route = useRoute<RouteProp<'Detail'>>();
   const { thoughtmarkId } = route.params;
   const { thoughtmarks, updateThoughtmark, deleteThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
@@ -155,7 +155,7 @@ export const DetailScreen: React.FC = () => {
   };
 
   const handleEdit = () => {
-    navigation.navigate('EditThoughtmark', { thoughtmarkId: thoughtmark.id.toString() });
+    navigation.navigate('ThoughtmarkEdit', { thoughtmarkId: thoughtmark.id });
   };
 
   const handleShare = () => {
@@ -185,7 +185,8 @@ export const DetailScreen: React.FC = () => {
     );
   };
 
-  const getBinName = (binId: number) => {
+  const getBinName = (binId: number | undefined) => {
+    if (!binId) return 'Unknown Bin';
     const bin = bins.find(b => b.id === binId);
     return bin?.name || 'Unknown Bin';
   };
