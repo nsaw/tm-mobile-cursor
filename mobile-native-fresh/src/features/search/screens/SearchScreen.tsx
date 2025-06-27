@@ -211,11 +211,10 @@ export const SearchScreen: React.FC = () => {
           <Ionicons name="search" size={20} color={tokens.colors.textSecondary} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search thoughtmarks, tags, or content..."
+            placeholder="Search thoughtmarks..."
             placeholderTextColor={tokens.colors.textSecondary}
             value={searchQuery}
             onChangeText={handleSearch}
-            autoFocus
           />
           {isSearching && (
             <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.searchSpinner} />

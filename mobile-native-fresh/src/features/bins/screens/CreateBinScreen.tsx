@@ -288,7 +288,6 @@ export const CreateBinScreen: React.FC = () => {
                 placeholder="Enter bin name..."
                 placeholderTextColor={tokens.colors.textMuted}
                 maxLength={50}
-                autoFocus
               />
             </CardContent>
           </Card>
