@@ -28,7 +28,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   rightAction,
   showBackButton = true,
 }) => {
-  const { tokens } = useTheme();
+  
 
   return (
     <AutoRoleView style={{
@@ -74,7 +74,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 backgroundColor: tokens.colors.surface,
               }} 
               onPress={onBack}
-             accessibilityRole="button" accessible={true} >
+             accessibilityRole="button"  >
               <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
             </TouchableOpacity>
           )}
@@ -110,7 +110,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               backgroundColor: tokens.colors.surface,
             }} 
             onPress={rightAction.onPress}
-           accessibilityRole="button" accessible={true} >
+           accessibilityRole="button"  >
             <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
           </TouchableOpacity>
         )}

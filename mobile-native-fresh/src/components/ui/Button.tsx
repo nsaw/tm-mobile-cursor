@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     leftIcon,
     rightIcon,
   } = props;
-  const { tokens } = useTheme();
+  
   const [isPressed, setIsPressed] = useState(false);
 
   // Get variant styles
@@ -96,11 +96,11 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <Pressable
       style={finalButtonStyle}
       onPress={disabled ? undefined : onPress}
-      onPressIn={() => setIsPressed(true)} accessibilityRole="button" accessible={true} 
+      onPressIn={() => setIsPressed(true)} accessibilityRole="button"  
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       accessibilityRole="button"
-      accessible={true}
+      
       
       android_ripple={{
         color: tokens.colors.surfaceHover,

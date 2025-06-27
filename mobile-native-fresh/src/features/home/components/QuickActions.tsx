@@ -15,7 +15,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   onVoiceRecord,
   onOpenBins,
 }) => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {
@@ -55,15 +55,15 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark} accessibilityRole="button" accessible={true} >
+      <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark} accessibilityRole="button"  >
         <Ionicons name="create-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.actionButton2} onPress={onVoiceRecord} accessibilityRole="button" accessible={true} >
+      <TouchableOpacity style={styles.actionButton2} onPress={onVoiceRecord} accessibilityRole="button"  >
         <Ionicons name="mic-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.actionButton3} onPress={onOpenBins} accessibilityRole="button" accessible={true} >
+      <TouchableOpacity style={styles.actionButton3} onPress={onOpenBins} accessibilityRole="button"  >
         <Ionicons name="folder-outline" size={24} color={tokens.colors.background} />
       </TouchableOpacity>
     </View>

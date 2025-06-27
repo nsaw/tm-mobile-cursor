@@ -56,10 +56,11 @@ const BIN_ICONS = [
 ];
 
 export const CreateBinScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
   const navigation = useNavigation();
   const { user } = useAuth();
   const { createBin } = useBins();
+  
 
   // Form state
   const [name, setName] = useState('');
@@ -314,7 +315,7 @@ export const CreateBinScreen: React.FC = () => {
                 placeholder="Describe what this bin is for..."
                 placeholderTextColor={tokens.colors.textMuted}
                 multiline
-                _numberOfLines={3}
+                numberOfLines={3}
                 maxLength={200}
               />
             </CardContent>
@@ -333,10 +334,8 @@ export const CreateBinScreen: React.FC = () => {
                       { backgroundColor: color },
                       selectedColor === color && styles.colorOptionSelected,
                     ]}
-                    onPress={() => setSelectedColor(color)} accessibilityRole="button" accessible={true} 
+                    onPress={() => setSelectedColor(color)}
                     accessibilityRole="button"
-                    accessible={true}
-                    accessibilityLabel={`Select color ${color}`}
                   >
                     {selectedColor === color && (
                       <Ionicons name="checkmark" size={20} color="white" />
@@ -359,10 +358,8 @@ export const CreateBinScreen: React.FC = () => {
                       styles.iconOption,
                       selectedIcon === icon && styles.iconOptionSelected,
                     ]}
-                    onPress={() => setSelectedIcon(icon)} accessibilityRole="button" accessible={true} 
+                    onPress={() => setSelectedIcon(icon)}
                     accessibilityRole="button"
-                    accessible={true}
-                    accessibilityLabel={`Select icon ${icon}`}
                   >
                     <Ionicons 
                       name={icon as any} 

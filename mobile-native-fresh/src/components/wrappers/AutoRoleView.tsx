@@ -20,7 +20,7 @@ const AutoRoleView: React.FC<Props> = ({
   accessibilityLabel,
   ...accessibilityProps
 }) => {
-  const { tokens } = useTheme();
+  
   const flattened = StyleSheet.flatten(style) || {};
   const role = forceRole || classifyStyleRole(flattened);
 

@@ -21,7 +21,7 @@ import { RootStackParamList } from '../../../navigation/types';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
 
 export const AllThoughtmarksScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
   const navigation = useNavigation<any>();
   const route = useRoute<RouteProp<RootStackParamList, 'AllThoughtmarks'>>();
   const { thoughtmarks, loading, fetchThoughtmarks } = useThoughtmarks();
@@ -312,7 +312,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const renderSortButton = (sortType: 'date' | 'title' | 'pinned', label: string) => (
     <TouchableOpacity
       style={[styles.sortButton, sortBy === sortType && styles.sortButtonActive]}
-      onPress={() => setSortBy(sortType)} accessibilityRole="button" accessible={true} 
+      onPress={() => setSortBy(sortType)} accessibilityRole="button"  
     >
       <Text style={[styles.sortButtonText, sortBy === sortType && styles.sortButtonTextActive]}>
         {label}
@@ -326,7 +326,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <TouchableOpacity
           style={[styles.binFilterButton, !selectedBin && styles.binFilterButtonActive]}
-          onPress={() => setSelectedBin(null)} accessibilityRole="button" accessible={true} 
+          onPress={() => setSelectedBin(null)} accessibilityRole="button"  
         >
           <Text style={[styles.binFilterText, !selectedBin && styles.binFilterTextActive]}>
             All
@@ -336,7 +336,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
           <TouchableOpacity
             key={bin.id}
             style={[styles.binFilterButton, selectedBin === bin.id && styles.binFilterButtonActive]}
-            onPress={() => setSelectedBin(bin.id)} accessibilityRole="button" accessible={true} 
+            onPress={() => setSelectedBin(bin.id)} accessibilityRole="button"  
           >
             <Ionicons 
               name={bin.icon as any} 
@@ -380,7 +380,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
                 style={[styles.dropdownButton, !selectedBin && styles.dropdownButtonActive]}
-                onPress={() => setSelectedBin(null)} accessibilityRole="button" accessible={true} 
+                onPress={() => setSelectedBin(null)} accessibilityRole="button"  
               >
                 <Text style={[styles.dropdownButtonText, !selectedBin && styles.dropdownButtonTextActive]}>
                   All
@@ -390,7 +390,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 <TouchableOpacity
                   key={bin.id}
                   style={[styles.dropdownButton, selectedBin === bin.id && styles.dropdownButtonActive]}
-                  onPress={() => setSelectedBin(bin.id)} accessibilityRole="button" accessible={true} 
+                  onPress={() => setSelectedBin(bin.id)} accessibilityRole="button"  
                 >
                   <Text style={[styles.dropdownButtonText, selectedBin === bin.id && styles.dropdownButtonTextActive]}>
                     {bin.name}
@@ -406,7 +406,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
                 style={[styles.dropdownButton, selectedTags.length === 0 && styles.dropdownButtonActive]}
-                onPress={() => setSelectedTags([])} accessibilityRole="button" accessible={true} 
+                onPress={() => setSelectedTags([])} accessibilityRole="button"  
               >
                 <Text style={[styles.dropdownButtonText, selectedTags.length === 0 && styles.dropdownButtonTextActive]}>
                   All
@@ -424,7 +424,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     }
                   }}
                   accessibilityRole="button"
-                  accessible={true}
+                  
                   
                 >
                   <Text style={[styles.dropdownButtonText, selectedTags.includes(tag) && styles.dropdownButtonTextActive]}>
@@ -479,7 +479,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                   <TouchableOpacity
                     style={styles.createButton}
                     onPress={handleCreateThoughtmark}
-                   accessibilityRole="button" accessible={true} >
+                   accessibilityRole="button"  >
                     <Ionicons name="add" size={20} color={tokens.colors.background} />
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>

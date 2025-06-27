@@ -1,8 +1,8 @@
 import {
   TouchableOpacity,
   Platform,
-  useSafeAreaInsets,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Brain } from 'lucide-react-native';
@@ -25,7 +25,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   currentRoute = '/',
   onCreateNew,
 }) => {
-  const { tokens } = useTheme();
+  
   const insets = useSafeAreaInsets();
 
   const handleAIToolsClick = () => {
@@ -141,7 +141,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   }
                 }}
                 accessibilityRole="button"
-                accessibilityLabel={`${label} ${isActive ? 'selected' : ''}`}
               >
                 {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && (
@@ -155,7 +154,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                     backgroundColor: `${tokens.colors.accent}1A`,
                     borderWidth: 1,
                     borderColor: `${tokens.colors.accent}4D`,
-                  }} forceRole="badge" />
+                  }} forceRole="badge">
+                    {/* Empty children for badge */}
+                  </AutoRoleView>
                 )}
               </TouchableOpacity>
             );
@@ -232,7 +233,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 }
               }}
               accessibilityRole="button"
-              
             >
               <MaterialCommunityIcons name="plus" size={47} color={tokens.colors.accent} />
             </TouchableOpacity>

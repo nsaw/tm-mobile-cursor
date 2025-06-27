@@ -82,8 +82,8 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
       animationType="slide"
       transparent
       onRequestClose={onClose}
-      accessible={true}
-      accessibilityLabel="Sign In"
+      
+      
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -155,7 +155,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                     keyboardType="email-address"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    accessibilityLabel="Email input"
+                    
                   />
                 </AutoRoleView>
                 {errors.email && (
@@ -198,12 +198,12 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                     secureTextEntry={!showPassword}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    accessibilityLabel="Password input"
+                    
                   />
                   <TouchableOpacity
                     onPress={() => setShowPassword(!showPassword)}
                     accessibilityRole="button"
-                    accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+                    
                   >
                     {showPassword ? (
                       <EyeOff size={20} color={tokens.colors.textSecondary} />
@@ -231,7 +231,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   marginBottom: tokens.spacing.lg,
                 }}
                 accessibilityRole="button"
-                accessibilityLabel="Forgot password"
+                
               >
                 <Text style={{
                   color: tokens.colors.accent,
@@ -257,7 +257,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                   marginBottom: tokens.spacing.md,
                 }}
                 accessibilityRole="button"
-                accessibilityLabel="Sign in"
+                
               >
                 <Text style={{
                   color: tokens.colors.buttonText || tokens.colors.background,
@@ -283,7 +283,7 @@ export const SignInScreen: React.FC<SignInScreenProps> = ({
                 <TouchableOpacity
                   onPress={onSwitchToSignUp}
                   accessibilityRole="button"
-                  accessibilityLabel="Switch to sign up"
+                  
                 >
                   <Text style={{
                     color: tokens.colors.accent,

@@ -27,7 +27,7 @@ export const BinCard: React.FC<BinCardProps> = ({
   bin,
   onPress,
 }) => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {
@@ -58,7 +58,7 @@ export const BinCard: React.FC<BinCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button" accessible={true} >
+    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button"  >
       <Ionicons 
         name={bin.icon as any} 
         size={32} 

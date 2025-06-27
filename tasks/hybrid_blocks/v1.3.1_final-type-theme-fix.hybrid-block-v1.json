@@ -1,0 +1,34 @@
+{
+  "branch": "fix/v1.3.1_final-type-theme-fix",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume",
+  "notes": [
+    "\u2705 Pre-check: Ensure all JSX + handlers + tokens previously linted",
+    "\ud83e\udde0 Mission: Complete type + theme compatibility fixes",
+    "\ud83c\udfaf Goal: Eliminate all TypeScript + theming context errors post-enforcement",
+    "\ud83d\udccc Context: Expo + React Native + useTheme() + tokens",
+    "\ud83d\udca5 Bug: tokens.* called at module scope or outside hook",
+    "\ud83d\udd27 Fix Summary: Migrate all tokens to useTheme(), patch prop and import types",
+    "\ud83d\udd10 Relevance: Final code safety + TypeScript compatibility"
+  ],
+  "phases": [
+    {
+      "section": "useTheme Context Enforcement",
+      "actions": [
+        "Detect `tokens.*` calls at module scope and wrap in useTheme()",
+        "Auto-inject missing `useTheme()` import from theme context",
+        "Scan for incorrect prop typing in component definitions",
+        "Correct type mismatches: string vs tokens.color, boolean vs undefined",
+        "Add defensive defaults for optional props that cause crashes",
+        "Normalize import paths for shared components and icons"
+      ],
+      "commit": "fix: complete type + theming context enforcement",
+      "tag": "v1.3.1_final-type-theme-fix"
+    }
+  ],
+  "final": {
+    "commit": "chore: final pass for theming + type safety complete",
+    "tag": "v1.3.1_type-safe-stable"
+  }
+}

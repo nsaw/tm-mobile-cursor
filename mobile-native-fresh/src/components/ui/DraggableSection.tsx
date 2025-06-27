@@ -46,7 +46,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
-  const { tokens } = useTheme();
+  
 
 
 
@@ -213,7 +213,7 @@ const { typography, spacing, tokens } = useTheme();
               onPressOut={handlePressOut}
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
-             accessibilityRole="button" accessible={true} >
+             accessibilityRole="button"  >
               <View style={styles.headerLeft}>
                 <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>

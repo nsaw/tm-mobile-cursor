@@ -15,7 +15,7 @@ const mockNavigation = {
 };
 
 export const DashboardExample: React.FC = () => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {

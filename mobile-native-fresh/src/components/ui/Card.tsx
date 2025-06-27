@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({
   onPress,
   disabled = false,
 }) => {
-  const { tokens } = useTheme();
+  
 
   // Get variant styles
   const cardVariants = getCardVariants(tokens);

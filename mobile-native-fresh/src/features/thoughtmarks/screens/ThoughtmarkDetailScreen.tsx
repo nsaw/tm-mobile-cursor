@@ -22,7 +22,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
   const { thoughtmarkId } = route.params;
@@ -425,7 +425,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <View style={styles.headerContent}>
           <TouchableOpacity 
             style={styles.backButton}
-            onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
+            onPress={() => navigation.goBack()} accessibilityRole="button"  
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>
@@ -436,8 +436,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             style={styles.actionButton}
             onPress={handlePin}
             accessibilityRole="button"
-            accessibilityLabel={thoughtmark.isPinned ? "Unpin thoughtmark" : "Pin thoughtmark"}
-           accessible={true}>
+            
+           >
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
@@ -449,7 +449,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             onPress={handleEdit}
             accessibilityRole="button"
             
-           accessible={true}>
+           >
             <Ionicons name="create-outline" size={20} color={tokens.colors.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -457,7 +457,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             onPress={handleDelete}
             accessibilityRole="button"
             
-           accessible={true}>
+           >
             <Ionicons name="trash-outline" size={20} color={tokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
         </View>
@@ -473,8 +473,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 style={[styles.taskStatus, thoughtmark.isCompleted && styles.taskCompleted]}
                 onPress={handleComplete}
                 accessibilityRole="button"
-                accessibilityLabel={thoughtmark.isCompleted ? "Mark task as incomplete" : "Mark task as complete"}
-               accessible={true}>
+                
+               >
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
@@ -509,7 +509,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   disabled={generatingAI}
                   accessibilityRole="button"
                   
-                 accessible={true}>
+                 >
                   {generatingAI ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
                   ) : (
@@ -560,7 +560,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   disabled={generatingSuggestions}
                   accessibilityRole="button"
                   
-                 accessible={true}>
+                 >
                   {generatingSuggestions ? (
                     <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
                   ) : (

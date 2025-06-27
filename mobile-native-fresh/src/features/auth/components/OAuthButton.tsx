@@ -15,7 +15,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
   onPress,
   disabled = false,
 }) => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     button: {
@@ -68,7 +68,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.8}
-     accessibilityRole="button" accessible={true} >
+     accessibilityRole="button"  >
       <Ionicons
         name={config.icon as any}
         size={20}

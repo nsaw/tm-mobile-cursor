@@ -176,7 +176,7 @@ export const SettingsScreen: React.FC = () => {
         style={styles.settingItem} 
         onPress={onPress}
         disabled={!onPress}
-       accessibilityRole="button" accessible={true} >
+       accessibilityRole="button"  >
         <View style={styles.settingItemLeft}>
           {iconElement}
           <View style={styles.settingItemText}>
@@ -357,7 +357,7 @@ export const SettingsScreen: React.FC = () => {
           <View style={styles.headerContent}>
             <TouchableOpacity 
               style={styles.backButton}
-              onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
+              onPress={() => navigation.goBack()} accessibilityRole="button"  
             >
               <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
             </TouchableOpacity>
@@ -655,7 +655,7 @@ export const SettingsScreen: React.FC = () => {
             <Text style={styles.sectionTitle}>Administration</Text>
             <TouchableOpacity
               style={styles.settingItem}
-              onPress={() => navigation.navigate('AdminDashboard')} accessibilityRole="button" accessible={true} 
+              onPress={() => navigation.navigate('AdminDashboard')} accessibilityRole="button"  
             >
               <View style={styles.settingLeft}>
                 <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
@@ -685,14 +685,14 @@ export const SettingsScreen: React.FC = () => {
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => setShowSiriDialog(false)} accessibilityRole="button" accessible={true} 
+                onPress={() => setShowSiriDialog(false)} accessibilityRole="button"  
               >
                 <Text style={styles.modalButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.modalButton, styles.modalButtonPrimary]}
                 onPress={handleSiriPhraseSave}
-               accessibilityRole="button" accessible={true} >
+               accessibilityRole="button"  >
                 <Text style={[styles.modalButtonText, styles.modalButtonTextPrimary]}>
                   Save
                 </Text>

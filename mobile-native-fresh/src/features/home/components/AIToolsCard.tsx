@@ -23,7 +23,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   subtitle = "Generate insights and suggestions",
   icon = "crown",
 }) => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {
@@ -68,7 +68,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} >
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button"  >
       <View style={styles.content}>
         <View>
           <SectionHeader><Text>{title}</Text></SectionHeader>

@@ -45,7 +45,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
       ]}
       activeOpacity={0.85}
       accessibilityRole="button"
-      accessible={true}
+      
       disabled={disabled}
       
     >
@@ -131,8 +131,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       animationType="slide"
       transparent
       onRequestClose={onClose}
-      accessible={true}
-      accessibilityLabel={steps[currentStep].title}
+      
+      
     >
       <View style={{
         flex: 1,
@@ -199,14 +199,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               onPress={handlePrevious}
               disabled={currentStep === 0}
               
-              accessible={true}
+              
             >
               Previous
             </ModalButton>
             <ModalButton
               onPress={handleNext}
-              accessibilityLabel={currentStep === steps.length - 1 ? 'Finish' : 'Next'}
-              accessible={true}
+              
+              
             >
               {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ModalButton>

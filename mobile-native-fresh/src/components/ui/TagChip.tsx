@@ -18,7 +18,8 @@ export const TagChip: React.FC<TagChipProps> = ({
   onPress,
   variant = 'outline',
 }: TagChipProps) => {
-  const { tokens } = useTheme();
+  
+  
 
   // Guard against undefined tokens
   if (!tokens) {
@@ -52,11 +53,9 @@ export const TagChip: React.FC<TagChipProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
-      onPress={() => onPress?.(tag)} accessibilityRole="button" accessible={true} 
-      activeOpacity={0.7}
+      onPress={() => onPress?.(tag)}
       accessibilityRole="button"
-      accessible={true}
-      accessibilityLabel={`tag: ${tag.toLowerCase()}`}
+      activeOpacity={0.7}
     >
       <Text 
         variant="caption"
@@ -66,7 +65,7 @@ export const TagChip: React.FC<TagChipProps> = ({
           textAlign: 'center',
           paddingHorizontal: 0
         }} 
-        _numberOfLines={1}
+        numberOfLines={1}
       >
         #{tag.toLowerCase()}
       </Text>

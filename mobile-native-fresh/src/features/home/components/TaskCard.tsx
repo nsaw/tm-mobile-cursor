@@ -97,7 +97,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   onToggle,
   style,
 }) => {
-  const { tokens } = useTheme();
+  
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
   const isCompleted = !!task.isCompleted;
   const styles = getStyles(tokens, isCompleted, !!isOverdue);
@@ -133,7 +133,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityRole="button"
-      accessible={true}
+      
       
     >
       <TouchableOpacity
@@ -143,7 +143,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           onToggle();
         }}
         accessibilityRole="button"
-        accessible={true}
+        
         
       >
         {task.isCompleted && (
@@ -156,7 +156,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             variant={isCompleted ? "muted" : "body"}
             weight={isCompleted ? "normal" : "semibold"}
             style={styles.title}
-            _numberOfLines={1}
+            numberOfLines={1}
           >
             {task.title || 'Untitled Task'}
           </Text>
@@ -173,7 +173,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <Text
             variant="muted"
             style={styles.contentText}
-            _numberOfLines={2}
+            numberOfLines={2}
           >
             {task.content}
           </Text>

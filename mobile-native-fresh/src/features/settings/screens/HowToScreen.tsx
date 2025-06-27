@@ -8,7 +8,7 @@ import { Card } from '../../../components/ui/Card';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 
 const HowToScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
 
   const categories = [
     {

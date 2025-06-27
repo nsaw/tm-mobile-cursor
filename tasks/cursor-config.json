@@ -1,0 +1,7 @@
+{
+  "tasks": [
+    "LOGIN-HYBRID_native-auth-instruction-block.v2.json",
+    "deeplink-handler.hybrid-block-v1.json",
+    "siri-shortcut-handler.hybrid-block-v1.json"
+  ]
+}

@@ -100,8 +100,8 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
       animationType="slide"
       transparent
       onRequestClose={onClose}
-      accessible={true}
-      accessibilityLabel="Sign Up"
+      
+      
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -172,7 +172,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     onChangeText={setDisplayName}
                     autoCapitalize="words"
                     autoCorrect={false}
-                    accessibilityLabel="Display name input"
+                    
                   />
                 </AutoRoleView>
                 {errors.displayName && (
@@ -215,7 +215,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     keyboardType="email-address"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    accessibilityLabel="Email input"
+                    
                   />
                 </AutoRoleView>
                 {errors.email && (
@@ -258,12 +258,12 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     secureTextEntry={!showPassword}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    accessibilityLabel="Password input"
+                    
                   />
                   <TouchableOpacity
                     onPress={() => setShowPassword(!showPassword)}
                     accessibilityRole="button"
-                    accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+                    
                   >
                     {showPassword ? (
                       <EyeOff size={20} color={tokens.colors.textSecondary} />
@@ -312,12 +312,12 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                     secureTextEntry={!showConfirmPassword}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    accessibilityLabel="Confirm password input"
+                    
                   />
                   <TouchableOpacity
                     onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                     accessibilityRole="button"
-                    accessibilityLabel={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                    
                   >
                     {showConfirmPassword ? (
                       <EyeOff size={20} color={tokens.colors.textSecondary} />
@@ -352,7 +352,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                   marginBottom: tokens.spacing.md,
                 }}
                 accessibilityRole="button"
-                accessibilityLabel="Sign up"
+                
               >
                 <Text style={{
                   color: tokens.colors.buttonText || tokens.colors.background,
@@ -378,7 +378,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({
                 <TouchableOpacity
                   onPress={onSwitchToSignIn}
                   accessibilityRole="button"
-                  accessibilityLabel="Switch to sign in"
+                  
                 >
                   <Text style={{
                     color: tokens.colors.accent,

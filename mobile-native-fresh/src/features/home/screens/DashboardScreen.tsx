@@ -341,7 +341,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             <View style={styles.tagsContainer}>
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
-                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} >
+                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button"  >
                   <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
@@ -355,10 +355,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     styles.tagChip,
                     localTagFilter === 'all' && styles.tagChipActive
                   ]}
-                  onPress={() => handleLocalTagPress('all')} accessibilityRole="button" accessible={true} 
-                  accessibilityRole="button"
-                  accessible={true}
-                  accessibilityLabel={`filter by tag: all`}
+                  onPress={() => handleLocalTagPress('all')} accessibilityRole="button"
                 >
                   <Text style={[
                     styles.tagChipText,
@@ -375,10 +372,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       styles.tagChip,
                       localTagFilter === tag && styles.tagChipActive
                     ]}
-                    onPress={() => handleLocalTagPress(tag)} accessibilityRole="button" accessible={true} 
-                    accessibilityRole="button"
-                    accessible={true}
-                    accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
+                    onPress={() => handleLocalTagPress(tag)} accessibilityRole="button"
                   >
                     <Text style={[
                       styles.tagChipText,
@@ -413,8 +407,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   style={styles.viewMoreCard}
                   onPress={handleViewAllThoughtmarks}
                   accessibilityRole="button"
-                  accessible={true}
-                  
                 >
                   <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
                   <Text style={styles.viewMoreText}>View all thoughtmarks</Text>
@@ -482,10 +474,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       <TouchableOpacity
                         key={bin.id}
                         style={styles.binCardHorizontal}
-                        onPress={() => handleBinPress(bin)} accessibilityRole="button" accessible={true} 
-                        accessibilityRole="button"
-                        accessible={true}
-                        accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
+                        onPress={() => handleBinPress(bin)} accessibilityRole="button"
                       >
                         <View style={styles.binCardContentHorizontal}>
                           <Text style={styles.binCardNameHorizontal}>{bin.name || 'Unnamed Bin'}</Text>
@@ -505,8 +494,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     style={styles.specialBinCard}
                     onPress={handleCreateBin}
                     accessibilityRole="button"
-                    accessible={true}
-                    
                   >
                     <View style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>New bin</Text>
@@ -524,8 +511,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       }
                     }}
                     accessibilityRole="button"
-                    accessible={true}
-                    
                   >
                     <View style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>Saved to sort later</Text>
@@ -538,10 +523,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Archive */}
                   <TouchableOpacity
                     style={styles.archiveCard}
-                    onPress={() => navigation.navigate('Archive')} accessibilityRole="button" accessible={true} 
-                    accessibilityRole="button"
-                    accessible={true}
-                    
+                    onPress={() => navigation.navigate('Archive')} accessibilityRole="button"
                   >
                     <View style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View archive</Text>
@@ -983,7 +965,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             />
             <View style={styles.titleContainer}>
               <CustomText><Text>THOUGHTMARKS</Text></CustomText>
-              <NeonGradientText variant="tagline" _numberOfLines={1}>bookmarks for your brain</NeonGradientText>
+              <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>
@@ -992,7 +974,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 style={styles.infoButton}
                 onPress={handleReorderHintPress}
                 accessibilityRole="button"
-                accessible={true}
+                
                 
               >
                 <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
@@ -1000,11 +982,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             </Animated.View>
             <TouchableOpacity
               style={styles.settingsButton}
-              onPress={() => navigation.navigate('Settings')} accessibilityRole="button" accessible={true} 
-              accessibilityRole="button"
-              accessible={true}
-              
-            >
+              onPress={() => navigation.navigate('Settings')} accessibilityRole="button" >
               <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>

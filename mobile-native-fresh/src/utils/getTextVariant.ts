@@ -1,4 +1,4 @@
-import { textVariants } from '../theme/variants';
+import { getTextVariants } from '../theme/variants';
 
 export function getTextVariant(variant: keyof typeof textVariants.variants.variant) {
   const base = textVariants.base || {};

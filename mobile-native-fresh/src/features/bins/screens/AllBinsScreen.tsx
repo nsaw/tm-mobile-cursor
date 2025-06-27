@@ -31,7 +31,7 @@ type SortType = 'name' | 'created' | 'updated';
 export const AllBinsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
-  const { tokens } = useTheme();
+  
   const { bins, loading, fetchBins } = useBins();
   const { thoughtmarks } = useThoughtmarks();
   
@@ -121,7 +121,7 @@ export const AllBinsScreen: React.FC = () => {
         borderWidth: 1,
         borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() => setSortBy(sortType as SortType)} accessibilityRole="button" accessible={true} 
+      onPress={() => setSortBy(sortType as SortType)} accessibilityRole="button"  
     >
       <Text 
         variant="body" 
@@ -326,8 +326,7 @@ export const AllBinsScreen: React.FC = () => {
       paddingBottom: tokens.spacing.xl,
     },
     refreshControl: {
-      colors: [tokens.colors.accent],
-      tintColor: tokens.colors.accent,
+            tintColor: tokens.colors.accent,
     },
   });
 
@@ -372,7 +371,7 @@ export const AllBinsScreen: React.FC = () => {
           <FlatList
             data={sortedBins}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleBinPress(item)} accessibilityRole="button" accessible={true} >
+              <TouchableOpacity onPress={() => handleBinPress(item)} accessibilityRole="button"  >
                 <BinCard bin={item} onPress={() => handleBinPress(item)} />
               </TouchableOpacity>
             )}

@@ -23,7 +23,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   onComplete, 
   message = "let me think about that…" 
 }) => {
-  const { tokens } = useTheme();
+  
   const [fadeAnim] = useState(new Animated.Value(0));
   const [scaleAnim] = useState(new Animated.Value(0.8));
   const [pulseAnim] = useState(new Animated.Value(1));

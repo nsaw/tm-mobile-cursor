@@ -18,7 +18,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false }) => {
-  const { tokens } = useTheme();
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -151,7 +151,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)} accessibilityRole="button" accessible={true} 
+            onPress={() => setShowPassword(!showPassword)} accessibilityRole="button"  
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 
@@ -167,7 +167,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
         style={[styles.submitButton, loading && styles.submitButtonDisabled]}
         onPress={handleSubmit}
         disabled={loading}
-       accessibilityRole="button" accessible={true} >
+       accessibilityRole="button"  >
         {loading ? (
           <ActivityIndicator color="#ffffff" />
         ) : (

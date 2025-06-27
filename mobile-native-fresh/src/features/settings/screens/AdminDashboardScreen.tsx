@@ -15,7 +15,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 
 export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const { user } = useAuth();
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {
@@ -165,7 +165,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
+            onPress={() => navigation.goBack()} accessibilityRole="button"  
           >
             <Ionicons name="arrow-back" size={24} color={getIconColor('text')} />
           </TouchableOpacity>
@@ -222,7 +222,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
               <Button
                 variant="outline"
                 onPress={handleImportData}
-                leftIcon={<Ionicons name="upload-outline" size={16} color={getIconColor('accent')} />}
+                leftIcon={<Ionicons name="play-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
               >
                 Import Data

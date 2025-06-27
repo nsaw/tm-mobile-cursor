@@ -20,7 +20,7 @@ import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 const logo = require('../../../../assets/logo.png');
 
 export const SignInScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
   const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
@@ -114,7 +114,7 @@ export const SignInScreen: React.FC = () => {
               style={styles.primaryButton}
               onPress={handleDemoSignIn}
               disabled={isLoading || loading}
-             accessibilityRole="button" accessible={true} >
+             accessibilityRole="button"  >
               <Text style={styles.primaryButtonText}>Demo Login</Text>
             </TouchableOpacity>
           </View>

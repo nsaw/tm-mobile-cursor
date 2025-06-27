@@ -32,7 +32,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
   items,
   title,
 }) => {
-  const { tokens } = useTheme();
+  
 
   const handleItemPress = (item: ActionSheetItem) => {
     item.onPress();
@@ -45,8 +45,8 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       transparent
       animationType="fade"
       onRequestClose={onClose}
-      accessible={true}
-      accessibilityLabel={title || 'Action menu'}
+      
+      
     >
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={{
@@ -83,11 +83,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     borderBottomWidth: index === items.length - 1 ? 0 : 1,
                     borderBottomColor: tokens.colors.border,
                   }}
-                  onPress={() => handleItemPress(item)} accessibilityRole="button" accessible={true} 
-                  accessibilityRole="button"
-                  accessible={true}
-                  accessibilityLabel={item.label}
-                >
+                  onPress={() => handleItemPress(item)} accessibilityRole="button" >
                   <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -124,7 +120,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 onPress={onClose}
                 accessibilityRole="button"
                 
-               accessible={true}>
+               >
                 <Text 
                   variant="body" 
                   style={{

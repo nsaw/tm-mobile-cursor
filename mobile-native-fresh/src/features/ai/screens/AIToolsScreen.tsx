@@ -34,7 +34,7 @@ type AIInsight = {
 
 export const AIToolsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  const { tokens } = useTheme();
+  
   const { user } = useAuth();
 
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
@@ -273,7 +273,7 @@ export const AIToolsScreen: React.FC = () => {
                       key={idx}
                       onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId })}
                       accessibilityRole="button"
-                      accessible={true}
+                      
                       
                       style={{
                         backgroundColor: tokens.colors.accent + '20',
@@ -304,7 +304,7 @@ export const AIToolsScreen: React.FC = () => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
+            onPress={() => navigation.goBack()} accessibilityRole="button"  
           >
             <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
           </TouchableOpacity>
@@ -344,7 +344,7 @@ export const AIToolsScreen: React.FC = () => {
 
           <TouchableOpacity
             style={[styles.upgradeButton, { backgroundColor: tokens.colors.accent }]}
-            onPress={() => navigation.navigate('Subscribe' as never)} accessibilityRole="button" accessible={true} 
+            onPress={() => navigation.navigate('Subscribe' as never)} accessibilityRole="button"  
           >
             <Ionicons name="star" size={20} color={tokens.colors.text} />
             <Text style={{ ...styles.upgradeButtonText, color: tokens.colors.text }}>
@@ -362,7 +362,7 @@ export const AIToolsScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()} accessibilityRole="button" accessible={true} 
+          onPress={() => navigation.goBack()} accessibilityRole="button"  
         >
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
         </TouchableOpacity>
@@ -487,7 +487,7 @@ export const AIToolsScreen: React.FC = () => {
       {/* Floating Action Button */}
       <TouchableOpacity
         style={[styles.fab, { backgroundColor: tokens.colors.accent }]}
-        onPress={() => navigation.navigate('CreateThoughtmark' as never)} accessibilityRole="button" accessible={true} 
+        onPress={() => navigation.navigate('CreateThoughtmark' as never)} accessibilityRole="button"  
       >
         <Ionicons name="add" size={24} color="#FFFFFF" />
       </TouchableOpacity>

@@ -23,7 +23,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onVoiceRecord,
   isRecording = false,
 }) => {
-  const { tokens } = useTheme();
+  
   const insets = useSafeAreaInsets();
   const [scaleValue] = useState(new Animated.Value(1));
 
@@ -90,7 +90,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             onPress={handlePress}
             onLongPress={handleLongPress}
             activeOpacity={0.8}
-           accessibilityRole="button" accessible={true} >
+           accessibilityRole="button"  >
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}

@@ -23,7 +23,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const { tokens } = useTheme();
+  
   const { user } = useAuth();
 
   const {
@@ -214,7 +214,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             backgroundColor: tokens.colors.backgroundSecondary,
             marginBottom: tokens.spacing.lg,
           }}
-          onPress={() => navigation.navigate('Account' as any)} accessibilityRole="button" accessible={true} 
+          onPress={() => navigation.navigate('Account' as any)} accessibilityRole="button"  
         >
           <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
           <Text style={{ marginLeft: tokens.spacing.sm, fontWeight: '600' }}>
@@ -248,7 +248,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   minWidth: 80,
                 }}
                 onPress={action.onPress}
-               accessibilityRole="button" accessible={true} >
+               accessibilityRole="button"  >
                 <View style={{
                   width: 60,
                   height: 60,
@@ -305,7 +305,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                 }}
                 onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
                 accessibilityRole="button"
-                accessible={true}
+                
                 
               >
                 <Text 
@@ -315,7 +315,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                     marginBottom: tokens.spacing.xs,
                     fontWeight: '600',
                   }}
-                  _numberOfLines={1}
+                  numberOfLines={1}
                 >
                   {thoughtmark.title}
                 </Text>
@@ -325,7 +325,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   style={{ 
                     color: tokens.colors.textSecondary,
                   }}
-                  _numberOfLines={2}
+                  numberOfLines={2}
                 >
                   {thoughtmark.content}
                 </Text>

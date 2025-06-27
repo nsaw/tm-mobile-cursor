@@ -22,7 +22,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChangeText,
 }) => {
-  const { tokens } = useTheme();
+  
 
 
 
@@ -108,7 +108,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           autoCorrect={false}
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button" accessible={true} >
+          <TouchableOpacity onPress={handleClear} style={styles.clearButton} accessibilityRole="button"  >
             <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
           </TouchableOpacity>
         )}

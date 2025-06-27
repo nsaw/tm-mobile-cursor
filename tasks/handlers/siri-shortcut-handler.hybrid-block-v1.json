@@ -1,0 +1,31 @@
+{
+  "branch": "feature/siri-shortcut-logic",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume",
+  "notes": [
+    "\u2705 Pre-check: Confirm thoughtmarks:// scheme active",
+    "\ud83e\udde0 Mission: Prepare app for Siri shortcut invocation with safe fallback",
+    "\ud83c\udfaf Goal: Enable Siri trigger for creating new thoughtmark or resuming app",
+    "\ud83d\udccc Context: Non-native Swift\u2014handled via deep linking from Siri shortcut",
+    "\ud83d\udca5 Bug: No fallback for unauthorized or background resume from Siri",
+    "\ud83d\udd27 Fix Summary: Add Siri intent detection to deep link handler + fallback toast",
+    "\ud83d\udd10 Relevance: Siri integration and onboarding"
+  ],
+  "phases": [
+    {
+      "section": "Siri Shortcut Detection",
+      "actions": [
+        "Detect if app is opened via Siri-defined shortcut (from link intent)",
+        "If not logged in, redirect to login and queue action",
+        "If logged in, route to /new and prepopulate thoughtmark creation"
+      ],
+      "commit": "feat: Siri shortcut routing fallback and detection",
+      "tag": "v1.3.1_siri-shortcut-fallback"
+    }
+  ],
+  "final": {
+    "commit": "chore: Siri voice-to-app integration stable",
+    "tag": "v1.3.1_siri-shortcut-ready"
+  }
+}

@@ -41,7 +41,7 @@ export const SearchScreen: React.FC = () => {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const { showVoiceRecorder } = useVoiceRecorder();
-  const { tokens } = useTheme();
+  
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
   const styles = getStyles(tokens);
 
@@ -226,7 +226,7 @@ export const SearchScreen: React.FC = () => {
         {hasPremiumAccess && (
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
-            onPress={() => setUseAISearch(!useAISearch)} accessibilityRole="button" accessible={true} 
+            onPress={() => setUseAISearch(!useAISearch)} accessibilityRole="button"  
           >
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
@@ -292,7 +292,7 @@ export const SearchScreen: React.FC = () => {
                       <TouchableOpacity
                         key={index}
                         style={styles.suggestionItem}
-                        onPress={() => handleSuggestionPress(suggestion)} accessibilityRole="button" accessible={true} 
+                        onPress={() => handleSuggestionPress(suggestion)} accessibilityRole="button"  
                       >
                         <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
@@ -316,7 +316,7 @@ export const SearchScreen: React.FC = () => {
                   {recentSearches.map((query, index) => (
                     <TouchableOpacity
                       key={index}
-                      onPress={() => handleRecentSearchPress(query)} accessibilityRole="button" accessible={true} 
+                      onPress={() => handleRecentSearchPress(query)} accessibilityRole="button"  
                     >
                       <TagChip
                         tag={query}

@@ -27,7 +27,7 @@ export const Text: React.FC<TextProps> = ({
   _numberOfLines,
   _ellipsizeMode,
 }) => {
-  const { tokens } = useTheme();
+  
 
   // Get variant styles
   const textVariants = getTextVariants(tokens);

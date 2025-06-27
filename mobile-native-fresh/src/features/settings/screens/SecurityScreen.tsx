@@ -8,7 +8,7 @@ import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 
 export const SecurityScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     container: {

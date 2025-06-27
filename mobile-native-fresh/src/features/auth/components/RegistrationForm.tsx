@@ -26,7 +26,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onSubmit,
   loading = false,
 }) => {
-  const { tokens } = useTheme();
+  
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -215,7 +215,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)} accessibilityRole="button" accessible={true} 
+            onPress={() => setShowPassword(!showPassword)} accessibilityRole="button"  
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 
@@ -255,7 +255,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         ]}
         onPress={handleSubmit}
         disabled={loading}
-       accessibilityRole="button" accessible={true} >
+       accessibilityRole="button"  >
         {loading ? (
           <ActivityIndicator color="#ffffff" />
         ) : (

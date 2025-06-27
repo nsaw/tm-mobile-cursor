@@ -38,7 +38,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   onClose,
   onComplete,
 }) => {
-  const { tokens } = useTheme();
+  
   const { user } = useAuth();
   const { createThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
@@ -492,7 +492,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           <View style={styles.header}>
             <View style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} >
+            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button"  >
               <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
@@ -507,7 +507,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             ]}
             onPress={isRecording ? stopRecording : startRecording}
             disabled={isProcessing}
-           accessibilityRole="button" accessible={true} >
+           accessibilityRole="button"  >
             <Ionicons
               name={isRecording ? "stop" : "mic"}
               size={32}
@@ -535,7 +535,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </Text>
           )}
 
-          <TouchableOpacity style={styles.testButton} onPress={() => Speech.speak("This is a test of the voice recorder functionality.")} accessibilityRole="button" accessible={true} >
+          <TouchableOpacity style={styles.testButton} onPress={() => Speech.speak("This is a test of the voice recorder functionality.")} accessibilityRole="button"  >
             <Ionicons name="flask" size={16} color={tokens.colors.accent} />
             <Text style={styles.testButtonText}>Test Audio</Text>
           </TouchableOpacity>
@@ -551,11 +551,11 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
               <TouchableOpacity style={styles.actionButton} onPress={() => {
                 onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
                 onClose();
-              }} accessibilityRole="button" accessible={true} >
+              }} accessibilityRole="button"  >
                 <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
                 <Text style={styles.actionButtonText}>Use</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} >
+              <TouchableOpacity style={styles.actionButton} onPress={cancelRecording} accessibilityRole="button"  >
                 <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>

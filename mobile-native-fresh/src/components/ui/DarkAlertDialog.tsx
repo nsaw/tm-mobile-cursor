@@ -32,7 +32,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   onCancel,
   type = 'info',
 }) => {
-  const { tokens } = useTheme();
+  
 
   const styles = StyleSheet.create({
     modalOverlay: {
@@ -124,7 +124,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
-             accessibilityRole="button" accessible={true} >
+             accessibilityRole="button"  >
               <Text style={[styles.buttonText, styles.cancelButtonText]}>
                 {cancelText}
               </Text>
@@ -133,7 +133,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
             <TouchableOpacity
               style={[styles.button, getButtonStyle()]}
               onPress={onConfirm}
-             accessibilityRole="button" accessible={true} >
+             accessibilityRole="button"  >
               <Text style={[styles.buttonText, styles.confirmButtonText]}>
                 {confirmText}
               </Text>

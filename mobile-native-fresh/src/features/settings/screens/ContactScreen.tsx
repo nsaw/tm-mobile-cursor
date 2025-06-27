@@ -7,7 +7,7 @@ import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 
 const ContactScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  
 
   return (
     <View style={{ 

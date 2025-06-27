@@ -32,7 +32,7 @@ interface ThoughtmarkCardProps {
 // PinIcon component with animation
 const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, onPress }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
-  const { tokens } = useTheme();
+  
 
   const handlePress = () => {
     // Animate scale on press
@@ -58,8 +58,8 @@ const PinIcon: React.FC<{ pinned: boolean; onPress: () => void }> = ({ pinned, o
       style={{ marginRight: tokens.spacing.xs, padding: 2 }}
       activeOpacity={0.7}
       accessibilityRole="button"
-      accessible={true}
-      accessibilityLabel={pinned ? "Unpin thoughtmark" : "Pin thoughtmark"}
+      
+      
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <FontAwesome
@@ -210,7 +210,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         onPressOut={handlePressOut}
         activeOpacity={0.7}
         accessibilityRole="button"
-        accessible={true}
+        
         
       >
         <View style={{ marginTop: tokens.spacing.xs, marginLeft: 0 }}>
@@ -231,11 +231,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               {selected && (
                 <TouchableOpacity
                   style={{ marginRight: tokens.spacing.xs }}
-                  onPress={() => onSelectionToggle?.()} accessibilityRole="button" accessible={true} 
-                  accessibilityRole="button"
-                  accessible={true}
-                  
-                >
+                  onPress={() => onSelectionToggle?.()} accessibilityRole="button" >
                   <Ionicons
                     name={selected ? 'checkbox' : 'square-outline'}
                     size={16}
@@ -260,7 +256,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
                   textTransform: 'capitalize',
                   fontSize: tokens.typography.fontSize.sm + 2,
                 }}
-                _numberOfLines={1}
+                numberOfLines={1}
               >
                 {thoughtmark.title || 'Untitled'}
               </Text>
@@ -304,11 +300,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               </Text>
               <TouchableOpacity
                 style={{ padding: tokens.spacing.xs }}
-                onPress={() => setShowContextMenu(true)} accessibilityRole="button" accessible={true} 
-                accessibilityRole="button"
-                accessible={true}
-                
-              >
+                onPress={() => setShowContextMenu(true)} accessibilityRole="button" >
                 <Ionicons
                   name="ellipsis-vertical"
                   size={16}
@@ -327,7 +319,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               lineHeight: 28,
               fontSize: tokens.typography.fontSize.sm + 1,
             }}
-            _numberOfLines={2}
+            numberOfLines={2}
           >
             {thoughtmark.content || 'No content'}
           </Text>

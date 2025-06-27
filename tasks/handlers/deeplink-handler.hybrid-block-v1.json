@@ -1,0 +1,32 @@
+{
+  "branch": "feature/deeplink-handler",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Resume silently",
+  "notes": [
+    "\u2705 Pre-check: Ensure Linking config present in app.json",
+    "\ud83e\udde0 Mission: Add deep linking handler for native launch, resume, and Siri workflows",
+    "\ud83c\udfaf Goal: Support /new, /insight/:id, /premium, and /invite routing post-auth",
+    "\ud83d\udccc Context: Expo + React Native + Firebase gated routing",
+    "\ud83d\udca5 Bug: Race conditions when auth is not confirmed before routing",
+    "\ud83d\udd27 Fix Summary: Block navigation until useAuth().authChecked === true",
+    "\ud83d\udd10 Relevance: Navigation, Siri, Shortcut, Deep Link integrations"
+  ],
+  "phases": [
+    {
+      "section": "Deep Link Route Handling",
+      "actions": [
+        "Create useDeepLinkHandler() hook in src/hooks/",
+        "Use Linking.getInitialURL() and addEventListener for dynamic links",
+        "Parse supported routes: /new, /insight/:id, /premium, /invite",
+        "Gate navigation until useAuth().authChecked === true"
+      ],
+      "commit": "feat: add gated deep link handler and cold-start support",
+      "tag": "v1.3.1_deeplink-handler"
+    }
+  ],
+  "final": {
+    "commit": "chore: deep link routes implemented and guarded",
+    "tag": "v1.3.1_deeplink-complete"
+  }
+}
