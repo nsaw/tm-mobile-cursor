@@ -32,6 +32,8 @@ cursor-uploads/client_secret_*.json
 # Local backup and archive folders
 .backup/
 archive/
+ios-bak/
+*.zip
 
 # Versioned task folders
 tasks/v*/
@@ -45,6 +47,9 @@ cursor-uploads/
 
 # Reference/Replit build
 reference/replit-build/
+reference/*
+reference/
+
 
 # TM Mobile clone
 tm-mobile-clone/
