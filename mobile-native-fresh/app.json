@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Thoughtmarks",
+    "slug": "thoughtmarks",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "sdkVersion": "50.0.0",
+    "platforms": ["ios", "android", "web"]
+  }
+} 
