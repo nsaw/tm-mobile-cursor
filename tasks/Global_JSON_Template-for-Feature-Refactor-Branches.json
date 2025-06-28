@@ -1,0 +1,43 @@
+{
+  "notes": [
+    "🧠 MISSION: Safe feature or refactor branch with checkpointing",
+    "🎯 GOAL: Create a new branch for risky changes, snapshot all progress with frequent tags, and maintain full rollback safety",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Always commit and tag the branch before starting work",
+    "✅ Tag after each major section or Cursor hybrid block phase",
+    "✅ Before merging, tag a pre-merge fallback",
+    "✅ Keep all progress in feature/fix branches until confirmed working on main"
+  ],
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): pre-task checkpoint for {branch}\"",
+      "git tag vX.Y.Z_pre-task-{branch}",
+      "git push origin {branch}",
+      "git push origin --tags"
+    ]
+  },
+  "phases": [
+    {
+      "section": "Section 1: Initial Task",
+      "actions": [
+        "Make your changes",
+        "git add .",
+        "git commit -m \"chore: section 1 checkpoint\"",
+        "git tag vX.Y.Z_section-1-complete"
+      ]
+    },
+    {
+      "section": "Section 2: Next Task or Block",
+      "actions": [
+        "Repeat process: commit, tag, push"
+      ]
+    }
+  ],
+  "final": {
+    "commit": "chore: final checkpoint and pre-merge tag",
+    "tag": "vX.Y.Z_pre-merge",
+    "notes": "All work is safely tagged and ready for review/merge."
+  }
+}
+
