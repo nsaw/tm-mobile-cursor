@@ -1,0 +1,31 @@
+{
+  "branch": "feature/session-hydration-check",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Resume silently",
+  "notes": [
+    "\u2705 Pre-check: Confirm AsyncStorage usage scoped to secure keyspace",
+    "\ud83e\udde0 Mission: Prevent blank app state during broken rehydration",
+    "\ud83c\udfaf Goal: Ensure user session state recovers from failed or missing JWTs",
+    "\ud83d\udccc Context: Firebase modular + local JWT usage with PIN fallback",
+    "\ud83d\udca5 Bug: Context null or stuck on splash screen due to broken token",
+    "\ud83d\udd27 Fix Summary: Add validation step on restore + reset fallback on failure",
+    "\ud83d\udd10 Relevance: App stability, session safety"
+  ],
+  "phases": [
+    {
+      "section": "Hydration Guard",
+      "actions": [
+        "Wrap useEffect in useAuth() with guard for invalid token structure",
+        "Clear corrupt storage entries if Firebase user mismatch",
+        "Show fallback screen if context can't hydrate"
+      ],
+      "commit": "fix: hydration fallback on broken JWT state",
+      "tag": "v1.3.0_hydration-safe"
+    }
+  ],
+  "final": {
+    "commit": "chore: safe startup with token validation guard",
+    "tag": "v1.3.0_hydration-complete"
+  }
+}

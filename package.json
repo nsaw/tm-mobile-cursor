@@ -1,0 +1,27 @@
+{
+  "name": "tm-mobile-cursor",
+  "version": "1.0.0",
+  "description": "Thoughtmarks Mobile App - Versioned Filesystem",
+  "scripts": {
+    "dev": "cd mobile-native-fresh && npm run start",
+    "backend": "cd mobile-native-fresh/backend && npm run dev",
+    "start": "cd mobile-native-fresh && npm run start",
+    "android": "cd mobile-native-fresh && npm run android",
+    "ios": "cd mobile-native-fresh && npm run ios",
+    "web": "cd mobile-native-fresh && npm run web",
+    "lint": "cd mobile-native-fresh && npm run lint",
+    "lint:fix": "cd mobile-native-fresh && npm run lint:fix",
+    "install:all": "npm install && cd mobile-native-fresh && npm install && cd backend && npm install",
+    "clean": "rm -rf node_modules mobile-native-fresh/node_modules mobile-native-fresh/backend/node_modules",
+    "reset": "npm run clean && npm run install:all",
+    "tasks:list": "./scripts/task-manager.sh list",
+    "tasks:organize": "./scripts/task-manager.sh organize",
+    "tasks:complete": "./scripts/task-manager.sh complete",
+    "tasks:sort": "./scripts/task-manager.sh sort"
+  },
+  "private": true,
+  "workspaces": [
+    "mobile-native-fresh",
+    "mobile-native-fresh/backend"
+  ]
+} 

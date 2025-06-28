@@ -1,0 +1,44 @@
+{
+  "branch": "release/v1.2.2-lint-daemon",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Continuous Lint Enforcement",
+      "actions": [
+        "while true; do npm run lint:fix-all; sleep 10; done"
+      ],
+      "commit": "chore: auto-fix eslint violations",
+      "tag": "v1.2.2_lint-pass-rolling"
+    },
+    {
+      "section": "Continuous Theme Scope Audit",
+      "actions": [
+        "while true; do npm run lint:check-theme; sleep 10; done"
+      ],
+      "commit": "chore: enforce token scope correctness",
+      "tag": "v1.2.2_theme-scope-watch"
+    },
+    {
+      "section": "Continuous Clickable Audit",
+      "actions": [
+        "while true; do npm run audit:clickables; sleep 10; done"
+      ],
+      "commit": "chore: clickable accessibility audit pass",
+      "tag": "v1.2.2_accessibility-loop"
+    }
+  ],
+  "final": {
+    "commit": "chore: background lint/watch agents running",
+    "tag": "v1.2.2_background-lint-agent-live",
+    "notes": [
+      "\u2705 PRE-CHECK: Confirm no other background agents are running",
+      "\ud83e\udde0 MISSION: Automate lint:fix-all pass during development",
+      "\ud83c\udfaf GOAL: Ensure JSX, theme, and text errors are resolved continuously",
+      "\ud83d\udccc CONTEXT: Linting issues often go unnoticed; this reduces regressions and keeps token usage compliant",
+      "\ud83d\udd27 FIX: Repeatedly runs `npm run lint:fix-all` scoped to appropriate folders",
+      "\ud83d\udd10 THEME: Keeps token scoping valid and ensures all components use <Text> correctly"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "branch": "fix/liquid-theme-v1-restore",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Restore LIQUID THEME v1 Visual Identity",
+      "actions": [
+        "Enforce text weight and casing, not font-size changes",
+        "Categorize visual elements: card, section, modal, header, tag",
+        "Apply opacity layering rules from token system",
+        "Remove overrides from typography and padding props where global tokens apply",
+        "Ensure all color usage routes through useTheme tokens"
+      ],
+      "commit": "style: restore liquid visual identity and readability",
+      "tag": "v1.2.2_liquid-theme-polish"
+    },
+    {
+      "section": "Visual Parity Verification",
+      "actions": [
+        "Run snapshot comparison with v1.2.1",
+        "Confirm spacing, opacity, and weight match",
+        "Fix any regressions in contrast or casing"
+      ],
+      "commit": "chore: liquid theme verification complete",
+      "tag": "v1.2.2_liquid-theme-verified"
+    }
+  ],
+  "final": {
+    "commit": "chore: v1.2.2 liquid theme restored",
+    "tag": "v1.2.2_liquid-theme-final",
+    "notes": [
+      "\u2705 PRE-CHECK: Snapshot current working branch before applying visual updates",
+      "\ud83e\udde0 MISSION: Restore Liquid Theme v1's visual rhythm and hierarchy (casing, weight, opacity)",
+      "\ud83c\udfaf GOAL: Ensure consistency in cards, sections, modal overlays, and readability scaffolds",
+      "\ud83d\udccc CONTEXT: Post-token-migration, casing and weight became visually diluted",
+      "\ud83d\udd27 FIX: Applies consistent typography, spacing, and surface visuals across app screens",
+      "\ud83d\udd10 THEME: Critical to enforcing visual polish rules under dynamic theme context"
+    ]
+  }
+}

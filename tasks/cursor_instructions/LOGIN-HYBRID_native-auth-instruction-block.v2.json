@@ -1,0 +1,117 @@
+{
+  "branch": "feature/native-auth-flow",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Firebase Auth Integration",
+      "actions": [
+        "Set up Firebase config using app.json and secrets",
+        "Install @react-native-firebase/app and @react-native-firebase/auth",
+        "Configure Firebase Auth (email/password only for now)",
+        "Prepare helpers in src/lib/firebaseAuth.ts for login, signup, password reset, signout"
+      ],
+      "commit": "feat: firebase config and auth utils wired",
+      "tag": "v1.2.2_firebase-auth-setup"
+    },
+    {
+      "section": "AuthContext & User Session Hook",
+      "actions": [
+        "Create AuthProvider in src/contexts/AuthContext.tsx with `useAuth()` hook",
+        "Manage auth state: firebaseUser, dbUser, isGuest, isAuthenticated, loading",
+        "Sync user record to backend via REST `/users/by-firebase/{uid}` or `/users`",
+        "Handle localStorage fallback for demo accounts"
+      ],
+      "commit": "feat: native auth context with firebase+db user sync",
+      "tag": "v1.2.2_auth-context-complete"
+    },
+    {
+      "section": "SignIn / SignUp Modal Screens",
+      "actions": [
+        "Create SignInScreen.tsx and SignUpScreen.tsx in src/features/auth/screens",
+        "Follow layout style of onboarding modal: backdrop, centered card, `spacing.modalPaddingHorizontal`",
+        "Use Ubuntu + Oswald fonts; apply `tokens.typography` for inputs, errors, labels",
+        "Build two-sided toggle UI with state-based screen rendering"
+      ],
+      "commit": "feat: signin/signup modal with toggle and form validation",
+      "tag": "v1.2.2_auth-screens-ui"
+    },
+    {
+      "section": "PIN Auth System",
+      "actions": [
+        "Create pin-auth.ts service in src/lib/",
+        "Hash PIN using Expo Crypto API, store securely using Expo SecureStore",
+        "Create PinLoginScreen.tsx and PinSetupScreen.tsx",
+        "Fallback to email auth if no PIN found or fails",
+        "Trigger login success via `dispatch('pinAuthSuccess', { user })`"
+      ],
+      "commit": "feat: PIN login and setup with secure local storage",
+      "tag": "v1.2.2_pin-auth"
+    },
+    {
+      "section": "Forgot Password + Change Flow",
+      "actions": [
+        "Add ForgotPasswordScreen.tsx with email reset logic using Firebase",
+        "Add ChangePasswordScreen.tsx inside Settings",
+        "Wrap both in modal stack with navigation.push()",
+        "Enforce password length > 6 with zod or form validation"
+      ],
+      "commit": "feat: forgot/change password screens implemented",
+      "tag": "v1.2.2_password-screens"
+    },
+    {
+      "section": "Role & Permission Enforcement",
+      "actions": [
+        "Port PermissionManager.ts from web and adapt for RN context",
+        "Use `roleId`, `subscriptionStatus`, and trial check logic from dbUser",
+        "Support isAdmin, isPremium, hasActiveSubscription, canUseFeature()"
+      ],
+      "commit": "feat: permission manager ported with tier support",
+      "tag": "v1.2.2_permissions-logic"
+    },
+    {
+      "section": "PremiumFeatureWrapper + Overlay",
+      "actions": [
+        "Create PremiumFeatureWrapper.tsx and PremiumOverlay.tsx in components/ui",
+        "Match web style: blurred black background, gradient card, crown icon, button",
+        "Use `tokens.colors.accent`, `spacing.cardPaddingHorizontal`, `typography.small`",
+        "Show upgrade CTA linking to /premium"
+      ],
+      "commit": "feat: premium overlay and feature wrapper styled for RN",
+      "tag": "v1.2.2_premium-wrapper"
+    },
+    {
+      "section": "Premium Screen Native Version",
+      "actions": [
+        "Create PremiumScreen.tsx with feature grid, tier pricing, CTA buttons",
+        "Replicate layout from web: spacing.sectionMarginBottom, gradient buttons",
+        "Temporarily use Linking API for App Store redirection only"
+      ],
+      "commit": "feat: native premium screen with tier layout and CTA",
+      "tag": "v1.2.2_premium-screen"
+    },
+    {
+      "section": "Route Guards and Settings Section",
+      "actions": [
+        "Prevent navigation to premium-only routes if !isPremium(user)",
+        "Add PIN, password, and subscription status to SettingsScreen.tsx",
+        "Include upgrade button if user not premium"
+      ],
+      "commit": "feat: settings auth section + premium route guard",
+      "tag": "v1.2.2_auth-settings-complete"
+    }
+  ],
+  "final": {
+    "commit": "feat: full expo-native auth system complete",
+    "tag": "v1.2.2_auth-native-done",
+    "notes": "All sign-in, sign-up, PIN, password reset, user role, and premium gating now implemented in native app with Firebase integration and theme-compliant styling. Google/Apple auth wiring reserved for future native builds."
+  },
+  "notes": [
+    "\u2705 PRE-CHECK: Reference summary from /docs/Login-Signup-Auth_Summary.md",
+    "\ud83e\udde0 MISSION: Native Sign-In / Sign-Up Auth System",
+    "\ud83c\udfaf GOAL: Implement full Firebase auth flow with login, signup, PIN, role-based gating, and premium overlays",
+    "\ud83d\udccc CONTEXT: Must match design language of onboarding modals and support Firebase + local secure login fallback",
+    "\ud83d\udd10 RELEVANCE: Central to premium access, user gating, and upcoming subscriptions"
+  ]
+}

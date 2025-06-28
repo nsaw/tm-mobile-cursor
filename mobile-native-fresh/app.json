@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "scheme": "thoughtmarks",
+    "name": "Thoughtmarks",
+    "slug": "thoughtmarks",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/fullscreen-splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#0D0D0D"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.thoughtmarks.app",
+      "backgroundColor": "#0D0D0D"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#0D0D0D"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.thoughtmarks.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-notifications",
+      "expo-font"
+    ],
+    "extra": {
+      "firebaseConfig": {
+        "apiKey": "AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y",
+        "authDomain": "thoughtmarks-25replit.firebaseapp.com",
+        "projectId": "thoughtmarks-25replit",
+        "storageBucket": "thoughtmarks-25replit.appspot.com",
+        "messagingSenderId": "371020564944",
+        "appId": "1:371020564944:web:your-app-id"
+      },
+      "googleAndroidClientId": "482692133923-uahvc6eshmr3p03mv8dl9vgk6vrl6b5v.apps.googleusercontent.com",
+      "googleIosClientId": "482692133923-urb0tq0gcjbp06e26gimulhjp18kpcpb.apps.googleusercontent.com"
+    },
+    "jsEngine": "jsc",
+    "experiments": {
+      "disableErrorOverlay": true
+    }
+  }
+}

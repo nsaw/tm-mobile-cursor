@@ -1,0 +1,32 @@
+{
+  "branch": "refactor/roleview-enforcement",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Replace View with AutoRoleView",
+      "actions": [
+        "Search for all View instances in UI components",
+        "Replace with AutoRoleView unless exception noted",
+        "Preserve props and layout logic",
+        "Use `convert-view-to-roleview.ts` if available"
+      ],
+      "commit": "refactor: AutoRoleView enforced across app",
+      "tag": "v1.2.2_auto-roleview"
+    }
+  ],
+  "final": {
+    "commit": "chore: role-based view system enforced",
+    "tag": "v1.2.2_auto-roleview-final",
+    "notes": [
+      "\u2705 PRE-CHECK: Ensure `View` usage is compliant with accessibility and layout expectations",
+      "\ud83e\udde0 MISSION: Upgrade all eligible <View> components to AutoRoleView",
+      "\ud83c\udfaf GOAL: Enforce accessible, semantically meaningful containers across the app",
+      "\ud83d\udccc CONTEXT: Many <View> elements are missing role or a11y props, and should use the AutoRoleView wrapper",
+      "\ud83d\udca5 BUG: Inconsistent accessibility roles and missing touch targets in basic layout containers",
+      "\ud83d\udd27 FIX: Replace all <View> with AutoRoleView where patterns match eligibility",
+      "\ud83d\udd10 ACCESSIBILITY: This is an a11y compliance step and ties into text enforcement and layout hierarchy"
+    ]
+  }
+}

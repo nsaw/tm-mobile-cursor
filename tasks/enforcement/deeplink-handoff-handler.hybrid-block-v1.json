@@ -1,0 +1,31 @@
+{
+  "branch": "feature/deeplink-routes",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Resume automatically",
+  "notes": [
+    "\u2705 Pre-check: Verify thoughtmarks:// scheme configured in app.json",
+    "\ud83e\udde0 Mission: Stabilize deep linking logic from shortcuts and web",
+    "\ud83c\udfaf Goal: Ensure routing to creation and premium actions via Siri/Links",
+    "\ud83d\udccc Context: Expo project with Linking.getInitialURL() and addEventListener",
+    "\ud83d\udca5 Bug: Race conditions on cold-start route hydration",
+    "\ud83d\udd27 Fix Summary: Add deep link guards and hydration wait handling",
+    "\ud83d\udd10 Relevance: App launch UX, shortcut handling, cross-platform integration"
+  ],
+  "phases": [
+    {
+      "section": "Link Handler Refactor",
+      "actions": [
+        "Move link parsing logic to useDeepLinkHandler()",
+        "Block routing until auth state confirmed via context",
+        "Support /new, /premium, /insight/:id with fallback"
+      ],
+      "commit": "fix: reliable deep linking handoff on cold start",
+      "tag": "v1.3.0_deeplink-stable"
+    }
+  ],
+  "final": {
+    "commit": "chore: deep link routing stabilized",
+    "tag": "v1.3.0_deeplink-complete"
+  }
+}

@@ -1,0 +1,132 @@
+{
+    ////////////////////////////////////////////
+    ////////////////////////////////////////////
+    // 🧠 MISSION: MODAL CHERRY-PICK & ROLLBACK + GIT & FOLDER HYGIENE
+    // 🎯 GOAL: Safely preserve latest OnboardingModal, roll back to v1.2.2_visual-polish, and set up robust versioning and local archiving
+    ////////////////////////////////////////////
+    ////////////////////////////////////////////
+  
+    "notes": [
+      "✅ PRE-CHECK: Ensure latest OnboardingModal is working and backed up locally",
+      "✅ All changes committed and pushed before any destructive operations",
+      "🧠 Modal isolation is done BEFORE any rollback so nothing is lost",
+      "🗂️ Folder and repo structure will be cleaned and documented",
+      "🔄 Everything is reversible — backups and checkpoints made at every major step"
+    ],
+  
+    ////////////////////////////////////////////
+    // PHASE 1: MODAL CHERRY-PICK & BACKUP
+    ////////////////////////////////////////////
+    "phases": [
+      {
+        "section": "Commit Current Work and Push to Remote",
+        "actions": [
+          "git add .",
+          "git commit -m 'chore: local checkpoint before modal extraction and rollback'",
+          "git tag pre-modal-cherry-pick-snapshot",
+          "git push",
+          "git push --tags"
+        ],
+        "commit": "chore: committed and tagged current working state",
+        "tag": "pre-modal-cherry-pick-snapshot"
+      },
+      {
+        "section": "Extract and Isolate OnboardingModal",
+        "actions": [
+          "Copy src/components/ui/OnboardingModal.tsx and any needed assets (icons, local styles)",
+          "If using local styles, extract them to src/components/ui/onboardingModalStyles.ts",
+          "Sanity check: Modal should NOT import from global theme files outside ThemeProvider or use any experimental wrappers",
+          "Move the extracted modal and styles into a new local folder: .backup/onboardingModal_v1.3.1/",
+          "Add a README.txt inside that folder describing date, source commit/tag, and any notes on working look/feel"
+        ],
+        "commit": "chore: backup and isolate working OnboardingModal for future transplant",
+        "tag": "modal-cherry-picked-and-archived"
+      },
+  
+      ////////////////////////////////////////////
+      // PHASE 2: ROLLBACK & STRUCTURAL CLEANUP
+      ////////////////////////////////////////////
+      {
+        "section": "Rollback to Last Known Good Visual Baseline",
+        "actions": [
+          "git checkout -b rollback/v1.2.2_visual-polish",
+          "git reset --hard v1.2.2_visual-polish",
+          "git status # Confirm working tree matches tag"
+        ],
+        "commit": "chore: rolled back project to visual-polish baseline",
+        "tag": "rollback-v1.2.2_visual-polish"
+      },
+      {
+        "section": "Test Baseline — Confirm Everything Loads and Looks as Expected",
+        "actions": [
+          "Run app (expo start or npx expo run) and visually confirm nav bar, logo, main dashboard/cards/buttons/tags",
+          "If any critical breakage, STOP and debug before proceeding"
+        ],
+        "commit": "chore: visual baseline confirmed post-rollback",
+        "tag": "rollback-v1.2.2_visual-confirmed"
+      },
+  
+      ////////////////////////////////////////////
+      // PHASE 3: REPO & FOLDER VERSIONING CLEANUP
+      ////////////////////////////////////////////
+      {
+        "section": "Create and Document Local Archive/Backup Folders",
+        "actions": [
+          "Create new local folders: .backup/ and archive/",
+          "Move old experimental components, failed style passes, or valuable code to these folders (git-ignored)",
+          "Add .gitignore entries: '.backup/' and 'archive/' if not already present"
+        ],
+        "commit": "chore: local backup/archive folders created and git-ignored",
+        "tag": "backup-folder-initialized"
+      },
+      {
+        "section": "Document Rollback in README",
+        "actions": [
+          "Add a new section to your project README.md or create /docs/ROLLBACK_HISTORY.md",
+          "Describe: why rollback was necessary, what was preserved, and the current state",
+          "Include the backup/archive instructions and commit/tag history"
+        ],
+        "commit": "docs: rollback rationale and backup strategy documented",
+        "tag": "rollback-readme-documented"
+      },
+      {
+        "section": "Lock Node, Expo, and TypeScript Versions",
+        "actions": [
+          "Check your package.json for engines and dependencies:",
+          "'node', 'expo', 'typescript' versions should match v1.2.2_visual-polish baseline (update if needed)",
+          "If using yarn.lock or package-lock.json, make sure lockfile is in sync"
+        ],
+        "commit": "chore: locked dependency versions to rollback baseline",
+        "tag": "rollback-versions-locked"
+      },
+  
+      ////////////////////////////////////////////
+      // PHASE 4: ONBOARDING MODAL TRANSPLANT (OPTIONAL)
+      ////////////////////////////////////////////
+      {
+        "section": "Re-insert OnboardingModal in the Clean Baseline",
+        "actions": [
+          "Copy .backup/onboardingModal_v1.3.1/OnboardingModal.tsx into src/components/ui/",
+          "Copy local onboardingModalStyles.ts if used",
+          "Update imports as needed (should only reference ThemeProvider/useTheme and standard React Native)",
+          "Test modal visually before full integration"
+        ],
+        "commit": "feat: transplanted working OnboardingModal into stable baseline",
+        "tag": "onboarding-modal-restored"
+      }
+    ],
+  
+    ////////////////////////////////////////////
+    // 🔚 FINAL SNAPSHOT + CLOSEOUT
+    ////////////////////////////////////////////
+    "final": {
+      "commit": "chore: baseline clean, modal preserved, repo and folder hygiene enforced",
+      "tag": "v1.2.2_modal-cherry-pick-baseline",
+      "notes": [
+        "Your project is rolled back, visually confirmed, and archived.",
+        "You have a working copy of the best OnboardingModal, safely stored for future transplant into any baseline.",
+        "Repo and folder structures are now robust against future mass theme breakage."
+      ]
+    }
+  }
+  

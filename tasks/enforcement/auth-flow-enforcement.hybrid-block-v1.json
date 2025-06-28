@@ -1,0 +1,42 @@
+{
+  "branch": "feature/native-auth-flow",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "notes": [
+    "\u2705 Pre-check: Confirm Firebase config is injected correctly and not hardcoded",
+    "\ud83e\udde0 Mission: Enforce reliable Firebase + PIN + Email auth flow across app",
+    "\ud83c\udfaf Goal: Ensure user login, logout, signup, and session persistence is consistent and recoverable",
+    "\ud83d\udccc Context: Built on Expo, React Native, and Firebase Modular SDK",
+    "\ud83d\udca5 Bug: Storage desync, context not restored, broken login edge cases",
+    "\ud83d\udd27 Fix Summary: Validate Firebase init, async JWT handling, session restore guard",
+    "\ud83d\udd10 Relevance: Authentication, security, and UX reliability"
+  ],
+  "phases": [
+    {
+      "section": "Firebase Auth Flow",
+      "actions": [
+        "Verify useAuth() rehydrates token and user context correctly",
+        "Enforce logout clears AsyncStorage and Firebase token",
+        "Add try/catch guard on initial auth fetch to show loading or fallback error"
+      ],
+      "commit": "fix: auth persistence and logout cleanup",
+      "tag": "v1.3.0_auth-flow-reliable"
+    },
+    {
+      "section": "PIN Login Integration",
+      "actions": [
+        "Validate PIN login fallback triggers if session token missing",
+        "Ensure PIN screen can set and validate code with secure storage",
+        "Test biometric or backup path for PIN bypass (if enabled)"
+      ],
+      "commit": "fix: pin login fallback and setup validation",
+      "tag": "v1.3.0_pin-login-integrated"
+    }
+  ],
+  "final": {
+    "commit": "chore: auth system complete and validated",
+    "tag": "v1.3.0_auth-stable",
+    "notes": "Covers login, signup, PIN, logout, and session restore across all screens."
+  }
+}

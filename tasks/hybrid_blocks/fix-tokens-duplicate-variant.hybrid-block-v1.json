@@ -1,0 +1,42 @@
+{
+  "branch": "fix/theme-tokens-variant-duplication",
+  "mode": "auto",
+  "watchConsole": true,
+  "phases": [
+    {
+      "section": "Fix Duplicate Token Declaration",
+      "actions": [
+        "Open src/theme/variants.ts",
+        "Remove `const { tokens } = useTheme()` from inside `getButtonVariants()`",
+        "Refactor function signature: change to `export function getButtonVariants(): ReturnType`",
+        "Inside the function body, add `const { tokens } = useTheme()` at the top level"
+      ],
+      "commit": "fix: remove duplicate tokens declaration in getButtonVariants",
+      "tag": "v1.2.2_fix-duplicate-tokens"
+    },
+    {
+      "section": "Re-verify Token Usage Compliance",
+      "actions": [
+        "Run `npm run lint:check-theme`",
+        "Run `npm run lint:fix-all`",
+        "Ensure no `tokens.*` references exist outside of function scope"
+      ],
+      "commit": "chore: verified token usage compliance",
+      "tag": "v1.2.2_token-verified"
+    }
+  ],
+  "final": {
+    "commit": "chore: fixed theme variant bug and verified token scope — v1.2.2_token-hotfix",
+    "tag": "v1.2.2_token-hotfix",
+    "notes": [
+      "✅ PRE-CHECK: Ensure latest `main` is pulled and you're on a clean branch",
+      "✅ DO NOT STOP — complete all tasks and sections in order",
+      "🧠 MISSION: Eliminate duplicate theme token declarations inside dynamic variant functions",
+      "🎯 GOAL: Enforce single `tokens` access point per component/function",
+      "📌 CONTEXT: Theme token access must follow scoped `useTheme()` usage. ESLint rule `no-global-theme/tokens` is enabled.",
+      "💥 BUG: In `getButtonVariants(tokens)`, `tokens` was passed as an argument AND re-declared inside the function body via `useTheme()`",
+      "🔧 FIX: Remove duplicate `tokens` declaration and allow `useTheme()` to define it in-body.",
+      "🔐 THEME ENFORCEMENT: This file is scanned by token scope guards and must never access `tokens.colors.*` statically or globally."
+    ]
+  }
+}

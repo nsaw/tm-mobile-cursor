@@ -1,0 +1,111 @@
+{
+  "name": "mobile-native-fresh",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx expo start",
+    "android": "npx expo start --android",
+    "ios": "npx expo start --ios",
+    "web": "npx expo start --web",
+    "postinstall": "npm uninstall -g expo-cli || true",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint:ci": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "lint:check-theme": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep 'no-restricted-imports' | wc -l",
+    "lint:wrap-text": "eslint . --ext .ts,.tsx --fix --rulesdir eslint-rules --rule 'no-text-outside-text: error',",
+    "lint:fix-text": "node scripts/fix-unwrapped-text.cjs",
+    "lint:fix-jsx": "node scripts/enforce-jsx-rules.cjs",
+    "lint:check-jsx": "eslint . --ext .ts,.tsx --format=unix 2>/dev/null | grep -E '(no-text-outside-text|no-inline-colors|enforce-theme-hook)' | wc -l",
+    "lint:fix-accessibility": "node scripts/fix-accessibility.cjs",
+    "lint:fix-all": "npm run lint:fix-text && npm run lint:fix-accessibility && npm run lint:check-theme && npm run lint:fix",
+    "lint:enforce-text-wrapping": "eslint . --ext .ts,.tsx --rule 'thoughtmarks/enforce-text-wrapping: error' --fix",
+    "pre-commit": "npm run lint:fix-all && node scripts/scan-unwrapped-text.cjs",
+    "fix:text-errors": "node scripts/auto-fix-text-errors.cjs",
+    "auto:fix": "npm run fix:text-errors",
+    "watch:text-errors": "node scripts/watch-text-errors.cjs",
+    "watch:fix": "npm run watch:text-errors",
+    "watch:lint-fix": "node scripts/watch-lint-fix.cjs"
+  },
+  "dependencies": {
+    "@expo-google-fonts/oswald": "^0.4.1",
+    "@expo-google-fonts/ubuntu": "^0.4.0",
+    "@expo/cli": "^0.24.15",
+    "@expo/config-plugins": "~10.0.0",
+    "@expo/metro-runtime": "~5.0.4",
+    "@react-native-async-storage/async-storage": "2.1.2",
+    "@react-native-community/datetimepicker": "8.3.0",
+    "@react-native-masked-view/masked-view": "0.3.2",
+    "@react-native-voice/voice": "^3.2.4",
+    "@react-navigation/bottom-tabs": "^7.3.17",
+    "@react-navigation/native": "^7.1.13",
+    "@react-navigation/stack": "^7.3.6",
+    "date-fns": "^4.1.0",
+    "expo": "^53.0.12",
+    "expo-apple-authentication": "~7.2.4",
+    "expo-auth-session": "~6.2.0",
+    "expo-av": "^15.1.6",
+    "expo-blur": "^14.1.5",
+    "expo-font": "~13.3.1",
+    "expo-notifications": "~0.31.3",
+    "expo-speech": "^13.1.7",
+    "expo-splash-screen": "~0.30.9",
+    "expo-status-bar": "~2.2.3",
+    "firebase": "^11.9.1",
+    "lucide-react-native": "^0.522.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.4",
+    "react-native-draggable-flatlist": "^4.0.3",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
+    "react-native-svg": "15.11.2",
+    "react-native-vector-icons": "^10.2.0",
+    "react-native-web": "^0.20.0",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@eslint/js": "^9.29.0",
+    "@expo/ngrok": "^4.1.0",
+    "@react-native-community/cli": "latest",
+    "@types/react": "~19.0.10",
+    "@types/react-native-vector-icons": "^6.4.18",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.1",
+    "eslint-config-expo": "^9.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^5.0.0",
+    "eslint-plugin-thoughtmarks": "file:eslint-plugin-thoughtmarks",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "glob": "^11.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3"
+  },
+  "private": true,
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-responsive-fontsize",
+          "firebase",
+          "react-native-vector-icons"
+        ]
+      }
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "eslint --rule 'no-restricted-imports: error'"
+    ]
+  }
+}

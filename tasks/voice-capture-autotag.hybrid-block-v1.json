@@ -1,0 +1,47 @@
+{
+  "notes": [
+    "🧠 MISSION: Wire voice capture autofill logic to NewThoughtmarkScreen",
+    "🎯 GOAL: When invoked via Siri/Google/deepLink, populate the form with dictated text, suggest a title, assign default bin and tags, and autosave",
+    "�� CONTEXT: User lands in NewThoughtmarkScreen with a URL like thoughtmarks://capture?text=...",
+    "✅ REQUIREMENTS: 'Sort Later' bin must exist, default tags 'voice-to-tm' and 'sort later' must be assignable",
+    "✅ Title suggestion comes from suggestTitleFromBody.ts helper",
+    "🔐 RELEVANCE: Required for 1-click Siri/Assistant capture flow to function reliably"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "branch": "feature/voice-capture-autotag",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Hook Dictated Text + Auto Tagging",
+      "actions": [
+        "Update NewThoughtmarkScreen to accept deep link param: body",
+        "Use suggestTitleFromBody.ts to populate a suggested title",
+        "Set initial tags: ['voice-to-tm', 'sort later']",
+        "Auto-select 'Sort Later' bin as default (create if missing in dev)"
+      ],
+      "commit": "feat: preload voice text, title suggestion, tags, and bin",
+      "tag": "v1.3.5_voice-autotag"
+    },
+    {
+      "section": "Autosave Voice-Initiated Thoughtmark",
+      "actions": [
+        "If screen is opened with voiceCapture param, autosave immediately after population",
+        "Show a visual confirmation/toast: 'Thoughtmark saved!'",
+        "Keep screen open for optional edits (do not dismiss immediately)"
+      ],
+      "commit": "feat: autosave thoughtmark from voice with passive flow",
+      "tag": "v1.3.5_voice-autosave"
+    }
+  ],
+  "final": {
+    "commit": "chore: voice capture autofill + autosave logic complete",
+    "tag": "v1.3.5_voice-capture-autotag-complete",
+    "notes": "Voice-dictated thoughtmarks now populate form, suggest title, assign tags and bin, and auto-save. Screen remains open for user edits."
+  }
+}

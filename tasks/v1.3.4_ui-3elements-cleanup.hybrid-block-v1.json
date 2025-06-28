@@ -1,0 +1,73 @@
+{
+  "notes": [
+    "🧠 MISSION: Reinstate and polish 3 key UI components post-rollback",
+    "🎯 GOAL: Restore core visual elements (NewThoughtmarkScreen, modal, pagination card) with spacing + a11y rules from DASH layout",
+    "📌 CONTEXT: Following rollback, we lost global visual polish from v1.2.2. We are now rebuilding the UI layer using verified patterns",
+    "✅ Use spacing, font weights, casing, and color token rules from v1.2.2_visual-polish-final",
+    "✅ Enforce <Text> wrapping, correct tag pill placement, bin button spacing, and autoFocus fields",
+    "✅ Reference and lift from DASH card variants for modal and form layout",
+    "✅ Confirm props like accessibilityLabel, role, keyboardType, and placeholderTextColor exist on text inputs",
+    "🔐 RELEVANCE: This is required for voice capture flow and onboarding polish to function smoothly. All fields must behave cleanly."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): secure state pre-ui rehydration v1.3.4\"",
+      "git tag v1.3.4_ui-3elements_pre-cleanup",
+      "git push origin v1.3.4_ui-3elements_pre-cleanup || echo 'Tag push failed (safe to ignore if local only)'"
+    ]
+  },
+  "branch": "staging/v1.3.4_ui-3elements-cleanup",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Reintegrate 3 Key UI Components",
+      "actions": [
+        "Restore pagination overlay component, linked to current dashboard paginator logic",
+        "Add NewThoughtmarkScreen from DASH reference into unified stack flow",
+        "Reintegrate modal components with proper spacing and accessibility props",
+        "Apply DASH card layout patterns to form components",
+        "Enforce Text wrapping rules and proper tag pill placement",
+        "Add autoFocus and keyboardType props to text inputs",
+        "Verify accessibilityLabel and role props on interactive elements"
+      ],
+      "commit": "feat: reintegrate 3 key UI components with DASH layout patterns"
+    },
+    {
+      "section": "Polish Visual Elements",
+      "actions": [
+        "Apply spacing rules from v1.2.2_visual-polish-final",
+        "Update font weights and casing according to design system",
+        "Implement color token rules for consistency",
+        "Add proper bin button spacing and alignment",
+        "Ensure modal and form layouts match DASH card variants"
+      ],
+      "commit": "style: apply visual polish from v1.2.2 design system"
+    }
+  ],
+  "final": {
+    "commit": "chore: UI 3 elements cleanup complete and artifacts organized",
+    "tag": "v1.3.4_ui-3elements-cleanup",
+    "notes": [
+      "All task JSON, scripts, and supporting files for this phase moved to /tasks/v1.3.4/.",
+      "Index updated in /tasks/INDEX.md with artifact list for traceability.",
+      "Root /tasks folder now clean for next phase."
+    ],
+    "actions": [
+      "Move this phase's instruction block(s) and scripts to /tasks/v1.3.4/",
+      "Update /tasks/INDEX.md with all moved files and their purpose."
+    ],
+    "links": [
+      "[/tasks/v1.3.4/](sandbox:/mnt/data/tasks/v1.3.4/)",
+      "[/tasks/INDEX.md](sandbox:/mnt/data/tasks/INDEX.md)"
+    ]
+  }
+}
+

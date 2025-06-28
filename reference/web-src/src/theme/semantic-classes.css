@@ -1,0 +1,513 @@
+/* ==========================================
+   THOUGHTMARKS SEMANTIC CLASS SYSTEM
+   Theme-aware scoped components
+   ========================================== */
+
+/* Base Typography System */
+* {
+  font-family: 'Ubuntu', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.tm-header,
+h1, h2, h3, h4, h5, h6, 
+.font-oswald, .text-2xl, .text-xl, .text-lg {
+  font-family: 'Oswald', 'Ubuntu', system-ui, sans-serif;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+}
+
+.font-medium, .font-500 {
+  font-weight: 500;
+  font-variation-settings: "wght" 500;
+}
+
+.font-normal, .font-400 {
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+}
+
+/* Component Base Classes - Applied to all matching elements */
+
+/* Card Components */
+.tm-card {
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tm-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Header Components */
+.tm-header {
+  font-family: 'Ubuntu', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #1084cb;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Wrapper Components */
+.tm-wrapper {
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+}
+
+.tm-container {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* Button Components */
+.tm-button {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease-out;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tm-button:active {
+  transform: scale(0.98);
+}
+
+/* Floating Action Button */
+.tm-fab {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 90px);
+  right: 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C6D600 0%, #9CB800 100%);
+  border: none;
+  box-shadow: 
+    0 8px 32px rgba(198, 214, 0, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 40;
+  backdrop-filter: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tm-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 12px 40px rgba(198, 214, 0, 0.4),
+    0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tm-fab:active {
+  transform: scale(0.95);
+}
+
+/* Navigation Bar */
+.tm-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 440px;
+  height: calc(70px + env(safe-area-inset-bottom, 0px));
+  background: rgba(0, 0, 0, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.tm-nav-button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.tm-nav-button:hover,
+.tm-nav-button.active {
+  color: #C6D600;
+}
+
+/* Icon Components */
+.tm-icon {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+/* Menu Components */
+.tm-menu {
+  background: rgba(26, 26, 26, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(24px);
+  border-radius: 8px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+.tm-menu-item {
+  color: #ffffff;
+  background: transparent;
+  padding: 8px 12px;
+  transition: background-color 0.2s ease;
+}
+
+.tm-menu-item:hover,
+.tm-menu-item:focus {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Toggle Components */
+.tm-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.tm-toggle:checked,
+.tm-toggle[data-state="checked"] {
+  background: #3399ff;
+  border-color: #3399ff;
+}
+
+/* Overlay Components */
+.tm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  z-index: 9998;
+}
+
+/* Glass Effect Components */
+.tm-glass {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tm-glass:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* State Variations */
+.tm-card.selected {
+  background: rgba(198, 214, 0, 0.1);
+  border-color: rgba(198, 214, 0, 0.3);
+  box-shadow: 
+    0 12px 40px rgba(198, 214, 0, 0.2),
+    inset 0 1px 0 rgba(198, 214, 0, 0.2),
+    0 0 20px rgba(198, 214, 0, 0.15);
+}
+
+.tm-card.pinned {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(59, 130, 246, 0.1),
+    0 0 10px rgba(59, 130, 246, 0.1);
+}
+
+/* Animation Classes */
+.tm-animate-press {
+  animation: press-feedback 0.15s ease-out;
+}
+
+.tm-animate-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.tm-animate-spring-in {
+  animation: spring-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Navigation Container - handles spacing and safe areas */
+.tm-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.tm-nav-container {
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 0 calc(48px + env(safe-area-inset-bottom));
+  min-height: calc(96px + env(safe-area-inset-bottom));
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tm-nav-button {
+  color: #9ca3af !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.tm-nav-button:hover {
+  background: transparent !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.tm-nav-button.active {
+  color: #C6D600 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 441px) {
+  .tm-nav-bar {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Theme Exclusions - Elements that should NOT receive glass effects */
+.tm-header,
+.tm-wrapper,
+.tm-nav-button,
+.tm-fab,
+.tm-icon {
+  /* Explicitly prevent glass styling inheritance */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--tm-element-bg, transparent) !important;
+  border: var(--tm-element-border, none) !important;
+  box-shadow: var(--tm-element-shadow, none) !important;
+}
+
+/* Task Card Checkbox Alignment */
+.tm-task-checkbox,
+[data-task-checkbox],
+.task-checkbox {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+.tm-task-card .checkbox-wrapper,
+.task-card .checkbox-wrapper,
+[data-task-card] .checkbox-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 48px !important;
+}
+
+/* Z-Index Layer Management */
+.tm-overlay { z-index: 9998; }
+.tm-menu { z-index: 9999; }
+.tm-nav-bar { z-index: 50; }
+.tm-fab { z-index: 40; }
+.tm-card { z-index: 1; }
+.tm-container { z-index: 1; }
+
+/* Layout System */
+html, body {
+  background-color: #000000;
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: 440px;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Center app on larger screens */
+@media (min-width: 441px) {
+  html, body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  #root {
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+}
+
+/* Hide all scrollbars universally */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+/* Floating Action Button System */
+.tm-fab-wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(112px + env(safe-area-inset-bottom));
+  z-index: 40;
+}
+
+.tm-fab-ring {
+  padding: 2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C6D600 0%, #00D9FF 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 16px 64px rgba(0, 0, 0, 0.6);
+  opacity: 0.75;
+}
+
+.tm-fab {
+  background: linear-gradient(135deg, #000000 0%, #1e3a8a 100%);
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(59, 130, 246, 0.2), 0 -4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Task Completion Toggle
+   Usage: Apply to any task completion control across the app
+   Attributes: data-completed="true|false" to control state
+   Icon: Use <Check className="w-4 h-4" /> inside the element
+   Example:
+   <div className="tm-completion-toggle" data-completed={isCompleted}>
+     <Check className="w-4 h-4" />
+   </div>
+*/
+
+/* Section Header Controls
+   Usage: Apply to header divs that control section expansion/collapse
+   Note: These should not have hover animations, only cursor pointer
+*/
+.section-header-control {
+  cursor: pointer;
+  transition: none !important;
+}
+
+.section-header-control:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+.tm-completion-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.tm-completion-toggle:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+/* Incomplete state - Blue ring with gray checkmark */
+.tm-completion-toggle[data-completed="false"] {
+  background-color: transparent !important;
+  border-color: #3b82f6 !important;
+  color: #6b7280 !important;
+}
+
+.tm-completion-toggle[data-completed="false"]:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border-color: #2563eb !important;
+  color: #9ca3af !important;
+  transform: scale(1.05);
+}
+
+/* Completed state - Green ring with green checkmark */
+.tm-completion-toggle[data-completed="true"] {
+  background-color: transparent !important;
+  border-color: #22c55e !important;
+  color: #22c55e !important;
+}
+
+.tm-completion-toggle[data-completed="true"]:hover {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+  border-color: #16a34a !important;
+  color: #16a34a !important;
+  transform: scale(1.05);
+}
+
+/* Icon animations */
+.tm-completion-toggle svg {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-completion-toggle[data-completed="false"] svg {
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+.tm-completion-toggle[data-completed="true"] svg {
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+/* Component-specific overrides for precise control */
+
+.tm-nav-bar {
+  --tm-element-bg: rgba(0, 0, 0, 0.95);
+  --tm-element-border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,42 @@
+{
+  "branch": "fix/ocd-lint-sweep",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "background",
+  "phases": [
+    {
+      "section": "Lint Enforcement Sweep",
+      "actions": [
+        "Run: npm run lint:fix-all",
+        "Run: npm run lint:check-theme",
+        "Run: npm run audit:clickables",
+        "Enable ESLint rules: no-shadow, no-redeclare, no-unused-vars, react/jsx-key, react-native/no-inline-styles, react-native/split-platform-components, react-native/no-color-literals",
+        "Auto-fix: trailing commas, missing semicolons, unused imports",
+        "Validate tokens usage is scoped via useTheme() or getStyles(tokens)",
+        "Wrap all plain strings in JSX with <Text>",
+        "Confirm spacing uses token values only",
+        "Audit all StyleSheet.create blocks for token violations",
+        "Ensure all clickable elements include role + accessibilityLabel",
+        "Collapse duplicated destructuring (tokens, styles, props, etc)",
+        "Flag unused useState/useEffect/useRef variables",
+        "Log grouped violations per file with line numbers",
+        "Commit all changes with diff context"
+      ],
+      "commit": "chore: full OCD lint sweep with auto-fixes and token enforcement",
+      "tag": "v1.2.2_ocd-lint-sweep"
+    }
+  ],
+  "final": {
+    "commit": "chore: OCD lint pass complete \u2014 JSX, spacing, text, tokens enforced",
+    "tag": "v1.2.2_lint-final-verified",
+    "notes": [
+      "\u2705 PRE-CHECK: Lint scripts pass independently",
+      "\ud83e\udde0 MISSION: Final deep lint pass for visual/token/JSX/accessibility consistency",
+      "\ud83c\udfaf GOAL: Remove shadow bugs, spacing issues, JSX errors, token misuse",
+      "\ud83d\udccc CONTEXT: Background agents missed scoped issues and visual violations",
+      "\ud83d\udca5 BUG: Tokens and variables redeclared, JSX had raw strings, spacing not tokenized",
+      "\ud83d\udd27 FIX: Apply strict lint config across src/theme, components, features",
+      "\ud83d\udd10 RELEVANCE: Prevents Expo build breaks, final check before 1.2.2 freeze"
+    ]
+  }
+}

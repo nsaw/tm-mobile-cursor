@@ -1,0 +1,33 @@
+{
+  "branch": "fix/no-shadow-no-redeclare-sweep",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "background",
+  "phases": [
+    {
+      "section": "Identifier Shadowing and Redeclaration Sweep",
+      "actions": [
+        "Enable ESLint rules: no-shadow, no-redeclare",
+        "Target identifiers: tokens, styles, props, theme, variants",
+        "Scan and fix all shadowed or redeclared variables across src/components, src/features, and src/theme",
+        "Exclude all files in /reference/, /webapp/, and /docs/snippets/",
+        "Log all resolved violations and commit with summary"
+      ],
+      "commit": "fix: resolve identifier shadowing and redeclaration bugs",
+      "tag": "v1.2.2_shadow-sweep"
+    }
+  ],
+  "final": {
+    "commit": "chore: identifier shadow cleanup complete",
+    "tag": "v1.2.2_shadow-enforced",
+    "notes": [
+      "\u2705 PRE-CHECK: Ensure webapp export folders like /reference/ and /docs/snippets/ are ignored",
+      "\ud83e\udde0 MISSION: Eliminate duplicate identifier declarations that slip past token enforcement",
+      "\ud83c\udfaf GOAL: Enforce clean scoping for tokens, styles, and props to avoid shadowing bugs",
+      "\ud83d\udccc CONTEXT: Prior token enforcement missed local redeclarations (e.g. `tokens` inside theme functions)",
+      "\ud83d\udca5 BUG: Files like variants.ts had multiple `tokens` references that created runtime errors",
+      "\ud83d\udd27 FIX: Apply no-shadow and no-redeclare rules and auto-resolve all matches in relevant scopes",
+      "\ud83d\udd10 RELEVANCE: This protects against silent runtime bugs during theme or token refactor phases"
+    ]
+  }
+}
