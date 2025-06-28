@@ -1,0 +1,875 @@
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.cursor-config.json and /Users/sawyer/gitSync/tm-mobile-cursor/.cursor-config.json differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: .cursor-config.overhaul-prep-v2.json
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/COMMIT_EDITMSG and /Users/sawyer/gitSync/tm-mobile-cursor/.git/COMMIT_EDITMSG differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/FETCH_HEAD and /Users/sawyer/gitSync/tm-mobile-cursor/.git/FETCH_HEAD differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/HEAD and /Users/sawyer/gitSync/tm-mobile-cursor/.git/HEAD differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/ORIG_HEAD and /Users/sawyer/gitSync/tm-mobile-cursor/.git/ORIG_HEAD differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/config and /Users/sawyer/gitSync/tm-mobile-cursor/.git/config differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/index and /Users/sawyer/gitSync/tm-mobile-cursor/.git/index differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/logs/HEAD and /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/HEAD differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/refs/heads/fix: v1.3.0_ui-enforcement
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/logs/refs/heads/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/refs/heads/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/refs/heads: rollback
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/logs/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/logs/refs/remotes/origin: rollback
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/00: 0e452fc4d3dae590a013e7021de8be41080951
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/00: be82c50f70edc7aa453d627daa83433e39aaee
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/01: 614a1fee1f36c50b758a20c107acb12bc03fd5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/02: 6e14778b3db9a3243a24394b4f10fccc17df5a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/03: ee5d4a29802aa9a6869f8e753a320e1e8c1c34
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/06: 1835761afce5cef12e7b259be1170cb5397d17
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/07: 7c1d56b8a6d4750e069684d6b83f7166ec1559
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/08: 6bebbf8fda85b20f044d4ad34d8e78707ad890
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0b: 5ea6a989fdecca09116149c1d56ca337509121
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0b: bf89703747068917219d9a8d853adce62abc9c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0c: 3b64a3f4709ffeeedd14d3c1d3e605a8d74fd5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0c: 8e57a3d0b47705cd8be3e3aae28b8a0d9a86ff
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0c: ef87ffd6ba2fbdb3edb1281d72447d29088005
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0d: 10986bdf0b9627665d2666008a2d99f598a8d8
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/0f: 84db1a2a5bc282413025e42d2c05f40c8e5672
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/10: 0c1c463b22f9e49ff75a52f00e7169b51221b0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/10: b62241451e0d0a968464def4a0f87b927bc2cc
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/11: 5ad123bfb2e51693e56c46fb83f01983662f81
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/11: 6ef2de9cacb241d66b79b70eb47918d6208dc7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/13: a2ceccb5f1a2e0932d1cf2f0ef9f36119e48a2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/17: 9ab28dc01d1a1bb0ab21782e198c55fc27620c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/18: 8f81e6db63972feb93d1b8b6796c860498a10c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1a: 64c19cdc396b982dd20fd01aa2307952376026
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1a: bb3c10447a4f955fbc24367178f5f0cac3508a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1b: 1a6a3170a0d84424ce1224d968e8cccd3ca32d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1b: 2182d7bc00ca189980ef2df311a7fe73151cef
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1b: dd206ecf3306a468a4e3c8fd77e098ff8ff5e1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1c: 061d7f53c5ae7d8475b4c800001dc26f3adc7c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1c: d2fb39a356bd6874ddb46da71dc2d70c90ab73
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1d: 18ff966ab6f9c415d654828ea25165411e456e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1d: 862dee3b8d22506826e572b52f42228f14b3db
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1f: c6789829712354a45c0d18fa39635e0544e691
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/1f: ef97678c1976bcaef08adeee22541010f33284
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/21: 9dea50359fbaf6489bee0203a51f938e0a2d29
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/22: a96df4551bfd4d48b3cc3e7ee24726857ff441
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/24: 7cdc0d3daeb34defba755ef8c4671a51ac0a43
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/25: b84ad79e435490fc27c4029d2f3cc63cad6582
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/26: 7024fd24d938e3e5811e29179c628a442aa72d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/26: 7b8352b93fd686e444fe145e905d8a32f788d2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/29: 0852745737ecea13e061fb883f392b5114b50e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2a: 3eb2ab5574c14dd98b39465703ef5f6de39dfa
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2a: a8c240908db8653b1c7cbe742909d4ace25f84
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2b: bbebd953541de181b898b1c1a81967f5dd549b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2c: 6c89b8a3f4518f59344d39943eee3209e05a41
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2c: b9c63bfc4bf3584ff731f818a5e39d1e819e90
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2c: d5f425690ba69a1b2eed9266091fcab0ff2603
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2e: 4523758193e4c9777e0883b53164d7170d08b5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/2e: c1a056ccc60306ce6418665044f31fa179f310
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/31: 8332e974f5d0be04bac7dcb05c3aad63cc2a3f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/31: bac7a1d9ab73e7d0bde7a0bca9d97d42376ca0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/32: 463887f85ab2f393ef01023dd4d5fd14863357
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/33: 78823ef7350982a1b69e18d81a44676c948c26
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/34: 9894debc92c810bd7b0660c3b1c3b72bb9f209
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/35: cfb77eba5a8bdd93cae22c51efa4e55d4647c7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/36: c5792f940ba005f74b4c16aa43995cca248597
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/38: 691dc00975bd140da019ab68a5083190beb1f5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/38: 6c55a836f2f38e132116a5953c7626174e6791
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/39: 232fba22da6d071fe6acc91b05f8b81386fd55
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3b: 5c0f3a7d3d5b86bc5cf55b7f8dbcef8dcdbe62
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3b: 7c8c2107428d6aef43bfebd421a0cc31e21d61
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3b: 986dbac359bc642df48ec18b5873308ab8a0d5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3b: db227d1f553a25ed3438092544a98c178dc01d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3c: 0a252b2a45357a0498419500bd63f64ca48905
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3d: 54b9cddc6ad2687d278be6f0dbd73d1988fdfb
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3d: 750b0d04a98703fbffce5477482385a01fbef1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3d: 8e05fe75deb588bd56268930ee682bb0057765
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3d: ccf51a51114666dbaf38d89acb8cca637e0a9a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3e: 31335c8195bbaffa23147bc82fbcad0c8e12e1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/3f: 4e06823a24b9021873f3a4ff0e14480602d996
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/40: ba27646e666a4202d85f85743412cceb7b099f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/43: f18a55bf0df31c514183bcf367a8dcd5beee8f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/44: a0ab47d524c904b23e436b9982f3425b9edcc0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/46: d654735cb28343cd1e2d7c1c9739ca6045864e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/47: 270808dcd40cb2d395763e8e533f187e27f26c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4a: adbdf463c88fb62bb3da3be44992d640a428b7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4d: ba236405f97e479ef482fed941d963177d0239
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4e: ac36b7ecb9c4eed768177c43cbd6927d243131
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4f: 2b64aee583a71582c95411c071bba71265c163
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4f: 43cba6905109b630e92c51d7b69a39bb323faf
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/4f: 5d9f6fb02ae1b8fcf425211cbd51350342dc17
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/51: 3997e149561e4e3acbd063f313330b686deb38
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/52: 09ef6d2f0faf32d8db7844ef4df786ec5971fc
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/52: 229ac229e183ae2617c7881fe0ce6c5de88988
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/53: 0bff29fb39d9f523082da3eac78bfbe787646c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/55: 8a025b2d50df6b00fa2962b988fdbf0b9a8ce4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/56: bcdde9b64aa092571e984d4f165d098c54c428
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/57: 7e3180c3ccb27c6dd251ad74f4112a40f01247
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/58: 784527a58aa90f05e2a72ff003563c06dfab89
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/59: c0fa5b61c33a04bc6beca317cf26f94ffa9380
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/5a: 09d037938bd2934466bdff4ec25f6bc3acb59e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/5a: 4d743d5c125ef5a672ac1cb2469a9cdc10a18b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/5c: 7ba2801ed2f40c00732bbac63dca13510b2b35
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/5d: e8098a12e9029bb29b20d742a5106976ca0810
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/5f: 5829b41421aa6f7e38fa94a30c1c7c35e17234
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/60: 20e383f91e51d2e4d7f54035ab1e179ec3d366
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/61: 8d10f37c33ec89029c15cd44fe70eb9447449f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/61: a7cdb435f8622c6a6801ac6fb9bdef9f6b48ca
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/62: 4cf044e407e915af13b2aa59d5e6b31d7c586b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/63: 84193066f59b676daca37838a2b589e5b998dd
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/64: d2d819f021b229a3fcc7d6778e3d9854184352
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/66: 5ab326fbad1bfd7e3a79f66e80afdc7183f016
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/68: 17a142dadc115f26eb6c5c5348fa8ed4ced829
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/69: 0b2279dc7f6014c2d234b7761cc138b5ee666b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/69: 63e5fb70f08fa98ac6decc7a8e98bec65517f9
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/6d: d142fe458996ab32f9fa7278b8f4d5a80eef2b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/6d: d1cb77de1619249a61a2def3d0934d6a6aaa8e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/71: 2531d5b93726364c4e8cede306ed37dae7347f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/71: 67c37dbb8a81bcaec0c09986cbf849faa0b5ef
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/71: 7f14e0c8f7babf57a1860e666297d0bf966646
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/72: 09ed168836cc19618d28b802df9dff23b6c484
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/72: 2f048e458a3cbc33e55b444096dd2db2af76bd
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/72: 46c01812ad0d77d343c5e8276b48352e875c19
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/73: 31622dffe233f4b42880efc0254288631da418
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/74: 1cbced318c70b97254c6f68aaced88da3a8fe9
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/74: b6e514d9311f14d08d31a886b90fea06291b66
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/75: 1888b6d5524d44d1fe3ec6ca9b481f216bf9e5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/75: 2cdbceb7d072f89c506e73d598df1584678928
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/76: 3242cba95d646eba3c63775c5ab35df68d43c1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/77: 6bf7262d12e0eabfe3d6705a9e4a6119d86882
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/77: 72d1125d1b46ba206908fc2ff6f4b808214d19
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/78: 7ea4c228c1f754d28c09e181ed7b25ddcd1a85
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/78: c8fb4720616ac1366397d0413955bb68dabc25
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/7b: 74f54315ef06a80269145e8e477f36a33105e6
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/7b: 9f782e6b05cdbaccca77a02805a40b682bf19c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/7c: bb595a9e864abf1043c112f1c6f735560e66cf
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/7d: 90f49d7f81734f747220714891be8ada9197fe
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/7f: d19e220b99384517daab62cf449e4177cff42a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/81: b644a3cbc25244437255e4c6df8cbbacce300a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/84: 106c34e622154e808863e9d2cdb0e38c2f3808
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/86: 7106477a1a4d5be5a11dc989105449f807b488
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/88: 2382ebf9e9bd78b938796a2de590aa252f4a3b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/88: 36f1fc04eeebb1e2d76039e7579071adee3056
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/88: a7d0602b3120c24f7e6c097fad0a1f43649136
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/89: 231d04fff2f601f39d03f7e716e18d487bd163
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/89: a82cbdbaf353900640e060f20d3950f305c109
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/89: d5dc85b9c307fba0b038efcea02924a90cb0db
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8a: cc62453cbbf510f1167232b82823ec53610c31
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8c: 15fd1b86bcc4100429f759f04da46d892aa23c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8c: f455bfe051645bed11ac9007e250aa5927d440
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8d: 470e7f11e60f8000f921bb37e33cf12fea0cf2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8d: f7e1099d32288b41e3f7ca6d12c35c291c2612
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/8f: fbd4c21df2d22225adafdab22c7af3f8e4812f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/91: 2510963c0f310e9c5b12101ffd5010e7b3f89b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/92: 25231d6d1de91f11d232143f30a0ae497e6fe5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/93: 5bc6f9dff17ca18324735a74b3d681ea6495cb
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/94: 9ed0c8c50b98d05ef423799d426da850ddc36e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/94: 9f770a0f964746a3f5ed9c27e5f33a42e1fdb1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/95: aa89e30464fa2fa7bab93586592193238d7739
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/96: ecd17ec56b8ba09fbb9c957e522be829b5e2db
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/97: 097a4c4b3ac312d71b12959279c95ed1dbbc94
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/97: 77c4e2b03fc7ed2d7f6771248b92085a3dfe1c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/98: 033aae828182a41ab1ac669ce0b64829e1ae51
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9a: f1d852b774f77d09a5f95db844f4841fa4f836
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9c: 016e1b721fffe0265883f434a6fd9bf51eeeb4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9d: f3ffef7f998a2b9d3c308ca5921495cf1fa285
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9e: 84861cf6ff43da3ee6dcf0dcb353c1c8fe0f23
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9e: e74c6167787a13c7c79c759c219940c8dfe8e9
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/9f: a54cec3658f1bd2c17c493254d6a97f6b1d364
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a1: 463843a47c17c5121804f022359621c03a0221
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a2: de90a869e14c9e84606bc08359828ddac3c4b4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a3: 248624d93c095bdee824b93bc4e34d8ebdf2e4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a3: 36897eab5c3fb75d32ab72e2229413f05bd0c0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a4: c6632cf57ad035e0351fb5e0d101a3baab4f50
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a6: 062d9999ba2fbd61c18718380f185c9400eb3c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a7: 3ae17d5e24faaade2eefb1f7250371c5e5995e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a9: bb21cbc7d6fcae313dda4f62ff6998ddc7e30f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/a9: cffa86468dff8f22ec41ed68a90331069561d1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ae: 16cfe7285f99a6a064de53f0e4f6ccbf787555
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/af: f90886a8d54d71ac3fc3cff3ff22126fe83502
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b0: 2a7bf3dc1ba479f63d716c01189cf033a70918
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b0: ff939b33a76501e4575088876fb61812f909d6
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b1: 29478a13f639e90d85046361c1ec364415aac7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b3: 7bb6da0a06a0fb5153bffbf4f8ff48ec64e8a5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b5: 6233c98a313b757a4076b280f2a3539af29ca5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b5: a58b30887f8ba209988e96423a80a1b8731d7c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b7: 9870f863aa4d28d7ddc5afae7da18982625ad3
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/b7: ef2fad0cf6c1e234ef60f7519be4d5cd64c38a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/bc: 59b1151e75862d27acffdd5dbf9a94d147f326
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/bc: e943de6eabd6a4ba351e66b3ee44ad852b85d2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/be: c2fe39c9e5c9ecb6a974dd3a2fb25f55e9da24
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/be: fd231f850dd1aa8444e60bb7fbbff8f87bdf3c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c2: f4cd6eb93dc64772dc17c9fe1df1864c3616bd
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c2: fbe684590240e61e74d11c700f3b6172ccc265
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c2: fcb1c6002352783f47b4e6be618e618e68f055
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c3: 1249ae925e4190297049f80352c51a2de92fd2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c3: abed7e36f79a56ea73fea0eee3b51322c64a8d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c4: 1a8d94d57df3997491ac19c2b8d82b2d25abdc
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c4: a80f9e30718c2acdb2b0ddf43456a07bb1004a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c5: 7f5e8fd6da41e9c342b68ce57e38c3e9eb9455
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c6: 101207ba164e536f9c2910b71e15226e5eaedf
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c6: 442cabff4753f53ebfe9857210429468d97e03
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c6: a52470f36c05149068db611f954bb2cd31baa0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/c8: 055fceb43dd69baf3bd79848fbb731ee2af6df
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/cb: 4634bbcb19ad2c563b44122a17eb56287c4f4f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/cb: 4fc4c84a1c5c194b0f5022f003307187b6ff8a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/cb: 79db37816d2c8122146ce79d846bc9a4605ce4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/cb: dc20b45301223143575d3cf70edf272d4c06d9
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/cd: 55a881c440c20f39e4bb9b766238c2bacc2e79
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ce: a79f5898ff19afb85b68d8b47403aa3773f15a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d0: 09f46aa5f9ed3df5e3b9cd909a067320fa13c3
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d0: d27d0fd22f77c3a49fee158a3e31b82fade8a4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d1: 11057f61d851b85d5a75aa3290c96811ce1c8a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d1: e46ab259b5a91a4508253e7c99e02d90fe125b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d2: 4f87866e6340d14b06005fa6ef512be1e6928d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d4: c967db74d3fc416d5aef4f20435bc3a9a20eab
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d5: 3627b179122c56d88483077f35d41c847195ec
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d5: b59dd70af42a4ddc0a2f8d9ec97cd5d611a125
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d5: b7aca1faffcc9f0abcd7d9aaafb0a8f627fecc
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d6: d46316eebdb20a6a32630b3abd091dce21cf42
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d6: fd4166a3989e692079c58f3b93789a7cf6a99f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/d7: 5ccd9528e835d9fee77a6b7fff85ba5d8aa9bd
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/dc: b5b9c4d07ce7300ec949de4e3f233adbd1747a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/de: e3159ba9cd9a68acafdc0cd8fb0832f9046ecb
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e0: 468f98c1467bd26dd4d91971df4393a9bfd91e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e1: af4864e62b2c01a11532bcffd6eeaa42a3133e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e1: fcfdf0650f085680270af9bdedaa19ea4b29aa
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e2: d895d9fdc0a41027db00bd17a6860b9a2cf48a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e2: f7e27bd42475dd5c43cf1a1261cb201cf4cb72
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e4: 48e494d0ac51a8a966617580af22666fcd82f8
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e5: 356556e7f2544c8531bf7bc83c544e00ad0e1c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e6: 36b7a7284c42dddc66fc89558595986fa0c157
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e6: 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e7: 01e980476b5daecffe5b600824621ac87263a8
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e7: d37e63b5dd1cbf71e128988bd6e6da581329da
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e8: 2f01f740e1ce7173d4265afc19191f79ff46c5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e8: 431891b5efa24c73f70562933e17d9c27f066f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/e8: a33ff92a6f5f1a3e9b04c021fabd8a1e6b2aeb
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/eb: 6437e78f3bf4441c253e96e41e8b1d32c4146a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ec: 3eb78c51f21ac3bd85abf3fd986ca7a63d0f26
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ee: d7678524687307b69d04d34d2eb6679ac554fd
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ef: 533f15be38bdd04f1abba208eb0315c8a4f962
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f1: e0b9f9b0731268629bd7a24cbb60aa94121999
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f2: 0a39ecc8d11d8dec3902d2e904f4d81bd37e31
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f2: 0e18352a45e859a6cf4aad2cc73163b8544287
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f2: 7d09752ac3b403f33c307a33c07b70ff337f50
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f3: 8641cdd35dce4beb0dd5973a49a9221569ee7d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f3: a31d8c3925c8b36d9693fd5c38d92c2da56a99
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f5: 628181762562c89c9aa412d803dc09a034b14b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f6: e6da37ae66761ac8765934e7e1489beba81988
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f7: 43760156b69a1aa20970a5921bf373c7655a7c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f7: 87af9dc59cb4e2c200f0b859d34e48b089f761
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f8: 29584df2d2bb24ff6e2bfdc7ada29bf119cddf
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/f8: 82ed619967f0bef71150344f6a649e57fea1e1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/fe: 87f3b8a7567401c1538aab94eef91fe5e24df5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/fe: ac790c7e09a9c310bd2eadae7a76a30798a83e
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/objects/ff: cc8a9b5bd9084809da1e03775802522d781849
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/heads/fix: v1.3.0_ui-enforcement
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/refs/heads/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/heads/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/heads: rollback
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.git/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/remotes/origin: rollback
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: backup-folder-initialized
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: modal-cherry-picked-and-archived
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: onboarding-modal-restored
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: pre-modal-cherry-pick-snapshot
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: rollback-readme-documented
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: rollback-v1.2.2_visual-polish
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: rollback-versions-locked
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: syntax-errors-fixed-app-bundling
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: v1.2.2_modal-cherry-pick-baseline
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: v1.3.0_pre-ui-enforcement-ROLLBACK
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/.git/refs/tags: v1.3.0_text-fix
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/.gitignore and /Users/sawyer/gitSync/tm-mobile-cursor/.gitignore differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/README.md and /Users/sawyer/gitSync/tm-mobile-cursor/README.md differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: ROLLBACK_SUMMARY.md
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: archive
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: cursor-config.overhaul-prep-v2.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: diff-summary.txt
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/docs: README
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/docs: nick_need2know
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: fix-onpress-accessibility.js
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: fix-onpress-broken.js
+Only in /Users/sawyer/gitSync/tm-mobile-cursor: fix-onpress-stuck.js
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh: .cursor-safeguards.json
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/.eslintrc.cjs and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/.eslintrc.cjs differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/app.json and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/app.json differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/docs: REFACTOR_WORKFLOW_CHECKLIST.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/docs/TASKS 250626: Login-Signup-Auth_Summary.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/docs/TASKS 250626: MASTER_tasklist-vGPT.md
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/docs/TASKS 250626: WEBAPP-Component Summaries.md
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/docs: blank 4.md
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/eslint-rules: no-inline-accessibility-props-in-function.js
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-node
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-node-cwd
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-node-esm
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-node-script
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-node-transpile-only
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.bin: ts-script
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/.package-lock.json and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/node_modules/.package-lock.json differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/@cspotcode: source-map-support
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/@tsconfig: node10
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/@tsconfig: node12
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/@tsconfig: node14
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules/@tsconfig: node16
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: acorn-walk
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: create-require
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: diff
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: make-error
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: ts-node
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: url
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: v8-compile-cache-lib
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/node_modules: yn
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/package-lock.json and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/package-lock.json differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/package.json and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/package.json differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/role-audit-report.md and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/role-audit-report.md differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts: check-accessibility-props.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: comprehensive-theme-fix.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: final-ocd-sweep.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: final-theme-sweep.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: final-type-theme-fix.cjs
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts: fix-accessibility-syntax.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: fix-duplicate-tokens.js
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: fix-missing-usetheme.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: fix-onpress-handlers.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: fix-remaining-errors.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: fix-syntax-errors.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: no-shadow-sweep.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: ocd-lint-sweep.cjs
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts: test-accessibility-rule.cjs
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/scripts: watch-lint-fix.cjs
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/ActionSheet.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/ActionSheet.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/BottomNav.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/BottomNav.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/Button.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Button.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/Card.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Card.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/DarkAlertDialog.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DarkAlertDialog.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/DesignSystemDemo.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DesignSystemDemo.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/DraggableSection.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DraggableSection.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/FloatingActionButton.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/FloatingActionButton.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/GlassmorphicContainer.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/GlassmorphicContainer.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/LoadingScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/LoadingScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/ModernHeader.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/ModernHeader.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/NeonGradientText.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/NeonGradientText.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/OnboardingModal.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/OnboardingModal.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/TagChip.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/TagChip.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/TagFilter.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/TagFilter.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/Text.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Text.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/VoiceRecorder.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/VoiceRecorder.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components/ui/VoiceRecorderProvider.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/VoiceRecorderProvider.tsx differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/components: wrappers
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/config/firebase.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/config/firebase.ts differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src: contexts
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/ai/screens/AIToolsScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/ai/screens/AIToolsScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/components/LoginForm.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/components/LoginForm.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/components/OAuthButton.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/components/OAuthButton.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/components/RegistrationForm.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/components/RegistrationForm.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/hooks/useAuth.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/hooks/useAuth.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/hooks/useNativeSocialAuth.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/hooks/useNativeSocialAuth.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/hooks/useUserProfile.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/hooks/useUserProfile.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/screens/SignIn.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/screens/SignIn.tsx differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/screens: SignInScreen.tsx
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/screens/SignUp.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/auth/screens/SignUp.tsx differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/auth/screens: SignUpScreen.tsx
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/bins/.DS_Store and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/bins/.DS_Store differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/bins/screens/AllBinsScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/bins/screens/AllBinsScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/bins/screens/CreateBinScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/bins/screens/CreateBinScreen.tsx differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/content: .DS_Store
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/content/screens/ContentScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/content/screens/ContentScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/AIToolsCard.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/AIToolsCard.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/BinCard.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/BinCard.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/DashboardExample.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/DashboardExample.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/QuickActions.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/QuickActions.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/SearchBar.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/SearchBar.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/TagFilter.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/TagFilter.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/TaskCard.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/TaskCard.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/ThoughtmarkCard.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/ThoughtmarkCard.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/components/ThoughtmarkList.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/components/ThoughtmarkList.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/hooks/useBins.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/hooks/useBins.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/hooks/useThoughtmarks.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/hooks/useThoughtmarks.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/screens/DashboardScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/screens/DashboardScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/screens/DetailScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/screens/DetailScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/home/screens/HomeScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/home/screens/HomeScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/search/screens/SearchScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/search/screens/SearchScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/AdminDashboardScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/AdminDashboardScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/ContactScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/ContactScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/ExportScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/ExportScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/HelpScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/HelpScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/HowToScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/HowToScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/PremiumScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/PremiumScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/PrivacyScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/PrivacyScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/ProfileScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/ProfileScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/SecurityScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/SecurityScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/SettingsScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/SettingsScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/TermsScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/TermsScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/settings/screens/ThemeScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/settings/screens/ThemeScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/hooks/useDashboardOrder.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/hooks/useDashboardOrder.ts differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src: lib
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/navigation/AppNavigator.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/navigation/AppNavigator.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/navigation/routes.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/navigation/routes.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/services/api.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/services/api.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/ThemeProvider.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/ThemeProvider.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/buttonStyles.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/buttonStyles.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/theme.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/theme.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/tokens.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/tokens.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/typography.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/typography.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/theme/variants.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/theme/variants.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/utils/getRadiusForHeight.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/utils/getRadiusForHeight.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/utils/getTextVariant.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/utils/getTextVariant.ts differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/utils/index.ts and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/utils/index.ts differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/src/utils: styleRoleClassifier.ts
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/test-simple.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/test-simple.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/mobile-native-fresh/test-unwrapped-text.tsx and /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/test-unwrapped-text.tsx differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/reference/.DS_Store and /Users/sawyer/gitSync/tm-mobile-cursor/reference/.DS_Store differ
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/reference: [WEBAPP REFERENCE ONLY] SOLO_CREATOR_MASTER_DOCUMENTATION.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/reference: [WEBAPP REFERENCE ONLY]-Component Summaries.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/reference: [WEBAPP REFERENCE ONLY]MASTER_DOCUMENTATION.md
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/react-native: .DS_Store
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/react-native/src: .DS_Store
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/reference/replit-build/.git/index and /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/.git/index differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._ai-tooltip.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._app-review-prompt.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._auth-prompt-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._bin-card.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._bin-selector.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._error-boundary.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._intro-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._passkey-manager.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._premium-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._seo-meta.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._share-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._simple-onboarding-modal.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._swipe-navigation-indicator.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._swipe-navigation.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._swipe-transition-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._thought-connections.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._ui
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/components: ._voice-recorder.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-enhanced-scroll.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-intersection-observer.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-keyboard-shortcuts.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-mobile.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-swipe-navigation.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-thoughtmarks.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/hooks: ._use-toast.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._biometric-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._export.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._firebase.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._ios-oauth-bridge.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._local-storage.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._notifications.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._pin-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._queryClient.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._siri-shortcuts.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._utils.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/lib: ._voice-handler.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._404.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._account.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._admin-premium-fixed.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._admin-promotional.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._all-bins.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._all-thoughtmarks.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._archive.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._auth.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._bin-detail-by-name.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._bin-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._bins
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._collaborate.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._dashboard.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._overview.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._privacy-settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._settings
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._subscribe.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages: ._thoughtmark-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/ai: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/bins: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/content: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/legal: ._cookie-policy.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings: ._automation
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/account: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/automation: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/legal: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/legal: ._intellectual-property.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/legal: ._liability.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/replit-build/client/src/pages/settings/legal: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._ai-tooltip.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._app-review-prompt.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._auth-prompt-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._bin-card.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._bin-selector.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._error-boundary.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._intro-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._passkey-manager.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._premium-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._seo-meta.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._share-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._simple-onboarding-modal.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._swipe-navigation-indicator.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._swipe-navigation.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._swipe-transition-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._thought-connections.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._ui
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/components: ._voice-recorder.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-enhanced-scroll.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-intersection-observer.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-keyboard-shortcuts.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-mobile.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-swipe-navigation.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-thoughtmarks.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/hooks: ._use-toast.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._biometric-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._export.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._firebase.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._ios-oauth-bridge.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._local-storage.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._notifications.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._pin-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._queryClient.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._siri-shortcuts.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._utils.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/lib: ._voice-handler.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._404.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._account.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._admin-premium-fixed.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._admin-promotional.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._all-bins.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._all-thoughtmarks.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._archive.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._auth.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._bin-detail-by-name.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._bin-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._bins
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._collaborate.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._dashboard.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._overview.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._privacy-settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._settings
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._subscribe.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages: ._thoughtmark-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/ai: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/bins: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/content: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/legal: ._cookie-policy.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings: ._automation
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/account: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/automation: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/legal: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/legal: ._intellectual-property.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/legal: ._liability.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/client/src/pages/settings/legal: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._ai-tooltip.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._app-review-prompt.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._auth-prompt-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._bin-card.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._bin-selector.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._error-boundary.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._intro-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._passkey-manager.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._premium-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._seo-meta.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._share-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._simple-onboarding-modal.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._swipe-navigation-indicator.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._swipe-navigation.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._swipe-transition-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._thought-connections.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._ui
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/components: ._voice-recorder.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-enhanced-scroll.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-intersection-observer.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-keyboard-shortcuts.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-mobile.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-swipe-navigation.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-thoughtmarks.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/hooks: ._use-toast.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._biometric-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._export.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._firebase.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._ios-oauth-bridge.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._local-storage.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._notifications.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._pin-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._queryClient.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._siri-shortcuts.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._utils.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/lib: ._voice-handler.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._404.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._account.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._admin-premium-fixed.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._admin-promotional.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._all-bins.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._all-thoughtmarks.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._archive.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._auth.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._bin-detail-by-name.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._bin-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._bins
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._collaborate.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._dashboard.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._overview.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._privacy-settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._settings
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._subscribe.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages: ._thoughtmark-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/ai: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/bins: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/content: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/legal: ._cookie-policy.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings: ._automation
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/account: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/automation: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/legal: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/legal: ._intellectual-property.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/legal: ._liability.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-build/export-packages/thoughtmarks-full-polished-2025-06-19T22-53-37-683Z/web-src/src/pages/settings/legal: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._ai-tooltip.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._app-review-prompt.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._auth-prompt-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._bin-card.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._bin-selector.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._error-boundary.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._intro-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._passkey-manager.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._premium-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._seo-meta.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._share-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._simple-onboarding-modal.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._swipe-navigation-indicator.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._swipe-navigation.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._swipe-transition-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._thought-connections.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._ui
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/components: ._voice-recorder.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-enhanced-scroll.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-intersection-observer.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-keyboard-shortcuts.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-mobile.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-swipe-navigation.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-thoughtmarks.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/hooks: ._use-toast.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._biometric-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._export.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._firebase.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._ios-oauth-bridge.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._local-storage.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._notifications.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._pin-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._queryClient.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._siri-shortcuts.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._utils.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/lib: ._voice-handler.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._404.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._account.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._admin-premium-fixed.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._admin-promotional.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._all-bins.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._all-thoughtmarks.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._archive.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._auth.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._bin-detail-by-name.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._bin-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._bins
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._collaborate.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._dashboard.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._overview.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._privacy-settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._settings
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._subscribe.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages: ._thoughtmark-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/ai: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/bins: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/content: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/legal: ._cookie-policy.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings: ._automation
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/account: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/automation: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/legal: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/legal: ._intellectual-property.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/legal: ._liability.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/reference/web-src/src/pages/settings/legal: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/scripts: diff_backup_vs_current.sh
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/.DS_Store and /Users/sawyer/gitSync/tm-mobile-cursor/tasks/.DS_Store differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: auto-roleview-enforcement.cursor-instruction.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: cursor-config.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: cursor-config.release-v1.2.2.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: cursor_instructions
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/docs: MASTER_tasklist-vGPT.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/docs: login-ux-test-plan.md
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: enforcement
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: handlers
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: EAS_LINT-LOOP.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: EAS_voice-capture-integrated.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: TOKENS-fix-duplicate-variant.hybrid-block-v1.notes-fixed.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: auto-roleview-enforcement.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: auto-roleview-enforcement.hybrid-block-v1.notes.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: cursor-background-lint-agent.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: cursor-background-lint-agent.hybrid-block-v1.notes.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: fix-tokens-duplicate-variant.hybrid-block-v1.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: lint-fix-background.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: lint-fix-background.hybrid-block-v1.notes.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: liquid-theme-v1-restoration.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: liquid-theme-v1-restoration.hybrid-block-v1.notes.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: role-audit-background-loop.hybrid-block-v1.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: role-audit-background.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: role-audit-background.hybrid-block-v1.notes.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: superLINTER-no-shadow-sweep.hybrid-block-v1.notes.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: v1.3.1_final-type-theme-fix.hybrid-block-v1.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks/hybrid_blocks: visual-polish-final-pass-v1.2.2.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks/hybrid_blocks: visual-polish-final-pass-v1.2.2.hybrid-block-v1.notes.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: lint-fix-background.cursor-instruction.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: liquid-theme-v1-restoration.hybrid-block-v1.json
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: loops_expensive
+Only in /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tasks: release_flows
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: role-audit-background.cursor-instruction.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: taskflow.release-v1.2.2.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: ui-enforcement-hybrid-block-v1.3.0.json
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tasks: visual-polish-final-pass-v1.2.2.cursor-instruction.json
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tm-mobile-clone/.git/FETCH_HEAD and /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/FETCH_HEAD differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tm-mobile-clone/.git/index and /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/index differ
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tm-mobile-clone/.git/logs/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/logs/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/logs/refs/remotes/origin: rollback
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 0b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 0c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 0f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 1b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 22
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 29
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 2a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 2c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 38
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 3b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 3d
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 3f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 44
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 47
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 4f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 51
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 56
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 57
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 5c
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/68: 17a142dadc115f26eb6c5c5348fa8ed4ced829
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 73
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/75: 1888b6d5524d44d1fe3ec6ca9b481f216bf9e5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/75: 2cdbceb7d072f89c506e73d598df1584678928
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 77
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 7b
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 7f
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 84
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 86
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 88
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 89
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 8a
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 94
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 96
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: 97
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: a1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: b0
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: b1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: b7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: be
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: c2
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: d1
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: d5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/d6: d46316eebdb20a6a32630b3abd091dce21cf42
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: de
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: e4
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: e5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: e8
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: eb
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: ec
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: ef
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: f3
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: f5
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: f7
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects: fe
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/pack: pack-c4c2d4aceeb4209cff7ef5f958289d140dcdf4f8.idx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/objects/pack: pack-c4c2d4aceeb4209cff7ef5f958289d140dcdf4f8.pack
+Files /Users/sawyer/Desktop/tm-mobile-cursor_BAK/tm-mobile-clone/.git/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix and /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/remotes/origin/fix/v1.3.1_final-type-theme-fix differ
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/remotes/origin: rollback
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: backup-folder-initialized
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: onboarding-modal-restored
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: pre-modal-cherry-pick-snapshot
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: rollback-readme-documented
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: rollback-v1.2.2_visual-polish
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: rollback-versions-locked
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: syntax-errors-fixed-app-bundling
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: v1.2.2_lint-loop
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: v1.2.2_lint-watch
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: v1.2.2_modal-cherry-pick-baseline
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/.git/refs/tags: v1.2.2_visual-polish
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._ai-tooltip.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._app-review-prompt.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._auth-prompt-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._bin-card.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._bin-selector.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._error-boundary.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._intro-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._passkey-manager.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._premium-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._seo-meta.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._share-dialog.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._simple-onboarding-modal.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._swipe-navigation-indicator.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._swipe-navigation.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._swipe-transition-overlay.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._thought-connections.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._ui
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/components: ._voice-recorder.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-enhanced-scroll.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-intersection-observer.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-keyboard-shortcuts.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-mobile.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-swipe-navigation.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-thoughtmarks.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/hooks: ._use-toast.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._biometric-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._export.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._firebase.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._ios-oauth-bridge.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._local-storage.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._notifications.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._pin-auth.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._queryClient.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._siri-shortcuts.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._utils.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/lib: ._voice-handler.ts
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._404.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._account.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._admin-premium-fixed.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._admin-promotional.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._all-bins.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._all-thoughtmarks.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._archive.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._auth.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._bin-detail-by-name.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._bin-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._bins
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._collaborate.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._dashboard.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._overview.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._privacy-settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._settings
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._settings.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._subscribe.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._terms.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages: ._thoughtmark-detail.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/ai: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/bins: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/content: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/legal: ._cookie-policy.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings: ._automation
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/account: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/automation: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/legal: ._index.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/legal: ._intellectual-property.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/legal: ._liability.tsx
+Only in /Users/sawyer/gitSync/tm-mobile-cursor/tm-mobile-clone/reference/web-src/src/pages/settings/legal: ._terms.tsx

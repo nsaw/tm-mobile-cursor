@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "firebase-ios-sdk",
+        "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
+        "state": {
+          "branch": null,
+          "revision": "5de0369ee79c0fbb3c00ff18da5d8a94c3afe0d4",
+          "version": "10.12.0"
+        }
+      },
+      {
+        "package": "lottie-ios",
+        "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "e047b4f0b7c81b9e3e7d4b0826e26c5bb5d8ddb6",
+          "version": "4.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

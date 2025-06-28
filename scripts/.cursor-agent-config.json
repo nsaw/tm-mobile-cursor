@@ -1,0 +1,1 @@
+{"agents": [{"name": "Nightly Enforcement Agent", "schedule": "0 1 * * *", "tasks": ["npm run lint:fix-all", "npm run lint:check-theme", "npm run audit:clickables"], "branch": "main", "watchPaths": ["src/"], "notes": "Nightly enforcement of JSX, theme, and accessibility compliance."}]}

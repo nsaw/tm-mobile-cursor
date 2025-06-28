@@ -1,0 +1,16 @@
+{
+  "name": "eslint-plugin-thoughtmarks",
+  "version": "1.0.0",
+  "description": "Custom ESLint rules for Thoughtmarks mobile app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "",
+  "license": "ISC"
+} 

@@ -1,0 +1,69 @@
+{
+    "notes": [
+      "PHASE 7 — UI Polish and Visual Consistency Sweep",
+      "Goal: Enforce all current UI/UX standards across every screen before starting advanced visual overhaul.",
+      "Apply BEFORE any glass morphism, experimental layouts, or major theme changes.",
+      "Covers: text wrapping, spacing, layout, card/section consistency, dark/light mode compliance, premium overlays.",
+      "Tag: v1.4.0_ui-polish-baseline"
+    ],
+    "branch": "fix/v1.4.0_ui-polish-baseline",
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "watchConsole": true,
+    "blockCommitOnError": true,
+    "alertUserOnParseFail": true,
+    "preCommit": {
+      "before": [
+        "git add .",
+        "git commit -m \"chore(rollback): full snapshot before UI polish v1.4.0\"",
+        "git tag v1.4.0_pre-ui-polish-ROLLBACK",
+        "git push origin v1.4.0_pre-ui-polish-ROLLBACK"
+      ]
+    },
+    "phases": [
+      {
+        "section": "UI Standard Enforcement",
+        "actions": [
+          "Wrap all unwrapped strings in <Text> components",
+          "Auto-import missing Text from react-native",
+          "Replace any hardcoded spacing/color/font values with tokens from useTheme()",
+          "Check for and fix any text color/readability issues in both light and dark modes",
+          "Enforce consistent card/section/container paddings and margins using tokens",
+          "Verify all interactive elements have accessibilityRole, accessible, and accessibilityLabel",
+          "Apply PremiumGate or <PremiumOverlay> wrapper to any premium-gated feature",
+          "Confirm all navigation calls use constants/types from routes manifest"
+        ],
+        "commit": "fix: UI polish, spacing, text, accessibility, premium gating",
+        "tag": "v1.4.0_ui-polish-phase"
+      },
+      {
+        "section": "Visual and Layout Audit",
+        "actions": [
+          "Review each page in simulator (light/dark mode, premium and non-premium)",
+          "Flag any element with misaligned, clipped, or visually jarring layout for manual review (list in /tasks/UI-polish-tasks.md)",
+          "If any persistent layout/spacing issues remain, alert user for targeted fix"
+        ],
+        "commit": "chore: visual audit and layout review complete",
+        "tag": "v1.4.0_ui-visual-audit"
+      }
+    ],
+    "final": {
+      "commit": "chore: UI polish and visual audit complete, artifacts organized",
+      "tag": "v1.4.0_ui-polish-baseline",
+      "notes": [
+        "All phase scripts/instructions moved to /tasks/v1.4.0/.",
+        "UI polish checklist and flagged items in /tasks/UI-polish-tasks.md for manual follow-up.",
+        "Root /tasks folder now clean for next phase."
+      ],
+      "actions": [
+        "Move this phase's instruction block(s) and UI polish checklist to /tasks/v1.4.0/",
+        "Update /tasks/INDEX.md with all moved files and their purpose."
+      ],
+      "links": [
+        "[/tasks/v1.4.0/](sandbox:/mnt/data/tasks/v1.4.0/)",
+        "[/tasks/UI-polish-tasks.md](sandbox:/mnt/data/tasks/UI-polish-tasks.md)",
+        "[/tasks/INDEX.md](sandbox:/mnt/data/tasks/INDEX.md)"
+      ]
+    }
+  }
+  
