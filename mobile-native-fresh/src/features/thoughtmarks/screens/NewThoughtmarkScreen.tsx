@@ -61,6 +61,11 @@ export const NewThoughtmarkScreen: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sortLaterBinId, setSortLaterBinId] = useState<number | undefined>();
 
+  // Voice capture autosave state
+  const [hasAutoSaved, setHasAutoSaved] = useState(false);
+  const [showAutoSaveConfirmation, setShowAutoSaveConfirmation] = useState(false);
+  const [autoSavedThoughtmarkId, setAutoSavedThoughtmarkId] = useState<number | undefined>();
+
   // Date picker state
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
@@ -118,6 +123,50 @@ export const NewThoughtmarkScreen: React.FC = () => {
     initializeVoiceCapture();
   }, [isVoiceCapture, voiceBody, isVoiceNote, bins, createBin, title]);
 
+  // Autosave voice-initiated thoughtmark
+  useEffect(() => {
+    const autoSaveVoiceThoughtmark = async () => {
+      if (isVoiceCapture && voiceBody && !hasAutoSaved && content.trim() && selectedBinId) {
+        try {
+          setIsSubmitting(true);
+          
+          const thoughtmarkData = {
+            title: title.trim() || suggestSmartTitleFromBody(voiceBody),
+            content: content.trim(),
+            tags: ['voice-to-tm', 'sort later'],
+            binId: selectedBinId,
+            isTask: false,
+            isCompleted: false,
+            dueDate: null,
+            isPinned: false,
+          };
+
+          const newThoughtmark = await createThoughtmark(thoughtmarkData);
+          
+          if (newThoughtmark && newThoughtmark.id) {
+            setAutoSavedThoughtmarkId(newThoughtmark.id);
+            setHasAutoSaved(true);
+            setShowAutoSaveConfirmation(true);
+            
+            // Hide confirmation after 3 seconds
+            setTimeout(() => {
+              setShowAutoSaveConfirmation(false);
+            }, 3000);
+          }
+        } catch (error) {
+          console.error('Error auto-saving voice thoughtmark:', error);
+          // Don't show error alert for autosave - let user save manually
+        } finally {
+          setIsSubmitting(false);
+        }
+      }
+    };
+
+    // Delay autosave to allow form to populate
+    const timer = setTimeout(autoSaveVoiceThoughtmark, 1000);
+    return () => clearTimeout(timer);
+  }, [isVoiceCapture, voiceBody, hasAutoSaved, content, selectedBinId, title, createThoughtmark]);
+
   const handleSave = async () => {
     if (!content.trim()) {
       Alert.alert('Content Required', 'Please enter some content for your thoughtmark.');
@@ -138,12 +187,20 @@ export const NewThoughtmarkScreen: React.FC = () => {
         isPinned,
       };
 
-      const newThoughtmark = await createThoughtmark(thoughtmarkData);
+      let newThoughtmark;
       
-      if (isVoiceCapture) {
-        Alert.alert('Success', 'Voice thoughtmark saved!');
+      if (hasAutoSaved && autoSavedThoughtmarkId) {
+        // Update the auto-saved thoughtmark instead of creating new one
+        newThoughtmark = await updateThoughtmark(autoSavedThoughtmarkId, thoughtmarkData);
+        Alert.alert('Success', 'Voice thoughtmark updated!');
       } else {
-        Alert.alert('Success', 'Thoughtmark created successfully!');
+        newThoughtmark = await createThoughtmark(thoughtmarkData);
+        
+        if (isVoiceCapture) {
+          Alert.alert('Success', 'Voice thoughtmark saved!');
+        } else {
+          Alert.alert('Success', 'Thoughtmark created successfully!');
+        }
       }
       
       // Navigate to detail view for new thoughtmarks
@@ -213,12 +270,17 @@ export const NewThoughtmarkScreen: React.FC = () => {
         isPinned,
       };
 
-      await createThoughtmark(thoughtmarkData);
-      
-      if (isVoiceCapture) {
-        Alert.alert('Success', 'Voice thoughtmark saved!');
+      if (hasAutoSaved && autoSavedThoughtmarkId) {
+        await updateThoughtmark(autoSavedThoughtmarkId, thoughtmarkData);
+        Alert.alert('Success', 'Voice thoughtmark updated!');
       } else {
-        Alert.alert('Success', 'Thoughtmark created successfully!');
+        await createThoughtmark(thoughtmarkData);
+        
+        if (isVoiceCapture) {
+          Alert.alert('Success', 'Voice thoughtmark saved!');
+        } else {
+          Alert.alert('Success', 'Thoughtmark created successfully!');
+        }
       }
       
       navigation.goBack();
@@ -251,12 +313,17 @@ export const NewThoughtmarkScreen: React.FC = () => {
         isPinned,
       };
 
-      await createThoughtmark(thoughtmarkData);
-      
-      if (isVoiceCapture) {
-        Alert.alert('Success', 'Voice thoughtmark saved!');
+      if (hasAutoSaved && autoSavedThoughtmarkId) {
+        await updateThoughtmark(autoSavedThoughtmarkId, thoughtmarkData);
+        Alert.alert('Success', 'Voice thoughtmark updated!');
       } else {
-        Alert.alert('Success', 'Thoughtmark created successfully!');
+        await createThoughtmark(thoughtmarkData);
+        
+        if (isVoiceCapture) {
+          Alert.alert('Success', 'Voice thoughtmark saved!');
+        } else {
+          Alert.alert('Success', 'Thoughtmark created successfully!');
+        }
       }
 
       // Reset form for new thoughtmark
@@ -268,6 +335,8 @@ export const NewThoughtmarkScreen: React.FC = () => {
       setIsCompleted(false);
       setDueDate(null);
       setIsPinned(false);
+      setHasAutoSaved(false);
+      setAutoSavedThoughtmarkId(undefined);
 
     } catch (error) {
       console.error('Error saving thoughtmark:', error);
@@ -359,6 +428,21 @@ export const NewThoughtmarkScreen: React.FC = () => {
       alignItems: 'center',
     },
     voiceCaptureText: {
+      color: tokens.colors.background,
+      fontSize: 14,
+      fontWeight: '600',
+      marginLeft: spacing.textMarginBottom,
+    },
+    autoSaveConfirmation: {
+      backgroundColor: tokens.colors.success || '#10B981',
+      paddingHorizontal: spacing.cardPaddingHorizontal,
+      paddingVertical: spacing.cardPaddingVertical,
+      borderRadius: tokens.radius.md,
+      marginBottom: spacing.formFieldMarginBottom,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    autoSaveText: {
       color: tokens.colors.background,
       fontSize: 14,
       fontWeight: '600',
@@ -537,6 +621,14 @@ export const NewThoughtmarkScreen: React.FC = () => {
             </View>
           )}
 
+          {/* Auto-save Confirmation */}
+          {showAutoSaveConfirmation && (
+            <View style={styles.autoSaveConfirmation}>
+              <Ionicons name="checkmark-circle" size={20} color={tokens.colors.background} />
+              <Text style={styles.autoSaveText}>Thoughtmark saved!</Text>
+            </View>
+          )}
+
           {/* Title Input */}
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: tokens.colors.textSecondary }]}>
@@ -712,7 +804,7 @@ export const NewThoughtmarkScreen: React.FC = () => {
                 <ActivityIndicator size="small" color={tokens.colors.background} />
               ) : (
                 <Text style={styles.primaryButtonText}>
-                  {isVoiceCapture ? 'Save Voice Thoughtmark' : 'Save Thoughtmark'}
+                  {hasAutoSaved ? 'Update Voice Thoughtmark' : (isVoiceCapture ? 'Save Voice Thoughtmark' : 'Save Thoughtmark')}
                 </Text>
               )}
             </TouchableOpacity>
