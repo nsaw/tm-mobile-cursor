@@ -1,17 +1,25 @@
 {
   "name": "mobile-native-fresh",
   "version": "1.0.0",
-  "description": "",
+  "description": "Thoughtmarks mobile app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "dev": "expo start --dev-client"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "expo",
+    "react-native",
+    "thoughtmarks"
+  ],
+  "author": "Thoughtmarks Team",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "expo": "^53.0.13",
+    "expo-status-bar": "^2.2.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-native": "^0.80.0",
