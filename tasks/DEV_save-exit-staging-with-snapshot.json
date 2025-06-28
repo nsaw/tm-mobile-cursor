@@ -1,0 +1,51 @@
+{
+  "notes": [
+    "🧠 MISSION: Cleanly exit from current broken or staging branch, snapshot all work, and return to safe mainline.",
+    "🎯 GOAL: Prevent further wasted cycles in a broken clone by committing/pushing to a dev branch, tagging the state, and switching to the last known-good on main.",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Stash or commit all local changes before switching branches.",
+    "✅ Use descriptive commit/tag for this 'exit' snapshot.",
+    "✅ Never delete anything—just push to origin for future reference.",
+    "✅ After safe exit, npm/yarn install on main and confirm full app boots before further work."
+  ],
+  "parseCheck": false,
+  "onParseFail": "revert-and-alert",
+  "blockCommitOnError": false,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore: save broken dev/staging state before exit\"",
+      "git tag dev-broken-exit-$(date +%Y%m%d%H%M)",
+      "git push origin HEAD --force",
+      "git push origin --tags"
+    ]
+  },
+  "branch": "dev/broken-exit-$(date +%Y%m%d)",
+  "mode": "manual",
+  "watchConsole": false,
+  "onReloadHang": "Ignore",
+  "phases": [
+    {
+      "section": "Safe Exit from Broken Dev Environment",
+      "actions": [
+        "Commit all current changes to the dev exit branch.",
+        "Tag the commit with dev-broken-exit and the current timestamp.",
+        "Force push the branch and tags to remote for future recovery.",
+        "Switch to main: git checkout main",
+        "Pull latest: git pull",
+        "npm install (or cd mobile-native-fresh && npm install)",
+        "npx expo start --clear (or yarn equivalent)",
+        "Confirm full app loads before resuming any feature work."
+      ],
+      "commit": "chore: safe exit to main after broken dev",
+      "tag": "dev-exit-complete-$(date +%Y%m%d%H%M)"
+    }
+  ],
+  "final": {
+    "commit": "chore: all progress safely stashed and back on main",
+    "tag": "main-safety-restore-$(date +%Y%m%d%H%M)",
+    "notes": "Development safely paused, all state is recoverable. Resume feature work only after confirming main app loads as expected."
+  }
+}
+

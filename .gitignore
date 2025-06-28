@@ -48,4 +48,6 @@ archive/
 # Tasks/hybrid_blocks/etc
 tasks/hybrid_blocks/.DS_Store
 tasks/rollback_tasks/.DS_Store
+# Only ignore the template, not all hybrid blocks!
+tasks/hybrid-instruction-block_TEMPLATE.json
 
