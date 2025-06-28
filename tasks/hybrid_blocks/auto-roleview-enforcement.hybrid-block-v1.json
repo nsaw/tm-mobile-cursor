@@ -1,0 +1,24 @@
+{
+  "branch": "refactor/roleview-enforcement",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Replace View with AutoRoleView",
+      "actions": [
+        "Search for all View instances in UI components",
+        "Replace with AutoRoleView unless exception noted",
+        "Preserve props and layout logic",
+        "Use `convert-view-to-roleview.ts` if available"
+      ],
+      "commit": "refactor: AutoRoleView enforced across app",
+      "tag": "v1.2.2_auto-roleview"
+    }
+  ],
+  "final": {
+    "commit": "chore: role-based view system enforced",
+    "tag": "v1.2.2_auto-roleview-final",
+    "notes": "View refactor to semantic JSX via AutoRoleView complete"
+  }
+}

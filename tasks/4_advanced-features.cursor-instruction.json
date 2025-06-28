@@ -1,0 +1,44 @@
+{
+  "notes": [
+    "PHASE 4 — Advanced Features (Optional)",
+    "Goal: Implement offline/sync, push notifications, backup/export, and social integrations.",
+    "Tag: v1.3.5_advanced-features"
+  ],
+  "branch": "feature/v1.3.5_advanced-features",
+  "phases": [
+    {
+      "section": "Offline/Sync Logic",
+      "actions": [
+        "Implement offline cache and data sync.",
+        "Test offline create/edit, background sync."
+      ],
+      "commit": "feat: offline and sync implemented"
+    },
+    {
+      "section": "Notifications, Export, Social",
+      "actions": [
+        "Add push notification setup (Expo or native).",
+        "Implement export/import and social/share integrations."
+      ],
+      "commit": "feat: notifications, export/import, social sharing"
+    }
+  ],
+  "final": {
+    "commit": "chore: advanced features complete and artifacts organized",
+    "tag": "v1.3.5_advanced-features",
+    "notes": [
+      "All task JSON, scripts, and supporting files for this phase moved to /tasks/v1.3.5/.",
+      "Index updated in /tasks/INDEX.md with artifact list for traceability.",
+      "Root /tasks folder now clean for next phase."
+    ],
+    "actions": [
+      "Move this phase's instruction block(s) and scripts to /tasks/v1.3.5/",
+      "Update /tasks/INDEX.md with all moved files and their purpose."
+    ],
+    "links": [
+      "[/tasks/v1.3.5/](sandbox:/mnt/data/tasks/v1.3.5/)",
+      "[/tasks/INDEX.md](sandbox:/mnt/data/tasks/INDEX.md)"
+    ]
+  }
+}
+

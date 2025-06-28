@@ -1,0 +1,45 @@
+{
+  "notes": [
+    "PHASE 1 — Deep Linking & Siri Shortcuts",
+    "Goal: Register and implement deep links and Siri shortcuts for in-app routing.",
+    "Enforce: All flows are type-safe, deep links and Siri tested on device/sim.",
+    "Tag: v1.3.2_deeplink-siri"
+  ],
+  "branch": "feature/v1.3.2_deeplink-siri",
+  "phases": [
+    {
+      "section": "Deep Link Registration",
+      "actions": [
+        "Register universal/app-specific scheme.",
+        "Test direct open to screens with URL."
+      ],
+      "commit": "feat: deep link scheme registered and tested"
+    },
+    {
+      "section": "Deep Link & Siri Handler Implementation",
+      "actions": [
+        "Implement URL handler that routes to correct screen/context.",
+        "Add and test Siri shortcut for quick-add or quick-open."
+      ],
+      "commit": "feat: deep link & Siri shortcut handler implemented"
+    }
+  ],
+  "final": {
+    "commit": "chore: deep link & Siri integration complete and artifacts organized",
+    "tag": "v1.3.2_deeplink-siri",
+    "notes": [
+      "All task JSON, scripts, and supporting files for this phase moved to /tasks/v1.3.2/.",
+      "Index updated in /tasks/INDEX.md with artifact list for traceability.",
+      "Root /tasks folder now clean for next phase."
+    ],
+    "actions": [
+      "Move this phase's instruction block(s) and scripts to /tasks/v1.3.2/",
+      "Update /tasks/INDEX.md with all moved files and their purpose."
+    ],
+    "links": [
+      "[/tasks/v1.3.2/](sandbox:/mnt/data/tasks/v1.3.2/)",
+      "[/tasks/INDEX.md](sandbox:/mnt/data/tasks/INDEX.md)"
+    ]
+  }
+}
+

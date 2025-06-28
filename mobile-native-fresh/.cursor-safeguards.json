@@ -1,0 +1,67 @@
+{
+  "safeguards": {
+    "pre_automation": {
+      "required_checks": [
+        "git status --porcelain",
+        "npx tsc --noEmit --skipLibCheck",
+        "npx eslint . --ext .ts,.tsx --max-warnings 0"
+      ],
+      "block_on_errors": true,
+      "require_clean_working_directory": true
+    },
+    "during_automation": {
+      "parse_check_interval": "after_each_file",
+      "stop_on_syntax_error": true,
+      "auto_revert_on_failure": true,
+      "max_concurrent_changes": 5
+    },
+    "post_automation": {
+      "required_validation": [
+        "npx expo start --clear",
+        "npx tsc --noEmit --skipLibCheck",
+        "npx eslint . --ext .ts,.tsx --max-warnings 0"
+      ],
+      "block_commit_on_errors": true,
+      "require_manual_review": true
+    },
+    "eslint_rules": {
+      "enforce_accessibility_props": true,
+      "prevent_inline_accessibility": true,
+      "block_jsx_bind_issues": true
+    },
+    "emergency_procedures": {
+      "auto_rollback_on_critical_error": true,
+      "preserve_working_state": true,
+      "alert_user_on_failure": true
+    }
+  },
+  "workflow_enforcement": {
+    "require_checklist": true,
+    "mandatory_phases": [
+      "pre_refactor_safety",
+      "incremental_mutation",
+      "post_refactor_validation"
+    ],
+    "block_unsafe_operations": true
+  },
+  "error_patterns": {
+    "syntax_errors": [
+      "Unexpected token",
+      "Expected '}'",
+      "Cannot find name",
+      "Property does not exist",
+      "Type.*is not assignable"
+    ],
+    "accessibility_errors": [
+      "accessibilityRole.*onPress",
+      "accessible.*onPress",
+      "accessibilityLabel.*onPress"
+    ],
+    "critical_errors": [
+      "Module not found",
+      "Cannot resolve",
+      "Build failed",
+      "Bundling failed"
+    ]
+  }
+} 
