@@ -1,45 +1,63 @@
 {
   "notes": [
-    "PHASE 1 — Deep Linking & Siri Shortcuts",
-    "Goal: Register and implement deep links and Siri shortcuts for in-app routing.",
-    "Enforce: All flows are type-safe, deep links and Siri tested on device/sim.",
-    "Tag: v1.3.2_deeplink-siri"
+    "🧠 MISSION: Deep Linking & Siri Shortcuts",
+    "🎯 GOAL: Register and implement URL handling and Siri shortcut support for in-app routing.",
+    "✅ PRE-CHECK: Tag rollback state before beginning work.",
+    "✅ DO NOT STOP — execute all phases in order until final validation is complete.",
+    "✅ Run `npm run lint:fix-all` continuously in background.",
+    "📌 CONTEXT: Enables universal links, route handoff, and Siri entry via voice command or automation.",
+    "🔐 RELEVANCE: Required for onboarding, discoverability, and Siri shortcut integration in v1.3 series."
   ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): safety tag before deep link handler\"",
+      "git tag v1.3.2_pre-deeplink-handler_250628_XXXXUTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-deeplink-handler_250628_XXXXUTC"
+    ]
+  },
   "branch": "feature/v1.3.2_deeplink-siri",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
   "phases": [
     {
-      "section": "Deep Link Registration",
+      "section": "Phase 1: Deep Link Registration",
       "actions": [
-        "Register universal/app-specific scheme.",
-        "Test direct open to screens with URL."
+        "Register 'thoughtmarks://' scheme in `app.json`",
+        "Validate `scheme` with `npx uri-scheme open thoughtmarks://home`",
+        "Test app opening on simulator and device with deep link"
       ],
-      "commit": "feat: deep link scheme registered and tested"
+      "commit": "feat: deeplink scheme registered and tested",
+      "tag": "v1.3.2_deeplink-registered_250628_XXXXUTC"
     },
     {
-      "section": "Deep Link & Siri Handler Implementation",
+      "section": "Phase 2: Deep Link + Siri Handlers",
       "actions": [
-        "Implement URL handler that routes to correct screen/context.",
-        "Add and test Siri shortcut for quick-add or quick-open."
+        "Implement universal URL handler in `App.tsx` to parse and route incoming deep links",
+        "Add voice command intent in `Shortcuts` config (e.g., quick-add Thoughtmark)",
+        "Enable Siri Shortcuts integration via Expo's `expo-intent-launcher` or native config",
+        "Test Siri command and confirm navigation routing works"
       ],
-      "commit": "feat: deep link & Siri shortcut handler implemented"
+      "commit": "feat: deep link and Siri handler implemented",
+      "tag": "v1.3.2_deeplink-siri-handler_250628_XXXXUTC"
     }
   ],
   "final": {
-    "commit": "chore: deep link & Siri integration complete and artifacts organized",
-    "tag": "v1.3.2_deeplink-siri",
+    "commit": "chore: deep link & Siri integration complete and archived",
+    "tag": "v1.3.2_deeplink-siri-complete_250628_XXXXUTC",
     "notes": [
-      "All task JSON, scripts, and supporting files for this phase moved to /tasks/v1.3.2/.",
-      "Index updated in /tasks/INDEX.md with artifact list for traceability.",
-      "Root /tasks folder now clean for next phase."
+      "All task JSON and supporting logic moved to /tasks/v1.3.2/",
+      "INDEX updated for full traceability of deep linking logic and shortcut setup"
     ],
     "actions": [
-      "Move this phase's instruction block(s) and scripts to /tasks/v1.3.2/",
-      "Update /tasks/INDEX.md with all moved files and their purpose."
-    ],
-    "links": [
-      "[/tasks/v1.3.2/](sandbox:/mnt/data/tasks/v1.3.2/)",
-      "[/tasks/INDEX.md](sandbox:/mnt/data/tasks/INDEX.md)"
+      "mv ./tasks/1_deeplink-siri.cursor-instruction.json ./tasks/v1.3.2/",
+      "update tasks/INDEX.md with file movement and final output location"
     ]
   }
 }
-
