@@ -1,0 +1,51 @@
+# macOS / system
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / Output
+dist/
+build/
+ios/Pods/
+ios/build/
+android/.gradle/
+android/build/
+*.keystore
+
+# Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Env/secrets
+.env
+.env.*
+
+# Replit/build/reference archives
+reference/replit-build/
+reference/replit-build-archive.zip
+reference/web-build/
+reference/web-build-archive.zip
+tm-mobile-clone/
+cursor-uploads/
+
+# Misc
+archive/
+*.log
+
+# Git
+*.orig
+
+# Expo
+.expo/
+.expo-shared/
+
+# Tasks/hybrid_blocks/etc
+tasks/hybrid_blocks/.DS_Store
+tasks/rollback_tasks/.DS_Store
+
