@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { LogBox } from 'react-native'
+import * as Linking from 'expo-linking'
 import {
   Oswald_400Regular,
   Oswald_500Medium,
@@ -97,6 +98,38 @@ export default function App() {
   //     initializeSiriShortcuts();
   //   }
   // }, [fontsLoaded]);
+
+  // Deep link handling
+  useEffect(() => {
+    const handleInitialURL = async () => {
+      try {
+        const initialURL = await Linking.getInitialURL();
+        if (initialURL) {
+          console.log('App opened with deep link:', initialURL);
+          // Handle initial URL when app is opened from a deep link
+          // Navigation will be handled once the app is fully loaded
+        }
+      } catch (error) {
+        console.error('Error getting initial URL:', error);
+      }
+    };
+
+    const handleURL = (event: { url: string }) => {
+      console.log('Deep link received:', event.url);
+      // Handle URL when app is already running
+      // Navigation will be handled by the navigation system
+    };
+
+    // Set up URL event listeners
+    const subscription = Linking.addEventListener('url', handleURL);
+
+    // Handle initial URL if app was opened from a deep link
+    handleInitialURL();
+
+    return () => {
+      subscription?.remove();
+    };
+  }, []);
 
   // Once fonts finish loading, hide the splash
   useEffect(() => {
