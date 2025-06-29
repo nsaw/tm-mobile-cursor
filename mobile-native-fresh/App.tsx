@@ -20,7 +20,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { AppNavigator } from './src/navigation/AppNavigator'
 import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
-// import SiriShortcutsService from './src/services/SiriShortcutsService'
+import DeepLinkService from './src/services/DeepLinkService'
+import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -59,48 +60,27 @@ export default function App() {
   })
 
   // Initialize Siri Shortcuts
-  // useEffect(() => {
-  //   const initializeSiriShortcuts = async () => {
-  //     try {
-  //       // Donate all shortcuts when app starts
-  //       await SiriShortcutsService.donateAllShortcuts();
-  //       
-  //       // Set up listeners for shortcut invocations
-  //       SiriShortcutsService.addListener('com.thoughtmarks.createThoughtmark', (userInfo) => {
-  //         console.log('Siri Shortcut invoked: Create Thoughtmark', userInfo);
-  //         // Navigate to create thoughtmark screen
-  //         // This will be handled by the navigation system
-  //       });
-  //
-  //       SiriShortcutsService.addListener('com.thoughtmarks.voiceRecord', (userInfo) => {
-  //         console.log('Siri Shortcut invoked: Voice Record', userInfo);
-  //         // Navigate to voice recording
-  //         // This will be handled by the navigation system
-  //       });
-  //
-  //       SiriShortcutsService.addListener('com.thoughtmarks.viewTasks', (userInfo) => {
-  //         console.log('Siri Shortcut invoked: View Tasks', userInfo);
-  //         // Navigate to tasks view
-  //         // This will be handled by the navigation system
-  //       });
-  //
-  //       SiriShortcutsService.addListener('com.thoughtmarks.search', (userInfo) => {
-  //         console.log('Siri Shortcut invoked: Search', userInfo);
-  //         // Navigate to search screen
-  //         // This will be handled by the navigation system
-  //       });
-  //     } catch (error) {
-  //       console.error('Error initializing Siri Shortcuts:', error);
-  //     }
-  //   };
-  //
-  //   if (fontsLoaded) {
-  //     initializeSiriShortcuts();
-  //   }
-  // }, [fontsLoaded]);
+  useEffect(() => {
+    const initializeSiriShortcuts = async () => {
+      try {
+        // Donate all shortcuts when app starts
+        await SiriShortcutsService.getInstance().donateAllShortcuts();
+        
+        console.log('Siri shortcuts initialized successfully');
+      } catch (error) {
+        console.error('Error initializing Siri Shortcuts:', error);
+      }
+    };
+
+    if (fontsLoaded) {
+      initializeSiriShortcuts();
+    }
+  }, [fontsLoaded]);
 
   // Deep link handling
   useEffect(() => {
+    const deepLinkService = DeepLinkService.getInstance();
+
     const handleInitialURL = async () => {
       try {
         const initialURL = await Linking.getInitialURL();
@@ -108,6 +88,7 @@ export default function App() {
           console.log('App opened with deep link:', initialURL);
           // Handle initial URL when app is opened from a deep link
           // Navigation will be handled once the app is fully loaded
+          deepLinkService.handleDeepLink(initialURL);
         }
       } catch (error) {
         console.error('Error getting initial URL:', error);
@@ -117,7 +98,7 @@ export default function App() {
     const handleURL = (event: { url: string }) => {
       console.log('Deep link received:', event.url);
       // Handle URL when app is already running
-      // Navigation will be handled by the navigation system
+      deepLinkService.handleDeepLink(event.url);
     };
 
     // Set up URL event listeners
