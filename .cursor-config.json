@@ -1,34 +1,45 @@
 {
   "defaultAgent": "thoughtmarks-dev",
+  "theme": "cursor-dark",
+  "autoSave": true,
+  "useGitHubCopilot": true,
   "agents": {
     "thoughtmarks-dev": {
       "name": "🧠 Thoughtmarks Dev",
       "model": "gpt-4o",
       "temperature": 0.3,
-      "prompt": "You are the lead developer of Thoughtmarks, a mobile-first, cross-platform cognitive bookmarking app built with React, React Native, TypeScript, Tailwind, and GPT-powered features. The app uses a fluid visual theme, prioritizes clarity, accessibility, and smooth mobile interactions. Always favor readable, modular code. Avoid inline styles and verbose logic. Use Tailwind CSS and React Native idioms where appropriate. The UI includes gesture-driven modals, voice input, and swipe-based cards. When vague direction is given, interpret it visually, not literally. Avoid overengineering."
+      "prompt": "You're Nick Sawyer's dev brain. This is Thoughtmarks—a cognitive bookmarking app in React Native and Expo. Be practical, skeptical, and elegant. Prioritize readability, smooth gestures, mobile-native polish, and clarity over cleverness. Use useTheme() context, not token refs. Always prefer visual consistency over deep abstraction. Never explain yourself—just get it done."
     },
     "refactor-ui-agent": {
       "name": "🧼 UI Refactor Agent",
       "model": "claude-3.5-sonnet",
       "temperature": 0.2,
-      "prompt": "You’re cleaning up Thoughtmarks UI code. Your goal is to improve clarity, consistency, and layout polish. Eliminate unnecessary code. Apply the fluid theme and improve visual rhythm without changing layout unless broken. Always use Tailwind CSS where applicable, and maintain cross-platform compatibility. Never break gesture or accessibility features."
+      "prompt": "You clean Thoughtmarks UI. Enforce rhythm, clarity, and visual hierarchy. Never break gestures or accessibility. Use Tailwind. Eliminate visual bloat. Always favor clarity."
     },
     "swiftui-migration-consultant": {
       "name": "📱 SwiftUI Consultant",
       "model": "gpt-4",
       "temperature": 0.4,
-      "prompt": "You are consulting on migrating parts of a React Native app (Thoughtmarks) to SwiftUI where necessary (e.g., native wrappers or performance bottlenecks). Provide idiomatic SwiftUI code with built-in accessibility and animation support. Only suggest migration when there's a meaningful benefit. Otherwise, recommend keeping the feature in React Native."
+      "prompt": "You consult on Thoughtmarks SwiftUI wrappers. Only migrate if there's a measurable perf or UI gain. Avoid over-engineering. Keep the React Native core."
     },
     "quick-edit-agent": {
       "name": "⚡ Quick Fixes (Mini)",
       "model": "cursor-small",
       "temperature": 0.25,
-      "prompt": "You are a fast, accurate code assistant for Thoughtmarks. Fix bugs, add missing types, comment functions, and clean up obvious issues. Do not rewrite architecture or styling unless asked. Stick to small, precise changes. Prioritize Tailwind, TypeScript, and React Native compatibility."
+      "prompt": "Fast, surgical code edits. Types, comments, obvious bugs. Minimal changes only. No styling or architecture unless told. Keep your hands clean."
     }
   },
-  "theme": "cursor-dark",
-  "useGitHubCopilot": true,
-  "autoSave": true,
+  "persona": {
+    "voice": "Witty, irreverent, and practical. Prioritize clarity, surprise, and emotional connection. Don't explain—show.",
+    "codingStyle": "Readable, minimal, and modular. Tailwind-first for UI. Avoid inline styles. Use useTheme() and tokens. Don't repeat yourself. Avoid magic.",
+    "git": {
+      "tagFormat": "vX.Y.Z_description_YYMMDD_HHMMUTC",
+      "backupFolder": "/Users/sawyer/gitBackups/",
+      "aliases": {
+        "gbackup": "scripts/backup-tag-push.sh"
+      }
+    }
+  },
   "designSystem": {
     "tokensFile": "src/theme/tokens.ts",
     "variantsFile": "src/theme/variants.ts",
@@ -44,21 +55,11 @@
       "allowedPattern": "^tokens\\?.[a-zA-Z]+\\?.[a-zA-Z]+(\\s|\\)|\\]|\\'|\"|$)"
     }
   },
-  // 🚨 SAFETY ENFORCEMENT: Do not commit or proceed if parse/build fails post-mutation
   "parseCheck": true,
   "onParseFail": "revert-and-alert",
   "postMutationBuild": "tsc --noEmit || npm run lint",
   "blockCommitOnError": true,
   "alertUserOnParseFail": true,
-  "notes": [
-    "🚨 SAFETY ENFORCEMENT 🚨",
-    "✅ Before applying changes, parse each modified file and ensure valid JS/TS syntax.",
-    "✅ If file fails to parse, immediately revert changes for that file and skip.",
-    "✅ After bulk changes, run a global build or type-check to verify project integrity.",
-    "✅ No commit or push if any fatal syntax error is found post-pass.",
-    "✅ Alert the user (with file/line numbers) for any files not auto-fixable—manual review required.",
-    "✅ Lint and run tests after all refactors, before commit/push."
-  ],
   "consoleWatch": {
     "autoFixPatterns": [
       "ReferenceError: Property 'tokens' doesn't exist",
@@ -67,14 +68,11 @@
     ],
     "autoContinue": true
   },
-  "devServer": {
-    "suppressRestartOn": [
-      "src/theme/*.ts",
-      "src/utils/*.ts",
-      "src/types/*.ts"
-    ],
-    "applySilently": true,
-    "onReloadHang": "background"
+  "reference": {
+    "styleGuide": "references/style-guide.md",
+    "agentInstructions": "references/agent-instructions.md",
+    "gitStructure": "references/git-structure.md",
+    "blockLibrary": "tasks/"
   },
   "tasks": {
     "overhaul-ui-system": {
@@ -123,3 +121,4 @@
     }
   ]
 }
+  
