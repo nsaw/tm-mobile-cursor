@@ -40,7 +40,7 @@
     ],
     "extra": {
       "firebaseConfig": {
-        "apiKey": "AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y",
+        "apiKey": "FIREBASE_API_KEY_PLACEHOLDER",
         "authDomain": "thoughtmarks-25replit.firebaseapp.com",
         "projectId": "thoughtmarks-25replit",
         "storageBucket": "thoughtmarks-25replit.appspot.com",

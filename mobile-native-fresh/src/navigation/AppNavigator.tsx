@@ -52,35 +52,285 @@ import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
 import { RootStackParamList } from './types';
 
 // Placeholder screens - to be implemented
-const BinDetailScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Bin Detail Screen</Text>
-  </View>
-);
+const BinDetailScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Bin Details
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="folder-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          Bin Management
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          View and manage your bin contents. 
+          Organize thoughtmarks into collections for better organization.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-const VoiceRecordScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Voice Record Screen</Text>
-  </View>
-);
+const VoiceRecordScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Voice Recording
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="mic-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          Voice to Thoughtmark
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          Record your thoughts and ideas. 
+          Your voice will be transcribed into a thoughtmark automatically.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-const TasksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Tasks Screen</Text>
-  </View>
-);
+const TasksScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Tasks
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="checkmark-circle-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          Task Management
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          Manage your tasks and to-dos. 
+          Convert thoughtmarks into actionable tasks and track your progress.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-const BinsScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Bins Screen</Text>
-  </View>
-);
+const BinsScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Bins
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="folder-open-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          Bin Collection
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          Browse and manage your bins. 
+          Organize thoughtmarks into themed collections for better discovery.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-const ThoughtmarksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
-  </View>
-);
+const ThoughtmarksScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Thoughtmarks
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="document-text-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          All Thoughtmarks
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          Browse all your thoughtmarks. 
+          Search, filter, and organize your captured ideas and insights.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 // Archive Screen with proper implementation
 const ArchiveScreen = () => {
@@ -98,7 +348,7 @@ const ArchiveScreen = () => {
         borderBottomColor: tokens.colors.divider
       }}>
         <TouchableOpacity 
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+          onPress={() => navigation.goBack()}
           style={{ marginRight: tokens.spacing.md }}
           accessibilityRole="button"
           accessible={true}
