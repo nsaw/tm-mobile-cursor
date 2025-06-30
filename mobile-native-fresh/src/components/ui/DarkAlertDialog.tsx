@@ -34,6 +34,26 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
 }) => {
   const { tokens } = useTheme();
 
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
   const styles = StyleSheet.create({
     modalOverlay: {
       flex: 1,
@@ -109,7 +129,9 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   };
 
   const getIconColor = () => {
-    switch (type) {
+    const { tokens } = useTheme();
+
+switch (type) {
       case 'danger':
         return tokens.colors.danger;
       case 'warning':

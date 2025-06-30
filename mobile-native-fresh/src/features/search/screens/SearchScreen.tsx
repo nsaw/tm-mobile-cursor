@@ -225,7 +225,7 @@ export const SearchScreen: React.FC = () => {
         {hasPremiumAccess && (
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
-            onPress={() => setUseAISearch(!useAISearch)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setUseAISearch(!useAISearch)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -294,7 +294,7 @@ export const SearchScreen: React.FC = () => {
                       <TouchableOpacity
                         key={index}
                         style={styles.suggestionItem}
-                        onPress={() => handleSuggestionPress(suggestion)}
+                        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleSuggestionPress(suggestion)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -321,7 +321,7 @@ export const SearchScreen: React.FC = () => {
                   {recentSearches.map((query, index) => (
                     <TouchableOpacity
                       key={index}
-                      onPress={() => handleRecentSearchPress(query)}
+                      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleRecentSearchPress(query)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
