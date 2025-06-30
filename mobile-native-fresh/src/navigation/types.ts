@@ -28,7 +28,7 @@ export type RootStackParamList = {
     binName?: string;
     tag?: string;
   };
-  ThoughtmarkDetail: { thoughtmarkId: number };
+  ThoughtmarkDetail: { thoughtmarkId: string };
   CreateThoughtmark: { 
     thoughtmarkId?: number; 
     content?: string; 
@@ -39,7 +39,7 @@ export type RootStackParamList = {
   
   // Bins Screens
   AllBins: undefined;
-  BinDetail: { binId: number; binName: string };
+  BinDetail: { binId: string; binName: string };
   CreateBin: undefined;
   
   // Other Screens

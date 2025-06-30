@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
+import { View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { LoadingScreen } from '../components/ui/LoadingScreen';
@@ -10,6 +11,7 @@ import { SessionHydrationGuard } from '../components/ui/SessionHydrationGuard';
 import { ContentScreen } from '../features/content/screens/ContentScreen';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
+import { useTheme } from '../theme/ThemeProvider';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
@@ -80,11 +82,62 @@ const ThoughtmarksScreen = () => (
   </View>
 );
 
-const ArchiveScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text variant="heading" size="lg">Archive Screen</Text>
-  </View>
-);
+// Archive Screen with proper implementation
+const ArchiveScreen = () => {
+  const navigation = useNavigation();
+  const { tokens } = useTheme();
+  
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+      <View style={{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: tokens.spacing.lg,
+        paddingVertical: tokens.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: tokens.colors.divider
+      }}>
+        <TouchableOpacity 
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+          style={{ marginRight: tokens.spacing.md }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Go back"
+        >
+          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+        </TouchableOpacity>
+        <Text variant="heading" size="lg" style={{ color: tokens.colors.text }}>
+          Archive
+        </Text>
+      </View>
+      
+      <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        paddingHorizontal: tokens.spacing.lg
+      }}>
+        <Ionicons name="archive-outline" size={64} color={tokens.colors.textSecondary} />
+        <Text variant="subheading" size="lg" style={{ 
+          color: tokens.colors.text, 
+          marginTop: tokens.spacing.lg,
+          marginBottom: tokens.spacing.sm,
+          textAlign: 'center'
+        }}>
+          Archived Content
+        </Text>
+        <Text variant="body" style={{ 
+          color: tokens.colors.textSecondary, 
+          textAlign: 'center',
+          lineHeight: 20
+        }}>
+          Your archived thoughtmarks and bins will appear here. 
+          Archived content is preserved but hidden from your main view.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 // Loading Screen Wrapper for React Navigation
 const LoadingScreenWrapper = () => (

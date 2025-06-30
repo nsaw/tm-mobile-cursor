@@ -214,7 +214,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             backgroundColor: tokens.colors.backgroundSecondary,
             marginBottom: tokens.spacing.lg,
           }}
-          onPress={() => navigation.navigate('Account' as any)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Profile')}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -306,7 +306,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   backgroundColor: tokens.colors.surface,
                   borderRadius: tokens.radius.md,
                 }}
-                onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

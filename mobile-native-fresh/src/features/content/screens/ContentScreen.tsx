@@ -83,7 +83,7 @@ export const ContentScreen: React.FC = () => {
     {
       title: 'All Thoughtmarks',
       description: 'Browse and manage all your thoughtmarks',
-      route: 'Dashboard',
+      route: 'AllThoughtmarks',
       iconName: 'list',
       iconColor: '#3b82f6',
     },
@@ -96,7 +96,7 @@ export const ContentScreen: React.FC = () => {
     },
     {
       title: 'Recently Deleted',
-      description: 'Recover deleted thoughtmarks and bins',
+      description: 'Recover deleted thoughtmarks and bins (filtered view)',
       route: 'Archive',
       iconName: 'rotate-ccw',
       iconColor: '#ef4444',
@@ -122,7 +122,7 @@ export const ContentScreen: React.FC = () => {
         <TouchableOpacity
           key={page.route}
           style={styles.card}
-          onPress={() => navigation.navigate(page.route as any)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate(page.route as any)}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel={page.title}

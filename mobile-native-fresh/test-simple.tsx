@@ -2,11 +2,7 @@ import React from 'react';
 
 const TestComponent = () => {
   return (
-    <div>
-      This is unwrapped text that should be wrapped in Text
-      <div>
-        More unwrapped text here
-      </div>
+    <div><Text>This is unwrapped text that should be wrapped in Text</Text><div><Text>More unwrapped text here</Text></div>
     </div>
   );
 };
