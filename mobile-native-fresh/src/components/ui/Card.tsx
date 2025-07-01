@@ -21,7 +21,8 @@ export const Card: React.FC<CardProps> = ({
   onPress,
   disabled = false,
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
+  const { tokens } = theme;
 
   // Get variant styles
   const cardVariants = getCardVariants(tokens);
@@ -73,7 +74,8 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
+  const { tokens } = theme;
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
@@ -100,7 +102,8 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
+  const { tokens } = theme;
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
@@ -126,7 +129,8 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
+  const { tokens } = theme;
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
