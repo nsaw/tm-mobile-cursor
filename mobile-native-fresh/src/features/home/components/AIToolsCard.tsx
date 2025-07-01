@@ -20,24 +20,24 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   title = "AI TOOLS",
   subtitle = "Generate insights and suggestions",
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       backgroundColor: 'transparent',
       borderRadius: 12,
-      paddingVertical: tokens.spacing.md,
-      paddingLeft: tokens.spacing.lg,
-      paddingRight: tokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
+      paddingLeft: designTokens.spacing.lg,
+      paddingRight: designTokens.spacing.lg,
       marginHorizontal: 0,
-      marginTop: tokens.spacing.md,
-      marginBottom: tokens.spacing.md,
+      marginTop: designTokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
       borderWidth: 0.25,
-      borderColor: tokens.colors.accent,
+      borderColor: designTokens.colors.accent,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      shadowColor: tokens.colors.accent,
+      shadowColor: designTokens.colors.accent,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
@@ -45,22 +45,22 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     },
     content: {
       flex: 1,
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
       flexDirection: 'row',
       alignItems: 'center',
     },
     title: {
-      color: tokens.colors.accent,
-      marginBottom: tokens.spacing.xs,
+      color: designTokens.colors.accent,
+      marginBottom: designTokens.spacing.xs,
       marginTop: 0,
       marginLeft: 0,
     },
     subtitle: {
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       lineHeight: 16,
     },
     crownIcon: {
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
     },
   });
 

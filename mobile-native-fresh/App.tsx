@@ -36,10 +36,10 @@ LogBox.ignoreLogs([
 LogBox.uninstall();
 
 function AppContent() {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       <StatusBar style="light" />
       <AppNavigator />
     </SafeAreaView>

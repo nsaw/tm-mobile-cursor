@@ -29,11 +29,11 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     leftIcon,
     rightIcon,
   } = props;
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [isPressed, setIsPressed] = useState(false);
 
   // Get variant styles
-  const buttonVariants = getButtonVariants(tokens);
+  const buttonVariants = getButtonVariants(designTokens);
   const baseStyle = buttonVariants.base;
   const variantStyle = buttonVariants.variants.variant[variant];
   const sizeStyle = buttonVariants.variants.size[size];
@@ -50,7 +50,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     ...buttonStyle,
     opacity: disabled ? 0.5 : 1,
     backgroundColor: variant === 'primary' && isPressed 
-      ? `${tokens.colors.accent}CC`
+      ? `${designTokens.colors.accent}CC`
       : buttonStyle.backgroundColor,
     // Only allow margin and padding overrides
     ...(margin !== undefined ? { margin } : {}),
@@ -74,19 +74,19 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const getTextColor = () => {
     switch (variant) {
       case 'primary':
-        return tokens.colors.accent;
+        return designTokens.colors.accent;
       case 'secondary':
-        return tokens.colors.text;
+        return designTokens.colors.text;
       case 'outline':
-        return tokens.colors.text;
+        return designTokens.colors.text;
       case 'ghost':
-        return tokens.colors.text;
+        return designTokens.colors.text;
       case 'destructive':
-        return tokens.colors.danger;
+        return designTokens.colors.danger;
       case 'brand':
-        return tokens.colors.brand;
+        return designTokens.colors.brand;
       default:
-        return tokens.colors.text;
+        return designTokens.colors.text;
     }
   };
 
@@ -103,12 +103,12 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       accessible={true}
       accessibilityLabel="Button"
       android_ripple={{
-        color: tokens.colors.surfaceHover,
+        color: designTokens.colors.surfaceHover,
         borderless: false,
       }}
     >
       {leftIcon && (
-        <ButtonText style={{ marginRight: tokens.spacing.sm, color: textColor }}>
+        <ButtonText style={{ marginRight: designTokens.spacing.sm, color: textColor }}>
           {leftIcon}
         </ButtonText>
       )}
@@ -128,7 +128,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       )}
       
       {rightIcon && (
-        <ButtonText style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
+        <ButtonText style={{ marginLeft: designTokens.spacing.sm, color: textColor }}>
           {rightIcon}
         </ButtonText>
       )}

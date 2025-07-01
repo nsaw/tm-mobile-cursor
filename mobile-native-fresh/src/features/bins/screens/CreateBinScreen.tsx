@@ -22,8 +22,6 @@ import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { BinFormData } from '../../../types';
-import { spacingTokens } from '../../../theme/spacing';
-
 // Predefined colors and icons for bin creation
 const BIN_COLORS = [
   '#3B82F6', // Blue
@@ -56,7 +54,7 @@ const BIN_ICONS = [
 ];
 
 export const CreateBinScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const navigation = useNavigation();
   const { user } = useAuth();
   const { createBin } = useBins();
@@ -141,29 +139,29 @@ export const CreateBinScreen: React.FC = () => {
       flex: 1,
     },
     scrollContent: {
-      padding: spacingTokens.pagePaddingHorizontal,
+      padding: designTokens.spacing.page,
       paddingBottom: 100,
     },
     card: {
-      marginBottom: spacingTokens.cardMarginBottom,
+      marginBottom: designTokens.spacing.md,
     },
     cardContent: {
-      padding: spacingTokens.cardPaddingHorizontal,
+      padding: designTokens.spacing.lg,
     },
     label: {
       fontSize: 16,
       fontWeight: '600',
-      marginBottom: spacingTokens.textMarginBottom,
-      color: tokens.colors.text,
+      marginBottom: designTokens.spacing.xs,
+      color: designTokens.colors.text,
     },
     textInput: {
       fontSize: 16,
       padding: 12,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
       borderRadius: 8,
-      backgroundColor: tokens.colors.surface,
-      color: tokens.colors.text,
+      backgroundColor: designTokens.colors.surface,
+      color: designTokens.colors.text,
     },
     textArea: {
       height: 80,
@@ -198,13 +196,13 @@ export const CreateBinScreen: React.FC = () => {
       borderRadius: 24,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: tokens.colors.surface,
+      backgroundColor: designTokens.colors.surface,
       borderWidth: 2,
       borderColor: 'transparent',
     },
     iconOptionSelected: {
-      borderColor: tokens.colors.accent,
-      backgroundColor: tokens.colors.surfaceHover,
+      borderColor: designTokens.colors.accent,
+      backgroundColor: designTokens.colors.surfaceHover,
     },
     previewBin: {
       padding: 16,
@@ -247,7 +245,7 @@ export const CreateBinScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
       <KeyboardAvoidingView 
         style={styles.keyboardAvoidingView}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -276,17 +274,17 @@ export const CreateBinScreen: React.FC = () => {
               <TextInput
                 style={{
                   fontSize: 16,
-                  padding: spacingTokens.buttonPadding,
+                  padding: designTokens.spacing.sm,
                   borderWidth: 1,
-                  borderColor: tokens.colors.border,
+                  borderColor: designTokens.colors.border,
                   borderRadius: 8,
-                  backgroundColor: tokens.colors.surface,
-                  color: tokens.colors.text,
+                  backgroundColor: designTokens.colors.surface,
+                  color: designTokens.colors.text,
                 }}
                 value={name}
                 onChangeText={setName}
                 placeholder="Enter bin name..."
-                placeholderTextColor={tokens.colors.textMuted}
+                placeholderTextColor={designTokens.colors.textMuted}
                 maxLength={50}
               />
             </CardContent>
@@ -299,19 +297,19 @@ export const CreateBinScreen: React.FC = () => {
               <TextInput
                 style={[{
                   fontSize: 16,
-                  padding: spacingTokens.buttonPadding,
+                  padding: designTokens.spacing.sm,
                   borderWidth: 1,
-                  borderColor: tokens.colors.border,
+                  borderColor: designTokens.colors.border,
                   borderRadius: 8,
-                  backgroundColor: tokens.colors.surface,
-                  color: tokens.colors.text,
+                  backgroundColor: designTokens.colors.surface,
+                  color: designTokens.colors.text,
                   height: 80,
                   textAlignVertical: 'top',
                 }]}
                 value={description}
                 onChangeText={setDescription}
                 placeholder="Describe what this bin is for..."
-                placeholderTextColor={tokens.colors.textMuted}
+                placeholderTextColor={designTokens.colors.textMuted}
                 multiline
                 numberOfLines={3}
                 maxLength={200}
@@ -366,7 +364,7 @@ export const CreateBinScreen: React.FC = () => {
                     <Ionicons 
                       name={icon as any} 
                       size={24} 
-                      color={selectedIcon === icon ? tokens.colors.accent : tokens.colors.textSecondary} 
+                      color={selectedIcon === icon ? designTokens.colors.accent : designTokens.colors.textSecondary} 
                     />
                   </TouchableOpacity>
                 ))}
@@ -396,7 +394,7 @@ export const CreateBinScreen: React.FC = () => {
         {/* Loading Overlay */}
         {isSubmitting && (
           <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color={tokens.colors.accent} />
+            <ActivityIndicator size="large" color={designTokens.colors.accent} />
             <Text style={styles.loadingText}>Creating bin...</Text>
           </View>
         )}

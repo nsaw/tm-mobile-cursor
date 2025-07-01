@@ -22,60 +22,60 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   onTagToggle,
   onClearAll,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [showAllTags, setShowAllTags] = useState(false);
 
   const styles = StyleSheet.create({
     container: {
-      marginBottom: tokens.spacing.lg ?? 20,
+      marginBottom: designTokens.spacing.lg ?? 20,
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm ?? 10,
+      marginBottom: designTokens.spacing.sm ?? 10,
     },
     title: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: tokens.typography.fontWeight.semibold,
-      color: tokens.colors.textSecondary ?? '#888',
-      marginLeft: tokens.spacing.sm ?? 10,
+      fontSize: designTokens.typography.fontSize.body,
+      fontWeight: designTokens.typography.fontWeight.semibold,
+      color: designTokens.colors.textSecondary ?? '#888',
+      marginLeft: designTokens.spacing.sm ?? 10,
     },
     clearButton: {
-      paddingHorizontal: tokens.spacing.sm ?? 10,
+      paddingHorizontal: designTokens.spacing.sm ?? 10,
     },
     clearText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#888',
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#888',
     },
     tagsContainer: {
-      paddingHorizontal: tokens.spacing.lg ?? 20,
+      paddingHorizontal: designTokens.spacing.lg ?? 20,
     },
     tagRow: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: tokens.spacing.md ?? 10,
-      paddingHorizontal: tokens.spacing.md ?? 10,
-      paddingVertical: tokens.spacing.sm ?? 5,
+      gap: designTokens.spacing.md ?? 10,
+      paddingHorizontal: designTokens.spacing.md ?? 10,
+      paddingVertical: designTokens.spacing.sm ?? 5,
     },
     tag: {
-      paddingHorizontal: tokens.spacing.lg ?? 20,
-      paddingVertical: tokens.spacing.sm ?? 5,
-      borderRadius: tokens.radius.md ?? 20,
+      paddingHorizontal: designTokens.spacing.lg ?? 20,
+      paddingVertical: designTokens.spacing.sm ?? 5,
+      borderRadius: designTokens.radius.md ?? 20,
       borderWidth: 1,
-      borderColor: tokens.colors.border ?? '#888',
-      marginRight: tokens.spacing.sm ?? 10,
+      borderColor: designTokens.colors.border ?? '#888',
+      marginRight: designTokens.spacing.sm ?? 10,
     },
     tagSelected: {
-      backgroundColor: tokens.colors.accent ?? '#FFD500',
-      borderColor: tokens.colors.accent ?? '#FFD500',
+      backgroundColor: designTokens.colors.accent ?? '#FFD500',
+      borderColor: designTokens.colors.accent ?? '#FFD500',
     },
     tagText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#888',
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#888',
     },
     filterIcon: {
-      marginRight: tokens.spacing.xs,
+      marginRight: designTokens.spacing.xs,
     },
   });
 
@@ -86,7 +86,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Ionicons name="filter-outline" size={16} color={tokens.colors.textSecondary ?? '#888'} />
+          <Ionicons name="filter-outline" size={16} color={designTokens.colors.textSecondary ?? '#888'} />
           <Text style={styles.title}>Filter by tags</Text>
         </View>
         {selectedTags.length > 0 && (
@@ -116,7 +116,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
             >
               <Text style={[
                 styles.tagText,
-                selectedTags.includes(tag) && { color: tokens.colors.background }
+                selectedTags.includes(tag) && { color: designTokens.colors.background }
               ]}>
                 {tag}
               </Text>

@@ -8,52 +8,52 @@ import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 
 export const PrivacyScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: tokens.colors.background,
-      padding: tokens.spacing.xl,
+      backgroundColor: designTokens.colors.background,
+      padding: designTokens.spacing.xl,
     },
     iconContainer: {
       width: 64,
       height: 64,
       borderRadius: 32,
-      backgroundColor: tokens.colors.accentMuted,
+      backgroundColor: designTokens.colors.accentMuted,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: designTokens.spacing.lg,
     },
     title: {
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.sm,
     },
     subtitle: {
-      color: tokens.colors.textMuted,
+      color: designTokens.colors.textMuted,
       textAlign: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: designTokens.spacing.lg,
     },
     button: {
       width: 180,
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
     },
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="shield-outline" size={32} color={tokens.colors.background} />
+          <MaterialCommunityIcons name="shield-outline" size={32} color={designTokens.colors.background} />
       </View>
         
         <Heading><Text>Privacy Policy</Text></Heading>
         <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
         
         <Button style={styles.button}>
-          <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
+          <Text style={{ color: designTokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
       </Button>
     </View>
     </SafeAreaView>

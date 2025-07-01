@@ -32,7 +32,7 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   onCancel,
   type = 'info',
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     modalOverlay: {
@@ -42,62 +42,62 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       alignItems: 'center',
     },
     modalContent: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.radius.lg,
-      padding: tokens.spacing.xl,
-      margin: tokens.spacing.lg,
-      width: width - tokens.spacing.lg * 2,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.lg,
+      padding: designTokens.spacing.xl,
+      margin: designTokens.spacing.lg,
+      width: width - designTokens.spacing.lg * 2,
       maxWidth: 400,
     },
     title: {
-      fontSize: tokens.typography.fontSize.lg,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.sm,
       textAlign: 'center',
     },
     message: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.xl,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.xl,
       textAlign: 'center',
       lineHeight: 20,
     },
     buttonRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     button: {
       flex: 1,
-      paddingVertical: tokens.spacing.md,
-      borderRadius: tokens.radius.md,
+      paddingVertical: designTokens.spacing.md,
+      borderRadius: designTokens.radius.md,
       alignItems: 'center',
       justifyContent: 'center',
     },
     cancelButton: {
       backgroundColor: 'transparent',
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     confirmButton: {
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
       borderWidth: 1,
-      borderColor: tokens.colors.accent,
+      borderColor: designTokens.colors.accent,
     },
     dangerButton: {
-      backgroundColor: tokens.colors.danger,
-      borderColor: tokens.colors.danger,
+      backgroundColor: designTokens.colors.danger,
+      borderColor: designTokens.colors.danger,
     },
     buttonText: {
-      fontSize: tokens.typography.fontSize.body,
+      fontSize: designTokens.typography.fontSize.body,
       fontWeight: '600',
     },
     cancelButtonText: {
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
     },
     confirmButtonText: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
   });
 
@@ -111,11 +111,11 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   const getIconColor = () => {
     switch (type) {
       case 'danger':
-        return tokens.colors.danger;
+        return designTokens.colors.danger;
       case 'warning':
-        return tokens.colors.warning;
+        return designTokens.colors.warning;
       default:
-        return tokens.colors.textSecondary;
+        return designTokens.colors.textSecondary;
     }
   };
 
@@ -127,9 +127,9 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       onRequestClose={onCancel}
      accessible={false} accessibilityLabel="Modal">
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
-          <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
-          <Text style={[styles.message, { color: tokens.colors.textSecondary }]}>{message}</Text>
+        <View style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
+          <Text style={[styles.title, { color: designTokens.colors.text }]}>{title}</Text>
+          <Text style={[styles.message, { color: designTokens.colors.textSecondary }]}>{message}</Text>
           
           <View style={styles.buttonRow}>
             <TouchableOpacity

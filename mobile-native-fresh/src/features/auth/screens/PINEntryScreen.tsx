@@ -22,7 +22,7 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
   onSuccess,
   onCancel,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   const [pin, setPin] = useState<string[]>([]);
   const [confirmPin, setConfirmPin] = useState<string[]>([]);
@@ -161,7 +161,7 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
   const isComplete = currentPin.length === PIN_LENGTH;
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: tokens.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
@@ -171,9 +171,9 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
           accessible={true}
           accessibilityLabel="Go back"
         >
-          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+          <Ionicons name="arrow-back" size={24} color={designTokens.colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { color: tokens.colors.text }]}>
+        <Text style={[styles.headerTitle, { color: designTokens.colors.text }]}>
           {getTitle()}
         </Text>
         <View style={styles.headerSpacer} />
@@ -181,7 +181,7 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
 
       {/* Content */}
       <View style={styles.content}>
-        <Text style={[styles.subtitle, { color: tokens.colors.textSecondary }]}>
+        <Text style={[styles.subtitle, { color: designTokens.colors.textSecondary }]}>
           {getSubtitle()}
         </Text>
 
@@ -194,9 +194,9 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
                 styles.pinDot,
                 {
                   backgroundColor: index < currentPin.length 
-                    ? tokens.colors.accent 
-                    : tokens.colors.border,
-                  borderColor: tokens.colors.border,
+                    ? designTokens.colors.accent 
+                    : designTokens.colors.border,
+                  borderColor: designTokens.colors.border,
                 }
               ]}
             />
@@ -208,13 +208,13 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
             <TouchableOpacity
               key={number}
-              style={[styles.numberButton, { backgroundColor: tokens.colors.backgroundSecondary }]}
+              style={[styles.numberButton, { backgroundColor: designTokens.colors.backgroundSecondary }]}
               onPress={() => handleNumberPress(number.toString())}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel={`Number ${number}`}
             >
-              <Text style={[styles.numberText, { color: tokens.colors.text }]}>
+              <Text style={[styles.numberText, { color: designTokens.colors.text }]}>
                 {number}
               </Text>
             </TouchableOpacity>
@@ -222,35 +222,35 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
           
           {/* Delete Button */}
           <TouchableOpacity
-            style={[styles.numberButton, { backgroundColor: tokens.colors.backgroundSecondary }]}
+            style={[styles.numberButton, { backgroundColor: designTokens.colors.backgroundSecondary }]}
             onPress={handleDelete}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Delete"
           >
-            <Ionicons name="backspace-outline" size={24} color={tokens.colors.text} />
+            <Ionicons name="backspace-outline" size={24} color={designTokens.colors.text} />
           </TouchableOpacity>
 
           {/* Zero */}
           <TouchableOpacity
-            style={[styles.numberButton, { backgroundColor: tokens.colors.backgroundSecondary }]}
+            style={[styles.numberButton, { backgroundColor: designTokens.colors.backgroundSecondary }]}
             onPress={() => handleNumberPress('0')}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Number 0"
           >
-            <Text style={[styles.numberText, { color: tokens.colors.text }]}>0</Text>
+            <Text style={[styles.numberText, { color: designTokens.colors.text }]}>0</Text>
           </TouchableOpacity>
 
           {/* Cancel/Back Button */}
           <TouchableOpacity
-            style={[styles.numberButton, { backgroundColor: tokens.colors.backgroundSecondary }]}
+            style={[styles.numberButton, { backgroundColor: designTokens.colors.backgroundSecondary }]}
             onPress={handleCancel}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Cancel"
           >
-            <Text style={[styles.numberText, { color: tokens.colors.textSecondary }]}>
+            <Text style={[styles.numberText, { color: designTokens.colors.textSecondary }]}>
               {mode === 'setup' ? 'Skip' : 'Cancel'}
             </Text>
           </TouchableOpacity>

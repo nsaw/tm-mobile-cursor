@@ -21,54 +21,54 @@ type ContentScreenNavigationProp = NavigationProp<RootStackParamList, 'Content'>
 
 export const ContentScreen: React.FC = () => {
   const navigation = useNavigation<ContentScreenNavigationProp>();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: designTokens.colors.background,
     },
     content: {
-      padding: tokens.spacing.md,
+      padding: designTokens.spacing.md,
     },
     title: {
-      fontFamily: tokens.typography.fontFamily.heading,
-      fontSize: tokens.typography.fontSize.heading,
-      fontWeight: tokens.typography.fontWeight.bold,
-      marginBottom: tokens.spacing.sm,
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.heading,
+      fontWeight: designTokens.typography.fontWeight.bold,
+      marginBottom: designTokens.spacing.sm,
     },
     description: {
-      fontFamily: tokens.typography.fontFamily.body,
-      fontSize: tokens.typography.fontSize.body,
-      marginBottom: tokens.spacing.lg,
-      color: tokens.colors.textSecondary,
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.body,
+      marginBottom: designTokens.spacing.lg,
+      color: designTokens.colors.textSecondary,
     },
     card: {
       flexDirection: 'row',
-      backgroundColor: tokens.colors.surface,
+      backgroundColor: designTokens.colors.surface,
       borderRadius: 12,
-      padding: tokens.spacing.md,
+      padding: designTokens.spacing.md,
       alignItems: 'flex-start',
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
       elevation: 2,
     },
     tag: {
-      marginRight: tokens.spacing.md,
+      marginRight: designTokens.spacing.md,
     },
     cardTextContainer: {
       flex: 1,
     },
     subtitle: {
-      fontFamily: tokens.typography.fontFamily.heading,
-      fontSize: tokens.typography.fontSize.lg,
-      fontWeight: tokens.typography.fontWeight.semibold,
-      marginBottom: tokens.spacing.xs,
-      color: tokens.colors.text,
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.lg,
+      fontWeight: designTokens.typography.fontWeight.semibold,
+      marginBottom: designTokens.spacing.xs,
+      color: designTokens.colors.text,
     },
     body: {
-      fontFamily: tokens.typography.fontFamily.body,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
     },
   });
 
