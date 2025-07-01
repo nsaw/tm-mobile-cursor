@@ -14,6 +14,7 @@ import { Text } from '../components/ui/Text';
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
 import { SignUpScreen } from '../features/auth/screens/SignUp';
+import { PINEntryScreen } from '../features/auth/screens/PINEntryScreen';
 
 // Home Screens
 import { DashboardScreen } from '../features/home/screens/DashboardScreen';
@@ -159,6 +160,7 @@ const AuthStack = () => (
   >
     <Stack.Screen name="SignIn" component={SignInScreen} />
     <Stack.Screen name="SignUp" component={SignUpScreen} />
+    <Stack.Screen name="PINEntry" component={PINEntryScreen} />
   </Stack.Navigator>
 );
 
