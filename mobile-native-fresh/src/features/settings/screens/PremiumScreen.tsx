@@ -11,26 +11,6 @@ import { useAuth } from '../../auth/hooks/useAuth';
 
 export const PremiumScreen: React.FC = () => {
   const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
   const { products, loading, error, purchaseProduct, restorePurchases } = useStoreKit();
   const { user } = useAuth();
   const [purchasing, setPurchasing] = useState<string | null>(null);

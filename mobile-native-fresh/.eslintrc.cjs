@@ -87,12 +87,12 @@ module.exports = {
         ]
       }
     ],
-    // Enforce designTokens usage instead of tokens
+    // Enforce tokens usage (the actual property name from ThemeProvider)
     'no-restricted-globals': [
       'error',
       {
-        name: 'tokens',
-        message: 'useTheme() must destructure as designTokens, not tokens'
+        name: 'designTokens',
+        message: 'useTheme() must destructure as tokens, not designTokens'
       }
     ],
     // Custom JSX enforcement rules
