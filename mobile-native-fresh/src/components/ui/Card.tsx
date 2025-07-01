@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, ViewStyle, Text } from 'react-native';
+import { ViewStyle, Text } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getCardVariants, mergeVariantStyles } from '../../theme/variants';
+import { AutoRoleView } from './AutoRoleView';
 
 interface CardProps {
   variant?: 'default' | 'glass' | 'elevated' | 'interactive';
@@ -59,19 +60,19 @@ export const Card: React.FC<CardProps> = ({
 
   if (onPress && !disabled) {
     return (
-      <View><Text>{renderChildren()}</Text></View>
+      <AutoRoleView style={finalCardStyle}><Text>{renderChildren()}</Text></AutoRoleView>
     );
   }
 
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView style={finalCardStyle}><Text>{renderChildren()}</Text></AutoRoleView>
   );
 };
 
 // Card sub-components for consistent layout
 export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle }> = ({
   children,
-  style,
+  style: _style,
 }) => {
   const { tokens: designTokens } = useTheme();
   
@@ -92,13 +93,13 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView><Text>{renderChildren()}</Text></AutoRoleView>
   );
 };
 
 export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyle }> = ({
   children,
-  style,
+  style: _style,
 }) => {
   const { tokens: designTokens } = useTheme();
   
@@ -118,13 +119,13 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView><Text>{renderChildren()}</Text></AutoRoleView>
   );
 };
 
 export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle }> = ({
   children,
-  style,
+  style: _style,
 }) => {
   const { tokens: designTokens } = useTheme();
   
@@ -144,6 +145,6 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <AutoRoleView><Text>{renderChildren()}</Text></AutoRoleView>
   );
 }; 

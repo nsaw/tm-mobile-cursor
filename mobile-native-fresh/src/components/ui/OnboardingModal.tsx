@@ -7,6 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui/Text';
+import { AutoRoleView } from './AutoRoleView';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -131,13 +132,13 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       transparent
       onRequestClose={onClose}
     >
-      <View style={{
+      <AutoRoleView style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#000000E6',
       }}>
-        <View style={{
+        <AutoRoleView style={{
           width: '90%',
           marginHorizontal: 'auto',
           paddingHorizontal: spacing.pagePaddingHorizontal,
@@ -168,7 +169,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             color: tokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
-          <View>{steps[currentStep].icon}</View>
+          <AutoRoleView>{steps[currentStep].icon}</AutoRoleView>
           {/* Body Text */}
           <Text style={{
             ...typography.body,
@@ -179,9 +180,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             marginBottom: tokens.spacing.md,
           }}>{steps[currentStep].description}</Text>
           {/* Pagination Dots */}
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
+          <AutoRoleView role="main" accessibilityRole="none" style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View key={i} style={{
+              <AutoRoleView key={i} style={{
                 width: 8,
                 height: 8,
                 borderRadius: 4,
@@ -189,9 +190,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
                 marginHorizontal: 4
               }} />
             ))}
-          </View>
+          </AutoRoleView>
           {/* Buttons */}
-          <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
+          <AutoRoleView role="main" accessibilityRole="none" style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
             <ModalButton
               onPress={handlePrevious}
               disabled={currentStep === 0}
@@ -201,9 +202,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             >
               {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ModalButton>
-          </View>
-        </View>
-      </View>
+          </AutoRoleView>
+        </AutoRoleView>
+      </AutoRoleView>
     </Modal>
   );
 }; 

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { Card } from './Card';
+import { AutoRoleView } from './AutoRoleView';
 
 export const HydrationTestCard: React.FC = () => {
   const { tokens: designTokens, isHydrated, isDarkMode, isFluidTheme } = useTheme();
@@ -34,52 +35,52 @@ export const HydrationTestCard: React.FC = () => {
         Hydration Status
       </Text>
       
-      <View style={styles.row}>
+      <AutoRoleView style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Auth Status:
         </Text>
         <Text style={[styles.value, { color: designTokens.colors.text }]}>
           {getHydrationStatus()}
         </Text>
-      </View>
+      </AutoRoleView>
 
-      <View style={styles.row}>
+      <AutoRoleView style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Theme Status:
         </Text>
         <Text style={[styles.value, { color: designTokens.colors.text }]}>
           {getThemeStatus()}
         </Text>
-      </View>
+      </AutoRoleView>
 
-      <View style={styles.row}>
+      <AutoRoleView style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           User Role:
         </Text>
         <Text style={[styles.value, { color: designTokens.colors.text }]}>
           {getRoleStatus()}
         </Text>
-      </View>
+      </AutoRoleView>
 
       {user && (
-        <View style={styles.row}>
+        <AutoRoleView style={styles.row}>
           <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
             User:
           </Text>
           <Text style={[styles.value, { color: designTokens.colors.text }]}>
             {user.firstName} {user.lastName}
           </Text>
-        </View>
+        </AutoRoleView>
       )}
 
-      <View style={styles.row}>
+      <AutoRoleView style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Fluid Theme:
         </Text>
         <Text style={[styles.value, { color: designTokens.colors.text }]}>
           {isFluidTheme ? '✅ Enabled' : '❌ Disabled'}
         </Text>
-      </View>
+      </AutoRoleView>
     </Card>
   );
 };

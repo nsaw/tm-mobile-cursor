@@ -17,6 +17,7 @@ import { RegistrationForm } from '../components/RegistrationForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { colors, spacing, typography } from '../../../theme/theme';
 import { useTheme } from '../../../theme/ThemeProvider';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const logo = require('../../../../assets/logo.png');
 
@@ -153,7 +154,7 @@ export const SignUpScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.keyboard}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -162,24 +163,24 @@ export const SignUpScreen: React.FC = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.logoContainer}>
+          <ScrollView style={styles.logoContainer}>
             <Image source={logo} style={styles.logo} resizeMode="contain" />
-          </View>
+          </ScrollView>
 
           <Text style={styles.title}>Create Account</Text>
           <Text style={styles.subtitle}>Join Thoughtmarks to get started</Text>
 
-          <View style={styles.formContainer}>
+          <ScrollView style={styles.formContainer}>
             <RegistrationForm
               onSubmit={handleEmailSignUp}
               loading={isLoading || loading}
             />
 
-            <View style={styles.divider}>
-              <View style={styles.dividerLine} />
+            <ScrollView style={styles.divider}>
+              <ScrollView style={styles.dividerLine} />
               <Text style={styles.dividerText}>OR</Text>
-              <View style={styles.dividerLine} />
-            </View>
+              <ScrollView style={styles.dividerLine} />
+            </ScrollView>
 
             <OAuthButton
               provider="google"
@@ -194,9 +195,9 @@ export const SignUpScreen: React.FC = () => {
                 loading={isLoading || loading}
               />
             )}
-          </View>
+          </ScrollView>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </ScrollView>
   );
 };

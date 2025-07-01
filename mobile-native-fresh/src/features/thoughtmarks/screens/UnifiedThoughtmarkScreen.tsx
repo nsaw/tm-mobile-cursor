@@ -25,6 +25,7 @@ import { Card, CardContent } from '../../../components/ui/Card';
 import { TagChip } from '../../../components/ui/TagChip';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { apiService } from '../../../services/api';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface RouteParams {
   thoughtmarkId?: number;
@@ -370,7 +371,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       <KeyboardAvoidingView 
         style={{ flex: 1 }} 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -394,25 +395,25 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         >
           {/* Voice Note Indicator */}
           {isVoiceNote && (
-            <View style={[styles.voiceIndicator, { backgroundColor: designTokens.colors.surface }]}>
+            <ScrollView style={[styles.voiceIndicator, { backgroundColor: designTokens.colors.surface }]}>
               <Ionicons name="mic" size={20} color={designTokens.colors.accent} />
               <Text style={[styles.voiceIndicatorText, { color: designTokens.colors.textSecondary }]}>
                 Voice note captured
               </Text>
-            </View>
+            </ScrollView>
           )}
 
           {/* AI Assistant Panel */}
           {hasPremiumAccess && (
             <Card style={styles.aiPanel}>
               <CardContent>
-                <View style={styles.aiPanelHeader}>
-                  <View style={styles.aiPanelTitle}>
+                <ScrollView style={styles.aiPanelHeader}>
+                  <ScrollView style={styles.aiPanelTitle}>
                     <Ionicons name="sparkles" size={16} color={designTokens.colors.accent} />
                     <Text style={[styles.aiPanelTitleText, { color: designTokens.colors.text }]}>
                       AI Assistant
                     </Text>
-                  </View>
+                  </ScrollView>
                   <TouchableOpacity
                     onPress={() => setShowAIPanel(!showAIPanel)}
                     accessibilityRole="button"
@@ -426,26 +427,26 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                       color={designTokens.colors.textSecondary} 
                     />
                   </TouchableOpacity>
-                </View>
+                </ScrollView>
 
                 {showAIPanel && (
-                  <View style={styles.aiPanelContent}>
+                  <ScrollView style={styles.aiPanelContent}>
                     {isGeneratingSuggestions ? (
-                      <View style={styles.aiLoading}>
+                      <ScrollView style={styles.aiLoading}>
                         <ActivityIndicator size="small" color={designTokens.colors.accent} />
                         <Text style={[styles.aiLoadingText, { color: designTokens.colors.textSecondary }]}>
                           Analyzing your content...
                         </Text>
-                      </View>
+                      </ScrollView>
                     ) : aiSuggestions ? (
-                      <View style={styles.aiSuggestions}>
+                      <ScrollView style={styles.aiSuggestions}>
                         {/* Auto Title Suggestion */}
                         {autoTitle && (
-                          <View style={styles.suggestionItem}>
+                          <ScrollView style={styles.suggestionItem}>
                             <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
                               Suggested Title:
                             </Text>
-                            <View style={styles.suggestionAction}>
+                            <ScrollView style={styles.suggestionAction}>
                               <Text style={[styles.suggestionText, { color: designTokens.colors.text }]}>
                                 {autoTitle}
                               </Text>
@@ -456,17 +457,17 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                               >
                                 <Ionicons name="checkmark" size={14} color={designTokens.colors.accent} />
                               </Button>
-                            </View>
-                          </View>
+                            </ScrollView>
+                          </ScrollView>
                         )}
 
                         {/* Auto Tags Suggestion */}
                         {autoTags.length > 0 && (
-                          <View style={styles.suggestionItem}>
+                          <ScrollView style={styles.suggestionItem}>
                             <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
                               Suggested Tags:
                             </Text>
-                            <View style={styles.suggestionTags}>
+                            <ScrollView style={styles.suggestionTags}>
                               {autoTags.map((tag, index) => (
                                 <TouchableOpacity
                                   key={index}
@@ -482,13 +483,13 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                   />
                                 </TouchableOpacity>
                               ))}
-                            </View>
-                          </View>
+                            </ScrollView>
+                          </ScrollView>
                         )}
 
                         {/* Content Suggestions */}
                         {contentSuggestions.length > 0 && (
-                          <View style={styles.suggestionItem}>
+                          <ScrollView style={styles.suggestionItem}>
                             <Text style={[styles.suggestionLabel, { color: designTokens.colors.textSecondary }]}>
                               Content Ideas:
                             </Text>
@@ -507,22 +508,22 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                                 <Ionicons name="add" size={14} color={designTokens.colors.accent} />
                               </TouchableOpacity>
                             ))}
-                          </View>
+                          </ScrollView>
                         )}
-                      </View>
+                      </ScrollView>
                     ) : (
                       <Text style={[styles.aiEmptyText, { color: designTokens.colors.textSecondary }]}>
                         Start typing to get AI suggestions
                       </Text>
                     )}
-                  </View>
+                  </ScrollView>
                 )}
               </CardContent>
             </Card>
           )}
 
           {/* Title Input */}
-          <View style={styles.inputGroup}>
+          <ScrollView style={styles.inputGroup}>
             <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
               Title (optional)
             </Text>
@@ -538,10 +539,10 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               onChangeText={setTitle}
               maxLength={100}
             />
-          </View>
+          </ScrollView>
 
           {/* Content Input */}
-          <View style={styles.inputGroup}>
+          <ScrollView style={styles.inputGroup}>
             <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
               Content *
             </Text>
@@ -562,14 +563,14 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
             <Text style={[styles.charCount, { color: designTokens.colors.textSecondary }]}>
               {content.length}/5000
             </Text>
-          </View>
+          </ScrollView>
 
           {/* Tags */}
-          <View style={styles.inputGroup}>
+          <ScrollView style={styles.inputGroup}>
             <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
               Tags
             </Text>
-            <View style={styles.tagsContainer}>
+            <ScrollView style={styles.tagsContainer}>
               {tags.map((tag, index) => (
                 <TagChip
                   key={index}
@@ -605,11 +606,11 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   </Text>
                 </TouchableOpacity>
               )}
-            </View>
-          </View>
+            </ScrollView>
+          </ScrollView>
 
           {/* Quick Actions */}
-          <View style={styles.quickActions}>
+          <ScrollView style={styles.quickActions}>
             <TouchableOpacity
               style={[styles.actionButton, isTask && styles.actionButtonActive]}
               onPress={toggleTask}
@@ -647,17 +648,17 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 Pin
               </Text>
             </TouchableOpacity>
-          </View>
+          </ScrollView>
 
           {/* Due Date Section - Only show when task is selected */}
           {isTask && (
-            <View style={styles.inputGroup}>
+            <ScrollView style={styles.inputGroup}>
               <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
                 Due Date (optional - no due date by default)
               </Text>
-              <View style={styles.dueDateContainer}>
+              <ScrollView style={styles.dueDateContainer}>
                 {dueDate ? (
-                  <View style={styles.dueDateDisplay}>
+                  <ScrollView style={styles.dueDateDisplay}>
                     <Ionicons name="calendar" size={16} color={designTokens.colors.accent} />
                     <Text style={[styles.dueDateText, { color: designTokens.colors.text }]}>
                       {formatDueDate(dueDate)}
@@ -665,7 +666,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     <TouchableOpacity onPress={clearDueDate} style={styles.clearDueDateButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                       <Ionicons name="close-circle" size={16} color={designTokens.colors.textSecondary} />
                     </TouchableOpacity>
-                  </View>
+                  </ScrollView>
                 ) : (
                   <TouchableOpacity
                     style={[styles.setDueDateButton, { borderColor: designTokens.colors.border }]}
@@ -680,8 +681,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                     </Text>
                   </TouchableOpacity>
                 )}
-              </View>
-            </View>
+              </ScrollView>
+            </ScrollView>
           )}
 
           {/* Date and Time Pickers */}
@@ -705,7 +706,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
           )}
 
           {/* Bin Selection */}
-          <View style={styles.inputGroup}>
+          <ScrollView style={styles.inputGroup}>
             <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
               Collection (optional)
             </Text>
@@ -752,7 +753,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
-          </View>
+          </ScrollView>
         </ScrollView>
       </KeyboardAvoidingView>
       
@@ -782,7 +783,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
         confirmText="Save"
         cancelText="Discard"
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

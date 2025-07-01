@@ -1,12 +1,12 @@
-import { Text,
-View,
-StyleSheet,
-ScrollView,
-TouchableOpacity,
-Alert,
-Switch,
-TextInput } from
-'react-native';
+import { Text ,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+  Switch,
+  TextInput,
+} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,7 +25,7 @@ export const SettingsScreen: React.FC = () => {
   const { tokens, typography } = useTheme();
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
-
+  
   const [showNavLabels, setShowNavLabels] = useState(true);
   const [notificationsExpanded, setNotificationsExpanded] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -38,9 +38,9 @@ export const SettingsScreen: React.FC = () => {
 
   // Load user preferences
   useEffect(() => {
-
     // No longer set aiNotifications or smartReminders from user
   }, [user]);
+
   // Load saved preferences
   useEffect(() => {
     loadPreferences();
@@ -50,7 +50,7 @@ export const SettingsScreen: React.FC = () => {
     try {
       const savedNavLabels = await AsyncStorage.getItem('showNavLabels');
       const savedSiriPhrase = await AsyncStorage.getItem('siriTriggerPhrase');
-
+      
       if (savedNavLabels !== null) {
         setShowNavLabels(savedNavLabels !== 'false');
       }
@@ -106,32 +106,32 @@ export const SettingsScreen: React.FC = () => {
   // Handle account deletion
   const handleDeleteAccount = async () => {
     if (!user) return;
-
+    
     Alert.alert(
       'Delete Account',
       'Are you sure you want to delete your account? This action cannot be undone.',
       [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          try {
-            // TODO: Implement account deletion API call
-            Alert.alert(
-              'Account deleted',
-              'Your account has been successfully deleted.'
-            );
-            navigation.navigate('SignIn');
-          } catch (error) {
-            Alert.alert(
-              'Error deleting account',
-              'There was a problem deleting your account. Please try again.'
-            );
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              // TODO: Implement account deletion API call
+              Alert.alert(
+                'Account deleted',
+                'Your account has been successfully deleted.'
+              );
+              navigation.navigate('SignIn');
+            } catch (error) {
+              Alert.alert(
+                'Error deleting account',
+                'There was a problem deleting your account. Please try again.'
+              );
+            }
           }
         }
-      }]
-
+      ]
     );
   };
 
@@ -145,27 +145,27 @@ export const SettingsScreen: React.FC = () => {
     Alert.alert('Siri Shortcuts', 'Siri shortcuts functionality is temporarily disabled.');
   };
 
-  const SettingItem = ({
-    icon,
-    title,
-    subtitle,
-    onPress,
-    showSwitch = false,
-    switchValue = false,
+  const SettingItem = ({ 
+    icon, 
+    title, 
+    subtitle, 
+    onPress, 
+    showSwitch = false, 
+    switchValue = false, 
     onSwitchChange = () => {},
     showArrow = true,
     tokens
-
-
-
-
-
-
-
-
-
-
-  }: {icon: string;title: string;subtitle?: string;onPress?: () => void;showSwitch?: boolean;switchValue?: boolean;onSwitchChange?: (value: boolean) => void;showArrow?: boolean;tokens: any;}) => {
+  }: {
+    icon: string;
+    title: string;
+    subtitle?: string;
+    onPress?: () => void;
+    showSwitch?: boolean;
+    switchValue?: boolean;
+    onSwitchChange?: (value: boolean) => void;
+    showArrow?: boolean;
+    tokens: any;
+  }) => {
     let iconElement = null;
     if (icon === 'crown') {
       iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
@@ -175,11 +175,11 @@ export const SettingsScreen: React.FC = () => {
       iconElement = <Ionicons name={icon as any} size={20} color={tokens.colors.accent ?? '#000'} />;
     }
     return (
-      <TouchableOpacity
-        style={styles.settingItem}
+      <TouchableOpacity 
+        style={styles.settingItem} 
         onPress={onPress}
         disabled={!onPress}
-        accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <ScrollView style={styles.settingItemLeft}>
           {iconElement}
           <ScrollView style={styles.settingItemText}>
@@ -188,63 +188,63 @@ export const SettingsScreen: React.FC = () => {
           </ScrollView>
         </ScrollView>
         <ScrollView style={styles.settingItemRight}>
-          {showSwitch &&
-          <Switch
-            value={switchValue}
-            onValueChange={onSwitchChange}
-            trackColor={{ false: tokens.colors.border ?? '#ccc', true: tokens.colors.accent ?? '#000' }}
-            thumbColor={tokens.colors.background ?? '#fff'} />
-
-          }
-          {showArrow && !showSwitch &&
-          <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
-          }
+          {showSwitch && (
+            <Switch
+              value={switchValue}
+              onValueChange={onSwitchChange}
+              trackColor={{ false: tokens.colors.border ?? '#ccc', true: tokens.colors.accent ?? '#000' }}
+              thumbColor={tokens.colors.background ?? '#fff'}
+            />
+          )}
+          {showArrow && !showSwitch && (
+            <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
+          )}
         </ScrollView>
-      </TouchableOpacity>);
-
+      </TouchableOpacity>
+    );
   };
 
   const styles = StyleSheet.create({
     scrollView: {
-      flex: 1
+      flex: 1,
     },
     scrollContent: {
-      paddingBottom: tokens.spacing.xl
+      paddingBottom: tokens.spacing.xl,
     },
     header: {
       paddingHorizontal: tokens.spacing.lg,
       paddingVertical: tokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border
+      borderBottomColor: tokens.colors.border,
     },
     headerContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm
+      marginBottom: tokens.spacing.sm,
     },
     backButton: {
-      marginRight: tokens.spacing.md
+      marginRight: tokens.spacing.md,
     },
     headerTitle: {
       ...typography.title,
-      color: tokens.colors.text
+      color: tokens.colors.text,
     },
     headerSubtitle: {
       ...typography.body,
-      color: tokens.colors.textSecondary
+      color: tokens.colors.textSecondary,
     },
     section: {
-      marginBottom: tokens.spacing.xxl
+      marginBottom: tokens.spacing.xxl,
     },
     sectionTitle: {
       ...typography.sectionTitle,
       color: tokens.colors.textSecondary,
       marginBottom: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.lg,
-      textTransform: 'uppercase'
+      textTransform: 'uppercase',
     },
     sectionCard: {
-      marginHorizontal: tokens.spacing.lg
+      marginHorizontal: tokens.spacing.lg,
     },
     settingItem: {
       flexDirection: 'row',
@@ -254,41 +254,41 @@ export const SettingsScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border,
-      minHeight: 44
+      minHeight: 44,
     },
     settingItemLeft: {
       flexDirection: 'row',
       alignItems: 'center',
-      flex: 1
+      flex: 1,
     },
     settingItemText: {
       marginLeft: tokens.spacing.md,
-      flex: 1
+      flex: 1,
     },
     settingItemTitle: {
       ...typography.body,
       color: tokens.colors.text,
-      opacity: 0.85
+      opacity: 0.85,
     },
     settingItemSubtitle: {
       ...typography.small,
       color: tokens.colors.textSecondary,
-      marginTop: 2
+      marginTop: 2,
     },
     settingItemRight: {
-      alignItems: 'center'
+      alignItems: 'center',
     },
     expandedSettings: {
-      backgroundColor: tokens.colors.backgroundSecondary
+      backgroundColor: tokens.colors.backgroundSecondary,
     },
     settingLeft: {
       flexDirection: 'row',
       alignItems: 'center',
-      flex: 1
+      flex: 1,
     },
     settingText: {
       marginLeft: tokens.spacing.md,
-      flex: 1
+      flex: 1,
     },
     modalOverlay: {
       position: 'absolute',
@@ -299,25 +299,25 @@ export const SettingsScreen: React.FC = () => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.lg
+      padding: tokens.spacing.lg,
     },
     modalContent: {
       backgroundColor: tokens.colors.surface,
       borderRadius: tokens.spacing.md,
       padding: tokens.spacing.lg,
       width: '100%',
-      maxWidth: 400
+      maxWidth: 400,
     },
     modalTitle: {
       fontSize: tokens.typography.fontSize.lg,
       fontWeight: '600',
       color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm
+      marginBottom: tokens.spacing.sm,
     },
     modalSubtitle: {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.lg
+      marginBottom: tokens.spacing.lg,
     },
     modalInput: {
       borderWidth: 1,
@@ -327,29 +327,29 @@ export const SettingsScreen: React.FC = () => {
       fontSize: tokens.typography.fontSize.body,
       color: tokens.colors.text,
       backgroundColor: tokens.colors.background,
-      marginBottom: tokens.spacing.lg
+      marginBottom: tokens.spacing.lg,
     },
     modalButtons: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      gap: tokens.spacing.md
+      gap: tokens.spacing.md,
     },
     modalButton: {
       paddingVertical: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm
+      borderRadius: tokens.spacing.sm,
     },
     modalButtonText: {
       fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text
+      color: tokens.colors.text,
     },
     modalButtonPrimary: {
-      backgroundColor: tokens.colors.accent
+      backgroundColor: tokens.colors.accent,
     },
     modalButtonTextPrimary: {
       color: tokens.colors.background,
-      fontWeight: '500'
-    }
+      fontWeight: '500',
+    },
   });
 
   return (
@@ -358,13 +358,13 @@ export const SettingsScreen: React.FC = () => {
         {/* Header */}
         <ScrollView style={styles.header}>
           <ScrollView style={styles.headerContent}>
-            <TouchableOpacity
+            <TouchableOpacity 
               style={styles.backButton}
               onPress={() => navigation.goBack()}
-              accessibilityRole="button"
-              accessible={true}
-              accessibilityLabel="Button">
-
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+            >
               <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
@@ -379,19 +379,19 @@ export const SettingsScreen: React.FC = () => {
               <>
                 {/* Brain icon in circle */}
                 <ScrollView style={{
-                  width: 48, height: 48, borderRadius: 24,
-                  backgroundColor: `${tokens.colors.success ?? '#000'}80`
-
-                }} contentContainerStyle={{ marginBottom: tokens.spacing.md, // 50% opacity
-                  alignItems: 'center', justifyContent: 'center' }}>
+                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
+                  backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
+                  alignItems: 'center', justifyContent: 'center',
+                }}>
                   <Brain size={28} />
                 </ScrollView>
                 {/* Title */}
-                <Text style={{ ...typography.sectionTitle,
-                    color: tokens.colors.text,
-                    textAlign: 'center',
-                    marginBottom: tokens.spacing.sm
-                  }}>
+                <Text style={{
+                  ...typography.sectionTitle,
+                  color: tokens.colors.text,
+                  textAlign: 'center',
+                  marginBottom: tokens.spacing.sm,
+                }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
@@ -399,7 +399,7 @@ export const SettingsScreen: React.FC = () => {
                   ...typography.body,
                   color: tokens.colors.textSecondary,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md
+                  marginBottom: tokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -410,21 +410,21 @@ export const SettingsScreen: React.FC = () => {
                     minWidth: '50%',
                     backgroundColor: tokens.colors.accent,
                     paddingVertical: tokens.spacing.sm,
-                    borderRadius: tokens.radius.md
+                    borderRadius: tokens.radius.md,
                   }}
-                  onPress={() => navigation.navigate('HowTo')}>
-
+                  onPress={() => navigation.navigate('HowTo')}
+                >
                   <Text style={{
                     ...typography.buttonText,
                     color: tokens.colors.buttonText,
                     textAlign: 'center',
-                    width: '100%'
-                  }}>
+                    width: '100%',
+                   }}>
                     User Guide
                   </Text>
                 </Button>
-              </>);
-
+              </>
+            );
           })()}
         </Card>
 
@@ -437,22 +437,22 @@ export const SettingsScreen: React.FC = () => {
               title="Profile"
               subtitle="Manage your account information"
               onPress={() => navigation.navigate('Profile')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="key"
               title="Security"
               subtitle="Password, 2FA, and security settings"
               onPress={() => navigation.navigate('Security')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="crown"
               title="Premium"
               subtitle="Upgrade to unlock advanced features"
               onPress={() => navigation.navigate('Premium')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
@@ -465,60 +465,60 @@ export const SettingsScreen: React.FC = () => {
               title="Theme"
               subtitle="Light, dark, or auto"
               onPress={() => navigation.navigate('Theme')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="notifications"
               title="Notifications"
               subtitle="Manage notification preferences"
               onPress={() => setNotificationsExpanded(!notificationsExpanded)}
-              tokens={tokens} />
-
-            {notificationsExpanded &&
-            <ScrollView style={styles.expandedSettings}>
+              tokens={tokens}
+            />
+            {notificationsExpanded && (
+              <ScrollView style={styles.expandedSettings}>
                 <SettingItem
-                icon="mail"
-                title="Marketing Emails"
-                showSwitch={true}
-                switchValue={marketingEmails}
-                onSwitchChange={setMarketingEmails}
-                showArrow={false}
-                tokens={tokens} />
-
+                  icon="mail"
+                  title="Marketing Emails"
+                  showSwitch={true}
+                  switchValue={marketingEmails}
+                  onSwitchChange={setMarketingEmails}
+                  showArrow={false}
+                  tokens={tokens}
+                />
                 <SettingItem
-                icon="sparkles"
-                title="AI Notifications"
-                showSwitch={true}
-                switchValue={aiNotifications}
-                onSwitchChange={setAiNotifications}
-                showArrow={false}
-                tokens={tokens} />
-
+                  icon="sparkles"
+                  title="AI Notifications"
+                  showSwitch={true}
+                  switchValue={aiNotifications}
+                  onSwitchChange={setAiNotifications}
+                  showArrow={false}
+                  tokens={tokens}
+                />
                 <SettingItem
-                icon="time"
-                title="Smart Reminders"
-                showSwitch={true}
-                switchValue={smartReminders}
-                onSwitchChange={setSmartReminders}
-                showArrow={false}
-                tokens={tokens} />
-
+                  icon="time"
+                  title="Smart Reminders"
+                  showSwitch={true}
+                  switchValue={smartReminders}
+                  onSwitchChange={setSmartReminders}
+                  showArrow={false}
+                  tokens={tokens}
+                />
               </ScrollView>
-            }
+            )}
             <SettingItem
               icon="mic"
               title="Voice Commands"
               subtitle="Set up Siri or Google Assistant"
               onPress={() => setShowSiriDialog(true)}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="cloud-upload"
               title="Export Data"
               subtitle="Download your data"
               onPress={() => navigation.navigate('Export')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
@@ -534,8 +534,8 @@ export const SettingsScreen: React.FC = () => {
               switchValue={showNavLabels}
               onSwitchChange={setShowNavLabels}
               showArrow={false}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
@@ -548,89 +548,89 @@ export const SettingsScreen: React.FC = () => {
               title="Help & Support"
               subtitle="Get help or contact support"
               onPress={() => navigation.navigate('Help')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="document-text"
               title="Terms of Service"
               subtitle="Read our terms"
               onPress={() => navigation.navigate('Terms')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="shield-checkmark"
               title="Privacy Policy"
               subtitle="Read our privacy policy"
               onPress={() => navigation.navigate('Privacy')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="mail"
               title="Contact Support"
               subtitle="Email or message us"
               onPress={() => navigation.navigate('Contact')}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
         {/* Siri Shortcuts */}
         {/* <ScrollView style={styles.section}>
-           <Text style={styles.sectionTitle}>SIRI SHORTCUTS</Text>
-           <Card style={styles.sectionCard}>
-             <SettingItem
-               icon="mic"
-               title="Donate All Shortcuts"
-               subtitle="Make all actions available to Siri"
-               onPress={async () => {
-                 try {
-                   await SiriShortcutsService.donateAllShortcuts();
-                   Alert.alert(
-                     'Shortcuts Donated',
-                     'All Siri shortcuts have been donated successfully. You can now use Siri to perform actions in Thoughtmarks.'
-                   );
-                 } catch (error) {
-                   Alert.alert(
-                     'Error',
-                     'Failed to donate shortcuts. Please try again.'
-                   );
-                 }
-               }}
-             />
-             <SettingItem
-               icon="trash-outline"
-               title="Clear All Shortcuts"
-               subtitle="Remove all Siri shortcuts"
-               onPress={async () => {
-                 Alert.alert(
-                   'Clear Shortcuts',
-                   'Are you sure you want to clear all Siri shortcuts?',
-                   [
-                     { text: 'Cancel', style: 'cancel' },
-                     {
-                       text: 'Clear',
-                       style: 'destructive',
-                       onPress: async () => {
-                         try {
-                           await SiriShortcutsService.clearAllShortcuts();
-                           Alert.alert(
-                             'Shortcuts Cleared',
-                             'All Siri shortcuts have been cleared.'
-                           );
-                         } catch (error) {
-                           Alert.alert(
-                             'Error',
-                             'Failed to clear shortcuts. Please try again.'
-                           );
-                         }
-                       }
-                     }
-                   ]
-                 );
-               }}
-             />
-           </Card>
-          </ScrollView> */}
+          <Text style={styles.sectionTitle}>SIRI SHORTCUTS</Text>
+          <Card style={styles.sectionCard}>
+            <SettingItem
+              icon="mic"
+              title="Donate All Shortcuts"
+              subtitle="Make all actions available to Siri"
+              onPress={async () => {
+                try {
+                  await SiriShortcutsService.donateAllShortcuts();
+                  Alert.alert(
+                    'Shortcuts Donated',
+                    'All Siri shortcuts have been donated successfully. You can now use Siri to perform actions in Thoughtmarks.'
+                  );
+                } catch (error) {
+                  Alert.alert(
+                    'Error',
+                    'Failed to donate shortcuts. Please try again.'
+                  );
+                }
+              }}
+            />
+            <SettingItem
+              icon="trash-outline"
+              title="Clear All Shortcuts"
+              subtitle="Remove all Siri shortcuts"
+              onPress={async () => {
+                Alert.alert(
+                  'Clear Shortcuts',
+                  'Are you sure you want to clear all Siri shortcuts?',
+                  [
+                    { text: 'Cancel', style: 'cancel' },
+                    {
+                      text: 'Clear',
+                      style: 'destructive',
+                      onPress: async () => {
+                        try {
+                          await SiriShortcutsService.clearAllShortcuts();
+                          Alert.alert(
+                            'Shortcuts Cleared',
+                            'All Siri shortcuts have been cleared.'
+                          );
+                        } catch (error) {
+                          Alert.alert(
+                            'Error',
+                            'Failed to clear shortcuts. Please try again.'
+                          );
+                        }
+                      }
+                    }
+                  ]
+                );
+              }}
+            />
+          </Card>
+        </ScrollView> */}
 
         {/* Account Actions */}
         <ScrollView style={styles.section}>
@@ -641,15 +641,15 @@ export const SettingsScreen: React.FC = () => {
               title="Sign Out"
               subtitle="Sign out of your account"
               onPress={handleSignOut}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="trash"
               title="Delete Account"
               subtitle="Permanently delete your account"
               onPress={handleDeleteAccount}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
@@ -662,29 +662,29 @@ export const SettingsScreen: React.FC = () => {
               title="Version"
               subtitle="1.0.0"
               showArrow={false}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
             <SettingItem
               icon="code-slash"
               title="Build"
               subtitle="2024.1.0"
               showArrow={false}
-              tokens={tokens} />
-
+              tokens={tokens}
+            />
           </Card>
         </ScrollView>
 
         {/* Admin Section - Only show for admin users */}
-        {(user?.email?.includes('admin') || user?.isAdmin) &&
-        <ScrollView style={styles.section}>
+        {(user?.email?.includes('admin') || user?.isAdmin) && (
+          <ScrollView style={styles.section}>
             <Text style={styles.sectionTitle}>Administration</Text>
             <TouchableOpacity
-            style={styles.settingItem}
-            onPress={() => navigation.navigate('AdminDashboard')}
-            accessibilityRole="button"
-            accessible={true}
-            accessibilityLabel="Button">
-
+              style={styles.settingItem}
+              onPress={() => navigation.navigate('AdminDashboard')}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+            >
               <ScrollView style={styles.settingLeft}>
                 <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
@@ -692,38 +692,38 @@ export const SettingsScreen: React.FC = () => {
               <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </ScrollView>
-        }
+        )}
       </ScrollView>
 
       {/* Siri Dialog */}
-      {showSiriDialog &&
-      <ScrollView style={styles.modalOverlay}>
+      {showSiriDialog && (
+        <ScrollView style={styles.modalOverlay}>
           <ScrollView style={styles.modalContent}>
             <Text style={styles.modalTitle}>Customize Siri Phrase</Text>
             <Text style={styles.modalSubtitle}>
               Set a custom phrase for Siri to add thoughtmarks
             </Text>
             <TextInput
-            style={styles.modalInput}
-            value={tempSiriPhrase}
-            onChangeText={setTempSiriPhrase}
-            placeholder="Enter your Siri phrase"
-            placeholderTextColor={tokens.colors.textSecondary ?? '#666'} />
-
+              style={styles.modalInput}
+              value={tempSiriPhrase}
+              onChangeText={setTempSiriPhrase}
+              placeholder="Enter your Siri phrase"
+              placeholderTextColor={tokens.colors.textSecondary ?? '#666'}
+            />
             <ScrollView style={styles.modalButtons}>
               <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => setShowSiriDialog(false)}
-              accessibilityRole="button"
-              accessible={true}
-              accessibilityLabel="Button">
-
+                style={styles.modalButton}
+                onPress={() => setShowSiriDialog(false)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+              >
                 <Text style={styles.modalButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
-              style={[styles.modalButton, styles.modalButtonPrimary]}
-              onPress={handleSiriPhraseSave}
-              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+                style={[styles.modalButton, styles.modalButtonPrimary]}
+                onPress={handleSiriPhraseSave}
+               accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                 <Text style={[styles.modalButtonText, styles.modalButtonTextPrimary]}>
                   Save
                 </Text>
@@ -731,7 +731,7 @@ export const SettingsScreen: React.FC = () => {
             </ScrollView>
           </ScrollView>
         </ScrollView>
-      }
-    </ScrollView>);
-
-};
+      )}
+    </ScrollView>
+  );
+}; 

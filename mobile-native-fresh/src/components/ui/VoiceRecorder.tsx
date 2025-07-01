@@ -16,6 +16,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useThoughtmarks } from '../../features/home/hooks/useThoughtmarks';
 import { useBins } from '../../features/home/hooks/useBins';
+import { AutoRoleView } from './AutoRoleView';
 
 interface VoiceRecorderProps {
   isVisible: boolean;
@@ -308,9 +309,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           title: 'Now listening...',
           message: transcript || (Voice ? 'Tell me about your idea, task, or thought. I\'ll capture and organize it for you.' : 'Recording in progress...'),
           icon: (
-            <View style={styles.recordingIcon}>
+            <AutoRoleView style={styles.recordingIcon}>
               <Ionicons name="mic" size={32} color="#FFFFFF" />
-            </View>
+            </AutoRoleView>
           ),
           showCancel: true,
         };
@@ -326,9 +327,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           title: 'Saved!',
           message: 'Your voice note has been saved successfully',
           icon: (
-            <View style={styles.successIcon}>
+            <AutoRoleView style={styles.successIcon}>
               <Ionicons name="checkmark" size={32} color="#FFFFFF" />
-            </View>
+            </AutoRoleView>
           ),
           showCancel: false,
         };
@@ -487,15 +488,15 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       animationType="fade"
       onRequestClose={cancelRecording}
      accessible={false} accessibilityLabel="Modal">
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
-          <View style={styles.header}>
-            <View style={{ width: 40 }} />
+      <AutoRoleView style={styles.modalOverlay}>
+        <AutoRoleView role="main" accessibilityRole="none" style={styles.modalContent}>
+          <AutoRoleView role="header" accessibilityRole="header" style={styles.header}>
+            <AutoRoleView style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
             <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons name="close" size={24} color={designTokens.colors.textSecondary} />
             </TouchableOpacity>
-          </View>
+          </AutoRoleView>
 
           <Text style={styles.title}>Record Your Thought</Text>
           
@@ -524,9 +525,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           </Text>
 
           {transcript ? (
-            <View style={styles.transcriptContainer}>
+            <AutoRoleView role="group" accessibilityRole="none" style={styles.transcriptContainer}>
               <Text style={styles.transcriptText}>{transcript}</Text>
-            </View>
+            </AutoRoleView>
           ) : (
             <Text style={styles.messageText}>
               {isProcessing
@@ -552,7 +553,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           </Text>
 
           {transcript && (
-            <View style={styles.buttonRow}>
+            <AutoRoleView style={styles.buttonRow}>
               <TouchableOpacity 
                 style={styles.actionButton} 
                 onPress={() => {
@@ -576,10 +577,10 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 <Ionicons name="refresh" size={16} color={designTokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>
-            </View>
+            </AutoRoleView>
           )}
-        </View>
-      </View>
+        </AutoRoleView>
+      </AutoRoleView>
     </Modal>
   );
 }; 

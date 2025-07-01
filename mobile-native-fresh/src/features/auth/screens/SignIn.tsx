@@ -16,6 +16,7 @@ import { LoginForm } from '../components/LoginForm';
 import { OAuthButton } from '../components/OAuthButton';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const logo = require('../../../../assets/logo.png');
 
@@ -72,29 +73,29 @@ export const SignInScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
       <KeyboardAvoidingView
         style={styles.keyboard}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <View style={styles.logoContainer}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.logoContainer}>
           <Image source={logo} style={styles.logo} resizeMode="contain" />
-        </View>
+        </AutoRoleView>
 
         <Text style={styles.title}>WELCOME TO THOUGHTMARKS!</Text>
         <Text style={styles.subtitle}>please sign in to continue</Text>
 
-        <View style={styles.formContainer}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.formContainer}>
           <LoginForm
             onSubmit={handleEmailSignIn}
             loading={isLoading || loading}
           />
 
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
+          <AutoRoleView style={styles.divider}>
+            <AutoRoleView style={styles.dividerLine} />
             <Text style={styles.dividerText}>OR</Text>
-            <View style={styles.dividerLine} />
-          </View>
+            <AutoRoleView style={styles.dividerLine} />
+          </AutoRoleView>
 
           <OAuthButton
             provider="google"
@@ -109,7 +110,7 @@ export const SignInScreen: React.FC = () => {
           )}
 
           {/* Demo Login Button */}
-          <View style={{ marginTop: 12 }}>
+          <AutoRoleView style={{ marginTop: 12 }}>
             <TouchableOpacity
               style={styles.primaryButton}
               onPress={handleDemoSignIn}
@@ -117,10 +118,10 @@ export const SignInScreen: React.FC = () => {
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Text style={styles.primaryButtonText}>Demo Login</Text>
             </TouchableOpacity>
-          </View>
-        </View>
+          </AutoRoleView>
+        </AutoRoleView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </AutoRoleView>
   );
 };
 

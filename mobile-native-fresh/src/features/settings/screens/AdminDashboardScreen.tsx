@@ -12,6 +12,7 @@ import { useTheme } from '../../../theme/ThemeProvider';
 import { Button } from '../../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../../components/ui/Card';
 import { useAuth } from '../../auth/hooks/useAuth';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const { user } = useAuth();
@@ -116,15 +117,15 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
 
   if (!isAdmin) {
     return (
-      <View style={styles.container}>
-        <View style={styles.accessDenied}>
+      <ScrollView style={styles.container}>
+        <ScrollView style={styles.accessDenied}>
           <Ionicons name="lock-closed" size={48} color={getIconColor('danger')} />
           <Text style={styles.accessDeniedTitle}>Access Denied</Text>
           <Text style={styles.accessDeniedText}>
             This area is restricted to administrators only.
           </Text>
-        </View>
-      </View>
+        </ScrollView>
+      </ScrollView>
     );
   }
 
@@ -159,10 +160,10 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={styles.header}>
+        <ScrollView style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
@@ -173,8 +174,8 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
           <Ionicons name="arrow-back" size={24} color={getIconColor('text')} />
         </TouchableOpacity>
           <Text style={styles.title}>Admin Dashboard</Text>
-          <View style={styles.headerRight} />
-        </View>
+          <ScrollView style={styles.headerRight} />
+        </ScrollView>
 
         {/* Admin Info */}
         <Card variant="elevated" style={styles.adminInfoCard}>
@@ -194,7 +195,7 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
             <Text style={styles.sectionTitle}>Development Tools</Text>
           </CardHeader>
           <CardContent>
-            <View style={styles.buttonGrid}>
+            <ScrollView style={styles.buttonGrid}>
               <Button
                 variant="outline"
                 onPress={handleDesignSystemDemo}
@@ -222,10 +223,10 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
                 leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
               ><Text>Import Data</Text></Button>
-            </View>
+            </ScrollView>
           </CardContent>
         </Card>
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 }; 

@@ -5,6 +5,7 @@ import { useTheme } from '../../../theme/ThemeProvider';
 import { useStoreKit } from '../../settings/hooks/useStoreKit';
 import { Button } from '../../../components/ui/Button';
 import { Card } from '../../../components/ui/Card';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const StoreKitTestCard: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -62,7 +63,7 @@ export const StoreKitTestCard: React.FC = () => {
         Products: {products.length} | Loading: {loading ? 'Yes' : 'No'}
       </Text>
       
-      <View style={styles.buttonContainer}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.buttonContainer}>
         <Button 
           style={styles.button}
           onPress={loadProducts}
@@ -92,7 +93,7 @@ export const StoreKitTestCard: React.FC = () => {
             Restore
           </Text>
         </Button>
-      </View>
+      </AutoRoleView>
     </Card>
   );
 }; 

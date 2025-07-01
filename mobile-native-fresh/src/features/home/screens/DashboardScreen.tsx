@@ -30,6 +30,7 @@ import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
 import { Text as CustomText } from '../../../components/ui/Text';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const { width } = Dimensions.get('window');
 
@@ -343,15 +344,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       
       case 'recent-thoughtmarks':
         return (
-          <View>
+          <ScrollView>
             {/* Tags Filter - Moved here from separate section */}
-            <View style={styles.tagsContainer}>
-              <View style={styles.tagsHeader}>
+            <ScrollView style={styles.tagsContainer}>
+              <ScrollView style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                   <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
-              </View>
+              </ScrollView>
               <ScrollView 
                 horizontal 
                 showsHorizontalScrollIndicator={false}
@@ -396,12 +397,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   </TouchableOpacity>
                 ))}
               </ScrollView>
-            </View>
+            </ScrollView>
 
             {/* Recent Thoughtmarks List */}
             {recentThoughtmarks.length > 0 ? (
               <>
-                <View style={styles.thoughtmarksList}>
+                <ScrollView style={styles.thoughtmarksList}>
                   {recentThoughtmarks.map((thoughtmark, idx, arr) => (
                     <ThoughtmarkCard
                       key={thoughtmark.id}
@@ -413,7 +414,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
                     />
                   ))}
-                </View>
+                </ScrollView>
                 
                 {/* View More Card - Reduced height */}
                 <TouchableOpacity
@@ -429,21 +430,21 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 </TouchableOpacity>
               </>
             ) : (
-              <View style={styles.emptyState}>
+              <ScrollView style={styles.emptyState}>
                 <Text style={styles.emptyStateText}>
                   {localTagFilter === 'all' 
                     ? 'No thoughtmarks yet. Tap the button below to create your first one!' 
                     : `No thoughtmarks with "${localTagFilter}" tag found.`
                   }
                 </Text>
-              </View>
+              </ScrollView>
             )}
-          </View>
+          </ScrollView>
         );
       
       case 'tasks':
         return activeTasks.length > 0 ? (
-          <View style={styles.tasksList}>
+          <ScrollView style={styles.tasksList}>
             {activeTasks.slice(0, 5).map((task, idx, arr) => (
               <TaskCard
                 key={task.id}
@@ -453,12 +454,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
               />
             ))}
-          </View>
+          </ScrollView>
         ) : null;
       
       case 'bins':
         return (
-          <View style={styles.binsContainer}>
+          <ScrollView style={styles.binsContainer}>
             {binsLoading ? (
               <ScrollView 
                 horizontal 
@@ -466,9 +467,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 contentContainerStyle={styles.binsHorizontalContent}
               >
                 {Array.from({ length: 6 }).map((_, i) => (
-                  <View key={i} style={styles.binCardSkeletonHorizontal}>
+                  <ScrollView key={i} style={styles.binCardSkeletonHorizontal}>
                     <Text>Loading...</Text>
-                  </View>
+                  </ScrollView>
                 ))}
               </ScrollView>
             ) : (
@@ -494,19 +495,19 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
                       >
-                        <View style={styles.binCardContentHorizontal}>
+                        <ScrollView style={styles.binCardContentHorizontal}>
                           <Text style={styles.binCardNameHorizontal}>{bin.name || 'Unnamed Bin'}</Text>
                           <Text style={styles.binCardCountHorizontal}>
                             {bin?.thoughtmarkCount || 0}
                           </Text>
-                        </View>
+                        </ScrollView>
                       </TouchableOpacity>
                     );
                   })}
                 </ScrollView>
                 
                 {/* Special sections below horizontal scroll */}
-                <View style={styles.specialBinsContainer}>
+                <ScrollView style={styles.specialBinsContainer}>
                   {/* New Bin Button - Moved to specialty section */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
@@ -515,10 +516,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Create new bin"
                   >
-                    <View style={styles.specialBinCardContent}>
+                    <ScrollView style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>New bin</Text>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
-                    </View>
+                    </ScrollView>
                   </TouchableOpacity>
                   
                   {/* Saved to Sort Later */}
@@ -534,12 +535,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Saved to sort later"
                   >
-                    <View style={styles.specialBinCardContent}>
+                    <ScrollView style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>Saved to sort later</Text>
                       <Text style={styles.specialBinCardCount}>
                         {bins.find((b: any) => b.name === 'Sort Later')?.thoughtmarkCount || 0}
                       </Text>
-                    </View>
+                    </ScrollView>
                   </TouchableOpacity>
                   
                   {/* Archive */}
@@ -550,15 +551,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="View archive"
                   >
-                    <View style={styles.archiveCardContent}>
+                    <ScrollView style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View archive</Text>
                       <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
-                    </View>
+                    </ScrollView>
                   </TouchableOpacity>
-                </View>
+                </ScrollView>
               </>
             )}
-          </View>
+          </ScrollView>
         );
       
       default:
@@ -956,9 +957,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   // Show loading screen while checking auth
   if (loading) {
     return (
-      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+      <ScrollView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
         <Text style={styles.loadingText}>Loading...</Text>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -969,22 +970,22 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Fallback component for when data is not loaded
   const renderFallbackContent = () => (
-    <View style={styles.emptyState}>
+    <ScrollView style={styles.emptyState}>
       <Text style={styles.emptyStateText}>
         {thoughtmarksLoading || binsLoading ? 'Loading content...' : 'No content available'}
       </Text>
-    </View>
+    </ScrollView>
   );
 
   // Check if we should render fallback
   if (shouldRenderFallback) {
     return (
-      <View><Text>{renderFallbackContent()}</Text></View>
+      <ScrollView><Text>{renderFallbackContent()}</Text></ScrollView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <OnboardingModal
         visible={showOnboarding}
         onClose={handleOnboardingClose}
@@ -995,8 +996,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.headerLeft}>
+        <ScrollView style={styles.header}>
+          <ScrollView style={styles.headerLeft}>
             <Image
               source={require('../../../../assets/logo.png')}
               style={{
@@ -1008,12 +1009,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               resizeMode="contain"
               accessibilityLabel="Thoughtmarks Logo"
             />
-            <View style={styles.titleContainer}>
+            <ScrollView style={styles.titleContainer}>
               <CustomText variant="title" numberOfLines={1}><Text>THOUGHTMARKS</Text></CustomText>
               <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
-            </View>
-          </View>
-          <View style={styles.headerRight}>
+            </ScrollView>
+          </ScrollView>
+          <ScrollView style={styles.headerRight}>
             <Animated.View style={{ transform: [{ scale: infoButtonScale }] }}>
               <TouchableOpacity
                 style={styles.infoButton}
@@ -1034,25 +1035,25 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             >
               <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
-          </View>
-        </View>
+          </ScrollView>
+        </ScrollView>
 
         {/* Reorder Hint Tooltip */}
         {showReorderHint && (
           <Animated.View style={[styles.reorderTooltip, { opacity: tooltipOpacity }]}>
-            <View style={styles.tooltipArrow} />
+            <ScrollView style={styles.tooltipArrow} />
             <Text style={styles.reorderTooltipText}>Long press and drag sections to rearrange</Text>
           </Animated.View>
         )}
 
         {/* AI Tools Card - Moved to top */}
-        <View style={styles.aiToolsContainer}>
+        <ScrollView style={styles.aiToolsContainer}>
           <AIToolsCard 
             title="AI Tools"
             subtitle="Unlock AI-powered insights and recommendations"
             onPress={handleAIToolsPress} 
           />
-        </View>
+        </ScrollView>
 
         {/* Draggable Sections */}
         {sections.map((section, index) => (
@@ -1096,6 +1097,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         currentRoute="Dashboard"
         onCreateNew={handleCreateNew}
       />
-    </View>
+    </ScrollView>
   );
 }; 

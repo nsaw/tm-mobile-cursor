@@ -1,4 +1,5 @@
 import { TextStyle, ViewStyle } from 'react-native';
+import { AutoRoleView } from '../components/ui/AutoRoleView';
 
 export interface TextVariant extends TextStyle {
   fontSize: number;

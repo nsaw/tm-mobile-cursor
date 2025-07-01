@@ -61,42 +61,43 @@ import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
 import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
 
 import { RootStackParamList } from './types';
+import { AutoRoleView } from '../components/ui/AutoRoleView';
 
 // Placeholder screens - to be implemented
 const BinDetailScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bin Detail Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const VoiceRecordScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Voice Record Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const TasksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Tasks Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const BinsScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bins Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const ThoughtmarksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const ArchiveScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView role="main" accessibilityRole="none" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Archive Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 // Loading Screen Wrapper for React Navigation

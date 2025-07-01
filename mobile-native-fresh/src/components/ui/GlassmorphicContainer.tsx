@@ -1,6 +1,7 @@
 import { Text , StyleSheet, ViewStyle } from 'react-native';
 import React from 'react';
 import { BlurView } from 'expo-blur';
+import { AutoRoleView } from './AutoRoleView';
 
 interface GlassmorphicContainerProps {
   children: React.ReactNode;

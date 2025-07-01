@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, SectionHeader } from '../../../components/ui/Text';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface AIToolsCardProps {
   onPress: () => void;
@@ -66,12 +67,12 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7} accessibilityRole="button" accessible={true} accessibilityLabel="AI Tools">
-      <View style={styles.content}>
-        <View>
+      <AutoRoleView role="main" accessibilityRole="none" style={styles.content}>
+        <AutoRoleView>
           <SectionHeader style={styles.title}>{title}</SectionHeader>
           <Text variant="body" style={styles.subtitle}>{subtitle}</Text>
-        </View>
-      </View>
+        </AutoRoleView>
+      </AutoRoleView>
       <MaterialCommunityIcons name="crown" size={20} style={styles.crownIcon} />
     </TouchableOpacity>
   );

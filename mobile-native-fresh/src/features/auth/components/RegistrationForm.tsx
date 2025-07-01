@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { useTheme } from '../../../theme/ThemeProvider'
 import { colors, spacing, typography } from '../../../theme/theme'
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface RegistrationFormProps {
   onSubmit: (
@@ -145,9 +146,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <View style={[styles.inputContainer, styles.halfWidth]}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+      <AutoRoleView style={styles.row}>
+        <AutoRoleView role="group" accessibilityRole="none" style={[styles.inputContainer, styles.halfWidth]}>
           <Text style={styles.label}>First Name *</Text>
           <TextInput
             style={[styles.input, errors.firstName && styles.inputError]}
@@ -162,9 +163,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           {errors.firstName && (
             <Text style={styles.errorText}>{errors.firstName}</Text>
           )}
-        </View>
+        </AutoRoleView>
 
-        <View style={[styles.inputContainer, styles.halfWidth]}>
+        <AutoRoleView role="group" accessibilityRole="none" style={[styles.inputContainer, styles.halfWidth]}>
           <Text style={styles.label}>Last Name</Text>
           <TextInput
             style={styles.input}
@@ -176,10 +177,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             autoCapitalize="words"
             editable={!loading}
           />
-        </View>
-      </View>
+        </AutoRoleView>
+      </AutoRoleView>
 
-      <View style={styles.inputContainer}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.inputContainer}>
         <Text style={styles.label}>Email *</Text>
         <TextInput
           style={[styles.input, errors.email && styles.inputError]}
@@ -196,11 +197,11 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         {errors.email && (
           <Text style={styles.errorText}>{errors.email}</Text>
         )}
-      </View>
+      </AutoRoleView>
 
-      <View style={styles.inputContainer}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.inputContainer}>
         <Text style={styles.label}>Password *</Text>
-        <View style={[styles.passwordContainer, errors.password && styles.inputError]}>
+        <AutoRoleView role="group" accessibilityRole="none" style={[styles.passwordContainer, errors.password && styles.inputError]}>
           <TextInput
             style={styles.passwordInput}
             value={password}
@@ -226,13 +227,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
               color={colors.subtext} 
             />
           </TouchableOpacity>
-        </View>
+        </AutoRoleView>
         {errors.password && (
           <Text style={styles.errorText}>{errors.password}</Text>
         )}
-      </View>
+      </AutoRoleView>
 
-      <View style={styles.inputContainer}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.inputContainer}>
         <Text style={styles.label}>Confirm Password *</Text>
         <TextInput
           style={[styles.input, errors.confirmPassword && styles.inputError]}
@@ -249,7 +250,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         {errors.confirmPassword && (
           <Text style={styles.errorText}>{errors.confirmPassword}</Text>
         )}
-      </View>
+      </AutoRoleView>
 
       <TouchableOpacity
         style={[
@@ -265,6 +266,6 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <Text style={styles.submitButtonText}>Create Account</Text>
         )}
       </TouchableOpacity>
-    </View>
+    </AutoRoleView>
   )
 }

@@ -5,19 +5,20 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const ThemeScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   return (
-    <View style={{ 
+    <AutoRoleView style={{ 
       flex: 1, 
       justifyContent: 'center', 
       alignItems: 'center', 
       backgroundColor: designTokens.colors.background, 
       padding: designTokens.spacing.xl 
     }}>
-      <View style={{ 
+      <AutoRoleView style={{ 
         width: 64, 
         height: 64, 
         borderRadius: 32, 
@@ -27,13 +28,13 @@ const ThemeScreen: React.FC = () => {
         marginBottom: designTokens.spacing.lg 
       }}>
         <MaterialCommunityIcons name="palette-outline" size={32} color={designTokens.colors.background} />
-      </View>
+      </AutoRoleView>
       
       <Heading><Text>Theme</Text></Heading>
       <Caption><Text>Customize the appearance of your app with different themes and color schemes.</Text></Caption>
       
       <Button><Text>Coming Soon</Text></Button>
-    </View>
+    </AutoRoleView>
   );
 };
 

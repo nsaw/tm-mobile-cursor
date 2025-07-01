@@ -6,6 +6,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 
 import { Text } from './Text';
 import { Button } from './Button';
+import { AutoRoleView } from './AutoRoleView';
 
 interface PremiumFeatureWrapperProps {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
   }
 
   return (
-    <View style={styles.overlay}>
+    <AutoRoleView style={styles.overlay}>
       <Text variant="heading" size="lg" style={styles.title}>
         Premium Feature
       </Text>
@@ -45,7 +46,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
           Upgrade Now
         </Text>
       </Button>
-    </View>
+    </AutoRoleView>
   );
 };
 

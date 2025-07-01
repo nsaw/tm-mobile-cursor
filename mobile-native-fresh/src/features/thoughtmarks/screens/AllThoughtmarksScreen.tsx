@@ -19,6 +19,7 @@ import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { RootStackParamList } from '../../../navigation/types';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const AllThoughtmarksScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -325,7 +326,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
   );
 
   const renderBinFilter = () => (
-    <View style={styles.binFilterContainer}>
+    <ScrollView style={styles.binFilterContainer}>
       <Text style={styles.filterLabel}>Filter by Bin:</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <TouchableOpacity
@@ -360,11 +361,11 @@ export const AllThoughtmarksScreen: React.FC = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Header */}
       <ModernHeader
         title={getHeaderTitle()}
@@ -373,19 +374,19 @@ export const AllThoughtmarksScreen: React.FC = () => {
       />
 
       {/* Controls */}
-      <View style={styles.controls}>
+      <ScrollView style={styles.controls}>
         {/* Compact Filter Row */}
-        <View style={styles.filterRow}>
+        <ScrollView style={styles.filterRow}>
           {/* Sort Dropdown */}
-          <View style={styles.filterDropdown}>
+          <ScrollView style={styles.filterDropdown}>
             <Text style={styles.filterLabel}>Sort</Text>
-            <View><Text>{renderSortButton('date', 'Date')}
+            <ScrollView><Text>{renderSortButton('date', 'Date')}
               {renderSortButton('title', 'Title')}
-              {renderSortButton('pinned', 'Pinned')}</Text></View>
-          </View>
+              {renderSortButton('pinned', 'Pinned')}</Text></ScrollView>
+          </ScrollView>
 
           {/* Bin Filter Dropdown */}
-          <View style={styles.filterDropdown}>
+          <ScrollView style={styles.filterDropdown}>
             <Text style={styles.filterLabel}>Bin</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
@@ -414,10 +415,10 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
-          </View>
+          </ScrollView>
 
           {/* Tag Filter Dropdown */}
-          <View style={styles.filterDropdown}>
+          <ScrollView style={styles.filterDropdown}>
             <Text style={styles.filterLabel}>Tag</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
@@ -452,17 +453,17 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
-          </View>
-        </View>
-      </View>
+          </ScrollView>
+        </ScrollView>
+      </ScrollView>
 
       {/* Thoughtmarks List */}
-      <View style={styles.listContainer}>
+      <ScrollView style={styles.listContainer}>
         {loading ? (
-          <View style={styles.loadingContainer}>
+          <ScrollView style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={designTokens.colors.accent} />
             <Text style={styles.loadingText}>Loading thoughtmarks...</Text>
-          </View>
+          </ScrollView>
         ) : (
           <FlatList
             data={sortedThoughtmarks}
@@ -485,7 +486,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
               />
             }
             ListEmptyComponent={
-              <View style={styles.emptyState}>
+              <ScrollView style={styles.emptyState}>
                 <Ionicons name="document-text" size={64} color={designTokens.colors.textSecondary} />
                 <Text style={styles.emptyStateTitle}>No thoughtmarks found</Text>
                 <Text style={styles.emptyStateSubtitle}>
@@ -503,11 +504,11 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>
                 )}
-              </View>
+              </ScrollView>
             }
           />
         )}
-      </View>
+      </ScrollView>
 
       {/* Bottom Navigation */}
       <BottomNav
@@ -517,6 +518,6 @@ export const AllThoughtmarksScreen: React.FC = () => {
         currentRoute="/all-thoughtmarks"
         onCreateNew={handleCreateThoughtmark}
       />
-    </View>
+    </ScrollView>
   );
 }; 

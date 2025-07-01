@@ -7,6 +7,7 @@ import {
 import type { Thoughtmark } from '../../../types';
 
 import { ThoughtmarkCard } from './ThoughtmarkCard';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface ThoughtmarkListProps {
   thoughtmarks: Thoughtmark[];

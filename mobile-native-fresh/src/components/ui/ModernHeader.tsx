@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../theme/ThemeProvider';
 
 import { Text } from './Text';
+import { AutoRoleView } from './AutoRoleView';
 
 interface ModernHeaderProps {
   title: string;
@@ -31,7 +32,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   const { tokens: designTokens } = useTheme();
 
   return (
-    <View style={{
+    <AutoRoleView style={{
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderBottomWidth: 1,
       borderBottomColor: designTokens.colors.divider,
@@ -54,13 +55,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
         },
       }),
     }}>
-      <View style={{
+      <AutoRoleView style={{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         minHeight: 32,
       }}>
-        <View style={{
+        <AutoRoleView style={{
           flexDirection: 'row',
           alignItems: 'center',
           flex: 1,
@@ -78,7 +79,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               <Ionicons name="arrow-back" size={20} color={designTokens.colors.text} />
             </TouchableOpacity>
           )}
-          <View style={{ flex: 1 }}>
+          <AutoRoleView style={{ flex: 1 }}>
             <Text 
               variant="heading2" 
               style={{ 
@@ -99,8 +100,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 {subtitle}
               </Text>
             )}
-          </View>
-        </View>
+          </AutoRoleView>
+        </AutoRoleView>
         
         {rightAction && (
           <TouchableOpacity 
@@ -114,7 +115,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Ionicons name={rightAction.icon as any} size={20} color={designTokens.colors.text} />
           </TouchableOpacity>
         )}
-      </View>
-    </View>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 }; 

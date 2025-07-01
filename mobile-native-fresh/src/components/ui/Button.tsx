@@ -5,6 +5,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
 
 import { ButtonText } from './Text';
+import { AutoRoleView } from './AutoRoleView';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'brand';

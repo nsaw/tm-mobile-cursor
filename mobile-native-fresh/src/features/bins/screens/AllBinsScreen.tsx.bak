@@ -31,7 +31,7 @@ export const AllBinsScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
   const { bins, loading, fetchBins } = useBins();
   const { thoughtmarks } = useThoughtmarks();
-
+  
   const [refreshing, setRefreshing] = useState(false);
   const [sortBy, setSortBy] = useState<SortType>('name');
 
@@ -46,7 +46,7 @@ export const AllBinsScreen: React.FC = () => {
   // Get thoughtmark count for each bin
   const binsWithCount = bins.map((bin: any) => ({
     ...bin,
-    thoughtmarkCount: thoughtmarks.filter((t: any) => t.binId === bin.id).length
+    thoughtmarkCount: thoughtmarks.filter((t: any) => t.binId === bin.id).length,
   }));
 
   // Sort bins
@@ -69,10 +69,10 @@ export const AllBinsScreen: React.FC = () => {
 
   const handleBinPress = (bin: any) => {
     // Navigate to All Thoughtmarks filtered by this bin
-    navigation.navigate('AllThoughtmarks', {
+    navigation.navigate('AllThoughtmarks', { 
       filter: 'bin',
       binId: bin.id,
-      binName: bin.name
+      binName: bin.name 
     });
   };
 
@@ -108,120 +108,120 @@ export const AllBinsScreen: React.FC = () => {
     navigation.navigate('CreateBin' as any);
   };
 
-  const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) =>
-  <TouchableOpacity
-    style={{
-      paddingHorizontal: designTokens.spacing.md,
-      paddingVertical: designTokens.spacing.sm,
-      borderRadius: designTokens.radius.sm,
-      backgroundColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.backgroundSecondary,
-      borderWidth: 1,
-      borderColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.border
-    }}
-    onPress={() => setSortBy(sortType as SortType)}
-    accessibilityRole="button"
-    accessible={true}
-    accessibilityLabel={sortType}>
-
-      <Text
-      variant="body"
+  const renderSortButton = (sortType: 'name' | 'count' | 'date', label: string) => (
+    <TouchableOpacity
       style={{
-        color: sortBy === sortType ? designTokens.colors.background : designTokens.colors.text,
-        fontWeight: '500'
-      }}>
-
+        paddingHorizontal: designTokens.spacing.md,
+        paddingVertical: designTokens.spacing.sm,
+        borderRadius: designTokens.radius.sm,
+        backgroundColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.backgroundSecondary,
+        borderWidth: 1,
+        borderColor: sortBy === sortType ? designTokens.colors.accent : designTokens.colors.border,
+      }}
+      onPress={() => setSortBy(sortType as SortType)}
+      accessibilityRole="button"
+      accessible={true}
+      accessibilityLabel={sortType}
+          >
+      <Text 
+        variant="body" 
+        style={{
+          color: sortBy === sortType ? designTokens.colors.background : designTokens.colors.text,
+          fontWeight: '500',
+        }}
+      >
         {label}
       </Text>
-    </TouchableOpacity>;
+    </TouchableOpacity>
+  );
 
-
-  const renderBinStats = () =>
-  <ScrollView style={{
-
-
-  }} contentContainerStyle={{ paddingHorizontal: designTokens.spacing.lg, marginBottom: designTokens.spacing.md }}>
+  const renderBinStats = () => (
+    <ScrollView style={{
+      paddingHorizontal: designTokens.spacing.lg,
+      marginBottom: designTokens.spacing.md,
+    }}>
       <Card style={{ padding: designTokens.spacing.lg }}>
         <ScrollView style={{
-
-
-      }} contentContainerStyle={{ flexDirection: 'row', alignItems: 'center' }}>
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
           <ScrollView style={{
-
-          flex: 1
-        }} contentContainerStyle={{ alignItems: 'center' }}>
-            <Text
-            variant="heading"
-            size="xl"
-            style={{
-              color: designTokens.colors.accent,
-              marginBottom: designTokens.spacing.xs
-            }}>
-
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: designTokens.colors.accent,
+                marginBottom: designTokens.spacing.xs,
+              }}
+            >
               {bins.length}
             </Text>
-            <Text
-            variant="caption"
-            style={{ textAlign: 'center' }}>
-
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
               Total Bins
             </Text>
           </ScrollView>
           <ScrollView style={{
-          width: 1,
-          backgroundColor: designTokens.colors.border,
-          marginHorizontal: designTokens.spacing.md
-        }} />
+            width: 1,
+            backgroundColor: designTokens.colors.border,
+            marginHorizontal: designTokens.spacing.md,
+          }} />
           <ScrollView style={{
-
-          flex: 1
-        }} contentContainerStyle={{ alignItems: 'center' }}>
-            <Text
-            variant="heading"
-            size="xl"
-            style={{
-              color: designTokens.colors.accent,
-              marginBottom: designTokens.spacing.xs
-            }}>
-
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: designTokens.colors.accent,
+                marginBottom: designTokens.spacing.xs,
+              }}
+            >
               {thoughtmarks.length}
             </Text>
-            <Text
-            variant="caption"
-            style={{ textAlign: 'center' }}>
-
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
               Total Thoughtmarks
             </Text>
           </ScrollView>
           <ScrollView style={{
-          width: 1,
-          backgroundColor: designTokens.colors.border,
-          marginHorizontal: designTokens.spacing.md
-        }} />
+            width: 1,
+            backgroundColor: designTokens.colors.border,
+            marginHorizontal: designTokens.spacing.md,
+          }} />
           <ScrollView style={{
-
-          flex: 1
-        }} contentContainerStyle={{ alignItems: 'center' }}>
-            <Text
-            variant="heading"
-            size="xl"
-            style={{
-              color: designTokens.colors.accent,
-              marginBottom: designTokens.spacing.xs
-            }}>
-
+            alignItems: 'center',
+            flex: 1,
+          }}>
+            <Text 
+              variant="heading" 
+              size="xl"
+              style={{
+                color: designTokens.colors.accent,
+                marginBottom: designTokens.spacing.xs,
+              }}
+            >
               {bins.length > 0 ? Math.round(thoughtmarks.length / bins.length) : 0}
             </Text>
-            <Text
-            variant="caption"
-            style={{ textAlign: 'center' }}>
-
+            <Text 
+              variant="caption" 
+              style={{ textAlign: 'center' }}
+            >
               Avg per Bin
             </Text>
           </ScrollView>
         </ScrollView>
       </Card>
-    </ScrollView>;
-
+    </ScrollView>
+  );
 
   const styles = StyleSheet.create({
     sortButton: {
@@ -231,70 +231,70 @@ export const AllBinsScreen: React.FC = () => {
       backgroundColor: designTokens.colors.backgroundSecondary,
       borderWidth: 1,
       borderColor: designTokens.colors.border,
-      marginRight: designTokens.spacing.sm
+      marginRight: designTokens.spacing.sm,
     },
     sortButtonActive: {
       backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent
+      borderColor: designTokens.colors.accent,
     },
     sortButtonText: {
       fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.text
+      color: designTokens.colors.text,
     },
     sortButtonTextActive: {
-      color: designTokens.colors.background
+      color: designTokens.colors.background,
     },
     sortContainer: {
       paddingHorizontal: designTokens.spacing.lg,
-      marginBottom: designTokens.spacing.md
+      marginBottom: designTokens.spacing.md,
     },
     binCard: {
-      padding: designTokens.spacing.lg
+      padding: designTokens.spacing.lg,
     },
     binIcon: {
       color: designTokens.colors.accent,
-      marginBottom: designTokens.spacing.xs
+      marginBottom: designTokens.spacing.xs,
     },
     binDivider: {
       height: 1,
       backgroundColor: designTokens.colors.border,
-      marginHorizontal: designTokens.spacing.md
+      marginHorizontal: designTokens.spacing.md,
     },
     container: {
       flex: 1,
-      backgroundColor: designTokens.colors.background
+      backgroundColor: designTokens.colors.background,
     },
     header: {
       paddingHorizontal: designTokens.spacing.lg,
-      paddingBottom: designTokens.spacing.md
+      paddingBottom: designTokens.spacing.md,
     },
     headerTitle: {
       fontSize: designTokens.typography.fontSize.xl,
       fontWeight: designTokens.typography.fontWeight.bold,
       color: designTokens.colors.text,
-      marginBottom: designTokens.spacing.sm
+      marginBottom: designTokens.spacing.sm,
     },
     headerSubtitle: {
       fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary
+      color: designTokens.colors.textSecondary,
     },
     content: {
       flex: 1,
-      paddingHorizontal: designTokens.spacing.lg
+      paddingHorizontal: designTokens.spacing.lg,
     },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     emptyContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      paddingHorizontal: designTokens.spacing.lg
+      paddingHorizontal: designTokens.spacing.lg,
     },
     emptyIcon: {
-      marginBottom: designTokens.spacing.md
+      marginBottom: designTokens.spacing.md,
     },
     emptyTitle: {
       fontSize: designTokens.typography.fontSize.xl,
@@ -302,13 +302,13 @@ export const AllBinsScreen: React.FC = () => {
       color: designTokens.colors.text,
       marginTop: designTokens.spacing.md,
       marginBottom: designTokens.spacing.sm,
-      textAlign: 'center'
+      textAlign: 'center',
     },
     emptySubtitle: {
       fontSize: designTokens.typography.fontSize.body,
       color: designTokens.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: designTokens.spacing.lg
+      marginBottom: designTokens.spacing.lg,
     },
     createButton: {
       flexDirection: 'row',
@@ -317,14 +317,14 @@ export const AllBinsScreen: React.FC = () => {
       backgroundColor: designTokens.colors.accent,
       paddingVertical: designTokens.spacing.lg,
       borderRadius: designTokens.radius.md,
-      marginBottom: designTokens.spacing.xl
+      marginBottom: designTokens.spacing.xl,
     },
     createButtonText: {
-      marginLeft: designTokens.spacing.sm
+      marginLeft: designTokens.spacing.sm,
     },
     listContainer: {
-      paddingBottom: designTokens.spacing.xl
-    }
+      paddingBottom: designTokens.spacing.xl,
+    },
   });
 
   return (
@@ -336,13 +336,13 @@ export const AllBinsScreen: React.FC = () => {
 
       {/* Controls */}
       <ScrollView style={styles.sortContainer}>
-        <Text
-          variant="body"
+        <Text 
+          variant="body" 
           style={{
             fontWeight: '600',
-            marginBottom: designTokens.spacing.sm
-          }}>
-
+            marginBottom: designTokens.spacing.sm,
+          }}
+        >
           Sort by:
         </Text>
         <ScrollView><Text>{renderSortButton('name', 'Name')}
@@ -352,55 +352,55 @@ export const AllBinsScreen: React.FC = () => {
 
       {/* Bins List */}
       <ScrollView style={styles.content}>
-        {loading ?
-        <ScrollView style={styles.loadingContainer}>
+        {loading ? (
+          <ScrollView style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={designTokens.colors.accent} />
-            <Text
-            variant="body"
-            style={{
-              marginTop: designTokens.spacing.md
-            }}>
-
+            <Text 
+              variant="body" 
+              style={{
+                marginTop: designTokens.spacing.md,
+              }}
+            >
               Loading bins...
             </Text>
-          </ScrollView> :
-
-        <FlatList
-          data={sortedBins}
-          renderItem={({ item }) =>
-          <TouchableOpacity
-            onPress={() => handleBinPress(item)}
-            accessibilityRole="button"
-            accessible={true}
-            accessibilityLabel="Button">
-
+          </ScrollView>
+        ) : (
+          <FlatList
+            data={sortedBins}
+            renderItem={({ item }) => (
+              <TouchableOpacity 
+                onPress={() => handleBinPress(item)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+              >
                 <BinCard bin={item} onPress={() => handleBinPress(item)} />
               </TouchableOpacity>
-          }
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            colors={[designTokens.colors.accent]}
-            tintColor={designTokens.colors.accent} />
-
-          }
-          ListEmptyComponent={
-          <ScrollView style={styles.emptyContainer}>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={styles.listContainer}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                colors={[designTokens.colors.accent]}
+                tintColor={designTokens.colors.accent}
+              />
+            }
+            ListEmptyComponent={
+              <ScrollView style={styles.emptyContainer}>
                 <Ionicons name="folder" size={64} color={designTokens.colors.textMuted} />
-                <Text
-              variant="heading"
-              style={styles.emptyTitle}>
-
+                <Text 
+                  variant="heading" 
+                  style={styles.emptyTitle}
+                >
                   No bins found
                 </Text>
-                <Text
-              variant="body"
-              style={styles.emptySubtitle}>
-
+                <Text 
+                  variant="body" 
+                  style={styles.emptySubtitle}
+                >
                   Create your first bin to organize your thoughtmarks
                 </Text>
                 <Button variant="primary" onPress={handleCreateBin}>
@@ -408,9 +408,9 @@ export const AllBinsScreen: React.FC = () => {
                   <Text style={styles.createButtonText}>Create Bin</Text>
                 </Button>
               </ScrollView>
-          } />
-
-        }
+            }
+          />
+        )}
       </ScrollView>
 
       <BottomNav
@@ -418,8 +418,8 @@ export const AllBinsScreen: React.FC = () => {
         onVoiceRecord={handleVoiceRecord}
         showCreateButton={true}
         currentRoute="/bins"
-        onCreateNew={handleCreateBin} />
-
-    </ScrollView>);
-
-};
+        onCreateNew={handleCreateBin}
+      />
+    </ScrollView>
+  );
+}; 

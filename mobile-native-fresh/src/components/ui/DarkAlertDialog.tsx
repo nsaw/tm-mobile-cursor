@@ -8,6 +8,7 @@ import { Text ,
 import React from 'react';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from './AutoRoleView';
 
 interface DarkAlertDialogProps {
   visible: boolean;
@@ -126,12 +127,12 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       animationType="fade"
       onRequestClose={onCancel}
      accessible={false} accessibilityLabel="Modal">
-      <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
+      <AutoRoleView style={styles.modalOverlay}>
+        <AutoRoleView role="main" accessibilityRole="none" style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
           <Text style={[styles.title, { color: designTokens.colors.text }]}>{title}</Text>
           <Text style={[styles.message, { color: designTokens.colors.textSecondary }]}>{message}</Text>
           
-          <View style={styles.buttonRow}>
+          <AutoRoleView style={styles.buttonRow}>
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
@@ -149,9 +150,9 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
                 {confirmText}
               </Text>
             </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+          </AutoRoleView>
+        </AutoRoleView>
+      </AutoRoleView>
     </Modal>
   );
 }; 

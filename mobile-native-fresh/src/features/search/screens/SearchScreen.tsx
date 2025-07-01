@@ -6,7 +6,7 @@ import { Text ,
   FlatList,
   ActivityIndicator,
   Alert,
-} from 'react-native';
+  ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -25,6 +25,7 @@ import { TagChip } from '../../../components/ui/TagChip';
 import { apiService } from '../../../services/api';
 import { RootStackParamList } from '../../../navigation/types';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -195,7 +196,7 @@ export const SearchScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ModernHeader 
         title="SEARCH" 
         subtitle="Find your thoughtmarks"
@@ -206,8 +207,8 @@ export const SearchScreen: React.FC = () => {
       />
 
       {/* Search Input */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchInputContainer}>
+      <ScrollView style={styles.searchContainer}>
+        <ScrollView style={styles.searchInputContainer}>
           <Ionicons name="search" size={20} color={designTokens.colors.textSecondary} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
@@ -219,7 +220,7 @@ export const SearchScreen: React.FC = () => {
           {isSearching && (
             <ActivityIndicator size="small" color={designTokens.colors.accent} style={styles.searchSpinner} />
           )}
-        </View>
+        </ScrollView>
 
         {/* AI Search Toggle */}
         {hasPremiumAccess && (
@@ -240,10 +241,10 @@ export const SearchScreen: React.FC = () => {
             </Text>
           </TouchableOpacity>
         )}
-      </View>
+      </ScrollView>
 
       {/* Search Results */}
-      <View style={styles.resultsContainer}>
+      <ScrollView style={styles.resultsContainer}>
         {searchQuery && !isSearching && (
           <Text style={styles.resultsCount}>
             {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} found
@@ -252,17 +253,17 @@ export const SearchScreen: React.FC = () => {
         )}
         
         {searchQuery && !isSearching && searchResults.length === 0 && (
-          <View style={styles.noResults}>
+          <ScrollView style={styles.noResults}>
             <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.noResultsTitle}>No results found</Text>
             <Text style={styles.noResultsSubtitle}>
               Try searching with different keywords or check your spelling
             </Text>
-          </View>
+          </ScrollView>
         )}
 
         {!searchQuery && (
-          <View style={styles.initialState}>
+          <ScrollView style={styles.initialState}>
             <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.initialStateTitle}>Search your thoughtmarks</Text>
             <Text style={styles.initialStateSubtitle}>
@@ -273,7 +274,7 @@ export const SearchScreen: React.FC = () => {
             {hasPremiumAccess && (
               <Card style={styles.suggestionsCard}>
                 <CardContent>
-                  <View style={styles.suggestionsHeader}>
+                  <ScrollView style={styles.suggestionsHeader}>
                     <Text style={styles.suggestionsTitle}>AI Search Suggestions</Text>
                     <Button
                       variant="ghost"
@@ -287,7 +288,7 @@ export const SearchScreen: React.FC = () => {
                         <Ionicons name="refresh" size={16} color={designTokens.colors.accent} />
                       )}
                     </Button>
-                  </View>
+                  </ScrollView>
                   
                   {aiSuggestions.length > 0 ? (
                     aiSuggestions.map((suggestion, index) => (
@@ -315,9 +316,9 @@ export const SearchScreen: React.FC = () => {
 
             {/* Recent Searches */}
             {recentSearches.length > 0 && (
-              <View style={styles.recentSearches}>
+              <ScrollView style={styles.recentSearches}>
                 <Text style={styles.recentTitle}>Recent Searches</Text>
-                <View style={styles.recentTags}>
+                <ScrollView style={styles.recentTags}>
                   {recentSearches.map((query, index) => (
                     <TouchableOpacity
                       key={index}
@@ -333,10 +334,10 @@ export const SearchScreen: React.FC = () => {
                       />
                     </TouchableOpacity>
                   ))}
-                </View>
-              </View>
+                </ScrollView>
+              </ScrollView>
             )}
-          </View>
+          </ScrollView>
         )}
 
         <FlatList
@@ -352,7 +353,7 @@ export const SearchScreen: React.FC = () => {
           contentContainerStyle={styles.resultsList}
           showsVerticalScrollIndicator={false}
         />
-      </View>
+      </ScrollView>
 
       {/* Bottom Navigation */}
       <BottomNav
@@ -362,7 +363,7 @@ export const SearchScreen: React.FC = () => {
         currentRoute="/search"
         onCreateNew={handleCreateThoughtmark}
       />
-    </View>
+    </ScrollView>
   );
 };
 

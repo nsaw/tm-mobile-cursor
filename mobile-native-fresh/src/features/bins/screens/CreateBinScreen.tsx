@@ -21,6 +21,7 @@ import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';
 import { BinFormData } from '../../../types';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 // Predefined colors and icons for bin creation
 const BIN_COLORS = [
   '#3B82F6', // Blue
@@ -244,7 +245,7 @@ export const CreateBinScreen: React.FC = () => {
   });
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
+    <ScrollView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
       <KeyboardAvoidingView 
         style={styles.keyboardAvoidingView}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -320,7 +321,7 @@ export const CreateBinScreen: React.FC = () => {
           <Card style={styles.card}>
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Color</Text>
-              <View style={styles.colorGrid}>
+              <ScrollView style={styles.colorGrid}>
                 {BIN_COLORS.map((color) => (
                   <TouchableOpacity
                     key={color}
@@ -339,7 +340,7 @@ export const CreateBinScreen: React.FC = () => {
                     )}
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </CardContent>
           </Card>
 
@@ -347,7 +348,7 @@ export const CreateBinScreen: React.FC = () => {
           <Card style={styles.card}>
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Icon</Text>
-              <View style={styles.iconGrid}>
+              <ScrollView style={styles.iconGrid}>
                 {BIN_ICONS.map((icon) => (
                   <TouchableOpacity
                     key={icon}
@@ -367,7 +368,7 @@ export const CreateBinScreen: React.FC = () => {
                     />
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </CardContent>
           </Card>
 
@@ -375,27 +376,27 @@ export const CreateBinScreen: React.FC = () => {
           <Card style={styles.card}>
             <CardContent style={styles.cardContent}>
               <Text style={styles.label}>Preview</Text>
-              <View style={[styles.previewBin, { backgroundColor: selectedColor }]}>
-                <View style={styles.previewContent}>
+              <ScrollView style={[styles.previewBin, { backgroundColor: selectedColor }]}>
+                <ScrollView style={styles.previewContent}>
                   <Ionicons name={selectedIcon as any} size={24} color="white" />
-                  <View style={styles.previewText}>
+                  <ScrollView style={styles.previewText}>
                     <Text style={styles.previewName}>{name || 'Bin Name'}</Text>
                     {description && (
                       <Text style={styles.previewDescription}>{description}</Text>
                     )}
-                  </View>
-                </View>
-              </View>
+                  </ScrollView>
+                </ScrollView>
+              </ScrollView>
             </CardContent>
           </Card>
         </ScrollView>
 
         {/* Loading Overlay */}
         {isSubmitting && (
-          <View style={styles.loadingOverlay}>
+          <ScrollView style={styles.loadingOverlay}>
             <ActivityIndicator size="large" color={designTokens.colors.accent} />
             <Text style={styles.loadingText}>Creating bin...</Text>
-          </View>
+          </ScrollView>
         )}
       </KeyboardAvoidingView>
 
@@ -412,6 +413,6 @@ export const CreateBinScreen: React.FC = () => {
         }}
         onCancel={() => setShowAlertDialog(false)}
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 }; 

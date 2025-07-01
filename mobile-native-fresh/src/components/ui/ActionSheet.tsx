@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../theme/ThemeProvider';
 
 import { Text } from './Text';
+import { AutoRoleView } from './AutoRoleView';
 
 interface ActionSheetItem {
   label: string;
@@ -49,13 +50,13 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       accessibilityLabel={title || 'Action menu'}
     >
       <TouchableWithoutFeedback onPress={onClose}>
-        <View style={{
+        <AutoRoleView style={{
           flex: 1,
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           justifyContent: 'flex-end',
         }}>
           <TouchableWithoutFeedback>
-            <View style={{
+            <AutoRoleView style={{
               backgroundColor: designTokens.colors.backgroundSecondary,
               borderTopLeftRadius: designTokens.radius.lg,
               borderTopRightRadius: designTokens.radius.lg,
@@ -64,14 +65,14 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               width: '100%',
             }}>
               {title && (
-                <View style={{
+                <AutoRoleView style={{
                   paddingVertical: designTokens.spacing.md,
                   paddingHorizontal: designTokens.spacing.lg,
                   borderBottomWidth: 1,
                   borderBottomColor: designTokens.colors.border,
                 }}>
                   <Text variant="subheading" style={{ textAlign: 'center' }}>{title}</Text>
-                </View>
+                </AutoRoleView>
               )}
               
               {items.map((item, index) => (
@@ -92,7 +93,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   accessible
                   accessibilityLabel={item.label}
                 >
-                  <View style={{
+                  <AutoRoleView style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                   }}>
@@ -113,7 +114,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     >
                       {item.label}
                     </Text>
-                  </View>
+                  </AutoRoleView>
                 </TouchableOpacity>
               ))}
               
@@ -141,9 +142,9 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   Cancel
                 </Text>
               </TouchableOpacity>
-            </View>
+            </AutoRoleView>
           </TouchableWithoutFeedback>
-        </View>
+        </AutoRoleView>
       </TouchableWithoutFeedback>
     </Modal>
   );

@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -69,8 +70,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.searchContainer}>
         <Ionicons 
           name="search" 
           size={20} 
@@ -92,7 +93,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             <Ionicons name="close-circle" size={20} color={designTokens.colors.textMuted} />
           </TouchableOpacity>
         )}
-      </View>
-    </View>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 };

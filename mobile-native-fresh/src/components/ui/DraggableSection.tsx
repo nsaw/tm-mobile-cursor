@@ -14,6 +14,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from './AutoRoleView';
 
 interface DraggableSectionProps {
   id: string;
@@ -193,20 +194,20 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-              <View style={styles.headerLeft}>
+              <AutoRoleView role="header" accessibilityRole="header" style={styles.headerLeft}>
                 <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>
                   {title}
                 </Animated.Text>
-              </View>
+              </AutoRoleView>
               
-              <View style={styles.headerRight}>
+              <AutoRoleView role="header" accessibilityRole="header" style={styles.headerRight}>
                 <Ionicons name="menu-outline" size={16} color="#6B7280" style={styles.dragHandle} />
-              </View>
+              </AutoRoleView>
             </TouchableOpacity>
 
             {isExpanded && (
-              <View><Text>{children}</Text></View>
+              <AutoRoleView><Text>{children}</Text></AutoRoleView>
             )}
           </Animated.View>
         </PanGestureHandler>

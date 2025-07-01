@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { DashboardScreen } from '../screens/DashboardScreen';
 import { useTheme } from '../../../theme/ThemeProvider';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 // Mock navigation for the example
 const mockNavigation = {
@@ -40,13 +41,13 @@ export const DashboardExample: React.FC = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
       <Text style={styles.header}>Dashboard Example</Text>
       <Text style={styles.body}>
         This is an example dashboard component. Replace this with your actual dashboard content.
       </Text>
       
       <DashboardScreen navigation={mockNavigation} />
-    </View>
+    </AutoRoleView>
   );
 }; 

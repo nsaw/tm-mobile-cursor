@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface QuickActionsProps {
   onCreateThoughtmark: () => void;
@@ -54,7 +55,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   });
 
   return (
-    <View style={styles.container}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
       <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <Ionicons name="create-outline" size={24} color={designTokens.colors.background} />
       </TouchableOpacity>
@@ -66,6 +67,6 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
       <TouchableOpacity style={styles.actionButton3} onPress={onOpenBins} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <Ionicons name="folder-outline" size={24} color={designTokens.colors.background} />
       </TouchableOpacity>
-    </View>
+    </AutoRoleView>
   );
 };

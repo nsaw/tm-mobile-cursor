@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const PIN_LENGTH = 4;
 const STORAGE_KEY = '@thoughtmarks_pin';
@@ -160,9 +161,9 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
   const isComplete = currentPin.length === PIN_LENGTH;
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
+    <AutoRoleView role="group" accessibilityRole="none" style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
       {/* Header */}
-      <View style={styles.header}>
+      <AutoRoleView role="header" accessibilityRole="header" style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
           onPress={handleCancel}
@@ -175,17 +176,17 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
         <Text style={[styles.headerTitle, { color: designTokens.colors.text }]}>
           {getTitle()}
         </Text>
-        <View style={styles.headerSpacer} />
-      </View>
+        <AutoRoleView role="header" accessibilityRole="header" style={styles.headerSpacer} />
+      </AutoRoleView>
 
       {/* Content */}
-      <View style={styles.content}>
+      <AutoRoleView role="main" accessibilityRole="none" style={styles.content}>
         <Text style={[styles.subtitle, { color: designTokens.colors.textSecondary }]}>
           {getSubtitle()}
         </Text>
 
         {/* PIN Dots */}
-        <View style={styles.pinContainer}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.pinContainer}>
           {Array.from({ length: PIN_LENGTH }).map((_, index) => (
             <View
               key={index}
@@ -200,10 +201,10 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
               ]}
             />
           ))}
-        </View>
+        </AutoRoleView>
 
         {/* Number Pad */}
-        <View style={styles.numberPad}>
+        <AutoRoleView style={styles.numberPad}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
             <TouchableOpacity
               key={number}
@@ -253,9 +254,9 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
               {mode === 'setup' ? 'Skip' : 'Cancel'}
             </Text>
           </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
+        </AutoRoleView>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 };
 

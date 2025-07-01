@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
-
+import { AutoRoleView } from './AutoRoleView';
 import { TagChip } from './TagChip';
 
 interface TagFilterProps {
@@ -25,7 +25,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   }
 
   return (
-    <View style={{ marginVertical: designTokens.spacing.sm }}>
+    <ScrollView style={{ marginVertical: designTokens.spacing.sm }}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -50,7 +50,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
           />
         )}
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 

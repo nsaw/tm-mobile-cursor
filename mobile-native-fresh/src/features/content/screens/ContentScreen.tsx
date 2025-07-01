@@ -7,6 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
 import { RootStackParamList } from '../../../navigation/types';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 type ContentPage = {
   title: string;
@@ -111,7 +112,7 @@ export const ContentScreen: React.FC = () => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>Content Management</Text>
         <Text style={styles.description}>
@@ -127,17 +128,17 @@ export const ContentScreen: React.FC = () => {
           accessible={true}
           accessibilityLabel={page.title}
         >
-          <View style={styles.tag}>
+          <ScrollView style={styles.tag}>
             <Feather name={page.iconName} size={24} color={page.iconColor} />
-          </View>
-          <View style={styles.cardTextContainer}>
+          </ScrollView>
+          <ScrollView style={styles.cardTextContainer}>
             <Text style={styles.subtitle}>{page.title}</Text>
             <Text style={styles.body}>{page.description}</Text>
-          </View>
+          </ScrollView>
         </TouchableOpacity>
       ))}
 
       </ScrollView>
-    </SafeAreaView>
+    </ScrollView>
   );
 };

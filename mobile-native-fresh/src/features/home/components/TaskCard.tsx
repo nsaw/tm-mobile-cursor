@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../../../components/ui/Text';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { ThoughtmarkWithBin } from '../../../types';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface TaskCardProps {
   task: ThoughtmarkWithBin;
@@ -148,8 +149,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <Ionicons name="checkmark" size={16} color={designTokens.colors.background} />
         )}
       </TouchableOpacity>
-      <View style={styles.textContainer}>
-        <View style={styles.titleRow}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.textContainer}>
+        <AutoRoleView style={styles.titleRow}>
           <Text
             variant={isCompleted ? "muted" : "body"}
             weight={isCompleted ? "normal" : "semibold"}
@@ -166,7 +167,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
               {formatDueDate(task.dueDate)}
             </Text>
           )}
-        </View>
+        </AutoRoleView>
         {task.content && (
           <Text
             variant="muted"
@@ -176,10 +177,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {task.content}
           </Text>
         )}
-      </View>
+      </AutoRoleView>
       
       {task.priority && (
-        <View style={[styles.priorityIndicator, getPriorityColor()]} />
+        <AutoRoleView style={[styles.priorityIndicator, getPriorityColor()]} />
       )}
     </TouchableOpacity>
   );

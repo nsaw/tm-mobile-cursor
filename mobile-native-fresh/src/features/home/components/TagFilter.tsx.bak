@@ -1,9 +1,9 @@
-import { Text,
-View,
-TouchableOpacity,
-StyleSheet,
-ScrollView } from
-'react-native';
+import { Text ,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -21,43 +21,43 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   tags,
   selectedTags,
   onTagToggle,
-  onClearAll
+  onClearAll,
 }) => {
   const { tokens: designTokens } = useTheme();
   const [showAllTags, setShowAllTags] = useState(false);
 
   const styles = StyleSheet.create({
     container: {
-      marginBottom: designTokens.spacing.lg ?? 20
+      marginBottom: designTokens.spacing.lg ?? 20,
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: designTokens.spacing.sm ?? 10
+      marginBottom: designTokens.spacing.sm ?? 10,
     },
     title: {
       fontSize: designTokens.typography.fontSize.body,
       fontWeight: designTokens.typography.fontWeight.semibold,
       color: designTokens.colors.textSecondary ?? '#888',
-      marginLeft: designTokens.spacing.sm ?? 10
+      marginLeft: designTokens.spacing.sm ?? 10,
     },
     clearButton: {
-      paddingHorizontal: designTokens.spacing.sm ?? 10
+      paddingHorizontal: designTokens.spacing.sm ?? 10,
     },
     clearText: {
       fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.textSecondary ?? '#888'
+      color: designTokens.colors.textSecondary ?? '#888',
     },
     tagsContainer: {
-      paddingHorizontal: designTokens.spacing.lg ?? 20
+      paddingHorizontal: designTokens.spacing.lg ?? 20,
     },
     tagRow: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       gap: designTokens.spacing.md ?? 10,
       paddingHorizontal: designTokens.spacing.md ?? 10,
-      paddingVertical: designTokens.spacing.sm ?? 5
+      paddingVertical: designTokens.spacing.sm ?? 5,
     },
     tag: {
       paddingHorizontal: designTokens.spacing.lg ?? 20,
@@ -65,19 +65,19 @@ export const TagFilter: React.FC<TagFilterProps> = ({
       borderRadius: designTokens.radius.md ?? 20,
       borderWidth: 1,
       borderColor: designTokens.colors.border ?? '#888',
-      marginRight: designTokens.spacing.sm ?? 10
+      marginRight: designTokens.spacing.sm ?? 10,
     },
     tagSelected: {
       backgroundColor: designTokens.colors.accent ?? '#FFD500',
-      borderColor: designTokens.colors.accent ?? '#FFD500'
+      borderColor: designTokens.colors.accent ?? '#FFD500',
     },
     tagText: {
       fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.textSecondary ?? '#888'
+      color: designTokens.colors.textSecondary ?? '#888',
     },
     filterIcon: {
-      marginRight: designTokens.spacing.xs
-    }
+      marginRight: designTokens.spacing.xs,
+    },
   });
 
   const displayedTags = showAllTags ? tags : tags.slice(0, 5);
@@ -86,59 +86,59 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   return (
     <ScrollView style={styles.container}>
       <ScrollView style={styles.header}>
-        <ScrollView style={{}} contentContainerStyle={{ flexDirection: 'row', alignItems: 'center' }}>
+        <ScrollView style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Ionicons name="filter-outline" size={16} color={designTokens.colors.textSecondary ?? '#888'} />
           <Text style={styles.title}>Filter by tags</Text>
         </ScrollView>
-        {selectedTags.length > 0 &&
-        <TouchableOpacity onPress={onClearAll} style={styles.clearButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        {selectedTags.length > 0 && (
+          <TouchableOpacity onPress={onClearAll} style={styles.clearButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.clearText}>Clear all</Text>
           </TouchableOpacity>
-        }
+        )}
       </ScrollView>
 
-      <ScrollView
-        horizontal
+      <ScrollView 
+        horizontal 
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.tagsContainer}>
-
+        contentContainerStyle={styles.tagsContainer}
+      >
         <ScrollView style={styles.tagRow}>
-          {displayedTags.map((tag) =>
-          <TouchableOpacity
-            key={tag}
-            style={[
-            styles.tag,
-            selectedTags.includes(tag) && styles.tagSelected]
-            }
-            onPress={() => onTagToggle(tag)}
-            accessibilityRole="button"
-            accessible={true}
-            accessibilityLabel="Button">
-
+          {displayedTags.map((tag) => (
+            <TouchableOpacity
+              key={tag}
+              style={[
+                styles.tag,
+                selectedTags.includes(tag) && styles.tagSelected,
+              ]}
+              onPress={() => onTagToggle(tag)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+            >
               <Text style={[
-            styles.tagText,
-            selectedTags.includes(tag) && { color: designTokens.colors.background }]
-            }>
+                styles.tagText,
+                selectedTags.includes(tag) && { color: designTokens.colors.background }
+              ]}>
                 {tag}
               </Text>
             </TouchableOpacity>
-          )}
+          ))}
           
-          {hasMoreTags &&
-          <TouchableOpacity
-            style={styles.tag}
-            onPress={() => setShowAllTags(!showAllTags)}
-            accessibilityRole="button"
-            accessible={true}
-            accessibilityLabel="Button">
-
+          {hasMoreTags && (
+            <TouchableOpacity
+              style={styles.tag}
+              onPress={() => setShowAllTags(!showAllTags)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
+            >
               <Text style={styles.tagText}>
                 {showAllTags ? 'Show less' : `+${tags.length - 5} more`}
               </Text>
             </TouchableOpacity>
-          }
+          )}
         </ScrollView>
       </ScrollView>
-    </ScrollView>);
-
-};
+    </ScrollView>
+  );
+}; 

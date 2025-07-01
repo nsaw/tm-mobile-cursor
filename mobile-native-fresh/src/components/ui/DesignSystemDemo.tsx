@@ -7,13 +7,14 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { Text , Heading, Subheading, BodyText, Caption } from './Text';
 import { Button } from './Button';
 import { Card, CardHeader, CardContent } from './Card';
+import { AutoRoleView } from './AutoRoleView';
 
 export const DesignSystemDemo: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={{ padding: designTokens.spacing.lg }}>
+    <AutoRoleView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+      <AutoRoleView style={{ padding: designTokens.spacing.lg }}>
         {/* Typography Section */}
         <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
@@ -22,7 +23,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <AutoRoleView style={{ gap: designTokens.spacing.md }}>
               <Heading><Text>Heading Level 1</Text></Heading>
               <Heading><Text>Heading Level 2</Text></Heading>
               <Heading><Text>Heading Level 3</Text></Heading>
@@ -30,7 +31,7 @@ export const DesignSystemDemo: React.FC = () => {
               <BodyText><Text>Body text with normal weight and size</Text></BodyText>
               <Caption><Text>Caption text for secondary information</Text></Caption>
               <Text variant="label" style={{ color: designTokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
-            </View>
+            </AutoRoleView>
           </CardContent>
         </Card>
 
@@ -42,7 +43,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <AutoRoleView style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" onPress={() => console.log('Primary pressed')}><Text>Primary Button</Text></Button>
               
               <Button variant="secondary" onPress={() => console.log('Secondary pressed')}><Text>Secondary Button</Text></Button>
@@ -54,7 +55,7 @@ export const DesignSystemDemo: React.FC = () => {
               <Button variant="destructive" onPress={() => console.log('Destructive pressed')}><Text>Destructive Button</Text></Button>
               
               <Button variant="brand" onPress={() => console.log('Brand pressed')}><Text>Brand Button</Text></Button>
-            </View>
+            </AutoRoleView>
           </CardContent>
         </Card>
 
@@ -66,7 +67,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <AutoRoleView style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>
               
               <Button variant="primary" size="md" onPress={() => console.log('Medium pressed')}><Text>Medium Button</Text></Button>
@@ -76,7 +77,7 @@ export const DesignSystemDemo: React.FC = () => {
               <Button variant="primary" size="icon" onPress={() => console.log('Icon pressed')}>
                 <Ionicons name="flame" size={20} color="#FFFFFF" />
               </Button>
-            </View>
+            </AutoRoleView>
           </CardContent>
         </Card>
 
@@ -88,7 +89,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <AutoRoleView style={{ gap: designTokens.spacing.md }}>
               <Card variant="default" onPress={() => console.log('Default card pressed')}>
                 <CardContent>
                   <BodyText><Text>Default Card - Tap me!</Text></BodyText>
@@ -112,7 +113,7 @@ export const DesignSystemDemo: React.FC = () => {
                   <BodyText><Text>Interactive Card - Tap me!</Text></BodyText>
                 </CardContent>
               </Card>
-            </View>
+            </AutoRoleView>
           </CardContent>
         </Card>
 
@@ -124,33 +125,33 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.sm }}>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+            <AutoRoleView style={{ gap: designTokens.spacing.md }}>
+              <AutoRoleView style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.sm }}>
+                <AutoRoleView style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <AutoRoleView style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Accent</Text></Caption>
-                </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                </AutoRoleView>
+                <AutoRoleView style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <AutoRoleView style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Success</Text></Caption>
-                </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                </AutoRoleView>
+                <AutoRoleView style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <AutoRoleView style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Warning</Text></Caption>
-                </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                </AutoRoleView>
+                <AutoRoleView style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <AutoRoleView style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Danger</Text></Caption>
-                </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                </AutoRoleView>
+                <AutoRoleView style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <AutoRoleView style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Brand</Text></Caption>
-                </View>
-              </View>
-            </View>
+                </AutoRoleView>
+              </AutoRoleView>
+            </AutoRoleView>
           </CardContent>
         </Card>
-      </View>
-    </ScrollView>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 }; 

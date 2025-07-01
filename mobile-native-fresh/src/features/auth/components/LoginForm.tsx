@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { colors, spacing, typography } from '../../../theme/theme'
 import { useTheme } from '../../../theme/ThemeProvider'
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void
@@ -116,8 +117,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <TextInput
           style={[styles.input, errors.email && styles.inputError]}
@@ -132,11 +133,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           editable={!loading}
         />
         {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-      </View>
+      </AutoRoleView>
 
-      <View style={styles.inputContainer}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
-        <View style={[styles.passwordContainer, errors.password && styles.inputError]}>
+        <AutoRoleView role="group" accessibilityRole="none" style={[styles.passwordContainer, errors.password && styles.inputError]}>
           <TextInput
             style={styles.passwordInput}
             value={password}
@@ -162,9 +163,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
               color={colors.subtext} 
             />
           </TouchableOpacity>
-        </View>
+        </AutoRoleView>
         {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-      </View>
+      </AutoRoleView>
 
       <TouchableOpacity
         style={[styles.submitButton, loading && styles.submitButtonDisabled]}
@@ -177,6 +178,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           <Text style={styles.submitButtonText}>Sign In</Text>
         )}
       </TouchableOpacity>
-    </View>
+    </AutoRoleView>
   )
 }

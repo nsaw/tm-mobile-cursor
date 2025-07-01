@@ -14,6 +14,7 @@ import { NavigationProp, RouteProp } from '../../../navigation/types';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const DetailScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -140,9 +141,9 @@ export const DetailScreen: React.FC = () => {
 
   if (!thoughtmark) {
     return (
-      <View style={styles.container}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
         <Text style={styles.title}>Thoughtmark not found</Text>
-      </View>
+      </AutoRoleView>
     );
   }
 
@@ -192,9 +193,9 @@ export const DetailScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
+      <AutoRoleView role="header" accessibilityRole="header" style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}
                 accessibilityRole="button"
                 accessible={true}
@@ -202,7 +203,7 @@ export const DetailScreen: React.FC = () => {
           <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>THOUGHTMARK</Text>
-        <View style={styles.headerActions}>
+        <AutoRoleView role="header" accessibilityRole="header" style={styles.headerActions}>
           <TouchableOpacity style={styles.actionButton} onPress={handlePin} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Ionicons name="pin" size={20} color={designTokens.colors.accent ?? '#000'} />
           </TouchableOpacity>
@@ -212,42 +213,42 @@ export const DetailScreen: React.FC = () => {
           <TouchableOpacity style={styles.actionButton} onPress={handleShare} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Ionicons name="share-outline" size={24} color={designTokens.colors.text ?? '#000'} />
           </TouchableOpacity>
-        </View>
-      </View>
+        </AutoRoleView>
+      </AutoRoleView>
 
       {/* Content */}
-      <ScrollView style={styles.content}>
+      <AutoRoleView role="main" accessibilityRole="none" style={styles.content}>
         {/* Bin Info */}
-        <View style={styles.contentCard}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <AutoRoleView role="card" accessibilityRole="summary" style={styles.contentCard}>
+          <AutoRoleView style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Ionicons name="folder-outline" size={16} color={designTokens.colors.textSecondary ?? '#000'} />
             <Text style={styles.contentTitle}>Bin: {getBinName(thoughtmark.binId)}</Text>
-          </View>
-        </View>
+          </AutoRoleView>
+        </AutoRoleView>
 
         {/* Title */}
         <Text style={styles.title}>{thoughtmark.title}</Text>
 
         {/* Content */}
-        <View style={styles.contentCard}>
+        <AutoRoleView role="card" accessibilityRole="summary" style={styles.contentCard}>
           <Text style={styles.contentSubtitle}>{thoughtmark.content}</Text>
-        </View>
+        </AutoRoleView>
 
         {/* Tags */}
         {thoughtmark.tags && thoughtmark.tags.length > 0 && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: designTokens.spacing.lg }}>
+          <AutoRoleView style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: designTokens.spacing.lg }}>
             {thoughtmark.tags.map((tag, index) => (
-              <View key={index} style={styles.tagsContainer}>
+              <AutoRoleView role="group" accessibilityRole="none" key={index} style={styles.tagsContainer}>
                 <Text style={styles.tagText}>#{tag}</Text>
-              </View>
+              </AutoRoleView>
             ))}
-          </View>
+          </AutoRoleView>
         )}
 
         {/* Task Status */}
         {thoughtmark.isTask && (
-          <View style={styles.contentCard}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <AutoRoleView role="card" accessibilityRole="summary" style={styles.contentCard}>
+            <AutoRoleView style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Ionicons
                 name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"}
                 size={20}
@@ -256,19 +257,19 @@ export const DetailScreen: React.FC = () => {
               <Text style={styles.contentTitle}>
                 {thoughtmark.isCompleted ? 'Completed' : 'Pending'}
               </Text>
-            </View>
-          </View>
+            </AutoRoleView>
+          </AutoRoleView>
         )}
-      </ScrollView>
+      </AutoRoleView>
 
       {/* Footer */}
-      <View style={styles.footer}>
+      <AutoRoleView role="contentinfo" accessibilityRole="none" style={styles.footer}>
         <TouchableOpacity style={styles.footerButton} onPress={handleDelete} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
           <Ionicons name="trash-outline" size={20} color={designTokens.colors.danger ?? '#EF4444'} />
           <Text style={styles.footerButtonText}>Delete</Text>
         </TouchableOpacity>
-        <View style={styles.spacer} />
-      </View>
-    </View>
+        <AutoRoleView style={styles.spacer} />
+      </AutoRoleView>
+    </AutoRoleView>
   );
 };

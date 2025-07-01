@@ -9,6 +9,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from './AutoRoleView';
 
 interface LoadingScreenProps {
   isVisible: boolean;
@@ -160,7 +161,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
     <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: designTokens.colors.background }]}>
       <Animated.View style={[styles.content, { transform: [{ scale: scaleAnim }] }]}>
         {/* Glow ring effect */}
-        <View style={styles.glowRing} />
+        <AutoRoleView style={styles.glowRing} />
         
         {/* Brain icon with pulse animation */}
         <Animated.View style={[styles.iconContainer, { transform: [{ scale: pulseAnim }] }]}>
@@ -173,11 +174,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </Animated.View>
 
         {/* Thinking dots */}
-        <View style={styles.thinkingDots}>
+        <AutoRoleView style={styles.thinkingDots}>
           <Animated.View style={[styles.dot, { opacity: dot1Anim }]} />
           <Animated.View style={[styles.dot, { opacity: dot2Anim }]} />
           <Animated.View style={[styles.dot, { opacity: dot3Anim }]} />
-        </View>
+        </AutoRoleView>
 
         {/* Text with fade animation */}
         <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: designTokens.colors.textSecondary }]}>
@@ -185,9 +186,9 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </Animated.Text>
 
         {/* Progress bar */}
-        <View style={styles.progressBar}>
+        <AutoRoleView style={styles.progressBar}>
           <Animated.View style={styles.progressFill} />
-        </View>
+        </AutoRoleView>
       </Animated.View>
     </Animated.View>
   );

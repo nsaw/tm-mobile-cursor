@@ -7,6 +7,7 @@ import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 import { useStoreKit } from '../hooks/useStoreKit';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const PremiumScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -113,48 +114,48 @@ export const PremiumScreen: React.FC = () => {
   // If user is already premium, show success message
   if (isPremium) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-        <View style={styles.container}>
-          <View style={styles.iconContainer}>
+      <AutoRoleView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+          <AutoRoleView role="group" accessibilityRole="none" style={styles.iconContainer}>
             <Crown size={32} color={designTokens.colors.background} />
-          </View>
+          </AutoRoleView>
           
           <Heading><Text>Premium Active!</Text></Heading>
           <Caption><Text>You have access to all premium features. Enjoy your enhanced experience!</Text></Caption>
-        </View>
-      </SafeAreaView>
+        </AutoRoleView>
+      </AutoRoleView>
     );
   }
 
   // If StoreKit is not available, show fallback
   if (!isAvailable) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-        <View style={styles.container}>
-          <View style={styles.iconContainer}>
+      <AutoRoleView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+          <AutoRoleView role="group" accessibilityRole="none" style={styles.iconContainer}>
             <Crown size={32} color={designTokens.colors.background} />
-          </View>
+          </AutoRoleView>
           
           <Heading><Text>Premium Features</Text></Heading>
           <Caption><Text>Premium features are not available on this device. Please try on iOS or Android.</Text></Caption>
-        </View>
-      </SafeAreaView>
+        </AutoRoleView>
+      </AutoRoleView>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={styles.container}>
-        <View style={styles.iconContainer}>
+    <AutoRoleView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+      <AutoRoleView role="group" accessibilityRole="none" style={styles.container}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.iconContainer}>
           <Crown size={32} color={designTokens.colors.background} />
-        </View>
+        </AutoRoleView>
         
         <Heading><Text>Upgrade to Premium</Text></Heading>
         <Caption><Text>Unlock all premium features including AI insights, smart reminders, and advanced search.</Text></Caption>
         
-        <View style={styles.productContainer}>
+        <AutoRoleView role="group" accessibilityRole="none" style={styles.productContainer}>
           {products.map((product) => (
-            <View key={product.id} style={styles.productCard}>
+            <AutoRoleView role="card" accessibilityRole="summary" key={product.id} style={styles.productCard}>
               <Text style={styles.productTitle}>{product.title}</Text>
               <Text style={styles.productDescription}>{product.description}</Text>
               <Text style={styles.productPrice}>{product.localizedPrice}</Text>
@@ -167,9 +168,9 @@ export const PremiumScreen: React.FC = () => {
                   {loading ? 'Processing...' : 'Upgrade Now'}
                 </Text>
               </Button>
-            </View>
+            </AutoRoleView>
           ))}
-        </View>
+        </AutoRoleView>
 
         <Button 
           style={styles.restoreButton}
@@ -181,7 +182,7 @@ export const PremiumScreen: React.FC = () => {
             Restore Purchases
           </Text>
         </Button>
-      </View>
-    </SafeAreaView>
+      </AutoRoleView>
+    </AutoRoleView>
   );
 }; 

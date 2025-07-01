@@ -20,6 +20,7 @@ import { Button } from '../../../components/ui/Button';
 import { TagChip } from '../../../components/ui/TagChip';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';
+import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -386,18 +387,18 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
 
   if (loading || !thoughtmark) {
     return (
-      <View style={styles.loadingContainer}>
+      <ScrollView style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={designTokens.colors.accent ?? '#FFD500'} />
         <Text style={styles.loadingText}>Loading thoughtmark...</Text>
-      </View>
+      </ScrollView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
+      <ScrollView style={styles.header}>
+        <ScrollView style={styles.headerContent}>
           <TouchableOpacity 
             style={styles.backButton}
             onPress={() => navigation.goBack()}
@@ -408,8 +409,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>THOUGHTMARK</Text>
-        </View>
-        <View style={styles.headerActions}>
+        </ScrollView>
+        <ScrollView style={styles.headerActions}>
           <TouchableOpacity
             style={styles.actionButton}
             onPress={handlePin}
@@ -438,8 +439,8 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
            accessible={true}>
             <Ionicons name="trash-outline" size={20} color={designTokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
-        </View>
-      </View>
+        </ScrollView>
+      </ScrollView>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         {/* Title */}
@@ -477,11 +478,11 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         {user?.isPremium && (
           <Card style={styles.aiCard}>
             <CardContent>
-              <View style={styles.aiHeader}>
-                <View style={styles.aiTitleContainer}>
+              <ScrollView style={styles.aiHeader}>
+                <ScrollView style={styles.aiTitleContainer}>
                   <Ionicons name="sparkles" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Insights</Text>
-                </View>
+                </ScrollView>
                 <TouchableOpacity
                   onPress={generateAIInsights}
                   disabled={generatingAI}
@@ -494,27 +495,27 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                     <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
-              </View>
+              </ScrollView>
               
               {aiInsights.length > 0 ? (
-                <View style={styles.insightsContainer}>
+                <ScrollView style={styles.insightsContainer}>
                   {aiInsights.map((insight, index) => (
-                    <View key={index} style={styles.insightItem}>
-                      <View style={styles.insightHeader}>
-                        <View style={[styles.insightType, { backgroundColor: getInsightTypeColor(insight.type) }]}>
+                    <ScrollView key={index} style={styles.insightItem}>
+                      <ScrollView style={styles.insightHeader}>
+                        <ScrollView style={[styles.insightType, { backgroundColor: getInsightTypeColor(insight.type) }]}>
                           <Text style={styles.insightTypeText}>{insight.type}</Text>
-                        </View>
+                        </ScrollView>
                         {insight.actionable && (
-                          <View style={styles.actionableBadge}>
+                          <ScrollView style={styles.actionableBadge}>
                             <Text style={styles.actionableText}>Actionable</Text>
-                          </View>
+                          </ScrollView>
                         )}
-                      </View>
+                      </ScrollView>
                       <Text style={styles.insightTitle}>{insight.title}</Text>
                       <Text style={styles.insightDescription}>{insight.description}</Text>
-                    </View>
+                    </ScrollView>
                   ))}
-                </View>
+                </ScrollView>
               ) : (
                 <Text style={styles.aiEmptyText}>
                   {generatingAI ? 'Generating insights...' : 'Tap refresh to generate AI insights'}
@@ -528,11 +529,11 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         {user?.isPremium && (
           <Card style={styles.aiCard}>
             <CardContent>
-              <View style={styles.aiHeader}>
-                <View style={styles.aiTitleContainer}>
+              <ScrollView style={styles.aiHeader}>
+                <ScrollView style={styles.aiTitleContainer}>
                   <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Suggestions</Text>
-                </View>
+                </ScrollView>
                 <TouchableOpacity
                   onPress={generateAISuggestions}
                   disabled={generatingSuggestions}
@@ -545,32 +546,32 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                     <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
-              </View>
+              </ScrollView>
               
               {aiSuggestions ? (
-                <View style={styles.suggestionsContainer}>
+                <ScrollView style={styles.suggestionsContainer}>
                   {aiSuggestions.suggestedTags && aiSuggestions.suggestedTags.length > 0 && (
-                    <View style={styles.suggestionItem}>
+                    <ScrollView style={styles.suggestionItem}>
                       <Text style={styles.suggestionText}>Suggested Tags:</Text>
-                      <View style={styles.tagsContainer}>
+                      <ScrollView style={styles.tagsContainer}>
                         {aiSuggestions.suggestedTags.map((tag: string, index: number) => (
                           <TagChip key={index} tag={tag} variant="outline" size="sm" />
                         ))}
-                      </View>
-                    </View>
+                      </ScrollView>
+                    </ScrollView>
                   )}
                   
                   {aiSuggestions.contentSuggestions && aiSuggestions.contentSuggestions.length > 0 && (
-                    <View style={styles.suggestionItem}>
+                    <ScrollView style={styles.suggestionItem}>
                       <Text style={styles.suggestionText}>Content Ideas:</Text>
                       {aiSuggestions.contentSuggestions.map((suggestion: string, index: number) => (
-                        <View key={index} style={styles.suggestionItem}>
+                        <ScrollView key={index} style={styles.suggestionItem}>
                           <Text style={styles.suggestionText}>{suggestion}</Text>
-                        </View>
+                        </ScrollView>
                       ))}
-                    </View>
+                    </ScrollView>
                   )}
-                </View>
+                </ScrollView>
               ) : (
                 <Text style={styles.aiEmptyText}>
                   {generatingSuggestions ? 'Generating suggestions...' : 'Tap refresh to get AI suggestions'}
@@ -583,32 +584,32 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         {/* Metadata */}
         <Card style={styles.metadataCard}>
           <CardContent>
-            <View style={styles.metadataItem}>
+            <ScrollView style={styles.metadataItem}>
               <Ionicons name="folder-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataText}>Bin:</Text>
               <Text style={styles.metadataText}>{getBinName(thoughtmark.binId)}</Text>
-            </View>
+            </ScrollView>
             
-            <View style={styles.metadataItem}>
+            <ScrollView style={styles.metadataItem}>
               <Ionicons name="time-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataText}>Created:</Text>
               <Text style={styles.metadataText}>{formatDate(thoughtmark.createdAt)}</Text>
-            </View>
+            </ScrollView>
             
             {thoughtmark.updatedAt !== thoughtmark.createdAt && (
-              <View style={styles.metadataItem}>
+              <ScrollView style={styles.metadataItem}>
                 <Ionicons name="refresh-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataText}>Updated:</Text>
                 <Text style={styles.metadataText}>{formatDate(thoughtmark.updatedAt)}</Text>
-              </View>
+              </ScrollView>
             )}
             
             {thoughtmark.dueDate && (
-              <View style={styles.metadataItem}>
+              <ScrollView style={styles.metadataItem}>
                 <Ionicons name="calendar-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataText}>Due:</Text>
                 <Text style={styles.metadataText}>{formatDate(thoughtmark.dueDate)}</Text>
-              </View>
+              </ScrollView>
             )}
           </CardContent>
         </Card>
@@ -618,17 +619,17 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
           <Card style={styles.tagsCard}>
             <CardContent>
               <Text style={styles.sectionTitle}>Tags</Text>
-              <View style={styles.tagsContainer}>
+              <ScrollView style={styles.tagsContainer}>
                 {thoughtmark.tags.map((tag: string, index: number) => (
                   <TagChip key={index} tag={tag} variant="primary" size="sm" />
                 ))}
-              </View>
+              </ScrollView>
             </CardContent>
           </Card>
         )}
 
         {/* Actions */}
-        <View style={styles.actionsContainer}>
+        <ScrollView style={styles.actionsContainer}>
           <Button><Text>Edit</Text></Button>
           <Button
             onPress={() => {
@@ -638,9 +639,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             variant="outline"
             style={{ padding: 8 }}
           ><Text>Share</Text></Button>
-        </View>
+        </ScrollView>
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 
