@@ -27,6 +27,21 @@ SplashScreen.preventAutoHideAsync().catch(() => {
   /* ignore */
 })
 
+// Enable ScrollView layout debugging in development
+if (__DEV__) {
+  (global as any).DEBUG_LAYOUT_PROPS = true;
+  
+  // Import and alias DebugScrollView for development
+  const { DebugScrollView } = require('./src/components/devtools/DebugScrollView');
+  const { ScrollView } = require('react-native');
+  
+  // Replace ScrollView with DebugScrollView in development
+  (global as any).__DEV_SCROLLVIEW_ALIAS__ = {
+    ScrollView: DebugScrollView,
+    originalScrollView: ScrollView
+  };
+}
+
 // Configure error overlay to auto-dismiss text string errors
 LogBox.ignoreLogs([
   'Text strings should be rendered within a <Text> component',
