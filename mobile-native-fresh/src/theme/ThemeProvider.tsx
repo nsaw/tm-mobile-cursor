@@ -13,7 +13,7 @@ import {
 } from './variants';
 
 interface ThemeContextType {
-  tokens: DesignTokens;
+  designTokens: DesignTokens;
   typography: typeof typographyTokens;
   buttonStyles: typeof buttonStyles;
   spacing: typeof spacingTokens;
@@ -73,7 +73,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   };
 
   const contextValue: ThemeContextType = {
-    tokens: designTokens,
+    designTokens: designTokens,
     typography: typographyTokens,
     buttonStyles: buttonStyles,
     spacing: spacingTokens,

@@ -10,7 +10,7 @@ import { useStoreKit } from '../hooks/useStoreKit';
 import { useAuth } from '../../auth/hooks/useAuth';
 
 export const PremiumScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  const { designTokens } = useTheme();
   const { products, loading, error, purchaseProduct, restorePurchases } = useStoreKit();
   const { user } = useAuth();
   const [purchasing, setPurchasing] = useState<string | null>(null);
@@ -18,94 +18,94 @@ export const PremiumScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: designTokens.colors.background,
     },
     content: {
       flex: 1,
-      padding: tokens.spacing.xl,
+      padding: designTokens.spacing.xl,
     },
     header: {
       alignItems: 'center',
-      marginBottom: tokens.spacing.xl,
+      marginBottom: designTokens.spacing.xl,
     },
     iconContainer: {
       width: 80,
       height: 80,
       borderRadius: 40,
-      backgroundColor: tokens.colors.accentMuted,
+      backgroundColor: designTokens.colors.accentMuted,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: designTokens.spacing.lg,
     },
     title: {
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.sm,
       textAlign: 'center',
     },
     subtitle: {
-      color: tokens.colors.textMuted,
+      color: designTokens.colors.textMuted,
       textAlign: 'center',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: designTokens.spacing.lg,
     },
     featuresList: {
-      marginBottom: tokens.spacing.xl,
+      marginBottom: designTokens.spacing.xl,
     },
     featureItem: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     featureIcon: {
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
     },
     productsContainer: {
-      marginBottom: tokens.spacing.xl,
+      marginBottom: designTokens.spacing.xl,
     },
     productCard: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.radius.lg,
-      padding: tokens.spacing.lg,
-      marginBottom: tokens.spacing.md,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.lg,
+      padding: designTokens.spacing.lg,
+      marginBottom: designTokens.spacing.md,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     productHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: designTokens.spacing.sm,
     },
     productTitle: {
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       fontWeight: '600',
     },
     productPrice: {
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       fontWeight: '700',
       fontSize: 18,
     },
     productDescription: {
-      color: tokens.colors.textMuted,
-      marginBottom: tokens.spacing.md,
+      color: designTokens.colors.textMuted,
+      marginBottom: designTokens.spacing.md,
     },
     button: {
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
     },
     restoreButton: {
-      backgroundColor: tokens.colors.surface,
+      backgroundColor: designTokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     errorText: {
-      color: tokens.colors.danger,
+      color: designTokens.colors.danger,
       textAlign: 'center',
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     premiumStatus: {
-      backgroundColor: tokens.colors.surface,
-      padding: tokens.spacing.md,
-      borderRadius: tokens.radius.md,
-      marginBottom: tokens.spacing.lg,
+      backgroundColor: designTokens.colors.surface,
+      padding: designTokens.spacing.md,
+      borderRadius: designTokens.radius.md,
+      marginBottom: designTokens.spacing.lg,
       alignItems: 'center',
     },
   });
@@ -180,7 +180,7 @@ export const PremiumScreen: React.FC = () => {
       <ScrollView style={styles.content}>
         <View style={styles.header}>
           <View style={styles.iconContainer}>
-            <Crown size={40} color={tokens.colors.background} />
+            <Crown size={40} color={designTokens.colors.background} />
           </View>
           
           <Heading><Text>Premium Features</Text></Heading>
@@ -189,8 +189,8 @@ export const PremiumScreen: React.FC = () => {
 
         {user?.isPremium && (
           <View style={styles.premiumStatus}>
-            <Check size={24} color={tokens.colors.success} />
-            <Text style={{ color: tokens.colors.success, marginTop: tokens.spacing.xs }}>
+            <Check size={24} color={designTokens.colors.success} />
+            <Text style={{ color: designTokens.colors.success, marginTop: designTokens.spacing.xs }}>
               You are currently a Premium user!
             </Text>
           </View>
@@ -200,7 +200,7 @@ export const PremiumScreen: React.FC = () => {
           <Heading><Text>What's Included:</Text></Heading>
           {premiumFeatures.map((feature, index) => (
             <View key={index} style={styles.featureItem}>
-              <Check size={20} color={tokens.colors.accent} style={styles.featureIcon} />
+              <Check size={20} color={designTokens.colors.accent} style={styles.featureIcon} />
               <Text>{feature}</Text>
             </View>
           ))}
@@ -224,7 +224,7 @@ export const PremiumScreen: React.FC = () => {
                 onPress={() => handlePurchase(product.productId)}
                 disabled={loading || purchasing === product.productId}
               >
-                <Text style={{ color: tokens.colors.background, fontWeight: '600' }}>
+                <Text style={{ color: designTokens.colors.background, fontWeight: '600' }}>
                   {purchasing === product.productId ? 'Processing...' : 'Upgrade Now'}
                 </Text>
               </Button>
@@ -237,8 +237,8 @@ export const PremiumScreen: React.FC = () => {
           onPress={handleRestore}
           disabled={loading}
         >
-          <RefreshCw size={16} color={tokens.colors.text} style={{ marginRight: tokens.spacing.sm }} />
-          <Text style={{ color: tokens.colors.text, fontWeight: '600' }}>
+                        <RefreshCw size={16} color={designTokens.colors.text} style={{ marginRight: designTokens.spacing.sm }} />
+              <Text style={{ color: designTokens.colors.text, fontWeight: '600' }}>
             Restore Purchases
           </Text>
         </Button>
