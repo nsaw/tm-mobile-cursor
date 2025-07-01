@@ -24,6 +24,26 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   isRecording = false,
 }) => {
   const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
   const [scaleValue] = useState(new Animated.Value(1));
 

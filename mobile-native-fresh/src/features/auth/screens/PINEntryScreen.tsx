@@ -107,7 +107,7 @@ export const PINEntryScreen: React.FC = () => {
       >
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
             style={styles.cancelButton}
             accessibilityRole="button"
             accessible={true}
@@ -137,15 +137,7 @@ export const PINEntryScreen: React.FC = () => {
           {/* PIN Display */}
           <View style={styles.pinDisplay}>
             {Array.from({ length: 6 }).map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.pinDot,
-                  index < pin.length && styles.pinDotFilled,
-                ]}
-              />
-            ))}
-          </View>
+              <View><Text>))}</Text></View>
 
           {/* Number Pad */}
           <View style={[styles.numberPad, isLocked && styles.numberPadDisabled]}>
@@ -153,7 +145,7 @@ export const PINEntryScreen: React.FC = () => {
               <TouchableOpacity
                 key={number}
                 style={[styles.numberButton, isLocked && styles.numberButtonDisabled]}
-                onPress={() => !isLocked && handleKeyPress(number.toString())}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> !isLocked && handleKeyPress(number.toString())}
                 disabled={isLocked}
                 accessibilityRole="button"
                 accessible={true}
@@ -175,7 +167,7 @@ export const PINEntryScreen: React.FC = () => {
             
             <TouchableOpacity
               style={styles.numberButton}
-              onPress={() => handleKeyPress('0')}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleKeyPress('0')}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Enter digit 0"
@@ -198,7 +190,7 @@ export const PINEntryScreen: React.FC = () => {
           <TouchableOpacity
             style={[
               styles.submitButton,
-              pin.length >= 4 && styles.submitButtonActive,
+              pin.length  accessibilityRole="button" accessible={true} accessibilityLabel="Button">= 4 && styles.submitButtonActive,
             ]}
             onPress={handlePINSubmit}
             disabled={pin.length < 4 || isLoading}

@@ -53,6 +53,7 @@
     "expo-av": "^15.1.6",
     "expo-blur": "^14.1.5",
     "expo-font": "~13.3.1",
+    "expo-in-app-purchases": "^14.5.0",
     "expo-notifications": "~0.31.3",
     "expo-speech": "^13.1.7",
     "expo-splash-screen": "~0.30.9",

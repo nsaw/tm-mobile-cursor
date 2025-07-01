@@ -151,7 +151,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowPassword(!showPassword)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel={showPassword ? "Hide password" : "Show password"}

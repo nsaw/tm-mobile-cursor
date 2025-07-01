@@ -96,7 +96,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <Pressable
       style={finalButtonStyle}
       onPress={disabled ? undefined : onPress}
-      onPressIn={() => setIsPressed(true)}
+      onPressIn={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       accessibilityRole="button"

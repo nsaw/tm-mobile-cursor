@@ -22,6 +22,26 @@ const logo = require('../../../../assets/logo.png');
 
 export const SignUpScreen: React.FC = () => {
   const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
   const { signUp, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();

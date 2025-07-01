@@ -312,7 +312,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const renderSortButton = (sortType: 'date' | 'title' | 'pinned', label: string) => (
     <TouchableOpacity
       style={[styles.sortButton, sortBy === sortType && styles.sortButtonActive]}
-      onPress={() =>  setSortBy(sortType)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSortBy(sortType)}
       accessibilityRole="button"
       accessible={true}
       accessibilityLabel={sortType}
@@ -330,7 +330,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <TouchableOpacity
           style={[styles.binFilterButton, !selectedBin && styles.binFilterButtonActive]}
-          onPress={() =>  setSelectedBin(null)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSelectedBin(null)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -343,7 +343,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
           <TouchableOpacity
             key={bin.id}
             style={[styles.binFilterButton, selectedBin === bin.id && styles.binFilterButtonActive]}
-            onPress={() =>  setSelectedBin(bin.id)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSelectedBin(bin.id)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -390,7 +390,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
                 style={[styles.dropdownButton, !selectedBin && styles.dropdownButtonActive]}
-                onPress={() =>  setSelectedBin(null)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSelectedBin(null)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -403,7 +403,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 <TouchableOpacity
                   key={bin.id}
                   style={[styles.dropdownButton, selectedBin === bin.id && styles.dropdownButtonActive]}
-                  onPress={() =>  setSelectedBin(bin.id)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSelectedBin(bin.id)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -422,7 +422,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dropdownContainer}>
               <TouchableOpacity
                 style={[styles.dropdownButton, selectedTags.length === 0 && styles.dropdownButtonActive]}
-                onPress={() =>  setSelectedTags([])}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setSelectedTags([])}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -435,7 +435,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 <TouchableOpacity
                   key={tag}
                   style={[styles.dropdownButton, selectedTags.includes(tag) && styles.dropdownButtonActive]}
-                  onPress={() =>  {
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  {
                     if (selectedTags.includes(tag)) {
                       setSelectedTags(selectedTags.filter(t => t !== tag));
                     } else {

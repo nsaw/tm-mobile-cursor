@@ -122,7 +122,7 @@ export const ContentScreen: React.FC = () => {
         <TouchableOpacity
           key={page.route}
           style={styles.card}
-          onPress={() =>  navigation.navigate(page.route as any)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.navigate(page.route as any)}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel={page.title}

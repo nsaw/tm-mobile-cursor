@@ -24,7 +24,7 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
+const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLabel="Modal"> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
   const { tokens, typography } = useTheme();
   return (
     <TouchableOpacity
@@ -182,19 +182,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Pagination Dots */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View key={i} style={{
-                width: 8,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: i === currentStep ? tokens.colors.accent : tokens.colors.border,
-                marginHorizontal: 4,
-              }} />
-            ))}
-          </View>
+              <View><Text>))}</Text></View>
           {/* Buttons */}
           <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
-            <ModalButton onPress={handlePrevious} disabled={currentStep === 0}>Previous</ModalButton>
-            <ModalButton onPress={handleNext}>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</ModalButton>
+            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>Previous</Text></ModalButton>
+            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
           </View>
         </View>
       </View>
