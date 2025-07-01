@@ -14,6 +14,19 @@ import { Text } from '../components/ui/Text';
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
 import { SignUpScreen } from '../features/auth/screens/SignUp';
+import { PINEntryScreen } from '../features/auth/screens/PINEntryScreen';
+
+// PIN Entry Wrapper for navigation
+const PINEntryWrapper = ({ route }: any) => {
+  const { mode, onSuccess, onCancel } = route.params || {};
+  return (
+    <PINEntryScreen 
+      mode={mode || 'verify'} 
+      onSuccess={onSuccess} 
+      onCancel={onCancel} 
+    />
+  );
+};
 
 // Home Screens
 import { DashboardScreen } from '../features/home/screens/DashboardScreen';
@@ -159,6 +172,7 @@ const AuthStack = () => (
   >
     <Stack.Screen name="SignIn" component={SignInScreen} />
     <Stack.Screen name="SignUp" component={SignUpScreen} />
+    <Stack.Screen name="PINEntry" component={PINEntryWrapper} />
   </Stack.Navigator>
 );
 
