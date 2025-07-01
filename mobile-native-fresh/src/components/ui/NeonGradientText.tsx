@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TextStyle } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
+
 import { Text } from './Text';
 
 interface NeonGradientTextProps {

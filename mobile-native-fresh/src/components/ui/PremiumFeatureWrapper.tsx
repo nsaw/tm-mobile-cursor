@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useTheme } from '../../theme/ThemeProvider';
+
 import { Text } from './Text';
 import { Button } from './Button';
 

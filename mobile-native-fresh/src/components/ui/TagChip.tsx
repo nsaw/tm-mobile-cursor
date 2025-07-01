@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getBadgeVariants, mergeVariantStyles } from '../../theme/variants';
+
 import { Text } from './Text';
 
 interface TagChipProps {

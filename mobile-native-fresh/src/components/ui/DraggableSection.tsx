@@ -46,7 +46,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
-  const { typography, spacing, tokens } = useTheme();
+  const { tokens, typography, spacing } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;

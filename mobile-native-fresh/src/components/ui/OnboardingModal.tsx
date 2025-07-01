@@ -4,6 +4,7 @@ import { Brain, Mic, Search } from 'lucide-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui/Text';
 
@@ -62,8 +63,8 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
 };
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClose }) => {
+  const { tokens, typography, spacing } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
-  const { typography, spacing, tokens } = useTheme();
 
   const iconSize = tokens.spacing.xxxl * 2;
 
@@ -194,9 +195,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             <ModalButton
               onPress={handlePrevious}
               disabled={currentStep === 0}
-            >
-              Previous
-            </ModalButton>
+            ><Text>Previous</Text></ModalButton>
             <ModalButton
               onPress={handleNext}
             >

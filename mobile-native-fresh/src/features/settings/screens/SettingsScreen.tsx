@@ -152,7 +152,8 @@ export const SettingsScreen: React.FC = () => {
     showSwitch = false, 
     switchValue = false, 
     onSwitchChange = () => {},
-    showArrow = true 
+    showArrow = true,
+    tokens
   }: {
     icon: string;
     title: string;
@@ -162,6 +163,7 @@ export const SettingsScreen: React.FC = () => {
     switchValue?: boolean;
     onSwitchChange?: (value: boolean) => void;
     showArrow?: boolean;
+    tokens: any;
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
@@ -434,18 +436,21 @@ export const SettingsScreen: React.FC = () => {
               title="Profile"
               subtitle="Manage your account information"
               onPress={() => navigation.navigate('Profile')}
+              tokens={tokens}
             />
             <SettingItem
               icon="key"
               title="Security"
               subtitle="Password, 2FA, and security settings"
               onPress={() => navigation.navigate('Security')}
+              tokens={tokens}
             />
             <SettingItem
               icon="crown"
               title="Premium"
               subtitle="Upgrade to unlock advanced features"
               onPress={() => navigation.navigate('Premium')}
+              tokens={tokens}
             />
           </Card>
         </View>
@@ -459,12 +464,14 @@ export const SettingsScreen: React.FC = () => {
               title="Theme"
               subtitle="Light, dark, or auto"
               onPress={() => navigation.navigate('Theme')}
+              tokens={tokens}
             />
             <SettingItem
               icon="notifications"
               title="Notifications"
               subtitle="Manage notification preferences"
               onPress={() => setNotificationsExpanded(!notificationsExpanded)}
+              tokens={tokens}
             />
             {notificationsExpanded && (
               <View style={styles.expandedSettings}>
@@ -475,6 +482,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={marketingEmails}
                   onSwitchChange={setMarketingEmails}
                   showArrow={false}
+                  tokens={tokens}
                 />
                 <SettingItem
                   icon="sparkles"
@@ -483,6 +491,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={aiNotifications}
                   onSwitchChange={setAiNotifications}
                   showArrow={false}
+                  tokens={tokens}
                 />
                 <SettingItem
                   icon="time"
@@ -491,6 +500,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={smartReminders}
                   onSwitchChange={setSmartReminders}
                   showArrow={false}
+                  tokens={tokens}
                 />
               </View>
             )}
@@ -499,12 +509,14 @@ export const SettingsScreen: React.FC = () => {
               title="Voice Commands"
               subtitle="Set up Siri or Google Assistant"
               onPress={() => setShowSiriDialog(true)}
+              tokens={tokens}
             />
             <SettingItem
               icon="cloud-upload"
               title="Export Data"
               subtitle="Download your data"
               onPress={() => navigation.navigate('Export')}
+              tokens={tokens}
             />
           </Card>
         </View>
@@ -521,6 +533,7 @@ export const SettingsScreen: React.FC = () => {
               switchValue={showNavLabels}
               onSwitchChange={setShowNavLabels}
               showArrow={false}
+              tokens={tokens}
             />
           </Card>
         </View>
@@ -534,24 +547,28 @@ export const SettingsScreen: React.FC = () => {
               title="Help & Support"
               subtitle="Get help or contact support"
               onPress={() => navigation.navigate('Help')}
+              tokens={tokens}
             />
             <SettingItem
               icon="document-text"
               title="Terms of Service"
               subtitle="Read our terms"
               onPress={() => navigation.navigate('Terms')}
+              tokens={tokens}
             />
             <SettingItem
               icon="shield-checkmark"
               title="Privacy Policy"
               subtitle="Read our privacy policy"
               onPress={() => navigation.navigate('Privacy')}
+              tokens={tokens}
             />
             <SettingItem
               icon="mail"
               title="Contact Support"
               subtitle="Email or message us"
               onPress={() => navigation.navigate('Contact')}
+              tokens={tokens}
             />
           </Card>
         </View>
@@ -623,12 +640,14 @@ export const SettingsScreen: React.FC = () => {
               title="Sign Out"
               subtitle="Sign out of your account"
               onPress={handleSignOut}
+              tokens={tokens}
             />
             <SettingItem
               icon="trash"
               title="Delete Account"
               subtitle="Permanently delete your account"
               onPress={handleDeleteAccount}
+              tokens={tokens}
             />
           </Card>
         </View>
@@ -642,12 +661,14 @@ export const SettingsScreen: React.FC = () => {
               title="Version"
               subtitle="1.0.0"
               showArrow={false}
+              tokens={tokens}
             />
             <SettingItem
               icon="code-slash"
               title="Build"
               subtitle="2024.1.0"
               showArrow={false}
+              tokens={tokens}
             />
           </Card>
         </View>

@@ -9,7 +9,6 @@ import {
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 import type { NavigationProp } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
@@ -22,7 +21,6 @@ import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
-import { RootStackParamList } from '../../../navigation/types';
 
 type SortType = 'name' | 'count' | 'date' | 'created' | 'updated';
 

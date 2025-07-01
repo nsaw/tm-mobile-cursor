@@ -200,36 +200,28 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
                 onPress={handleDesignSystemDemo}
                 leftIcon={<Ionicons name="color-palette-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Design System Demo
-              </Button>
+              ><Text>Design System Demo</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleDatabaseReset}
                 leftIcon={<Ionicons name="refresh-outline" size={16} color={getIconColor('danger')} />}
                 style={styles.adminButton}
-              >
-                Reset Database
-              </Button>
+              ><Text>Reset Database</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleExportData}
                 leftIcon={<Ionicons name="download-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Export Data
-              </Button>
+              ><Text>Export Data</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleImportData}
                 leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Import Data
-              </Button>
+              ><Text>Import Data</Text></Button>
             </View>
           </CardContent>
         </Card>

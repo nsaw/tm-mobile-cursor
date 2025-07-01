@@ -28,8 +28,7 @@ import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
-import { Text as CustomText, SectionHeader, ButtonText } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
+import { Text as CustomText } from '../../../components/ui/Text';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 const { width } = Dimensions.get('window');
@@ -1010,8 +1009,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
-              <CustomText variant="title" numberOfLines={1}>THOUGHTMARKS</CustomText>
-              <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
+              <CustomText variant="title" numberOfLines={1}><Text>THOUGHTMARKS</Text></CustomText>
+              <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>

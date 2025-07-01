@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useStoreKit } from '../../settings/hooks/useStoreKit';
 import { Button } from '../../../components/ui/Button';

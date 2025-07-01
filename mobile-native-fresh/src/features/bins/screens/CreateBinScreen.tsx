@@ -17,7 +17,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useBins } from '../../home/hooks/useBins';
-import { Button } from '../../../components/ui/Button';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { Card, CardContent } from '../../../components/ui/Card';
 import { DarkAlertDialog } from '../../../components/ui/DarkAlertDialog';

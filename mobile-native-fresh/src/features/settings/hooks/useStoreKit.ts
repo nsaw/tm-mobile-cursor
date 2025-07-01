@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
+
 import { useAuth } from '../../auth/hooks/useAuth';
-import { storeKitService, StoreKitProduct, StoreKitPurchase } from '../../../services/storekit';
+import { storeKitService, StoreKitProduct } from '../../../services/storekit';
 
 export const useStoreKit = () => {
   const { user, refreshUser } = useAuth();

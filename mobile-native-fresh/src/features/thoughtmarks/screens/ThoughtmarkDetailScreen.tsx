@@ -637,9 +637,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             }}
             variant="outline"
             style={{ padding: 8 }}
-          >
-            Share
-          </Button>
+          ><Text>Share</Text></Button>
         </View>
       </ScrollView>
     </View>
