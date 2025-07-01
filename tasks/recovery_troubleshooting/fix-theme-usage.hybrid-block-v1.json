@@ -1,0 +1,54 @@
+{
+  "notes": [
+    "🧠 MISSION: Project-wide Theme Usage Audit and Enforcement",
+    "🎯 GOAL: Remove all direct `tokens` or `designTokens` imports from non-theme files; ensure every usage of tokens in components follows the `const { tokens } = useTheme()` pattern, with only one per function.",
+    "✅ Pre-check: Parse each modified file for valid JS/TS syntax before applying changes.",
+    "✅ If a file fails to parse, revert changes for that file and alert for manual review.",
+    "✅ After mutation, run lint and type-check globally; block commit if any fatal error remains.",
+    "✅ On parse fail: revert and alert, do not commit broken files.",
+    "✅ Commit and tag a rollback checkpoint before mutation for safety.",
+    "✅ Lint and run tests after all refactors, before commit/push.",
+    "📌 CONTEXT: App uses strict theming architecture. Only ThemeProvider and files in src/theme/* may import tokens directly. All components must use tokens from useTheme(), and helpers/utilities must accept tokens as a param.",
+    "💥 Bug: Current runtime and lint errors due to duplicate tokens declarations, illegal direct imports, and improper useTheme hook placement.",
+    "🔧 Fix Summary: Remove/replace all illegal imports, deduplicate useTheme calls, refactor helpers, enforce correct token access, and block any files that fail auto-fix.",
+    "🔐 RELEVANCE: Mission-critical for dynamic theming, type safety, and CI/CD pipeline stability."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before theme usage audit\"",
+      "git tag v1.3.7_theme-enforcement-rollback_$(date +'%y%m%d_%H%MUTC')",
+      "sh scripts/backup-tag-push.sh v1.3.7_theme-enforcement-rollback_$(date +'%y%m%d_%H%MUTC')"
+    ]
+  },
+  "branch": "fix/v1.3.7_theme-usage-enforcement",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "THEME USAGE AUDIT & FIX",
+      "actions": [
+        "Scan all .ts and .tsx files in src/ for any import of `tokens` or `designTokens` except src/theme/* and ThemeProvider.tsx.",
+        "Replace any illegal import with a pattern that receives tokens from props/args, or, for components, use `const { tokens } = useTheme()` inside the function body only.",
+        "Find all files where `const { tokens } = useTheme()` is declared more than once per function/component, and reduce to one per scope.",
+        "For helper/util files (e.g., getTextVariant, variants.ts), enforce that tokens are always passed as a parameter, never accessed via useTheme.",
+        "Audit all module-scope usage of tokens or useTheme, move into the appropriate function/component.",
+        "For each fixed file, run a parse check before saving. If parse fails, revert and alert user for manual review."
+      ],
+      "commit": "fix: enforce theme usage, remove direct imports, deduplicate tokens hooks",
+      "tag": "v1.3.7_theme-usage-enforcement_$(date +'%y%m%d_%H%MUTC')"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete theme usage enforcement project-wide",
+    "tag": "v1.3.7_theme-usage-complete_$(date +'%y%m%d_%H%MUTC')",
+    "notes": "All non-theme files now access tokens only via useTheme or as function arguments. No duplicate tokens hook calls remain. Rollback and safety tags applied. Lint and type-check clean."
+  }
+}
+
