@@ -16,12 +16,14 @@ This is Phase 1 of the system lifecycle. You **must complete this full pass** be
 | 3.5   | tasks/v1.3.2/3.5_v1.3.2_tokens-refactor.cursor-instruction.json | Refactor `tokens` → `designTokens` usage |
 | 4     | tasks/v1.3.2/4_v1.3.2_storekit-premium.cursor-instruction.json | StoreKit Purchase, Upgrade, Restore |
 | 4.5   | tasks/v1.3.2/4.5_v1.3.2_syntax-safe-validation.cursor-instruction.json | ✅ HARD STOP: Boot-safe, lint-pass validator |
-| 5     | tasks/v1.3.2/5_v1.3.2_hydration-init.cursor-instruction.json | Theme/Auth Hydration Restore & Token Sync |
-| 6     | tasks/v1.3.2/6_v1.3.2_clickable-crawl.cursor-instruction.json | Clickable Routing + Missing Page Audit |
+| 5     | tasks/v1.3.2/5_v1.3.2_hydration-init.cursor-instruction.json | ✅ Theme/Auth Hydration Restore & Token Sync |
+| 6     | tasks/v1.3.2/6_v1.3.2_clickable-crawl.cursor-instruction.json | ✅ Clickable Routing + Missing Page Audit |
 | 7     | tasks/v1.3.2/7_v1.3.2_final-validation.cursor-instruction.json | Dry QA Pass + Global Function Audit |
 | 8     | tasks/v1.3.2/8_v1.3.2_unified-clickable-theme-role-enforcer.cursor-instruction.json | Role/Theme Enforcement for All Clickables |
 
 > ⚠️ `Phase 4.5` must pass **`tsc`, `eslint`, and `expo start`** boot checks before moving forward.
+
+> 📝 **Phase 6 Note**: Accessibility props (accessibilityRole, accessible, accessibilityLabel) enforcement deferred to v1.4.0/1_auto-roleview-mapping for semantic refactor integration.
 
 ---
 
@@ -31,7 +33,7 @@ These begin on a **new branch**. You must have passed all v1.3.2 phases before s
 
 | Phase | File Path | Description |
 |-------|-----------|-------------|
-| 1     | tasks/v1.4.0/1_v1.4.0_auto-roleview-mapping.cursor-instruction.json | Apply Roles to Clickables & Containers |
+| 1     | tasks/v1.4.0/1_v1.4.0_auto-roleview-mapping.cursor-instruction.json | Apply Roles to Clickables & Containers + Accessibility Props |
 | 2     | tasks/v1.4.0/2_v1.4.0_theme-role-global-enforce.cursor-instruction.json | Theme Token Overlay by Role Type |
 | 3     | tasks/v1.4.0/3_v1.4.0_glass-morphism-ui.cursor-instruction.json | Apply Glass Morphism to Cards, Sections |
 | 4     | tasks/v1.4.0/4_v1.4.0_ui-refactor-preflight.cursor-instruction.json | Surgical Prep of Layout, Casing, Spacing |
