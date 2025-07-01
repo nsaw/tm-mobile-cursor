@@ -1,0 +1,9 @@
+[ 192]  .
+├── [  96]  assets
+│   └── [  96]  SVG
+│       └── [ 112]  brains-4.svg
+├── [  96]  components
+│   └── [ 126]  ProcessingLoader.tsx
+└── [   0]  folder-structure-with-sizes.txt
+
+4 directories, 3 files

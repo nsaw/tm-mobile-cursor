@@ -21,6 +21,9 @@ export const PINEntryScreen: React.FC = () => {
   const { tokens } = useTheme();
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockoutTime, setLockoutTime] = useState(0);
 
   const styles = getStyles(tokens);
 
@@ -30,6 +33,17 @@ export const PINEntryScreen: React.FC = () => {
       return;
     }
 
+    if (isLocked) {
+      const remainingTime = Math.ceil((lockoutTime - Date.now()) / 1000);
+      if (remainingTime > 0) {
+        Alert.alert('Account Locked', `Please wait ${remainingTime} seconds before trying again.`);
+        return;
+      } else {
+        setIsLocked(false);
+        setAttempts(0);
+      }
+    }
+
     setIsLoading(true);
     try {
       // TODO: Implement actual PIN validation logic
@@ -37,10 +51,32 @@ export const PINEntryScreen: React.FC = () => {
       const demoPIN = '1234';
       
       if (pin === demoPIN) {
+        // Success - reset attempts and navigate back
+        setAttempts(0);
+        setPin('');
         navigation.goBack();
       } else {
-        Alert.alert('Incorrect PIN', 'Please try again');
+        // Failed attempt
+        const newAttempts = attempts + 1;
+        setAttempts(newAttempts);
         setPin('');
+        
+        if (newAttempts >= 3) {
+          // Lock account for 5 minutes after 3 failed attempts
+          setIsLocked(true);
+          setLockoutTime(Date.now() + (5 * 60 * 1000)); // 5 minutes
+          Alert.alert(
+            'Account Locked', 
+            'Too many failed attempts. Please wait 5 minutes before trying again.',
+            [{ text: 'OK' }]
+          );
+        } else {
+          const remainingAttempts = 3 - newAttempts;
+          Alert.alert(
+            'Incorrect PIN', 
+            `Please try again. ${remainingAttempts} attempt${remainingAttempts !== 1 ? 's' : ''} remaining.`
+          );
+        }
       }
     } catch (error) {
       Alert.alert('Error', 'Failed to validate PIN. Please try again.');
@@ -84,6 +120,19 @@ export const PINEntryScreen: React.FC = () => {
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.message}>{message}</Text>
+          
+          {/* Attempts and Lockout Status */}
+          {attempts > 0 && !isLocked && (
+            <Text style={styles.attemptsText}>
+              {3 - attempts} attempt{3 - attempts !== 1 ? 's' : ''} remaining
+            </Text>
+          )}
+          
+          {isLocked && (
+            <Text style={styles.lockoutText}>
+              Account locked. Please wait {Math.ceil((lockoutTime - Date.now()) / 1000)} seconds.
+            </Text>
+          )}
 
           {/* PIN Display */}
           <View style={styles.pinDisplay}>
@@ -99,17 +148,18 @@ export const PINEntryScreen: React.FC = () => {
           </View>
 
           {/* Number Pad */}
-          <View style={styles.numberPad}>
+          <View style={[styles.numberPad, isLocked && styles.numberPadDisabled]}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
               <TouchableOpacity
                 key={number}
-                style={styles.numberButton}
-                onPress={() => handleKeyPress(number.toString())}
+                style={[styles.numberButton, isLocked && styles.numberButtonDisabled]}
+                onPress={() => !isLocked && handleKeyPress(number.toString())}
+                disabled={isLocked}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel={`Enter digit ${number}`}
               >
-                <Text style={styles.numberText}>{number}</Text>
+                <Text style={[styles.numberText, isLocked && styles.numberTextDisabled]}>{number}</Text>
               </TouchableOpacity>
             ))}
             
@@ -261,5 +311,18 @@ const getStyles = (tokens: any) => StyleSheet.create({
   },
   submitButtonTextActive: {
     color: tokens.colors.background,
+  },
+  attemptsText: {
+    fontSize: tokens.typography.fontSize.sm,
+    color: tokens.colors.textSecondary,
+    textAlign: 'center',
+    marginBottom: tokens.spacing.md,
+  },
+  lockoutText: {
+    fontSize: tokens.typography.fontSize.sm,
+    color: '#ff4444',
+    textAlign: 'center',
+    marginBottom: tokens.spacing.md,
+    fontWeight: tokens.typography.fontWeight.semibold,
   },
 }); 

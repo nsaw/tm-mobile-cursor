@@ -1,0 +1,117 @@
+[ 416]  .
+├── [ 128]  components
+│   └── [ 704]  ui
+│       ├── [4.6K]  ActionSheet.tsx
+│       ├── [7.5K]  BottomNav.tsx
+│       ├── [4.1K]  Button.tsx
+│       ├── [3.3K]  Card.tsx
+│       ├── [4.4K]  DarkAlertDialog.tsx
+│       ├── [7.6K]  DesignSystemDemo.tsx
+│       ├── [6.9K]  DraggableSection.tsx
+│       ├── [4.2K]  FloatingActionButton.tsx
+│       ├── [1.1K]  GlassmorphicContainer.tsx
+│       ├── [7.0K]  LoadingScreen.tsx
+│       ├── [3.0K]  ModernHeader.tsx
+│       ├── [1.4K]  NeonGradientText.tsx
+│       ├── [7.1K]  OnboardingModal.tsx
+│       ├── [1.9K]  PremiumFeatureWrapper.tsx
+│       ├── [3.8K]  SessionHydrationGuard.tsx
+│       ├── [2.9K]  TagChip.tsx
+│       ├── [1.4K]  TagFilter.tsx
+│       ├── [6.0K]  Text.tsx
+│       ├── [ 17K]  VoiceRecorder.tsx
+│       └── [1.8K]  VoiceRecorderProvider.tsx
+├── [  96]  config
+│   └── [ 909]  firebase.ts
+├── [ 352]  features
+│   ├── [  96]  ai
+│   │   └── [  96]  screens
+│   │       └── [ 20K]  AIToolsScreen.tsx
+│   ├── [ 160]  auth
+│   │   ├── [ 160]  components
+│   │   │   ├── [5.3K]  LoginForm.tsx
+│   │   │   ├── [2.2K]  OAuthButton.tsx
+│   │   │   └── [8.0K]  RegistrationForm.tsx
+│   │   ├── [ 160]  hooks
+│   │   │   ├── [ 10K]  useAuth.ts
+│   │   │   ├── [1.7K]  useNativeSocialAuth.ts
+│   │   │   └── [3.5K]  useUserProfile.ts
+│   │   └── [ 160]  screens
+│   │       ├── [9.5K]  PINEntryScreen.tsx
+│   │       ├── [5.5K]  SignIn.tsx
+│   │       └── [5.5K]  SignUp.tsx
+│   ├── [ 128]  bins
+│   │   └── [ 128]  screens
+│   │       ├── [ 12K]  AllBinsScreen.tsx
+│   │       └── [ 12K]  CreateBinScreen.tsx
+│   ├── [ 128]  content
+│   │   └── [  96]  screens
+│   │       └── [4.3K]  ContentScreen.tsx
+│   ├── [ 224]  home
+│   │   ├── [ 384]  components
+│   │   │   ├── [2.3K]  AIToolsCard.tsx
+│   │   │   ├── [1.9K]  BinCard.tsx
+│   │   │   ├── [1.5K]  DashboardExample.tsx
+│   │   │   ├── [2.3K]  QuickActions.tsx
+│   │   │   ├── [4.4K]  README.md
+│   │   │   ├── [2.8K]  SearchBar.tsx
+│   │   │   ├── [4.5K]  TagFilter.tsx
+│   │   │   ├── [5.1K]  TaskCard.tsx
+│   │   │   ├── [ 11K]  ThoughtmarkCard.tsx
+│   │   │   └── [1.5K]  ThoughtmarkList.tsx
+│   │   ├── [ 128]  hooks
+│   │   │   ├── [4.6K]  useBins.ts
+│   │   │   └── [4.8K]  useThoughtmarks.ts
+│   │   ├── [6.4K]  README.md
+│   │   └── [ 160]  screens
+│   │       ├── [ 36K]  DashboardScreen.tsx
+│   │       ├── [9.3K]  DetailScreen.tsx
+│   │       └── [ 13K]  HomeScreen.tsx
+│   ├── [  96]  search
+│   │   └── [  96]  screens
+│   │       └── [ 17K]  SearchScreen.tsx
+│   ├── [ 128]  settings
+│   │   └── [ 448]  screens
+│   │       ├── [7.2K]  AdminDashboardScreen.tsx
+│   │       ├── [1.2K]  ContactScreen.tsx
+│   │       ├── [1.9K]  ExportScreen.tsx
+│   │       ├── [1.9K]  HelpScreen.tsx
+│   │       ├── [8.5K]  HowToScreen.tsx
+│   │       ├── [1.8K]  PremiumScreen.tsx
+│   │       ├── [1.9K]  PrivacyScreen.tsx
+│   │       ├── [1.8K]  ProfileScreen.tsx
+│   │       ├── [1.9K]  SecurityScreen.tsx
+│   │       ├── [ 24K]  SettingsScreen.tsx
+│   │       ├── [1.9K]  TermsScreen.tsx
+│   │       └── [1.2K]  ThemeScreen.tsx
+│   └── [ 128]  thoughtmarks
+│       └── [ 160]  screens
+│           ├── [ 18K]  AllThoughtmarksScreen.tsx
+│           ├── [ 22K]  ThoughtmarkDetailScreen.tsx
+│           └── [ 32K]  UnifiedThoughtmarkScreen.tsx
+├── [   0]  folder-structure-with-sizes.txt
+├── [  96]  hooks
+│   └── [2.5K]  useDashboardOrder.ts
+├── [ 160]  navigation
+│   ├── [7.2K]  AppNavigator.tsx
+│   ├── [4.5K]  routes.ts
+│   └── [1.8K]  types.ts
+├── [  96]  services
+│   └── [9.1K]  api.ts
+├── [ 320]  theme
+│   ├── [2.9K]  buttonStyles.ts
+│   ├── [1.4K]  spacing.ts
+│   ├── [1.9K]  theme.d.ts
+│   ├── [ 798]  theme.ts
+│   ├── [2.7K]  ThemeProvider.tsx
+│   ├── [3.7K]  tokens.ts
+│   ├── [2.0K]  typography.ts
+│   └── [ 10K]  variants.ts
+├── [  96]  types
+│   └── [2.7K]  index.ts
+└── [ 160]  utils
+    ├── [ 283]  getRadiusForHeight.ts
+    ├── [ 436]  getTextVariant.ts
+    └── [5.1K]  index.ts
+
+31 directories, 84 files
