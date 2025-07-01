@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
   Text,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   Dimensions,
   useWindowDimensions,
@@ -21,6 +19,7 @@ import { AIToolsCard } from '../components/AIToolsCard';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { ThoughtmarkWithBin } from '../../../types';
+import { DebugScrollView } from '../../../components/devtools/DebugScrollView';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { NeonGradientText } from '../../../components/ui/NeonGradientText';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
@@ -29,8 +28,6 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
 import { Text as CustomText } from '../../../components/ui/Text';
-// import SiriShortcutsService from '../../../services/SiriShortcutsService';
-import { AutoRoleView } from '../../../components/ui/AutoRoleView';
 
 const { width } = Dimensions.get('window');
 
@@ -344,16 +341,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       
       case 'recent-thoughtmarks':
         return (
-          <ScrollView>
+          <DebugScrollView debugId="recent-thoughtmarks-container">
             {/* Tags Filter - Moved here from separate section */}
-            <ScrollView style={styles.tagsContainer}>
-              <ScrollView style={styles.tagsHeader}>
+            <DebugScrollView debugId="tags-container" style={styles.tagsContainer}>
+              <DebugScrollView debugId="tags-header" style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                   <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
-              </ScrollView>
-              <ScrollView 
+              </DebugScrollView>
+              <DebugScrollView 
+                debugId="tags-horizontal-scroll"
                 horizontal 
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.tagsScrollContent}
@@ -396,13 +394,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     </Text>
                   </TouchableOpacity>
                 ))}
-              </ScrollView>
-            </ScrollView>
+              </DebugScrollView>
+            </DebugScrollView>
 
             {/* Recent Thoughtmarks List */}
             {recentThoughtmarks.length > 0 ? (
               <>
-                <ScrollView style={styles.thoughtmarksList}>
+                <DebugScrollView debugId="thoughtmarks-list" style={styles.thoughtmarksList}>
                   {recentThoughtmarks.map((thoughtmark, idx, arr) => (
                     <ThoughtmarkCard
                       key={thoughtmark.id}
@@ -414,7 +412,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
                     />
                   ))}
-                </ScrollView>
+                </DebugScrollView>
                 
                 {/* View More Card - Reduced height */}
                 <TouchableOpacity
@@ -430,21 +428,21 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 </TouchableOpacity>
               </>
             ) : (
-              <ScrollView style={styles.emptyState}>
+              <DebugScrollView debugId="empty-state" style={styles.emptyState}>
                 <Text style={styles.emptyStateText}>
                   {localTagFilter === 'all' 
                     ? 'No thoughtmarks yet. Tap the button below to create your first one!' 
                     : `No thoughtmarks with "${localTagFilter}" tag found.`
                   }
                 </Text>
-              </ScrollView>
+              </DebugScrollView>
             )}
-          </ScrollView>
+          </DebugScrollView>
         );
       
       case 'tasks':
         return activeTasks.length > 0 ? (
-          <ScrollView style={styles.tasksList}>
+          <DebugScrollView debugId="tasks-list" style={styles.tasksList}>
             {activeTasks.slice(0, 5).map((task, idx, arr) => (
               <TaskCard
                 key={task.id}
@@ -454,28 +452,30 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
               />
             ))}
-          </ScrollView>
+          </DebugScrollView>
         ) : null;
       
       case 'bins':
         return (
-          <ScrollView style={styles.binsContainer}>
+          <DebugScrollView debugId="bins-container" style={styles.binsContainer}>
             {binsLoading ? (
-              <ScrollView 
+              <DebugScrollView 
+                debugId="bins-loading-horizontal"
                 horizontal 
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.binsHorizontalContent}
               >
                 {Array.from({ length: 6 }).map((_, i) => (
-                  <ScrollView key={i} style={styles.binCardSkeletonHorizontal}>
+                  <DebugScrollView key={i} debugId={`bin-skeleton-${i}`} style={styles.binCardSkeletonHorizontal}>
                     <Text>Loading...</Text>
-                  </ScrollView>
+                  </DebugScrollView>
                 ))}
-              </ScrollView>
+              </DebugScrollView>
             ) : (
               <>
                 {/* Template bins in horizontal scroll */}
-                <ScrollView 
+                <DebugScrollView 
+                  debugId="bins-horizontal-scroll"
                   horizontal 
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.binsHorizontalContent}
@@ -495,19 +495,19 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
                       >
-                        <ScrollView style={styles.binCardContentHorizontal}>
+                        <DebugScrollView debugId={`bin-content-${bin.id}`} style={styles.binCardContentHorizontal}>
                           <Text style={styles.binCardNameHorizontal}>{bin.name || 'Unnamed Bin'}</Text>
                           <Text style={styles.binCardCountHorizontal}>
                             {bin?.thoughtmarkCount || 0}
                           </Text>
-                        </ScrollView>
+                        </DebugScrollView>
                       </TouchableOpacity>
                     );
                   })}
-                </ScrollView>
+                </DebugScrollView>
                 
                 {/* Special sections below horizontal scroll */}
-                <ScrollView style={styles.specialBinsContainer}>
+                <DebugScrollView debugId="special-bins-container" style={styles.specialBinsContainer}>
                   {/* New Bin Button - Moved to specialty section */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
@@ -516,10 +516,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Create new bin"
                   >
-                    <ScrollView style={styles.specialBinCardContent}>
+                    <DebugScrollView debugId="new-bin-content" style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>New bin</Text>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
-                    </ScrollView>
+                    </DebugScrollView>
                   </TouchableOpacity>
                   
                   {/* Saved to Sort Later */}
@@ -535,12 +535,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Saved to sort later"
                   >
-                    <ScrollView style={styles.specialBinCardContent}>
+                    <DebugScrollView debugId="sort-later-content" style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>Saved to sort later</Text>
                       <Text style={styles.specialBinCardCount}>
                         {bins.find((b: any) => b.name === 'Sort Later')?.thoughtmarkCount || 0}
                       </Text>
-                    </ScrollView>
+                    </DebugScrollView>
                   </TouchableOpacity>
                   
                   {/* Archive */}
@@ -551,15 +551,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="View archive"
                   >
-                    <ScrollView style={styles.archiveCardContent}>
+                    <DebugScrollView debugId="archive-content" style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View archive</Text>
                       <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
-                    </ScrollView>
+                    </DebugScrollView>
                   </TouchableOpacity>
-                </ScrollView>
+                </DebugScrollView>
               </>
             )}
-          </ScrollView>
+          </DebugScrollView>
         );
       
       default:
@@ -957,12 +957,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   // Show loading screen while checking auth
   if (loading) {
     return (
-      <ScrollView 
+      <DebugScrollView 
+        debugId="loading-screen"
         style={styles.container}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <Text style={styles.loadingText}>Loading...</Text>
-      </ScrollView>
+      </DebugScrollView>
     );
   }
 
@@ -973,34 +974,35 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Fallback component for when data is not loaded
   const renderFallbackContent = () => (
-    <ScrollView style={styles.emptyState}>
+    <DebugScrollView debugId="fallback-content" style={styles.emptyState}>
       <Text style={styles.emptyStateText}>
         {thoughtmarksLoading || binsLoading ? 'Loading content...' : 'No content available'}
       </Text>
-    </ScrollView>
+    </DebugScrollView>
   );
 
   // Check if we should render fallback
   if (shouldRenderFallback) {
     return (
-      <ScrollView><Text>{renderFallbackContent()}</Text></ScrollView>
+      <DebugScrollView debugId="fallback-wrapper"><Text>{renderFallbackContent()}</Text></DebugScrollView>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <DebugScrollView debugId="main-container" style={styles.container}>
       <OnboardingModal
         visible={showOnboarding}
         onClose={handleOnboardingClose}
       />
-      <ScrollView
+      <DebugScrollView
+        debugId="main-scroll-view"
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <ScrollView style={styles.header}>
-          <ScrollView style={styles.headerLeft}>
+        <DebugScrollView debugId="header" style={styles.header}>
+          <DebugScrollView debugId="header-left" style={styles.headerLeft}>
             <Image
               source={require('../../../../assets/logo.png')}
               style={{
@@ -1012,12 +1014,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               resizeMode="contain"
               accessibilityLabel="Thoughtmarks Logo"
             />
-            <ScrollView style={styles.titleContainer}>
+            <DebugScrollView debugId="title-container" style={styles.titleContainer}>
               <CustomText variant="title" numberOfLines={1}><Text>THOUGHTMARKS</Text></CustomText>
               <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
-            </ScrollView>
-          </ScrollView>
-          <ScrollView style={styles.headerRight}>
+            </DebugScrollView>
+          </DebugScrollView>
+          <DebugScrollView debugId="header-right" style={styles.headerRight}>
             <Animated.View style={{ transform: [{ scale: infoButtonScale }] }}>
               <TouchableOpacity
                 style={styles.infoButton}
@@ -1038,25 +1040,25 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             >
               <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
-          </ScrollView>
-        </ScrollView>
+          </DebugScrollView>
+        </DebugScrollView>
 
         {/* Reorder Hint Tooltip */}
         {showReorderHint && (
           <Animated.View style={[styles.reorderTooltip, { opacity: tooltipOpacity }]}>
-            <ScrollView style={styles.tooltipArrow} />
+            <DebugScrollView debugId="tooltip-arrow" style={styles.tooltipArrow} />
             <Text style={styles.reorderTooltipText}>Long press and drag sections to rearrange</Text>
           </Animated.View>
         )}
 
         {/* AI Tools Card - Moved to top */}
-        <ScrollView style={styles.aiToolsContainer}>
+        <DebugScrollView debugId="ai-tools-container" style={styles.aiToolsContainer}>
           <AIToolsCard 
             title="AI Tools"
             subtitle="Unlock AI-powered insights and recommendations"
             onPress={handleAIToolsPress} 
           />
-        </ScrollView>
+        </DebugScrollView>
 
         {/* Draggable Sections */}
         {sections.map((section, index) => (
@@ -1090,7 +1092,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             {renderSectionContent(section.id)}
           </DraggableSection>
         ))}
-      </ScrollView>
+      </DebugScrollView>
 
       {/* Bottom Navigation */}
       <BottomNav
@@ -1100,6 +1102,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         currentRoute="Dashboard"
         onCreateNew={handleCreateNew}
       />
-    </ScrollView>
+    </DebugScrollView>
   );
 }; 

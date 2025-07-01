@@ -29,7 +29,8 @@ const PINEntryWrapper = ({ route }: any) => {
 };
 
 // Home Screens
-import { DashboardScreen } from '../features/home/screens/DashboardScreen';
+// import { DashboardScreen } from '../features/home/screens/DashboardScreen';
+import { TestScrollViewError } from '../components/devtools/TestScrollViewError';
 
 // AI Screens
 import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
@@ -111,7 +112,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const MainStack = () => (
   <VoiceRecorderProvider>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Dashboard" component={TestScrollViewError} />
       <Stack.Screen name="Search" component={SearchScreen} />
       <Stack.Screen name="AITools" component={AIToolsScreen} />
       <Stack.Screen name="AllThoughtmarks" component={AllThoughtmarksScreen} />
