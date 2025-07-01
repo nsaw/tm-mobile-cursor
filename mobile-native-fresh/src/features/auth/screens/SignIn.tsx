@@ -20,7 +20,6 @@ import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 const logo = require('../../../../assets/logo.png');
 
 export const SignInScreen: React.FC = () => {
-  const { tokens } = useTheme();
   const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
@@ -130,79 +129,79 @@ export const SignInScreen: React.FC = () => {
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: designTokens.colors.background,
   },
   keyboard: {
     flex: 1,
-    paddingHorizontal: tokens.spacing.md,
+    paddingHorizontal: designTokens.spacing.md,
     justifyContent: 'center',
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: tokens.spacing.xl,
+    marginBottom: designTokens.spacing.xl,
   },
   logo: {
     width: 120,
     height: 120,
   },
   title: {
-    fontSize: tokens.typography.fontSize.heading,
-    fontWeight: tokens.typography.fontWeight.bold,
-    color: tokens.colors.text,
+    fontSize: designTokens.typography.fontSize.heading,
+    fontWeight: designTokens.typography.fontWeight.bold,
+    color: designTokens.colors.text,
     textAlign: 'center',
-    marginBottom: tokens.spacing.sm,
+    marginBottom: designTokens.spacing.sm,
   },
   subtitle: {
-    fontSize: tokens.typography.fontSize.body,
-    color: tokens.colors.textSecondary,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: designTokens.spacing.lg,
   },
   formContainer: {
-    backgroundColor: tokens.colors.surface,
+    backgroundColor: designTokens.colors.surface,
     borderRadius: 16,
-    padding: tokens.spacing.md,
-    marginHorizontal: tokens.spacing.sm,
+    padding: designTokens.spacing.md,
+    marginHorizontal: designTokens.spacing.sm,
     shadowColor: '#000',
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
   },
   input: {
-    backgroundColor: tokens.colors.backgroundSecondary,
-    color: tokens.colors.text,
+    backgroundColor: designTokens.colors.backgroundSecondary,
+    color: designTokens.colors.text,
     borderWidth: 1,
-    borderColor: tokens.colors.border,
+    borderColor: designTokens.colors.border,
     borderRadius: 8,
-    paddingVertical: tokens.spacing.sm * 1.5,
-    paddingHorizontal: tokens.spacing.md,
-    marginBottom: tokens.spacing.md,
+    paddingVertical: designTokens.spacing.sm * 1.5,
+    paddingHorizontal: designTokens.spacing.md,
+    marginBottom: designTokens.spacing.md,
   },
   primaryButton: {
-    backgroundColor: tokens.colors.accent,
+    backgroundColor: designTokens.colors.accent,
     borderRadius: 8,
-    paddingVertical: tokens.spacing.sm * 1.5,
+    paddingVertical: designTokens.spacing.sm * 1.5,
     alignItems: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: designTokens.spacing.md,
   },
   primaryButtonText: {
-    fontSize: tokens.typography.fontSize.body,
+    fontSize: designTokens.typography.fontSize.body,
     color: '#ffffff',
     fontWeight: '600',
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: tokens.spacing.lg,
+    marginVertical: designTokens.spacing.lg,
   },
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: tokens.colors.border,
+    backgroundColor: designTokens.colors.border,
   },
   dividerText: {
-    marginHorizontal: tokens.spacing.sm,
-    fontSize: tokens.typography.fontSize.body,
-    color: tokens.colors.textSecondary,
+    marginHorizontal: designTokens.spacing.sm,
+    fontSize: designTokens.typography.fontSize.body,
+    color: designTokens.colors.textSecondary,
   },
 });

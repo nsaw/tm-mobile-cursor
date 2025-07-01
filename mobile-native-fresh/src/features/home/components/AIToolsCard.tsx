@@ -23,7 +23,6 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   subtitle = "Generate insights and suggestions",
   icon = "crown",
 }) => {
-  const { tokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
@@ -59,7 +58,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       marginLeft: 0,
     },
     subtitle: {
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       lineHeight: 16,
     },
     crownIcon: {

@@ -22,7 +22,6 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { apiService } from '../../../services/api';
 
 export const ThoughtmarkDetailScreen: React.FC = () => {
-  const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<{ params: { thoughtmarkId: string } }>>();
   const { thoughtmarkId } = route.params;
@@ -42,216 +41,216 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: designTokens.colors.background,
     },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: tokens.colors.background,
+      backgroundColor: designTokens.colors.background,
     },
     loadingText: {
-      marginTop: tokens.spacing.md,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
+      marginTop: designTokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
     },
     headerContent: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     backButton: {
-      marginRight: tokens.spacing.md,
+      marginRight: designTokens.spacing.md,
     },
     headerTitle: {
-      fontSize: tokens.typography.fontSize.heading,
+      fontSize: designTokens.typography.fontSize.heading,
       fontWeight: '700',
-      color: tokens.colors.text,
-      fontFamily: tokens.typography.fontFamily.heading,
+      color: designTokens.colors.text,
+      fontFamily: designTokens.typography.fontFamily.heading,
     },
     headerActions: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     actionButton: {
-      padding: tokens.spacing.sm,
-      marginLeft: tokens.spacing.sm,
+      padding: designTokens.spacing.sm,
+      marginLeft: designTokens.spacing.sm,
     },
     content: {
       flex: 1,
     },
     contentContainer: {
-      padding: tokens.spacing.lg,
+      padding: designTokens.spacing.lg,
     },
     titleCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     title: {
-      fontSize: tokens.typography.fontSize.xl,
+      fontSize: designTokens.typography.fontSize.xl,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.md,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.md,
     },
     taskStatus: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm,
-      backgroundColor: tokens.colors.surface,
+      paddingVertical: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.md,
+      borderRadius: designTokens.spacing.sm,
+      backgroundColor: designTokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     taskCompleted: {
-      backgroundColor: tokens.colors.accent,
-      borderColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
+      borderColor: designTokens.colors.accent,
     },
     taskStatusText: {
-      marginLeft: tokens.spacing.sm,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      marginLeft: designTokens.spacing.sm,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
     },
     taskCompletedText: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
     contentCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     contentText: {
-      fontSize: tokens.typography.fontSize.body,
+      fontSize: designTokens.typography.fontSize.body,
       lineHeight: 24,
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
     },
     aiCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     aiHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     aiTitleContainer: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     aiTitle: {
-      marginLeft: tokens.spacing.sm,
-      fontSize: tokens.typography.fontSize.lg,
+      marginLeft: designTokens.spacing.sm,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
     },
     insightsContainer: {
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     insightItem: {
-      padding: tokens.spacing.md,
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.spacing.sm,
+      padding: designTokens.spacing.md,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.spacing.sm,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     insightHeader: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: designTokens.spacing.sm,
     },
     insightType: {
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs,
-      borderRadius: tokens.spacing.xs,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
+      borderRadius: designTokens.spacing.xs,
     },
     insightTypeText: {
-      fontSize: tokens.typography.fontSize.xs,
+      fontSize: designTokens.typography.fontSize.xs,
       fontWeight: '600',
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
     actionableBadge: {
-      marginLeft: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs,
-      borderRadius: tokens.spacing.xs,
-      backgroundColor: tokens.colors.success,
+      marginLeft: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
+      borderRadius: designTokens.spacing.xs,
+      backgroundColor: designTokens.colors.success,
     },
     actionableText: {
-      fontSize: tokens.typography.fontSize.xs,
+      fontSize: designTokens.typography.fontSize.xs,
       fontWeight: '600',
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
     insightTitle: {
-      fontSize: tokens.typography.fontSize.body,
+      fontSize: designTokens.typography.fontSize.body,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.xs,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.xs,
     },
     insightDescription: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary,
       lineHeight: 20,
     },
     aiEmptyText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary,
       textAlign: 'center',
       fontStyle: 'italic',
     },
     suggestionsContainer: {
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     suggestionItem: {
-      padding: tokens.spacing.md,
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.spacing.sm,
+      padding: designTokens.spacing.md,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.spacing.sm,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     suggestionText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
     },
     metadataCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     metadataItem: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.sm,
+      paddingVertical: designTokens.spacing.sm,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
     },
     metadataText: {
-      fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.xs,
+      color: designTokens.colors.textSecondary,
     },
     tagsCard: {
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     sectionTitle: {
-      fontSize: tokens.typography.fontSize.lg,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.md,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.md,
     },
     tagsContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: tokens.spacing.sm,
+      gap: designTokens.spacing.sm,
     },
     actionsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.md,
-      gap: tokens.spacing.md,
+      paddingVertical: designTokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
   });
 
@@ -387,7 +386,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   if (loading || !thoughtmark) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={tokens.colors.accent ?? '#FFD500'} />
+        <ActivityIndicator size="large" color={designTokens.colors.accent ?? '#FFD500'} />
         <Text style={styles.loadingText}>Loading thoughtmark...</Text>
       </View>
     );
@@ -405,7 +404,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 accessible={true}
                 accessibilityLabel="Button"
           >
-            <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#F5F5F7'} />
+            <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         </View>
@@ -419,7 +418,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <Ionicons 
               name={thoughtmark.isPinned ? "pin" : "pin-outline"} 
               size={20} 
-              color={thoughtmark.isPinned ? tokens.colors.accent ?? '#FFD500' : tokens.colors.textSecondary ?? '#6B7280'} 
+              color={thoughtmark.isPinned ? designTokens.colors.accent ?? '#FFD500' : designTokens.colors.textSecondary ?? '#6B7280'} 
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -428,7 +427,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Edit thoughtmark"
            accessible={true}>
-            <Ionicons name="create-outline" size={20} color={tokens.colors.textSecondary ?? '#6B7280'} />
+            <Ionicons name="create-outline" size={20} color={designTokens.colors.textSecondary ?? '#6B7280'} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.actionButton}
@@ -436,7 +435,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             accessibilityRole="button"
             accessibilityLabel="Delete thoughtmark"
            accessible={true}>
-            <Ionicons name="trash-outline" size={20} color={tokens.colors.accent ?? '#FFD500'} />
+            <Ionicons name="trash-outline" size={20} color={designTokens.colors.accent ?? '#FFD500'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -456,7 +455,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                 <Ionicons 
                   name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"} 
                   size={20} 
-                  color={thoughtmark.isCompleted ? tokens.colors.accent ?? '#FFD500' : tokens.colors.textSecondary ?? '#6B7280'} 
+                  color={thoughtmark.isCompleted ? designTokens.colors.accent ?? '#FFD500' : designTokens.colors.textSecondary ?? '#6B7280'} 
                 />
                 <Text style={StyleSheet.flatten([styles.taskStatusText, thoughtmark.isCompleted && styles.taskCompletedText])}>
                   {thoughtmark.isCompleted ? 'Completed' : 'Mark as Complete'}
@@ -479,7 +478,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="sparkles" size={16} color={tokens.colors.accent ?? '#FFD500'} />
+                  <Ionicons name="sparkles" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Insights</Text>
                 </View>
                 <TouchableOpacity
@@ -489,9 +488,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI insights"
                  accessible={true}>
                   {generatingAI ? (
-                    <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
+                    <ActivityIndicator size="small" color={designTokens.colors.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens.colors.accent ?? '#FFD500'} />
+                    <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -530,7 +529,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             <CardContent>
               <View style={styles.aiHeader}>
                 <View style={styles.aiTitleContainer}>
-                  <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent ?? '#FFD500'} />
+                  <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   <Text style={styles.aiTitle}>AI Suggestions</Text>
                 </View>
                 <TouchableOpacity
@@ -540,9 +539,9 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
                   accessibilityLabel="Generate AI suggestions"
                  accessible={true}>
                   {generatingSuggestions ? (
-                    <ActivityIndicator size="small" color={tokens.colors.accent ?? '#FFD500'} />
+                    <ActivityIndicator size="small" color={designTokens.colors.accent ?? '#FFD500'} />
                   ) : (
-                    <Ionicons name="refresh" size={16} color={tokens.colors.accent ?? '#FFD500'} />
+                    <Ionicons name="refresh" size={16} color={designTokens.colors.accent ?? '#FFD500'} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -584,20 +583,20 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <Card style={styles.metadataCard}>
           <CardContent>
             <View style={styles.metadataItem}>
-              <Ionicons name="folder-outline" size={16} color={tokens.colors.textSecondary ?? '#6B7280'} />
+              <Ionicons name="folder-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataText}>Bin:</Text>
               <Text style={styles.metadataText}>{getBinName(thoughtmark.binId)}</Text>
             </View>
             
             <View style={styles.metadataItem}>
-              <Ionicons name="time-outline" size={16} color={tokens.colors.textSecondary ?? '#6B7280'} />
+              <Ionicons name="time-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
               <Text style={styles.metadataText}>Created:</Text>
               <Text style={styles.metadataText}>{formatDate(thoughtmark.createdAt)}</Text>
             </View>
             
             {thoughtmark.updatedAt !== thoughtmark.createdAt && (
               <View style={styles.metadataItem}>
-                <Ionicons name="refresh-outline" size={16} color={tokens.colors.textSecondary ?? '#6B7280'} />
+                <Ionicons name="refresh-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataText}>Updated:</Text>
                 <Text style={styles.metadataText}>{formatDate(thoughtmark.updatedAt)}</Text>
               </View>
@@ -605,7 +604,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             
             {thoughtmark.dueDate && (
               <View style={styles.metadataItem}>
-                <Ionicons name="calendar-outline" size={16} color={tokens.colors.textSecondary ?? '#6B7280'} />
+                <Ionicons name="calendar-outline" size={16} color={designTokens.colors.textSecondary ?? '#6B7280'} />
                 <Text style={styles.metadataText}>Due:</Text>
                 <Text style={styles.metadataText}>{formatDate(thoughtmark.dueDate)}</Text>
               </View>

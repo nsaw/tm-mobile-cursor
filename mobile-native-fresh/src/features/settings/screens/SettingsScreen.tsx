@@ -165,11 +165,11 @@ export const SettingsScreen: React.FC = () => {
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={designTokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
-      iconElement = <Ionicons name={icon as any} size={20} color={tokens.colors.accent ?? '#000'} />;
+      iconElement = <Ionicons name={icon as any} size={20} color={designTokens.colors.accent ?? '#000'} />;
     }
     return (
       <TouchableOpacity 
@@ -191,12 +191,12 @@ export const SettingsScreen: React.FC = () => {
             <Switch
               value={switchValue}
               onValueChange={onSwitchChange}
-              trackColor={{ false: tokens.colors.border ?? '#ccc', true: tokens.colors.accent ?? '#000' }}
-              thumbColor={tokens.colors.background ?? '#fff'}
+              trackColor={{ false: designTokens.colors.border ?? '#ccc', true: designTokens.colors.accent ?? '#000' }}
+              thumbColor={designTokens.colors.background ?? '#fff'}
             />
           )}
           {showArrow && !showSwitch && (
-            <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
+            <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
           )}
         </View>
       </TouchableOpacity>
@@ -208,51 +208,51 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     scrollContent: {
-      paddingBottom: tokens.spacing.xl,
+      paddingBottom: designTokens.spacing.xl,
     },
     header: {
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
     },
     headerContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: designTokens.spacing.sm,
     },
     backButton: {
-      marginRight: tokens.spacing.md,
+      marginRight: designTokens.spacing.md,
     },
     headerTitle: {
       ...typography.title,
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
     },
     headerSubtitle: {
       ...typography.body,
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
     },
     section: {
-      marginBottom: tokens.spacing.xxl,
+      marginBottom: designTokens.spacing.xxl,
     },
     sectionTitle: {
       ...typography.sectionTitle,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.lg,
+      color: designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.lg,
       textTransform: 'uppercase',
     },
     sectionCard: {
-      marginHorizontal: tokens.spacing.lg,
+      marginHorizontal: designTokens.spacing.lg,
     },
     settingItem: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingVertical: tokens.spacing.md,
-      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
       minHeight: 44,
     },
     settingItemLeft: {
@@ -261,24 +261,24 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingItemText: {
-      marginLeft: tokens.spacing.md,
+      marginLeft: designTokens.spacing.md,
       flex: 1,
     },
     settingItemTitle: {
       ...typography.body,
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       opacity: 0.85,
     },
     settingItemSubtitle: {
       ...typography.small,
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       marginTop: 2,
     },
     settingItemRight: {
       alignItems: 'center',
     },
     expandedSettings: {
-      backgroundColor: tokens.colors.backgroundSecondary,
+      backgroundColor: designTokens.colors.backgroundSecondary,
     },
     settingLeft: {
       flexDirection: 'row',
@@ -286,7 +286,7 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingText: {
-      marginLeft: tokens.spacing.md,
+      marginLeft: designTokens.spacing.md,
       flex: 1,
     },
     modalOverlay: {
@@ -298,61 +298,61 @@ export const SettingsScreen: React.FC = () => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.lg,
+      padding: designTokens.spacing.lg,
     },
     modalContent: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.spacing.md,
-      padding: tokens.spacing.lg,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.spacing.md,
+      padding: designTokens.spacing.lg,
       width: '100%',
       maxWidth: 400,
     },
     modalTitle: {
-      fontSize: tokens.typography.fontSize.lg,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.sm,
     },
     modalSubtitle: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.lg,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.lg,
     },
     modalInput: {
       borderWidth: 1,
-      borderColor: tokens.colors.border,
-      borderRadius: tokens.spacing.sm,
-      padding: tokens.spacing.md,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-      backgroundColor: tokens.colors.background,
-      marginBottom: tokens.spacing.lg,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      padding: designTokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
+      backgroundColor: designTokens.colors.background,
+      marginBottom: designTokens.spacing.lg,
     },
     modalButtons: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     modalButton: {
-      paddingVertical: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm,
+      paddingVertical: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.md,
+      borderRadius: designTokens.spacing.sm,
     },
     modalButtonText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
     },
     modalButtonPrimary: {
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
     },
     modalButtonTextPrimary: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
       fontWeight: '500',
     },
   });
 
   return (
-    <View style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
+    <View style={{ flex: 1, backgroundColor: designTokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -364,7 +364,7 @@ export const SettingsScreen: React.FC = () => {
                 accessible={true}
                 accessibilityLabel="Button"
             >
-              <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
+              <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
           </View>
@@ -372,14 +372,14 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={{ alignItems: 'center', paddingHorizontal: tokens.spacing.page, paddingVertical: tokens.spacing.lg, marginBottom: tokens.spacing.xxl }}>
+        <Card style={{ alignItems: 'center', paddingHorizontal: designTokens.spacing.page, paddingVertical: designTokens.spacing.lg, marginBottom: designTokens.spacing.xxl }}>
           {(() => {
             return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
-                  backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: designTokens.spacing.md,
+                  backgroundColor: `${designTokens.colors.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
@@ -387,18 +387,18 @@ export const SettingsScreen: React.FC = () => {
                 {/* Title */}
                 <Text style={{
                   ...typography.sectionTitle,
-                  color: tokens.colors.text,
+                  color: designTokens.colors.text,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.sm,
+                  marginBottom: designTokens.spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
                   ...typography.body,
-                  color: tokens.colors.textSecondary,
+                  color: designTokens.colors.textSecondary,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: designTokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -407,15 +407,15 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens.colors.accent,
-                    paddingVertical: tokens.spacing.sm,
-                    borderRadius: tokens.radius.md,
+                    backgroundColor: designTokens.colors.accent,
+                    paddingVertical: designTokens.spacing.sm,
+                    borderRadius: designTokens.radius.md,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
                     ...typography.buttonText,
-                    color: tokens.colors.buttonText,
+                    color: designTokens.colors.buttonText,
                     textAlign: 'center',
                     width: '100%',
                    }}>
@@ -666,10 +666,10 @@ export const SettingsScreen: React.FC = () => {
                 accessibilityLabel="Button"
             >
               <View style={styles.settingLeft}>
-                <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
+                <Ionicons name="shield-outline" size={20} color={designTokens.colors.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
+              <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </View>
         )}
@@ -688,7 +688,7 @@ export const SettingsScreen: React.FC = () => {
               value={tempSiriPhrase}
               onChangeText={setTempSiriPhrase}
               placeholder="Enter your Siri phrase"
-              placeholderTextColor={tokens.colors.textSecondary ?? '#666'}
+              placeholderTextColor={designTokens.colors.textSecondary ?? '#666'}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity

@@ -19,7 +19,6 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
   onUpgrade,
 }) => {
   const { user } = useAuth();
-  const { tokens } = useTheme();
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
   const styles = getStyles(tokens);
 
@@ -41,7 +40,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
         onPress={onUpgrade}
         style={styles.button}
       >
-        <Text variant="body" size="lg" style={{ color: tokens.colors.background, fontWeight: '700', textAlign: 'center' }}>
+        <Text variant="body" size="lg" style={{ color: designTokens.colors.background, fontWeight: '700', textAlign: 'center' }}>
           Upgrade Now
         </Text>
       </Button>
@@ -54,22 +53,22 @@ const getStyles = (tokens: any) => StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: tokens.colors.background,
-    padding: tokens.spacing.xl,
+    backgroundColor: designTokens.colors.background,
+    padding: designTokens.spacing.xl,
   },
   title: {
-    color: tokens.colors.text,
-    marginBottom: tokens.spacing.sm,
+    color: designTokens.colors.text,
+    marginBottom: designTokens.spacing.sm,
     textAlign: 'center',
   },
   subtitle: {
-    color: tokens.colors.textSecondary,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: tokens.spacing.lg,
+    marginBottom: designTokens.spacing.lg,
     lineHeight: 22,
   },
   button: {
     width: 180,
-    backgroundColor: tokens.colors.accent,
+    backgroundColor: designTokens.colors.accent,
   },
 }); 

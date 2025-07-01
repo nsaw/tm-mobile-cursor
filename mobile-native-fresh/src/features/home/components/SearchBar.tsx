@@ -22,53 +22,42 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChangeText,
 }) => {
-  const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
 
-const { tokens } = useTheme();
   const [searchQuery, setSearchQuery] = useState(value || '');
 
   const styles = StyleSheet.create({
     container: {
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
     },
     searchContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.radius.md,
-      paddingHorizontal: tokens.spacing.md,
-      paddingVertical: tokens.spacing.sm,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.md,
+      paddingHorizontal: designTokens.spacing.md,
+      paddingVertical: designTokens.spacing.sm,
     },
     searchIcon: {
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
     },
     searchInput: {
       flex: 1,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-      paddingVertical: tokens.spacing.xs,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
+      paddingVertical: designTokens.spacing.xs,
     },
     clearButton: {
-      padding: tokens.spacing.xs,
+      padding: designTokens.spacing.xs,
     },
   });
 
@@ -94,13 +83,13 @@ const { tokens } = useTheme();
         <Ionicons 
           name="search" 
           size={20} 
-          color={tokens.colors.textMuted}
+          color={designTokens.colors.textMuted}
           style={styles.searchIcon}
         />
         <TextInput
           style={styles.searchInput}
           placeholder={placeholder}
-          placeholderTextColor={tokens.colors.textMuted}
+          placeholderTextColor={designTokens.colors.textMuted}
           value={searchQuery}
           onChangeText={handleSearch}
           returnKeyType="search"
@@ -114,7 +103,7 @@ const { tokens } = useTheme();
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Clear search">
-            <Ionicons name="close-circle" size={20} color={tokens.colors.textMuted} />
+            <Ionicons name="close-circle" size={20} color={designTokens.colors.textMuted} />
           </TouchableOpacity>
         )}
       </View>

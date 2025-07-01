@@ -28,14 +28,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   rightAction,
   showBackButton = true,
 }) => {
-  const { tokens } = useTheme();
 
   return (
     <View style={{
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.divider,
-      paddingHorizontal: tokens.spacing.md,
+      borderBottomColor: designTokens.colors.divider,
+      paddingHorizontal: designTokens.spacing.md,
       paddingVertical: 2,
       minHeight: 40,
       // Cross-platform shadow
@@ -68,16 +67,16 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
           {showBackButton && onBack && (
             <TouchableOpacity 
               style={{
-                marginRight: tokens.spacing.md,
-                padding: tokens.spacing.xs,
-                borderRadius: tokens.radius.sm,
-                backgroundColor: tokens.colors.surface,
+                marginRight: designTokens.spacing.md,
+                padding: designTokens.spacing.xs,
+                borderRadius: designTokens.radius.sm,
+                backgroundColor: designTokens.colors.surface,
               }} 
               onPress={onBack}
              accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-              <Ionicons name="arrow-back" size={20} color={tokens.colors.text} />
+              <Ionicons name="arrow-back" size={20} color={designTokens.colors.text} />
             </TouchableOpacity>
           )}
           <View style={{ flex: 1 }}>
@@ -107,15 +106,15 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
         {rightAction && (
           <TouchableOpacity 
             style={{
-              padding: tokens.spacing.xs,
-              borderRadius: tokens.radius.sm,
-              backgroundColor: tokens.colors.surface,
+              padding: designTokens.spacing.xs,
+              borderRadius: designTokens.radius.sm,
+              backgroundColor: designTokens.colors.surface,
             }} 
             onPress={rightAction.onPress}
            accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-            <Ionicons name={rightAction.icon as any} size={20} color={tokens.colors.text} />
+            <Ionicons name={rightAction.icon as any} size={20} color={designTokens.colors.text} />
           </TouchableOpacity>
         )}
       </View>

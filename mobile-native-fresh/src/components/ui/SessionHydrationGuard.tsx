@@ -12,7 +12,6 @@ interface SessionHydrationGuardProps {
 }
 
 export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ children }) => {
-  const { tokens } = useTheme();
   const { loading } = useAuth();
   const [hydrationTimeout, setHydrationTimeout] = useState(false);
   const [hydrationError, setHydrationError] = useState<string | null>(null);
@@ -118,24 +117,24 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: tokens.colors.background,
+    backgroundColor: designTokens.colors.background,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: tokens.spacing.lg,
+    paddingHorizontal: designTokens.spacing.lg,
   },
   content: {
     alignItems: 'center',
     maxWidth: 400,
   },
   title: {
-    color: tokens.colors.text,
+    color: designTokens.colors.text,
     textAlign: 'center',
-    marginBottom: tokens.spacing.md,
+    marginBottom: designTokens.spacing.md,
   },
   subtitle: {
-    color: tokens.colors.textSecondary,
+    color: designTokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: tokens.spacing.xl,
+    marginBottom: designTokens.spacing.xl,
     lineHeight: 24,
   },
   buttonContainer: {

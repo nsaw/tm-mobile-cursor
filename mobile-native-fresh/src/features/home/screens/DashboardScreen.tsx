@@ -352,7 +352,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
+                  <Ionicons name="arrow-forward" size={16} color={designTokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
               <ScrollView 
@@ -413,7 +413,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       onClick={() => handleThoughtmarkPress(thoughtmark)}
                       onEdit={() => handleThoughtmarkEdit(thoughtmark)}
                       onPinToggle={handlePinToggle}
-                      style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
+                      style={idx !== arr.length - 1 ? { marginBottom: designTokens.spacing.xs } : undefined}
                     />
                   ))}
                 </View>
@@ -428,7 +428,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 >
                   <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
                   <Text style={styles.viewMoreText}>View all thoughtmarks</Text>
-                  <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
+                  <Ionicons name="arrow-forward" size={20} color={designTokens.colors.accent} />
                 </TouchableOpacity>
               </>
             ) : (
@@ -453,7 +453,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 task={task}
                 onPress={() => handleThoughtmarkPress(task)}
                 onToggle={() => handleTaskToggle(task)}
-                style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
+                style={idx !== arr.length - 1 ? { marginBottom: designTokens.spacing.xs } : undefined}
               />
             ))}
           </View>
@@ -520,7 +520,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   >
                     <View style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>New bin</Text>
-                      <Ionicons name="add" size={21} color={tokens.colors.accent} />
+                      <Ionicons name="add" size={21} color={designTokens.colors.accent} />
                     </View>
                   </TouchableOpacity>
                   
@@ -555,7 +555,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   >
                     <View style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View archive</Text>
-                      <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
+                      <Ionicons name="archive-outline" size={21} color={designTokens.colors.accent} />
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -579,24 +579,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background,
+      backgroundColor: designTokens.colors.background,
       position: 'relative', // Ensure proper positioning context
     },
     scrollView: {
       flex: 1,
     },
     scrollContent: {
-      paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
+      paddingTop: designTokens.spacing.lg * 0.5, // Reduced from spacing.lg
       paddingBottom: 120, // Increased padding to account for nav bar + safe area
       minHeight: '100%', // Ensure content fills the scroll view
-      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
+      paddingHorizontal: designTokens.spacing.page, // Page-level horizontal padding
     },
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.lg * 0.25, // Reduced from spacing.lg
-      paddingHorizontal: tokens.spacing.page * 0.25, // Reduced by half
+      marginBottom: designTokens.spacing.lg * 0.25, // Reduced from spacing.lg
+      paddingHorizontal: designTokens.spacing.page * 0.25, // Reduced by half
     },
     headerLeft: {
       flexDirection: 'row',
@@ -607,16 +607,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       width: 64, // 48 * 1.34
       height: 64, // 48 * 1.34
       borderRadius: 13, // 10 * 1.34
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
     },
     titleContainer: {
       flex: 1,
-      marginLeft: tokens.spacing.sm,
+      marginLeft: designTokens.spacing.sm,
     },
     title: {
       fontSize: RFValue(16),
       fontWeight: '900',
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       opacity: 0.9, // Added 90% opacity for h2 text
       letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
       textTransform: 'uppercase',
@@ -637,8 +637,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       alignItems: 'center',
     },
     infoButton: {
-      padding: tokens.spacing.sm,
-      shadowColor: tokens.colors.text,
+      padding: designTokens.spacing.sm,
+      shadowColor: designTokens.colors.text,
       shadowOffset: {
         width: 0,
         height: 2,
@@ -648,24 +648,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       elevation: 3,
     },
     settingsButton: {
-      padding: tokens.spacing.sm,
+      padding: designTokens.spacing.sm,
     },
     aiToolsContainer: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+      marginBottom: designTokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
     },
     section: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+      marginBottom: designTokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
     },
     sectionHeader: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.md * 0.5, // Reduced from spacing.md
+      marginBottom: designTokens.spacing.md * 0.5, // Reduced from spacing.md
     },
     sectionTitle: {
       fontSize: RFValue(18),
       fontWeight: '600',
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       letterSpacing: 0.5,
       fontFamily: 'Ubuntu_600SemiBold',
       opacity: 0.7,
@@ -675,11 +675,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       alignItems: 'center',
     },
     viewAllButton: {
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
     },
     viewAllText: {
-      fontSize: RFValue(tokens.typography.fontSize.body),
-      color: tokens.colors.accent,
+      fontSize: RFValue(designTokens.typography.fontSize.body),
+      color: designTokens.colors.accent,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       opacity: 0.8,
@@ -692,30 +692,30 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     separator: {
       height: 1,
-      backgroundColor: tokens.colors.border,
-      marginVertical: tokens.spacing.sm,
+      backgroundColor: designTokens.colors.border,
+      marginVertical: designTokens.spacing.sm,
     },
     binsContainer: {
       // Styles for the bins container
     },
     binsHorizontalContent: {
-      paddingHorizontal: tokens.spacing.page, // Page-level padding
-      paddingVertical: tokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.page, // Page-level padding
+      paddingVertical: designTokens.spacing.sm,
     },
     binCardSkeletonHorizontal: {
       width: 160,
       height: 70,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
-      marginRight: tokens.spacing.md, // Increased spacing
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md,
+      marginRight: designTokens.spacing.md, // Increased spacing
     },
     binCardHorizontal: {
       width: 160,
       height: 70,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
-      padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.md, // Increased spacing
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md,
+      padding: designTokens.spacing.sm,
+      marginRight: designTokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
     binCardContentHorizontal: {
@@ -727,54 +727,54 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     binCardNameHorizontal: {
       fontSize: RFValue(14), // Reduced from 16
       fontWeight: '600',
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       marginBottom: 2,
       fontFamily: 'Ubuntu_600SemiBold',
     },
     binCardCountHorizontal: {
       fontSize: RFValue(12), // Reduced from 13
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
     },
     newBinCardHorizontal: {
       width: 160,
       height: 52,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md,
       borderWidth: 2,
-      borderColor: tokens.colors.textMuted,
+      borderColor: designTokens.colors.textMuted,
       borderStyle: 'dashed',
-      padding: tokens.spacing.sm,
-      marginRight: tokens.spacing.md, // Increased spacing
+      padding: designTokens.spacing.sm,
+      marginRight: designTokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
     newBinCardContentHorizontal: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: tokens.spacing.xs,
+      gap: designTokens.spacing.xs,
     },
     newBinTextHorizontal: {
       fontSize: RFValue(14),
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       fontWeight: '500',
       opacity: 0.8,
     },
     specialBinsContainer: {
-      marginTop: tokens.spacing.md * 1.34,
+      marginTop: designTokens.spacing.md * 1.34,
     },
     specialBinCard: {
       width: '100%',
       height: 70,
       backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       borderWidth: 1,
-      borderColor: tokens.colors.accent,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginBottom: tokens.spacing.sm * 1.34,
+      borderColor: designTokens.colors.accent,
+      paddingTop: designTokens.spacing.sm * 1.34,
+      paddingBottom: designTokens.spacing.sm * 1.34,
+      paddingLeft: designTokens.spacing.sm * 2.5,
+      paddingRight: designTokens.spacing.sm * 2.5,
+      marginBottom: designTokens.spacing.sm * 1.34,
       justifyContent: 'center',
     },
     specialBinCardContent: {
@@ -785,28 +785,28 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     specialBinCardText: {
       fontSize: RFValue(12.5),
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       fontWeight: '500',
       opacity: 0.8,
     },
     specialBinCardCount: {
       fontSize: RFValue(12.5),
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       opacity: 0.8,
     },
     archiveCard: {
       width: '100%',
       height: 70,
       backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginBottom: tokens.spacing.sm * 1.34,
+      borderRadius: designTokens.radius.md,
+      paddingTop: designTokens.spacing.sm * 1.34,
+      paddingBottom: designTokens.spacing.sm * 1.34,
+      paddingLeft: designTokens.spacing.sm * 2.5,
+      paddingRight: designTokens.spacing.sm * 2.5,
+      marginBottom: designTokens.spacing.sm * 1.34,
       justifyContent: 'center',
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     archiveCardContent: {
       flexDirection: 'row',
@@ -816,20 +816,20 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     archiveCardText: {
       fontSize: RFValue(12),
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       fontWeight: '500',
       opacity: 0.8,
     },
     viewMoreCard: {
       backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginTop: tokens.spacing.md * 1.34,
+      borderRadius: designTokens.radius.md,
+      paddingTop: designTokens.spacing.sm * 1.34,
+      paddingBottom: designTokens.spacing.sm * 1.34,
+      paddingLeft: designTokens.spacing.sm * 2.5,
+      paddingRight: designTokens.spacing.sm * 2.5,
+      marginTop: designTokens.spacing.md * 1.34,
       borderWidth: 1,
-      borderColor: tokens.colors.accent,
+      borderColor: designTokens.colors.accent,
       height: 70,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -837,24 +837,24 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     viewMoreText: {
       fontSize: RFValue(14),
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       fontWeight: '600',
       marginTop: 0,
       opacity: 0.8,
     },
     viewMoreCount: {
       fontSize: RFValue(11),
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       marginTop: 0,
       opacity: 0.8,
     },
     emptyState: {
       alignItems: 'center',
-      paddingVertical: tokens.spacing.xl * 1.34,
+      paddingVertical: designTokens.spacing.xl * 1.34,
     },
     emptyStateText: {
       fontSize: RFValue(14),
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       textAlign: 'center',
       lineHeight: 32,
       opacity: 0.8,
@@ -862,11 +862,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     reorderTooltip: {
       position: 'absolute',
       top: 107,
-      right: tokens.spacing.lg * 1.34,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
-      padding: tokens.spacing.sm * 1.34,
-      shadowColor: tokens.colors.text,
+      right: designTokens.spacing.lg * 1.34,
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md,
+      padding: designTokens.spacing.sm * 1.34,
+      shadowColor: designTokens.colors.text,
       shadowOffset: {
         width: 0,
         height: 3,
@@ -886,56 +886,56 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       borderLeftWidth: 11,
       borderRightWidth: 11,
       borderBottomWidth: 11,
-      borderColor: `transparent transparent ${tokens.colors.backgroundSecondary} transparent`,
+      borderColor: `transparent transparent ${designTokens.colors.backgroundSecondary} transparent`,
     },
     reorderTooltipText: {
       fontSize: RFValue(11),
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       textAlign: 'center',
       opacity: 0.8,
     },
     tagsContainer: {
-      marginBottom: tokens.spacing.sm * 1.34,
+      marginBottom: designTokens.spacing.sm * 1.34,
     },
     tagsScrollContent: {
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs * 1.34,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs * 1.34,
     },
     tagChip: {
-      paddingHorizontal: tokens.spacing.md * 1.34,
-      paddingVertical: tokens.spacing.xs * 1.34,
+      paddingHorizontal: designTokens.spacing.md * 1.34,
+      paddingVertical: designTokens.spacing.xs * 1.34,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
-      borderRadius: tokens.radius.md,
-      marginRight: tokens.spacing.xs * 1.34,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.radius.md,
+      marginRight: designTokens.spacing.xs * 1.34,
     },
     tagChipActive: {
       backgroundColor: 'transparent',
-      borderColor: tokens.colors.accent,
+      borderColor: designTokens.colors.accent,
     },
     tagChipText: {
       fontSize: RFValue(10),
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       opacity: 0.8,
     },
     tagChipTextActive: {
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       opacity: 0.8,
     },
     tagsHeader: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.md * 1.34,
+      marginBottom: designTokens.spacing.md * 1.34,
     },
     tagsTitle: {
       fontSize: RFValue(10),
       fontWeight: '400',
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       letterSpacing: 0.7,
       fontFamily: 'Ubuntu_400Regular',
       textTransform: 'lowercase',
@@ -943,7 +943,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
     viewAllTagsText: {
       fontSize: RFValue(19),
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
       opacity: 0.8,
@@ -951,7 +951,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     loadingText: {
       fontSize: RFValue(18),
       fontWeight: '600',
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       opacity: 0.8,
     },
   });
@@ -1005,7 +1005,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               style={{
                 width: 32,
                 height: 32,
-                marginRight: tokens.spacing.sm,
+                marginRight: designTokens.spacing.sm,
                 borderRadius: 8,
               }}
               resizeMode="contain"
@@ -1025,7 +1025,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 accessible={true}
                 accessibilityLabel="Button"
               >
-                <Ionicons name="information-circle-outline" size={27} color={tokens.colors.textSecondary} />
+                <Ionicons name="information-circle-outline" size={27} color={designTokens.colors.textSecondary} />
               </TouchableOpacity>
             </Animated.View>
             <TouchableOpacity
@@ -1035,7 +1035,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessible={true}
               accessibilityLabel="Button"
             >
-              <Ionicons name="settings-outline" size={32} color={tokens.colors.textSecondary} />
+              <Ionicons name="settings-outline" size={32} color={designTokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
         </View>

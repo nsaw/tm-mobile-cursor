@@ -41,9 +41,9 @@ export const NeonGradientText: React.FC<NeonGradientTextProps> = ({
 
 const getStyles = (tokens: any) => StyleSheet.create({
   neonText: {
-    fontSize: tokens.typography.fontSize.sm, // Use tagline variant size
-    fontWeight: tokens.typography.fontWeight.medium, // Medium weight for tagline
-    fontFamily: tokens.typography.fontFamily.body,
+    fontSize: designTokens.typography.fontSize.sm, // Use tagline variant size
+    fontWeight: designTokens.typography.fontWeight.medium, // Medium weight for tagline
+    fontFamily: designTokens.typography.fontFamily.body,
     color: '#C6D600', // Use the accent color directly
     textShadowColor: '#C6D600',
     textShadowOffset: { width: 1, height: 1 }, // 45deg angle (1,1)

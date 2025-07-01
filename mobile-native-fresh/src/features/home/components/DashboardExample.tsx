@@ -15,27 +15,26 @@ const mockNavigation = {
 };
 
 export const DashboardExample: React.FC = () => {
-  const { tokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
     },
     header: {
-      fontFamily: tokens.typography.fontFamily.heading,
-      fontSize: tokens.typography.fontSize.heading,
-      color: tokens.colors.text ?? '#FFFFFF',
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.heading,
+      color: designTokens.colors.text ?? '#FFFFFF',
       textAlign: 'center',
-      padding: tokens.spacing.lg,
+      padding: designTokens.spacing.lg,
     },
     body: {
-      fontFamily: tokens.typography.fontFamily.body,
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#808080',
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#808080',
       textAlign: 'center',
-      paddingHorizontal: tokens.spacing.lg,
-      marginBottom: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      marginBottom: designTokens.spacing.md,
     },
   });
 
