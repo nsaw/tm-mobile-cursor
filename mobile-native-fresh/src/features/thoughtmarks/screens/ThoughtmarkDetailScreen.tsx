@@ -399,10 +399,10 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <View style={styles.headerContent}>
           <TouchableOpacity 
             style={styles.backButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.goBack()}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+            onPress={() => { navigation.goBack(); }}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Button"
           >
             <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#F5F5F7'} />
           </TouchableOpacity>

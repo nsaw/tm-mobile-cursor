@@ -15,12 +15,11 @@ import { useAuth } from '../../auth/hooks/useAuth';
 
 export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const { user } = useAuth();
-  const { tokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
     },
     scrollView: {
       flex: 1,
@@ -29,18 +28,18 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: tokens.spacing.lg,
+      padding: designTokens.spacing.lg,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border ?? '#000',
+      borderBottomColor: designTokens.colors.border ?? '#000',
     },
     backButton: {
-      padding: tokens.spacing.sm,
+      padding: designTokens.spacing.sm,
     },
     title: {
-      fontSize: tokens.typography.fontSize.heading,
+      fontSize: designTokens.typography.fontSize.heading,
       fontWeight: '700',
-      color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      color: designTokens.colors.text ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.heading,
     },
     headerRight: {
       width: 48,
@@ -49,47 +48,47 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.xl,
+      padding: designTokens.spacing.xl,
     },
     accessDeniedTitle: {
-      fontSize: tokens.typography.fontSize.heading,
+      fontSize: designTokens.typography.fontSize.heading,
       fontWeight: '700',
-      color: tokens.colors.danger ?? '#FF3B30',
-      marginTop: tokens.spacing.md,
-      fontFamily: tokens.typography.fontFamily.heading,
+      color: designTokens.colors.danger ?? '#FF3B30',
+      marginTop: designTokens.spacing.md,
+      fontFamily: designTokens.typography.fontFamily.heading,
     },
     accessDeniedText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#666',
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#666',
       textAlign: 'center',
-      marginTop: tokens.spacing.sm,
-      fontFamily: tokens.typography.fontFamily.body,
+      marginTop: designTokens.spacing.sm,
+      fontFamily: designTokens.typography.fontFamily.body,
     },
     adminInfoCard: {
-      margin: tokens.spacing.lg,
+      margin: designTokens.spacing.lg,
     },
     adminInfoTitle: {
-      fontSize: tokens.typography.fontSize.xl,
+      fontSize: designTokens.typography.fontSize.xl,
       fontWeight: '600',
-      color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      color: designTokens.colors.text ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.heading,
     },
     adminInfoText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#666',
-      fontFamily: tokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#666',
+      fontFamily: designTokens.typography.fontFamily.body,
     },
     section: {
-      margin: tokens.spacing.lg,
+      margin: designTokens.spacing.lg,
     },
     sectionTitle: {
-      fontSize: tokens.typography.fontSize.xl,
+      fontSize: designTokens.typography.fontSize.xl,
       fontWeight: '600',
-      color: tokens.colors.text ?? '#000',
-      fontFamily: tokens.typography.fontFamily.heading,
+      color: designTokens.colors.text ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.heading,
     },
     buttonGrid: {
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     adminButton: {
       justifyContent: 'flex-start',
@@ -99,13 +98,13 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const getIconColor = (type: 'danger' | 'accent' | 'background' | 'text') => {
     switch (type) {
       case 'danger':
-        return tokens.colors.danger ?? '#FF3B30';
+        return designTokens.colors.danger ?? '#FF3B30';
       case 'accent':
-        return tokens.colors.accent ?? '#000';
+        return designTokens.colors.accent ?? '#000';
       case 'background':
-        return tokens.colors.background ?? '#0D0D0F';
+        return designTokens.colors.background ?? '#0D0D0F';
       case 'text':
-        return tokens.colors.text ?? '#000';
+        return designTokens.colors.text ?? '#000';
       default:
         return '#000';
     }

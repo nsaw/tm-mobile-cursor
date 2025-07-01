@@ -28,6 +28,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   currentRoute = '/',
   onCreateNew,
 }) => {
+  const { designTokens } = useTheme();
   const insets = useSafeAreaInsets();
 
   const handleAIToolsClick = () => {
@@ -133,7 +134,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   minWidth: 59,
                   position: 'relative',
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  {
+                onPress={() => {
                   if (isVoice && onVoiceRecord) {
                     onVoiceRecord();
                   } else if (action === 'ai-tools') {
@@ -227,7 +228,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   },
                 }),
               }}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  {
+              onPress={() => {
                 if (onCreateNew) {
                   onCreateNew();
                 } else {

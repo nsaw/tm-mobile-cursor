@@ -16,7 +16,6 @@ import { useBins } from '../hooks/useBins';
 import { useAuth } from '../../auth/hooks/useAuth';
 
 export const DetailScreen: React.FC = () => {
-  const { tokens } = useTheme();
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<'Detail'>>();
   const { thoughtmarkId } = route.params;
@@ -29,112 +28,112 @@ export const DetailScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: tokens.colors.background ?? '#0D0D0F',
+      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
     },
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border ?? '#000',
+      borderBottomColor: designTokens.colors.border ?? '#000',
     },
     backButton: {
-      padding: tokens.spacing.sm,
+      padding: designTokens.spacing.sm,
     },
     headerTitle: {
-      fontSize: tokens.typography.fontSize.heading,
-      fontFamily: tokens.typography.fontFamily.heading,
-      fontWeight: tokens.typography.fontWeight.bold,
-      color: tokens.colors.text ?? '#000',
-      marginBottom: tokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.heading,
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontWeight: designTokens.typography.fontWeight.bold,
+      color: designTokens.colors.text ?? '#000',
+      marginBottom: designTokens.spacing.md,
     },
     headerActions: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     actionButton: {
-      padding: tokens.spacing.sm,
-      marginLeft: tokens.spacing.xs,
+      padding: designTokens.spacing.sm,
+      marginLeft: designTokens.spacing.xs,
     },
     content: {
       flex: 1,
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
     },
     title: {
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.text ?? '#000',
-      marginBottom: tokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.body,
+      fontFamily: designTokens.typography.fontFamily.body,
+      color: designTokens.colors.text ?? '#000',
+      marginBottom: designTokens.spacing.md,
     },
     contentText: {
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.textSecondary ?? '#000',
-      marginLeft: tokens.spacing.xs,
-      marginBottom: tokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.body,
+      fontFamily: designTokens.typography.fontFamily.body,
+      color: designTokens.colors.textSecondary ?? '#000',
+      marginLeft: designTokens.spacing.xs,
+      marginBottom: designTokens.spacing.md,
     },
     tagsContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      backgroundColor: tokens.colors.surface ?? '#000',
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs,
-      borderRadius: tokens.spacing.sm,
-      marginRight: tokens.spacing.xs,
-      marginBottom: tokens.spacing.xs,
+      backgroundColor: designTokens.colors.surface ?? '#000',
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
+      borderRadius: designTokens.spacing.sm,
+      marginRight: designTokens.spacing.xs,
+      marginBottom: designTokens.spacing.xs,
     },
     tagText: {
-      fontFamily: tokens.typography.fontFamily.body,
-      fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.textSecondary ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.xs,
+      color: designTokens.colors.textSecondary ?? '#000',
     },
     contentCard: {
-      backgroundColor: tokens.colors.surface ?? '#000',
-      padding: tokens.spacing.md,
-      borderRadius: tokens.spacing.md,
-      marginBottom: tokens.spacing.lg,
+      backgroundColor: designTokens.colors.surface ?? '#000',
+      padding: designTokens.spacing.md,
+      borderRadius: designTokens.spacing.md,
+      marginBottom: designTokens.spacing.lg,
     },
     contentTitle: {
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.text ?? '#000',
-      marginLeft: tokens.spacing.sm,
+      fontSize: designTokens.typography.fontSize.body,
+      fontFamily: designTokens.typography.fontFamily.body,
+      color: designTokens.colors.text ?? '#000',
+      marginLeft: designTokens.spacing.sm,
     },
     contentSubtitle: {
-      fontFamily: tokens.typography.fontFamily.body,
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary ?? '#000',
     },
     footer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       borderTopWidth: 1,
-      borderTopColor: tokens.colors.border ?? '#000',
+      borderTopColor: designTokens.colors.border ?? '#000',
     },
     footerButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: tokens.spacing.sm,
+      paddingVertical: designTokens.spacing.sm,
     },
     footerButtonText: {
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.danger ?? '#EF4444',
-      marginLeft: tokens.spacing.xs,
+      fontSize: designTokens.typography.fontSize.body,
+      fontFamily: designTokens.typography.fontFamily.body,
+      color: designTokens.colors.danger ?? '#EF4444',
+      marginLeft: designTokens.spacing.xs,
     },
     footerButtonText2: {
-      fontSize: tokens.typography.fontSize.body,
-      fontFamily: tokens.typography.fontFamily.body,
-      color: tokens.colors.danger ?? '#EF4444',
+      fontSize: designTokens.typography.fontSize.body,
+      fontFamily: designTokens.typography.fontFamily.body,
+      color: designTokens.colors.danger ?? '#EF4444',
     },
     spacer: {
-      marginTop: tokens.spacing.xl,
+      marginTop: designTokens.spacing.xl,
     },
   });
 
@@ -195,28 +194,28 @@ export const DetailScreen: React.FC = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.goBack()}
+        <TouchableOpacity style={styles.backButton} onPress={() => {  navigation.goBack()}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-          <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
+          <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>THOUGHTMARK</Text>
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.actionButton} onPress={handlePin} accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-            <Ionicons name="pin" size={20} color={tokens.colors.accent ?? '#000'} />
+            <Ionicons name="pin" size={20} color={designTokens.colors.accent ?? '#000'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={handleEdit} accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-            <Ionicons name="create-outline" size={24} color={tokens.colors.text ?? '#000'} />
+            <Ionicons name="create-outline" size={24} color={designTokens.colors.text ?? '#000'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={handleShare} accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-            <Ionicons name="share-outline" size={24} color={tokens.colors.text ?? '#000'} />
+            <Ionicons name="share-outline" size={24} color={designTokens.colors.text ?? '#000'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -226,7 +225,7 @@ export const DetailScreen: React.FC = () => {
         {/* Bin Info */}
         <View style={styles.contentCard}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Ionicons name="folder-outline" size={16} color={tokens.colors.textSecondary ?? '#000'} />
+            <Ionicons name="folder-outline" size={16} color={designTokens.colors.textSecondary ?? '#000'} />
             <Text style={styles.contentTitle}>Bin: {getBinName(thoughtmark.binId)}</Text>
           </View>
         </View>
@@ -241,7 +240,7 @@ export const DetailScreen: React.FC = () => {
 
         {/* Tags */}
         {thoughtmark.tags && thoughtmark.tags.length > 0 && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: tokens.spacing.lg }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: designTokens.spacing.lg }}>
             {thoughtmark.tags.map((tag, index) => (
               <View key={index} style={styles.tagsContainer}>
                 <Text style={styles.tagText}>#{tag}</Text>
@@ -257,7 +256,7 @@ export const DetailScreen: React.FC = () => {
               <Ionicons
                 name={thoughtmark.isCompleted ? "checkmark-circle" : "ellipse-outline"}
                 size={20}
-                color={thoughtmark.isCompleted ? tokens.colors.accent ?? '#000' : tokens.colors.textSecondary ?? '#000'}
+                color={thoughtmark.isCompleted ? designTokens.colors.accent ?? '#000' : designTokens.colors.textSecondary ?? '#000'}
               />
               <Text style={styles.contentTitle}>
                 {thoughtmark.isCompleted ? 'Completed' : 'Pending'}
@@ -272,7 +271,7 @@ export const DetailScreen: React.FC = () => {
         <TouchableOpacity style={styles.footerButton} onPress={handleDelete} accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button">
-          <Ionicons name="trash-outline" size={20} color={tokens.colors.danger ?? '#EF4444'} />
+          <Ionicons name="trash-outline" size={20} color={designTokens.colors.danger ?? '#EF4444'} />
           <Text style={styles.footerButtonText}>Delete</Text>
         </TouchableOpacity>
         <View style={styles.spacer} />

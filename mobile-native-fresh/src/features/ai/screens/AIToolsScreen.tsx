@@ -36,6 +36,7 @@ type AIInsight = {
 export const AIToolsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const { user } = useAuth();
+  const { designTokens } = useTheme();
 
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
   const [isSmartSorting, setIsSmartSorting] = useState(false);
@@ -269,17 +270,7 @@ export const AIToolsScreen: React.FC = () => {
                   {item.relatedThoughtmarks.map((thoughtmarkId: number, idx: number) => (
                     <TouchableOpacity
                       key={idx}
-                      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: designTokens.colors.accent + 20,
-                        paddingHorizontal: designTokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}">  navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
+                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
                       accessibilityRole="button"
                       accessible={true}
                       accessibilityLabel="Open thoughtmark detail"
@@ -318,17 +309,7 @@ export const AIToolsScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: designTokens.colors.accent + 20,
-                        paddingHorizontal: designTokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}">  navigation.goBack()}
+          onPress={() => navigation.goBack()}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel="Go back"
@@ -456,22 +437,12 @@ export const AIToolsScreen: React.FC = () => {
       {/* Floating Action Button */}
       <TouchableOpacity
         style={[styles.fab, { backgroundColor: designTokens.colors.accent }]}
-        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: designTokens.colors.accent + 20,
-                        paddingHorizontal: designTokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}">  navigation.navigate('CreateThoughtmark' as never)}
+        onPress={() => navigation.navigate('CreateThoughtmark' as never)}
         accessibilityRole="button"
         accessible={true}
         accessibilityLabel="Create new thoughtmark"
       >
-        <Ionicons name="add" size={24} color="#FFFFFF" />
+        <Ionicons name="add" size={32} color={designTokens.colors.background} />
       </TouchableOpacity>
       
       {/* Bottom Nav Bar */}

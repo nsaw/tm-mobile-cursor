@@ -359,10 +359,10 @@ export const SettingsScreen: React.FC = () => {
           <View style={styles.headerContent}>
             <TouchableOpacity 
               style={styles.backButton}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.goBack()}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+              onPress={() => { navigation.goBack(); }}
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Button"
             >
               <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
             </TouchableOpacity>
@@ -660,10 +660,10 @@ export const SettingsScreen: React.FC = () => {
             <Text style={styles.sectionTitle}>Administration</Text>
             <TouchableOpacity
               style={styles.settingItem}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.navigate('AdminDashboard')}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+              onPress={() => { navigation.navigate('AdminDashboard'); }}
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Button"
             >
               <View style={styles.settingLeft}>
                 <Ionicons name="shield-outline" size={20} color={designTokens.colors.accent ?? '#000'} />
@@ -693,7 +693,7 @@ export const SettingsScreen: React.FC = () => {
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setShowSiriDialog(false)}
+                onPress={() => { setShowSiriDialog(false); }}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -703,9 +703,10 @@ export const SettingsScreen: React.FC = () => {
               <TouchableOpacity
                 style={[styles.modalButton, styles.modalButtonPrimary]}
                 onPress={handleSiriPhraseSave}
-               accessibilityRole="button"
+                accessibilityRole="button"
                 accessible={true}
-                accessibilityLabel="Button">
+                accessibilityLabel="Button"
+              >
                 <Text style={[styles.modalButtonText, styles.modalButtonTextPrimary]}>
                   Save
                 </Text>

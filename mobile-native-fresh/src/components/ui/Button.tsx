@@ -30,9 +30,10 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     rightIcon,
   } = props;
   const [isPressed, setIsPressed] = useState(false);
+  const { designTokens } = useTheme();
 
   // Get variant styles
-  const buttonVariants = getButtonVariants(tokens);
+  const buttonVariants = getButtonVariants(designTokens);
   const baseStyle = buttonVariants.base;
   const variantStyle = buttonVariants.variants.variant[variant];
   const sizeStyle = buttonVariants.variants.size[size];
@@ -95,7 +96,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <Pressable
       style={finalButtonStyle}
       onPress={disabled ? undefined : onPress}
-      onPressIn={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsPressed(true)}
+      onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       accessibilityRole="button"

@@ -213,10 +213,10 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             backgroundColor: designTokens.colors.backgroundSecondary,
             marginBottom: designTokens.spacing.lg,
           }}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.navigate('Account' as any)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+          onPress={() => { navigation.navigate('Account' as any); }}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Button"
         >
           <Ionicons name="person-circle-outline" size={24} color={designTokens.colors.text} />
           <Text style={{ marginLeft: designTokens.spacing.sm, fontWeight: '600' }}>
@@ -307,7 +307,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   backgroundColor: designTokens.colors.surface,
                   borderRadius: designTokens.radius.md,
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+                onPress={() => { navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id }); }}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

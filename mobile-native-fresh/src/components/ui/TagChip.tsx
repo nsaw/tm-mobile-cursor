@@ -21,6 +21,8 @@ export const TagChip: React.FC<TagChipProps> = ({
   size = 'md',
 }: TagChipProps) => {
 
+  const { designTokens } = useTheme();
+
   // Guard against undefined tokens
   if (!designTokens) {
     console.warn('TagChip: theme designTokens not initialized');
@@ -74,7 +76,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  onPress?.(tag)}
+      onPress={() => { onPress?.(tag); }}
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}

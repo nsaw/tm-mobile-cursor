@@ -23,6 +23,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
 
+  const { designTokens } = useTheme();
+
   const styles = StyleSheet.create({
     container: {
       width: '100%',
@@ -150,10 +152,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowPassword(!showPassword)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+            onPress={() => { setShowPassword(!showPassword); }}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel={showPassword ? "Hide password" : "Show password"}
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 

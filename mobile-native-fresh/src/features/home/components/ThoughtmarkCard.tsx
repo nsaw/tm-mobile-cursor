@@ -230,7 +230,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               {selected && (
                 <TouchableOpacity
                   style={{ marginRight: designTokens.spacing.xs }}
-                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  onSelectionToggle?.()}
+                  onPress={() => { onSelectionToggle?.(); }}
                   accessibilityRole="button"
                   accessible
                   accessibilityLabel="Toggle selection"
@@ -303,7 +303,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
               </Text>
               <TouchableOpacity
                 style={{ padding: designTokens.spacing.xs }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  setShowContextMenu(true)}
+                onPress={() => { setShowContextMenu(true); }}
                 accessibilityRole="button"
                 accessible
                 accessibilityLabel="Open context menu"

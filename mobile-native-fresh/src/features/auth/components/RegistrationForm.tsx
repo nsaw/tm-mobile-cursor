@@ -34,6 +34,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
+  const { designTokens } = useTheme();
+
   const styles = StyleSheet.create({
     container: {
       width: '100%',
@@ -214,10 +216,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           />
           <TouchableOpacity
             style={styles.eyeButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowPassword(!showPassword)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+            onPress={() => { setShowPassword(!showPassword); }}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel={showPassword ? "Hide password" : "Show password"}
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 

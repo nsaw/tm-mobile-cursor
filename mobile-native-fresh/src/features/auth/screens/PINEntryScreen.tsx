@@ -14,17 +14,23 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 
-export const PINEntryScreen: React.FC = () => {
+export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
+  title = 'Enter PIN',
+  message = 'Please enter your 4-digit PIN',
+  onPINSubmit,
+  onCancel,
+  maxAttempts = 3,
+  lockoutDuration = 30000, // 30 seconds
+}) => {
   const navigation = useNavigation();
-  const title = 'Enter PIN';
-  const message = 'Please enter your PIN to continue';
+  const { designTokens } = useTheme();
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
   const [lockoutTime, setLockoutTime] = useState(0);
 
-  const styles = getStyles(tokens);
+  const styles = getStyles(designTokens);
 
   const handlePINSubmit = async () => {
     if (pin.length < 4) {
@@ -106,7 +112,7 @@ export const PINEntryScreen: React.FC = () => {
       >
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+            onPress={() => { navigation.goBack(); }}
             style={styles.cancelButton}
             accessibilityRole="button"
             accessible={true}
@@ -136,7 +142,15 @@ export const PINEntryScreen: React.FC = () => {
           {/* PIN Display */}
           <View style={styles.pinDisplay}>
             {Array.from({ length: 6 }).map((_, index) => (
-              <View><Text>))}</Text></View>
+              <View
+                key={index}
+                style={[
+                  styles.pinDot,
+                  index < pin.length && styles.pinDotFilled,
+                ]}
+              />
+            ))}
+          </View>
 
           {/* Number Pad */}
           <View style={[styles.numberPad, isLocked && styles.numberPadDisabled]}>
@@ -144,7 +158,7 @@ export const PINEntryScreen: React.FC = () => {
               <TouchableOpacity
                 key={number}
                 style={[styles.numberButton, isLocked && styles.numberButtonDisabled]}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> !isLocked && handleKeyPress(number.toString())}
+                onPress={() => { !isLocked && handleKeyPress(number.toString()); }}
                 disabled={isLocked}
                 accessibilityRole="button"
                 accessible={true}
@@ -166,7 +180,7 @@ export const PINEntryScreen: React.FC = () => {
             
             <TouchableOpacity
               style={styles.numberButton}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleKeyPress('0')}
+              onPress={() => { handleKeyPress('0'); }}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Enter digit 0"
@@ -189,7 +203,7 @@ export const PINEntryScreen: React.FC = () => {
           <TouchableOpacity
             style={[
               styles.submitButton,
-              pin.length  accessibilityRole="button" accessible={true} accessibilityLabel="Button">= 4 && styles.submitButtonActive,
+              pin.length >= 4 && styles.submitButtonActive,
             ]}
             onPress={handlePINSubmit}
             disabled={pin.length < 4 || isLoading}
@@ -213,7 +227,7 @@ export const PINEntryScreen: React.FC = () => {
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: designTokens.colors.background,
+    backgroundColor: tokens.colors.background,
   },
   keyboard: {
     flex: 1,
@@ -221,99 +235,99 @@ const getStyles = (tokens: any) => StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    paddingHorizontal: designTokens.spacing.md,
-    paddingVertical: designTokens.spacing.sm,
+    paddingHorizontal: tokens.spacing.md,
+    paddingVertical: tokens.spacing.sm,
   },
   cancelButton: {
-    padding: designTokens.spacing.sm,
+    padding: tokens.spacing.sm,
   },
   content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: designTokens.spacing.xl,
+    paddingHorizontal: tokens.spacing.xl,
   },
   title: {
-    fontSize: designTokens.typography.fontSize.heading,
-    fontWeight: designTokens.typography.fontWeight.bold,
-    color: designTokens.colors.text,
+    fontSize: tokens.typography.fontSize.heading,
+    fontWeight: tokens.typography.fontWeight.bold,
+    color: tokens.colors.text,
     textAlign: 'center',
-    marginBottom: designTokens.spacing.sm,
+    marginBottom: tokens.spacing.sm,
   },
   message: {
-    fontSize: designTokens.typography.fontSize.body,
-    color: designTokens.colors.textSecondary,
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: designTokens.spacing.xl,
+    marginBottom: tokens.spacing.xl,
   },
   pinDisplay: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: designTokens.spacing.xl,
+    marginBottom: tokens.spacing.xl,
   },
   pinDot: {
     width: 20,
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: designTokens.colors.border,
-    marginHorizontal: designTokens.spacing.sm,
+    borderColor: tokens.colors.border,
+    marginHorizontal: tokens.spacing.sm,
   },
   pinDotFilled: {
-    backgroundColor: designTokens.colors.accent,
-    borderColor: designTokens.colors.accent,
+    backgroundColor: tokens.colors.accent,
+    borderColor: tokens.colors.accent,
   },
   numberPad: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     maxWidth: 300,
-    marginBottom: designTokens.spacing.xl,
+    marginBottom: tokens.spacing.xl,
   },
   numberButton: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: designTokens.colors.surface,
+    backgroundColor: tokens.colors.surface,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: designTokens.spacing.sm,
+    margin: tokens.spacing.sm,
   },
   numberText: {
-    fontSize: designTokens.typography.fontSize.heading,
-    fontWeight: designTokens.typography.fontWeight.semibold,
-    color: designTokens.colors.text,
+    fontSize: tokens.typography.fontSize.heading,
+    fontWeight: tokens.typography.fontWeight.semibold,
+    color: tokens.colors.text,
   },
   submitButton: {
-    backgroundColor: designTokens.colors.border,
-    borderRadius: designTokens.radius.md,
-    paddingVertical: designTokens.spacing.md,
-    paddingHorizontal: designTokens.spacing.xl,
+    backgroundColor: tokens.colors.border,
+    borderRadius: tokens.radius.md,
+    paddingVertical: tokens.spacing.md,
+    paddingHorizontal: tokens.spacing.xl,
     minWidth: 200,
     alignItems: 'center',
   },
   submitButtonActive: {
-    backgroundColor: designTokens.colors.accent,
+    backgroundColor: tokens.colors.accent,
   },
   submitButtonText: {
-    fontSize: designTokens.typography.fontSize.body,
-    fontWeight: designTokens.typography.fontWeight.semibold,
-    color: designTokens.colors.textSecondary,
+    fontSize: tokens.typography.fontSize.body,
+    fontWeight: tokens.typography.fontWeight.semibold,
+    color: tokens.colors.textSecondary,
   },
   submitButtonTextActive: {
-    color: designTokens.colors.background,
+    color: tokens.colors.background,
   },
   attemptsText: {
-    fontSize: designTokens.typography.fontSize.sm,
-    color: designTokens.colors.textSecondary,
+    fontSize: tokens.typography.fontSize.sm,
+    color: tokens.colors.textSecondary,
     textAlign: 'center',
-    marginBottom: designTokens.spacing.md,
+    marginBottom: tokens.spacing.md,
   },
   lockoutText: {
-    fontSize: designTokens.typography.fontSize.sm,
+    fontSize: tokens.typography.fontSize.sm,
     color: '#ff4444',
     textAlign: 'center',
-    marginBottom: designTokens.spacing.md,
-    fontWeight: designTokens.typography.fontWeight.semibold,
+    marginBottom: tokens.spacing.md,
+    fontWeight: tokens.typography.fontWeight.semibold,
   },
 }); 

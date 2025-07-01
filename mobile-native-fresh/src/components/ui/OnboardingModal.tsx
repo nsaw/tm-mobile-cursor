@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle, Text } from 'react-native';
+import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle, Text, TouchableOpacityProps } from 'react-native';
 import { Brain, Mic, Search } from 'lucide-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from '../../theme/ThemeProvider';
-import { Text } from '../ui/Text';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-interface ModalButtonProps {
+interface ModalButtonProps extends TouchableOpacityProps {
   onPress: (event: GestureResponderEvent) => void;
   icon?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  disabled?: boolean;
   iconRight?: boolean;
   textStyle?: any;
 }
@@ -24,8 +22,8 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLabel="Modal"> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
-  const { tokens, typography } = useTheme();
+const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight, textStyle, ...rest }) => {
+  const { designTokens, typography } = useTheme();
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -47,7 +45,9 @@ const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLab
       accessibilityRole="button"
       disabled={disabled}
       accessible={true}
-      accessibilityLabel="Button">
+      accessibilityLabel="Button"
+      {...rest}
+    >
       {!iconRight && icon && <Feather name={icon} size={18} color={designTokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,
@@ -64,7 +64,7 @@ const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLab
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClose }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const { typography, spacing, tokens } = useTheme();
+  const { typography, spacing, designTokens } = useTheme();
 
   const iconSize = designTokens.spacing.xxxl * 2;
 
@@ -182,11 +182,19 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Pagination Dots */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View><Text>))}</Text></View>
+              <View key={i} style={{
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                marginHorizontal: 4,
+                backgroundColor: i === currentStep ? designTokens.colors.accent : designTokens.colors.textMuted,
+              }} />
+            ))}
+          </View>
           {/* Buttons */}
           <View style={{ flexDirection: 'row', width: '100%', marginTop: designTokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
-            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>Previous</Text></ModalButton>
-            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
+            <ModalButton onPress={handlePrevious} disabled={currentStep === 0} accessible={false} accessibilityLabel="Modal"><Text>Previous</Text></ModalButton>
+            <ModalButton onPress={handleNext} accessible={false} accessibilityLabel="Modal"><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
           </View>
         </View>
       </View>

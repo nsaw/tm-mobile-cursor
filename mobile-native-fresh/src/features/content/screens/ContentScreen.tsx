@@ -21,6 +21,7 @@ type ContentScreenNavigationProp = NavigationProp<RootStackParamList, 'Content'>
 
 export const ContentScreen: React.FC = () => {
   const navigation = useNavigation<ContentScreenNavigationProp>();
+  const { designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
@@ -121,7 +122,7 @@ export const ContentScreen: React.FC = () => {
         <TouchableOpacity
           key={page.route}
           style={styles.card}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button">  navigation.navigate(page.route as any)}
+          onPress={() => { navigation.navigate(page.route as any); }}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel={page.title}

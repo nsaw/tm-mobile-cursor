@@ -27,17 +27,16 @@ export const BinCard: React.FC<BinCardProps> = ({
   bin,
   onPress,
 }) => {
-  const { tokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
-      width: (width - tokens.spacing.lg * 2 - tokens.spacing.sm) / 2,
+      width: (width - designTokens.spacing.lg * 2 - designTokens.spacing.sm) / 2,
       aspectRatio: 1,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md * 1.34,
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md * 1.34,
       marginBottom: spacingTokens.cardMarginBottom,
       borderWidth: 1,
-      borderColor: tokens.colors.borderHover,
+      borderColor: designTokens.colors.borderHover,
       justifyContent: 'center',
       alignItems: 'center',
       padding: spacingTokens.cardPaddingHorizontal,
@@ -47,12 +46,12 @@ export const BinCard: React.FC<BinCardProps> = ({
       marginBottom: spacingTokens.textMarginBottom,
     },
     name: {
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
       textAlign: 'center',
       marginBottom: spacingTokens.textMarginBottom,
     },
     count: {
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       textAlign: 'center',
     },
   });
@@ -64,7 +63,7 @@ export const BinCard: React.FC<BinCardProps> = ({
       <Ionicons 
         name={bin.icon as any} 
         size={32} 
-        style={[styles.icon, { color: bin.color || tokens.colors.accent }]} 
+        style={[styles.icon, { color: bin.color || designTokens.colors.accent }]} 
       />
       <Text variant="subtitle" style={styles.name}>{bin.name}</Text>
       <Text variant="caption" style={styles.count}>{bin.thoughtmarkCount} thoughtmarks</Text>
