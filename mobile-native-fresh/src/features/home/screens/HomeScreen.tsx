@@ -14,6 +14,7 @@ import { useBins } from '../hooks/useBins';
 import { Text } from '../../../components/ui/Text';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { StoreKitTestCard } from '../components/StoreKitTestCard';
+import { HydrationTestCard } from '../../../components/ui/HydrationTestCard';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
@@ -207,6 +208,9 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
       >
         {/* StoreKit Test Card */}
         <StoreKitTestCard />
+        
+        {/* Hydration Test Card */}
+        <HydrationTestCard />
 
         {/* Profile Section */}
         <TouchableOpacity 

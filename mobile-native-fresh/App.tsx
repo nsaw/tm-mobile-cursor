@@ -19,6 +19,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { AppNavigator } from './src/navigation/AppNavigator'
 import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
+import { SessionHydrationGuard } from './src/components/ui/SessionHydrationGuard'
 // import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
@@ -39,10 +40,12 @@ function AppContent() {
   const { tokens: designTokens } = useTheme();
   
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <StatusBar style="light" />
-      <AppNavigator />
-    </SafeAreaView>
+    <SessionHydrationGuard>
+      <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+        <StatusBar style="light" />
+        <AppNavigator />
+      </SafeAreaView>
+    </SessionHydrationGuard>
   )
 }
 

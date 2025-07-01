@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { designTokens, DesignTokens } from './tokens';
 import { typographyTokens } from './typography';
@@ -11,6 +12,8 @@ import {
   getTextVariants, 
   getBadgeVariants 
 } from './variants';
+
+const THEME_STORAGE_KEY = '@thoughtmarks_theme_preferences';
 
 interface ThemeContextType {
   tokens: DesignTokens;
@@ -28,6 +31,7 @@ interface ThemeContextType {
   toggleTheme: () => void;
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  isHydrated: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -47,29 +51,63 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [isFluidTheme, setIsFluidTheme] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     // Load theme preferences from storage
-    // TODO: Implement AsyncStorage for theme persistence
     const loadThemePreferences = async () => {
-      // For now, default to dark mode
-      setIsDarkMode(true);
-      setIsFluidTheme(false);
+      try {
+        console.log('🎨 Theme: Loading theme preferences from storage...');
+        const storedPreferences = await AsyncStorage.getItem(THEME_STORAGE_KEY);
+        
+        if (storedPreferences) {
+          const preferences = JSON.parse(storedPreferences);
+          console.log('🎨 Theme: Loaded preferences:', preferences);
+          
+          setIsDarkMode(preferences.isDarkMode ?? true);
+          setIsFluidTheme(preferences.isFluidTheme ?? false);
+        } else {
+          console.log('🎨 Theme: No stored preferences, using defaults');
+          // Save default preferences
+          const defaultPreferences = {
+            isDarkMode: true,
+            isFluidTheme: false,
+          };
+          await AsyncStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(defaultPreferences));
+        }
+      } catch (error) {
+        console.error('🎨 Theme: Error loading theme preferences:', error);
+        // Fallback to defaults
+        setIsDarkMode(true);
+        setIsFluidTheme(false);
+      } finally {
+        setIsHydrated(true);
+        console.log('🎨 Theme: Hydration complete');
+      }
     };
 
     loadThemePreferences();
   }, []);
 
-  const toggleTheme = () => {
-    const newMode = !isFluidTheme;
-    setIsFluidTheme(newMode);
-    // TODO: Save to AsyncStorage
+  const saveThemePreferences = async (newPreferences: { isDarkMode: boolean; isFluidTheme: boolean }) => {
+    try {
+      await AsyncStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(newPreferences));
+      console.log('🎨 Theme: Preferences saved:', newPreferences);
+    } catch (error) {
+      console.error('🎨 Theme: Error saving preferences:', error);
+    }
   };
 
-  const toggleDarkMode = () => {
+  const toggleTheme = async () => {
+    const newMode = !isFluidTheme;
+    setIsFluidTheme(newMode);
+    await saveThemePreferences({ isDarkMode, isFluidTheme: newMode });
+  };
+
+  const toggleDarkMode = async () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    // TODO: Save to AsyncStorage
+    await saveThemePreferences({ isDarkMode: newMode, isFluidTheme });
   };
 
   const contextValue: ThemeContextType = {
@@ -88,6 +126,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     toggleTheme,
     isDarkMode,
     toggleDarkMode,
+    isHydrated,
   };
 
   return (
