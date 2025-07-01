@@ -162,7 +162,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const handleViewBins = () => {
-    navigation.navigate('Bins');
+    navigation.navigate('AllBins');
   };
 
   const handleNavigate = (route: string) => {

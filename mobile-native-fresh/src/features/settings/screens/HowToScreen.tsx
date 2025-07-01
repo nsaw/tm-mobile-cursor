@@ -150,13 +150,19 @@ const HowToScreen: React.FC = () => {
       title: 'Video Tutorials',
       description: 'Step-by-step guides',
       icon: Ionicons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement video tutorials navigation
+        console.log('Video tutorials pressed');
+      },
     },
     {
       title: 'User Guide',
       description: 'Comprehensive documentation',
       icon: MaterialCommunityIcons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement user guide navigation
+        console.log('User guide pressed');
+      },
     },
   ];
 
