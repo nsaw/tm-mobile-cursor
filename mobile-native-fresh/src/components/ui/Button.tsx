@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, ViewStyle, TextStyle } from 'react-native';
+import { Pressable, ViewStyle, TextStyle, Text } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getButtonVariants, mergeVariantStyles } from '../../theme/variants';
@@ -96,7 +96,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <Pressable
       style={finalButtonStyle}
       onPress={disabled ? undefined : onPress}
-      onPressIn={() => setIsPressed(true)}
+      onPressIn={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       disabled={disabled}
       accessibilityRole="button"
@@ -108,29 +108,17 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       }}
     >
       {leftIcon && (
-        <ButtonText style={{ marginRight: tokens.spacing.sm, color: textColor }}>
-          {leftIcon}
-        </ButtonText>
+        <ButtonText><Text>{leftIcon}</Text></ButtonText>
       )}
       
       {typeof children === 'string' ? (
-        <ButtonText
-          style={{
-            color: textColor,
-            textAlign: 'center',
-            ...textStyle,
-          }}
-        >
-          {children}
-        </ButtonText>
+        <ButtonText><Text>{children}</Text></ButtonText>
       ) : (
         children
       )}
       
       {rightIcon && (
-        <ButtonText style={{ marginLeft: tokens.spacing.sm, color: textColor }}>
-          {rightIcon}
-        </ButtonText>
+        <ButtonText><Text>{rightIcon}</Text></ButtonText>
       )}
     </Pressable>
   );

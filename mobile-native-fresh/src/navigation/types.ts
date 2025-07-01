@@ -4,6 +4,7 @@ export type RootStackParamList = {
   // Auth Screens
   SignIn: undefined;
   SignUp: undefined;
+  PINEntry: { isSetup?: boolean; onSuccess?: () => void; onCancel?: () => void };
   
   // Main Screens
   Dashboard: undefined;

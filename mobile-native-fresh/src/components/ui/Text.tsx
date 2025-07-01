@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, Text } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
 
 export interface TextProps extends RNTextProps {
@@ -126,12 +127,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <RNText
-      style={[getVariantStyle(), style]}
-      {...props}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 };
 
