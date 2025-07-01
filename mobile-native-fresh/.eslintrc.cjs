@@ -134,6 +134,7 @@ module.exports = {
       files: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts', 'src/utils/getTextVariant.ts'],
       rules: {
         'no-restricted-imports': 'off',
+        'thoughtmarks/require-use-theme': 'off',
       },
     },
   ],
