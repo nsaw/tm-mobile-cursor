@@ -9,7 +9,7 @@ This index maps all active hybrid blocks, scripts, and structure references for 
 | Phase | Cursor Block | Description |
 |-------|-------------------------------|-------------|
 | 1     | tasks/v1.3.2/1_v1.3.2_deeplink-siri.cursor-instruction.json | Deep Link + Siri Handler |
-| 2     | tasks/v1.3.2/2_v1.3.2_auth-onboarding.cursor-instruction.json | SignIn, SignUp, Onboarding |
+| 2     | ✅ COMPLETE | SignIn, SignUp, Onboarding |
 | 3     | tasks/v1.3.2/3_v1.3.2_pin-premium-role.cursor-instruction.json | PIN entry, role gating |
 | 4     | tasks/v1.3.2/4_v1.3.2_storekit-premium.cursor-instruction.json | StoreKit purchase/restore |
 | 5     | tasks/v1.3.2/5_v1.3.2_hydration-init.cursor-instruction.json | Theme + Auth hydration |
