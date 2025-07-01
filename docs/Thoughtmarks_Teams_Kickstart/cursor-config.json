@@ -1,0 +1,19 @@
+{
+  "reference": {
+    "styleGuide": "preferences/style-guide.md",
+    "agentInstructions": "preferences/agent-instructions.md",
+    "gitStructure": "preferences/git-structure.md",
+    "blockLibrary": "preferences/hybrid-blocks/"
+  },
+  "git": {
+    "backupScript": "scripts/backup-tag-push.sh",
+    "backupPath": "/Users/sawyer/gitSync/tm-safety_backups"
+  },
+  "hybridBlockDefaults": {
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+    "blockCommitOnError": true,
+    "alertUserOnParseFail": true
+  }
+}

@@ -1,0 +1,103 @@
+[ 576]  .
+├── [ 736]  Archive
+│   ├── [1.8K]  10_v1.4.0_glass-morphism-ui.cursor-instruction.json
+│   ├── [1.5K]  2_storekit-premium.cursor-instruction.json
+│   ├── [1.4K]  3_premium-qa.cursor-instruction.json
+│   ├── [4.1K]  3.5_v1.3.2_tokens-refactor.cursor-instruction.json
+│   ├── [1.4K]  4_advanced-features.cursor-instruction.json
+│   ├── [2.2K]  4.5_v1.3.2_syntax-lint-boot-validation.cursor-instruction.json
+│   ├── [1.5K]  5_release-candidate.cursor-instruction.json
+│   ├── [1.6K]  5_v1.3.2_hydration-init.cursor-instruction.json
+│   ├── [3.4K]  6_v1.3.2_clickable-crawl.cursor-instruction.json
+│   ├── [3.1K]  7_ui-polish-phase.cursor-instruction.json
+│   ├── [1.9K]  7_v1.3.2_final-validation.cursor-instruction.json
+│   ├── [1.9K]  8_ui-polish-with-dashboard-exception.cursor-instruction.json
+│   ├── [2.7K]  8_v1.3.2_unified-clickable-theme-role-enforcer.cursor-instruction.json
+│   ├── [1.7K]  9_v1.4.0_ui-refactor-preflight.cursor-instruction.json
+│   ├── [3.1K]  audit-clickables.hybrid-block-v1.json
+│   ├── [ 766]  auto-roleview-enforcement.cursor-instruction.json
+│   ├── [2.0K]  Download 0_v1.4.0_ui-refactor-init.cursor-instruction.json
+│   ├── [1.9K]  eas-build-checklist.md
+│   ├── [1.5K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   └── [3.8K]  routing-validation.json
+├── [ 456]  backup-tag-push.sh
+├── [   0]  blank.json
+├── [  96]  cleanup
+├── [ 160]  docs
+│   ├── [ 11K]  MasterTask-250627.md
+│   └── [1.6K]  Notes_250627.md
+├── [   0]  folder-structure-with-sizes.txt
+├── [  64]  git
+├── [ 320]  hybrid_blocks
+│   ├── [ 766]  auto-roleview-enforcement.hybrid-block-v1.json
+│   ├── [1.2K]  cursor-background-lint-agent.hybrid-block-v1.json
+│   ├── [ 665]  lint-fix-background.hybrid-block-v1.json
+│   ├── [1.3K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   ├── [ 690]  role-audit-background-loop.hybrid-block-v1.json
+│   ├── [ 750]  role-audit-background.hybrid-block-v1.json
+│   └── [2.0K]  visual-polish-final-pass-v1.2.2.hybrid-block-v1.json
+├── [2.2K]  INDEX (1).md
+├── [2.4K]  INDEX.md
+├── [ 192]  recovery_troubleshooting
+│   ├── [1.1K]  clean-reset-mirror.json
+│   ├── [ 22K]  postmortem.md
+│   ├── [7.2K]  recovery-audit-fresh-tasks_250628.md
+│   └── [1.6K]  restore-icloud-backup.json
+├── [ 448]  v1.2.2
+│   ├── [ 766]  auto-roleview-enforcement.hybrid-block-v1.json
+│   ├── [1.2K]  cursor-background-lint-agent.hybrid-block-v1.json
+│   ├── [2.3K]  cursor-config.release-v1.2.2.json
+│   ├── [ 665]  lint-fix-background.cursor-instruction.json
+│   ├── [ 665]  lint-fix-background.hybrid-block-v1.json
+│   ├── [1.3K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   ├── [ 690]  role-audit-background-loop.hybrid-block-v1.json
+│   ├── [ 750]  role-audit-background.cursor-instruction.json
+│   ├── [ 750]  role-audit-background.hybrid-block-v1.json
+│   ├── [1.1K]  taskflow.release-v1.2.2.json
+│   ├── [2.0K]  visual-polish-final-pass-v1.2.2.cursor-instruction.json
+│   └── [2.0K]  visual-polish-final-pass-v1.2.2.hybrid-block-v1.json
+├── [ 160]  v1.3.1
+│   ├── [1.9K]  6_eas-setup.cursor-instruction.json
+│   ├── [5.7K]  core-app-sprint.cursor-instruction.json
+│   └── [4.5K]  ui-enforcement-hybrid-block-v1.3.0.json
+├── [ 416]  v1.3.2
+│   ├── [2.8K]  1_v1.3.2_deeplink-siri.cursor-instruction.json
+│   ├── [2.6K]  2_v1.3.2_auth-onboarding.cursor-instruction.json
+│   ├── [2.1K]  3_v1.3.2_pin-premium-role.cursor-instruction.json
+│   ├── [4.1K]  3.5_v1.3.2_tokens-refactor.cursor-instruction.json
+│   ├── [1.9K]  4_v1.3.2_storekit-premium.cursor-instruction.json
+│   ├── [2.2K]  4.5_v1.3.2_syntax-lint-boot-validation.cursor-instruction.json
+│   ├── [1.6K]  5_v1.3.2_hydration-init.cursor-instruction.json
+│   ├── [ 256]  docs
+│   │   ├── [ 489]  AUDIT-RESULTS.md
+│   │   ├── [ 363]  BLOCK_COVERAGE.md
+│   │   ├── [ 250]  CHANGELOG.md
+│   │   ├── [ 551]  INDEX.md
+│   │   ├── [ 725]  PACKAGE1_DIFF_REPORT.md
+│   │   └── [ 622]  ROADMAP.md
+│   ├── [ 534]  README_v1.3.2_BOOT_ENFORCEMENT.md
+│   └── [4.2K]  tokens_to_design_tokens.json
+└── [ 384]  v1.4.0
+    ├── [1.9K]  1_v1.4.0_auto-roleview-mapping.cursor-instruction.json
+    ├── [1.9K]  2_v1.4.0_theme-role-global-enforce.cursor-instruction.json
+    ├── [1.8K]  3_v1.4.0_glass-morphism-ui.cursor-instruction.json
+    ├── [1.9K]  4_v1.4.0_ui-refactor-preflight.cursor-instruction.json
+    ├── [1.9K]  5_v1.4.0_clickable-validation.cursor-instruction.json
+    ├── [1.8K]  6_v1.4.0_final-ui-validation.cursor-instruction.json
+    ├── [ 480]  docs
+    │   ├── [ 346]  DASHBOARD_LAYOUT.md
+    │   ├── [ 207]  INDEX.md
+    │   ├── [ 243]  README.md
+    │   ├── [1.1K]  ROLE_TYPE_MAP.md
+    │   ├── [ 403]  SACRED_COWS_PROTECTION.md
+    │   ├── [ 377]  SETTINGS_LAYOUT.md
+    │   ├── [ 818]  THEME_ASSIGNMENT_RULES.md
+    │   ├── [2.4K]  UI_LEXICON.md
+    │   ├── [ 488]  UI-AUDIT-RESULTS.md
+    │   ├── [ 320]  UNIFIED_THOUGHTMARK.md
+    │   ├── [ 407]  VISUAL_ENFORCEMENT_PLAN.md
+    │   └── [ 479]  VISUAL_VALIDATION_PLAN.md
+    ├── [ 755]  INDEX_UI_REFACTOR_v1.4.0.md
+    └── [1.8K]  ROADMAP_UI_REFACTOR_v1.4.0.md
+
+13 directories, 88 files
