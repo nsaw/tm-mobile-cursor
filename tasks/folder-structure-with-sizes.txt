@@ -1,0 +1,84 @@
+[ 928]  .
+├── [2.7K]  1_deeplink-siri.cursor-instruction.json
+├── [1.5K]  2_storekit-premium.cursor-instruction.json
+├── [1.4K]  3_premium-qa.cursor-instruction.json
+├── [1.4K]  4_advanced-features.cursor-instruction.json
+├── [1.5K]  5_release-candidate.cursor-instruction.json
+├── [3.1K]  7_ui-polish-phase.cursor-instruction.json
+├── [1.9K]  8_ui-polish-with-dashboard-exception.cursor-instruction.json
+├── [ 448]  Archive
+│   ├── [1.5K]  2_storekit-premium.cursor-instruction.json
+│   ├── [1.4K]  3_premium-qa.cursor-instruction.json
+│   ├── [1.4K]  4_advanced-features.cursor-instruction.json
+│   ├── [1.5K]  5_release-candidate.cursor-instruction.json
+│   ├── [3.1K]  7_ui-polish-phase.cursor-instruction.json
+│   ├── [1.9K]  8_ui-polish-with-dashboard-exception.cursor-instruction.json
+│   ├── [3.1K]  audit-clickables.hybrid-block-v1.json
+│   ├── [ 766]  auto-roleview-enforcement.cursor-instruction.json
+│   ├── [1.9K]  eas-build-checklist.md
+│   ├── [1.5K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   └── [3.8K]  routing-validation.json
+├── [ 766]  auto-roleview-enforcement.cursor-instruction.json
+├── [ 456]  backup-tag-push.sh
+├── [   0]  blank.json
+├── [  96]  cleanup
+├── [ 160]  docs
+│   ├── [ 11K]  MasterTask-250627.md
+│   └── [1.6K]  Notes_250627.md
+├── [1.9K]  eas-build-checklist.md
+├── [   0]  folder-structure-with-sizes.txt
+├── [  64]  git
+├── [ 320]  hybrid_blocks
+│   ├── [ 766]  auto-roleview-enforcement.hybrid-block-v1.json
+│   ├── [1.2K]  cursor-background-lint-agent.hybrid-block-v1.json
+│   ├── [ 665]  lint-fix-background.hybrid-block-v1.json
+│   ├── [1.3K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   ├── [ 690]  role-audit-background-loop.hybrid-block-v1.json
+│   ├── [ 750]  role-audit-background.hybrid-block-v1.json
+│   └── [2.0K]  visual-polish-final-pass-v1.2.2.hybrid-block-v1.json
+├── [2.9K]  INDEX.md
+├── [ 665]  lint-fix-background.cursor-instruction.json
+├── [1.5K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+├── [ 192]  recovery_troubleshooting
+│   ├── [1.1K]  clean-reset-mirror.json
+│   ├── [ 22K]  postmortem.md
+│   ├── [7.2K]  recovery-audit-fresh-tasks_250628.md
+│   └── [1.6K]  restore-icloud-backup.json
+├── [1.6K]  restore-icloud-backup.json
+├── [ 750]  role-audit-background.cursor-instruction.json
+├── [ 448]  v1.2.2
+│   ├── [ 766]  auto-roleview-enforcement.hybrid-block-v1.json
+│   ├── [1.2K]  cursor-background-lint-agent.hybrid-block-v1.json
+│   ├── [2.3K]  cursor-config.release-v1.2.2.json
+│   ├── [ 665]  lint-fix-background.cursor-instruction.json
+│   ├── [ 665]  lint-fix-background.hybrid-block-v1.json
+│   ├── [1.3K]  liquid-theme-v1-restoration.hybrid-block-v1.json
+│   ├── [ 690]  role-audit-background-loop.hybrid-block-v1.json
+│   ├── [ 750]  role-audit-background.cursor-instruction.json
+│   ├── [ 750]  role-audit-background.hybrid-block-v1.json
+│   ├── [1.1K]  taskflow.release-v1.2.2.json
+│   ├── [2.0K]  visual-polish-final-pass-v1.2.2.cursor-instruction.json
+│   └── [2.0K]  visual-polish-final-pass-v1.2.2.hybrid-block-v1.json
+├── [ 160]  v1.3.1
+│   ├── [1.9K]  6_eas-setup.cursor-instruction.json
+│   ├── [5.7K]  core-app-sprint.cursor-instruction.json
+│   └── [4.5K]  ui-enforcement-hybrid-block-v1.3.0.json
+└── [ 448]  v1.3.2
+    ├── [2.8K]  1_v1.3.2_deeplink-siri.cursor-instruction.json
+    ├── [2.6K]  2_v1.3.2_auth-onboarding.cursor-instruction.json
+    ├── [2.1K]  3_v1.3.2_pin-premium-role.cursor-instruction.json
+    ├── [1.9K]  4_v1.3.2_storekit-premium.cursor-instruction.json
+    ├── [1.8K]  5_v1.3.2_hydration-init.cursor-instruction.json
+    ├── [3.7K]  6_v1.3.2_clickable-crawl.cursor-instruction.json
+    ├── [2.3K]  7_v1.3.2_final-validation.cursor-instruction.json
+    ├── [2.9K]  8_v1.3.2_unified-clickable-theme-role-enforcer.cursor-instruction.json
+    ├── [ 224]  thoughtmarks-functional-docs-v1.3.2
+    │   ├── [ 547]  AUDIT-RESULTS.md
+    │   ├── [ 776]  BLOCK_COVERAGE.md
+    │   ├── [ 338]  CHANGELOG.md
+    │   ├── [  79]  INDEX.md
+    │   └── [1.2K]  ROADMAP.md
+    ├── [  96]  v1.3.2_hybrid-blocks-tar-backup-added
+    └── [9.3K]  v1.3.2_hybrid-blocks-tar-backup-added.zip
+
+12 directories, 70 files

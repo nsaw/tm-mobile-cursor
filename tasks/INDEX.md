@@ -1,79 +1,62 @@
-# Tasks Index
+# 🧭 Thoughtmarks Task Index (v1.3.2)
 
-This directory contains task instruction files and related artifacts for the Thoughtmarks mobile app development.
+This index maps all active hybrid blocks, scripts, and structure references for phase execution in version 1.3.2.
 
-## Task Files
+---
 
-### Core Sprint Tasks
-- `1_deeplink-siri.cursor-instruction.json` - Deep linking and Siri integration setup
-- `2_storekit-premium.cursor-instruction.json` - StoreKit premium feature implementation
-- `3_premium-qa.cursor-instruction.json` - Premium feature QA and testing
-- `4_advanced-features.cursor-instruction.json` - Advanced app features implementation
-- `5_release-candidate.cursor-instruction.json` - Release candidate preparation
-- `6_eas-setup.cursor-instruction.json` - EAS integration and build setup (moved to v1.3.1/)
-- `7_ui-polish-phase.cursor-instruction.json` - UI polish and refinement phase
-- `8_ui-polish-with-dashboard-exception.cursor-instruction.json` - UI polish with dashboard exceptions
+## ✅ Active Hybrid Cursor Tasks — v1.3.2
 
-### Background Tasks
-- `role-audit-background.cursor-instruction.json` - Background role audit automation
-- `lint-fix-background.cursor-instruction.json` - Background linting fixes
-- `auto-roleview-enforcement.cursor-instruction.json` - Automated role view enforcement
+| Phase | Cursor Block | Description |
+|-------|-------------------------------|-------------|
+| 1     | tasks/v1.3.2/1_v1.3.2_deeplink-siri.cursor-instruction.json | Deep Link + Siri Handler |
+| 2     | tasks/v1.3.2/2_v1.3.2_auth-onboarding.cursor-instruction.json | SignIn, SignUp, Onboarding |
+| 3     | tasks/v1.3.2/3_v1.3.2_pin-premium-role.cursor-instruction.json | PIN entry, role gating |
+| 4     | tasks/v1.3.2/4_v1.3.2_storekit-premium.cursor-instruction.json | StoreKit purchase/restore |
+| 5     | tasks/v1.3.2/5_v1.3.2_hydration-init.cursor-instruction.json | Theme + Auth hydration |
+| 6     | tasks/v1.3.2/6_v1.3.2_clickable-crawl.cursor-instruction.json | Dry clickable/nav audit |
+| 7     | tasks/v1.3.2/7_v1.3.2_final-validation.cursor-instruction.json | Final QA system check |
+| 8     | tasks/v1.3.2/8_v1.3.2_unified-clickable-theme-role-enforcer.cursor-instruction.json | Role, click, theme enforcement |
 
-### Hybrid Blocks
-- `liquid-theme-v1-restoration.hybrid-block-v1.json` - Theme restoration hybrid block
+---
 
-## Version Directories
+## 📂 Key Project Folders (Relevant)
 
-### v1.2.2/
-Contains artifacts and documentation from version 1.2.2 development phase.
+- `/tasks/v1.3.2/`: All hybrid blocks for 1.3.2 phase
+- `/scripts/`: Live audit tools + pre-push utilities
+- `/mobile-native-fresh/src/`: All screens and components
+- `/references/`: Agent prompts, git and theme style guides
+- `/docs/`: Roadmap, audit results, changelogs, block coverage
 
-### v1.3.1/
-Contains artifacts and documentation from version 1.3.1 development phase.
+---
 
-#### Files in v1.3.1/:
-- `6_eas-setup.cursor-instruction.json` - Original EAS setup task instructions
-- `eas-setup-summary.md` - Comprehensive summary of EAS integration
+## ⚠️ Caution Zones
 
-## EAS Configuration Summary
+- `UnifiedThoughtmarkScreen.tsx`: theme violations + redundant Views
+- `BottomNav.tsx`, `ActionSheet.tsx`: clickable cleanup required
+- `SettingsScreen.tsx`: visual drift from Dashboard
+- `TagEditor.tsx`: missing a11y, labels, routing
 
-### Project Details:
-- **EAS Project**: @nsaw/thoughtmarks
-- **Project ID**: a913dda1-8ad5-4c41-8d69-a4f5bd9d4ceb
-- **iOS Bundle ID**: com.thoughtmarks.mobile
-- **Android Package**: com.thoughtmarks.app
+---
 
-### Build Status:
-- **iOS**: ✅ Successfully configured and tested
-- **Android**: ⏳ Pending keystore configuration
+## 🧪 Cursor Usage Examples
 
-### Build Scripts Available:
-- `npm run build:ios` - Build for iOS
-- `npm run build:android` - Build for Android
-- `npm run build:ios-preview` - Preview build for iOS
-- `npm run build:android-preview` - Preview build for Android
-- `npm run build:all` - Build for all platforms
-- `npm run build:all-preview` - Preview build for all platforms
-
-## Documentation
-
-### Core Documentation:
-- `docs/` - General project documentation
-- `git/` - Git-related documentation and workflows
-
-### Task Documentation:
-Each task directory contains relevant documentation and artifacts for that specific development phase.
-
-## Usage
-
-To execute a task, use the corresponding instruction file with the cursor instruction system. For example:
+**Run a task block:**
 ```bash
-# Execute EAS setup task
-@6_eas-setup.cursor-instruction.json run it
+cursor run tasks/v1.3.2/5_v1.3.2_hydration-init.cursor-instruction.json
 ```
 
-## Notes
+**Run unified role & clickable enforcement:**
+```bash
+cursor run tasks/v1.3.2/8_v1.3.2_unified-clickable-theme-role-enforcer.cursor-instruction.json
+```
 
-- Task files are organized by version and phase
-- Completed tasks are moved to version-specific directories
-- Background tasks run continuously to maintain code quality
-- Hybrid blocks provide reusable development patterns 
+**Create a full project backup before continuing:**
+```bash
+tar --exclude='.git' --exclude='node_modules' --exclude='logs' \
+    -czf /Users/sawyer/gitSync/tm-safety_backups/tm-mobile-cursor_v1.3.2_manual_250630.tar.gz \
+    -C /Users/sawyer/gitSync tm-mobile-cursor
+```
+
+---
+
+Maintain this as your master execution map.

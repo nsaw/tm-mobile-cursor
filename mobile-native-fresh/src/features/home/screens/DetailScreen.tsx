@@ -195,13 +195,10 @@ export const DetailScreen: React.FC = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
-          accessibilityRole="button"
-          accessible={true}
-          accessibilityLabel="Back button"
-        >
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
           <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>THOUGHTMARK</Text>
