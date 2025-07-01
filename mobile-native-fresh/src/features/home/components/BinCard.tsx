@@ -8,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
 
 interface BinCardProps {
   bin: {
@@ -35,21 +34,21 @@ export const BinCard: React.FC<BinCardProps> = ({
       aspectRatio: 1,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md * 1.34,
-      marginBottom: spacingTokens.cardMarginBottom,
+      marginBottom: tokens.spacing.md,
       borderWidth: 1,
       borderColor: tokens.colors.borderHover,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: spacingTokens.cardPaddingHorizontal,
+      padding: tokens.spacing.lg,
     },
     icon: {
       fontSize: 32,
-      marginBottom: spacingTokens.textMarginBottom,
+      marginBottom: tokens.spacing.xs,
     },
     name: {
       color: tokens.colors.accent,
       textAlign: 'center',
-      marginBottom: spacingTokens.textMarginBottom,
+      marginBottom: tokens.spacing.xs,
     },
     count: {
       color: tokens.colors.textSecondary,
