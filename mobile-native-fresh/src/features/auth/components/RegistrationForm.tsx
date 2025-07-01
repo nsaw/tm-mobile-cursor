@@ -26,7 +26,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onSubmit,
   loading = false,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -59,7 +59,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       color: colors.text,
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
       fontSize: typography.body.fontSize,
@@ -73,7 +73,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       backgroundColor: colors.card,
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
     },
     passwordInput: {
       flex: 1,
@@ -93,7 +93,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     },
     submitButton: {
       backgroundColor: colors.primary,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       alignItems: 'center',
       marginTop: spacing.sm,

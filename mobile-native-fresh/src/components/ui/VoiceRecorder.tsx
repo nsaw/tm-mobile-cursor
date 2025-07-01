@@ -38,7 +38,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   onClose,
   onComplete,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const { user } = useAuth();
   const { createThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
@@ -300,7 +300,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Voice Recorder',
           message: Voice ? 'Preparing to listen...' : 'Voice recording (Expo Go mode)',
-          icon: <Ionicons name="mic" size={64} color={tokens.colors.accent} />,
+          icon: <Ionicons name="mic" size={64} color={designTokens.colors.accent} />,
           showCancel: true,
         };
       case 'listening':
@@ -318,7 +318,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         return {
           title: 'Processing...',
           message: 'Creating your thoughtmark...',
-          icon: <ActivityIndicator size={64} color={tokens.colors.accent} />,
+          icon: <ActivityIndicator size={64} color={designTokens.colors.accent} />,
           showCancel: false,
         };
       case 'complete':
@@ -345,11 +345,11 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       alignItems: 'center',
     },
     modalContent: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.radius.lg,
-      padding: tokens.spacing.xl,
-      margin: tokens.spacing.lg,
-      width: Dimensions.get('window').width - tokens.spacing.lg * 2,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.lg,
+      padding: designTokens.spacing.xl,
+      margin: designTokens.spacing.lg,
+      width: Dimensions.get('window').width - designTokens.spacing.lg * 2,
       maxWidth: 400,
       alignItems: 'center',
     },
@@ -358,57 +358,57 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      marginBottom: tokens.spacing.lg,
+      marginBottom: designTokens.spacing.lg,
     },
     closeButton: {
-      padding: tokens.spacing.sm,
+      padding: designTokens.spacing.sm,
     },
     title: {
-      fontSize: tokens.typography.fontSize.lg,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       textAlign: 'center',
     },
     recordButton: {
       width: 80,
       height: 80,
       borderRadius: 40,
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
       justifyContent: 'center',
       alignItems: 'center',
-      marginVertical: tokens.spacing.lg,
+      marginVertical: designTokens.spacing.lg,
     },
     recordButtonRecording: {
-      backgroundColor: tokens.colors.danger,
+      backgroundColor: designTokens.colors.danger,
     },
     recordButtonDisabled: {
-      backgroundColor: tokens.colors.textMuted,
+      backgroundColor: designTokens.colors.textMuted,
     },
     recordIcon: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
     statusText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: tokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
     },
     transcriptContainer: {
       width: '100%',
       minHeight: 100,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
-      padding: tokens.spacing.md,
-      marginTop: tokens.spacing.md,
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderRadius: designTokens.radius.md,
+      padding: designTokens.spacing.md,
+      marginTop: designTokens.spacing.md,
     },
     transcriptText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
       lineHeight: 20,
     },
     messageText: {
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.textSecondary,
       textAlign: 'center',
       fontStyle: 'italic',
     },
@@ -416,43 +416,43 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       flexDirection: 'row',
       justifyContent: 'space-around',
       width: '100%',
-      marginTop: tokens.spacing.lg,
+      marginTop: designTokens.spacing.lg,
     },
     actionButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing.md,
-      paddingVertical: tokens.spacing.sm,
-      borderRadius: tokens.radius.md,
-      backgroundColor: tokens.colors.surface,
+      paddingHorizontal: designTokens.spacing.md,
+      paddingVertical: designTokens.spacing.sm,
+      borderRadius: designTokens.radius.md,
+      backgroundColor: designTokens.colors.surface,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
     },
     actionButtonText: {
-      marginLeft: tokens.spacing.sm,
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.text,
+      marginLeft: designTokens.spacing.sm,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.text,
     },
     testButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: tokens.spacing.md,
-      paddingVertical: tokens.spacing.sm,
-      borderRadius: tokens.radius.md,
-      backgroundColor: tokens.colors.accent,
-      marginTop: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.md,
+      paddingVertical: designTokens.spacing.sm,
+      borderRadius: designTokens.radius.md,
+      backgroundColor: designTokens.colors.accent,
+      marginTop: designTokens.spacing.md,
     },
     testButtonText: {
-      marginLeft: tokens.spacing.sm,
-      fontSize: tokens.typography.fontSize.sm,
-      color: tokens.colors.background,
+      marginLeft: designTokens.spacing.sm,
+      fontSize: designTokens.typography.fontSize.sm,
+      color: designTokens.colors.background,
       fontWeight: '600',
     },
     testTipText: {
-      fontSize: tokens.typography.fontSize.xs,
-      color: tokens.colors.textMuted,
+      fontSize: designTokens.typography.fontSize.xs,
+      color: designTokens.colors.textMuted,
       textAlign: 'center',
-      marginTop: tokens.spacing.sm,
+      marginTop: designTokens.spacing.sm,
       fontStyle: 'italic',
     },
     recordingIcon: {
@@ -493,7 +493,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             <View style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
             <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-              <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
+              <Ionicons name="close" size={24} color={designTokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
 
@@ -541,7 +541,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             accessible={true}
             accessibilityLabel="Button"
           >
-            <Ionicons name="flask" size={16} color={tokens.colors.accent} />
+            <Ionicons name="flask" size={16} color={designTokens.colors.accent} />
             <Text style={styles.testButtonText}>Test Audio</Text>
           </TouchableOpacity>
           <Text style={styles.testTipText}>
@@ -563,7 +563,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 accessible={true}
                 accessibilityLabel="Button"
               >
-                <Ionicons name="checkmark" size={16} color={tokens.colors.success} />
+                <Ionicons name="checkmark" size={16} color={designTokens.colors.success} />
                 <Text style={styles.actionButtonText}>Use</Text>
               </TouchableOpacity>
               <TouchableOpacity 
@@ -573,7 +573,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
                 accessible={true} 
                 accessibilityLabel="Button"
               >
-                <Ionicons name="refresh" size={16} color={tokens.colors.textSecondary} />
+                <Ionicons name="refresh" size={16} color={designTokens.colors.textSecondary} />
                 <Text style={styles.actionButtonText}>Clear</Text>
               </TouchableOpacity>
             </View>

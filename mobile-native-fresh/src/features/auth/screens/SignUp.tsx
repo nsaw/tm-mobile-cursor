@@ -24,7 +24,7 @@ export const SignUpScreen: React.FC = () => {
   const { signUp, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const handleEmailSignUp = async (
     email: string,
@@ -100,7 +100,7 @@ export const SignUpScreen: React.FC = () => {
     },
     formContainer: {
       backgroundColor: colors.card,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       padding: spacing.md,
       shadowColor: '#000',
       shadowOpacity: 0.05,
@@ -110,14 +110,14 @@ export const SignUpScreen: React.FC = () => {
     input: {
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       paddingHorizontal: spacing.md,
       marginBottom: spacing.md,
     },
     primaryButton: {
       backgroundColor: colors.primary,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       alignItems: 'center',
       marginBottom: spacing.md,
@@ -146,7 +146,7 @@ export const SignUpScreen: React.FC = () => {
       backgroundColor: colors.background,
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingVertical: spacing.sm * 2,
       marginBottom: spacing.sm,
     },

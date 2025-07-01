@@ -24,7 +24,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   isRecording = false,
 }) => {
   const insets = useSafeAreaInsets();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [scaleValue] = useState(new Animated.Value(1));
 
   const handlePress = () => {
@@ -63,11 +63,11 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 
   return (
     <View style={[styles.container, { bottom: insets.bottom + 70 }]}>
-      <BlurView intensity={70} tint="dark" style={[styles.blurContainer, { backgroundColor: tokens.colors.backgroundSecondary }]}>
+      <BlurView intensity={70} tint="dark" style={[styles.blurContainer, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
         <Animated.View style={[styles.fab, { 
           transform: [{ scale: scaleValue }],
-          backgroundColor: tokens.colors.backgroundSecondary,
-          shadowColor: tokens.colors.accent,
+          backgroundColor: designTokens.colors.backgroundSecondary,
+          shadowColor: designTokens.colors.accent,
           shadowOffset: {
             width: 0,
             height: 8,
@@ -78,7 +78,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
         }]}>
           <TouchableOpacity
             style={[styles.fabButton, {
-              shadowColor: tokens.colors.accent,
+              shadowColor: designTokens.colors.accent,
               shadowOffset: {
                 width: 0,
                 height: 0,
@@ -94,7 +94,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
             <MaterialCommunityIcons
               name={isRecording ? 'stop' : 'plus'}
               size={26}
-              color={tokens.colors.accent}
+              color={designTokens.colors.accent}
             />
           </TouchableOpacity>
         </Animated.View>
@@ -102,8 +102,8 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       
       {/* Voice recording indicator */}
       {isRecording && (
-        <View style={[styles.recordingIndicator, { backgroundColor: tokens.colors.danger }]}>
-          <View style={[styles.recordingDot, { backgroundColor: tokens.colors.background }]} />
+        <View style={[styles.recordingIndicator, { backgroundColor: designTokens.colors.danger }]}>
+          <View style={[styles.recordingDot, { backgroundColor: designTokens.colors.background }]} />
         </View>
       )}
     </View>

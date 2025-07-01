@@ -24,19 +24,19 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   onToggle,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date();
   const isCompleted = !!task.isCompleted;
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.radius.md,
-      padding: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
-      marginBottom: tokens.spacing.md,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.md,
+      padding: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
+      marginBottom: designTokens.spacing.md,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: designTokens.colors.border,
       flexDirection: 'row',
       alignItems: 'flex-start',
       width: '100%',
@@ -49,27 +49,27 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       height: 24,
       borderRadius: 12,
       borderWidth: 2,
-      borderColor: isCompleted ? tokens.colors.accent : tokens.colors.border,
-      backgroundColor: isCompleted ? tokens.colors.accent : 'transparent',
+      borderColor: isCompleted ? designTokens.colors.accent : designTokens.colors.border,
+      backgroundColor: isCompleted ? designTokens.colors.accent : 'transparent',
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
       marginTop: 2,
     },
     textContainer: {
       flex: 1,
     },
     title: {
-      color: isOverdue ? '#FCA5A5' : isCompleted ? tokens.colors.textSecondary : tokens.colors.text,
-      marginBottom: tokens.spacing.xs,
+      color: isOverdue ? '#FCA5A5' : isCompleted ? designTokens.colors.textSecondary : designTokens.colors.text,
+      marginBottom: designTokens.spacing.xs,
       textDecorationLine: isCompleted ? 'line-through' : 'none',
     },
     contentText: {
-      color: isCompleted ? tokens.colors.textSecondary : tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.xs,
+      color: isCompleted ? designTokens.colors.textSecondary : designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.xs,
     },
     dueDate: {
-      color: isOverdue ? '#FCA5A5' : tokens.colors.textSecondary,
+      color: isOverdue ? '#FCA5A5' : designTokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
       marginLeft: 11,
       textAlign: 'right',
@@ -81,22 +81,22 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       justifyContent: 'space-between',
     },
     icon: {
-      color: isCompleted ? tokens.colors.accent : tokens.colors.textSecondary,
+      color: isCompleted ? designTokens.colors.accent : designTokens.colors.textSecondary,
     },
     priorityIndicator: {
       width: 8,
       height: 8,
       borderRadius: 4,
-      marginLeft: tokens.spacing.sm,
+      marginLeft: designTokens.spacing.sm,
     },
     priorityLow: {
-      backgroundColor: tokens.colors.success,
+      backgroundColor: designTokens.colors.success,
     },
     priorityMedium: {
-      backgroundColor: tokens.colors.warning,
+      backgroundColor: designTokens.colors.warning,
     },
     priorityHigh: {
-      backgroundColor: tokens.colors.danger,
+      backgroundColor: designTokens.colors.danger,
     },
   });
   const formatDueDate = (dateString: string) => {
@@ -127,7 +127,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
   return (
     <TouchableOpacity
-      style={[styles.container, style, isOverdue && { borderColor: tokens.colors.danger }]}
+      style={[styles.container, style, isOverdue && { borderColor: designTokens.colors.danger }]}
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityRole="button"
@@ -145,7 +145,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         accessibilityLabel="Toggle task completion"
       >
         {task.isCompleted && (
-          <Ionicons name="checkmark" size={16} color={tokens.colors.background} />
+          <Ionicons name="checkmark" size={16} color={designTokens.colors.background} />
         )}
       </TouchableOpacity>
       <View style={styles.textContainer}>
@@ -161,7 +161,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           {task.dueDate && (
             <Text 
               variant="caption"
-              style={isOverdue ? { ...styles.dueDate, color: tokens.colors.danger } : styles.dueDate}
+              style={isOverdue ? { ...styles.dueDate, color: designTokens.colors.danger } : styles.dueDate}
             >
               {formatDueDate(task.dueDate)}
             </Text>

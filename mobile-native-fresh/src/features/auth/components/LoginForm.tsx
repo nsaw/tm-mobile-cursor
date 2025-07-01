@@ -18,7 +18,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -39,7 +39,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
     input: {
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
       fontSize: typography.body.fontSize,
@@ -54,7 +54,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
       alignItems: 'center',
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       backgroundColor: colors.card,
     },
     passwordInput: {
@@ -75,7 +75,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, loading = false 
     },
     submitButton: {
       backgroundColor: colors.primary,
-      borderRadius: tokens.radius.md,
+      borderRadius: designTokens.radius.md,
       paddingVertical: spacing.sm * 1.5,
       alignItems: 'center',
       marginTop: spacing.sm,

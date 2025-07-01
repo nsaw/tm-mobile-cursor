@@ -9,40 +9,40 @@ import { Button } from './Button';
 import { Card, CardHeader, CardContent } from './Card';
 
 export const DesignSystemDemo: React.FC = () => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
-      <View style={{ padding: tokens.spacing.lg }}>
+    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+      <View style={{ padding: designTokens.spacing.lg }}>
         {/* Typography Section */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
             <Heading><Text>Design System Demo</Text></Heading>
             <Caption><Text>Showcasing our new component variants</Text></Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.md }}>
+            <View style={{ gap: designTokens.spacing.md }}>
               <Heading><Text>Heading Level 1</Text></Heading>
               <Heading><Text>Heading Level 2</Text></Heading>
               <Heading><Text>Heading Level 3</Text></Heading>
               <Subheading><Text>Subheading Text</Text></Subheading>
               <BodyText><Text>Body text with normal weight and size</Text></BodyText>
               <Caption><Text>Caption text for secondary information</Text></Caption>
-              <Text variant="label" style={{ color: tokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
+              <Text variant="label" style={{ color: designTokens.colors.textSecondary, includeFontPadding: false }}>Label text for form elements</Text>
             </View>
           </CardContent>
         </Card>
 
         {/* Button Variants */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
             <Heading><Text>Button Variants</Text></Heading>
             <Caption><Text>Different button styles and states</Text></Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.md }}>
+            <View style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" onPress={() => console.log('Primary pressed')}>
                 Primary Button
               </Button>
@@ -71,14 +71,14 @@ export const DesignSystemDemo: React.FC = () => {
         </Card>
 
         {/* Button Sizes */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
             <Heading><Text>Button Sizes</Text></Heading>
             <Caption><Text>Available button size options</Text></Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.md }}>
+            <View style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}>
                 Small Button
               </Button>
@@ -99,14 +99,14 @@ export const DesignSystemDemo: React.FC = () => {
         </Card>
 
         {/* Card Variants */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
             <Heading><Text>Card Variants</Text></Heading>
             <Caption><Text>Different card styles and layouts</Text></Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.md }}>
+            <View style={{ gap: designTokens.spacing.md }}>
               <Card variant="default" onPress={() => console.log('Default card pressed')}>
                 <CardContent>
                   <BodyText><Text>Default Card - Tap me!</Text></BodyText>
@@ -135,33 +135,33 @@ export const DesignSystemDemo: React.FC = () => {
         </Card>
 
         {/* Color Palette Section */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.xl }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
             <Heading><Text>Color Palette</Text></Heading>
             <Caption><Text>Our refined muted color system</Text></Caption>
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: tokens.spacing.md }}>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm }}>
-                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: tokens.colors.background }} />
+            <View style={{ gap: designTokens.spacing.md }}>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.sm }}>
+                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Accent</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: tokens.colors.background }} />
+                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Success</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: tokens.colors.background }} />
+                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Warning</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: tokens.colors.background }} />
+                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Danger</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: tokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: tokens.colors.background }} />
+                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Brand</Text></Caption>
                 </View>
               </View>
