@@ -8,20 +8,17 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, SectionHeader } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
 
 interface AIToolsCardProps {
   onPress: () => void;
   title?: string;
   subtitle?: string;
-  icon?: string;
 }
 
 export const AIToolsCard: React.FC<AIToolsCardProps> = ({
   onPress,
   title = "AI TOOLS",
   subtitle = "Generate insights and suggestions",
-  icon = "crown",
 }) => {
   const { tokens } = useTheme();
 
@@ -29,18 +26,18 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     container: {
       backgroundColor: 'transparent',
       borderRadius: 12,
-      paddingVertical: spacingTokens.cardPaddingVertical,
-      paddingLeft: spacingTokens.cardPaddingHorizontal,
-      paddingRight: spacingTokens.cardPaddingHorizontal,
+      paddingVertical: tokens.spacing.md,
+      paddingLeft: tokens.spacing.lg,
+      paddingRight: tokens.spacing.lg,
       marginHorizontal: 0,
-      marginTop: spacingTokens.sectionHeaderMarginBottom,
-      marginBottom: spacingTokens.cardMarginBottom,
+      marginTop: tokens.spacing.md,
+      marginBottom: tokens.spacing.md,
       borderWidth: 0.25,
-      borderColor: '#FFD700',
+      borderColor: tokens.colors.accent,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      shadowColor: '#FFD700',
+      shadowColor: tokens.colors.accent,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
@@ -48,13 +45,13 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
     },
     content: {
       flex: 1,
-      marginRight: spacingTokens.iconMarginRight,
+      marginRight: tokens.spacing.sm,
       flexDirection: 'row',
       alignItems: 'center',
     },
     title: {
-      color: '#FFD700',
-      marginBottom: spacingTokens.textMarginBottom,
+      color: tokens.colors.accent,
+      marginBottom: tokens.spacing.xs,
       marginTop: 0,
       marginLeft: 0,
     },
@@ -63,7 +60,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
       lineHeight: 16,
     },
     crownIcon: {
-      color: '#FFD700',
+      color: tokens.colors.accent,
     },
   });
 
