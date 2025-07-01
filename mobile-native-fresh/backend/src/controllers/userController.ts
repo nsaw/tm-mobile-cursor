@@ -288,4 +288,69 @@ export const userController = {
       });
     }
   },
+
+  async updatePremiumStatus(req: Request, res: Response) {
+    try {
+      const { productId, transactionId, purchaseDate, expirationDate } = req.body;
+      const userId = (req as any).user?.id;
+
+      if (!userId) {
+        return res.status(401).json({
+          success: false,
+          error: 'User not authenticated'
+        });
+      }
+
+      // Update user premium status
+      const updatedUser = await db.update(users)
+        .set({
+          isPremium: true,
+          premiumExpiresAt: expirationDate ? new Date(expirationDate) : null,
+          subscriptionStatus: 'active',
+          updatedAt: new Date()
+        })
+        .where(eq(users.id, userId))
+        .returning();
+
+      if (updatedUser.length === 0) {
+        return res.status(404).json({
+          success: false,
+          error: 'User not found'
+        });
+      }
+
+      const userData = updatedUser[0];
+
+      // Log the premium purchase
+      console.log('Premium purchase completed:', {
+        userId,
+        productId,
+        transactionId,
+        purchaseDate,
+        expirationDate
+      });
+
+      res.json({
+        success: true,
+        data: {
+          id: userData.id,
+          email: userData.email,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          displayName: userData.displayName,
+          isPremium: userData.isPremium,
+          isAdmin: userData.isAdmin,
+          subscriptionStatus: userData.subscriptionStatus,
+          emailVerified: userData.emailVerified,
+          createdAt: userData.createdAt,
+        }
+      });
+    } catch (error) {
+      console.error('Update premium status error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  },
 }; 

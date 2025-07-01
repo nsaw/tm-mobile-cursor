@@ -13,6 +13,7 @@ import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { Text } from '../../../components/ui/Text';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
+import { StoreKitTestCard } from '../components/StoreKitTestCard';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
@@ -204,6 +205,9 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         }}
         showsVerticalScrollIndicator={false}
       >
+        {/* StoreKit Test Card */}
+        <StoreKitTestCard />
+
         {/* Profile Section */}
         <TouchableOpacity 
           style={{
