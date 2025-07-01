@@ -87,6 +87,14 @@ module.exports = {
         ]
       }
     ],
+    // Enforce designTokens usage instead of tokens
+    'no-restricted-globals': [
+      'error',
+      {
+        name: 'tokens',
+        message: 'useTheme() must destructure as designTokens, not tokens'
+      }
+    ],
     // Custom JSX enforcement rules
     'thoughtmarks/no-direct-design-tokens': 'error',
     'thoughtmarks/no-global-theme': 'error',
