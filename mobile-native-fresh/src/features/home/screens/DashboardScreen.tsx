@@ -957,7 +957,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   // Show loading screen while checking auth
   if (loading) {
     return (
-      <ScrollView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+      <ScrollView 
+        style={styles.container}
+        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+      >
         <Text style={styles.loadingText}>Loading...</Text>
       </ScrollView>
     );
