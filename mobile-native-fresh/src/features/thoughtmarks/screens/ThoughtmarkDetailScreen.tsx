@@ -400,7 +400,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
         <View style={styles.headerContent}>
           <TouchableOpacity 
             style={styles.backButton}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
+            onPress={() =>  navigation.goBack()}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

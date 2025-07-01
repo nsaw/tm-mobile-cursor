@@ -214,7 +214,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
             backgroundColor: tokens.colors.backgroundSecondary,
             marginBottom: tokens.spacing.lg,
           }}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Account' as any)}
+          onPress={() =>  navigation.navigate('Account' as any)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -251,7 +251,9 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   minWidth: 80,
                 }}
                 onPress={action.onPress}
-               accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+               accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
                 <View style={{
                   width: 60,
                   height: 60,
@@ -306,7 +308,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   backgroundColor: tokens.colors.surface,
                   borderRadius: tokens.radius.md,
                 }}
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
+                onPress={() =>  navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

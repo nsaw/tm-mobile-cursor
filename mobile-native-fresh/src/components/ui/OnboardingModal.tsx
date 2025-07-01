@@ -24,7 +24,7 @@ interface OnboardingModalProps {
   onClose: () => void;
 }
 
-const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLabel="Modal"> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
+const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, style, disabled, iconRight, textStyle }) => {
   const { tokens, typography } = useTheme();
   return (
     <TouchableOpacity
@@ -46,7 +46,8 @@ const ModalButton: React.FC<ModalButtonProps accessible={false} accessibilityLab
       activeOpacity={0.85}
       accessibilityRole="button"
       disabled={disabled}
-     accessible={true} accessibilityLabel="Button">
+      accessible={true}
+      accessibilityLabel="Button">
       {!iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,
@@ -129,7 +130,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       animationType="slide"
       transparent
       onRequestClose={onClose}
-     accessible={false} accessibilityLabel="Modal">
+      accessible={false}
+      accessibilityLabel="Modal">
       <View style={{
         flex: 1,
         justifyContent: 'center',
@@ -180,11 +182,19 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Pagination Dots */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View><Text>))}</Text></View>
+              <View key={i} style={{
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                backgroundColor: i === currentStep ? tokens.colors.accent : tokens.colors.border,
+                marginHorizontal: 4,
+              }} />
+            ))}
+          </View>
           {/* Buttons */}
           <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
-            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>Previous</Text></ModalButton>
-            <ModalButton accessible={false} accessibilityLabel="Modal"><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
+            <ModalButton onPress={handlePrevious} disabled={currentStep === 0}>Previous</ModalButton>
+            <ModalButton onPress={handleNext}>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</ModalButton>
           </View>
         </View>
       </View>

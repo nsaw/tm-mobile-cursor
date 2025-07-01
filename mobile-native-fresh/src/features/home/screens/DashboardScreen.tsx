@@ -349,7 +349,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             <View style={styles.tagsContainer}>
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
-                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+                <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
                   <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
@@ -363,7 +365,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     styles.tagChip,
                     localTagFilter === 'all' && styles.tagChipActive
                   ]}
-                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress('all')}
+                  onPress={() =>  handleLocalTagPress('all')}
                   accessibilityRole="button"
                   accessible={true}
                   accessibilityLabel={`filter by tag: all`}
@@ -383,7 +385,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       styles.tagChip,
                       localTagFilter === tag && styles.tagChipActive
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress(tag)}
+                    onPress={() =>  handleLocalTagPress(tag)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
@@ -490,7 +492,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       <TouchableOpacity
                         key={bin.id}
                         style={styles.binCardHorizontal}
-                        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(bin)}
+                        onPress={() =>  handleBinPress(bin)}
                         accessibilityRole="button"
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
@@ -525,7 +527,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Saved to Sort Later */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                    onPress={() =>  {
                       const sortLaterBin = bins.find((b: any) => b.name === 'Sort Later');
                       if (sortLaterBin) {
                         handleBinPress(sortLaterBin);
@@ -546,7 +548,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Archive */}
                   <TouchableOpacity
                     style={styles.archiveCard}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Archive')}
+                    onPress={() =>  navigation.navigate('Archive')}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel="View archive"
@@ -1028,7 +1030,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             </Animated.View>
             <TouchableOpacity
               style={styles.settingsButton}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Settings')}
+              onPress={() =>  navigation.navigate('Settings')}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Button"

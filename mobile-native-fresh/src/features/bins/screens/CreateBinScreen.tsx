@@ -332,7 +332,7 @@ export const CreateBinScreen: React.FC = () => {
                       { backgroundColor: color },
                       selectedColor === color && styles.colorOptionSelected,
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedColor(color)}
+                    onPress={() =>  setSelectedColor(color)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`Select color ${color}`}
@@ -358,7 +358,7 @@ export const CreateBinScreen: React.FC = () => {
                       styles.iconOption,
                       selectedIcon === icon && styles.iconOptionSelected,
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedIcon(icon)}
+                    onPress={() =>  setSelectedIcon(icon)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`Select icon ${icon}`}

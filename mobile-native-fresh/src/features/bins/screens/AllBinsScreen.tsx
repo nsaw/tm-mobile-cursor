@@ -119,7 +119,7 @@ export const AllBinsScreen: React.FC = () => {
         borderWidth: 1,
         borderColor: sortBy === sortType ? tokens.colors.accent : tokens.colors.border,
       }}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSortBy(sortType as SortType)}
+      onPress={() =>  setSortBy(sortType as SortType)}
       accessibilityRole="button"
       accessible={true}
       accessibilityLabel={sortType}
@@ -370,7 +370,7 @@ export const AllBinsScreen: React.FC = () => {
             data={sortedBins}
             renderItem={({ item }) => (
               <TouchableOpacity 
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(item)}
+                onPress={() =>  handleBinPress(item)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

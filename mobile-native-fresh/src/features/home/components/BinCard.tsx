@@ -58,7 +58,9 @@ export const BinCard: React.FC<BinCardProps> = ({
   });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+    <TouchableOpacity style={styles.container} onPress={onPress} accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
       <Ionicons 
         name={bin.icon as any} 
         size={32} 

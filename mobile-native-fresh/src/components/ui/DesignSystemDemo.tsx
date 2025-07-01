@@ -11,26 +11,6 @@ import { Card, CardHeader, CardContent } from './Card';
 export const DesignSystemDemo: React.FC = () => {
   const { tokens } = useTheme();
 
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
   return (
     <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
       <View style={{ padding: tokens.spacing.lg }}>

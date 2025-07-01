@@ -492,7 +492,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           <View style={styles.header}>
             <View style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
               <Ionicons name="close" size={24} color={tokens.colors.textSecondary} />
             </TouchableOpacity>
           </View>
@@ -507,7 +509,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             ]}
             onPress={isRecording ? stopRecording : startRecording}
             disabled={isProcessing}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+           accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
             <Ionicons
               name={isRecording ? "stop" : "mic"}
               size={32}
@@ -536,7 +540,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           )}
 
           <TouchableOpacity style={styles.testButton} 
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> Speech.speak("This is a test of the voice recorder functionality.")}
+            onPress={() =>  Speech.speak("This is a test of the voice recorder functionality.")}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Button"
@@ -555,7 +559,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             <View style={styles.buttonRow}>
               <TouchableOpacity 
                 style={styles.actionButton} 
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                onPress={() =>  {
                   onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
                   onClose();
                 }}

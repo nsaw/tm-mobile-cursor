@@ -34,26 +34,6 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
 }) => {
   const { tokens } = useTheme();
 
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
   const styles = StyleSheet.create({
     modalOverlay: {
       flex: 1,
@@ -129,9 +109,7 @@ const { tokens } = useTheme();
   };
 
   const getIconColor = () => {
-    const { tokens } = useTheme();
-
-switch (type) {
+    switch (type) {
       case 'danger':
         return tokens.colors.danger;
       case 'warning':
@@ -147,7 +125,8 @@ switch (type) {
       transparent
       animationType="fade"
       onRequestClose={onCancel}
-     accessible={false} accessibilityLabel="Modal">
+      accessible={false}
+      accessibilityLabel="Modal">
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, { backgroundColor: tokens.colors.backgroundSecondary }]}>
           <Text style={[styles.title, { color: tokens.colors.text }]}>{title}</Text>
@@ -157,7 +136,9 @@ switch (type) {
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
               <Text style={[styles.buttonText, styles.cancelButtonText]}>
                 {cancelText}
               </Text>
@@ -166,7 +147,9 @@ switch (type) {
             <TouchableOpacity
               style={[styles.button, getButtonStyle()]}
               onPress={onConfirm}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+             accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button">
               <Text style={[styles.buttonText, styles.confirmButtonText]}>
                 {confirmText}
               </Text>
