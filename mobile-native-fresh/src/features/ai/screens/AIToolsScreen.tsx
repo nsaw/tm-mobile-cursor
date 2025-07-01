@@ -298,7 +298,14 @@ export const AIToolsScreen: React.FC = () => {
         fallbackText="AI Tools are available for premium users. Upgrade to unlock AI-powered insights, smart sorting, and recommendations."
         onUpgrade={() => navigation.navigate('Premium' as never)}
       >
-        {/* No children for fallback */}
+        <View style={styles.upgradeContainer}>
+          <Text style={[styles.upgradeTitle, { color: tokens.colors.text }]}>
+            Upgrade to Premium
+          </Text>
+          <Text style={[styles.upgradeDescription, { color: tokens.colors.textSecondary }]}>
+            Unlock AI-powered insights, smart sorting, and personalized recommendations.
+          </Text>
+        </View>
       </PremiumFeatureWrapper>
     );
   }
