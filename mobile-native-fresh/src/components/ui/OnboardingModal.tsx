@@ -46,7 +46,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
       activeOpacity={0.85}
       accessibilityRole="button"
       disabled={disabled}
-    >
+     accessible={true} accessibilityLabel="Button">
       {!iconRight && icon && <Feather name={icon} size={18} color={tokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,

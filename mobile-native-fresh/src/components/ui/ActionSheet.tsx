@@ -84,7 +84,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                     borderBottomColor: tokens.colors.border,
                     backgroundColor: item.destructive ? tokens.colors.danger : tokens.colors.surface,
                   }}
-                  onPress={() => {
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
                     handleItemPress(item);
                     onClose();
                   }}
@@ -129,7 +129,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                 accessibilityRole="button"
                 accessible
                 accessibilityLabel="Cancel"
-              >
+               accessible={true}>
                 <Text 
                   variant="body" 
                   style={{

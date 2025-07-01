@@ -50,6 +50,7 @@ export type RootStackParamList = {
   Content: undefined;
   DesignSystemDemo: undefined;
   Archive: undefined;
+  Account: undefined;
   
   // Loading
   Loading: undefined;

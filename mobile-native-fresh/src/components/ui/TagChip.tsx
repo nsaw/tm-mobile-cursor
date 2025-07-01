@@ -75,7 +75,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
-      onPress={() => onPress?.(tag)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(tag)}
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}

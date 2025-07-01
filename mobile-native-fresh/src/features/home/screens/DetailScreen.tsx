@@ -197,7 +197,7 @@ export const DetailScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton} 
-          onPress={() => navigation.goBack()}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel="Back button"

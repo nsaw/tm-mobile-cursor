@@ -357,7 +357,7 @@ export const SettingsScreen: React.FC = () => {
           <View style={styles.headerContent}>
             <TouchableOpacity 
               style={styles.backButton}
-              onPress={() => navigation.goBack()}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.goBack()}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -658,7 +658,7 @@ export const SettingsScreen: React.FC = () => {
             <Text style={styles.sectionTitle}>Administration</Text>
             <TouchableOpacity
               style={styles.settingItem}
-              onPress={() => navigation.navigate('AdminDashboard')}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('AdminDashboard')}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -691,7 +691,7 @@ export const SettingsScreen: React.FC = () => {
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => setShowSiriDialog(false)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowSiriDialog(false)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
