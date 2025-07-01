@@ -1010,7 +1010,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
-              <CustomText variant="title" numberOfLines={1}>THOUGHTMARKS</CustomText>
+              <CustomText><Text>THOUGHTMARKS</Text></CustomText>
               <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
             </View>
           </View>

@@ -218,7 +218,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowPassword(!showPassword)}
                 accessibilityRole="button"
                 accessible={true}
-                accessibilityLabel="Button"
+                accessibilityLabel={showPassword ? "Hide password" : "Show password"}
           >
             <Ionicons 
               name={showPassword ? "eye-off" : "eye"} 
@@ -258,7 +258,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         ]}
         onPress={handleSubmit}
         disabled={loading}
-       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        accessibilityRole="button" 
+        accessible={true} 
+        accessibilityLabel="Create Account"
+      >
         {loading ? (
           <ActivityIndicator color="#ffffff" />
         ) : (

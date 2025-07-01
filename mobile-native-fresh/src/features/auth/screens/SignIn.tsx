@@ -114,7 +114,10 @@ export const SignInScreen: React.FC = () => {
               style={styles.primaryButton}
               onPress={handleDemoSignIn}
               disabled={isLoading || loading}
-             accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+              accessibilityRole="button" 
+              accessible={true} 
+              accessibilityLabel="Demo Login"
+            >
               <Text style={styles.primaryButtonText}>Demo Login</Text>
             </TouchableOpacity>
           </View>

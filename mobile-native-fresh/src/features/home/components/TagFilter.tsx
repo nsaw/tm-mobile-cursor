@@ -1,4 +1,5 @@
-import { Text ,
+import { 
+  Text,
   View,
   TouchableOpacity,
   StyleSheet,
@@ -90,7 +91,13 @@ export const TagFilter: React.FC<TagFilterProps> = ({
           <Text style={styles.title}>Filter by tags</Text>
         </View>
         {selectedTags.length > 0 && (
-          <TouchableOpacity onPress={onClearAll} style={styles.clearButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <TouchableOpacity 
+            onPress={onClearAll} 
+            style={styles.clearButton} 
+            accessibilityRole="button" 
+            accessible={true} 
+            accessibilityLabel="Clear all tags"
+          >
             <Text style={styles.clearText}>Clear all</Text>
           </TouchableOpacity>
         )}
@@ -112,7 +119,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
               onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onTagToggle(tag)}
                 accessibilityRole="button"
                 accessible={true}
-                accessibilityLabel="Button"
+                accessibilityLabel={`Toggle ${tag} tag`}
             >
               <Text style={[
                 styles.tagText,
@@ -129,7 +136,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
               onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowAllTags(!showAllTags)}
                 accessibilityRole="button"
                 accessible={true}
-                accessibilityLabel="Button"
+                accessibilityLabel={showAllTags ? "Show fewer tags" : "Show more tags"}
             >
               <Text style={styles.tagText}>
                 {showAllTags ? 'Show less' : `+${tags.length - 5} more`}
