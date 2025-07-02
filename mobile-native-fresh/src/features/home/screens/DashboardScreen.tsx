@@ -344,7 +344,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
           <DebugScrollView debugId="recent-thoughtmarks-container">
             {/* Tags Filter - Moved here from separate section */}
             <DebugScrollView debugId="tags-container" style={styles.tagsContainer}>
-              <DebugScrollView debugId="tags-header" style={styles.tagsHeader}>
+              <DebugScrollView 
+          debugId="tags-header" 
+          style={{
+            marginBottom: tokens.spacing.md * 1.34,
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                   <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
@@ -428,7 +438,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 </TouchableOpacity>
               </>
             ) : (
-              <DebugScrollView debugId="empty-state" style={styles.emptyState}>
+              <DebugScrollView 
+          debugId="empty-state" 
+          style={{
+            paddingVertical: tokens.spacing.xl * 1.34,
+          }}
+          contentContainerStyle={{
+            alignItems: 'center',
+          }}
+        >
                 <Text style={styles.emptyStateText}>
                   {localTagFilter === 'all' 
                     ? 'No thoughtmarks yet. Tap the button below to create your first one!' 
@@ -482,9 +500,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   snapToInterval={160} // Card width + margin
                   decelerationRate="fast"
                 >
-                  {['Relevant', 'Life Hacks', 'Quotes', 'Inspiration', 'Circle Back', 'Revelations', 'Funny', 'Stories', 'Half-Baked', 'Team-Up', 'Newsworthy'].map((binName) => {
-                    // Find the template bin (preferring lower ID for original)
-                    const bin = bins.filter(b => b.name === binName).sort((a: any, b: any) => a.id - b.id)[0];
+                  {bins.slice(0, 11).map((bin) => {
+                    // Use actual bins from data instead of hardcoded names
                     if (!bin) return null;
                     return (
                       <TouchableOpacity
@@ -495,7 +512,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
                       >
-                        <DebugScrollView debugId={`bin-content-${bin.id}`} style={styles.binCardContentHorizontal}>
+                        <DebugScrollView 
+          debugId={`bin-content-${bin.id}`} 
+          style={{
+            width: '100%',
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
                           <Text style={styles.binCardNameHorizontal}>{bin.name || 'Unnamed Bin'}</Text>
                           <Text style={styles.binCardCountHorizontal}>
                             {bin?.thoughtmarkCount || 0}
@@ -516,7 +543,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Create new bin"
                   >
-                    <DebugScrollView debugId="new-bin-content" style={styles.specialBinCardContent}>
+                    <DebugScrollView 
+          debugId="new-bin-content" 
+          style={{
+            width: '100%',
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
                       <Text style={styles.specialBinCardText}>New bin</Text>
                       <Ionicons name="add" size={21} color={tokens.colors.accent} />
                     </DebugScrollView>
@@ -535,7 +572,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="Saved to sort later"
                   >
-                    <DebugScrollView debugId="sort-later-content" style={styles.specialBinCardContent}>
+                    <DebugScrollView 
+          debugId="sort-later-content" 
+          style={{
+            width: '100%',
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
                       <Text style={styles.specialBinCardText}>Saved to sort later</Text>
                       <Text style={styles.specialBinCardCount}>
                         {bins.find((b: any) => b.name === 'Sort Later')?.thoughtmarkCount || 0}
@@ -551,7 +598,17 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     accessible={true}
                     accessibilityLabel="View archive"
                   >
-                    <DebugScrollView debugId="archive-content" style={styles.archiveCardContent}>
+                    <DebugScrollView 
+          debugId="archive-content" 
+          style={{
+            width: '100%',
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
                       <Text style={styles.archiveCardText}>View archive</Text>
                       <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
                     </DebugScrollView>
@@ -954,6 +1011,19 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
     },
   });
 
+  // Add debug logging for render state
+  console.log('DashboardScreen Render Debug:', {
+    thoughtmarksCount: thoughtmarks.length,
+    recentThoughtmarksCount: recentThoughtmarks.length,
+    binsCount: bins.length,
+    sectionsCount: sections.length,
+    shouldRenderFallback,
+    thoughtmarksLoading,
+    binsLoading,
+    isAuthenticated,
+    loading
+  });
+
   // Show loading screen while checking auth
   if (loading) {
     return (
@@ -974,7 +1044,15 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Fallback component for when data is not loaded
   const renderFallbackContent = () => (
-    <DebugScrollView debugId="fallback-content" style={styles.emptyState}>
+    <DebugScrollView 
+      debugId="fallback-content" 
+      style={{
+        paddingVertical: tokens.spacing.xl * 1.34,
+      }}
+      contentContainerStyle={{
+        alignItems: 'center',
+      }}
+    >
       <Text style={styles.emptyStateText}>
         {thoughtmarksLoading || binsLoading ? 'Loading content...' : 'No content available'}
       </Text>
@@ -983,9 +1061,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Check if we should render fallback
   if (shouldRenderFallback) {
-    return (
-      <DebugScrollView debugId="fallback-wrapper"><Text>{renderFallbackContent()}</Text></DebugScrollView>
-    );
+    return renderFallbackContent();
   }
 
   return (
@@ -1001,8 +1077,28 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <DebugScrollView debugId="header" style={styles.header}>
-          <DebugScrollView debugId="header-left" style={styles.headerLeft}>
+        <DebugScrollView 
+          debugId="header" 
+          style={{
+            marginBottom: tokens.spacing.lg * 0.25,
+            paddingHorizontal: tokens.spacing.page * 0.25,
+          }}
+          contentContainerStyle={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <DebugScrollView 
+            debugId="header-left" 
+            style={{
+              flex: 1,
+            }}
+            contentContainerStyle={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
             <Image
               source={require('../../../../assets/logo.png')}
               style={{
@@ -1019,7 +1115,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
             </DebugScrollView>
           </DebugScrollView>
-          <DebugScrollView debugId="header-right" style={styles.headerRight}>
+          <DebugScrollView 
+            debugId="header-right" 
+            style={{}}
+            contentContainerStyle={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
             <Animated.View style={{ transform: [{ scale: infoButtonScale }] }}>
               <TouchableOpacity
                 style={styles.infoButton}

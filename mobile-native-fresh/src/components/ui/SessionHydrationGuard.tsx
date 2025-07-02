@@ -41,7 +41,9 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
     setHydrationTimeout(false);
     setHydrationError(null);
     // Force a re-render by updating loading state
-    window.location.reload();
+    // Note: In React Native, we can't use window.location.reload()
+    // Instead, we'll reset the state and let the auth hook re-initialize
+    console.log('🔄 SessionHydrationGuard: Retrying hydration...');
   };
 
   const styles = getStyles(designTokens);

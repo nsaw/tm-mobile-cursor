@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
 
-import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { LoadingScreen } from '../components/ui/LoadingScreen';
 import { DesignSystemDemo } from '../components/ui/DesignSystemDemo';
 import { SessionHydrationGuard } from '../components/ui/SessionHydrationGuard';
+import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { ContentScreen } from '../features/content/screens/ContentScreen';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
@@ -29,8 +28,8 @@ const PINEntryWrapper = ({ route }: any) => {
 };
 
 // Home Screens
-// import { DashboardScreen } from '../features/home/screens/DashboardScreen';
-import { TestScrollViewError } from '../components/devtools/TestScrollViewError';
+import { DashboardScreen } from '../features/home/screens/DashboardScreen';
+// import { TestScrollViewError } from '../components/devtools/TestScrollViewError';
 
 // AI Screens
 import { AIToolsScreen } from '../features/ai/screens/AIToolsScreen';
@@ -112,7 +111,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const MainStack = () => (
   <VoiceRecorderProvider>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Dashboard" component={TestScrollViewError} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} />
       <Stack.Screen name="Search" component={SearchScreen} />
       <Stack.Screen name="AITools" component={AIToolsScreen} />
       <Stack.Screen name="AllThoughtmarks" component={AllThoughtmarksScreen} />
@@ -180,9 +179,12 @@ const AuthStack = () => (
 
 // Main App Navigator with Session Hydration Guard
 export const AppNavigator = () => {
+  console.log('🔍 AppNavigator: Starting render...');
   const { isAuthenticated, loading } = useAuth();
+  console.log('🔍 AppNavigator: Auth state:', { isAuthenticated, loading });
 
   if (loading) {
+    console.log('🔍 AppNavigator: Still loading, showing loading screen...');
     return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -192,6 +194,7 @@ export const AppNavigator = () => {
     );
   }
 
+  console.log('🔍 AppNavigator: Auth loaded, showing main content...');
   return (
     <SessionHydrationGuard>
       <NavigationContainer>
