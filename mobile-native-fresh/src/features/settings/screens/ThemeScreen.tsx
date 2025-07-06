@@ -5,12 +5,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Text, Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 
 const ThemeScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   return (
-    <View style={{ 
+    <AutoRoleView layoutRole="section" style={{ 
       flex: 1, 
       justifyContent: 'center', 
       alignItems: 'center', 
@@ -33,7 +34,7 @@ const ThemeScreen: React.FC = () => {
       <Caption><Text>Customize the appearance of your app with different themes and color schemes.</Text></Caption>
       
       <Button><Text>Coming Soon</Text></Button>
-    </View>
+    </AutoRoleView>
   );
 };
 

@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 
 export const ExportScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -45,7 +46,7 @@ export const ExportScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={styles.container}>
+      <AutoRoleView layoutRole="section" style={styles.container}>
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="download-outline" size={32} color={designTokens.colors.background} />
         </View>
@@ -56,7 +57,7 @@ export const ExportScreen: React.FC = () => {
         <Button disabled style={styles.button}>
           <Text style={{ color: designTokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
         </Button>
-      </View>
+      </AutoRoleView>
     </SafeAreaView>
   );
 }; 

@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 
 export const SecurityScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -45,18 +46,18 @@ export const SecurityScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={styles.container}>
+      <AutoRoleView layoutRole="section" style={styles.container}>
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="key-outline" size={32} color={designTokens.colors.background} />
-      </View>
+        </View>
         
         <Heading><Text>Security</Text></Heading>
         <Caption><Text>This feature is coming soon. We're working hard to bring you the best experience.</Text></Caption>
         
         <Button disabled style={styles.button}>
           <Text style={{ color: designTokens.colors.background, fontWeight: '600' }}>Coming Soon</Text>
-      </Button>
-    </View>
+        </Button>
+      </AutoRoleView>
     </SafeAreaView>
   );
 };
