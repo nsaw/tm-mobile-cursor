@@ -1,0 +1,199 @@
+{
+  "name": "v1.4.0_phase1.10f_runtime_snapshot_crawl",
+  "description": "Capture visual snapshots of all bottom-tab screens with runtime data and layout validation",
+  "version": "1.4.0",
+  "phase": "1.10f",
+  "type": "snapshot_crawl",
+  "targets": [
+    {
+      "name": "DashboardScreen",
+      "route": "Dashboard",
+      "params": {},
+      "tags": ["layout-safe", "data-present", "bottom-tab"],
+      "description": "Main dashboard with thoughtmarks, bins, and AI tools sections",
+      "expectedElements": [
+        "thoughtmarks-list",
+        "bins-horizontal-scroll", 
+        "ai-tools-card",
+        "bottom-navigation",
+        "floating-action-button"
+      ]
+    },
+    {
+      "name": "SearchScreen",
+      "route": "Search", 
+      "params": {},
+      "tags": ["layout-safe", "data-present", "bottom-tab"],
+      "description": "Search interface with AI-enhanced search capabilities",
+      "expectedElements": [
+        "search-input",
+        "search-results",
+        "ai-search-toggle",
+        "recent-searches",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "AllThoughtmarksScreen_default",
+      "route": "AllThoughtmarks",
+      "params": {},
+      "tags": ["layout-safe", "data-present", "bottom-tab"],
+      "description": "All thoughtmarks view with default filtering",
+      "expectedElements": [
+        "thoughtmarks-list",
+        "filter-controls",
+        "sort-options",
+        "bin-filter",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "AllThoughtmarksScreen_tasks",
+      "route": "AllThoughtmarks",
+      "params": { "filter": "tasks" },
+      "tags": ["layout-safe", "data-present", "bottom-tab", "filtered"],
+      "description": "Tasks view - thoughtmarks filtered by isTask=true",
+      "expectedElements": [
+        "tasks-list",
+        "task-filter-indicator",
+        "sort-options",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "AllThoughtmarksScreen_archive", 
+      "route": "AllThoughtmarks",
+      "params": { "filter": "archive" },
+      "tags": ["layout-safe", "data-present", "bottom-tab", "filtered"],
+      "description": "Archive view - thoughtmarks filtered by isDeleted=true",
+      "expectedElements": [
+        "archive-list",
+        "archive-filter-indicator", 
+        "sort-options",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "AllThoughtmarksScreen_bin_filtered",
+      "route": "AllThoughtmarks",
+      "params": { "filter": "bin", "binId": 1, "binName": "Work & Projects" },
+      "tags": ["layout-safe", "data-present", "bottom-tab", "filtered"],
+      "description": "Bin-filtered thoughtmarks view",
+      "expectedElements": [
+        "bin-filtered-list",
+        "bin-name-header",
+        "thoughtmark-count",
+        "sort-options",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "AllBinsScreen",
+      "route": "AllBins",
+      "params": {},
+      "tags": ["layout-safe", "data-present", "bottom-tab"],
+      "description": "All bins view with sorting and statistics",
+      "expectedElements": [
+        "bins-list",
+        "bin-stats",
+        "sort-controls",
+        "create-bin-button",
+        "bottom-navigation"
+      ]
+    },
+    {
+      "name": "NewThoughtmarkScreen",
+      "route": "CreateThoughtmark",
+      "params": {},
+      "tags": ["layout-safe", "modal", "fab-route"],
+      "description": "Create new thoughtmark modal from FAB",
+      "expectedElements": [
+        "thoughtmark-form",
+        "title-input",
+        "content-input",
+        "bin-selector",
+        "tags-input",
+        "save-button"
+      ]
+    },
+    {
+      "name": "NewThoughtmarkScreen_voice",
+      "route": "CreateThoughtmark", 
+      "params": { "isVoiceNote": true },
+      "tags": ["layout-safe", "modal", "fab-route", "voice"],
+      "description": "Create thoughtmark from voice recording",
+      "expectedElements": [
+        "voice-recorder",
+        "transcription-display",
+        "thoughtmark-form",
+        "save-button"
+      ]
+    }
+  ],
+  "snapshotConfig": {
+    "outputDir": "snapshots/v1.4.0_phase1.10f_runtime/",
+    "filenamePattern": "{route}_{type}_{timestamp}.png",
+    "updateSnapshot": false,
+    "diffDetection": true,
+    "includeConsoleLogs": true,
+    "consoleLogFilters": [
+      "Navigating to",
+      "API_BASE_URL",
+      "Authorization header",
+      "DashboardScreen Render Debug",
+      "Rendering bins section",
+      "Rendering recent-thoughtmarks section",
+      "Layout rendering with empty"
+    ]
+  },
+  "runtimeValidation": {
+    "checkAuthToken": true,
+    "checkApiConnectivity": true,
+    "checkDataLoading": true,
+    "checkLayoutCompliance": true,
+    "checkScrollViewProps": true,
+    "checkSafeAreaInsets": true
+  },
+  "preflightChecks": [
+    "npx tsc --noEmit",
+    "npm run lint",
+    "expo start --clear"
+  ],
+  "postCrawlValidation": {
+    "verifyAllScreensCaptured": true,
+    "verifyConsoleLogsPresent": true,
+    "verifyNoLayoutErrors": true,
+    "verifyDataInjection": true
+  },
+  "instructions": [
+    "1. Run preflight checks to ensure clean build state",
+    "2. Start the app and wait for full hydration",
+    "3. Navigate to each target screen with specified route params",
+    "4. Wait for data loading and layout stabilization",
+    "5. Capture visual snapshot with console logs",
+    "6. Verify expected elements are present in each snapshot",
+    "7. Generate snapshot diff report if enabled",
+    "8. Validate runtime state matches expected behavior"
+  ],
+  "expectedConsoleOutput": [
+    "🔍 AppNavigator: Starting render...",
+    "🔍 AppNavigator: Auth state: { isAuthenticated: true, loading: false }",
+    "Navigating to DashboardScreen",
+    "Navigating to SearchScreen", 
+    "Navigating to AllThoughtmarksScreen",
+    "Navigating to AllBinsScreen",
+    "API_BASE_URL: http://192.168.1.100:3000",
+    "Authorization header: Bearer [token]",
+    "DashboardScreen Render Debug: { thoughtmarksCount: X, binsCount: Y }",
+    "Rendering bins section: { binsCount: X, binsLoading: false }",
+    "Rendering recent-thoughtmarks section: { recentThoughtmarksLength: X }"
+  ],
+  "errorConditions": [
+    "ScrollView child layout must be applied through contentContainerStyle",
+    "Invariant Violation",
+    "Cannot find name",
+    "Parse errors in imported module",
+    "DashboardScreen: Layout rendering with empty thoughtmarks array",
+    "DashboardScreen: Layout rendering with empty bins array"
+  ]
+} 

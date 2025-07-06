@@ -1,0 +1,42 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Capture visual baseline after Phase 1.10d",
+    "\ud83c\udfaf GOAL: Ensure all critical screens render correctly with visible data, no visual regressions, no layout bugs",
+    "\ud83d\udea8 SAFETY ENFORCEMENT \ud83d\udea8",
+    "\u2705 Must pass runtime tests: API functional, nav routes active, no ScrollView/layout crashes",
+    "\u2705 Snapshot must reflect production layout with current theme and spacing",
+    "\ud83d\udccc CONTEXT: Locking in working visual state post-runtime restoration",
+    "\ud83d\udd10 RELEVANCE: Prevent regressions as Phase 2 introduces onboarding, gestures, and AI enhancements"
+  ],
+  "parseCheck": false,
+  "onParseFail": "skip",
+  "postMutationBuild": "npx tsc --noEmit && npm run lint",
+  "blockCommitOnError": false,
+  "alertUserOnParseFail": false,
+  "branch": "snapshot/post-runtime-v1.4.0",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Capture UI Snapshots of critical tabs and flows",
+      "actions": [
+        "Open: Dashboard \u2192 wait for full load",
+        "Open: AllThoughtmarks \u2192 test filters, empty state rendering",
+        "Open: FAB \u2192 CreateThoughtmarkScreen",
+        "Open: SearchScreen \u2192 verify layout loads without crash",
+        "Open: AITools tab",
+        "Test BottomNav transitions",
+        "Verify header spacing on all screens",
+        "Store snapshots to: snapshots/v1.4.0_visual-baseline_phase1.10d_{date}"
+      ],
+      "commit": "chore: visual snapshot crawl complete",
+      "tag": "v1.4.0_visual-baseline_phase1.10d_250705_2038UTC"
+    }
+  ],
+  "final": {
+    "commit": "chore: finalize v1.4.0 visual crawl post-runtime",
+    "tag": "v1.4.0_finalized-post-runtime-snapshot_250705_2038UTC",
+    "notes": "All critical screens confirmed visually stable. Screenshots may now be compared for snapshot diffs across Phase 2."
+  }
+}
