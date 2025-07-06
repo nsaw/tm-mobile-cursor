@@ -18,6 +18,7 @@ import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useTheme } from '../../../theme/ThemeProvider';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 export const SettingsScreen: React.FC = () => {
@@ -178,7 +179,10 @@ export const SettingsScreen: React.FC = () => {
         style={styles.settingItem} 
         onPress={onPress}
         disabled={!onPress}
-       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        accessibilityRole="button" 
+        accessible={true} 
+        accessibilityLabel="Button"
+      >
         <View style={styles.settingItemLeft}>
           {iconElement}
           <View style={styles.settingItemText}>
@@ -352,7 +356,7 @@ export const SettingsScreen: React.FC = () => {
   });
 
   return (
-    <View style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
+    <AutoRoleView layoutRole="section" style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -360,9 +364,9 @@ export const SettingsScreen: React.FC = () => {
             <TouchableOpacity 
               style={styles.backButton}
               onPress={() => navigation.goBack()}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Button"
             >
               <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
             </TouchableOpacity>
@@ -680,9 +684,9 @@ export const SettingsScreen: React.FC = () => {
             <TouchableOpacity
               style={styles.settingItem}
               onPress={() => navigation.navigate('AdminDashboard')}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Button"
             >
               <View style={styles.settingLeft}>
                 <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
@@ -722,7 +726,10 @@ export const SettingsScreen: React.FC = () => {
               <TouchableOpacity
                 style={[styles.modalButton, styles.modalButtonPrimary]}
                 onPress={handleSiriPhraseSave}
-               accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+                accessibilityRole="button" 
+                accessible={true} 
+                accessibilityLabel="Button"
+              >
                 <Text style={[styles.modalButtonText, styles.modalButtonTextPrimary]}>
                   Save
                 </Text>
@@ -731,6 +738,6 @@ export const SettingsScreen: React.FC = () => {
           </View>
         </View>
       )}
-    </View>
+    </AutoRoleView>
   );
 }; 

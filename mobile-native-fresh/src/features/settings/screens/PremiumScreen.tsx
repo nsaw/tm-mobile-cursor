@@ -7,6 +7,7 @@ import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
 import { useStoreKit } from '../hooks/useStoreKit';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 
 export const PremiumScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -114,14 +115,14 @@ export const PremiumScreen: React.FC = () => {
   if (isPremium) {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-        <View style={styles.container}>
+        <AutoRoleView layoutRole="section" style={styles.container}>
           <View style={styles.iconContainer}>
             <Crown size={32} color={designTokens.colors.background} />
           </View>
           
           <Heading><Text>Premium Active!</Text></Heading>
           <Caption><Text>You have access to all premium features. Enjoy your enhanced experience!</Text></Caption>
-        </View>
+        </AutoRoleView>
       </SafeAreaView>
     );
   }
@@ -130,21 +131,21 @@ export const PremiumScreen: React.FC = () => {
   if (!isAvailable) {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-        <View style={styles.container}>
+        <AutoRoleView layoutRole="section" style={styles.container}>
           <View style={styles.iconContainer}>
             <Crown size={32} color={designTokens.colors.background} />
           </View>
           
           <Heading><Text>Premium Features</Text></Heading>
           <Caption><Text>Premium features are not available on this device. Please try on iOS or Android.</Text></Caption>
-        </View>
+        </AutoRoleView>
       </SafeAreaView>
     );
   }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={styles.container}>
+      <AutoRoleView layoutRole="section" style={styles.container}>
         <View style={styles.iconContainer}>
           <Crown size={32} color={designTokens.colors.background} />
         </View>
@@ -181,7 +182,7 @@ export const PremiumScreen: React.FC = () => {
             Restore Purchases
           </Text>
         </Button>
-      </View>
+      </AutoRoleView>
     </SafeAreaView>
   );
 }; 

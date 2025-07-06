@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
 
 import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
 import { LoadingScreen } from '../components/ui/LoadingScreen';
@@ -10,6 +9,7 @@ import { SessionHydrationGuard } from '../components/ui/SessionHydrationGuard';
 import { ContentScreen } from '../features/content/screens/ContentScreen';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
+import { AutoRoleView } from '../components/AutoRoleView';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
@@ -64,39 +64,39 @@ import { RootStackParamList } from './types';
 
 // Placeholder screens - to be implemented
 const BinDetailScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bin Detail Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const VoiceRecordScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Voice Record Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const TasksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Tasks Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const BinsScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Bins Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const ThoughtmarksScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Thoughtmarks Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 const ArchiveScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <AutoRoleView layoutRole="section" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text variant="heading" size="lg">Archive Screen</Text>
-  </View>
+  </AutoRoleView>
 );
 
 // Loading Screen Wrapper for React Navigation

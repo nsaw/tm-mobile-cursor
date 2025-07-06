@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useTheme } from '../../../theme/ThemeProvider';
 import { Heading, Caption } from '../../../components/ui/Text';
 import { Button } from '../../../components/ui/Button';
+import { AutoRoleView } from '../../../components/AutoRoleView';
 
 export const HelpScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
@@ -44,7 +45,7 @@ export const HelpScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={styles.container}>
+      <AutoRoleView layoutRole="section" style={styles.container}>
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons name="help-circle-outline" size={32} color={designTokens.colors.background} />
         </View>
@@ -55,7 +56,7 @@ export const HelpScreen: React.FC = () => {
         <Button style={styles.button}>
           <Text style={{ color: designTokens.colors.background, fontWeight: '600' }}>Get Help</Text>
         </Button>
-      </View>
+      </AutoRoleView>
     </SafeAreaView>
   );
 }; 
