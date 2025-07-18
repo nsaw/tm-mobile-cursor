@@ -103,9 +103,32 @@ class ApiService {
   }
 
   async demoLogin(): Promise<APIResponse<{ user: User; token: string }>> {
-    return this.makeRequest('/api/auth/demo', {
-      method: 'POST',
-    });
+    // TEMPORARY BYPASS — replace demoLogin call for local development
+    console.log('🧪 Firebase bypass mode — injecting mock user');
+    
+    // Mock user data for local development
+    const mockUser: User = {
+      id: 'dev-bypass-user',
+      email: 'demo@bypass.local',
+      firstName: 'Demo',
+      lastName: 'User',
+      displayName: 'Demo User',
+      isPremium: false,
+      isTestUser: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const mockToken = 'mock-token-for-local-development';
+
+    return {
+      success: true,
+      data: {
+        user: mockUser,
+        token: mockToken,
+      },
+      error: undefined,
+    };
   }
 
   // User profile methods
