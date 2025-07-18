@@ -101,14 +101,20 @@
   "guard-theme-scope": {
     "description": "Ensure tokens.colors usage is scoped to component functions only",
     "autoCommit": true,
-    "scope": ["src/components/ui/", "src/features/"],
+    "scope": [
+      "src/components/ui/",
+      "src/features/"
+    ],
     "watchConsole": true,
     "autoContinue": true,
     "command": "Audit and refactor all top-level theme token usage. Replace any static references to tokens.colors.* outside component scope with getStyles(tokens) factories or inline useTheme(). Fix StyleSheet.create() definitions as needed."
   },
   "overrides": [
     {
-      "files": ["**/*.tsx", "**/*.ts"],
+      "files": [
+        "**/*.tsx",
+        "**/*.ts"
+      ],
       "rules": {
         "no-global-theme/tokens": [
           "error",
@@ -119,6 +125,9 @@
         "no-inline-accessibility-props-in-function/no-inline-accessibility-props-in-function": "error"
       }
     }
-  ]
+  ],
+  "autopilot": {
+    "enabled": true,
+    "safety": "high"
+  }
 }
-  
