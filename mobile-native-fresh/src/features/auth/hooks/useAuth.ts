@@ -151,39 +151,40 @@ export const useAuth = () => {
 
   const signInWithDemo = async () => {
     console.log('🔐 Auth: Starting demo login...');
+    
+    // ⚠️ TEMPORARY LOCAL BYPASS - Force mock user injection
+    console.warn('⚠️ Bypassing Firebase demo login via useAuth override');
+    
     try {
-      const res = await apiService.demoLogin();
-      console.log('🔐 Auth: Demo login response:', JSON.stringify(res, null, 2));
+      // Mock user data for local development
+      const mockUser: User = {
+        id: 'dev-bypass-user',
+        email: 'demo@bypass.local',
+        firstName: 'Demo',
+        lastName: 'User',
+        displayName: 'Demo User',
+        isPremium: false,
+        isTestUser: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      const mockToken = 'mock-token-for-local-development';
+
+      console.log('🔐 Auth: Mock login successful!', { 
+        user: mockUser, 
+        token: mockToken
+      });
       
-      if (res.success && res.data && res.data.user && res.data.token) {
-        // Ensure token is a string and user is an object
-        const token = String(res.data.token);
-        const user = res.data.user as User;
-        
-        console.log('🔐 Auth: Storing auth data:', { 
-          user: user, 
-          token: token,
-          userType: typeof user,
-          tokenType: typeof token
-        });
-        await storeAuthData(user, token);
-        setAuthState({
-          user: user,
-          isAuthenticated: true,
-          loading: false,
-          guestMode: false,
-        });
-        console.log('🔐 Auth: Demo login successful!');
-      } else {
-        console.log('🔐 Auth: Demo login failed or missing data:', {
-          success: res.success,
-          hasData: !!res.data,
-          hasUser: !!(res.data && res.data.user),
-          hasToken: !!(res.data && res.data.token),
-          dataKeys: res.data ? Object.keys(res.data) : 'no data'
-        });
-        setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
-      }
+      await storeAuthData(mockUser, mockToken);
+      setAuthState({
+        user: mockUser,
+        isAuthenticated: true,
+        loading: false,
+        guestMode: false,
+      });
+      console.log('🔐 Auth: Demo login successful!');
+      
     } catch (error) {
       console.error('🔐 Auth: Failed to sign in with demo:', error);
       setAuthState(prev => ({ ...prev, loading: false, guestMode: true }));
