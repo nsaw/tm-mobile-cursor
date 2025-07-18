@@ -41,9 +41,9 @@ export const SearchScreen: React.FC = () => {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const { showVoiceRecorder } = useVoiceRecorder();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
-  const styles = getStyles(tokens);
+  const styles = getStyles(designTokens);
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -208,16 +208,16 @@ export const SearchScreen: React.FC = () => {
       {/* Search Input */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Ionicons name="search" size={20} color={tokens.colors.textSecondary} style={styles.searchIcon} />
+          <Ionicons name="search" size={20} color={designTokens.colors.textSecondary} style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search thoughtmarks..."
-            placeholderTextColor={tokens.colors.textSecondary}
+            placeholderTextColor={designTokens.colors.textSecondary}
             value={searchQuery}
             onChangeText={handleSearch}
           />
           {isSearching && (
-            <ActivityIndicator size="small" color={tokens.colors.accent} style={styles.searchSpinner} />
+            <ActivityIndicator size="small" color={designTokens.colors.accent} style={styles.searchSpinner} />
           )}
         </View>
 
@@ -225,7 +225,7 @@ export const SearchScreen: React.FC = () => {
         {hasPremiumAccess && (
           <TouchableOpacity
             style={[styles.aiToggle, useAISearch && styles.aiToggleActive]}
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setUseAISearch(!useAISearch)}
+            onPress={() => setUseAISearch(!useAISearch)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -233,9 +233,9 @@ export const SearchScreen: React.FC = () => {
             <Ionicons 
               name={useAISearch ? "sparkles" : "sparkles-outline"} 
               size={16} 
-              color={useAISearch ? tokens.colors.accent : tokens.colors.textSecondary} 
+              color={useAISearch ? designTokens.colors.accent : designTokens.colors.textSecondary} 
             />
-            <Text style={[styles.aiToggleText, { color: useAISearch ? tokens.colors.accent : tokens.colors.textSecondary }]}>
+            <Text style={[styles.aiToggleText, { color: useAISearch ? designTokens.colors.accent : designTokens.colors.textSecondary }]}>
               AI Enhanced
             </Text>
           </TouchableOpacity>
@@ -253,7 +253,7 @@ export const SearchScreen: React.FC = () => {
         
         {searchQuery && !isSearching && searchResults.length === 0 && (
           <View style={styles.noResults}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.noResultsTitle}>No results found</Text>
             <Text style={styles.noResultsSubtitle}>
               Try searching with different keywords or check your spelling
@@ -263,7 +263,7 @@ export const SearchScreen: React.FC = () => {
 
         {!searchQuery && (
           <View style={styles.initialState}>
-            <Ionicons name="search" size={48} color={tokens.colors.textSecondary} />
+            <Ionicons name="search" size={48} color={designTokens.colors.textSecondary} />
             <Text style={styles.initialStateTitle}>Search your thoughtmarks</Text>
             <Text style={styles.initialStateSubtitle}>
               Search by title, content, or tags to find what you're looking for
@@ -282,9 +282,9 @@ export const SearchScreen: React.FC = () => {
                       disabled={isGeneratingSuggestions}
                     >
                       {isGeneratingSuggestions ? (
-                        <ActivityIndicator size="small" color={tokens.colors.accent} />
+                        <ActivityIndicator size="small" color={designTokens.colors.accent} />
                       ) : (
-                        <Ionicons name="refresh" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="refresh" size={16} color={designTokens.colors.accent} />
                       )}
                     </Button>
                   </View>
@@ -294,12 +294,12 @@ export const SearchScreen: React.FC = () => {
                       <TouchableOpacity
                         key={index}
                         style={styles.suggestionItem}
-                        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleSuggestionPress(suggestion)}
+                        onPress={() => handleSuggestionPress(suggestion)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
                       >
-                        <Ionicons name="bulb-outline" size={16} color={tokens.colors.accent} />
+                        <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
                         <Text style={styles.suggestionReason}>{suggestion.reason}</Text>
                       </TouchableOpacity>
@@ -321,7 +321,7 @@ export const SearchScreen: React.FC = () => {
                   {recentSearches.map((query, index) => (
                     <TouchableOpacity
                       key={index}
-                      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleRecentSearchPress(query)}
+                      onPress={() => handleRecentSearchPress(query)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"
@@ -366,6 +366,7 @@ export const SearchScreen: React.FC = () => {
   );
 };
 
+// tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,

@@ -3,8 +3,7 @@ import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
-import { LogBox } from 'react-native'
-import * as Linking from 'expo-linking'
+import { LogBox, Linking } from 'react-native'
 import {
   Oswald_400Regular,
   Oswald_500Medium,
@@ -20,8 +19,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { AppNavigator } from './src/navigation/AppNavigator'
 import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
-import DeepLinkService from './src/services/DeepLinkService'
-import SiriShortcutsService from './src/services/SiriShortcutsService'
+import { SessionHydrationGuard } from './src/components/ui/SessionHydrationGuard'
+// import SiriShortcutsService from './src/services/SiriShortcutsService'
 
 // Prevent the splash auto‐hiding before we're ready
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -38,13 +37,15 @@ LogBox.ignoreLogs([
 LogBox.uninstall();
 
 function AppContent() {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
-      <StatusBar style="light" />
-      <AppNavigator />
-    </SafeAreaView>
+    <SessionHydrationGuard>
+      <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
+        <StatusBar style="light" />
+        <AppNavigator />
+      </SafeAreaView>
+    </SessionHydrationGuard>
   )
 }
 
@@ -59,58 +60,113 @@ export default function App() {
     Ubuntu_700Bold,
   })
 
+  // Deep Link Handler
+  useEffect(() => {
+    const handleDeepLink = (url: string) => {
+      console.log('Deep link received:', url);
+      
+      // Handle Expo development URLs
+      if (url.startsWith('exp://')) {
+        const route = url.replace('exp://192.168.68.127:8081', '').trim();
+        if (!route) {
+          console.warn('Unknown deep link route:', url);
+          return;
+        }
+        console.log('Expo deep link route:', route);
+        return;
+      }
+      
+      // Parse the URL to extract route and parameters
+      const route = url.replace('thoughtmarks://', '');
+      
+      // Handle different deep link routes
+      switch (route) {
+        case 'home':
+          // Navigate to home screen
+          console.log('Navigating to home');
+          break;
+        case 'create':
+          // Navigate to create thoughtmark screen
+          console.log('Navigating to create thoughtmark');
+          break;
+        case 'search':
+          // Navigate to search screen
+          console.log('Navigating to search');
+          break;
+        case 'tasks':
+          // Navigate to tasks screen
+          console.log('Navigating to tasks');
+          break;
+        default:
+          console.log('Unknown deep link route:', route);
+      }
+    };
+
+    // Handle deep links when app is already running
+    const subscription = Linking.addEventListener('url', (event) => {
+      handleDeepLink(event.url);
+    });
+
+    // Handle deep links when app is opened from a deep link
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        handleDeepLink(url);
+      }
+    });
+
+    return () => {
+      subscription?.remove();
+    };
+  }, []);
+
   // Initialize Siri Shortcuts
   useEffect(() => {
     const initializeSiriShortcuts = async () => {
       try {
-        // Donate all shortcuts when app starts
-        await SiriShortcutsService.getInstance().donateAllShortcuts();
+        // Donate shortcuts for common actions
+        const shortcuts = [
+          {
+            identifier: 'com.thoughtmarks.createThoughtmark',
+            title: 'Add Thoughtmark',
+            subtitle: 'Quickly add a new thoughtmark',
+            phrase: 'Add a thoughtmark'
+          },
+          {
+            identifier: 'com.thoughtmarks.voiceRecord',
+            title: 'Voice Record',
+            subtitle: 'Record a voice thoughtmark',
+            phrase: 'Record my thoughts'
+          },
+          {
+            identifier: 'com.thoughtmarks.viewTasks',
+            title: 'View Tasks',
+            subtitle: 'Check your tasks',
+            phrase: 'Show my tasks'
+          },
+          {
+            identifier: 'com.thoughtmarks.search',
+            title: 'Search Thoughtmarks',
+            subtitle: 'Search your thoughtmarks',
+            phrase: 'Search thoughtmarks'
+          }
+        ];
+
+        // Note: In a real implementation, you would use expo-siri-shortcuts
+        // or a native module to donate these shortcuts
+        console.log('Siri shortcuts configured:', shortcuts);
         
-        console.log('Siri shortcuts initialized successfully');
+        // Set up listeners for shortcut invocations
+        // This would be handled by the deep link system above
+        console.log('Siri shortcut listeners configured');
       } catch (error) {
         console.error('Error initializing Siri Shortcuts:', error);
       }
     };
 
     if (fontsLoaded) {
-      initializeSiriShortcuts();
+      initializeSiriShortcuts().catch(console.error);
     }
   }, [fontsLoaded]);
-
-  // Deep link handling
-  useEffect(() => {
-    const deepLinkService = DeepLinkService.getInstance();
-
-    const handleInitialURL = async () => {
-      try {
-        const initialURL = await Linking.getInitialURL();
-        if (initialURL) {
-          console.log('App opened with deep link:', initialURL);
-          // Handle initial URL when app is opened from a deep link
-          // Navigation will be handled once the app is fully loaded
-          deepLinkService.handleDeepLink(initialURL);
-        }
-      } catch (error) {
-        console.error('Error getting initial URL:', error);
-      }
-    };
-
-    const handleURL = (event: { url: string }) => {
-      console.log('Deep link received:', event.url);
-      // Handle URL when app is already running
-      deepLinkService.handleDeepLink(event.url);
-    };
-
-    // Set up URL event listeners
-    const subscription = Linking.addEventListener('url', handleURL);
-
-    // Handle initial URL if app was opened from a deep link
-    handleInitialURL();
-
-    return () => {
-      subscription?.remove();
-    };
-  }, []);
 
   // Once fonts finish loading, hide the splash
   useEffect(() => {

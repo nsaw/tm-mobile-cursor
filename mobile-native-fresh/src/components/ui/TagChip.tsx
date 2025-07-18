@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { getBadgeVariants, mergeVariantStyles } from '../../theme/variants';
+
 import { Text } from './Text';
 
 interface TagChipProps {
@@ -20,16 +21,16 @@ export const TagChip: React.FC<TagChipProps> = ({
   variant = 'outline',
   size = 'md',
 }: TagChipProps) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
-  // Guard against undefined tokens
-  if (!tokens) {
-    console.warn('TagChip: theme tokens not initialized');
+  // Guard against undefined designTokens
+  if (!designTokens) {
+    console.warn('TagChip: theme designTokens not initialized');
     return null;
   }
 
-  // Get variant styles using the function with tokens
-  const badgeVariants = getBadgeVariants(tokens);
+  // Get variant styles using the function with designTokens
+  const badgeVariants = getBadgeVariants(designTokens);
   const baseStyle = badgeVariants.base;
   const variantStyles: Record<string, unknown> = badgeVariants.variants.variant;
   const variantStyle = variantStyles[variant] || variantStyles.outline;
@@ -44,20 +45,20 @@ export const TagChip: React.FC<TagChipProps> = ({
     switch (size) {
       case 'sm':
         return {
-          paddingHorizontal: tokens.spacing.sm,
-          paddingVertical: tokens.spacing.xs,
+          paddingHorizontal: designTokens.spacing.sm,
+          paddingVertical: designTokens.spacing.xs,
           borderRadius: 6,
         };
       case 'lg':
         return {
-          paddingHorizontal: tokens.spacing.lg,
-          paddingVertical: tokens.spacing.md,
+          paddingHorizontal: designTokens.spacing.lg,
+          paddingVertical: designTokens.spacing.md,
           borderRadius: 10,
         };
       default: // md
         return {
-          paddingHorizontal: tokens.spacing.md * 1.34,
-          paddingVertical: tokens.spacing.sm,
+          paddingHorizontal: designTokens.spacing.md * 1.34,
+          paddingVertical: designTokens.spacing.sm,
           borderRadius: 8,
         };
     }
@@ -66,7 +67,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   const compactStyle = {
     ...getSizeStyle(),
     borderWidth: 1,
-    borderColor: isSelected ? tokens.colors.accent : tokens.colors.border,
+    borderColor: isSelected ? designTokens.colors.accent : designTokens.colors.border,
     backgroundColor: isSelected ? 'transparent' : 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
@@ -75,7 +76,7 @@ export const TagChip: React.FC<TagChipProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, chipStyle, compactStyle]}
-      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(tag)}
+      onPress={() => onPress?.(tag)}
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}
@@ -85,7 +86,7 @@ export const TagChip: React.FC<TagChipProps> = ({
         variant="caption"
         weight="medium"
         style={{
-          color: isSelected ? tokens.colors.accent : tokens.colors.text,
+          color: isSelected ? designTokens.colors.accent : designTokens.colors.text,
           textAlign: 'center',
           paddingHorizontal: 0
         }} 

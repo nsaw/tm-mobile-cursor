@@ -288,6 +288,34 @@ export const useAuth = () => {
     ]);
   };
 
+  const refreshUser = async () => {
+    if (!authState.isAuthenticated || !authState.user) {
+      console.log('🔐 Auth: Cannot refresh user - not authenticated');
+      return;
+    }
+
+    try {
+      console.log('🔐 Auth: Refreshing user data...');
+      const response = await apiService.getUserProfile();
+      
+      if (response.success && response.data) {
+        const updatedUser = response.data;
+        await storeAuthData(updatedUser, await AsyncStorage.getItem(STORAGE_KEYS.TOKEN) || '');
+        
+        setAuthState(prev => ({
+          ...prev,
+          user: updatedUser,
+        }));
+        
+        console.log('🔐 Auth: User data refreshed successfully');
+      } else {
+        console.error('🔐 Auth: Failed to refresh user data:', response.error);
+      }
+    } catch (error) {
+      console.error('🔐 Auth: Error refreshing user data:', error);
+    }
+  };
+
   return {
     ...authState,
     signIn,
@@ -298,5 +326,6 @@ export const useAuth = () => {
     enableGuestMode,
     disableGuestMode,
     signInWithDemo,
+    refreshUser,
   };
 };

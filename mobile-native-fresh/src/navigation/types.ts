@@ -4,6 +4,11 @@ export type RootStackParamList = {
   // Auth Screens
   SignIn: undefined;
   SignUp: undefined;
+  PINEntry: { 
+    mode: 'setup' | 'verify' | 'change';
+    onSuccess?: () => void;
+    onCancel?: () => void;
+  };
   
   // Main Screens
   Dashboard: undefined;
@@ -28,7 +33,7 @@ export type RootStackParamList = {
     binName?: string;
     tag?: string;
   };
-  ThoughtmarkDetail: { thoughtmarkId: string };
+  ThoughtmarkDetail: { thoughtmarkId: number };
   CreateThoughtmark: { 
     thoughtmarkId?: number; 
     content?: string; 
@@ -39,7 +44,7 @@ export type RootStackParamList = {
   
   // Bins Screens
   AllBins: undefined;
-  BinDetail: { binId: string; binName: string };
+  BinDetail: { binId: number; binName: string };
   CreateBin: undefined;
   
   // Other Screens

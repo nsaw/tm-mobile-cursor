@@ -21,10 +21,10 @@ export const Card: React.FC<CardProps> = ({
   onPress,
   disabled = false,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   // Get variant styles
-  const cardVariants = getCardVariants(tokens);
+  const cardVariants = getCardVariants(designTokens);
   const baseStyle = cardVariants.base;
   const variantStyle = cardVariants.variants.variant[variant];
   const sizeStyle = cardVariants.variants.size[size];
@@ -47,8 +47,8 @@ export const Card: React.FC<CardProps> = ({
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>
@@ -73,16 +73,16 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.lg,
-          fontWeight: tokens.typography.fontWeight.semibold,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.lg,
+          fontWeight: designTokens.typography.fontWeight.semibold,
         }}>
           {children}
         </Text>
@@ -100,15 +100,15 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>
@@ -126,15 +126,15 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   children,
   style,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   
   // Handle string children by wrapping them in Text
   const renderChildren = () => {
     if (typeof children === 'string') {
       return (
         <Text style={{
-          color: tokens.colors.text,
-          fontSize: tokens.typography.fontSize.body,
+          color: designTokens.colors.text,
+          fontSize: designTokens.typography.fontSize.body,
         }}>
           {children}
         </Text>

@@ -19,9 +19,9 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
   onUpgrade,
 }) => {
   const { user } = useAuth();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const hasPremiumAccess = user?.isPremium || user?.isTestUser;
-  const styles = getStyles(tokens);
+  const styles = getStyles(designTokens);
 
   if (hasPremiumAccess) {
     return <>{children}</>;
@@ -41,7 +41,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
         onPress={onUpgrade}
         style={styles.button}
       >
-        <Text variant="body" size="lg" style={{ color: tokens.colors.background, fontWeight: '700', textAlign: 'center' }}>
+        <Text variant="body" size="lg" style={{ color: designTokens.colors.background, fontWeight: '700', textAlign: 'center' }}>
           Upgrade Now
         </Text>
       </Button>
@@ -49,6 +49,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
   );
 };
 
+// tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
   overlay: {
     flex: 1,

@@ -15,40 +15,40 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   onVoiceRecord,
   onOpenBins,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
     },
     actionButton: {
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: tokens.colors.accent,
-      padding: tokens.spacing.md,
-      borderRadius: tokens.radius.md,
+      backgroundColor: designTokens.colors.accent,
+      padding: designTokens.spacing.md,
+      borderRadius: designTokens.radius.md,
       minWidth: 80,
     },
     actionIcon: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
     },
     actionButton2: {
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: tokens.colors.accent,
-      padding: tokens.spacing.md,
-      borderRadius: tokens.radius.md,
+      backgroundColor: designTokens.colors.accent,
+      padding: designTokens.spacing.md,
+      borderRadius: designTokens.radius.md,
       minWidth: 80,
     },
     actionButton3: {
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: tokens.colors.accent,
-      padding: tokens.spacing.md,
-      borderRadius: tokens.radius.md,
+      backgroundColor: designTokens.colors.accent,
+      padding: designTokens.spacing.md,
+      borderRadius: designTokens.radius.md,
       minWidth: 80,
     },
   });
@@ -56,15 +56,15 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.actionButton} onPress={onCreateThoughtmark} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-        <Ionicons name="create-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="create-outline" size={24} color={designTokens.colors.background} />
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.actionButton2} onPress={onVoiceRecord} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-        <Ionicons name="mic-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="mic-outline" size={24} color={designTokens.colors.background} />
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.actionButton3} onPress={onOpenBins} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-        <Ionicons name="folder-outline" size={24} color={tokens.colors.background} />
+        <Ionicons name="folder-outline" size={24} color={designTokens.colors.background} />
       </TouchableOpacity>
     </View>
   );

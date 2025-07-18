@@ -17,28 +17,28 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
   disabled = false,
   loading = false,
 }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
     button: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: tokens.spacing.md,
-      paddingHorizontal: tokens.spacing.lg,
-      borderRadius: tokens.radius.md,
-      backgroundColor: provider === 'google' ? tokens.colors.surface : tokens.colors.background,
+      paddingVertical: designTokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      borderRadius: designTokens.radius.md,
+      backgroundColor: provider === 'google' ? designTokens.colors.surface : designTokens.colors.background,
       borderWidth: 1,
-      borderColor: provider === 'google' ? tokens.colors.border : 'transparent',
+      borderColor: provider === 'google' ? designTokens.colors.border : 'transparent',
       opacity: disabled ? 0.6 : 1,
     },
     icon: {
-      marginRight: tokens.spacing.sm,
+      marginRight: designTokens.spacing.sm,
     },
     text: {
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: tokens.typography.fontWeight.semibold,
-      color: provider === 'google' ? tokens.colors.text : tokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      fontWeight: designTokens.typography.fontWeight.semibold,
+      color: provider === 'google' ? designTokens.colors.text : designTokens.colors.text,
     },
   });
 

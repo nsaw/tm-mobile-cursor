@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import { eq } from 'drizzle-orm';
 
 import { db } from '../db';
 import { users , bins } from '../db/schema';
 import { createTemplateContent } from '../utils/templates';
-import { verifyAppleJWT, processAppleNotification } from '../utils/appleAuth';
 
 export const authController = {
   // Basic authentication
@@ -103,6 +103,9 @@ export const authController = {
           error: 'User already exists'
         });
       }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       // Create user
       const newUser = await db.insert(users).values({
@@ -517,68 +520,6 @@ export const authController = {
       res.status(401).json({
         success: false,
         error: 'Invalid token'
-      });
-    }
-  },
-
-  // Apple server-to-server notifications
-  async handleAppleNotifications(req: Request, res: Response) {
-    try {
-      const { signedPayload } = req.body;
-
-      if (!signedPayload) {
-        return res.status(400).json({
-          success: false,
-          error: 'Signed payload is required'
-        });
-      }
-
-      console.log('Apple notification received:', {
-        signedPayload: signedPayload.substring(0, 100) + '...', // Log first 100 chars for security
-        timestamp: new Date().toISOString(),
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
-      });
-
-      // Verify the JWT signature using Apple's public key
-      let verifiedPayload;
-      try {
-        verifiedPayload = await verifyAppleJWT(signedPayload);
-        console.log('Apple JWT verified successfully');
-      } catch (verificationError) {
-        console.error('Apple JWT verification failed:', verificationError);
-        return res.status(401).json({
-          success: false,
-          error: 'Invalid signature'
-        });
-      }
-
-      // Process the notification
-      let processingResults;
-      try {
-        processingResults = await processAppleNotification(verifiedPayload);
-        console.log('Apple notification processed:', processingResults);
-      } catch (processingError) {
-        console.error('Apple notification processing failed:', processingError);
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid notification format'
-        });
-      }
-
-      // TODO: Implement actual database operations based on notification type
-      // For now, we'll just log the results
-      
-      res.status(200).json({
-        success: true,
-        message: 'Notification received and processed',
-        processedEvents: processingResults.length
-      });
-    } catch (error) {
-      console.error('Apple notification error:', error);
-      res.status(500).json({
-        success: false,
-        error: 'Internal server error'
       });
     }
   },

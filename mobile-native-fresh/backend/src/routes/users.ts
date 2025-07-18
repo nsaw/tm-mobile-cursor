@@ -17,4 +17,7 @@ router.delete('/:id', userController.deleteUser);
 // User preferences
 router.patch('/:id/preferences', userController.updatePreferences);
 
+// Premium/StoreKit routes
+router.post('/premium', userController.updatePremiumStatus);
+
 export default router; 

@@ -13,6 +13,8 @@ import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
 import { Text } from '../../../components/ui/Text';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
+import { StoreKitTestCard } from '../components/StoreKitTestCard';
+import { HydrationTestCard } from '../../../components/ui/HydrationTestCard';
 import type { Thoughtmark, Bin, ThoughtmarkWithBin } from '../../../types';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
@@ -23,7 +25,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const { user } = useAuth();
 
   const {
@@ -160,7 +162,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   };
 
   const handleViewBins = () => {
-    navigation.navigate('Bins');
+    navigation.navigate('AllBins');
   };
 
   const handleNavigate = (route: string) => {
@@ -172,26 +174,26 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
       title: 'Create Thoughtmark',
       icon: 'add-circle-outline',
       onPress: handleCreateNew,
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
     },
     {
       title: 'Voice Record',
       icon: 'mic-outline',
       onPress: handleVoiceRecord,
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
     },
     {
       title: 'View Bins',
       icon: 'folder-outline',
       onPress: handleViewBins,
-      color: tokens.colors.accent,
+      color: designTokens.colors.accent,
     },
   ];
 
   const tags = allTags;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       <ModernHeader 
         title="HOME" 
       />
@@ -199,40 +201,46 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
       <ScrollView 
         style={{ 
           flex: 1,
-          paddingHorizontal: tokens.spacing.lg,
-          paddingVertical: tokens.spacing.md,
+          paddingHorizontal: designTokens.spacing.lg,
+          paddingVertical: designTokens.spacing.md,
         }}
         showsVerticalScrollIndicator={false}
       >
+        {/* StoreKit Test Card */}
+        <StoreKitTestCard />
+        
+        {/* Hydration Test Card */}
+        <HydrationTestCard />
+
         {/* Profile Section */}
         <TouchableOpacity 
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: tokens.spacing.sm,
-            borderRadius: tokens.radius.full,
-            backgroundColor: tokens.colors.backgroundSecondary,
-            marginBottom: tokens.spacing.lg,
+            paddingVertical: designTokens.spacing.sm,
+            borderRadius: designTokens.radius.full,
+            backgroundColor: designTokens.colors.backgroundSecondary,
+            marginBottom: designTokens.spacing.lg,
           }}
-          onPress={() => navigation.navigate('Profile')}
-          accessibilityRole="button"
-          accessible={true}
-          accessibilityLabel="Button"
+          onPress={() => navigation.navigate('Account' as any)}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Button"
         >
-          <Ionicons name="person-circle-outline" size={24} color={tokens.colors.text} />
-          <Text style={{ marginLeft: tokens.spacing.sm, fontWeight: '600' }}>
+          <Ionicons name="person-circle-outline" size={24} color={designTokens.colors.text} />
+          <Text style={{ marginLeft: designTokens.spacing.sm, fontWeight: '600' }}>
             {user?.firstName || 'User'}
           </Text>
         </TouchableOpacity>
 
         {/* Quick Actions */}
-        <View style={{ marginBottom: tokens.spacing.lg }}>
+        <View style={{ marginBottom: designTokens.spacing.lg }}>
           <Text 
             variant="subheading" 
             size="lg"
             style={{ 
-              marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              marginBottom: designTokens.spacing.sm,
+              paddingHorizontal: designTokens.spacing.lg,
             }}
           >
             Quick Actions
@@ -240,14 +248,14 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
           <ScrollView 
             horizontal 
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+            contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
           >
             {quickActions.map((action) => (
               <TouchableOpacity
                 key={action.title}
                 style={{
                   alignItems: 'center',
-                  marginRight: tokens.spacing.lg,
+                  marginRight: designTokens.spacing.lg,
                   minWidth: 80,
                 }}
                 onPress={action.onPress}
@@ -255,21 +263,21 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                 <View style={{
                   width: 60,
                   height: 60,
-                  borderRadius: tokens.radius.md,
-                  marginHorizontal: tokens.spacing.xs,
-                  backgroundColor: action.color || tokens.colors.surface,
+                  borderRadius: designTokens.radius.md,
+                  marginHorizontal: designTokens.spacing.xs,
+                  backgroundColor: action.color || designTokens.colors.surface,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: tokens.spacing.xs,
+                  marginBottom: designTokens.spacing.xs,
                 }}>
-                  <Ionicons name={action.icon as any} size={24} color={tokens.colors.text} />
+                  <Ionicons name={action.icon as any} size={24} color={designTokens.colors.text} />
                 </View>
                 <Text 
                   variant="caption" 
                   size="sm"
                   style={{ 
                     textAlign: 'center',
-                    marginBottom: tokens.spacing.xs,
+                    marginBottom: designTokens.spacing.xs,
                   }}
                 >
                   {action.title}
@@ -280,13 +288,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         </View>
 
         {/* Recent Thoughtmarks */}
-        <View style={{ marginBottom: tokens.spacing.lg }}>
+        <View style={{ marginBottom: designTokens.spacing.lg }}>
           <Text 
             variant="subheading" 
             size="lg"
             style={{ 
-              marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              marginBottom: designTokens.spacing.sm,
+              paddingHorizontal: designTokens.spacing.lg,
             }}
           >
             Recent Thoughtmarks
@@ -294,17 +302,17 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
           <ScrollView 
             horizontal 
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: tokens.spacing.md }}
+            contentContainerStyle={{ paddingHorizontal: designTokens.spacing.md }}
           >
             {recentThoughtmarks.map((thoughtmark) => (
               <TouchableOpacity
                 key={thoughtmark.id}
                 style={{
                   width: 200,
-                  marginRight: tokens.spacing.md,
-                  padding: tokens.spacing.md,
-                  backgroundColor: tokens.colors.surface,
-                  borderRadius: tokens.radius.md,
+                  marginRight: designTokens.spacing.md,
+                  padding: designTokens.spacing.md,
+                  backgroundColor: designTokens.colors.surface,
+                  borderRadius: designTokens.radius.md,
                 }}
                 onPress={() => navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id })}
                 accessibilityRole="button"
@@ -315,7 +323,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   variant="subheading" 
                   size="sm"
                   style={{ 
-                    marginBottom: tokens.spacing.xs,
+                    marginBottom: designTokens.spacing.xs,
                     fontWeight: '600',
                   }}
                   numberOfLines={1}
@@ -326,7 +334,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
                   variant="body" 
                   size="sm"
                   style={{ 
-                    color: tokens.colors.textSecondary,
+                    color: designTokens.colors.textSecondary,
                   }}
                   numberOfLines={2}
                 >
@@ -338,13 +346,13 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         </View>
 
         {/* Stats */}
-        <View style={{ marginBottom: tokens.spacing.lg }}>
+        <View style={{ marginBottom: designTokens.spacing.lg }}>
           <Text 
             variant="subheading" 
             size="lg"
             style={{ 
-              marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              marginBottom: designTokens.spacing.sm,
+              paddingHorizontal: designTokens.spacing.lg,
             }}
           >
             Your Stats
@@ -352,29 +360,29 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
           <View style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-            paddingHorizontal: tokens.spacing.lg,
+            paddingHorizontal: designTokens.spacing.lg,
           }}>
             <View style={{ alignItems: 'center' }}>
-              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+              <Text variant="heading" size="xl" style={{ color: designTokens.colors.accent }}>
                 {thoughtmarks.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption" size="sm" style={{ color: designTokens.colors.textSecondary }}>
                 Thoughtmarks
               </Text>
             </View>
             <View style={{ alignItems: 'center' }}>
-              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+              <Text variant="heading" size="xl" style={{ color: designTokens.colors.accent }}>
                 {bins.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption" size="sm" style={{ color: designTokens.colors.textSecondary }}>
                 Bins
               </Text>
             </View>
             <View style={{ alignItems: 'center' }}>
-              <Text variant="heading" size="xl" style={{ color: tokens.colors.accent }}>
+              <Text variant="heading" size="xl" style={{ color: designTokens.colors.accent }}>
                 {tags.length}
               </Text>
-              <Text variant="caption" size="sm" style={{ color: tokens.colors.textSecondary }}>
+              <Text variant="caption" size="sm" style={{ color: designTokens.colors.textSecondary }}>
                 Tags
               </Text>
             </View>
@@ -382,21 +390,21 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
         </View>
 
         {/* Tips */}
-        <View style={{ marginBottom: tokens.spacing.lg }}>
+        <View style={{ marginBottom: designTokens.spacing.lg }}>
           <Text 
             variant="subheading" 
             size="lg"
             style={{ 
-              marginBottom: tokens.spacing.sm,
-              paddingHorizontal: tokens.spacing.lg,
+              marginBottom: designTokens.spacing.sm,
+              paddingHorizontal: designTokens.spacing.lg,
             }}
           >
             Tips & Tricks
           </Text>
           <View style={{
-            paddingHorizontal: tokens.spacing.lg,
+            paddingHorizontal: designTokens.spacing.lg,
           }}>
-            <Text variant="body" style={{ textAlign: 'center', marginBottom: tokens.spacing.lg }}>
+            <Text variant="body" style={{ textAlign: 'center', marginBottom: designTokens.spacing.lg }}>
               Use voice recording to quickly capture ideas on the go. Long press any thoughtmark for quick actions.
             </Text>
           </View>

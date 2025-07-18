@@ -12,7 +12,7 @@ interface SessionHydrationGuardProps {
 }
 
 export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ children }) => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const { loading } = useAuth();
   const [hydrationTimeout, setHydrationTimeout] = useState(false);
   const [hydrationError, setHydrationError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
     window.location.reload();
   };
 
-  const styles = getStyles(tokens);
+  const styles = getStyles(designTokens);
 
   // Show loading screen while hydrating
   if (loading && !hydrationTimeout && !hydrationError) {
@@ -115,6 +115,7 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
   return <>{children}</>;
 };
 
+// tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,
