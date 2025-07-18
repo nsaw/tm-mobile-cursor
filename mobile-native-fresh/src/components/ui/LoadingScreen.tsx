@@ -23,27 +23,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   onComplete, 
   message = "let me think about that…" 
 }) => {
-  const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const [fadeAnim] = useState(new Animated.Value(0));
   const [scaleAnim] = useState(new Animated.Value(0.8));
   const [pulseAnim] = useState(new Animated.Value(1));
@@ -177,7 +157,7 @@ const { tokens } = useTheme();
   if (!isVisible) return null;
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: tokens.colors.background }]}>
+    <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: designTokens.colors.background }]}>
       <Animated.View style={[styles.content, { transform: [{ scale: scaleAnim }] }]}>
         {/* Glow ring effect */}
         <View style={styles.glowRing} />
@@ -187,7 +167,7 @@ const { tokens } = useTheme();
           <Ionicons 
             name="bulb" 
             size={40} 
-            color={tokens.colors.accent}
+            color={designTokens.colors.accent}
             style={styles.brainIcon}
           />
         </Animated.View>
@@ -200,7 +180,7 @@ const { tokens } = useTheme();
         </View>
 
         {/* Text with fade animation */}
-        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: tokens.colors.textSecondary }]}>
+        <Animated.Text style={[styles.thinkingText, { opacity: textOpacity, color: designTokens.colors.textSecondary }]}>
           {message}
         </Animated.Text>
 

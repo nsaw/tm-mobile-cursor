@@ -1,0 +1,2198 @@
+{
+  "timestamp": "2025-07-01T20:47:13.110Z",
+  "summary": {
+    "totalFiles": 86,
+    "totalIssues": 278,
+    "accessibilityIssues": 278,
+    "navigationIssues": 0,
+    "emptyHandlerIssues": 0
+  },
+  "issues": [
+    {
+      "file": "src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 416,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 428,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 452,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 471,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 483,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 496,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 508,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 582,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 606,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 613,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 630,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 632,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 649,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 667,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 670,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 681,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 717,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 733,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 735,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 752,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 401,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 409,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 413,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 424,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 425,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 432,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 433,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 440,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 450,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 464,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 485,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 496,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 536,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 547,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 632,
+          "code": "<Button><Text>Edit</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 633,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 313,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 323,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 331,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 341,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 343,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 360,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 391,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 401,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 403,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 414,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 423,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 433,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 435,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 452,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 498,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 504,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/ThemeScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 35,
+          "code": "<Button><Text>Coming Soon</Text></Button>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/TermsScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 55,
+          "code": "<Button style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/SettingsScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 177,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 202,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 360,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 368,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 406,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 680,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 692,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 713,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 721,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 722,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 729,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/SecurityScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 56,
+          "code": "<Button disabled style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/ProfileScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 56,
+          "code": "<Button disabled style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/PrivacyScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 55,
+          "code": "<Button style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/PremiumScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 161,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 174,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/HelpScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 55,
+          "code": "<Button style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/ExportScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 56,
+          "code": "<Button disabled style={styles.button}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/ContactScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 35,
+          "code": "<Button><Text>Coming Soon</Text></Button>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/settings/screens/AdminDashboardScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 166,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 174,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 198,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 205,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 212,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 219,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/features/search/screens/SearchScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 226,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 241,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 278,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 294,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 305,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 322,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 334,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/screens/HomeScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 216,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 234,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 254,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 285,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 308,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 343,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/screens/DetailScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 198,
+          "code": "<TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 203,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 208,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 211,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 214,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 269,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 7,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 353,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 360,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 376,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 379,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 396,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 419,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 429,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 489,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 503,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 511,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 522,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 525,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 543,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 546,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 557,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 1018,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 1026,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 1028,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 1036,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/ThoughtmarkCard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 56,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 71,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 195,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 233,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 245,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 306,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 318,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 368,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/TaskCard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 129,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 137,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 150,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 184,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/TagFilter.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 95,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 106,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 123,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 127,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 137,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/StoreKitTestCard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 66,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 76,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 86,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/SearchBar.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 93,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/QuickActions.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { View, TouchableOpacity, StyleSheet } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 60,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 64,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 68,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/BinCard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 68,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/home/components/AIToolsCard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 76,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/content/screens/ContentScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 1,
+          "code": "import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 122,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 137,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/bins/screens/CreateBinScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 5,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 325,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 340,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 352,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 368,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/bins/screens/AllBinsScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 111,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 134,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 370,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 377,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 405,
+          "code": "<Button variant=\"primary\" onPress={handleCreateBin}>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/auth/screens/SignIn.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 8,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 113,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 119,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/auth/screens/PINEntryScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 166,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 174,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 208,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 219,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 223,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 231,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 234,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 242,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 245,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 255,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/auth/components/RegistrationForm.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 216,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 228,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 254,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 267,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/auth/components/OAuthButton.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { TouchableOpacity, Text, StyleSheet } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 68,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 86,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/auth/components/LoginForm.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 152,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 164,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 169,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 179,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/features/ai/screens/AIToolsScreen.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 271,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 284,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 317,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 325,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 342,
+          "code": "<Button onPress={generateInsights} disabled={isGeneratingInsights} style={{ marginBottom: designTokens.spacing.md }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 369,
+          "code": "<Button onPress={performSmartSorting} disabled={isSmartSorting} style={{ marginBottom: designTokens.spacing.md }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 396,
+          "code": "<Button onPress={generateRecommendations} disabled={isGeneratingRecommendations} style={{ marginBottom: designTokens.spacing.md }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 423,
+          "code": "<Button onPress={generateLearningResources} disabled={isGeneratingLearningResources} style={{ marginBottom: designTokens.spacing.md }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 445,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 453,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/VoiceRecorder.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 497,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 502,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 516,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 538,
+          "code": "<TouchableOpacity style={styles.testButton}"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 546,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 556,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 568,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 569,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 578,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/TagChip.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { TouchableOpacity, StyleSheet } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 77,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 97,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/SessionHydrationGuard.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 76,
+          "code": "<Button"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 101,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/PremiumFeatureWrapper.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 38,
+          "code": "<Button"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/OnboardingModal.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 31,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 61,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/ModernHeader.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 69,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 79,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 106,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 115,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/FloatingActionButton.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 79,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 99,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/DraggableSection.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 188,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 206,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/DesignSystemDemo.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 46,
+          "code": "<Button variant=\"primary\" onPress={() => console.log('Primary pressed')}><Text>Primary Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 48,
+          "code": "<Button variant=\"secondary\" onPress={() => console.log('Secondary pressed')}><Text>Secondary Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 50,
+          "code": "<Button variant=\"outline\" onPress={() => console.log('Outline pressed')}><Text>Outline Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 52,
+          "code": "<Button variant=\"ghost\" onPress={() => console.log('Ghost pressed')}><Text>Ghost Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 54,
+          "code": "<Button variant=\"destructive\" onPress={() => console.log('Destructive pressed')}><Text>Destructive Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 56,
+          "code": "<Button variant=\"brand\" onPress={() => console.log('Brand pressed')}><Text>Brand Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 70,
+          "code": "<Button variant=\"primary\" size=\"sm\" onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 72,
+          "code": "<Button variant=\"primary\" size=\"md\" onPress={() => console.log('Medium pressed')}><Text>Medium Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 74,
+          "code": "<Button variant=\"primary\" size=\"lg\" onPress={() => console.log('Large pressed')}><Text>Large Button</Text></Button>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 76,
+          "code": "<Button variant=\"primary\" size=\"icon\" onPress={() => console.log('Icon pressed')}>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/DarkAlertDialog.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 135,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 142,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 144,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 151,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/Button.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 2,
+          "code": "import { Pressable, ViewStyle, TextStyle } from 'react-native';"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 21,
+          "code": "export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 97,
+          "code": "<Pressable"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 112,
+          "code": "<ButtonText style={{ marginRight: designTokens.spacing.sm, color: textColor }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 118,
+          "code": "<ButtonText"
+        },
+        {
+          "type": "accessibility",
+          "severity": "warning",
+          "message": "Button component missing accessibility props",
+          "line": 132,
+          "code": "<ButtonText style={{ marginLeft: designTokens.spacing.sm, color: textColor }}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 136,
+          "code": "</Pressable>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/BottomNav.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 4,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 124,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 164,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 207,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 242,
+          "code": "</TouchableOpacity>"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ui/ActionSheet.tsx",
+      "issues": [
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 3,
+          "code": "TouchableOpacity,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 6,
+          "code": "TouchableWithoutFeedback,"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 51,
+          "code": "<TouchableWithoutFeedback onPress={onClose}>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 57,
+          "code": "<TouchableWithoutFeedback>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 78,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 117,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 120,
+          "code": "<TouchableOpacity"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 143,
+          "code": "</TouchableOpacity>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 145,
+          "code": "</TouchableWithoutFeedback>"
+        },
+        {
+          "type": "accessibility",
+          "severity": "error",
+          "message": "Touchable element missing accessibility props",
+          "line": 147,
+          "code": "</TouchableWithoutFeedback>"
+        }
+      ]
+    }
+  ]
+}

@@ -28,8 +28,7 @@ import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
-import { Text as CustomText, SectionHeader, ButtonText } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
+import { Text as CustomText } from '../../../components/ui/Text';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 const { width } = Dimensions.get('window');
@@ -363,7 +362,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     styles.tagChip,
                     localTagFilter === 'all' && styles.tagChipActive
                   ]}
-                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress('all')}
+                  onPress={() => handleLocalTagPress('all')}
                   accessibilityRole="button"
                   accessible={true}
                   accessibilityLabel={`filter by tag: all`}
@@ -383,7 +382,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       styles.tagChip,
                       localTagFilter === tag && styles.tagChipActive
                     ]}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLocalTagPress(tag)}
+                    onPress={() => handleLocalTagPress(tag)}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
@@ -490,7 +489,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       <TouchableOpacity
                         key={bin.id}
                         style={styles.binCardHorizontal}
-                        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(bin)}
+                        onPress={() => handleBinPress(bin)}
                         accessibilityRole="button"
                         accessible={true}
                         accessibilityLabel={`${bin.name} bin with ${bin?.thoughtmarkCount || 0} items`}
@@ -525,7 +524,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Saved to Sort Later */}
                   <TouchableOpacity
                     style={styles.specialBinCard}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                    onPress={() => {
                       const sortLaterBin = bins.find((b: any) => b.name === 'Sort Later');
                       if (sortLaterBin) {
                         handleBinPress(sortLaterBin);
@@ -546,7 +545,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   {/* Archive */}
                   <TouchableOpacity
                     style={styles.archiveCard}
-                    onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Archive')}
+                    onPress={() => navigation.navigate('Archive')}
                     accessibilityRole="button"
                     accessible={true}
                     accessibilityLabel="View archive"
@@ -1010,8 +1009,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
-              <CustomText><Text>THOUGHTMARKS</Text></CustomText>
-              <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
+              <CustomText variant="title" numberOfLines={1}><Text>THOUGHTMARKS</Text></CustomText>
+              <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>
@@ -1028,7 +1027,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
             </Animated.View>
             <TouchableOpacity
               style={styles.settingsButton}
-              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> navigation.navigate('Settings')}
+              onPress={() => navigation.navigate('Settings')}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Button"

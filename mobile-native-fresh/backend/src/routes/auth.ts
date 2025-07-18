@@ -15,9 +15,6 @@ router.post('/demo', authController.demoLogin);
 router.post('/google', authController.googleSignIn);
 router.post('/apple', authController.appleSignIn);
 
-// Apple server-to-server notifications
-router.post('/apple/notifications', authController.handleAppleNotifications);
-
 // Password reset
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);

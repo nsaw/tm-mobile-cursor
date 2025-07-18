@@ -3,7 +3,11 @@ import { View } from 'react-native';
 
 const TestComponent = () => {
   return (
-    <View><Text>This is unwrapped text that should be wrapped in Text</Text><View><Text>More unwrapped text here</Text></View>
+    <View>
+      This is unwrapped text that should be wrapped in Text
+      <View>
+        More unwrapped text here
+      </View>
     </View>
   );
 };

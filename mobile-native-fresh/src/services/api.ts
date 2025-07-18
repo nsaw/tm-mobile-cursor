@@ -325,6 +325,19 @@ class ApiService {
       error: response.error,
     };
   }
+
+  // Premium/StoreKit methods
+  async updatePremiumStatus(data: {
+    productId: string;
+    transactionId: string;
+    purchaseDate: string;
+    expirationDate?: string;
+  }): Promise<APIResponse<User>> {
+    return this.makeRequest('/api/users/premium', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export const apiService = new ApiService();

@@ -35,7 +35,7 @@ type AIInsight = {
 
 export const AIToolsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const { user } = useAuth();
 
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
@@ -223,31 +223,31 @@ export const AIToolsScreen: React.FC = () => {
   const getIconColorForType = (type: string) => {
     switch (type) {
       case 'pattern':
-        return tokens.colors.accent;
+        return designTokens.colors.accent;
       case 'recommendation':
         return '#FFD700';
       case 'trend':
-        return tokens.colors.success;
+        return designTokens.colors.success;
       case 'connection':
-        return tokens.colors.brand;
+        return designTokens.colors.brand;
       default:
-        return tokens.colors.accent;
+        return designTokens.colors.accent;
     }
   };
 
   const renderAICard = (item: any, index: number, type: string) => (
-    <Card key={index} style={{ marginBottom: tokens.spacing.md }}>
+    <Card key={index} style={{ marginBottom: designTokens.spacing.md }}>
       <CardContent>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: tokens.spacing.sm }}>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: designTokens.spacing.sm }}>
           <MaterialCommunityIcons 
             name={getIconForType(item.type || type) as any}
             size={24}
             color={getIconColorForType(item.type || type)}
-            style={{ marginRight: tokens.spacing.sm, marginTop: 2 }}
+            style={{ marginRight: designTokens.spacing.sm, marginTop: 2 }}
           />
           <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.xs }}>
-              <Text style={{ fontWeight: 'bold', color: tokens.colors.text, flex: 1 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.xs }}>
+              <Text style={{ fontWeight: 'bold', color: designTokens.colors.text, flex: 1 }}>
                 {item.title}
               </Text>
               {item.actionable && (
@@ -258,35 +258,25 @@ export const AIToolsScreen: React.FC = () => {
                 />
               )}
             </View>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.sm }}>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.sm }}>
               {item.description}
             </Text>
             {item.relatedThoughtmarks && item.relatedThoughtmarks.length > 0 && (
-              <View style={{ marginTop: tokens.spacing.sm }}>
-                <Text style={{ color: tokens.colors.textMuted, fontSize: 12, marginBottom: tokens.spacing.xs }}>
+              <View style={{ marginTop: designTokens.spacing.sm }}>
+                <Text style={{ color: designTokens.colors.textMuted, fontSize: 12, marginBottom: designTokens.spacing.xs }}>
                   Related Thoughtmarks:
                 </Text>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                   {item.relatedThoughtmarks.map((thoughtmarkId: number, idx: number) => (
                     <TouchableOpacity
                       key={idx}
-                      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: tokens.colors.accent + 20,
-                        paddingHorizontal: tokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}"> navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
+                      onPress={() => navigation.navigate('ThoughtmarkDetail' as never, { id: thoughtmarkId } as never)}
                       accessibilityRole="button"
                       accessible={true}
                       accessibilityLabel="Open thoughtmark detail"
                       style={{
-                        backgroundColor: tokens.colors.accent + '20',
-                        paddingHorizontal: tokens.spacing.sm,
+                        backgroundColor: designTokens.colors.accent + '20',
+                        paddingHorizontal: designTokens.spacing.sm,
                         // ...other styles
                       }}
                     >
@@ -308,35 +298,32 @@ export const AIToolsScreen: React.FC = () => {
         fallbackText="AI Tools are available for premium users. Upgrade to unlock AI-powered insights, smart sorting, and recommendations."
         onUpgrade={() => navigation.navigate('Premium' as never)}
       >
-        {/* No children for fallback */}
+        <View style={styles.upgradeContainer}>
+          <Text style={[styles.upgradeTitle, { color: designTokens.colors.text }]}>
+            Upgrade to Premium
+          </Text>
+          <Text style={[styles.upgradeDescription, { color: designTokens.colors.textSecondary }]}>
+            Unlock AI-powered insights, smart sorting, and personalized recommendations.
+          </Text>
+        </View>
       </PremiumFeatureWrapper>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: tokens.colors.accent + 20,
-                        paddingHorizontal: tokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}"> navigation.goBack()}
+          onPress={() => navigation.goBack()}
           accessibilityRole="button"
           accessible={true}
           accessibilityLabel="Go back"
         >
-          <Ionicons name="arrow-back" size={24} color={tokens.colors.text} />
+          <Ionicons name="arrow-back" size={24} color={designTokens.colors.text} />
         </TouchableOpacity>
-        <Text style={{ ...styles.headerTitle, color: tokens.colors.text }}>AI Tools</Text>
+        <Text style={{ ...styles.headerTitle, color: designTokens.colors.text }}>AI Tools</Text>
         <View style={styles.headerSpacer} />
       </View>
 
@@ -346,26 +333,26 @@ export const AIToolsScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* AI Insights */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.lg }}>
           <CardContent>
             <Heading><Text>AI Insights</Text></Heading>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.md }}>
               Get a summary of your recent thoughtmarks, trends, and patterns discovered by AI.
             </Text>
-            <Button onPress={generateInsights} disabled={isGeneratingInsights} style={{ marginBottom: tokens.spacing.md }}>
+            <Button onPress={generateInsights} disabled={isGeneratingInsights} style={{ marginBottom: designTokens.spacing.md }}>
               {isGeneratingInsights ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
-                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                  <ActivityIndicator color={designTokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
-                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Insights</Text>
+                <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generate Insights</Text>
               )}
             </Button>
             {insights && insights.length > 0 ? (
               insights.map((insight, idx) => renderAICard(insight, idx, 'insight'))
             ) : (
-              <Text style={{ color: tokens.colors.textSecondary }}>
+              <Text style={{ color: designTokens.colors.textSecondary }}>
                 No insights generated yet.
               </Text>
             )}
@@ -373,26 +360,26 @@ export const AIToolsScreen: React.FC = () => {
         </Card>
 
         {/* Smart Sorting */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.lg }}>
           <CardContent>
             <Heading><Text>Smart Sorting</Text></Heading>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.md }}>
               Let AI automatically organize your thoughtmarks into the most relevant bins.
             </Text>
-            <Button onPress={performSmartSorting} disabled={isSmartSorting} style={{ marginBottom: tokens.spacing.md }}>
+            <Button onPress={performSmartSorting} disabled={isSmartSorting} style={{ marginBottom: designTokens.spacing.md }}>
               {isSmartSorting ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
-                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Sorting...</Text>
+                  <ActivityIndicator color={designTokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Sorting...</Text>
                 </>
               ) : (
-                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Run Smart Sort</Text>
+                <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Run Smart Sort</Text>
               )}
             </Button>
             {smartSortResults && smartSortResults.suggestions ? (
               smartSortResults.suggestions.map((suggestion: any, idx: number) => renderAICard(suggestion, idx, 'smart-sort'))
             ) : (
-              <Text style={{ color: tokens.colors.textSecondary }}>
+              <Text style={{ color: designTokens.colors.textSecondary }}>
                 No smart sort results yet.
               </Text>
             )}
@@ -400,26 +387,26 @@ export const AIToolsScreen: React.FC = () => {
         </Card>
 
         {/* AI Recommendations */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.lg }}>
           <CardContent>
             <Heading><Text>AI Recommendations</Text></Heading>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.md }}>
               Get personalized suggestions for next actions, topics, or organization improvements.
             </Text>
-            <Button onPress={generateRecommendations} disabled={isGeneratingRecommendations} style={{ marginBottom: tokens.spacing.md }}>
+            <Button onPress={generateRecommendations} disabled={isGeneratingRecommendations} style={{ marginBottom: designTokens.spacing.md }}>
               {isGeneratingRecommendations ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
-                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                  <ActivityIndicator color={designTokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
-                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Recommendations</Text>
+                <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generate Recommendations</Text>
               )}
             </Button>
             {recommendations && recommendations.recommendations ? (
               recommendations.recommendations.map((recommendation: any, idx: number) => renderAICard(recommendation, idx, 'recommendation'))
             ) : (
-              <Text style={{ color: tokens.colors.textSecondary }}>
+              <Text style={{ color: designTokens.colors.textSecondary }}>
                 No recommendations generated yet.
               </Text>
             )}
@@ -427,26 +414,26 @@ export const AIToolsScreen: React.FC = () => {
         </Card>
 
         {/* Learning Resources */}
-        <Card variant="elevated" style={{ marginBottom: tokens.spacing.lg }}>
+        <Card variant="elevated" style={{ marginBottom: designTokens.spacing.lg }}>
           <CardContent>
             <Heading><Text>Learning Resources</Text></Heading>
-            <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.md }}>
+            <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.md }}>
               Discover personalized learning materials and resources based on your thoughtmarks.
             </Text>
-            <Button onPress={generateLearningResources} disabled={isGeneratingLearningResources} style={{ marginBottom: tokens.spacing.md }}>
+            <Button onPress={generateLearningResources} disabled={isGeneratingLearningResources} style={{ marginBottom: designTokens.spacing.md }}>
               {isGeneratingLearningResources ? (
                 <>
-                  <ActivityIndicator color={tokens.colors.background} style={{ marginRight: 8 }} />
-                  <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
+                  <ActivityIndicator color={designTokens.colors.background} style={{ marginRight: 8 }} />
+                  <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generating...</Text>
                 </>
               ) : (
-                <Text style={{ color: tokens.colors.buttonText, fontWeight: '600' }}>Generate Learning Resources</Text>
+                <Text style={{ color: designTokens.colors.buttonText, fontWeight: '600' }}>Generate Learning Resources</Text>
               )}
             </Button>
             {learningResources && learningResources.learningResources ? (
               learningResources.learningResources.map((resource: any, idx: number) => renderAICard(resource, idx, 'learning-resource'))
             ) : (
-              <Text style={{ color: tokens.colors.textSecondary }}>
+              <Text style={{ color: designTokens.colors.textSecondary }}>
                 No learning resources generated yet.
               </Text>
             )}
@@ -456,18 +443,8 @@ export const AIToolsScreen: React.FC = () => {
       
       {/* Floating Action Button */}
       <TouchableOpacity
-        style={[styles.fab, { backgroundColor: tokens.colors.accent }]}
-        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="navigation.navigate(ThoughtmarkDetail as never, { id: thoughtmarkId } as never)}
-                      accessibilityRole=button
-                      accessible={true}
-                      accessibilityLabel=Open thoughtmark detail
-                      style={{
-                        backgroundColor: tokens.colors.accent + 20,
-                        paddingHorizontal: tokens.spacing.sm,
-                        // ...other styles
-                      }}
-                    >
-                      {/* ...child content */}"> navigation.navigate('CreateThoughtmark' as never)}
+        style={[styles.fab, { backgroundColor: designTokens.colors.accent }]}
+        onPress={() => navigation.navigate('CreateThoughtmark' as never)}
         accessibilityRole="button"
         accessible={true}
         accessibilityLabel="Create new thoughtmark"

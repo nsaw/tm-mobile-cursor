@@ -103,27 +103,7 @@ const resources = [
 ];
 
 const HowToScreen: React.FC = () => {
-  const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
-
-const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
 
   const categories = [
     {
@@ -170,18 +150,24 @@ const { tokens } = useTheme();
       title: 'Video Tutorials',
       description: 'Step-by-step guides',
       icon: Ionicons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement video tutorials navigation
+        console.log('Video tutorials pressed');
+      },
     },
     {
       title: 'User Guide',
       description: 'Comprehensive documentation',
       icon: MaterialCommunityIcons,
-      onPress: () => {},
+      onPress: () => {
+        // TODO: Implement user guide navigation
+        console.log('User guide pressed');
+      },
     },
   ];
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: tokens.colors.background }} contentContainerStyle={{ padding: tokens.spacing.lg }}>
+    <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }} contentContainerStyle={{ padding: designTokens.spacing.lg }}>
       <Heading><Text>How to Use Thoughtmarks</Text></Heading>
       
       <Caption><Text>Get the most out of your thoughtmarking experience with these helpful guides and tips.</Text></Caption>
@@ -189,21 +175,21 @@ const { tokens } = useTheme();
       {/* Categories */}
       <Heading><Text>Quick Start Guide</Text></Heading>
       
-      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {categories.map((cat) => (
-          <Card key={cat.title} style={{ padding: tokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <cat.icon size={28} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <Card key={cat.title} style={{ padding: designTokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
+              <cat.icon size={28} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
               <View style={{ flex: 1 }}>
-                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{cat.title}</Text>
+                <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{cat.title}</Text>
                 <Caption><Text>{cat.description}</Text></Caption>
               </View>
             </View>
-            <View style={{ gap: tokens.spacing.xs }}>
+            <View style={{ gap: designTokens.spacing.xs }}>
               {cat.items.map((item, index) => (
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <CheckCircle size={14} color={tokens.colors.success} style={{ marginRight: 6 }} />
-                  <Text style={{ color: tokens.colors.textSecondary, fontSize: tokens.typography.fontSize.sm }}>{item}</Text>
+                  <CheckCircle size={14} color={designTokens.colors.success} style={{ marginRight: 6 }} />
+                  <Text style={{ color: designTokens.colors.textSecondary, fontSize: designTokens.typography.fontSize.sm }}>{item}</Text>
                 </View>
               ))}
             </View>
@@ -214,14 +200,14 @@ const { tokens } = useTheme();
       {/* FAQs */}
       <Heading><Text>Frequently Asked Questions</Text></Heading>
       
-      <View style={{ gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {faqs.map((faq) => (
-          <Card key={faq.question} style={{ padding: tokens.spacing.md }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: tokens.spacing.sm }}>
-              <faq.icon size={22} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <Card key={faq.question} style={{ padding: designTokens.spacing.md }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: designTokens.spacing.sm }}>
+              <faq.icon size={22} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
               <View style={{ flex: 1 }}>
-                <Text style={{ color: tokens.colors.text, fontWeight: 'bold', fontSize: tokens.typography.fontSize.sm }}>{faq.question}</Text>
-                <Text style={{ color: tokens.colors.textSecondary, marginBottom: tokens.spacing.xs }}>{faq.answer}</Text>
+                <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', fontSize: designTokens.typography.fontSize.sm }}>{faq.question}</Text>
+                <Text style={{ color: designTokens.colors.textSecondary, marginBottom: designTokens.spacing.xs }}>{faq.answer}</Text>
                 <Caption><Text>{faq.category}</Text></Caption>
               </View>
             </View>
@@ -232,22 +218,22 @@ const { tokens } = useTheme();
       {/* Resources */}
       <Heading><Text>Additional Resources</Text></Heading>
       
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.md, marginBottom: tokens.spacing.xl }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.md, marginBottom: designTokens.spacing.xl }}>
         {resources.map((res) => (
-          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: tokens.spacing.md }} onPress={res.onPress}>
-            <res.icon size={32} color={tokens.colors.accent} style={{ marginBottom: tokens.spacing.sm }} />
-            <Text style={{ color: tokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
+          <Card key={res.title} style={{ flex: 1, minWidth: 140, alignItems: 'center', padding: designTokens.spacing.md }} onPress={res.onPress}>
+            <res.icon size={32} color={designTokens.colors.accent} style={{ marginBottom: designTokens.spacing.sm }} />
+            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold', textAlign: 'center' }}>{res.title}</Text>
             <Caption><Text>{res.description}</Text></Caption>
           </Card>
         ))}
       </View>
 
       {/* Support Info */}
-      <Card style={{ backgroundColor: tokens.colors.accentMuted, borderColor: tokens.colors.accent, padding: tokens.spacing.md }}>
+      <Card style={{ backgroundColor: designTokens.colors.accentMuted, borderColor: designTokens.colors.accent, padding: designTokens.spacing.md }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <HelpCircle size={20} color={tokens.colors.accent} style={{ marginRight: tokens.spacing.md }} />
+          <HelpCircle size={20} color={designTokens.colors.accent} style={{ marginRight: designTokens.spacing.md }} />
           <View style={{ flex: 1 }}>
-            <Text style={{ color: tokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
+            <Text style={{ color: designTokens.colors.text, fontWeight: 'bold' }}>Support Response Times</Text>
             <Caption><Text>We typically respond to support requests within 24 hours during business days.</Text></Caption>
           </View>
         </View>

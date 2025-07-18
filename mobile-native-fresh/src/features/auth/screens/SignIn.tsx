@@ -20,12 +20,12 @@ import { useGoogleAuth, signInWithApple } from '../hooks/useNativeSocialAuth';
 const logo = require('../../../../assets/logo.png');
 
 export const SignInScreen: React.FC = () => {
-  const { tokens } = useTheme();
+  const { tokens: designTokens } = useTheme();
   const { signIn, loading, signInWithDemo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { promptAsync: googlePromptAsync } = useGoogleAuth();
 
-  const styles = getStyles(tokens);
+  const styles = getStyles(designTokens);
 
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
@@ -124,6 +124,7 @@ export const SignInScreen: React.FC = () => {
   );
 };
 
+// tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
   container: {
     flex: 1,

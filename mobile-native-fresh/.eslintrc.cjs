@@ -115,7 +115,7 @@ module.exports = {
   overrides: [
     {
       files: ['src/**/*.ts', 'src/**/*.tsx'],
-      excludedFiles: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts'],
+      excludedFiles: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts', 'src/utils/getTextVariant.ts'],
       rules: {
         'no-restricted-imports': [
           'error',
@@ -131,9 +131,10 @@ module.exports = {
       },
     },
     {
-      files: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts'],
+      files: ['src/theme/**/*.ts', 'src/theme/**/*.tsx', 'src/utils/getRadiusForHeight.ts', 'src/utils/getTextVariant.ts'],
       rules: {
         'no-restricted-imports': 'off',
+        'thoughtmarks/require-use-theme': 'off',
       },
     },
   ],

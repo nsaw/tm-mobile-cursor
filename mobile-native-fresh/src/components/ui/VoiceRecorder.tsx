@@ -535,8 +535,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </Text>
           )}
 
-          <TouchableOpacity style={styles.testButton} 
-            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> Speech.speak("This is a test of the voice recorder functionality.")}
+          <TouchableOpacity 
+            style={styles.testButton} 
+            onPress={() => Speech.speak("This is a test of the voice recorder functionality.")}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel="Button"
@@ -555,7 +556,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             <View style={styles.buttonRow}>
               <TouchableOpacity 
                 style={styles.actionButton} 
-                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
+                onPress={() => {
                   onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
                   onClose();
                 }}
