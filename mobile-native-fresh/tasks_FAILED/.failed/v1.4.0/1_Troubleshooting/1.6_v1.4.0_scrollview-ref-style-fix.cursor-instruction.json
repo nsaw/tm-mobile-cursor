@@ -1,0 +1,49 @@
+{
+  "notes": [
+    "🧠 MISSION: Resolve residual ScrollView layout prop violations after inline fix pass",
+    "🎯 GOAL: Identify and correct remaining layout props (alignItems, justifyContent, etc.) incorrectly applied to <ScrollView>",
+    "📌 CONTEXT: The app still throws runtime Invariant Violation errors in DashboardScreen.tsx despite prior inline-only fix pass",
+    "💥 BUG: Some <ScrollView> instances still apply layout props via `style={styles.container}` (non-inline), bypassing current fixer logic",
+    "🔧 FIX SUMMARY: Locate all <ScrollView> instances using `style={styles.*}` or similar references where layout props exist and migrate them to `contentContainerStyle` inside the same file",
+    "🔐 RELEVANCE: React Native runtime requires all layout props to be passed via contentContainerStyle, not style"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(snapshot): before style reference ScrollView layout fix\"",
+      "git tag v1.4.0_scrollview-ref-style-pre_$(date -u +%y%m%d_%H%MUTC)",
+      "sh scripts/backup-tag-push.sh v1.4.0_scrollview-ref-style-pre_$(date -u +%y%m%d_%H%MUTC)"
+    ]
+  },
+  "branch": "fix/v1.4.0_scrollview-ref-style",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Fix ScrollView Layout in Referenced Styles",
+      "actions": [
+        "Search all <ScrollView> components using `style={styles.*}`",
+        "Resolve the referenced style object in the same file",
+        "If any layout props (alignItems, justifyContent, etc.) exist in the referenced style object:",
+        "- Remove them from the referenced style object",
+        "- Add or merge them into `contentContainerStyle` on that <ScrollView> instance",
+        "- Ensure no layout props remain in style references",
+        "- Preserve unrelated props like flex, backgroundColor, etc."
+      ],
+      "commit": "fix: migrate layout props from style references to contentContainerStyle",
+      "tag": "v1.4.0_scrollview-ref-style-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete ScrollView layout ref fix pass",
+    "tag": "v1.4.0_scrollview-ref-style-complete_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "All <ScrollView> components using style references are now compliant with layout rules. App should now boot cleanly."
+  }
+}
+

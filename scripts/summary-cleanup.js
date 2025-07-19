@@ -7,7 +7,7 @@ const LogRotator = require('./log-rotation.js');
 class SummaryCleanup {
     constructor() {
         this.logRotator = new LogRotator();
-        this.summariesDir = 'summaries';
+        this.summariesDir = '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries';
         this.backupDir = 'summaries/archive';
         this.maxAgeHours = 48;
         this.maxAgeMs = this.maxAgeHours * 60 * 60 * 1000;

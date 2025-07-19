@@ -1,0 +1,17 @@
+{
+  "projectName": "tm-mobile-cursor",
+  "projectRoot": "/Users/sawyer/gitSync/tm-mobile-cursor",
+  "paths": {
+    "projectRoot": "/Users/sawyer/gitSync/tm-mobile-cursor",
+    "mobileNativeFresh": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh",
+    "patchesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches",
+    "summariesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries",
+    "logsPath": "/Users/sawyer/gitSync/tm-mobile-cursor/logs",
+    "scriptsPath": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts",
+    "tasksPath": "/Users/sawyer/gitSync/tm-mobile-cursor/tasks",
+    "legacyPatchesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/patches",
+    "legacySummariesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/summaries"
+  },
+  "timestamp": "2025-07-18T16:52:38.889Z",
+  "description": "Path routing configuration for tm-mobile-cursor project"
+}

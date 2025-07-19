@@ -1,0 +1,77 @@
+{
+  "notes": [
+    "🧠 MISSION: Repair broken layout, alignment, and render issues in Dashboard after ScrollView and logic refactor",
+    "🎯 GOAL: Fully restore the intended structure, visual layout, and conditional render logic of DashboardScreen, including cards, bins, header, FAB, and BottomNav",
+    "📌 CONTEXT:",
+    "- ScrollView patches fixed runtime crashes but caused visual and render regressions",
+    "- Audit confirms multiple broken flows: cards not rendering fully, misaligned header, SafeArea ignored, bottom UI not floating",
+    "- Tasks and BinCards do not render properly — likely due to conditional logic or layout starvation",
+    "🔐 RELEVANCE: Dashboard is the primary interaction surface and must be fully stable, visually aligned, and accessible across all screen sizes",
+    "📎 FIXES TO APPLY:",
+    "- ✅ Restore SafeAreaView to screen-level wrapper with full edge padding",
+    "- ✅ Align Dashboard Header with flex row and justifyContent: 'space-between'; add flex: 1 spacers as needed",
+    "- ✅ Re-align ThoughtmarkCard titles: left-align on Dashboard, center on modal cards",
+    "- ✅ Restore BottomNav and FAB as floating elements (absolute position, bottom spacing, zIndex, SafeArea inset)",
+    "- ✅ Repair render logic for task-based Thoughtmarks: ensure map and conditionals resolve valid JSX",
+    "- ✅ Ensure BinCards render from live bins (not name filters); fix layout collapse if present",
+    "- ✅ Refactor any nested ScrollView in cards to use View unless scroll is needed",
+    "📄 OUTPUT:",
+    "- logs/layout-role-regression.json",
+    "- logs/render-logic-audit.json",
+    "- logs/dashboard-layout-fix.json"
+  ],
+  "branch": "fix/v1.4.0_dashboard-full-repair",
+  "mode": "auto",
+  "watchConsole": true,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": false,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): pre-dashboard-repair checkpoint\"",
+      "git tag v1.4.0_dashboard-repair-pre_$(date -u +%y%m%d_%H%MUTC)",
+      "sh scripts/backup-tag-push.sh v1.4.0_dashboard-repair-pre_$(date -u +%y%m%d_%H%MUTC)"
+    ]
+  },
+  "phases": [
+    {
+      "section": "Fix Layout and Structure",
+      "actions": [
+        "Wrap DashboardScreen in SafeAreaView if not present; apply edges={['top','bottom']}",
+        "Fix Dashboard header layout: align title left, buttons right using flexDirection: 'row', justifyContent: 'space-between'",
+        "Reposition BottomNav and FAB with absolute positioning, bottom spacing, zIndex, and SafeArea gap"
+      ],
+      "commit": "fix: dashboard layout structure and SafeArea restored",
+      "tag": "v1.4.0_dashboard-layout-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    },
+    {
+      "section": "Fix ThoughtmarkCard and BinCard Layouts",
+      "actions": [
+        "In ThoughtmarkCard, conditionally align title left (for dashboard) or center (for modal)",
+        "Remove ScrollView nesting from card if unnecessary; use View instead",
+        "Ensure BinCards layout uses flexWrap: 'wrap', proper gap, and does not collapse due to missing parent flex rules"
+      ],
+      "commit": "fix: Thoughtmark and BinCard alignment + layout",
+      "tag": "v1.4.0_cards-bin-layout-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    },
+    {
+      "section": "Fix Render Logic for Task and Bin Data",
+      "actions": [
+        "Trace task rendering logic: validate map over tasks, ensure props passed to ThoughtmarkCard are valid",
+        "Patch render logic if conditional short-circuits are hiding children",
+        "Confirm bin data maps correctly to BinCards (no leftover name filtering); ensure slice() fallback is safe"
+      ],
+      "commit": "fix: task and bin render logic repaired",
+      "tag": "v1.4.0_data-render-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: dashboard layout, cards, bins, and render flow fully restored",
+    "tag": "v1.4.0_dashboard-verified-stable_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Dashboard screen is now fully functional and visually aligned: SafeArea, header, cards, bins, BottomNav, and FAB all restored. All JSX role violations patched."
+  }
+}
+

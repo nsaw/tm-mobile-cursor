@@ -1,0 +1,37 @@
+// patch-2025-07-18T_test-summary-hook-check.json
+{
+  "showInUI": true,
+  "target": "braun",
+  "execution": {
+    "autoReleaseTimeoutMs": 30000,
+    "watchConsole": true,
+    "onReloadHang": "Move to background and resume automatically"
+  },
+  "dispatchTime": "2025-07-18T21:42:00-07:00",
+  "tasks": [
+    {
+      "task": "writeFile",
+      "file": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/summary-hook-test-2025-07-18.md",
+      "content": "# ✅ Summary Hook Test\nThis is a live validation of the GPT → GHOST → BRAUN summary writeback monitoring system.\n\nIf you are reading this file, summary writeback succeeded and watcher is functional.\n\n- Test ID: `test-summary-hook`\n- Timestamp: 2025-07-18T21:42 PT\n- Directory: `mobile-native-fresh/tasks/summaries/`\n- ✅ Safe to archive and confirm post-execution\n"
+    },
+    {
+      "task": "moveFile",
+      "source": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/patch-2025-07-18T_test-summary-hook-check.json",
+      "destination": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/.archive/patch-2025-07-18T_test-summary-hook-check.json"
+    },
+    {
+      "task": "runShellCommand",
+      "command": "tail -n 200 /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/summary-hook-test-2025-07-18.md || echo 'No tail output found.'",
+      "parseCheck": false,
+      "onParseFail": "alert-only"
+    }
+  ],
+  "postRun": {
+    "summary": {
+      "enabled": true,
+      "output": "summaries",
+      "path": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/"
+    }
+  },
+  "blockCommitOnError": true
+}

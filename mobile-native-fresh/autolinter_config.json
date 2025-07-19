@@ -1,0 +1,51 @@
+{
+  "project_directories": [
+    "./src",
+    "./scripts",
+    "./config"
+  ],
+  "ignore_patterns": [
+    ".git",
+    "node_modules",
+    "dist",
+    "build",
+    "logs",
+    "temp",
+    "*.md",
+    "*.json",
+    "*.lock",
+    "*.log",
+    "*.min.js",
+    "*.bundle.js"
+  ],
+  "linter_settings": {
+    "eslint_config": "./config/.eslintrc.cjs",
+    "prettier_config": "./.prettierrc",
+    "select_errors": ["error", "warn"],
+    "auto_fix": true,
+    "max_warnings": 0
+  },
+  "monitoring": {
+    "debounce_delay": 1.0,
+    "save_stats_interval": 300,
+    "log_level": "INFO"
+  },
+  "fixing_strategies": {
+    "use_eslint": true,
+    "use_prettier": true,
+    "use_manual_fixes": true,
+    "max_line_length": 100,
+    "fix_on_save": true
+  },
+  "notifications": {
+    "enable_slack": false,
+    "enable_console": true,
+    "enable_file": true
+  },
+  "statistics": {
+    "track_errors": true,
+    "track_fixes": true,
+    "track_performance": true,
+    "save_interval": 300
+  }
+} 

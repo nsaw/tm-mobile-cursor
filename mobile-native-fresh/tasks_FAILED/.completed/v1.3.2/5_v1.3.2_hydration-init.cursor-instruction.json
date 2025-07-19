@@ -1,0 +1,42 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: App Hydration & Initialization",
+    "\ud83c\udfaf GOAL: Ensure app state is correctly hydrated on launch, with correct role, auth, and gating.",
+    "\u2705 PRE-CHECK: Tag and backup before mutation.",
+    "\ud83d\udccc CONTEXT: Protects against partial state loads, corrupted sessions, and bad user experience.",
+    "\ud83d\udd10 RELEVANCE: Foundational for all subsequent app usage."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before v1.3.2\"",
+      "git tag v1.3.2_pre-v1.3.2_250701_UTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-v1.3.2_250701_UTC"
+    ]
+  },
+  "branch": "feature/v1.3.2_hydration-init",
+  "mode": "auto",
+  "watchConsole": true,
+  "phases": [
+    {
+      "section": "Phase 1: Hydration & State Validation",
+      "actions": [
+        "Test cold start, background resume, and session restore for correct user state.",
+        "Validate role and plan assignment post-hydration.",
+        "Ensure all post-hydration hooks (theme, navigation, PIN, premium) trigger as expected."
+      ],
+      "commit": "fix: hydration and init validated",
+      "tag": "v1.3.2_hydration-init-validated_250630_XXXXUTC"
+    }
+  ],
+  "final": {
+    "commit": "fix: hydration state and rehydration logic",
+    "tag": "v1.3.2_v1.3.2_complete_250701_UTC",
+    "notes": "Updated for post-token-refactor validation and safe runtime boot."
+  }
+}

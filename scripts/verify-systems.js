@@ -143,7 +143,7 @@ class SystemVerifier {
             'scripts/trust-daemon.js',
             'scripts/summary-cleanup.js',
             'logs',
-            'summaries'
+            '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries'
         ];
 
         const missing = [];

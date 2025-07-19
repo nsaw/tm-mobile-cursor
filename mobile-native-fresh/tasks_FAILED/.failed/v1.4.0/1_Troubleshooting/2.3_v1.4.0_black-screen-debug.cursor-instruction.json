@@ -1,0 +1,40 @@
+{
+  "notes": [
+    "🧠 MISSION: Halt ScrollView tracing and investigate black screen regression after recent debug wrapper and demo hydration changes",
+    "🎯 GOAL: Identify the root cause of the blank screen, restore visible app UI, and ensure ScrollView layout tracing resumes once visual tree renders",
+    "📌 CONTEXT: App previously booted to login screen successfully (see tag: v1.4.0_scrollview-final-pre-demo). After enabling demo content and enhanced DebugScrollView tracing, the app now loads to a full black screen.",
+    "💥 BUG: This is no longer a ScrollView layout error. The black screen likely results from a fatal render crash, missing navigation route, component-level crash (e.g., VoiceRecorderProvider, MainStack), or React boundary failing silently.",
+    "🚨 KEY INDICATORS: Console logs stop early, no visible UI appears, but the app doesn't crash to system error. This suggests a render-blocking condition or invalid JSX return from a key screen/component.",
+    "🔧 FIX SUMMARY: Pause further ScrollView layout tracing and immediately begin isolating the blank screen regression. Check App.tsx, AppContent, SessionHydrationGuard, MainStack, VoiceRecorderProvider, and DashboardScreen for broken JSX, unresolved data props, or failed providers. Resume ScrollView tracing only after visual UI is restored and stable."
+  ],
+  "branch": "fix/v1.4.0_black-screen-debug",
+  "mode": "manual",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "phases": [
+    {
+      "section": "Diagnose and Repair Black Screen Rendering Blocker",
+      "actions": [
+        "Disable or comment out DebugScrollView wrapper temporarily to confirm if it's the cause",
+        "Check App.tsx, AppContent, SessionHydrationGuard, and MainStack for blank return statements, conditional render fallbacks that return null, or missing children",
+        "Add temporary console.warn in App.tsx and MainStack to verify if navigation is initialized",
+        "Inspect VoiceRecorderProvider and DashboardScreen for any try/catch swallowing rendering or exceptions thrown in useEffect/useMemo",
+        "Temporarily bypass demo content hydration and re-enable basic Dashboard mock",
+        "Once visual UI returns, re-enable DebugScrollView and resume ScrollView tracing"
+      ],
+      "commit": "fix: restored visible UI and isolated black screen source",
+      "tag": "v1.4.0_black-screen-recovered_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: app UI restored; layout error tracing re-enabled post-blackout",
+    "tag": "v1.4.0_scrollview-trace-resume_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Blank screen resolved. App UI visible. Ready to resume ScrollView layout tracing and violation patching from visual render tree."
+  }
+}
+

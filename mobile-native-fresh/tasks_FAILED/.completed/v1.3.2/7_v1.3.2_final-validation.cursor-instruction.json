@@ -1,0 +1,43 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Final Functional QA and Tag/Archive",
+    "\ud83c\udfaf GOAL: Validate all previous phases; tag, backup, and archive a clean, working state for production or UI refactor.",
+    "\u2705 PRE-CHECK: Ensure all previous checkpoints have passed, and commit/tag a final pre-archive rollback point.",
+    "\ud83d\udccc CONTEXT: This locks the baseline for future UI/role/theming passes.",
+    "\ud83d\udd10 RELEVANCE: Prevents regressions and provides a single rollback point for release or refactor."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before v1.3.2\"",
+      "git tag v1.3.2_pre-v1.3.2_250701_UTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-v1.3.2_250701_UTC"
+    ]
+  },
+  "branch": "feature/v1.3.2_final-validation",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Phase 1: Final QA & Archive",
+      "actions": [
+        "Validate that all previous functional blocks have been executed and all checkpoints are passing (review git tags and backup status).",
+        "Run app in all supported modes (cold start, resume, onboarding, premium gating, navigation) and verify with smoke/manual tests.",
+        "If any phase fails, alert and rerun the corresponding block with PATCH or FIX as needed."
+      ],
+      "commit": "test: final functional QA and archive complete",
+      "tag": "v1.3.2_final-functional-QA_250630_XXXXUTC"
+    }
+  ],
+  "final": {
+    "commit": "validate: full system check and pass/fail logging",
+    "tag": "v1.3.2_v1.3.2_complete_250701_UTC",
+    "notes": "Updated for post-token-refactor validation and safe runtime boot."
+  }
+}

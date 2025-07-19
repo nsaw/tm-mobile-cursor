@@ -1,0 +1,46 @@
+{
+    "notes": [
+      "🧠 MISSION: Enter auto-healing mode — patch all remaining DebugScrollView violations one by one by runtime debugId until no violations remain",
+      "🎯 GOAL: Continuously scan the app at runtime for ScrollView layout violations caught by DebugScrollView and patch each one until app boots cleanly with no runtime layout errors",
+      "📌 CONTEXT:",
+      "- Demo login succeeds",
+      "- App loads but black screen appears due to unpatched ScrollView layout violations",
+      "- DebugScrollView logs runtime violations with a debugId per offending instance",
+      "- Cursor has manually fixed header, header-left, header-right — but now 'tags-header' is failing",
+      "🔧 FIX SUMMARY: Implement a loop that does the following per cycle:",
+      "- Detect the next `🚨 SCROLLVIEW LAYOUT VIOLATION DETECTED [debugId]` in console logs",
+      "- Locate that debugId instance in source code (DashboardScreen or child)",
+      "- Move layout props from `style` to `contentContainerStyle`",
+      "- Reload and repeat until no violations appear"
+    ],
+    "branch": "fix/v1.4.0_autopatch-scrollview-violations",
+    "mode": "auto",
+    "watchConsole": true,
+    "onReloadHang": "Move to background and resume automatically",
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+    "blockCommitOnError": false,
+    "alertUserOnParseFail": true,
+    "phases": [
+      {
+        "section": "Loop Patch Until All Violations Resolved",
+        "actions": [
+          "Start app with DEBUG_LAYOUT_PROPS=true",
+          "Wait for DebugScrollView to log any `🚨 SCROLLVIEW LAYOUT VIOLATION DETECTED [debugId]`",
+          "Parse debugId and locate the ScrollView/DebugScrollView using that debugId",
+          "Move layout props (alignItems, justifyContent, flexDirection, gap, etc.) from `style` to `contentContainerStyle`",
+          "Save, reload app, and repeat",
+          "Log each fix with file, line, debugId, and props moved"
+        ],
+        "commit": "fix: patched layout violation [${debugId}]",
+        "tag": "v1.4.0_scrollview-fix-${debugId}_$(date -u +%y%m%d_%H%MUTC)"
+      }
+    ],
+    "final": {
+      "commit": "chore: ScrollView layout system clean — all debugId violations resolved",
+      "tag": "v1.4.0_scrollview-runtime-stable_$(date -u +%y%m%d_%H%MUTC)",
+      "notes": "All runtime layout violations traced via DebugScrollView and resolved. UI rendering fully stable. Debug wrapper shows no remaining violations."
+    }
+  }
+  

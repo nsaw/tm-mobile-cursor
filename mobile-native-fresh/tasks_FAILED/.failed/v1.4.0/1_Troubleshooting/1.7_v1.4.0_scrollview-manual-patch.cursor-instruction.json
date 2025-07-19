@@ -1,0 +1,63 @@
+{
+  "notes": [
+    "🧠 MISSION: Patch any remaining <ScrollView> layout violations and verify zero violations via AST-based spread-aware scanner",
+    "🎯 GOAL: Eliminate all runtime layout errors from <ScrollView> misuse, and verify via live JSX+AST pass that no layout props (alignItems, justifyContent, etc.) remain in style props",
+    "📌 CONTEXT: App still throws layout runtime error in DashboardScreen.tsx even after inline and style-ref ScrollView fixes",
+    "💥 BUG: Previous fixer did not catch layout props nested via spread operators or conditionals",
+    "🔧 FIX SUMMARY: Manually patch all missed <ScrollView> style assignments (e.g. spread objects, conditional merges), then verify global correctness using an AST-powered scanner that traces spread resolution",
+    "🔐 RELEVANCE: React Native requires layout props to live only inside `contentContainerStyle` or it throws runtime Invariant Violations"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(snapshot): before spread-aware ScrollView layout patch\"",
+      "git tag v1.4.0_scrollview-manual-spread-pre_$(date -u +%y%m%d_%H%MUTC)",
+      "sh scripts/backup-tag-push.sh v1.4.0_scrollview-manual-spread-pre_$(date -u +%y%m%d_%H%MUTC)"
+    ]
+  },
+  "branch": "fix/v1.4.0_scrollview-manual-patch",
+  "mode": "manual",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Manual Fix of Missed ScrollView Layout Violations",
+      "actions": [
+        "Open src/features/home/screens/DashboardScreen.tsx",
+        "Locate all <ScrollView> elements and their style assignments",
+        "Unwrap any spread-based style props (e.g., {...styles.container})",
+        "If any layout props (alignItems, justifyContent, gap, etc.) exist within these spreads:",
+        "- Move them to contentContainerStyle",
+        "- Leave non-layout props in style",
+        "- Ensure contentContainerStyle is defined and merged correctly",
+        "Ensure no layout props remain in any spread or resolved style objects used in style"
+      ],
+      "commit": "fix: manually patched spread-based ScrollView layout props in DashboardScreen",
+      "tag": "v1.4.0_scrollview-spread-patched_$(date -u +%y%m%d_%H%MUTC)"
+    },
+    {
+      "section": "AST-Based Global JSX Scanner Verification",
+      "actions": [
+        "Run scripts/scan-scrollview-layout-spread-aware.cjs",
+        "- This scanner resolves spread props in style={{...}} or style={styles.*}",
+        "- Flags any layout props present in the resolved object",
+        "- Outputs violations to /tmp/scrollview-layout-spread-violations.json",
+        "Confirm scanner result: [] (no violations)",
+        "If any violations remain, alert and block commit"
+      ],
+      "commit": "chore: verified ScrollView layout compliance via JSX+AST spread-aware scanner",
+      "tag": "v1.4.0_scrollview-final-verified_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: all ScrollView layout props verified and compliant",
+    "tag": "v1.4.0_scrollview-clean_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Manual patch and JSX+AST verification complete. ScrollView layout error resolved. No remaining violations detected."
+  }
+}
+

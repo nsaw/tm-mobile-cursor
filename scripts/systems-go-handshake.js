@@ -153,7 +153,7 @@ class SystemsGoHandshake {
             }
 
             // Check summaries directory
-            const summariesDir = 'summaries';
+            const summariesDir = '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries';
             if (!fs.existsSync(summariesDir)) {
                 return { status: 'operational', message: 'No summaries to clean' };
             }
