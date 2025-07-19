@@ -1,0 +1,51 @@
+{
+    "notes": [
+      "🧠 MISSION: Fix Expo startup context and ensure Task Thoughtmark cards render all children",
+      "🎯 GOAL: (1) Start Expo from correct working directory with port kill logic, (2) Fix cropped task card issue",
+      "📌 CONTEXT:",
+      "- Cursor’s Expo start is failing or using wrong directory",
+      "- Task cards on Dashboard only show checkbox, not title/content",
+      "🔧 WHAT TO DO:",
+      "- Always run Expo from `mobile-native-fresh/`, not repo root",
+      "- Kill port 8081 before starting Expo, fallback to 8082 if needed",
+      "- Patch card layout: ensure full width, children spacing, no overflow:hidden",
+      "- Trace card rendering logic — validate `type === 'task'` doesn't short-circuit or skip content"
+    ],
+    "branch": "fix/v1.4.0_expo-launch-task-card",
+    "mode": "auto",
+    "watchConsole": true,
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "postMutationBuild": "lsof -ti:8081 | xargs kill -9 || true && cd mobile-native-fresh && npx expo start --dev-client --clear --port 8082",
+    "blockCommitOnError": false,
+    "alertUserOnParseFail": true,
+    "phases": [
+      {
+        "section": "Fix Expo Startup Path",
+        "actions": [
+          "Update postMutationBuild and test execution to run from /mobile-native-fresh",
+          "Ensure all hybrid blocks launch Expo using cleared cache and custom port 8082",
+          "Kill any process on 8081 before startup"
+        ],
+        "commit": "chore: fixed Expo startup path and port conflict handling",
+        "tag": "v1.4.0_expo-path-fixed_$(date -u +%y%m%d_%H%MUTC)"
+      },
+      {
+        "section": "Fix Task Card Rendering",
+        "actions": [
+          "Trace card render function for task thoughtmarks",
+          "Ensure card wrapper has width: '100%' or flex: 1 and does not clip children",
+          "Ensure all JSX children render when type === 'task'",
+          "Remove conditional short-circuiting or early returns that skip render"
+        ],
+        "commit": "fix: task cards render full content properly",
+        "tag": "v1.4.0_task-card-fixed_$(date -u +%y%m%d_%H%MUTC)"
+      }
+    ],
+    "final": {
+      "commit": "chore: verified Expo path and restored task card content rendering",
+      "tag": "v1.4.0_launch-and-cards-clean_$(date -u +%y%m%d_%H%MUTC)",
+      "notes": "Expo now launches correctly from mobile-native-fresh/ with no port collisions. Task Thoughtmark cards render all children including title and content."
+    }
+  }
+  

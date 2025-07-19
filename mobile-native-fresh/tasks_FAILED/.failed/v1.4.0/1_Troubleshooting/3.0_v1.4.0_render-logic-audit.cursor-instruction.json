@@ -1,0 +1,55 @@
+{
+  "notes": [
+    "🧠 MISSION: Detect and verify render logic failures introduced during the ScrollView and wrapper refactors",
+    "🎯 GOAL: Ensure all map-based content, conditional render trees, and children props are preserved and functioning correctly",
+    "📌 CONTEXT:",
+    "- ThoughtmarkCards now show only checkboxes — content likely broken in `map()` or `children` usage",
+    "- BinCards are not loading — map iteration or visibility conditions may be failing",
+    "- FAB and BottomNav missing — likely due to layout starvation or conditional wrapper misplacement",
+    "- DebugScrollView and refactors may have dropped or improperly passed `children`",
+    "🔬 TARGET COMPONENTS:",
+    "- DashboardScreen.tsx",
+    "- ThoughtmarkCard.tsx",
+    "- BinCard.tsx",
+    "- FAB.tsx",
+    "- BottomNav.tsx",
+    "- SafeAreaView + outer wrapper logic",
+    "🛠 WHAT TO TRACE:",
+    "- Each `.map()` loop rendering UI — ensure array exists and renders valid elements",
+    "- All conditional logic (`isEmpty`, `!data?.length`, etc.) — ensure fallbacks aren't swallowing real data",
+    "- Props like `children` — ensure they flow through custom wrappers (`DebugScrollView`, nested Views)",
+    "- Return values in render functions — detect cases where JSX might be `null` or undefined",
+    "📄 OUTPUT:",
+    "- Markdown summary: /audit/render-logic-audit.md",
+    "- JSON log: tasks/v1.4.0/logs/render-logic-audit.json"
+  ],
+  "branch": "verify/v1.4.0_render-logic-audit",
+  "mode": "manual",
+  "watchConsole": false,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "true",
+  "blockCommitOnError": false,
+  "alertUserOnParseFail": true,
+  "phases": [
+    {
+      "section": "Audit Conditional Rendering & Map Flow",
+      "actions": [
+        "For DashboardScreen.tsx: verify map render of bins and tags",
+        "For ThoughtmarkCard.tsx: ensure title/description render fully",
+        "For BinCard.tsx: check for children, flex props, or map collapse",
+        "Check FAB.tsx and BottomNav.tsx for layout starvation or unmounted status",
+        "Confirm children prop is preserved in all wrappers (esp. DebugScrollView)",
+        "Trace conditional returns in render() or functional components — ensure JSX is returned, not null"
+      ],
+      "commit": "chore: audit render logic and conditional flows",
+      "tag": "v1.4.0_render-logic-verified_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "docs: render logic audit complete and mapped",
+    "tag": "v1.4.0_render-logic-mapped_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Component tree and render output verified. Map loops, children props, and conditional flows confirmed or flagged. Logged to /audit/render-logic-audit.md and tasks/v1.4.0/logs/render-logic-audit.json."
+  }
+}
+

@@ -1,0 +1,52 @@
+{
+  "notes": [
+    "🧠 MISSION: Trace and verify visual layout regressions after automated ScrollView contentContainerStyle enforcement",
+    "🎯 GOAL: Compare current rendered output to expected role-based layouts for critical components in DashboardScreen",
+    "📌 CONTEXT:",
+    "- ScrollView layout patching fixed runtime errors but broke visual structure",
+    "- Regressions include: missing BottomNav, FAB, misaligned header buttons, and broken bin wrapping",
+    "📎 ASSERTIONS TO VERIFY:",
+    "- ✅ Dashboard Header: Title (left) + Settings/Info buttons (right) layout must be flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'",
+    "- ✅ ThoughtmarkCard: Title must have left alignment (textAlign: 'left') and consistent padding/margin",
+    "- ✅ FAB must be present and anchored to bottom-right with SafeAreaView active",
+    "- ✅ BottomNav must be rendered and docked at bottom of screen (not scrolled off)",
+    "- ✅ SafeAreaView must apply edge padding (top/bottom) consistently",
+    "- ✅ Bin Layouts: Section must wrap to 2-column layout with flexWrap: 'wrap' and gap/rowGap if used",
+    "📄 OUTPUT:",
+    "- Markdown summary: /audit/layout-regression-report.md",
+    "- JSON export: tasks/v1.4.0/logs/layout-regression-log.json"
+  ],
+  "branch": "verify/v1.4.0_scrollview-role-regression",
+  "mode": "manual",
+  "watchConsole": true,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "true",
+  "blockCommitOnError": false,
+  "alertUserOnParseFail": true,
+  "phases": [
+    {
+      "section": "Role-Specific Regression Analysis",
+      "actions": [
+        "Traverse JSX and runtime role logs for debugIds matching: header, header-left, header-right, ThoughtmarkCard, BottomNav, FAB, SafeAreaView, bin-content-*",
+        "Compare actual layout props to expected roles:",
+        "- Header sections: flexDirection + justifyContent + alignItems",
+        "- ThoughtmarkCard: Title alignment (textAlign), left padding",
+        "- FAB: Anchored to screen corner with SafeAreaView padding",
+        "- BottomNav: Visibility + position at screen bottom",
+        "- SafeAreaView: Applied to top-level screen containers",
+        "- Bin Layouts: flexWrap and grid logic retained",
+        "Flag missing or broken layout props",
+        "Log exact file path + line + debugId for violations"
+      ],
+      "commit": "chore: layout regression role audit complete",
+      "tag": "v1.4.0_layout-role-regression_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "docs: dashboard layout roles verified and logged",
+    "tag": "v1.4.0_layout-role-verified_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Visual role audit complete. Layout regressions documented in /audit/layout-regression-report.md and tasks/v1.4.0/logs/layout-regression-log.json."
+  }
+}
+

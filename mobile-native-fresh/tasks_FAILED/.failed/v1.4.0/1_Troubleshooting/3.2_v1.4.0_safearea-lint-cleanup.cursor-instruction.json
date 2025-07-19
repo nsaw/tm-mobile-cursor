@@ -1,0 +1,54 @@
+{
+  "notes": [
+    "🧠 MISSION: Restore SafeAreaView compliance and remove remaining lint/type warnings",
+    "🎯 GOAL: Ensure safe visual spacing on top/bottom and eliminate all residual ESLint and TypeScript warnings",
+    "✅ Pre-check: Ensure demo login and Dashboard are active before running these changes",
+    "📌 CONTEXT: Layout regressions after scrollView auto-patch and logic audit",
+    "💥 BUGS ADDRESSED:",
+    "- SafeAreaView missing at root → top spacing collapsed",
+    "- BottomNav and FAB shifted into unsafe zone (not floating)",
+    "- Task cards truncated due to overflow or layout clipping",
+    "- Linter still reporting unused vars, bad imports, parse errors",
+    "🔧 FIX SUMMARY:",
+    "- Wrap `DashboardScreen`, `AppContent`, and `AppNavigator` containers with `<SafeAreaView edges={['top', 'bottom']}>`",
+    "- Re-inject bottom spacing using `useSafeAreaInsets` in FAB and BottomNav wrappers",
+    "- Add `flex: 1`, `width: '100%'`, or padding to key containers",
+    "- Run full ESLint autofix + parse validation pass",
+    "🔐 RELEVANCE: Ensures UI stability across all devices and clears build/test pipelines"
+  ],
+  "branch": "fix/v1.4.0_safearea-lint-pass",
+  "mode": "auto",
+  "watchConsole": true,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "blockCommitOnError": false,
+  "postMutationBuild": "cd mobile-native-fresh && npm run lint:fix-all && npx tsc --noEmit",
+  "phases": [
+    {
+      "section": "SafeArea & Layout Enforcement",
+      "actions": [
+        "Wrap AppContent and DashboardScreen root-level Views in SafeAreaView with edges=['top', 'bottom']",
+        "Use useSafeAreaInsets to inject bottom spacing to FAB and BottomNav",
+        "Fix missing padding/margin in Dashboard top header region",
+        "Ensure FAB and BottomNav use absolute positioning and correct safe-area spacing"
+      ],
+      "commit": "fix: restore SafeArea and footer positioning",
+      "tag": "v1.4.0_safearea-recovered_$(date -u +%y%m%d_%H%MUTC)"
+    },
+    {
+      "section": "Global Lint Cleanup",
+      "actions": [
+        "Run ESLint autofix on all ts/tsx files",
+        "Fix unused variables, dangling imports, formatting",
+        "Revalidate parse-check on entire src tree"
+      ],
+      "commit": "chore: global lint cleanup",
+      "tag": "v1.4.0_lint-cleanup_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: safearea restored and lint cleared",
+    "tag": "v1.4.0_ui-layout-stabilized_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "SafeAreaView applied, layout clipping fixed, BottomNav restored, and all lint errors resolved"
+  }
+}

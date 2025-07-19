@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { User, Thoughtmark, Bin, APIResponse, ThoughtmarkFormData, BinFormData } from '../types';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://192.168.68.127:4000';
 
 class ApiService {
   private async getAuthHeaders(): Promise<HeadersInit> {
@@ -103,32 +103,9 @@ class ApiService {
   }
 
   async demoLogin(): Promise<APIResponse<{ user: User; token: string }>> {
-    // TEMPORARY BYPASS — replace demoLogin call for local development
-    console.log('🧪 Firebase bypass mode — injecting mock user');
-    
-    // Mock user data for local development
-    const mockUser: User = {
-      id: 'dev-bypass-user',
-      email: 'demo@bypass.local',
-      firstName: 'Demo',
-      lastName: 'User',
-      displayName: 'Demo User',
-      isPremium: false,
-      isTestUser: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    const mockToken = 'mock-token-for-local-development';
-
-    return {
-      success: true,
-      data: {
-        user: mockUser,
-        token: mockToken,
-      },
-      error: undefined,
-    };
+    return this.makeRequest('/api/auth/demo', {
+      method: 'POST',
+    });
   }
 
   // User profile methods
@@ -165,69 +142,7 @@ class ApiService {
 
   // Thoughtmarks methods
   async getThoughtmarks(): Promise<APIResponse<Thoughtmark[]>> {
-    // TEMPORARY BYPASS — return mock thoughtmarks for local development
-    console.log('🧪 Bypassing getThoughtmarks API call — returning mock data');
-    
-    const mockThoughtmarks: Thoughtmark[] = [
-      {
-        id: 1,
-        title: 'Welcome to Thoughtmarks',
-        content: 'This is your first thoughtmark. Start capturing your ideas, tasks, and insights here.',
-        binId: 1,
-        userId: 1,
-        tags: ['welcome', 'getting-started'],
-        aiSummary: 'Introduction to the Thoughtmarks app',
-        aiCategorySuggestions: ['introduction', 'tutorial'],
-        isArchived: false,
-        isPinned: true,
-        isDeleted: false,
-        isTask: false,
-        isCompleted: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        title: 'Sample Task',
-        content: 'This is a sample task that demonstrates the task functionality.',
-        binId: 1,
-        userId: 1,
-        tags: ['task', 'sample'],
-        aiSummary: 'A demonstration task item',
-        aiCategorySuggestions: ['task', 'demo'],
-        isArchived: false,
-        isPinned: false,
-        isDeleted: false,
-        isTask: true,
-        isCompleted: false,
-        priority: 'medium',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: 3,
-        title: 'Ideas for Future Features',
-        content: 'Voice recording, AI insights, smart categorization, and more advanced features.',
-        binId: 2,
-        userId: 1,
-        tags: ['ideas', 'features', 'roadmap'],
-        aiSummary: 'Feature ideas and roadmap planning',
-        aiCategorySuggestions: ['planning', 'ideas'],
-        isArchived: false,
-        isPinned: false,
-        isDeleted: false,
-        isTask: false,
-        isCompleted: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ];
-
-    return {
-      success: true,
-      data: mockThoughtmarks,
-      error: undefined,
-    };
+    return this.makeRequest('/api/thoughtmarks');
   }
 
   async getThoughtmark(id: number): Promise<APIResponse<Thoughtmark>> {
@@ -272,62 +187,7 @@ class ApiService {
 
   // Bins methods
   async getBins(): Promise<APIResponse<Bin[]>> {
-    // TEMPORARY BYPASS — return mock bins for local development
-    console.log('🧪 Bypassing getBins API call — returning mock data');
-    
-    const mockBins: Bin[] = [
-      {
-        id: 1,
-        name: 'General',
-        description: 'Default bin for general thoughtmarks',
-        userId: 1,
-        color: '#3B82F6',
-        icon: '📝',
-        isDefault: true,
-        isArchived: false,
-        isDeleted: false,
-        sortOrder: 1,
-        thoughtmarkCount: 2,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        name: 'Ideas',
-        description: 'Collection of ideas and concepts',
-        userId: 1,
-        color: '#10B981',
-        icon: '💡',
-        isDefault: false,
-        isArchived: false,
-        isDeleted: false,
-        sortOrder: 2,
-        thoughtmarkCount: 1,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: 3,
-        name: 'Tasks',
-        description: 'Action items and to-dos',
-        userId: 1,
-        color: '#F59E0B',
-        icon: '✅',
-        isDefault: false,
-        isArchived: false,
-        isDeleted: false,
-        sortOrder: 3,
-        thoughtmarkCount: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ];
-
-    return {
-      success: true,
-      data: mockBins,
-      error: undefined,
-    };
+    return this.makeRequest('/api/bins');
   }
 
   async getBin(id: number): Promise<APIResponse<Bin>> {

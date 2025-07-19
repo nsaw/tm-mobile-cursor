@@ -2,7 +2,7 @@
 
 /**
  * Clickable Element Audit Script
- * 
+ *
  * This script performs a comprehensive audit of all clickable elements
  * across the React Native app to ensure:
  * 1. All navigation routes are valid and implemented
@@ -11,18 +11,40 @@
  * 4. All routes follow the new global UI/UX standards
  */
 
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+const fs = require("fs");
+const path = require("path");
+const glob = require("glob");
 
 // Define valid routes from routes.ts
 const VALID_ROUTES = [
-  'SignIn', 'SignUp', 'Dashboard', 'Search', 'AITools',
-  'AllThoughtmarks', 'ThoughtmarkDetail', 'CreateThoughtmark',
-  'AllBins', 'CreateBin', 'BinDetail', 'Tasks', 'Content',
-  'VoiceRecord', 'Settings', 'Profile', 'Premium', 'Help',
-  'Terms', 'Privacy', 'Security', 'Theme', 'Export',
-  'Contact', 'HowTo', 'AdminDashboard', 'Archive', 'DesignSystemDemo'
+  "SignIn",
+  "SignUp",
+  "Dashboard",
+  "Search",
+  "AITools",
+  "AllThoughtmarks",
+  "ThoughtmarkDetail",
+  "CreateThoughtmark",
+  "AllBins",
+  "CreateBin",
+  "BinDetail",
+  "Tasks",
+  "Content",
+  "VoiceRecord",
+  "Settings",
+  "Profile",
+  "Premium",
+  "Help",
+  "Terms",
+  "Privacy",
+  "Security",
+  "Theme",
+  "Export",
+  "Contact",
+  "HowTo",
+  "AdminDashboard",
+  "Archive",
+  "DesignSystemDemo",
 ];
 
 // Define clickable component patterns
@@ -65,20 +87,24 @@ const auditResults = {
   missingAccessibility: 0,
   issues: [],
   warnings: [],
-  recommendations: []
+  recommendations: [],
 };
 
 /**
  * Extract route names from navigation calls
  */
 function extractRouteNames(code) {
-  const routeMatches = code.match(/navigation\.(navigate|push|replace)\(['"`]([^'"`]+)['"`]/g);
+  const routeMatches = code.match(
+    /navigation\.(navigate|push|replace)\(['"`]([^'"`]+)['"`]/g,
+  );
   if (!routeMatches) return [];
-  
-  return routeMatches.map(match => {
-    const routeMatch = match.match(/['"`]([^'"`]+)['"`]/);
-    return routeMatch ? routeMatch[1] : null;
-  }).filter(Boolean);
+
+  return routeMatches
+    .map((match) => {
+      const routeMatch = match.match(/['"`]([^'"`]+)['"`]/);
+      return routeMatch ? routeMatch[1] : null;
+    })
+    .filter(Boolean);
 }
 
 /**
@@ -95,14 +121,15 @@ function checkAccessibility(code, filePath, lineNumber) {
   const hasAccessibilityRole = /accessibilityRole\s*=/.test(code);
   const hasAccessible = /accessible\s*=/.test(code);
   const hasAccessibilityLabel = /accessibilityLabel\s*=/.test(code);
-  
+
   if (!hasAccessibilityRole || !hasAccessible || !hasAccessibilityLabel) {
     auditResults.missingAccessibility++;
     auditResults.issues.push({
-      type: 'accessibility',
+      type: "accessibility",
       file: filePath,
       line: lineNumber,
-      message: 'Missing accessibility props (accessibilityRole, accessible, accessibilityLabel)'
+      message:
+        "Missing accessibility props (accessibilityRole, accessible, accessibilityLabel)",
     });
   }
 }
@@ -118,15 +145,15 @@ function checkStylingCompliance(code, filePath, lineNumber) {
     /margin:\s*\d+/,
     /color:\s*['"`]#[0-9a-fA-F]{3,6}['"`]/,
   ];
-  
-  hardcodedPatterns.forEach(pattern => {
+
+  hardcodedPatterns.forEach((pattern) => {
     const matches = code.match(pattern);
     if (matches) {
       auditResults.warnings.push({
-        type: 'styling',
+        type: "styling",
         file: filePath,
         line: lineNumber,
-        message: `Hardcoded value found: ${matches[0]}. Consider using design tokens.`
+        message: `Hardcoded value found: ${matches[0]}. Consider using design tokens.`,
       });
     }
   });
@@ -137,55 +164,58 @@ function checkStylingCompliance(code, filePath, lineNumber) {
  */
 function auditFile(filePath) {
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    const lines = content.split('\n');
-    
+    const content = fs.readFileSync(filePath, "utf8");
+    const lines = content.split("\n");
+
     auditResults.totalFiles++;
     let hasClickables = false;
     let fileClickables = 0;
-    
+
     lines.forEach((line, index) => {
       const lineNumber = index + 1;
-      
+
       // Check for clickable components
-      const isClickable = CLICKABLE_PATTERNS.some(pattern => pattern.test(line));
-      const hasNavigation = NAVIGATION_PATTERNS.some(pattern => pattern.test(line));
-      
+      const isClickable = CLICKABLE_PATTERNS.some((pattern) =>
+        pattern.test(line),
+      );
+      const hasNavigation = NAVIGATION_PATTERNS.some((pattern) =>
+        pattern.test(line),
+      );
+
       if (isClickable) {
         hasClickables = true;
         fileClickables++;
         auditResults.totalClickables++;
-        
+
         // Check accessibility
         checkAccessibility(line, filePath, lineNumber);
-        
+
         // Check styling compliance
         checkStylingCompliance(line, filePath, lineNumber);
       }
-      
+
       // Check navigation routes
       if (hasNavigation) {
         const routes = extractRouteNames(line);
-        routes.forEach(route => {
+        routes.forEach((route) => {
           if (isValidRoute(route)) {
             auditResults.validRoutes++;
           } else {
             auditResults.invalidRoutes++;
             auditResults.issues.push({
-              type: 'navigation',
+              type: "navigation",
               file: filePath,
               line: lineNumber,
-              message: `Invalid route: ${route}`
+              message: `Invalid route: ${route}`,
             });
           }
         });
       }
     });
-    
+
     if (hasClickables) {
       auditResults.filesWithClickables++;
     }
-    
   } catch (error) {
     console.error(`Error reading file ${filePath}:`, error.message);
   }
@@ -208,21 +238,35 @@ Generated: ${new Date().toISOString()}
 - Missing accessibility: ${auditResults.missingAccessibility}
 
 ## Issues Found (${auditResults.issues.length})
-${auditResults.issues.map(issue => 
-  `- **${issue.type.toUpperCase()}**: ${issue.file}:${issue.line} - ${issue.message}`
-).join('\n')}
+${auditResults.issues
+  .map(
+    (issue) =>
+      `- **${issue.type.toUpperCase()}**: ${issue.file}:${issue.line} - ${issue.message}`,
+  )
+  .join("\n")}
 
 ## Warnings (${auditResults.warnings.length})
-${auditResults.warnings.map(warning => 
-  `- **${warning.type.toUpperCase()}**: ${warning.file}:${warning.line} - ${warning.message}`
-).join('\n')}
+${auditResults.warnings
+  .map(
+    (warning) =>
+      `- **${warning.type.toUpperCase()}**: ${warning.file}:${warning.line} - ${warning.message}`,
+  )
+  .join("\n")}
 
 ## Recommendations
-${auditResults.recommendations.map(rec => `- ${rec}`).join('\n')}
+${auditResults.recommendations.map((rec) => `- ${rec}`).join("\n")}
 
 ## Compliance Score
-- Navigation Routes: ${Math.round((auditResults.validRoutes / (auditResults.validRoutes + auditResults.invalidRoutes)) * 100)}%
-- Accessibility: ${Math.round(((auditResults.totalClickables - auditResults.missingAccessibility) / auditResults.totalClickables) * 100)}%
+- Navigation Routes: ${Math.round(
+    (auditResults.validRoutes /
+      (auditResults.validRoutes + auditResults.invalidRoutes)) *
+      100,
+  )}%
+- Accessibility: ${Math.round(
+    ((auditResults.totalClickables - auditResults.missingAccessibility) /
+      auditResults.totalClickables) *
+      100,
+  )}%
 `;
 
   return report;
@@ -232,51 +276,51 @@ ${auditResults.recommendations.map(rec => `- ${rec}`).join('\n')}
  * Main audit function
  */
 function runAudit() {
-  console.log('🔍 Starting Clickable Element Audit...\n');
-  
+  console.log("🔍 Starting Clickable Element Audit...\n");
+
   // Find all TypeScript/JavaScript files
-  const files = glob.sync('src/**/*.{ts,tsx,js,jsx}', {
-    ignore: ['**/node_modules/**', '**/dist/**', '**/build/**']
+  const files = glob.sync("src/**/*.{ts,tsx,js,jsx}", {
+    ignore: ["**/node_modules/**", "**/dist/**", "**/build/**"],
   });
-  
+
   console.log(`Found ${files.length} files to audit...\n`);
-  
+
   // Audit each file
-  files.forEach(file => {
+  files.forEach((file) => {
     auditFile(file);
   });
-  
+
   // Generate and save report
   const report = generateReport();
-  const reportPath = path.join(__dirname, '../audit-report.md');
-  
+  const reportPath = path.join(__dirname, "../audit-report.md");
+
   fs.writeFileSync(reportPath, report);
-  
-  console.log('📊 Audit Complete!');
+
+  console.log("📊 Audit Complete!");
   console.log(`Report saved to: ${reportPath}\n`);
-  
-  console.log('📋 Summary:');
+
+  console.log("📋 Summary:");
   console.log(`- Files scanned: ${auditResults.totalFiles}`);
   console.log(`- Clickable elements: ${auditResults.totalClickables}`);
   console.log(`- Valid routes: ${auditResults.validRoutes}`);
   console.log(`- Invalid routes: ${auditResults.invalidRoutes}`);
   console.log(`- Accessibility issues: ${auditResults.missingAccessibility}`);
-  
+
   if (auditResults.issues.length > 0) {
-    console.log('\n❌ Issues found:');
-    auditResults.issues.forEach(issue => {
+    console.log("\n❌ Issues found:");
+    auditResults.issues.forEach((issue) => {
       console.log(`  - ${issue.file}:${issue.line} - ${issue.message}`);
     });
   }
-  
+
   if (auditResults.warnings.length > 0) {
-    console.log('\n⚠️  Warnings:');
-    auditResults.warnings.forEach(warning => {
+    console.log("\n⚠️  Warnings:");
+    auditResults.warnings.forEach((warning) => {
       console.log(`  - ${warning.file}:${warning.line} - ${warning.message}`);
     });
   }
-  
-  console.log('\n✅ Audit completed successfully!');
+
+  console.log("\n✅ Audit completed successfully!");
 }
 
 // Run the audit if this script is executed directly
@@ -284,4 +328,4 @@ if (require.main === module) {
   runAudit();
 }
 
-module.exports = { runAudit, auditResults }; 
+module.exports = { runAudit, auditResults };

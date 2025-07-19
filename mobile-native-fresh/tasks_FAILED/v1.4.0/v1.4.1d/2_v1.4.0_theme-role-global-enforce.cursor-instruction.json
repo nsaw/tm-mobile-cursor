@@ -1,0 +1,43 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Phase 2 \u2014 Apply styling/spacing based on roles (spacing, casing, borders)",
+    "\ud83c\udfaf GOAL: Build globally styled, role-aware layout for Thoughtmarks app",
+    "\u2705 BEFORE: Run only after v1.3.2 complete and booting",
+    "\ud83d\udd10 RISK: MODERATE \u2014 rollback safe tagged backup will be created",
+    "\u2705 Validates parse + types before changes",
+    "\u2705 Final state must boot cleanly and pass ESLint + TypeScript checks"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): v1.4.0 backup before theme-role-global-enforce\"",
+      "git tag v1.4.0_pre-theme-role-global-enforce_250701_1754UTC",
+      "sh scripts/backup-tag-push.sh v1.4.0_pre-theme-role-global-enforce_250701_1754UTC",
+      "tar -czf /Users/sawyer/gitSync/tm-safety_backups/tm-mobile-cursor_v1.4.0_pre-theme-role-global-enforce_250701_1754UTC.tar.gz /Users/sawyer/gitSync/tm-mobile-cursor --exclude='.git' --exclude='node_modules' --exclude='*.log'"
+    ]
+  },
+  "branch": "feature/v1.4.0_theme-role-global-enforce",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Phase 2 \u2014 Apply styling/spacing based on roles (spacing, casing, borders)",
+      "actions": [
+        "Run role/style refactor for theme-role-global-enforce"
+      ],
+      "commit": "feat: v1.4.0 phase 2 - theme-role-global-enforce",
+      "tag": "v1.4.0_theme-role-global-enforce_final_250701_1754UTC"
+    }
+  ],
+  "final": {
+    "commit": "chore: v1.4.0 complete phase 2 - theme-role-global-enforce",
+    "tag": "v1.4.0_theme-role-global-enforce_final_250701_1754UTC",
+    "notes": "Validated UI role and layout transformation for phase 2"
+  }
+}

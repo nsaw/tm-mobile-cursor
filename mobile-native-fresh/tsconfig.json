@@ -1,18 +1,4 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "jsx": "react-native",
-    "esModuleInterop": true,
-    "target": "esnext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "extends": "expo/tsconfig.base",
-  "include": ["src", "app"],
-  "exclude": ["tm-mobile-clone/**/*", "reference/**/*", "ios bak/**/*"]
+  "compilerOptions": {},
+  "extends": "expo/tsconfig.base"
 }

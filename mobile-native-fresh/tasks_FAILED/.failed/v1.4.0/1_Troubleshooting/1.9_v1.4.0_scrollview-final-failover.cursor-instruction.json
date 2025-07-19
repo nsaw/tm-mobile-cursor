@@ -1,0 +1,43 @@
+{
+  "notes": [
+    "🧠 MISSION: Re-open ScrollView layout violation debugging on DashboardScreen.tsx despite automated and manual patch completion",
+    "🎯 GOAL: Identify why the runtime error still occurs even though all fix phases report compliance, and the debug wrapper claims no active violations",
+    "📌 CONTEXT: Cursor completed the following:",
+    "- Manual fix applied to DashboardScreen ScrollView at line 959",
+    "- DebugScrollView wrapper baked in with __DEV__ + DEBUG_LAYOUT_PROPS safeguards",
+    "- TypeScript, lint, and boot all report green ✅",
+    "- But the app still throws this fatal runtime error: `Invariant Violation: ScrollView child layout ([\"alignItems\",\"justifyContent\"]) must be applied through the contentContainerStyle prop.`",
+    "💥 BUG: At least one ScrollView instance (or nested child in the same component tree) still applies layout props to `style`, possibly at runtime through deeply composed or indirect means not covered by static analysis or debug wrappers",
+    "🔧 FIX SUMMARY: Perform a **full trace** of all <ScrollView> components in DashboardScreen.tsx using runtime introspection (console logging or breakpoint evaluation). Validate every rendered instance’s actual props—particularly `style`—and confirm where alignItems/justifyContent are leaking from. Do not trust AST, spread, or debug wrapper reports—trust the rendered output only.",
+    "🔐 RELEVANCE: Until this specific violation is surfaced and resolved, the app cannot boot successfully in production or development."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "branch": "fix/v1.4.0_scrollview-final-failover",
+  "mode": "manual",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Trace ScrollView Runtime Prop Leak in DashboardScreen",
+      "actions": [
+        "Set a breakpoint or add console.warn inside DebugScrollView for all received props",
+        "Print and log flattened style and contentContainerStyle props",
+        "Manually inspect the call stack from the error and match it to the actual JSX returned from DashboardScreen",
+        "Confirm whether any children or wrapped ScrollViews in the render tree also incorrectly apply layout props in style",
+        "Patch those deeply nested cases if found, even if outside the current file"
+      ],
+      "commit": "fix: caught deep ScrollView layout prop leak not covered by static analysis",
+      "tag": "v1.4.0_scrollview-deep-patch_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: verified full runtime compliance of ScrollView layout rules",
+    "tag": "v1.4.0_scrollview-final-clean-confirmed_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Root cause of the persistent runtime violation identified and patched. Verified via direct runtime inspection of flattened prop trees."
+  }
+}
+

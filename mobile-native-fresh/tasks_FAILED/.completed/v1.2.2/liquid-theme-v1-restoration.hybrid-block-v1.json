@@ -1,0 +1,35 @@
+{
+  "branch": "fix/liquid-theme-v1-restore",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Restore LIQUID THEME v1 Visual Identity",
+      "actions": [
+        "Enforce text weight and casing, not font-size changes",
+        "Categorize visual elements: card, section, modal, header, tag",
+        "Apply opacity layering rules from token system",
+        "Remove overrides from typography and padding props where global tokens apply",
+        "Ensure all color usage routes through useTheme tokens"
+      ],
+      "commit": "style: restore liquid visual identity and readability",
+      "tag": "v1.2.2_liquid-theme-polish"
+    },
+    {
+      "section": "Visual Parity Verification",
+      "actions": [
+        "Run snapshot comparison with v1.2.1",
+        "Confirm spacing, opacity, and weight match",
+        "Fix any regressions in contrast or casing"
+      ],
+      "commit": "chore: liquid theme verification complete",
+      "tag": "v1.2.2_liquid-theme-verified"
+    }
+  ],
+  "final": {
+    "commit": "chore: v1.2.2 liquid theme restored",
+    "tag": "v1.2.2_liquid-theme-final",
+    "notes": "This task enforces weight, casing, opacity structure from original fluid design without altering component layout."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "branch": "chore/style-role-audit",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "JSX Style Role Audit",
+      "actions": [
+        "Run `scripts/audit-style-roles.ts`",
+        "Detect missing `role` prop in core UI components",
+        "Flag miscategorized text, views, and containers",
+        "Auto-suggest replacements using RoleClassifier"
+      ],
+      "commit": "chore: jsx style role audit complete",
+      "tag": "v1.2.2_style-role-audit"
+    }
+  ],
+  "final": {
+    "commit": "chore: style role scan locked",
+    "tag": "v1.2.2_style-role-audit-final",
+    "notes": "Ensures all View/Text usage conforms to role-based JSX system"
+  }
+}
