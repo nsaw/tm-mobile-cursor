@@ -1,0 +1,16 @@
+{
+  "screen": "Dashboard",
+  "components": [
+    "DualMountToggle",
+    "ThoughtmarkCardList",
+    "BottomNav",
+    "AIToolsCard"
+  ],
+  "interactive": [
+    "env-toggle",
+    "card-scroll",
+    "fab-button"
+  ],
+  "source": "app-shell mount point",
+  "timestamp": "2025-07-20T06:56:32.503Z"
+}

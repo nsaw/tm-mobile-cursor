@@ -1,0 +1,10 @@
+{
+  "id": "test-diagnostic-patch",
+  "role": "ui_patch",
+  "target_file": "mobile-native-fresh/src/components/ui/TestComponent.tsx",
+  "patch": {
+    "pattern": "Test",
+    "replacement": "\u2705 Diagnostic test passed"
+  },
+  "description": "Diagnostic test patch"
+}

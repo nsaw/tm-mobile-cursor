@@ -1,0 +1,26 @@
+{
+  "showInUI": true,
+  "id": "test-file-patch",
+  "role": "test",
+  "target_file": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/test-output.md",
+  "description": "Test file patch execution",
+  "patch": {
+    "pattern": ".*",
+    "replacement": "# Test File Patch Execution\n\nThis file was created by the patch executor to verify file patch execution is working.\n\n## Status\n- ✅ File patch detection working\n- ✅ File creation working\n- ✅ Pattern replacement working\n\nGenerated: 2025-07-18T23:52:00.000Z"
+  },
+  "metadata": {
+    "author": "test",
+    "source": "patch-executor-test",
+    "timestamp": "2025-07-18T23:52:00-07:00"
+  },
+  "postMutationBuild": {
+    "commands": [
+      "echo 'Test patch executed successfully'"
+    ]
+  },
+  "final": {
+    "tag": "test-file-patch-complete",
+    "commit": "Test file patch execution completed"
+  },
+  "blockCommitOnError": false
+} 

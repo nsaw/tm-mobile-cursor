@@ -1,0 +1,11 @@
+{
+  "before": {
+    "env": "legacy",
+    "toggleState": false
+  },
+  "after": {
+    "env": "nextgen",
+    "toggleState": true
+  },
+  "timestamp": "2025-07-20T06:56:32.500Z"
+}

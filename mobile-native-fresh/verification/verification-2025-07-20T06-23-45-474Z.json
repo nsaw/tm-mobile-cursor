@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-07-20T06:18:24.836Z",
+  "captures": {
+    "iphone16pro": {
+      "app-load": {
+        "success": false,
+        "error": "png screenshots do not support 'quality'."
+      },
+      "content-load": {
+        "success": false,
+        "error": "page.waitForTimeout is not a function"
+      },
+      "dashboard": {
+        "success": false,
+        "error": "page.waitForTimeout is not a function"
+      }
+    },
+    "iphone16promax": {
+      "app-load": {
+        "success": false,
+        "error": "png screenshots do not support 'quality'."
+      },
+      "content-load": {
+        "success": false,
+        "error": "page.waitForTimeout is not a function"
+      },
+      "dashboard": {
+        "success": false,
+        "error": "page.waitForTimeout is not a function"
+      }
+    }
+  },
+  "summary": {
+    "success": 0,
+    "failed": 6,
+    "total": 6
+  }
+}

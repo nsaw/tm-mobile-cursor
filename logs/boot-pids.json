@@ -1,1 +1,8 @@
-{"Backend": {"pid": 98670, "command": "npm run dev", "log_file": "/Users/sawyer/gitSync/tm-mobile-cursor/logs/backend.log", "started": "2025-07-19T03:32:45Z"}}
+{
+  "Backend": {
+    "pid": 88775,
+    "command": "npm run dev",
+    "log_file": "/Users/sawyer/gitSync/tm-mobile-cursor/logs/backend.log",
+    "started": "2025-07-19T04:33:42.402Z"
+  }
+}

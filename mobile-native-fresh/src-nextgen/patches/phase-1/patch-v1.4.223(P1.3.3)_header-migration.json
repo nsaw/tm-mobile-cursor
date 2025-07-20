@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-header-migration.js",
+    "node scripts/validate-header-role.js",
+    "node scripts/test-header-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/header-migration",
+  "notes": [
+    "PATCH NAME: patch-v1.4.223(P1.3.3)_header-migration.json",
+    "SUMMARY NAME: summary-v1.4.223(P1.3.3)_header-migration.md",
+    "GOAL: Migrate Header component → layoutRole=\"header-navigation\" with hardened validation",
+    "MISSION: Migrate Header component to nextgen with proper role assignment and comprehensive testing",
+    "CONTEXT: This is the fourth pilot component migration in Phase 1. Header.tsx will be migrated to src-nextgen/ with layoutRole=\"header-navigation\" assignment, serving as a template for layout component migrations.",
+    "SAFETY ENFORCEMENT: Test header component functionality and role assignment, verify visual consistency, validate behavior, ensure proper testing",
+    "STABLE STATE CHECK: Confirm header component functionality working, role assignment correct, visual consistency maintained",
+    "🚨 CRITICAL: Must validate header role assignment and header behavior before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 3,
+      "task": "Migrate Header component → layoutRole=\"header-navigation\" with hardened validation",
+      "version": "v1.4.223(P1.3.3)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Copy Header.tsx to src-nextgen/components/",
+        "Add layoutRole=\"header-navigation\" assignment with validation",
+        "Update imports and dependencies",
+        "Install required testing dependencies",
+        "Test header component functionality with comprehensive tests",
+        "Validate header role assignment behavior",
+        "Create header validation scripts"
+      ],
+      "validation": [
+        "Test header component functionality and role assignment",
+        "Verify visual consistency with legacy",
+        "Confirm role assignment working",
+        "Validate header component behavior",
+        "Test header role assignment validation",
+        "Verify header validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert Header.tsx migration",
+        "Legacy Header.tsx preserved in src-reference/",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "migrate-v1.4.223(P1.3.3)_header-migration",
+      "summaryFile": "summary-v1.4.223(P1.3.3)_header-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test header component functionality",
+    "Verify role assignment",
+    "Validate visual consistency",
+    "Test header component behavior",
+    "Test header role assignment validation",
+    "Verify header validation scripts"
+  ],
+  "successCriteria": [
+    "Header component migrated successfully with TypeScript",
+    "Role assignment working correctly with validation",
+    "Visual consistency maintained with tests",
+    "Header component behavior validated",
+    "Header role assignment validation operational",
+    "Header validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

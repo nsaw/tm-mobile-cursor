@@ -1,0 +1,39 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "patch-1.4.1e-1-5e_blueprint-scan.json",
+    "summary-patch-1.4.1e-1-5e_blueprint-scan.md",
+    "GOAL: Initiate a scan reference block inside the src-nextgen roadmap to track Blueprint-based migrations.",
+    "MISSION: Add a new section to the refactor task index that highlights upcoming Blueprint file migrations.",
+    "CONTEXT: The current ROADMAP_FOR_DUMMIES.md and tasks/README.md do not include Blueprint-targeted scaffolding.",
+    "SAFETY ENFORCEMENT: This patch modifies only the scoped /src-nextgen/tasks/README.md file. No application logic or styles are touched.",
+    "STABLE STATE CHECKS: Post-patch, the README should include a valid Markdown scaffold header with a placeholder list. No crashes, no file deletions."
+  ],
+  "preCommit": {
+    "backup": "/Users/sawyer/gitSync/_backups/tm-safety_backups/20250719-UTC_v1.4.1e-1-5e_blueprint-scan_backup_tm-mobile-cursor.tar.gz"
+  },
+  "mutations": [
+    {
+      "role": "content_patch",
+      "id": "patch-1.4.1e-1-5e_blueprint-scan",
+      "description": "Insert Blueprint migration scan marker",
+      "target_file": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-nextgen/tasks/README.md",
+      "patch": {
+        "pattern": ".*",
+        "replacement": "## Blueprint Scan\n\n- Matched blueprint files\n- Annotated for future lift\n"
+      }
+    }
+  ],
+  "postMutationBuild": {
+    "run": [
+      "yarn lint",
+      "yarn typecheck"
+    ],
+    "onFailure": "rollback"
+  },
+  "final": {
+    "tag": "v1.4.1e-1-5e_blueprint-scan_applied",
+    "commit": "Patch 1.4.1e-1-5e: Blueprint scan scaffold added to README"
+  }
+}

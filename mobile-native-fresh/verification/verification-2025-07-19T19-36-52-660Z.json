@@ -1,0 +1,319 @@
+{
+  "id": "verification-2025-07-19T19-36-52-660Z",
+  "timestamp": "2025-07-19T19:36:52.660Z",
+  "type": "ghost-runner-verification",
+  "task": {
+    "test": true,
+    "content": "UI test content",
+    "contentType": "test"
+  },
+  "status": "rejected",
+  "verificationSteps": [
+    {
+      "name": "screen-capture",
+      "status": "failed",
+      "required": true,
+      "description": "Capture app load, content load, and dashboard screens",
+      "result": {
+        "timestamp": "2025-07-19T19:36:52.660Z",
+        "captures": {
+          "app-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "content-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "dashboard": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          }
+        },
+        "summary": {
+          "success": 0,
+          "failed": 3,
+          "total": 3
+        }
+      }
+    },
+    {
+      "name": "human-review",
+      "status": "rejected",
+      "required": true,
+      "description": "Human review of captured screenshots",
+      "requestId": "human-review-2025-07-19T19-37-14-568Z",
+      "result": {
+        "id": "human-review-2025-07-19T19-37-14-568Z",
+        "timestamp": "2025-07-19T19:37:14.568Z",
+        "type": "human-review",
+        "taskId": "verification-2025-07-19T19-36-52-660Z",
+        "captures": {
+          "app-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "content-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "dashboard": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          }
+        },
+        "instructions": [
+          "Review the captured screenshots for visual integrity and functionality",
+          "Check for proper app loading, content display, and dashboard functionality",
+          "Verify no blank screens, broken layouts, or visual regressions",
+          "Confirm all UI elements are visible and properly positioned",
+          "Test navigation and interactive elements if possible",
+          "Note any issues or concerns in the review comments"
+        ],
+        "criteria": {
+          "appLoad": "App should load without errors and display initial screen",
+          "contentLoad": "Content should load properly with no missing elements",
+          "dashboard": "Dashboard should display all components correctly",
+          "navigation": "Navigation elements should be functional",
+          "visualConsistency": "UI should be consistent with design system"
+        },
+        "status": "pending",
+        "requiresApproval": true,
+        "approvalDeadline": "2025-07-19T19:38:14.568Z"
+      }
+    },
+    {
+      "name": "gpt-analysis",
+      "status": "rejected",
+      "required": true,
+      "description": "GPT analysis of UI integrity and functionality",
+      "requestId": "gpt-analysis-2025-07-19T19-37-14-569Z",
+      "result": {
+        "id": "gpt-analysis-2025-07-19T19-37-14-569Z",
+        "timestamp": "2025-07-19T19:37:14.569Z",
+        "type": "gpt-analysis",
+        "taskId": "verification-2025-07-19T19-36-52-660Z",
+        "captures": {
+          "app-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "content-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "dashboard": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          }
+        },
+        "analysisInstructions": [
+          "Analyze the captured screenshots for visual consistency and UI integrity",
+          "Check for proper component rendering and layout structure",
+          "Verify navigation elements and interactive components",
+          "Identify any visual regressions or broken UI elements",
+          "Assess accessibility compliance and user experience",
+          "Provide confidence score and detailed analysis report"
+        ],
+        "analysisCriteria": {
+          "visualConsistency": "UI elements should follow consistent design patterns",
+          "componentRendering": "All components should render correctly",
+          "layoutStructure": "Layout should be properly structured and responsive",
+          "navigationElements": "Navigation should be functional and accessible",
+          "accessibilityCompliance": "UI should meet accessibility standards",
+          "userExperience": "Overall user experience should be smooth and intuitive"
+        },
+        "status": "pending",
+        "requiresAnalysis": true,
+        "analysisDeadline": "2025-07-19T19:38:14.569Z"
+      }
+    }
+  ],
+  "results": {
+    "screenCapture": {
+      "timestamp": "2025-07-19T19:36:52.660Z",
+      "captures": {
+        "app-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "content-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "dashboard": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        }
+      },
+      "summary": {
+        "success": 0,
+        "failed": 3,
+        "total": 3
+      }
+    },
+    "humanReviewRequest": {
+      "id": "human-review-2025-07-19T19-37-14-568Z",
+      "timestamp": "2025-07-19T19:37:14.568Z",
+      "type": "human-review",
+      "taskId": "verification-2025-07-19T19-36-52-660Z",
+      "captures": {
+        "app-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "content-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "dashboard": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        }
+      },
+      "instructions": [
+        "Review the captured screenshots for visual integrity and functionality",
+        "Check for proper app loading, content display, and dashboard functionality",
+        "Verify no blank screens, broken layouts, or visual regressions",
+        "Confirm all UI elements are visible and properly positioned",
+        "Test navigation and interactive elements if possible",
+        "Note any issues or concerns in the review comments"
+      ],
+      "criteria": {
+        "appLoad": "App should load without errors and display initial screen",
+        "contentLoad": "Content should load properly with no missing elements",
+        "dashboard": "Dashboard should display all components correctly",
+        "navigation": "Navigation elements should be functional",
+        "visualConsistency": "UI should be consistent with design system"
+      },
+      "status": "pending",
+      "requiresApproval": true,
+      "approvalDeadline": "2025-07-19T19:38:14.568Z"
+    },
+    "gptAnalysisRequest": {
+      "id": "gpt-analysis-2025-07-19T19-37-14-569Z",
+      "timestamp": "2025-07-19T19:37:14.569Z",
+      "type": "gpt-analysis",
+      "taskId": "verification-2025-07-19T19-36-52-660Z",
+      "captures": {
+        "app-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "content-load": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        },
+        "dashboard": {
+          "success": false,
+          "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+        }
+      },
+      "analysisInstructions": [
+        "Analyze the captured screenshots for visual consistency and UI integrity",
+        "Check for proper component rendering and layout structure",
+        "Verify navigation elements and interactive components",
+        "Identify any visual regressions or broken UI elements",
+        "Assess accessibility compliance and user experience",
+        "Provide confidence score and detailed analysis report"
+      ],
+      "analysisCriteria": {
+        "visualConsistency": "UI elements should follow consistent design patterns",
+        "componentRendering": "All components should render correctly",
+        "layoutStructure": "Layout should be properly structured and responsive",
+        "navigationElements": "Navigation should be functional and accessible",
+        "accessibilityCompliance": "UI should meet accessibility standards",
+        "userExperience": "Overall user experience should be smooth and intuitive"
+      },
+      "status": "pending",
+      "requiresAnalysis": true,
+      "analysisDeadline": "2025-07-19T19:38:14.569Z"
+    },
+    "verificationResponse": {
+      "approved": false,
+      "humanReview": {
+        "id": "human-review-2025-07-19T19-37-14-568Z",
+        "timestamp": "2025-07-19T19:37:14.568Z",
+        "type": "human-review",
+        "taskId": "verification-2025-07-19T19-36-52-660Z",
+        "captures": {
+          "app-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "content-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "dashboard": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          }
+        },
+        "instructions": [
+          "Review the captured screenshots for visual integrity and functionality",
+          "Check for proper app loading, content display, and dashboard functionality",
+          "Verify no blank screens, broken layouts, or visual regressions",
+          "Confirm all UI elements are visible and properly positioned",
+          "Test navigation and interactive elements if possible",
+          "Note any issues or concerns in the review comments"
+        ],
+        "criteria": {
+          "appLoad": "App should load without errors and display initial screen",
+          "contentLoad": "Content should load properly with no missing elements",
+          "dashboard": "Dashboard should display all components correctly",
+          "navigation": "Navigation elements should be functional",
+          "visualConsistency": "UI should be consistent with design system"
+        },
+        "status": "pending",
+        "requiresApproval": true,
+        "approvalDeadline": "2025-07-19T19:38:14.568Z"
+      },
+      "gptAnalysis": {
+        "id": "gpt-analysis-2025-07-19T19-37-14-569Z",
+        "timestamp": "2025-07-19T19:37:14.569Z",
+        "type": "gpt-analysis",
+        "taskId": "verification-2025-07-19T19-36-52-660Z",
+        "captures": {
+          "app-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "content-load": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          },
+          "dashboard": {
+            "success": false,
+            "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+          }
+        },
+        "analysisInstructions": [
+          "Analyze the captured screenshots for visual consistency and UI integrity",
+          "Check for proper component rendering and layout structure",
+          "Verify navigation elements and interactive components",
+          "Identify any visual regressions or broken UI elements",
+          "Assess accessibility compliance and user experience",
+          "Provide confidence score and detailed analysis report"
+        ],
+        "analysisCriteria": {
+          "visualConsistency": "UI elements should follow consistent design patterns",
+          "componentRendering": "All components should render correctly",
+          "layoutStructure": "Layout should be properly structured and responsive",
+          "navigationElements": "Navigation should be functional and accessible",
+          "accessibilityCompliance": "UI should meet accessibility standards",
+          "userExperience": "Overall user experience should be smooth and intuitive"
+        },
+        "status": "pending",
+        "requiresAnalysis": true,
+        "analysisDeadline": "2025-07-19T19:38:14.569Z"
+      }
+    }
+  },
+  "metadata": {
+    "createdBy": "ghost-runner",
+    "priority": "high",
+    "requiresApproval": true
+  },
+  "completedAt": "2025-07-19T19:37:14.569Z"
+}

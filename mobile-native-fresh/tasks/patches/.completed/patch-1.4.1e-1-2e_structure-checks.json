@@ -1,0 +1,15 @@
+{
+  "id": "patch-1.4.1e-1-2e_structure-checks",
+  "role": "ui_patch",
+  "target_file": "mobile-native-fresh/src/components/ui/TestComponent.tsx",
+  "patch": {
+    "pattern": "Test",
+    "replacement": "✅ Patch 1.4.1e-1-2e structure-checks applied"
+  },
+  "description": "structure-checks patch for tm-mobile-cursor",
+  "metadata": {
+    "author": "gpt",
+    "source": "ghost_runner",
+    "timestamp": "2025-07-18T22:12:00.000Z"
+  }
+}

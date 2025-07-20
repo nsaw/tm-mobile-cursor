@@ -1,0 +1,61 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.9999(P2.4.4)_role-heatmap-devtool.json",
+    "SUMMARY NAME: summary-v1.4.9999(P2.4.4)_role-heatmap-devtool.md",
+    "GOAL: Add role heatmap devtool for visual QA",
+    "MISSION: Create a development overlay that color-codes elements based on their assigned role type for visual quality assurance",
+    "CONTEXT: During AutoRoleView migration, developers need a visual way to quickly identify role assignments across the UI. This heatmap tool provides immediate visual feedback on role distribution and coverage.",
+    "SAFETY ENFORCEMENT: Heatmap must be dev-only, toggleable, and not interfere with UI testing or accessibility",
+    "STABLE STATE CHECK: Confirm heatmap visible, accurate, and helpful for role validation"
+  ],
+  "phases": [
+    {
+      "phase": 2,
+      "step": 4,
+      "attempt": 4,
+      "task": "Add role heatmap devtool for visual QA",
+      "version": "v1.4.9999(P2.4.4)",
+      "priority": "medium",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Create RoleHeatmapDevtool component",
+        "Implement color-coding for different role types",
+        "Add toggle functionality for heatmap overlay",
+        "Integrate with existing debug system",
+        "Test accuracy of role visualization",
+        "Validate usefulness for QA process"
+      ],
+      "validation": [
+        "Role heatmap visible in dev mode",
+        "Color-coding accurately reflects role types",
+        "Toggle functionality works correctly",
+        "No interference with UI testing",
+        "Helpful for role validation and QA"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can remove RoleHeatmapDevtool component",
+        "No impact on production functionality"
+      ],
+      "gitTag": "devtool-v1.4.9999(P2.4.4)_role-heatmap-devtool",
+      "summaryFile": "summary-v1.4.9999(P2.4.4)_role-heatmap-devtool.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Role heatmap visible and functional",
+    "Color-coding accurately reflects role types",
+    "Toggle functionality works correctly",
+    "No interference with UI testing"
+  ],
+  "successCriteria": [
+    "Role heatmap visible in development",
+    "Color-coding accurately reflects role types",
+    "Toggle functionality working",
+    "No interference with UI testing",
+    "Helpful for role validation and QA",
+    "Dev-only and not shipped to production"
+  ]
+} 

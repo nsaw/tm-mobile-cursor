@@ -5,7 +5,7 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 
 import { errorHandler } from './middleware/errorHandler';
-import { logger } from './utils/logger';
+import logger from './utils/logger';
 import thoughtmarkRoutes from './routes/thoughtmarks';
 import binRoutes from './routes/bins';
 import authRoutes from './routes/auth';

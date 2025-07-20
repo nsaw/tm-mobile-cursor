@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-07-19T19:36:52.660Z",
+  "captures": {
+    "app-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "content-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "dashboard": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    }
+  },
+  "summary": {
+    "success": 0,
+    "failed": 3,
+    "total": 3
+  }
+}

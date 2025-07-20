@@ -1,0 +1,12 @@
+{
+  "entries": [
+    {
+      "timestamp": "2025-07-18T23:51:10.358089",
+      "filename": "patch-1.4.1e-1-3_src-nextgen-init.json",
+      "original_path": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/patch-1.4.1e-1-3_src-nextgen-init.json",
+      "target_path": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/.fail/patch-1.4.1e-1-3_src-nextgen-init.json",
+      "reason": "Validation failed: Dangerous pattern detected: .*",
+      "status": "moved"
+    }
+  ]
+}

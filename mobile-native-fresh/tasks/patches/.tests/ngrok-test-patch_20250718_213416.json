@@ -1,0 +1,10 @@
+{
+  "id": "ngrok-test-patch",
+  "role": "ui_patch",
+  "target_file": "mobile-native-fresh/src/components/ui/NgrokTestComponent.tsx",
+  "patch": {
+    "pattern": "Ngrok",
+    "replacement": "\u2705 Ngrok tunnel working"
+  },
+  "description": "Test patch via ngrok tunnel"
+}

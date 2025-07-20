@@ -1,0 +1,39 @@
+{
+  "id": "gpt-analysis-2025-07-19T19-37-14-569Z",
+  "timestamp": "2025-07-19T19:37:14.569Z",
+  "type": "gpt-analysis",
+  "taskId": "verification-2025-07-19T19-36-52-660Z",
+  "captures": {
+    "app-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "content-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "dashboard": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    }
+  },
+  "analysisInstructions": [
+    "Analyze the captured screenshots for visual consistency and UI integrity",
+    "Check for proper component rendering and layout structure",
+    "Verify navigation elements and interactive components",
+    "Identify any visual regressions or broken UI elements",
+    "Assess accessibility compliance and user experience",
+    "Provide confidence score and detailed analysis report"
+  ],
+  "analysisCriteria": {
+    "visualConsistency": "UI elements should follow consistent design patterns",
+    "componentRendering": "All components should render correctly",
+    "layoutStructure": "Layout should be properly structured and responsive",
+    "navigationElements": "Navigation should be functional and accessible",
+    "accessibilityCompliance": "UI should meet accessibility standards",
+    "userExperience": "Overall user experience should be smooth and intuitive"
+  },
+  "status": "pending",
+  "requiresAnalysis": true,
+  "analysisDeadline": "2025-07-19T19:38:14.569Z"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "human-review-2025-07-19T19-37-14-568Z",
+  "timestamp": "2025-07-19T19:37:14.568Z",
+  "type": "human-review",
+  "taskId": "verification-2025-07-19T19-36-52-660Z",
+  "captures": {
+    "app-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "content-load": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    },
+    "dashboard": {
+      "success": false,
+      "error": "net::ERR_CONNECTION_REFUSED at http://localhost:4000"
+    }
+  },
+  "instructions": [
+    "Review the captured screenshots for visual integrity and functionality",
+    "Check for proper app loading, content display, and dashboard functionality",
+    "Verify no blank screens, broken layouts, or visual regressions",
+    "Confirm all UI elements are visible and properly positioned",
+    "Test navigation and interactive elements if possible",
+    "Note any issues or concerns in the review comments"
+  ],
+  "criteria": {
+    "appLoad": "App should load without errors and display initial screen",
+    "contentLoad": "Content should load properly with no missing elements",
+    "dashboard": "Dashboard should display all components correctly",
+    "navigation": "Navigation elements should be functional",
+    "visualConsistency": "UI should be consistent with design system"
+  },
+  "status": "pending",
+  "requiresApproval": true,
+  "approvalDeadline": "2025-07-19T19:38:14.568Z"
+}

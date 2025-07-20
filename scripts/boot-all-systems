@@ -1,0 +1,6 @@
+#!/bin/bash
+# Simple command to boot all systems
+# Usage: ./boot-all-systems [start|stop|status|restart]
+
+cd "$(dirname "$0")"
+bash boot-all-systems.sh "$@" 

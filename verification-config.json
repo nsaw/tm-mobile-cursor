@@ -1,0 +1,39 @@
+{
+  "screenCapture": {
+    "viewports": {
+      "iphone16pro": {
+        "width": 402,
+        "height": 874,
+        "name": "iPhone 16 Pro"
+      },
+      "iphone16promax": {
+        "width": 440,
+        "height": 956,
+        "name": "iPhone 16 Pro Max"
+      }
+    },
+    "defaultViewport": "iphone16pro",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    "screenshotQuality": 80,
+    "retryAttempts": 3,
+    "timeout": 30000
+  },
+  "verification": {
+    "timeout": 60000,
+    "autoApproveThreshold": 0.8,
+    "maxRetries": 3,
+    "verificationTypes": ["ui", "functionality", "performance", "accessibility"]
+  },
+  "paths": {
+    "captures": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures",
+    "verification": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/verification",
+    "logs": "/Users/sawyer/gitSync/tm-mobile-cursor/logs",
+    "summaries": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries"
+  },
+  "uiKeywords": [
+    "UI", "interface", "screen", "component", "layout", "visual", "design",
+    "React Native", "Expo", "mobile", "app", "dashboard", "navigation",
+    "button", "modal", "form", "input", "style", "theme", "render",
+    "Screen", "View", "Text", "TouchableOpacity", "ScrollView"
+  ]
+}

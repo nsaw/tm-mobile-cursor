@@ -1,0 +1,33 @@
+{
+  "showInUI": true,
+  "id": "patch-1.4.1e-1-3_src-nextgen-readme-inject",
+  "role": "init_doc",
+  "target_file": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-nextgen/README.md",
+  "description": "Injects authoritative roadmap and guardrail doc into src-nextgen/ as README.md",
+  "patch": {
+    "pattern": ".*",
+    "replacement": "# 🚀 `src-nextgen/` Rebuild Tracker\n\nThis folder tracks the UI rebuild from scratch, with complete role, theme, and patch daemon enforcement.\n\n---\n\n## 📋 Purpose\n- Tracks every major step in the refactor\n- Updated automatically on every patch or change\n- Translates technical operations into plain English\n\n---\n\n## 🧩 Scaffold Initial Folders\n\nCreate fresh structure for next-gen app views:\n- `views/`\n- `components/`\n- `layouts/`\n- `hooks/`\n- `theme/`\n- `tokens/`\n- `helpers/`\n\nEach will contain a `.nextgenpatch` marker.\n\n---\n\n## 🔁 Patch System Integration\n- Patch runner (`patch_runner_main.py`) treats `src-nextgen/` as a **primary target zone**\n- Patch summaries write to:\n  - `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/`\n  - `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/`\n- Daemon auto-sorts `.stop`, `.tests/`, `.ready` folders\n\n---\n\n## 📂 Legacy Backup\n- Legacy `src/` moved to `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-reference/`\n- Used for:\n  - Visual diffing\n  - Sacred component cherry-picks\n  - Lint baseline preservation\n\n---\n\n## 🛫 AUTOPILOT FLIGHT PLAN — PHASES\n\n| Phase | Description |\n|-------|-------------|\n| 1     | 📦 Scaffold `src-nextgen/`, create starter pages and docs |\n| 2     | 🔐 Inject sacred page clones from `src-reference/` |\n| 3     | 🎨 Rebuild `theme/`, `tokens/`, components, and wrappers |\n| 4     | 🔁 Rewire `App.tsx` and entrypoint to new routes |\n| 5     | 🧪 Inject test views for click/nav/overlay regressions |\n| 6     | 🔍 Run screenshot baseline visual regression |\n| 7     | 📘 Final review, docs, and freeze commit/tag |\n\n---\n\n## 🔁 FAIL-SAFE PROTECTIONS\n\n- ✅ `.nextgenpatch` markers prevent rogue patches\n- ✅ `.json.stop` halts autopilot instantly\n- ✅ `.md` required for any verified commit/tag\n- ✅ `.cursor-config.json` watches recursively, ignores clock skew\n- ✅ `.gitignore` protected freeze lockfiles enforced\n- 🛑 Original `src/` is **read-only**. Will never be overwritten.\n\n---\n\n## 📘 Companion Docs\n- `ROADMAP_FOR_DUMMIES.md`: Auto-updating human-readable changelog\n- `INDEX.md`: Tracks patch phase status, links to summaries\n- Patch IDs follow format: `patch-1.4.1e-*-*_desc.json`\n\n---\n\n**Maintained by GPT autopilot. Do not modify manually unless instructed.**"
+  },
+  "metadata": {
+    "author": "gpt",
+    "source": "src-nextgen bootstrap",
+    "timestamp": "2025-07-18T24:50:00-07:00"
+  },
+  "lifecycle": {
+    "writesTo": [
+      "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-nextgen/README.md"
+    ],
+    "summary": "Injects `README.md` into `src-nextgen/` containing full roadmap, patch system hooks, and fail-safe instructions"
+  },
+  "postMutationBuild": {
+    "commands": [
+      "yarn lint",
+      "yarn typecheck"
+    ]
+  },
+  "final": {
+    "tag": "v1.4.1e-1-3_nextgen-readme-injected",
+    "commit": "Injected authoritative rebuild README for src-nextgen/"
+  },
+  "blockCommitOnError": true
+} 

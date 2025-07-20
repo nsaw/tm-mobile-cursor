@@ -10,6 +10,7 @@ import { ContentScreen } from '../features/content/screens/ContentScreen';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { Text } from '../components/ui/Text';
 import { AutoRoleView } from '../components/AutoRoleView';
+import { DualMountToggle } from '../components/layout/DualMountToggle';
 
 // Auth Screens
 import { SignInScreen } from '../features/auth/screens/SignIn';
@@ -159,12 +160,14 @@ const MainStack = () => (
       <Stack.Screen name="HowTo" component={HowToScreen} />
       <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
     </Stack.Navigator>
+    <DualMountToggle position="top-center" showLabel={true} opacity={0.3} />
   </VoiceRecorderProvider>
 );
 
 // Auth Stack Navigator (for unauthenticated users)
 const AuthStack = () => (
   <Stack.Navigator 
+    id="AuthStack"
     screenOptions={{ 
       headerShown: false,
       cardStyle: { backgroundColor: '#181818' }
@@ -183,7 +186,7 @@ export const AppNavigator = () => {
   if (loading) {
     return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator id="LoadingStack" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Loading" component={LoadingScreenWrapper} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,0 +1,15 @@
+{
+  "id": "patch-1.4.1e-1-4e_theme-role-token-audit",
+  "role": "ui_patch",
+  "target_file": "mobile-native-fresh/src/components/ui/TestComponent.tsx",
+  "patch": {
+    "pattern": "Test",
+    "replacement": "✅ Patch 1.4.1e-1-4e theme-role-token-audit applied"
+  },
+  "description": "theme-role-token-audit patch for tm-mobile-cursor",
+  "metadata": {
+    "author": "gpt",
+    "source": "ghost_runner",
+    "timestamp": "2025-07-18T22:12:00.000Z"
+  }
+}

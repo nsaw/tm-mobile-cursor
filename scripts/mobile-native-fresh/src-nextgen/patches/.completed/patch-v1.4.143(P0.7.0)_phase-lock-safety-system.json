@@ -1,0 +1,30 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Create phase-lock.json to prevent future patch skips",
+    "SUMMARY NAME: summary-v1.4.340(P2.5.0)_phase-lock-safety.md",
+    "STABLE STATE CHECK: Target file exists, commit pushed, summary tagged"
+  ],
+  "phases": [
+    {
+      "task": "Create phase-lock.json to prevent future patch skips",
+      "executionSteps": [
+        "Create or configure src-nextgen/config/phase-lock.json",
+        "Log results to summaries/phase-2/summary-v1.4.340(P2.5.0)_phase-lock-safety.md",
+        "Create tag: v1.4.340(P2.5.0)_phase-lock-system"
+      ],
+      "validation": [
+        "src-nextgen/config/phase-lock.json exists",
+        "summary-v1.4.340(P2.5.0)_phase-lock-safety.md written",
+        "v1.4.340(P2.5.0)_phase-lock-system in Git log"
+      ]
+    }
+  ],
+  "postMutationBuild": "tsc --noEmit && eslint . --ext .ts,.tsx && npm test -- --watchAll=false",
+  "final": {
+    "commit": "chore: create phase-lock.json to prevent future patch skips",
+    "tag": "v1.4.340(P2.5.0)_phase-lock-system",
+    "notes": "Create phase-lock.json to prevent future patch skips patch created and validated"
+  }
+} 

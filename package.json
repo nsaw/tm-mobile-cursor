@@ -1,0 +1,23 @@
+{
+  "name": "tm-mobile-cursor",
+  "version": "1.0.0",
+  "description": "TM Mobile Cursor Project",
+  "scripts": {
+    "dev:clean": "bash scripts/clean-dev-state.sh all",
+    "dev:clean:expo": "bash scripts/clean-dev-state.sh expo",
+    "dev:clean:ports": "bash scripts/clean-dev-state.sh ports",
+    "dev:emergency": "bash scripts/emergency-logout.sh",
+    "dev:watchdog": "bash scripts/thread-watchdog.sh monitor",
+    "dev:watchdog:check": "bash scripts/thread-watchdog.sh check",
+    "dev:watchdog:cleanup": "bash scripts/thread-watchdog.sh cleanup",
+    "verification:capture": "node scripts/screen-capture-verifier.js",
+    "verification:manage": "node scripts/verification-manager.js",
+    "verification:test": "node scripts/screen-capture-verifier.js capture-all"
+  },
+  "devDependencies": {
+    "chokidar": "^4.0.3",
+    "glob": "^11.0.3",
+    "modern-screenshot": "^4.6.5",
+    "puppeteer": "^24.14.0"
+  }
+}

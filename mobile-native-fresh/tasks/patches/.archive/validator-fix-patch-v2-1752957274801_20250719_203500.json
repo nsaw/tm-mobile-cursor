@@ -1,0 +1,17 @@
+{
+  "id": "validator-fix-patch-v2-1752957274801",
+  "role": "system_patch",
+  "description": "Fix ghost-runner webhook validation schema to handle executePhase commands without requiring target_file - improved pattern matching",
+  "target_file": "gpt_cursor_runner/validation/patch_schema.py",
+  "patch": {
+    "pattern": "required_fields = \\[\"id\", \"role\", \"action\"\\]",
+    "replacement": "required_fields = [\"id\", \"role\", \"action\"]\n\n    # Handle different action types\n    if block_data[\"action\"] in [\"patch\", \"edit\", \"replace\"]:\n        required_fields += [\"target_file\"]\n    elif block_data[\"action\"] in [\"executePhase\", \"executeAll\", \"executeFileBatch\"]:\n        # Skip 'target_file' requirement for these control actions\n        pass\n    else:\n        required_fields += [\"target_file\"]  # Fallback for unexpected actions"
+  },
+  "metadata": {
+    "author": "gpt-fix-v2",
+    "source": "webhook_validation_fix_v2",
+    "timestamp": "2025-07-19T20:35:00.000000",
+    "priority": "critical",
+    "type": "schema_fix"
+  }
+} 

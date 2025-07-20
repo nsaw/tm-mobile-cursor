@@ -1,0 +1,43 @@
+// patch-1.4.1e-1-1e_src-crawl-snapshot.json
+// summary-src-crawl-snapshot.md
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Document the current state of the `src/` directory before refactor.",
+    "MISSION: Capture the legacy structure and drop into `src-nextgen/tasks/README.md` as a reference snapshot.",
+    "CONTEXT: This begins Phase 1 of the src-nextgen rebuild under v1.4.1e, using full structure audit from previous rollback.",
+    "SAFETY ENFORCEMENT: This is a read-only snapshot, no destructive changes. All edits isolated to tasks README.",
+    "STABLE STATE CHECK: Confirm file is written to `mobile-native-fresh/src-nextgen/tasks/README.md`, contents match patch."
+  ],
+  "preCommit": {
+    "backup": true,
+    "backupLocation": "/Users/sawyer/gitSync/_backups/tm-safety_backups/",
+    "backupName": "240719-UTC_v1.4.1e-1-1e_src-crawl-snapshot_TM.tar.gz"
+  },
+  "mutations": [
+    {
+      "file": "mobile-native-fresh/src-nextgen/tasks/README.md",
+      "transform": {
+        "type": "regex",
+        "regex": ".*",
+        "replacement": "## Snapshot: src/ Structure\n\n- Documented initial src layout\n- Catalogued legacy files\n"
+      }
+    }
+  ],
+  "postMutationBuild": {
+    "commands": [
+      "echo '✅ Post-mutation check complete. No build step required for README-only patch.'"
+    ],
+    "parseCheck": false,
+    "onParseFail": "alert-only"
+  },
+  "final": {
+    "git": {
+      "commit": true,
+      "commitMessage": "📸 INIT: Phase 1 snapshot of src/ legacy structure → v1.4.1e-1-1e",
+      "tag": "v1.4.1e-1-1e_src-crawl-snapshot_ready",
+      "push": true
+    }
+  }
+}

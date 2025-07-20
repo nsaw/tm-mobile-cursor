@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-07-20T06:22:46.233Z",
+  "captures": {
+    "iphone16pro": {
+      "app-load": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/app-load-iphone-16-pro-2025-07-20T06-23-02-860Z.png",
+        "filename": "app-load-iphone-16-pro-2025-07-20T06-23-02-860Z.png",
+        "viewport": "iPhone 16 Pro"
+      },
+      "content-load": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/content-load-iphone-16-pro-2025-07-20T06-23-21-789Z.png",
+        "filename": "content-load-iphone-16-pro-2025-07-20T06-23-21-789Z.png",
+        "viewport": "iPhone 16 Pro"
+      },
+      "dashboard": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/dashboard-iphone-16-pro-2025-07-20T06-23-41-248Z.png",
+        "filename": "dashboard-iphone-16-pro-2025-07-20T06-23-41-248Z.png",
+        "viewport": "iPhone 16 Pro"
+      }
+    },
+    "iphone16promax": {
+      "app-load": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/app-load-iphone-16-pro-max-2025-07-20T06-23-57-733Z.png",
+        "filename": "app-load-iphone-16-pro-max-2025-07-20T06-23-57-733Z.png",
+        "viewport": "iPhone 16 Pro Max"
+      },
+      "content-load": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/content-load-iphone-16-pro-max-2025-07-20T06-24-16-201Z.png",
+        "filename": "content-load-iphone-16-pro-max-2025-07-20T06-24-16-201Z.png",
+        "viewport": "iPhone 16 Pro Max"
+      },
+      "dashboard": {
+        "success": true,
+        "filepath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures/dashboard-iphone-16-pro-max-2025-07-20T06-24-35-644Z.png",
+        "filename": "dashboard-iphone-16-pro-max-2025-07-20T06-24-35-644Z.png",
+        "viewport": "iPhone 16 Pro Max"
+      }
+    }
+  },
+  "summary": {
+    "success": 6,
+    "failed": 0,
+    "total": 6
+  }
+}

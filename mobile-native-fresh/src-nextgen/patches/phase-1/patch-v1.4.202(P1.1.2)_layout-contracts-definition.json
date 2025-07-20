@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-layout-contracts.js",
+    "node scripts/validate-z-index-protection.js",
+    "node scripts/test-safe-frame-shells.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/layout-contracts-definition",
+  "notes": [
+    "PATCH NAME: patch-v1.4.202(P1.1.2)_layout-contracts-definition.json",
+    "SUMMARY NAME: summary-v1.4.202(P1.1.2)_layout-contracts-definition.md",
+    "GOAL: Define layout contracts and z-index protection with hardened validation",
+    "MISSION: Establish layout contract system for sacred layouts and z-index protection with comprehensive testing",
+    "CONTEXT: Layout contracts are essential for the hybrid shell strategy. We need to define z-index contracts, safe-frame shells, and layout protection mechanisms for sacred layouts.",
+    "SAFETY ENFORCEMENT: Test layout contract validation, verify z-index protection, validate safe-frame shells, ensure proper testing",
+    "STABLE STATE CHECK: Confirm layout contracts defined, z-index protection working, safe-frame shells functional",
+    "🚨 CRITICAL: Must validate z-index protection and safe-frame shells before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 1,
+      "attempt": 2,
+      "task": "Define layout contracts and z-index protection with hardened validation",
+      "version": "v1.4.202(P1.1.2)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Define layout contract interfaces with TypeScript",
+        "Set up z-index protection system with validation",
+        "Configure safe-frame shell contracts",
+        "Set up layout validation system",
+        "Install required testing dependencies",
+        "Test layout contract functionality with comprehensive tests",
+        "Validate z-index protection behavior",
+        "Create layout protection validation scripts"
+      ],
+      "validation": [
+        "Test layout contract validation",
+        "Verify z-index protection working",
+        "Confirm safe-frame shells functional",
+        "Validate layout protection mechanisms",
+        "Test z-index protection validation",
+        "Verify layout protection scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert layout contract setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "layout-v1.4.202(P1.1.2)_layout-contracts-definition",
+      "summaryFile": "summary-v1.4.202(P1.1.2)_layout-contracts-definition.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test layout contract validation",
+    "Verify z-index protection",
+    "Validate safe-frame shells",
+    "Test z-index protection validation",
+    "Verify layout protection scripts"
+  ],
+  "successCriteria": [
+    "Layout contracts defined with TypeScript",
+    "Z-index protection working with validation",
+    "Safe-frame shells functional with tests",
+    "Layout protection mechanisms validated",
+    "Z-index protection validation operational",
+    "Layout protection scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

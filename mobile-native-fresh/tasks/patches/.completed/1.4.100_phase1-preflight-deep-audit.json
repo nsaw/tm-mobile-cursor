@@ -1,0 +1,31 @@
+{
+  "id": "phase1-preflight-deep-audit",
+  "showInUI": true,
+  "role": "manager",
+  "agent": "BRAUN",
+  "phase": "1.0",
+  "mode": "sequential",
+  "notes": [
+    "🧠 PHASE 1 DEEP AUDIT",
+    "Analyze queued phase 1 patches for conflicts, missing deps, bad logic, or layout issues",
+    "Prepare diagnostic summary before greenlight"
+  ],
+  "targets": [
+    "mobile-native-fresh/tasks/1.4.1d/",
+    "mobile-native-fresh/src-nextgen/"
+  ],
+  "patch": {
+    "pattern": ".*",
+    "replacement": "// Audit only — no direct mutation"
+  },
+  "postMutationBuild": [
+    "node scripts/audit-phase1-patches.js",
+    "yarn tsc",
+    "yarn lint"
+  ],
+  "final": {
+    "commit": "chore: phase 1 patch audit with summary",
+    "tag": "v1.4.100_phase1-preflight-deep-audit",
+    "notes": "✅ Full diagnostic dry run of all queued patches. Awaiting summary report."
+  }
+}

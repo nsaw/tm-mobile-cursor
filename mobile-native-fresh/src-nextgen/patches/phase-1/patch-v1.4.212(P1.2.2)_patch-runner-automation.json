@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-patch-runner.js",
+    "node scripts/validate-automation-system.js",
+    "node scripts/test-patch-execution-order.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/patch-runner-automation",
+  "notes": [
+    "PATCH NAME: patch-v1.4.212(P1.2.2)_patch-runner-automation.json",
+    "SUMMARY NAME: summary-v1.4.212(P1.2.2)_patch-runner-automation.md",
+    "GOAL: Set up patch runner automation system with hardened validation",
+    "MISSION: Establish automated patch runner system for coordinated patch execution with comprehensive testing",
+    "CONTEXT: Patch runner automation is critical for the dual-mount strategy. We need automated systems that can execute patches in the correct order, validate results, and handle rollbacks.",
+    "SAFETY ENFORCEMENT: Test patch runner functionality, verify automation system, validate patch execution order, ensure proper testing",
+    "STABLE STATE CHECK: Confirm patch runner automation operational, automation system working, patch execution order validated",
+    "🚨 CRITICAL: Must validate automation system and patch execution order before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 2,
+      "attempt": 2,
+      "task": "Set up patch runner automation system with hardened validation",
+      "version": "v1.4.212(P1.2.2)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Create patch runner automation system with TypeScript",
+        "Set up patch execution order validation",
+        "Configure automated patch validation",
+        "Set up patch rollback automation",
+        "Install required testing dependencies",
+        "Test patch runner functionality with comprehensive tests",
+        "Validate automation system behavior",
+        "Create patch automation validation scripts"
+      ],
+      "validation": [
+        "Test patch runner functionality",
+        "Verify automation system working",
+        "Confirm patch execution order",
+        "Validate patch rollback automation",
+        "Test automation system validation",
+        "Verify patch automation validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert patch runner setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "runner-v1.4.212(P1.2.2)_patch-runner-automation",
+      "summaryFile": "summary-v1.4.212(P1.2.2)_patch-runner-automation.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test patch runner functionality",
+    "Verify automation system",
+    "Validate patch execution order",
+    "Test automation system validation",
+    "Verify patch automation validation scripts"
+  ],
+  "successCriteria": [
+    "Patch runner automation operational with TypeScript",
+    "Automation system working with validation",
+    "Patch execution order validated with tests",
+    "Patch rollback automation functional",
+    "Automation system validation operational",
+    "Patch automation validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

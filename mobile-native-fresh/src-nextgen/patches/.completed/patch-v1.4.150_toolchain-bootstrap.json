@@ -1,0 +1,56 @@
+{
+  "showInUI": true,
+  "notes": [
+    "\ud83e\udde0 MISSION: Bootstrap all ops tools, patch validators, sacred docs, and test infra into src-nextgen system",
+    "\ud83c\udfaf GOAL: Harden automation stack for refactor-safe dev, with role validation, sacred view guards, performance monitoring, and autotest mesh",
+    "\ud83d\udce6 INCLUDED: scripts/, docs/, GPT-recommended tools, test:unit postMutation enforcement, sacred docs hydration, Slack + daemon tools",
+    "\ud83d\udea8 SAFETY ENFORCEMENT \ud83d\udea8",
+    "\u2705 Ensure all scripts from /scripts/ are copied to ./tools/ or ./scripts/ and chmod +x",
+    "\u2705 All .md docs from /docs/ are placed in ./docs/ and referenced by RoleWrapper, shell, and visual patches",
+    "\u2705 Install all recommended NPM tools with pinned versions",
+    "\u2705 Embed phase-aware test:unit run in postMutationBuild globally",
+    "\u2705 Add lint fix + max-warnings enforcement",
+    "\u2705 Tag tests with Phase Context",
+    "\u2705 Prepare test-map.json for risk classification and CI relay",
+    "\u2705 Validate that all CI scripts include summary and log-cleaning automation",
+    "\ud83d\udd10 RELEVANCE: Ensures all future GPT + Cursor patches are test-coupled, sacred-aware, and rollback-ready"
+  ],
+  "parseCheck": false,
+  "onParseFail": "alert-only",
+  "postMutationBuild": [
+    "chmod +x tools/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node tools/verify-systems.js",
+    "node tools/summary-monitor.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/bootstrap-sys-tools",
+  "phases": [
+    {
+      "section": "Phase 0 System Toolchain Setup",
+      "actions": [
+        "Copy all scripts/*.sh and *.js to ./tools/ and chmod +x",
+        "Copy docs/*.md to ./docs/ and ensure they match sacred roles/themes",
+        "Install: @shopify/react-native-performance, why-did-you-render, react-dev-inspector, @sentry/react-native, jest-performance",
+        "Install: eslint-plugin-role-linter (custom)",
+        "Update RoleWrapper.tsx to reference ROLE_TYPE_MAP.md and SACRED_COWS_PROTECTION.md",
+        "Add shell/RoleWrapper.tsx snapshot sanity test",
+        "Create test-map.json to classify by phase + risk",
+        "Inject test:unit into all patch blocks via global template",
+        "Backup existing STAGE_STATUS.json, PATCH_MANIFEST.json",
+        "Run verify-systems.js and patch-executor.js dry-run"
+      ],
+      "commit": "chore: setup refactor automation toolchain",
+      "tag": "v1.4.150_toolchain-bootstrap_250719_0700PT"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete bootstrap of refactor test + role enforcement tools",
+    "tag": "v1.4.150_toolchain-final_250719_0700PT",
+    "notes": "All tools and docs migrated. Test harness, sacred scanners, perf hooks and summary watchers are CI-ready. Ready for Phase 1 full automation."
+  }
+}

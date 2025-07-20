@@ -1,9 +1,9 @@
 // App.tsx
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
-import { LogBox, Linking } from 'react-native'
+import { LogBox, Linking, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import {
   Oswald_400Regular,
   Oswald_500Medium,
@@ -20,7 +20,15 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { AppNavigator } from './src/navigation/AppNavigator'
 import { ThemeProvider, useTheme } from './src/theme/ThemeProvider'
 import { SessionHydrationGuard } from './src/components/ui/SessionHydrationGuard'
+import DualMountBootstrap from './src/utils/dualMountBootstrap'
 // import SiriShortcutsService from './src/services/SiriShortcutsService'
+
+// Environment toggle - for development only
+import { getEnvironmentFlags, logEnvironmentConfig } from './src/utils/envValidation';
+import { initializeDualMountToggle } from './src/utils/dualMountToggle';
+
+const flags = getEnvironmentFlags();
+const USE_NEXTGEN_ENV = flags.USE_NEXTGEN;
 
 // Prevent the splash auto‐hiding before we're ready
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -36,20 +44,59 @@ LogBox.ignoreLogs([
 // Disable LogBox to prevent error toasts
 LogBox.uninstall();
 
+// Environment Toggle Component (Development Only)
+function EnvironmentToggle({ onToggle, isNextGen }: { onToggle: () => void, isNextGen: boolean }) {
+  if (__DEV__) {
+    return (
+      <View style={styles.toggleContainer}>
+        <TouchableOpacity onPress={onToggle} style={styles.toggleButton}>
+          <Text style={styles.toggleText}>
+            {isNextGen ? '🔄 NextGen' : '🔄 Legacy'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  return null;
+}
+
 function AppContent() {
   const { tokens: designTokens } = useTheme();
+  const [isNextGen, setIsNextGen] = useState(USE_NEXTGEN_ENV);
+  
+  const handleEnvironmentToggle = () => {
+    setIsNextGen(!isNextGen);
+    console.log(`Switched to ${!isNextGen ? 'NextGen' : 'Legacy'} environment`);
+  };
   
   return (
     <SessionHydrationGuard>
       <SafeAreaView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
         <StatusBar style="light" />
-        <AppNavigator />
+        <EnvironmentToggle onToggle={handleEnvironmentToggle} isNextGen={isNextGen} />
+        {isNextGen ? (
+          <View style={styles.nextgenContainer}>
+            <Text style={styles.nextgenText}>🚀 NextGen Environment</Text>
+            <Text style={styles.nextgenSubtext}>Coming soon...</Text>
+          </View>
+        ) : (
+          <AppNavigator />
+        )}
       </SafeAreaView>
     </SessionHydrationGuard>
   )
 }
 
 export default function App() {
+  // Log environment configuration in development
+  logEnvironmentConfig();
+  
+  // Initialize dual mount toggle system
+  useEffect(() => {
+    initializeDualMountToggle();
+    console.log('✅ DualMountToggle initialized');
+  }, []);
+  
   const [fontsLoaded] = useFonts({
     Oswald_400Regular,
     Oswald_500Medium,
@@ -194,8 +241,58 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <AppContent />
+        <DualMountBootstrap
+          timeout={15000}
+          showDebugInfo={__DEV__}
+          onEnvironmentReady={(environment) => {
+            console.log(`✅ Environment ready: ${environment}`);
+          }}
+          onBootstrapError={(error) => {
+            console.error('❌ Bootstrap error:', error.message);
+          }}
+        >
+          <AppContent />
+        </DualMountBootstrap>
       </ThemeProvider>
     </SafeAreaProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  toggleContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 10,
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderBottomRightRadius: 10,
+  },
+  toggleButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+  },
+  toggleText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  nextgenContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  nextgenText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  nextgenSubtext: {
+    fontSize: 16,
+    color: '#666',
+    marginTop: 5,
+  },
+});

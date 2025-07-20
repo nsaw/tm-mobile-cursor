@@ -1,4 +1,9 @@
 {
   "compilerOptions": {},
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "exclude": [
+    "src-reference/**/*",
+    "src/__tests__/**/*",
+    "node_modules/**/*"
+  ]
 }

@@ -1,0 +1,31 @@
+{
+  "id": "cursor-reliability-recovery",
+  "showInUI": true,
+  "role": "manager",
+  "agent": "BRAUN",
+  "phase": "0.6",
+  "mode": "sequential",
+  "notes": [
+    "🧠 PATCH: Reissue reliability fallback and Ghost schema sync",
+    "Fix all `~` path references, reroute summary captures",
+    "Verify daemon responsiveness, execution trails, and summary sync"
+  ],
+  "targets": [
+    "/Users/sawyer/gitSync/tm-mobile-cursor/.cursor-agent/ghost-relay.log",
+    "/Users/sawyer/gitSync/tm-mobile-cursor/.cursor-config.json"
+  ],
+  "patch": {
+    "pattern": "~",
+    "replacement": "/Users/sawyer"
+  },
+  "postMutationBuild": [
+    "yarn tsc",
+    "yarn lint",
+    "node scripts/accurate-patch-status.js status"
+  ],
+  "final": {
+    "commit": "chore: fix cursor-agent ghost fallback reliability",
+    "tag": "v1.4.151_cursor-fallback-recovery_250719_retry",
+    "notes": "✅ Repatch of schema bypass + ghost fallback routing with absolute path fix"
+  }
+}

@@ -1,0 +1,18 @@
+# Dual-mount environment configuration
+EXPO_PUBLIC_USE_NEXTGEN=false
+EXPO_PUBLIC_ENVIRONMENT=legacy
+EXPO_PUBLIC_DEBUG_MODE=true
+
+# Feature flags
+EXPO_PUBLIC_ENABLE_VOICE_RECORDING=true
+EXPO_PUBLIC_ENABLE_AI_FEATURES=true
+EXPO_PUBLIC_ENABLE_PREMIUM_FEATURES=false
+
+# App configuration
+EXPO_PUBLIC_APP_NAME=Thoughtmarks
+EXPO_PUBLIC_APP_VERSION=1.4.1
+EXPO_PUBLIC_API_URL=https://api.thoughtmarks.app
+
+# Development settings
+EXPO_PUBLIC_LOG_LEVEL=debug
+EXPO_PUBLIC_ENABLE_ANALYTICS=false 
