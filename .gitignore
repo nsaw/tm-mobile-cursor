@@ -51,7 +51,6 @@ reference/replit-build/
 reference/*
 reference/
 
-
 # TM Mobile clone
 tm-mobile-clone/
 
@@ -63,3 +62,89 @@ tm-mobile-clone/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Repository size reduction - exclude large directories and files
+# Summary directories
+**/summaries/
+**/*summaries*/
+**/summary-*/
+
+# Archive directories
+**/.archive*/
+**/*.archive*/
+**/archive*/
+
+# Completed and done directories
+**/*.complete*/
+**/*.done*/
+**/*.cleanup*/
+
+# Failed task directories
+**/tasks_FAILED/
+**/*.failed*/
+
+# Large documentation files
+**/INDEX.md
+**/tasks/INDEX.md
+
+# Temporary and cache files
+**/.tmp*/
+**/*.tmp
+**/.cache*/
+**/*.cache
+
+# Build artifacts
+**/build/
+**/dist/
+**/.next/
+**/.nuxt/
+
+# IDE and editor files
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/*~
+
+# OS generated files
+**/.DS_Store
+**/Thumbs.db
+**/ehthumbs.db
+**/Desktop.ini
+
+# Log directories
+**/logs/
+**/*.log
+
+# Backup files
+**/*.bak
+**/*.backup
+**/*.old
+
+# Large binary files
+**/*.tar.gz
+**/*.zip
+**/*.rar
+**/*.7z
+
+# Node.js specific
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.npm/
+**/.yarn/
+
+# React Native specific
+**/.expo/
+**/.expo-shared/
+**/web-build/
+**/android/
+**/ios/
+
+# Environment files
+**/.env*
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
