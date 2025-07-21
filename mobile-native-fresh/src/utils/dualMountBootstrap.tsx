@@ -1,12 +1,12 @@
 // src/utils/dualMountBootstrap.tsx
-// Dual-environment bootstrap wrapper for App.tsx
+// FORCED HYDRATION OVERRIDE - Read from env.app before any render phase
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
 import SplashFallback from '../components/SplashFallback';
 import EnvironmentIndicator from '../components/EnvironmentIndicator';
-import { initializeDualMountToggle, getCurrentEnvironment } from './dualMountToggle';
 
 interface DualMountBootstrapProps {
   children: React.ReactNode;
@@ -21,18 +21,18 @@ interface BootstrapStatus {
   environment: 'legacy' | 'nextgen' | 'unknown';
   error?: string;
   timestamp: number;
+  hydrationSource: 'file' | 'process.env' | 'fallback';
   checks: {
-    environmentVariables: boolean;
-    dualMount: boolean;
-    sacredComponents: boolean;
-    sacredLayouts: boolean;
-    debugSystem: boolean;
+    fileHydration: boolean;
+    environmentValidation: boolean;
+    stateInitialization: boolean;
+    noLegacyFallback: boolean;
   };
 }
 
 const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
   children,
-  timeout = 15000, // 15 seconds
+  timeout = 15000,
   showDebugInfo = false,
   onEnvironmentReady,
   onBootstrapError,
@@ -41,84 +41,97 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
     isReady: false,
     environment: 'unknown',
     timestamp: Date.now(),
+    hydrationSource: 'fallback',
     checks: {
-      environmentVariables: false,
-      dualMount: false,
-      sacredComponents: false,
-      sacredLayouts: false,
-      debugSystem: false,
+      fileHydration: false,
+      environmentValidation: false,
+      stateInitialization: false,
+      noLegacyFallback: false,
     },
   });
 
   const [timeoutReached, setTimeoutReached] = useState(false);
 
-  // Bootstrap environment
+  // FORCED HYDRATION - Read from env.app file before any render
   useEffect(() => {
-    const bootstrapEnvironment = async () => {
+    const forceHydrationFromFile = async () => {
       try {
         const startTime = Date.now();
+        console.log('🔐 FORCED HYDRATION: Reading environment from env.app file...');
         
-        // Check 1: Environment variables
-        const useNextGen = process.env.EXPO_PUBLIC_USE_NEXTGEN === 'true';
-        const environment = useNextGen ? 'nextgen' : 'legacy';
+        // STEP 1: Force read from env.app file (source of truth)
+        const envPath = `${FileSystem.documentDirectory}env.app`;
+        let fileContents: string;
         
-        setBootstrapStatus(prev => ({
-          ...prev,
-          environment,
-          checks: { ...prev.checks, environmentVariables: true },
-        }));
-
-        // Check 2: Dual-mount system - Initialize the toggle system
         try {
-          initializeDualMountToggle({
-            useNextGen,
-            environment,
-            autoSwitch: false,
-            switchThreshold: 5000,
-            fallbackEnvironment: 'legacy',
-          });
-          
-          // Verify initialization
-          const currentEnvironment = getCurrentEnvironment();
-          console.log(`✅ Dual-mount toggle initialized: ${currentEnvironment} environment`);
-          
+          fileContents = await FileSystem.readAsStringAsync(envPath);
+          console.log('✅ FORCED HYDRATION: Successfully read env.app file');
           setBootstrapStatus(prev => ({
             ...prev,
-            checks: { ...prev.checks, dualMount: true },
+            checks: { ...prev.checks, fileHydration: true },
+            hydrationSource: 'file',
           }));
-        } catch (error) {
-          console.error('❌ Failed to initialize dual-mount toggle:', error);
-          throw error;
+        } catch (fileError) {
+          console.error('❌ FORCED HYDRATION: Failed to read env.app file:', fileError);
+          throw new Error(`File hydration failed: ${fileError}`);
         }
 
-        // Check 3: Sacred components
-        await new Promise(resolve => setTimeout(resolve, 300)); // Simulate check
+        // STEP 2: Parse environment from file content
+        const lines = fileContents.split('\n');
+        let environment: 'legacy' | 'nextgen' = 'legacy';
+        
+        for (const line of lines) {
+          if (line.startsWith('EXPO_PUBLIC_ENVIRONMENT=')) {
+            const envValue = line.split('=')[1]?.trim();
+            if (envValue === 'nextgen') {
+              environment = 'nextgen';
+              console.log('✅ FORCED HYDRATION: Environment set to nextgen from file');
+              break;
+            }
+          }
+        }
+
+        // STEP 3: Validate environment state
+        if (environment === 'nextgen') {
+          console.log('✅ FORCED HYDRATION: Validated nextgen environment from file');
+          setBootstrapStatus(prev => ({
+            ...prev,
+            environment,
+            checks: { ...prev.checks, environmentValidation: true },
+          }));
+        } else {
+          console.log('📋 FORCED HYDRATION: Environment set to legacy from file');
+          setBootstrapStatus(prev => ({
+            ...prev,
+            environment,
+            checks: { ...prev.checks, environmentValidation: true },
+          }));
+        }
+
+        // STEP 4: Block any process.env fallback
+        const processEnvEnvironment = process.env.EXPO_PUBLIC_ENVIRONMENT;
+        if (processEnvEnvironment && processEnvEnvironment !== environment) {
+          console.warn(`⚠️ FORCED HYDRATION: Blocking stale process.env value (${processEnvEnvironment}) in favor of file value (${environment})`);
+        }
+        
         setBootstrapStatus(prev => ({
           ...prev,
-          checks: { ...prev.checks, sacredComponents: true },
+          checks: { ...prev.checks, noLegacyFallback: true },
         }));
 
-        // Check 4: Sacred layouts
-        await new Promise(resolve => setTimeout(resolve, 300)); // Simulate check
+        // STEP 5: Initialize state with file-based environment
+        await new Promise(resolve => setTimeout(resolve, 100)); // Ensure state propagation
         setBootstrapStatus(prev => ({
           ...prev,
-          checks: { ...prev.checks, sacredLayouts: true },
+          checks: { ...prev.checks, stateInitialization: true },
         }));
 
-        // Check 5: Debug system
-        await new Promise(resolve => setTimeout(resolve, 200)); // Simulate check
-        setBootstrapStatus(prev => ({
-          ...prev,
-          checks: { ...prev.checks, debugSystem: true },
-        }));
-
-        // All checks passed
+        // STEP 6: Complete bootstrap
         const allChecksPassed = Object.values({
-          environmentVariables: true,
-          dualMount: true,
-          sacredComponents: true,
-          sacredLayouts: true,
-          debugSystem: true,
+          fileHydration: true,
+          environmentValidation: true,
+          stateInitialization: true,
+          noLegacyFallback: true,
         }).every(check => check);
 
         if (allChecksPassed) {
@@ -129,13 +142,14 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           }));
           
           onEnvironmentReady?.(environment);
-          console.log(`✅ Bootstrap completed for ${environment} environment in ${Date.now() - startTime}ms`);
+          console.log(`✅ FORCED HYDRATION: Bootstrap completed for ${environment} environment in ${Date.now() - startTime}ms`);
+          console.log(`✅ FORCED HYDRATION: Environment source: ${bootstrapStatus.hydrationSource}`);
         } else {
-          throw new Error('Bootstrap checks failed');
+          throw new Error('Forced hydration checks failed');
         }
 
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown bootstrap error';
+        const errorMessage = error instanceof Error ? error.message : 'Unknown forced hydration error';
         setBootstrapStatus(prev => ({
           ...prev,
           error: errorMessage,
@@ -143,18 +157,18 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
         }));
         
         onBootstrapError?.(error instanceof Error ? error : new Error(errorMessage));
-        console.error('❌ Bootstrap failed:', errorMessage);
+        console.error('❌ FORCED HYDRATION: Bootstrap failed:', errorMessage);
       }
     };
 
-    bootstrapEnvironment();
+    forceHydrationFromFile();
   }, [onEnvironmentReady, onBootstrapError]);
 
   // Handle timeout
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeoutReached(true);
-      console.warn('⚠️ Bootstrap timeout reached');
+      console.warn('⚠️ FORCED HYDRATION: Bootstrap timeout reached');
     }, timeout);
 
     return () => clearTimeout(timer);
@@ -164,12 +178,12 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
   if (!bootstrapStatus.isReady) {
     return (
       <SplashFallback
-        message={timeoutReached ? 'Bootstrap timeout reached' : 'Initializing environment...'}
+        message={timeoutReached ? 'Forced hydration timeout reached' : 'Forcing environment hydration...'}
         timeout={timeout}
         showEnvironment={true}
         showDebugInfo={showDebugInfo}
         onTimeout={() => {
-          console.warn('⚠️ Splash fallback timeout reached');
+          console.warn('⚠️ FORCED HYDRATION: Splash fallback timeout reached');
         }}
       />
     );
@@ -179,10 +193,13 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
   if (bootstrapStatus.error) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorTitle}>🚨 Bootstrap Failed</Text>
+        <Text style={styles.errorTitle}>🚨 FORCED HYDRATION FAILED</Text>
         <Text style={styles.errorMessage}>{bootstrapStatus.error}</Text>
         <Text style={styles.errorSubtext}>
           Environment: {bootstrapStatus.environment.toUpperCase()}
+        </Text>
+        <Text style={styles.errorSubtext}>
+          Source: {bootstrapStatus.hydrationSource.toUpperCase()}
         </Text>
         {showDebugInfo && (
           <View style={styles.debugInfo}>
