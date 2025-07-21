@@ -168,7 +168,7 @@ class RealtimeMonitor {
 
     // Check ghost runner status
     checkGhostStatus() {
-        exec('curl -s https://gpt-cursor-runner.fly.dev/health', (error, stdout) => {
+        exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout) => {
             const newStatus = error ? 'unreachable' : 'running';
             const oldStatus = this.status.ghost.status;
             

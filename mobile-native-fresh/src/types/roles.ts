@@ -188,7 +188,7 @@ export function getAllRelatedRoles(role: string): string[] {
     related.push(...roleGroups[group as keyof typeof roleGroups]);
   }
   
-  return [...new Set(related)]; // Remove duplicates
+  return Array.from(new Set(related)); // Remove duplicates
 }
 
 // ============================================================================

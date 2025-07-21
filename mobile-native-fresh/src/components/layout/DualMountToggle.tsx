@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { Text } from '../ui/Text';
 import { AutoRoleView } from '../AutoRoleView';
 import { toggleEnvironment, getCurrentEnvironment } from '../../utils/dualMountToggle';
@@ -89,7 +90,7 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
         return {
           ...baseStyle,
           top: insets.top + 10,
-          left: '50%',
+          left: '50%' as any,
           transform: [{ translateX: -30 }], // Center the button (assuming 60px width)
         };
       default:

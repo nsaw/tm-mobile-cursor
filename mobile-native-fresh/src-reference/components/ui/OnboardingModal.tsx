@@ -63,7 +63,67 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
 };
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClose }) => {
-  const { tokens, typography, spacing } = useTheme();
+  const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens, typography, spacing } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
 
   const iconSize = tokens.spacing.xxxl * 2;

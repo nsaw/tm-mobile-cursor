@@ -27,7 +27,7 @@ class LivePatchStatus {
         this.status = {
             patches: { pending: 0, executing: 0, completed: 0, failed: 0, queue: [] },
             systems: { running: [], stopped: [], errors: [] },
-            ghost: { status: 'unknown', lastCheck: null, url: 'https://gpt-cursor-runner.fly.dev/health' },
+            ghost: { status: 'unknown', lastCheck: null, url: 'https://runner.thoughtmarks.app/health' },
             recentActivity: [],
             executionQueue: [],
             lastUpdate: null

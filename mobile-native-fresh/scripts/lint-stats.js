@@ -12,6 +12,7 @@
 
 const fs = require("fs");
 const path = require("path");
+
 const { Logger } = require("./logging.js");
 
 class LintStats {

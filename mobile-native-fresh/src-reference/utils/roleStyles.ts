@@ -14,7 +14,9 @@ import { roleGroups, roleInheritance } from '../types/roles';
 // ============================================================================
 
 export function getRoleStyles(theme: any): Record<string, ViewStyle> {
-  const { tokens } = theme;
+  const { tokens } = useTheme();
+
+const { tokens } = theme;
   
   return {
     // Layout Roles

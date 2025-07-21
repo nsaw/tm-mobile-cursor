@@ -21,7 +21,7 @@ export interface AccessibilityResult {
   timestamp: number;
   violations: AccessibilityViolation[];
   passes: number;
-  violations: number;
+  violationCount: number;
   inapplicable: number;
   incomplete: number;
   totalChecks: number;
@@ -111,7 +111,7 @@ class AccessibilityAuditor {
         timestamp: Date.now(),
         violations,
         passes: Math.max(0, 10 - violations.length), // Simulate passes
-        violations: violations.length,
+        violationCount: violations.length,
         inapplicable: 2, // Simulate inapplicable checks
         incomplete: 1, // Simulate incomplete checks
         totalChecks: 13, // Total simulated checks
@@ -236,7 +236,7 @@ class AccessibilityAuditor {
       ? this.results.filter(r => r.environment === environment)
       : this.results;
 
-    const totalViolations = filteredResults.reduce((sum, r) => sum + r.violations, 0);
+    const totalViolations = filteredResults.reduce((sum, r) => sum + r.violationCount, 0);
     const totalPasses = filteredResults.reduce((sum, r) => sum + r.passes, 0);
 
     const summary = {
@@ -261,7 +261,7 @@ class AccessibilityAuditor {
 
     const report: AccessibilityReport = {
       timestamp: new Date().toISOString(),
-      environment: environment || 'both',
+      environment: environment || 'legacy',
       totalComponents: filteredResults.length,
       totalViolations,
       totalPasses,

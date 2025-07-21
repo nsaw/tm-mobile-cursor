@@ -1,96 +1,124 @@
 #!/usr/bin/env node
 
-/**
- * Verify Role Wrappers Script
- * Validates that role-based wrappers have been properly implemented
- */
-
 const fs = require('fs');
 const path = require('path');
 
-console.log('🔍 Verifying role-based wrappers...');
+console.log('🔍 Verifying role wrappers implementation...');
 
-const roleWrappersPath = path.join(__dirname, '../src-nextgen/shell/role-wrappers');
-const requiredFiles = [
-  'index.ts',
+const shellDir = path.join(__dirname, '../src/shell');
+const componentsDir = path.join(shellDir, 'components');
+
+const requiredWrappers = [
   'RoleWrapper.tsx',
-  'types.ts',
-  'validation.ts'
+  'InteractiveWrapper.tsx',
+  'ContentWrapper.tsx',
+  'LayoutWrapper.tsx'
 ];
 
-let allValid = true;
+let allPassed = true;
 
-// Check if role-wrappers directory exists
-if (!fs.existsSync(roleWrappersPath)) {
-  console.error('❌ Role wrappers directory does not exist');
-  allValid = false;
+// Check if components directory exists
+if (!fs.existsSync(componentsDir)) {
+  console.error('❌ src/shell/components/ directory does not exist');
+  allPassed = false;
 } else {
-  console.log('✅ Role wrappers directory exists');
+  console.log('✅ src/shell/components/ directory exists');
 }
 
-// Check required files
-for (const file of requiredFiles) {
-  const filePath = path.join(roleWrappersPath, file);
-  if (!fs.existsSync(filePath)) {
-    console.error(`❌ Required file missing: ${file}`);
-    allValid = false;
+// Check required wrapper files
+requiredWrappers.forEach(wrapper => {
+  const wrapperPath = path.join(componentsDir, wrapper);
+  if (!fs.existsSync(wrapperPath)) {
+    console.error(`❌ ${wrapper} does not exist`);
+    allPassed = false;
   } else {
-    console.log(`✅ File exists: ${file}`);
+    console.log(`✅ ${wrapper} exists`);
     
-    // Check file content for basic structure
-    try {
-      const content = fs.readFileSync(filePath, 'utf8');
-      if (content.length === 0) {
-        console.error(`❌ File is empty: ${file}`);
-        allValid = false;
-      } else {
-        console.log(`✅ File has content: ${file}`);
-      }
-    } catch (error) {
-      console.error(`❌ Cannot read file: ${file}`);
-      allValid = false;
-    }
-  }
-}
-
-// Check for TypeScript interfaces
-const typesPath = path.join(roleWrappersPath, 'types.ts');
-if (fs.existsSync(typesPath)) {
-  try {
-    const content = fs.readFileSync(typesPath, 'utf8');
-    if (content.includes('interface') || content.includes('type')) {
-      console.log('✅ TypeScript interfaces found');
-    } else {
-      console.error('❌ No TypeScript interfaces found');
-      allValid = false;
-    }
-  } catch (error) {
-    console.error('❌ Cannot read types file');
-    allValid = false;
-  }
-}
-
-// Check for React component structure
-const wrapperPath = path.join(roleWrappersPath, 'RoleWrapper.tsx');
-if (fs.existsSync(wrapperPath)) {
-  try {
+    // Check file content for key functions
     const content = fs.readFileSync(wrapperPath, 'utf8');
-    if (content.includes('React') && content.includes('export')) {
-      console.log('✅ React component structure found');
-    } else {
-      console.error('❌ React component structure not found');
-      allValid = false;
+    
+    if (wrapper === 'RoleWrapper.tsx') {
+      if (content.includes('validateRole') && content.includes('RoleValidationResult')) {
+        console.log(`✅ ${wrapper} has validation functions`);
+      } else {
+        console.error(`❌ ${wrapper} missing validation functions`);
+        allPassed = false;
+      }
     }
-  } catch (error) {
-    console.error('❌ Cannot read RoleWrapper file');
-    allValid = false;
+    
+    if (wrapper === 'InteractiveWrapper.tsx') {
+      if (content.includes('InteractiveWrapperProps') && content.includes('accessibilityState')) {
+        console.log(`✅ ${wrapper} has accessibility features`);
+      } else {
+        console.error(`❌ ${wrapper} missing accessibility features`);
+        allPassed = false;
+      }
+    }
+    
+    if (wrapper === 'ContentWrapper.tsx') {
+      if (content.includes('ContentWrapperProps') && content.includes('getContentStyle')) {
+        console.log(`✅ ${wrapper} has content styling`);
+      } else {
+        console.error(`❌ ${wrapper} missing content styling`);
+        allPassed = false;
+      }
+    }
+    
+    if (wrapper === 'LayoutWrapper.tsx') {
+      if (content.includes('LayoutWrapperProps') && content.includes('getDefaultZIndex')) {
+        console.log(`✅ ${wrapper} has z-index protection`);
+      } else {
+        console.error(`❌ ${wrapper} missing z-index protection`);
+        allPassed = false;
+      }
+    }
   }
+});
+
+// Check index.ts exports
+const indexPath = path.join(componentsDir, 'index.ts');
+if (fs.existsSync(indexPath)) {
+  const content = fs.readFileSync(indexPath, 'utf8');
+  
+  if (content.includes('RoleWrapper') && 
+      content.includes('InteractiveWrapper') && 
+      content.includes('ContentWrapper') && 
+      content.includes('LayoutWrapper')) {
+    console.log('✅ Components index.ts exports all wrappers');
+  } else {
+    console.error('❌ Components index.ts missing wrapper exports');
+    allPassed = false;
+  }
+  
+  if (content.includes('version: \'1.4.201\'')) {
+    console.log('✅ Components index.ts has correct version');
+  } else {
+    console.error('❌ Components index.ts has incorrect version');
+    allPassed = false;
+  }
+} else {
+  console.error('❌ Components index.ts does not exist');
+  allPassed = false;
 }
 
-if (allValid) {
-  console.log('✅ Role wrappers validation passed');
+// Check TypeScript compilation
+console.log('🔍 Checking TypeScript compilation...');
+const { execSync } = require('child_process');
+try {
+  execSync('npx tsc --noEmit --skipLibCheck src/shell/components/index.ts', { 
+    cwd: path.join(__dirname, '..'),
+    stdio: 'pipe'
+  });
+  console.log('✅ TypeScript compilation passed');
+} catch (error) {
+  console.error('❌ TypeScript compilation failed');
+  allPassed = false;
+}
+
+if (allPassed) {
+  console.log('🎉 Role wrappers validation passed!');
   process.exit(0);
 } else {
-  console.error('❌ Role wrappers validation failed');
+  console.error('💥 Role wrappers validation failed!');
   process.exit(1);
 } 

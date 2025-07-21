@@ -1,0 +1,47 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Trigger execution of all hybrid patches under Phase 1 for src-nextgen refactor",
+    "\ud83c\udfaf GOAL: Sequentially apply and validate every patch in /src-nextgen/patches/phase-1/",
+    "\ud83d\udea8 SAFETY ENFORCEMENT \ud83d\udea8",
+    "\u2705 Each patch must validate parse, typecheck, lint, and snapshot consistency",
+    "\u2705 HALT on first failure; do not continue past any invalid or broken hybrid block",
+    "\ud83d\udccc CONTEXT: Phase 0 audit and hardening completed; Phase 1 is approved to proceed",
+    "\ud83d\udd10 RELEVANCE: Required to establish foundation for all later role + visual recovery work"
+  ],
+  "showInUI": true,
+  "parseCheck": false,
+  "onParseFail": "alert-only",
+  "postMutationBuild": "tsc --noEmit && npm run lint",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(phase-1): executed all hybrid patches for src-nextgen foundation\"",
+      "git tag v1.4.200(P1.0.1)_phase-1-batch-execution",
+      "tar -czf /Users/sawyer/gitSync/_backups/tm-safety_backups/250720-PT_v1.4.200(P1.0.1)_phase-1-batch-execution_backup_tm-mobile-cursor.tar.gz ."
+    ]
+  },
+  "branch": "feature/v1.4.2(000)_SRC-NXTGEN",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Execute All Phase 1 Patches",
+      "actions": [
+        "Load all patches from /src-nextgen/patches/phase-1/",
+        "Apply each hybrid block in order of filename (numerical sort)",
+        "Enforce validation after each apply before continuing",
+        "Log summary output to /summaries/ and capture console replay"
+      ],
+      "commit": "chore: batch run all Phase 1 patch blocks",
+      "tag": "v1.4.200(P1.0.1)_phase-1-batch-execution"
+    }
+  ],
+  "final": {
+    "commit": "chore: Phase 1 patch sequence fully applied and validated",
+    "tag": "v1.4.200(P1.0.1)_phase-1-batch-execution_final",
+    "notes": "All foundational Phase 1 patches applied. src-nextgen now ready for Phase 2 scaffolding and role assignment."
+  }
+}

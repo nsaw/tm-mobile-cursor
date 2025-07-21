@@ -22,7 +22,7 @@ import { AutoRoleView } from '../../../components/AutoRoleView';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 export const SettingsScreen: React.FC = () => {
-  const { tokens, typography } = useTheme();
+  const { designTokens, typography } = useTheme();
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
   
@@ -154,7 +154,7 @@ export const SettingsScreen: React.FC = () => {
     switchValue = false, 
     onSwitchChange = () => {},
     showArrow = true,
-    tokens
+    designTokens
   }: {
     icon: string;
     title: string;
@@ -164,15 +164,16 @@ export const SettingsScreen: React.FC = () => {
     switchValue?: boolean;
     onSwitchChange?: (value: boolean) => void;
     showArrow?: boolean;
-    tokens: any;
+    designTokens: any;
   }) => {
+
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
+      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={designTokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
-      iconElement = <Ionicons name={icon as any} size={20} color={tokens.colors.accent ?? '#000'} />;
+      iconElement = <Ionicons name={icon as any} size={20} color={designTokens.colors.accent ?? '#000'} />;
     }
     return (
       <TouchableOpacity 
@@ -195,12 +196,12 @@ export const SettingsScreen: React.FC = () => {
             <Switch
               value={switchValue}
               onValueChange={onSwitchChange}
-              trackColor={{ false: tokens.colors.border ?? '#ccc', true: tokens.colors.accent ?? '#000' }}
-              thumbColor={tokens.colors.background ?? '#fff'}
+              trackColor={{ false: designTokens.colors.border ?? '#ccc', true: designTokens.colors.accent ?? '#000' }}
+              thumbColor={designTokens.colors.background ?? '#fff'}
             />
           )}
           {showArrow && !showSwitch && (
-            <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
+            <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
           )}
         </View>
       </TouchableOpacity>
@@ -212,51 +213,51 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     scrollContent: {
-      paddingBottom: tokens.spacing.xl,
+      paddingBottom: designTokens.spacing.xl,
     },
     header: {
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
     },
     headerContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
+      marginBottom: designTokens.spacing.sm,
     },
     backButton: {
-      marginRight: tokens.spacing.md,
+      marginRight: designTokens.spacing.md,
     },
     headerTitle: {
       ...typography.title,
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
     },
     headerSubtitle: {
       ...typography.body,
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
     },
     section: {
-      marginBottom: tokens.spacing.xxl,
+      marginBottom: designTokens.spacing.xxl,
     },
     sectionTitle: {
       ...typography.sectionTitle,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.lg,
+      color: designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.lg,
       textTransform: 'uppercase',
     },
     sectionCard: {
-      marginHorizontal: tokens.spacing.lg,
+      marginHorizontal: designTokens.spacing.lg,
     },
     settingItem: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingVertical: tokens.spacing.md,
-      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
       borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
+      borderBottomColor: designTokens.colors.border,
       minHeight: 44,
     },
     settingItemLeft: {
@@ -265,24 +266,24 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingItemText: {
-      marginLeft: tokens.spacing.md,
+      marginLeft: designTokens.spacing.md,
       flex: 1,
     },
     settingItemTitle: {
       ...typography.body,
-      color: tokens.colors.text,
+      color: designTokens.colors.text,
       opacity: 0.85,
     },
     settingItemSubtitle: {
       ...typography.small,
-      color: tokens.colors.textSecondary,
+      color: designTokens.colors.textSecondary,
       marginTop: 2,
     },
     settingItemRight: {
       alignItems: 'center',
     },
     expandedSettings: {
-      backgroundColor: tokens.colors.backgroundSecondary,
+      backgroundColor: designTokens.colors.backgroundSecondary,
     },
     settingLeft: {
       flexDirection: 'row',
@@ -290,7 +291,7 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingText: {
-      marginLeft: tokens.spacing.md,
+      marginLeft: designTokens.spacing.md,
       flex: 1,
     },
     modalOverlay: {
@@ -302,61 +303,61 @@ export const SettingsScreen: React.FC = () => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.lg,
+      padding: designTokens.spacing.lg,
     },
     modalContent: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.spacing.md,
-      padding: tokens.spacing.lg,
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.spacing.md,
+      padding: designTokens.spacing.lg,
       width: '100%',
       maxWidth: 400,
     },
     modalTitle: {
-      fontSize: tokens.typography.fontSize.lg,
+      fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
+      color: designTokens.colors.text,
+      marginBottom: designTokens.spacing.sm,
     },
     modalSubtitle: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.lg,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.textSecondary,
+      marginBottom: designTokens.spacing.lg,
     },
     modalInput: {
       borderWidth: 1,
-      borderColor: tokens.colors.border,
-      borderRadius: tokens.spacing.sm,
-      padding: tokens.spacing.md,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-      backgroundColor: tokens.colors.background,
-      marginBottom: tokens.spacing.lg,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      padding: designTokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
+      backgroundColor: designTokens.colors.background,
+      marginBottom: designTokens.spacing.lg,
     },
     modalButtons: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      gap: tokens.spacing.md,
+      gap: designTokens.spacing.md,
     },
     modalButton: {
-      paddingVertical: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm,
+      paddingVertical: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.md,
+      borderRadius: designTokens.spacing.sm,
     },
     modalButtonText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      color: designTokens.colors.text,
     },
     modalButtonPrimary: {
-      backgroundColor: tokens.colors.accent,
+      backgroundColor: designTokens.colors.accent,
     },
     modalButtonTextPrimary: {
-      color: tokens.colors.background,
+      color: designTokens.colors.background,
       fontWeight: '500',
     },
   });
 
   return (
-    <AutoRoleView layoutRole="section" style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
+    <AutoRoleView layoutRole="section" style={{ flex: 1, backgroundColor: designTokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -368,7 +369,7 @@ export const SettingsScreen: React.FC = () => {
               accessible={true}
               accessibilityLabel="Button"
             >
-              <Ionicons name="arrow-back" size={24} color={tokens.colors.text ?? '#000'} />
+              <Ionicons name="arrow-back" size={24} color={designTokens.colors.text ?? '#000'} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>SETTINGS</Text>
           </View>
@@ -376,14 +377,16 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Welcome Section */}
-        <Card style={{ alignItems: 'center', paddingHorizontal: tokens.spacing.page, paddingVertical: tokens.spacing.lg, marginBottom: tokens.spacing.xxl }}>
-          {(() => {
-            return (
+        <Card style={{ alignItems: 'center', paddingHorizontal: designTokens.spacing.page, paddingVertical: designTokens.spacing.lg, marginBottom: designTokens.spacing.xxl }}>
+                      {(() => {
+              const { designTokens } = useTheme();
+
+              return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
-                  backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: designTokens.spacing.md,
+                  backgroundColor: `${designTokens.colors.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
@@ -391,18 +394,18 @@ export const SettingsScreen: React.FC = () => {
                 {/* Title */}
                 <Text style={{
                   ...typography.sectionTitle,
-                  color: tokens.colors.text,
+                  color: designTokens.colors.text,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.sm,
+                  marginBottom: designTokens.spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
                   ...typography.body,
-                  color: tokens.colors.textSecondary,
+                  color: designTokens.colors.textSecondary,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: designTokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -411,15 +414,15 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens.colors.accent,
-                    paddingVertical: tokens.spacing.sm,
-                    borderRadius: tokens.radius.md,
+                    backgroundColor: designTokens.colors.accent,
+                    paddingVertical: designTokens.spacing.sm,
+                    borderRadius: designTokens.radius.md,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
                     ...typography.buttonText,
-                    color: tokens.colors.buttonText,
+                    color: designTokens.colors.buttonText,
                     textAlign: 'center',
                     width: '100%',
                    }}>
@@ -440,21 +443,21 @@ export const SettingsScreen: React.FC = () => {
               title="Profile"
               subtitle="Manage your account information"
               onPress={() => navigation.navigate('Profile')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="key"
               title="Security"
               subtitle="Password, 2FA, and security settings"
               onPress={() => navigation.navigate('Security')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="crown"
               title="Premium"
               subtitle="Upgrade to unlock advanced features"
               onPress={() => navigation.navigate('Premium')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -468,14 +471,14 @@ export const SettingsScreen: React.FC = () => {
               title="Theme"
               subtitle="Light, dark, or auto"
               onPress={() => navigation.navigate('Theme')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="notifications"
               title="Notifications"
               subtitle="Manage notification preferences"
               onPress={() => setNotificationsExpanded(!notificationsExpanded)}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             {notificationsExpanded && (
               <View style={styles.expandedSettings}>
@@ -486,7 +489,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={marketingEmails}
                   onSwitchChange={setMarketingEmails}
                   showArrow={false}
-                  tokens={tokens}
+                  designTokens={designTokens}
                 />
                 <SettingItem
                   icon="sparkles"
@@ -495,7 +498,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={aiNotifications}
                   onSwitchChange={setAiNotifications}
                   showArrow={false}
-                  tokens={tokens}
+                  designTokens={designTokens}
                 />
                 <SettingItem
                   icon="time"
@@ -504,7 +507,7 @@ export const SettingsScreen: React.FC = () => {
                   switchValue={smartReminders}
                   onSwitchChange={setSmartReminders}
                   showArrow={false}
-                  tokens={tokens}
+                  designTokens={designTokens}
                 />
               </View>
             )}
@@ -513,14 +516,14 @@ export const SettingsScreen: React.FC = () => {
               title="Voice Commands"
               subtitle="Set up Siri or Google Assistant"
               onPress={() => setShowSiriDialog(true)}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="cloud-upload"
               title="Export Data"
               subtitle="Download your data"
               onPress={() => navigation.navigate('Export')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -537,7 +540,7 @@ export const SettingsScreen: React.FC = () => {
               switchValue={showNavLabels}
               onSwitchChange={setShowNavLabels}
               showArrow={false}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -551,28 +554,28 @@ export const SettingsScreen: React.FC = () => {
               title="Help & Support"
               subtitle="Get help or contact support"
               onPress={() => navigation.navigate('Help')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="document-text"
               title="Terms of Service"
               subtitle="Read our terms"
               onPress={() => navigation.navigate('Terms')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="shield-checkmark"
               title="Privacy Policy"
               subtitle="Read our privacy policy"
               onPress={() => navigation.navigate('Privacy')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="mail"
               title="Contact Support"
               subtitle="Email or message us"
               onPress={() => navigation.navigate('Contact')}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -644,14 +647,14 @@ export const SettingsScreen: React.FC = () => {
               title="Sign Out"
               subtitle="Sign out of your account"
               onPress={handleSignOut}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="trash"
               title="Delete Account"
               subtitle="Permanently delete your account"
               onPress={handleDeleteAccount}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -665,14 +668,14 @@ export const SettingsScreen: React.FC = () => {
               title="Version"
               subtitle="1.0.0"
               showArrow={false}
-              tokens={tokens}
+              designTokens={designTokens}
             />
             <SettingItem
               icon="code-slash"
               title="Build"
               subtitle="2024.1.0"
               showArrow={false}
-              tokens={tokens}
+              designTokens={designTokens}
             />
           </Card>
         </View>
@@ -689,10 +692,10 @@ export const SettingsScreen: React.FC = () => {
               accessibilityLabel="Button"
             >
               <View style={styles.settingLeft}>
-                <Ionicons name="shield-outline" size={20} color={tokens.colors.accent ?? '#000'} />
+                <Ionicons name="shield-outline" size={20} color={designTokens.colors.accent ?? '#000'} />
                 <Text style={styles.settingText}>Admin Dashboard</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color={tokens.colors.textSecondary ?? '#666'} />
+              <Ionicons name="chevron-forward" size={16} color={designTokens.colors.textSecondary ?? '#666'} />
             </TouchableOpacity>
           </View>
         )}
@@ -711,7 +714,7 @@ export const SettingsScreen: React.FC = () => {
               value={tempSiriPhrase}
               onChangeText={setTempSiriPhrase}
               placeholder="Enter your Siri phrase"
-              placeholderTextColor={tokens.colors.textSecondary ?? '#666'}
+              placeholderTextColor={designTokens.colors.textSecondary ?? '#666'}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity

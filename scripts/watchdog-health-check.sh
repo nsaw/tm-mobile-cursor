@@ -5,7 +5,7 @@
 
 WATCHDOG_LABEL="com.thoughtmarks.patchwatchdog"
 LOG_FILE="./logs/watchdog-health-check.log"
-DASHBOARD_WEBHOOK="https://gpt-cursor-runner.fly.dev/slack/commands"
+DASHBOARD_WEBHOOK="https://runner.thoughtmarks.app/slack/commands"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"

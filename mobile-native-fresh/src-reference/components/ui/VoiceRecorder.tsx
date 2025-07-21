@@ -39,6 +39,66 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   onComplete,
 }) => {
   const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
   const { user } = useAuth();
   const { createThoughtmark } = useThoughtmarks();
   const { bins } = useBins();
@@ -295,7 +355,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   };
 
   const getStageContent = () => {
-    switch (recordingStage) {
+    const { tokens } = useTheme();
+
+switch (recordingStage) {
       case 'ready':
         return {
           title: 'Voice Recorder',
@@ -557,7 +619,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
               <TouchableOpacity 
                 style={styles.actionButton} 
                 onPress={() => {
-                  onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
+                  const { tokens } = useTheme();
+
+onComplete?.(autoSaveId || undefined, transcript, 'Voice Note');
                   onClose();
                 }}
                 accessibilityRole="button"

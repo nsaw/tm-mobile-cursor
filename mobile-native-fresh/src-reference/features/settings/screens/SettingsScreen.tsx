@@ -166,7 +166,9 @@ export const SettingsScreen: React.FC = () => {
     showArrow?: boolean;
     tokens: any;
   }) => {
-    let iconElement = null;
+    const { tokens } = useTheme();
+
+let iconElement = null;
     if (icon === 'crown') {
       iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
@@ -378,7 +380,67 @@ export const SettingsScreen: React.FC = () => {
         {/* Welcome Section */}
         <Card style={{ alignItems: 'center', paddingHorizontal: tokens.spacing.page, paddingVertical: tokens.spacing.lg, marginBottom: tokens.spacing.xxl }}>
           {(() => {
-            return (
+            const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+const { tokens } = useTheme();
+
+return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{

@@ -10,65 +10,74 @@ const path = require('path');
 
 console.log('🔍 Verifying shell directory structure...');
 
-const shellPath = path.join(__dirname, '../src-nextgen/shell');
+const shellDir = path.join(__dirname, '../src/shell');
 const requiredDirs = [
-  'role-wrappers',
-  'layout-contracts',
-  'navigation-definitions',
-  'sacred-view-mounts'
+  'components',
+  'layouts', 
+  'navigation',
+  'roles',
+  'types',
+  'utils'
 ];
 
 const requiredFiles = [
   'index.ts',
-  'types.ts',
-  'validation.ts'
+  'components/index.ts',
+  'layouts/index.ts',
+  'navigation/index.ts',
+  'roles/index.ts',
+  'types/index.ts',
+  'utils/index.ts'
 ];
 
-let allValid = true;
+let allPassed = true;
 
 // Check if shell directory exists
-if (!fs.existsSync(shellPath)) {
-  console.error('❌ Shell directory does not exist at:', shellPath);
-  allValid = false;
+if (!fs.existsSync(shellDir)) {
+  console.error('❌ src/shell/ directory does not exist');
+  allPassed = false;
 } else {
-  console.log('✅ Shell directory exists');
+  console.log('✅ src/shell/ directory exists');
 }
 
 // Check required subdirectories
-for (const dir of requiredDirs) {
-  const dirPath = path.join(shellPath, dir);
+requiredDirs.forEach(dir => {
+  const dirPath = path.join(shellDir, dir);
   if (!fs.existsSync(dirPath)) {
-    console.error(`❌ Required subdirectory missing: ${dir}`);
-    allValid = false;
+    console.error(`❌ src/shell/${dir}/ directory does not exist`);
+    allPassed = false;
   } else {
-    console.log(`✅ Subdirectory exists: ${dir}`);
+    console.log(`✅ src/shell/${dir}/ directory exists`);
   }
-}
+});
 
 // Check required files
-for (const file of requiredFiles) {
-  const filePath = path.join(shellPath, file);
+requiredFiles.forEach(file => {
+  const filePath = path.join(shellDir, file);
   if (!fs.existsSync(filePath)) {
-    console.error(`❌ Required file missing: ${file}`);
-    allValid = false;
+    console.error(`❌ src/shell/${file} file does not exist`);
+    allPassed = false;
   } else {
-    console.log(`✅ File exists: ${file}`);
+    console.log(`✅ src/shell/${file} file exists`);
+  }
+});
+
+// Check shell index.ts content
+const shellIndexPath = path.join(shellDir, 'index.ts');
+if (fs.existsSync(shellIndexPath)) {
+  const content = fs.readFileSync(shellIndexPath, 'utf8');
+  if (content.includes('initializeShell') && content.includes('validateShell')) {
+    console.log('✅ Shell index.ts has required functions');
+  } else {
+    console.error('❌ Shell index.ts missing required functions');
+    allPassed = false;
   }
 }
 
-// Check TypeScript configuration
-const tsConfigPath = path.join(shellPath, 'tsconfig.json');
-if (!fs.existsSync(tsConfigPath)) {
-  console.error('❌ TypeScript configuration missing');
-  allValid = false;
-} else {
-  console.log('✅ TypeScript configuration exists');
-}
-
-if (allValid) {
-  console.log('✅ Shell structure validation passed');
+if (allPassed) {
+  console.log('🎉 Shell directory structure validation passed!');
   process.exit(0);
 } else {
-  console.error('❌ Shell structure validation failed');
+  console.error('💥 Shell directory structure validation failed!');
   process.exit(1);
 } 

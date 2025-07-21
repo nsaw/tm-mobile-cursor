@@ -1,4 +1,8 @@
-// src-nextgen/components/index.ts
-// Placeholder for nextgen components
+// NextGen Components
+// Migrated components with role assignments
 
-export {}; 
+export { Button } from './Button';
+export { Text, Heading, Subheading, BodyText, Caption, Label, ButtonText, SectionHeader } from './Text';
+export { TagChip } from './TagChip';
+export { Header } from './Header';
+export { BottomNav } from './BottomNav'; 

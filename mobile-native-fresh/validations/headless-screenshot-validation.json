@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-07-21T00:30:50.269Z",
+  "detox": "available",
+  "puppeteer": "available",
+  "modernScreenshot": "available",
+  "screenshotsDir": true,
+  "validationsDir": true,
+  "status": "PASSED"
+}

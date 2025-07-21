@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../features/auth/hooks/useAuth';
+
 import { Card } from './Card';
 
 export const HydrationTestCard: React.FC = () => {

@@ -16,14 +16,14 @@ class GhostBridge {
         this.projectRoot = process.cwd();
         this.projectName = path.basename(this.projectRoot);
         
-        // gpt-cursor-runner endpoints
+        // gpt-cursor-runner endpoints (fly.io production - direct URL)
         this.runnerEndpoints = {
-            health: 'http://localhost:5052/health',
-            slack: 'http://localhost:5052/slack/commands',
-            dashboard: 'http://localhost:5052/dashboard',
-            webhook: 'http://localhost:5052/webhook',
-            patches: 'http://localhost:5052/api/patches', // Use dedicated patches endpoint
-            summaries: 'http://localhost:5052/api/summaries' // Use dedicated summaries endpoint
+            health: 'https://gpt-cursor-runner.fly.dev/health',
+            slack: 'https://gpt-cursor-runner.fly.dev/slack/commands',
+            dashboard: 'https://gpt-cursor-runner.fly.dev/dashboard',
+            webhook: 'https://gpt-cursor-runner.fly.dev/webhook',
+            patches: 'https://gpt-cursor-runner.fly.dev/api/patches', // Use dedicated patches endpoint
+            summaries: 'https://gpt-cursor-runner.fly.dev/api/summaries' // Use dedicated summaries endpoint
         };
         
         // Local paths for tm-mobile-cursor

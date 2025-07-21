@@ -13,7 +13,7 @@ LOG_DIR="./logs/watchdogs"
 PID_FILE="./logs/watchdog-runner.pid"
 CHECK_INTERVAL=30
 MAX_RETRIES=3
-DASHBOARD_WEBHOOK="https://gpt-cursor-runner.fly.dev/slack/commands"
+DASHBOARD_WEBHOOK="https://runner.thoughtmarks.app/slack/commands"
 LOG_FILE="$LOG_DIR/.runner-watchdog"
 
 # Colors for output

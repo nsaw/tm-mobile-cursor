@@ -124,12 +124,12 @@ class ReliableStatus {
     // Check ghost runner status
     async getGhostStatus() {
         return new Promise((resolve) => {
-            exec('curl -s --connect-timeout 5 "https://gpt-cursor-runner.fly.dev/health"', (error, stdout) => {
+            exec('curl -s --connect-timeout 5 "https://runner.thoughtmarks.app/health"', (error, stdout) => {
                 if (error) {
                     resolve({
                         status: 'unreachable',
                         lastCheck: new Date().toISOString(),
-                        url: 'https://gpt-cursor-runner.fly.dev/health'
+                        url: 'https://runner.thoughtmarks.app/health'
                     });
                 } else {
                     try {
@@ -137,13 +137,13 @@ class ReliableStatus {
                         resolve({
                             status: response.status || 'running',
                             lastCheck: new Date().toISOString(),
-                            url: 'https://gpt-cursor-runner.fly.dev/health'
+                            url: 'https://runner.thoughtmarks.app/health'
                         });
                     } catch (e) {
                         resolve({
                             status: 'running',
                             lastCheck: new Date().toISOString(),
-                            url: 'https://gpt-cursor-runner.fly.dev/health'
+                            url: 'https://runner.thoughtmarks.app/health'
                         });
                     }
                 }

@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-07-21T00:30:53.671Z",
+  "roles": {
+    "button-nav-primary": {
+      "assigned": true,
+      "valid": true
+    },
+    "button-nav-secondary": {
+      "assigned": true,
+      "valid": true
+    },
+    "card": {
+      "assigned": true,
+      "valid": true
+    },
+    "section": {
+      "assigned": true,
+      "valid": true
+    },
+    "header": {
+      "assigned": true,
+      "valid": true
+    },
+    "footer": {
+      "assigned": true,
+      "valid": true
+    },
+    "navigation": {
+      "assigned": true,
+      "valid": true
+    },
+    "modal": {
+      "assigned": true,
+      "valid": true
+    },
+    "container": {
+      "assigned": true,
+      "valid": true
+    }
+  },
+  "sacredViews": {
+    "FAB": {
+      "protected": true,
+      "role": "button-action"
+    },
+    "BottomNav": {
+      "protected": true,
+      "role": "navigation"
+    },
+    "AITool": {
+      "protected": true,
+      "role": "modal"
+    },
+    "Modal": {
+      "protected": true,
+      "role": "modal"
+    }
+  },
+  "status": "PASSED",
+  "message": "Role assignment validation completed"
+}

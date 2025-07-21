@@ -17,6 +17,7 @@ const THEME_STORAGE_KEY = '@thoughtmarks_theme_preferences';
 
 interface ThemeContextType {
   tokens: DesignTokens;
+  designTokens: DesignTokens; // Alias for tokens
   typography: typeof typographyTokens;
   buttonStyles: typeof buttonStyles;
   spacing: typeof spacingTokens;
@@ -112,6 +113,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const contextValue: ThemeContextType = {
     tokens: designTokens,
+    designTokens: designTokens,
     typography: typographyTokens,
     buttonStyles: buttonStyles,
     spacing: spacingTokens,

@@ -63,41 +63,41 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
 };
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClose }) => {
-  const { tokens, typography, spacing } = useTheme();
+  const { designTokens, typography, spacing } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
 
-  const iconSize = tokens.spacing.xxxl * 2;
+  const iconSize = designTokens.spacing.xxxl * 2;
 
   const steps = [
     {
       title: 'Welcome to Thoughtmarks!',
       description: 'Your personal knowledge management system for capturing thoughts without breaking flow state.',
-      icon: <Brain size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Brain size={iconSize} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Voice to Thoughtmark',
       description: "Quickly capture ideas using voice input. Perfect for when you're in the zone and don't want to type.",
-      icon: <Mic size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Mic size={iconSize} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Siri Shortcuts Setup',
       description: "Enable voice commands like 'Hey Siri, capture thoughtmark' or 'Hey Siri, add to thoughtmarks' from anywhere on your device. You can set this up now or later in Settings.",
-      icon: <Ionicons name="phone-portrait-outline" size={iconSize} color={tokens.colors.accent} />,
+      icon: <Ionicons name="phone-portrait-outline" size={iconSize} color={designTokens.colors.accent} />,
     },
     {
       title: 'Organize with Smart Bins',
       description: 'AI automatically categorizes your thoughts into relevant bins. You can also create custom bins for specific projects.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={tokens.colors.accent} />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={designTokens.colors.accent} />,
     },
     {
       title: 'Search & Discover',
       description: 'Find any thoughtmark instantly with semantic and keyword search.',
-      icon: <Search size={iconSize} color={tokens.colors.accent} strokeWidth={2.5} />,
+      icon: <Search size={iconSize} color={designTokens.colors.accent} strokeWidth={2.5} />,
     },
     {
       title: 'Unlock Premium Features',
       description: 'Access advanced AI, unlimited bins, priority support, and more.',
-      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={tokens.colors.accent} />,
+      icon: <MaterialCommunityIcons name="crown-outline" size={iconSize} color={designTokens.colors.accent} />,
       premium: true,
     },
   ];
@@ -141,10 +141,10 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           width: '90%',
           marginHorizontal: 'auto',
           paddingHorizontal: spacing.pagePaddingHorizontal,
-          paddingTop: tokens.spacing.xl,
-          paddingBottom: tokens.spacing.xl,
-          backgroundColor: tokens.colors.backgroundSecondary,
-          borderRadius: tokens.radius.lg,
+          paddingTop: designTokens.spacing.xl,
+          paddingBottom: designTokens.spacing.xl,
+          backgroundColor: designTokens.colors.backgroundSecondary,
+          borderRadius: designTokens.radius.lg,
           alignItems: 'center',
         }}>
           {/* Title */}
@@ -155,17 +155,17 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             textTransform: 'uppercase',
             opacity: 0.85,
             textAlign: 'center',
-            marginBottom: tokens.spacing.lg,
-            color: tokens.colors.text,
-            paddingVertical: tokens.spacing.sm,
+            marginBottom: designTokens.spacing.lg,
+            color: designTokens.colors.text,
+            paddingVertical: designTokens.spacing.sm,
             lineHeight: ((typography.sectionTitle?.fontSize || 16) + 8),
           }}>{steps[currentStep].title}</Text>
           {/* Pagination Label */}
           <Text style={{
             ...typography.small,
             textAlign: 'center',
-            marginBottom: tokens.spacing.sm,
-            color: tokens.colors.textSecondary,
+            marginBottom: designTokens.spacing.sm,
+            color: designTokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
           <View>{steps[currentStep].icon}</View>
@@ -175,23 +175,23 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             fontSize: (typography.body.fontSize || 16) - 2,
             lineHeight: 24,
             textAlign: 'center',
-            color: tokens.colors.textSecondary,
-            marginBottom: tokens.spacing.md,
+            color: designTokens.colors.textSecondary,
+            marginBottom: designTokens.spacing.md,
           }}>{steps[currentStep].description}</Text>
           {/* Pagination Dots */}
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: tokens.spacing.md, marginBottom: tokens.spacing.md }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }}>
             {steps.map((_, i) => (
               <View key={i} style={{
                 width: 8,
                 height: 8,
                 borderRadius: 4,
-                backgroundColor: i === currentStep ? tokens.colors.accent : tokens.colors.border,
+                backgroundColor: i === currentStep ? designTokens.colors.accent : designTokens.colors.border,
                 marginHorizontal: 4
               }} />
             ))}
           </View>
           {/* Buttons */}
-          <View style={{ flexDirection: 'row', width: '100%', marginTop: tokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', width: '100%', marginTop: designTokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
             <ModalButton
               onPress={handlePrevious}
               disabled={currentStep === 0}

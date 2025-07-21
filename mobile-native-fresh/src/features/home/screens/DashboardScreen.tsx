@@ -336,6 +336,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Render section content based on section ID
   const renderSectionContent = (sectionId: string) => {
+    const { designTokens } = useTheme();
+
     switch (sectionId) {
       case 'tags':
         // Tags section is now integrated into recent-thoughtmarks
@@ -349,7 +351,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               <View style={styles.tagsHeader}>
                 <Text style={styles.tagsTitle}>Filter by tag</Text>
                 <TouchableOpacity onPress={handleViewAllThoughtmarks} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-                  <Ionicons name="arrow-forward" size={16} color={tokens.colors.accent} style={{ opacity: 0.7 }} />
+                  <Ionicons name="arrow-forward" size={16} color={designTokens.colors.accent} style={{ opacity: 0.7 }} />
                 </TouchableOpacity>
               </View>
               <ScrollView 
@@ -410,7 +412,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                       onClick={() => handleThoughtmarkPress(thoughtmark)}
                       onEdit={() => handleThoughtmarkEdit(thoughtmark)}
                       onPinToggle={handlePinToggle}
-                      style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
+                      style={idx !== arr.length - 1 ? { marginBottom: designTokens.spacing.xs } : undefined}
                     />
                   ))}
                 </View>
@@ -425,7 +427,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 >
                   <Text style={styles.viewMoreCount}>{filteredThoughtmarks.length} total</Text>
                   <Text style={styles.viewMoreText}>View all thoughtmarks</Text>
-                  <Ionicons name="arrow-forward" size={20} color={tokens.colors.accent} />
+                  <Ionicons name="arrow-forward" size={20} color={designTokens.colors.accent} />
                 </TouchableOpacity>
               </>
             ) : (
@@ -450,7 +452,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                 task={task}
                 onPress={() => handleThoughtmarkPress(task)}
                 onToggle={() => handleTaskToggle(task)}
-                style={idx !== arr.length - 1 ? { marginBottom: tokens.spacing.xs } : undefined}
+                style={idx !== arr.length - 1 ? { marginBottom: designTokens.spacing.xs } : undefined}
               />
             ))}
           </View>
@@ -517,7 +519,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   >
                     <View style={styles.specialBinCardContent}>
                       <Text style={styles.specialBinCardText}>New bin</Text>
-                      <Ionicons name="add" size={21} color={tokens.colors.accent} />
+                      <Ionicons name="add" size={21} color={designTokens.colors.accent} />
                     </View>
                   </TouchableOpacity>
                   
@@ -552,7 +554,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                   >
                     <View style={styles.archiveCardContent}>
                       <Text style={styles.archiveCardText}>View archive</Text>
-                      <Ionicons name="archive-outline" size={21} color={tokens.colors.accent} />
+                      <Ionicons name="archive-outline" size={21} color={designTokens.colors.accent} />
                     </View>
                   </TouchableOpacity>
                 </View>

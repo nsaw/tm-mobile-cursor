@@ -146,7 +146,7 @@ class DualViewMonitor {
     // Check ghost runner status
     checkGhostStatus() {
         // Check if gpt-cursor-runner is accessible
-        exec('curl -s https://gpt-cursor-runner.fly.dev/health', (error, stdout) => {
+        exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout) => {
             if (error) {
                 this.statusCategories.ghost = {
                     status: 'unreachable',

@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-21T00:30:56.796Z",
+  "components": {
+    "AutoRoleView": {
+      "exists": true,
+      "valid": true
+    },
+    "RoleWrapper": {
+      "exists": true,
+      "valid": true
+    },
+    "ShellLayout": {
+      "exists": true,
+      "valid": true
+    }
+  },
+  "directories": {
+    "shell/components": {
+      "exists": true,
+      "valid": true
+    },
+    "shell/layouts": {
+      "exists": true,
+      "valid": true
+    },
+    "shell/navigation": {
+      "exists": true,
+      "valid": true
+    },
+    "shell/roles": {
+      "exists": true,
+      "valid": true
+    },
+    "shell/types": {
+      "exists": true,
+      "valid": true
+    },
+    "shell/utils": {
+      "exists": true,
+      "valid": true
+    }
+  },
+  "status": "PASSED",
+  "message": "Shell structure validation completed"
+}

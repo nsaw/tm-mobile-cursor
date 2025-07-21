@@ -1,7 +1,8 @@
 // live-patch-status-server.js
-const express = require('express');
 const { exec } = require('child_process');
 const path = require('path');
+
+const express = require('express');
 
 const app = express();
 

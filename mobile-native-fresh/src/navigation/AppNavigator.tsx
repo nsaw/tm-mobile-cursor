@@ -167,7 +167,6 @@ const MainStack = () => (
 // Auth Stack Navigator (for unauthenticated users)
 const AuthStack = () => (
   <Stack.Navigator 
-    id="AuthStack"
     screenOptions={{ 
       headerShown: false,
       cardStyle: { backgroundColor: '#181818' }
@@ -186,7 +185,7 @@ export const AppNavigator = () => {
   if (loading) {
     return (
       <NavigationContainer>
-        <Stack.Navigator id="LoadingStack" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Loading" component={LoadingScreenWrapper} />
         </Stack.Navigator>
       </NavigationContainer>

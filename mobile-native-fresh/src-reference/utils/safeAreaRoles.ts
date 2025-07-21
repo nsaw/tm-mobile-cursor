@@ -12,7 +12,6 @@ import {
   UILayoutRole,
   RoleProps,
 } from '../types/roles';
-
 import { useTheme } from '../theme/ThemeProvider';
 
 // ============================================================================

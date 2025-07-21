@@ -9,8 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
   StatusBar,
-} from 'react-native';
-import { useColorScheme } from 'react-native';
+ useColorScheme } from 'react-native';
 
 interface SplashFallbackProps {
   message?: string;

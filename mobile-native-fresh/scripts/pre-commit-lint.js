@@ -13,6 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawn, exec } = require("child_process");
+
 const { Logger } = require("./logging.js");
 
 class PreCommitLint {

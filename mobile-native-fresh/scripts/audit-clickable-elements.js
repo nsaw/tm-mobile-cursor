@@ -13,6 +13,7 @@
 
 const fs = require("fs");
 const path = require("path");
+
 const glob = require("glob");
 
 // Define valid routes from routes.ts

@@ -253,7 +253,7 @@ class SacredLayoutManager {
         zIndex: 2500,
         protectionMechanism: 'safe-frame',
         safeFrameShell: {
-          width: '100%',
+          width: 100,
           height: 300,
           position: 'bottom',
           zIndex: 2500,
@@ -287,7 +287,7 @@ class SacredLayoutManager {
         layoutId: layout.id,
         zIndex: layout.zIndex,
         layer: this.getLayerFromZIndex(layout.zIndex),
-        environment: layout.environment,
+        environment: layout.environment === 'both' ? 'legacy' : layout.environment,
         conditions: [
           {
             feature: 'layout-support',
@@ -316,7 +316,7 @@ class SacredLayoutManager {
         height: layout.safeFrameShell!.height,
         position: layout.safeFrameShell!.position,
         zIndex: layout.safeFrameShell!.zIndex,
-        environment: layout.environment,
+        environment: layout.environment === 'both' ? 'legacy' : layout.environment,
         padding: {
           top: 10,
           bottom: 10,
@@ -370,7 +370,7 @@ class SacredLayoutManager {
         layoutId: id,
         zIndex: layout.zIndex,
         layer: this.getLayerFromZIndex(layout.zIndex),
-        environment: layout.environment,
+        environment: layout.environment === 'both' ? 'legacy' : layout.environment,
         conditions: [
           {
             feature: 'layout-support',
@@ -396,7 +396,7 @@ class SacredLayoutManager {
         height: layout.safeFrameShell.height,
         position: layout.safeFrameShell.position,
         zIndex: layout.safeFrameShell.zIndex,
-        environment: layout.environment,
+        environment: layout.environment === 'both' ? 'legacy' : layout.environment,
         padding: {
           top: 10,
           bottom: 10,

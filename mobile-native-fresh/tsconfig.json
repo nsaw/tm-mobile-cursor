@@ -1,9 +1,47 @@
 {
-  "compilerOptions": {},
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext",
+    "types": ["react-native", "jest", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@features/*": ["src/features/*"],
+      "@utils/*": ["src/utils/*"],
+      "@theme/*": ["src/theme/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@services/*": ["src/services/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@types/*": ["src/types/*"],
+      "@shell/*": ["src/shell/*"],
+      "@nextgen/*": ["src-nextgen/*"]
+    }
+  },
   "extends": "expo/tsconfig.base",
+  "include": [
+    "src/**/*",
+    "src-nextgen/**/*",
+    "tests/**/*",
+    "scripts/**/*"
+  ],
   "exclude": [
     "src-reference/**/*",
     "src/__tests__/**/*",
-    "node_modules/**/*"
+    "node_modules/**/*",
+    "dist/**/*",
+    "build/**/*"
   ]
 }

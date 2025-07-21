@@ -46,7 +46,8 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
-  const { tokens, typography, spacing } = useTheme();
+  const { designTokens } = useTheme();
+
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -194,8 +195,8 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               delayLongPress={500}
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
-                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>
+                <Ionicons name="chevron-down" size={16} color={designTokens.colors.textSecondary} style={styles.chevronIcon} />
+                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: designTokens.colors.textSecondary }]}>
                   {title}
                 </Animated.Text>
               </View>

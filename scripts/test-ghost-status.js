@@ -4,7 +4,7 @@ const { exec } = require('child_process');
 
 console.log('🔍 Testing Ghost Runner Status...');
 
-exec('curl -s https://gpt-cursor-runner.fly.dev/health', (error, stdout, stderr) => {
+exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout, stderr) => {
     if (error) {
         console.log('❌ Ghost Runner UNREACHABLE');
         console.log('Error:', error.message);

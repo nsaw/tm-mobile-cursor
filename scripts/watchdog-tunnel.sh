@@ -14,7 +14,7 @@ LOG_DIR="./logs/watchdogs"
 PID_FILE="./logs/watchdog-tunnel.pid"
 CHECK_INTERVAL=30
 MAX_RETRIES=3
-DASHBOARD_WEBHOOK="https://gpt-cursor-runner.fly.dev/slack/commands"
+DASHBOARD_WEBHOOK="https://runner.thoughtmarks.app/slack/commands"
 LOG_FILE="$LOG_DIR/.tunnel-watchdog"
 
 # Colors for output
@@ -180,7 +180,7 @@ test_external_connectivity() {
     log "INFO" "🔍 Testing external connectivity"
     
     local fallback_urls=(
-        "https://gpt-cursor-runner.fly.dev/health"
+        "https://runner.thoughtmarks.app/health"
         "https://httpbin.org/get"
         "https://api.github.com/zen"
     )
