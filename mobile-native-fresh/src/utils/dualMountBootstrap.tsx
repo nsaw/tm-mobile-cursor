@@ -114,6 +114,11 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           console.warn(`⚠️ FORCED HYDRATION: Blocking stale process.env value (${processEnvEnvironment}) in favor of file value (${environment})`);
         }
         
+        // HYDRATION GUARD VERIFICATION: Override detection for legacy fallbacks
+        if (process.env.EXPO_PUBLIC_ENVIRONMENT !== 'nextgen') {
+          console.warn('❌ Detected legacy process.env value — this should have been overridden');
+        }
+        
         setBootstrapStatus(prev => ({
           ...prev,
           checks: { ...prev.checks, noLegacyFallback: true },
