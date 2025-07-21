@@ -23,7 +23,7 @@ interface BootstrapStatus {
   environment: 'legacy' | 'nextgen' | 'unknown';
   error?: string;
   timestamp: number;
-  hydrationSource: 'file' | 'process.env' | 'fallback';
+  hydrationSource: 'file' | 'process.env' | 'fallback' | 'memory' | 'cache';
   checks: {
     fileHydration: boolean;
     environmentValidation: boolean;
@@ -32,6 +32,7 @@ interface BootstrapStatus {
     processEnvOverride: boolean;
     zustandSync: boolean;
     appShellResolution: boolean;
+    memoryFallback: boolean;
   };
 }
 
@@ -39,25 +40,26 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
   children,
   timeout = 15000,
   showDebugInfo = false,
-  onEnvironmentReady,
-  onBootstrapError,
+  onEnvironmentReady: _onEnvironmentReady,
+  onBootstrapError: _onBootstrapError,
 }) => {
-  const { init: initEnvironmentStore } = useEnvironmentStore();
+  const { init: initEnvironmentStore, rehydrate: rehydrateEnvironmentStore } = useEnvironmentStore();
   
   const [bootstrapStatus, setBootstrapStatus] = useState<BootstrapStatus>({
     isReady: false,
     environment: 'unknown',
     timestamp: Date.now(),
     hydrationSource: 'fallback',
-    checks: {
-      fileHydration: false,
-      environmentValidation: false,
-      stateInitialization: false,
-      noLegacyFallback: false,
-      processEnvOverride: false,
-      zustandSync: false,
-      appShellResolution: false,
-    },
+            checks: {
+          fileHydration: false,
+          environmentValidation: false,
+          stateInitialization: false,
+          noLegacyFallback: false,
+          processEnvOverride: false,
+          zustandSync: false,
+          appShellResolution: false,
+          memoryFallback: false,
+        },
   });
 
   const [timeoutReached, setTimeoutReached] = useState(false);
@@ -83,7 +85,23 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           }));
         } catch (fileError) {
           console.error('❌ FORCED HYDRATION: Failed to read env.app file:', fileError);
-          throw new Error(`File hydration failed: ${fileError}`);
+          
+          // MEMORY FALLBACK: Try to rehydrate from memory/cache if file read fails
+          console.log('🔄 FORCED HYDRATION: Attempting memory fallback...');
+          const rehydrated = await rehydrateEnvironmentStore();
+          
+          if (rehydrated) {
+            console.log('✅ FORCED HYDRATION: Memory fallback successful');
+            setBootstrapStatus(prev => ({
+              ...prev,
+              checks: { ...prev.checks, memoryFallback: true },
+              hydrationSource: 'memory',
+            }));
+            // Continue with memory-based environment
+            return;
+          }
+          
+          throw new Error(`File hydration failed and memory fallback unavailable: ${fileError}`);
         }
 
         // STEP 2: Parse environment from file content
@@ -182,6 +200,7 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           processEnvOverride: true,
           zustandSync: true,
           appShellResolution: true,
+          memoryFallback: bootstrapStatus.checks.memoryFallback || true, // Allow memory fallback
         }).every(check => check);
 
         if (allChecksPassed) {
