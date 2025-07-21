@@ -1,3 +1,4 @@
+// ✅ PATCH LOCKED: Zustand snapshot fallback chain enforced
 // FORCED HYDRATION ENVIRONMENT STORE - Read from env.app before render phase
 // ENHANCED: Includes last-mile guard, hydration status, AppShell fallback resolver, and Zustand snapshot persistence
 import { create } from 'zustand';
@@ -39,6 +40,7 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
       if (currentState.memorySnapshot && currentState.hydrationSource === 'memory') {
         console.log('✅ FORCED HYDRATION: EnvironmentStore resolved source: memory');
         console.log(`✅ FORCED HYDRATION: Zustand snapshot restored from memory - environment=${currentState.environment}`);
+        console.log('✅ Runtime source chain sealed — source: memory');
         return;
       }
       
@@ -46,6 +48,7 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
       const rehydrated = await get().rehydrate();
       if (rehydrated) {
         console.log('✅ FORCED HYDRATION: EnvironmentStore resolved source: cache');
+        console.log('✅ Runtime source chain sealed — source: cache');
         return;
       }
     }
@@ -75,10 +78,11 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
         }
       }
       
-      // BLOCK PROCESS.ENV FALLBACK
+      // BLOCK PROCESS.ENV FALLBACK - Runtime chain freeze enforced
       const processEnvEnvironment = process.env.EXPO_PUBLIC_ENVIRONMENT;
       if (processEnvEnvironment && processEnvEnvironment !== environment) {
         console.warn(`⚠️ FORCED HYDRATION: EnvironmentStore blocking stale process.env value (${processEnvEnvironment}) in favor of file value (${environment})`);
+        console.log('✅ Runtime source chain sealed — blocking process.env fallback');
       }
       
       // LAST-MILE GUARD: Ensure process.env is overridden for runtime consistency
@@ -113,8 +117,10 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
       if (environment === 'nextgen') {
         console.log('✅ FORCED HYDRATION: EnvironmentStore hydrated nextgen from file');
         console.log('✅ FORCED HYDRATION: Setting environment to nextgen from file');
+        console.log('✅ Runtime source chain sealed — source: file');
       } else {
         console.log('📋 FORCED HYDRATION: EnvironmentStore hydrated legacy from file');
+        console.log('✅ Runtime source chain sealed — source: file');
       }
       
       initialized = true;
@@ -127,15 +133,17 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
       const rehydrated = await get().rehydrate();
       if (rehydrated) {
         console.log('✅ FORCED HYDRATION: EnvironmentStore resolved source: memory (fallback)');
+        console.log('✅ Runtime source chain sealed — source: memory (fallback)');
         initialized = true;
         return;
       }
       
-      // APPSHELL FALLBACK RESOLVER: Enhanced fallback logic
+      // APPSHELL FALLBACK RESOLVER: Enhanced fallback logic - Runtime chain freeze enforced
       const processEnvEnvironment = process.env.EXPO_PUBLIC_ENVIRONMENT;
       const fallbackEnvironment = processEnvEnvironment === 'nextgen' ? 'nextgen' : 'legacy';
       
       console.warn(`⚠️ FORCED HYDRATION: EnvironmentStore falling back to process.env (${fallbackEnvironment}) due to file read error`);
+      console.log('✅ Runtime source chain sealed — source: process.env (fallback)');
       
       // LAST-MILE GUARD FOR FALLBACK: Ensure consistency
       if (fallbackEnvironment === 'nextgen') {

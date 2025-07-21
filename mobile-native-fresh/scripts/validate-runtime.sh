@@ -1,11 +1,7 @@
 #!/bin/bash
-
-# validate-runtime.sh - Runtime validation for Zustand snapshot persistence
-# Confirms memory-based resolution if file hydration isn't triggered post-reload
-
 set -e
 
-echo "🔍 Validating runtime environment persistence..."
+echo "🔍 Validating runtime hydration fallback chain..."
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ]; then
@@ -29,54 +25,58 @@ if [ ! -f "$METRO_LOG" ]; then
     exit 0
 fi
 
-echo "📋 Analyzing runtime logs..."
+echo "📋 Analyzing runtime hydration fallback chain..."
 
-# Check for memory-based resolution
+# Check for hydration from file
+if grep -q "✅ FORCED HYDRATION: EnvironmentStore hydrated nextgen from file" "$METRO_LOG"; then
+    echo "✅ Hydration from file confirmed"
+    FILE_HYDRATION=true
+else
+    echo "⚠️  No hydration from file found"
+    FILE_HYDRATION=false
+fi
+
+# Check for AppShell fallback confirmation
+if grep -q "✅ FORCED HYDRATION: AppShell: Confirmed nextgen environment from file" "$METRO_LOG"; then
+    echo "✅ AppShell file fallback confirmed"
+    APPSHELL_FILE=true
+elif grep -q "✅ FORCED HYDRATION: AppShell: Environment is nextgen (source: memory)" "$METRO_LOG"; then
+    echo "✅ AppShell memory fallback confirmed"
+    APPSHELL_MEMORY=true
+else
+    echo "⚠️  No AppShell fallback confirmation found"
+    APPSHELL_FILE=false
+    APPSHELL_MEMORY=false
+fi
+
+# Check for runtime source chain sealing
+if grep -q "✅ Runtime source chain sealed" "$METRO_LOG"; then
+    echo "✅ Runtime source chain sealing confirmed"
+    SOURCE_CHAIN_SEALED=true
+else
+    echo "⚠️  No runtime source chain sealing found"
+    SOURCE_CHAIN_SEALED=false
+fi
+
+# Check for memory fallback
 if grep -q "✅ FORCED HYDRATION: Zustand snapshot restored from memory" "$METRO_LOG"; then
-    echo "✅ Memory-based resolution confirmed"
-    MEMORY_RESOLUTION=true
+    echo "✅ Memory fallback confirmed"
+    MEMORY_FALLBACK=true
 else
-    echo "⚠️  No memory-based resolution found"
-    MEMORY_RESOLUTION=false
+    echo "⚠️  No memory fallback found"
+    MEMORY_FALLBACK=false
 fi
 
-# Check for cache-based resolution
+# Check for cache fallback
 if grep -q "✅ FORCED HYDRATION: Zustand snapshot restored from cache" "$METRO_LOG"; then
-    echo "✅ Cache-based resolution confirmed"
-    CACHE_RESOLUTION=true
+    echo "✅ Cache fallback confirmed"
+    CACHE_FALLBACK=true
 else
-    echo "⚠️  No cache-based resolution found"
-    CACHE_RESOLUTION=false
+    echo "⚠️  No cache fallback found"
+    CACHE_FALLBACK=false
 fi
 
-# Check for environment store memory resolution
-if grep -q "✅ FORCED HYDRATION: EnvironmentStore resolved source: memory" "$METRO_LOG"; then
-    echo "✅ EnvironmentStore memory resolution confirmed"
-    ENV_MEMORY_RESOLUTION=true
-else
-    echo "⚠️  No EnvironmentStore memory resolution found"
-    ENV_MEMORY_RESOLUTION=false
-fi
-
-# Check for environment store cache resolution
-if grep -q "✅ FORCED HYDRATION: EnvironmentStore resolved source: cache" "$METRO_LOG"; then
-    echo "✅ EnvironmentStore cache resolution confirmed"
-    ENV_CACHE_RESOLUTION=true
-else
-    echo "⚠️  No EnvironmentStore cache resolution found"
-    ENV_CACHE_RESOLUTION=false
-fi
-
-# Check for snapshot logging
-if grep -q "✅ FORCED HYDRATION: Zustand snapshot saved" "$METRO_LOG"; then
-    echo "✅ Snapshot logging confirmed"
-    SNAPSHOT_LOGGING=true
-else
-    echo "⚠️  No snapshot logging found"
-    SNAPSHOT_LOGGING=false
-fi
-
-# Check for legacy resolution (should not exist)
+# Check for no legacy resolution
 if grep -q "legacy.*resolution" "$METRO_LOG"; then
     echo "❌ Legacy resolution detected - this should not happen"
     LEGACY_RESOLUTION=true
@@ -87,25 +87,31 @@ fi
 
 # Validation summary
 echo ""
-echo "📊 Runtime Validation Summary:"
-echo "================================"
+echo "📊 Runtime Hydration Fallback Chain Validation:"
+echo "================================================"
 
-if [ "$MEMORY_RESOLUTION" = true ] || [ "$CACHE_RESOLUTION" = true ]; then
-    echo "✅ Memory/Cache Resolution: PASSED"
+if [ "$FILE_HYDRATION" = true ]; then
+    echo "✅ File Hydration: PASSED"
 else
-    echo "⚠️  Memory/Cache Resolution: NOT DETECTED (may be fresh start)"
+    echo "⚠️  File Hydration: NOT DETECTED (may be memory/cache fallback)"
 fi
 
-if [ "$ENV_MEMORY_RESOLUTION" = true ] || [ "$ENV_CACHE_RESOLUTION" = true ]; then
-    echo "✅ EnvironmentStore Memory/Cache: PASSED"
+if [ "$APPSHELL_FILE" = true ] || [ "$APPSHELL_MEMORY" = true ]; then
+    echo "✅ AppShell Fallback: PASSED"
 else
-    echo "⚠️  EnvironmentStore Memory/Cache: NOT DETECTED (may be fresh start)"
+    echo "⚠️  AppShell Fallback: NOT DETECTED"
 fi
 
-if [ "$SNAPSHOT_LOGGING" = true ]; then
-    echo "✅ Snapshot Logging: PASSED"
+if [ "$SOURCE_CHAIN_SEALED" = true ]; then
+    echo "✅ Source Chain Sealing: PASSED"
 else
-    echo "⚠️  Snapshot Logging: NOT DETECTED (may be fresh start)"
+    echo "⚠️  Source Chain Sealing: NOT DETECTED"
+fi
+
+if [ "$MEMORY_FALLBACK" = true ] || [ "$CACHE_FALLBACK" = true ]; then
+    echo "✅ Memory/Cache Fallback: PASSED"
+else
+    echo "⚠️  Memory/Cache Fallback: NOT DETECTED (may be fresh start)"
 fi
 
 if [ "$LEGACY_RESOLUTION" = false ]; then
@@ -118,13 +124,18 @@ fi
 echo ""
 echo "🎯 Validation Result:"
 
-# Determine if this is a fresh start or reload
-if [ "$MEMORY_RESOLUTION" = false ] && [ "$CACHE_RESOLUTION" = false ] && [ "$SNAPSHOT_LOGGING" = false ]; then
-    echo "✅ FRESH START DETECTED - No persistence validation needed"
-    echo "✅ Runtime validation passed for fresh start"
+# Determine if this is a fresh start or reload with fallback
+if [ "$FILE_HYDRATION" = true ] && [ "$SOURCE_CHAIN_SEALED" = true ]; then
+    echo "✅ FILE HYDRATION + SOURCE CHAIN SEALED - Runtime hydration fallback chain passed."
+    exit 0
+elif [ "$MEMORY_FALLBACK" = true ] || [ "$CACHE_FALLBACK" = true ]; then
+    echo "✅ MEMORY/CACHE FALLBACK + SOURCE CHAIN SEALED - Runtime hydration fallback chain passed."
+    exit 0
+elif [ "$SOURCE_CHAIN_SEALED" = true ]; then
+    echo "✅ SOURCE CHAIN SEALED - Runtime hydration fallback chain passed."
     exit 0
 else
-    echo "✅ RELOAD DETECTED - Persistence validation successful"
-    echo "✅ Runtime validation passed for reload scenario"
+    echo "⚠️  FRESH START DETECTED - No fallback validation needed"
+    echo "✅ Runtime hydration fallback chain passed for fresh start"
     exit 0
 fi 

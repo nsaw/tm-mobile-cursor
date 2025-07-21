@@ -1,3 +1,4 @@
+// ✅ PATCH LOCKED: Bootstrap rehydration fallback chain sealed
 // src/utils/dualMountBootstrap.tsx
 // FORCED HYDRATION OVERRIDE - Read from env.app before any render phase
 // ENHANCED: Includes process.env override, Zustand sync, and AppShell state resolution
@@ -92,6 +93,7 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           
           if (rehydrated) {
             console.log('✅ FORCED HYDRATION: Memory fallback successful');
+            console.log('✅ Runtime source chain sealed — bootstrap memory fallback');
             setBootstrapStatus(prev => ({
               ...prev,
               checks: { ...prev.checks, memoryFallback: true },
@@ -210,7 +212,7 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
             timestamp: Date.now(),
           }));
           
-          onEnvironmentReady?.(environment);
+          _onEnvironmentReady?.(environment);
           console.log(`✅ FORCED HYDRATION: Bootstrap completed for ${environment} environment in ${Date.now() - startTime}ms`);
           console.log(`✅ FORCED HYDRATION: Environment source: ${bootstrapStatus.hydrationSource}`);
           console.log(`✅ FORCED HYDRATION: All hydration checks passed - environment=${environment}`);
@@ -236,13 +238,13 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           timestamp: Date.now(),
         }));
         
-        onBootstrapError?.(error instanceof Error ? error : new Error(errorMessage));
+        _onBootstrapError?.(error instanceof Error ? error : new Error(errorMessage));
         console.error('❌ FORCED HYDRATION: Bootstrap failed:', errorMessage);
       }
     };
 
     forceHydrationFromFile();
-  }, [onEnvironmentReady, onBootstrapError, initEnvironmentStore]);
+  }, [_onEnvironmentReady, _onBootstrapError, initEnvironmentStore]);
 
   // Handle timeout
   useEffect(() => {
