@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -38,8 +38,11 @@ interface DashboardScreenProps {
 }
 
 export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
+  // STABILIZED HOOK CHAIN - ALL HOOKS CALLED IN SAME ORDER EVERY TIME
   const { width: windowWidth } = useWindowDimensions();
   const { typography, buttonStyles, spacing, tokens } = useTheme();
+  
+  // All useState hooks in consistent order
   const [refreshing, setRefreshing] = useState(false);
   const [selectedTag, setSelectedTag] = useState<string>('all');
   const [localTagFilter, setLocalTagFilter] = useState<string>('all');
@@ -47,32 +50,34 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
   const [showBinsSection, setShowBinsSection] = useState(true);
   const [showThoughtmarksSection, setShowThoughtmarksSection] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
-  const { user, isAuthenticated, loading } = useAuth();
   const [showOnboarding, setShowOnboarding] = useState(false);
-  
-  // Draggable sections state
   const [isDragging, setIsDragging] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [showReorderHint, setShowReorderHint] = useState(false);
-  const tooltipOpacity = new Animated.Value(0);
-  const infoButtonScale = new Animated.Value(1);
+  
+  // All useRef hooks
+  const scrollViewRef = useRef(null);
+  
+  // All custom hooks in consistent order
+  const { user, isAuthenticated, loading } = useAuth();
   const { sections, isLoading: sectionsLoading, reorderSections } = useDashboardOrder();
-
   const {
     thoughtmarks,
     loading: thoughtmarksLoading,
     error: thoughtmarksError,
     fetchThoughtmarks,
   } = useThoughtmarks();
-
   const {
     bins,
     loading: binsLoading,
     error: binsError,
     fetchBins,
   } = useBins();
-
   const { showVoiceRecorder } = useVoiceRecorder();
+  
+  // Animated values
+  const tooltipOpacity = new Animated.Value(0);
+  const infoButtonScale = new Animated.Value(1);
 
   // Auth blocking logic
   useEffect(() => {

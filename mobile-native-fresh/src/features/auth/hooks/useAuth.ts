@@ -150,6 +150,13 @@ export const useAuth = () => {
   };
 
   const signInWithDemo = async () => {
+    // PATCHED: Fix infinite demo login loop - add guard to prevent repeated login
+    const currentState = authState;
+    if (currentState.user?.id === '2' && currentState.isAuthenticated) {
+      console.log('✅ Demo user already logged in, skipping repeat login');
+      return;
+    }
+    
     console.log('🔐 Auth: Starting demo login...');
     try {
       const res = await apiService.demoLogin();

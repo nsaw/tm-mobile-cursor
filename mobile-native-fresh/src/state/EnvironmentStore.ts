@@ -58,9 +58,23 @@ export const useEnvironmentStore = create<EnvironmentStore>((set, get) => ({
     try {
       // FORCE READ FROM ENV.APP FILE (source of truth)
       const envPath = `${FileSystem.documentDirectory}env.app`;
-      const fileContents = await FileSystem.readAsStringAsync(envPath);
+      let fileContents: string;
       
-      console.log('✅ FORCED HYDRATION: Successfully read env.app file in EnvironmentStore');
+      try {
+        fileContents = await FileSystem.readAsStringAsync(envPath);
+        console.log('✅ FORCED HYDRATION: Successfully read env.app file in EnvironmentStore');
+      } catch (readError) {
+        console.warn('❌ [FORCED HYDRATION] Failed to read env.app file:', (readError as Error).message);
+        // Fallback to memory or mark environment as UNKNOWN safely
+        set({ 
+          environment: 'legacy', 
+          hydrationSource: 'error_fallback' as any,
+          hydrationStatus: 'failed',
+          lastHydrationAttempt: Date.now()
+        });
+        initialized = true;
+        return;
+      }
       
       // Parse environment from file content
       const lines = fileContents.split('\n');

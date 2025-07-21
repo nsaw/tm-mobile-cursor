@@ -246,15 +246,15 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
     forceHydrationFromFile();
   }, [_onEnvironmentReady, _onBootstrapError, initEnvironmentStore]);
 
-  // Handle timeout
+  // PATCHED: Remove bootstrap timeout - replace with runtime guard
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeoutReached(true);
-      console.warn('⚠️ FORCED HYDRATION: Bootstrap timeout reached');
-    }, timeout);
-
-    return () => clearTimeout(timer);
-  }, [timeout]);
+    const hydrationCheck = setTimeout(() => {
+      if (!bootstrapStatus.isReady) {
+        console.warn('⚠️ FORCED HYDRATION: Timeout - environment not confirmed');
+      }
+    }, 3000);
+    return () => clearTimeout(hydrationCheck);
+  }, [bootstrapStatus.isReady]);
 
   // Show splash fallback if not ready
   if (!bootstrapStatus.isReady) {
