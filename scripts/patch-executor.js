@@ -128,8 +128,11 @@ class PatchExecutor {
       // Execute based on patch type
       const result = await this.executePatchData(patchData, patchFileName);
       
+      // Find the correct patches directory for this file
+      const patchesDir = path.dirname(absolutePatchPath);
+      
       // Ensure completed directory exists
-      const completedDir = path.join(this.patchesPath, '.completed');
+      const completedDir = path.join(patchesDir, '.completed');
       if (!fs.existsSync(completedDir)) {
         fs.mkdirSync(completedDir, { recursive: true });
       }
@@ -145,8 +148,11 @@ class PatchExecutor {
     } catch (error) {
       console.error(`❌ Error executing patch ${absolutePatchPath}:`, error.message);
       
+      // Find the correct patches directory for this file
+      const patchesDir = path.dirname(absolutePatchPath);
+      
       // Ensure failed directory exists
-      const failedDir = path.join(this.patchesPath, '.failed');
+      const failedDir = path.join(patchesDir, '.failed');
       if (!fs.existsSync(failedDir)) {
         fs.mkdirSync(failedDir, { recursive: true });
       }
