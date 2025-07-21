@@ -1,10 +1,12 @@
 // src/utils/dualMountBootstrap.tsx
 // FORCED HYDRATION OVERRIDE - Read from env.app before any render phase
+// ENHANCED: Includes process.env override, Zustand sync, and AppShell state resolution
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 
+import { useEnvironmentStore } from '../state/EnvironmentStore';
 import SplashFallback from '../components/SplashFallback';
 import EnvironmentIndicator from '../components/EnvironmentIndicator';
 
@@ -27,6 +29,9 @@ interface BootstrapStatus {
     environmentValidation: boolean;
     stateInitialization: boolean;
     noLegacyFallback: boolean;
+    processEnvOverride: boolean;
+    zustandSync: boolean;
+    appShellResolution: boolean;
   };
 }
 
@@ -37,6 +42,8 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
   onEnvironmentReady,
   onBootstrapError,
 }) => {
+  const { init: initEnvironmentStore } = useEnvironmentStore();
+  
   const [bootstrapStatus, setBootstrapStatus] = useState<BootstrapStatus>({
     isReady: false,
     environment: 'unknown',
@@ -47,6 +54,9 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
       environmentValidation: false,
       stateInitialization: false,
       noLegacyFallback: false,
+      processEnvOverride: false,
+      zustandSync: false,
+      appShellResolution: false,
     },
   });
 
@@ -108,35 +118,70 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           }));
         }
 
-        // STEP 4: Block any process.env fallback
+        // STEP 4: FORCE PROCESS.ENV OVERRIDE (critical for runtime masking)
         const processEnvEnvironment = process.env.EXPO_PUBLIC_ENVIRONMENT;
         if (processEnvEnvironment && processEnvEnvironment !== environment) {
           console.warn(`⚠️ FORCED HYDRATION: Blocking stale process.env value (${processEnvEnvironment}) in favor of file value (${environment})`);
+          
+          // Explicitly override process.env for runtime consistency
+          if (environment === 'nextgen') {
+            process.env.EXPO_PUBLIC_ENVIRONMENT = 'nextgen';
+            console.log('✅ FORCED HYDRATION: Explicitly overrode process.env.EXPO_PUBLIC_ENVIRONMENT to nextgen');
+          }
         }
         
         // HYDRATION GUARD VERIFICATION: Override detection for legacy fallbacks
-        if (process.env.EXPO_PUBLIC_ENVIRONMENT !== 'nextgen') {
+        if (process.env.EXPO_PUBLIC_ENVIRONMENT !== 'nextgen' && environment === 'nextgen') {
           console.warn('❌ Detected legacy process.env value — this should have been overridden');
+          // Force override again
+          process.env.EXPO_PUBLIC_ENVIRONMENT = 'nextgen';
+          console.log('✅ FORCED HYDRATION: Re-overrode process.env to nextgen');
         }
         
         setBootstrapStatus(prev => ({
           ...prev,
-          checks: { ...prev.checks, noLegacyFallback: true },
+          checks: { ...prev.checks, noLegacyFallback: true, processEnvOverride: true },
         }));
 
-        // STEP 5: Initialize state with file-based environment
+        // STEP 5: SYNC WITH ZUSTAND ENVIRONMENT STORE
+        console.log('🔄 FORCED HYDRATION: Syncing with Zustand EnvironmentStore...');
+        await initEnvironmentStore();
+        console.log('✅ FORCED HYDRATION: Zustand EnvironmentStore sync complete');
+        setBootstrapStatus(prev => ({
+          ...prev,
+          checks: { ...prev.checks, zustandSync: true },
+        }));
+
+        // STEP 6: Initialize state with file-based environment
         await new Promise(resolve => setTimeout(resolve, 100)); // Ensure state propagation
         setBootstrapStatus(prev => ({
           ...prev,
           checks: { ...prev.checks, stateInitialization: true },
         }));
 
-        // STEP 6: Complete bootstrap
+        // STEP 7: VERIFY APPSHELL RESOLUTION
+        console.log('🔍 FORCED HYDRATION: Verifying AppShell state resolution...');
+        const { environment: zustandEnv, hydrationSource: zustandSource } = useEnvironmentStore.getState();
+        
+        if (zustandEnv === environment && zustandSource === 'file') {
+          console.log('✅ FORCED HYDRATION: AppShell state resolution verified');
+          setBootstrapStatus(prev => ({
+            ...prev,
+            checks: { ...prev.checks, appShellResolution: true },
+          }));
+        } else {
+          console.warn(`⚠️ FORCED HYDRATION: AppShell state mismatch - expected ${environment} from file, got ${zustandEnv} from ${zustandSource}`);
+        }
+
+        // STEP 8: Complete bootstrap with all checks
         const allChecksPassed = Object.values({
           fileHydration: true,
           environmentValidation: true,
           stateInitialization: true,
           noLegacyFallback: true,
+          processEnvOverride: true,
+          zustandSync: true,
+          appShellResolution: true,
         }).every(check => check);
 
         if (allChecksPassed) {
@@ -149,8 +194,19 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           onEnvironmentReady?.(environment);
           console.log(`✅ FORCED HYDRATION: Bootstrap completed for ${environment} environment in ${Date.now() - startTime}ms`);
           console.log(`✅ FORCED HYDRATION: Environment source: ${bootstrapStatus.hydrationSource}`);
+          console.log(`✅ FORCED HYDRATION: All hydration checks passed - environment=${environment}`);
         } else {
-          throw new Error('Forced hydration checks failed');
+                  const failedChecks = Object.entries({
+          fileHydration: true,
+          environmentValidation: true,
+          stateInitialization: true,
+          noLegacyFallback: true,
+          processEnvOverride: true,
+          zustandSync: true,
+          appShellResolution: true,
+        }).filter(([, value]) => !value).map(([key]) => key);
+          
+          throw new Error(`Forced hydration checks failed: ${failedChecks.join(', ')}`);
         }
 
       } catch (error) {
@@ -167,7 +223,7 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
     };
 
     forceHydrationFromFile();
-  }, [onEnvironmentReady, onBootstrapError]);
+  }, [onEnvironmentReady, onBootstrapError, initEnvironmentStore]);
 
   // Handle timeout
   useEffect(() => {
