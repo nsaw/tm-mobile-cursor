@@ -1,55 +1,8 @@
 {
-  "watchman": {
-    "suppressPatterns": [
-      "**/node_modules/**",
-      "**/.git/**",
-      "**/ios-bak/**",
-      "**/src/theme/**",
-      "**/src/utils/**",
-      "**/reference/**",
-      "**/.expo/**",
-      "**/.turbo/**",
-      "**/.next/**",
-      "**/build/**",
-      "**/dist/**",
-      "**/*.log",
-      "**/*.pid"
-    ],
-    "maxFileWatches": 10000,
-    "throttleMs": 1000
-  },
-  "fileWatcher": {
-    "excludePatterns": [
-      "**/node_modules/**",
-      "**/.git/**",
-      "**/ios-bak/**",
-      "**/src/theme/**",
-      "**/src/utils/**",
-      "**/reference/**",
-      "**/.expo/**",
-      "**/.turbo/**",
-      "**/.next/**",
-      "**/build/**",
-      "**/dist/**",
-      "**/*.log",
-      "**/*.pid"
-    ],
-    "maxWatchers": 5000,
-    "debounceMs": 500
-  },
-  "hotReload": {
-    "suppressPaths": [
-      "src/theme/",
-      "src/utils/",
-      "reference/",
-      "ios-bak/"
-    ],
-    "maxReloadsPerMinute": 10
-  },
-  "devProtection": {
-    "enabled": true,
-    "maxCpuPercent": 80,
-    "maxMemoryMb": 4096,
-    "emergencyCleanup": true
-  }
+  "enforceValidationGate": true,
+  "strictRuntimeAudit": true,
+  "runDryCheck": true,
+  "forceRuntimeTrace": true,
+  "requireMutationProof": true,
+  "requireServiceUptime": true
 } 

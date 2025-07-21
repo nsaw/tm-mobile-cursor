@@ -489,6 +489,13 @@ class SacredComponentManager {
   }
 
   /**
+   * Update configuration
+   */
+  updateConfig(config: Partial<SacredComponentConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
+
+  /**
    * Clear sacred components data
    */
   clearSacredComponentsData(): void {
@@ -528,7 +535,8 @@ export const sacredComponentManager = new SacredComponentManager();
 // Export utility functions
 export function initializeSacredComponentManager(config?: Partial<SacredComponentConfig>): void {
   if (config) {
-    Object.assign(sacredComponentManager.config, config);
+    // Use public method to update configuration
+    sacredComponentManager.updateConfig(config);
   }
 }
 

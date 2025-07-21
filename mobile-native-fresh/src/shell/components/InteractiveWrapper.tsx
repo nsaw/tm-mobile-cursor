@@ -1,6 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, TouchableOpacityProps, View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+
 import { UIInteractiveRole } from '../../types/roles';
+
 import { RoleWrapper, validateRole } from './RoleWrapper';
 
 export interface InteractiveWrapperProps {

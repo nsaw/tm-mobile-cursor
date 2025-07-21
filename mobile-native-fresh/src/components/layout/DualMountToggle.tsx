@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text } from '../ui/Text';
 import { AutoRoleView } from '../AutoRoleView';
-import { toggleEnvironment, getCurrentEnvironment } from '../../utils/dualMountToggle';
+import { toggleEnvironment, getCurrentEnvironment, addEnvironmentChangeCallback, removeEnvironmentChangeCallback } from '../../utils/dualMountToggle';
 
 interface DualMountToggleProps {
   position?: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right';
@@ -18,8 +18,27 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
   opacity = 0.8,
 }) => {
   const [isToggling, setIsToggling] = useState(false);
+  const [currentEnvironment, setCurrentEnvironment] = useState<'legacy' | 'nextgen'>('legacy');
   const insets = useSafeAreaInsets();
-  const currentEnvironment = getCurrentEnvironment();
+
+  // Update local state when environment changes
+  useEffect(() => {
+    const updateEnvironment = () => {
+      const env = getCurrentEnvironment();
+      setCurrentEnvironment(env);
+    };
+
+    // Set initial environment
+    updateEnvironment();
+
+    // Add callback for environment changes
+    addEnvironmentChangeCallback(updateEnvironment);
+
+    // Cleanup callback on unmount
+    return () => {
+      removeEnvironmentChangeCallback(updateEnvironment);
+    };
+  }, []);
 
   const handleToggle = async () => {
     if (isToggling) return;
@@ -27,9 +46,12 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
     setIsToggling(true);
     
     try {
-      const result = toggleEnvironment();
+      const result = await toggleEnvironment();
       
       if (result.success) {
+        // Update local state immediately
+        setCurrentEnvironment(result.currentEnvironment);
+        
         Alert.alert(
           'Environment Switched',
           `Switched from ${result.previousEnvironment} to ${result.currentEnvironment}`,

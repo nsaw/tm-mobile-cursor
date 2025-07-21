@@ -4,21 +4,11 @@
 PROJECT_PATH='/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh'
 
 # Create status-based directories if they don't exist
-mkdir -p "$PROJECT_PATH/tasks/patches/.archive/"
+mkdir -p "$PROJECT_PATH/tasks/patches/.archived/"
 mkdir -p "$PROJECT_PATH/tasks/patches/.completed/"
 mkdir -p "$PROJECT_PATH/tasks/patches/.failed/"
-mkdir -p "$PROJECT_PATH/tasks/summaries/archived/"
+mkdir -p "$PROJECT_PATH/tasks/summaries/.archived/"
 
-# Create phase-specific directories for src-nextgen
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-0/.completed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-0/.failed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-0/.archive/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-1/.completed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-1/.failed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-1/.archive/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-2/.completed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-2/.failed/"
-mkdir -p "$PROJECT_PATH/src-nextgen/patches/phase-2/.archive/"
 
 echo "🔍 Auto-organizer: Checking patches for summaries..."
 
@@ -217,8 +207,8 @@ for phase_dir in "$PROJECT_PATH/src-nextgen/patches/phase-"*; do
       summary_file=$(find "$PROJECT_PATH/tasks/summaries/" -name "$summary_pattern" 2>/dev/null | head -1)
       
       if [ -n "$summary_file" ]; then
-        # Only archive if patch is older than 30 minutes AND has a summary
-        if [ $(find "$patch_file" -mmin +30 2>/dev/null | wc -l) -gt 0 ]; then
+        # Only archive if patch is older than 60min AND has a summary
+        if [ $(find "$patch_file" -mmin +60 2>/dev/null | wc -l) -gt 0 ]; then
           mv "$patch_file" "$phase_dir/.archive/"
           echo "📦 Archived processed patch: $phase_name/$(basename "$patch_file") (has summary and is old)"
           moved_patches="$moved_patches $(basename "$patch_file")"
@@ -236,7 +226,7 @@ done
 echo "🔍 Auto-organizer: Archiving old summaries..."
 
 # Archive stale summaries (older than 30 minutes)
-find "$PROJECT_PATH/tasks/summaries/" -name '*.md' -mmin +30 -exec mv {} "$PROJECT_PATH/tasks/summaries/archived/" \;
+find "$PROJECT_PATH/tasks/summaries/" -name '*.md' -mtime +1 -exec mv {} "$PROJECT_PATH/tasks/summaries/.archived/" \;
 
 # Update master index if modified
 if [ -f "$PROJECT_PATH/tasks/INDEX.md" ]; then

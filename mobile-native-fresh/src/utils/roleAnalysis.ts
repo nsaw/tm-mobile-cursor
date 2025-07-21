@@ -475,7 +475,7 @@ class RoleAnalyzer {
       suggestions.push('Consider reviewing role assignments for better accessibility');
     }
 
-    if (analysis.assignments.length === 0) {
+    if (analysis.assignedRoles.length === 0) {
       suggestions.push('Add explicit roles to improve component accessibility');
     }
 
@@ -522,6 +522,13 @@ class RoleAnalyzer {
   }
 
   /**
+   * Update configuration
+   */
+  updateConfig(config: Partial<RoleAnalysisConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
+
+  /**
    * Generate role analysis report
    */
   generateReport(analyses: RoleAnalysis[]): string {
@@ -555,7 +562,8 @@ export const roleAnalyzer = new RoleAnalyzer();
 // Export utility functions
 export function initializeRoleAnalyzer(config?: Partial<RoleAnalysisConfig>): void {
   if (config) {
-    Object.assign(roleAnalyzer.config, config);
+    // Use public method to update configuration
+    roleAnalyzer.updateConfig(config);
   }
 }
 

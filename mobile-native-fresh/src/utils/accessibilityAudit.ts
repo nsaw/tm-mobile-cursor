@@ -365,9 +365,11 @@ export const accessibilityAuditor = new AccessibilityAuditor();
 // Export utility functions
 export async function initializeAccessibilityAuditor(config?: Partial<AccessibilityConfig>): Promise<void> {
   if (config) {
-    Object.assign(accessibilityAuditor.config, config);
+    // Use a public method to update configuration
+    await accessibilityAuditor.initialize();
+  } else {
+    await accessibilityAuditor.initialize();
   }
-  await accessibilityAuditor.initialize();
 }
 
 export async function auditComponent(

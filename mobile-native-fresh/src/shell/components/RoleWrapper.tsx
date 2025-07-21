@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ViewProps, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+
 import { ShellRole } from '../types';
 
 export interface RoleWrapperProps {

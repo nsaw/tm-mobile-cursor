@@ -589,7 +589,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                         { text: 'Cancel', style: 'cancel'},
                         { 
                           text: 'Add', 
-                          onPress: (newTag) => {
+                          onPress: (newTag?: string) => {
                             if (newTag && newTag.trim() && !tags.includes(newTag.trim())) {
                               setTags([...tags, newTag.trim()]);
                             }

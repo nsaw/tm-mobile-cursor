@@ -59,10 +59,10 @@ module.exports = {
             if (!isTokensUsage) return;
 
             // Check if we're inside a useTheme() call
-            const ancestors = context.getAncestors();
+            const ancestors = context.getSourceCode().getAncestors ? context.getSourceCode().getAncestors(node) : [];
             const isInUseTheme = ancestors.some(ancestor => 
               ancestor.type === 'CallExpression' && 
-              ancestor.callee.name === 'useTheme'
+              ancestor.callee && ancestor.callee.name === 'useTheme'
             );
 
             // Check if we're inside a component function

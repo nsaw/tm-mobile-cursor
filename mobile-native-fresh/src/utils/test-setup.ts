@@ -85,7 +85,7 @@ process.env.EXPO_PUBLIC_USE_NEXTGEN = process.env.EXPO_PUBLIC_USE_NEXTGEN || 'fa
 process.env.EXPO_PUBLIC_ENVIRONMENT = process.env.EXPO_PUBLIC_ENVIRONMENT || 'legacy';
 
 // Global test utilities
-global.testUtils = {
+(global as any).testUtils = {
   // Helper to create test components
   createTestComponent: (Component: any, props: any = {}) => {
     return Component(props);

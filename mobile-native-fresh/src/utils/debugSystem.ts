@@ -218,8 +218,8 @@ class DebugSystem {
     const originalOnUnhandledRejection = global.onunhandledrejection;
     global.onunhandledrejection = (event) => {
       this.trackError(event.reason, { type: 'unhandledRejection' });
-      if (originalOnUnhandledRejection) {
-        originalOnUnhandledRejection(event);
+      if (originalOnUnhandledRejection && typeof originalOnUnhandledRejection === 'function') {
+        (originalOnUnhandledRejection as any).call(globalThis, event);
       }
     };
   }

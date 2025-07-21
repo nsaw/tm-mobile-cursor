@@ -2,6 +2,7 @@
 // Manages layout contracts, z-index protection, and safe-frame shells
 
 import { UILayoutRole } from '../../types/roles';
+
 import { 
   ZIndexContract, 
   SafeFrameShell, 
@@ -11,7 +12,6 @@ import {
   LayoutManager,
   defaultZIndexContracts,
   defaultSafeFrameShells,
-  getZIndexForLayer,
   getLayerForZIndex,
   validateZIndex
 } from './LayoutContract';

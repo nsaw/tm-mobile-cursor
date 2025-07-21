@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ViewProps } from 'react-native';
+import { View } from 'react-native';
+
 import { ShellRole } from '../types';
 
 export interface SacredViewMountProps {

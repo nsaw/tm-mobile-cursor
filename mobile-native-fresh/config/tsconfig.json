@@ -12,7 +12,7 @@
       "@/*": ["src/*"]
     }
   },
-  "extends": "expo/tsconfig.base",
-  "include": ["src", "app"],
-  "exclude": ["tm-mobile-clone/**/*", "reference/**/*", "ios bak/**/*"]
+  "extends": "../tsconfig.base.json",
+  "include": ["../src/**/*"],
+  "exclude": ["../tm-mobile-clone/**/*", "../reference/**/*", "../ios bak/**/*"]
 }

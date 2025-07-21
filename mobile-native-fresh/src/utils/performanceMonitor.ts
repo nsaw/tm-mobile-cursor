@@ -106,9 +106,8 @@ class PerformanceMonitor {
    * Get current memory usage
    */
   private getMemoryUsage(): number {
-    if (typeof performance !== 'undefined' && performance.memory) {
-      return performance.memory.usedJSHeapSize;
-    }
+    // React Native doesn't have performance.memory
+    // Return 0 for now, could be enhanced with native modules
     return 0;
   }
 

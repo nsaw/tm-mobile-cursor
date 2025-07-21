@@ -1,7 +1,7 @@
 import React, { createContext, useContext, ReactNode, useEffect } from 'react';
 
 import { LayoutContract } from '../types';
-import { zIndexProtectionManager } from './ZIndexProtection';
+
 
 interface LayoutContextType {
   layout?: LayoutContract;

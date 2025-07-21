@@ -654,6 +654,13 @@ class SacredLayoutManager {
   }
 
   /**
+   * Update configuration
+   */
+  updateConfig(config: Partial<SacredLayoutConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
+
+  /**
    * Clear sacred layouts data
    */
   clearSacredLayoutsData(): void {
@@ -702,7 +709,8 @@ export const sacredLayoutManager = new SacredLayoutManager();
 // Export utility functions
 export function initializeSacredLayoutManager(config?: Partial<SacredLayoutConfig>): void {
   if (config) {
-    Object.assign(sacredLayoutManager.config, config);
+    // Use public method to update configuration
+    sacredLayoutManager.updateConfig(config);
   }
 }
 

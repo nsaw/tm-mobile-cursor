@@ -505,6 +505,13 @@ class RollbackValidator {
   }
 
   /**
+   * Update configuration
+   */
+  updateConfig(config: Partial<RollbackValidationConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
+
+  /**
    * Generate rollback validation report
    */
   generateReport(validationResults: RollbackValidationResult[]): string {
@@ -537,7 +544,8 @@ export const rollbackValidator = new RollbackValidator();
 // Export utility functions
 export function initializeRollbackValidator(config?: Partial<RollbackValidationConfig>): void {
   if (config) {
-    Object.assign(rollbackValidator.config, config);
+    // Use public method to update configuration
+    rollbackValidator.updateConfig(config);
   }
 }
 

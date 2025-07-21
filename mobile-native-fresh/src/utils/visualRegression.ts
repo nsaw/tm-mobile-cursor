@@ -108,7 +108,7 @@ class VisualRegressionTester {
     url: string = 'http://localhost:8081'
   ): Promise<string> {
     try {
-      const { modernScreenshot } = await import('modern-screenshot');
+      const modernScreenshot = await import('modern-screenshot');
       
       const filename = `${componentName}-${environment}-${Date.now()}.png`;
       const filepath = this.path.join(this.config.currentDir, filename);
@@ -117,7 +117,7 @@ class VisualRegressionTester {
       process.env.EXPO_PUBLIC_USE_NEXTGEN = environment === 'nextgen' ? 'true' : 'false';
       process.env.EXPO_PUBLIC_ENVIRONMENT = environment;
 
-      const screenshot = await modernScreenshot(url, {
+      const screenshot = await (modernScreenshot as any).default(url, {
         width: this.config.viewport.width,
         height: this.config.viewport.height,
         devicePixelRatio: this.config.devicePixelRatio,
@@ -295,6 +295,13 @@ class VisualRegressionTester {
   }
 
   /**
+   * Update configuration
+   */
+  updateConfig(config: Partial<VisualRegressionConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
+
+  /**
    * Get baseline information
    */
   getBaseline(): VisualBaseline {
@@ -328,7 +335,8 @@ export const visualRegressionTester = new VisualRegressionTester();
 // Export utility functions
 export async function initializeVisualRegression(config?: Partial<VisualRegressionConfig>): Promise<void> {
   if (config) {
-    Object.assign(visualRegressionTester.config, config);
+    // Use public method to update configuration
+    visualRegressionTester.updateConfig(config);
   }
   await visualRegressionTester.initialize();
 }

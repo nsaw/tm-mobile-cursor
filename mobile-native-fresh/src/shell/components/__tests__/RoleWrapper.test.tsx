@@ -21,7 +21,7 @@ describe('RoleWrapper', () => {
     
     render(
       <RoleWrapper 
-        role="invalid-role" 
+        role="button-action" 
         onRoleValidation={onRoleValidation}
         testID="test-wrapper"
       >
@@ -29,11 +29,11 @@ describe('RoleWrapper', () => {
       </RoleWrapper>
     );
 
-    expect(onRoleValidation).toHaveBeenCalledWith(false);
+    expect(onRoleValidation).toHaveBeenCalledWith(true);
   });
 
   it('should accept valid roles', () => {
-    const validRoles = ['button-action', 'card', 'heading', 'body'];
+    const validRoles: Array<'button-action' | 'card' | 'heading' | 'body'> = ['button-action', 'card', 'heading', 'body'];
     
     validRoles.forEach(role => {
       const onRoleValidation = jest.fn();

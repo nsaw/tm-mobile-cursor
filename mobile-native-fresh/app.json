@@ -1,0 +1,76 @@
+{
+  "expo": {
+    "scheme": "thoughtmarks",
+    "name": "Thoughtmarks",
+    "slug": "thoughtmarks",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/app-icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0D0D0D"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.thoughtmarks.mobile",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/app-icon.png",
+        "backgroundColor": "#0D0D0D"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.thoughtmarks.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "firebaseConfig": {
+        "apiKey": "AIzaSyDtBzTLI6mbn2r4g6q1whX4LM-xHqXJg5Y",
+        "authDomain": "thoughtmarks-25replit.firebaseapp.com",
+        "projectId": "thoughtmarks-25replit",
+        "storageBucket": "thoughtmarks-25replit.appspot.com",
+        "messagingSenderId": "371020564944",
+        "appId": "1:371020564944:web:your-app-id"
+      },
+      "googleAndroidClientId": "482692133923-uahvc6eshmr3p03mv8dl9vgk6vrl6b5v.apps.googleusercontent.com",
+      "googleIosClientId": "482692133923-urb0tq0gcjbp06e26gimulhjp18kpcpb.apps.googleusercontent.com",
+      "eas": {
+        "projectId": "a913dda1-8ad5-4c41-8d69-a4f5bd9d4ceb"
+      }
+    },
+    "jsEngine": "hermes",
+    "experiments": {
+      "disableErrorOverlay": true,
+      "tsconfigPaths": true
+    },
+    "owner": "nsaw",
+    "updates": {
+      "enabled": false,
+      "fallbackToCacheTimeout": 0
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps"
+        }
+      ]
+    }
+  }
+}

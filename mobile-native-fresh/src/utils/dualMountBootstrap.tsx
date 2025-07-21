@@ -6,6 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import SplashFallback from '../components/SplashFallback';
 import EnvironmentIndicator from '../components/EnvironmentIndicator';
+import { initializeDualMountToggle, getCurrentEnvironment } from './dualMountToggle';
 
 interface DualMountBootstrapProps {
   children: React.ReactNode;
@@ -67,12 +68,28 @@ const DualMountBootstrap: React.FC<DualMountBootstrapProps> = ({
           checks: { ...prev.checks, environmentVariables: true },
         }));
 
-        // Check 2: Dual-mount system
-        await new Promise(resolve => setTimeout(resolve, 500)); // Simulate check
-        setBootstrapStatus(prev => ({
-          ...prev,
-          checks: { ...prev.checks, dualMount: true },
-        }));
+        // Check 2: Dual-mount system - Initialize the toggle system
+        try {
+          initializeDualMountToggle({
+            useNextGen,
+            environment,
+            autoSwitch: false,
+            switchThreshold: 5000,
+            fallbackEnvironment: 'legacy',
+          });
+          
+          // Verify initialization
+          const currentEnvironment = getCurrentEnvironment();
+          console.log(`✅ Dual-mount toggle initialized: ${currentEnvironment} environment`);
+          
+          setBootstrapStatus(prev => ({
+            ...prev,
+            checks: { ...prev.checks, dualMount: true },
+          }));
+        } catch (error) {
+          console.error('❌ Failed to initialize dual-mount toggle:', error);
+          throw error;
+        }
 
         // Check 3: Sacred components
         await new Promise(resolve => setTimeout(resolve, 300)); // Simulate check

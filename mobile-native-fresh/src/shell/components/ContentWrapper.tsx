@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, ViewProps, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
 import { UIContentRole } from '../../types/roles';
+
 import { RoleWrapper, validateRole } from './RoleWrapper';
 
 export interface ContentWrapperProps {

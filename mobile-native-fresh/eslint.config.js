@@ -8,6 +8,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import unusedImports from 'eslint-plugin-unused-imports';
 import promise from 'eslint-plugin-promise';
 import reactNative from 'eslint-plugin-react-native';
+
 import thoughtmarks from './eslint-plugin-thoughtmarks.cjs';
 
 export default [

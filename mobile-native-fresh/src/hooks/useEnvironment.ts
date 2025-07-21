@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toggleEnvironment as toggleDualMount, setEnvironment as setDualMountEnvironment } from '../utils/dualMountToggle';
 
 export type Environment = 'legacy' | 'nextgen';
 
@@ -6,8 +7,8 @@ interface EnvironmentState {
   currentEnvironment: Environment;
   isDevelopment: boolean;
   isProduction: boolean;
-  toggleEnvironment: () => void;
-  setEnvironment: (env: Environment) => void;
+  toggleEnvironment: () => Promise<void>;
+  setEnvironment: (env: Environment) => Promise<void>;
 }
 
 export const useEnvironment = (): EnvironmentState => {
@@ -26,12 +27,26 @@ export const useEnvironment = (): EnvironmentState => {
     }
   }, []);
 
-  const toggleEnvironment = () => {
-    setCurrentEnvironment(prev => prev === 'legacy' ? 'nextgen' : 'legacy');
+  const toggleEnvironment = async () => {
+    try {
+      const result = await toggleDualMount();
+      if (result.success) {
+        setCurrentEnvironment(result.currentEnvironment);
+      }
+    } catch (error) {
+      console.error('Failed to toggle environment:', error);
+    }
   };
 
-  const setEnvironment = (env: Environment) => {
-    setCurrentEnvironment(env);
+  const setEnvironment = async (env: Environment) => {
+    try {
+      const result = await setDualMountEnvironment(env);
+      if (result.success) {
+        setCurrentEnvironment(result.currentEnvironment);
+      }
+    } catch (error) {
+      console.error('Failed to set environment:', error);
+    }
   };
 
   return {
