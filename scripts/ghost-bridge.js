@@ -1,0 +1,1 @@
+/Users/sawyer/gitSync/gpt-cursor-runner/scripts/ghost-bridge.js

@@ -1,8 +1,5 @@
 {
-  "enforceValidationGate": true,
-  "strictRuntimeAudit": true,
-  "runDryCheck": true,
-  "forceRuntimeTrace": true,
-  "requireMutationProof": true,
-  "requireServiceUptime": true
+  "summaryWriteDir": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries",
+  "summaryArchiveDir": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/.archive",
+  "patchWriteDir": "/Users/sawyer/gitSync/.cursor-cache/MAIN/patches"
 } 

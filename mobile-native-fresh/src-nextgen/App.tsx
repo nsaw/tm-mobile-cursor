@@ -2,20 +2,26 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useAppState } from './state/store';
+import { ThemeProvider } from './providers/ThemeProvider';
 
 export default function NextGenApp() {
+  useAppState();
+
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.title}>🚀 NextGen Environment</Text>
-          <Text style={styles.subtitle}>Coming soon...</Text>
-          <Text style={styles.description}>
-            This is the nextgen environment that will contain the new codebase.
-          </Text>
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.content}>
+            <Text style={styles.title}>🚀 NextGen Environment</Text>
+            <Text style={styles.subtitle}>Coming soon...</Text>
+            <Text style={styles.description}>
+              This is the nextgen environment that will contain the new codebase.
+            </Text>
+          </View>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
 
