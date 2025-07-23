@@ -9,6 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { formatActivityItem } = require('./filename-concatenator');
 
 class RealtimeMonitor {
     constructor() {
@@ -281,7 +282,7 @@ class RealtimeMonitor {
         const recent = this.status.recentActivity;
         if (recent.length > 0) {
             recent.forEach(activity => {
-                console.log(`   📄 ${activity.file} (${activity.time})`);
+                console.log(formatActivityItem(activity));
             });
         } else {
             console.log('   No recent activity');
@@ -381,7 +382,7 @@ class RealtimeMonitor {
         if (recent.length > 0) {
             statusText += `📋 **Recent Activity:**\n`;
             recent.forEach(activity => {
-                statusText += `   📄 ${activity.file} (${activity.time})\n`;
+                statusText += formatActivityItem(activity) + '\n';
             });
             statusText += `\n`;
         }

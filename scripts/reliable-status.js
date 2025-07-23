@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { concatenateFilename } = require('./filename-concatenator');
 
 class ReliableStatus {
     constructor() {
@@ -218,7 +219,8 @@ class ReliableStatus {
         if (recent.length > 0) {
             console.log('📋 **Recent Activity (Last 10):**');
             recent.forEach(activity => {
-                console.log(`   📄 ${activity.file} (${activity.time})`);
+                const concatenatedFile = concatenateFilename(activity.file);
+                console.log(`   📄 ${concatenatedFile} (${activity.time})`);
             });
             console.log('');
         }

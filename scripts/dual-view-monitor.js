@@ -9,12 +9,13 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { concatenateFilename } = require('./filename-concatenator');
 
 class DualViewMonitor {
     constructor() {
         this.projectRoot = process.cwd();
         this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches');
-        this.summariesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
+        this.summariesPath = path.resolve('/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries');
         this.logsPath = path.join(this.projectRoot, 'logs');
         
         this.monitoring = false;
@@ -73,39 +74,58 @@ class DualViewMonitor {
         this.displayStatus();
     }
 
-    // Check patch status
+    // Extract patch ID from filename
+    extractPatchId(filename) {
+        if (filename.startsWith('patch-')) {
+            return filename.replace(/^patch-/, '').replace(/\.json$/, '');
+        }
+        if (filename.startsWith('summary-')) {
+            return filename.replace(/^summary-/, '').replace(/\.md$/, '');
+        }
+        return filename.replace(/\.(json|md)$/, '');
+    }
+
+    // Check patch status using the same logic as live-patch-status.js
     checkPatchStatus() {
         try {
-            const patchFiles = fs.readdirSync(this.patchesPath);
-            const status = { pending: 0, executing: 0, completed: 0, failed: 0 };
-            
-            patchFiles.forEach(file => {
-                if (file.endsWith('.json')) {
-                    status.pending++;
-                }
+            // Get patch files
+            const patchDirContents = fs.readdirSync(this.patchesPath);
+            const patchFiles = patchDirContents
+                .filter(f => f.endsWith('.json'))
+                .filter(f => !f.startsWith('.')) // Exclude hidden files
+                .filter(f => fs.existsSync(path.join(this.patchesPath, f))); // Ensure exists
+
+            // Get summary files
+            const summaryDirContents = fs.readdirSync(this.summariesPath);
+            const summaryFiles = summaryDirContents
+                .filter(f => f.endsWith('.md'))
+                .filter(f => !f.startsWith('.')) // Exclude hidden files
+                .filter(f => fs.existsSync(path.join(this.summariesPath, f))); // Ensure exists
+
+            // Extract completed patch IDs from summary files
+            const completedIds = summaryFiles.map(f => this.extractPatchId(f));
+
+            // Filter pending patches - only include patches that don't have corresponding summaries
+            const pendingPatches = patchFiles.filter(patchFile => {
+                const patchId = this.extractPatchId(patchFile);
+                return !completedIds.includes(patchId);
             });
-            
-            // Check archive and failed directories
-            const archivePath = path.join(this.patchesPath, '.archive');
-            const failedPath = path.join(this.patchesPath, '.failed');
-            
-            if (fs.existsSync(archivePath)) {
-                const archived = fs.readdirSync(archivePath).filter(f => f.endsWith('.json')).length;
-                status.completed += archived;
-            }
-            
-            if (fs.existsSync(failedPath)) {
-                const failed = fs.readdirSync(failedPath).filter(f => f.endsWith('.json')).length;
-                status.failed += failed;
-            }
+
+            const status = {
+                pending: pendingPatches.length,
+                executing: 0,
+                completed: completedIds.length,
+                failed: 0
+            };
             
             this.statusCategories.patches = status;
         } catch (error) {
             console.error('❌ Error checking patch status:', error.message);
+            this.statusCategories.patches = { pending: 0, executing: 0, completed: 0, failed: 0 };
         }
     }
 
-    // Check system status
+    // Check system status synchronously
     checkSystemStatus() {
         const systems = {
             running: [],
@@ -113,52 +133,79 @@ class DualViewMonitor {
             errors: []
         };
         
-        // Check if patch executor is running
-        exec('ps aux | grep "patch-executor" | grep -v grep', (error, stdout) => {
-            if (stdout.trim()) {
+        try {
+            // Check if patch executor is running
+            const patchExecutorCheck = require('child_process').execSync('ps aux | grep "patch-executor" | grep -v grep', { encoding: 'utf8' });
+            if (patchExecutorCheck.trim()) {
                 systems.running.push('patch-executor');
             } else {
                 systems.stopped.push('patch-executor');
             }
-        });
+        } catch (error) {
+            systems.stopped.push('patch-executor');
+        }
         
-        // Check if ghost bridge is running
-        exec('ps aux | grep "ghost-bridge" | grep -v grep', (error, stdout) => {
-            if (stdout.trim()) {
+        try {
+            // Check if ghost bridge is running
+            const ghostBridgeCheck = require('child_process').execSync('ps aux | grep "ghost-bridge" | grep -v grep', { encoding: 'utf8' });
+            if (ghostBridgeCheck.trim()) {
                 systems.running.push('ghost-bridge');
             } else {
                 systems.stopped.push('ghost-bridge');
             }
-        });
+        } catch (error) {
+            systems.stopped.push('ghost-bridge');
+        }
         
-        // Check if summary monitor is running
-        exec('ps aux | grep "summary-monitor" | grep -v grep', (error, stdout) => {
-            if (stdout.trim()) {
+        try {
+            // Check if summary monitor is running
+            const summaryMonitorCheck = require('child_process').execSync('ps aux | grep "summary-monitor" | grep -v grep', { encoding: 'utf8' });
+            if (summaryMonitorCheck.trim()) {
                 systems.running.push('summary-monitor');
             } else {
                 systems.stopped.push('summary-monitor');
             }
-        });
+        } catch (error) {
+            systems.stopped.push('summary-monitor');
+        }
+        
+        try {
+            // Check if expo dev server is running
+            const expoCheck = require('child_process').execSync('ps aux | grep "expo" | grep -v grep', { encoding: 'utf8' });
+            if (expoCheck.trim()) {
+                systems.running.push('expo-dev-server');
+            } else {
+                systems.stopped.push('expo-dev-server');
+            }
+        } catch (error) {
+            systems.stopped.push('expo-dev-server');
+        }
         
         this.statusCategories.systems = systems;
     }
 
-    // Check ghost runner status
+    // Check ghost runner status synchronously
     checkGhostStatus() {
-        // Check if gpt-cursor-runner is accessible
-        exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout) => {
-            if (error) {
-                this.statusCategories.ghost = {
-                    status: 'unreachable',
-                    lastCheck: new Date().toISOString()
-                };
-            } else {
+        try {
+            // Check if gpt-cursor-runner is accessible
+            const curlCheck = require('child_process').execSync('curl -s -m 5 https://runner.thoughtmarks.app/health', { encoding: 'utf8' });
+            if (curlCheck.trim()) {
                 this.statusCategories.ghost = {
                     status: 'running',
                     lastCheck: new Date().toISOString()
                 };
+            } else {
+                this.statusCategories.ghost = {
+                    status: 'unreachable',
+                    lastCheck: new Date().toISOString()
+                };
             }
-        });
+        } catch (error) {
+            this.statusCategories.ghost = {
+                status: 'unreachable',
+                lastCheck: new Date().toISOString()
+            };
+        }
     }
 
     // Display current status
@@ -177,6 +224,12 @@ class DualViewMonitor {
         if (patches.pending > 0) {
             console.log('   ⚠️  Pending patches detected!');
         }
+        
+        console.log('');
+        
+        // Execution Queue
+        console.log('🔄 EXECUTION QUEUE:');
+        this.showExecutionQueue();
         
         console.log('');
         
@@ -214,6 +267,37 @@ class DualViewMonitor {
         console.log('💡 Commands: start | stop | execute | status');
     }
 
+    // Show execution queue
+    showExecutionQueue() {
+        try {
+            const patchFiles = fs.readdirSync(this.patchesPath)
+                .filter(f => f.endsWith('.json'))
+                .filter(f => !f.startsWith('.'))
+                .filter(f => fs.existsSync(path.join(this.patchesPath, f)));
+
+            const summaryFiles = fs.readdirSync(this.summariesPath)
+                .filter(f => f.endsWith('.md'))
+                .filter(f => !f.startsWith('.'))
+                .filter(f => fs.existsSync(path.join(this.summariesPath, f)));
+
+            const completedIds = summaryFiles.map(f => this.extractPatchId(f));
+            const pendingPatches = patchFiles.filter(patchFile => {
+                const patchId = this.extractPatchId(patchFile);
+                return !completedIds.includes(patchId);
+            });
+
+            if (pendingPatches.length > 0) {
+                pendingPatches.forEach(patch => {
+                    console.log(`   ⏳ ${patch} (queued)`);
+                });
+            } else {
+                console.log('   ✅ No pending patches in queue');
+            }
+        } catch (error) {
+            console.log('   Error reading execution queue');
+        }
+    }
+
     // Show recent activity
     showRecentActivity() {
         try {
@@ -224,12 +308,13 @@ class DualViewMonitor {
                     const bStat = fs.statSync(path.join(this.summariesPath, b));
                     return bStat.mtime - aStat.mtime;
                 })
-                .slice(0, 3);
+                .slice(0, 6);
             
             if (summaryFiles.length > 0) {
                 summaryFiles.forEach(file => {
                     const stat = fs.statSync(path.join(this.summariesPath, file));
-                    console.log(`   📄 ${file} (${stat.mtime.toLocaleTimeString()})`);
+                    const concatenatedFile = concatenateFilename(file);
+                    console.log(`   📄 ${concatenatedFile} (${stat.mtime.toLocaleTimeString()})`);
                 });
             } else {
                 console.log('   No recent activity');
@@ -255,7 +340,7 @@ class DualViewMonitor {
     watchSummaries() {
         const watcher = fs.watch(this.summariesPath, (eventType, filename) => {
             if (filename && filename.endsWith('.md')) {
-                console.log(`📄 Summary file change detected: ${filename}`);
+                console.log(`📫 Summary file change detected: ${filename}`);
                 this.updateStatus();
             }
         });

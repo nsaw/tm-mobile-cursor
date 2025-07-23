@@ -9,6 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { formatActivityItem } = require('./filename-concatenator');
 
 class AgentStatusDisplay {
     constructor() {
@@ -198,7 +199,7 @@ class AgentStatusDisplay {
         if (recent.length > 0) {
             statusText += `📋 **Recent Activity:**\n`;
             recent.forEach(activity => {
-                statusText += `   📄 ${activity.file} (${activity.time})\n`;
+                statusText += formatActivityItem(activity) + '\n';
             });
             statusText += `\n`;
         }

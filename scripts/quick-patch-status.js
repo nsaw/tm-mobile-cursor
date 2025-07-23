@@ -8,6 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { concatenateFilename } = require('./filename-concatenator');
 
 function getPatchStatus() {
     const projectRoot = process.cwd();
@@ -67,7 +68,8 @@ function formatStatus(status) {
     if (status.recent.length > 0) {
         output += `📋 **Recent Activity:**\n`;
         status.recent.forEach(item => {
-            output += `   📄 ${item.file} (${item.time})\n`;
+            const concatenatedFile = concatenateFilename(item.file);
+            output += `   📄 ${concatenatedFile} (${item.time})\n`;
         });
         output += `\n`;
     }
