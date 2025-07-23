@@ -1,7 +1,8 @@
-// useSlotZone: hook to inject into layout slot zones
+// useSlotZone: hook to inject into layout slot zones with navigation awareness
 import React, { useEffect, useState, createContext, useContext } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-// Context for slot zone state
+// Context for slot zone state with navigation awareness
 interface SlotZoneContextType {
   topSlotContent: React.ReactNode | null;
   centerSlotContent: React.ReactNode | null;
@@ -9,15 +10,19 @@ interface SlotZoneContextType {
   setTopSlotContent: (content: React.ReactNode | null) => void;
   setCenterSlotContent: (content: React.ReactNode | null) => void;
   setBottomSlotContent: (content: React.ReactNode | null) => void;
+  currentRoute: string | null;
+  navigationState: any;
 }
 
 const SlotZoneContext = createContext<SlotZoneContextType | null>(null);
 
-// Provider component
+// Provider component with navigation integration
 export const SlotZoneProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [topSlotContent, setTopSlotContent] = useState<React.ReactNode | null>(null);
   const [centerSlotContent, setCenterSlotContent] = useState<React.ReactNode | null>(null);
   const [bottomSlotContent, setBottomSlotContent] = useState<React.ReactNode | null>(null);
+  const [currentRoute, setCurrentRoute] = useState<string | null>(null);
+  const [navigationState, setNavigationState] = useState<any>(null);
 
   return (
     <SlotZoneContext.Provider 
@@ -27,7 +32,9 @@ export const SlotZoneProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         bottomSlotContent,
         setTopSlotContent,
         setCenterSlotContent,
-        setBottomSlotContent
+        setBottomSlotContent,
+        currentRoute,
+        navigationState
       }}
     >
       {children}
@@ -35,8 +42,10 @@ export const SlotZoneProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 };
 
-// Hook to use slot zone
+// Hook to use slot zone with navigation awareness
 const useSlotZone = (zone: 'top' | 'center' | 'bottom', content: React.ReactNode) => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const context = useContext(SlotZoneContext);
 
   useEffect(() => {
@@ -48,10 +57,22 @@ const useSlotZone = (zone: 'top' | 'center' | 'bottom', content: React.ReactNode
       } else if (zone === 'bottom') {
         context.setBottomSlotContent(content);
       }
+      
+      // Update navigation context
+      context.currentRoute = route.name;
+      context.navigationState = navigation.getState();
+      
       // eslint-disable-next-line no-console
-      console.log(`[SlotBridge] Injecting into ${zone} zone`);
+      console.log(`[SlotBridge] Injecting into ${zone} zone on route: ${route.name}`);
     }
-  }, [zone, content, context]);
+  }, [zone, content, context, route.name, navigation]);
+
+  return {
+    navigation,
+    route,
+    currentRoute: route.name,
+    navigationState: navigation.getState()
+  };
 };
 
 // Hook to get slot content
@@ -68,6 +89,15 @@ export const useCenterSlotContent = () => {
 export const useBottomSlotContent = () => {
   const context = useContext(SlotZoneContext);
   return context?.bottomSlotContent || null;
+};
+
+// Hook to get navigation context
+export const useSlotNavigation = () => {
+  const context = useContext(SlotZoneContext);
+  return {
+    currentRoute: context?.currentRoute || null,
+    navigationState: context?.navigationState || null
+  };
 };
 
 export default useSlotZone; 

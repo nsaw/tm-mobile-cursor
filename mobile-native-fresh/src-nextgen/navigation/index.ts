@@ -1,4 +1,4 @@
 // src-nextgen/navigation/index.ts
-// Placeholder for nextgen navigation
+// Export nextgen navigation components
 
-export {}; 
+export { MainStack as RootStack } from './stack'; 
