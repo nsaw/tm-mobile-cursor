@@ -1,0 +1,1 @@
+{ "test": "ghost relay patch propagation", "status": "should appear in logs, summary, and disk" } 
