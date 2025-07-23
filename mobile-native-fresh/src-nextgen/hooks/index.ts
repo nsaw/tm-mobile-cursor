@@ -1,4 +1,4 @@
 // src-nextgen/hooks/index.ts
-// Placeholder for nextgen hooks
+// Export nextgen hooks
 
-export {}; 
+export { default as useSlotZone, SlotZoneProvider, useTopSlotContent, useBottomSlotContent } from './useSlotZone'; 
