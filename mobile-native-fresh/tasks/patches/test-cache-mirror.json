@@ -1,0 +1,1 @@
+{ "test": "cache mirror functionality", "status": "should appear in both /tasks/patches and .cursor-cache/MAIN/patches/phase-1" } 
