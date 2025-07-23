@@ -4,8 +4,10 @@ import React, { useEffect, useState, createContext, useContext } from 'react';
 // Context for slot zone state
 interface SlotZoneContextType {
   topSlotContent: React.ReactNode | null;
+  centerSlotContent: React.ReactNode | null;
   bottomSlotContent: React.ReactNode | null;
   setTopSlotContent: (content: React.ReactNode | null) => void;
+  setCenterSlotContent: (content: React.ReactNode | null) => void;
   setBottomSlotContent: (content: React.ReactNode | null) => void;
 }
 
@@ -14,14 +16,17 @@ const SlotZoneContext = createContext<SlotZoneContextType | null>(null);
 // Provider component
 export const SlotZoneProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [topSlotContent, setTopSlotContent] = useState<React.ReactNode | null>(null);
+  const [centerSlotContent, setCenterSlotContent] = useState<React.ReactNode | null>(null);
   const [bottomSlotContent, setBottomSlotContent] = useState<React.ReactNode | null>(null);
 
   return (
     <SlotZoneContext.Provider 
       value={{
         topSlotContent,
+        centerSlotContent,
         bottomSlotContent,
         setTopSlotContent,
+        setCenterSlotContent,
         setBottomSlotContent
       }}
     >
@@ -31,13 +36,15 @@ export const SlotZoneProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 };
 
 // Hook to use slot zone
-const useSlotZone = (zone: 'top' | 'bottom', content: React.ReactNode) => {
+const useSlotZone = (zone: 'top' | 'center' | 'bottom', content: React.ReactNode) => {
   const context = useContext(SlotZoneContext);
 
   useEffect(() => {
     if (context) {
       if (zone === 'top') {
         context.setTopSlotContent(content);
+      } else if (zone === 'center') {
+        context.setCenterSlotContent(content);
       } else if (zone === 'bottom') {
         context.setBottomSlotContent(content);
       }
@@ -51,6 +58,11 @@ const useSlotZone = (zone: 'top' | 'bottom', content: React.ReactNode) => {
 export const useTopSlotContent = () => {
   const context = useContext(SlotZoneContext);
   return context?.topSlotContent || null;
+};
+
+export const useCenterSlotContent = () => {
+  const context = useContext(SlotZoneContext);
+  return context?.centerSlotContent || null;
 };
 
 export const useBottomSlotContent = () => {
