@@ -14,7 +14,7 @@ const { concatenateFilename } = require('./filename-concatenator');
 class DualViewMonitor {
     constructor() {
         this.projectRoot = process.cwd();
-        this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches');
+        this.patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
         this.summariesPath = path.resolve('/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries');
         this.logsPath = path.join(this.projectRoot, 'logs');
         

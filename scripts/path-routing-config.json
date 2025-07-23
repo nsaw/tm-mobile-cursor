@@ -4,7 +4,7 @@
   "paths": {
     "projectRoot": "/Users/sawyer/gitSync/tm-mobile-cursor",
     "mobileNativeFresh": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh",
-    "patchesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches",
+    "patchesPath": "/Users/sawyer/gitSync/.cursor-cache/MAIN/patches",
     "summariesPath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries",
     "logsPath": "/Users/sawyer/gitSync/tm-mobile-cursor/logs",
     "scriptsPath": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts",

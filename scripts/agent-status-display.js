@@ -14,7 +14,7 @@ const { formatActivityItem } = require('./filename-concatenator');
 class AgentStatusDisplay {
     constructor() {
         this.projectRoot = process.cwd();
-        this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches');
+        this.patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
         this.summariesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
         
         this.status = {

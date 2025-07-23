@@ -10,7 +10,7 @@ class PathRoutingVerifier {
         
         // Expected paths
         this.expectedPaths = {
-            patchesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches'),
+            patchesPath: '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches',
             summariesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries'),
             logsPath: path.join(this.projectRoot, 'logs'),
             scriptsPath: path.join(this.projectRoot, 'scripts'),

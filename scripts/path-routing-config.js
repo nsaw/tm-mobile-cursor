@@ -15,7 +15,7 @@ class PathRoutingConfig {
             mobileNativeFresh: path.join(this.projectRoot, 'mobile-native-fresh'),
             
             // Target paths for patches and summaries
-            patchesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches'),
+            patchesPath: '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches',
             summariesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries'),
             
             // Supporting directories

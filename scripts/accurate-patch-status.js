@@ -15,8 +15,8 @@ class AccuratePatchStatus {
     constructor() {
         this.projectRoot = process.cwd();
         // Correct paths for the actual patch structure
-        this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'src-nextgen', 'patches');
-        this.summariesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
+        this.patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
+        this.summariesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries';
         this.logsPath = path.join(this.projectRoot, 'logs');
         
         this.status = {

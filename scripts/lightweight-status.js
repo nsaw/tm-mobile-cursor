@@ -11,7 +11,7 @@ const path = require('path');
 class LightweightStatus {
     constructor() {
         this.projectRoot = process.cwd();
-        this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'src-nextgen', 'patches');
+        this.patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
         this.summariesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
         this.logsPath = path.join(this.projectRoot, 'logs');
     }

@@ -12,8 +12,8 @@ const { concatenateFilename } = require('./filename-concatenator');
 
 function getPatchStatus() {
     const projectRoot = process.cwd();
-    const patchesPath = path.join(projectRoot, 'mobile-native-fresh', 'src-nextgen', 'patches');
-    const summariesPath = path.join(projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
+    const patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
+    const summariesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries';
     
     let status = {
         pending: 0,

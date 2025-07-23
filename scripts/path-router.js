@@ -55,7 +55,7 @@ class EnhancedPathRouter {
             return {
                 ...basePaths,
                 primaryTarget: path.join(this.projectRoot, 'mobile-native-fresh'),
-                patchesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches'),
+                patchesPath: '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches',
                 summariesPath: path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries'),
                 backendPath: path.join(this.projectRoot, 'mobile-native-fresh', 'backend'),
                 srcPath: path.join(this.projectRoot, 'mobile-native-fresh', 'src'),

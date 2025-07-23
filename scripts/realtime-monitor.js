@@ -15,8 +15,8 @@ class RealtimeMonitor {
     constructor() {
         // Get the project root (parent of scripts directory)
         this.projectRoot = path.resolve(__dirname, '..');
-        this.patchesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'patches');
-        this.summariesPath = path.join(this.projectRoot, 'mobile-native-fresh', 'tasks', 'summaries');
+        this.patchesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches';
+        this.summariesPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries';
         
         this.monitoring = false;
         this.updateInterval = null;
