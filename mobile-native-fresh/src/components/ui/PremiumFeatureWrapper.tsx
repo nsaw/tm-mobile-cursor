@@ -28,7 +28,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
   }
 
   return (
-    <View style={styles.overlay}>
+    <View role="Wrapper" style={styles.overlay}>
       <Text variant="heading" size="lg" style={styles.title}>
         Premium Feature
       </Text>

@@ -48,8 +48,8 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
   // Show loading screen while hydrating
   if (loading && !hydrationTimeout && !hydrationError) {
     return (
-      <View style={styles.container}>
-        <View style={styles.content}>
+      <View role="Wrapper" style={styles.container}>
+        <View role="Wrapper" style={styles.content}>
           <Text variant="heading" size="lg" style={styles.title}>
             Loading Thoughtmarks...
           </Text>
@@ -64,15 +64,15 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
   // Show timeout error screen
   if (hydrationTimeout) {
     return (
-      <View style={styles.container}>
-        <View style={styles.content}>
+      <View role="Wrapper" style={styles.container}>
+        <View role="Wrapper" style={styles.content}>
           <Text variant="heading" size="lg" style={styles.title}>
             Session Timeout
           </Text>
           <Text variant="body" size="lg" style={styles.subtitle}>
             It&apos;s taking longer than expected to restore your session. This might be due to a slow connection.
           </Text>
-          <View style={styles.buttonContainer}>
+          <View role="Wrapper" style={styles.buttonContainer}>
             <Button 
               onPress={handleRetry}
               variant="primary"
@@ -89,15 +89,15 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
   // Show hydration error screen
   if (hydrationError) {
     return (
-      <View style={styles.container}>
-        <View style={styles.content}>
+      <View role="Wrapper" style={styles.container}>
+        <View role="Wrapper" style={styles.content}>
           <Text variant="heading" size="lg" style={styles.title}>
             Session Error
           </Text>
           <Text variant="body" size="lg" style={styles.subtitle}>
             {hydrationError}
           </Text>
-          <View style={styles.buttonContainer}>
+          <View role="Wrapper" style={styles.buttonContainer}>
             <Button 
               onPress={handleRetry}
               variant="primary"

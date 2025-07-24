@@ -13,7 +13,7 @@ export const DesignSystemDemo: React.FC = () => {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: designTokens.colors.background }}>
-      <View style={{ padding: designTokens.spacing.lg }}>
+      <View role="Wrapper" style={{ padding: designTokens.spacing.lg }}>
         {/* Typography Section */}
         <Card variant="elevated" style={{ marginBottom: designTokens.spacing.xl }}>
           <CardHeader>
@@ -22,7 +22,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <View role="Wrapper" style={{ gap: designTokens.spacing.md }}>
               <Heading><Text>Heading Level 1</Text></Heading>
               <Heading><Text>Heading Level 2</Text></Heading>
               <Heading><Text>Heading Level 3</Text></Heading>
@@ -42,7 +42,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <View role="Wrapper" style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" onPress={() => console.log('Primary pressed')}><Text>Primary Button</Text></Button>
               
               <Button variant="secondary" onPress={() => console.log('Secondary pressed')}><Text>Secondary Button</Text></Button>
@@ -66,7 +66,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <View role="Wrapper" style={{ gap: designTokens.spacing.md }}>
               <Button variant="primary" size="sm" onPress={() => console.log('Small pressed')}><Text>Small Button</Text></Button>
               
               <Button variant="primary" size="md" onPress={() => console.log('Medium pressed')}><Text>Medium Button</Text></Button>
@@ -88,7 +88,7 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
+            <View role="Wrapper" style={{ gap: designTokens.spacing.md }}>
               <Card variant="default" onPress={() => console.log('Default card pressed')}>
                 <CardContent>
                   <BodyText><Text>Default Card - Tap me!</Text></BodyText>
@@ -124,26 +124,26 @@ export const DesignSystemDemo: React.FC = () => {
           </CardHeader>
           
           <CardContent>
-            <View style={{ gap: designTokens.spacing.md }}>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.sm }}>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+            <View role="Wrapper" style={{ gap: designTokens.spacing.md }}>
+              <View role="Wrapper" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: designTokens.spacing.sm }}>
+                <View role="Wrapper" style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View role="Wrapper" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Accent</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                <View role="Wrapper" style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View role="Wrapper" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Success</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                <View role="Wrapper" style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View role="Wrapper" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Warning</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                <View role="Wrapper" style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View role="Wrapper" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Danger</Text></Caption>
                 </View>
-                <View style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
-                  <View style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
+                <View role="Wrapper" style={{ alignItems: 'center', gap: designTokens.spacing.xs }}>
+                  <View role="Wrapper" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: designTokens.colors.background }} />
                   <Caption><Text>Brand</Text></Caption>
                 </View>
               </View>

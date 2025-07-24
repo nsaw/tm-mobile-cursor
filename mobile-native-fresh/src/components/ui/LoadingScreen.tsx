@@ -160,7 +160,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
     <Animated.View style={[styles.container, { opacity: fadeAnim, backgroundColor: designTokens.colors.background }]}>
       <Animated.View style={[styles.content, { transform: [{ scale: scaleAnim }] }]}>
         {/* Glow ring effect */}
-        <View style={styles.glowRing} />
+        <View role="Wrapper" style={styles.glowRing} />
         
         {/* Brain icon with pulse animation */}
         <Animated.View style={[styles.iconContainer, { transform: [{ scale: pulseAnim }] }]}>
@@ -173,7 +173,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </Animated.View>
 
         {/* Thinking dots */}
-        <View style={styles.thinkingDots}>
+        <View role="Wrapper" style={styles.thinkingDots}>
           <Animated.View style={[styles.dot, { opacity: dot1Anim }]} />
           <Animated.View style={[styles.dot, { opacity: dot2Anim }]} />
           <Animated.View style={[styles.dot, { opacity: dot3Anim }]} />
@@ -185,7 +185,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </Animated.Text>
 
         {/* Progress bar */}
-        <View style={styles.progressBar}>
+        <View role="Wrapper" style={styles.progressBar}>
           <Animated.View style={styles.progressFill} />
         </View>
       </Animated.View>

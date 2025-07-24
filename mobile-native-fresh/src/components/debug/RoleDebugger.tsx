@@ -70,7 +70,7 @@ export const RoleDebugger: React.FC<RoleDebuggerProps> = ({
     if (!showDebugInfo) return null;
 
     return (
-      <View style={styles.debugInfoContainer}>
+      <View role="Wrapper" style={styles.debugInfoContainer}>
         <Text style={[styles.debugText, { color: getDebugBorderColor() }]}>
           🏷️ {debugInfo.roleType.toUpperCase()}: {debugInfo.roleValue || 'NONE'}
         </Text>
@@ -85,7 +85,7 @@ export const RoleDebugger: React.FC<RoleDebuggerProps> = ({
     if (!showValidation) return null;
 
     return (
-      <View style={styles.validationContainer}>
+      <View role="Wrapper" style={styles.validationContainer}>
         {validation.errors.map((error, index) => (
           <Text key={index} style={styles.errorText}>
             ❌ {error}
@@ -104,9 +104,9 @@ export const RoleDebugger: React.FC<RoleDebuggerProps> = ({
     if (!showStylePreview || debugInfo.roleType === 'none') return null;
 
     return (
-      <View style={styles.stylePreviewContainer}>
+      <View role="Wrapper" style={styles.stylePreviewContainer}>
         <Text style={styles.stylePreviewTitle}>Style Preview:</Text>
-        <View style={styles.stylePreviewBox}>
+        <View role="Wrapper" style={styles.stylePreviewBox}>
           <Text style={styles.stylePreviewText}>
             {debugInfo.roleType === 'content' && 'Text styling applied'}
             {debugInfo.roleType === 'layout' && 'Layout spacing applied'}
@@ -118,7 +118,7 @@ export const RoleDebugger: React.FC<RoleDebuggerProps> = ({
   };
 
   return (
-    <View style={debugContainerStyle}>
+    <View role="Wrapper" style={debugContainerStyle}>
       {renderDebugInfo()}
       {renderValidation()}
       {renderStylePreview()}

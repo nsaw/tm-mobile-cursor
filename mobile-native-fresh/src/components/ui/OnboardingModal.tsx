@@ -14,7 +14,7 @@ interface ModalButtonProps {
   onPress: (event: GestureResponderEvent) => void;
   icon?: string;
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<View role="Wrapper"Style>;
   disabled?: boolean;
   iconRight?: boolean;
   textStyle?: any;
@@ -131,13 +131,13 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
       transparent
       onRequestClose={onClose}
     >
-      <View style={{
+      <View role="Wrapper" style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#000000E6',
       }}>
-        <View style={{
+        <View role="Wrapper" style={{
           width: '90%',
           marginHorizontal: 'auto',
           paddingHorizontal: spacing.pagePaddingHorizontal,
@@ -168,7 +168,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             color: designTokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
-          <View>{steps[currentStep].icon}</View>
+          <View role="Wrapper">{steps[currentStep].icon}</View>
           {/* Body Text */}
           <Text style={{
             ...typography.body,
@@ -179,9 +179,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             marginBottom: designTokens.spacing.md,
           }}>{steps[currentStep].description}</Text>
           {/* Pagination Dots */}
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }}>
+          <View role="Wrapper" style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View key={i} style={{
+              <View role="Wrapper" key={i} style={{
                 width: 8,
                 height: 8,
                 borderRadius: 4,
@@ -191,7 +191,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             ))}
           </View>
           {/* Buttons */}
-          <View style={{ flexDirection: 'row', width: '100%', marginTop: designTokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
+          <View role="Wrapper" style={{ flexDirection: 'row', width: '100%', marginTop: designTokens.spacing.xxxl, justifyContent: 'center', alignItems: 'center' }}>
             <ModalButton
               onPress={handlePrevious}
               disabled={currentStep === 0}

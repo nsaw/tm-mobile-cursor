@@ -36,7 +36,7 @@ export const HydrationTestCard: React.FC = () => {
         Hydration Status
       </Text>
       
-      <View style={styles.row}>
+      <View role="Wrapper" style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Auth Status:
         </Text>
@@ -45,7 +45,7 @@ export const HydrationTestCard: React.FC = () => {
         </Text>
       </View>
 
-      <View style={styles.row}>
+      <View role="Wrapper" style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Theme Status:
         </Text>
@@ -54,7 +54,7 @@ export const HydrationTestCard: React.FC = () => {
         </Text>
       </View>
 
-      <View style={styles.row}>
+      <View role="Wrapper" style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           User Role:
         </Text>
@@ -64,7 +64,7 @@ export const HydrationTestCard: React.FC = () => {
       </View>
 
       {user && (
-        <View style={styles.row}>
+        <View role="Wrapper" style={styles.row}>
           <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
             User:
           </Text>
@@ -74,7 +74,7 @@ export const HydrationTestCard: React.FC = () => {
         </View>
       )}
 
-      <View style={styles.row}>
+      <View role="Wrapper" style={styles.row}>
         <Text style={[styles.label, { color: designTokens.colors.textSecondary }]}>
           Fluid Theme:
         </Text>

@@ -141,8 +141,8 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
         accessibilityRole="button"
         accessibilityState={{ disabled: isToggling }}
       >
-        <View style={styles.content}>
-          <View style={[styles.indicator, { backgroundColor: currentEnvironment === 'nextgen' ? '#2E7D32' : '#E65100' }]} />
+        <View role="Wrapper" style={styles.content}>
+          <View role="Wrapper" style={[styles.indicator, { backgroundColor: currentEnvironment === 'nextgen' ? '#2E7D32' : '#E65100' }]} />
           {showLabel && (
             <Text 
               variant="body" 

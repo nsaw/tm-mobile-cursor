@@ -31,7 +31,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   const { tokens: designTokens } = useTheme();
 
   return (
-    <View style={{
+    <View role="Wrapper" style={{
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderBottomWidth: 1,
       borderBottomColor: designTokens.colors.divider,
@@ -54,13 +54,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
         },
       }),
     }}>
-      <View style={{
+      <View role="Wrapper" style={{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         minHeight: 32,
       }}>
-        <View style={{
+        <View role="Wrapper" style={{
           flexDirection: 'row',
           alignItems: 'center',
           flex: 1,
@@ -78,7 +78,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               <Ionicons name="arrow-back" size={20} color={designTokens.colors.text} />
             </TouchableOpacity>
           )}
-          <View style={{ flex: 1 }}>
+          <View role="Wrapper" style={{ flex: 1 }}>
             <Text 
               variant="heading2" 
               style={{ 

@@ -49,13 +49,13 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
       accessibilityLabel={title || 'Action menu'}
     >
       <TouchableWithoutFeedback onPress={onClose}>
-        <View style={{
+        <View role="Wrapper" style={{
           flex: 1,
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           justifyContent: 'flex-end',
         }}>
           <TouchableWithoutFeedback>
-            <View style={{
+            <View role="Wrapper" style={{
               backgroundColor: designTokens.colors.backgroundSecondary,
               borderTopLeftRadius: designTokens.radius.lg,
               borderTopRightRadius: designTokens.radius.lg,
@@ -64,7 +64,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
               width: '100%',
             }}>
               {title && (
-                <View style={{
+                <View role="Wrapper" style={{
                   paddingVertical: designTokens.spacing.md,
                   paddingHorizontal: designTokens.spacing.lg,
                   borderBottomWidth: 1,
@@ -92,7 +92,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
                   accessible
                   accessibilityLabel={item.label}
                 >
-                  <View style={{
+                  <View role="Wrapper" style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                   }}>

@@ -59,12 +59,12 @@ export const Card: React.FC<CardProps> = ({
 
   if (onPress && !disabled) {
     return (
-      <View><Text>{renderChildren()}</Text></View>
+      <View role="Wrapper"><Text>{renderChildren()}</Text></View>
     );
   }
 
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <View role="Wrapper"><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -92,7 +92,7 @@ export const CardHeader: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <View role="Wrapper"><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -118,7 +118,7 @@ export const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyl
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <View role="Wrapper"><Text>{renderChildren()}</Text></View>
   );
 };
 
@@ -144,6 +144,6 @@ export const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle
   };
   
   return (
-    <View><Text>{renderChildren()}</Text></View>
+    <View role="Wrapper"><Text>{renderChildren()}</Text></View>
   );
 }; 

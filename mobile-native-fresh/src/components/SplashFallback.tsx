@@ -84,16 +84,16 @@ const SplashFallback: React.FC<SplashFallbackProps> = ({
   const { width, height } = Dimensions.get('window');
 
   return (
-    <View style={[styles.container, { backgroundColor: isDark ? '#000' : '#fff' }]}>
+    <View role="Wrapper" style={[styles.container, { backgroundColor: isDark ? '#000' : '#fff' }]}>
       <StatusBar
         barStyle={isDark ? 'light-content' : 'dark-content'}
         backgroundColor={isDark ? '#000' : '#fff'}
       />
       
       {/* Main content */}
-      <View style={styles.content}>
+      <View role="Wrapper" style={styles.content}>
         {/* App icon placeholder */}
-        <View style={[styles.iconContainer, { backgroundColor: isDark ? '#333' : '#f0f0f0' }]}>
+        <View role="Wrapper" style={[styles.iconContainer, { backgroundColor: isDark ? '#333' : '#f0f0f0' }]}>
           <Text style={[styles.iconText, { color: isDark ? '#fff' : '#000' }]}>
             📱
           </Text>
@@ -113,7 +113,7 @@ const SplashFallback: React.FC<SplashFallbackProps> = ({
 
         {/* Environment status */}
         {showEnvironment && (
-          <View style={styles.environmentContainer}>
+          <View role="Wrapper" style={styles.environmentContainer}>
             <Text style={[styles.environmentText, { color: isDark ? '#ccc' : '#666' }]}>
               Environment: {environmentStatus.environment.toUpperCase()}
             </Text>
@@ -128,7 +128,7 @@ const SplashFallback: React.FC<SplashFallbackProps> = ({
 
         {/* Debug info */}
         {showDebugInfo && (
-          <View style={styles.debugContainer}>
+          <View role="Wrapper" style={styles.debugContainer}>
             <Text style={[styles.debugText, { color: isDark ? '#ccc' : '#666' }]}>
               Screen: {width}x{height}
             </Text>
@@ -148,7 +148,7 @@ const SplashFallback: React.FC<SplashFallbackProps> = ({
 
         {/* Timeout warning */}
         {timeoutReached && (
-          <View style={styles.timeoutContainer}>
+          <View role="Wrapper" style={styles.timeoutContainer}>
             <Text style={[styles.timeoutText, { color: isDark ? '#FF9800' : '#F57C00' }]}>
               ⚠️ Loading timeout reached
             </Text>
@@ -160,7 +160,7 @@ const SplashFallback: React.FC<SplashFallbackProps> = ({
       </View>
 
       {/* Footer */}
-      <View style={styles.footer}>
+      <View role="Wrapper" style={styles.footer}>
         <Text style={[styles.footerText, { color: isDark ? '#666' : '#999' }]}>
           ThoughtMarks Mobile
         </Text>

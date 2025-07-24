@@ -1,6 +1,6 @@
-#!/bin/{ { { { bash
+#!/bin/bash
 
-TAG="$1" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+TAG="$1"
 DATESTAMP=$(date -u +"%Y%m%d_%H%MUTC")
 
 if [ -z "$TAG" ]; then

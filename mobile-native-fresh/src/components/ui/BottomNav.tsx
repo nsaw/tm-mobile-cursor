@@ -75,7 +75,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   };
 
   return (
-    <View style={{
+    <View role="Wrapper" style={{
       position: 'absolute',
       bottom: 0,
       left: 0,
@@ -86,7 +86,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       zIndex: designTokens.zIndex.modal,
       paddingBottom: 0,
     }}>
-      <View style={{
+      <View role="Wrapper" style={{
         backgroundColor: designTokens.colors.backgroundSecondary,
         borderTopWidth: 1,
         borderTopColor: designTokens.colors.divider,
@@ -106,7 +106,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           },
         }),
       }}>
-        <View style={{
+        <View role="Wrapper" style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
@@ -149,7 +149,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               >
                 {renderIcon(item, isActive, isHome, isVoice)}
                 {isActive && (
-                  <View style={{
+                  <View role="Wrapper" style={{
                     position: 'absolute',
                     top: -2,
                     left: -2,
@@ -169,7 +169,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
       {/* Floating New Thoughtmark Button */}
       {showCreateButton && currentRoute !== '/' && (
-        <View style={{
+        <View role="Wrapper" style={{
           position: 'absolute',
           left: '50%',
           transform: [{ translateX: -43 }],
@@ -178,7 +178,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           justifyContent: 'center',
           bottom: (insets.bottom + 40) * 1.34,
         }}>
-          <View style={{
+          <View role="Wrapper" style={{
             width: 83,
             height: 83,
             borderRadius: 56,

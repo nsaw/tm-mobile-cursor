@@ -25,7 +25,7 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   }
 
   return (
-    <View style={{ marginVertical: designTokens.spacing.sm }}>
+    <View role="Wrapper" style={{ marginVertical: designTokens.spacing.sm }}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}

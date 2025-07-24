@@ -60,7 +60,7 @@ export function AutoRoleView({
   const accessibilityProps = getAccessibilityProps(roleProps);
 
   return (
-    <View
+    <View role="Wrapper"
       style={[roleStyle, debugStyle, style]}
       {...accessibilityProps}
     >

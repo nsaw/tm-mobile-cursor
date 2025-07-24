@@ -64,7 +64,7 @@ export const EnvironmentIndicator: React.FC<EnvironmentIndicatorProps> = ({
       onPress={onToggle}
       activeOpacity={0.7}
     >
-      <View style={[styles.indicator, { backgroundColor: getEnvironmentColor() }]}>
+      <View role="Wrapper" style={[styles.indicator, { backgroundColor: getEnvironmentColor() }]}>
         <Text style={styles.text}>{getEnvironmentLabel()}</Text>
       </View>
     </TouchableOpacity>

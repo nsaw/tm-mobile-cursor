@@ -62,7 +62,7 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   };
 
   return (
-    <View style={[styles.container, { bottom: insets.bottom + 70 }]}>
+    <View role="Wrapper" style={[styles.container, { bottom: insets.bottom + 70 }]}>
       <BlurView intensity={70} tint="dark" style={[styles.blurContainer, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
         <Animated.View style={[styles.fab, { 
           transform: [{ scale: scaleValue }],
@@ -102,8 +102,8 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
       
       {/* Voice recording indicator */}
       {isRecording && (
-        <View style={[styles.recordingIndicator, { backgroundColor: designTokens.colors.danger }]}>
-          <View style={[styles.recordingDot, { backgroundColor: designTokens.colors.background }]} />
+        <View role="Wrapper" style={[styles.recordingIndicator, { backgroundColor: designTokens.colors.danger }]}>
+          <View role="Wrapper" style={[styles.recordingDot, { backgroundColor: designTokens.colors.background }]} />
         </View>
       )}
     </View>

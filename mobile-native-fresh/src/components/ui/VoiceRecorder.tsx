@@ -310,7 +310,7 @@ switch (recordingStage) {
           title: 'Now listening...',
           message: transcript || (Voice ? 'Tell me about your idea, task, or thought. I\'ll capture and organize it for you.' : 'Recording in progress...'),
           icon: (
-            <View style={styles.recordingIcon}>
+            <View role="Wrapper" style={styles.recordingIcon}>
               <Ionicons name="mic" size={32} color="#FFFFFF" />
             </View>
           ),
@@ -328,7 +328,7 @@ switch (recordingStage) {
           title: 'Saved!',
           message: 'Your voice note has been saved successfully',
           icon: (
-            <View style={styles.successIcon}>
+            <View role="Wrapper" style={styles.successIcon}>
               <Ionicons name="checkmark" size={32} color="#FFFFFF" />
             </View>
           ),
@@ -489,10 +489,10 @@ switch (recordingStage) {
       animationType="fade"
       onRequestClose={cancelRecording}
      accessible={false} accessibilityLabel="Modal">
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
-          <View style={styles.header}>
-            <View style={{ width: 40 }} />
+      <View role="Wrapper" style={styles.modalOverlay}>
+        <View role="Wrapper" style={styles.modalContent}>
+          <View role="Wrapper" style={styles.header}>
+            <View role="Wrapper" style={{ width: 40 }} />
             <Text style={styles.title}>Voice Recorder</Text>
             <TouchableOpacity style={styles.closeButton} onPress={cancelRecording} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons name="close" size={24} color={designTokens.colors.textSecondary} />
@@ -526,7 +526,7 @@ switch (recordingStage) {
           </Text>
 
           {transcript ? (
-            <View style={styles.transcriptContainer}>
+            <View role="Wrapper" style={styles.transcriptContainer}>
               <Text style={styles.transcriptText}>{transcript}</Text>
             </View>
           ) : (
@@ -555,7 +555,7 @@ switch (recordingStage) {
           </Text>
 
           {transcript && (
-            <View style={styles.buttonRow}>
+            <View role="Wrapper" style={styles.buttonRow}>
               <TouchableOpacity 
                 style={styles.actionButton} 
                 onPress={() => {

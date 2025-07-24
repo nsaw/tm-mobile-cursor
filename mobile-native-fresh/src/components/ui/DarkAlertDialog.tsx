@@ -126,12 +126,12 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
       animationType="fade"
       onRequestClose={onCancel}
      accessible={false} accessibilityLabel="Modal">
-      <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
+      <View role="Wrapper" style={styles.modalOverlay}>
+        <View role="Wrapper" style={[styles.modalContent, { backgroundColor: designTokens.colors.backgroundSecondary }]}>
           <Text style={[styles.title, { color: designTokens.colors.text }]}>{title}</Text>
           <Text style={[styles.message, { color: designTokens.colors.textSecondary }]}>{message}</Text>
           
-          <View style={styles.buttonRow}>
+          <View role="Wrapper" style={styles.buttonRow}>
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}

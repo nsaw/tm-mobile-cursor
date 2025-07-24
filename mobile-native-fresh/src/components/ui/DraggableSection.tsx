@@ -194,20 +194,20 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               activeOpacity={1} // We handle opacity manually
               delayLongPress={500}
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-              <View style={styles.headerLeft}>
+              <View role="Wrapper" style={styles.headerLeft}>
                 <Ionicons name="chevron-down" size={16} color={designTokens.colors.textSecondary} style={styles.chevronIcon} />
                 <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: designTokens.colors.textSecondary }]}>
                   {title}
                 </Animated.Text>
               </View>
               
-              <View style={styles.headerRight}>
+              <View role="Wrapper" style={styles.headerRight}>
                 <Ionicons name="menu-outline" size={16} color="#6B7280" style={styles.dragHandle} />
               </View>
             </TouchableOpacity>
 
             {isExpanded && (
-              <View><Text>{children}</Text></View>
+              <View role="Wrapper"><Text>{children}</Text></View>
             )}
           </Animated.View>
         </PanGestureHandler>

@@ -40,10 +40,10 @@ export const LoadingFallbackScreen: React.FC<LoadingFallbackScreenProps> = ({
   });
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
+    <View role="Wrapper" style={styles.container}>
+      <View role="Wrapper" style={styles.content}>
         {showIcon && (
-          <View style={styles.icon}>
+          <View role="Wrapper" style={styles.icon}>
             <ActivityIndicator size="large" color={designTokens.colors.accent} />
           </View>
         )}

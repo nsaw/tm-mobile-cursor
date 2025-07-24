@@ -16,7 +16,7 @@ export const SafeComponentZone: React.FC<SafeComponentZoneProps> = ({
   ...props 
 }) => {
   return (
-    <View
+    <View role="Wrapper"
       style={[
         {
           // Frozen style boundary - no theme propagation

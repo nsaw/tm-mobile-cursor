@@ -17,7 +17,7 @@ export const EnvironmentDebugger: React.FC<{ visible?: boolean }> = ({ visible =
   const envText = environment ? environment.toUpperCase() : 'UNKNOWN';
 
   return (
-    <View style={{ padding: 16 }}>
+    <View role="Wrapper" style={{ padding: 16 }}>
       <Text style={{ color: 'white', fontWeight: 'bold' }}>🔍 Environment Debugger</Text>
       <Text style={{ color: 'white' }}>Current: {envText}</Text>
       <Text style={{ color: 'white' }}>useNextGen: {String(useNextGen)}</Text>

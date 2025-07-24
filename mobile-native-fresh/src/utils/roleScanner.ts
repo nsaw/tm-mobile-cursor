@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from 'fs';
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs';
 import { join, extname } from 'path';
 
 export interface RoleSnapshot {
@@ -31,6 +31,23 @@ export interface RoleManifest {
   };
 }
 
+export interface ViewAuditResult {
+  filePath: string;
+  componentName: string;
+  viewsFound: number;
+  viewsWithRoles: number;
+  viewsWithoutRoles: number;
+  layoutOnlyViews: number;
+  wrapperRolesAdded: number;
+  issues: string[];
+}
+
+export interface AuditViewsOptions {
+  enforceRole?: string;
+  dryRun?: boolean;
+  fixAutomatically?: boolean;
+}
+
 /**
  * Scan UI components for role assignments and generate a manifest
  */
@@ -52,6 +69,27 @@ export function scanUIRoles(): RoleManifest {
   // Generate manifest
   const manifest = generateManifest(snapshots);
   return manifest;
+}
+
+/**
+ * Audit Views in components and optionally enforce wrapper roles
+ */
+export function auditViews(options: AuditViewsOptions = {}): ViewAuditResult[] {
+  const srcPath = join(__dirname, '..');
+  const componentsPath = join(srcPath, 'components');
+  const results: ViewAuditResult[] = [];
+  
+  // Scan components directory
+  const components = scanDirectory(componentsPath, ['.tsx', '.ts']);
+  
+  for (const component of components) {
+    const result = auditComponentViews(component, options);
+    if (result) {
+      results.push(result);
+    }
+  }
+  
+  return results;
 }
 
 /**
@@ -109,6 +147,119 @@ function analyzeComponent(filePath: string): RoleSnapshot | null {
     console.warn(`Warning: Could not analyze component ${filePath}:`, error);
     return null;
   }
+}
+
+/**
+ * Audit Views in a single component file
+ */
+function auditComponentViews(filePath: string, options: AuditViewsOptions): ViewAuditResult | null {
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const componentName = extractComponentName(filePath);
+    
+    const viewsFound = countViews(content);
+    const viewsWithRoles = countViewsWithRoles(content);
+    const viewsWithoutRoles = viewsFound - viewsWithRoles;
+    const layoutOnlyViews = countLayoutOnlyViews(content);
+    
+    let wrapperRolesAdded = 0;
+    const issues: string[] = [];
+    
+    // If enforcing wrapper roles and not dry run
+    if (options.enforceRole && !options.dryRun && options.fixAutomatically) {
+      const { newContent, rolesAdded } = enforceWrapperRoles(content, options.enforceRole);
+      wrapperRolesAdded = rolesAdded;
+      
+      if (rolesAdded > 0) {
+        writeFileSync(filePath, newContent, 'utf-8');
+      }
+    }
+    
+    // Check for issues
+    if (viewsWithoutRoles > 0) {
+      issues.push(`${viewsWithoutRoles} Views without explicit roles`);
+    }
+    
+    if (layoutOnlyViews > 0 && viewsWithoutRoles > 0) {
+      issues.push(`${layoutOnlyViews} layout-only Views should have role="${options.enforceRole || 'Wrapper'}"`);
+    }
+    
+    return {
+      filePath,
+      componentName,
+      viewsFound,
+      viewsWithRoles,
+      viewsWithoutRoles,
+      layoutOnlyViews,
+      wrapperRolesAdded,
+      issues,
+    };
+  } catch (error) {
+    console.warn(`Warning: Could not audit component ${filePath}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Count total Views in content
+ */
+function countViews(content: string): number {
+  const viewMatches = content.match(/<View[^>]*>/g);
+  return viewMatches ? viewMatches.length : 0;
+}
+
+/**
+ * Count Views that already have role attributes
+ */
+function countViewsWithRoles(content: string): number {
+  const viewWithRoleMatches = content.match(/<View[^>]*role\s*=\s*["'][^"']+["'][^>]*>/g);
+  return viewWithRoleMatches ? viewWithRoleMatches.length : 0;
+}
+
+/**
+ * Count Views that appear to be layout-only (no interactive elements)
+ */
+function countLayoutOnlyViews(content: string): number {
+  const layoutOnlyPatterns = [
+    /<View[^>]*style\s*=\s*\{[^}]*\}[^>]*>/g, // Views with style props
+    /<View[^>]*>\s*<View/g, // Nested Views
+    /<View[^>]*>\s*<Text/g, // Views containing Text
+    /<View[^>]*>\s*<Image/g, // Views containing Image
+  ];
+  
+  let layoutOnlyCount = 0;
+  layoutOnlyPatterns.forEach(pattern => {
+    const matches = content.match(pattern);
+    if (matches) {
+      layoutOnlyCount += matches.length;
+    }
+  });
+  
+  return layoutOnlyCount;
+}
+
+/**
+ * Enforce wrapper roles on Views that don't have roles
+ */
+function enforceWrapperRoles(content: string, roleName: string): { newContent: string; rolesAdded: number } {
+  let newContent = content;
+  let rolesAdded = 0;
+  
+  // Find Views without role attributes
+  const viewWithoutRoleRegex = /<View([^>]*?)(?<!role\s*=\s*["'][^"']*["'])([^>]*?)>/g;
+  
+  newContent = newContent.replace(viewWithoutRoleRegex, (match, beforeProps, afterProps) => {
+    // Skip if this View already has a role
+    if (match.includes('role=')) {
+      return match;
+    }
+    
+    // Add role attribute
+    rolesAdded++;
+    return `<View${beforeProps} role="${roleName}"${afterProps}>`;
+  });
+  
+  return { newContent, rolesAdded };
 }
 
 /**
