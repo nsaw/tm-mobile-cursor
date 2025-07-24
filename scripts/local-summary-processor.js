@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 class LocalSummaryProcessor {
@@ -208,7 +208,7 @@ if (require.main === module) {
       console.log(JSON.stringify(log, null, 2));
       break;
     default:
-      console.log('Usage: node local-summary-processor.js [start|stats|log]');
+      console.log('Usage: { { { { node local-summary-processor.js [start|stats|log]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
       console.log('  start - Start processing summaries locally');
       console.log('  stats - Show current summary statistics');
       console.log('  log   - Show processing log');

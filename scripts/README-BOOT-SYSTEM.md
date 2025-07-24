@@ -6,8 +6,8 @@ This boot system provides comprehensive management for all TM-Mobile-Cursor serv
 
 ## Quick Start
 
-```bash
-# Start all systems
+```{ { { { bash
+# Start all systems & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh start
 
 # Stop all systems  
@@ -156,7 +156,7 @@ This boot system provides comprehensive management for all TM-Mobile-Cursor serv
 - Performance monitoring
 
 ### Dependency Management
-- Automatic npm install for dependencies
+- Automatic { { { { { { { { npm install & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown for dependencies & } >/dev/null 2>&1 & disown
 - Python package management
 - Environment setup
 - Configuration validation
@@ -164,8 +164,8 @@ This boot system provides comprehensive management for all TM-Mobile-Cursor serv
 ## Usage Examples
 
 ### Development Workflow
-```bash
-# Start development environment
+```{ { { { bash
+# Start development environment & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh start
 
 # Check status
@@ -181,8 +181,8 @@ This boot system provides comprehensive management for all TM-Mobile-Cursor serv
 ```
 
 ### Troubleshooting
-```bash
-# Check what's running
+```{ { { { bash
+# Check what's running & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh status
 
 # Force restart everything
@@ -197,9 +197,9 @@ tail -f logs/expo.log
 ```
 
 ### Monitoring
-```bash
-# Check process status
-ps aux | grep -E "(expo|metro|nodemon|ngrok)"
+```{ { { { bash
+# Check process status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep -E "(expo|metro|nodemon|ngrok)" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check port usage
 lsof -i -P | grep LISTEN
@@ -250,8 +250,8 @@ To modify port assignments or add new services:
 ### Common Issues
 
 **Port Already in Use**
-```bash
-# Check what's using the port
+```{ { { { bash
+# Check what's using the port & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 lsof -i :4000
 
 # Kill the process
@@ -262,8 +262,8 @@ kill -9 <PID>
 ```
 
 **Service Not Starting**
-```bash
-# Check logs
+```{ { { { bash
+# Check logs & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 tail -f logs/boot-all-systems.log
 
 # Check specific service log
@@ -274,8 +274,8 @@ cd mobile-native-fresh/backend && npm install
 ```
 
 **Process Not Stopping**
-```bash
-# Force kill all related processes
+```{ { { { bash
+# Force kill all related processes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 pkill -f "expo"
 pkill -f "metro"
 pkill -f "nodemon"
@@ -287,8 +287,8 @@ pkill -f "ngrok"
 
 ### Debug Mode
 To run with verbose output:
-```bash
-# Enable debug mode
+```{ { { { bash
+# Enable debug mode & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 set -x
 ./scripts/system-control.sh start
 set +x
@@ -321,8 +321,8 @@ The boot system integrates with the Ghost monitoring infrastructure:
 For issues or questions:
 1. Check the logs in `logs/` directory
 2. Run `./scripts/system-control.sh status`
-3. Review this README for troubleshooting steps
-4. Check individual service documentation
+3. Review this README for troubleshooting ste{ { { { ps
+4. Check individual service documentation & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ---
 

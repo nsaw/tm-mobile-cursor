@@ -13,7 +13,7 @@ The app is currently running with **mock data** for immediate testing. You can s
 - ✅ Mock authentication (auto-logs in as demo user)
 
 ### How to Test:
-1. Run `npm start` in the `mobile-native-fresh` directory
+1. Run `{ { { { { { { { npm start & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown` in the `mobile-native-fresh` directory & } >/dev/null 2>&1 & disown
 2. Open Expo Go on your device or use the simulator
 3. The app will automatically log you in as a demo user
 4. Navigate to the Dashboard to see all the components working
@@ -67,9 +67,9 @@ Once Firebase is configured, update the `useAuth.ts` hook to use real Firebase a
 If you want to set up the full backend with PostgreSQL:
 
 ### 1. Install Dependencies
-```bash
-cd backend
-npm install
+```{ { { { bash
+cd backend & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### 2. Set up PostgreSQL Database
@@ -78,13 +78,13 @@ npm install
 - Set up environment variables for database connection
 
 ### 3. Run Database Migrations
-```bash
-npm run migrate
+```{ { { { bash
+npm run migrate & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### 4. Start the Backend
-```bash
-npm run dev
+```{ { { bash
+{ { { { npm run dev & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 ## 📱 Current App Structure
@@ -126,8 +126,8 @@ The app uses a consistent design system with:
 
 ## 🚀 Quick Commands
 
-```bash
-# Start the mobile app
+```{ { { { bash
+# Start the mobile app & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 cd mobile-native-fresh
 npm start
 
@@ -136,5 +136,5 @@ cd backend
 npm run dev
 
 # Run tests
-npm test
+{ { { { npm test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ``` 

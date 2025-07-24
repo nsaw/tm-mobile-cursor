@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync } = require('child_process');
 const crypto = require('crypto');
@@ -133,7 +133,7 @@ class BackupSanitizer {
       this.cleanTempDir(extractDir);
       
       // Extract archive
-      execSync(`tar -xzf "${archivePath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
+      execSync('{ { { { { { { { tar -xzf &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown&  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown& } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${archivePath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
       
       // Check if extraction was successful
       if (!fs.existsSync(extractDir)) {
@@ -186,7 +186,7 @@ class BackupSanitizer {
   cleanTempDir(dir) {
     if (fs.existsSync(dir)) {
       try {
-        execSync(`rm -rf "${dir}"`);
+        execSync('{ { { rm -rf & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${dir}"`);
         console.log(`🧹 Cleaned temp directory: ${path.relative(this.backupDir, dir)}`);
       } catch (error) {
         console.error(`❌ Error cleaning temp directory ${dir}:`, error.message);
@@ -203,7 +203,7 @@ class BackupSanitizer {
     
     // Find and clean any other temp files in backup directory
     try {
-      const tempFiles = execSync(`find "${this.backupDir}" -name "*.tmp" -type f`, { encoding: 'utf8' }).trim().split('\n');
+      const tempFiles = execSync('{ { { find & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${this.backupDir}" -name "*.tmp" -type f`, { encoding: 'utf8' }).trim().split('\n');
       tempFiles.forEach(file => {
         if (file && fs.existsSync(file)) {
           fs.unlinkSync(file);
@@ -216,10 +216,10 @@ class BackupSanitizer {
     
     // Clean any temp directories
     try {
-      const tempDirs = execSync(`find "${this.backupDir}" -name "temp_*" -type d`, { encoding: 'utf8' }).trim().split('\n');
+      const tempDirs = execSync('{ { { find & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${this.backupDir}" -name "temp_*" -type d`, { encoding: 'utf8' }).trim().split('\n');
       tempDirs.forEach(dir => {
         if (dir && fs.existsSync(dir)) {
-          execSync(`rm -rf "${dir}"`);
+          execSync('{ { { rm -rf & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${dir}"`);
           console.log(`🗑️  Deleted temp directory: ${path.relative(this.backupDir, dir)}`);
         }
       });
@@ -400,7 +400,7 @@ Generated: ${new Date().toISOString()}
       this.cleanTempDir(cleanedDir);
       
       // Extract original archive
-      execSync(`tar -xzf "${originalPath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
+      execSync('{ { { tar -xzf & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${originalPath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
       
       // Check if extraction was successful
       if (!fs.existsSync(extractDir)) {
@@ -423,7 +423,7 @@ Generated: ${new Date().toISOString()}
       
       // Create cleaned archive
       const cleanedArchivePath = path.join(this.backupDir, `${archiveName}_cleaned.tar.gz`);
-      execSync(`tar -czf "${cleanedArchivePath}" -C "${cleanedDir}" .`, { stdio: 'pipe' });
+      execSync('{ { { { { { tar -czf & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${cleanedArchivePath}" -C "${cleanedDir}" .`, { stdio: 'pipe' });
       
       // Generate manifest
       const manifestPath = path.join(this.backupDir, `${archiveName}_cleaned_manifest.txt`);

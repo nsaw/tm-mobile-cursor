@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { LayoutContext } from '../LayoutShell';
 
 export const useTopBarZone = () => {
   // For now, return a placeholder since the context doesn't have topbarSlot yet

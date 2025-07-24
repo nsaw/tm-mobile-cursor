@@ -2,8 +2,8 @@
 
 ## 🚀 QUICK START COMMANDS
 
-```bash
-# Start all systems
+```{ { { { { { { { bash
+# Start all systems & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ./scripts/system-control.sh start
 
 # Stop all systems
@@ -16,7 +16,7 @@
 ./scripts/system-control.sh status
 
 # Check what's running
-ps aux | grep -E "(expo|metro|nodemon|ngrok|ghost|autolinter)"
+{ { { { ps aux | grep -E "(expo|metro|nodemon|ngrok|ghost|autolinter)" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check ports
 lsof -i -P | grep LISTEN | grep -E "(3000|4000|14000|5050|5052|5555|8081|18081)"
@@ -133,8 +133,8 @@ lsof -i -P | grep LISTEN | grep -E "(3000|4000|14000|5050|5052|5555|8081|18081)"
 ## 🛠️ BOOT SYSTEM SCRIPTS
 
 ### **Main Control Script**
-```bash
-./scripts/system-control.sh [COMMAND]
+```{ { { { bash
+./scripts/system-control.sh [COMMAND] & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 **Commands:**
 - `start` - Start all systems
@@ -144,8 +144,8 @@ lsof -i -P | grep LISTEN | grep -E "(3000|4000|14000|5050|5052|5555|8081|18081)"
 - `help` - Show help
 
 ### **Comprehensive Boot Script**
-```bash
-./scripts/boot-all-systems.sh
+```{ { { { bash
+./scripts/boot-all-systems.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 **Features:**
 - Port conflict detection and resolution
@@ -156,8 +156,8 @@ lsof -i -P | grep LISTEN | grep -E "(3000|4000|14000|5050|5052|5555|8081|18081)"
 - Health monitoring and verification
 
 ### **Graceful Shutdown Script**
-```bash
-./scripts/shutdown-all-systems.sh
+```{ { { { bash
+./scripts/shutdown-all-systems.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 **Features:**
 - Graceful process termination
@@ -190,19 +190,19 @@ lsof -i -P | grep LISTEN | grep -E "(3000|4000|14000|5050|5052|5555|8081|18081)"
 ## 🔍 MONITORING COMMANDS
 
 ### **Process Monitoring**
-```bash
-# Check all related processes
-ps aux | grep -E "(expo|metro|nodemon|ngrok|ghost|autolinter|trust|watchdog)"
+```{ { { { bash
+# Check all related processes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep -E "(expo|metro|nodemon|ngrok|ghost|autolinter|trust|watchdog)" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check specific service
-ps aux | grep "expo start"
-ps aux | grep "nodemon"
-ps aux | grep "ngrok"
+{ { { { ps aux | grep "expo start" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep "nodemon" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep "ngrok" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **Port Monitoring**
-```bash
-# Check all listening ports
+```{ { { { bash
+# Check all listening ports & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 lsof -i -P | grep LISTEN
 
 # Check specific ports
@@ -213,18 +213,18 @@ lsof -i:4000 && echo "Port 4000 in use" || echo "Port 4000 free"
 ```
 
 ### **Health Checks**
-```bash
-# Backend health
-curl -s http://localhost:3000/health
+```{ { { { bash
+# Backend health & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { curl -s http://localhost:3000/health & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Expo health
-curl -s http://localhost:4000
+{ { { { curl -s http://localhost:4000 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Metro health
-curl -s http://localhost:8081
+{ { { { curl -s http://localhost:8081 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Ngrok tunnels
-curl -s http://localhost:4040/api/tunnels | jq
+{ { { { curl -s http://localhost:4040/api/tunnels | jq & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 🚨 TROUBLESHOOTING
@@ -232,8 +232,8 @@ curl -s http://localhost:4040/api/tunnels | jq
 ### **Common Issues**
 
 **Port Already in Use**
-```bash
-# Check what's using the port
+```{ { { { bash
+# Check what's using the port & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 lsof -i :4000
 
 # Kill the process
@@ -244,20 +244,20 @@ kill -9 <PID>
 ```
 
 **Service Not Starting**
-```bash
-# Check logs
+```{ { { { bash
+# Check logs & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 tail -f logs/boot-all-systems.log
 
 # Check specific service log
 tail -f logs/backend.log
 
 # Verify dependencies
-cd mobile-native-fresh/backend && npm install
+cd mobile-native-fresh/backend && { { { { npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 **Process Not Stopping**
-```bash
-# Force kill all related processes
+```{ { { { bash
+# Force kill all related processes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 pkill -f "expo"
 pkill -f "metro"
 pkill -f "nodemon"
@@ -268,8 +268,8 @@ pkill -f "ngrok"
 ```
 
 ### **Debug Mode**
-```bash
-# Enable debug mode
+```{ { { { bash
+# Enable debug mode & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 set -x
 ./scripts/system-control.sh start
 set +x
@@ -291,8 +291,8 @@ tail -f logs/backend.log
 ```
 
 ### **Make Changes**
-```bash
-# Edit code files...
+```{ { { { bash
+# Edit code files... & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check autolinter status
 tail -f logs/js-autolinter.log
@@ -300,17 +300,17 @@ tail -f logs/python-autolinter.log
 ```
 
 ### **Restart for Changes**
-```bash
-# Restart all systems
+```{ { { { bash
+# Restart all systems & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh restart
 
 # Or restart specific service
-pkill -f "nodemon" && cd mobile-native-fresh/backend && npm run dev &
+pkill -f "nodemon" && cd mobile-native-fresh/backend && { { { { npm run dev & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **Stop Development**
-```bash
-# Stop all systems
+```{ { { { bash
+# Stop all systems & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh stop
 
 # Verify cleanup
@@ -327,9 +327,9 @@ pkill -f "nodemon" && cd mobile-native-fresh/backend && npm run dev &
 - **Watchdog**: Auto-healing tunnel monitoring
 
 ### **Monitoring Commands**
-```bash
-# Check Ghost processes
-ps aux | grep -E "(summary-monitor|ghost-bridge|patch-executor|trust-daemon)"
+```{ { { { bash
+# Check Ghost processes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep -E "(summary-monitor|ghost-bridge|patch-executor|trust-daemon)" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check Ghost logs
 tail -f logs/summary-monitor.log
@@ -343,8 +343,8 @@ ls -la mobile-native-fresh/tasks/summaries/.processed/
 ## 🔧 CONFIGURATION
 
 ### **Environment Variables**
-```bash
-# Project paths
+```{ { { { bash
+# Project paths & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor"
 MOBILE_DIR="$PROJECT_ROOT/mobile-native-fresh"
 BACKEND_DIR="$MOBILE_DIR/backend"
@@ -376,9 +376,9 @@ To modify port assignments or add new services:
 - **Network**: Minimal for local development, moderate for tunnels
 
 ### **Monitoring**
-```bash
-# Check memory usage
-ps aux | grep -E "(expo|metro|nodemon|ngrok)" | awk '{print $2, $3, $4, $11}'
+```{ { { { bash
+# Check memory usage & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep -E "(expo|metro|nodemon|ngrok)" | awk '{print $2, $3, $4, $11 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}'
 
 # Check CPU usage
 top -l 1 | grep -E "(expo|metro|nodemon|ngrok)"
@@ -397,8 +397,8 @@ du -sh mobile-native-fresh/node_modules/
 - Trust daemon monitoring for security compliance
 
 ### **Access Control**
-```bash
-# Check file permissions
+```{ { { { bash
+# Check file permissions & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ls -la scripts/
 ls -la logs/
 
@@ -414,8 +414,8 @@ grep -r "password\|secret\|key" logs/ || echo "No sensitive data found"
 - `logs/` - All system logs
 
 ### **Useful Commands**
-```bash
-# Quick status check
+```{ { { { bash
+# Quick status check & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh status
 
 # View recent logs

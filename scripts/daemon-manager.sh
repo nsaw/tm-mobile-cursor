@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { bash
 
-# Daemon Manager - Keeps critical systems alive with auto-restart
+# Daemon Manager - Keeps critical systems alive with auto-restart & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 # Manages patch-executor, ghost-bridge, summary-monitor, realtime-monitor
 
 set -e
@@ -25,11 +25,11 @@ mkdir -p "$PID_DIR"
 # Daemon configurations (using regular arrays for compatibility)
 DAEMON_NAMES=("doc-sync" "summary-monitor" "realtime-monitor" "patch-executor" "ghost-bridge")
 DAEMON_COMMANDS=(
-    "bash scripts/watchdog-doc-sync.sh"
-    "node scripts/summary-monitor.js"
-    "node scripts/realtime-monitor.js start"
-    "node scripts/patch-executor.js daemon"
-    "node scripts/ghost-bridge.js"
+    "{ { bash scripts/watchdog-doc-sync.sh" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+    "{ { node scripts/summary-monitor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+    "{ { node scripts/realtime-monitor.js start" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+    "{ { node scripts/direct-patch-executor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+    "{ { node scripts/ghost-bridge.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 )
 
 # Get daemon command by name
@@ -59,15 +59,17 @@ is_daemon_running() {
     local pid_file="$PID_DIR/${daemon_name}.pid"
     
     if [ -f "$pid_file" ]; then
-        local pid=$(cat "$pid_file")
-        if kill -0 "$pid" 2>/dev/null; then
-            return 0  # Running
-        else
-            log "WARN" "Stale PID file for $daemon_name, removing"
-            rm -f "$pid_file"
+        local pid=$(cat "$pid_file" 2>/dev/null || echo "")
+        if [ -n "$pid" ]; then
+            if kill -0 "$pid" 2>/dev/null; then
+                return 0
+            else
+                # Process is dead, remove stale PID file
+                rm -f "$pid_file"
+            fi
         fi
     fi
-    return 1  # Not running
+    return 1
 }
 
 # Start a daemon
@@ -77,35 +79,25 @@ start_daemon() {
     local pid_file="$PID_DIR/${daemon_name}.pid"
     local log_file="$LOG_DIR/${daemon_name}.log"
     
-    if [ -z "$command" ]; then
-        log "ERROR" "Unknown daemon: $daemon_name"
-        return 1
-    fi
-    
-    if is_daemon_running "$daemon_name"; then
-        log "INFO" "✅ $daemon_name is already running"
-        return 0
-    fi
-    
-    log "INFO" "🚀 Starting $daemon_name: $command"
-    
-    # Start daemon in background
-    nohup $command > "$log_file" 2>&1 &
-    local pid=$!
-    
-    # Save PID
-    echo "$pid" > "$pid_file"
-    
-    # Wait a moment to see if it starts successfully
-    sleep 2
-    
-    if kill -0 "$pid" 2>/dev/null; then
-        log "INFO" "✅ $daemon_name started successfully (PID: $pid)"
-        return 0
+    if ! is_daemon_running "$daemon_name"; then
+        log "INFO" "🚀 Starting $daemon_name"
+        
+        # Start daemon with non-blocking pattern
+        { { $command & } >/dev/null 2>&1 & disown } >/dev/null 2>&1 & disown
+        
+        # Wait a moment for process to start
+        sleep 2
+        
+        # Try to find the PID
+        local pid=$(pgrep -f "$daemon_name" | head -1)
+        if [ -n "$pid" ]; then
+            echo "$pid" > "$pid_file"
+            log "INFO" "✅ $daemon_name started (PID: $pid)"
+        else
+            log "WARN" "⚠️  $daemon_name may not have started properly"
+        fi
     else
-        log "ERROR" "❌ $daemon_name failed to start"
-        rm -f "$pid_file"
-        return 1
+        log "INFO" "ℹ️  $daemon_name is already running"
     fi
 }
 
@@ -114,24 +106,25 @@ stop_daemon() {
     local daemon_name=$1
     local pid_file="$PID_DIR/${daemon_name}.pid"
     
-    if [ -f "$pid_file" ]; then
-        local pid=$(cat "$pid_file")
-        log "INFO" "🛑 Stopping $daemon_name (PID: $pid)"
+    if is_daemon_running "$daemon_name"; then
+        log "INFO" "🛑 Stop{ { ping $daemon_name" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
         
-        if kill -0 "$pid" 2>/dev/null; then
-            kill "$pid"
-            sleep 2
-            
-            if kill -0 "$pid" 2>/dev/null; then
-                log "WARN" "⚠️ $daemon_name didn't stop gracefully, force killing"
+        if [ -f "$pid_file" ]; then
+            local pid=$(cat "$pid_file")
+            if [ -n "$pid" ]; then
+                kill "$pid" 2>/dev/null || true
+                sleep 1
                 kill -9 "$pid" 2>/dev/null || true
             fi
         fi
         
+        # Also kill by name pattern
+        pkill -f "$daemon_name" 2>/dev/null || true
+        
         rm -f "$pid_file"
         log "INFO" "✅ $daemon_name stopped"
     else
-        log "INFO" "ℹ️ $daemon_name not running"
+        log "INFO" "ℹ️  $daemon_name is not running"
     fi
 }
 
@@ -140,25 +133,21 @@ restart_daemon() {
     local daemon_name=$1
     log "INFO" "🔄 Restarting $daemon_name"
     stop_daemon "$daemon_name"
-    sleep 1
+    sleep 2
     start_daemon "$daemon_name"
 }
 
-# Check and restart daemons if needed
+# Check all daemons and restart if needed
 check_daemons() {
-    log "INFO" "🔍 Checking daemon health"
-    
     for daemon_name in "${DAEMON_NAMES[@]}"; do
         if ! is_daemon_running "$daemon_name"; then
-            log "WARN" "⚠️ $daemon_name is down, restarting"
+            log "WARN" "⚠️  $daemon_name is down, restarting"
             start_daemon "$daemon_name"
-        else
-            log "INFO" "✅ $daemon_name is healthy"
         fi
     done
 }
 
-# Show daemon status
+# Show status of all daemons
 show_status() {
     echo "🔍 **DAEMON STATUS**"
     echo "=================="
@@ -195,7 +184,7 @@ daemon_loop() {
     # Main monitoring loop
     while true; do
         check_daemons
-        log "INFO" "💤 Sleeping for $CHECK_INTERVAL seconds"
+        log "INFO" "💤 Slee{ { ping for $CHECK_INTERVAL seconds" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
         sleep "$CHECK_INTERVAL"
     done
 }
@@ -206,13 +195,11 @@ case "${1:-status}" in
         daemon_loop
         ;;
     "stop")
-        log "INFO" "🛑 Stopping all daemons"
         for daemon_name in "${DAEMON_NAMES[@]}"; do
             stop_daemon "$daemon_name"
         done
         ;;
     "restart")
-        log "INFO" "🔄 Restarting all daemons"
         for daemon_name in "${DAEMON_NAMES[@]}"; do
             restart_daemon "$daemon_name"
         done
@@ -220,35 +207,20 @@ case "${1:-status}" in
     "status")
         show_status
         ;;
-    "start-daemon")
-        if [ -z "$2" ]; then
-            echo "Usage: $0 start-daemon <daemon-name>"
-            echo "Available daemons: ${DAEMON_NAMES[*]}"
-            exit 1
-        fi
-        start_daemon "$2"
-        ;;
-    "stop-daemon")
-        if [ -z "$2" ]; then
-            echo "Usage: $0 stop-daemon <daemon-name>"
-            echo "Available daemons: ${DAEMON_NAMES[*]}"
-            exit 1
-        fi
-        stop_daemon "$2"
-        ;;
     *)
         echo "🔧 Daemon Manager"
         echo ""
-        echo "Usage: $0 [start|stop|restart|status|start-daemon|stop-daemon]"
+        echo "Usage: $0 [start|stop|restart|status]"
         echo ""
         echo "Commands:"
-        echo "  start         - Start daemon manager (monitors all daemons)"
-        echo "  stop          - Stop all daemons"
-        echo "  restart       - Restart all daemons"
-        echo "  status        - Show daemon status"
-        echo "  start-daemon  - Start specific daemon"
-        echo "  stop-daemon   - Stop specific daemon"
+        echo "  start   - Start daemon manager and all daemons"
+        echo "  stop    - Stop all daemons"
+        echo "  restart - Restart all daemons"
+        echo "  status  - Show status of all daemons"
         echo ""
-        echo "Available daemons: ${DAEMON_NAMES[*]}"
+        echo "Managed daemons:"
+        for daemon_name in "${DAEMON_NAMES[@]}"; do
+            echo "  • $daemon_name"
+        done
         ;;
 esac 

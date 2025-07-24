@@ -47,7 +47,7 @@ For complete guidelines and examples, see [Theming and Styling Guide](./docs/THE
 
 ---
 
-## Text Wrapping in JSX
+## Text Wrap{ { { { ping in JSX & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 **All string literals rendered in JSX must be wrapped in `<Text>` components.**
 
@@ -58,7 +58,7 @@ This is enforced automatically by a custom ESLint rule (`no-text-outside-text`).
 
 - The pre-commit hook will auto-fix any unwrapped text strings.
 - If you see a warning about text strings outside `<Text>`, run:
-  ```bash
-  npm run lint:wrap-text
+  ```{ { { { bash
+  npm run lint:wrap-text & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 - If you add new UI, always wrap text in `<Text>`. 

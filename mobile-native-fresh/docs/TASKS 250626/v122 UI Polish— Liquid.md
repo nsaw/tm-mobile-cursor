@@ -11,7 +11,7 @@ STAGE 1
   // ✅ FOCUS ONLY: typography weight, casing, and opacity alignment
   // ✅ NON-DESTRUCTIVE: Apply glass morphism overlays without layout regression
   // ✅ STRUCTURAL ENFORCEMENT: Classify cards vs. sections for correct rule application
-  // ✅ Run `npm run lint:fix-all` continuously in background
+  // ✅ Run `{ { { { { { { { npm run lint:fix-all` continuously in background & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
   // ✅ PRE-CHECK PREP: Rollback Safety Tag
   📌 BEFORE ANY FILE CHANGES:
   git add .
@@ -94,7 +94,7 @@ import { View, StyleSheet, Platform } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useTheme } from '@/theme/ThemeProvider';
 
-interface Props {
+interface Pro{ { { { ps { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   children: React.ReactNode;
   intensity?: number;
   tint?: 'light' | 'dark';
@@ -300,7 +300,7 @@ Dynamic Style Role Integration instruction
     {
       "section": "Ensure GlassCardWrapper Used Correctly",
       "actions": [
-        "Verify that `GlassCardWrapper` wraps card-role elements and is not duplicated on already-wrapped children",
+        "Verify that `GlassCardWrapper` wra{ { { { ps card-role elements and is not duplicated on already-wrapped children", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         "Ensure `GlassCardWrapper` does not interfere with touchables, text input focus, or scroll views"
       ],
       "commit": "fix: non-destructive glass morphism application via role-based wrapping",
@@ -339,7 +339,7 @@ import { classifyStyleRole, StyleRole } from '@/utils/styleRoleClassifier';
 import GlassCardWrapper from './GlassCardWrapper';
 import { useTheme } from '@/theme/ThemeProvider';
 
-interface Props extends AccessibilityProps {
+interface Pro{ { { { ps extends AccessibilityProps { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   forceRole?: StyleRole;
@@ -371,7 +371,7 @@ const AutoRoleView: React.FC<Props> = ({
 
   const combined = [flattened, spacingStyles];
 
-  const baseProps = {
+  const basePro{ { { { ps = { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     accessible,
     accessibilityLabel,
     accessibilityRole: role === 'button-wrapper' ? 'button' : undefined,
@@ -455,9 +455,9 @@ Use `<AutoRoleView>` as a default wrapper for any layout block. It automatically
       "section": "Replace View with AutoRoleView in Eligible Components",
       "actions": [
         "Scan all .tsx files in `src/components/ui/`, `src/features/`, `src/screens/`",
-        "Find all <View> elements with inline style props containing: shadow, borderRadius, elevation, flex, padding, margin",
+        "Find all <View> elements with inline style pro{ { { { ps containing: shadow, borderRadius, elevation, flex, padding, margin", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         "Replace eligible <View> with <AutoRoleView>",
-        "Preserve props and children — pass them unchanged",
+        "Preserve pro{ { { { ps and children — pass them unchanged", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         "Add `forceRole` where pattern is clearly a card, input, or section",
         "Ensure `AutoRoleView` is imported from `@/components/wrappers/AutoRoleView`"
       ],
@@ -468,7 +468,7 @@ Use `<AutoRoleView>` as a default wrapper for any layout block. It automatically
       "section": "Verify Runtime Safety and CI Compatibility",
       "actions": [
         "Run all Expo Metro bundler checks and lint hooks",
-        "Run `npm run lint:check-theme` and `npm run lint:fix-all`",
+        "Run `{ { { { npm run lint:check-theme` and `npm run lint:fix-all`", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         "Verify glass morphism fallback works without blur errors on Android or test devices"
       ],
       "commit": "chore: verified AutoRoleView migration CI-safe",
@@ -577,12 +577,12 @@ run();
 
 Dry run, preview all eligible View replacements:
 
-ts-node bin/convert-view-to-roleview.ts --dryRun
+ts-{ { { { node bin/convert-view-to-roleview.ts --dryRun & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Convert one file, force as card:
 
-ts-node bin/convert-view-to-roleview.ts src/components/ui/MyCard.tsx --forceRole=card
+ts-{ { { { node bin/convert-view-to-roleview.ts src/components/ui/MyCard.tsx --forceRole=card & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Convert all screens with forceRole=section:
 
-ts-node bin/convert-view-to-roleview.ts "src/features/**/*.tsx" --forceRole=section
+ts-{ { { { node bin/convert-view-to-roleview.ts "src/features/**/*.tsx" --forceRole=section & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown

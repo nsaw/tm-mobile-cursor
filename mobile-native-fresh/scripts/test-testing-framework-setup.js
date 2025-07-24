@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Testing Framework Setup Validation
  * Tests the testing framework system and infrastructure
  */

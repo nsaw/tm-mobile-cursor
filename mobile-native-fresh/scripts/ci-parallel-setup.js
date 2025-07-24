@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * CI Parallel Setup Script
  * Configures parallel testing for legacy and nextgen environments
  */
@@ -15,10 +15,10 @@ console.log('🚀 Setting up CI Parallel Testing...\n');
 const config = {
   environments: ['legacy', 'nextgen'],
   testScripts: {
-    legacy: 'npm run test:legacy',
-    nextgen: 'npm run test:nextgen',
-    parallel: 'npm run test:parallel',
-    coverage: 'npm run test:coverage'
+    legacy: '{ { { { npm run test:legacy', & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    nextgen: '{ { { { npm run test:nextgen', & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    parallel: '{ { { { npm run test:parallel', & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    coverage: '{ { { { npm run test:coverage' & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   },
   jestConfigs: {
     legacy: 'jest.config.legacy.js',
@@ -197,11 +197,11 @@ function updatePackageJson() {
     'test:legacy': `jest --config ${config.jestConfigs.legacy}`,
     'test:nextgen': `jest --config ${config.jestConfigs.nextgen}`,
     'test:parallel': `jest --config ${config.jestConfigs.parallel}`,
-    'test:coverage': 'npm run test:parallel -- --coverage',
+    'test:coverage': '{ { { { npm run test:parallel -- --coverage', & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     'test:legacy:watch': `jest --config ${config.jestConfigs.legacy} --watch`,
     'test:nextgen:watch': `jest --config ${config.jestConfigs.nextgen} --watch`,
     'test:parallel:watch': `jest --config ${config.jestConfigs.parallel} --watch`,
-    'test:ci': 'npm run test:parallel -- --ci --coverage --watchAll=false'
+    'test:ci': '{ { { { npm run test:parallel -- --ci --coverage --watchAll=false' & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   };
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
@@ -310,7 +310,7 @@ function validateSetup() {
 
   // Test Jest configurations
   try {
-    execSync('npx jest --version', { stdio: 'pipe' });
+    execSync('{ { { { { { npx jest --version & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' });
     console.log('✅ Jest is available');
   } catch (error) {
     console.error('❌ Jest not available:', error.message);
@@ -338,11 +338,11 @@ function setup() {
     if (validateSetup()) {
       console.log('\n🎉 CI Parallel Setup Complete!');
       console.log('\nAvailable commands:');
-      console.log('  npm run test:legacy     - Run legacy tests');
-      console.log('  npm run test:nextgen    - Run nextgen tests');
-      console.log('  npm run test:parallel   - Run both environments in parallel');
-      console.log('  npm run test:coverage   - Run tests with coverage');
-      console.log('  npm run test:ci         - Run tests for CI');
+      console.log('  { { { { npm run test:legacy     - Run legacy tests') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+      console.log('  { { { { npm run test:nextgen    - Run nextgen tests') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+      console.log('  { { { { npm run test:parallel   - Run both environments in parallel') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+      console.log('  { { { { npm run test:coverage   - Run tests with coverage') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+      console.log('  { { { { npm run test:ci         - Run tests for CI') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     } else {
       console.error('\n❌ Setup validation failed');
       process.exit(1);

@@ -51,7 +51,7 @@ const templateBins = [
   {
     id: 4,
     name: 'Shopping',
-    description: 'Shopping lists and errands',
+    description: 'Shop{ { { { ping lists and errands', & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     color: '#EF4444',
     icon: 'cart-outline',
     userId: 1,

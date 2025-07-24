@@ -31,12 +31,12 @@ All secrets are stored in the `tm-mobile-cursor` vault in 1Password and referenc
 
 ## Development
 
-```bash
-# Generate .env from 1Password
+```{ { { { bash
+# Generate .env from 1Password & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 op run --env-file env.template > .env
 
 # Run with secrets
-op run --env-file .env -- npm start
+op run --env-file .env -- { { { { npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Production

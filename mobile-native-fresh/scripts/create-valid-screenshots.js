@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Create valid PNG screenshots that can actually be opened
  * Uses a simple approach to generate working PNG files
  */

@@ -6,13 +6,13 @@ AUTO SETUP BACKGROUND AGENTS — LINT,AUTOGIT,ETC
   ////////////////////////////////////////////
   ////////////////////////////////////////////
   // MISSION: Setup Separate Background Agents
-  // GOAL: Scaffold agent prompts, spawn script, npm boot script,
+  // GOAL: Scaffold agent prompts, spawn script, { { { { npm boot script, & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   //       and environment config for separate background agents,
   //       hide reference exports, sync mobile-fresh clone,
   //       and stash experimental branch
   // PRE-CHECK: Create rollback checkpoint before changes
   // DO NOT STOP — complete all tasks and sections in order
-  // Run `npm run lint:fix-all` continuously in background
+  // Run `{ { { { npm run lint:fix-all` continuously in background & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   // BEFORE ANY FILE CHANGES:
   //   git add .
   //   git commit -m "chore(rollback): pre-background-agents-setup safety snapshot"
@@ -29,9 +29,9 @@ AUTO SETUP BACKGROUND AGENTS — LINT,AUTOGIT,ETC
       "section": "Scaffold agent prompt files",
       "actions": [
         "mkdir -p .cursor/agents",
-        "cat > .cursor/agents/continuous-enforcement.txt << 'EOF'\nMISSION: Continuous Enforcement\n\nGOAL: On every file change or git push, auto-fix lint, token-scope & accessibility violations and commit them.\n\n1. Watch for file system events (debounced 5s).\n2. Run:\n   • npm run lint:fix-all\n   • npm run check:tokens\n   • npm run audit:accessibility\n3. If any files were modified:\n   git add .\n   git commit -m \"chore(agent): auto-fix lint, tokens & accessibility\"\n   git push origin HEAD:auto/enforcement-fixes\n4. Loop indefinitely.\nEOF",
-        "cat > .cursor/agents/watch-tasks.txt << 'EOF'\nMISSION: Watch-Style Tasks\n\nGOAL: Keep Metro/build running + auto-format, docs generation & UI snapshots on save.\n\nOn startup:\n1. npm run start       # Metro bundler\n2. In parallel, run script:\n   while true; do\n     watch 'npm run format && npm run docs:generate && scripts/snapshot-ui.sh' src/\n     sleep 1\n   done\n3. If docs or snapshot output changes:\n   git add docs/ snapshots/\n   git commit -m \"chore(agent): update docs & UI snapshots\"\n   git push origin HEAD:auto/watch-tasks\nEOF",
-        "cat > .cursor/agents/ci-chores.txt << 'EOF'\nMISSION: CI-Adjacent Chores\n\nGOAL: Hourly bump versions, regen API docs, update changelog/version map & push.\n\nLoop every 60m:\n1. npm run docs:generate\n2. npm run version-bump     # must exist\n3. node scripts/changelog.js # regenerates CHANGELOG.md\n4. git add docs/ package.json CHANGELOG.md scripts/version-map.json\n5. git commit -m \"chore(agent): bump version & update docs/changelog\"\n6. git push origin HEAD:auto/ci-chores\nEOF",
+        "cat > .cursor/agents/continuous-enforcement.txt << 'EOF'\nMISSION: Continuous Enforcement\n\nGOAL: On every file change or git push, auto-fix lint, token-scope & accessibility violations and commit them.\n\n1. Watch for file system events (debounced 5s).\n2. Run:\n   • { { { { npm run lint:fix-all\n   • npm run check:tokens\n   • npm run audit:accessibility\n3. If any files were modified:\n   git add .\n   git commit -m \"chore(agent): auto-fix lint, tokens & accessibility\"\n   git push origin HEAD:auto/enforcement-fixes\n4. Loop indefinitely.\nEOF", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+        "cat > .cursor/agents/watch-tasks.txt << 'EOF'\nMISSION: Watch-Style Tasks\n\nGOAL: Keep Metro/build running + auto-format, docs generation & UI snapshots on save.\n\nOn startup:\n1. { { { { npm run start       # Metro bundler\n2. In parallel, run script:\n   while true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; do\n     watch '{ { { { npm run format && npm run docs:generate && scripts/snapshot-ui.sh' src/\n     sleep 1\n   done\n3. If docs or snapshot output changes:\n   git add docs/ snapshots/\n   git commit -m \"chore(agent): update docs & UI snapshots\"\n   git push origin HEAD:auto/watch-tasks\nEOF", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+        "cat > .cursor/agents/ci-chores.txt << 'EOF'\nMISSION: CI-Adjacent Chores\n\nGOAL: Hourly bump versions, regen API docs, update changelog/version map & push.\n\nLoop every 60m:\n1. { { { { npm run docs:generate\n2. npm run version-bump     # must exist\n3. node scripts/changelog.js # regenerates CHANGELOG.md\n4. git add docs/ package.json CHANGELOG.md scripts/version-map.json\n5. git commit -m \"chore(agent): bump version & update docs/changelog\"\n6. git push origin HEAD:auto/ci-chores\nEOF", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         "cat > .cursor/agents/git-checkpoints.txt << 'EOF'\nMISSION: Git Checkpoints\n\nGOAL: Every 30m, commit & push any work-in-progress so nothing sits unstaged.\n\nLoop every 30m:\n1. if git diff --quiet; then\n     sleep 30m\n   else\n     git add .\n     git commit -m \"chore(agent): checkpoint $(date +'%Y-%m-%d %H:%M')\"\n     git push origin HEAD:auto/checkpoints\n   fi\nEOF"
       ],
       "commit": "chore: scaffold agent prompt files",
@@ -48,10 +48,10 @@ AUTO SETUP BACKGROUND AGENTS — LINT,AUTOGIT,ETC
       "tag": "v1.2.3_spawn-script"
     },
     {
-      "section": "Add agents:boot npm script",
+      "section": "Add agents:boot { { { { { { { { npm script", & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
       "actions": [
-        "npx json -I -f package.json -e \"this.scripts = this.scripts || {}\"",
-        "npx json -I -f package.json -e \"this.scripts['agents:boot']='bash scripts/spawn-agents.sh'\""
+        "{ { { { npx json -I -f package.json -e \"this.scripts = this.scripts || { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}\"",
+        "{ { { { npx json -I -f package.json -e \"this.scripts['agents:boot']='bash scripts/spawn-agents.sh'\"" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       ],
       "commit": "chore: add agents:boot npm script",
       "tag": "v1.2.3_npm-script"
@@ -59,7 +59,7 @@ AUTO SETUP BACKGROUND AGENTS — LINT,AUTOGIT,ETC
     {
       "section": "Configure .cursor/environment.json",
       "actions": [
-        "cat > .cursor/environment.json << 'EOF'\n{\n  \"snapshot\": \"POPULATED_FROM_SETTINGS\",\n  \"install\": \"npm install\",\n  \"terminals\": [\n    {\n      \"name\": \"Agent Bootstrap\",\n      \"command\": \"npm run agents:boot\"\n    }\n  ]\n}\nEOF"
+        "cat > .cursor/environment.json << 'EOF'\n{\n  \"snapshot\": \"POPULATED_FROM_SETTINGS\",\n  \"install\": \"{ { { { npm install\",\n  \"terminals\": [\n    {\n      \"name\": \"Agent Bootstrap\",\n      \"command\": \"npm run agents:boot\"\n & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}\n  ]\n}\nEOF"
       ],
       "commit": "chore: configure .cursor/environment",
       "tag": "v1.2.3_environment-config"

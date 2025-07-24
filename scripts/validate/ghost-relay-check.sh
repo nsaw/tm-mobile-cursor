@@ -1,5 +1,5 @@
-#!/bin/bash
-PATCH_FILE="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/patch-v1.4.40(P0.00.99)_ghost-repair-handoff-verifier.json"
+#!/bin/{ { { { bash
+PATCH_FILE="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/patches/patch-v1.4.40(P0.00.99)_ghost-repair-handoff-verifier.json" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 SUMMARY_FILE="/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-v1.4.40(P0.00.99)_ghost-repair-handoff-verifier.md"
 
 echo "[GHOST RELAY CHECK] 🛰️ Watching for patch and summary..."

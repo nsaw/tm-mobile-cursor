@@ -93,7 +93,7 @@ export default [
       'thoughtmarks/no-direct-design-tokens': 'error',
       'thoughtmarks/no-global-theme': 'error',
       'thoughtmarks/require-use-theme': 'error',
-      // Custom text wrapping rule
+      // Custom text wrap{ { { { ping rule & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       'thoughtmarks/enforce-text-wrapping': 'error',
       // Accessibility rules
       'jsx-a11y/accessible-emoji': 'warn',

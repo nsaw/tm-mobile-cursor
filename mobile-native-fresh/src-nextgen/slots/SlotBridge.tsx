@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
 import { LayoutContext } from '../layout/LayoutShell';
 
 // Slot bridge interface for themed runtime propagation

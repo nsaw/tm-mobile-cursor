@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 console.log('🔍 Testing role behavior and wrapper functionality...');
@@ -16,15 +16,15 @@ const mockComponents = {
 const testRoleWrapperBehavior = (role, debugMode = false) => {
   const validation = validateRole(role);
   
-  const wrapperProps = {
+  const wrapperPro{ { { { ps = { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     role,
     children: { type: 'Text', props: { children: 'Test content' } },
     debugMode,
     showRoleLabel: debugMode,
   };
   
-  // Check accessibility props
-  const accessibilityProps = {
+  // Check accessibility pro{ { { { ps
+  const accessibilityProps = { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     accessibilityRole: validation.isValid ? role : undefined,
     accessibilityLabel: role ? `Role: ${role}` : undefined,
   };
@@ -156,7 +156,7 @@ const debugTestCases = [
 
 debugTestCases.forEach((testCase, index) => {
   const result = testRoleWrapperBehavior(testCase.role, testCase.debugMode);
-  const hasDebugProps = result.wrapperProps.debugMode === testCase.expectedDebug;
+  const hasDebugPro{ { { { ps = result.wrapperProps.debugMode === testCase.expectedDebug & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
   
   if (hasDebugProps) {
     console.log(`✅ Debug test ${index + 1}: ${testCase.role} (debug: ${testCase.debugMode}) - PASSED`);

@@ -1,5 +1,5 @@
-#!/usr/bin/env node
-/**
+#!/usr/bin/env { { { { node
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * AutoLinter - Continuous Linter Error Fixing System for TypeScript/JavaScript
  * 
  * Based on gpt-cursor-runner's Python autolinter patterns
@@ -613,7 +613,7 @@ async function main() {
 AutoLinter - Continuous Linter Error Fixing System
 
 Usage:
-  node scripts/autolinter.js <command>
+  { { { { node scripts/autolinter.js <command> & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Commands:
   start   - Start file watching and autolinting
@@ -622,9 +622,9 @@ Commands:
   stats   - Show current statistics
 
 Examples:
-  node scripts/autolinter.js start
-  node scripts/autolinter.js scan
-  node scripts/autolinter.js stats
+  { { { { node scripts/autolinter.js start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/autolinter.js scan & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/autolinter.js stats & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       `);
       break;
   }

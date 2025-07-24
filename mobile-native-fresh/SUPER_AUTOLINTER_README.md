@@ -48,12 +48,12 @@ logs/
 ## 🛠️ Installation & Setup
 
 ### **1. Prerequisites**
-```bash
-# Python dependencies
+```{ { { { bash
+# Python dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 pip install watchdog flake8 black autopep8
 
 # JavaScript dependencies
-npm install -g eslint prettier
+{ { { { { { { { npm install -g eslint prettier & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 ### **2. Configuration**
@@ -81,24 +81,24 @@ The super autolinter uses a JSON configuration file (`super_autolinter_config.js
 
 ### **Basic Commands**
 
-```bash
-# Start in watch mode (default)
-python3 scripts/super_autolinter.py --config scripts/super_autolinter_config.json
+```{ { { { bash
+# Start in watch mode (default) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { python3 scripts/super_autolinter.py --config scripts/super_autolinter_config.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # One-time scan
-python3 scripts/super_autolinter.py --scan-only
+{ { { { python3 scripts/super_autolinter.py --scan-only & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Show statistics
-python3 scripts/super_autolinter.py --stats
+{ { { { python3 scripts/super_autolinter.py --stats & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Monitor specific directories
-python3 scripts/super_autolinter.py --project-dirs ./src ./backend
+{ { { { python3 scripts/super_autolinter.py --project-dirs ./src ./backend & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **Migration from Old Autolinters**
 
-```bash
-# Run migration script
+```{ { { { bash
+# Run migration script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/migrate_to_super_autolinter.sh migrate
 
 # Check status
@@ -218,8 +218,8 @@ The super autolinter uses multiple strategies for each language:
 
 ### **Improved Reliability**
 - **Error Recovery**: Graceful handling of failures
-- **Backup Strategy**: Automatic file backups
-- **Retry Logic**: Multiple attempts for fixes
+- **Backup Strategy**: Automatic file backu{ { { { ps
+- **Retry Logic**: Multiple attempts for fixes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - **Comprehensive Logging**: Detailed error tracking
 
 ## 🔄 Migration Guide
@@ -227,29 +227,29 @@ The super autolinter uses multiple strategies for each language:
 ### **From Multiple Autolinters**
 
 1. **Stop Old Processes**
-   ```bash
-   ./scripts/migrate_to_super_autolinter.sh stop
+   ```{ { { { bash
+   ./scripts/migrate_to_super_autolinter.sh stop & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 2. **Backup Old Files**
-   ```bash
-   # Migration script handles this automatically
+   ```{ { { { bash
+   # Migration script handles this automatically & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ./scripts/migrate_to_super_autolinter.sh migrate
    ```
 
 3. **Test New System**
-   ```bash
-   ./scripts/migrate_to_super_autolinter.sh test
+   ```{ { { { bash
+   ./scripts/migrate_to_super_autolinter.sh test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 4. **Start Super AutoLinter**
-   ```bash
-   ./scripts/migrate_to_super_autolinter.sh start
+   ```{ { { { bash
+   ./scripts/migrate_to_super_autolinter.sh start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 ### **Rollback Process**
-```bash
-# If issues occur, rollback to old autolinters
+```{ { { { bash
+# If issues occur, rollback to old autolinters & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/migrate_to_super_autolinter.sh rollback
 ```
 
@@ -258,32 +258,32 @@ The super autolinter uses multiple strategies for each language:
 ### **Common Issues**
 
 **1. Super AutoLinter Not Starting**
-```bash
-# Check dependencies
+```{ { { { bash
+# Check dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 pip install watchdog flake8 black autopep8
 npm install -g eslint prettier
 
 # Check configuration
-python3 scripts/super_autolinter.py --config scripts/super_autolinter_config.json --test
+{ { { { python3 scripts/super_autolinter.py --config scripts/super_autolinter_config.json --test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 **2. No Files Being Processed**
-```bash
-# Check ignore patterns
+```{ { { { bash
+# Check ignore patterns & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Verify project directories exist
 # Check file extensions are supported
 ```
 
 **3. Fixes Not Applied**
-```bash
-# Check linter tools are installed
+```{ { { { bash
+# Check linter tools are installed & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Verify configuration settings
 # Check log files for errors
 ```
 
 ### **Debug Commands**
-```bash
-# Show current status
+```{ { { { bash
+# Show current status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/migrate_to_super_autolinter.sh status
 
 # View logs
@@ -355,7 +355,7 @@ python3 scripts/super_autolinter.py --config scripts/super_autolinter_config.jso
 - **Log Files**: Include relevant log entries
 - **Configuration**: Share configuration file
 - **Environment**: Describe system setup
-- **Steps to Reproduce**: Detail the issue
+- **Ste{ { { { ps to Reproduce**: Detail the issue & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ---
 

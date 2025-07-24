@@ -248,7 +248,7 @@ This manifest documents all tools, scripts, and automation systems across four g
 
 | Script | Purpose | Backup Location | Dependencies | Auto-Launch |
 |--------|---------|----------------|--------------|-------------|
-| `aggressive-backup-cleaner.js` | Aggressive backup cleaning | _backups/tm-safety_backups | tar, gzip | Manual |
+| `aggressive-backup-cleaner.js` | Aggressive backup cleaning | _backups/tm-safety_backu{ { { { { { { { { { { { ps | tar, gzip | Manual | & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 | `backup-sanitizer.js` | Backup sanitization | _backups/tm-safety_backups | tar, gzip | Manual |
 | `emergency-backup-cleaner.js` | Emergency cleanup | _backups/tm-safety_backups | tar, gzip | Manual |
 | `backup-log-cleanup.js` | Log cleanup | logs/ | fs | Manual |
@@ -309,7 +309,7 @@ This manifest documents all tools, scripts, and automation systems across four g
 | `screen-capture-verifier.js` | Screen capture verification | UI components | Puppeteer | Manual |
 | `verify-systems.js` | System verification | All systems | All systems | Manual |
 | `verify-path-routing.js` | Path routing verification | File paths | fs | Manual |
-| `test-ghost-endpoints.js` | Ghost endpoint testing | gpt-cursor-runner | curl | Manual |
+| `test-ghost-endpoints.js` | Ghost endpoint testing | gpt-cursor-runner | { { { curl | Manual | & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### Test Systems
 | Script | Purpose | Test Target | Dependencies | Auto-Launch |
@@ -469,7 +469,7 @@ This manifest documents all tools, scripts, and automation systems across four g
 | Script | Purpose | Utility Type | Dependencies | Auto-Launch |
 |--------|---------|--------------|--------------|-------------|
 | `get-sha1.sh` | SHA1 generation | Hash utility | sha1sum | Manual |
-| `setup-shell-alias.sh` | Shell alias setup | Shell utility | bash | Manual |
+| `setup-shell-alias.sh` | Shell alias setup | Shell utility | { { { bash | Manual | & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | `setup-verification-dependencies.sh` | Dependency setup | Setup utility | All systems | Manual |
 | `sync-from-remote.sh` | Remote sync | Sync utility | git | Manual |
 | `backup-tag-push.sh` | Backup tagging | Backup utility | git | Manual |
@@ -645,21 +645,21 @@ Boot Script ←→ All Systems
    ```
 
 ### Command Patterns
-```bash
-# Start all systems
+```{ { { bash
+# Start all systems & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/system-control.sh start
 
 # Check status
 ./scripts/system-control.sh status
 
 # Execute patches
-node scripts/patch-executor.js execute
+{ { { node scripts/patch-executor.js execute & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Monitor live status
-node scripts/live-patch-status.js start
+{ { { node scripts/live-patch-status.js start & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check ghost bridge
-node scripts/ghost-bridge.js test
+{ { { node scripts/ghost-bridge.js test & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ---
@@ -696,43 +696,43 @@ node scripts/ghost-bridge.js test
 1. **Check System Status**: `./scripts/system-control.sh status`
 2. **Check Logs**: `tail -f logs/*.log`
 3. **Restart Systems**: `./scripts/system-control.sh restart`
-4. **Check Ghost Bridge**: `node scripts/ghost-bridge.js test`
-5. **Emergency Cleanup**: `node scripts/emergency-backup-cleaner.js`
+4. **Check Ghost Bridge**: `{ { { node scripts/ghost-bridge.js test` & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+5. **Emergency Cleanup**: `{ { { node scripts/emergency-backup-cleaner.js` & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ---
 
 I'll conduct a comprehensive audit of all tools and scripts across the four directories you specified. Let me start by exploring the directory structure and then analyze each script systematically.
 
 Ran tool
-```bash
-find /Users/sawyer/gitSync/_global -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20
+```{ { { bash
+find /Users/sawyer/gitSync/_global -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20 & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
-```bash
-find /Users/sawyer/gitSync/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20
+```{ { { bash
+find /Users/sawyer/gitSync/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20 & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
-```bash
-find /Users/sawyer/gitSync/tm-mobile-cursor/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20
+```{ { { bash
+find /Users/sawyer/gitSync/tm-mobile-cursor/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20 & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
-```bash
-find /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20
+```{ { { bash
+find /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | head -20 & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Now let me get a comprehensive list of all files and then analyze them systematically:
 
-```bash
-find /Users/sawyer/gitSync/_global /Users/sawyer/gitSync/scripts /Users/sawyer/gitSync/tm-mobile-cursor/scripts /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | grep -v node_modules | grep -v .git | sort
+```{ { { bash
+find /Users/sawyer/gitSync/_global /Users/sawyer/gitSync/scripts /Users/sawyer/gitSync/tm-mobile-cursor/scripts /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" | grep -v node_modules | grep -v .git | sort & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Let me try a different approach to get the file list:
 
-```bash
-find /Users/sawyer/gitSync/_global -type f \( -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" \) | grep -v node_modules | grep -v .git | wc -l
+```{ { { bash
+find /Users/sawyer/gitSync/_global -type f \( -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" \) | grep -v node_modules | grep -v .git | wc -l & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Let me check if the directories exist and get the file lists properly:
 
-```bash
-ls -la /Users/sawyer/gitSync/_global/scripts/ 2>/dev/null || echo "Directory not found"
+```{ { { bash
+ls -la /Users/sawyer/gitSync/_global/scripts/ 2>/dev/null || echo "Directory not found" & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
-```bash
-ls -la /Users/sawyer/gitSync/scripts/ 2>/dev/null || echo "Directory not found"
+```{ { { bash
+ls -la /Users/sawyer/gitSync/scripts/ 2>/dev/null || echo "Directory not found" & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Now let me analyze the scripts systematically. I'll start by examining key scripts from each directory to understand their purposes and relationships:
 
@@ -756,13 +756,13 @@ Read file: mobile-native-fresh/scripts/ngrok-tunnel-manager.sh
 Read file: mobile-native-fresh/scripts/autolinter-runner-config.json
 Now let me get a comprehensive list of all files to create the master manifest:
 
-```bash
-find /Users/sawyer/gitSync/_global /Users/sawyer/gitSync/scripts /Users/sawyer/gitSync/tm-mobile-cursor/scripts /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -type f \( -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" \) 2>/dev/null | grep -v node_modules | grep -v .git | sort
+```{ { { bash
+find /Users/sawyer/gitSync/_global /Users/sawyer/gitSync/scripts /Users/sawyer/gitSync/tm-mobile-cursor/scripts /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts -type f \( -name "*.js" -o -name "*.py" -o -name "*.sh" -o -name "*.json" -o -name "*.cjs" -o -name "*.mjs" \) 2>/dev/null | grep -v node_modules | grep -v .git | sort & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Let me try a different approach to get the file lists:
 
-```bash
-ls -la /Users/sawyer/gitSync/_global/scripts/ /Users/sawyer/gitSync/scripts/ /Users/sawyer/gitSync/tm-mobile-cursor/scripts/ /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/ 2>/dev/null | grep -E "\.(js|py|sh|json|cjs|mjs)$"
+```{ { { bash
+ls -la /Users/sawyer/gitSync/_global/scripts/ /Users/sawyer/gitSync/scripts/ /Users/sawyer/gitSync/tm-mobile-cursor/scripts/ /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/ 2>/dev/null | grep -E "\.(js|py|sh|json|cjs|mjs)$" & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 Now let me examine some key configuration files and automation scripts to understand the complete system:
 

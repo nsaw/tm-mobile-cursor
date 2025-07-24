@@ -1,5 +1,5 @@
-#!/usr/bin/env node
-/**
+#!/usr/bin/env { { { { node
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Linting Dashboard
  *
  * Features:
@@ -371,7 +371,7 @@ async function main() {
 Lint Dashboard
 
 Usage:
-  node scripts/lint-dashboard.js <command> [port]
+  { { { { node scripts/lint-dashboard.js <command> [port] & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Commands:
   start   - Start the dashboard server
@@ -379,9 +379,9 @@ Commands:
   status  - Show dashboard status
 
 Examples:
-  node scripts/lint-dashboard.js start
-  node scripts/lint-dashboard.js start 3002
-  node scripts/lint-dashboard.js status
+  { { { { node scripts/lint-dashboard.js start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-dashboard.js start 3002 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-dashboard.js status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       `);
       break;
   }

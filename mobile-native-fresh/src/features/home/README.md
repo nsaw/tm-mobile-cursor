@@ -158,8 +158,8 @@ import { TagFilter } from '../features/home/components/TagFilter';
 1. **DashboardScreen** manages overall state
 2. **useThoughtmarks** hook provides data
 3. **useBins** hook provides bin data
-4. Components receive data via props
-5. Actions trigger navigation or API calls
+4. Components receive data via pro{ { { { ps
+5. Actions trigger navigation or API calls & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### Navigation Flow
 ```
@@ -244,8 +244,8 @@ Update `src/theme/theme.ts` to modify:
 ### Component Customization
 Each component can be customized by:
 - Modifying styles
-- Adding new props
-- Extending functionality
+- Adding new pro{ { { { ps
+- Extending functionality & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Overriding default behavior
 
 The dashboard provides a solid foundation for the mobile app while maintaining consistency with the web version's design and functionality. 

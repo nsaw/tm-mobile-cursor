@@ -92,18 +92,18 @@ Thoughtmarks is a sophisticated personal knowledge management application that l
    - OpenAI API key
 
 2. **Installation**
-   ```bash
-   # Install dependencies
-   npm install
+   ```{ { { { bash
+   # Install dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   { { { { npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    
    # Setup environment
    cp .env.example .env
    
    # Database setup
-   npm run migrate
+   { { { { npm run migrate & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    
    # Start development
-   npm run dev
+   { { { { npm run dev & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 ### Testing Strategy

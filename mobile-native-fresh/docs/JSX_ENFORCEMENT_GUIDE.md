@@ -13,7 +13,7 @@ The JSX enforcement system automatically detects and fixes common issues in Reac
 
 ## 📋 Rules
 
-### 1. Text Wrapping Rule (`no-text-outside-text`)
+### 1. Text Wrap{ { { { ping Rule (`no-text-outside-text`) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 **What it catches:**
 ```tsx
@@ -26,7 +26,7 @@ The JSX enforcement system automatically detects and fixes common issues in Reac
 <Button><Text>Click me</Text></Button>
 ```
 
-**Auto-fix:** Wraps unwrapped text in `<Text>` components and adds missing imports.
+**Auto-fix:** Wra{ { { { ps unwrapped text in `<Text>` components and adds missing imports. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### 2. Inline Colors Rule (`no-inline-colors`)
 
@@ -67,29 +67,29 @@ function MyComponent() {
 
 ### Available Scripts
 
-```bash
-# Comprehensive JSX enforcement (recommended)
-npm run lint:fix-jsx
+```{ { { { bash
+# Comprehensive JSX enforcement (recommended) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { { { { { npm run lint:fix-jsx & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 # Individual rule enforcement
-npm run lint:fix-text          # Text wrapping only
-npm run lint:wrap-text         # ESLint-based text wrapping
+{ { { { npm run lint:fix-text          # Text wrapping only & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run lint:wrap-text         # ESLint-based text wrapping & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Checking for violations
-npm run lint:check-jsx         # Count JSX rule violations
-npm run lint:check-theme       # Count theme import violations
+{ { { { { { { { npm run lint:check-jsx & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown         # Count JSX rule violations & } >/dev/null 2>&1 & disown
+{ { { { npm run lint:check-theme       # Count theme import violations & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Full linting
-npm run lint                   # Standard ESLint
-npm run lint:fix              # ESLint with auto-fix
+{ { { { npm run lint                   # Standard ESLint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run lint:fix              # ESLint with auto-fix & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Pre-commit Hook
 
 The system automatically runs on every commit:
 
-```bash
-npm run pre-commit
+```{ { { { bash
+npm run pre-commit & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 This executes:
@@ -124,7 +124,7 @@ rules: {
 
 ### Custom Rules Location
 
-- `eslint-rules/no-text-outside-text.cjs` - Text wrapping rule
+- `eslint-rules/no-text-outside-text.cjs` - Text wrap{ { { { ping rule & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - `eslint-rules/no-inline-colors.cjs` - Inline colors rule
 - `eslint-rules/enforce-theme-hook.cjs` - Theme hook rule
 
@@ -184,7 +184,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm ci
+      - run: { { { { npm ci & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       - run: npm run lint:fix-jsx
       - run: npm run lint:check-jsx
         # Fail if violations exist
@@ -202,20 +202,20 @@ jobs:
 
 ### Debug Commands
 
-```bash
-# Check ESLint configuration
-npx eslint --print-config src/components/SomeComponent.tsx
+```{ { { { bash
+# Check ESLint configuration & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npx eslint --print-config src/components/SomeComponent.tsx & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Run specific rule
-npx eslint --rule 'no-inline-colors: error' src/
+{ { { { npx eslint --rule 'no-inline-colors: error' src/ & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Debug rule loading
-npx eslint --debug src/
+{ { { { npx eslint --debug src/ & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 📈 Best Practices
 
-1. **Run enforcement regularly**: Use `npm run lint:fix-jsx` before committing
+1. **Run enforcement regularly**: Use `{ { { { { { { { npm run lint:fix-jsx` & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown before committing & } >/dev/null 2>&1 & disown
 2. **Review auto-fixes**: Always review automatic changes to ensure they're correct
 3. **Test after fixes**: Run the app to ensure no runtime issues were introduced
 4. **Use theme tokens**: Always use `tokens.colors.*` instead of hardcoded colors

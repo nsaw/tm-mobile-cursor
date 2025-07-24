@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Role Audit Background Loop Script
+# Role Audit Background Loop Script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Runs the JSX style role audit every hour continuously
 
 echo "🔄 Starting continuous JSX style role audit loop..."
@@ -12,7 +12,7 @@ while true; do
     echo "🔍 Running role audit at: $(date)"
     
     # Run the audit script
-    npx ts-node scripts/audit-style-roles.ts
+    { { { { npx ts-node scripts/audit-style-roles.ts & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     # Check if audit found issues
     if [ $? -eq 1 ]; then

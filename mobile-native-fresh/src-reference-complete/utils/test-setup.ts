@@ -145,7 +145,7 @@ expect.extend({
   },
 
   toBeAccessible(component: any) {
-    const hasAccessibilityProps = component.props?.accessibilityLabel || 
+    const hasAccessibilityPro{ { { { ps = component.props?.accessibilityLabel || & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
                                  component.props?.accessibilityRole ||
                                  component.props?.accessibilityHint;
     

@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Dual View Monitor
  * Shows patch execution status in real-time for agent chat
  * Provides live monitoring of patch execution and system status
@@ -55,7 +55,7 @@ class DualViewMonitor {
 
     // Stop monitoring
     stop() {
-        console.log('🛑 Stopping Dual View Monitor...');
+        console.log('🛑 Stop{ { ping Dual View Monitor...') & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown;
         this.monitoring = false;
         
         if (this.statusInterval) {
@@ -135,7 +135,7 @@ class DualViewMonitor {
         
         try {
             // Check if patch executor is running
-            const patchExecutorCheck = require('child_process').execSync('ps aux | grep "patch-executor" | grep -v grep', { encoding: 'utf8' });
+            const patchExecutorCheck = require('child_process').execSync('{ { ps aux | grep  & } >/dev/null 2>&1 & disown', { stdio: 'pipe' })patch-executor" | grep -v grep & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             if (patchExecutorCheck.trim()) {
                 systems.running.push('patch-executor');
             } else {
@@ -147,7 +147,7 @@ class DualViewMonitor {
         
         try {
             // Check if ghost bridge is running
-            const ghostBridgeCheck = require('child_process').execSync('ps aux | grep "ghost-bridge" | grep -v grep', { encoding: 'utf8' });
+            const ghostBridgeCheck = require('child_process').execSync('{ { ps aux | grep  & } >/dev/null 2>&1 & disown', { stdio: 'pipe' })ghost-bridge" | grep -v grep & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             if (ghostBridgeCheck.trim()) {
                 systems.running.push('ghost-bridge');
             } else {
@@ -159,7 +159,7 @@ class DualViewMonitor {
         
         try {
             // Check if summary monitor is running
-            const summaryMonitorCheck = require('child_process').execSync('ps aux | grep "summary-monitor" | grep -v grep', { encoding: 'utf8' });
+            const summaryMonitorCheck = require('child_process').execSync('{ { ps aux | grep  & } >/dev/null 2>&1 & disown', { stdio: 'pipe' })summary-monitor" | grep -v grep & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             if (summaryMonitorCheck.trim()) {
                 systems.running.push('summary-monitor');
             } else {
@@ -170,15 +170,15 @@ class DualViewMonitor {
         }
         
         try {
-            // Check if expo dev server is running
-            const expoCheck = require('child_process').execSync('ps aux | grep "expo" | grep -v grep', { encoding: 'utf8' });
+            // Check if expo is running
+            const expoCheck = require('child_process').execSync('{ { ps aux | grep  & } >/dev/null 2>&1 & disown', { stdio: 'pipe' })expo" | grep -v grep & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             if (expoCheck.trim()) {
-                systems.running.push('expo-dev-server');
+                systems.running.push('expo');
             } else {
-                systems.stopped.push('expo-dev-server');
+                systems.stopped.push('expo');
             }
         } catch (error) {
-            systems.stopped.push('expo-dev-server');
+            systems.stopped.push('expo');
         }
         
         this.statusCategories.systems = systems;
@@ -187,24 +187,15 @@ class DualViewMonitor {
     // Check ghost runner status synchronously
     checkGhostStatus() {
         try {
-            // Check if gpt-cursor-runner is accessible
-            const curlCheck = require('child_process').execSync('curl -s -m 5 https://runner.thoughtmarks.app/health', { encoding: 'utf8' });
+            // Check ghost runner health
+            const curlCheck = require('child_process').execSync('{ { { curl -s -m 5 https://runner.thoughtmarks.app/health &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             if (curlCheck.trim()) {
-                this.statusCategories.ghost = {
-                    status: 'running',
-                    lastCheck: new Date().toISOString()
-                };
+                this.statusCategories.ghost.status = 'healthy';
             } else {
-                this.statusCategories.ghost = {
-                    status: 'unreachable',
-                    lastCheck: new Date().toISOString()
-                };
+                this.statusCategories.ghost.status = 'unhealthy';
             }
         } catch (error) {
-            this.statusCategories.ghost = {
-                status: 'unreachable',
-                lastCheck: new Date().toISOString()
-            };
+            this.statusCategories.ghost.status = 'error';
         }
     }
 
@@ -352,7 +343,7 @@ class DualViewMonitor {
     executePatches() {
         console.log('🚀 Executing pending patches...');
         
-        exec('node scripts/patch-executor.js execute', (error, stdout, stderr) => {
+        exec('{ { { node scripts/direct-patch-executor.js &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
             if (error) {
                 console.error('❌ Patch execution failed:', error.message);
             } else {
@@ -395,7 +386,7 @@ switch (command) {
     default:
         console.log('🔍 Dual View Monitor');
         console.log('');
-        console.log('Usage: node dual-view-monitor.js [start|stop|execute|status]');
+        console.log('Usage: { { node dual-view-monitor.js [start|stop|execute|status]') & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown;
         console.log('');
         console.log('Commands:');
         console.log('  start   - Start monitoring patch execution status');

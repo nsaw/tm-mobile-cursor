@@ -5,16 +5,16 @@ Complete backend system for the Thoughtmarks mobile app, migrated from the produ
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies
-```bash
-npm install
+```{ { { { bash
+npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### 2. Set up Database
 You have two options:
 
 #### Option A: Local PostgreSQL
-```bash
-# Install PostgreSQL locally
+```{ { { { bash
+# Install PostgreSQL locally & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 brew install postgresql  # macOS
 # or
 sudo apt-get install postgresql  # Ubuntu
@@ -32,13 +32,13 @@ The export includes connection details for the production Neon PostgreSQL databa
 2. Set the environment variables accordingly
 
 ### 3. Run Database Migrations
-```bash
-npm run migrate
+```{ { { { bash
+npm run migrate & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### 4. Start Development Server
-```bash
-npm run dev
+```{ { { { { { { { bash
+npm run dev & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 The API will be available at `http://localhost:5000`
@@ -178,15 +178,15 @@ npm run dev
 ```
 
 ### Production Build
-```bash
-npm run build
-npm start
+```{ { { { bash
+npm run build & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Database Management
-```bash
-npm run migrate    # Run migrations
-npm run db:studio  # Open Drizzle Studio
+```{ { { { bash
+npm run migrate    # Run migrations & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run db:studio  # Open Drizzle Studio & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 🔒 Security Features
@@ -220,15 +220,15 @@ The backend is fully compatible with the React Native mobile app:
 ## 🧪 Testing
 
 ### Manual Testing
-```bash
-# Test health endpoint
-curl http://localhost:5000/health
+```{ { { { bash
+# Test health endpoint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { curl http://localhost:5000/health & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Test demo login
-curl -X POST http://localhost:5000/api/auth/demo
+{ { { { curl -X POST http://localhost:5000/api/auth/demo & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Test thoughtmarks endpoint
-curl http://localhost:5000/api/thoughtmarks
+{ { { { curl http://localhost:5000/api/thoughtmarks & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### API Testing

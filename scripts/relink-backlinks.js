@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Backlink Repair Script
  * Scans all .md files in summaries directory and reinserts correct backlinks
  * Enforces structureEnforcerMode compliance

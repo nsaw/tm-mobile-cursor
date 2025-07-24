@@ -1,62 +1,72 @@
-#!/bin/bash
+#!/bin/{ { bash
 
-# Simple Daemon Manager - Keeps critical systems alive
-# No complex features, just basic process management
+# Simple Daemon Manager & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+# Minimal resource usage daemon manager for critical systems
 
 set -e
 
 # Configuration
 LOG_DIR="./logs"
-PID_DIR="./logs/daemons"
 CHECK_INTERVAL=60
 
-# Ensure directories exist
-mkdir -p "$LOG_DIR"
-mkdir -p "$PID_DIR"
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-# Logging
+# Ensure log directory exists
+mkdir -p "$LOG_DIR"
+
+# Logging function
 log() {
     local message="$*"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-    echo "[$timestamp] $message" | tee -a "$LOG_DIR/simple-daemon.log"
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    echo "[$timestamp] [SIMPLE-DAEMON] $message" | tee -a "$LOG_DIR/simple-daemon.log"
 }
 
-# Check if process is running
+# Check if system is running
 is_running() {
-    local name=$1
-    pgrep -f "$name" >/dev/null 2>&1
+    local system_name="$1"
+    pgrep -f "$system_name" > /dev/null 2>&1
 }
 
-# Start a simple daemon
-start_daemon() {
-    local name=$1
-    local command=$2
+# Start a system
+start_system() {
+    local system_name="$1"
+    local command="$2"
     
-    if is_running "$name"; then
-        log "✅ $name already running"
-        return 0
-    fi
-    
-    log "🚀 Starting $name: $command"
-    nohup $command > "$LOG_DIR/${name}.log" 2>&1 &
-    local pid=$!
-    log "✅ $name started (PID: $pid)"
-    return 0
-}
-
-# Stop a daemon
-stop_daemon() {
-    local name=$1
-    local pids=$(pgrep -f "$name" 2>/dev/null || echo "")
-    
-    if [ -n "$pids" ]; then
-        log "🛑 Stopping $name (PIDs: $pids)"
-        echo "$pids" | xargs kill 2>/dev/null || true
+    if ! is_running "$system_name"; then
+        log "🚀 Starting $system_name"
+        
+        # Start with non-blocking pattern
+        { { $command & } >/dev/null 2>&1 & disown } >/dev/null 2>&1 & disown
+        
         sleep 2
-        echo "$pids" | xargs kill -9 2>/dev/null || true
-        log "✅ $name stopped"
+        
+        if is_running "$system_name"; then
+            log "✅ $system_name started successfully"
+        else
+            log "⚠️  $system_name may not have started properly"
+        fi
     else
-        log "ℹ️ $name not running"
+        log "ℹ️  $system_name is already running"
+    fi
+}
+
+# Stop a system
+stop_system() {
+    local system_name="$1"
+    
+    if is_running "$system_name"; then
+        log "🛑 Stop{ { ping $system_name" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        pkill -f "$system_name" 2>/dev/null || true
+        sleep 1
+        pkill -9 -f "$system_name" 2>/dev/null || true
+        log "✅ $system_name stopped"
+    else
+        log "ℹ️  $system_name is not running"
     fi
 }
 
@@ -65,17 +75,15 @@ show_status() {
     echo "🔍 **SIMPLE DAEMON STATUS**"
     echo "=========================="
     
-    local daemons=(
-        "doc-sync:bash scripts/watchdog-doc-sync.sh"
-        "summary-monitor:node scripts/summary-monitor.js"
-        "realtime-monitor:node scripts/realtime-monitor.js start"
-        "patch-executor:node scripts/patch-executor.js daemon"
-        "ghost-bridge:node scripts/ghost-bridge.js"
+    local systems=(
+        "summary-monitor:{ { { { { { node scripts/summary-monitor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        "ghost-bridge:{ { { { { { node scripts/ghost-bridge.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        "patch-executor:{ { { { { { node scripts/direct-patch-executor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
     )
     
-    for daemon in "${daemons[@]}"; do
-        local name=$(echo "$daemon" | cut -d: -f1)
-        local command=$(echo "$daemon" | cut -d: -f2)
+    for system in "${systems[@]}"; do
+        local name=$(echo "$system" | cut -d: -f1)
+        local command=$(echo "$system" | cut -d: -f2)
         
         if is_running "$name"; then
             local pids=$(pgrep -f "$name" 2>/dev/null || echo "unknown")
@@ -87,73 +95,57 @@ show_status() {
     
     echo ""
     echo "📊 **System Health:**"
-    echo "   • Doc Sync: $(is_running "doc-sync" && echo "✅" || echo "❌")"
     echo "   • Summary Monitor: $(is_running "summary-monitor" && echo "✅" || echo "❌")"
-    echo "   • Realtime Monitor: $(is_running "realtime-monitor" && echo "✅" || echo "❌")"
-    echo "   • Patch Executor: $(is_running "patch-executor" && echo "✅" || echo "❌")"
     echo "   • Ghost Bridge: $(is_running "ghost-bridge" && echo "✅" || echo "❌")"
+    echo "   • Patch Executor: $(is_running "patch-executor" && echo "✅" || echo "❌")"
 }
 
-# Start all daemons
+# Start all systems
 start_all() {
-    log "🚀 Starting all daemons"
+    log "🚀 Starting all systems"
     
-    start_daemon "doc-sync" "bash scripts/watchdog-doc-sync.sh"
-    start_daemon "summary-monitor" "node scripts/summary-monitor.js"
-    start_daemon "realtime-monitor" "node scripts/realtime-monitor.js start"
-    start_daemon "patch-executor" "node scripts/patch-executor.js daemon"
-    start_daemon "ghost-bridge" "node scripts/ghost-bridge.js"
+    start_system "summary-monitor" "node scripts/summary-monitor.js"
+    start_system "ghost-bridge" "node scripts/ghost-bridge.js"
+    start_system "patch-executor" "node scripts/direct-patch-executor.js"
     
-    log "✅ All daemons started"
+    log "✅ All systems started"
 }
 
-# Stop all daemons
+# Stop all systems
 stop_all() {
-    log "🛑 Stopping all daemons"
+    log "🛑 Stop{ { ping all systems" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
     
-    stop_daemon "doc-sync"
-    stop_daemon "summary-monitor"
-    stop_daemon "realtime-monitor"
-    stop_daemon "patch-executor"
-    stop_daemon "ghost-bridge"
+    stop_system "summary-monitor"
+    stop_system "ghost-bridge"
+    stop_system "patch-executor"
     
-    log "✅ All daemons stopped"
+    log "✅ All systems stopped"
 }
 
-# Monitor loop
+# Monitor loop (minimal resource usage)
 monitor_loop() {
-    log "🔍 Starting monitor loop (checking every $CHECK_INTERVAL seconds)"
+    log "🔍 Starting minimal monitor loop (checking every $CHECK_INTERVAL seconds)"
     
     while true; do
-        log "🔍 Checking daemon health"
+        log "🔍 Checking system health"
         
         # Check and restart if needed
-        if ! is_running "doc-sync"; then
-            log "⚠️ doc-sync down, restarting"
-            start_daemon "doc-sync" "bash scripts/watchdog-doc-sync.sh"
-        fi
-        
         if ! is_running "summary-monitor"; then
             log "⚠️ summary-monitor down, restarting"
-            start_daemon "summary-monitor" "node scripts/summary-monitor.js"
-        fi
-        
-        if ! is_running "realtime-monitor"; then
-            log "⚠️ realtime-monitor down, restarting"
-            start_daemon "realtime-monitor" "node scripts/realtime-monitor.js start"
-        fi
-        
-        if ! is_running "patch-executor"; then
-            log "⚠️ patch-executor down, restarting"
-            start_daemon "patch-executor" "node scripts/patch-executor.js daemon"
+            start_system "summary-monitor" "node scripts/summary-monitor.js"
         fi
         
         if ! is_running "ghost-bridge"; then
             log "⚠️ ghost-bridge down, restarting"
-            start_daemon "ghost-bridge" "node scripts/ghost-bridge.js"
+            start_system "ghost-bridge" "node scripts/ghost-bridge.js"
         fi
         
-        log "💤 Sleeping for $CHECK_INTERVAL seconds"
+        if ! is_running "patch-executor"; then
+            log "⚠️ patch-executor down, restarting"
+            start_system "patch-executor" "node scripts/direct-patch-executor.js"
+        fi
+        
+        log "💤 Slee{ { ping for $CHECK_INTERVAL seconds" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
         sleep "$CHECK_INTERVAL"
     done
 }
@@ -163,24 +155,24 @@ case "${1:-status}" in
     "start")
         start_all
         ;;
-    "stop")
-        stop_all
-        ;;
     "monitor")
         monitor_loop
+        ;;
+    "stop")
+        stop_all
         ;;
     "status")
         show_status
         ;;
     *)
-        echo "🔧 Simple Daemon Manager"
+        echo "🔧 Simple Daemon"
         echo ""
-        echo "Usage: $0 [start|stop|monitor|status]"
+        echo "Usage: $0 [start|monitor|stop|status]"
         echo ""
         echo "Commands:"
-        echo "  start   - Start all daemons"
-        echo "  stop    - Stop all daemons"
-        echo "  monitor - Start monitoring loop (keeps daemons alive)"
-        echo "  status  - Show daemon status"
+        echo "  start   - Start all systems"
+        echo "  monitor - Start monitoring loop (kee{ { ps systems alive)" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        echo "  stop    - Stop all systems"
+        echo "  status  - Show system status"
         ;;
 esac 

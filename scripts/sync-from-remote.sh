@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# 🔄 SYNC-FROM-REMOTE.SH
+# 🔄 SYNC-FROM-REMOTE.SH & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Pulls latest state from remote branch and resets local to match.
 
 BRANCH="release/v1.2.2"

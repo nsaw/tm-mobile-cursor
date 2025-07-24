@@ -14,16 +14,16 @@
 ## Safety Rules
 - Always tag before destructive changes
 - Never rewrite `main` — use `stash/` branches for resets
-- Git backups auto-stored at `/Users/sawyer/gitBackups/`
+- Git backu{ { { { ps auto-stored at `/Users/sawyer/gitBackups/` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ## Cursor Task Prep
 - Always run:
-  ```bash
-  git add .
+  ```{ { { { bash
+  git add . & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   git commit -m "chore(rollback): snapshot before [change]"
   git tag vX.Y.Z_[desc]_YYMMDD_HHMMUTC
   git push origin vX.Y.Z_[desc]_YYMMDD_HHMMUTC
   ```
 
 ## Shortcuts
-- `gbackup` — Pushes current state as timestamped tag and zips `.git/` into backups
+- `gbackup` — Pushes current state as timestamped tag and zi{ { { { ps `.git/` into backups & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown

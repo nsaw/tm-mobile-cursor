@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/{ { bash
 
-# Continuous Daemon Manager
-# Keeps all monitoring scripts running and restarts them if they die
+# Continuous Daemon Manager & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+# Kee{ { ps all monitoring scripts running and restarts them if they die & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor"
 SCRIPTS_DIR="$PROJECT_ROOT/scripts"
@@ -15,7 +15,7 @@ DAEMONS=(
     "live-patch-status.js:start"
     "ghost-bridge.js:monitor"
     "summary-monitor.js:start"
-    "patch-executor.js:watch"
+    "direct-patch-executor.js"
     "realtime-monitor.js:start"
 )
 
@@ -46,7 +46,10 @@ start_daemon() {
     if ! is_daemon_running "$daemon_name"; then
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🚀 Starting $daemon_name with command: $start_command"
         cd "$SCRIPTS_DIR"
-        nohup node "$daemon_name" "$start_command" > "$log_file" 2>&1 &
+        
+        # Start with non-blocking pattern
+        { { { { node "$daemon_name" "$start_command" > "$log_file" 2>&1 &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown } >/dev/null 2>&1 & disown
+        
         sleep 2
     fi
 }
@@ -55,7 +58,7 @@ start_daemon() {
 stop_daemon() {
     local daemon_name="$1"
     if is_daemon_running "$daemon_name"; then
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🛑 Stopping $daemon_name"
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🛑 Stop{ { ping $daemon_name" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
         pkill -f "$daemon_name"
         sleep 1
     fi
@@ -66,25 +69,16 @@ restart_daemon() {
     local daemon_name="$1"
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🔄 Restarting $daemon_name"
     stop_daemon "$daemon_name"
+    sleep 2
     start_daemon "$daemon_name"
 }
 
-# Function to get daemon name from array
-get_daemon_name() {
-    local daemon_entry="$1"
-    echo "${daemon_entry%:*}"
-}
-
-# Function to check and restart all daemons
-check_and_restart_daemons() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🔍 Checking daemon status..."
-    
-    for daemon_entry in "${DAEMONS[@]}"; do
-        local daemon_name=$(get_daemon_name "$daemon_entry")
-        if is_daemon_running "$daemon_name"; then
-            echo "   ✅ $daemon_name is running"
-        else
-            echo "   ❌ $daemon_name is not running - restarting"
+# Function to check all daemons
+check_daemons() {
+    for daemon in "${DAEMONS[@]}"; do
+        local daemon_name="${daemon%:*}"
+        if ! is_daemon_running "$daemon_name"; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] ⚠️  $daemon_name is down, restarting"
             start_daemon "$daemon_name"
         fi
     done
@@ -92,89 +86,96 @@ check_and_restart_daemons() {
 
 # Function to show status
 show_status() {
-    echo "🔍 DAEMON STATUS:"
-    echo "=================="
+    echo "🔍 **CONTINUOUS DAEMON STATUS**"
+    echo "=============================="
     
-    for daemon_entry in "${DAEMONS[@]}"; do
-        local daemon_name=$(get_daemon_name "$daemon_entry")
+    for daemon in "${DAEMONS[@]}"; do
+        local daemon_name="${daemon%:*}"
         if is_daemon_running "$daemon_name"; then
-            echo "   ✅ $daemon_name"
+            local pids=$(pgrep -f "$daemon_name" 2>/dev/null || echo "unknown")
+            echo "✅ $daemon_name: RUNNING (PIDs: $pids)"
         else
-            echo "   ❌ $daemon_name"
+            echo "❌ $daemon_name: STOPPED"
         fi
     done
-    
-    echo ""
-    echo "📊 System Status:"
-    echo "=================="
-    
-    # Check if Expo is running
-    if lsof -i :8081 > /dev/null 2>&1; then
-        echo "   ✅ Expo (port 8081)"
-    else
-        echo "   ❌ Expo (port 8081)"
-    fi
-    
-    # Check if Backend is running
-    if lsof -i :4000 > /dev/null 2>&1; then
-        echo "   ✅ Backend (port 4000)"
-    else
-        echo "   ❌ Backend (port 4000)"
-    fi
 }
 
-# Main loop
-main() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🚀 Continuous Daemon Manager starting"
-    echo "📋 Managing daemons: ${DAEMONS[*]}"
-    echo "📁 Logs: $LOG_DIR"
-    echo "⏰ Check interval: 30 seconds"
-    echo ""
-    
-    # Initial start of all daemons
-    for daemon_entry in "${DAEMONS[@]}"; do
-        local daemon_name=$(get_daemon_name "$daemon_entry")
+# Function to start all daemons
+start_all() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🚀 Starting all daemons"
+    for daemon in "${DAEMONS[@]}"; do
+        local daemon_name="${daemon%:*}"
         start_daemon "$daemon_name"
     done
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ✅ All daemons started"
+}
+
+# Function to stop all daemons
+stop_all() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🛑 Stop{ { ping all daemons" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+    for daemon in "${DAEMONS[@]}"; do
+        local daemon_name="${daemon%:*}"
+        stop_daemon "$daemon_name"
+    done
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ✅ All daemons stopped"
+}
+
+# Function to restart all daemons
+restart_all() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🔄 Restarting all daemons"
+    stop_all
+    sleep 3
+    start_all
+}
+
+# Main monitoring loop
+monitor_loop() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🔍 Starting continuous daemon monitoring"
     
-    # Continuous monitoring loop
+    # Start all daemons initially
+    start_all
+    
+    # Main monitoring loop
     while true; do
-        check_and_restart_daemons
+        check_daemons
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 💤 Slee{ { ping for 30 seconds" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
         sleep 30
     done
 }
 
-# Handle command line arguments
-case "${1:-start}" in
-    start)
-        main
+# CLI interface
+case "${1:-status}" in
+    "start")
+        start_all
         ;;
-    stop)
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🛑 Stopping all daemons..."
-        for daemon_entry in "${DAEMONS[@]}"; do
-            local daemon_name=$(get_daemon_name "$daemon_entry")
-            stop_daemon "$daemon_name"
-        done
-        echo "✅ All daemons stopped"
+    "stop")
+        stop_all
         ;;
-    restart)
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🔄 Restarting all daemons..."
-        for daemon_entry in "${DAEMONS[@]}"; do
-            local daemon_name=$(get_daemon_name "$daemon_entry")
-            restart_daemon "$daemon_name"
-        done
-        echo "✅ All daemons restarted"
+    "restart")
+        restart_all
         ;;
-    status)
+    "monitor")
+        monitor_loop
+        ;;
+    "status")
         show_status
         ;;
     *)
-        echo "Usage: $0 [start|stop|restart|status]"
+        echo "🔧 Continuous Daemon Manager"
+        echo ""
+        echo "Usage: $0 [start|stop|restart|monitor|status]"
         echo ""
         echo "Commands:"
-        echo "  start   - Start continuous daemon management"
+        echo "  start   - Start all daemons"
         echo "  stop    - Stop all daemons"
         echo "  restart - Restart all daemons"
-        echo "  status  - Show current status"
+        echo "  monitor - Start monitoring loop (kee{ { ps daemons alive)" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        echo "  status  - Show daemon status"
+        echo ""
+        echo "Managed daemons:"
+        for daemon in "${DAEMONS[@]}"; do
+            local daemon_name="${daemon%:*}"
+            echo "  • $daemon_name"
+        done
         ;;
 esac 

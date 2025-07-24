@@ -7,9 +7,9 @@
 ## Quick Start Guide
 
 ### 1. Install All Dependencies
-```bash
-# React Native
-cd react-native && npm install && cd ..
+```{ { { { bash
+# React Native & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cd react-native && { { { { { { { { { { { { npm install && cd .. & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 # Backend API  
 cd backend && npm install && cd ..
@@ -22,8 +22,8 @@ cd swiftui && open Package.swift
 ```
 
 ### 2. Environment Setup
-```bash
-# Backend
+```{ { { { bash
+# Backend & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 cp backend/.env.example backend/.env
 # Configure: DATABASE_URL, FIREBASE_*, OPENAI_API_KEY
 
@@ -37,15 +37,15 @@ cp react-native/.env.example react-native/.env
 ```
 
 ### 3. Start Development
-```bash
-# Terminal 1: Backend
-cd backend && npm run dev
+```{ { { { bash
+# Terminal 1: Backend & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cd backend && { { { { { { { { npm run dev & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 # Terminal 2: Web
 cd web-src && npm run dev
 
 # Terminal 3: Mobile
-cd react-native && npm start
+cd react-native && { { { { npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Package Contents
@@ -88,8 +88,8 @@ cd react-native && npm start
 ## Production Deployment
 
 ### Web Application
-```bash
-cd web-src && npm run build
+```{ { { { bash
+cd web-src && npm run build & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Deploy contents of dist/ to your hosting provider
 ```
 
@@ -98,8 +98,8 @@ cd web-src && npm run build
 - **Android**: `cd android && ./gradlew assembleRelease`
 
 ### Backend API
-```bash
-cd backend && npm run build && npm start
+```{ { { { bash
+cd backend && npm run build && npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Deploy to Railway, Render, or your cloud provider
 ```
 

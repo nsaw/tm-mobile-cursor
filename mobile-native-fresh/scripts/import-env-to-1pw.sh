@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -eo pipefail
+#!/usr/bin/env { { { { bash
+set -eo pipefail & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Configuration
 VAULT="tm-mobile"

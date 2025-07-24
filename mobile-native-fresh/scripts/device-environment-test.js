@@ -1,5 +1,5 @@
-#!/usr/bin/env node
-// scripts/device-environment-test.js
+#!/usr/bin/env { { { { node
+// scripts/device-environment-test.js & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 // Device testing script for environment toggle validation
 
 const { execSync } = require('child_process');
@@ -61,7 +61,7 @@ class DeviceEnvironmentTester {
       // Check if Expo server is running
       let isExpoRunning = false;
       try {
-        const expoProcesses = execSync('ps aux | grep expo | grep -v grep', { encoding: 'utf8' });
+        const expoProcesses = execSync('{ { { { { { ps aux | grep expo | grep -v grep & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { encoding: 'utf8' });
         isExpoRunning = expoProcesses.length > 0;
       } catch (error) {
         // Expo process check failed, but that's okay
@@ -70,7 +70,7 @@ class DeviceEnvironmentTester {
       // Test localhost connectivity
       let isLocalhostAccessible = false;
       try {
-        const localhostTest = execSync('curl -s -o /dev/null -w "%{http_code}" http://localhost:8081', { encoding: 'utf8' });
+        const localhostTest = execSync('{ { { { { { curl -s -o /dev/null -w & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })%{http_code}" http://localhost:8081', { encoding: 'utf8' });
         isLocalhostAccessible = localhostTest.trim() === '200';
       } catch (error) {
         // Localhost test failed, but that's okay
@@ -100,7 +100,7 @@ class DeviceEnvironmentTester {
       // Check for iOS simulators
       let hasIOSSimulator = false;
       try {
-        const iosSimulators = execSync('xcrun simctl list devices | grep "iPhone" | grep "Booted"', { encoding: 'utf8' });
+        const iosSimulators = execSync('{ { { xcrun simctl list devices | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })iPhone" | grep "Booted"', { encoding: 'utf8' });
         hasIOSSimulator = iosSimulators.length > 0;
       } catch (error) {
         // iOS simulator check failed, but that's okay
@@ -109,7 +109,7 @@ class DeviceEnvironmentTester {
       // Check for Android emulators (ADB might not be available)
       let hasAndroidEmulator = false;
       try {
-        const androidEmulators = execSync('adb devices | grep "emulator"', { encoding: 'utf8' });
+        const androidEmulators = execSync('{ { { adb devices | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })emulator"', { encoding: 'utf8' });
         hasAndroidEmulator = androidEmulators.length > 0;
       } catch (error) {
         // ADB not available, which is expected on macOS without Android SDK
@@ -118,7 +118,7 @@ class DeviceEnvironmentTester {
       // Check for physical devices (ADB might not be available)
       let hasPhysicalDevice = false;
       try {
-        const physicalDevices = execSync('adb devices | grep -v "List of devices" | grep -v "emulator"', { encoding: 'utf8' });
+        const physicalDevices = execSync('{ { { adb devices | grep -v & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })List of devices" | grep -v "emulator"', { encoding: 'utf8' });
         hasPhysicalDevice = physicalDevices.length > 0;
       } catch (error) {
         // ADB not available, which is expected on macOS without Android SDK
@@ -232,8 +232,8 @@ class DeviceEnvironmentTester {
       console.log('⚡ Testing performance metrics...');
       
       // Get system performance metrics
-      const cpuUsage = execSync('top -l 1 | grep "CPU usage"', { encoding: 'utf8' });
-      const memoryUsage = execSync('vm_stat | grep "Pages free"', { encoding: 'utf8' });
+      const cpuUsage = execSync('{ { { top -l 1 | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })CPU usage"', { encoding: 'utf8' });
+      const memoryUsage = execSync('{ { { vm_stat | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })Pages free"', { encoding: 'utf8' });
       
       const success = cpuUsage.length > 0 && memoryUsage.length > 0;
       
@@ -256,11 +256,11 @@ class DeviceEnvironmentTester {
       console.log('💾 Testing memory usage...');
       
       // Check memory usage of Node.js processes
-      const nodeProcesses = execSync('ps aux | grep node | grep -v grep', { encoding: 'utf8' });
+      const nodeProcesses = execSync('{ { { { { { ps aux | grep node | grep -v grep & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { encoding: 'utf8' });
       const hasNodeProcesses = nodeProcesses.length > 0;
       
       // Check for memory leaks (basic check)
-      const memoryInfo = execSync('vm_stat', { encoding: 'utf8' });
+      const memoryInfo = execSync('{ { { vm_stat & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { encoding: 'utf8' });
       const hasMemoryInfo = memoryInfo.length > 0;
 
       const success = hasNodeProcesses && hasMemoryInfo;
@@ -286,7 +286,7 @@ class DeviceEnvironmentTester {
       // Test internet connectivity
       let hasInternet = false;
       try {
-        const internetTest = execSync('ping -c 1 8.8.8.8', { encoding: 'utf8' });
+        const internetTest = execSync('{ { { { { { ping -c 1 8.8.8.8 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { encoding: 'utf8' });
         hasInternet = internetTest.includes('1 packets transmitted, 1 packets received');
       } catch (error) {
         // Internet test failed, but that's okay
@@ -298,7 +298,7 @@ class DeviceEnvironmentTester {
       
       for (const gateway of gateways) {
         try {
-          const localNetworkTest = execSync(`ping -c 1 ${gateway}`, { encoding: 'utf8' });
+          const localNetworkTest = execSync('{ { { { { { { ping -c 1 ${gateway & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { encoding: 'utf8' });
           if (localNetworkTest.includes('1 packets transmitted, 1 packets received')) {
             hasLocalNetwork = true;
             break;

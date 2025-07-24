@@ -7,9 +7,9 @@
 ## 🥇 PRIORITY: CRITICAL ENFORCEMENT
 
 ### 1. Run Full Enforcement Sweep (JSX, Theme, Accessibility, Text)
-- [ ] `npm run lint:fix-all`
-- [ ] `npm run audit:clickables`
-- [ ] `npm run lint:check-theme`
+- [ ] `{ { { { npm run lint:fix-all` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- [ ] `{ { { { npm run audit:clickables` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- [ ] `{ { { { npm run lint:check-theme` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ---
 
@@ -43,7 +43,7 @@
 ## 🔁 PRIORITY: BACKGROUND AGENTS
 
 ### 5. Background Agent Automation
-- [ ] Auto-schedule `npm run lint:fix-all` nightly
+- [ ] Auto-schedule `{ { { { npm run lint:fix-all` nightly & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - [ ] Include `audit:clickables` and `lint:check-theme` in run
 - [ ] Setup `.cursor-agent-config.json` for persistent tasks
 

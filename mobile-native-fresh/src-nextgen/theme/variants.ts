@@ -1,4 +1,4 @@
-import { designTokens } from './designTokens';
+import { // TODO: Remove designTokens import, use useTheme() instead } from './designTokens';
 
 export interface BadgeVariant {
   backgroundColor: string;

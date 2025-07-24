@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 class EnhancedPathRouter {
@@ -310,7 +310,7 @@ if (require.main === module) {
             console.log(`Summary written to: ${summaryPath}`);
             break;
         default:
-            console.log('Usage: node enhanced-path-router.js [command] [target] [data]');
+            console.log('Usage: { { { { node enhanced-path-router.js [command] [target] [data]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
             console.log('Commands: patches-path, summaries-path, list-patches, list-summaries, project-info, environment-info, target-paths, write-patch, write-summary');
             console.log('Targets: default, mobile-native-fresh, server, python');
     }

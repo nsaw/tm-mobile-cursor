@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Codemod script to refactor designTokens usage to useTheme()
- * Usage: node scripts/refactor-theme.js <file-or-directory>
+ * Usage: { { { { node scripts/refactor-theme.js <file-or-directory> & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  */
 
 import fs from "fs";
@@ -20,7 +20,7 @@ function processFile(filePath) {
 
   // Skip ThemeProvider.tsx
   if (filePath.includes("ThemeProvider.tsx")) {
-    console.log("  Skipping ThemeProvider.tsx (allowed to use designTokens)");
+    console.log("  Skip{ { { { ping ThemeProvider.tsx (allowed to use designTokens)") & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     return;
   }
 
@@ -157,7 +157,7 @@ if (fs.existsSync(target)) {
   }
 
   console.log("\n✅ Theme refactoring complete!");
-  console.log('💡 Run "npm run lint" to check for any remaining issues');
+  console.log('💡 Run "{ { { { npm run lint" to check for any remaining issues') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 } else {
   console.error(`❌ Target not found: ${target}`);
   process.exit(1);

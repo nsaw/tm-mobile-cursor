@@ -1,5 +1,5 @@
-#!/bin/bash
-# Validate orphan slot zones in runtime
+#!/bin/{ { { { bash
+# Validate orphan slot zones in runtime & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Final sweep of unregistered slots, broken projections, orphaned bridges
 
 set -e
@@ -29,8 +29,8 @@ cat > "$VALIDATION_RESULTS" << EOF
 }
 EOF
 
-# Function to log validation steps
-log_step() {
+# Function to log validation ste{ { { { ps
+log_step() { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     echo "[$(date '+%H:%M:%S')] $1" | tee -a "$LOG_FILE"
 }
 
@@ -41,7 +41,7 @@ update_result() {
     if command -v jq >/dev/null 2>&1; then
         jq ".validations.$key = $value" "$VALIDATION_RESULTS" > "${VALIDATION_RESULTS}.tmp" && mv "${VALIDATION_RESULTS}.tmp" "$VALIDATION_RESULTS"
     else
-        echo "Warning: jq not available, skipping result update"
+        echo "Warning: jq not available, skip{ { { { ping result update" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     fi
 }
 

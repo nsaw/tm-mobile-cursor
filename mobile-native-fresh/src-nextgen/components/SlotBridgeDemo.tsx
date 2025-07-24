@@ -1,6 +1,7 @@
 // SlotBridgeDemo.tsx - Demonstration of complete slot bridge handoff chain
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+
 import { LayoutShell } from '../layout/LayoutShell';
 import { useLayoutContext } from '../hooks/useLayoutContext';
 import { SlotBridge, useSlotBridge } from '../slots/SlotBridge';

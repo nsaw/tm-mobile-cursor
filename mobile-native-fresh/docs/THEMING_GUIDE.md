@@ -67,7 +67,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 
-interface MyComponentProps {
+interface MyComponentPro{ { { { ps { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   isActive: boolean;
   variant: 'primary' | 'secondary';
 }
@@ -238,7 +238,7 @@ These files are excluded from the import restrictions because they are part of t
 
 ### Before Committing
 
-1. **Run theme check**: `npm run lint:check-theme`
+1. **Run theme check**: `{ { { { npm run lint:check-theme` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 2. **Fix any violations**: Follow the patterns above
 3. **Commit**: Pre-commit hook will automatically verify
 
@@ -332,8 +332,8 @@ If you see TypeScript errors with tokens:
 
 If you experience performance issues:
 1. Ensure `getStyles(tokens)` is called inside the component
-2. Don't call `getStyles` in render loops
-3. Consider memoizing styles for complex components
+2. Don't call `getStyles` in render loo{ { { { ps
+3. Consider memoizing styles for complex components & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ---
 

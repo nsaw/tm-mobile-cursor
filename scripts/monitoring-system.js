@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { node
 
-const fs = require('fs');
+const fs = require('fs') & } >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync, spawn } = require('child_process');
 const LogRotator = require('./log-rotation.js');
@@ -32,7 +32,7 @@ class MonitoringSystem {
     }
 
     stop() {
-        console.log('🛑 Stopping Monitoring System...');
+        console.log('🛑 Stop{ { { ping Monitoring System...') & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
         this.monitoring = false;
     }
 
@@ -84,11 +84,11 @@ class MonitoringSystem {
             const cpuUsage = Math.floor(Math.random() * 100); // Placeholder
             
             // Get memory usage
-            const memInfo = execSync('vm_stat', { encoding: 'utf8' });
+            const memInfo = execSync('{ vm_stat & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             const memoryUsage = this.parseMemoryUsage(memInfo);
             
             // Get disk usage
-            const diskInfo = execSync('df -h .', { encoding: 'utf8' });
+            const diskInfo = execSync('{ df -h . & } >/dev/null 2>&1 & disown', { stdio: 'pipe' });
             const diskUsage = this.parseDiskUsage(diskInfo);
             
             return {
@@ -255,10 +255,11 @@ class MonitoringSystem {
         // For now, just log the alert
     }
 
+    // Check if process is running
     isProcessRunning(pattern) {
         try {
-            const result = execSync(`ps aux | grep "${pattern}" | grep -v grep`, { encoding: 'utf8' });
-            return result.trim().length > 0;
+            const result = execSync('{ { ps aux | grep  & } >/dev/null 2>&1 & disown', { stdio: 'pipe' })${pattern}" | grep -v grep & } >/dev/null 2>&1 & disown`, { stdio: 'pipe' });
+            return result.toString().trim().length > 0;
         } catch (error) {
             return false;
         }
@@ -331,7 +332,7 @@ if (require.main === module) {
             }
             break;
         default:
-            console.log('Usage: node monitoring-system.js [start|stop|check|report]');
+            console.log('Usage: { node monitoring-system.js [start|stop|check|report]') & } >/dev/null 2>&1 & disown;
     }
 }
 

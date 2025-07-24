@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Screen Capture Verification System is a comprehensive solution for the ghost runner automation that provides headless screen capture and verification for all UI-related tasks. It ensures that app load, content load, and dashboard screens are captured and verified by both human reviewers and GPT analysis before marking steps complete.
+The Screen Capture Verification System is a comprehensive solution for the ghost runner automation that provides headless screen capture and verification for all UI-related tasks. It ensures that app load, content load, and dashboard screens are captured and verified by both human reviewers and GPT analysis before marking ste{ { { { ps complete. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ## Features
 
@@ -53,8 +53,8 @@ The Screen Capture Verification System is a comprehensive solution for the ghost
 
 Run the setup script to install all required dependencies:
 
-```bash
-./scripts/setup-verification-dependencies.sh
+```{ { { { bash
+./scripts/setup-verification-dependencies.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 This will:
@@ -67,12 +67,12 @@ This will:
 
 Test that the verification system is working:
 
-```bash
-# Test screen capture
-node scripts/screen-capture-verifier.js capture-all
+```{ { { { bash
+# Test screen capture & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { { { { { { { { { node scripts/screen-capture-verifier.js capture-all & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 # Test verification manager
-node scripts/verification-manager.js verify '{"test": true}'
+{ { { { node scripts/verification-manager.js verify '{"test": true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}'
 
 # Test enhanced ghost runner
 ./scripts/enhanced-ghost-runner-with-verification.sh test-verification
@@ -82,39 +82,39 @@ node scripts/verification-manager.js verify '{"test": true}'
 
 ### Basic Screen Capture
 
-```bash
-# Capture all screens (app load, content load, dashboard)
+```{ { { { bash
+# Capture all screens (app load, content load, dashboard) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 node scripts/screen-capture-verifier.js capture-all
 
 # Capture specific screen
-node scripts/screen-capture-verifier.js capture-app-load
-node scripts/screen-capture-verifier.js capture-content-load
-node scripts/screen-capture-verifier.js capture-dashboard
+{ { { { node scripts/screen-capture-verifier.js capture-app-load & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/screen-capture-verifier.js capture-content-load & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/screen-capture-verifier.js capture-dashboard & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Clean up old captures
-node scripts/screen-capture-verifier.js cleanup
+{ { { { node scripts/screen-capture-verifier.js cleanup & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Verification Workflow
 
-```bash
-# Run complete verification workflow
-node scripts/verification-manager.js verify '{"content": "UI test", "contentType": "patch"}'
+```{ { { { bash
+# Run complete verification workflow & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/verification-manager.js verify '{"content": "UI test", "contentType": "patch" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}'
 
 # Create verification task
-node scripts/verification-manager.js create-task '{"test": true}'
+{ { { { node scripts/verification-manager.js create-task '{"test": true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}'
 
 # Execute verification workflow
-node scripts/verification-manager.js execute-workflow <task-id>
+{ { { { node scripts/verification-manager.js execute-workflow <task-id> & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Wait for approval
-node scripts/verification-manager.js wait-approval <task-id>
+{ { { { node scripts/verification-manager.js wait-approval <task-id> & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Ghost Runner Integration
 
-```bash
-# Start ghost runner with verification
+```{ { { { bash
+# Start ghost runner with verification & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ./scripts/enhanced-ghost-runner-with-verification.sh start
 
 # Check status
@@ -238,9 +238,9 @@ logs/
 
 ### Status Checking
 
-```bash
-# Check verification system status
-node scripts/verification-manager.js status
+```{ { { { bash
+# Check verification system status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/verification-manager.js status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check ghost runner status
 ./scripts/enhanced-ghost-runner-with-verification.sh status
@@ -257,28 +257,28 @@ ls -la mobile-native-fresh/verification/
 ### Common Issues
 
 1. **Puppeteer Installation**
-   ```bash
-   # If Puppeteer fails to install
-   npm install puppeteer --unsafe-perm=true
+   ```{ { { { bash
+   # If Puppeteer fails to install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   { { { { npm install puppeteer --unsafe-perm=true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 2. **Port Conflicts**
-   ```bash
-   # Check if port 4000 is in use
+   ```{ { { { bash
+   # Check if port 4000 is in use & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    lsof -i :4000
    # Kill conflicting process
    kill -9 <PID>
    ```
 
 3. **Permission Issues**
-   ```bash
-   # Make scripts executable
+   ```{ { { { bash
+   # Make scripts executable & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    chmod +x scripts/*.sh
    ```
 
 4. **Directory Issues**
-   ```bash
-   # Create missing directories
+   ```{ { { { bash
+   # Create missing directories & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    mkdir -p mobile-native-fresh/captures
    mkdir -p mobile-native-fresh/verification
    mkdir -p logs
@@ -288,8 +288,8 @@ ls -la mobile-native-fresh/verification/
 
 Enable debug logging:
 
-```bash
-# Set debug environment variable
+```{ { { { bash
+# Set debug environment variable & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 export VERIFICATION_DEBUG=true
 
 # Run with debug output

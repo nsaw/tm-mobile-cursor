@@ -1,5 +1,6 @@
 // THEME WRAPPED APPSHELL ENTRY
 import React, { useEffect } from 'react';
+
 import { ThemeProvider } from './theme/ThemeProvider';
 import { useEnvironmentStore } from './state/EnvironmentStore';
 import { AppContent } from './components/AppContent';

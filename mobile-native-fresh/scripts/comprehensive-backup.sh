@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Comprehensive Backup Script for tm-mobile-cursor project
+# Comprehensive Backup Script for tm-mobile-cursor project & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Supports both full project backup and mobile-native-fresh specific backup
 
 TAG="$1"

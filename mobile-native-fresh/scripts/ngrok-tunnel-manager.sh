@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# ngrok-tunnel-manager.sh
+# ngrok-tunnel-manager.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Manages ngrok tunnels using agent configuration
 
 set -e
@@ -43,7 +43,7 @@ function start_tunnels() {
     sleep 5
     
     # Check if tunnels started successfully
-    if curl -s "$WEB_INTERFACE/api/tunnels" > /dev/null 2>&1; then
+    if { { { { { { { { { { { { curl -s "$WEB_INTERFACE/api/tunnels" > /dev/null 2>&1 & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown; then
         echo "✅ Tunnels started successfully!"
         list_tunnels
     else
@@ -53,7 +53,7 @@ function start_tunnels() {
 }
 
 function stop_tunnels() {
-    echo "🛑 Stopping all ngrok tunnels..."
+    echo "🛑 Stop{ { { { ping all ngrok tunnels..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     pkill -f ngrok || true
     rm -f logs/ngrok-all-tunnels.pid
     echo "✅ All tunnels stopped"
@@ -72,7 +72,7 @@ function show_status() {
         # Get tunnel information
         if curl -s "$WEB_INTERFACE/api/tunnels" > /dev/null 2>&1; then
             echo "📡 Active Tunnels:"
-            curl -s "$WEB_INTERFACE/api/tunnels" | jq -r '.tunnels[] | "  \(.name): \(.public_url) -> \(.config.addr)"' 2>/dev/null || echo "  No tunnels found"
+            { { { { curl -s "$WEB_INTERFACE/api/tunnels" | jq -r '.tunnels[] | "  \(.name): \(.public_url) -> \(.config.addr)"' 2>/dev/null || echo "  No tunnels found" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         else
             echo "⚠️  Web interface not accessible"
         fi
@@ -89,7 +89,7 @@ function list_tunnels() {
     echo "======================"
     
     if curl -s "$WEB_INTERFACE/api/tunnels" > /dev/null 2>&1; then
-        curl -s "$WEB_INTERFACE/api/tunnels" | jq -r '.tunnels[] | "\(.name): \(.public_url)"' 2>/dev/null || echo "No tunnels found"
+        { { { { curl -s "$WEB_INTERFACE/api/tunnels" | jq -r '.tunnels[] | "\(.name): \(.public_url)"' 2>/dev/null || echo "No tunnels found" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     else
         echo "No tunnels accessible"
     fi

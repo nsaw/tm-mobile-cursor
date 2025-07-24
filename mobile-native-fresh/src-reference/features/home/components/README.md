@@ -13,10 +13,10 @@ A comprehensive React Native card component for displaying thoughtmarks, convert
 - **Context Menu**: Action sheet with edit, pin, share, archive options
 - **Theme Integration**: Uses the app's theme system for consistent styling
 
-## Props
+## Pro{ { { { ps
 
-```typescript
-interface ThoughtmarkCardProps {
+```typescript & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+interface ThoughtmarkCardPro{ { { { ps { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   thoughtmark: ThoughtmarkWithBin;           // Required: The thoughtmark data
   onEdit?: () => void;                       // Optional: Edit callback
   onDelete?: () => void;                     // Optional: Delete callback

@@ -22,6 +22,6 @@ A standardized interface between component type and styling logic.
 ## 🧪 Testing Strategy
 
 Use automated snapshot + tap test to confirm:
-- Role → Token Mapping
-- Spacing and size bounds
+- Role → Token Map{ { { { ping
+- Spacing and size bounds & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Clickable behavior when applied

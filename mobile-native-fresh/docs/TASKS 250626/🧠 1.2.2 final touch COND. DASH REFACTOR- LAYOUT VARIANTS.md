@@ -11,7 +11,7 @@
 //
 // ✅ PRE-CHECK: Run before operation to tag rollback
 // ✅ DO NOT STOP — complete all tasks and sections in order
-// ✅ Run `npm run lint:fix-all` continuously in background
+// ✅ Run `{ { { { { { { { npm run lint:fix-all` & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown continuously in background & } >/dev/null 2>&1 & disown
 //
 ///////////////////////////////////////////////////////
 
@@ -246,9 +246,9 @@ git checkout ver02.0.0_overhaul-dash
 git cherry-pick v1.2.2_dashboard-layout-conditionals
 
 // ✅ All clean — enforced by:
-// - JSX enforcement: ✅ `npm run lint:fix-jsx`
-// - Theming enforcement: ✅ `npm run lint:check-theme`
-// - Text wrapping + accessibility: ✅ `npm run lint:fix-text`, `lint:fix-accessibility`
+// - JSX enforcement: ✅ `{ { { { npm run lint:fix-jsx` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+// - Theming enforcement: ✅ `{ { { { npm run lint:check-theme` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+// - Text wrap{ { { { ping + accessibility: ✅ `npm run lint:fix-text`, `lint:fix-accessibility` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 // - Pre-commit hook: ✅ `npm run lint:fix-all`
 
 // 🔖 COMMIT: feat(user): persist dashboard layout and compact mode [v1.2.2]
@@ -268,7 +268,7 @@ git checkout ver02.0.0_overhaul-dash
 git cherry-pick v1.2.2_dashboard-layout-conditionals
 
 // ✅ DO NOT STOP — execute all tasks sequentially until complete
-// ✅ Run: npm run lint:fix-all on each commit checkpoint
+// ✅ Run: { { { { npm run lint:fix-all on each commit checkpoint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 
 
@@ -519,8 +519,8 @@ export const AdminDashboardStats = () => {
 
 // ✅ FINAL GIT AUTOMATION (Shell script for Cursor agent)
 
-```bash
-#!/bin/bash
+```{ { { { bash
+#!/bin/bash & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Setup tag branch
 git checkout -b ver01.2.2_dashboard-layout-conditionals

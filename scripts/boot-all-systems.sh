@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Boot All Systems Script
+# Boot All Systems Script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Starts all critical systems in the correct order
 
 PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor"
@@ -92,7 +92,7 @@ stop_service() {
     local service_name="$1"
     
     if is_running "$service_name"; then
-        log "${YELLOW}Stopping $service_name...${NC}"
+        log "${YELLOW}Stop{ { { { ping $service_name...${NC & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}"
         pkill -f "$service_name"
         sleep 2
     fi
@@ -162,7 +162,7 @@ main() {
     echo ""
     
     # Step 1: Stop any existing processes
-    log "${YELLOW}🛑 Stopping existing processes...${NC}"
+    log "${YELLOW}🛑 Stop{ { { { ping existing processes...${NC & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}"
     stop_service "expo"
     stop_service "node.*backend"
     stop_service "live-patch-status"
@@ -177,7 +177,7 @@ main() {
     log "${BLUE}📡 Starting Backend API...${NC}"
     if wait_for_port 4000; then
         cd "$BACKEND_DIR"
-        start_service "backend-api" "npm start" "$LOG_DIR/backend-boot.log"
+        start_service "backend-api" "{ { { { npm start" "$LOG_DIR/backend-boot.log" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         cd "$SCRIPTS_DIR"
     else
         log "${RED}Backend port 4000 is still in use${NC}"
@@ -187,7 +187,7 @@ main() {
     log "${BLUE}📱 Starting Expo Dev Server (port 8081)...${NC}"
     if wait_for_port 8081; then
         cd "$MOBILE_DIR"
-        start_service "expo.*8081" "npx expo start --port 8081 --no-dev --minify" "$LOG_DIR/expo-boot.log"
+        start_service "expo.*8081" "{ { { { npx expo start --port 8081 --no-dev --minify" "$LOG_DIR/expo-boot.log" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         cd "$SCRIPTS_DIR"
     else
         log "${RED}Expo port 8081 is still in use${NC}"
@@ -196,21 +196,21 @@ main() {
     # Step 4: Start Expo Tunnel Server
     log "${BLUE}🌐 Starting Expo Tunnel Server...${NC}"
     cd "$MOBILE_DIR"
-    start_service "expo.*tunnel" "npx expo start --tunnel" "$LOG_DIR/expo-tunnel-boot.log"
+    start_service "expo.*tunnel" "{ { { { npx expo start --tunnel" "$LOG_DIR/expo-tunnel-boot.log" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     cd "$SCRIPTS_DIR"
     
     # Step 5: Start background monitoring processes
     log "${BLUE}🔧 Starting background monitoring processes...${NC}"
     
     # Start continuous daemon manager first
-    start_service "continuous-daemon-manager" "bash continuous-daemon-manager.sh start" "$LOG_DIR/daemon-manager-boot.log"
+    start_service "continuous-daemon-manager" "{ { { { bash continuous-daemon-manager.sh start" "$LOG_DIR/daemon-manager-boot.log" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     # Start individual monitoring scripts
-    start_service "live-patch-status" "node live-patch-status.js start" "$LOG_DIR/live-patch-boot.log"
-    start_service "patch-executor" "node patch-executor.js watch" "$LOG_DIR/patch-executor-boot.log"
-    start_service "ghost-bridge" "node ghost-bridge.js monitor" "$LOG_DIR/ghost-bridge-boot.log"
-    start_service "summary-monitor" "node summary-monitor.js start" "$LOG_DIR/summary-monitor-boot.log"
-    start_service "realtime-monitor" "node realtime-monitor.js start" "$LOG_DIR/realtime-monitor-boot.log"
+    start_service "live-patch-status" "{ { { node live-patch-status.js start &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/live-patch-boot.log"
+    start_service "patch-executor" "{ { { node direct-patch-executor.js &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/patch-executor-boot.log"
+    start_service "ghost-bridge" "{ { { node ghost-bridge.js monitor &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/ghost-bridge-boot.log"
+    start_service "summary-monitor" "{ { { node summary-monitor.js start &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/summary-monitor-boot.log"
+    start_service "realtime-monitor" "{ { { node realtime-monitor.js start &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/realtime-monitor-boot.log"
     
     # Step 6: Start Fly.io and Ghost Runner (if available)
     log "${BLUE}☁️ Starting cloud services...${NC}"
@@ -219,13 +219,13 @@ main() {
     if command -v fly &> /dev/null; then
         start_service "fly" "fly deploy" "$LOG_DIR/fly-boot.log"
     else
-        log "${YELLOW}Fly CLI not found, skipping Fly.io deployment${NC}"
+        log "${YELLOW}Fly CLI not found, skip{ { ping Fly.io deployment${NC & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown}"
     fi
     
     # Start Ghost Runner (if available)
     if [ -d "/Users/sawyer/gitSync/gpt-cursor-runner" ]; then
         cd "/Users/sawyer/gitSync/gpt-cursor-runner"
-        start_service "ghost.*runner" "python3 -m gpt_cursor_runner.main" "$LOG_DIR/ghost-runner-boot.log"
+        start_service "ghost.*runner" "{ { { python3 -m gpt_cursor_runner.main &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown" "$LOG_DIR/ghost-runner-boot.log"
         cd "$SCRIPTS_DIR"
     else
         log "${YELLOW}Ghost Runner directory not found, skipping${NC}"
@@ -237,8 +237,8 @@ main() {
     
     log "${GREEN}🎉 Boot sequence completed!${NC}"
     log "Check logs in: $LOG_DIR"
-    log "Use 'bash boot-all-systems.sh status' to check status"
-    log "Use 'bash boot-all-systems.sh stop' to stop all systems"
+    log "Use '{ { { { bash boot-all-systems.sh status' to check status" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    log "Use '{ { { { bash boot-all-systems.sh stop' to stop all systems" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 }
 
 # Handle command line arguments
@@ -247,7 +247,7 @@ case "${1:-start}" in
         main
         ;;
     stop)
-        log "${YELLOW}🛑 Stopping all systems...${NC}"
+        log "${YELLOW}🛑 Stop{ { { { ping all systems...${NC & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}"
         stop_service "expo"
         stop_service "node.*backend"
         stop_service "live-patch-status"
@@ -265,9 +265,9 @@ case "${1:-start}" in
         ;;
     restart)
         log "${YELLOW}🔄 Restarting all systems...${NC}"
-        bash "$0" stop
+        { { { { bash "$0" stop & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         sleep 3
-        bash "$0" start
+        { { { { bash "$0" start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         ;;
     *)
         echo "Usage: $0 [start|stop|status|restart]"

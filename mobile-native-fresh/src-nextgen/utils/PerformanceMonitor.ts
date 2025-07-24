@@ -1,8 +1,7 @@
 // src-nextgen/utils/PerformanceMonitor.ts
 // Comprehensive performance monitoring system for Phase 3 migration
 
-import { PerformanceObserver, PerformanceEntry } from 'react-native';
-import { InteractionManager } from 'react-native';
+import {  InteractionManager } from 'react-native';
 
 export interface PerformanceMetrics {
   renderTime: number;

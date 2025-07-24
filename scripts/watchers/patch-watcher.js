@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-import { PATCH_WATCH_DIR, PATCH_COMPLETED_DIR } from '../constants/paths.js';
+import { PATCH_WATCH_DIR, PATCH_COMPLETED_DIR & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} from '../constants/paths.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -192,6 +192,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
             console.log('📊 Patch Watcher Status:', patchWatcher.getStatus());
             break;
         default:
-            console.log('Usage: node patch-watcher.js [start|stop|status]');
+            console.log('Usage: { { { { node patch-watcher.js [start|stop|status]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 } 

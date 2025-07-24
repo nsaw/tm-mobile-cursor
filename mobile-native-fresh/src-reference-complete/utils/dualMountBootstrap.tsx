@@ -6,6 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import SplashFallback from '../components/SplashFallback';
 import EnvironmentIndicator from '../components/EnvironmentIndicator';
+
 import { initializeDualMountToggle, getCurrentEnvironment } from './dualMountToggle';
 
 interface DualMountBootstrapProps {

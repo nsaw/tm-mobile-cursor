@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Generate REAL iPhone 16 Pro and iPhone 16 Pro Max viewport screenshots
  * Required for visual regression testing with actual device viewports
  */

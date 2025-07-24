@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-import { SUMMARY_WRITE_DIR, SUMMARY_ARCHIVE_DIR } from './constants/paths.js';
+import { SUMMARY_WRITE_DIR, SUMMARY_ARCHIVE_DIR & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} from './constants/paths.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -276,6 +276,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
             console.log('📊 Summary Writer Stats:', summaryWriter.getStats());
             break;
         default:
-            console.log('Usage: node summary-writer.js [index|archive|stats]');
+            console.log('Usage: { { { { node summary-writer.js [index|archive|stats]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 } 

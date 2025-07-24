@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 class BackupLogCleanup {
@@ -183,7 +183,7 @@ if (require.main === module) {
       console.log(JSON.stringify(stats, null, 2));
       break;
     default:
-      console.log('Usage: node backup-log-cleanup.js [cleanup|stats]');
+      console.log('Usage: { { { { node backup-log-cleanup.js [cleanup|stats]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
       console.log('  cleanup - Clean up old backup log files');
       console.log('  stats   - Show backup log statistics');
   }

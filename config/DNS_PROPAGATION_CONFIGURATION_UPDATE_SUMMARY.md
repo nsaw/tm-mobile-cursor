@@ -66,8 +66,8 @@ While DNS was propagating, I systematically updated all local repository files, 
 ### **Current Port Usage**
 | Port | Service | Status | Process |
 |------|---------|--------|---------|
-| **4000** | Backend API | ✅ Active | node (PID 23346) |
-| **8081** | Expo Dev Server | ✅ Active | node (PID 86811) |
+| **4000** | Backend API | ✅ Active | { { { { node (PID 23346) | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+| **8081** | Expo Dev Server | ✅ Active | { { { { node (PID 86811) | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | **5555** | Runner Tunnel | ✅ Active | cloudflared (PID 17388) |
 | **5556** | Ghost Tunnel | ✅ Active | cloudflared (PID 17390) |
 | **5051** | Python Flask | ❌ Inactive | No conflicts |
@@ -181,10 +181,10 @@ While DNS was propagating, I systematically updated all local repository files, 
 4. **Update External References**: Update any external systems using old URLs
 
 ### **Post-DNS Validation**
-```bash
-# Test connectivity
-curl -I https://runner.thoughtmarks.app
-curl -I https://ghost.thoughtmarks.app
+```{ { { { bash
+# Test connectivity & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { curl -I https://runner.thoughtmarks.app & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { curl -I https://ghost.thoughtmarks.app & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check system health
 cd /Users/sawyer/gitSync/tm-mobile-cursor
@@ -192,13 +192,13 @@ cd /Users/sawyer/gitSync/tm-mobile-cursor
 
 # Test all endpoints
 cd /Users/sawyer/gitSync/gpt-cursor-runner
-python3 -m gpt_cursor_runner.main --test
+{ { { { python3 -m gpt_cursor_runner.main --test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **Monitoring Commands**
-```bash
-# Check all processes
-ps aux | grep -E "(node|python|ngrok|expo|cloudflared)" | grep -v grep
+```{ { { { bash
+# Check all processes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { ps aux | grep -E "(node|python|ngrok|expo|cloudflared)" | grep -v grep & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check all ports
 lsof -i -P | grep LISTEN

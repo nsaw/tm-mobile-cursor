@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Migration Script: Replace Old Autolinters with Super AutoLinter
-# This script stops all old autolinter processes and starts the unified super autolinter
+# Migration Script: Replace Old Autolinters with Super AutoLinter & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+# This script sto{ { { { ps all old autolinter processes and starts the unified super autolinter & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
@@ -28,7 +28,7 @@ check_super_autolinter() {
 
 # Function to stop old autolinter processes
 stop_old_autolinters() {
-    log "🛑 Stopping old autolinter processes..."
+    log "🛑 Stop{ { { { ping old autolinter processes..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     # Kill all autolinter.py processes
     pkill -f "autolinter.py" 2>/dev/null
@@ -90,7 +90,7 @@ start_super_autolinter() {
     
     # Start super autolinter in background
     cd "$PROJECT_DIR"
-    python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" > "$LOG_FILE" 2>&1 &
+    { { { { python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" > "$LOG_FILE" 2>&1 & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     SUPER_AUTOLINTER_PID=$!
     
     sleep 3
@@ -111,7 +111,7 @@ show_status() {
     echo "Old Autolinters:"
     if pgrep -f "autolinter.py" > /dev/null 2>&1; then
         echo "  ❌ autolinter.py processes still running"
-        pgrep -f "autolinter.py" | xargs ps -p
+        pgrep -f "autolinter.py" | xargs { { { { { { { { ps -p & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
     else
         echo "  ✅ No old autolinter.py processes"
     fi
@@ -142,7 +142,7 @@ test_super_autolinter() {
     
     # Test scan-only mode
     cd "$PROJECT_DIR"
-    python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" --scan-only
+    { { { { python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" --scan-only & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     if [ $? -eq 0 ]; then
         log "✅ Super AutoLinter test successful"
@@ -156,7 +156,7 @@ test_super_autolinter() {
 show_stats() {
     log "📈 Super AutoLinter Statistics:"
     cd "$PROJECT_DIR"
-    python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" --stats
+    { { { { python3 "$SUPER_AUTOLINTER" --config "$CONFIG_FILE" --stats & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 }
 
 # Main migration function

@@ -1,7 +1,8 @@
 // ThemeProvider.tsx
 import React from 'react';
-import { useAppState } from '../state/store';
 import { ThemeProvider as NativeThemeProvider } from 'styled-components/native';
+
+import { useAppState } from '../state/store';
 
 const lightTheme = { background: '#fff' };
 const darkTheme = { background: '#000' };

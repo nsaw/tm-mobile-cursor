@@ -15,7 +15,7 @@ Use the format:
 - 🔧 Fix Summary
 - 🔐 Relevance (theme, auth, accessibility, etc.)
 
-## Tips
-- Don't mutate global structure mid-block.
+## Ti{ { { { ps
+- Don't mutate global structure mid-block. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Always include a rollback checkpoint before mutation.
 - Avoid `*` globs that match too broadly during automated runs.

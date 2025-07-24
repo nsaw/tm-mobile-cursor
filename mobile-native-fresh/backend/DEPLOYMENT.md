@@ -16,60 +16,60 @@ src/
 ## Local Development Setup
 
 1. Install dependencies:
-```bash
-npm install
+```{ { { { bash
+npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 2. Configure environment:
-```bash
-cp .env.example .env
+```{ { { { bash
+cp .env.example .env & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Edit .env with your configuration
 ```
 
 3. Setup database:
-```bash
-npm run migrate
+```{ { { { { { { { bash
+npm run migrate & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 4. Start development server:
-```bash
-npm run dev
+```{ { { { bash
+npm run dev & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Production Build
 
 1. Build TypeScript:
-```bash
-npm run build
+```{ { { { bash
+npm run build & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 2. Start production server:
-```bash
-npm start
+```{ { { { bash
+npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Testing
 
 Run tests:
-```bash
-npm test
+```{ { { { bash
+npm test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 Run tests in watch mode:
-```bash
-npm run test:watch
+```{ { { { bash
+npm run test:watch & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Code Quality
 
 Lint code:
-```bash
-npm run lint
+```{ { { { bash
+npm run lint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 Fix linting issues:
-```bash
-npm run lint:fix
+```{ { { { bash
+npm run lint:fix & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Database Management
@@ -80,8 +80,8 @@ npm run migrate
 ```
 
 View database in Drizzle Studio:
-```bash
-npm run db:studio
+```{ { { { bash
+npm run db:studio & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## Docker Deployment
@@ -94,7 +94,7 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-RUN npm ci --only=production
+RUN { { { { npm ci --only=production & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Copy built application
 COPY dist ./dist
@@ -104,15 +104,15 @@ EXPOSE 5000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:5000/health || exit 1
+  CMD { { { { curl -f http://localhost:5000/health || exit 1 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Start application
 CMD ["npm", "start"]
 ```
 
 Build and run:
-```bash
-docker build -t thoughtmarks-api .
+```{ { { { bash
+docker build -t thoughtmarks-api . & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 docker run -p 5000:5000 thoughtmarks-api
 ```
 
@@ -133,21 +133,21 @@ Required environment variables:
 ## Cloud Deployment Options
 
 ### Railway
-```bash
-railway login
+```{ { { { bash
+railway login & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 railway link
 railway up
 ```
 
 ### Render
 1. Connect GitHub repository
-2. Set build command: `npm run build`
-3. Set start command: `npm start`
+2. Set build command: `{ { { { npm run build` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+3. Set start command: `{ { { { npm start` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 4. Add environment variables
 
 ### Vercel
-```bash
-vercel
+```{ { { { bash
+vercel & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### AWS ECS/Fargate

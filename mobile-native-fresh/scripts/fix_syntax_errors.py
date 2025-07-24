@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env { { { { python3
 """
 Script to fix syntax errors in slack_handler.py
 """

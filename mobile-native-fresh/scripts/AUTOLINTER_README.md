@@ -33,13 +33,13 @@ AutoLinter is a comprehensive, automated system that continuously monitors Pytho
 ## 🚀 Quick Start
 
 ### **1. Start the AutoLinter**
-```bash
-./start_autolinter.sh
+```{ { { { bash
+./start_autolinter.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **2. Manual Start (Alternative)**
-```bash
-python3 autolinter.py
+```{ { { { bash
+python3 autolinter.py & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **3. Stop the AutoLinter**
@@ -178,13 +178,13 @@ The system tracks:
 ### **Common Issues**
 
 **1. Missing Dependencies**
-```bash
-pip3 install flake8 black autopep8 watchdog
+```{ { { { bash
+pip3 install flake8 black autopep8 watchdog & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 **2. Permission Issues**
-```bash
-chmod +x start_autolinter.sh
+```{ { { { bash
+chmod +x start_autolinter.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 **3. Configuration Issues**
@@ -192,8 +192,8 @@ chmod +x start_autolinter.sh
 - Verify project directories exist
 
 **4. Log Analysis**
-```bash
-tail -f logs/autolinter.log
+```{ { { { bash
+tail -f logs/autolinter.log & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### **Debug Mode**

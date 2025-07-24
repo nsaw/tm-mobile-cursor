@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync, spawn } = require('child_process');
 const puppeteer = require('puppeteer');
@@ -445,7 +445,7 @@ if (require.main === module) {
             });
             break;
         default:
-            console.log('Usage: node screen-capture-verifier.js [capture-all|verify|cleanup|capture-app-load|capture-content-load|capture-dashboard]');
+            console.log('Usage: { { { node screen-capture-verifier.js [capture-all|verify|cleanup|capture-app-load|capture-content-load|capture-dashboard]') & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 }
 

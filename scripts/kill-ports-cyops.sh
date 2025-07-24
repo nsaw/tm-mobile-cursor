@@ -1,5 +1,5 @@
-#!/bin/bash
-# kill-ports-cyops.sh
+#!/bin/{ { { { bash
+# kill-ports-cyops.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Kills all ports and processes for the CYOPS project (tm-mobile-cursor)
 
 echo "🔄 Killing ports for CYOPS project..."
@@ -8,7 +8,7 @@ echo "🔄 Killing ports for CYOPS project..."
 echo "📱 Killing Expo development server..."
 pkill -f "expo start" 2>/dev/null || true
 pkill -f "expo" 2>/dev/null || true
-pkill -f "npx expo" 2>/dev/null || true
+pkill -f "{ { { { npx expo" 2>/dev/null || true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Kill Metro bundler
 echo "🚇 Killing Metro bundler..."

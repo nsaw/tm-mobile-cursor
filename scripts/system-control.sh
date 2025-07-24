@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# =============================================================================
+# ============================================================================= & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # TM-MOBILE-CURSOR SYSTEM CONTROL
 # =============================================================================
 # Simple wrapper for boot and shutdown scripts
@@ -49,7 +49,7 @@ check_status() {
         echo -e "${GREEN}✅ Systems are running${NC}"
         echo ""
         echo "Running processes:"
-        node -e "
+        { { { { node -e " & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         const fs = require('fs');
         try {
             const pids = JSON.parse(fs.readFileSync('$PID_FILE', 'utf8'));
@@ -83,7 +83,7 @@ case "${1:-help}" in
         "$BOOT_SCRIPT"
         ;;
     stop|shutdown|down)
-        echo -e "${YELLOW}🛑 Stopping all systems...${NC}"
+        echo -e "${YELLOW}🛑 Stop{ { { { ping all systems...${NC & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}"
         "$SHUTDOWN_SCRIPT"
         ;;
     restart|reboot)

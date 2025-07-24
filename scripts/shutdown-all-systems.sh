@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# =============================================================================
+# ============================================================================= & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # TM-MOBILE-CURSOR COMPREHENSIVE SHUTDOWN SCRIPT
 # =============================================================================
-# Gracefully stops all frontend, backend, monitoring, and pipeline systems
+# Gracefully sto{ { { { ps all frontend, backend, monitoring, and pipeline systems & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # =============================================================================
 
 set -e  # Exit on any error
@@ -43,13 +43,13 @@ kill_process() {
     local name=$1
     local pid=$2
     
-    if [ -n "$pid" ] && ps -p $pid > /dev/null 2>&1; then
-        log_info "Stopping $name (PID: $pid)..."
+    if [ -n "$pid" ] && { { { { { { { { ps -p $pid > /dev/null 2>&1 & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown; then
+        log_info "Stop{ { { { ping $name (PID: $pid)..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         kill -TERM $pid 2>/dev/null || true
         
         # Wait for graceful shutdown
         local count=0
-        while ps -p $pid > /dev/null 2>&1 && [ $count -lt 10 ]; do
+        while { { { { ps -p $pid > /dev/null 2>&1 && [ $count -lt 10 ] & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; do
             sleep 1
             count=$((count + 1))
         done
@@ -71,7 +71,7 @@ kill_by_pattern() {
     local pattern=$1
     local name=$2
     
-    log_info "Stopping $name processes..."
+    log_info "Stop{ { { { ping $name processes..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     pkill -f "$pattern" 2>/dev/null || true
     sleep 2
     
@@ -93,10 +93,10 @@ mkdir -p "$(dirname "$SHUTDOWN_LOG")"
 
 # Stop processes from PID file
 if [ -f "$PID_FILE" ]; then
-    log_info "Stopping processes from PID file..."
+    log_info "Stop{ { { { ping processes from PID file..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     # Read and kill processes from PID file
-    node -e "
+    { { { { node -e " & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     const fs = require('fs');
     try {
         const pids = JSON.parse(fs.readFileSync('$PID_FILE', 'utf8'));

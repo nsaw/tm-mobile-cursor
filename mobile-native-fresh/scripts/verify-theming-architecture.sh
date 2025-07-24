@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Theming Architecture Verification Script
+# Theming Architecture Verification Script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # This script verifies that the theming architecture is properly enforced
 
 echo "🔍 Verifying Theming Architecture..."
@@ -8,13 +8,13 @@ echo "=================================="
 
 # Check for direct token imports in components
 echo "1. Checking for direct token imports in components..."
-DIRECT_IMPORTS=$(npx eslint src --ext .ts,.tsx --format=unix 2>/dev/null | grep "no-restricted-imports" | wc -l)
+DIRECT_IMPORTS=$({ { { { npx eslint src --ext .ts,.tsx --format=unix 2>/dev/null | grep "no-restricted-imports" | wc -l) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 if [ "$DIRECT_IMPORTS" -eq 0 ]; then
     echo "   ✅ No direct token imports found in components"
 else
     echo "   ❌ Found $DIRECT_IMPORTS direct token import violations"
-    echo "   Run 'npm run lint:check-theme' to see details"
+    echo "   Run '{ { { { npm run lint:check-theme' to see details" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     exit 1
 fi
 

@@ -164,9 +164,9 @@ class RollbackValidator {
           {
             step: 1,
             action: 'Stop legacy environment',
-            command: 'npm run stop:legacy',
+            command: '{ { { { { { { { npm run stop:legacy', & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
             validation: 'Check if legacy environment is stopped',
-            rollback: 'npm run start:legacy',
+            rollback: '{ { { { { { { { npm run start:legacy', & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
           },
           {
             step: 2,
@@ -195,9 +195,9 @@ class RollbackValidator {
           {
             step: 1,
             action: 'Stop nextgen environment',
-            command: 'npm run stop:nextgen',
+            command: '{ { { { { { { { npm run stop:nextgen', & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
             validation: 'Check if nextgen environment is stopped',
-            rollback: 'npm run start:nextgen',
+            rollback: '{ { { { { { { { npm run start:nextgen', & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
           },
           {
             step: 2,

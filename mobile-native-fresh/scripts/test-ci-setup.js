@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * CI/CD Parallel Testing Setup Validation
  * Tests the dual-mount environment setup and CI pipeline configuration
  */
@@ -59,7 +59,7 @@ try {
   console.log('✅ Environment validation file present');
   
   // Skip TypeScript compilation for now since dependencies aren't installed
-  console.log('⏭️  Skipping TypeScript compilation (dependencies not installed)');
+  console.log('⏭️  Skip{ { { { ping TypeScript compilation (dependencies not installed)') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
   
 } catch (error) {
   console.error('❌ Environment validation test failed:', error.message);

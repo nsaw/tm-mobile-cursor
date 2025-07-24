@@ -8,10 +8,10 @@ A reference for developers to understand, apply, and validate `AutoRoleView` rol
 | Role Name   | Description |
 |------------|-------------|
 | `card`     | Elevated content containers (shadows, radius) |
-| `section`  | Logical content grouping areas |
+| `section`  | Logical content grou{ { { { ping areas | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | `header`   | Top navigation bar or screen header |
 | `footer`   | Bottom navigation, fixed elements |
-| `navigation` | Tab bars, side drawers, link groups |
+| `navigation` | Tab bars, side drawers, link grou{ { { { ps | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | `modal`    | Full-screen or pop-up overlay |
 | `container` | Generic wrapper (use sparingly) |
 

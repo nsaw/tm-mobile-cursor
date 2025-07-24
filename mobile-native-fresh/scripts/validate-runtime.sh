@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#!/bin/{ { { { bash
+set -e & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 echo "🔍 Validating runtime hydration fallback chain..."
 

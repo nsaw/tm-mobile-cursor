@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-echo "🔁 Moving taskflow and snippets into project repo..."
+echo "🔁 Moving taskflow and snippets into project repo..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Ensure destination folders
 mkdir -p ./docs/snippets

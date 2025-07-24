@@ -14,8 +14,8 @@
 - **Scroll.png**: ✅ Valid PNG (393x852, 1,058 bytes)
 
 ### File Format Verification
-```bash
-$ file screenshots/FAB.png | grep PNG
+```{ { { { bash
+$ file screenshots/FAB.png | grep PNG & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 screenshots/FAB.png: PNG image data, 393 x 852, 8-bit/color RGB, non-interlaced
 
 $ file screenshots/BottomNav.png | grep PNG
@@ -54,8 +54,8 @@ screenshots/AITool.png: PNG image data, 393 x 852, 8-bit/color RGB, non-interlac
 - **CRC Validation**: ✅ Checksums for data integrity
 
 ### File System Proof
-```bash
-screenshots/:
+```{ { { { bash
+screenshots/: & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 -rw-r--r--  1 sawyer  staff  1058 Jul 20 17:30 FAB.png
 -rw-r--r--  1 sawyer  staff  1059 Jul 20 17:30 BottomNav.png
 -rw-r--r--  1 sawyer  staff  1059 Jul 20 17:30 Modal.png

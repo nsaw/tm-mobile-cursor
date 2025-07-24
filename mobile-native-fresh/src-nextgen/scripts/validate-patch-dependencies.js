@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 /**
@@ -91,7 +91,7 @@ function validateDependencies(patches) {
       continue;
     }
     
-    const missingDeps = requiredPatches.filter(p => !p);
+    const missingDe{ { { { ps = requiredPatches.filter(p => !p) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     if (missingDeps.length > 0) {
       console.log(`❌ ${dependent} missing dependencies: ${requirements.join(', ')}`);
       allValid = false;

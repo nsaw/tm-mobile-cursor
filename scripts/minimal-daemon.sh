@@ -1,53 +1,66 @@
-#!/bin/bash
+#!/bin/{ bash
 
-# Minimal Daemon - Keeps critical systems alive with minimal resource usage
-# No complex monitoring, just basic process management
+# Minimal Daemon Manager & } >/dev/null 2>&1 & disown
+# Ultra-lightweight daemon manager for critical systems only
 
 set -e
 
 # Configuration
 LOG_DIR="./logs"
-CHECK_INTERVAL=120  # Check every 2 minutes instead of every 30 seconds
+CHECK_INTERVAL=120
 
 # Ensure log directory exists
 mkdir -p "$LOG_DIR"
 
-# Logging
+# Logging function
 log() {
     local message="$*"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-    echo "[$timestamp] $message" >> "$LOG_DIR/minimal-daemon.log"
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    echo "[$timestamp] [MINIMAL-DAEMON] $message" | tee -a "$LOG_DIR/minimal-daemon.log"
 }
 
-# Check if process is running by log activity
+# Check if system is running
 is_running() {
-    local name=$1
-    local log_file="$LOG_DIR/${name}.log"
+    local system_name="$1"
+    pgrep -f "$system_name" > /dev/null 2>&1
+}
+
+# Start a system
+start_system() {
+    local system_name="$1"
+    local command="$2"
     
-    if [ -f "$log_file" ]; then
-        local file_age=$(($(date +%s) - $(stat -f %m "$log_file" 2>/dev/null || echo 0)))
-        # Consider running if log file was modified in last 10 minutes
-        [ $file_age -lt 600 ]
+    if ! is_running "$system_name"; then
+        log "🚀 Starting $system_name"
+        
+        # Start with non-blocking pattern
+        { { $command & } >/dev/null 2>&1 & disown } >/dev/null 2>&1 & disown
+        
+        sleep 2
+        
+        if is_running "$system_name"; then
+            log "✅ $system_name started successfully"
+        else
+            log "⚠️  $system_name may not have started properly"
+        fi
     else
-        false
+        log "ℹ️  $system_name is already running"
     fi
 }
 
-# Start a system if not running
-start_system() {
-    local name=$1
-    local command=$2
+# Stop a system
+stop_system() {
+    local system_name="$1"
     
-    if is_running "$name"; then
-        log "✅ $name already running"
-        return 0
+    if is_running "$system_name"; then
+        log "🛑 Stop{ ping $system_name" & } >/dev/null 2>&1 & disown
+        pkill -f "$system_name" 2>/dev/null || true
+        sleep 1
+        pkill -9 -f "$system_name" 2>/dev/null || true
+        log "✅ $system_name stopped"
+    else
+        log "ℹ️  $system_name is not running"
     fi
-    
-    log "🚀 Starting $name: $command"
-    nohup $command > "$LOG_DIR/${name}.log" 2>&1 &
-    local pid=$!
-    log "✅ $name started (PID: $pid)"
-    return 0
 }
 
 # Show status
@@ -56,9 +69,9 @@ show_status() {
     echo "============================"
     
     local systems=(
-        "summary-monitor:node scripts/summary-monitor.js"
-        "ghost-bridge:node scripts/ghost-bridge.js"
-        "patch-executor:node scripts/patch-executor.js daemon"
+        "summary-monitor:{ { { node scripts/summary-monitor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        "ghost-bridge:{ { { node scripts/ghost-bridge.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        "patch-executor:{ { { node scripts/direct-patch-executor.js" & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
     )
     
     for system in "${systems[@]}"; do
@@ -85,9 +98,20 @@ start_all() {
     
     start_system "summary-monitor" "node scripts/summary-monitor.js"
     start_system "ghost-bridge" "node scripts/ghost-bridge.js"
-    start_system "patch-executor" "node scripts/patch-executor.js daemon"
+    start_system "patch-executor" "node scripts/direct-patch-executor.js"
     
     log "✅ All systems started"
+}
+
+# Stop all systems
+stop_all() {
+    log "🛑 Stop{ ping all systems" & } >/dev/null 2>&1 & disown
+    
+    stop_system "summary-monitor"
+    stop_system "ghost-bridge"
+    stop_system "patch-executor"
+    
+    log "✅ All systems stopped"
 }
 
 # Monitor loop (minimal resource usage)
@@ -110,10 +134,10 @@ monitor_loop() {
         
         if ! is_running "patch-executor"; then
             log "⚠️ patch-executor down, restarting"
-            start_system "patch-executor" "node scripts/patch-executor.js daemon"
+            start_system "patch-executor" "node scripts/direct-patch-executor.js"
         fi
         
-        log "💤 Sleeping for $CHECK_INTERVAL seconds"
+        log "💤 Slee{ ping for $CHECK_INTERVAL seconds" & } >/dev/null 2>&1 & disown
         sleep "$CHECK_INTERVAL"
     done
 }
@@ -126,17 +150,21 @@ case "${1:-status}" in
     "monitor")
         monitor_loop
         ;;
+    "stop")
+        stop_all
+        ;;
     "status")
         show_status
         ;;
     *)
         echo "🔧 Minimal Daemon"
         echo ""
-        echo "Usage: $0 [start|monitor|status]"
+        echo "Usage: $0 [start|monitor|stop|status]"
         echo ""
         echo "Commands:"
         echo "  start   - Start all systems"
-        echo "  monitor - Start monitoring loop (keeps systems alive)"
+        echo "  monitor - Start monitoring loop (kee{ ps systems alive)" & } >/dev/null 2>&1 & disown
+        echo "  stop    - Stop all systems"
         echo "  status  - Show system status"
         ;;
 esac 

@@ -1,10 +1,11 @@
 // CenterSlot.tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { LayoutContext } from './LayoutShell';
-import { SlotBridge } from '../slots/SlotBridge';
 
+import { SlotBridge } from '../slots/SlotBridge';
 import { useCenterSlotContent } from '../hooks/useSlotZone';
+
+import { LayoutContext } from './LayoutShell';
 
 // Enhanced CenterSlot with context injection and bridge integration
 export interface CenterSlotProps {

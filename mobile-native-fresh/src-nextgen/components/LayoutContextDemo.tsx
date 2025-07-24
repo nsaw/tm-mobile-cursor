@@ -1,6 +1,7 @@
 // LayoutContextDemo.tsx - Demonstration of context-aware layout system
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+
 import { LayoutShell } from '../layout/LayoutShell';
 import { useLayoutContext, useSlotInjection } from '../hooks/useLayoutContext';
 

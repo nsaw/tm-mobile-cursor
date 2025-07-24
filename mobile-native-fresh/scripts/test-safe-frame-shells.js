@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-console.log('🔍 Testing safe-frame shell functionality...');
+console.log('🔍 Testing safe-frame shell functionality...') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 
 // Mock safe-frame shell system for testing
 const mockSafeFrameShells = {

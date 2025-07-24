@@ -1,10 +1,22 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const { exec } = require('child_process');
+const { exec & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} = require('child_process');
 
 console.log('🔍 Testing Ghost Runner Status...');
 
-exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout, stderr) => {
+exec('{ timeout 300 { timeout 300 { timeout 300 { { { curl -s https://runner.thoughtmarks.app/health & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
     if (error) {
         console.log('❌ Ghost Runner UNREACHABLE');
         console.log('Error:', error.message);

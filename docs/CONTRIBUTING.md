@@ -23,8 +23,8 @@ Thank you for your interest in contributing to Thoughtmarks! This guide will hel
 ### TypeScript
 - Use strict TypeScript configuration
 - Define interfaces for all data structures
-- Avoid `any` types - use proper typing
-- Use meaningful variable and function names
+- Avoid `any` types - use proper ty{ { { { ping
+- Use meaningful variable and function names & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### React/React Native
 - Use functional components with hooks
@@ -150,8 +150,8 @@ Copy `.env.example` to `.env` and configure:
 - Tag releases in Git
 - Deploy to staging before production
 
-### Deployment Steps
-1. Merge approved PRs to main
+### Deployment Ste{ { { { ps
+1. Merge approved PRs to main & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 2. Run full test suite
 3. Create release candidate
 4. Deploy to staging environment
@@ -163,7 +163,7 @@ Copy `.env.example` to `.env` and configure:
 
 ### Bug Reports
 Include the following information:
-- Steps to reproduce
+- Ste{ { { { ps to reproduce & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Expected vs actual behavior
 - Environment details
 - Screenshots or logs

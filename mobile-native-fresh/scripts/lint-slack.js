@@ -1,5 +1,5 @@
-#!/usr/bin/env node
-/**
+#!/usr/bin/env { { { { node
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Slack Integration for Linting
  *
  * Features:
@@ -396,7 +396,7 @@ async function main() {
         });
       } else {
         console.log(
-          "Usage: node scripts/lint-slack.js errors <error-file.json>",
+          "Usage: { { { { node scripts/lint-slack.js errors <error-file.json>", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         );
       }
       break;
@@ -410,7 +410,7 @@ async function main() {
           filesProcessed: fixes.length,
         });
       } else {
-        console.log("Usage: node scripts/lint-slack.js fixes <fix-file.json>");
+        console.log("Usage: { { { { node scripts/lint-slack.js fixes <fix-file.json>") & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
       }
       break;
 
@@ -421,7 +421,7 @@ async function main() {
         await slack.notifyReport(stats);
       } else {
         console.log(
-          "Usage: node scripts/lint-slack.js report <stats-file.json>",
+          "Usage: { { { { node scripts/lint-slack.js report <stats-file.json>", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         );
       }
       break;
@@ -443,7 +443,7 @@ async function main() {
 Slack Lint Integration
 
 Usage:
-  node scripts/lint-slack.js <command> [file]
+  { { { { node scripts/lint-slack.js <command> [file] & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Commands:
   test     - Test Slack connection
@@ -454,12 +454,12 @@ Commands:
   weekly   - Send weekly report
 
 Examples:
-  node scripts/lint-slack.js test
-  node scripts/lint-slack.js errors errors.json
-  node scripts/lint-slack.js fixes fixes.json
-  node scripts/lint-slack.js report stats.json
-  node scripts/lint-slack.js daily
-  node scripts/lint-slack.js weekly
+  { { { { node scripts/lint-slack.js test & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-slack.js errors errors.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-slack.js fixes fixes.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-slack.js report stats.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-slack.js daily & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-slack.js weekly & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       `);
       break;
   }

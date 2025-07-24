@@ -1,5 +1,6 @@
 // FORCED HYDRATION APPSHELL - Validate one-time hydration and log to console
 import React, { useEffect } from 'react';
+
 import { ThemeProvider } from './theme/ThemeProvider';
 import { useEnvironmentStore } from './state/EnvironmentStore';
 import { AppContent } from './components/AppContent';

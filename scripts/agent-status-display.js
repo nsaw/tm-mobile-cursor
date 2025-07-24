@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Agent Status Display
  * Real-time status display for agent chat
  * Shows patch execution status, system health, and recent activity
@@ -84,7 +84,19 @@ class AgentStatusDisplay {
         };
         
         // Check if patch executor is running
-        exec('ps aux | grep "patch-executor" | grep -v grep', (error, stdout) => {
+        exec('{ timeout 300 { timeout 300 { timeout 300 { { { { { { ps aux | grep &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown&  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown& } >/dev/null 2>&1 & disown& } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        })patch-executor" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('patch-executor');
             } else {
@@ -93,7 +105,19 @@ class AgentStatusDisplay {
         });
         
         // Check if ghost bridge is running
-        exec('ps aux | grep "ghost-bridge" | grep -v grep', (error, stdout) => {
+        exec('{ timeout 300 { timeout 300 { timeout 300 ps aux | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        })ghost-bridge" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('ghost-bridge');
             } else {
@@ -102,7 +126,19 @@ class AgentStatusDisplay {
         });
         
         // Check if summary monitor is running
-        exec('ps aux | grep "summary-monitor" | grep -v grep', (error, stdout) => {
+        exec('{ timeout 300 { timeout 300 { timeout 300 ps aux | grep & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        })summary-monitor" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('summary-monitor');
             } else {
@@ -115,7 +151,19 @@ class AgentStatusDisplay {
 
     // Check ghost runner status
     checkGhostStatus() {
-        exec('curl -s https://gpt-cursor-runner.fly.dev/health', (error, stdout) => {
+        exec('{ timeout 300 { timeout 300 { timeout 300 { { curl -s https://gpt-cursor-runner.fly.dev/health & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout) => {
             if (error) {
                 this.status.ghost = {
                     status: 'unreachable',
@@ -213,9 +261,9 @@ class AgentStatusDisplay {
     }
 
     // Execute pending patches
-    executePatches() {
+    async executePatches() {
         return new Promise((resolve, reject) => {
-            exec('node scripts/patch-executor.js execute', (error, stdout, stderr) => {
+            exec('{ { node scripts/direct-patch-executor.js &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
                 if (error) {
                     reject(`Patch execution failed: ${error.message}`);
                 } else {
@@ -252,7 +300,7 @@ switch (command) {
     default:
         console.log('🔍 Agent Status Display');
         console.log('');
-        console.log('Usage: node agent-status-display.js [status|execute|json]');
+        console.log('Usage: { { { node agent-status-display.js [status|execute|json]') & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
         console.log('');
         console.log('Commands:');
         console.log('  status  - Show formatted status for agent chat');

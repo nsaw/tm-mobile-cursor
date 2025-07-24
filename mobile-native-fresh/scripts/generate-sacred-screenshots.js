@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Generate sacred view screenshots as valid PNG files
  * Required by patch-v1.4.200(P1.0.11)_true-screenshot-revalidation
  */
@@ -168,7 +168,7 @@ sacredViews.forEach(view => {
     // Test file command
     try {
       const { execSync } = require('child_process');
-      const fileOutput = execSync(`file "${screenshotPath}"`, { encoding: 'utf8' });
+      const fileOutput = execSync('{ { { file & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${screenshotPath}"`, { encoding: 'utf8' });
       if (fileOutput.includes('PNG')) {
         console.log(`✅ ${view.name}: Valid PNG confirmed`);
       } else {

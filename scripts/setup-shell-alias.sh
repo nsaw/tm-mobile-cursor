@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Detect the active shell config file
+# Detect the active shell config file & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 if [ -n "$ZSH_VERSION" ]; then
   SHELL_RC="$HOME/.zshrc"
 elif [ -n "$BASH_VERSION" ]; then
@@ -10,7 +10,7 @@ else
   exit 1
 fi
 
-ALIAS_CMD="alias gbackup='bash ~/gitSync/tm-mobile-cursor/scripts/backup-tag-push.sh'"
+ALIAS_CMD="alias gbackup='{ { { { bash ~/gitSync/tm-mobile-cursor/scripts/backup-tag-push.sh'" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check if alias already exists
 if grep -Fxq "$ALIAS_CMD" "$SHELL_RC"; then

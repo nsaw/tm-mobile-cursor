@@ -153,7 +153,7 @@ export const useAuth = () => {
     // PATCHED: Fix infinite demo login loop - add guard to prevent repeated login
     const currentState = authState;
     if (currentState.user?.id === '2' && currentState.isAuthenticated) {
-      console.log('✅ Demo user already logged in, skipping repeat login');
+      console.log('✅ Demo user already logged in, skip{ { { { ping repeat login') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
       return;
     }
     

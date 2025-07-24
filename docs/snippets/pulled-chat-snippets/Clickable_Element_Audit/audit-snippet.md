@@ -1,4 +1,4 @@
-npm run audit:clickables
+{ { { { npm run audit:clickables & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Verifies:
 - All buttons, links, and touchables have:

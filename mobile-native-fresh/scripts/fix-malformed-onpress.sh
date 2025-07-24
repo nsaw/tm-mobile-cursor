@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Script to fix malformed onPress handlers that have accessibility props mixed in
+# Script to fix malformed onPress handlers that have accessibility props mixed in & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # This script finds and fixes patterns like: onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> { ... }}
 
 echo "🔧 Fixing malformed onPress handlers..."

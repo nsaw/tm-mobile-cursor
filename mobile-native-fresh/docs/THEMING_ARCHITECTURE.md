@@ -101,30 +101,30 @@ A pre-commit hook automatically:
 
 ### Available Scripts
 
-```bash
-# Run all ESLint checks
-npm run lint
+```{ { { { bash
+# Run all ESLint checks & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run lint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Fix auto-fixable issues
-npm run lint:fix
+{ { { { npm run lint:fix & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Check only theming architecture rules
-npm run lint:check-theme
+{ { { { npm run lint:check-theme & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Run pre-commit checks
-npm run pre-commit
+{ { { { npm run pre-commit & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Codemod Script
 
 Automatically refactor existing code:
 
-```bash
-# Refactor entire src directory
-node scripts/refactor-theme.js src/
+```{ { { { bash
+# Refactor entire src directory & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/refactor-theme.js src/ & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Refactor specific file
-node scripts/refactor-theme.js src/components/MyComponent.tsx
+{ { { { node scripts/refactor-theme.js src/components/MyComponent.tsx & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 🏗️ Architecture Overview
@@ -219,8 +219,8 @@ export const MyComponent: React.FC = () => {
 ## 🔍 Debugging
 
 ### Check for Violations
-```bash
-# Find all designTokens usage
+```{ { { { bash
+# Find all designTokens usage & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 grep -r "designTokens" src/ --include="*.ts" --include="*.tsx"
 
 # Find all tokens usage at module level
@@ -228,9 +228,9 @@ grep -r "tokens\." src/ --include="*.ts" --include="*.tsx" | grep -v "useTheme"
 ```
 
 ### ESLint Debug Mode
-```bash
-# Run ESLint with detailed output
-npx eslint src/components/MyComponent.tsx --debug
+```{ { { { bash
+# Run ESLint with detailed output & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npx eslint src/components/MyComponent.tsx --debug & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 📋 Migration Checklist
@@ -241,7 +241,7 @@ When migrating existing code:
 - [ ] Add `useTheme()` hook to components
 - [ ] Move `StyleSheet.create()` inside components
 - [ ] Replace `designTokens.*` with `tokens.*`
-- [ ] Run `npm run lint:check-theme`
+- [ ] Run `{ { { { npm run lint:check-theme` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - [ ] Test component functionality
 - [ ] Commit changes
 

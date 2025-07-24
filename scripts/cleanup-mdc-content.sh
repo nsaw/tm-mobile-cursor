@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Cleanup remaining old content in .mdc files
+# Cleanup remaining old content in .mdc files & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Removes old tags, appliesTo, enforce fields and standardizes structure
 
 set -e

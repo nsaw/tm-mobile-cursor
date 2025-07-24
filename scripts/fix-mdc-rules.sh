@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { bash
 
-# Comprehensive .mdc Rule File Fixer
+# Comprehensive .mdc Rule File Fixer & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Fixes YAML headers, structure, and standardization across all rule files
 
 set -e

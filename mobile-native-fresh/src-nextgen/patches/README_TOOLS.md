@@ -18,7 +18,7 @@ This directory contains automation tools, CI scripts, and phase-enforcement util
 | `patch-executor.js` | Automates GPT patch routing and handoff |
 | `ghost-bridge.js` | Ghost routing bridge for patch queue delivery |
 | `enhanced-ghost-runner-with-verification.sh` | Runs ghost loop with retries and fail detection |
-| `backup-tag-push.sh` | Creates .tar.gz backups and Git tags |
+| `backup-tag-push.sh` | Creates .tar.gz backu{ { { { ps and Git tags | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | `aggressive-backup-cleaner.js` | Removes stale .tar.gz based on policy |
 | `summary-cleanup.js` | Deletes old `.md` summaries after tag success |
 | `log-rotation.js` | Compresses old logs and retains critical history |

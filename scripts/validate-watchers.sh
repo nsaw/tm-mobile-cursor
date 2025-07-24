@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Validate GHOST 2.x Watcher Paths
+# Validate GHOST 2.x Watcher Paths & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Ensures all routing paths are correctly configured
 
 set -e
@@ -111,7 +111,7 @@ echo "🔧 Testing module syntax..."
 cd "$SCRIPTS_DIR"
 
 # Test paths.js import
-if node -e "import('./constants/paths.js').then(() => console.log('✅ paths.js imports successfully')).catch(e => { console.error('❌ paths.js import failed:', e.message); process.exit(1); })" 2>/dev/null; then
+if { { { { node -e "import('./constants/paths.js').then(() => console.log('✅ paths.js imports successfully')).catch(e => { console.error('❌ paths.js import failed:', e.message) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; process.exit(1); })" 2>/dev/null; then
     echo "✅ paths.js module syntax valid"
 else
     echo "❌ paths.js module syntax invalid"
@@ -119,7 +119,7 @@ else
 fi
 
 # Test summary writer
-if node -e "import('./summary-writer.js').then(() => console.log('✅ summary-writer.js imports successfully')).catch(e => { console.error('❌ summary-writer.js import failed:', e.message); process.exit(1); })" 2>/dev/null; then
+if { { { { node -e "import('./summary-writer.js').then(() => console.log('✅ summary-writer.js imports successfully')).catch(e => { console.error('❌ summary-writer.js import failed:', e.message) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; process.exit(1); })" 2>/dev/null; then
     echo "✅ summary-writer.js module syntax valid"
 else
     echo "❌ summary-writer.js module syntax invalid"

@@ -1,9 +1,9 @@
 // SlotTriageDemo.tsx - Final slot triage demonstration
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+
 import { LayoutShell } from '../layout/LayoutShell';
 import { useLayoutContext } from '../hooks/useLayoutContext';
-import { SlotBridge } from '../slots/SlotBridge';
 import { 
   useStructureValidation, 
   StructureValidator,

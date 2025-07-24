@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-// fix-ghost-paths.js
+// fix-ghost-paths.js & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 // Fixes Ghost path resolution issues and ensures proper patch delivery
 
 const fs = require('fs');

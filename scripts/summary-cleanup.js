@@ -1,13 +1,13 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const LogRotator = require('./log-rotation.js');
 
 class SummaryCleanup {
     constructor() {
         this.logRotator = new LogRotator();
-        this.summariesDir = '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries';
+        this.summariesDir = '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries';
         this.backupDir = 'summaries/archive';
         this.maxAgeHours = 48;
         this.maxAgeMs = this.maxAgeHours * 60 * 60 * 1000;
@@ -228,7 +228,7 @@ if (require.main === module) {
             cleanup.dryRun();
             break;
         default:
-            console.log('Usage: node summary-cleanup.js [cleanup|restore|status|dry-run]');
+            console.log('Usage: { { { { node summary-cleanup.js [cleanup|restore|status|dry-run]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 }
 

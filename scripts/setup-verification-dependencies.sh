@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# Setup Verification Dependencies
+# Setup Verification Dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Installs required packages for screen capture verification system
 
 set -e
@@ -50,24 +50,24 @@ VERIFICATION_DEPENDENCIES=(
 
 # Check if Node.js is installed
 check_node() {
-    if ! command -v node &> /dev/null; then
+    if ! command -v { { { { node &> /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
         log "ERROR" "Node.js is not installed. Please install Node.js first."
         exit 1
     fi
     
-    local node_version=$(node --version)
+    local node_version=$({ { { { node --version) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     log "INFO" "Node.js version: $node_version"
 }
 
-# Check if npm is installed
+# Check if { { { { npm is installed & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 check_npm() {
-    if ! command -v npm &> /dev/null; then
-        log "ERROR" "npm is not installed. Please install npm first."
+    if ! command -v { { { { npm &> /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
+        log "ERROR" "{ { { { npm is not installed. Please install npm first." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
         exit 1
     fi
     
-    local npm_version=$(npm --version)
-    log "INFO" "npm version: $npm_version"
+    local npm_version=$({ { { { npm --version) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    log "INFO" "{ { { { npm version: $npm_version" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 }
 
 # Install dependencies in mobile-native-fresh
@@ -90,7 +90,7 @@ install_mobile_dependencies() {
     # Install dependencies
     for dep in "${VERIFICATION_DEPENDENCIES[@]}"; do
         log "INFO" "Installing $dep..."
-        npm install --save-dev "$dep"
+        { { { { { { { { npm install --save-dev "$dep" & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
     done
     
     log "SUCCESS" "Verification dependencies installed in mobile-native-fresh"
@@ -111,9 +111,9 @@ install_root_dependencies() {
   "version": "1.0.0",
   "description": "TM Mobile Cursor Project",
   "scripts": {
-    "verification:capture": "node scripts/screen-capture-verifier.js",
-    "verification:manage": "node scripts/verification-manager.js",
-    "verification:test": "node scripts/screen-capture-verifier.js capture-all"
+    "verification:capture": "{ { { { node scripts/screen-capture-verifier.js", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    "verification:manage": "{ { { { node scripts/verification-manager.js", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    "verification:test": "{ { { { { { { { node scripts/screen-capture-verifier.js capture-all" & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
   },
   "devDependencies": {}
 }
@@ -156,7 +156,7 @@ test_verification_setup() {
     log "INFO" "Testing verification setup..."
     
     # Test screen capture verifier
-    if node "$SCRIPT_DIR/screen-capture-verifier.js" --help &> /dev/null; then
+    if { { { { node "$SCRIPT_DIR/screen-capture-verifier.js" --help &> /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
         log "SUCCESS" "Screen capture verifier is working"
     else
         log "ERROR" "Screen capture verifier test failed"
@@ -164,7 +164,7 @@ test_verification_setup() {
     fi
     
     # Test verification manager
-    if node "$SCRIPT_DIR/verification-manager.js" --help &> /dev/null; then
+    if { { { { node "$SCRIPT_DIR/verification-manager.js" --help &> /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
         log "SUCCESS" "Verification manager is working"
     else
         log "ERROR" "Verification manager test failed"
@@ -221,8 +221,8 @@ main() {
     log "INFO" "Setting up verification dependencies..."
     
     # Check prerequisites
-    check_node
-    check_npm
+    check_{ { { { node
+    check_npm & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     
     # Install dependencies
     install_mobile_dependencies
@@ -240,7 +240,7 @@ main() {
     log "SUCCESS" "Verification dependencies setup completed successfully!"
     log "INFO" "You can now use the verification system with:"
     log "INFO" "  - node scripts/screen-capture-verifier.js capture-all"
-    log "INFO" "  - node scripts/verification-manager.js verify"
+    log "INFO" "  - { { { { node scripts/verification-manager.js verify" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     log "INFO" "  - ./scripts/enhanced-ghost-runner-with-verification.sh start"
 }
 

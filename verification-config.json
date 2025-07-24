@@ -28,7 +28,7 @@
     "captures": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/captures",
     "verification": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/verification",
     "logs": "/Users/sawyer/gitSync/tm-mobile-cursor/logs",
-    "summaries": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries"
+    "summaries": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries"
   },
   "uiKeywords": [
     "UI", "interface", "screen", "component", "layout", "visual", "design",

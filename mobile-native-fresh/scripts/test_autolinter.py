@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env { { { { python3
 """
 Test script for AutoLinter functionality
 """
@@ -12,7 +12,7 @@ from pathlib import Path
 
 def create_test_file():
     """Create a test file with linter errors."""
-    test_content = '''#!/usr/bin/env python3
+    test_content = '''#!/usr/bin/env { { { { python3
 # Test file with linter errors
 
 import os,sys,time  # E501: line too long

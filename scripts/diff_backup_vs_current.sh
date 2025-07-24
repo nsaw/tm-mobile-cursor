@@ -1,5 +1,5 @@
-#!/bin/bash
-# Compare backup and current project for any differences
+#!/bin/{ { { { bash
+# Compare backup and current project for any differences & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 BACKUP="/Users/sawyer/Desktop/tm-mobile-cursor_BAK"
 CURRENT="/Users/sawyer/gitSync/tm-mobile-cursor"

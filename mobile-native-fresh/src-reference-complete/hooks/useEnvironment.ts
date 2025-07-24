@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { toggleEnvironment as toggleDualMount, setEnvironment as setDualMountEnvironment } from '../utils/dualMountToggle';
 
 export type Environment = 'legacy' | 'nextgen';

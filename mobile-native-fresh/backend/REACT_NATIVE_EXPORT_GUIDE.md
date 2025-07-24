@@ -84,23 +84,23 @@ react-native-expo/
 The exported package provides:
 
 ### Immediate Setup
-```bash
-# Extract and install
-tar -xzf thoughtmarks-react-native-expo.tar.gz
+```{ { { { bash
+# Extract and install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { tar -xzf thoughtmarks-react-native-expo.tar.gz & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 cd react-native-expo
-npm install
+{ { { { npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Development Commands
-```bash
-npm start          # Start Expo development server
-npm run android    # Run on Android device/emulator
-npm run ios        # Run on iOS device/simulator
+```{ { { { bash
+npm start          # Start Expo development server & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run android    # Run on Android device/emulator & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm run ios        # Run on iOS device/simulator & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Production Deployment
-```bash
-expo build:android  # Build Android APK
+```{ { { { bash
+expo build:android  # Build Android APK & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 expo build:ios      # Build iOS IPA
 ```
 

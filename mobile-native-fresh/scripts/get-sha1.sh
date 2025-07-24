@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-echo "🔍 Getting SHA-1 Fingerprint for Android"
+echo "🔍 Getting SHA-1 Fingerprint for Android" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 echo "========================================"
 
 # Method 1: Try to find Android SDK keytool
@@ -85,7 +85,7 @@ echo ""
 echo "2. Use Firebase Console:"
 echo "   - Go to Firebase Console"
 echo "   - Project Settings → General"
-echo "   - Your apps → Add app → Android"
+echo "   - Your ap{ { { { ps → Add app → Android" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 echo "   - Enter package name: com.thoughtmarks.app"
 echo "   - You can add SHA-1 later in the app settings"
 echo ""
@@ -94,6 +94,6 @@ echo "   - Install Java JDK from https://adoptium.net/"
 echo "   - Then run: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android"
 echo ""
 echo "4. Use Expo EAS (if using EAS Build):"
-echo "   - npm install -g @expo/eas-cli"
+echo "   - { { { { npm install -g @expo/eas-cli" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 echo "   - eas login"
 echo "   - eas credentials:manager" 

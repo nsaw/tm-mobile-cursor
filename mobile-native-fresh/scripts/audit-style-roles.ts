@@ -1,12 +1,12 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * JSX Style Role Audit Script
  *
  * This script performs a comprehensive audit of all JSX components
  * to ensure proper role-based styling compliance:
- * 1. All View/Text components have appropriate role props
- * 2. Text components are properly categorized (heading, body, caption, etc.)
+ * 1. All View/Text components have appropriate role pro{ { { { ps
+ * 2. Text components are properly categorized (heading, body, caption, etc.) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * 3. View components have appropriate roles (container, card, button, etc.)
  * 4. Auto-suggest replacements using RoleClassifier patterns
  */
@@ -102,8 +102,8 @@ const auditResults: AuditResult = {
 };
 
 /**
- * Extract role values from JSX props
- */
+ * Extract role values from JSX pro{ { { { ps
+ */ & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 function extractRoleValue(code: string): string | null {
   for (const pattern of ROLE_PROP_PATTERNS) {
     const match = code.match(pattern);

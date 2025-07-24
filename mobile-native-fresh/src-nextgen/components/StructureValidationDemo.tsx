@@ -1,6 +1,7 @@
 // StructureValidationDemo.tsx - Demonstration of structure validation capabilities
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+
 import { LayoutShell } from '../layout/LayoutShell';
 import { useLayoutContext } from '../hooks/useLayoutContext';
 import { 

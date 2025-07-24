@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync } = require('child_process');
 const LogRotator = require('./log-rotation.js');
@@ -143,7 +143,7 @@ class SystemVerifier {
             'scripts/trust-daemon.js',
             'scripts/summary-cleanup.js',
             'logs',
-            '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries'
+            '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries'
         ];
 
         const missing = [];
@@ -362,7 +362,7 @@ if (require.main === module) {
             }
             break;
         default:
-            console.log('Usage: node verify-systems.js [verify|report]');
+            console.log('Usage: { { { { node verify-systems.js [verify|report]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 }
 

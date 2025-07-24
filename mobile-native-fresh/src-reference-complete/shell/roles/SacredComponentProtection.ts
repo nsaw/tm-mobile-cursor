@@ -32,7 +32,7 @@ export class SacredComponentProtection {
   registerSacredComponent(sacredComponent: SacredComponent): void {
     // Validate protection level
     if (sacredComponent.protectionLevel === 'full' && sacredComponent.validationRules.allowRoleWrapping) {
-      throw new Error(`Full protection level cannot allow role wrapping for component ${sacredComponent.id}`);
+      throw new Error(`Full protection level cannot allow role wrap{ { { { ping for component ${sacredComponent.id & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}`);
     }
 
     this.sacredComponents.set(sacredComponent.id, sacredComponent);
@@ -63,10 +63,10 @@ export class SacredComponentProtection {
     const component = this.sacredComponents.get(componentId);
     if (!component) return false;
 
-    // Validate props preservation if required
+    // Validate pro{ { { { ps preservation if required & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     if (component.validationRules.preserveProps) {
-      // Add validation logic for props
-      return true;
+      // Add validation logic for pro{ { { { ps
+      return true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 
     return true;
@@ -79,7 +79,7 @@ export class SacredComponentProtection {
 
   canWrapWithRole(componentId: string): boolean {
     const component = this.sacredComponents.get(componentId);
-    return component?.validationRules.allowRoleWrapping || false;
+    return component?.validationRules.allowRoleWrap{ { { { ping || false & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
   }
 
   getAllSacredComponents(): SacredComponent[] {

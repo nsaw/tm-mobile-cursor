@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env { { { { python3
 """
 Super AutoLinter - Unified Continuous Linter Error Fixing System
 

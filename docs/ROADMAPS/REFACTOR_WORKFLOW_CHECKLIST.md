@@ -6,31 +6,31 @@
 
 ### Phase 1: Safety Preparation
 - [ ] **Commit and tag current state** as rollback point
-  ```bash
-  git add .
+  ```{ { { { { { { { bash
+  git add . & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
   git commit -m "chore: pre-refactor safety checkpoint"
   git tag pre-refactor-$(date +%Y%m%d-%H%M%S)
   git push --tags
   ```
 - [ ] **Create non-destructive branch** for mutations
-  ```bash
-  git checkout -b refactor/$(date +%Y%m%d)-$(description)
+  ```{ { { { bash
+  git checkout -b refactor/$(date +%Y%m%d)-$(description) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 - [ ] **Verify clean working directory**
-  ```bash
-  git status
+  ```{ { { { bash
+  git status & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   # Should show "working tree clean"
   ```
 
 ### Phase 2: Pre-Refactor Validation
 - [ ] **Run parse check** to ensure current state is valid
-  ```bash
-  npx tsc --noEmit --skipLibCheck
-  npx eslint . --ext .ts,.tsx --max-warnings 0
+  ```{ { { { bash
+  { { { { npx tsc --noEmit --skipLibCheck & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+  { { { { npx eslint . --ext .ts,.tsx --max-warnings 0 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 - [ ] **Test build** in development mode
-  ```bash
-  npx expo start --clear
+  ```{ { { { { { { { bash
+  npx expo start --clear & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
   # Verify app starts without errors
   ```
 - [ ] **Document current working state** in checklist
@@ -40,14 +40,14 @@
 ### Phase 3: Mutation Safety
 - [ ] **Apply mutations incrementally** (not all at once)
 - [ ] **Run parse check after each major change**
-  ```bash
-  npx tsc --noEmit --skipLibCheck
+  ```{ { { bash
+  npx tsc --noEmit --skipLibCheck &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 - [ ] **Block commit if any parse errors remain**
 - [ ] **Alert user if files cannot be safely autofixed**
 - [ ] **Use ESLint to catch accessibility prop issues**
-  ```bash
-  npx eslint . --ext .ts,.tsx --rule 'no-inline-accessibility-props-in-function: error'
+  ```{ { { { bash
+  npx eslint . --ext .ts,.tsx --rule 'no-inline-accessibility-props-in-function: error' & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 
 ### Phase 4: Error Recovery
@@ -71,13 +71,13 @@
   # Verify app starts and runs correctly
   ```
 - [ ] **Test build in production mode**
-  ```bash
-  npx expo start --no-dev --minify
+  ```{ { { { bash
+  npx expo start --no-dev --minify & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   # Verify production build works
   ```
 - [ ] **Run comprehensive linting**
-  ```bash
-  npx eslint . --ext .ts,.tsx --max-warnings 0
+  ```{ { { { bash
+  npx eslint . --ext .ts,.tsx --max-warnings 0 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   npx tsc --noEmit --skipLibCheck
   ```
 - [ ] **Manual code review** of all changed files
@@ -90,12 +90,12 @@
   git commit -m "refactor: [description] - [date]"
   ```
 - [ ] **Tag successful completion**
-  ```bash
-  git tag refactor-complete-$(date +%Y%m%d-%H%M%S)
+  ```{ { { { bash
+  git tag refactor-complete-$(date +%Y%m%d-%H%M%S) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   ```
 - [ ] **Push to remote**
-  ```bash
-  git push --set-upstream origin refactor/$(date +%Y%m%d)-$(description)
+  ```{ { { { bash
+  git push --set-upstream origin refactor/$(date +%Y%m%d)-$(description) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
   git push --tags
   ```
 
@@ -104,13 +104,13 @@
 ### If Refactor Goes Wrong:
 1. **Immediate stop** all automation
 2. **Revert to last known good state**
-   ```bash
-   git reset --hard pre-refactor-$(date)
+   ```{ { { { bash
+   git reset --hard pre-refactor-$(date) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    git clean -fd
    ```
 3. **Verify rollback worked**
-   ```bash
-   npx expo start --clear
+   ```{ { { { bash
+   npx expo start --clear & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 4. **Document what went wrong**
 5. **Create new branch** for targeted fix
@@ -118,7 +118,7 @@
 ## SAFEGUARDS SUMMARY
 
 ### ESLint Rules in Place:
-- ✅ `no-inline-accessibility-props-in-function`: Prevents accessibility props in functions
+- ✅ `no-inline-accessibility-props-in-function`: Prevents accessibility pro{ { { { ps in functions & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - ✅ `react/jsx-no-bind`: Prevents bad prop placement
 - ✅ Custom accessibility rule: Catches inline accessibility issues
 

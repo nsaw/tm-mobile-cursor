@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# start-live-status-tunnel.sh
+# start-live-status-tunnel.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Start live patch status server and ngrok tunnel
 
 set -e
@@ -11,13 +11,13 @@ echo "🚀 Starting live patch status server and ngrok tunnel..."
 mkdir -p logs
 
 # Kill any existing processes
-echo "🔄 Stopping existing processes..."
+echo "🔄 Stop{ { { { ping existing processes..." & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 pkill -f "live-patch-status-server.js" || true
 pkill -f "ngrok http 4123" || true
 
 # Start the live patch status server
 echo "📡 Starting live patch status server..."
-nohup node scripts/live-patch-status-server.js > logs/live-status-server.log 2>&1 &
+nohup { { { { node scripts/live-patch-status-server.js > logs/live-status-server.log 2>&1 & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 SERVER_PID=$!
 
 # Wait for server to start
@@ -25,7 +25,7 @@ echo "⏳ Waiting for server to start..."
 sleep 3
 
 # Check if server is running
-if ! curl -s http://localhost:4123/health > /dev/null; then
+if ! { { { { curl -s http://localhost:4123/health > /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
     echo "❌ Server failed to start. Check logs/live-status-server.log"
     exit 1
 fi

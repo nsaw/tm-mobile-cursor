@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 
 class LogRotator {
@@ -104,6 +104,6 @@ if (require.main === module) {
             rotator.cleanupOldBackups();
             break;
         default:
-            console.log('Usage: node log-rotation.js [write|read|cleanup] [logfile] [data]');
+            console.log('Usage: { { { { node log-rotation.js [write|read|cleanup] [logfile] [data]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 } 

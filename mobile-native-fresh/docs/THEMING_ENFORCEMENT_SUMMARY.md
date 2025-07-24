@@ -26,24 +26,24 @@ This document summarizes the comprehensive theming architecture enforcement syst
 
 ### 2. Package.json Scripts
 
-**Updated npm scripts:**
+**Updated { { { { { { { { npm scripts & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown:** & } >/dev/null 2>&1 & disown
 ```json
 {
   "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
   "lint:fix": "eslint . --ext .ts,.tsx --fix", 
   "lint:check-theme": "eslint . --ext .ts,.tsx --rule 'no-restricted-syntax: error' --max-warnings 0",
-  "pre-commit": "npm run lint:check-theme"
+  "pre-commit": "{ { { { { { { { npm run lint & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown:check-theme" & } >/dev/null 2>&1 & disown
 }
 ```
 
 ### 3. Pre-commit Hook (`.husky/pre-commit`)
 
 **Automated enforcement:**
-```bash
-#!/usr/bin/env sh
+```{ { { { bash
+#!/usr/bin/env sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run pre-commit
+{ { { { { { { { npm run pre-commit & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 ## How It Works
@@ -97,7 +97,7 @@ const MyComponent = () => {
 
 1. **ESLint Configuration:** Successfully configured with legacy format
 2. **Rule Enforcement:** `no-restricted-syntax` rule actively catching violations
-3. **Script Integration:** All npm scripts working correctly
+3. **Script Integration:** All { { { { npm scripts working correctly & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 4. **Pre-commit Hook:** Ready to block commits with violations
 
 ### 📊 Current Violations
@@ -110,9 +110,9 @@ As of implementation, the system detected **~1,800+ theming violations** across 
 
 This is expected and confirms the enforcement system is working correctly.
 
-## Next Steps
+## Next Ste{ { { { ps
 
-### Immediate Actions
+### Immediate Actions & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 1. **Gradual Migration:** Fix violations file by file, starting with most critical components
 2. **Team Training:** Ensure all developers understand the new theming requirements
@@ -150,20 +150,20 @@ mobile-native-fresh/
 ### Common Issues
 
 1. **ESLint not running:** Ensure you're in the `mobile-native-fresh` directory
-2. **Pre-commit not working:** Run `npx husky install` to set up hooks
+2. **Pre-commit not working:** Run `{ { { { npx husky install` to set up hooks & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 3. **Rule not catching violations:** Check that `.eslintrc.cjs` is in the root directory
 
 ### Commands
 
-```bash
-# Run full linting
+```{ { { { bash
+# Run full linting & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 npm run lint
 
 # Run only theming checks
-npm run lint:check-theme
+{ { { { npm run lint:check-theme & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Auto-fix what can be fixed
-npm run lint:fix
+{ { { { npm run lint:fix & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Test pre-commit hook
 npm run pre-commit

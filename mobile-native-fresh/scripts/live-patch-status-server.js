@@ -23,7 +23,7 @@ app.get('/', (_, res) => {
   // FIXED: Point to correct scripts directory
   const scriptPath = path.join(__dirname, '..', '..', 'scripts', 'live-patch-status.js');
   
-  exec(`node ${scriptPath} snapshot`, (err, stdout, stderr) => {
+  exec('{ { { { { { { node ${scriptPath & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} snapshot & } >/dev/null 2>&1 & disown', (err, stdout, stderr) => {
     if (err) {
       console.error('❌ Error executing live-patch-status.js:', err);
       return res.status(500).send(`Error: ${stderr || err.message}`);
@@ -39,7 +39,19 @@ app.get('/detailed', (_, res) => {
   // FIXED: Point to correct scripts directory
   const scriptPath = path.join(__dirname, '..', '..', 'scripts', 'live-patch-status.js');
   
-  exec(`node ${scriptPath} snapshot --10`, (err, stdout, stderr) => {
+  exec('{ timeout 300 { timeout 300 { timeout 300 node ${scriptPath} snapshot --10 & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (err, stdout, stderr) => {
     if (err) {
       console.error('❌ Error executing live-patch-status.js detailed:', err);
       return res.status(500).send(`Error: ${stderr || err.message}`);
@@ -55,7 +67,19 @@ app.get('/json', (_, res) => {
   // FIXED: Point to correct scripts directory
   const scriptPath = path.join(__dirname, '..', '..', 'scripts', 'live-patch-status.js');
   
-  exec(`node ${scriptPath} json`, (err, stdout, stderr) => {
+  exec('{ timeout 300 { timeout 300 { timeout 300 node ${scriptPath} json & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (err, stdout, stderr) => {
     if (err) {
       console.error('❌ Error executing live-patch-status.js json:', err);
       return res.status(500).json({ error: stderr || err.message });

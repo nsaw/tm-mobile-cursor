@@ -1,6 +1,7 @@
 // useLayoutContext.tsx - Context bridge for layout shell components
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
 import { LayoutContext } from '../layout/LayoutShell';
 
 // Enhanced layout context with navigation and theme integration

@@ -1,3 +1,9 @@
+---
+description: Enforce non-blocking terminal patterns and prevent UI freezing
+globs:
+alwaysApply: true
+---
+
 # Terminal Blocking Prevention Rules
 
 ## **CRITICAL: Never Block Cursor Terminal**

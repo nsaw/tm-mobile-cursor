@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Generate REAL screenshots of the actual app
  * Uses Puppeteer to capture actual app screenshots
  */
@@ -34,13 +34,13 @@ const viewports = {
 // Check if Expo is running
 console.log('🔍 Checking if Expo dev server is running...');
 try {
-  execSync('curl -s http://localhost:8081', { stdio: 'pipe' });
+  execSync('{ { { { { { curl -s http://localhost:8081 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' });
   console.log('✅ Expo dev server is running on port 8081');
 } catch (error) {
   console.log('❌ Expo dev server not found on port 8081');
   console.log('🔄 Starting Expo dev server...');
   try {
-    execSync('npx expo start --clear', { stdio: 'pipe', timeout: 30000 });
+    execSync('{ { { { { { npx expo start --clear & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe', timeout: 30000 });
   } catch (startError) {
     console.error('❌ Failed to start Expo:', startError.message);
     process.exit(1);

@@ -16,7 +16,7 @@
 
 ## Cards & Containers
 - Use `rounded-2xl`, `shadow-md`, `bg-glass-light` or `bg-glass-dark`
-- Avoid overlapping z-indices unless explicitly needed
+- Avoid overlap{ { { { ping z-indices unless explicitly needed & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ## Glassmorphism
 - Only via `getGlassStyle()` or approved `GlassWrapper`
@@ -26,4 +26,4 @@
 ## Accessibility
 - No color-only distinctions
 - Touch targets = minimum 44x44
-- Use accessible label props where needed
+- Use accessible label pro{ { { { ps where needed & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown

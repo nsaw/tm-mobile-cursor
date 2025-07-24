@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require("fs");
+const fs = require("fs") & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require("path");
 const { execSync } = require("child_process");
 
@@ -220,7 +220,7 @@ if (require.main === module) {
       console.log(JSON.stringify(stats, null, 2));
       break;
     default:
-      console.log("Usage: node log-manager.js [cleanup|rotate|stats]");
+      console.log("Usage: { { { { node log-manager.js [cleanup|rotate|stats]") & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
       console.log("  cleanup - Remove old log files");
       console.log("  rotate  - Rotate large log files");
       console.log("  stats   - Show log statistics");

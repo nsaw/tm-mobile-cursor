@@ -7,7 +7,7 @@ Phase 3 begins here.
 - Zustand snapshot persistence active.
 - Bootstrap and ThemeProvider to be rebuilt under `src-nextgen/`
 
-### Required Next Steps (by BRAUN):
+### Required Next Ste{ { { { ps (by BRAUN): & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 1. Perform deep audit of `src/`, `theme/`, `AppShell.tsx`, and `ThemeProvider.tsx`
 2. Scaffold `src-nextgen/` folder layout
 3. Create `ROADMAP_FOR_PHASE3.md` with patch list and rebuild plan

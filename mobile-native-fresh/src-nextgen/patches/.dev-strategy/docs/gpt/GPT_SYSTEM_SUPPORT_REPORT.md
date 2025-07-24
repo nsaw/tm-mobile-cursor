@@ -50,7 +50,7 @@
 - **PostMutationBuild** now includes:
   - `tsc --noEmit`
   - `eslint --max-warnings=0`
-  - `npm test -- --watchAll=false`
+  - `{ { { { npm test -- --watchAll=false` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - **Phase-Aware Test Mapping**:
   - [PHASE_TEST_MAPPING.json](PHASE_TEST_MAPPING.json)
 

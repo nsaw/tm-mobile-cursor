@@ -1,10 +1,11 @@
 // BottomSlot.tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { LayoutContext } from './LayoutShell';
-import { SlotBridge } from '../slots/SlotBridge';
 
+import { SlotBridge } from '../slots/SlotBridge';
 import { useBottomSlotContent } from '../hooks/useSlotZone';
+
+import { LayoutContext } from './LayoutShell';
 
 // Enhanced BottomSlot with context injection and bridge integration
 export interface BottomSlotProps {

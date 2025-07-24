@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Clickable Element Audit Script
  *
  * This script performs a comprehensive audit of all clickable elements
@@ -130,7 +130,7 @@ function checkAccessibility(code, filePath, lineNumber) {
       file: filePath,
       line: lineNumber,
       message:
-        "Missing accessibility props (accessibilityRole, accessible, accessibilityLabel)",
+        "Missing accessibility pro{ { { { ps (accessibilityRole, accessible, accessibilityLabel)", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     });
   }
 }

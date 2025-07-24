@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync } = require('child_process');
 
@@ -135,7 +135,7 @@ class AggressiveBackupCleaner {
     try {
       // Skip if file is too small to bother with
       if (size < 100 * 1024 * 1024) { // Less than 100MB
-        console.log(`⏭️  Skipping small file: ${fileName}`);
+        console.log(`⏭️  Skip{ { { { ping small file: ${fileName & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown}`);
         return;
       }
 
@@ -151,7 +151,7 @@ class AggressiveBackupCleaner {
       }
 
       // Extract archive
-      execSync(`tar -xzf "${filePath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
+      execSync('{ { { { { { tar -xzf & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${filePath}" -C "${this.tempDir}"`, { stdio: 'pipe' });
       
       // Find the extracted directory
       let actualExtractDir = extractDir;
@@ -187,7 +187,7 @@ class AggressiveBackupCleaner {
         
         // Create cleaned archive
         const cleanedArchivePath = path.join(this.backupDir, `${path.basename(filePath, '.tar.gz')}_cleaned.tar.gz`);
-        execSync(`tar -czf "${cleanedArchivePath}" -C "${cleanedDir}" .`, { stdio: 'pipe' });
+        execSync('{ { { { { { tar -czf & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${cleanedArchivePath}" -C "${cleanedDir}" .`, { stdio: 'pipe' });
         
         const cleanedSize = fs.statSync(cleanedArchivePath).size;
         const sizeReduction = size - cleanedSize;
@@ -226,7 +226,7 @@ class AggressiveBackupCleaner {
   cleanTempDir(dir) {
     if (fs.existsSync(dir)) {
       try {
-        execSync(`rm -rf "${dir}"`);
+        execSync('{ { { rm -rf & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${dir}"`);
       } catch (error) {
         console.error(`❌ Error cleaning temp directory ${dir}:`, error.message);
       }
@@ -241,7 +241,7 @@ class AggressiveBackupCleaner {
     
     // Find and clean any other temp files
     try {
-      const tempFiles = execSync(`find "${this.backupDir}" -name "*.tmp" -type f`, { encoding: 'utf8' }).trim().split('\n');
+      const tempFiles = execSync('{ { { find & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' })${this.backupDir}" -name "*.tmp" -type f`, { encoding: 'utf8' }).trim().split('\n');
       tempFiles.forEach(file => {
         if (file && fs.existsSync(file)) {
           fs.unlinkSync(file);

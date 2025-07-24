@@ -17,20 +17,20 @@
 ### Option 2: Using Command Line (if Java is installed)
 
 #### For Debug Keystore:
-```bash
-keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+```{ { { { bash
+keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 #### For Release Keystore:
-```bash
-keytool -list -v -keystore path-to-your-release-keystore -alias your-key-alias
+```{ { { { bash
+keytool -list -v -keystore path-to-your-release-keystore -alias your-key-alias & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Option 3: Using Expo EAS (if using EAS Build)
 
-```bash
-# Install EAS CLI
-npm install -g @expo/eas-cli
+```{ { { { bash
+# Install EAS CLI & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm install -g @expo/eas-cli & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Login to Expo
 eas login
@@ -183,9 +183,9 @@ After getting all the client IDs:
 
 After completing the setup:
 
-```bash
-# Restart the development server
-npm start
+```{ { { { bash
+# Restart the development server & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Test on different platforms:
 # - iOS Simulator: Google OAuth + Apple Sign-In

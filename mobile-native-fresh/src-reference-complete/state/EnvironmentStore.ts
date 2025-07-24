@@ -1,5 +1,6 @@
 // FINALIZED AUTOHYDRATE + LOG BLOCK PATCH
 import { create } from 'zustand';
+
 import { hydrateEnvFromAppFile } from '../utils/env';
 
 let initialized = false;

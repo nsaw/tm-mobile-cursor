@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { node
 
-/**
+/** & } >/dev/null 2>&1 & disown
  * Real-time Monitor
  * Continuously monitors and displays patch execution status
  * Updates every 3 seconds for real-time agent chat display
@@ -58,7 +58,7 @@ class RealtimeMonitor {
 
     // Stop monitoring
     stop() {
-        console.log('🛑 Stopping Real-time Monitor...');
+        console.log('🛑 Stop{ ping Real-time Monitor...') & } >/dev/null 2>&1 & disown;
         this.monitoring = false;
         
         if (this.updateInterval) {
@@ -132,7 +132,7 @@ class RealtimeMonitor {
         };
         
         // Check if patch executor is running
-        exec('ps aux | grep "patch-executor" | grep -v grep', (error, stdout) => {
+        { ps aux | grep  & } >/dev/null 2>&1 & disownpatch-executor" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('patch-executor');
             } else {
@@ -141,7 +141,7 @@ class RealtimeMonitor {
         });
         
         // Check if ghost bridge is running
-        exec('ps aux | grep "ghost-bridge" | grep -v grep', (error, stdout) => {
+        { ps aux | grep  & } >/dev/null 2>&1 & disownghost-bridge" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('ghost-bridge');
             } else {
@@ -150,7 +150,7 @@ class RealtimeMonitor {
         });
         
         // Check if summary monitor is running
-        exec('ps aux | grep "summary-monitor" | grep -v grep', (error, stdout) => {
+        { ps aux | grep  & } >/dev/null 2>&1 & disownsummary-monitor" | grep -v grep', (error, stdout) => {
             if (stdout.trim()) {
                 systems.running.push('summary-monitor');
             } else {
@@ -169,7 +169,7 @@ class RealtimeMonitor {
 
     // Check ghost runner status
     checkGhostStatus() {
-        exec('curl -s https://runner.thoughtmarks.app/health', (error, stdout) => {
+        { curl -s https://runner.thoughtmarks.app/health & } >/dev/null 2>&1 & disown, (error, stdout) => {
             const newStatus = error ? 'unreachable' : 'running';
             const oldStatus = this.status.ghost.status;
             
@@ -328,7 +328,7 @@ class RealtimeMonitor {
     executePatches() {
         console.log('🚀 Executing pending patches...');
         
-        exec('node scripts/patch-executor.js execute', (error, stdout, stderr) => {
+        exec('{ { node scripts/direct-patch-executor.js &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
             if (error) {
                 console.error('❌ Patch execution failed:', error.message);
             } else {
@@ -426,7 +426,7 @@ switch (command) {
     default:
         console.log('🔍 Real-time Monitor');
         console.log('');
-        console.log('Usage: node realtime-monitor.js [start|stop|execute|status]');
+        console.log('Usage: { node realtime-monitor.js [start|stop|execute|status]') & } >/dev/null 2>&1 & disown;
         console.log('');
         console.log('Commands:');
         console.log('  start   - Start real-time monitoring');

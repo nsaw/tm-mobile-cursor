@@ -1,7 +1,5 @@
 // 🧹 FIXED: dual export conflicts, env boot mismatch, console shadow
-import { Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-import Constants from 'expo-constants';
 
 const envAppFilePath = `${FileSystem.documentDirectory}../env.app`;
 

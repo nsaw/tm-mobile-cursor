@@ -1,9 +1,9 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-// ngrok-api-manager.js
+// ngrok-api-manager.js & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 // Programmatic ngrok tunnel management using API
 
-const https = require('https');
+const htt{ { { { ps = require('https') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const fs = require('fs');
 const path = require('path');
 
@@ -286,7 +286,7 @@ async function main() {
         break;
 
       default:
-        console.log('Usage: node ngrok-api-manager.js [command]');
+        console.log('Usage: { { { { node ngrok-api-manager.js [command]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
         console.log('');
         console.log('Commands:');
         console.log('  tunnels        - List all tunnels');

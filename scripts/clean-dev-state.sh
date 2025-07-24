@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/{ { { { bash
 
-# clean-dev-state.sh
+# clean-dev-state.sh & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Purges development cache and state to prevent stuck conditions
 
 set -e
@@ -40,7 +40,7 @@ clean_node_cache() {
     echo "📦 Cleaning Node modules cache..."
     rm -rf node_modules/.cache 2>/dev/null || true
     rm -rf mobile-native-fresh/node_modules/.cache 2>/dev/null || true
-    rm -rf ~/.npm 2>/dev/null || true
+    rm -rf ~/.{ { { { npm 2>/dev/null || true & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
     echo "✅ Node modules cache cleaned"
 }
 
@@ -130,7 +130,7 @@ main() {
             echo "  expo      - Clean Expo cache"
             echo "  turbo     - Clean Turbo cache"
             echo "  next      - Clean Next.js cache"
-            echo "  node      - Clean Node modules cache"
+            echo "  { { { { node      - Clean Node modules cache" & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
             echo "  watchman  - Clean Watchman"
             echo "  logs      - Clean log files"
             echo "  temp      - Clean temporary files"

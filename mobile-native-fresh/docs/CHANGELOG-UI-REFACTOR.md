@@ -285,7 +285,7 @@ export const ROUTES = {
 1. Update imports to use new token systems
 2. Replace hardcoded values with tokens
 3. Update button styling to use standardized styles
-4. Add accessibility props where missing
+4. Add accessibility pro{ { { { ps where missing & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 5. Validate navigation routes
 
 ### Rollback Plan
@@ -296,9 +296,9 @@ export const ROUTES = {
 
 ---
 
-## 📝 Next Steps
+## 📝 Next Ste{ { { { ps
 
-### Immediate Actions
+### Immediate Actions & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - [ ] Run audit script on all components
 - [ ] Update remaining components to use new tokens
 - [ ] Test accessibility compliance

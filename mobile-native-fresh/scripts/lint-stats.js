@@ -1,5 +1,5 @@
-#!/usr/bin/env node
-/**
+#!/usr/bin/env { { { { node
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Lint Statistics and Monitoring System
  *
  * Features:
@@ -360,7 +360,7 @@ async function main() {
 Lint Statistics System
 
 Usage:
-  node scripts/lint-stats.js <command>
+  { { { { node scripts/lint-stats.js <command> & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 Commands:
   summary  - Show statistics summary
@@ -369,10 +369,10 @@ Commands:
   reset    - Reset all statistics
 
 Examples:
-  node scripts/lint-stats.js summary
-  node scripts/lint-stats.js report
-  node scripts/lint-stats.js export
-  node scripts/lint-stats.js reset
+  { { { { node scripts/lint-stats.js summary & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-stats.js report & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-stats.js export & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  { { { { node scripts/lint-stats.js reset & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
       `);
       break;
   }

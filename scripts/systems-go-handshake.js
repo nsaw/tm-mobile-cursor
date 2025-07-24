@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-const fs = require('fs');
+const fs = require('fs') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
 const path = require('path');
 const { execSync } = require('child_process');
 const LogRotator = require('./log-rotation.js');
@@ -132,7 +132,7 @@ class SystemsGoHandshake {
             if (fs.existsSync(pidFile)) {
                 const pid = fs.readFileSync(pidFile, 'utf8').trim();
                 try {
-                    execSync(`kill -0 ${pid}`, { stdio: 'ignore' });
+                    execSync('{ { { kill -0 ${pid} & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'pipe' }), { stdio: 'ignore' });
                     return { status: 'operational', message: 'Trust daemon running' };
                 } catch {
                     return { status: 'warning', message: 'Trust daemon PID stale' };
@@ -153,7 +153,7 @@ class SystemsGoHandshake {
             }
 
             // Check summaries directory
-            const summariesDir = '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries';
+            const summariesDir = '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries';
             if (!fs.existsSync(summariesDir)) {
                 return { status: 'operational', message: 'No summaries to clean' };
             }
@@ -221,7 +221,7 @@ if (require.main === module) {
             }
             break;
         default:
-            console.log('Usage: node systems-go-handshake.js [check|status]');
+            console.log('Usage: { { { { node systems-go-handshake.js [check|status]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
     }
 }
 

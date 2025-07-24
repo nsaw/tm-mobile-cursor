@@ -30,10 +30,10 @@
 | Role Name   | Description | Usage Guidelines |
 |------------|-------------|------------------|
 | `card`     | Elevated content containers (shadows, radius) | Use for content cards, elevated sections |
-| `section`  | Logical content grouping areas | Use for content grouping, not interactive |
+| `section`  | Logical content grou{ { { ping areas | Use for content grouping, not interactive | & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 | `header`   | Top navigation bar or screen header | Use for page headers, navigation bars |
 | `footer`   | Bottom navigation, fixed elements | Use for bottom nav, fixed footers |
-| `navigation` | Tab bars, side drawers, link groups | Use for navigation components |
+| `navigation` | Tab bars, side drawers, link grou{ { { { { { ps | & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown Use for navigation components | & } >/dev/null 2>&1 & disown
 | `modal`    | Full-screen or pop-up overlay | Use for modals, overlays |
 | `container` | Generic wrapper (use sparingly) | Use only when no other role fits |
 
@@ -122,8 +122,8 @@ Based on `SACRED_COWS_PROTECTION.md`:
 
 ### **Role Group Utilities**
 ```typescript
-// Example role groups
-"layout" → card, section, header, footer, navigation, modal, container
+// Example role grou{ { { ps
+"layout" → card, section, header, footer, navigation, modal, container & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 "interactive" → button-action, toggle, input, chip, badge, tag
 "content" → heading, body, caption, label, button-text, link-text
 ```
@@ -168,7 +168,7 @@ Based on `SACRED_COWS_PROTECTION.md`:
 
 ### **Rollback Strategy**
 - Git tags for each phase
-- Manual `.tar.gz` backups on confirmed passes
+- Manual `.tar.gz` backu{ { { ps on confirmed passes & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Quick rollback capability for each phase
 - Comprehensive testing before proceeding
 
@@ -188,7 +188,7 @@ Based on `SACRED_COWS_PROTECTION.md`:
 - ✅ No runtime errors or crashes
 - ✅ No duplicate JSX role usage
 - ✅ Theme inheritance preserved
-- ✅ Accessibility props surfaced where needed
+- ✅ Accessibility pro{ { { ps surfaced where needed & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### **Performance Standards**
 - ✅ No more than 5% render time increase

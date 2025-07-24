@@ -2,8 +2,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { RootStack } from './index';
 import { SlotRenderer } from '../layout/SlotRenderer';
+
+import { RootStack } from './index';
 
 const AppEntry = () => {
   return (

@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Quick Patch Status
  * Simple status display for agent chat
  * Shows current patch execution status
@@ -94,7 +94,7 @@ switch (command) {
     default:
         console.log('🔍 Quick Patch Status');
         console.log('');
-        console.log('Usage: node quick-patch-status.js [status|json]');
+        console.log('Usage: { { { { node quick-patch-status.js [status|json]') & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
         console.log('');
         console.log('Commands:');
         console.log('  status - Show formatted status for agent chat');

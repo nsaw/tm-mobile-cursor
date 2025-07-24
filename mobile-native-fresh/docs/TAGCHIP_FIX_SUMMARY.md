@@ -103,8 +103,8 @@ const variantStyle = variants.variants.variant[variantName];
 ## 🚀 Testing
 
 ### 1. **Cache Reset**
-```bash
-npm start -- --reset-cache
+```{ { { { bash
+npm start -- --reset-cache & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### 2. **Expected Behavior**

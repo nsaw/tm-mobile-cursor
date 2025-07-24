@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-/**
+/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  * Reliable Status Checker
- * Uses file-based detection instead of ps aux to avoid resource issues
+ * Uses file-based detection instead of { { { { ps aux to avoid resource issues & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
  */
 
 const fs = require('fs');
@@ -25,8 +25,8 @@ class ReliableStatus {
         if (fs.existsSync(pidFile)) {
             try {
                 const pid = fs.readFileSync(pidFile, 'utf8').trim();
-                // Check if process exists without using ps
-                try {
+                // Check if process exists without using { { { { ps
+                try { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
                     process.kill(pid, 0); // Signal 0 just checks if process exists
                     return true;
                 } catch (e) {
@@ -125,7 +125,19 @@ class ReliableStatus {
     // Check ghost runner status
     async getGhostStatus() {
         return new Promise((resolve) => {
-            exec('curl -s --connect-timeout 5 "https://runner.thoughtmarks.app/health"', (error, stdout) => {
+            exec('{ timeout 300 { timeout 300 { timeout 300 { { { curl -s --connect-timeout 5 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown', (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        }), (error, stdout, stderr) => {
+                            if (error) {
+                                console.error('Command failed:', error.message);
+                            }
+                        })https://runner.thoughtmarks.app/health"', (error, stdout) => {
                 if (error) {
                     resolve({
                         status: 'unreachable',

@@ -4,8 +4,8 @@
 This document outlines the cleanup and organization strategy for src-nextgen.
 
 ## Archive Directories
-- `.archive/` - Historical files and backups
-- `.dev-strategy/` - Development strategy documents
+- `.archive/` - Historical files and backu{ { { { ps
+- `.dev-strategy/` - Development strategy documents & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - `.cleanup/` - Clutter files and temporary data
 - `.deprecated/` - Deprecated components and features
 

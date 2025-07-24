@@ -18,7 +18,7 @@ The React Native app now has a **fully enforced theming architecture** that ensu
 - **Status**: ✅ Active and working
 
 ### 3. **Pre-commit Hooks**
-- **Script**: `npm run lint:check-theme`
+- **Script**: `{ { { { npm run lint:check-theme` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - **Configuration**: `package.json` pre-commit and lint-staged
 - **Function**: Automatically blocks commits with theming violations
 - **Status**: ✅ Active and working
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
 - Provides clear error messages
 
 ### 3. **Package Scripts**
-- `npm run lint:check-theme` - Manual theming validation
-- `npm run lint` - Full linting including theming rules
-- `npm run lint:fix` - Auto-fix compatible issues
+- `{ { { { npm run lint:check-theme` - Manual theming validation & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- `{ { { { npm run lint` - Full linting including theming rules & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- `{ { { { npm run lint:fix` - Auto-fix compatible issues & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### 4. **Verification Script**
 - `./scripts/verify-theming-architecture.sh`
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 3. Never import tokens directly from theme files
 
 ### Before Committing
-1. Run `npm run lint:check-theme` to verify no violations
+1. Run `{ { { { npm run lint:check-theme` to verify no violations & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 2. Commit - pre-commit hook will automatically verify
 3. If violations exist, fix them before committing
 
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
 5. **Developer Experience**: Clear patterns and automated enforcement
 6. **Future-Proof**: Architecture prevents regressions
 
-## 🚀 Next Steps
+## 🚀 Next Ste{ { { { ps
 
-The theming architecture is now **locked in and enforced**. Future development should:
+The theming architecture is now **locked in and enforced**. Future development should: & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 1. **Follow the established patterns** in all new components
 2. **Use the verification script** to validate changes

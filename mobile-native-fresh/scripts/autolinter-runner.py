@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env { { { { python3
 """
 AutoLinter - Continuous Linter Error Fixing System
 

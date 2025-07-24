@@ -1,8 +1,9 @@
 // ✅ SlotRenderer: auto-wired to LayoutShell
 import React from 'react';
+import { View, SafeAreaView } from 'react-native';
+
 import TopSlot from './TopSlot';
 import BottomSlot from './BottomSlot';
-import { View, SafeAreaView } from 'react-native';
 
 const SlotRenderer = () => {
   return (

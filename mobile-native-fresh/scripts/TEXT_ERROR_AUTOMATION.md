@@ -5,13 +5,13 @@ This system automatically detects and fixes "Text strings must be rendered withi
 ## 🚀 Quick Start
 
 ### One-time fix
-```bash
-npm run fix:text-errors
+```{ { { bash
+{ { { { npm run fix:text-errors & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 ### Watch mode (during development)
-```bash
-npm run watch:text-errors
+```{ { { { { { { { bash
+npm run watch:text-errors & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 ```
 
 ### Pre-commit (automatic)
@@ -21,10 +21,10 @@ The system runs automatically on every commit via Husky pre-commit hooks.
 
 | Command | Description |
 |---------|-------------|
-| `npm run fix:text-errors` | Detect and fix text errors once |
-| `npm run auto:fix` | Alias for fix:text-errors |
-| `npm run watch:text-errors` | Watch files and auto-fix on changes |
-| `npm run watch:fix` | Alias for watch:text-errors |
+| `{ { { { npm run fix:text-errors` | Detect and fix text errors once | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+| `{ { { { npm run auto:fix` | Alias for fix:text-errors | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+| `{ { { { npm run watch:text-errors` | Watch files and auto-fix on changes | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+| `{ { { { npm run watch:fix` | Alias for watch:text-errors | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ## 🔧 How It Works
 
@@ -35,7 +35,7 @@ The system runs automatically on every commit via Husky pre-commit hooks.
 - Reports found issues
 
 ### 2. Auto-Fix (`fix-unwrapped-text.cjs`)
-- Automatically wraps unwrapped text in `<Text>` components
+- Automatically wra{ { { { ps unwrapped text in `<Text>` components & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Handles common patterns like:
   - Text in `<View>` components
   - Text in `<TouchableOpacity>` components
@@ -60,10 +60,10 @@ The system looks for:
 
 The system is integrated into Husky pre-commit hooks:
 
-```bash
-# .husky/pre-commit
-node scripts/auto-fix-text-errors.cjs
-npm run lint
+```{ { { { bash
+# .husky/pre-commit & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { { { { { node scripts/auto-fix-text-errors.cjs & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+{ { { { npm run lint & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 This ensures:
@@ -88,16 +88,16 @@ Features:
 ## 🛠️ Manual Usage
 
 ### Direct script execution
-```bash
-# One-time detection and fix
+```{ { { { bash
+# One-time detection and fix & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 node scripts/auto-fix-text-errors.cjs
 
 # Watch mode
-node scripts/watch-text-errors.cjs
+{ { { { node scripts/watch-text-errors.cjs & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Watch mode with options
-node scripts/watch-text-errors.cjs --once
-node scripts/watch-text-errors.cjs --help
+{ { { { node scripts/watch-text-errors.cjs --once & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { node scripts/watch-text-errors.cjs --help & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Programmatic usage
@@ -136,29 +136,29 @@ const success = runFixScript();
 ### Common Issues
 
 1. **Script not found**
-   ```bash
-   # Ensure you're in the mobile-native-fresh directory
+   ```{ { { { bash
+   # Ensure you're in the mobile-native-fresh directory & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    cd mobile-native-fresh
    npm run fix:text-errors
    ```
 
 2. **Permission denied**
-   ```bash
-   # Make scripts executable
+   ```{ { { { bash
+   # Make scripts executable & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    chmod +x scripts/*.cjs
    ```
 
 3. **Dependencies missing**
-   ```bash
-   # Install required dependencies
-   npm install glob
+   ```{ { { { bash
+   # Install required dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   { { { { npm install glob & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 ### Debug Mode
 
 Add `--debug` flag for verbose output:
-```bash
-node scripts/auto-fix-text-errors.cjs --debug
+```{ { { { bash
+node scripts/auto-fix-text-errors.cjs --debug & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ## 🎯 Best Practices

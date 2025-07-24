@@ -16,7 +16,7 @@ Your Firebase project is already set up with:
 - ✅ Apple Sign-In with proper scopes
 - ✅ Backend integration endpoint
 
-## 🔧 Next Steps to Complete Setup
+## 🔧 Next Ste{ { { { ps to Complete Setup & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ### 1. Get Your App ID
 
@@ -79,9 +79,9 @@ Replace the placeholder OAuth client IDs in `app.json`:
 
 After updating the App ID and OAuth client IDs:
 
-```bash
-# Restart the development server
-npm start
+```{ { { { bash
+# Restart the development server & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ { { { npm start & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Test authentication flows:
 # - Email/Password sign up/sign in

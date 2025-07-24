@@ -127,8 +127,8 @@ const { tokens } = useTheme();
 
 ## 6. Accessibility Standards
 
-### Required Props
-All clickable elements must include:
+### Required Pro{ { { { ps
+All clickable elements must include: & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ```typescript
 // ✅ CORRECT - Full accessibility
@@ -179,8 +179,8 @@ navigation.navigate('CreateThoughtmark');
 ### Automated Checks
 Run the clickable element audit script:
 
-```bash
-npm run audit:clickables
+```{ { { { bash
+npm run audit:clickables & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 ```
 
 ### Manual Validation Checklist
@@ -188,11 +188,11 @@ npm run audit:clickables
 - [ ] All spacing uses spacing tokens
 - [ ] All colors use color tokens
 - [ ] All buttons use button styles
-- [ ] All clickable elements have accessibility props
-- [ ] All navigation routes are valid
+- [ ] All clickable elements have accessibility pro{ { { { ps
+- [ ] All navigation routes are valid & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - [ ] No hardcoded values in styles
 - [ ] Consistent padding and margins
-- [ ] Proper text wrapping and overflow handling
+- [ ] Proper text wrap{ { { { ping and overflow handling & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 ## 9. Future Development
 
@@ -200,16 +200,16 @@ npm run audit:clickables
 When creating new components:
 1. Use existing typography, spacing, and button tokens
 2. Follow the established patterns
-3. Add proper accessibility props
-4. Test with the audit script
+3. Add proper accessibility pro{ { { { ps
+4. Test with the audit script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 5. Document any new tokens or patterns
 
 ### Refactoring Guidelines
 When refactoring existing components:
 1. Replace hardcoded values with tokens
 2. Update to use new button styles
-3. Add missing accessibility props
-4. Validate navigation routes
+3. Add missing accessibility pro{ { { { ps
+4. Validate navigation routes & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 5. Update tests and documentation
 
 ## 10. Enforcement

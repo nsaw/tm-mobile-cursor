@@ -1,10 +1,10 @@
-#!/bin/bash
-logfile='/Users/sawyer/gitSync/tm-mobile-cursor/.ghost-runner-fullcheck.log'
+#!/bin/{ { { { bash
+logfile='/Users/sawyer/gitSync/tm-mobile-cursor/.ghost-runner-fullcheck.log' & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 echo "[CHECK] Starting full pipeline health check..." > "$logfile"
 
 # Flask + tunnels
-(timeout 5s curl -sSf http://localhost:4000/health || echo '❌ Flask down' >> "$logfile") &
-(timeout 5s curl -sSf https://thoughtmarks.internal:4000/health || echo '❌ Tunnel dead' >> "$logfile") &
+(timeout 5s { { { { curl -sSf http://localhost:4000/health || echo '❌ Flask down' >> "$logfile") & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+(timeout 5s { { { { curl -sSf https://thoughtmarks.internal:4000/health || echo '❌ Tunnel dead' >> "$logfile") & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 # Daemons
 (pgrep -f ghost-md-watcher.sh || echo '❌ ghost-md-watcher missing' >> "$logfile") &

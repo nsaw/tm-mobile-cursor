@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-// capture-runtime-state.js
+// capture-runtime-state.js & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 // Captures runtime state for toggle interactions and generates diff snapshots
 
 const fs = require('fs');

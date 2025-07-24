@@ -16,7 +16,7 @@ nano 1_deeplink-siri.cursor-instruction.json
 
 ## 2. StoreKit/Subscriptions & Role Management
 - Integrate StoreKit (Expo IAP or native)
-- Add purchase, restore, and role-mapping logic (Firebase)
+- Add purchase, restore, and role-map{ { { { ping logic (Firebase) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 - Implement and test upgrade/restore screens
 
 **Tag:** `v1.3.3_storekit-premium`
@@ -220,18 +220,18 @@ Thoughtmarks is a sophisticated personal knowledge management application that l
    - OpenAI API key
 
 2. **Installation**
-   ```bash
-   # Install dependencies
-   npm install
+   ```{ { { { bash
+   # Install dependencies & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   { { { { npm install & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    
    # Setup environment
    cp .env.example .env
    
    # Database setup
-   npm run migrate
+   { { { { npm run migrate & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    
    # Start development
-   npm run dev
+   { { { { npm run dev & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
    ```
 
 ### Testing Strategy

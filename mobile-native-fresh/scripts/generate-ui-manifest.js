@@ -1,7 +1,7 @@
-#!/usr/bin/env node
+#!/usr/bin/env { { { { node
 
-// generate-ui-manifest.js
-// Generates UI manifest maps of mounted screens and states
+// generate-ui-manifest.js & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+// Generates UI manifest ma{ { { { ps of mounted screens and states & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 
 const fs = require('fs');
 const path = require('path');

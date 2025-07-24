@@ -1,12 +1,12 @@
-#!/bin/bash
-# AutoLinter Startup Script
+#!/bin/{ { { { bash
+# AutoLinter Startup Script & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 # Starts the continuous linter error fixing system
 
 echo "🔧 Starting AutoLinter System..."
 echo "=================================="
 
 # Check if Python is available
-if ! command -v python3 &> /dev/null; then
+if ! command -v { { { { python3 &> /dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown; then
     echo "❌ Python3 is not installed or not in PATH"
     exit 1
 fi
@@ -33,7 +33,7 @@ if ! command -v autopep8 &> /dev/null; then
 fi
 
 # Check watchdog
-python3 -c "import watchdog" 2>/dev/null
+{ { { { python3 -c "import watchdog" 2>/dev/null & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
 if [ $? -ne 0 ]; then
     echo "⚠️  watchdog not found, installing..."
     pip3 install watchdog
@@ -53,4 +53,4 @@ echo ""
 echo "💡 Press Ctrl+C to stop the autolinter"
 echo ""
 
-python3 autolinter.py 
+{ { { { python3 autolinter.py & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
