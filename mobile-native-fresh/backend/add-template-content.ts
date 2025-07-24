@@ -51,7 +51,7 @@ async function addTemplateContent() {
       { name: "Examples", description: "Sample thoughtmarks to help you get started", color: "#C6D600", icon: "folder-outline", userId: user.id, sortOrder: 1 },
       { name: "Sort Later", description: "Temporarily store thoughtmarks to organize later", color: "#6B7280", icon: "folder-outline", userId: user.id, sortOrder: 2 },
       { name: "Relevant", description: "Important and timely information", color: "#3B82F6", icon: "folder-outline", userId: user.id, sortOrder: 3 },
-      { name: "Life Hacks", description: "Ti{ { { { ps and tricks for daily life", color: "#10B981", icon: "folder-outline", userId: user.id, sortOrder: 4 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown},
+      { name: "Life Hacks", description: "Tips and tricks for daily life", color: "#10B981", icon: "folder-outline", userId: user.id, sortOrder: 4 },
       { name: "Quotes", description: "Inspiring and memorable quotes", color: "#F59E0B", icon: "folder-outline", userId: user.id, sortOrder: 5 },
       { name: "Inspiration", description: "Motivational content and ideas", color: "#8B5CF6", icon: "folder-outline", userId: user.id, sortOrder: 6 },
       { name: "Circle Back", description: "Items to revisit later", color: "#EF4444", icon: "folder-outline", userId: user.id, sortOrder: 7 },
@@ -120,7 +120,7 @@ async function addTemplateContent() {
       },
       {
         title: "Learn how to delete example thoughtmarks",
-        content: "Visit the 'All Thoughtmarks' page to see all your thoughtmarks. After viewing them, you'll get a popup asking if you want to delete all example thoughtmarks at once. You can also delete individual thoughtmarks by tap{ { { { ping the three dots menu on any thoughtmark card.", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+        content: "Visit the 'All Thoughtmarks' page to see all your thoughtmarks. After viewing them, you'll get a popup asking if you want to delete all example thoughtmarks at once. You can also delete individual thoughtmarks by tapping the three dots menu on any thoughtmark card.",
         tags: ["tutorial", "deletion", "cleanup"],
         binId: defaultBinId,
         userId: user.id,
@@ -195,8 +195,8 @@ async function addTemplateContent() {
         attachments: [],
       },
       {
-        title: "Weekend cam{ { { { ping gear checklist", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-        content: "• Tent and slee{ { { { ping bag\n• Portable water filter\n• First aid kit\n• Headlamp with extra batteries\n• Weather-appropriate clothing\n• Non-perishable food\n• Multi-tool or knife", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+        title: "Weekend camping gear checklist",
+        content: "• Tent and sleeping bag\n• Portable water filter\n• First aid kit\n• Headlamp with extra batteries\n• Weather-appropriate clothing\n• Non-perishable food\n• Multi-tool or knife",
         tags: ["camping", "outdoors", "checklist"],
         binId: defaultBinId,
         userId: user.id,

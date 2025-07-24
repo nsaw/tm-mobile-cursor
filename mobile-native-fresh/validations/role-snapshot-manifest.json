@@ -1,0 +1,674 @@
+{
+  "version": "1.0.0",
+  "timestamp": 1753327450840,
+  "totalComponents": 33,
+  "totalRoles": 0,
+  "environments": {
+    "legacy": 33,
+    "nextgen": 0
+  },
+  "roleCoverage": {},
+  "snapshots": [
+    {
+      "componentName": "AppContent",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/AppContent.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background"
+      ],
+      "styleOverlays": [
+        "flex",
+        "backgroundColor"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450837,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "AutoRoleView",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/AutoRoleView.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "EnvironmentDebugger",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/EnvironmentDebugger.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [
+        "padding",
+        "color",
+        "fontWeight"
+      ],
+      "themeAssignment": "default",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "EnvironmentIndicator",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/EnvironmentIndicator.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [
+        "backgroundColor"
+      ],
+      "themeAssignment": "default",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "SplashFallback",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/SplashFallback.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [
+        "backgroundColor",
+        "color"
+      ],
+      "themeAssignment": "default",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "RoleDebugger",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/debug/RoleDebugger.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [
+        "color"
+      ],
+      "themeAssignment": "default",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "DualMountToggle",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/layout/DualMountToggle.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [
+        "backgroundColor"
+      ],
+      "themeAssignment": "default",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "BottomNav",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/system/BottomNav.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "frozen-zone",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "FAB",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/system/FAB.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "frozen-zone",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "SafeComponentZone",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/system/SafeComponentZone.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "frozen-zone",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "ActionSheet",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/ActionSheet.tsx",
+      "roles": [],
+      "tokens": [
+        "color-backgroundSecondary",
+        "color-border",
+        "color-danger",
+        "color-surface",
+        "color-text",
+        "color-accent",
+        "spacing-lg",
+        "spacing-md",
+        "spacing-sm"
+      ],
+      "styleOverlays": [
+        "flex",
+        "backgroundColor",
+        "justifyContent",
+        "borderTopLeftRadius",
+        "borderTopRightRadius",
+        "paddingBottom",
+        "maxWidth",
+        "width",
+        "paddingVertical",
+        "paddingHorizontal",
+        "borderBottomWidth",
+        "borderBottomColor",
+        "textAlign",
+        "flexDirection",
+        "alignItems",
+        "marginRight",
+        "color",
+        "marginTop",
+        "borderTopWidth",
+        "borderTopColor",
+        "fontWeight"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "BottomNav",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/BottomNav.tsx",
+      "roles": [],
+      "tokens": [
+        "color-accent",
+        "color-danger",
+        "color-textMuted",
+        "color-backgroundSecondary",
+        "color-divider",
+        "color-background",
+        "spacing-md",
+        "spacing-lg",
+        "spacing-sm"
+      ],
+      "styleOverlays": [
+        "position",
+        "bottom",
+        "left",
+        "right",
+        "maxWidth",
+        "alignSelf",
+        "width",
+        "zIndex",
+        "paddingBottom",
+        "backgroundColor",
+        "borderTopWidth",
+        "borderTopColor",
+        "ios",
+        "shadowOffset",
+        "height",
+        "flexDirection",
+        "justifyContent",
+        "alignItems",
+        "paddingVertical",
+        "paddingHorizontal",
+        "minHeight",
+        "borderRadius",
+        "minWidth",
+        "top",
+        "transform",
+        "padding"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "Button",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Button.tsx",
+      "roles": [],
+      "tokens": [
+        "tokens",
+        "color-border",
+        "color-accent",
+        "color-buttonText"
+      ],
+      "styleOverlays": [
+        "color",
+        "fontSize",
+        "fontWeight"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "Card",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Card.tsx",
+      "roles": [],
+      "tokens": [
+        "color-text"
+      ],
+      "styleOverlays": [
+        "color",
+        "fontSize",
+        "fontWeight"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "DarkAlertDialog",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DarkAlertDialog.tsx",
+      "roles": [],
+      "tokens": [
+        "color-surface",
+        "color-text",
+        "color-textSecondary",
+        "color-border",
+        "color-accent",
+        "color-danger",
+        "color-background",
+        "color-warning",
+        "color-backgroundSecondary",
+        "spacing-xl",
+        "spacing-lg",
+        "spacing-sm",
+        "spacing-md"
+      ],
+      "styleOverlays": [
+        "backgroundColor",
+        "color"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450838,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "DesignSystemDemo",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DesignSystemDemo.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background",
+        "color-textSecondary",
+        "spacing-lg",
+        "spacing-xl",
+        "spacing-md",
+        "spacing-sm",
+        "spacing-xs"
+      ],
+      "styleOverlays": [
+        "flex",
+        "backgroundColor",
+        "padding",
+        "marginBottom",
+        "gap",
+        "color",
+        "includeFontPadding",
+        "flexDirection",
+        "flexWrap",
+        "alignItems",
+        "width",
+        "height",
+        "borderRadius"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "DraggableSection",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/DraggableSection.tsx",
+      "roles": [],
+      "tokens": [
+        "color-textSecondary"
+      ],
+      "styleOverlays": [
+        "transform",
+        "opacity",
+        "color"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "FloatingActionButton",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/FloatingActionButton.tsx",
+      "roles": [],
+      "tokens": [
+        "color-backgroundSecondary",
+        "color-accent",
+        "color-danger",
+        "color-background"
+      ],
+      "styleOverlays": [
+        "bottom",
+        "backgroundColor",
+        "transform",
+        "shadowColor",
+        "shadowOffset",
+        "height"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "GlassmorphicContainer",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/GlassmorphicContainer.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "default",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "HydrationTestCard",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/HydrationTestCard.tsx",
+      "roles": [],
+      "tokens": [
+        "color-text",
+        "color-textSecondary"
+      ],
+      "styleOverlays": [
+        "color"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "LoadingFallbackScreen",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/LoadingFallbackScreen.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background",
+        "color-textSecondary",
+        "color-accent",
+        "spacing-xl",
+        "spacing-lg",
+        "spacing-md"
+      ],
+      "styleOverlays": [],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "LoadingScreen",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/LoadingScreen.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background",
+        "color-accent",
+        "color-textSecondary"
+      ],
+      "styleOverlays": [
+        "opacity",
+        "backgroundColor",
+        "transform",
+        "color"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "ModernHeader",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/ModernHeader.tsx",
+      "roles": [],
+      "tokens": [
+        "color-divider",
+        "color-surface",
+        "color-text",
+        "spacing-md",
+        "spacing-xs"
+      ],
+      "styleOverlays": [
+        "backgroundColor",
+        "borderBottomWidth",
+        "borderBottomColor",
+        "paddingHorizontal",
+        "paddingVertical",
+        "minHeight",
+        "ios",
+        "shadowOffset",
+        "height",
+        "flexDirection",
+        "alignItems",
+        "justifyContent",
+        "flex",
+        "marginRight",
+        "padding",
+        "borderRadius",
+        "textTransform",
+        "letterSpacing",
+        "marginTop"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "NeonGradientText",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/NeonGradientText.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "OnboardingModal",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/OnboardingModal.tsx",
+      "roles": [],
+      "tokens": [
+        "color-accent",
+        "color-buttonText",
+        "color-backgroundSecondary",
+        "color-text",
+        "color-textSecondary",
+        "color-border",
+        "spacing-sm",
+        "spacing-xxxl",
+        "spacing-pagePaddingHorizontal",
+        "spacing-xl",
+        "spacing-lg",
+        "spacing-md"
+      ],
+      "styleOverlays": [
+        "flex",
+        "flexDirection",
+        "alignItems",
+        "justifyContent",
+        "minHeight",
+        "marginHorizontal",
+        "backgroundColor",
+        "borderRadius",
+        "opacity",
+        "marginRight",
+        "fontSize",
+        "color",
+        "textAlign",
+        "fontWeight",
+        "marginLeft",
+        "width",
+        "paddingHorizontal",
+        "paddingTop",
+        "paddingBottom",
+        "fontFamily",
+        "textTransform",
+        "marginBottom",
+        "paddingVertical",
+        "lineHeight",
+        "marginTop",
+        "height"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "OnboardingModal_RUNNER-TEST",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/OnboardingModal_RUNNER-TEST.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "default",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "PremiumFeatureWrapper",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/PremiumFeatureWrapper.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background",
+        "color-text",
+        "color-textSecondary",
+        "color-accent",
+        "spacing-xl",
+        "spacing-sm",
+        "spacing-lg"
+      ],
+      "styleOverlays": [
+        "color",
+        "fontWeight",
+        "textAlign"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "SessionHydrationGuard",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/SessionHydrationGuard.tsx",
+      "roles": [],
+      "tokens": [
+        "color-background",
+        "color-text",
+        "color-textSecondary",
+        "spacing-lg",
+        "spacing-md",
+        "spacing-xl"
+      ],
+      "styleOverlays": [],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "TagChip",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/TagChip.tsx",
+      "roles": [],
+      "tokens": [
+        "color-accent",
+        "color-border",
+        "color-text",
+        "spacing-sm",
+        "spacing-xs",
+        "spacing-lg",
+        "spacing-md"
+      ],
+      "styleOverlays": [
+        "color",
+        "textAlign",
+        "paddingHorizontal"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "TagFilter",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/TagFilter.tsx",
+      "roles": [],
+      "tokens": [
+        "spacing-sm",
+        "spacing-md"
+      ],
+      "styleOverlays": [
+        "marginVertical"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "Text",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/Text.tsx",
+      "roles": [],
+      "tokens": [
+        "color-text",
+        "color-textSecondary",
+        "color-textMuted"
+      ],
+      "styleOverlays": [],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450839,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "VoiceRecorder",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/VoiceRecorder.tsx",
+      "roles": [],
+      "tokens": [
+        "color-accent",
+        "color-surface",
+        "color-text",
+        "color-danger",
+        "color-textMuted",
+        "color-background",
+        "color-textSecondary",
+        "color-backgroundSecondary",
+        "color-border",
+        "color-success",
+        "spacing-xl",
+        "spacing-lg",
+        "spacing-sm",
+        "spacing-md"
+      ],
+      "styleOverlays": [
+        "width"
+      ],
+      "themeAssignment": "theme-context",
+      "timestamp": 1753327450840,
+      "environment": "legacy"
+    },
+    {
+      "componentName": "VoiceRecorderProvider",
+      "filePath": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/components/ui/VoiceRecorderProvider.tsx",
+      "roles": [],
+      "tokens": [],
+      "styleOverlays": [],
+      "themeAssignment": "default",
+      "timestamp": 1753327450840,
+      "environment": "legacy"
+    }
+  ],
+  "summary": {
+    "componentsWithRoles": 0,
+    "componentsWithoutRoles": 33,
+    "roleDistribution": {},
+    "tokenUsage": {
+      "color-background": 10,
+      "color-backgroundSecondary": 6,
+      "color-border": 6,
+      "color-danger": 5,
+      "color-surface": 4,
+      "color-text": 11,
+      "color-accent": 11,
+      "spacing-lg": 10,
+      "spacing-md": 11,
+      "spacing-sm": 9,
+      "color-textMuted": 3,
+      "color-divider": 2,
+      "tokens": 1,
+      "color-buttonText": 2,
+      "color-textSecondary": 11,
+      "color-warning": 1,
+      "spacing-xl": 7,
+      "spacing-xs": 3,
+      "spacing-xxxl": 1,
+      "spacing-pagePaddingHorizontal": 1,
+      "color-success": 1
+    }
+  }
+}

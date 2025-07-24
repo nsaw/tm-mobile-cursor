@@ -62,7 +62,7 @@ export const templateBins: TemplateBin[] = [
 export const templateThoughtmarks: TemplateThoughtmark[] = [
   {
     title: 'Welcome to Thoughtmarks! 🎉',
-    content: `Welcome to your new digital workspace! Thoughtmarks hel{ { { { ps you capture, organize, and connect your ideas, tasks, and notes. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    content: `Welcome to your new digital workspace! Thoughtmarks helps you capture, organize, and connect your ideas, tasks, and notes.
 
 Here's what you can do:
 • Create thoughtmarks for any idea, task, or note
@@ -151,7 +151,7 @@ export const createTemplateContent = async (userId: number) => {
       { name: "Examples", description: "Sample thoughtmarks to help you get started", color: "#C6D600", icon: "folder-outline", userId, sortOrder: 1 },
       { name: "Sort Later", description: "Temporarily store thoughtmarks to organize later", color: "#6B7280", icon: "folder-outline", userId, sortOrder: 2 },
       { name: "Relevant", description: "Important and timely information", color: "#3B82F6", icon: "folder-outline", userId, sortOrder: 3 },
-      { name: "Life Hacks", description: "Ti{ { { { ps and tricks for daily life", color: "#10B981", icon: "folder-outline", userId, sortOrder: 4 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown},
+      { name: "Life Hacks", description: "Tips and tricks for daily life", color: "#10B981", icon: "folder-outline", userId, sortOrder: 4 },
       { name: "Quotes", description: "Inspiring and memorable quotes", color: "#F59E0B", icon: "folder-outline", userId, sortOrder: 5 },
       { name: "Inspiration", description: "Motivational content and ideas", color: "#8B5CF6", icon: "folder-outline", userId, sortOrder: 6 },
       { name: "Circle Back", description: "Items to revisit later", color: "#EF4444", icon: "folder-outline", userId, sortOrder: 7 },
@@ -294,7 +294,7 @@ export const createTemplateContent = async (userId: number) => {
         attachments: [],
       },
       {
-        title: "Weekend cam{ { { { ping gear checklist", & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+        title: "Weekend camping gear checklist",
         content: "Outdoor equipment list",
         tags: ["camping", "checklist"],
         binId: defaultBinId,

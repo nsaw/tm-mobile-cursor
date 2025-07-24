@@ -20,7 +20,7 @@ export const users = pgTable("users", {
   firebaseUid: text("firebase_uid").notNull().unique(),
   linkedAccounts: json("linked_accounts").default([]), // Array of linked auth providers
   roleId: integer("role_id").notNull().default(3), // Default to 'free' role - remove circular reference for now
-  // Legacy fields - kee{ { { { ping for backward compatibility but will be derived from role & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  // Legacy fields - keeping for backward compatibility but will be derived from role
   isAdmin: boolean("is_admin").notNull().default(false),
   isPremium: boolean("is_premium").notNull().default(false),
   isTestUser: boolean("is_test_user").notNull().default(false),
