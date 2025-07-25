@@ -1,6 +1,6 @@
-#!/usr/bin/env { { { { node
+#!/usr/bin/env node
 
-/** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+/**
  * Rigorous Environment Toggle Visual Debug Test
  * Actually tests functionality, not just string presence
  */
@@ -233,8 +233,8 @@ try {
   const testContent = `
 import React from 'react';
 import { View } from 'react-native';
-import EnvironmentIndicator from './src/components/EnvironmentIndicator';
-import { useEnvironment } from './src/hooks/useEnvironment';
+import EnvironmentIndicator from './src-reference-complete/components/EnvironmentIndicator';
+import { useEnvironment } from './src-reference-complete/hooks/useEnvironment';
 
 const TestComponent: React.FC = () => {
   const env = useEnvironment();

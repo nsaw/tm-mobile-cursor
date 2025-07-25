@@ -50,7 +50,7 @@ jobs:
     - name: Run environment validation
       run: |
         node -e "
-        const { validateEnvironmentFlags } = require('./src/utils/envValidation.ts');
+        const { validateEnvironmentFlags } = require('./src-reference-complete/utils/envValidation.ts');
         const flags = validateEnvironmentFlags();
         console.log('Legacy environment flags:', flags);
         if (flags.USE_NEXTGEN !== false) {
@@ -110,7 +110,7 @@ jobs:
     - name: Run environment validation
       run: |
         node -e "
-        const { validateEnvironmentFlags } = require('./src/utils/envValidation.ts');
+        const { validateEnvironmentFlags } = require('./src-reference-complete/utils/envValidation.ts');
         const flags = validateEnvironmentFlags();
         console.log('NextGen environment flags:', flags);
         if (flags.USE_NEXTGEN !== true) {
@@ -168,7 +168,7 @@ jobs:
         
         # Test environment toggle functionality
         node -e "
-        const { getEnvironmentFlags } = require('./src/utils/envValidation.ts');
+        const { getEnvironmentFlags } = require('./src-reference-complete/utils/envValidation.ts');
         
         // Test legacy environment
         process.env.EXPO_PUBLIC_USE_NEXTGEN = 'false';
