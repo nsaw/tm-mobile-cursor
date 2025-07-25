@@ -1,4 +1,5 @@
 import { DesignTokens } from './tokens';
+import { useTheme } from './ThemeProvider';
 
 // Utility function to create variant styles
 function createVariantStyles<T extends Record<string, any>>(
@@ -9,7 +10,7 @@ function createVariantStyles<T extends Record<string, any>>(
 }
 
 // Button variants (dynamic)
-export function getButtonVariants(tokens: DesignTokens) {
+export function getButtonVariants() {
   const { tokens } = useTheme();
 
 return createVariantStyles(
@@ -86,7 +87,7 @@ return createVariantStyles(
 }
 
 // Card variants (dynamic)
-export function getCardVariants(tokens: DesignTokens) {
+export function getCardVariants() {
   const { tokens } = useTheme();
 
 return createVariantStyles(
@@ -133,7 +134,7 @@ return createVariantStyles(
 }
 
 // Input variants (dynamic)
-export function getInputVariants(tokens: DesignTokens) {
+export function getInputVariants() {
   const { tokens } = useTheme();
 
 return createVariantStyles(
@@ -186,7 +187,7 @@ return createVariantStyles(
 }
 
 // Text variants (dynamic) - LIQUID theme principles
-export function getTextVariants(tokens: DesignTokens) {
+export function getTextVariants() {
   const { tokens } = useTheme();
 
 return createVariantStyles(
@@ -300,7 +301,7 @@ return createVariantStyles(
 }
 
 // Badge variants (dynamic)
-export function getBadgeVariants(tokens: DesignTokens) {
+export function getBadgeVariants() {
   const { tokens } = useTheme();
 
 return createVariantStyles(
