@@ -1,13 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { View, Text } from 'react-native';
 
-// Simple test component
+// Simple test component using React Native components
 const TestCard = ({ children }: { children: React.ReactNode }) => (
-  <div data-testid="card">{children}</div>
+  <View testID="card">{children}</View>
 );
 
 const TestTagChip = ({ label }: { label: string }) => (
-  <span data-testid="tag-chip">{label}</span>
+  <Text testID="tag-chip">{label}</Text>
 );
 
 describe('RoleSnapshot JSX Structure', () => {
