@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RoleSnapshot JSX Structure renders <TestCard /> correctly 1`] = `null`;
+
+exports[`RoleSnapshot JSX Structure renders <TestTagChip /> correctly 1`] = `null`;

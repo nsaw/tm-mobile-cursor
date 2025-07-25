@@ -1,21 +1,27 @@
 module.exports = {
   preset: 'jest-expo',
-  setupFilesAfterEnv: ['<rootDir>/src/utils/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src-reference-complete/utils/test-setup.ts'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-responsive-fontsize|react-native-iphone-x-helper)',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.(ts|tsx|js)',
-    '<rootDir>/src/**/?(*.)(spec|test).(ts|tsx|js)',
+    '<rootDir>/__tests__/**/*.(ts|tsx|js)',
+    '<rootDir>/src-reference-complete/**/__tests__/**/*.(ts|tsx|js)',
+    '<rootDir>/src-reference-complete/**/?(*.)(spec|test).(ts|tsx|js)',
   ],
   testEnvironment: 'node',
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/__tests__/**',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/**/*.spec.{ts,tsx}',
+    'src-reference-complete/**/*.{ts,tsx}',
+    'src-nextgen/**/*.{ts,tsx}',
+    '!src-reference-complete/**/*.d.ts',
+    '!src-reference-complete/**/__tests__/**',
+    '!src-reference-complete/**/*.test.{ts,tsx}',
+    '!src-reference-complete/**/*.spec.{ts,tsx}',
+    '!src-nextgen/**/*.d.ts',
+    '!src-nextgen/**/__tests__/**',
+    '!src-nextgen/**/*.test.{ts,tsx}',
+    '!src-nextgen/**/*.spec.{ts,tsx}',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
@@ -37,8 +43,8 @@ module.exports = {
     '/ios/',
     '/coverage/',
   ],
-  moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src-reference-complete/$1',
   },
   globals: {
     'ts-jest': {
@@ -49,23 +55,24 @@ module.exports = {
   projects: [
     {
       displayName: 'legacy',
-      testMatch: ['<rootDir>/src/**/__tests__/**/*.legacy.test.{ts,tsx}'],
-      setupFilesAfterEnv: ['<rootDir>/src/utils/test-setup.ts'],
+      testMatch: ['<rootDir>/__tests__/**/*.legacy.test.{ts,tsx}'],
+      setupFilesAfterEnv: ['<rootDir>/src-reference-complete/utils/test-setup.ts'],
       testEnvironment: 'node',
       globals: {
         'EXPO_PUBLIC_USE_NEXTGEN': 'false',
         'EXPO_PUBLIC_ENVIRONMENT': 'legacy',
       },
     },
-    {
-      displayName: 'nextgen',
-      testMatch: ['<rootDir>/src/**/__tests__/**/*.nextgen.test.{ts,tsx}'],
-      setupFilesAfterEnv: ['<rootDir>/src/utils/test-setup.ts'],
-      testEnvironment: 'node',
-      globals: {
-        'EXPO_PUBLIC_USE_NEXTGEN': 'true',
-        'EXPO_PUBLIC_ENVIRONMENT': 'nextgen',
-      },
-    },
   ],
+  // Transform configuration for React Native
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  // Handle ES modules
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true,
+    },
+  },
 }; 

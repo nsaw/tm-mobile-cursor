@@ -49,6 +49,7 @@
     "jest-expo": "~53.0.9",
     "modern-screenshot": "^4.6.5",
     "puppeteer": "^24.14.0",
+    "react-test-renderer": "^19.1.0",
     "ts-jest": "^29.1.1"
   },
   "dependencies": {
