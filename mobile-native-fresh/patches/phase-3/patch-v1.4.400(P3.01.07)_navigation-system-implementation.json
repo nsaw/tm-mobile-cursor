@@ -1,0 +1,69 @@
+{
+  "patchId": "patch-v1.4.400(P3.01.07)_navigation-system-implementation",
+  "version": "v1.4.400",
+  "phase": 3,
+  "step": "3.01.07",
+  "description": "Navigation System Implementation",
+  "priority": "high",
+  "risk": "medium",
+  "estimatedTime": "2-3 hours",
+  "dependencies": [
+    "patch-v1.4.400(P3.01.01)_autoroleview-enhancement",
+    "patch-v1.4.400(P3.01.02)_performance-monitor-fix",
+    "patch-v1.4.400(P3.01.03)_validation-system-fix",
+    "patch-v1.4.400(P3.01.04)_environment-system-fix",
+    "patch-v1.4.400(P3.01.05)_theme-system-implementation",
+    "patch-v1.4.400(P3.01.06)_accessibility-hooks-implementation"
+  ],
+  "validationGates": [
+    "typescript",
+    "eslint",
+    "navigation",
+    "dual-mount-toggle"
+  ],
+  "successCriteria": [
+    "Navigation system properly implemented",
+    "All navigation types defined",
+    "Navigation hooks working",
+    "No TypeScript errors in navigation files",
+    "Navigation tests pass"
+  ],
+  "rollbackPlan": "Revert to legacy navigation",
+  "gitTag": "v1.4.400-P3.01.07",
+  "summaryFile": "mobile-native-fresh/tasks/summaries/patch-v1.4.400(P3.01.07)_navigation-system-implementation.md",
+  "branch": "phase-3-navigation-system",
+  "preMutationBuild": "npm run lint:guard && npx tsc --noEmit",
+  "postMutationBuild": "npm run lint:guard && npx tsc --noEmit && npm run test:navigation",
+  "mutations": [
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/types.ts",
+      "description": "Define navigation types and interfaces",
+      "content": "export type RootStackParamList = {\n  Home: undefined;\n  Dashboard: undefined;\n  Search: undefined;\n  Profile: undefined;\n  Settings: undefined;\n  SignIn: undefined;\n  SignUp: undefined;\n  PasswordReset: undefined;\n  ThoughtmarkDetail: { id: string };\n  TaskDetail: { id: string };\n  EditProfile: undefined;\n  Notifications: undefined;\n};\n\nexport type TabParamList = {\n  HomeTab: undefined;\n  SearchTab: undefined;\n  DashboardTab: undefined;\n  ProfileTab: undefined;\n};\n\nexport type NavigationProp<T extends keyof RootStackParamList> = {\n  navigate: (screen: T, params?: RootStackParamList[T]) => void;\n  goBack: () => void;\n  canGoBack: () => boolean;\n  reset: (state: any) => void;\n  setParams: (params: Partial<RootStackParamList[T]>) => void;\n  setOptions: (options: any) => void;\n};\n\nexport type RouteProp<T extends keyof RootStackParamList> = {\n  key: string;\n  name: T;\n  params: RootStackParamList[T];\n};\n\nexport interface NavigationState {\n  index: number;\n  routes: Array<{\n    key: string;\n    name: string;\n    params?: any;\n  }>;\n}\n\nexport interface NavigationOptions {\n  title?: string;\n  headerShown?: boolean;\n  headerTitle?: string;\n  headerBackTitle?: string;\n  headerTintColor?: string;\n  headerStyle?: {\n    backgroundColor?: string;\n    elevation?: number;\n    shadowOpacity?: number;\n  };\n  tabBarIcon?: (props: { focused: boolean; color: string; size: number }) => React.ReactNode;\n  tabBarLabel?: string;\n  tabBarVisible?: boolean;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/NavigationProvider.tsx",
+      "description": "Create navigation provider with proper TypeScript types",
+      "content": "import React, { createContext, useContext, ReactNode } from 'react';\nimport { NavigationContainer } from '@react-navigation/native';\nimport { createStackNavigator } from '@react-navigation/stack';\nimport { createBottomTabNavigator } from '@react-navigation/bottom-tabs';\nimport { RootStackParamList, TabParamList } from './types';\nimport { useTheme } from '../theme';\nimport { useAccessibility } from '../hooks/useAccessibility';\n\nconst Stack = createStackNavigator<RootStackParamList>();\nconst Tab = createBottomTabNavigator<TabParamList>();\n\ninterface NavigationProviderProps {\n  children: ReactNode;\n}\n\nexport const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {\n  const { theme } = useTheme();\n  const { isScreenReaderEnabled } = useAccessibility();\n\n  const defaultScreenOptions = {\n    headerStyle: {\n      backgroundColor: theme.colors.background,\n      elevation: 0,\n      shadowOpacity: 0,\n    },\n    headerTintColor: theme.colors.text,\n    headerTitleStyle: {\n      color: theme.colors.text,\n      fontSize: theme.typography.fontSize.lg,\n      fontWeight: theme.typography.fontWeight.semibold,\n    },\n    cardStyle: {\n      backgroundColor: theme.colors.background,\n    },\n  };\n\n  const defaultTabOptions = {\n    tabBarStyle: {\n      backgroundColor: theme.colors.background,\n      borderTopColor: theme.colors.border,\n      borderTopWidth: 1,\n    },\n    tabBarActiveTintColor: theme.colors.primary,\n    tabBarInactiveTintColor: theme.colors.textSecondary,\n    tabBarLabelStyle: {\n      fontSize: theme.typography.fontSize.xs,\n      fontWeight: theme.typography.fontWeight.medium,\n    },\n  };\n\n  return (\n    <NavigationContainer\n      theme={{\n        dark: theme.name === 'dark',\n        colors: {\n          primary: theme.colors.primary,\n          background: theme.colors.background,\n          card: theme.colors.background,\n          text: theme.colors.text,\n          border: theme.colors.border,\n          notification: theme.colors.error,\n        },\n      }}\n    >\n      {children}\n    </NavigationContainer>\n  );\n};"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/hooks/useNavigation.ts",
+      "description": "Create navigation hooks with proper TypeScript types",
+      "content": "import { useNavigation as useRNNavigation, useRoute as useRNRoute } from '@react-navigation/native';\nimport { NavigationProp, RouteProp, RootStackParamList } from '../types';\n\nexport const useNavigation = <T extends keyof RootStackParamList>(): NavigationProp<T> => {\n  return useRNNavigation<NavigationProp<T>>();\n};\n\nexport const useRoute = <T extends keyof RootStackParamList>(): RouteProp<T> => {\n  return useRNRoute<RouteProp<T>>();\n};\n\nexport const useNavigationState = () => {\n  const navigation = useRNNavigation();\n  return {\n    canGoBack: navigation.canGoBack(),\n    routeNames: navigation.getState().routeNames,\n    currentRoute: navigation.getCurrentRoute(),\n  };\n};"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/index.ts",
+      "description": "Export navigation components and types",
+      "content": "export * from './types';\nexport * from './NavigationProvider';\nexport * from './hooks/useNavigation';\n\nexport { NavigationProvider } from './NavigationProvider';\nexport { useNavigation, useRoute, useNavigationState } from './hooks/useNavigation';"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/NavigationProvider.test.tsx",
+      "description": "Create tests for NavigationProvider",
+      "content": "import React from 'react';\nimport { render } from '@testing-library/react-native';\nimport { NavigationProvider } from './NavigationProvider';\n\n// Mock navigation dependencies\njest.mock('@react-navigation/native', () => ({\n  NavigationContainer: ({ children }: { children: React.ReactNode }) => children,\n}));\n\njest.mock('@react-navigation/stack', () => ({\n  createStackNavigator: () => ({\n    Navigator: ({ children }: { children: React.ReactNode }) => children,\n    Screen: ({ children }: { children: React.ReactNode }) => children,\n  }),\n}));\n\njest.mock('@react-navigation/bottom-tabs', () => ({\n  createBottomTabNavigator: () => ({\n    Navigator: ({ children }: { children: React.ReactNode }) => children,\n    Screen: ({ children }: { children: React.ReactNode }) => children,\n  }),\n}));\n\n// Mock theme and accessibility hooks\njest.mock('../theme', () => ({\n  useTheme: () => ({\n    theme: {\n      name: 'light',\n      colors: {\n        primary: '#007AFF',\n        background: '#FFFFFF',\n        text: '#000000',\n        border: '#C6C6C8',\n        error: '#FF3B30',\n      },\n    },\n  }),\n}));\n\njest.mock('../hooks/useAccessibility', () => ({\n  useAccessibility: () => ({\n    isScreenReaderEnabled: false,\n  }),\n}));\n\ndescribe('NavigationProvider', () => {\n  it('should render children', () => {\n    const { getByText } = render(\n      <NavigationProvider>\n        <div>Test Content</div>\n      </NavigationProvider>\n    );\n    \n    expect(getByText('Test Content')).toBeDefined();\n  });\n});"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/navigation/hooks/useNavigation.test.ts",
+      "description": "Create tests for navigation hooks",
+      "content": "import { renderHook } from '@testing-library/react-native';\nimport { useNavigation, useRoute, useNavigationState } from './useNavigation';\n\n// Mock @react-navigation/native\njest.mock('@react-navigation/native', () => ({\n  useNavigation: jest.fn(),\n  useRoute: jest.fn(),\n}));\n\nconst mockUseNavigation = require('@react-navigation/native').useNavigation;\nconst mockUseRoute = require('@react-navigation/native').useRoute;\n\ndescribe('Navigation Hooks', () => {\n  beforeEach(() => {\n    jest.clearAllMocks();\n  });\n\n  describe('useNavigation', () => {\n    it('should return navigation object', () => {\n      const mockNavigation = {\n        navigate: jest.fn(),\n        goBack: jest.fn(),\n        canGoBack: jest.fn(),\n        reset: jest.fn(),\n        setParams: jest.fn(),\n        setOptions: jest.fn(),\n      };\n      \n      mockUseNavigation.mockReturnValue(mockNavigation);\n      \n      const { result } = renderHook(() => useNavigation<'Home'>());\n      \n      expect(result.current).toBe(mockNavigation);\n    });\n  });\n\n  describe('useRoute', () => {\n    it('should return route object', () => {\n      const mockRoute = {\n        key: 'test-key',\n        name: 'Home' as const,\n        params: undefined,\n      };\n      \n      mockUseRoute.mockReturnValue(mockRoute);\n      \n      const { result } = renderHook(() => useRoute<'Home'>());\n      \n      expect(result.current).toBe(mockRoute);\n    });\n  });\n\n  describe('useNavigationState', () => {\n    it('should return navigation state', () => {\n      const mockNavigation = {\n        canGoBack: jest.fn().mockReturnValue(true),\n        getState: jest.fn().mockReturnValue({\n          routeNames: ['Home', 'Dashboard'],\n        }),\n        getCurrentRoute: jest.fn().mockReturnValue({\n          name: 'Home',\n          key: 'home-key',\n        }),\n      };\n      \n      mockUseNavigation.mockReturnValue(mockNavigation);\n      \n      const { result } = renderHook(() => useNavigationState());\n      \n      expect(result.current.canGoBack).toBe(true);\n      expect(result.current.routeNames).toEqual(['Home', 'Dashboard']);\n      expect(result.current.currentRoute).toEqual({\n        name: 'Home',\n        key: 'home-key',\n      });\n    });\n  });\n});"
+    }
+  ]
+} 

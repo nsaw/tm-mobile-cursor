@@ -1,0 +1,157 @@
+{
+  "patch": {
+    "id": "patch-v1.4.400(P3.01.01)_autoroleview-enhancement",
+    "version": "v1.4.400(P3.01.01)",
+    "phase": 3,
+    "step": 1,
+    "attempt": 1,
+    "description": "AutoRoleView Enhancement - Fix TypeScript errors and enhance role system",
+    "priority": "critical",
+    "risk": "high",
+    "estimatedTime": "4 hours",
+    "dependencies": [],
+    "validationGates": [
+      "TypeScript compilation",
+      "Role validation",
+      "Performance baseline",
+      "Accessibility compliance",
+      "Visual regression test"
+    ],
+    "successCriteria": [
+      "All TypeScript errors resolved",
+      "Role system enhanced",
+      "Performance impact < 5%",
+      "Accessibility compliance achieved",
+      "No visual regressions"
+    ],
+    "rollbackPlan": [
+      "Git tag: backup-v1.4.400(P3.01.01)_autoroleview-enhancement",
+      "Restore from src-reference/components/AutoRoleView.tsx",
+      "Revert any role system changes",
+      "Test legacy functionality"
+    ],
+    "gitTag": "v1.4.400(P3.01.01)_autoroleview-enhancement",
+    "summaryFile": "summary-v1.4.400(P3.01.01)_autoroleview-enhancement.md",
+    "branch": "main",
+    "preMutationBuild": [
+      "npm run lint:guard",
+      "npx tsc --noEmit",
+      "npm run test:unit --watchAll=false"
+    ],
+    "postMutationBuild": [
+      "npm run lint:guard",
+      "npx tsc --noEmit",
+      "npm run test:unit --watchAll=false",
+      "npm run test:integration --watchAll=false"
+    ],
+    "mutations": [
+      {
+        "type": "file_update",
+        "target": "src-nextgen/components/AutoRoleView.tsx",
+        "description": "Enhance AutoRoleView with improved TypeScript types and role system integration",
+        "changes": [
+          {
+            "type": "replace",
+            "search": "interface AutoRoleViewProps {",
+            "replace": "interface AutoRoleViewProps {",
+            "context": "Enhanced interface with better TypeScript types"
+          },
+          {
+            "type": "add_after",
+            "search": "interface AutoRoleViewProps {",
+            "add": "  children: React.ReactNode;\n  layoutRole?: string;\n  style?: any;\n  onPress?: () => void;\n  accessibilityRole?: string;\n  accessible?: boolean;\n  accessibilityLabel?: string;\n  testID?: string;\n  role?: string;\n  ariaLabel?: string;\n  ariaDescribedBy?: string;\n  ariaHidden?: boolean;\n  ariaExpanded?: boolean;\n  ariaPressed?: boolean;\n  ariaChecked?: boolean;\n  ariaSelected?: boolean;\n  ariaDisabled?: boolean;\n  ariaRequired?: boolean;\n  ariaInvalid?: boolean;\n  ariaLive?: 'off' | 'polite' | 'assertive';\n  ariaAtomic?: boolean;\n  ariaRelevant?: string;\n  ariaBusy?: boolean;\n  ariaControls?: string;\n  ariaOwns?: string;\n  ariaLabelledBy?: string;",
+            "context": "Add comprehensive accessibility props"
+          },
+          {
+            "type": "replace",
+            "search": "export const AutoRoleView: React.FC<AutoRoleViewProps> = ({",
+            "replace": "export const AutoRoleView: React.FC<AutoRoleViewProps> = ({",
+            "context": "Enhanced component with better prop handling"
+          },
+          {
+            "type": "add_after",
+            "search": "export const AutoRoleView: React.FC<AutoRoleViewProps> = ({",
+            "add": "  children,\n  layoutRole: _layoutRole, // eslint-disable-line no-unused-vars\n  style,\n  onPress,\n  accessibilityRole,\n  accessible,\n  accessibilityLabel,\n  testID,\n  role,\n  ariaLabel,\n  ariaDescribedBy,\n  ariaHidden,\n  ariaExpanded,\n  ariaPressed,\n  ariaChecked,\n  ariaSelected,\n  ariaDisabled,\n  ariaRequired,\n  ariaInvalid,\n  ariaLive,\n  ariaAtomic,\n  ariaRelevant,\n  ariaBusy,\n  ariaControls,\n  ariaOwns,\n  ariaLabelledBy,\n  ...props",
+            "context": "Add all accessibility props to component"
+          },
+          {
+            "type": "replace",
+            "search": "return (",
+            "replace": "  const accessibilityProps = {\n    accessible,\n    accessibilityRole,\n    accessibilityLabel,\n    testID,\n    role,\n    ariaLabel,\n    ariaDescribedBy,\n    ariaHidden,\n    ariaExpanded,\n    ariaPressed,\n    ariaChecked,\n    ariaSelected,\n    ariaDisabled,\n    ariaRequired,\n    ariaInvalid,\n    ariaLive,\n    ariaAtomic,\n    ariaRelevant,\n    ariaBusy,\n    ariaControls,\n    ariaOwns,\n    ariaLabelledBy,\n  };\n\n  return (",
+            "context": "Add accessibility props handling"
+          },
+          {
+            "type": "replace",
+            "search": "    <View",
+            "replace": "    <View\n      {...accessibilityProps}",
+            "context": "Apply accessibility props to View"
+          }
+        ]
+      },
+      {
+        "type": "file_update",
+        "target": "src-nextgen/types/RoleSystem.ts",
+        "description": "Fix ariaModal issue and enhance role system",
+        "changes": [
+          {
+            "type": "replace",
+            "search": "export interface RoleAccessibility {",
+            "replace": "export interface RoleAccessibility {",
+            "context": "Enhanced accessibility interface"
+          },
+          {
+            "type": "add_after",
+            "search": "export interface RoleAccessibility {",
+            "add": "  ariaRole?: string;\n  ariaLabel?: string;\n  ariaDescribedBy?: string;\n  ariaHidden?: boolean;\n  ariaExpanded?: boolean;\n  ariaPressed?: boolean;\n  ariaChecked?: boolean;\n  ariaSelected?: boolean;\n  ariaDisabled?: boolean;\n  ariaRequired?: boolean;\n  ariaInvalid?: boolean;\n  ariaLive?: 'off' | 'polite' | 'assertive';\n  ariaAtomic?: boolean;\n  ariaRelevant?: string;\n  ariaBusy?: boolean;\n  ariaControls?: string;\n  ariaOwns?: string;\n  ariaLabelledBy?: string;\n  ariaModal?: boolean;\n  keyboardNavigation: boolean;\n  screenReaderSupport: boolean;\n  colorContrast: boolean;\n  focusManagement: boolean;\n  gestureSupport: boolean;",
+            "context": "Add ariaModal and other accessibility properties"
+          },
+          {
+            "type": "replace",
+            "search": "        ariaModal: true,",
+            "replace": "        ariaModal: true,",
+            "context": "Fix ariaModal property"
+          }
+        ]
+      },
+      {
+        "type": "file_create",
+        "target": "src-nextgen/components/AutoRoleView.test.tsx",
+        "description": "Create comprehensive tests for AutoRoleView",
+        "content": "import React from 'react';\nimport { render, fireEvent } from '@testing-library/react-native';\nimport { AutoRoleView } from './AutoRoleView';\n\ndescribe('AutoRoleView', () => {\n  it('renders children correctly', () => {\n    const { getByText } = render(\n      <AutoRoleView>\n        <Text>Test Content</Text>\n      </AutoRoleView>\n    );\n    expect(getByText('Test Content')).toBeTruthy();\n  });\n\n  it('handles onPress correctly', () => {\n    const onPressMock = jest.fn();\n    const { getByTestId } = render(\n      <AutoRoleView onPress={onPressMock} testID=\"test-view\">\n        <Text>Test Content</Text>\n      </AutoRoleView>\n    );\n    fireEvent.press(getByTestId('test-view'));\n    expect(onPressMock).toHaveBeenCalledTimes(1);\n  });\n\n  it('applies accessibility props correctly', () => {\n    const { getByTestId } = render(\n      <AutoRoleView\n        testID=\"test-view\"\n        accessibilityRole=\"button\"\n        accessibilityLabel=\"Test Button\"\n        ariaLabel=\"Test Button\"\n        ariaPressed={true}\n      >\n        <Text>Test Content</Text>\n      </AutoRoleView>\n    );\n    const view = getByTestId('test-view');\n    expect(view.props.accessibilityRole).toBe('button');\n    expect(view.props.accessibilityLabel).toBe('Test Button');\n    expect(view.props.ariaLabel).toBe('Test Button');\n    expect(view.props.ariaPressed).toBe(true);\n  });\n});"
+      }
+    ],
+    "documentation": {
+      "purpose": "Enhance AutoRoleView component with improved TypeScript types, comprehensive accessibility support, and better role system integration",
+      "changes": [
+        "Enhanced TypeScript interface with comprehensive accessibility props",
+        "Added ariaModal property to RoleAccessibility interface",
+        "Improved accessibility props handling in component",
+        "Added comprehensive unit tests",
+        "Enhanced role system integration"
+      ],
+      "testing": [
+        "Unit tests for component rendering",
+        "Unit tests for onPress handling",
+        "Unit tests for accessibility props",
+        "Integration tests with role system",
+        "Visual regression tests"
+      ],
+      "rollback": [
+        "Restore original AutoRoleView from src-reference",
+        "Revert role system changes",
+        "Remove test file",
+        "Verify legacy functionality"
+      ]
+    },
+    "performance": {
+      "baseline": "Current AutoRoleView render time",
+      "target": "< 5% increase in render time",
+      "monitoring": "PerformanceMonitor integration"
+    },
+    "accessibility": {
+      "baseline": "Current accessibility compliance",
+      "target": "100% WCAG 2.1 AA compliance",
+      "testing": "Screen reader testing, keyboard navigation"
+    }
+  }
+} 

@@ -1,0 +1,157 @@
+{
+  "patch": {
+    "id": "patch-v1.4.400(P3.01.02)_performance-monitor-fix",
+    "version": "v1.4.400(P3.01.02)",
+    "phase": 3,
+    "step": 1,
+    "attempt": 2,
+    "description": "PerformanceMonitor Fix - Fix React Native API issues and React imports",
+    "priority": "critical",
+    "risk": "medium",
+    "estimatedTime": "3 hours",
+    "dependencies": [],
+    "validationGates": [
+      "TypeScript compilation",
+      "Performance testing",
+      "Memory monitoring",
+      "Bundle size validation",
+      "Runtime performance testing"
+    ],
+    "successCriteria": [
+      "All TypeScript errors resolved",
+      "PerformanceMonitor working correctly",
+      "Memory monitoring functional",
+      "Bundle size within targets",
+      "No runtime errors"
+    ],
+    "rollbackPlan": [
+      "Git tag: backup-v1.4.400(P3.01.02)_performance-monitor-fix",
+      "Restore original PerformanceMonitor from backup",
+      "Revert React import changes",
+      "Test legacy performance monitoring"
+    ],
+    "gitTag": "v1.4.400(P3.01.02)_performance-monitor-fix",
+    "summaryFile": "summary-v1.4.400(P3.01.02)_performance-monitor-fix.md",
+    "branch": "main",
+    "preMutationBuild": [
+      "npm run lint:guard",
+      "npx tsc --noEmit",
+      "npm run test:unit --watchAll=false"
+    ],
+    "postMutationBuild": [
+      "npm run lint:guard",
+      "npx tsc --noEmit",
+      "npm run test:unit --watchAll=false",
+      "npm run test:performance --watchAll=false"
+    ],
+    "mutations": [
+      {
+        "type": "file_update",
+        "target": "src-nextgen/utils/PerformanceMonitor.ts",
+        "description": "Fix React Native API issues and React imports",
+        "changes": [
+          {
+            "type": "replace",
+            "search": "import { PerformanceObserver, PerformanceEntry } from 'react-native';",
+            "replace": "import React from 'react';",
+            "context": "Fix React Native API imports"
+          },
+          {
+            "type": "add_after",
+            "search": "import React from 'react';",
+            "add": "import { View, Text } from 'react-native';",
+            "context": "Add React Native component imports"
+          },
+          {
+            "type": "replace",
+            "search": "  private monitorRenderPerformance(): void {",
+            "replace": "  private monitorRenderPerformance(): void {",
+            "context": "Fix render performance monitoring"
+          },
+          {
+            "type": "add_after",
+            "search": "  private monitorRenderPerformance(): void {",
+            "add": "    // Use requestAnimationFrame for performance monitoring\n    const measureRenderTime = () => {\n      const startTime = performance.now();\n      requestAnimationFrame(() => {\n        const endTime = performance.now();\n        const renderTime = endTime - startTime;\n        this.recordComponentMetrics('global', renderTime, 'nextgen');\n      });\n    };\n\n    // Monitor render performance periodically\n    setInterval(measureRenderTime, 1000);",
+            "context": "Implement render performance monitoring"
+          },
+          {
+            "type": "replace",
+            "search": "  private monitorMemoryUsage(): void {",
+            "replace": "  private monitorMemoryUsage(): void {",
+            "context": "Fix memory usage monitoring"
+          },
+          {
+            "type": "add_after",
+            "search": "  private monitorMemoryUsage(): void {",
+            "add": "    // Monitor memory usage periodically\n    setInterval(() => {\n      const memoryUsage = this.getCurrentMemoryUsage();\n      this.metrics.push({\n        renderTime: 0,\n        memoryUsage,\n        bundleSize: this.getBundleSize(),\n        startupTime: this.getStartupTime(),\n        dualMountOverhead: this.calculateDualMountOverhead(),\n        timestamp: Date.now(),\n        environment: 'nextgen',\n      });\n    }, 5000);",
+            "context": "Implement memory usage monitoring"
+          },
+          {
+            "type": "replace",
+            "search": "export const withPerformanceMonitoring = <P extends object>(",
+            "replace": "export const withPerformanceMonitoring = <P extends object>(",
+            "context": "Fix HOC implementation"
+          },
+          {
+            "type": "add_after",
+            "search": "export const withPerformanceMonitoring = <P extends object>(",
+            "add": "  WrappedComponent: React.ComponentType<P>,\n  componentName: string,\n  environment: 'legacy' | 'nextgen'\n) => {\n  return React.forwardRef<any, P>((props, ref) => {\n    const { recordComponentRender } = usePerformanceMonitor();\n    const recordRender = recordComponentRender(componentName, environment);\n\n    React.useEffect(() => {\n      recordRender();\n    });\n\n    return React.createElement(WrappedComponent, { ...props, ref });\n  });\n};",
+            "context": "Fix HOC implementation with proper React.createElement"
+          }
+        ]
+      },
+      {
+        "type": "file_create",
+        "target": "src-nextgen/utils/PerformanceMonitor.test.ts",
+        "description": "Create comprehensive tests for PerformanceMonitor",
+        "content": "import { PerformanceMonitor } from './PerformanceMonitor';\n\ndescribe('PerformanceMonitor', () => {\n  let monitor: PerformanceMonitor;\n\n  beforeEach(() => {\n    monitor = PerformanceMonitor.getInstance();\n    monitor.clearMetrics();\n  });\n\n  it('should be a singleton', () => {\n    const instance1 = PerformanceMonitor.getInstance();\n    const instance2 = PerformanceMonitor.getInstance();\n    expect(instance1).toBe(instance2);\n  });\n\n  it('should record component metrics', () => {\n    monitor.recordComponentMetrics('TestComponent', 100, 'nextgen');\n    const report = monitor.getPerformanceReport();\n    expect(report.currentMetrics.length).toBeGreaterThan(0);\n  });\n\n  it('should record screen metrics', () => {\n    monitor.recordScreenMetrics('TestScreen', 200, 'nextgen');\n    const report = monitor.getPerformanceReport();\n    expect(report.currentMetrics.length).toBeGreaterThan(0);\n  });\n\n  it('should establish baseline', () => {\n    monitor.recordComponentMetrics('TestComponent', 100, 'legacy');\n    monitor.recordComponentMetrics('TestComponent', 110, 'nextgen');\n    const baseline = monitor.establishBaseline();\n    expect(baseline.legacy).toBeDefined();\n    expect(baseline.nextgen).toBeDefined();\n  });\n\n  it('should check performance targets', () => {\n    monitor.recordComponentMetrics('TestComponent', 100, 'nextgen');\n    const result = monitor.checkPerformanceTargets('nextgen');\n    expect(result.passed).toBeDefined();\n    expect(result.violations).toBeDefined();\n  });\n});"
+      },
+      {
+        "type": "file_update",
+        "target": "src-nextgen/utils/index.ts",
+        "description": "Export PerformanceMonitor utilities",
+        "changes": [
+          {
+            "type": "add",
+            "add": "export { PerformanceMonitor, usePerformanceMonitor, withPerformanceMonitoring } from './PerformanceMonitor';",
+            "context": "Export PerformanceMonitor utilities"
+          }
+        ]
+      }
+    ],
+    "documentation": {
+      "purpose": "Fix PerformanceMonitor TypeScript errors and React Native API issues, ensuring proper performance monitoring functionality",
+      "changes": [
+        "Fixed React Native API imports",
+        "Added proper React imports",
+        "Implemented render performance monitoring",
+        "Implemented memory usage monitoring",
+        "Fixed HOC implementation",
+        "Added comprehensive unit tests"
+      ],
+      "testing": [
+        "Unit tests for singleton pattern",
+        "Unit tests for component metrics",
+        "Unit tests for screen metrics",
+        "Unit tests for baseline establishment",
+        "Unit tests for performance targets"
+      ],
+      "rollback": [
+        "Restore original PerformanceMonitor from backup",
+        "Revert React import changes",
+        "Remove test file",
+        "Verify legacy performance monitoring"
+      ]
+    },
+    "performance": {
+      "baseline": "Current performance monitoring overhead",
+      "target": "< 2% overhead for performance monitoring",
+      "monitoring": "Self-monitoring of performance impact"
+    },
+    "accessibility": {
+      "baseline": "N/A - Performance monitoring utility",
+      "target": "N/A",
+      "testing": "N/A"
+    }
+  }
+} 

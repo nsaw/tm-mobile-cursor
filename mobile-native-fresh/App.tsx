@@ -5,7 +5,7 @@ import { ThemeProvider } from './src-nextgen/providers/ThemeProvider';
 import { NavigationProvider } from './src-nextgen/providers/NavigationProvider';
 import { SafeAreaProvider as NextGenSafeAreaProvider } from './src-nextgen/providers/SafeAreaProvider';
 import { SlotZoneProvider } from './src-nextgen/hooks/useSlotZone';
-import { startRuntimeValidator } from './src/lib/runtimeValidator';
+import { startRuntimeValidator } from './src-nextgen/lib/runtimeValidator';
 
 // Initialize runtime validator
 startRuntimeValidator();

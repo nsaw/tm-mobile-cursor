@@ -1,0 +1,87 @@
+{
+  "patchId": "patch-v1.4.410(P3.02.01)_core-types-definition",
+  "version": "v1.4.410",
+  "phase": 3,
+  "step": "3.02.01",
+  "description": "Core Types Definition",
+  "priority": "high",
+  "risk": "low",
+  "estimatedTime": "2-3 hours",
+  "dependencies": [
+    "patch-v1.4.400(P3.01.01)_autoroleview-enhancement",
+    "patch-v1.4.400(P3.01.02)_performance-monitor-fix",
+    "patch-v1.4.400(P3.01.03)_validation-system-fix",
+    "patch-v1.4.400(P3.01.04)_environment-system-fix",
+    "patch-v1.4.400(P3.01.05)_theme-system-implementation",
+    "patch-v1.4.400(P3.01.06)_accessibility-hooks-implementation",
+    "patch-v1.4.400(P3.01.07)_navigation-system-implementation",
+    "patch-v1.4.400(P3.01.08)_state-management-implementation",
+    "patch-v1.4.400(P3.01.09)_error-boundary-implementation"
+  ],
+  "validationGates": [
+    "typescript",
+    "eslint",
+    "type-checking",
+    "dual-mount-toggle"
+  ],
+  "successCriteria": [
+    "All core types properly defined",
+    "TypeScript compilation successful",
+    "No type conflicts with legacy system",
+    "Comprehensive type coverage",
+    "Type tests pass"
+  ],
+  "rollbackPlan": "Revert to basic types",
+  "gitTag": "v1.4.410-P3.02.01",
+  "summaryFile": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/patch-v1.4.410(P3.02.01)_core-types-definition.md",
+  "branch": "phase-3-core-types",
+  "preMutationBuild": "npm run lint:guard && npx tsc --noEmit",
+  "postMutationBuild": "npm run lint:guard && npx tsc --noEmit && npm run test:types",
+  "mutations": [
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/index.ts",
+      "description": "Create main types index file",
+      "content": "export * from './ApiTypes';\nexport * from './ComponentTypes';\nexport * from './DataTypes';\nexport * from './EventTypes';\nexport * from './FormTypes';\nexport * from './NavigationTypes';\nexport * from './StateTypes';\nexport * from './UtilityTypes';"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/ApiTypes.ts",
+      "description": "Define API-related types",
+      "content": "export interface ApiResponse<T = any> {\n  data: T;\n  status: number;\n  message: string;\n  success: boolean;\n  timestamp: string;\n}\n\nexport interface ApiError {\n  code: string;\n  message: string;\n  details?: any;\n  timestamp: string;\n}\n\nexport interface ApiRequestConfig {\n  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';\n  url: string;\n  data?: any;\n  params?: Record<string, any>;\n  headers?: Record<string, string>;\n  timeout?: number;\n  retry?: number;\n}\n\nexport interface ApiClient {\n  request<T>(config: ApiRequestConfig): Promise<ApiResponse<T>>;\n  get<T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>>;\n  post<T>(url: string, data?: any): Promise<ApiResponse<T>>;\n  put<T>(url: string, data?: any): Promise<ApiResponse<T>>;\n  delete<T>(url: string): Promise<ApiResponse<T>>;\n  patch<T>(url: string, data?: any): Promise<ApiResponse<T>>;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/ComponentTypes.ts",
+      "description": "Define component-related types",
+      "content": "import { ReactNode } from 'react';\nimport { ViewStyle, TextStyle, ImageStyle } from 'react-native';\n\nexport interface BaseComponentProps {\n  children?: ReactNode;\n  style?: ViewStyle | TextStyle | ImageStyle;\n  testID?: string;\n  accessible?: boolean;\n  accessibilityLabel?: string;\n  accessibilityHint?: string;\n  accessibilityRole?: string;\n}\n\nexport interface LayoutProps extends BaseComponentProps {\n  flex?: number;\n  flexDirection?: 'row' | 'column';\n  justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';\n  alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';\n  padding?: number;\n  margin?: number;\n  width?: number | string;\n  height?: number | string;\n}\n\nexport interface InteractiveProps extends BaseComponentProps {\n  onPress?: () => void;\n  onLongPress?: () => void;\n  disabled?: boolean;\n  loading?: boolean;\n  pressed?: boolean;\n}\n\nexport interface FormFieldProps extends BaseComponentProps {\n  value?: string | number;\n  onChange?: (value: string | number) => void;\n  onBlur?: () => void;\n  onFocus?: () => void;\n  placeholder?: string;\n  error?: string;\n  required?: boolean;\n  maxLength?: number;\n  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';\n  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';\n  autoCorrect?: boolean;\n  secureTextEntry?: boolean;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/DataTypes.ts",
+      "description": "Define data-related types",
+      "content": "export interface User {\n  id: string;\n  email: string;\n  name: string;\n  avatar?: string;\n  isPremium: boolean;\n  createdAt: string;\n  updatedAt: string;\n  preferences?: UserPreferences;\n}\n\nexport interface UserPreferences {\n  theme: 'light' | 'dark' | 'system';\n  notifications: boolean;\n  analytics: boolean;\n  language: string;\n  timezone: string;\n}\n\nexport interface Thoughtmark {\n  id: string;\n  title: string;\n  content: string;\n  tags: string[];\n  binId: string;\n  createdAt: string;\n  updatedAt: string;\n  isArchived: boolean;\n  isPinned: boolean;\n  metadata?: ThoughtmarkMetadata;\n}\n\nexport interface ThoughtmarkMetadata {\n  wordCount: number;\n  readingTime: number;\n  lastRead?: string;\n  readCount: number;\n  shareCount: number;\n}\n\nexport interface Bin {\n  id: string;\n  name: string;\n  description?: string;\n  color: string;\n  thoughtmarkCount: number;\n  createdAt: string;\n  updatedAt: string;\n  isDefault: boolean;\n  sortOrder: number;\n}\n\nexport interface Task {\n  id: string;\n  title: string;\n  description?: string;\n  isCompleted: boolean;\n  priority: 'low' | 'medium' | 'high';\n  dueDate?: string;\n  createdAt: string;\n  updatedAt: string;\n  tags?: string[];\n  assignedTo?: string;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/EventTypes.ts",
+      "description": "Define event-related types",
+      "content": "export interface BaseEvent {\n  id: string;\n  type: string;\n  timestamp: string;\n  userId?: string;\n  sessionId?: string;\n  metadata?: Record<string, any>;\n}\n\nexport interface UserEvent extends BaseEvent {\n  type: 'user_action' | 'user_preference' | 'user_error';\n  action: string;\n  target?: string;\n  value?: any;\n}\n\nexport interface NavigationEvent extends BaseEvent {\n  type: 'navigation';\n  from: string;\n  to: string;\n  method: 'push' | 'pop' | 'replace' | 'reset';\n}\n\nexport interface PerformanceEvent extends BaseEvent {\n  type: 'performance';\n  metric: string;\n  value: number;\n  unit: string;\n  context?: string;\n}\n\nexport interface ErrorEvent extends BaseEvent {\n  type: 'error';\n  error: {\n    message: string;\n    stack?: string;\n    code?: string;\n  };\n  severity: 'low' | 'medium' | 'high' | 'critical';\n  handled: boolean;\n}\n\nexport type AppEvent = UserEvent | NavigationEvent | PerformanceEvent | ErrorEvent;\n\nexport interface EventHandler<T extends AppEvent = AppEvent> {\n  (event: T): void | Promise<void>;\n}\n\nexport interface EventEmitter {\n  on<T extends AppEvent>(type: T['type'], handler: EventHandler<T>): void;\n  off<T extends AppEvent>(type: T['type'], handler: EventHandler<T>): void;\n  emit<T extends AppEvent>(event: T): void;\n  once<T extends AppEvent>(type: T['type'], handler: EventHandler<T>): void;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/FormTypes.ts",
+      "description": "Define form-related types",
+      "content": "export interface FormField<T = any> {\n  name: string;\n  value: T;\n  error?: string;\n  touched: boolean;\n  required: boolean;\n  validators?: Validator<T>[];\n  transform?: (value: T) => T;\n}\n\nexport interface FormState<T extends Record<string, any> = Record<string, any>> {\n  fields: Record<keyof T, FormField<any>>;\n  isValid: boolean;\n  isDirty: boolean;\n  isSubmitting: boolean;\n  errors: Record<keyof T, string>;\n  touched: Record<keyof T, boolean>;\n}\n\nexport interface Validator<T = any> {\n  (value: T, allValues?: Record<string, any>): string | undefined;\n}\n\nexport interface FormConfig<T extends Record<string, any> = Record<string, any>> {\n  initialValues: T;\n  validationSchema?: Record<keyof T, Validator<any>[]>;\n  onSubmit: (values: T) => void | Promise<void>;\n  onReset?: () => void;\n  validateOnChange?: boolean;\n  validateOnBlur?: boolean;\n}\n\nexport interface FormActions<T extends Record<string, any> = Record<string, any>> {\n  setFieldValue: (name: keyof T, value: any) => void;\n  setFieldError: (name: keyof T, error: string) => void;\n  setFieldTouched: (name: keyof T, touched: boolean) => void;\n  resetForm: () => void;\n  submitForm: () => Promise<void>;\n  validateForm: () => Promise<Record<keyof T, string>>;\n  getFieldValue: (name: keyof T) => any;\n  getFieldError: (name: keyof T) => string | undefined;\n  getFieldTouched: (name: keyof T) => boolean;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/NavigationTypes.ts",
+      "description": "Define navigation-related types",
+      "content": "export type RootStackParamList = {\n  Home: undefined;\n  Dashboard: undefined;\n  Search: undefined;\n  Profile: undefined;\n  Settings: undefined;\n  SignIn: undefined;\n  SignUp: undefined;\n  PasswordReset: undefined;\n  ThoughtmarkDetail: { id: string };\n  TaskDetail: { id: string };\n  EditProfile: undefined;\n  Notifications: undefined;\n  CreateThoughtmark: undefined;\n  EditThoughtmark: { id: string };\n  CreateTask: undefined;\n  EditTask: { id: string };\n  BinManagement: undefined;\n  SearchResults: { query: string };\n  Onboarding: undefined;\n};\n\nexport type TabParamList = {\n  HomeTab: undefined;\n  SearchTab: undefined;\n  DashboardTab: undefined;\n  ProfileTab: undefined;\n};\n\nexport interface NavigationState {\n  index: number;\n  routes: NavigationRoute[];\n  type: string;\n  key: string;\n}\n\nexport interface NavigationRoute {\n  key: string;\n  name: string;\n  params?: any;\n  state?: NavigationState;\n}\n\nexport interface NavigationOptions {\n  title?: string;\n  headerShown?: boolean;\n  headerTitle?: string;\n  headerBackTitle?: string;\n  headerTintColor?: string;\n  headerStyle?: {\n    backgroundColor?: string;\n    elevation?: number;\n    shadowOpacity?: number;\n  };\n  tabBarIcon?: (props: { focused: boolean; color: string; size: number }) => React.ReactNode;\n  tabBarLabel?: string;\n  tabBarVisible?: boolean;\n  gestureEnabled?: boolean;\n  animationEnabled?: boolean;\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/StateTypes.ts",
+      "description": "Define state-related types",
+      "content": "export interface AppState {\n  currentEnvironment: 'legacy' | 'nextgen';\n  isFirstLaunch: boolean;\n  onboardingCompleted: boolean;\n  theme: 'light' | 'dark' | 'system';\n  notifications: boolean;\n  analytics: boolean;\n  version: string;\n  buildNumber: string;\n}\n\nexport interface AuthState {\n  user: User | null;\n  isAuthenticated: boolean;\n  isLoading: boolean;\n  error: string | null;\n  token: string | null;\n  refreshToken: string | null;\n  tokenExpiry: string | null;\n}\n\nexport interface UIState {\n  isLoading: boolean;\n  error: string | null;\n  modal: {\n    isVisible: boolean;\n    type: string | null;\n    data: any;\n  };\n  sidebar: {\n    isOpen: boolean;\n  };\n  search: {\n    query: string;\n    isActive: boolean;\n    results: any[];\n    filters: SearchFilters;\n  };\n  toast: {\n    isVisible: boolean;\n    message: string;\n    type: 'success' | 'error' | 'warning' | 'info';\n    duration: number;\n  };\n}\n\nexport interface SearchFilters {\n  bins: string[];\n  tags: string[];\n  dateRange: {\n    start: string | null;\n    end: string | null;\n  };\n  sortBy: 'created' | 'updated' | 'title' | 'relevance';\n  sortOrder: 'asc' | 'desc';\n}\n\nexport interface RootState {\n  app: AppState;\n  auth: AuthState;\n  ui: UIState;\n  thoughtmarks: Thoughtmark[];\n  bins: Bin[];\n  tasks: Task[];\n}"
+    },
+    {
+      "file": "mobile-native-fresh/src-nextgen/types/UtilityTypes.ts",
+      "description": "Define utility types",
+      "content": "export type DeepPartial<T> = {\n  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];\n};\n\nexport type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;\n\nexport type Required<T, K extends keyof T> = T & Required<Pick<T, K>>;\n\nexport type Nullable<T> = T | null;\n\nexport type Undefinable<T> = T | undefined;\n\nexport type NonNullable<T> = T extends null | undefined ? never : T;\n\nexport type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (\n  ...args: any\n) => Promise<infer R>\n  ? R\n  : any;\n\nexport type ComponentProps<T> = T extends React.ComponentType<infer P> ? P : never;\n\nexport type EventHandler<T = any> = (event: T) => void;\n\nexport type AsyncEventHandler<T = any> = (event: T) => Promise<void>;\n\nexport type DebouncedFunction<T extends (...args: any[]) => any> = (\n  ...args: Parameters<T>\n) => void;\n\nexport type ThrottledFunction<T extends (...args: any[]) => any> = (\n  ...args: Parameters<T>\n) => void;\n\nexport type DeepReadonly<T> = {\n  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];\n};\n\nexport type Mutable<T> = {\n  -readonly [P in keyof T]: T[P];\n};\n\nexport type ExtractProps<T> = T extends React.ComponentType<infer P> ? P : never;\n\nexport type ExtractState<T> = T extends React.ComponentClass<any, infer S> ? S : never;\n\nexport type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (\n  k: infer I\n) => void\n  ? I\n  : never;\n\nexport type TupleToUnion<T extends readonly any[]> = T[number];\n\nexport type ArrayElement<T> = T extends readonly (infer U)[] ? U : never;\n\nexport type PromiseValue<T> = T extends Promise<infer U> ? U : T;\n\nexport type FunctionReturnType<T> = T extends (...args: any[]) => infer R ? R : never;\n\nexport type FunctionParameters<T> = T extends (...args: infer P) => any ? P : never;"
+    }
+  ]
+} 
