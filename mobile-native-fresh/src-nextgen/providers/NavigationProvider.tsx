@@ -2,12 +2,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { MainStack } from '../navigation/stack';
+import RootNavigator from '../navigation/RootNavigator';
 
 export const NavigationProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <NavigationContainer>
-      <MainStack />
+      <RootNavigator />
       {children}
     </NavigationContainer>
   );

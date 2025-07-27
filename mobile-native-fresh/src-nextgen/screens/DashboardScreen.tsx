@@ -29,6 +29,7 @@ import { useAuth } from '../features/auth/hooks/useAuth';
 import { DraggableSection } from '../components/DraggableSection';
 import { useDashboardOrder } from '../hooks/useDashboardOrder';
 import { Text as CustomText } from '../components/Text';
+import { SnapshotTagMarker } from '../components/SnapshotTagMarker';
 
 const { width } = Dimensions.get('window');
 
@@ -986,6 +987,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   return (
     <View style={styles.container}>
+      {/* SnapshotTagMarker for JSX role snapshot tagging and audit traceability */}
+      <SnapshotTagMarker 
+        tagId="dashboard-screen-root"
+        componentName="DashboardScreen"
+        roleType="layout"
+        debugMode={__DEV__}
+      />
       <OnboardingModal
         visible={showOnboarding}
         onClose={handleOnboardingClose}

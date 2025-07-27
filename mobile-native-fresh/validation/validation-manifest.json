@@ -1,0 +1,28 @@
+{
+  "validation_mirror_config": {
+    "timestamp": "2025-07-26T05:32:33Z",
+    "project_root": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh",
+    "cursor_cache": "/Users/sawyer/gitSync/.cursor-cache",
+    "targets": {
+      "project_validation": {
+        "snapshots": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/validation/snapshots",
+        "diff": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/validation/diff"
+      },
+      "cyops_validation": {
+        "snapshots": "/Users/sawyer/gitSync/.cursor-cache/CYOPS/validation/snapshots",
+        "diff": "/Users/sawyer/gitSync/.cursor-cache/CYOPS/validation/diff"
+      },
+      "main_validation": {
+        "snapshots": "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/snapshots",
+        "diff": "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/diff"
+      }
+    },
+    "subdirectories": [".archive", ".completed", ".failed"],
+    "symlinks": {
+      "snapshots_cyops": "snapshots-cyops",
+      "snapshots_main": "snapshots-main",
+      "diff_cyops": "diff-cyops",
+      "diff_main": "diff-main"
+    }
+  }
+}

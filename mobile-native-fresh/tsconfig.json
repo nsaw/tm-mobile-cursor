@@ -42,6 +42,8 @@
     "src/__tests__/**/*",
     "node_modules/**/*",
     "dist/**/*",
-    "build/**/*"
+    "build/**/*",
+    "scripts/**/*",
+    "src-nextgen/scripts/**/*"
   ]
 }

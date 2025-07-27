@@ -265,7 +265,7 @@ export class ValidationSystem {
       console.log('🔍 ValidationSystem: Running TypeScript type checking...');
       
       // Run TypeScript compiler in noEmit mode
-      const { stdout, stderr } = await execAsync('{ { { npx tsc --noEmit', { & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+      const { stdout, stderr } = await execAsync('npx tsc --noEmit', {
         cwd: process.cwd(),
         timeout: 30000, // 30 second timeout
       });
@@ -375,7 +375,7 @@ export class ValidationSystem {
         details.legacyCheck = legacyCheck;
         details.nextgenCheck = nextgenCheck;
       } else {
-        warnings.push('Performance baseline not established - skip{ { { ping performance validation') & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+        warnings.push('Performance baseline not established - skipping performance validation');
       }
 
     } catch (error) {
@@ -451,7 +451,7 @@ export class ValidationSystem {
       console.log('🔍 ValidationSystem: Running ESLint validation...');
       
       // Run ESLint
-      const { stdout, stderr } = await execAsync('{ { { npm run lint:guard', { & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+      const { stdout, stderr } = await execAsync('npm run lint:guard', {
         cwd: process.cwd(),
         timeout: 30000, // 30 second timeout
       });

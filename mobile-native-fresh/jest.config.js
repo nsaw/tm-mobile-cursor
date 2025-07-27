@@ -7,17 +7,12 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testMatch: [
     '<rootDir>/__tests__/**/*.(ts|tsx|js)',
-    '<rootDir>/src-reference-complete/**/__tests__/**/*.(ts|tsx|js)',
-    '<rootDir>/src-reference-complete/**/?(*.)(spec|test).(ts|tsx|js)',
+    '<rootDir>/src-nextgen/**/__tests__/**/*.(ts|tsx|js)',
+    '<rootDir>/src-nextgen/**/?(*.)(spec|test).(ts|tsx|js)',
   ],
   testEnvironment: 'node',
   collectCoverageFrom: [
-    'src-reference-complete/**/*.{ts,tsx}',
     'src-nextgen/**/*.{ts,tsx}',
-    '!src-reference-complete/**/*.d.ts',
-    '!src-reference-complete/**/__tests__/**',
-    '!src-reference-complete/**/*.test.{ts,tsx}',
-    '!src-reference-complete/**/*.spec.{ts,tsx}',
     '!src-nextgen/**/*.d.ts',
     '!src-nextgen/**/__tests__/**',
     '!src-nextgen/**/*.test.{ts,tsx}',
@@ -44,7 +39,7 @@ module.exports = {
     '/coverage/',
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src-reference-complete/$1',
+    '^@/(.*)$': '<rootDir>/src-nextgen/$1',
   },
   globals: {
     'ts-jest': {
@@ -56,7 +51,7 @@ module.exports = {
     {
       displayName: 'legacy',
       testMatch: ['<rootDir>/__tests__/**/*.legacy.test.{ts,tsx}'],
-      setupFilesAfterEnv: ['<rootDir>/src-reference-complete/utils/test-setup.ts'],
+      setupFilesAfterEnv: ['<rootDir>/src-nextgen/utils/test-setup.ts'],
       testEnvironment: 'node',
       globals: {
         'EXPO_PUBLIC_USE_NEXTGEN': 'false',
@@ -70,9 +65,4 @@ module.exports = {
   },
   // Handle ES modules
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  globals: {
-    'ts-jest': {
-      useESM: true,
-    },
-  },
 }; 

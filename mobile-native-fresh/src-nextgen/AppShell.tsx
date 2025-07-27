@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { useEnvironmentStore } from './state/EnvironmentStore';
 import { AppContent } from './components/AppContent';
+import { SnapshotTagMarker } from './components/SnapshotTagMarker';
 
 export const AppShell = () => {
   const init = useEnvironmentStore(state => state.init);
@@ -32,6 +33,13 @@ export const AppShell = () => {
 
   return (
     <ThemeProvider>
+      {/* SnapshotTagMarker for JSX role snapshot tagging and audit traceability */}
+      <SnapshotTagMarker 
+        tagId="app-shell-root"
+        componentName="AppShell"
+        roleType="container"
+        debugMode={__DEV__}
+      />
       <AppContent />
     </ThemeProvider>
   );

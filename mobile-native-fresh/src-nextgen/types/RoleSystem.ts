@@ -575,7 +575,7 @@ export class RoleSystem {
         fromLegacy: 'BottomNav',
         toNextgen: 'BottomNav',
         breakingChanges: ['onNavigate prop required'],
-        deprecationWarnings: ['Legacy navigation pro{ { { { { { { { ps deprecated'], & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+        deprecationWarnings: ['Legacy navigation props deprecated'],
         migrationSteps: [
           'Add onNavigate prop',
           'Update currentRoute prop',
@@ -867,8 +867,8 @@ export class RoleSystem {
     const errors: string[] = [];
     const warnings: string[] = [];
 
-    // Validate required pro{ { { { ps
-    for (const prop of role.props) { & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+    // Validate required props
+    for (const prop of role.props) {
       if (prop.required && !(prop.name in props)) {
         errors.push(`Required prop '${prop.name}' missing for role '${roleName}'`);
       }
@@ -944,7 +944,7 @@ export const useRoleSystem = () => {
   const roleSystem = RoleSystem.getInstance();
 
   const getRole = (roleName: string) => roleSystem.getRole(roleName);
-  const validatePro{ { { { ps = (roleName: string, props: any) => roleSystem.validateRoleProps(roleName, props) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+  const validateProps = (roleName: string, props: any) => roleSystem.validateRoleProps(roleName, props);
   const getMigration = (roleName: string) => roleSystem.getRoleMigration(roleName);
 
   return {

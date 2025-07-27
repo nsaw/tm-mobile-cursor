@@ -1,18 +1,10 @@
 // ✅ AppEntry with screen zone mount
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 
-import { SlotRenderer } from '../layout/SlotRenderer';
-
-import { RootStack } from './index';
+import RootNavigator from './RootNavigator';
 
 const AppEntry = () => {
-  return (
-    <NavigationContainer>
-      <SlotRenderer />
-      <RootStack />
-    </NavigationContainer>
-  );
+  return <RootNavigator />;
 };
 
 export default AppEntry; 

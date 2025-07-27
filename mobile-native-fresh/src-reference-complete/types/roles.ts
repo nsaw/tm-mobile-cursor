@@ -11,7 +11,7 @@
 
 export type UILayoutRole =
   | 'card'        // Elevated content containers with shadows/borders
-  | 'section'     // Content grou{ { { { ping containers with spacing & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  | 'section'     // Content grouping containers with spacing
   | 'header'      // Top navigation and header areas
   | 'footer'      // Bottom navigation and footer areas
   | 'navigation'  // Navigation containers and menus
@@ -47,7 +47,7 @@ export type UIInteractiveRole =
   | 'toggle'                // Toggle switches and checkboxes
   | 'slider'                // Slider controls and range inputs
   // Decorative Elements
-  | 'chip'                  // Chi{ { { { ps and pills & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+  | 'chip'                  // Chips and pills
   | 'badge'                 // Badges and tags
   | 'tag';                  // Tags and labels
 
@@ -55,7 +55,7 @@ export type UIInteractiveRole =
 // ROLE PROPS - Type-safe role assignment
 // ============================================================================
 
-export type RolePro{ { { { { { { { ps = { & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+export type RoleProps = {
   layoutRole?: UILayoutRole;
   contentRole?: UIContentRole;
   interactiveRole?: UIInteractiveRole;
