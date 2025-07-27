@@ -1,25 +1,18 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { LayoutShell } from '../layout/LayoutShell';
-import HomeScreen from '../screens/Home';
-import TestZoneScreen from '../screens/TestZoneScreen';
-import TestNavBridgeScreen from '../screens/TestNavBridgeScreen';
+import SlotBridge from './SlotBridge';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-const RootNavigator = () => (
-  <Stack.Navigator initialRouteName="LayoutRoot">
-    <Stack.Screen 
-      name="LayoutRoot" 
-      options={{ headerShown: false }}
-    >
-      {() => <LayoutShell />}
-    </Stack.Screen>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="TestZone" component={TestZoneScreen} />
-    <Stack.Screen name="TestNavBridge" component={TestNavBridgeScreen} />
-  </Stack.Navigator>
-);
-
-export default RootNavigator; 
+export default function RootNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={() => null} />
+        <Stack.Screen name="Slot" component={SlotBridge} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+} 

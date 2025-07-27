@@ -1,25 +1,28 @@
 // src-nextgen/App.tsx
 import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { useAppState } from './state/store';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { NavigationProvider } from './providers/NavigationProvider';
-import { SafeAreaProvider } from './providers/SafeAreaProvider';
+import { SafeAreaProvider as NextGenSafeAreaProvider } from './providers/SafeAreaProvider';
 import { SlotZoneProvider } from './hooks/useSlotZone';
-import { LayoutShell } from './layout/LayoutShell';
+import LayoutShell from './layout/LayoutShell';
 
-export default function NextGenApp() {
-  useAppState();
-
+export default function App() {
   return (
-    <ThemeProvider>
-      <SafeAreaProvider>
-        <NavigationProvider>
-          <SlotZoneProvider>
-            <LayoutShell />
-          </SlotZoneProvider>
-        </NavigationProvider>
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <NextGenSafeAreaProvider>
+          <NavigationProvider>
+            <SlotZoneProvider>
+              <LayoutShell>
+                {/* App content will be rendered here */}
+                <></>
+              </LayoutShell>
+            </SlotZoneProvider>
+          </NavigationProvider>
+        </NextGenSafeAreaProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 } 
