@@ -203,12 +203,29 @@ export interface RoleAccessibility {
   ariaControls?: string;
   ariaOwns?: string;
   ariaLabelledBy?: string;
+  ariaModal?: boolean;
   keyboardNavigation: boolean;
   screenReaderSupport: boolean;
   colorContrast: boolean;
   focusManagement: boolean;
   gestureSupport: boolean;
 }
+
+export interface RoleSystem {
+  accessibility: RoleAccessibility;
+  layoutRole?: string;
+  componentRole?: string;
+  semanticRole?: string;
+}
+
+export const defaultRoleAccessibility: RoleAccessibility = {
+  ariaModal: true,
+  keyboardNavigation: true,
+  screenReaderSupport: true,
+  colorContrast: true,
+  focusManagement: true,
+  gestureSupport: true,
+};
 
 export interface RolePerformance {
   renderTime: number; // milliseconds
