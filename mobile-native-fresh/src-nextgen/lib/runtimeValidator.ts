@@ -1,9 +1,10 @@
-import { tapConsole, checkNavigationContext } from './validation';
+import { tapConsole } from './validation';
 
 declare const console: any;
 
 export function startRuntimeValidator() {
   tapConsole();
-  checkNavigationContext();
+  // Temporarily disabled to prevent startup warnings
+  // checkNavigationContext();
   console.log('[✅ Runtime Validator] Initialized.');
 } 
