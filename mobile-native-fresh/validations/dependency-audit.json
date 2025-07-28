@@ -1,0 +1,725 @@
+{
+  "timestamp": "2025-07-28T03:20:26.344Z",
+  "summary": {
+    "totalFiles": 68,
+    "totalImports": 81,
+    "existingImports": 67,
+    "missingImports": 14,
+    "missingModules": 14
+  },
+  "missingModules": [
+    {
+      "module": "./state/EnvironmentStore",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/AppShell.tsx",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "module": "./components/AppContent",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/AppShell.tsx",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "module": "../../components/system",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/__tests__/snapshots/RoleSnapshot.legacy.test.tsx",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "module": "../components/ThoughtmarkCard",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "module": "../components/TaskCard",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "module": "../components/AIToolsCard",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "module": "../hooks/useThoughtmarks",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "module": "../hooks/useBins",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "module": "../components/NeonGradientText",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "module": "../components/VoiceRecorderProvider",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "module": "../components/OnboardingModal",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "module": "../features/auth/hooks/useAuth",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "module": "../components/DraggableSection",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "module": "../hooks/useDashboardOrder",
+      "importCount": 1,
+      "files": [
+        {
+          "file": "src-nextgen/screens/DashboardScreen.tsx",
+          "line": 30
+        }
+      ]
+    }
+  ],
+  "details": {
+    "missing": [
+      {
+        "file": "src-nextgen/AppShell.tsx",
+        "importPath": "./state/EnvironmentStore",
+        "line": 5,
+        "relativePath": "src-nextgen/AppShell.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/AppShell.tsx",
+        "importPath": "./components/AppContent",
+        "line": 6,
+        "relativePath": "src-nextgen/AppShell.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/__tests__/snapshots/RoleSnapshot.legacy.test.tsx",
+        "importPath": "../../components/system",
+        "line": 3,
+        "relativePath": "src-nextgen/__tests__/snapshots/RoleSnapshot.legacy.test.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/ThoughtmarkCard",
+        "line": 18,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/TaskCard",
+        "line": 19,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/AIToolsCard",
+        "line": 20,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useThoughtmarks",
+        "line": 21,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useBins",
+        "line": 22,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/NeonGradientText",
+        "line": 25,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/VoiceRecorderProvider",
+        "line": 26,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/OnboardingModal",
+        "line": 27,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../features/auth/hooks/useAuth",
+        "line": 28,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/DraggableSection",
+        "line": 29,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useDashboardOrder",
+        "line": 30,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "missing"
+      }
+    ],
+    "existing": [
+      {
+        "file": "src-nextgen/App.tsx",
+        "importPath": "./providers/ThemeProvider",
+        "line": 5,
+        "relativePath": "src-nextgen/App.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/App.tsx",
+        "importPath": "./providers/NavigationProvider",
+        "line": 6,
+        "relativePath": "src-nextgen/App.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/App.tsx",
+        "importPath": "./providers/SafeAreaProvider",
+        "line": 7,
+        "relativePath": "src-nextgen/App.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/App.tsx",
+        "importPath": "./hooks/useSlotZone",
+        "line": 8,
+        "relativePath": "src-nextgen/App.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/App.tsx",
+        "importPath": "./layout/LayoutShell",
+        "line": 9,
+        "relativePath": "src-nextgen/App.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/AppShell.tsx",
+        "importPath": "./theme/ThemeProvider",
+        "line": 4,
+        "relativePath": "src-nextgen/AppShell.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/AppShell.tsx",
+        "importPath": "./components/SnapshotTagMarker",
+        "line": 7,
+        "relativePath": "src-nextgen/AppShell.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/AutoRoleView.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 4,
+        "relativePath": "src-nextgen/components/AutoRoleView.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/BottomNav.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 11,
+        "relativePath": "src-nextgen/components/BottomNav.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/Button.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 4,
+        "relativePath": "src-nextgen/components/Button.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/Button.tsx",
+        "importPath": "../components/AutoRoleView",
+        "line": 5,
+        "relativePath": "src-nextgen/components/Button.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/Header.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 9,
+        "relativePath": "src-nextgen/components/Header.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/Header.tsx",
+        "importPath": "./Text",
+        "line": 11,
+        "relativePath": "src-nextgen/components/Header.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/LayoutContextDemo.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 5,
+        "relativePath": "src-nextgen/components/LayoutContextDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/LayoutContextDemo.tsx",
+        "importPath": "../hooks/useLayoutContext",
+        "line": 6,
+        "relativePath": "src-nextgen/components/LayoutContextDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/RoleHydrator.tsx",
+        "importPath": "./AutoRoleView",
+        "line": 5,
+        "relativePath": "src-nextgen/components/RoleHydrator.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/RoleHydrator.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 6,
+        "relativePath": "src-nextgen/components/RoleHydrator.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 5,
+        "relativePath": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "importPath": "../hooks/useLayoutContext",
+        "line": 6,
+        "relativePath": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "importPath": "../slots/SlotBridge",
+        "line": 7,
+        "relativePath": "src-nextgen/components/SlotBridgeDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotTriageDemo.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 5,
+        "relativePath": "src-nextgen/components/SlotTriageDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotTriageDemo.tsx",
+        "importPath": "../hooks/useLayoutContext",
+        "line": 6,
+        "relativePath": "src-nextgen/components/SlotTriageDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/SlotTriageDemo.tsx",
+        "importPath": "../hooks/useStructureValidation",
+        "line": 7,
+        "relativePath": "src-nextgen/components/SlotTriageDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/StructureValidationDemo.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 5,
+        "relativePath": "src-nextgen/components/StructureValidationDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/StructureValidationDemo.tsx",
+        "importPath": "../hooks/useLayoutContext",
+        "line": 6,
+        "relativePath": "src-nextgen/components/StructureValidationDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/StructureValidationDemo.tsx",
+        "importPath": "../hooks/useStructureValidation",
+        "line": 7,
+        "relativePath": "src-nextgen/components/StructureValidationDemo.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/TagChip.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 4,
+        "relativePath": "src-nextgen/components/TagChip.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/TagChip.tsx",
+        "importPath": "../theme/variants",
+        "line": 5,
+        "relativePath": "src-nextgen/components/TagChip.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/TagChip.tsx",
+        "importPath": "./Text",
+        "line": 7,
+        "relativePath": "src-nextgen/components/TagChip.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/Text.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 4,
+        "relativePath": "src-nextgen/components/Text.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/layout/SlotRenderer.tsx",
+        "importPath": "./TopSlot",
+        "line": 5,
+        "relativePath": "src-nextgen/components/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/components/layout/SlotRenderer.tsx",
+        "importPath": "./BottomSlot",
+        "line": 6,
+        "relativePath": "src-nextgen/components/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/hooks/useLayoutContext.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 5,
+        "relativePath": "src-nextgen/hooks/useLayoutContext.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/BottomSlot.tsx",
+        "importPath": "../slots/SlotBridge",
+        "line": 5,
+        "relativePath": "src-nextgen/layout/BottomSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/BottomSlot.tsx",
+        "importPath": "../hooks/useSlotZone",
+        "line": 6,
+        "relativePath": "src-nextgen/layout/BottomSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/BottomSlot.tsx",
+        "importPath": "./LayoutShell",
+        "line": 8,
+        "relativePath": "src-nextgen/layout/BottomSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/CenterSlot.tsx",
+        "importPath": "../slots/SlotBridge",
+        "line": 5,
+        "relativePath": "src-nextgen/layout/CenterSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/CenterSlot.tsx",
+        "importPath": "../hooks/useSlotZone",
+        "line": 6,
+        "relativePath": "src-nextgen/layout/CenterSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/CenterSlot.tsx",
+        "importPath": "./LayoutShell",
+        "line": 8,
+        "relativePath": "src-nextgen/layout/CenterSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/SlotRenderer.tsx",
+        "importPath": "./TopSlot",
+        "line": 5,
+        "relativePath": "src-nextgen/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/SlotRenderer.tsx",
+        "importPath": "./CenterSlot",
+        "line": 6,
+        "relativePath": "src-nextgen/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/SlotRenderer.tsx",
+        "importPath": "./BottomSlot",
+        "line": 7,
+        "relativePath": "src-nextgen/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/SlotRenderer.tsx",
+        "importPath": "./LayoutShell",
+        "line": 8,
+        "relativePath": "src-nextgen/layout/SlotRenderer.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/TopSlot.tsx",
+        "importPath": "../slots/SlotBridge",
+        "line": 5,
+        "relativePath": "src-nextgen/layout/TopSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/TopSlot.tsx",
+        "importPath": "../hooks/useSlotZone",
+        "line": 6,
+        "relativePath": "src-nextgen/layout/TopSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/layout/TopSlot.tsx",
+        "importPath": "./LayoutShell",
+        "line": 8,
+        "relativePath": "src-nextgen/layout/TopSlot.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/lib/runtimeValidator.ts",
+        "importPath": "./validation",
+        "line": 1,
+        "relativePath": "src-nextgen/lib/runtimeValidator.ts",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/navigation/AppEntry.tsx",
+        "importPath": "./RootNavigator",
+        "line": 4,
+        "relativePath": "src-nextgen/navigation/AppEntry.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/navigation/RootNavigator.tsx",
+        "importPath": "./SlotBridge",
+        "line": 5,
+        "relativePath": "src-nextgen/navigation/RootNavigator.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/navigation/stack.tsx",
+        "importPath": "../screens/Home",
+        "line": 5,
+        "relativePath": "src-nextgen/navigation/stack.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/navigation/stack.tsx",
+        "importPath": "../screens/TestZoneScreen",
+        "line": 6,
+        "relativePath": "src-nextgen/navigation/stack.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/navigation/stack.tsx",
+        "importPath": "../screens/TestNavBridgeScreen",
+        "line": 7,
+        "relativePath": "src-nextgen/navigation/stack.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/providers/NavigationProvider.tsx",
+        "importPath": "../navigation/RootNavigator",
+        "line": 5,
+        "relativePath": "src-nextgen/providers/NavigationProvider.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/providers/ThemeProvider.tsx",
+        "importPath": "../state/store",
+        "line": 5,
+        "relativePath": "src-nextgen/providers/ThemeProvider.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 17,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../types",
+        "line": 23,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/BottomNav",
+        "line": 24,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/Text",
+        "line": 31,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/SnapshotTagMarker",
+        "line": 32,
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/HomeScreen.tsx",
+        "importPath": "../components/AutoRoleView",
+        "line": 5,
+        "relativePath": "src-nextgen/screens/HomeScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/HomeScreen.tsx",
+        "importPath": "../theme/ThemeProvider",
+        "line": 6,
+        "relativePath": "src-nextgen/screens/HomeScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/TestNavBridgeScreen.tsx",
+        "importPath": "../hooks/useSlotZone",
+        "line": 5,
+        "relativePath": "src-nextgen/screens/TestNavBridgeScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/TestZoneScreen.tsx",
+        "importPath": "../hooks/useSlotZone",
+        "line": 5,
+        "relativePath": "src-nextgen/screens/TestZoneScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/slots/SlotBridge.tsx",
+        "importPath": "../layout/LayoutShell",
+        "line": 6,
+        "relativePath": "src-nextgen/slots/SlotBridge.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/theme/ThemeProvider.tsx",
+        "importPath": "./designTokens",
+        "line": 3,
+        "relativePath": "src-nextgen/theme/ThemeProvider.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/theme/variants.ts",
+        "importPath": "./designTokens",
+        "line": 1,
+        "relativePath": "src-nextgen/theme/variants.ts",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/utils/ValidationSystem.ts",
+        "importPath": "./PerformanceMonitor",
+        "line": 6,
+        "relativePath": "src-nextgen/utils/ValidationSystem.ts",
+        "status": "exists"
+      }
+    ]
+  }
+}
