@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-07-28T03:21:24.100Z",
+  "timestamp": "2025-07-28T03:54:39.993Z",
   "summary": {
     "totalFiles": 5,
     "totalImports": 20,
-    "existingImports": 9,
-    "missingImports": 11
+    "existingImports": 20,
+    "missingImports": 0
   },
   "categories": {
     "total": {
@@ -17,211 +17,71 @@
       "other": 4
     },
     "missing": {
-      "components": 5,
-      "hooks": 5,
+      "components": 0,
+      "hooks": 0,
       "types": 0,
       "utils": 0,
       "providers": 0,
       "screens": 0,
-      "other": 1
+      "other": 0
     }
   },
   "missingByCategory": {
-    "components": [
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/ThoughtmarkCard",
-        "component": "ThoughtmarkCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/TaskCard",
-        "component": "TaskCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/AIToolsCard",
-        "component": "AIToolsCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/NeonGradientText",
-        "component": "NeonGradientText",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/OnboardingModal",
-        "component": "OnboardingModal",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      }
-    ],
-    "hooks": [
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useThoughtmarks",
-        "component": "useThoughtmarks",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useBins",
-        "component": "useBins",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/VoiceRecorderProvider",
-        "component": "useVoiceRecorder",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../features/auth/hooks/useAuth",
-        "component": "useAuth",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useDashboardOrder",
-        "component": "useDashboardOrder",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      }
-    ],
+    "components": [],
+    "hooks": [],
     "types": [],
     "utils": [],
     "providers": [],
     "screens": [],
-    "other": [
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/DraggableSection",
-        "component": "DraggableSection",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      }
-    ]
+    "other": []
   },
   "details": {
-    "missing": [
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/ThoughtmarkCard",
-        "component": "ThoughtmarkCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/TaskCard",
-        "component": "TaskCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/AIToolsCard",
-        "component": "AIToolsCard",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useThoughtmarks",
-        "component": "useThoughtmarks",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useBins",
-        "component": "useBins",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/NeonGradientText",
-        "component": "NeonGradientText",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/VoiceRecorderProvider",
-        "component": "useVoiceRecorder",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/OnboardingModal",
-        "component": "OnboardingModal",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../features/auth/hooks/useAuth",
-        "component": "useAuth",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../components/DraggableSection",
-        "component": "DraggableSection",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      },
-      {
-        "file": "src-nextgen/screens/DashboardScreen.tsx",
-        "importPath": "../hooks/useDashboardOrder",
-        "component": "useDashboardOrder",
-        "type": "named",
-        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
-        "status": "missing"
-      }
-    ],
+    "missing": [],
     "existing": [
       {
         "file": "src-nextgen/screens/DashboardScreen.tsx",
         "importPath": "../theme/ThemeProvider",
         "component": "useTheme",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/ThoughtmarkCard",
+        "component": "ThoughtmarkCard",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/TaskCard",
+        "component": "TaskCard",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/AIToolsCard",
+        "component": "AIToolsCard",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useThoughtmarks",
+        "component": "useThoughtmarks",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useBins",
+        "component": "useBins",
         "type": "named",
         "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
         "status": "exists"
@@ -238,6 +98,54 @@
         "file": "src-nextgen/screens/DashboardScreen.tsx",
         "importPath": "../components/BottomNav",
         "component": "BottomNav",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/NeonGradientText",
+        "component": "NeonGradientText",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/VoiceRecorderProvider",
+        "component": "useVoiceRecorder",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/OnboardingModal",
+        "component": "OnboardingModal",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../features/auth/hooks/useAuth",
+        "component": "useAuth",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../components/DraggableSection",
+        "component": "DraggableSection",
+        "type": "named",
+        "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
+        "status": "exists"
+      },
+      {
+        "file": "src-nextgen/screens/DashboardScreen.tsx",
+        "importPath": "../hooks/useDashboardOrder",
+        "component": "useDashboardOrder",
         "type": "named",
         "relativePath": "src-nextgen/screens/DashboardScreen.tsx",
         "status": "exists"

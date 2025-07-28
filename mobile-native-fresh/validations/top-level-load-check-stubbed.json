@@ -1,0 +1,19 @@
+🔍 Starting top-level dry load scan...
+📁 Found 5 screen files
+
+📊 Scan Summary:
+  Total files: 5
+  Total imports: 20
+  Existing imports: 20
+  Missing imports: 0
+
+📋 Import Categories:
+  components: 7 total, 0 missing
+  hooks: 9 total, 0 missing
+  types: 0 total, 0 missing
+  utils: 0 total, 0 missing
+  providers: 0 total, 0 missing
+  screens: 0 total, 0 missing
+  other: 4 total, 0 missing
+
+✅ Scan report written to: validations/top-level-load-check.json
