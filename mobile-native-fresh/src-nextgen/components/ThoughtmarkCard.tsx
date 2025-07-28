@@ -1,13 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 
+import { useSlotMode } from '../state/slotMode';
 declare const console: any;
 
-export const ThoughtmarkCard = () => {
-  useEffect(() => console.log('🧠 Slot type: thoughtmark'), []);
+type Props = { slotType: string };
+
+export const ThoughtmarkCard = ({ slotType }: Props) => {
+  const [slotMode] = useSlotMode();
+  const isMock = slotMode === 'mock';
+  console.log(`ThoughtmarkCard: [${slotType}] Rendering (${slotMode} mode)`);
+  const thoughtmarks = isMock ? [{ id: 'tm1', title: '📌 Quantum Theory' }] : [];
   return (
-    <View style={{ padding: 16, borderRadius: 12, backgroundColor: '#222' }}>
-      <Text style={{ color: 'white' }}>🧠 ThoughtmarkCard</Text>
+    <View style={{ backgroundColor: '#222', padding: 12, borderRadius: 12 }}>
+      <Text style={{ color: 'white', fontWeight: 'bold' }}>🧠 Thoughtmarks</Text>
+      {thoughtmarks.map(tm => (
+        <Text key={tm.id} style={{ color: 'white', marginTop: 4 }}>{tm.title}</Text>
+      ))}
     </View>
   );
 }; 

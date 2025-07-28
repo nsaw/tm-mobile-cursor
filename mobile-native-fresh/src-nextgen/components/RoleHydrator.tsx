@@ -1,9 +1,13 @@
 // RoleHydrator.tsx - JSX role prop hydration and validation
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import { useTheme } from '../theme/ThemeProvider';
 
 import { AutoRoleView } from './AutoRoleView';
-import { useTheme } from '../theme/ThemeProvider';
+
+declare const setTimeout: any;
+declare const clearTimeout: any;
 
 export interface RoleHydrationProps {
   layoutRole?: string;
@@ -49,8 +53,8 @@ export const RoleHydrator: React.FC<RoleHydrationProps> = ({
 
   const validateRoleProps = (): boolean => {
     // Basic role prop validation
-    const hasValidRole = layoutRole && typeof layoutRole === 'string';
-    const hasValidAccessibility = !accessible || (accessibilityRole && accessibilityLabel);
+    const hasValidRole = Boolean(layoutRole && typeof layoutRole === 'string');
+    const hasValidAccessibility = !accessible || Boolean(accessibilityRole && accessibilityLabel);
     
     return hasValidRole && hasValidAccessibility;
   };

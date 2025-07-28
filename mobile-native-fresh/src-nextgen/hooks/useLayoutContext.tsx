@@ -28,13 +28,11 @@ export const useLayoutContext = (options?: {
 }): EnhancedLayoutContext => {
   const navigation = useNavigation();
   const route = useRoute();
-  const [navigationState, setNavigationState] = useState<any>(null);
   const [currentRoute, setCurrentRoute] = useState<string | null>(null);
 
   // Update navigation context on route changes
   useEffect(() => {
     setCurrentRoute(route.name);
-    setNavigationState(navigation.getState());
     
     // eslint-disable-next-line no-console
     console.log(`[LayoutContext] Route changed to: ${route.name}`);
@@ -42,7 +40,6 @@ export const useLayoutContext = (options?: {
 
   // Create enhanced context
   const enhancedContext: EnhancedLayoutContext = {
-    navigationState,
     currentRoute: currentRoute || undefined,
     themeContext: options?.themeContext,
     userContext: options?.userContext,
@@ -65,7 +62,6 @@ export const useSlotInjection = (slotType: 'top' | 'center' | 'bottom') => {
     return {
       content,
       context: {
-        navigationState: navigation.getState(),
         currentRoute: route.name,
         ...context
       }
@@ -81,7 +77,6 @@ export const useCurrentLayoutContext = (): EnhancedLayoutContext => {
   const route = useRoute();
   
   return {
-    navigationState: navigation.getState(),
     currentRoute: route.name,
     enableContextBridge: true
   };

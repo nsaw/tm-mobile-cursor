@@ -5,12 +5,12 @@ import { ThoughtmarkCard } from './ThoughtmarkCard';
 import { TaskCard } from './TaskCard';
 import { AIToolsCard } from './AIToolsCard';
 
-export default function SlotGrid() {
+export const SlotGrid = () => {
   return (
     <View style={{ gap: 16 }}>
-      <ThoughtmarkCard />
-      <TaskCard />
-      <AIToolsCard />
+      <ThoughtmarkCard slotType="DASHBOARD_ENTRY" />
+      <TaskCard slotType="TASKS_ENTRY" />
+      <AIToolsCard slotType="AI_TOOLS_ENTRY" />
     </View>
   );
-} 
+}; 
