@@ -13,7 +13,7 @@ const TestTagChip = ({ label }: { label: string }) => (
 
 describe('RoleSnapshot JSX Structure', () => {
   it('renders <TestCard /> correctly', () => {
-    const tree = renderer.create(<TestCard>Snapshot JSX Test</TestCard>).toJSON();
+    const tree = renderer.create(<TestCard><Text>Snapshot JSX Test</Text></TestCard>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

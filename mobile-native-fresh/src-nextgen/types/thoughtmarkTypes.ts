@@ -1,1 +1,0 @@
-export interface ThoughtmarkWithBin { id: string; binId: string; text: string; } 

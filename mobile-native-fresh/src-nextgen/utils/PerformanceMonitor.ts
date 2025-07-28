@@ -1,10 +1,15 @@
+// src-nextgen/utils/PerformanceMonitor.ts
+// Comprehensive performance monitoring system for Phase 3 migration
+
 import React from 'react';
 
-// Performance monitoring system for dual-mount architecture
-// Tracks render times, memory usage, and performance metrics across legacy and nextgen environments
-
+// Global type declarations
 declare const console: any;
+declare const performance: any;
+declare const requestAnimationFrame: any;
 declare const setInterval: any;
+declare const window: any;
+declare const global: any;
 
 export interface PerformanceMetrics {
   renderTime: number;
@@ -21,16 +26,14 @@ export interface PerformanceMetrics {
 export interface PerformanceBaseline {
   legacy: PerformanceMetrics;
   nextgen: PerformanceMetrics;
-  timestamp: number;
-  version: string;
 }
 
 export interface PerformanceTargets {
-  renderTimeIncrease: number; // percentage
-  memoryUsageIncrease: number; // percentage
-  bundleSizeIncrease: number; // percentage
-  startupTimeIncrease: number; // percentage
-  dualMountOverhead: number; // percentage
+  renderTimeIncrease: number;
+  memoryUsageIncrease: number;
+  bundleSizeIncrease: number;
+  startupTimeIncrease: number;
+  dualMountOverhead: number;
 }
 
 export class PerformanceMonitor {
@@ -59,22 +62,31 @@ export class PerformanceMonitor {
   }
 
   /**
+   * Establish performance baseline
+   */
+  establishBaseline(legacyMetrics: PerformanceMetrics, nextgenMetrics: PerformanceMetrics): void {
+    this.baseline = {
+      legacy: legacyMetrics,
+      nextgen: nextgenMetrics,
+    };
+    
+    console.log('🔍 PerformanceMonitor: Baseline established', this.baseline);
+  }
+
+  /**
    * Start performance monitoring
    */
   startMonitoring(): void {
-    if (this.isMonitoring) return;
-    
+    if (this.isMonitoring) {
+      console.warn('⚠️ PerformanceMonitor: Already monitoring');
+      return;
+    }
+
     this.isMonitoring = true;
-    console.log('🔍 PerformanceMonitor: Started monitoring');
-    
-    // Monitor render performance
     this.monitorRenderPerformance();
-    
-    // Monitor memory usage
     this.monitorMemoryUsage();
     
-    // Monitor startup time
-    this.monitorStartupTime();
+    console.log('🔍 PerformanceMonitor: Monitoring started');
   }
 
   /**
@@ -82,7 +94,44 @@ export class PerformanceMonitor {
    */
   stopMonitoring(): void {
     this.isMonitoring = false;
-    console.log('🔍 PerformanceMonitor: Stopped monitoring');
+    console.log('🔍 PerformanceMonitor: Monitoring stopped');
+  }
+
+  /**
+   * Monitor render performance
+   */
+  private monitorRenderPerformance(): void {
+    // Use requestAnimationFrame for performance monitoring
+    const measureRenderTime = () => {
+      const startTime = performance.now();
+      requestAnimationFrame(() => {
+        const endTime = performance.now();
+        const renderTime = endTime - startTime;
+        this.recordComponentMetrics('global', renderTime, 'nextgen');
+      });
+    };
+
+    // Monitor render performance periodically
+    setInterval(measureRenderTime, 1000);
+  }
+
+  /**
+   * Monitor memory usage
+   */
+  private monitorMemoryUsage(): void {
+    // Monitor memory usage periodically
+    setInterval(() => {
+      const memoryUsage = this.getCurrentMemoryUsage();
+      this.metrics.push({
+        renderTime: 0,
+        memoryUsage,
+        bundleSize: this.getBundleSize(),
+        startupTime: this.getStartupTime(),
+        dualMountOverhead: this.calculateDualMountOverhead(),
+        timestamp: Date.now(),
+        environment: 'nextgen',
+      });
+    }, 5000);
   }
 
   /**
@@ -93,7 +142,7 @@ export class PerformanceMonitor {
     renderTime: number,
     environment: 'legacy' | 'nextgen'
   ): void {
-    const metrics: PerformanceMetrics = {
+    const componentMetrics: PerformanceMetrics = {
       renderTime,
       memoryUsage: this.getCurrentMemoryUsage(),
       bundleSize: this.getBundleSize(),
@@ -104,10 +153,10 @@ export class PerformanceMonitor {
       componentName,
     };
 
-    this.metrics.push(metrics);
-    this.notifyObservers(metrics);
+    this.metrics.push(componentMetrics);
+    this.notifyObservers(componentMetrics);
     
-    console.log(`🔍 PerformanceMonitor: Recorded metrics for ${componentName}`, metrics);
+    console.log(`🔍 PerformanceMonitor: Recorded metrics for ${componentName}`, componentMetrics);
   }
 
   /**
@@ -118,7 +167,7 @@ export class PerformanceMonitor {
     renderTime: number,
     environment: 'legacy' | 'nextgen'
   ): void {
-    const metrics: PerformanceMetrics = {
+    const screenMetrics: PerformanceMetrics = {
       renderTime,
       memoryUsage: this.getCurrentMemoryUsage(),
       bundleSize: this.getBundleSize(),
@@ -129,28 +178,90 @@ export class PerformanceMonitor {
       screenName,
     };
 
-    this.metrics.push(metrics);
-    this.notifyObservers(metrics);
+    this.metrics.push(screenMetrics);
+    this.notifyObservers(screenMetrics);
     
-    console.log(`🔍 PerformanceMonitor: Recorded metrics for screen ${screenName}`, metrics);
+    console.log(`🔍 PerformanceMonitor: Recorded metrics for screen ${screenName}`, screenMetrics);
   }
 
   /**
-   * Establish performance baseline
+   * Get current memory usage
    */
-  establishBaseline(): PerformanceBaseline {
-    const legacyMetrics = this.getAverageMetrics('legacy');
-    const nextgenMetrics = this.getAverageMetrics('nextgen');
+  private getCurrentMemoryUsage(): number {
+    try {
+      if (typeof window !== 'undefined' && window.performance?.memory) {
+        return window.performance.memory.usedJSHeapSize;
+      }
+      return 0;
+    } catch (error) {
+      console.error('PerformanceMonitor: Failed to get memory usage:', error);
+      return 0;
+    }
+  }
 
-    this.baseline = {
-      legacy: legacyMetrics,
-      nextgen: nextgenMetrics,
-      timestamp: Date.now(),
-      version: '1.4.1',
+  /**
+   * Get bundle size (estimated)
+   */
+  private getBundleSize(): number {
+    // This is a placeholder - in a real implementation, you'd get this from your bundler
+    return 1024 * 1024; // 1MB placeholder
+  }
+
+  /**
+   * Get startup time
+   */
+  private getStartupTime(): number {
+    // This is a placeholder - in a real implementation, you'd measure actual startup time
+    return Date.now() - (global as any).__STARTUP_TIME__ || 0;
+  }
+
+  /**
+   * Calculate dual mount overhead
+   */
+  private calculateDualMountOverhead(): number {
+    // This is a placeholder - in a real implementation, you'd measure actual overhead
+    return 0;
+  }
+
+  /**
+   * Get average metrics for an environment
+   */
+  private getAverageMetrics(environment: 'legacy' | 'nextgen'): PerformanceMetrics {
+    const environmentMetrics = this.metrics.filter(m => m.environment === environment);
+    
+    if (environmentMetrics.length === 0) {
+      throw new Error(`No metrics found for environment: ${environment}`);
+    }
+
+    const sum = environmentMetrics.reduce((acc, metric) => ({
+      renderTime: acc.renderTime + metric.renderTime,
+      memoryUsage: acc.memoryUsage + metric.memoryUsage,
+      bundleSize: acc.bundleSize + metric.bundleSize,
+      startupTime: acc.startupTime + metric.startupTime,
+      dualMountOverhead: acc.dualMountOverhead + metric.dualMountOverhead,
+      timestamp: acc.timestamp + metric.timestamp,
+      environment: acc.environment,
+    }), {
+      renderTime: 0,
+      memoryUsage: 0,
+      bundleSize: 0,
+      startupTime: 0,
+      dualMountOverhead: 0,
+      timestamp: 0,
+      environment,
+    });
+
+    const count = environmentMetrics.length;
+    
+    return {
+      renderTime: sum.renderTime / count,
+      memoryUsage: sum.memoryUsage / count,
+      bundleSize: sum.bundleSize / count,
+      startupTime: sum.startupTime / count,
+      dualMountOverhead: sum.dualMountOverhead / count,
+      timestamp: sum.timestamp / count,
+      environment,
     };
-
-    console.log('🔍 PerformanceMonitor: Baseline established', this.baseline);
-    return this.baseline;
   }
 
   /**
@@ -214,7 +325,7 @@ export class PerformanceMonitor {
       violations.push(`Startup time increase (${startupTimeIncrease.toFixed(2)}%) exceeds target (${this.targets.startupTimeIncrease}%)`);
     }
 
-    // Check dual-mount overhead
+    // Check dual mount overhead
     const dualMountOverhead = currentMetrics.dualMountOverhead;
     details.dualMountOverhead = {
       current: dualMountOverhead,
@@ -222,7 +333,7 @@ export class PerformanceMonitor {
       percentage: dualMountOverhead,
     };
     if (dualMountOverhead > this.targets.dualMountOverhead) {
-      violations.push(`Dual-mount overhead (${dualMountOverhead.toFixed(2)}%) exceeds target (${this.targets.dualMountOverhead}%)`);
+      violations.push(`Dual mount overhead (${dualMountOverhead.toFixed(2)}%) exceeds target (${this.targets.dualMountOverhead}%)`);
     }
 
     return {
@@ -236,50 +347,57 @@ export class PerformanceMonitor {
    * Get performance report
    */
   getPerformanceReport(): {
-    baseline: PerformanceBaseline | null;
-    currentMetrics: PerformanceMetrics[];
-    targets: PerformanceTargets;
-    summary: {
-      totalMeasurements: number;
-      legacyMeasurements: number;
-      nextgenMeasurements: number;
-      averageRenderTime: { legacy: number; nextgen: number };
-      averageMemoryUsage: { legacy: number; nextgen: number };
-    };
+    totalMetrics: number;
+    averageRenderTime: number;
+    averageMemoryUsage: number;
+    environmentBreakdown: Record<string, number>;
+    recentMetrics: PerformanceMetrics[];
   } {
-    const legacyMetrics = this.metrics.filter(m => m.environment === 'legacy');
-    const nextgenMetrics = this.metrics.filter(m => m.environment === 'nextgen');
+    const totalMetrics = this.metrics.length;
+    const averageRenderTime = this.metrics.reduce((sum, m) => sum + m.renderTime, 0) / totalMetrics || 0;
+    const averageMemoryUsage = this.metrics.reduce((sum, m) => sum + m.memoryUsage, 0) / totalMetrics || 0;
+    
+    const environmentBreakdown = this.metrics.reduce((acc, m) => {
+      acc[m.environment] = (acc[m.environment] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
-    const averageRenderTime = {
-      legacy: legacyMetrics.length > 0 ? legacyMetrics.reduce((sum, m) => sum + m.renderTime, 0) / legacyMetrics.length : 0,
-      nextgen: nextgenMetrics.length > 0 ? nextgenMetrics.reduce((sum, m) => sum + m.renderTime, 0) / nextgenMetrics.length : 0,
-    };
-
-    const averageMemoryUsage = {
-      legacy: legacyMetrics.length > 0 ? legacyMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / legacyMetrics.length : 0,
-      nextgen: nextgenMetrics.length > 0 ? nextgenMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / nextgenMetrics.length : 0,
-    };
+    const recentMetrics = this.metrics.slice(-10);
 
     return {
-      baseline: this.baseline,
-      currentMetrics: this.metrics,
-      targets: this.targets,
-      summary: {
-        totalMeasurements: this.metrics.length,
-        legacyMeasurements: legacyMetrics.length,
-        nextgenMeasurements: nextgenMetrics.length,
-        averageRenderTime,
-        averageMemoryUsage,
-      },
+      totalMetrics,
+      averageRenderTime,
+      averageMemoryUsage,
+      environmentBreakdown,
+      recentMetrics,
     };
   }
 
   /**
-   * Add performance observer
+   * Add observer for performance metrics
    */
-  addObserver(observer: (metrics: PerformanceMetrics) => void): () => void {
+  addObserver(observer: (metrics: PerformanceMetrics) => void): void {
     this.observers.add(observer);
-    return () => this.observers.delete(observer);
+  }
+
+  /**
+   * Remove observer
+   */
+  removeObserver(observer: (metrics: PerformanceMetrics) => void): void {
+    this.observers.delete(observer);
+  }
+
+  /**
+   * Notify all observers
+   */
+  private notifyObservers(metrics: PerformanceMetrics): void {
+    this.observers.forEach(observer => {
+      try {
+        observer(metrics);
+      } catch (error) {
+        console.error('PerformanceMonitor: Observer error:', error);
+      }
+    });
   }
 
   /**
@@ -291,117 +409,10 @@ export class PerformanceMonitor {
   }
 
   /**
-   * Export metrics to JSON
+   * Export metrics for analysis
    */
-  exportMetrics(): string {
-    return JSON.stringify({
-      metrics: this.metrics,
-      baseline: this.baseline,
-      targets: this.targets,
-      timestamp: Date.now(),
-    }, null, 2);
-  }
-
-  // Private methods
-
-  private monitorRenderPerformance(): void {
-    // Monitor component render performance
-    // This will be called after interactions complete
-    // We can use this to measure render performance
-  }
-
-  private monitorMemoryUsage(): void {
-    // Monitor memory usage periodically
-    setInterval(() => {
-      const memoryUsage = this.getCurrentMemoryUsage();
-      console.log(`🔍 PerformanceMonitor: Current memory usage: ${memoryUsage}MB`);
-    }, 5000); // Check every 5 seconds
-  }
-
-  private monitorStartupTime(): void {
-    // Monitor startup time
-    const startTime = Date.now();
-    // This will be called after interactions complete
-    // We can use this to measure startup time
-  }
-
-  private getCurrentMemoryUsage(): number {
-    // This is a placeholder - in a real implementation, you would use
-    // React Native's performance APIs or native modules to get actual memory usage
-    return Math.random() * 100 + 50; // Simulated memory usage between 50-150MB
-  }
-
-  private getBundleSize(): number {
-    // This is a placeholder - in a real implementation, you would get the actual bundle size
-    return 2.5; // Simulated bundle size in MB
-  }
-
-  private getStartupTime(): number {
-    // This is a placeholder - in a real implementation, you would measure actual startup time
-    return Math.random() * 1000 + 500; // Simulated startup time between 500-1500ms
-  }
-
-  private calculateDualMountOverhead(): number {
-    // This is a placeholder - in a real implementation, you would measure the actual overhead
-    return Math.random() * 2; // Simulated dual-mount overhead between 0-2%
-  }
-
-  private getAverageMetrics(environment: 'legacy' | 'nextgen'): PerformanceMetrics {
-    const environmentMetrics = this.metrics.filter(m => m.environment === environment);
-    
-    if (environmentMetrics.length === 0) {
-      return {
-        renderTime: 0,
-        memoryUsage: 0,
-        bundleSize: 0,
-        startupTime: 0,
-        dualMountOverhead: 0,
-        timestamp: Date.now(),
-        environment,
-      };
-    }
-
-    const averageMetrics = environmentMetrics.reduce(
-      (acc, metric) => ({
-        renderTime: acc.renderTime + metric.renderTime,
-        memoryUsage: acc.memoryUsage + metric.memoryUsage,
-        bundleSize: acc.bundleSize + metric.bundleSize,
-        startupTime: acc.startupTime + metric.startupTime,
-        dualMountOverhead: acc.dualMountOverhead + metric.dualMountOverhead,
-        timestamp: Date.now(),
-        environment,
-      }),
-      {
-        renderTime: 0,
-        memoryUsage: 0,
-        bundleSize: 0,
-        startupTime: 0,
-        dualMountOverhead: 0,
-        timestamp: Date.now(),
-        environment,
-      }
-    );
-
-    const count = environmentMetrics.length;
-    return {
-      renderTime: averageMetrics.renderTime / count,
-      memoryUsage: averageMetrics.memoryUsage / count,
-      bundleSize: averageMetrics.bundleSize / count,
-      startupTime: averageMetrics.startupTime / count,
-      dualMountOverhead: averageMetrics.dualMountOverhead / count,
-      timestamp: Date.now(),
-      environment,
-    };
-  }
-
-  private notifyObservers(metrics: PerformanceMetrics): void {
-    this.observers.forEach(observer => {
-      try {
-        observer(metrics);
-      } catch (error) {
-        console.error('🔍 PerformanceMonitor: Observer error', error);
-      }
-    });
+  exportMetrics(): PerformanceMetrics[] {
+    return [...this.metrics];
   }
 }
 
@@ -452,6 +463,4 @@ export const withPerformanceMonitoring = <P extends object>(
 
     return React.createElement(WrappedComponent, { ...props, ref } as any);
   });
-};
-
-export default PerformanceMonitor; 
+}; 

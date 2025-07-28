@@ -5,11 +5,16 @@ import { View, Text } from 'react-native';
 import { SlotBridge } from '../slots/SlotBridge';
 import { useBottomSlotContent } from '../hooks/useSlotZone';
 
-import { LayoutContext } from './LayoutShell';
+declare const console: any;
 
 // Enhanced BottomSlot with context injection and bridge integration
 export interface BottomSlotProps {
-  context?: LayoutContext & { enableContextBridge?: boolean };
+  context?: {
+    navigationState?: any;
+    currentRoute?: string;
+    themeContext?: any;
+    enableContextBridge?: boolean;
+  };
   override?: React.ReactNode;
 }
 

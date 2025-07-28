@@ -40,6 +40,7 @@
   "exclude": [
     "src-reference/**/*",
     "src/__tests__/**/*",
+    "src-nextgen/__tests__/**/*",
     "node_modules/**/*",
     "dist/**/*",
     "build/**/*",

@@ -3,7 +3,8 @@
 
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { PerformanceMonitor, PerformanceMetrics } from './PerformanceMonitor';
+
+import { PerformanceMonitor } from './PerformanceMonitor';
 
 const execAsync = promisify(exec);
 

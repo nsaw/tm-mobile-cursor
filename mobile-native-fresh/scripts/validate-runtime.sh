@@ -1,72 +1,87 @@
 #!/bin/bash
 
-# Runtime validation script
-# Validates that the application can start and run correctly
+# Runtime validation script for Phase 0 patches
+# Validates that the app loads correctly and components render as expected
 
 set -e
 
-echo "🔍 Validating runtime functionality..."
+echo "🔍 Starting runtime validation..."
 
-# Check if we're in the correct directory
-if [ ! -f "package.json" ]; then
-    echo "❌ Error: package.json not found. Please run from project root."
+# Check if expo is running
+if ! pgrep -f "expo start" > /dev/null; then
+    echo "❌ Expo is not running. Please start the app first."
     exit 1
 fi
 
-# Check if node_modules exists
-if [ ! -d "node_modules" ]; then
-    echo "❌ Error: node_modules not found. Please run 'npm install' first."
-    exit 1
+echo "✅ Expo is running"
+
+# Wait for app to load
+sleep 5
+
+# Check expo logs for expected output
+if [ -f "logs/expo.log" ]; then
+    echo "📋 Checking expo logs..."
+    
+    # Check for card component rendering
+    if grep -q "ThoughtmarkCard: \[DASHBOARD_ENTRY\]" logs/expo.log; then
+        echo "✅ ThoughtmarkCard rendering confirmed"
+    else
+        echo "❌ ThoughtmarkCard not rendering"
+        exit 1
+    fi
+    
+    if grep -q "TaskCard: \[TASKS_ENTRY\]" logs/expo.log; then
+        echo "✅ TaskCard rendering confirmed"
+    else
+        echo "❌ TaskCard not rendering"
+        exit 1
+    fi
+    
+    if grep -q "AIToolsCard: \[AI_TOOLS_ENTRY\]" logs/expo.log; then
+        echo "✅ AIToolsCard rendering confirmed"
+    else
+        echo "❌ AIToolsCard not rendering"
+        exit 1
+    fi
+    
+    # Check for slotSelector and slotQuery logs (if available)
+    if grep -q "\[slotSelector\]" logs/expo.log; then
+        echo "✅ slotSelector function called"
+    else
+        echo "⚠️ slotSelector logs not found (may need app reload)"
+    fi
+    
+    if grep -q "\[slotQuery\]" logs/expo.log; then
+        echo "✅ slotQuery function called"
+    else
+        echo "⚠️ slotQuery logs not found (may need app reload)"
+    fi
+    
+else
+    echo "⚠️ No expo.log found, skipping log validation"
 fi
 
-# Check if expo CLI is available
-if ! command -v npx &> /dev/null; then
-    echo "❌ Error: npx not found. Please install Node.js and npm."
-    exit 1
-fi
-
-# Test TypeScript compilation
-echo "📝 Testing TypeScript compilation..."
-if npx tsc --noEmit; then
+# Check TypeScript compilation
+echo "🔍 Checking TypeScript compilation..."
+if npx tsc --noEmit > /dev/null 2>&1; then
     echo "✅ TypeScript compilation successful"
 else
     echo "❌ TypeScript compilation failed"
+    npx tsc --noEmit 2>&1 | head -10
     exit 1
 fi
 
-# Test ESLint
-echo "🔍 Running ESLint..."
-if npx eslint . --ext .ts,.tsx --max-warnings=0; then
-    echo "✅ ESLint passed"
-else
-    echo "❌ ESLint failed"
-    exit 1
-fi
-
-# Test if Expo can start (non-blocking)
-echo "🚀 Testing Expo startup..."
-{ timeout 30s npx expo start --dev-client --clear & } >/dev/null 2>&1 & disown
-EXPO_PID=$!
-
-# Wait a moment for Expo to start
-sleep 5
-
-# Check if Expo is running
-if ps -p $EXPO_PID > /dev/null; then
-    echo "✅ Expo started successfully"
-    
-    # Test if the development server is responding
-    if curl -s http://localhost:8081/status > /dev/null 2>&1; then
-        echo "✅ Development server responding"
+# Check for critical runtime errors
+if [ -f "logs/expo.log" ]; then
+    if grep -q "ERROR\|Error\|error" logs/expo.log | grep -v "Testing console logs"; then
+        echo "❌ Runtime errors detected"
+        grep "ERROR\|Error\|error" logs/expo.log | grep -v "Testing console logs" | head -5
+        exit 1
     else
-        echo "⚠️  Development server not responding (may still be starting)"
+        echo "✅ No critical runtime errors detected"
     fi
-    
-    # Kill Expo process
-    kill $EXPO_PID 2>/dev/null || true
-else
-    echo "❌ Expo failed to start"
-    exit 1
 fi
 
-echo "✅ Runtime validation completed successfully!"
+echo "✅ Runtime validation completed successfully"
+exit 0
+

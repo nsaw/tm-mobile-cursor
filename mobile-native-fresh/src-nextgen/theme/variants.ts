@@ -1,5 +1,3 @@
-import { designTokens } from './designTokens';
-
 export interface BadgeVariant {
   backgroundColor: string;
   color: string;
@@ -11,7 +9,7 @@ export interface BadgeVariant {
   fontWeight: string;
 }
 
-export const getBadgeVariants = (): Record<string, BadgeVariant> => ({
+export const createBadgeVariants = (designTokens: any): Record<string, BadgeVariant> => ({
   primary: {
     backgroundColor: designTokens.colors.primary,
     color: designTokens.colors.background,

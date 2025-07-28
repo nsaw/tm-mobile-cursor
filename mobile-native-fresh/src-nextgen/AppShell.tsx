@@ -6,10 +6,13 @@ import { useEnvironmentStore } from './state/EnvironmentStore';
 import { AppContent } from './components/AppContent';
 import { SnapshotTagMarker } from './components/SnapshotTagMarker';
 
+declare const console: any;
+declare const __DEV__: boolean;
+
 export const AppShell = () => {
-  const init = useEnvironmentStore(state => state.init);
-  const environment = useEnvironmentStore(state => state.environment);
-  const hydrationSource = useEnvironmentStore(state => state.hydrationSource);
+  const init = useEnvironmentStore((state: any) => state.init);
+  const environment = useEnvironmentStore((state: any) => state.environment);
+  const hydrationSource = useEnvironmentStore((state: any) => state.hydrationSource);
 
   useEffect(() => {
     console.log('🚀 FORCED HYDRATION: AppShell mounted - initializing EnvironmentStore...');
@@ -26,7 +29,7 @@ export const AppShell = () => {
       } else {
         console.log('📋 FORCED HYDRATION: AppShell: Confirmed legacy environment from file');
       }
-    }).catch((error) => {
+    }).catch((error: any) => {
       console.error('❌ FORCED HYDRATION: AppShell: EnvironmentStore.init() failed:', error);
     });
   }, []);

@@ -1,4 +1,3 @@
-import { DesignTokens } from './tokens';
 import { useTheme } from './ThemeProvider';
 
 // Utility function to create variant styles

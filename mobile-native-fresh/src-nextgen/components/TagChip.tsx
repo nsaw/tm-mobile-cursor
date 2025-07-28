@@ -2,9 +2,11 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useTheme } from '../theme/ThemeProvider';
-import { getBadgeVariants, mergeVariantStyles } from '../theme/variants';
+import { createBadgeVariants, mergeVariantStyles } from '../theme/variants';
 
 import { Text } from './Text';
+
+declare const console: any;
 
 interface TagChipProps {
   tag: string;
@@ -32,9 +34,9 @@ export const TagChip: React.FC<TagChipProps> = ({
   }
 
   // Get variant styles
-  const badgeVariants = getBadgeVariants();
+  const badgeVariants = createBadgeVariants(designTokens);
   const baseStyle = badgeVariants.primary; // Use primary as base
-  const variantStyle = badgeVariants[variant] || badgeVariants.outline;
+  const variantStyle = badgeVariants[variant] || badgeVariants.secondary;
 
   // Merge all styles first
   const chipStyle = mergeVariantStyles(baseStyle, variantStyle);

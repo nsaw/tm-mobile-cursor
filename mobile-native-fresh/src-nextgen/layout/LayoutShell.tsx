@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { createContext, ReactNode } from 'react';
 import { SafeAreaView } from 'react-native';
-import type { ReactNode } from 'react';
 
-// Layout context interface for navigation and theme integration
-export interface LayoutContext {
+interface LayoutContextType {
   navigationState?: any;
-  currentRoute?: string;
-  themeContext?: any;
-  userContext?: any;
-  appState?: any;
 }
 
-type LayoutProps = { 
-  children: ReactNode;
-  context?: LayoutContext;
-  enableContextBridge?: boolean;
-};
+const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
-export default function LayoutShell({ children, context: _context, enableContextBridge: _enableContextBridge }: LayoutProps) {
+type LayoutProps = { children: ReactNode };
+
+export function LayoutShell({ children }: LayoutProps) {
+  const contextValue: LayoutContextType = {
+    navigationState: undefined,
+  };
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {children}
-    </SafeAreaView>
+    <LayoutContext.Provider value={contextValue}>
+      <SafeAreaView style={{ flex: 1 }}>
+        {children}
+      </SafeAreaView>
+    </LayoutContext.Provider>
   );
-} 
+}
+
+export { LayoutContext };
+
+export default LayoutShell; 

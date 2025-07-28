@@ -1,6 +1,7 @@
-import { scanUIRoles } from '../src/utils/roleScanner';
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
+
+import { scanUIRoles } from '../src/utils/roleScanner';
 
 // Ensure validations directory exists
 const validationsDir = join(__dirname, '..', 'validations');
