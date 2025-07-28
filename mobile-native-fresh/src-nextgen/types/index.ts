@@ -1,4 +1,5 @@
 // src-nextgen/types/index.ts
 // Placeholder for nextgen types
 
-export {}; 
+export * from './Thoughtmark';
+export * from './AppContent'; 
