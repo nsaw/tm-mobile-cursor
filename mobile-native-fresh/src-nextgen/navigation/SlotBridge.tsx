@@ -6,10 +6,14 @@ declare const console: any;
 
 export default function SlotBridge() {
   const route = useRoute<RouteProp<Record<string, object | undefined>, string>>();
-  
+
   useEffect(() => {
-    if (!route?.name) console.error('SlotBridge missing route context');
+    const routeName = route?.name || '[undefined]';
+    if (!route?.name) {
+      console.warn('⚠️ SlotBridge fallback: route.name undefined. Injected fallback triggered.');
+    }
+    console.log(`[SlotBridge] route: ${routeName}`);
   }, [route?.name]);
-  
+
   return null;
 } 
