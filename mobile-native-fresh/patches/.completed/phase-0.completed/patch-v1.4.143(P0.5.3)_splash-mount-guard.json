@@ -1,0 +1,31 @@
+{
+  "notes": [
+    "\ud83e\udde0 Splash Screen Fallback Guard",
+    "\ud83c\udfaf Prevent boot hangs if dual-mount or ENV unready",
+    "\u2705 Adds fallback UI screen and context guard to App.tsx",
+    "\ud83d\udd10 Essential for shared mounts under ENV toggles"
+  ],
+  "postMutationBuild": [
+    "tsc --noEmit",
+    "eslint . --max-warnings=0",
+    "yarn test:unit --watchAll=false"
+  ],
+  "branch": "feature/boot-splash-guard",
+  "phases": [
+    {
+      "section": "P0.5.3 Splash Mount Guard",
+      "actions": [
+        "Add SplashFallback component",
+        "Wrap App.tsx in dual-env bootstrap",
+        "Validate boot completes in both env"
+      ],
+      "commit": "feat: add splash fallback for dual-mount boot",
+      "tag": "v1.4.143(P0.5.3)_splash-fallback"
+    }
+  ],
+  "final": {
+    "commit": "chore: finish splash fallback fallback",
+    "tag": "v1.4.143(P0.5.3)_splash-fallback-final",
+    "notes": "App.tsx now guards mount failures with fallback splash"
+  }
+}

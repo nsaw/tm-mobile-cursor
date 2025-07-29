@@ -1,0 +1,45 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Diff overlays vs. v1.4.1d-1-1b snapshot",
+    "\ud83c\udfaf GOAL: Complete part of v1.4.1d role refactor and UI integrity pass.",
+    "\ud83d\udea8 SAFETY ENFORCEMENT \ud83d\udea8",
+    "\u2705 Validate render and routing per task goal.",
+    "\u2705 AutoRoleView enforcement must follow sacred rules.",
+    "\u2705 Verify tags and UI lexicon match the reference files.",
+    "\ud83d\udccc CONTEXT: Continuation of v1.4.1d visual and logical role alignment.",
+    "\ud83d\udd10 RELEVANCE: Phase checkpoint aligned to role overlay + dashboard rebuild."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"feat: Diff overlays vs. v1.4.1d-1-1b snapshot\"",
+      "git tag v1.4.1d-3-2a_overlay-regression-compare_250710_UTC"
+    ]
+  },
+  "branch": "feature/v1.4.1d-3-2a_overlay-regression-compare",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "showInUI": true,
+  "phases": [
+    {
+      "section": "Diff overlays vs. v1.4.1d-1-1b snapshot",
+      "actions": [
+        "Run patch or validator checks per goal.",
+        "Stop on visual failure."
+      ],
+      "commit": "feat: diff overlays vs. v1.4.1d-1-1b snapshot",
+      "tag": "v1.4.1d-3-2a_overlay-regression-compare_250710_UTC"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete diff overlays vs. v1.4.1d-1-1b snapshot",
+    "tag": "v1.4.1d-3-2a_overlay-regression-compare_complete_250710_UTC",
+    "notes": "Finalization step for v1.4.1d-3-2a_overlay-regression-compare"
+  }
+}

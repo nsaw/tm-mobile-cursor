@@ -9,7 +9,6 @@ import {
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 import type { NavigationProp } from '../../../navigation/types';
 import { useTheme } from '../../../theme/ThemeProvider';
@@ -22,7 +21,6 @@ import { useThoughtmarks } from '../../home/hooks/useThoughtmarks';
 import { ModernHeader } from '../../../components/ui/ModernHeader';
 import { BottomNav } from '../../../components/ui/BottomNav';
 import { useVoiceRecorder } from '../../../components/ui/VoiceRecorderProvider';
-import { RootStackParamList } from '../../../navigation/types';
 
 type SortType = 'name' | 'count' | 'date' | 'created' | 'updated';
 
@@ -225,106 +223,106 @@ export const AllBinsScreen: React.FC = () => {
   );
 
   const styles = StyleSheet.create({
+    binCard: {
+      padding: designTokens.spacing.lg,
+    },
+    binDivider: {
+      backgroundColor: designTokens.colors.border,
+      height: 1,
+      marginHorizontal: designTokens.spacing.md,
+    },
+    binIcon: {
+      color: designTokens.colors.accent,
+      marginBottom: designTokens.spacing.xs,
+    },
+    container: {
+      backgroundColor: designTokens.colors.background,
+      flex: 1,
+    },
+    content: {
+      flex: 1,
+      paddingHorizontal: designTokens.spacing.lg,
+    },
+    createButton: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.accent,
+      borderRadius: designTokens.radius.md,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginBottom: designTokens.spacing.xl,
+      paddingVertical: designTokens.spacing.lg,
+    },
+    createButtonText: {
+      marginLeft: designTokens.spacing.sm,
+    },
+    emptyContainer: {
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: designTokens.spacing.lg,
+    },
+    emptyIcon: {
+      marginBottom: designTokens.spacing.md,
+    },
+    emptySubtitle: {
+      color: designTokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.body,
+      marginBottom: designTokens.spacing.lg,
+      textAlign: 'center',
+    },
+    emptyTitle: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.xl,
+      fontWeight: designTokens.typography.fontWeight.bold,
+      marginBottom: designTokens.spacing.sm,
+      marginTop: designTokens.spacing.md,
+      textAlign: 'center',
+    },
+    header: {
+      paddingBottom: designTokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+    },
+    headerSubtitle: {
+      color: designTokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.body,
+    },
+    headerTitle: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.xl,
+      fontWeight: designTokens.typography.fontWeight.bold,
+      marginBottom: designTokens.spacing.sm,
+    },
+    listContainer: {
+      paddingBottom: designTokens.spacing.xl,
+    },
+    loadingContainer: {
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+    },
     sortButton: {
+      backgroundColor: designTokens.colors.backgroundSecondary,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.radius.sm,
+      borderWidth: 1,
+      marginRight: designTokens.spacing.sm,
       paddingHorizontal: designTokens.spacing.md,
       paddingVertical: designTokens.spacing.sm,
-      borderRadius: designTokens.radius.sm,
-      backgroundColor: designTokens.colors.backgroundSecondary,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-      marginRight: designTokens.spacing.sm,
     },
     sortButtonActive: {
       backgroundColor: designTokens.colors.accent,
       borderColor: designTokens.colors.accent,
     },
     sortButtonText: {
-      fontSize: designTokens.typography.fontSize.sm,
       color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.sm,
     },
     sortButtonTextActive: {
       color: designTokens.colors.background,
     },
     sortContainer: {
-      paddingHorizontal: designTokens.spacing.lg,
       marginBottom: designTokens.spacing.md,
-    },
-    binCard: {
-      padding: designTokens.spacing.lg,
-    },
-    binIcon: {
-      color: designTokens.colors.accent,
-      marginBottom: designTokens.spacing.xs,
-    },
-    binDivider: {
-      height: 1,
-      backgroundColor: designTokens.colors.border,
-      marginHorizontal: designTokens.spacing.md,
-    },
-    container: {
-      flex: 1,
-      backgroundColor: designTokens.colors.background,
-    },
-    header: {
       paddingHorizontal: designTokens.spacing.lg,
-      paddingBottom: designTokens.spacing.md,
-    },
-    headerTitle: {
-      fontSize: designTokens.typography.fontSize.xl,
-      fontWeight: designTokens.typography.fontWeight.bold,
-      color: designTokens.colors.text,
-      marginBottom: designTokens.spacing.sm,
-    },
-    headerSubtitle: {
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
-    },
-    content: {
-      flex: 1,
-      paddingHorizontal: designTokens.spacing.lg,
-    },
-    loadingContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    emptyContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: designTokens.spacing.lg,
-    },
-    emptyIcon: {
-      marginBottom: designTokens.spacing.md,
-    },
-    emptyTitle: {
-      fontSize: designTokens.typography.fontSize.xl,
-      fontWeight: designTokens.typography.fontWeight.bold,
-      color: designTokens.colors.text,
-      marginTop: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.sm,
-      textAlign: 'center',
-    },
-    emptySubtitle: {
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
-      textAlign: 'center',
-      marginBottom: designTokens.spacing.lg,
-    },
-    createButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: designTokens.colors.accent,
-      paddingVertical: designTokens.spacing.lg,
-      borderRadius: designTokens.radius.md,
-      marginBottom: designTokens.spacing.xl,
-    },
-    createButtonText: {
-      marginLeft: designTokens.spacing.sm,
-    },
-    listContainer: {
-      paddingBottom: designTokens.spacing.xl,
     },
   });
 

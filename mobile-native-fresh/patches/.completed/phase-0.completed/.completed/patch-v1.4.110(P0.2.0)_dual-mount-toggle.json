@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.110(P0.2.0)_dual-mount-toggle.json",
+    "SUMMARY NAME: summary-v1.4.110(P0.2.0)_dual-mount-toggle.md",
+    "GOAL: Set up dual-mount App.tsx toggle",
+    "MISSION: Implement environment toggle system to switch between legacy and nextgen environments",
+    "CONTEXT: The dual-mount architecture is core to the D strategy. We need to modify App.tsx to include an environment toggle that allows switching between legacy and nextgen environments for safe testing.",
+    "SAFETY ENFORCEMENT: Test environment toggle functionality, verify both environments load correctly",
+    "STABLE STATE CHECK: Confirm dual-mount toggle working, both environments functional, environment variable handling working"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 2,
+      "attempt": 0,
+      "task": "Set up dual-mount App.tsx toggle",
+      "version": "v1.4.110(P0.2.0)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Modify App.tsx to include environment toggle",
+        "Implement conditional loading logic",
+        "Set up environment variable handling",
+        "Create basic src-nextgen/App.tsx",
+        "Test toggle functionality"
+      ],
+      "validation": [
+        "Test environment toggle functionality",
+        "Verify legacy app loads correctly",
+        "Confirm nextgen app loads correctly",
+        "Test environment variable handling"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert App.tsx changes",
+        "Maintains legacy functionality"
+      ],
+      "gitTag": "backup-v1.4.110(P0.2.0)_dual-mount-toggle",
+      "summaryFile": "summary-v1.4.110(P0.2.0)_dual-mount-toggle.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test environment toggle functionality",
+    "Verify legacy environment loads",
+    "Verify nextgen environment loads",
+    "Test environment variable handling"
+  ],
+  "successCriteria": [
+    "Dual-mount toggle functional",
+    "Legacy environment loads correctly",
+    "Nextgen environment loads correctly",
+    "Environment variable handling working"
+  ]
+} 

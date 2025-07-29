@@ -26,15 +26,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [searchQuery, setSearchQuery] = useState(value || '');
 
   const styles = StyleSheet.create({
+    clearButton: {
+      padding: designTokens.spacing.xs,
+    },
     container: {
       paddingHorizontal: designTokens.spacing.lg,
       paddingVertical: designTokens.spacing.md,
     },
     searchContainer: {
-      flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: designTokens.colors.surface,
       borderRadius: designTokens.radius.md,
+      flexDirection: 'row',
       paddingHorizontal: designTokens.spacing.md,
       paddingVertical: designTokens.spacing.sm,
     },
@@ -42,13 +45,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       marginRight: designTokens.spacing.sm,
     },
     searchInput: {
+      color: designTokens.colors.text,
       flex: 1,
       fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.text,
       paddingVertical: designTokens.spacing.xs,
-    },
-    clearButton: {
-      padding: designTokens.spacing.xs,
     },
   });
 

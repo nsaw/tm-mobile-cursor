@@ -21,24 +21,24 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
 
   const styles = StyleSheet.create({
     button: {
-      flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: designTokens.spacing.md,
-      paddingHorizontal: designTokens.spacing.lg,
-      borderRadius: designTokens.radius.md,
       backgroundColor: provider === 'google' ? designTokens.colors.surface : designTokens.colors.background,
-      borderWidth: 1,
       borderColor: provider === 'google' ? designTokens.colors.border : 'transparent',
+      borderRadius: designTokens.radius.md,
+      borderWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
       opacity: disabled ? 0.6 : 1,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
     },
     icon: {
       marginRight: designTokens.spacing.sm,
     },
     text: {
+      color: provider === 'google' ? designTokens.colors.text : designTokens.colors.text,
       fontSize: designTokens.typography.fontSize.body,
       fontWeight: designTokens.typography.fontWeight.semibold,
-      color: provider === 'google' ? designTokens.colors.text : designTokens.colors.text,
     },
   });
 

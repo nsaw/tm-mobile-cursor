@@ -45,18 +45,18 @@ export const ThoughtmarkList: React.FC<ThoughtmarkListProps> = ({
 };
 
 const styles = StyleSheet.create({
+  horizontalCard: {
+    marginRight: 12,
+    width: 250,
+  },
   horizontalContainer: {
     paddingHorizontal: 16,
-  },
-  verticalContainer: {
-    padding: 16,
-  },
-  horizontalCard: {
-    width: 250,
-    marginRight: 12,
   },
   separator: {
     height: 12,
     width: 12,
+  },
+  verticalContainer: {
+    padding: 16,
   },
 });

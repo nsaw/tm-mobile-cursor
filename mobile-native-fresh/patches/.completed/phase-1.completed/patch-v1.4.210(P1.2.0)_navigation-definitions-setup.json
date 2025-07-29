@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-navigation-definitions.js",
+    "node scripts/validate-routing-system.js",
+    "node scripts/test-screen-transitions.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/navigation-definitions-setup",
+  "notes": [
+    "PATCH NAME: patch-v1.4.210(P1.2.0)_navigation-definitions-setup.json",
+    "SUMMARY NAME: summary-v1.4.210(P1.2.0)_navigation-definitions-setup.md",
+    "GOAL: Set up navigation definitions and routing system with hardened validation",
+    "MISSION: Establish navigation definitions and routing system for hybrid shell architecture with comprehensive testing",
+    "CONTEXT: Navigation definitions are critical for the hybrid shell strategy. We need to define navigation routes, screen transitions, and routing logic that works with both legacy and nextgen environments.",
+    "SAFETY ENFORCEMENT: Test navigation definitions, verify routing system, validate screen transitions, ensure proper testing",
+    "STABLE STATE CHECK: Confirm navigation definitions operational, routing system working, screen transitions functional",
+    "🚨 CRITICAL: Must validate routing system and screen transitions before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 2,
+      "attempt": 0,
+      "task": "Set up navigation definitions and routing system with hardened validation",
+      "version": "v1.4.210(P1.2.0)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Define navigation route interfaces with TypeScript",
+        "Set up routing system configuration with validation",
+        "Configure screen transition logic",
+        "Set up navigation validation system",
+        "Install required testing dependencies",
+        "Test navigation definitions functionality with comprehensive tests",
+        "Validate routing system behavior",
+        "Create navigation validation scripts"
+      ],
+      "validation": [
+        "Test navigation definitions",
+        "Verify routing system working",
+        "Confirm screen transitions functional",
+        "Validate navigation logic",
+        "Test routing system validation",
+        "Verify navigation validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert navigation setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "nav-v1.4.210(P1.2.0)_navigation-definitions-setup",
+      "summaryFile": "summary-v1.4.210(P1.2.0)_navigation-definitions-setup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test navigation definitions",
+    "Verify routing system",
+    "Validate screen transitions",
+    "Test routing system validation",
+    "Verify navigation validation scripts"
+  ],
+  "successCriteria": [
+    "Navigation definitions operational with TypeScript",
+    "Routing system working with validation",
+    "Screen transitions functional with tests",
+    "Navigation logic validated",
+    "Routing system validation operational",
+    "Navigation validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

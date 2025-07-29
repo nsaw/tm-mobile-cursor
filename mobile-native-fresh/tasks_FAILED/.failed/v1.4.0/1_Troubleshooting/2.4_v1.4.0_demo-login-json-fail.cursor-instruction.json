@@ -1,0 +1,43 @@
+{
+  "notes": [
+    "🧠 MISSION: Fix broken demo login response and restore post-auth navigation so ScrollView layout tracing can resume",
+    "🎯 GOAL: Ensure demo login returns valid JSON, prevents crash, and allows DashboardScreen to render for DebugScrollView to trace violations",
+    "📌 CONTEXT: Current runtime logs show:",
+    "- App loads to login screen",
+    "- Demo login fails with `JSON Parse error: Unexpected character: T`",
+    "- App enters render dead-end due to malformed response, preventing Dashboard or other protected screens from mounting",
+    "💥 BUG: The demo login endpoint or local mock returns an invalid string instead of a JSON-parsable body (likely 'true' or 'Token ...')",
+    "🔧 FIX SUMMARY: Fix `apiService.demoLogin()` to always return a valid JSON object with a `success` boolean, `user` object, or well-structured fallback. Patch or mock if needed.",
+    "🔐 RELEVANCE: Until this is fixed, ScrollView tracing cannot continue because the screen housing the violations never mounts."
+  ],
+  "branch": "fix/v1.4.0_demo-login-json-fail",
+  "mode": "manual",
+  "watchConsole": true,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "phases": [
+    {
+      "section": "Fix JSON Parsing Crash in Demo Login",
+      "actions": [
+        "Open src/features/auth/api/apiService.ts",
+        "Locate `demoLogin()` implementation and check response parsing",
+        "Ensure response is parsed with `res.json()` not `res.text()` and wrapped in try/catch",
+        "Patch or mock fallback response to `{ success: true, user: { ... }, token: '...' }`",
+        "Verify that `useAuth()` state updates cleanly on success",
+        "Once fixed, re-enable dashboard navigation and monitor DebugScrollView"
+      ],
+      "commit": "fix: restored JSON integrity in demo login response",
+      "tag": "v1.4.0_demo-login-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: demo login repaired; dashboard trace path restored",
+    "tag": "v1.4.0_scrollview-trace-resumed_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "Demo login no longer blocks post-auth flow. App navigates past login. Dashboard and layout tracing now active again. Ready to detect and patch remaining violations."
+  }
+}
+
+

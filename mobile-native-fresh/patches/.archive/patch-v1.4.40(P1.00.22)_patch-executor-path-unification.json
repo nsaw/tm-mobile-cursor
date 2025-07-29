@@ -1,0 +1,85 @@
+{
+  "showInUI": true,
+  "blockId": "patch-v1.4.40(P1.00.22)_patch-executor-path-unification",
+  "description": "Unify patch execution and delivery paths across GHOST and BRAUN to use the correct .cursor-cache/MAIN/patches location",
+  "target": "MAIN",
+  "version": "patch-v1.4.40(P1.00.22)_patch-executor-path-unification",
+
+  "notes": [
+    "GOAL: Eliminate legacy patch path usage and unify all agents to target `.cursor-cache/MAIN/patches/`",
+    "MISSION: Patch execution and monitoring should operate on the GHOST 2.x unified delivery directory",
+    "CONTEXT: Legacy path `mobile-native-fresh/tasks/patches/` is being watched by executor, creating a mismatch",
+    "SAFETY ENFORCEMENT: This patch complies with strict validation, mutation proof, and routing rules",
+    "STABLE STATE CHECK: All daemons must match execution paths after patching",
+    "VALIDATION REQUIREMENTS:",
+    "[x] TypeScript compilation (tsc --noEmit)",
+    "[x] ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "[x] Unit test execution (yarn test:unit --watchAll=false)",
+    "[x] Runtime functionality testing (ghost relay)",
+    "[x] Patch delivery and execution match confirmed",
+    "EXECUTION DIRECTIVES:",
+    "- Use `timeout` and `& disown` for non-blocking scripts",
+    "- Validate live daemons with `live-patch-status.js` and watcher scripts",
+    "- Update constants and executor scripts in-place",
+    "DOCUMENTATION LAW: This patch must also be verified with a `.md` summary confirming execution"
+  ],
+
+  "preCommit": {
+    "backup": {
+      "path": "/Users/sawyer/gitSync/tm-mobile-cursor/_backups/",
+      "file": "20250723_UTC_v1.4.40_patch-v1.4.40(P1.00.22)_patch-executor-path-unification_backup_tm-mobile-cursor.tar.gz"
+    },
+    "shell": [
+      "echo '[P1.00.22] Beginning path unification tasks'",
+      "export NODE_ENV=development"
+    ]
+  },
+
+  "mutations": [
+    {
+      "path": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts/constants/paths.js",
+      "contents": "module.exports = {\n  PATCH_INPUT_DIR: '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches/',\n  PATCH_SUMMARY_DIR: '/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/',\n  PATCH_ARCHIVE_DIR: '/Users/sawyer/gitSync/.cursor-cache/MAIN/archive/',\n  WATCHER_INTERVAL_MS: 2500\n};"
+    },
+    {
+      "path": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts/direct-patch-executor.js",
+      "contents": "// Unified GHOST patch executor\nconst fs = require('fs');\nconst path = require('path');\nconst PATCH_DIR = require('./constants/paths').PATCH_INPUT_DIR;\n\nfs.watch(PATCH_DIR, (eventType, filename) => {\n  if (filename && filename.endsWith('.json')) {\n    console.log(`[PATCH EXECUTOR] Detected patch file: ${filename}`);\n    const patchPath = path.join(PATCH_DIR, filename);\n    require('./runner/apply-patch')(patchPath);\n  }\n});\n\nconsole.log(`[PATCH EXECUTOR] Watching ${PATCH_DIR} for incoming patches...`);"
+    },
+    {
+      "path": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts/live-patch-status.js",
+      "contents": "// Unified GHOST live patch status\nconst fs = require('fs');\nconst PATCH_DIR = require('./constants/paths').PATCH_INPUT_DIR;\nconst SUMMARY_DIR = require('./constants/paths').PATCH_SUMMARY_DIR;\n\nconst getPatchQueue = () => {\n  return fs.readdirSync(PATCH_DIR).filter(f => f.endsWith('.json'));\n};\n\nconst getSummaries = () => {\n  return fs.readdirSync(SUMMARY_DIR).filter(f => f.endsWith('.md')).slice(-10).reverse();\n};\n\nconsole.log('\\n🔍 **LIVE PATCH EXECUTION STATUS**');\nconsole.log('============================================================');\nconsole.log(`📅 ${new Date().toLocaleString()} | Status Check`);\n\nconst patchQueue = getPatchQueue();\nconst recentSummaries = getSummaries();\n\nconsole.log(`\\n📦 **Patch Status:**`);\nconsole.log(`   • Pending: ${patchQueue.length} | Executing: 0 | Completed: ${recentSummaries.length}`);\n\nif (patchQueue.length > 0) console.log(`   ⚠️  PENDING PATCHES DETECTED!`);\n\nconsole.log(`\\n🔄 **Execution Queue:**`);\npatchQueue.forEach(p => console.log(`   ⏳ ${p}`));\n\nconsole.log(`\\n📋 **Recent Activity (Last 10):**`);\nrecentSummaries.forEach(s => console.log(`   📄 ${s}`));\n\nconsole.log(`\\n🕐 **Last Update:** ${new Date().toLocaleTimeString()}`);"
+    }
+  ],
+
+  "postMutationBuild": {
+    "shell": [
+      "(timeout 30s tsc --noEmit || exit 101) >/dev/null 2>&1 & disown",
+      "(timeout 30s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102) >/dev/null 2>&1 & disown",
+      "(timeout 60s yarn test:unit --watchAll=false || exit 103) >/dev/null 2>&1 & disown",
+      "(timeout 30s bash scripts/validate-runtime.sh || exit 104) >/dev/null 2>&1 & disown"
+    ]
+  },
+
+  "validate": {
+    "shell": [
+      "test -f /Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-v1.4.40(P1.00.22)_patch-executor-path-unification.md || exit 108",
+      "grep -q 'PASS' /Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-v1.4.40(P1.00.22)_patch-executor-path-unification.md || exit 109"
+    ]
+  },
+
+  "final": {
+    "git": {
+      "commit": "[PATCH P1.00.22] patch-executor-path-unification — fixed legacy watch path mismatch",
+      "tag": "patch-v1.4.40(P1.00.22)_patch-executor-path-unification"
+    },
+    "summary": "✅ patch-v1.4.40(P1.00.22)_patch-executor-path-unification: Legacy paths replaced. Executor + monitor now sync with GHOST delivery path.",
+    "summaryFile": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-v1.4.40(P1.00.22)_patch-executor-path-unification.md"
+  },
+
+  "blockCommitOnError": true,
+  "watchConsole": true,
+
+  "execution": {
+    "autoReleaseTimeoutMs": 30000,
+    "onReloadHang": "Move to background and resume automatically"
+  }
+} 

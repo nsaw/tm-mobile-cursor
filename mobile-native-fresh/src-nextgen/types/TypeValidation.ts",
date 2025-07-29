@@ -1,0 +1,123 @@
+import { User, Thoughtmark, Bin, Task } from './DataTypes';
+
+export const typeValidator = {
+  isValidUser: (data: any): data is User => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      typeof data.id === 'string' &&
+      typeof data.email === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.createdAt === 'string' &&
+      typeof data.updatedAt === 'string'
+    );
+  },
+
+  isValidThoughtmark: (data: any): data is Thoughtmark => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      typeof data.id === 'string' &&
+      typeof data.content === 'string' &&
+      typeof data.userId === 'string' &&
+      typeof data.binId === 'string' &&
+      typeof data.createdAt === 'string' &&
+      typeof data.updatedAt === 'string'
+    );
+  },
+
+  isValidBin: (data: any): data is Bin => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.userId === 'string' &&
+      typeof data.createdAt === 'string' &&
+      typeof data.updatedAt === 'string'
+    );
+  },
+
+  isValidTask: (data: any): data is Task => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      typeof data.id === 'string' &&
+      typeof data.title === 'string' &&
+      typeof data.completed === 'boolean' &&
+      typeof data.userId === 'string' &&
+      typeof data.createdAt === 'string' &&
+      typeof data.updatedAt === 'string'
+    );
+  },
+
+  validateUser: (data: any): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+    
+    if (typeof data !== 'object' || data === null) {
+      errors.push('User must be an object');
+      return { isValid: false, errors };
+    }
+
+    if (typeof data.id !== 'string') errors.push('User.id must be a string');
+    if (typeof data.email !== 'string') errors.push('User.email must be a string');
+    if (typeof data.name !== 'string') errors.push('User.name must be a string');
+    if (typeof data.createdAt !== 'string') errors.push('User.createdAt must be a string');
+    if (typeof data.updatedAt !== 'string') errors.push('User.updatedAt must be a string');
+
+    return { isValid: errors.length === 0, errors };
+  },
+
+  validateThoughtmark: (data: any): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+    
+    if (typeof data !== 'object' || data === null) {
+      errors.push('Thoughtmark must be an object');
+      return { isValid: false, errors };
+    }
+
+    if (typeof data.id !== 'string') errors.push('Thoughtmark.id must be a string');
+    if (typeof data.content !== 'string') errors.push('Thoughtmark.content must be a string');
+    if (typeof data.userId !== 'string') errors.push('Thoughtmark.userId must be a string');
+    if (typeof data.binId !== 'string') errors.push('Thoughtmark.binId must be a string');
+    if (typeof data.createdAt !== 'string') errors.push('Thoughtmark.createdAt must be a string');
+    if (typeof data.updatedAt !== 'string') errors.push('Thoughtmark.updatedAt must be a string');
+
+    return { isValid: errors.length === 0, errors };
+  },
+
+  validateBin: (data: any): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+    
+    if (typeof data !== 'object' || data === null) {
+      errors.push('Bin must be an object');
+      return { isValid: false, errors };
+    }
+
+    if (typeof data.id !== 'string') errors.push('Bin.id must be a string');
+    if (typeof data.name !== 'string') errors.push('Bin.name must be a string');
+    if (typeof data.userId !== 'string') errors.push('Bin.userId must be a string');
+    if (typeof data.createdAt !== 'string') errors.push('Bin.createdAt must be a string');
+    if (typeof data.updatedAt !== 'string') errors.push('Bin.updatedAt must be a string');
+
+    return { isValid: errors.length === 0, errors };
+  },
+
+  validateTask: (data: any): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+    
+    if (typeof data !== 'object' || data === null) {
+      errors.push('Task must be an object');
+      return { isValid: false, errors };
+    }
+
+    if (typeof data.id !== 'string') errors.push('Task.id must be a string');
+    if (typeof data.title !== 'string') errors.push('Task.title must be a string');
+    if (typeof data.completed !== 'boolean') errors.push('Task.completed must be a boolean');
+    if (typeof data.userId !== 'string') errors.push('Task.userId must be a string');
+    if (typeof data.createdAt !== 'string') errors.push('Task.createdAt must be a string');
+    if (typeof data.updatedAt !== 'string') errors.push('Task.updatedAt must be a string');
+
+    return { isValid: errors.length === 0, errors };
+  },
+}; 

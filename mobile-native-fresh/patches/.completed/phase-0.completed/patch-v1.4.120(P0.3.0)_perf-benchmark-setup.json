@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.120(P0.3.0)_perf-benchmark-setup.json",
+    "SUMMARY NAME: summary-v1.4.120(P0.3.0)_perf-benchmark-setup.md",
+    "GOAL: Set up performance benchmarking tools",
+    "MISSION: Establish performance monitoring and benchmarking infrastructure",
+    "CONTEXT: Performance monitoring is critical for the B + D + E strategy. We need to set up tools to measure render times, memory usage, and performance impact of migrations.",
+    "SAFETY ENFORCEMENT: Verify performance measurement tools working, test baseline establishment, validate monitoring",
+    "STABLE STATE CHECK: Confirm performance tools operational, baseline established, monitoring functional"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 3,
+      "attempt": 0,
+      "task": "Set up performance benchmarking tools",
+      "version": "v1.4.120(P0.3.0)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Install performance monitoring tools",
+        "Configure baseline measurement",
+        "Set up render time tracking",
+        "Configure memory usage monitoring",
+        "Set up performance alerts"
+      ],
+      "validation": [
+        "Verify performance measurement tools working",
+        "Test baseline establishment",
+        "Confirm render time tracking",
+        "Validate memory usage monitoring",
+        "Test performance alerts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can remove performance tools if needed",
+        "No impact on app functionality"
+      ],
+      "gitTag": "backup-v1.4.120(P0.3.0)_perf-benchmark-setup",
+      "summaryFile": "summary-v1.4.120(P0.3.0)_perf-benchmark-setup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Verify performance measurement tools",
+    "Test baseline establishment",
+    "Validate monitoring functionality"
+  ],
+  "successCriteria": [
+    "Performance measurement tools working",
+    "Baseline established",
+    "Render time tracking functional",
+    "Memory usage monitoring operational"
+  ]
+} 

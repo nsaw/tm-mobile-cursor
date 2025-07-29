@@ -4,15 +4,21 @@
     "jsx": "react-native",
     "esModuleInterop": true,
     "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "allowJs": true,
+    "lib": ["DOM", "ESNext"],
+    "moduleDetection": "force",
+    "customConditions": ["react-native"],
+    "noEmit": true,
+    "resolveJsonModule": true
   },
-  "extends": "expo/tsconfig.base",
   "include": ["src", "app"],
-  "exclude": ["tm-mobile-clone/**/*", "reference/**/*", "ios bak/**/*"]
+  "exclude": ["tm-mobile-clone/**/*", "reference/**/*", "ios bak/**/*", "node_modules"]
 }

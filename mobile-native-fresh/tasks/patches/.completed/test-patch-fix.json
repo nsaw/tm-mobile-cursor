@@ -1,0 +1,8 @@
+{
+  "id": "test-patch-fix",
+  "version": "1.0.0",
+  "description": "Test patch to verify direct-patch-executor fix",
+  "postMutationBuild": "echo 'Test command executed successfully'",
+  "actions": [],
+  "mode": "auto"
+} 

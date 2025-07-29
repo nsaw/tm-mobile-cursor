@@ -1,0 +1,65 @@
+{
+  "notes": [
+    "🧠 MISSION: Deep Linking & Siri Shortcuts",
+    "🎯 GOAL: Register and implement universal URL handling and Siri shortcut support for in-app routing.",
+    "✅ PRE-CHECK: Tag rollback state before execution.",
+    "✅ DO NOT STOP — execute all phases in sequence until validation passes.",
+    "✅ Run `npm run lint:fix-all` and `tsc --noEmit` continuously in background.",
+    "📌 CONTEXT: Enables deep links (e.g. thoughtmarks://home) and Siri voice command entry into the app.",
+    "🔐 RELEVANCE: Required for onboarding, automation, and native iOS interaction."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before v1.3.2 deeplink handler\"",
+      "git tag v1.3.2_pre-deeplink-handler_250628_XXXXUTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-deeplink-handler_250628_XXXXUTC"
+    ]
+  },
+  "branch": "feature/v1.3.2_deeplink-siri",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Phase 1: Register Scheme + Validate",
+      "actions": [
+        "Ensure `app.json` has: `scheme: 'thoughtmarks'`",
+        "Test deep link open: `npx uri-scheme open thoughtmarks://home`",
+        "Confirm launch behavior in both iOS simulator and real device",
+        "Run `npm run lint:fix-all` and verify TS passes"
+      ],
+      "commit": "feat(v1.3.2): deep link scheme registered and verified",
+      "tag": "v1.3.2_deeplink-registered_250628_XXXXUTC"
+    },
+    {
+      "section": "Phase 2: Deep Link Handler + Siri Shortcut",
+      "actions": [
+        "Implement `Linking.addEventListener()` or equivalent in `App.tsx`",
+        "Parse incoming deep link and trigger `navigate(route)`",
+        "Add simulated Siri Shortcut (e.g., 'Add Thoughtmark') via `Shortcuts.donate()` logic",
+        "Confirm shortcut appears under iOS Settings > Siri",
+        "Test Siri command and confirm correct routing on simulator + device"
+      ],
+      "commit": "feat(v1.3.2): deep link + Siri shortcut routing implemented",
+      "tag": "v1.3.2_deeplink-siri-handler_250628_XXXXUTC"
+    }
+  ],
+  "final": {
+    "commit": "chore(v1.3.2): deeplink + Siri complete and archived",
+    "tag": "v1.3.2_deeplink-siri-complete_250628_XXXXUTC",
+    "notes": [
+      "Validated scheme + navigation across all supported entry points.",
+      "Tasks moved to `tasks/v1.3.2/`, index updated."
+    ],
+    "actions": [
+      "mv ./tasks/1_deeplink-siri.cursor-instruction.json ./tasks/v1.3.2/1_v1.3.2_deeplink-siri.cursor-instruction.json",
+      "update tasks/INDEX.md with new file location + tag reference"
+    ]
+  }
+}

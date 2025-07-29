@@ -459,108 +459,98 @@ export const AIToolsScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2E2E2E',
-  },
   backButton: {
     padding: 8,
   },
-  headerTitle: {
-    fontSize: 18,
+  confidenceText: {
+    fontSize: 12,
     fontWeight: '600',
   },
-  headerSpacer: {
-    width: 40,
-  },
-  upgradeContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  content: {
+    padding: 16,
+  },
+  fab: {
     alignItems: 'center',
-    paddingHorizontal: 32,
-  },
-  upgradeTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  upgradeDescription: {
-    fontSize: 16,
-    textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: 32,
-  },
-  featuresList: {
-    width: '100%',
-    marginBottom: 32,
+    borderRadius: 28,
+    bottom: 80,
+    elevation: 8,
+    height: 56,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    width: 56,
   },
   featureItem: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     marginBottom: 16,
   },
   featureText: {
     fontSize: 16,
     marginLeft: 12,
   },
-  upgradeButton: {
-    flexDirection: 'row',
+  featuresList: {
+    marginBottom: 32,
+    width: '100%',
+  },
+  header: {
     alignItems: 'center',
-    gap: 8,
-    paddingHorizontal: 24,
+    borderBottomColor: '#2E2E2E',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  upgradeButtonText: {
-    fontSize: 16,
+  headerSpacer: {
+    width: 40,
+  },
+  headerTitle: {
+    fontSize: 18,
     fontWeight: '600',
   },
-  scrollView: {
-    flex: 1,
+  insightsSection: {
+    marginBottom: 20,
   },
-  content: {
-    padding: 16,
-  },
-  toolsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-    marginBottom: 24,
-  },
-  toolCard: {
-    flex: 1,
-    minWidth: 150,
-    padding: 20,
-    borderRadius: 16,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  toolIcon: {
-    marginBottom: 12,
-  },
-  toolTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  toolDescription: {
+  patternDescription: {
     fontSize: 14,
-    textAlign: 'center',
     lineHeight: 20,
   },
-  toolLoader: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
+  patternHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 4,
+  },
+  patternItem: {
+    marginBottom: 16,
+  },
+  patternType: {
+    fontSize: 14,
+    fontWeight: '600',
+    textTransform: 'capitalize',
+  },
+  recommendationItem: {
+    marginBottom: 12,
+  },
+  recommendationReason: {
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  recommendationTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 4,
   },
   resultsCard: {
     marginBottom: 16,
@@ -570,75 +560,85 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 16,
   },
-  insightsSection: {
-    marginBottom: 20,
+  scrollView: {
+    flex: 1,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 12,
   },
-  patternItem: {
-    marginBottom: 16,
-  },
-  patternHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  patternType: {
-    fontSize: 14,
-    fontWeight: '600',
-    textTransform: 'capitalize',
-  },
-  confidenceText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  patternDescription: {
-    fontSize: 14,
-    lineHeight: 20,
-  },
   suggestionItem: {
-    flexDirection: 'row',
     alignItems: 'flex-start',
+    flexDirection: 'row',
     marginBottom: 8,
   },
   suggestionText: {
+    flex: 1,
     fontSize: 14,
     lineHeight: 20,
     marginLeft: 8,
-    flex: 1,
   },
-  recommendationItem: {
+  toolCard: {
+    alignItems: 'center',
+    borderRadius: 16,
+    flex: 1,
+    minWidth: 150,
+    padding: 20,
+    position: 'relative',
+  },
+  toolDescription: {
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: 'center',
+  },
+  toolIcon: {
     marginBottom: 12,
   },
-  recommendationTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  recommendationReason: {
-    fontSize: 12,
-    lineHeight: 16,
-  },
-  fab: {
+  toolLoader: {
     position: 'absolute',
-    bottom: 80,
-    right: 20,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
+    right: 12,
+    top: 12,
+  },
+  toolTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  toolsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    marginBottom: 24,
+  },
+  upgradeButton: {
     alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    flexDirection: 'row',
+    gap: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+  },
+  upgradeButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  upgradeContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+  },
+  upgradeDescription: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  upgradeTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    marginBottom: 8,
+    marginTop: 16,
   },
 });

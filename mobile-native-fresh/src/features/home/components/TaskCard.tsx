@@ -29,40 +29,32 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const isCompleted = !!task.isCompleted;
   
   const styles = StyleSheet.create({
+    checkbox: {
+      alignItems: 'center',
+      backgroundColor: isCompleted ? designTokens.colors.accent : 'transparent',
+      borderColor: isCompleted ? designTokens.colors.accent : designTokens.colors.border,
+      borderRadius: 12,
+      borderWidth: 2,
+      height: 24,
+      justifyContent: 'center',
+      marginRight: designTokens.spacing.sm,
+      marginTop: 2,
+      width: 24,
+    },
     container: {
+      alignItems: 'flex-start',
       backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
       borderRadius: designTokens.radius.md,
+      borderWidth: 1,
+      flexDirection: 'row',
+      marginBottom: designTokens.spacing.md,
       padding: designTokens.spacing.lg,
       paddingVertical: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.md,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-      flexDirection: 'row',
-      alignItems: 'flex-start',
       width: '100%',
     },
     content: {
       flex: 1,
-    },
-    checkbox: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: isCompleted ? designTokens.colors.accent : designTokens.colors.border,
-      backgroundColor: isCompleted ? designTokens.colors.accent : 'transparent',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginRight: designTokens.spacing.sm,
-      marginTop: 2,
-    },
-    textContainer: {
-      flex: 1,
-    },
-    title: {
-      color: isOverdue ? '#FCA5A5' : isCompleted ? designTokens.colors.textSecondary : designTokens.colors.text,
-      marginBottom: designTokens.spacing.xs,
-      textDecorationLine: isCompleted ? 'line-through' : 'none',
     },
     contentText: {
       color: isCompleted ? designTokens.colors.textSecondary : designTokens.colors.textSecondary,
@@ -72,22 +64,20 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       color: isOverdue ? '#FCA5A5' : designTokens.colors.textSecondary,
       fontFamily: 'Ubuntu_400Regular',
       marginLeft: 11,
-      textAlign: 'right',
       minWidth: 86,
-    },
-    titleRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      textAlign: 'right',
     },
     icon: {
       color: isCompleted ? designTokens.colors.accent : designTokens.colors.textSecondary,
     },
+    priorityHigh: {
+      backgroundColor: designTokens.colors.danger,
+    },
     priorityIndicator: {
-      width: 8,
-      height: 8,
       borderRadius: 4,
+      height: 8,
       marginLeft: designTokens.spacing.sm,
+      width: 8,
     },
     priorityLow: {
       backgroundColor: designTokens.colors.success,
@@ -95,8 +85,18 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     priorityMedium: {
       backgroundColor: designTokens.colors.warning,
     },
-    priorityHigh: {
-      backgroundColor: designTokens.colors.danger,
+    textContainer: {
+      flex: 1,
+    },
+    title: {
+      color: isOverdue ? '#FCA5A5' : isCompleted ? designTokens.colors.textSecondary : designTokens.colors.text,
+      marginBottom: designTokens.spacing.xs,
+      textDecorationLine: isCompleted ? 'line-through' : 'none',
+    },
+    titleRow: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
   });
   const formatDueDate = (dateString: string) => {

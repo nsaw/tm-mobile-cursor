@@ -11,34 +11,34 @@ export const HelpScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
+    button: {
+      backgroundColor: designTokens.colors.accent,
+      width: 180,
+    },
     container: {
-      flex: 1,
-      justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: designTokens.colors.background,
+      flex: 1,
+      justifyContent: 'center',
       padding: designTokens.spacing.xl,
     },
     iconContainer: {
-      width: 64,
-      height: 64,
-      borderRadius: 32,
-      backgroundColor: designTokens.colors.accentMuted,
       alignItems: 'center',
+      backgroundColor: designTokens.colors.accentMuted,
+      borderRadius: 32,
+      height: 64,
       justifyContent: 'center',
       marginBottom: designTokens.spacing.lg,
+      width: 64,
+    },
+    subtitle: {
+      color: designTokens.colors.textMuted,
+      marginBottom: designTokens.spacing.lg,
+      textAlign: 'center',
     },
     title: {
       color: designTokens.colors.text,
       marginBottom: designTokens.spacing.sm,
-    },
-    subtitle: {
-      color: designTokens.colors.textMuted,
-      textAlign: 'center',
-      marginBottom: designTokens.spacing.lg,
-    },
-    button: {
-      width: 180,
-      backgroundColor: designTokens.colors.accent,
     },
   });
 

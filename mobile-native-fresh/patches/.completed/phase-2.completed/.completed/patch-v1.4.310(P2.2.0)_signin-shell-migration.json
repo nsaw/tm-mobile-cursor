@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.310(P2.2.0)_signin-shell-migration.json",
+    "SUMMARY NAME: summary-v1.4.310(P2.2.0)_signin-shell-migration.md",
+    "GOAL: Migrate SignIn.tsx → src/shell/auth/SignIn.tsx",
+    "MISSION: Migrate SignIn component to shell structure for authentication",
+    "CONTEXT: This is the first authentication component migration in Phase 2. SignIn.tsx will be migrated to src/shell/auth/ as part of the E strategy (Hybrid Shell), ensuring proper authentication flow preservation.",
+    "SAFETY ENFORCEMENT: Test signin component in shell structure, verify authentication flow, validate security",
+    "STABLE STATE CHECK: Confirm signin component working in shell structure, authentication flow preserved, security validated"
+  ],
+  "phases": [
+    {
+      "phase": 2,
+      "step": 2,
+      "attempt": 0,
+      "task": "Migrate SignIn.tsx → src/shell/auth/SignIn.tsx",
+      "version": "v1.4.310(P2.2.0)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Copy SignIn.tsx to src/shell/auth/",
+        "Update imports and dependencies",
+        "Configure shell authentication routing",
+        "Test signin component functionality",
+        "Validate authentication flow"
+      ],
+      "validation": [
+        "Test signin component in shell structure",
+        "Verify authentication flow preserved",
+        "Confirm shell routing working",
+        "Validate authentication security"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert SignIn.tsx migration",
+        "Legacy SignIn.tsx preserved in src-reference/"
+      ],
+      "gitTag": "backup-v1.4.310(P2.2.0)_signin-shell-migration",
+      "summaryFile": "summary-v1.4.310(P2.2.0)_signin-shell-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test signin component functionality",
+    "Verify authentication flow",
+    "Validate shell routing",
+    "Test authentication security"
+  ],
+  "successCriteria": [
+    "SignIn component migrated successfully",
+    "Shell authentication routing working",
+    "Authentication flow preserved",
+    "Security validated"
+  ]
+} 

@@ -39,64 +39,64 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     container: {
       width: '100%',
     },
-    row: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+    errorText: {
+      color: '#ff4444',
+      fontSize: 14,
+      marginTop: spacing.xs,
+    },
+    eyeButton: {
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+    },
+    halfWidth: {
+      width: '48%',
+    },
+    input: {
+      backgroundColor: colors.card,
+      borderColor: colors.border,
+      borderRadius: designTokens.radius.md,
+      borderWidth: 1,
+      color: colors.text,
+      fontSize: typography.body.fontSize,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
     },
     inputContainer: {
       marginBottom: spacing.md,
     },
-    halfWidth: {
-      width: '48%',
+    inputError: {
+      borderColor: '#ff4444',
     },
     label: {
       ...typography.body,
       color: colors.text,
       marginBottom: spacing.xs,
     },
-    input: {
-      backgroundColor: colors.card,
-      color: colors.text,
-      borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: designTokens.radius.md,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      fontSize: typography.body.fontSize,
-    },
-    inputError: {
-      borderColor: '#ff4444',
-    },
     passwordContainer: {
-      flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: colors.card,
-      borderWidth: 1,
       borderColor: colors.border,
       borderRadius: designTokens.radius.md,
+      borderWidth: 1,
+      flexDirection: 'row',
     },
     passwordInput: {
-      flex: 1,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      fontSize: typography.body.fontSize,
       color: colors.text,
-    },
-    eyeButton: {
+      flex: 1,
+      fontSize: typography.body.fontSize,
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
     },
-    errorText: {
-      color: '#ff4444',
-      fontSize: 14,
-      marginTop: spacing.xs,
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     submitButton: {
+      alignItems: 'center',
       backgroundColor: colors.primary,
       borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
-      alignItems: 'center',
       marginTop: spacing.sm,
+      paddingVertical: spacing.sm * 1.5,
     },
     submitButtonDisabled: {
       backgroundColor: '#555555',

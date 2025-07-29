@@ -1,0 +1,17 @@
+{
+  "notes": [
+    "🧠 MISSION: Tag the last clean bootable state prior to demo content hydration",
+    "🎯 GOAL: Create a safe pre-demo checkpoint that confirms login screen renders without ScrollView layout errors",
+    "📌 CONTEXT: App boots cleanly to login screen. ScrollView tag structure in DashboardScreen.tsx has been repaired. No runtime layout violation appears yet, but demo content has not been loaded.",
+    "🚨 WARNING: The ScrollView error may still appear once demo data is injected or dashboard screen is mounted after login",
+    "🔧 FIX SUMMARY: Save current state as soft checkpoint for safe rollback. Delay the final v1.4.0 stable tag until post-demo validation."
+  ],
+  "branch": "fix/v1.4.0_scrollview-tag-repair",
+  "watchConsole": true,
+  "final": {
+    "commit": "chore: pre-demo checkpoint after ScrollView layout repair",
+    "tag": "v1.4.0_scrollview-final-pre-demo_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "App boots to login without layout errors. Dashboard demo data not yet loaded. Tag saved for rollback in case runtime errors reappear after hydration."
+  }
+}
+

@@ -787,52 +787,184 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  voiceIndicator: {
-    flexDirection: 'row',
+  actionButton: {
     alignItems: 'center',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
+    borderRadius: 6,
+    flexDirection: 'row',
+    gap: 3,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
   },
-  voiceIndicatorText: {
-    marginLeft: 8,
-    fontSize: 14,
+  actionButtonActive: {
+    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+  },
+  actionText: {
+    fontFamily: 'Ubuntu',
+    fontSize: 11,
     fontWeight: '500',
+  },
+  addTagButton: {
+    alignItems: 'center',
+    borderRadius: 12,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    flexDirection: 'row',
+    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  addTagText: {
+    fontFamily: 'Ubuntu',
+    fontSize: 11,
+    fontWeight: '500',
+  },
+  aiEmptyText: {
+    fontSize: 14,
+    fontStyle: 'italic',
+    paddingVertical: 8,
+    textAlign: 'center',
+  },
+  aiLoading: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingVertical: 8,
+  },
+  aiLoadingText: {
+    fontSize: 14,
+    marginLeft: 8,
   },
   aiPanel: {
     marginBottom: 16,
   },
+  aiPanelContent: {
+    marginTop: 12,
+  },
   aiPanelHeader: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   aiPanelTitle: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   aiPanelTitleText: {
-    marginLeft: 8,
     fontSize: 14,
     fontWeight: '600',
+    marginLeft: 8,
+  },
+  aiSuggestions: {
+    gap: 12,
   },
   aiToggleButton: {
     padding: 4,
   },
-  aiPanelContent: {
-    marginTop: 12,
+  binOption: {
+    borderRadius: 6,
+    borderWidth: 1,
+    marginRight: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
-  aiLoading: {
+  binOptionActive: {
+    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    borderColor: '#3B82F6',
+  },
+  binOptionText: {
+    fontFamily: 'Ubuntu',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  binsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
   },
-  aiLoadingText: {
-    marginLeft: 8,
+  charCount: {
+    fontFamily: 'Ubuntu',
+    fontSize: 10,
+    marginTop: 2,
+    textAlign: 'right',
+  },
+  clearDueDateButton: {
+    padding: 2,
+  },
+  contentInput: {
+    borderRadius: 8,
+    borderWidth: 1,
+    fontFamily: 'Ubuntu',
+    fontSize: 12,
+    lineHeight: 15,
+    minHeight: 60,
+    padding: 6,
+  },
+  contentSuggestion: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    borderRadius: 6,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4,
+    padding: 8,
+  },
+  contentSuggestionText: {
+    flex: 1,
     fontSize: 14,
   },
-  aiSuggestions: {
-    gap: 12,
+  dueDateContainer: {
+    alignItems: 'center',
+    borderColor: 'rgba(59, 130, 246, 0.1)',
+    borderRadius: 6,
+    borderWidth: 1,
+    flexDirection: 'row',
+    padding: 8,
+  },
+  dueDateDisplay: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    gap: 4,
+  },
+  dueDateText: {
+    flex: 1,
+    fontFamily: 'Ubuntu',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  label: {
+    fontFamily: 'Ubuntu',
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 6,
+  },
+  quickActions: {
+    flexDirection: 'row',
+    gap: 6,
+    marginBottom: 10,
+  },
+  setDueDateButton: {
+    alignItems: 'center',
+    borderRadius: 6,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    flexDirection: 'row',
+    flex: 1,
+    gap: 4,
+    padding: 8,
+  },
+  setDueDateText: {
+    fontFamily: 'Ubuntu',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  suggestionAction: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    borderRadius: 6,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 8,
   },
   suggestionItem: {
     gap: 8,
@@ -842,172 +974,40 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textTransform: 'uppercase',
   },
-  suggestionAction: {
+  suggestionTags: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 8,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderRadius: 6,
+    flexWrap: 'wrap',
+    gap: 8,
   },
   suggestionText: {
     flex: 1,
     fontSize: 14,
     fontWeight: '500',
   },
-  suggestionTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  contentSuggestion: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 8,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderRadius: 6,
-    marginTop: 4,
-  },
-  contentSuggestionText: {
-    flex: 1,
-    fontSize: 14,
-  },
-  aiEmptyText: {
-    fontSize: 14,
-    fontStyle: 'italic',
-    textAlign: 'center',
-    paddingVertical: 8,
-  },
-  inputGroup: {
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 12,
-    fontWeight: '600',
-    marginBottom: 6,
-    fontFamily: 'Ubuntu',
-  },
-  titleInput: {
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 6,
-    fontSize: 12,
-    fontWeight: '500',
-    fontFamily: 'Ubuntu',
-    lineHeight: 15,
-  },
-  contentInput: {
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 6,
-    fontSize: 12,
-    fontFamily: 'Ubuntu',
-    lineHeight: 15,
-    minHeight: 60,
-  },
-  charCount: {
-    fontSize: 10,
-    textAlign: 'right',
-    marginTop: 2,
-    fontFamily: 'Ubuntu',
-  },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 4,
   },
-  addTagButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  titleInput: {
+    borderRadius: 8,
     borderWidth: 1,
-    borderStyle: 'dashed',
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    gap: 4,
-  },
-  addTagText: {
-    fontSize: 11,
-    fontWeight: '500',
     fontFamily: 'Ubuntu',
-  },
-  quickActions: {
-    flexDirection: 'row',
-    gap: 6,
-    marginBottom: 10,
-  },
-  actionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 6,
-    gap: 3,
-  },
-  actionButtonActive: {
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-  },
-  actionText: {
-    fontSize: 11,
-    fontWeight: '500',
-    fontFamily: 'Ubuntu',
-  },
-  binsContainer: {
-    flexDirection: 'row',
-  },
-  binOption: {
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    marginRight: 4,
-  },
-  binOptionActive: {
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    borderColor: '#3B82F6',
-  },
-  binOptionText: {
     fontSize: 12,
     fontWeight: '500',
-    fontFamily: 'Ubuntu',
+    lineHeight: 15,
+    padding: 6,
   },
-  dueDateContainer: {
-    flexDirection: 'row',
+  voiceIndicator: {
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(59, 130, 246, 0.1)',
-    borderRadius: 6,
-    padding: 8,
-  },
-  dueDateDisplay: {
+    borderRadius: 8,
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    flex: 1,
+    marginBottom: 16,
+    padding: 12,
   },
-  dueDateText: {
-    fontSize: 12,
+  voiceIndicatorText: {
+    fontSize: 14,
     fontWeight: '500',
-    flex: 1,
-    fontFamily: 'Ubuntu',
-  },
-  clearDueDateButton: {
-    padding: 2,
-  },
-  setDueDateButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 8,
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderRadius: 6,
-    gap: 4,
-    flex: 1,
-  },
-  setDueDateText: {
-    fontSize: 12,
-    fontWeight: '500',
-    fontFamily: 'Ubuntu',
+    marginLeft: 8,
   },
 }); 

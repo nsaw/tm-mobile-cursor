@@ -38,102 +38,115 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const { showVoiceRecorder } = useVoiceRecorder();
 
   const styles = StyleSheet.create({
+    binFilterButton: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      borderWidth: 1,
+      flexDirection: 'row',
+      marginRight: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.md,
+      paddingVertical: designTokens.spacing.sm,
+    },
+    binFilterButtonActive: {
+      backgroundColor: designTokens.colors.accent,
+      borderColor: designTokens.colors.accent,
+    },
+    binFilterContainer: {
+      marginBottom: designTokens.spacing.md,
+    },
+    binFilterIcon: {
+      marginRight: designTokens.spacing.xs,
+    },
+    binFilterText: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      fontWeight: '500',
+    },
+    binFilterTextActive: {
+      color: designTokens.colors.background,
+    },
     container: {
-      flex: 1,
       backgroundColor: designTokens.colors.background ?? '#0D0D0F',
+      flex: 1,
     },
     controls: {
-      paddingHorizontal: designTokens.spacing.lg,
       paddingBottom: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.lg,
     },
-    filterRow: {
+    createButton: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.accent,
+      borderRadius: designTokens.spacing.md,
       flexDirection: 'row',
-      gap: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
     },
-    filterDropdown: {
-      flex: 1,
-      alignItems: 'flex-start',
-    },
-    filterLabel: {
-      fontSize: 12,
+    createButtonText: {
+      color: designTokens.colors.background,
+      fontSize: designTokens.typography.fontSize.body,
       fontWeight: '600',
-      color: designTokens.colors.text ?? '#F5F5F7',
-      marginBottom: designTokens.spacing.xs,
-      opacity: 0.8,
-    },
-    dropdownContainer: {
-      flexDirection: 'row',
-      gap: designTokens.spacing.xs,
+      marginLeft: designTokens.spacing.sm,
     },
     dropdownButton: {
+      backgroundColor: designTokens.colors.surface ?? '#2C2C2E',
+      borderColor: designTokens.colors.border ?? '#2C2C2E',
+      borderRadius: 6,
+      borderWidth: 1,
       paddingHorizontal: designTokens.spacing.sm,
       paddingVertical: designTokens.spacing.xs,
-      borderRadius: 6,
-      backgroundColor: designTokens.colors.surface ?? '#2C2C2E',
-      borderWidth: 1,
-      borderColor: designTokens.colors.border ?? '#2C2C2E',
     },
     dropdownButtonActive: {
       backgroundColor: designTokens.colors.accent ?? '#FFD500',
       borderColor: designTokens.colors.accent ?? '#FFD500',
     },
     dropdownButtonText: {
-      fontSize: 11,
       color: designTokens.colors.text ?? '#F5F5F7',
+      fontSize: 11,
       fontWeight: '500',
     },
     dropdownButtonTextActive: {
       color: designTokens.colors.background ?? '#0D0D0F',
     },
-    sortButton: {
-      paddingHorizontal: designTokens.spacing.sm,
-      paddingVertical: designTokens.spacing.xs,
-      borderRadius: 6,
-      backgroundColor: designTokens.colors.surface,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-    },
-    sortButtonActive: {
-      backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent,
-    },
-    sortButtonText: {
-      fontSize: 11,
-      color: designTokens.colors.text,
-      fontWeight: '500',
-    },
-    sortButtonTextActive: {
-      color: designTokens.colors.background,
-    },
-    binFilterContainer: {
-      marginBottom: designTokens.spacing.md,
-    },
-    binFilterButton: {
+    dropdownContainer: {
       flexDirection: 'row',
+      gap: designTokens.spacing.xs,
+    },
+    emptyState: {
       alignItems: 'center',
-      paddingHorizontal: designTokens.spacing.md,
-      paddingVertical: designTokens.spacing.sm,
-      marginRight: designTokens.spacing.sm,
-      borderRadius: designTokens.spacing.sm,
-      backgroundColor: designTokens.colors.surface,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
+      flex: 1,
+      justifyContent: 'center',
+      paddingVertical: designTokens.spacing.xl,
     },
-    binFilterButtonActive: {
-      backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent,
-    },
-    binFilterIcon: {
-      marginRight: designTokens.spacing.xs,
-    },
-    binFilterText: {
+    emptyStateSubtitle: {
+      color: designTokens.colors.textSecondary,
       fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.text,
-      fontWeight: '500',
+      marginBottom: designTokens.spacing.lg,
+      textAlign: 'center',
     },
-    binFilterTextActive: {
-      color: designTokens.colors.background,
+    emptyStateTitle: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.lg,
+      fontWeight: '600',
+      marginBottom: designTokens.spacing.sm,
+      marginTop: designTokens.spacing.md,
+    },
+    filterDropdown: {
+      alignItems: 'flex-start',
+      flex: 1,
+    },
+    filterLabel: {
+      color: designTokens.colors.text ?? '#F5F5F7',
+      fontSize: 12,
+      fontWeight: '600',
+      marginBottom: designTokens.spacing.xs,
+      opacity: 0.8,
+    },
+    filterRow: {
+      flexDirection: 'row',
+      gap: designTokens.spacing.md,
+      marginBottom: designTokens.spacing.sm,
     },
     listContainer: {
       flex: 1,
@@ -143,47 +156,34 @@ export const AllThoughtmarksScreen: React.FC = () => {
       paddingBottom: designTokens.spacing.lg,
     },
     loadingContainer: {
+      alignItems: 'center',
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
     },
     loadingText: {
-      marginTop: designTokens.spacing.md,
-      fontSize: designTokens.typography.fontSize.body,
       color: designTokens.colors.textSecondary,
-    },
-    emptyState: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingVertical: designTokens.spacing.xl,
-    },
-    emptyStateTitle: {
-      fontSize: designTokens.typography.fontSize.lg,
-      fontWeight: '600',
-      color: designTokens.colors.text,
-      marginTop: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.sm,
-    },
-    emptyStateSubtitle: {
       fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
-      textAlign: 'center',
-      marginBottom: designTokens.spacing.lg,
+      marginTop: designTokens.spacing.md,
     },
-    createButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
+    sortButton: {
+      backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
+      borderRadius: 6,
+      borderWidth: 1,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
+    },
+    sortButtonActive: {
       backgroundColor: designTokens.colors.accent,
-      paddingHorizontal: designTokens.spacing.lg,
-      paddingVertical: designTokens.spacing.md,
-      borderRadius: designTokens.spacing.md,
+      borderColor: designTokens.colors.accent,
     },
-    createButtonText: {
-      fontSize: designTokens.typography.fontSize.body,
-      fontWeight: '600',
+    sortButtonText: {
+      color: designTokens.colors.text,
+      fontSize: 11,
+      fontWeight: '500',
+    },
+    sortButtonTextActive: {
       color: designTokens.colors.background,
-      marginLeft: designTokens.spacing.sm,
     },
   });
 

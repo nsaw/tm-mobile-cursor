@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useTheme } from '../../../theme/ThemeProvider';
@@ -261,70 +260,70 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
 };
 
 const styles = StyleSheet.create({
+  backButton: {
+    padding: 8,
+  },
   container: {
     flex: 1,
   },
-  header: {
-    flexDirection: 'row',
+  content: {
     alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+  },
+  header: {
+    alignItems: 'center',
+    borderBottomColor: '#2E2E2E',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2E2E2E',
   },
-  backButton: {
-    padding: 8,
+  headerSpacer: {
+    width: 40,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
   },
-  headerSpacer: {
-    width: 40,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+  numberButton: {
     alignItems: 'center',
-    paddingHorizontal: 32,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 40,
-    lineHeight: 22,
-  },
-  pinContainer: {
-    flexDirection: 'row',
+    borderRadius: 35,
+    height: 70,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 60,
-  },
-  pinDot: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    marginHorizontal: 8,
-    borderWidth: 1,
+    margin: 8,
+    width: 70,
   },
   numberPad: {
+    alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    alignItems: 'center',
     maxWidth: 300,
-  },
-  numberButton: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 8,
   },
   numberText: {
     fontSize: 24,
     fontWeight: '600',
+  },
+  pinContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 60,
+  },
+  pinDot: {
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 20,
+    marginHorizontal: 8,
+    width: 20,
+  },
+  subtitle: {
+    fontSize: 16,
+    lineHeight: 22,
+    marginBottom: 40,
+    textAlign: 'center',
   },
 }); 

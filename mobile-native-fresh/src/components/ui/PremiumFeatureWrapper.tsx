@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useTheme } from '../../theme/ThemeProvider';
+
 import { Text } from './Text';
 import { Button } from './Button';
 
@@ -49,26 +51,26 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
 
 // tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
+  button: {
+    backgroundColor: tokens.colors.accent,
+    width: 180,
+  },
   overlay: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: tokens.colors.background,
+    flex: 1,
+    justifyContent: 'center',
     padding: tokens.spacing.xl,
+  },
+  subtitle: {
+    color: tokens.colors.textSecondary,
+    lineHeight: 22,
+    marginBottom: tokens.spacing.lg,
+    textAlign: 'center',
   },
   title: {
     color: tokens.colors.text,
     marginBottom: tokens.spacing.sm,
     textAlign: 'center',
-  },
-  subtitle: {
-    color: tokens.colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: tokens.spacing.lg,
-    lineHeight: 22,
-  },
-  button: {
-    width: 180,
-    backgroundColor: tokens.colors.accent,
   },
 }); 

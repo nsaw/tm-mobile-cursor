@@ -163,7 +163,9 @@ export const SettingsScreen: React.FC = () => {
     onSwitchChange?: (value: boolean) => void;
     showArrow?: boolean;
   }) => {
-    let iconElement = null;
+    const { tokens } = useTheme();
+
+let iconElement = null;
     if (icon === 'crown') {
       iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
@@ -202,36 +204,102 @@ export const SettingsScreen: React.FC = () => {
   };
 
   const styles = StyleSheet.create({
-    scrollView: {
-      flex: 1,
-    },
-    scrollContent: {
-      paddingBottom: tokens.spacing.xl,
-    },
-    header: {
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
-      borderBottomWidth: 1,
-      borderBottomColor: tokens.colors.border,
-    },
-    headerContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: tokens.spacing.sm,
-    },
     backButton: {
       marginRight: tokens.spacing.md,
     },
-    headerTitle: {
-      ...typography.title,
-      color: tokens.colors.text,
+    expandedSettings: {
+      backgroundColor: tokens.colors.backgroundSecondary,
+    },
+    header: {
+      borderBottomColor: tokens.colors.border,
+      borderBottomWidth: 1,
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
+    },
+    headerContent: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginBottom: tokens.spacing.sm,
     },
     headerSubtitle: {
       ...typography.body,
       color: tokens.colors.textSecondary,
     },
+    headerTitle: {
+      ...typography.title,
+      color: tokens.colors.text,
+    },
+    modalButton: {
+      borderRadius: tokens.spacing.sm,
+      paddingHorizontal: tokens.spacing.md,
+      paddingVertical: tokens.spacing.sm,
+    },
+    modalButtonPrimary: {
+      backgroundColor: tokens.colors.accent,
+    },
+    modalButtonText: {
+      color: tokens.colors.text,
+      fontSize: tokens.typography.fontSize.body,
+    },
+    modalButtonTextPrimary: {
+      color: tokens.colors.background,
+      fontWeight: '500',
+    },
+    modalButtons: {
+      flexDirection: 'row',
+      gap: tokens.spacing.md,
+      justifyContent: 'flex-end',
+    },
+    modalContent: {
+      backgroundColor: tokens.colors.surface,
+      borderRadius: tokens.spacing.md,
+      maxWidth: 400,
+      padding: tokens.spacing.lg,
+      width: '100%',
+    },
+    modalInput: {
+      backgroundColor: tokens.colors.background,
+      borderColor: tokens.colors.border,
+      borderRadius: tokens.spacing.sm,
+      borderWidth: 1,
+      color: tokens.colors.text,
+      fontSize: tokens.typography.fontSize.body,
+      marginBottom: tokens.spacing.lg,
+      padding: tokens.spacing.md,
+    },
+    modalOverlay: {
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      bottom: 0,
+      justifyContent: 'center',
+      left: 0,
+      padding: tokens.spacing.lg,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+    },
+    modalSubtitle: {
+      color: tokens.colors.textSecondary,
+      fontSize: tokens.typography.fontSize.body,
+      marginBottom: tokens.spacing.lg,
+    },
+    modalTitle: {
+      color: tokens.colors.text,
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: '600',
+      marginBottom: tokens.spacing.sm,
+    },
+    scrollContent: {
+      paddingBottom: tokens.spacing.xl,
+    },
+    scrollView: {
+      flex: 1,
+    },
     section: {
       marginBottom: tokens.spacing.xxl,
+    },
+    sectionCard: {
+      marginHorizontal: tokens.spacing.lg,
     },
     sectionTitle: {
       ...typography.sectionTitle,
@@ -240,112 +308,46 @@ export const SettingsScreen: React.FC = () => {
       paddingHorizontal: tokens.spacing.lg,
       textTransform: 'uppercase',
     },
-    sectionCard: {
-      marginHorizontal: tokens.spacing.lg,
-    },
     settingItem: {
-      flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingVertical: tokens.spacing.md,
-      paddingHorizontal: tokens.spacing.lg,
-      borderBottomWidth: 1,
       borderBottomColor: tokens.colors.border,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       minHeight: 44,
+      paddingHorizontal: tokens.spacing.lg,
+      paddingVertical: tokens.spacing.md,
     },
     settingItemLeft: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       flex: 1,
     },
-    settingItemText: {
-      marginLeft: tokens.spacing.md,
-      flex: 1,
-    },
-    settingItemTitle: {
-      ...typography.body,
-      color: tokens.colors.text,
-      opacity: 0.85,
+    settingItemRight: {
+      alignItems: 'center',
     },
     settingItemSubtitle: {
       ...typography.small,
       color: tokens.colors.textSecondary,
       marginTop: 2,
     },
-    settingItemRight: {
-      alignItems: 'center',
+    settingItemText: {
+      flex: 1,
+      marginLeft: tokens.spacing.md,
     },
-    expandedSettings: {
-      backgroundColor: tokens.colors.backgroundSecondary,
+    settingItemTitle: {
+      ...typography.body,
+      color: tokens.colors.text,
+      opacity: 0.85,
     },
     settingLeft: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       flex: 1,
     },
     settingText: {
-      marginLeft: tokens.spacing.md,
       flex: 1,
-    },
-    modalOverlay: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: tokens.spacing.lg,
-    },
-    modalContent: {
-      backgroundColor: tokens.colors.surface,
-      borderRadius: tokens.spacing.md,
-      padding: tokens.spacing.lg,
-      width: '100%',
-      maxWidth: 400,
-    },
-    modalTitle: {
-      fontSize: tokens.typography.fontSize.lg,
-      fontWeight: '600',
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.sm,
-    },
-    modalSubtitle: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.textSecondary,
-      marginBottom: tokens.spacing.lg,
-    },
-    modalInput: {
-      borderWidth: 1,
-      borderColor: tokens.colors.border,
-      borderRadius: tokens.spacing.sm,
-      padding: tokens.spacing.md,
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-      backgroundColor: tokens.colors.background,
-      marginBottom: tokens.spacing.lg,
-    },
-    modalButtons: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      gap: tokens.spacing.md,
-    },
-    modalButton: {
-      paddingVertical: tokens.spacing.sm,
-      paddingHorizontal: tokens.spacing.md,
-      borderRadius: tokens.spacing.sm,
-    },
-    modalButtonText: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-    },
-    modalButtonPrimary: {
-      backgroundColor: tokens.colors.accent,
-    },
-    modalButtonTextPrimary: {
-      color: tokens.colors.background,
-      fontWeight: '500',
+      marginLeft: tokens.spacing.md,
     },
   });
 
@@ -372,12 +374,14 @@ export const SettingsScreen: React.FC = () => {
         {/* Welcome Section */}
         <Card style={{ alignItems: 'center', paddingHorizontal: tokens.spacing.page, paddingVertical: tokens.spacing.lg, marginBottom: tokens.spacing.xxl }}>
           {(() => {
-            return (
+            const { tokens: themeTokens } = useTheme();
+
+return (
               <>
                 {/* Brain icon in circle */}
                 <View style={{
-                  width: 48, height: 48, borderRadius: 24, marginBottom: tokens.spacing.md,
-                  backgroundColor: `${tokens.colors.success ?? '#000'}80`, // 50% opacity
+                  width: 48, height: 48, borderRadius: 24, marginBottom: themeTokens.spacing.md,
+                  backgroundColor: `${themeTokens.colors.success ?? '#000'}80`, // 50% opacity
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Brain size={28} />
@@ -385,18 +389,18 @@ export const SettingsScreen: React.FC = () => {
                 {/* Title */}
                 <Text style={{
                   ...typography.sectionTitle,
-                  color: tokens.colors.text,
+                  color: themeTokens.colors.text,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.sm,
+                  marginBottom: themeTokens.spacing.sm,
                 }}>
                   Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
                   ...typography.body,
-                  color: tokens.colors.textSecondary,
+                  color: themeTokens.colors.textSecondary,
                   textAlign: 'center',
-                  marginBottom: tokens.spacing.md,
+                  marginBottom: themeTokens.spacing.md,
                 }}>
                   Capture fleeting thoughts without breaking your flow-- a quick reference for your brain! Use voice commands, quick notes, or AI-powered categorization to build your personal knowledge base effortlessly.
                 </Text>
@@ -405,15 +409,15 @@ export const SettingsScreen: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '50%',
-                    backgroundColor: tokens.colors.accent,
-                    paddingVertical: tokens.spacing.sm,
-                    borderRadius: tokens.radius.md,
+                    backgroundColor: themeTokens.colors.accent,
+                    paddingVertical: themeTokens.spacing.sm,
+                    borderRadius: themeTokens.radius.md,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
                 >
                   <Text style={{
                     ...typography.buttonText,
-                    color: tokens.colors.buttonText,
+                    color: themeTokens.colors.buttonText,
                     textAlign: 'center',
                     width: '100%',
                    }}>

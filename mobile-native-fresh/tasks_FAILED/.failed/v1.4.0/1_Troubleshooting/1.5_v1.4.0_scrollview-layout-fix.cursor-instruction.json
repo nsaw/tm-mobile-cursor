@@ -1,0 +1,47 @@
+{
+  "notes": [
+    "🧠 MISSION: Enforce proper layout prop placement in ScrollView components",
+    "🎯 GOAL: Move all layout-related props (alignItems, justifyContent, etc.) from `style` to `contentContainerStyle` in <ScrollView>",
+    "✅ PRE-CHECK: Ensure Expo boots and tsc passes before mutation",
+    "📌 CONTEXT: App is throwing runtime layout errors due to layout props being incorrectly placed on <ScrollView>",
+    "🔧 FIX SUMMARY: Traverse all JSX usages of <ScrollView> and migrate layout props to `contentContainerStyle` while preserving existing `style` props like `flex`, `backgroundColor`, etc.",
+    "🔐 RELEVANCE: React Native requires layout props inside `contentContainerStyle` or runtime will crash"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(snapshot): before ScrollView layout prop fix\"",
+      "git tag v1.4.0_scrollview-layout-pre_$(date -u +%y%m%d_%H%MUTC)",
+      "sh scripts/backup-tag-push.sh v1.4.0_scrollview-layout-pre_$(date -u +%y%m%d_%H%MUTC)"
+    ]
+  },
+  "branch": "fix/v1.4.0_scrollview-layout-fix",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Scan & Fix ScrollView Layout Violations",
+      "actions": [
+        "Search all JSX for <ScrollView ...>",
+        "Identify all inline `style` objects containing layout props: alignItems, justifyContent, flexDirection, gap, rowGap, columnGap, padding, etc.",
+        "Split style props: move layout-related props to `contentContainerStyle`, leave remaining in `style`",
+        "If `contentContainerStyle` already exists, merge layout props into it",
+        "Preserve all existing non-layout style props (e.g., `flex`, `backgroundColor`, `paddingTop`, etc.)"
+      ],
+      "commit": "fix: enforce ScrollView layout props via contentContainerStyle",
+      "tag": "v1.4.0_scrollview-layout-fixed_$(date -u +%y%m%d_%H%MUTC)"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete ScrollView layout compliance for React Native",
+    "tag": "v1.4.0_scrollview-layout-complete_$(date -u +%y%m%d_%H%MUTC)",
+    "notes": "All <ScrollView> components now comply with contentContainerStyle layout rules. App runtime layout errors resolved."
+  }
+}
+

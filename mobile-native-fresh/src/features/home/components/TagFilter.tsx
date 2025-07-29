@@ -26,30 +26,32 @@ export const TagFilter: React.FC<TagFilterProps> = ({
   const [showAllTags, setShowAllTags] = useState(false);
 
   const styles = StyleSheet.create({
-    container: {
-      marginBottom: designTokens.spacing.lg ?? 20,
-    },
-    header: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: designTokens.spacing.sm ?? 10,
-    },
-    title: {
-      fontSize: designTokens.typography.fontSize.body,
-      fontWeight: designTokens.typography.fontWeight.semibold,
-      color: designTokens.colors.textSecondary ?? '#888',
-      marginLeft: designTokens.spacing.sm ?? 10,
-    },
     clearButton: {
       paddingHorizontal: designTokens.spacing.sm ?? 10,
     },
     clearText: {
-      fontSize: designTokens.typography.fontSize.sm,
       color: designTokens.colors.textSecondary ?? '#888',
+      fontSize: designTokens.typography.fontSize.sm,
     },
-    tagsContainer: {
+    container: {
+      marginBottom: designTokens.spacing.lg ?? 20,
+    },
+    filterIcon: {
+      marginRight: designTokens.spacing.xs,
+    },
+    header: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: designTokens.spacing.sm ?? 10,
+    },
+    tag: {
+      borderColor: designTokens.colors.border ?? '#888',
+      borderRadius: designTokens.radius.md ?? 20,
+      borderWidth: 1,
+      marginRight: designTokens.spacing.sm ?? 10,
       paddingHorizontal: designTokens.spacing.lg ?? 20,
+      paddingVertical: designTokens.spacing.sm ?? 5,
     },
     tagRow: {
       flexDirection: 'row',
@@ -58,24 +60,22 @@ export const TagFilter: React.FC<TagFilterProps> = ({
       paddingHorizontal: designTokens.spacing.md ?? 10,
       paddingVertical: designTokens.spacing.sm ?? 5,
     },
-    tag: {
-      paddingHorizontal: designTokens.spacing.lg ?? 20,
-      paddingVertical: designTokens.spacing.sm ?? 5,
-      borderRadius: designTokens.radius.md ?? 20,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border ?? '#888',
-      marginRight: designTokens.spacing.sm ?? 10,
-    },
     tagSelected: {
       backgroundColor: designTokens.colors.accent ?? '#FFD500',
       borderColor: designTokens.colors.accent ?? '#FFD500',
     },
     tagText: {
-      fontSize: designTokens.typography.fontSize.sm,
       color: designTokens.colors.textSecondary ?? '#888',
+      fontSize: designTokens.typography.fontSize.sm,
     },
-    filterIcon: {
-      marginRight: designTokens.spacing.xs,
+    tagsContainer: {
+      paddingHorizontal: designTokens.spacing.lg ?? 20,
+    },
+    title: {
+      color: designTokens.colors.textSecondary ?? '#888',
+      fontSize: designTokens.typography.fontSize.body,
+      fontWeight: designTokens.typography.fontWeight.semibold,
+      marginLeft: designTokens.spacing.sm ?? 10,
     },
   });
 

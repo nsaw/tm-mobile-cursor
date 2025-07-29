@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-button-migration.js",
+    "node scripts/validate-role-assignment.js",
+    "node scripts/test-button-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/button-migration",
+  "notes": [
+    "PATCH NAME: patch-v1.4.220(P1.3.0)_button-migration.json",
+    "SUMMARY NAME: summary-v1.4.220(P1.3.0)_button-migration.md",
+    "GOAL: Migrate Button.tsx → interactiveRole=\"button-action\" with hardened validation",
+    "MISSION: Migrate Button component to nextgen with proper role assignment and comprehensive testing",
+    "CONTEXT: This is the first pilot component migration in Phase 1. Button.tsx will be migrated to src-nextgen/ with interactiveRole=\"button-action\" assignment, serving as a template for future migrations.",
+    "SAFETY ENFORCEMENT: Test button functionality and role assignment, verify visual consistency, validate behavior, ensure proper testing",
+    "STABLE STATE CHECK: Confirm button functionality working, role assignment correct, visual consistency maintained",
+    "🚨 CRITICAL: Must validate role assignment and button behavior before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 0,
+      "task": "Migrate Button.tsx → interactiveRole=\"button-action\" with hardened validation",
+      "version": "v1.4.220(P1.3.0)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Copy Button.tsx to src-nextgen/components/",
+        "Add interactiveRole=\"button-action\" assignment with validation",
+        "Update imports and dependencies",
+        "Install required testing dependencies",
+        "Test button functionality with comprehensive tests",
+        "Validate role assignment behavior",
+        "Create button validation scripts"
+      ],
+      "validation": [
+        "Test button functionality and role assignment",
+        "Verify visual consistency with legacy",
+        "Confirm role assignment working",
+        "Validate button behavior",
+        "Test role assignment validation",
+        "Verify button validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert Button.tsx migration",
+        "Legacy Button.tsx preserved in src-reference/",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "backup-v1.4.220(P1.3.0)_button-migration",
+      "summaryFile": "summary-v1.4.220(P1.3.0)_button-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test button functionality",
+    "Verify role assignment",
+    "Validate visual consistency",
+    "Test button behavior",
+    "Test role assignment validation",
+    "Verify button validation scripts"
+  ],
+  "successCriteria": [
+    "Button component migrated successfully with TypeScript",
+    "Role assignment working correctly with validation",
+    "Visual consistency maintained with tests",
+    "Button behavior validated",
+    "Role assignment validation operational",
+    "Button validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

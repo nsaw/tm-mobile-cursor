@@ -18,81 +18,81 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
-    },
-    scrollView: {
-      flex: 1,
-    },
-    header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: designTokens.spacing.lg,
-      borderBottomWidth: 1,
-      borderBottomColor: designTokens.colors.border ?? '#000',
-    },
-    backButton: {
-      padding: designTokens.spacing.sm,
-    },
-    title: {
-      fontSize: designTokens.typography.fontSize.heading,
-      fontWeight: '700',
-      color: designTokens.colors.text ?? '#000',
-      fontFamily: designTokens.typography.fontFamily.heading,
-    },
-    headerRight: {
-      width: 48,
-    },
     accessDenied: {
+      alignItems: 'center',
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
       padding: designTokens.spacing.xl,
     },
+    accessDeniedText: {
+      color: designTokens.colors.textSecondary ?? '#666',
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.sm,
+      marginTop: designTokens.spacing.sm,
+      textAlign: 'center',
+    },
     accessDeniedTitle: {
+      color: designTokens.colors.danger ?? '#FF3B30',
+      fontFamily: designTokens.typography.fontFamily.heading,
       fontSize: designTokens.typography.fontSize.heading,
       fontWeight: '700',
-      color: designTokens.colors.danger ?? '#FF3B30',
       marginTop: designTokens.spacing.md,
-      fontFamily: designTokens.typography.fontFamily.heading,
     },
-    accessDeniedText: {
-      fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.textSecondary ?? '#666',
-      textAlign: 'center',
-      marginTop: designTokens.spacing.sm,
-      fontFamily: designTokens.typography.fontFamily.body,
+    adminButton: {
+      justifyContent: 'flex-start',
     },
     adminInfoCard: {
       margin: designTokens.spacing.lg,
     },
-    adminInfoTitle: {
-      fontSize: designTokens.typography.fontSize.xl,
-      fontWeight: '600',
-      color: designTokens.colors.text ?? '#000',
-      fontFamily: designTokens.typography.fontFamily.heading,
-    },
     adminInfoText: {
-      fontSize: designTokens.typography.fontSize.sm,
       color: designTokens.colors.textSecondary ?? '#666',
       fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.sm,
+    },
+    adminInfoTitle: {
+      color: designTokens.colors.text ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.xl,
+      fontWeight: '600',
+    },
+    backButton: {
+      padding: designTokens.spacing.sm,
+    },
+    buttonGrid: {
+      gap: designTokens.spacing.md,
+    },
+    container: {
+      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
+      flex: 1,
+    },
+    header: {
+      alignItems: 'center',
+      borderBottomColor: designTokens.colors.border ?? '#000',
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: designTokens.spacing.lg,
+    },
+    headerRight: {
+      width: 48,
+    },
+    scrollView: {
+      flex: 1,
     },
     section: {
       margin: designTokens.spacing.lg,
     },
     sectionTitle: {
-      fontSize: designTokens.typography.fontSize.xl,
-      fontWeight: '600',
       color: designTokens.colors.text ?? '#000',
       fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.xl,
+      fontWeight: '600',
     },
-    buttonGrid: {
-      gap: designTokens.spacing.md,
-    },
-    adminButton: {
-      justifyContent: 'flex-start',
+    title: {
+      color: designTokens.colors.text ?? '#000',
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.heading,
+      fontWeight: '700',
     },
   });
 
@@ -200,36 +200,28 @@ export const AdminDashboardScreen: React.FC = ({ navigation }: any) => {
                 onPress={handleDesignSystemDemo}
                 leftIcon={<Ionicons name="color-palette-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Design System Demo
-              </Button>
+              ><Text>Design System Demo</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleDatabaseReset}
                 leftIcon={<Ionicons name="refresh-outline" size={16} color={getIconColor('danger')} />}
                 style={styles.adminButton}
-              >
-                Reset Database
-              </Button>
+              ><Text>Reset Database</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleExportData}
                 leftIcon={<Ionicons name="download-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Export Data
-              </Button>
+              ><Text>Export Data</Text></Button>
 
               <Button
                 variant="outline"
                 onPress={handleImportData}
                 leftIcon={<Ionicons name="cloud-upload-outline" size={16} color={getIconColor('accent')} />}
                 style={styles.adminButton}
-              >
-                Import Data
-              </Button>
+              ><Text>Import Data</Text></Button>
             </View>
           </CardContent>
         </Card>

@@ -58,7 +58,7 @@ import { UnifiedThoughtmarkScreen } from '../features/thoughtmarks/screens/Unifi
 
 // Bins Screens
 import { AllBinsScreen } from '../features/bins/screens/AllBinsScreen';
-import { CreateBinScreen } from '../features/bins/screens/CreateBinScreen';
+import CreateBinScreen from '../features/bins/screens/CreateBinScreen';
 
 import { RootStackParamList } from './types';
 

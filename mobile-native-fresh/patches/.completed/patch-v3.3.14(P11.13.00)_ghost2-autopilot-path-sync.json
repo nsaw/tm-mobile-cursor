@@ -1,0 +1,82 @@
+{
+  "showInUI": true,
+  "blockId": "patch-v3.3.14(P11.13.00)_ghost2-autopilot-path-sync",
+  "description": "Sync BRAUN with GHOST 2.x unified patch+summary routing",
+  "target": "MAIN",
+  "version": "patch-v3.3.14(P11.13.00)_ghost2-autopilot-path-sync",
+
+  "notes": [
+    "GOAL: Align BRAUN's autopilot and summary routing with the GHOST 2.x unified directory system",
+    "MISSION: Replace legacy `tasks/` folder watchers and summary writers",
+    "CONTEXT: Phase 3 patching and roadmap have fully transitioned to `.cursor-cache` protocol",
+    "SAFETY ENFORCEMENT: Patch is fully non-destructive and only adjusts routing hooks",
+    "STABLE STATE CHECK: Patch must validate summary outputs, GHOST loop handoff, and .archive/.completed sync logic",
+    "VALIDATION REQUIREMENTS:",
+    "[ ] GHOST picks up patch from `.cursor-cache/MAIN/patches/`",
+    "[ ] BRAUN writes summary to `.cursor-cache/CYOPS/summaries/`",
+    "[ ] Hook daemon no longer polls `mobile-native-fresh/tasks/` unless manually triggered",
+    "[ ] All logs + writebacks go through updated paths",
+    "EXECUTION DIRECTIVES:",
+    "- Update watchers to point at `.cursor-cache/MAIN/patches/`",
+    "- Move legacy summaries to `.archive/` after 2 days",
+    "- Rewrite doc daemon to target unified summary dir for `INDEX.md`"
+  ],
+
+  "preCommit": {
+    "backup": {
+      "path": "/Users/sawyer/gitSync/_backups/",
+      "file": "20250721_UTC_v3.3.14(P11.13.00)_ghost2-autopilot-path-sync_backup_gpt-cursor-runner.tar.gz"
+    },
+    "shell": [
+      "echo '[⚙️] Syncing BRAUN routing paths to unified GHOST 2.x spec...'"
+    ]
+  },
+
+  "mutations": [
+    {
+      "path": "/Users/sawyer/gitSync/gpt-cursor-runner/scripts/constants/paths.js",
+      "contents": "export const PATCH_WATCH_DIR = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches/';\nexport const PATCH_COMPLETED_DIR = '/Users/sawyer/gitSync/.cursor-cache/MAIN/patches/.completed/';\nexport const SUMMARY_WRITE_DIR = '/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/';\nexport const SUMMARY_ARCHIVE_DIR = '/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/.archive/';"
+    },
+    {
+      "path": "/Users/sawyer/gitSync/gpt-cursor-runner/scripts/watchers/patch-watcher.js",
+      "contents": "import { PATCH_WATCH_DIR } from '../constants/paths.js';\n// Watcher logic updated to poll PATCH_WATCH_DIR exclusively"
+    },
+    {
+      "path": "/Users/sawyer/gitSync/gpt-cursor-runner/scripts/summary-writer.js",
+      "contents": "import { SUMMARY_WRITE_DIR } from '../constants/paths.js';\n// Writer logic now pushes all summaries to SUMMARY_WRITE_DIR"
+    }
+  ],
+
+  "postMutationBuild": {
+    "shell": [
+      "timeout 60s tsc --noEmit || exit 101",
+      "timeout 60s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102",
+      "timeout 60s bash scripts/validate-watchers.sh || exit 103",
+      "timeout 60s bash scripts/validate-summary-writes.sh || exit 104"
+    ]
+  },
+
+  "validate": {
+    "shell": [
+      "test -d /Users/sawyer/gitSync/.cursor-cache/MAIN/patches/ || exit 108",
+      "test -d /Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/ || exit 109"
+    ]
+  },
+
+  "final": {
+    "git": {
+      "commit": "[P11.13.00] ghost2-autopilot-path-sync — reroute patch and summary to unified folders",
+      "tag": "patch-v3.3.14(P11.13.00)_ghost2-autopilot-path-sync"
+    },
+    "summary": "✅ patch-v3.3.14(P11.13.00)_ghost2-autopilot-path-sync: BRAUN now syncing to .cursor-cache/MAIN/patches/ and writing to CYOPS summaries.",
+    "summaryFile": "/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/patch-v3.3.14(P11.13.00)_ghost2-autopilot-path-sync.md"
+  },
+
+  "blockCommitOnError": true,
+  "watchConsole": true,
+
+  "execution": {
+    "autoReleaseTimeoutMs": 30000,
+    "onReloadHang": "Move to background and resume automatically"
+  }
+}

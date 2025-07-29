@@ -1,0 +1,23 @@
+{
+  "branch": "chore/lint-fix-background",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Run and Watch ESLint",
+      "actions": [
+        "Continuously run `npm run lint:fix-all` in watch mode",
+        "Auto-commit minor fixes",
+        "Ignore theme, types, and util file changes for restart"
+      ],
+      "commit": "chore: background lint autofix enabled",
+      "tag": "v1.2.2_lint-watch"
+    }
+  ],
+  "final": {
+    "commit": "chore: lint fix loop active",
+    "tag": "v1.2.2_lint-loop",
+    "notes": "Maintains clean state during all v1.2.2 refactors"
+  }
+}

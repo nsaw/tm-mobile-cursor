@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../features/auth/hooks/useAuth';
+
 import { Text } from './Text';
 import { Button } from './Button';
 
@@ -116,30 +117,30 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
 
 // tokens are passed from the parent component, useTheme is called in the component scope.
 const getStyles = (tokens: any) => StyleSheet.create({
+  buttonContainer: {
+    maxWidth: 200,
+    width: '100%',
+  },
   container: {
-    flex: 1,
-    backgroundColor: tokens.colors.background,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: tokens.colors.background,
+    flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: tokens.spacing.lg,
   },
   content: {
     alignItems: 'center',
     maxWidth: 400,
   },
-  title: {
-    color: tokens.colors.text,
-    textAlign: 'center',
-    marginBottom: tokens.spacing.md,
-  },
   subtitle: {
     color: tokens.colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: tokens.spacing.xl,
     lineHeight: 24,
+    marginBottom: tokens.spacing.xl,
+    textAlign: 'center',
   },
-  buttonContainer: {
-    width: '100%',
-    maxWidth: 200,
+  title: {
+    color: tokens.colors.text,
+    marginBottom: tokens.spacing.md,
+    textAlign: 'center',
   },
 }); 

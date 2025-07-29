@@ -1,0 +1,61 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.333(P2.4.3)_form-restore-sentinel.json",
+    "SUMMARY NAME: summary-v1.4.333(P2.4.3)_form-restore-sentinel.md",
+    "GOAL: Add form state restoration sentinel for dual-mount auth flows",
+    "MISSION: Create a sentinel component to catch and restore lost form state in onboarding and dual-mounted authentication flows",
+    "CONTEXT: During dual-mount migration, form state can be lost when switching between legacy and nextgen environments. This sentinel ensures form data persistence across environment switches.",
+    "SAFETY ENFORCEMENT: Form state must be preserved, restored correctly, and not interfere with authentication flows",
+    "STABLE STATE CHECK: Confirm form state restoration working, no data loss, and seamless environment switching"
+  ],
+  "phases": [
+    {
+      "phase": 2,
+      "step": 4,
+      "attempt": 3,
+      "task": "Add form restore sentinel for dual-mount auth flows",
+      "version": "v1.4.333(P2.4.3)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Create FormRestoreSentinel component",
+        "Implement form state persistence mechanism",
+        "Add state restoration for onboarding flows",
+        "Add state restoration for authentication flows",
+        "Test state persistence across environment switches",
+        "Validate no data loss during environment transitions"
+      ],
+      "validation": [
+        "Form state preserved across environment switches",
+        "No data loss during environment transitions",
+        "State restoration works for onboarding flows",
+        "State restoration works for authentication flows",
+        "No interference with authentication security"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can remove FormRestoreSentinel component",
+        "Form state will revert to default behavior"
+      ],
+      "gitTag": "form-v1.4.333(P2.4.3)_form-restore-sentinel",
+      "summaryFile": "summary-v1.4.333(P2.4.3)_form-restore-sentinel.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Form state preserved across environment switches",
+    "No data loss during environment transitions",
+    "State restoration works correctly",
+    "No interference with authentication security"
+  ],
+  "successCriteria": [
+    "Form state preserved across environment switches",
+    "No data loss during environment transitions",
+    "State restoration works for onboarding flows",
+    "State restoration works for authentication flows",
+    "No interference with authentication security",
+    "Seamless environment switching with form data intact"
+  ]
+} 

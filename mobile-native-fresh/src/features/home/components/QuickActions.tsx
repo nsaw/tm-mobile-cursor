@@ -18,38 +18,38 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
+    actionButton: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.accent,
+      borderRadius: designTokens.radius.md,
+      justifyContent: 'center',
+      minWidth: 80,
+      padding: designTokens.spacing.md,
+    },
+    actionButton2: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.accent,
+      borderRadius: designTokens.radius.md,
+      justifyContent: 'center',
+      minWidth: 80,
+      padding: designTokens.spacing.md,
+    },
+    actionButton3: {
+      alignItems: 'center',
+      backgroundColor: designTokens.colors.accent,
+      borderRadius: designTokens.radius.md,
+      justifyContent: 'center',
+      minWidth: 80,
+      padding: designTokens.spacing.md,
+    },
+    actionIcon: {
+      color: designTokens.colors.background,
+    },
     container: {
       flexDirection: 'row',
       justifyContent: 'space-around',
       paddingHorizontal: designTokens.spacing.lg,
       paddingVertical: designTokens.spacing.md,
-    },
-    actionButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: designTokens.colors.accent,
-      padding: designTokens.spacing.md,
-      borderRadius: designTokens.radius.md,
-      minWidth: 80,
-    },
-    actionIcon: {
-      color: designTokens.colors.background,
-    },
-    actionButton2: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: designTokens.colors.accent,
-      padding: designTokens.spacing.md,
-      borderRadius: designTokens.radius.md,
-      minWidth: 80,
-    },
-    actionButton3: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: designTokens.colors.accent,
-      padding: designTokens.spacing.md,
-      borderRadius: designTokens.radius.md,
-      minWidth: 80,
     },
   });
 

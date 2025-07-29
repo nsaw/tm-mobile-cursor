@@ -1,0 +1,43 @@
+{
+    "notes": [
+      "🧠 MISSION: Reopen black screen debugging after ScrollView layout fixes failed to restore UI",
+      "🎯 GOAL: Identify the next blocking runtime error or rendering exception that prevents Dashboard or UI from displaying, even after header/header-left/header-right layout fixes",
+      "📌 CONTEXT:",
+      "- All DebugScrollView violations reported by debugId (header, header-left, header-right) are now patched",
+      "- No new ScrollView layout violations are logged",
+      "- However, the app still renders a black screen post-login, post-demo load",
+      "- This implies another component in the render tree is crashing or failing silently during mount",
+      "💥 HYPOTHESIS:",
+      "- A non-wrapped ScrollView (or another layout container) might be applying forbidden layout props",
+      "- OR a different component (e.g., VoiceRecorderProvider, OnboardingModal, FloatingActionButton) is throwing or returning null",
+      "🔧 FIX SUMMARY: Run a stepped trace from AppContent → SessionHydrationGuard → AppNavigator → MainStack → DashboardScreen. Log visible breadcrumbs and add conditional test renders. Fallback to placeholder content if component fails. Goal: restore any visible output, even a dummy div, to confirm crash source."
+    ],
+    "branch": "fix/v1.4.0_post-patch-blackout-trace",
+    "mode": "manual",
+    "watchConsole": true,
+    "parseCheck": true,
+    "onParseFail": "revert-and-alert",
+    "postMutationBuild": "tsc --noEmit && npm run lint && npx expo start --dev-client",
+    "blockCommitOnError": true,
+    "alertUserOnParseFail": true,
+    "phases": [
+      {
+        "section": "Black Screen Recovery After Layout Fixes",
+        "actions": [
+          "Instrument AppNavigator, MainStack, and DashboardScreen with console.warn checkpoints at each render level",
+          "Add fallback return content (e.g., <Text>Failed to mount Dashboard</Text>) if any render logic conditionally returns null",
+          "Wrap risky components like VoiceRecorderProvider and FloatingActionButton with try/catch boundaries or remove temporarily",
+          "Confirm if any image loads, animation inits, or layout transitions are throwing",
+          "Fallback: Replace DashboardScreen temporarily with a <View><Text>Dashboard Booted</Text></View> and reintroduce blocks one by one"
+        ],
+        "commit": "fix: reestablished visual output and isolated new crash source post-layout fix",
+        "tag": "v1.4.0_dashboard-blackout-fixed_$(date -u +%y%m%d_%H%MUTC)"
+      }
+    ],
+    "final": {
+      "commit": "chore: restored post-demo dashboard rendering; ScrollView tracing back online",
+      "tag": "v1.4.0_postpatch-ui-restored_$(date -u +%y%m%d_%H%MUTC)",
+      "notes": "Black screen resolved after layout patching. Remaining render blocker isolated and patched. UI now visible. Resuming live violation tracing."
+    }
+  }
+  

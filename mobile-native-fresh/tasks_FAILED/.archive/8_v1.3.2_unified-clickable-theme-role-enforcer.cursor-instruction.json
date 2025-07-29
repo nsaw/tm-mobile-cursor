@@ -1,0 +1,65 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Enforce and Auto-Fix All Clickable, Theme, Role, and Accessibility Violations",
+    "\ud83c\udfaf GOAL: Run a full app audit and apply automated corrections to ensure all clickable elements function, route, and present correct role/theme/aria behavior.",
+    "\u2705 PRE-CHECK: Tag + commit a rollback state. Skip if already on v1.3.2_final-functional-QA.",
+    "\ud83d\udccc CONTEXT: This replaces prior crawl blocks and auto-fixes layout, roleView, handler, accessibility, and token violations.",
+    "\ud83d\udd10 RELEVANCE: Prepares the app for UI/role refactors with full routing/styling/semantic integrity."
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before v1.3.2\"",
+      "git tag v1.3.2_pre-v1.3.2_250701_UTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-v1.3.2_250701_UTC"
+    ]
+  },
+  "branch": "feature/v1.3.2_unified-enforcer",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Phase 1: Dry Audit + Map",
+      "actions": [
+        "Run clickable + routing audit on all pages and components",
+        "Log unlinked targets, missing pages, dead clickables, and raw token violations"
+      ],
+      "commit": "test: audit dry run",
+      "tag": "v1.3.2_enforce-audit_250630_XXXXUTC"
+    },
+    {
+      "section": "Phase 2: Automated Fix + Creation",
+      "actions": [
+        "Convert eligible Views to AutoRoleView",
+        "Hoist/merge useTheme, dedupe hooks",
+        "Fix/attach onPress handlers or stub with console.warn",
+        "Create missing screens with correct structure",
+        "Fix accessibility props for buttons, links, forms",
+        "Convert raw tokens to theme tokens or annotate with REVIEW"
+      ],
+      "commit": "fix: auto role, theme, nav, accessibility enforcement",
+      "tag": "v1.3.2_enforce-fix_250630_XXXXUTC"
+    },
+    {
+      "section": "Phase 3: Live Script Setup",
+      "actions": [
+        "Install unified-clickable-audit-fix.js to scripts/",
+        "Bind to lint-staged or Git hook (manual step)",
+        "Log all live violations on every push"
+      ],
+      "commit": "chore: add future enforcement hook",
+      "tag": "v1.3.2_enforce-script-added_250630_XXXXUTC"
+    }
+  ],
+  "final": {
+    "commit": "feat: apply global theme/role mappings",
+    "tag": "v1.3.2_v1.3.2_complete_250701_UTC",
+    "notes": "Updated for post-token-refactor validation and safe runtime boot."
+  }
+}

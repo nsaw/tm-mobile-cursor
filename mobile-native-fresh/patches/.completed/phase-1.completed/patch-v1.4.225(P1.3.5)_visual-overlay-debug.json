@@ -1,0 +1,67 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-visual-overlay.js",
+    "node scripts/validate-role-highlighting.js",
+    "node scripts/test-debug-overlay.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/role-visual-overlay",
+  "notes": [
+    "🧠 Visual Overlay Debug Patch with Hardened Validation",
+    "🎯 Add dev-only debug layer to highlight active roles at runtime",
+    "✅ `highlight-roles.debug()` shows RoleWrapper assignments",
+    "🚨 CRITICAL: Must validate role highlighting and debug overlay before proceeding"
+  ],
+  "phases": [
+    {
+      "section": "P1.3.5 Overlay Debug Patch with Hardened Validation",
+      "actions": [
+        "Add debug overlay to RoleWrapper.tsx with validation",
+        "Expose toggle via ENV + dev menu with comprehensive testing",
+        "Install required testing dependencies",
+        "Create role highlighting validation scripts"
+      ],
+      "commit": "feat: role debug overlay for visual QA with hardened validation",
+      "tag": "v1.4.225(P1.3.5)_visual-role-overlay"
+    }
+  ],
+  "final": {
+    "commit": "chore: finalize role debug overlay with comprehensive testing",
+    "tag": "v1.4.225(P1.3.5)_visual-role-overlay-final",
+    "notes": "Role overlays now visually show in dev mode with hardened validation"
+  },
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test visual overlay functionality",
+    "Verify role highlighting",
+    "Validate debug overlay behavior",
+    "Test role highlighting validation",
+    "Verify debug overlay scripts"
+  ],
+  "successCriteria": [
+    "Visual overlay debug operational with TypeScript",
+    "Role highlighting working with validation",
+    "Debug overlay functional with tests",
+    "Role highlighting validation operational",
+    "Debug overlay scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-bottomnav-migration.js",
+    "node scripts/validate-navigation-role.js",
+    "node scripts/test-sacred-component-protection.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/bottomnav-migration",
+  "notes": [
+    "PATCH NAME: patch-v1.4.224(P1.3.4)_bottomnav-migration.json",
+    "SUMMARY NAME: summary-v1.4.224(P1.3.4)_bottomnav-migration.md",
+    "GOAL: Migrate BottomNav.tsx → layoutRole=\"navigation\" with hardened validation",
+    "MISSION: Migrate BottomNav component as sacred component with layout role and comprehensive testing",
+    "CONTEXT: BottomNav is a sacred component that must be preserved via import mechanism. This migration demonstrates the sacred component protection strategy in the E approach.",
+    "SAFETY ENFORCEMENT: Test BottomNav functionality and navigation role, verify sacred component protection, validate import mechanism, ensure proper testing",
+    "STABLE STATE CHECK: Confirm BottomNav functionality working, navigation role assigned, sacred component protection active",
+    "🚨 CRITICAL: Must validate sacred component protection and import mechanism before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 4,
+      "task": "Migrate BottomNav.tsx → layoutRole=\"navigation\" with hardened validation",
+      "version": "v1.4.224(P1.3.4)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Copy BottomNav.tsx to src-nextgen/components/",
+        "Add layoutRole=\"navigation\" assignment with validation",
+        "Configure sacred component import protection",
+        "Install required testing dependencies",
+        "Test BottomNav functionality with comprehensive tests",
+        "Validate navigation role assignment behavior",
+        "Create sacred component validation scripts"
+      ],
+      "validation": [
+        "Test BottomNav functionality and navigation role",
+        "Verify sacred component import protection",
+        "Confirm navigation role working",
+        "Validate BottomNav behavior",
+        "Test sacred component protection validation",
+        "Verify sacred component validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert BottomNav.tsx migration",
+        "Legacy BottomNav.tsx preserved in src-reference/",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "backup-v1.4.224(P1.3.4)_bottomnav-migration",
+      "summaryFile": "summary-v1.4.224(P1.3.4)_bottomnav-migration.md",
+      "sacredComponent": true,
+      "protectionMethod": "import"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test BottomNav functionality",
+    "Verify navigation role assignment",
+    "Validate sacred component protection",
+    "Test import mechanism",
+    "Test sacred component protection validation",
+    "Verify sacred component validation scripts"
+  ],
+  "successCriteria": [
+    "BottomNav component migrated successfully with TypeScript",
+    "Navigation role assigned correctly with validation",
+    "Sacred component protection active with tests",
+    "Import mechanism working",
+    "Sacred component protection validation operational",
+    "Sacred component validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

@@ -1,0 +1,406 @@
+{
+  "timestamp": "2025-07-23T22:54:56.437Z",
+  "stats": {
+    "monitoringRuns": 12,
+    "violationsDetected": 0,
+    "performanceIssues": 2,
+    "complianceChecks": 4,
+    "trainingSessions": 0,
+    "errors": 12,
+    "lastRun": null
+  },
+  "performance": {
+    "current": {
+      "cpuUsage": 27.486172840245658,
+      "memoryUsage": 69.02458019064845,
+      "diskUsage": 24.350700188488407,
+      "processCount": 0,
+      "fileCount": 0
+    },
+    "history": [
+      {
+        "timestamp": "2025-07-23T22:34:56.459Z",
+        "metric": "cpuUsage",
+        "value": 52.44253787665858,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:34:56.459Z",
+        "metric": "memoryUsage",
+        "value": 51.54448817516706,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:34:56.460Z",
+        "metric": "diskUsage",
+        "value": 53.927750127805126,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:34:56.460Z",
+        "metric": "processCount",
+        "value": 0,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:34:56.460Z",
+        "metric": "fileCount",
+        "value": 0,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:44:56.460Z",
+        "metric": "cpuUsage",
+        "value": 80.77357743129903,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:44:56.460Z",
+        "metric": "memoryUsage",
+        "value": 55.942962132251715,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:44:56.460Z",
+        "metric": "diskUsage",
+        "value": 50.92636065932884,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:44:56.460Z",
+        "metric": "processCount",
+        "value": 0,
+        "details": {}
+      },
+      {
+        "timestamp": "2025-07-23T22:44:56.461Z",
+        "metric": "fileCount",
+        "value": 0,
+        "details": {}
+      }
+    ]
+  },
+  "violations": {
+    "recent": [],
+    "total": 0
+  },
+  "compliance": {
+    "recent": [
+      {
+        "timestamp": "2025-07-23T21:54:56.895Z",
+        "report": {
+          "timestamp": "2025-07-23T21:54:56.895Z",
+          "stats": {
+            "agentsMonitored": 0,
+            "complianceChecks": 0,
+            "violationsDetected": 0,
+            "warningsIssued": 0,
+            "trainingSessions": 0,
+            "errors": 0,
+            "isMonitoring": false,
+            "agentStatus": {}
+          },
+          "agents": [
+            {
+              "name": "BRAUN",
+              "description": "Main agent for patch execution",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "node scripts/",
+                "bash scripts/"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "DEV",
+              "description": "Development agent for code changes",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "npm run",
+                "npx"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "GHOST",
+              "description": "Ghost runner agent",
+              "paths": [
+                "scripts/ghost/",
+                "gpt_cursor_runner/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "python3 -m"
+              ],
+              "complianceLevel": "CRITICAL",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            }
+          ],
+          "summary": {
+            "overallCompliance": "COMPLIANT",
+            "riskLevel": "LOW",
+            "trainingNeeded": false
+          }
+        }
+      },
+      {
+        "timestamp": "2025-07-23T22:09:56.484Z",
+        "report": {
+          "timestamp": "2025-07-23T22:09:56.484Z",
+          "stats": {
+            "agentsMonitored": 0,
+            "complianceChecks": 0,
+            "violationsDetected": 0,
+            "warningsIssued": 0,
+            "trainingSessions": 0,
+            "errors": 0,
+            "isMonitoring": false,
+            "agentStatus": {}
+          },
+          "agents": [
+            {
+              "name": "BRAUN",
+              "description": "Main agent for patch execution",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "node scripts/",
+                "bash scripts/"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "DEV",
+              "description": "Development agent for code changes",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "npm run",
+                "npx"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "GHOST",
+              "description": "Ghost runner agent",
+              "paths": [
+                "scripts/ghost/",
+                "gpt_cursor_runner/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "python3 -m"
+              ],
+              "complianceLevel": "CRITICAL",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            }
+          ],
+          "summary": {
+            "overallCompliance": "COMPLIANT",
+            "riskLevel": "LOW",
+            "trainingNeeded": false
+          }
+        }
+      },
+      {
+        "timestamp": "2025-07-23T22:24:56.460Z",
+        "report": {
+          "timestamp": "2025-07-23T22:24:56.460Z",
+          "stats": {
+            "agentsMonitored": 0,
+            "complianceChecks": 0,
+            "violationsDetected": 0,
+            "warningsIssued": 0,
+            "trainingSessions": 0,
+            "errors": 0,
+            "isMonitoring": false,
+            "agentStatus": {}
+          },
+          "agents": [
+            {
+              "name": "BRAUN",
+              "description": "Main agent for patch execution",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "node scripts/",
+                "bash scripts/"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "DEV",
+              "description": "Development agent for code changes",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "npm run",
+                "npx"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "GHOST",
+              "description": "Ghost runner agent",
+              "paths": [
+                "scripts/ghost/",
+                "gpt_cursor_runner/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "python3 -m"
+              ],
+              "complianceLevel": "CRITICAL",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            }
+          ],
+          "summary": {
+            "overallCompliance": "COMPLIANT",
+            "riskLevel": "LOW",
+            "trainingNeeded": false
+          }
+        }
+      },
+      {
+        "timestamp": "2025-07-23T22:39:56.456Z",
+        "report": {
+          "timestamp": "2025-07-23T22:39:56.456Z",
+          "stats": {
+            "agentsMonitored": 0,
+            "complianceChecks": 0,
+            "violationsDetected": 0,
+            "warningsIssued": 0,
+            "trainingSessions": 0,
+            "errors": 0,
+            "isMonitoring": false,
+            "agentStatus": {}
+          },
+          "agents": [
+            {
+              "name": "BRAUN",
+              "description": "Main agent for patch execution",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "node scripts/",
+                "bash scripts/"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "DEV",
+              "description": "Development agent for code changes",
+              "paths": [
+                "scripts/",
+                "mobile-native-fresh/scripts/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "npm run",
+                "npx"
+              ],
+              "complianceLevel": "HIGH",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            },
+            {
+              "name": "GHOST",
+              "description": "Ghost runner agent",
+              "paths": [
+                "scripts/ghost/",
+                "gpt_cursor_runner/"
+              ],
+              "patterns": [
+                "execSync",
+                "exec",
+                "python3 -m"
+              ],
+              "complianceLevel": "CRITICAL",
+              "status": {
+                "complianceLevel": "UNKNOWN"
+              }
+            }
+          ],
+          "summary": {
+            "overallCompliance": "COMPLIANT",
+            "riskLevel": "LOW",
+            "trainingNeeded": false
+          }
+        }
+      }
+    ],
+    "total": 4
+  },
+  "summary": {
+    "overallHealth": "FAIR",
+    "recommendations": [
+      "Investigate performance issues and optimize resource usage",
+      "Review and fix monitoring system errors"
+    ],
+    "nextActions": [
+      "ROUTINE: Continue daily monitoring and validation"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "branch": "release/v1.2.2-visual-polish",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Text & Readability Repair",
+      "actions": [
+        "Wrap unwrapped strings in <Text>",
+        "Fix layout clipping from missing numberOfLines or flexShrink",
+        "Apply typography tokens: title, sectionTitle, body"
+      ],
+      "commit": "fix: restore readability and text wrapping",
+      "tag": "v1.2.2_text-fix"
+    },
+    {
+      "section": "Spacing & Layout Realignment",
+      "actions": [
+        "Fix margin/padding for BinCard, AIToolsCard, ThoughtmarkCard",
+        "Use spacing tokens for vertical rhythm: spacing.md and spacing.lg",
+        "Ensure spacing.pagePaddingHorizontal is used on all screen containers"
+      ],
+      "commit": "fix: spacing and card layout realignment",
+      "tag": "v1.2.2_spacing-aligned"
+    },
+    {
+      "section": "Visual Structure Cleanup",
+      "actions": [
+        "Realign tags, icons, and badges within cards",
+        "Ensure FAB does not overlap content or violate SafeAreaView",
+        "Fix card title placement using typography + spacing tokens"
+      ],
+      "commit": "fix: visual hierarchy cleanup",
+      "tag": "v1.2.2_visual-structure"
+    },
+    {
+      "section": "Final Token & Theming Compliance",
+      "actions": [
+        "Run `npm run lint:check-theme`",
+        "Fix all remaining token violations via `useTheme()`",
+        "Run `scripts/verify-theming-architecture.sh`"
+      ],
+      "commit": "chore: theme compliance verified",
+      "tag": "v1.2.2_theme-verified"
+    }
+  ],
+  "final": {
+    "commit": "chore: polish pass complete \u2014 v1.2.2_visual-polish",
+    "tag": "v1.2.2_visual-polish",
+    "notes": "This polish pass preserves layout structure and architecture introduced in 1.2. Only spacing, wrapping, and visual hierarchy were corrected. Typography tokens and spacing scale are now compliant with the fluid theme."
+  }
+}

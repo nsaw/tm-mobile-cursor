@@ -111,6 +111,10 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
+  blurContainer: {
+    borderRadius: 16, // Squircle shape
+    overflow: 'hidden',
+  },
   container: {
     position: 'absolute',
     left: '50%',
@@ -118,14 +122,10 @@ const styles = StyleSheet.create({
     zIndex: 40,
     alignItems: 'center',
   },
-  blurContainer: {
-    borderRadius: 16, // Squircle shape
-    overflow: 'hidden',
-  },
   fab: {
-    width: 60,
+    borderRadius: 16,
     height: 60,
-    borderRadius: 16, // Squircle shape
+    width: 60, // Squircle shape
   },
   fabButton: {
     width: '100%',
@@ -135,19 +135,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  recordingIndicator: {
-    position: 'absolute',
-    top: -8,
-    right: -8,
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   recordingDot: {
-    width: 8,
-    height: 8,
     borderRadius: 4,
+    height: 8,
+    width: 8,
+  },
+  recordingIndicator: {
+    alignItems: 'center',
+    borderRadius: 8,
+    height: 16,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: -8,
+    top: -8,
+    width: 16,
   },
 }); 

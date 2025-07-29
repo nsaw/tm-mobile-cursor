@@ -1,0 +1,1 @@
+{"id": "patch-v1.4.40(P1.00.24)_test-executor-fixed", "version": "v1.4.40(P1.00.24)", "description": "Test patch to verify fixed executor", "target": "MAIN", "timestamp": "2025-07-23T21:10:00Z", "test": true}

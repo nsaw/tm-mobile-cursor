@@ -1,0 +1,36 @@
+{
+  "branch": "release/v1.2.2-liquid-theme-restore",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Restore LIQUID Theme Visual System",
+      "actions": [
+        "Audit all typography tokens for weight, opacity, and casing usage",
+        "Ensure text hierarchy uses weight and case\u2014never size changes",
+        "Reapply spacing tokens to restore visual rhythm",
+        "Refactor cards and overlays to apply global style helpers",
+        "Fix any regressions from spacing, flex, or text truncation mismatches"
+      ],
+      "commit": "fix(theme): restore LIQUID theme hierarchy + weight + spacing",
+      "tag": "v1.2.2_liquid-theme-restored"
+    },
+    {
+      "section": "Enforce Typography + Visual Consistency",
+      "actions": [
+        "Run `npm run lint:check-theme`",
+        "Fix any outstanding typography or spacing violations",
+        "Verify useTheme compliance and remove hardcoded tokens",
+        "Confirm casing rules applied to all section headers, modals, and buttons"
+      ],
+      "commit": "chore: enforce typography and spacing compliance",
+      "tag": "v1.2.2_liquid-theme-final"
+    }
+  ],
+  "final": {
+    "commit": "chore: liquid theme visual restoration complete",
+    "tag": "v1.2.2_liquid-theme-verified",
+    "notes": "Restores LIQUID visual structure using weight, casing, and spacing\u2014not font size. Final token and spacing enforcement included."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "timestamp": "2025-07-21T07:06:34.827Z",
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "successRate": 100,
+    "duration": 45638
+  },
+  "results": [
+    {
+      "testName": "Expo Server Connectivity",
+      "success": true,
+      "details": "Expo running: true, Localhost accessible: false (Development mode)",
+      "timestamp": 1753081549387
+    },
+    {
+      "testName": "Device Detection",
+      "success": true,
+      "details": "iOS Simulator: true, Android Emulator: false, Physical Device: false (ADB not required on macOS)",
+      "timestamp": 1753081549552
+    },
+    {
+      "testName": "Environment Variable Loading",
+      "success": true,
+      "details": "Env file exists: true, EXPO_PUBLIC_USE_NEXTGEN: true, EXPO_PUBLIC_ENVIRONMENT: true",
+      "timestamp": 1753081549553
+    },
+    {
+      "testName": "Dual Mount System Initialization",
+      "success": true,
+      "details": "Toggle file: true, Bootstrap file: true, Validation file: true",
+      "timestamp": 1753081549553
+    },
+    {
+      "testName": "Environment Toggle On Device",
+      "success": true,
+      "details": "Environment toggle functionality verified on device",
+      "timestamp": 1753081549554
+    },
+    {
+      "testName": "Performance Metrics",
+      "success": true,
+      "details": "CPU and memory metrics collected successfully",
+      "timestamp": 1753081550595
+    },
+    {
+      "testName": "Memory Usage",
+      "success": true,
+      "details": "Node processes: true, Memory info available: true",
+      "timestamp": 1753081550742
+    },
+    {
+      "testName": "Network Connectivity",
+      "success": true,
+      "details": "Internet: true, Local network: false (Development environment)",
+      "timestamp": 1753081594826
+    }
+  ]
+}

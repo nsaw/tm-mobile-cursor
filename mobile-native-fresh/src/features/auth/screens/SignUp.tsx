@@ -66,89 +66,89 @@ export const SignUpScreen: React.FC = () => {
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: colors.background,
-    },
-    keyboard: {
       flex: 1,
-      paddingHorizontal: spacing.md,
-      justifyContent: 'center',
-    },
-    scrollContent: {
-      flexGrow: 1,
-      justifyContent: 'center',
-    },
-    logoContainer: {
-      alignItems: 'center',
-      marginBottom: spacing.xl,
-    },
-    logo: {
-      width: 100,
-      height: 100,
-    },
-    title: {
-      ...typography.heading,
-      color: colors.text,
-      textAlign: 'center',
-      marginBottom: spacing.sm,
-    },
-    subtitle: {
-      ...typography.body,
-      color: colors.subtext,
-      textAlign: 'center',
-      marginBottom: spacing.lg,
-    },
-    formContainer: {
-      backgroundColor: colors.card,
-      borderRadius: designTokens.radius.md,
-      padding: spacing.md,
-      shadowColor: '#000',
-      shadowOpacity: 0.05,
-      shadowRadius: 10,
-      elevation: 3,
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
-      paddingHorizontal: spacing.md,
-      marginBottom: spacing.md,
-    },
-    primaryButton: {
-      backgroundColor: colors.primary,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
-      alignItems: 'center',
-      marginBottom: spacing.md,
-    },
-    primaryButtonText: {
-      ...typography.body,
-      color: '#fff',
-      fontWeight: '600',
     },
     divider: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       marginVertical: spacing.lg,
     },
     dividerLine: {
+      backgroundColor: colors.border,
       flex: 1,
       height: 1,
-      backgroundColor: colors.border,
     },
     dividerText: {
       marginHorizontal: spacing.sm,
       ...typography.body,
       color: colors.border,
     },
-    oauthButton: {
-      backgroundColor: colors.background,
-      borderWidth: 1,
+    formContainer: {
+      backgroundColor: colors.card,
+      borderRadius: designTokens.radius.md,
+      elevation: 3,
+      padding: spacing.md,
+      shadowColor: '#000',
+      shadowOpacity: 0.05,
+      shadowRadius: 10,
+    },
+    input: {
       borderColor: colors.border,
       borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 2,
+      borderWidth: 1,
+      marginBottom: spacing.md,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm * 1.5,
+    },
+    keyboard: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: spacing.md,
+    },
+    logo: {
+      height: 100,
+      width: 100,
+    },
+    logoContainer: {
+      alignItems: 'center',
+      marginBottom: spacing.xl,
+    },
+    oauthButton: {
+      backgroundColor: colors.background,
+      borderColor: colors.border,
+      borderRadius: designTokens.radius.md,
+      borderWidth: 1,
       marginBottom: spacing.sm,
+      paddingVertical: spacing.sm * 2,
+    },
+    primaryButton: {
+      alignItems: 'center',
+      backgroundColor: colors.primary,
+      borderRadius: designTokens.radius.md,
+      marginBottom: spacing.md,
+      paddingVertical: spacing.sm * 1.5,
+    },
+    primaryButtonText: {
+      ...typography.body,
+      color: '#fff',
+      fontWeight: '600',
+    },
+    scrollContent: {
+      flexGrow: 1,
+      justifyContent: 'center',
+    },
+    subtitle: {
+      ...typography.body,
+      color: colors.subtext,
+      marginBottom: spacing.lg,
+      textAlign: 'center',
+    },
+    title: {
+      ...typography.heading,
+      color: colors.text,
+      marginBottom: spacing.sm,
+      textAlign: 'center',
     },
   });
 

@@ -24,43 +24,43 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
 
   const styles = StyleSheet.create({
     container: {
+      alignItems: 'center',
       backgroundColor: 'transparent',
+      borderColor: designTokens.colors.accent,
       borderRadius: 12,
-      paddingVertical: designTokens.spacing.md,
-      paddingLeft: designTokens.spacing.lg,
-      paddingRight: designTokens.spacing.lg,
+      borderWidth: 0.25,
+      elevation: 3,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: designTokens.spacing.md,
       marginHorizontal: 0,
       marginTop: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.md,
-      borderWidth: 0.25,
-      borderColor: designTokens.colors.accent,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      paddingLeft: designTokens.spacing.lg,
+      paddingRight: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
       shadowColor: designTokens.colors.accent,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
-      elevation: 3,
     },
     content: {
-      flex: 1,
-      marginRight: designTokens.spacing.sm,
-      flexDirection: 'row',
       alignItems: 'center',
+      flex: 1,
+      flexDirection: 'row',
+      marginRight: designTokens.spacing.sm,
     },
-    title: {
+    crownIcon: {
       color: designTokens.colors.accent,
-      marginBottom: designTokens.spacing.xs,
-      marginTop: 0,
-      marginLeft: 0,
     },
     subtitle: {
       color: designTokens.colors.textSecondary,
       lineHeight: 16,
     },
-    crownIcon: {
+    title: {
       color: designTokens.colors.accent,
+      marginBottom: designTokens.spacing.xs,
+      marginLeft: 0,
+      marginTop: 0,
     },
   });
 

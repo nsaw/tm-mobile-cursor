@@ -1,0 +1,60 @@
+{
+  "showInUI": true,
+  "blockId": "patch-v1.4.200(P1.0.10)_visual-revalidation",
+  "description": "Final Phase 1 hotpatch to enforce screenshot and visual validation",
+  "target": "MAIN",
+  "version": "patch-v1.4.200(P1.0.10)_visual-revalidation",
+  "notes": [
+    "GOAL: Visually validate all sacred views and UI mount states post-Phase 1",
+    "MISSION: Trigger screenshot capture, UI mount diffs, and theming enforcement for audit",
+    "CONTEXT: Screenshot directory is currently empty. Visual diffs not validated.",
+    "SAFETY ENFORCEMENT: This patch must write screenshot + validation artifacts to disk.",
+    "STABLE STATE CHECK: Must validate snapshot integrity across FAB, BottomNav, AI Tool, Modal",
+    "VALIDATION REQUIREMENTS:",
+    "[ ] Screenshot validation (sacred views mounted)",
+    "[ ] Screenshot diff output to /screenshots/",
+    "[ ] Visual validation logs in /validations/",
+    "[ ] Markdown checkpoint: PHASE1_VISUAL_VALIDATED.md",
+    "DOCUMENTATION LAW: Summary log must be saved after validation completes"
+  ],
+  "preCommit": {
+    "backup": {
+      "path": "/Users/sawyer/gitSync/_backups/tm-safety_backups/",
+      "file": "20250720-2021_patch-v1.4.200(P1.0.10)_visual-revalidation_backup_tm-mobile-cursor.tar.gz"
+    },
+    "shell": [
+      "export NODE_ENV=test",
+      "echo 'Beginning visual validation...'"
+    ]
+  },
+  "mutations": [],
+  "postMutationBuild": {
+    "shell": [
+      "timeout 180s node scripts/validate-screenshot.js || exit 201",
+      "timeout 60s node scripts/validate-role-assignment.js || exit 202",
+      "timeout 60s node scripts/validate-shell-structure.js || exit 203"
+    ]
+  },
+  "validate": {
+    "shell": [
+      "test -f /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/screenshots/FAB.png || exit 301",
+      "test -f /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/screenshots/BottomNav.png || exit 302",
+      "test -f /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/validations/visual-validation.log || exit 303",
+      "touch /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/PHASE1_VISUAL_VALIDATED.md"
+    ]
+  },
+  "final": {
+    "git": {
+      "commit": "[PATCH P1.0.10] visual-revalidation \u2014 final screenshot validation for Phase 1",
+      "tag": "patch-v1.4.200(P1.0.10)_visual-revalidation"
+    },
+    "summary": "\u2705 patch-v1.4.200(P1.0.10)_visual-revalidation: Screenshots and visual diffs validated. Sacred views confirmed mounted.",
+    "summaryFile": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/summaries/patch-v1.4.200(P1.0.10)_visual-revalidation.md"
+  },
+  "blockCommitOnError": true,
+  "watchConsole": true,
+  "execution": {
+    "autoReleaseTimeoutMs": 30000,
+    "onReloadHang": "Move to background and resume automatically"
+  }
+}

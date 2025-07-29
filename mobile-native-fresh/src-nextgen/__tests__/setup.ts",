@@ -1,0 +1,142 @@
+import React from 'react';
+
+// Mock React Native modules
+jest.mock('react-native', () => {
+  const React = require('react');
+  return {
+    View: ({ children, ...props }: any) => React.createElement('View', props, children),
+    Text: ({ children, ...props }: any) => React.createElement('Text', props, children),
+    TouchableOpacity: ({ children, onPress, ...props }: any) => 
+      React.createElement('TouchableOpacity', { ...props, onPress }, children),
+    TouchableHighlight: ({ children, onPress, ...props }: any) => 
+      React.createElement('TouchableHighlight', { ...props, onPress }, children),
+    ScrollView: ({ children, ...props }: any) => React.createElement('ScrollView', props, children),
+    FlatList: ({ data, renderItem, ...props }: any) => React.createElement('FlatList', { ...props, data, renderItem }),
+    Image: (props: any) => React.createElement('Image', props),
+    TextInput: (props: any) => React.createElement('TextInput', props),
+    Switch: (props: any) => React.createElement('Switch', props),
+    Modal: ({ children, ...props }: any) => React.createElement('Modal', props, children),
+    Alert: {
+      alert: jest.fn(),
+    },
+    Platform: {
+      OS: 'ios',
+      select: jest.fn((obj: any) => obj.ios || obj.default),
+    },
+    Dimensions: {
+      get: jest.fn(() => ({ width: 375, height: 812 })),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    },
+    StatusBar: {
+      setBarStyle: jest.fn(),
+      setHidden: jest.fn(),
+    },
+    StyleSheet: {
+      create: (styles: any) => styles,
+      flatten: (style: any) => style,
+    },
+    AccessibilityInfo: {
+      isHighTextContrastEnabled: jest.fn(() => Promise.resolve(false)),
+      announceForAccessibility: jest.fn(),
+      setAccessibilityFocus: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    },
+    // Mock native modules to prevent __fbBatchedBridgeConfig errors
+    NativeModules: {
+      AccessibilityInfo: {
+        isHighTextContrastEnabled: jest.fn(() => Promise.resolve(false)),
+        announceForAccessibility: jest.fn(),
+        setAccessibilityFocus: jest.fn(),
+      },
+    },
+  };
+});
+
+// Mock AsyncStorage
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  setItem: jest.fn(() => Promise.resolve()),
+  getItem: jest.fn(() => Promise.resolve(null)),
+  removeItem: jest.fn(() => Promise.resolve()),
+  clear: jest.fn(() => Promise.resolve()),
+  getAllKeys: jest.fn(() => Promise.resolve([])),
+  multiGet: jest.fn(() => Promise.resolve([])),
+  multiSet: jest.fn(() => Promise.resolve()),
+  multiRemove: jest.fn(() => Promise.resolve()),
+}));
+
+// Mock React Navigation
+jest.mock('@react-navigation/stack', () => ({
+  createStackNavigator: jest.fn(() => ({
+    Navigator: ({ children, ...props }: any) => React.createElement('Navigator', props, children),
+    Screen: ({ name, component, ...props }: any) => React.createElement('Screen', { ...props, name, component }),
+  })),
+}));
+
+jest.mock('@react-navigation/bottom-tabs', () => ({
+  createBottomTabNavigator: jest.fn(() => ({
+    Navigator: ({ children, ...props }: any) => React.createElement('Navigator', props, children),
+    Screen: ({ name, component, ...props }: any) => React.createElement('Screen', { ...props, name, component }),
+  })),
+}));
+
+jest.mock('@react-navigation/native', () => ({
+  NavigationContainer: ({ children, ...props }: any) => React.createElement('NavigationContainer', props, children),
+  useNavigation: jest.fn(() => ({
+    navigate: jest.fn(),
+    goBack: jest.fn(),
+    canGoBack: jest.fn(() => true),
+  })),
+  useRoute: jest.fn(() => ({
+    name: 'TestScreen',
+    params: {},
+  })),
+}));
+
+// Mock global performance API
+global.performance = {
+  now: jest.fn(() => Date.now()),
+  mark: jest.fn(),
+  measure: jest.fn(),
+  clearMarks: jest.fn(),
+  clearMeasures: jest.fn(),
+  getEntriesByType: jest.fn(() => []),
+  getEntriesByName: jest.fn(() => []),
+  getEntries: jest.fn(() => []),
+  timeOrigin: Date.now(),
+} as any;
+
+// Mock global fetch API
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ success: true }),
+    text: () => Promise.resolve('OK'),
+  })
+) as any;
+
+// Global test utilities
+global.waitFor = (condition: () => boolean, timeout = 1000) => {
+  return new Promise<void>((resolve, reject) => {
+    const startTime = Date.now();
+    const check = () => {
+      if (condition()) {
+        resolve();
+      } else if (Date.now() - startTime > timeout) {
+        reject(new Error('Timeout waiting for condition'));
+      } else {
+        setTimeout(check, 10);
+      }
+    };
+    check();
+  });
+};
+
+global.mockPerformanceNow = (mockTime: number) => {
+  (global.performance.now as jest.Mock).mockReturnValue(mockTime);
+};
+
+global.resetPerformanceMock = () => {
+  (global.performance.now as jest.Mock).mockClear();
+}; 

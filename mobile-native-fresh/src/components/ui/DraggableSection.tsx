@@ -46,7 +46,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
   onReorder,
   totalSections,
 }) => {
-  const { typography, spacing, tokens } = useTheme();
+  const { tokens: themeTokens, typography, spacing } = useTheme();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -194,8 +194,8 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
               delayLongPress={500}
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <View style={styles.headerLeft}>
-                <Ionicons name="chevron-down" size={16} color={tokens.colors.textSecondary} style={styles.chevronIcon} />
-                <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: tokens.colors.textSecondary }]}>
+                        <Ionicons name="chevron-down" size={16} color={themeTokens.colors.textSecondary} style={styles.chevronIcon} />
+        <Animated.Text style={[styles.sectionTitle, { opacity: opacityAnim, color: themeTokens.colors.textSecondary }]}>
                   {title}
                 </Animated.Text>
               </View>
@@ -216,47 +216,47 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
 };
 
 const styles = StyleSheet.create({
+  chevronIcon: {
+    marginRight: 11,
+  },
   container: {
-    marginBottom: 8,
     backgroundColor: 'transparent',
     borderRadius: 11,
+    marginBottom: 8,
+  },
+  dragHandle: {
+    marginLeft: 11,
   },
   dragging: {
     opacity: 0.8,
     zIndex: 1000,
   },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 21,
-    paddingHorizontal: 11,
-    paddingBottom: 11,
-  },
   headerLeft: {
-    flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-  },
-  chevronIcon: {
-    marginRight: 11,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    letterSpacing: 0.7,
-    fontFamily: 'Ubuntu_700Bold',
+    flexDirection: 'row',
     flex: 1,
   },
   headerRight: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   sectionContent: {
-    paddingHorizontal: 11,
     paddingBottom: 21,
+    paddingHorizontal: 11,
   },
-  dragHandle: {
-    marginLeft: 11,
+  sectionHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 11,
+    paddingHorizontal: 11,
+    paddingVertical: 21,
+  },
+  sectionTitle: {
+    flex: 1,
+    fontFamily: 'Ubuntu_700Bold',
+    fontSize: 20,
+    fontWeight: '700',
+    letterSpacing: 0.7,
   },
 }); 

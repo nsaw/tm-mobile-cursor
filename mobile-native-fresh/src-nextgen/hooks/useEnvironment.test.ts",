@@ -1,0 +1,119 @@
+import { renderHook, act } from '@testing-library/react-native';
+import { useEnvironment } from './useEnvironment';
+import { resetAllMocks } from '@/__tests__/helpers/test-utils';
+
+// Mock AsyncStorage
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  setItem: jest.fn(),
+  getItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+}));
+
+describe('useEnvironment', () => {
+  let mockAsyncStorage: any;
+
+  beforeEach(() => {
+    resetAllMocks();
+    mockAsyncStorage = require('@react-native-async-storage/async-storage');
+    mockAsyncStorage.setItem.mockResolvedValue();
+    mockAsyncStorage.getItem.mockResolvedValue(null);
+  });
+
+  it('should initialize with legacy environment', () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    expect(result.current.environment).toBe('legacy');
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBeNull();
+  });
+
+  it('should load environment from storage', async () => {
+    mockAsyncStorage.getItem.mockResolvedValue('nextgen');
+    
+    const { result } = renderHook(() => useEnvironment());
+    
+    await act(async () => {
+      await result.current.loadEnvironment();
+    });
+    
+    expect(result.current.environment).toBe('nextgen');
+  });
+
+  it('should toggle environment successfully', async () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    await act(async () => {
+      await result.current.toggleEnvironment();
+    });
+    
+    expect(result.current.environment).toBe('nextgen');
+    expect(mockAsyncStorage.setItem).toHaveBeenCalledWith('app_environment', 'nextgen');
+  });
+
+  it('should handle validation failure', async () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    // Mock validation failure
+    jest.spyOn(result.current, 'validateEnvironment').mockResolvedValueOnce({
+      isValid: false,
+      errors: ['Validation failed'],
+    });
+    
+    await act(async () => {
+      await result.current.toggleEnvironment();
+    });
+    
+    expect(result.current.error).toBe('Validation failed');
+  });
+
+  it('should handle storage errors', async () => {
+    mockAsyncStorage.setItem.mockRejectedValue(new Error('Storage error'));
+    
+    const { result } = renderHook(() => useEnvironment());
+    
+    await act(async () => {
+      await result.current.toggleEnvironment();
+    });
+    
+    expect(result.current.error).toBe('Storage error');
+  });
+
+  it('should reset environment to default', async () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    await act(async () => {
+      await result.current.resetEnvironment();
+    });
+    
+    expect(result.current.environment).toBe('legacy');
+    expect(mockAsyncStorage.removeItem).toHaveBeenCalledWith('app_environment');
+  });
+
+  it('should clear errors', () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    act(() => {
+      result.current.clearError();
+    });
+    
+    expect(result.current.error).toBeNull();
+  });
+
+  it('should handle timeout during toggle', async () => {
+    const { result } = renderHook(() => useEnvironment());
+    
+    // Mock a slow toggle operation
+    jest.spyOn(result.current, 'toggleEnvironment').mockImplementationOnce(() =>
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), 100)
+      )
+    );
+    
+    await act(async () => {
+      await result.current.toggleEnvironment();
+    });
+    
+    expect(result.current.error).toBe('Timeout');
+  });
+}); 

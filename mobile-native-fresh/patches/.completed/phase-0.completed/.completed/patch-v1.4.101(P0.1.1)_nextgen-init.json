@@ -1,0 +1,56 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.101(P0.1.1)_nextgen-init.json",
+    "SUMMARY NAME: summary-v1.4.101(P0.1.1)_nextgen-init.md",
+    "GOAL: Create src-nextgen/ directory structure",
+    "MISSION: Set up the foundational directory structure for the nextgen codebase",
+    "CONTEXT: After legacy backup is complete, we need to create the src-nextgen/ directory structure that will house the new codebase alongside the legacy src-reference/.",
+    "SAFETY ENFORCEMENT: Verify directory structure matches roadmap, test TypeScript and ESLint setup",
+    "STABLE STATE CHECK: Confirm src-nextgen/ structure created, TypeScript working, ESLint configured"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 1,
+      "attempt": 1,
+      "task": "Create src-nextgen/ directory structure",
+      "version": "v1.4.101(P0.1.1)",
+      "priority": "high",
+      "estimatedTime": "15 minutes",
+      "executionSteps": [
+        "Create src-nextgen/ directory",
+        "Set up directory structure matching roadmap",
+        "Create placeholder files for organization",
+        "Configure initial TypeScript setup",
+        "Set up basic ESLint configuration"
+      ],
+      "validation": [
+        "Verify src-nextgen/ structure matches roadmap",
+        "Confirm TypeScript configuration working",
+        "Test ESLint setup",
+        "Validate directory permissions"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can delete src-nextgen/ if needed",
+        "No impact on legacy functionality"
+      ],
+      "gitTag": "backup-v1.4.101(P0.1.1)_nextgen-init",
+      "summaryFile": "summary-v1.4.101(P0.1.1)_nextgen-init.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Verify directory structure",
+    "Test TypeScript configuration",
+    "Test ESLint setup"
+  ],
+  "successCriteria": [
+    "src-nextgen/ directory structure created",
+    "TypeScript configuration working",
+    "ESLint setup functional",
+    "Directory permissions correct"
+  ]
+} 

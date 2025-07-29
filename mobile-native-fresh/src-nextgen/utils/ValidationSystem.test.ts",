@@ -1,0 +1,158 @@
+import { ValidationSystem } from './ValidationSystem';
+import { resetAllMocks } from '@/__tests__/helpers/test-utils';
+
+// Mock fetch globally
+global.fetch = jest.fn();
+
+describe('ValidationSystem', () => {
+  let validationSystem: ValidationSystem;
+  let mockFetch: jest.MockedFunction<typeof fetch>;
+
+  beforeEach(() => {
+    resetAllMocks();
+    validationSystem = ValidationSystem.getInstance();
+    mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
+  });
+
+  afterEach(() => {
+    validationSystem.destroy();
+  });
+
+  it('should be a singleton', () => {
+    const instance1 = ValidationSystem.getInstance();
+    const instance2 = ValidationSystem.getInstance();
+    expect(instance1).toBe(instance2);
+  });
+
+  it('should validate environment successfully', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ status: 'ok' }),
+    } as any);
+
+    const result = await validationSystem.validateEnvironment();
+    expect(result.isValid).toBe(true);
+    expect(result.errors).toHaveLength(0);
+  });
+
+  it('should handle network validation failure', async () => {
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    const result = await validationSystem.validateNetwork();
+    expect(result.isValid).toBe(false);
+    expect(result.errors.length).toBeGreaterThan(0);
+  });
+
+  it('should handle timeout errors', async () => {
+    // Mock a slow network request
+    mockFetch.mockImplementationOnce(() => 
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), 100)
+      )
+    );
+
+    const result = await validationSystem.validateEnvironment();
+    expect(result.isValid).toBe(false);
+    expect(result.errors.some(error => error.includes('timeout'))).toBe(true);
+  }, 15000); // Increase timeout for this test
+
+  it('should retry failed validations', async () => {
+    let callCount = 0;
+    mockFetch.mockImplementation(() => {
+      callCount++;
+      if (callCount === 1) {
+        return Promise.reject(new Error('Network error'));
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ status: 'ok' }),
+      } as any);
+    });
+
+    const result = await validationSystem.validateEnvironment();
+    
+    expect(callCount).toBeGreaterThan(1);
+    expect(result.isValid).toBe(true);
+  });
+
+  it('should cache validation results', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ status: 'ok' }),
+    } as any);
+
+    // First call
+    const result1 = await validationSystem.validateEnvironment();
+    expect(result1.isValid).toBe(true);
+
+    // Second call should use cache
+    const result2 = await validationSystem.validateEnvironment();
+    expect(result2.isValid).toBe(true);
+
+    // Should only make one network request
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle platform compatibility validation', async () => {
+    const result = await validationSystem.validatePlatform();
+    expect(result.isValid).toBe(true);
+  });
+
+  it('should handle unsupported platform', async () => {
+    // Mock Platform.OS to return unsupported platform
+    const originalPlatform = require('react-native').Platform;
+    require('react-native').Platform = { ...originalPlatform, OS: 'unsupported' };
+
+    const result = await validationSystem.validatePlatform();
+    expect(result.isValid).toBe(false);
+
+    // Restore original Platform
+    require('react-native').Platform = originalPlatform;
+  });
+
+  it('should provide validation statistics', () => {
+    const stats = validationSystem.getValidationStatistics();
+    expect(stats).toHaveProperty('totalValidations');
+    expect(stats).toHaveProperty('successfulValidations');
+    expect(stats).toHaveProperty('failedValidations');
+    expect(stats).toHaveProperty('averageValidationTime');
+  });
+
+  it('should handle concurrent validations', async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ status: 'ok' }),
+    } as any);
+
+    // Run multiple validations concurrently
+    const promises = [
+      validationSystem.validateEnvironment(),
+      validationSystem.validateNetwork(),
+      validationSystem.validatePlatform(),
+    ];
+
+    const results = await Promise.all(promises);
+
+    // All should succeed
+    results.forEach(result => {
+      expect(result.isValid).toBe(true);
+    });
+
+    // Should only make one network request due to caching
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle validation system destruction', () => {
+    expect(() => validationSystem.destroy()).not.toThrow();
+  });
+});
+
+describe('ValidationErrorType', () => {
+  it('should have all required error types', () => {
+    const { ValidationErrorType } = require('./ValidationSystem');
+    expect(ValidationErrorType).toHaveProperty('NETWORK_ERROR');
+    expect(ValidationErrorType).toHaveProperty('TIMEOUT_ERROR');
+    expect(ValidationErrorType).toHaveProperty('VALIDATION_ERROR');
+    expect(ValidationErrorType).toHaveProperty('PLATFORM_ERROR');
+  });
+}); 

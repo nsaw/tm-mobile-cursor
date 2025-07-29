@@ -18,24 +18,24 @@ export const DashboardExample: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
-    },
-    header: {
-      fontFamily: designTokens.typography.fontFamily.heading,
-      fontSize: designTokens.typography.fontSize.heading,
-      color: designTokens.colors.text ?? '#FFFFFF',
-      textAlign: 'center',
-      padding: designTokens.spacing.lg,
-    },
     body: {
+      color: designTokens.colors.textSecondary ?? '#808080',
       fontFamily: designTokens.typography.fontFamily.body,
       fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.textSecondary ?? '#808080',
-      textAlign: 'center',
-      paddingHorizontal: designTokens.spacing.lg,
       marginBottom: designTokens.spacing.md,
+      paddingHorizontal: designTokens.spacing.lg,
+      textAlign: 'center',
+    },
+    container: {
+      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
+      flex: 1,
+    },
+    header: {
+      color: designTokens.colors.text ?? '#FFFFFF',
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.heading,
+      padding: designTokens.spacing.lg,
+      textAlign: 'center',
     },
   });
 

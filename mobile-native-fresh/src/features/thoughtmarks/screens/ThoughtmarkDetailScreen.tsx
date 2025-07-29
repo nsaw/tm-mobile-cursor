@@ -40,205 +40,181 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   const [aiSuggestions, setAiSuggestions] = useState<any>(null);
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: designTokens.colors.background,
-    },
-    loadingContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: designTokens.colors.background,
-    },
-    loadingText: {
-      marginTop: designTokens.spacing.md,
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
-    },
-    header: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingHorizontal: designTokens.spacing.lg,
-      paddingVertical: designTokens.spacing.md,
-      borderBottomWidth: 1,
-      borderBottomColor: designTokens.colors.border,
-    },
-    headerContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    backButton: {
-      marginRight: designTokens.spacing.md,
-    },
-    headerTitle: {
-      fontSize: designTokens.typography.fontSize.heading,
-      fontWeight: '700',
-      color: designTokens.colors.text,
-      fontFamily: designTokens.typography.fontFamily.heading,
-    },
-    headerActions: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
     actionButton: {
+      marginLeft: designTokens.spacing.sm,
       padding: designTokens.spacing.sm,
+    },
+    actionableBadge: {
+      backgroundColor: designTokens.colors.success,
+      borderRadius: designTokens.spacing.xs,
       marginLeft: designTokens.spacing.sm,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
     },
-    content: {
-      flex: 1,
-    },
-    contentContainer: {
-      padding: designTokens.spacing.lg,
-    },
-    titleCard: {
-      marginBottom: designTokens.spacing.md,
-    },
-    title: {
-      fontSize: designTokens.typography.fontSize.xl,
-      fontWeight: '600',
-      color: designTokens.colors.text,
-      marginBottom: designTokens.spacing.md,
-    },
-    taskStatus: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingVertical: designTokens.spacing.sm,
-      paddingHorizontal: designTokens.spacing.md,
-      borderRadius: designTokens.spacing.sm,
-      backgroundColor: designTokens.colors.surface,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-    },
-    taskCompleted: {
-      backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent,
-    },
-    taskStatusText: {
-      marginLeft: designTokens.spacing.sm,
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.text,
-    },
-    taskCompletedText: {
+    actionableText: {
       color: designTokens.colors.background,
+      fontSize: designTokens.typography.fontSize.xs,
+      fontWeight: '600',
     },
-    contentCard: {
-      marginBottom: designTokens.spacing.md,
-    },
-    contentText: {
-      fontSize: designTokens.typography.fontSize.body,
-      lineHeight: 24,
-      color: designTokens.colors.text,
+    actionsContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      gap: designTokens.spacing.md,
+      justifyContent: 'space-between',
+      paddingVertical: designTokens.spacing.md,
     },
     aiCard: {
       marginBottom: designTokens.spacing.md,
     },
+    aiEmptyText: {
+      color: designTokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.sm,
+      fontStyle: 'italic',
+      textAlign: 'center',
+    },
     aiHeader: {
+      alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
       marginBottom: designTokens.spacing.md,
     },
-    aiTitleContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
     aiTitle: {
-      marginLeft: designTokens.spacing.sm,
+      color: designTokens.colors.text,
       fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
+      marginLeft: designTokens.spacing.sm,
+    },
+    aiTitleContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    backButton: {
+      marginRight: designTokens.spacing.md,
+    },
+    container: {
+      backgroundColor: designTokens.colors.background,
+      flex: 1,
+    },
+    content: {
+      flex: 1,
+    },
+    contentCard: {
+      marginBottom: designTokens.spacing.md,
+    },
+    contentContainer: {
+      padding: designTokens.spacing.lg,
+    },
+    contentText: {
       color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      lineHeight: 24,
+    },
+    header: {
+      alignItems: 'center',
+      borderBottomColor: designTokens.colors.border,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingHorizontal: designTokens.spacing.lg,
+      paddingVertical: designTokens.spacing.md,
+    },
+    headerActions: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    headerContent: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    headerTitle: {
+      color: designTokens.colors.text,
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.heading,
+      fontWeight: '700',
+    },
+    insightDescription: {
+      color: designTokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.sm,
+      lineHeight: 20,
+    },
+    insightHeader: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginBottom: designTokens.spacing.sm,
+    },
+    insightItem: {
+      backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      borderWidth: 1,
+      padding: designTokens.spacing.md,
+    },
+    insightTitle: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      fontWeight: '600',
+      marginBottom: designTokens.spacing.xs,
+    },
+    insightType: {
+      borderRadius: designTokens.spacing.xs,
+      paddingHorizontal: designTokens.spacing.sm,
+      paddingVertical: designTokens.spacing.xs,
+    },
+    insightTypeText: {
+      color: designTokens.colors.background,
+      fontSize: designTokens.typography.fontSize.xs,
+      fontWeight: '600',
     },
     insightsContainer: {
       gap: designTokens.spacing.md,
     },
-    insightItem: {
-      padding: designTokens.spacing.md,
-      backgroundColor: designTokens.colors.surface,
-      borderRadius: designTokens.spacing.sm,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-    },
-    insightHeader: {
-      flexDirection: 'row',
+    loadingContainer: {
       alignItems: 'center',
-      marginBottom: designTokens.spacing.sm,
+      backgroundColor: designTokens.colors.background,
+      flex: 1,
+      justifyContent: 'center',
     },
-    insightType: {
-      paddingHorizontal: designTokens.spacing.sm,
-      paddingVertical: designTokens.spacing.xs,
-      borderRadius: designTokens.spacing.xs,
-    },
-    insightTypeText: {
-      fontSize: designTokens.typography.fontSize.xs,
-      fontWeight: '600',
-      color: designTokens.colors.background,
-    },
-    actionableBadge: {
-      marginLeft: designTokens.spacing.sm,
-      paddingHorizontal: designTokens.spacing.sm,
-      paddingVertical: designTokens.spacing.xs,
-      borderRadius: designTokens.spacing.xs,
-      backgroundColor: designTokens.colors.success,
-    },
-    actionableText: {
-      fontSize: designTokens.typography.fontSize.xs,
-      fontWeight: '600',
-      color: designTokens.colors.background,
-    },
-    insightTitle: {
-      fontSize: designTokens.typography.fontSize.body,
-      fontWeight: '600',
-      color: designTokens.colors.text,
-      marginBottom: designTokens.spacing.xs,
-    },
-    insightDescription: {
-      fontSize: designTokens.typography.fontSize.sm,
+    loadingText: {
       color: designTokens.colors.textSecondary,
-      lineHeight: 20,
-    },
-    aiEmptyText: {
-      fontSize: designTokens.typography.fontSize.sm,
-      color: designTokens.colors.textSecondary,
-      textAlign: 'center',
-      fontStyle: 'italic',
-    },
-    suggestionsContainer: {
-      gap: designTokens.spacing.md,
-    },
-    suggestionItem: {
-      padding: designTokens.spacing.md,
-      backgroundColor: designTokens.colors.surface,
-      borderRadius: designTokens.spacing.sm,
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-    },
-    suggestionText: {
       fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.text,
+      marginTop: designTokens.spacing.md,
     },
     metadataCard: {
       marginBottom: designTokens.spacing.md,
     },
     metadataItem: {
+      alignItems: 'center',
+      borderBottomColor: designTokens.colors.border,
+      borderBottomWidth: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
       paddingVertical: designTokens.spacing.sm,
-      borderBottomWidth: 1,
-      borderBottomColor: designTokens.colors.border,
     },
     metadataText: {
-      fontSize: designTokens.typography.fontSize.xs,
       color: designTokens.colors.textSecondary,
-    },
-    tagsCard: {
-      marginBottom: designTokens.spacing.md,
+      fontSize: designTokens.typography.fontSize.xs,
     },
     sectionTitle: {
+      color: designTokens.colors.text,
       fontSize: designTokens.typography.fontSize.lg,
       fontWeight: '600',
+      marginBottom: designTokens.spacing.md,
+    },
+    suggestionItem: {
+      backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      borderWidth: 1,
+      padding: designTokens.spacing.md,
+    },
+    suggestionText: {
       color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+    },
+    suggestionsContainer: {
+      gap: designTokens.spacing.md,
+    },
+    tagsCard: {
       marginBottom: designTokens.spacing.md,
     },
     tagsContainer: {
@@ -246,12 +222,36 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
       flexWrap: 'wrap',
       gap: designTokens.spacing.sm,
     },
-    actionsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+    taskCompleted: {
+      backgroundColor: designTokens.colors.accent,
+      borderColor: designTokens.colors.accent,
+    },
+    taskCompletedText: {
+      color: designTokens.colors.background,
+    },
+    taskStatus: {
       alignItems: 'center',
-      paddingVertical: designTokens.spacing.md,
-      gap: designTokens.spacing.md,
+      backgroundColor: designTokens.colors.surface,
+      borderColor: designTokens.colors.border,
+      borderRadius: designTokens.spacing.sm,
+      borderWidth: 1,
+      flexDirection: 'row',
+      paddingHorizontal: designTokens.spacing.md,
+      paddingVertical: designTokens.spacing.sm,
+    },
+    taskStatusText: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.body,
+      marginLeft: designTokens.spacing.sm,
+    },
+    title: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.xl,
+      fontWeight: '600',
+      marginBottom: designTokens.spacing.md,
+    },
+    titleCard: {
+      marginBottom: designTokens.spacing.md,
     },
   });
 
@@ -637,9 +637,7 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
             }}
             variant="outline"
             style={{ padding: 8 }}
-          >
-            Share
-          </Button>
+          ><Text>Share</Text></Button>
         </View>
       </ScrollView>
     </View>

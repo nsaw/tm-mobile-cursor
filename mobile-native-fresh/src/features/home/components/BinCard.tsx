@@ -30,16 +30,20 @@ export const BinCard: React.FC<BinCardProps> = ({
 
   const styles = StyleSheet.create({
     container: {
-      width: (width - designTokens.spacing.lg * 2 - designTokens.spacing.sm) / 2,
+      alignItems: 'center',
       aspectRatio: 1,
       backgroundColor: designTokens.colors.backgroundSecondary,
-      borderRadius: designTokens.radius.md * 1.34,
-      marginBottom: designTokens.spacing.md,
-      borderWidth: 1,
       borderColor: designTokens.colors.borderHover,
+      borderRadius: designTokens.radius.md * 1.34,
+      borderWidth: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      marginBottom: designTokens.spacing.md,
       padding: designTokens.spacing.lg,
+      width: (width - designTokens.spacing.lg * 2 - designTokens.spacing.sm) / 2,
+    },
+    count: {
+      color: designTokens.colors.textSecondary,
+      textAlign: 'center',
     },
     icon: {
       fontSize: 32,
@@ -47,11 +51,7 @@ export const BinCard: React.FC<BinCardProps> = ({
     },
     name: {
       color: designTokens.colors.accent,
-      textAlign: 'center',
       marginBottom: designTokens.spacing.xs,
-    },
-    count: {
-      color: designTokens.colors.textSecondary,
       textAlign: 'center',
     },
   });

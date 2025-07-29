@@ -1,0 +1,58 @@
+{
+  "notes": [
+    "🧠 MISSION: Validate syntax, lint, and type-safety of entire app before resuming final phases.",
+    "🎯 GOAL: Catch and fix syntax-level errors (e.g., malformed JSX, token destructuring collisions) that cause parse or runtime issues.",
+    "✅ PRE-CHECK: Ensure all files are committed.",
+    "📌 CONTEXT: 3.5 token refactor didn’t catch JSX-level invalid props or broken JSX fragments from destructuring.",
+    "💥 COMMON ISSUES:",
+    "- JSX onPress handlers with malformed expressions",
+    "- Duplicate `useTheme()` calls without unification",
+    "- Dangling `tokens` identifiers in JSX context"
+  ],
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": "tsc --noEmit && npm run lint:fix-all",
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(rollback): backup before syntax/boot validation\"",
+      "git tag v1.3.2_pre-validation-fix_250701_UTC",
+      "sh scripts/backup-tag-push.sh v1.3.2_pre-validation-fix_250701_UTC"
+    ]
+  },
+  "branch": "fix/v1.3.2_syntax-boot-validation",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Syntax and Lint Fix Loop",
+      "actions": [
+        "Run ESLint with autofix repeatedly until zero violations",
+        "Run Prettier fix-all pass",
+        "Run `tsc --noEmit` repeatedly to confirm TS compliance"
+      ],
+      "commit": "fix: full syntax and linting cleanup",
+      "tag": "v1.3.2_post-lint-fix_250701_UTC"
+    },
+    {
+      "section": "Boot Confirmation",
+      "actions": [
+        "Run `npx expo start --dev-client`",
+        "If app boots without error in terminal log, continue",
+        "If not, log error and abort",
+        "Capture unresolved issues and mark with `// FIXME:`"
+      ],
+      "commit": "test: boot validation pass",
+      "tag": "v1.3.2_boot-confirmed_250701_UTC"
+    }
+  ],
+  "final": {
+    "commit": "chore: confirm system is syntax-valid and bootable",
+    "tag": "v1.3.2_validation-complete_250701_UTC",
+    "notes": "All syntax errors fixed. Theme destructuring validated. Safe to resume automation."
+  }
+}
+

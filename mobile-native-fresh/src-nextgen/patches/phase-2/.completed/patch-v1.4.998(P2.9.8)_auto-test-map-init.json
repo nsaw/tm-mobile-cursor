@@ -1,0 +1,29 @@
+{
+  "notes": [
+    "\ud83e\udde0 Test Map Auto Trigger Patch",
+    "\ud83c\udfaf Inject test-map.json and dynamic triggers by phase",
+    "\u2705 Enables GPT/Cursor to trigger test:unit per patch risk"
+  ],
+  "postMutationBuild": [
+    "tsc --noEmit",
+    "eslint . --max-warnings=0",
+    "yarn test:unit --watchAll=false"
+  ],
+  "branch": "feature/phase-test-map",
+  "phases": [
+    {
+      "section": "P2.9.8 Phase-aware Test Trigger",
+      "actions": [
+        "Create test-map.json",
+        "Wire GPT test triggers to patch phase/risk level"
+      ],
+      "commit": "feat: dynamic test trigger config",
+      "tag": "v1.4.998(P2.9.8)_test-map"
+    }
+  ],
+  "final": {
+    "commit": "chore: finalize dynamic test mapping",
+    "tag": "v1.4.998(P2.9.8)_test-map-final",
+    "notes": "test-map.json now routes tests per risk phase"
+  }
+}

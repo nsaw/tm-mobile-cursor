@@ -28,8 +28,7 @@ import { OnboardingModal } from '../../../components/ui/OnboardingModal';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { DraggableSection } from '../../../components/ui/DraggableSection';
 import { useDashboardOrder } from '../../../hooks/useDashboardOrder';
-import { Text as CustomText, SectionHeader, ButtonText } from '../../../components/ui/Text';
-import { spacingTokens } from '../../../theme/spacing';
+import { Text as CustomText } from '../../../components/ui/Text';
 // import SiriShortcutsService from '../../../services/SiriShortcutsService';
 
 const { width } = Dimensions.get('window');
@@ -337,7 +336,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Render section content based on section ID
   const renderSectionContent = (sectionId: string) => {
-    switch (sectionId) {
+    const { tokens } = useTheme();
+
+switch (sectionId) {
       case 'tags':
         // Tags section is now integrated into recent-thoughtmarks
         return null;
@@ -575,31 +576,34 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
 
   // Create styles with tokens
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: tokens.colors.background,
-      position: 'relative', // Ensure proper positioning context
+    aiToolsContainer: {
+      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
     },
-    scrollView: {
-      flex: 1,
+    archiveCard: {
+      backgroundColor: 'transparent',
+      borderColor: tokens.colors.border,
+      borderRadius: tokens.radius.md,
+      borderWidth: 1,
+      height: 70,
+      justifyContent: 'center',
+      marginBottom: tokens.spacing.sm * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
+      paddingTop: tokens.spacing.sm * 1.34,
+      width: '100%',
     },
-    scrollContent: {
-      paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
-      paddingBottom: 120, // Increased padding to account for nav bar + safe area
-      minHeight: '100%', // Ensure content fills the scroll view
-      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
-    },
-    header: {
-      flexDirection: 'row',
+    archiveCardContent: {
       alignItems: 'center',
+      flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.lg * 0.25, // Reduced from spacing.lg
-      paddingHorizontal: tokens.spacing.page * 0.25, // Reduced by half
+      width: '100%',
     },
-    headerLeft: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      flex: 1,
+    archiveCardText: {
+      color: tokens.colors.text,
+      fontSize: RFValue(12),
+      fontWeight: '500',
+      opacity: 0.8,
     },
     avatar: {
       width: 64, // 48 * 1.34
@@ -607,105 +611,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       borderRadius: 13, // 10 * 1.34
       marginRight: tokens.spacing.sm,
     },
-    titleContainer: {
-      flex: 1,
-      marginLeft: tokens.spacing.sm,
-    },
-    title: {
-      fontSize: RFValue(16),
-      fontWeight: '900',
-      color: tokens.colors.text,
-      opacity: 0.9, // Added 90% opacity for h2 text
-      letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
-      textTransform: 'uppercase',
-      fontFamily: 'Ubuntu_700Bold',
-      flexShrink: 1,
-    },
-    subtitle: {
-      fontSize: RFValue(10),
-      fontWeight: '400',
-      marginTop: -5, // Reduced spacing between title and tagline
-      marginLeft: 21, // Indent the tagline - 16 * 1.34
-      fontFamily: 'Ubuntu_400Regular',
-      opacity: 0.8, // Added 80% opacity for text below h3
-      flexShrink: 1, // Allow shrinking to prevent overflow
-    },
-    headerRight: {
-      flexDirection: 'row',
+    binCardContentHorizontal: {
       alignItems: 'center',
-    },
-    infoButton: {
-      padding: tokens.spacing.sm,
-      shadowColor: tokens.colors.text,
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    settingsButton: {
-      padding: tokens.spacing.sm,
-    },
-    aiToolsContainer: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
-    },
-    section: {
-      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
-    },
-    sectionHeader: {
       flexDirection: 'row',
-      alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: tokens.spacing.md * 0.5, // Reduced from spacing.md
+      width: '100%',
     },
-    sectionTitle: {
-      fontSize: RFValue(18),
-      fontWeight: '600',
+    binCardCountHorizontal: {
+      fontSize: RFValue(12), // Reduced from 13
       color: tokens.colors.textSecondary,
-      letterSpacing: 0.5,
-      fontFamily: 'Ubuntu_600SemiBold',
-      opacity: 0.7,
-    },
-    sectionHeaderRight: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    viewAllButton: {
-      marginRight: tokens.spacing.sm,
-    },
-    viewAllText: {
-      fontSize: RFValue(tokens.typography.fontSize.body),
-      color: tokens.colors.accent,
-      fontWeight: '500',
-      fontFamily: 'Ubuntu_500Medium',
-      opacity: 0.8,
-    },
-    tasksList: {
-      // Styles for tasks list
-    },
-    thoughtmarksList: {
-      // Styles for thoughtmarks list
-    },
-    separator: {
-      height: 1,
-      backgroundColor: tokens.colors.border,
-      marginVertical: tokens.spacing.sm,
-    },
-    binsContainer: {
-      // Styles for the bins container
-    },
-    binsHorizontalContent: {
-      paddingHorizontal: tokens.spacing.page, // Page-level padding
-      paddingVertical: tokens.spacing.sm,
-    },
-    binCardSkeletonHorizontal: {
-      width: 160,
-      height: 70,
-      backgroundColor: tokens.colors.backgroundSecondary,
-      borderRadius: tokens.radius.md,
-      marginRight: tokens.spacing.md, // Increased spacing
+      fontFamily: 'Ubuntu_400Regular',
     },
     binCardHorizontal: {
       width: 160,
@@ -716,12 +631,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginRight: tokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
-    binCardContentHorizontal: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-    },
     binCardNameHorizontal: {
       fontSize: RFValue(14), // Reduced from 16
       fontWeight: '600',
@@ -729,10 +638,74 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginBottom: 2,
       fontFamily: 'Ubuntu_600SemiBold',
     },
-    binCardCountHorizontal: {
-      fontSize: RFValue(12), // Reduced from 13
+    binCardSkeletonHorizontal: {
+      backgroundColor: tokens.colors.backgroundSecondary,
+      borderRadius: tokens.radius.md,
+      height: 70,
+      marginRight: tokens.spacing.md,
+      width: 160, // Increased spacing
+    },
+    binsContainer: {
+      // Styles for the bins container
+    },
+    binsHorizontalContent: {
+      paddingHorizontal: tokens.spacing.page, // Page-level padding
+      paddingVertical: tokens.spacing.sm,
+    },
+    container: {
+      backgroundColor: tokens.colors.background,
+      flex: 1,
+      position: 'relative', // Ensure proper positioning context
+    },
+    emptyState: {
+      alignItems: 'center',
+      paddingVertical: tokens.spacing.xl * 1.34,
+    },
+    emptyStateText: {
       color: tokens.colors.textSecondary,
-      fontFamily: 'Ubuntu_400Regular',
+      fontSize: RFValue(14),
+      lineHeight: 32,
+      opacity: 0.8,
+      textAlign: 'center',
+    },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: tokens.spacing.lg * 0.25, // Reduced from spacing.lg
+      paddingHorizontal: tokens.spacing.page * 0.25, // Reduced by half
+    },
+    headerLeft: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      flex: 1,
+    },
+    headerRight: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    infoButton: {
+      elevation: 3,
+      padding: tokens.spacing.sm,
+      shadowColor: tokens.colors.text,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+    },
+    loadingText: {
+      color: tokens.colors.text,
+      fontSize: RFValue(18),
+      fontWeight: '600',
+      opacity: 0.8,
+    },
+    newBinCardContentHorizontal: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      gap: tokens.spacing.xs,
+      justifyContent: 'center',
     },
     newBinCardHorizontal: {
       width: 160,
@@ -746,124 +719,20 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       marginRight: tokens.spacing.md, // Increased spacing
       justifyContent: 'center',
     },
-    newBinCardContentHorizontal: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: tokens.spacing.xs,
-    },
     newBinTextHorizontal: {
+      color: tokens.colors.accent,
       fontSize: RFValue(14),
-      color: tokens.colors.accent,
       fontWeight: '500',
-      opacity: 0.8,
-    },
-    specialBinsContainer: {
-      marginTop: tokens.spacing.md * 1.34,
-    },
-    specialBinCard: {
-      width: '100%',
-      height: 70,
-      backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
-      borderWidth: 1,
-      borderColor: tokens.colors.accent,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginBottom: tokens.spacing.sm * 1.34,
-      justifyContent: 'center',
-    },
-    specialBinCardContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-    },
-    specialBinCardText: {
-      fontSize: RFValue(12.5),
-      color: tokens.colors.accent,
-      fontWeight: '500',
-      opacity: 0.8,
-    },
-    specialBinCardCount: {
-      fontSize: RFValue(12.5),
-      color: tokens.colors.accent,
-      opacity: 0.8,
-    },
-    archiveCard: {
-      width: '100%',
-      height: 70,
-      backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginBottom: tokens.spacing.sm * 1.34,
-      justifyContent: 'center',
-      borderWidth: 1,
-      borderColor: tokens.colors.border,
-    },
-    archiveCardContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-    },
-    archiveCardText: {
-      fontSize: RFValue(12),
-      color: tokens.colors.text,
-      fontWeight: '500',
-      opacity: 0.8,
-    },
-    viewMoreCard: {
-      backgroundColor: 'transparent',
-      borderRadius: tokens.radius.md,
-      paddingTop: tokens.spacing.sm * 1.34,
-      paddingBottom: tokens.spacing.sm * 1.34,
-      paddingLeft: tokens.spacing.sm * 2.5,
-      paddingRight: tokens.spacing.sm * 2.5,
-      marginTop: tokens.spacing.md * 1.34,
-      borderWidth: 1,
-      borderColor: tokens.colors.accent,
-      height: 70,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    viewMoreText: {
-      fontSize: RFValue(14),
-      color: tokens.colors.accent,
-      fontWeight: '600',
-      marginTop: 0,
-      opacity: 0.8,
-    },
-    viewMoreCount: {
-      fontSize: RFValue(11),
-      color: tokens.colors.textSecondary,
-      marginTop: 0,
-      opacity: 0.8,
-    },
-    emptyState: {
-      alignItems: 'center',
-      paddingVertical: tokens.spacing.xl * 1.34,
-    },
-    emptyStateText: {
-      fontSize: RFValue(14),
-      color: tokens.colors.textSecondary,
-      textAlign: 'center',
-      lineHeight: 32,
       opacity: 0.8,
     },
     reorderTooltip: {
-      position: 'absolute',
-      top: 107,
-      right: tokens.spacing.lg * 1.34,
       backgroundColor: tokens.colors.backgroundSecondary,
       borderRadius: tokens.radius.md,
+      elevation: 4,
+      maxWidth: 268,
       padding: tokens.spacing.sm * 1.34,
+      position: 'absolute',
+      right: tokens.spacing.lg * 1.34,
       shadowColor: tokens.colors.text,
       shadowOffset: {
         width: 0,
@@ -871,85 +740,217 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
       },
       shadowOpacity: 0.1,
       shadowRadius: 5,
-      elevation: 4,
+      top: 107,
       zIndex: 1000,
-      maxWidth: 268,
-    },
-    tooltipArrow: {
-      position: 'absolute',
-      top: -11,
-      right: 27,
-      width: 0,
-      height: 0,
-      borderLeftWidth: 11,
-      borderRightWidth: 11,
-      borderBottomWidth: 11,
-      borderColor: `transparent transparent ${tokens.colors.backgroundSecondary} transparent`,
     },
     reorderTooltipText: {
-      fontSize: RFValue(11),
       color: tokens.colors.text,
-      fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
+      fontSize: RFValue(11),
+      fontWeight: '500',
+      opacity: 0.8,
       textAlign: 'center',
+    },
+    scrollContent: {
+      paddingTop: tokens.spacing.lg * 0.5, // Reduced from spacing.lg
+      paddingBottom: 120, // Increased padding to account for nav bar + safe area
+      minHeight: '100%', // Ensure content fills the scroll view
+      paddingHorizontal: tokens.spacing.page, // Page-level horizontal padding
+    },
+    scrollView: {
+      flex: 1,
+    },
+    section: {
+      marginBottom: tokens.spacing.lg * 0.18, // Reduced by 65% from spacing.lg * 0.5
+    },
+    sectionHeader: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: tokens.spacing.md * 0.5, // Reduced from spacing.md
+    },
+    sectionHeaderRight: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    sectionTitle: {
+      color: tokens.colors.textSecondary,
+      fontFamily: 'Ubuntu_600SemiBold',
+      fontSize: RFValue(18),
+      fontWeight: '600',
+      letterSpacing: 0.5,
+      opacity: 0.7,
+    },
+    separator: {
+      backgroundColor: tokens.colors.border,
+      height: 1,
+      marginVertical: tokens.spacing.sm,
+    },
+    settingsButton: {
+      padding: tokens.spacing.sm,
+    },
+    specialBinCard: {
+      backgroundColor: 'transparent',
+      borderColor: tokens.colors.accent,
+      borderRadius: tokens.radius.md,
+      borderWidth: 1,
+      height: 70,
+      justifyContent: 'center',
+      marginBottom: tokens.spacing.sm * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
+      paddingTop: tokens.spacing.sm * 1.34,
+      width: '100%',
+    },
+    specialBinCardContent: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+    },
+    specialBinCardCount: {
+      color: tokens.colors.accent,
+      fontSize: RFValue(12.5),
       opacity: 0.8,
     },
-    tagsContainer: {
-      marginBottom: tokens.spacing.sm * 1.34,
+    specialBinCardText: {
+      color: tokens.colors.accent,
+      fontSize: RFValue(12.5),
+      fontWeight: '500',
+      opacity: 0.8,
     },
-    tagsScrollContent: {
-      paddingHorizontal: tokens.spacing.sm,
-      paddingVertical: tokens.spacing.xs * 1.34,
+    specialBinsContainer: {
+      marginTop: tokens.spacing.md * 1.34,
+    },
+    subtitle: {
+      fontSize: RFValue(10),
+      fontWeight: '400',
+      marginTop: -5, // Reduced spacing between title and tagline
+      marginLeft: 21, // Indent the tagline - 16 * 1.34
+      fontFamily: 'Ubuntu_400Regular',
+      opacity: 0.8, // Added 80% opacity for text below h3
+      flexShrink: 1, // Allow shrinking to prevent overflow
     },
     tagChip: {
-      paddingHorizontal: tokens.spacing.md * 1.34,
-      paddingVertical: tokens.spacing.xs * 1.34,
-      borderWidth: 1,
       borderColor: tokens.colors.border,
       borderRadius: tokens.radius.md,
+      borderWidth: 1,
       marginRight: tokens.spacing.xs * 1.34,
+      paddingHorizontal: tokens.spacing.md * 1.34,
+      paddingVertical: tokens.spacing.xs * 1.34,
     },
     tagChipActive: {
       backgroundColor: 'transparent',
       borderColor: tokens.colors.accent,
     },
     tagChipText: {
-      fontSize: RFValue(10),
       color: tokens.colors.text,
-      fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
+      fontSize: RFValue(10),
+      fontWeight: '500',
       opacity: 0.8,
     },
     tagChipTextActive: {
       color: tokens.colors.accent,
       opacity: 0.8,
     },
+    tagsContainer: {
+      marginBottom: tokens.spacing.sm * 1.34,
+    },
     tagsHeader: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       justifyContent: 'space-between',
       marginBottom: tokens.spacing.md * 1.34,
     },
+    tagsScrollContent: {
+      paddingHorizontal: tokens.spacing.sm,
+      paddingVertical: tokens.spacing.xs * 1.34,
+    },
     tagsTitle: {
+      color: tokens.colors.textSecondary,
+      fontFamily: 'Ubuntu_400Regular',
       fontSize: RFValue(10),
       fontWeight: '400',
-      color: tokens.colors.textSecondary,
       letterSpacing: 0.7,
-      fontFamily: 'Ubuntu_400Regular',
-      textTransform: 'lowercase',
       opacity: 0.8,
+      textTransform: 'lowercase',
+    },
+    tasksList: {
+      // Styles for tasks list
+    },
+    thoughtmarksList: {
+      // Styles for thoughtmarks list
+    },
+    title: {
+      fontSize: RFValue(16),
+      fontWeight: '900',
+      color: tokens.colors.text,
+      opacity: 0.9, // Added 90% opacity for h2 text
+      letterSpacing: 0.5, // Reduced from 1 to prevent wrapping
+      textTransform: 'uppercase',
+      fontFamily: 'Ubuntu_700Bold',
+      flexShrink: 1,
+    },
+    titleContainer: {
+      flex: 1,
+      marginLeft: tokens.spacing.sm,
+    },
+    tooltipArrow: {
+      borderBottomWidth: 11,
+      borderColor: `transparent transparent ${tokens.colors.backgroundSecondary} transparent`,
+      borderLeftWidth: 11,
+      borderRightWidth: 11,
+      height: 0,
+      position: 'absolute',
+      right: 27,
+      top: -11,
+      width: 0,
+    },
+    viewAllButton: {
+      marginRight: tokens.spacing.sm,
     },
     viewAllTagsText: {
-      fontSize: RFValue(19),
       color: tokens.colors.accent,
-      fontWeight: '500',
       fontFamily: 'Ubuntu_500Medium',
+      fontSize: RFValue(19),
+      fontWeight: '500',
       opacity: 0.8,
     },
-    loadingText: {
-      fontSize: RFValue(18),
+    viewAllText: {
+      color: tokens.colors.accent,
+      fontFamily: 'Ubuntu_500Medium',
+      fontSize: RFValue(tokens.typography.fontSize.body),
+      fontWeight: '500',
+      opacity: 0.8,
+    },
+    viewMoreCard: {
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+      borderColor: tokens.colors.accent,
+      borderRadius: tokens.radius.md,
+      borderWidth: 1,
+      flexDirection: 'row',
+      height: 70,
+      justifyContent: 'space-between',
+      marginTop: tokens.spacing.md * 1.34,
+      paddingBottom: tokens.spacing.sm * 1.34,
+      paddingLeft: tokens.spacing.sm * 2.5,
+      paddingRight: tokens.spacing.sm * 2.5,
+      paddingTop: tokens.spacing.sm * 1.34,
+    },
+    viewMoreCount: {
+      color: tokens.colors.textSecondary,
+      fontSize: RFValue(11),
+      marginTop: 0,
+      opacity: 0.8,
+    },
+    viewMoreText: {
+      color: tokens.colors.accent,
+      fontSize: RFValue(14),
       fontWeight: '600',
-      color: tokens.colors.text,
+      marginTop: 0,
       opacity: 0.8,
     },
   });
@@ -1010,8 +1011,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
               accessibilityLabel="Thoughtmarks Logo"
             />
             <View style={styles.titleContainer}>
-              <CustomText variant="title" numberOfLines={1}>THOUGHTMARKS</CustomText>
-              <NeonGradientText variant="tagline" numberOfLines={1}>bookmarks for your brain</NeonGradientText>
+              <CustomText variant="title" numberOfLines={1}><Text>THOUGHTMARKS</Text></CustomText>
+              <NeonGradientText variant="tagline" numberOfLines={1}><Text>bookmarks for your brain</Text></NeonGradientText>
             </View>
           </View>
           <View style={styles.headerRight}>

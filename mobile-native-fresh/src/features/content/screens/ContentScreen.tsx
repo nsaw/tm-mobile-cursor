@@ -24,51 +24,51 @@ export const ContentScreen: React.FC = () => {
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
-    container: {
+    body: {
+      color: designTokens.colors.textSecondary,
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.body,
+    },
+    card: {
+      alignItems: 'flex-start',
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: 12,
+      elevation: 2,
+      flexDirection: 'row',
+      marginBottom: designTokens.spacing.md,
+      padding: designTokens.spacing.md,
+    },
+    cardTextContainer: {
       flex: 1,
+    },
+    container: {
       backgroundColor: designTokens.colors.background,
+      flex: 1,
     },
     content: {
       padding: designTokens.spacing.md,
+    },
+    description: {
+      color: designTokens.colors.textSecondary,
+      fontFamily: designTokens.typography.fontFamily.body,
+      fontSize: designTokens.typography.fontSize.body,
+      marginBottom: designTokens.spacing.lg,
+    },
+    subtitle: {
+      color: designTokens.colors.text,
+      fontFamily: designTokens.typography.fontFamily.heading,
+      fontSize: designTokens.typography.fontSize.lg,
+      fontWeight: designTokens.typography.fontWeight.semibold,
+      marginBottom: designTokens.spacing.xs,
+    },
+    tag: {
+      marginRight: designTokens.spacing.md,
     },
     title: {
       fontFamily: designTokens.typography.fontFamily.heading,
       fontSize: designTokens.typography.fontSize.heading,
       fontWeight: designTokens.typography.fontWeight.bold,
       marginBottom: designTokens.spacing.sm,
-    },
-    description: {
-      fontFamily: designTokens.typography.fontFamily.body,
-      fontSize: designTokens.typography.fontSize.body,
-      marginBottom: designTokens.spacing.lg,
-      color: designTokens.colors.textSecondary,
-    },
-    card: {
-      flexDirection: 'row',
-      backgroundColor: designTokens.colors.surface,
-      borderRadius: 12,
-      padding: designTokens.spacing.md,
-      alignItems: 'flex-start',
-      marginBottom: designTokens.spacing.md,
-      elevation: 2,
-    },
-    tag: {
-      marginRight: designTokens.spacing.md,
-    },
-    cardTextContainer: {
-      flex: 1,
-    },
-    subtitle: {
-      fontFamily: designTokens.typography.fontFamily.heading,
-      fontSize: designTokens.typography.fontSize.lg,
-      fontWeight: designTokens.typography.fontWeight.semibold,
-      marginBottom: designTokens.spacing.xs,
-      color: designTokens.colors.text,
-    },
-    body: {
-      fontFamily: designTokens.typography.fontFamily.body,
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
     },
   });
 

@@ -1,0 +1,814 @@
+{
+  "metadata": {
+    "generated": "2025-07-20T01:08:18.167Z",
+    "version": "1.4.154",
+    "phase": "0.6",
+    "description": "UI Manifest for Phase 0 Visual Verification"
+  },
+  "screens": {
+    "count": 26,
+    "items": [
+      {
+        "name": "AIToolsScreen",
+        "path": "src/features/ai/screens/AIToolsScreen.tsx",
+        "feature": "ai",
+        "type": "screen"
+      },
+      {
+        "name": "PINEntryScreen",
+        "path": "src/features/auth/screens/PINEntryScreen.tsx",
+        "feature": "auth",
+        "type": "screen"
+      },
+      {
+        "name": "SignIn",
+        "path": "src/features/auth/screens/SignIn.tsx",
+        "feature": "auth",
+        "type": "screen"
+      },
+      {
+        "name": "SignUp",
+        "path": "src/features/auth/screens/SignUp.tsx",
+        "feature": "auth",
+        "type": "screen"
+      },
+      {
+        "name": "AllBinsScreen",
+        "path": "src/features/bins/screens/AllBinsScreen.tsx",
+        "feature": "bins",
+        "type": "screen"
+      },
+      {
+        "name": "CreateBinScreen",
+        "path": "src/features/bins/screens/CreateBinScreen.tsx",
+        "feature": "bins",
+        "type": "screen"
+      },
+      {
+        "name": "ContentScreen",
+        "path": "src/features/content/screens/ContentScreen.tsx",
+        "feature": "content",
+        "type": "screen"
+      },
+      {
+        "name": "DashboardScreen",
+        "path": "src/features/home/screens/DashboardScreen.tsx",
+        "feature": "home",
+        "type": "screen"
+      },
+      {
+        "name": "DetailScreen",
+        "path": "src/features/home/screens/DetailScreen.tsx",
+        "feature": "home",
+        "type": "screen"
+      },
+      {
+        "name": "HomeScreen",
+        "path": "src/features/home/screens/HomeScreen.tsx",
+        "feature": "home",
+        "type": "screen"
+      },
+      {
+        "name": "SearchScreen",
+        "path": "src/features/search/screens/SearchScreen.tsx",
+        "feature": "search",
+        "type": "screen"
+      },
+      {
+        "name": "AdminDashboardScreen",
+        "path": "src/features/settings/screens/AdminDashboardScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "ContactScreen",
+        "path": "src/features/settings/screens/ContactScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "ExportScreen",
+        "path": "src/features/settings/screens/ExportScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "HelpScreen",
+        "path": "src/features/settings/screens/HelpScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "HowToScreen",
+        "path": "src/features/settings/screens/HowToScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "PremiumScreen",
+        "path": "src/features/settings/screens/PremiumScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "PrivacyScreen",
+        "path": "src/features/settings/screens/PrivacyScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "ProfileScreen",
+        "path": "src/features/settings/screens/ProfileScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "SecurityScreen",
+        "path": "src/features/settings/screens/SecurityScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "SettingsScreen",
+        "path": "src/features/settings/screens/SettingsScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "TermsScreen",
+        "path": "src/features/settings/screens/TermsScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "ThemeScreen",
+        "path": "src/features/settings/screens/ThemeScreen.tsx",
+        "feature": "settings",
+        "type": "screen"
+      },
+      {
+        "name": "AllThoughtmarksScreen",
+        "path": "src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx",
+        "feature": "thoughtmarks",
+        "type": "screen"
+      },
+      {
+        "name": "ThoughtmarkDetailScreen",
+        "path": "src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx",
+        "feature": "thoughtmarks",
+        "type": "screen"
+      },
+      {
+        "name": "UnifiedThoughtmarkScreen",
+        "path": "src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx",
+        "feature": "thoughtmarks",
+        "type": "screen"
+      }
+    ],
+    "byFeature": {
+      "ai": [
+        {
+          "name": "AIToolsScreen",
+          "path": "src/features/ai/screens/AIToolsScreen.tsx",
+          "feature": "ai",
+          "type": "screen"
+        }
+      ],
+      "auth": [
+        {
+          "name": "PINEntryScreen",
+          "path": "src/features/auth/screens/PINEntryScreen.tsx",
+          "feature": "auth",
+          "type": "screen"
+        },
+        {
+          "name": "SignIn",
+          "path": "src/features/auth/screens/SignIn.tsx",
+          "feature": "auth",
+          "type": "screen"
+        },
+        {
+          "name": "SignUp",
+          "path": "src/features/auth/screens/SignUp.tsx",
+          "feature": "auth",
+          "type": "screen"
+        }
+      ],
+      "bins": [
+        {
+          "name": "AllBinsScreen",
+          "path": "src/features/bins/screens/AllBinsScreen.tsx",
+          "feature": "bins",
+          "type": "screen"
+        },
+        {
+          "name": "CreateBinScreen",
+          "path": "src/features/bins/screens/CreateBinScreen.tsx",
+          "feature": "bins",
+          "type": "screen"
+        }
+      ],
+      "content": [
+        {
+          "name": "ContentScreen",
+          "path": "src/features/content/screens/ContentScreen.tsx",
+          "feature": "content",
+          "type": "screen"
+        }
+      ],
+      "home": [
+        {
+          "name": "DashboardScreen",
+          "path": "src/features/home/screens/DashboardScreen.tsx",
+          "feature": "home",
+          "type": "screen"
+        },
+        {
+          "name": "DetailScreen",
+          "path": "src/features/home/screens/DetailScreen.tsx",
+          "feature": "home",
+          "type": "screen"
+        },
+        {
+          "name": "HomeScreen",
+          "path": "src/features/home/screens/HomeScreen.tsx",
+          "feature": "home",
+          "type": "screen"
+        }
+      ],
+      "search": [
+        {
+          "name": "SearchScreen",
+          "path": "src/features/search/screens/SearchScreen.tsx",
+          "feature": "search",
+          "type": "screen"
+        }
+      ],
+      "settings": [
+        {
+          "name": "AdminDashboardScreen",
+          "path": "src/features/settings/screens/AdminDashboardScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "ContactScreen",
+          "path": "src/features/settings/screens/ContactScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "ExportScreen",
+          "path": "src/features/settings/screens/ExportScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "HelpScreen",
+          "path": "src/features/settings/screens/HelpScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "HowToScreen",
+          "path": "src/features/settings/screens/HowToScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "PremiumScreen",
+          "path": "src/features/settings/screens/PremiumScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "PrivacyScreen",
+          "path": "src/features/settings/screens/PrivacyScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "ProfileScreen",
+          "path": "src/features/settings/screens/ProfileScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "SecurityScreen",
+          "path": "src/features/settings/screens/SecurityScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "SettingsScreen",
+          "path": "src/features/settings/screens/SettingsScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "TermsScreen",
+          "path": "src/features/settings/screens/TermsScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        },
+        {
+          "name": "ThemeScreen",
+          "path": "src/features/settings/screens/ThemeScreen.tsx",
+          "feature": "settings",
+          "type": "screen"
+        }
+      ],
+      "thoughtmarks": [
+        {
+          "name": "AllThoughtmarksScreen",
+          "path": "src/features/thoughtmarks/screens/AllThoughtmarksScreen.tsx",
+          "feature": "thoughtmarks",
+          "type": "screen"
+        },
+        {
+          "name": "ThoughtmarkDetailScreen",
+          "path": "src/features/thoughtmarks/screens/ThoughtmarkDetailScreen.tsx",
+          "feature": "thoughtmarks",
+          "type": "screen"
+        },
+        {
+          "name": "UnifiedThoughtmarkScreen",
+          "path": "src/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx",
+          "feature": "thoughtmarks",
+          "type": "screen"
+        }
+      ]
+    }
+  },
+  "components": {
+    "count": 28,
+    "items": [
+      {
+        "name": "AutoRoleView",
+        "path": "src/components/AutoRoleView.tsx",
+        "category": "root",
+        "type": "component"
+      },
+      {
+        "name": "EnvironmentIndicator",
+        "path": "src/components/EnvironmentIndicator.tsx",
+        "category": "root",
+        "type": "component"
+      },
+      {
+        "name": "SplashFallback",
+        "path": "src/components/SplashFallback.tsx",
+        "category": "root",
+        "type": "component"
+      },
+      {
+        "name": "RoleDebugger",
+        "path": "src/components/debug/RoleDebugger.tsx",
+        "category": "debug",
+        "type": "component"
+      },
+      {
+        "name": "DualMountToggle",
+        "path": "src/components/layout/DualMountToggle.tsx",
+        "category": "layout",
+        "type": "component"
+      },
+      {
+        "name": "ActionSheet",
+        "path": "src/components/ui/ActionSheet.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "BottomNav",
+        "path": "src/components/ui/BottomNav.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "Button",
+        "path": "src/components/ui/Button.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "Card",
+        "path": "src/components/ui/Card.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "DarkAlertDialog",
+        "path": "src/components/ui/DarkAlertDialog.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "DesignSystemDemo",
+        "path": "src/components/ui/DesignSystemDemo.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "DraggableSection",
+        "path": "src/components/ui/DraggableSection.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "FloatingActionButton",
+        "path": "src/components/ui/FloatingActionButton.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "GlassmorphicContainer",
+        "path": "src/components/ui/GlassmorphicContainer.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "HydrationTestCard",
+        "path": "src/components/ui/HydrationTestCard.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "LoadingFallbackScreen",
+        "path": "src/components/ui/LoadingFallbackScreen.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "LoadingScreen",
+        "path": "src/components/ui/LoadingScreen.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "ModernHeader",
+        "path": "src/components/ui/ModernHeader.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "NeonGradientText",
+        "path": "src/components/ui/NeonGradientText.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "OnboardingModal",
+        "path": "src/components/ui/OnboardingModal.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "OnboardingModal_RUNNER-TEST",
+        "path": "src/components/ui/OnboardingModal_RUNNER-TEST.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "PremiumFeatureWrapper",
+        "path": "src/components/ui/PremiumFeatureWrapper.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "SessionHydrationGuard",
+        "path": "src/components/ui/SessionHydrationGuard.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "TagChip",
+        "path": "src/components/ui/TagChip.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "TagFilter",
+        "path": "src/components/ui/TagFilter.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "Text",
+        "path": "src/components/ui/Text.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "VoiceRecorder",
+        "path": "src/components/ui/VoiceRecorder.tsx",
+        "category": "ui",
+        "type": "component"
+      },
+      {
+        "name": "VoiceRecorderProvider",
+        "path": "src/components/ui/VoiceRecorderProvider.tsx",
+        "category": "ui",
+        "type": "component"
+      }
+    ],
+    "byCategory": {
+      "root": [
+        {
+          "name": "AutoRoleView",
+          "path": "src/components/AutoRoleView.tsx",
+          "category": "root",
+          "type": "component"
+        },
+        {
+          "name": "EnvironmentIndicator",
+          "path": "src/components/EnvironmentIndicator.tsx",
+          "category": "root",
+          "type": "component"
+        },
+        {
+          "name": "SplashFallback",
+          "path": "src/components/SplashFallback.tsx",
+          "category": "root",
+          "type": "component"
+        }
+      ],
+      "debug": [
+        {
+          "name": "RoleDebugger",
+          "path": "src/components/debug/RoleDebugger.tsx",
+          "category": "debug",
+          "type": "component"
+        }
+      ],
+      "layout": [
+        {
+          "name": "DualMountToggle",
+          "path": "src/components/layout/DualMountToggle.tsx",
+          "category": "layout",
+          "type": "component"
+        }
+      ],
+      "ui": [
+        {
+          "name": "ActionSheet",
+          "path": "src/components/ui/ActionSheet.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "BottomNav",
+          "path": "src/components/ui/BottomNav.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "Button",
+          "path": "src/components/ui/Button.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "Card",
+          "path": "src/components/ui/Card.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "DarkAlertDialog",
+          "path": "src/components/ui/DarkAlertDialog.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "DesignSystemDemo",
+          "path": "src/components/ui/DesignSystemDemo.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "DraggableSection",
+          "path": "src/components/ui/DraggableSection.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "FloatingActionButton",
+          "path": "src/components/ui/FloatingActionButton.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "GlassmorphicContainer",
+          "path": "src/components/ui/GlassmorphicContainer.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "HydrationTestCard",
+          "path": "src/components/ui/HydrationTestCard.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "LoadingFallbackScreen",
+          "path": "src/components/ui/LoadingFallbackScreen.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "LoadingScreen",
+          "path": "src/components/ui/LoadingScreen.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "ModernHeader",
+          "path": "src/components/ui/ModernHeader.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "NeonGradientText",
+          "path": "src/components/ui/NeonGradientText.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "OnboardingModal",
+          "path": "src/components/ui/OnboardingModal.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "OnboardingModal_RUNNER-TEST",
+          "path": "src/components/ui/OnboardingModal_RUNNER-TEST.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "PremiumFeatureWrapper",
+          "path": "src/components/ui/PremiumFeatureWrapper.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "SessionHydrationGuard",
+          "path": "src/components/ui/SessionHydrationGuard.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "TagChip",
+          "path": "src/components/ui/TagChip.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "TagFilter",
+          "path": "src/components/ui/TagFilter.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "Text",
+          "path": "src/components/ui/Text.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "VoiceRecorder",
+          "path": "src/components/ui/VoiceRecorder.tsx",
+          "category": "ui",
+          "type": "component"
+        },
+        {
+          "name": "VoiceRecorderProvider",
+          "path": "src/components/ui/VoiceRecorderProvider.tsx",
+          "category": "ui",
+          "type": "component"
+        }
+      ]
+    }
+  },
+  "environments": {
+    "legacy": {
+      "description": "Legacy environment with original components",
+      "features": [
+        "auth",
+        "home",
+        "settings",
+        "search",
+        "thoughtmarks",
+        "bins"
+      ],
+      "navigation": "Stack-based navigation",
+      "styling": "Original design system"
+    },
+    "nextgen": {
+      "description": "NextGen environment with enhanced components",
+      "features": [
+        "auth",
+        "home",
+        "settings",
+        "search",
+        "thoughtmarks",
+        "bins"
+      ],
+      "navigation": "Enhanced navigation with dual-mount support",
+      "styling": "Enhanced design system with AutoRoleView"
+    }
+  },
+  "accessibility": {
+    "roles": {
+      "layout": [
+        "card",
+        "section",
+        "header",
+        "footer",
+        "navigation",
+        "modal",
+        "container"
+      ],
+      "content": [
+        "heading",
+        "body",
+        "caption",
+        "label",
+        "button-text",
+        "link-text"
+      ],
+      "interactive": [
+        "button-nav-primary",
+        "button-nav-secondary",
+        "card-as-nav",
+        "link-nav",
+        "button-action",
+        "button-function",
+        "input",
+        "toggle",
+        "slider",
+        "chip",
+        "badge",
+        "tag"
+      ]
+    },
+    "components": {
+      "AutoRoleView": "Automatic role assignment component",
+      "DualMountToggle": "Environment toggle with accessibility support",
+      "Text": "Accessible text component with role variants"
+    }
+  },
+  "navigation": {
+    "stack": "React Navigation Stack",
+    "screens": [
+      "AIToolsScreen",
+      "PINEntryScreen",
+      "SignIn",
+      "SignUp",
+      "AllBinsScreen",
+      "CreateBinScreen",
+      "ContentScreen",
+      "DashboardScreen",
+      "DetailScreen",
+      "HomeScreen",
+      "SearchScreen",
+      "AdminDashboardScreen",
+      "ContactScreen",
+      "ExportScreen",
+      "HelpScreen",
+      "HowToScreen",
+      "PremiumScreen",
+      "PrivacyScreen",
+      "ProfileScreen",
+      "SecurityScreen",
+      "SettingsScreen",
+      "TermsScreen",
+      "ThemeScreen",
+      "AllThoughtmarksScreen",
+      "ThoughtmarkDetailScreen",
+      "UnifiedThoughtmarkScreen"
+    ],
+    "features": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "dualMount": {
+    "toggle": "DualMountToggle component",
+    "environments": [
+      "legacy",
+      "nextgen"
+    ],
+    "features": [
+      "SafeArea support",
+      "Tapability",
+      "Transparency",
+      "Accessibility"
+    ]
+  }
+}

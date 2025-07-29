@@ -35,69 +35,69 @@ export const DarkAlertDialog: React.FC<DarkAlertDialogProps> = ({
   const { tokens: designTokens } = useTheme();
 
   const styles = StyleSheet.create({
-    modalOverlay: {
-      flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      justifyContent: 'center',
+    button: {
       alignItems: 'center',
-    },
-    modalContent: {
-      backgroundColor: designTokens.colors.surface,
-      borderRadius: designTokens.radius.lg,
-      padding: designTokens.spacing.xl,
-      margin: designTokens.spacing.lg,
-      width: width - designTokens.spacing.lg * 2,
-      maxWidth: 400,
-    },
-    title: {
-      fontSize: designTokens.typography.fontSize.lg,
-      fontWeight: '600',
-      color: designTokens.colors.text,
-      marginBottom: designTokens.spacing.sm,
-      textAlign: 'center',
-    },
-    message: {
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
-      marginBottom: designTokens.spacing.xl,
-      textAlign: 'center',
-      lineHeight: 20,
+      borderRadius: designTokens.radius.md,
+      flex: 1,
+      justifyContent: 'center',
+      paddingVertical: designTokens.spacing.md,
     },
     buttonRow: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
       gap: designTokens.spacing.md,
-    },
-    button: {
-      flex: 1,
-      paddingVertical: designTokens.spacing.md,
-      borderRadius: designTokens.radius.md,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    cancelButton: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderColor: designTokens.colors.border,
-    },
-    confirmButton: {
-      backgroundColor: designTokens.colors.accent,
-      borderWidth: 1,
-      borderColor: designTokens.colors.accent,
-    },
-    dangerButton: {
-      backgroundColor: designTokens.colors.danger,
-      borderColor: designTokens.colors.danger,
+      justifyContent: 'space-between',
     },
     buttonText: {
       fontSize: designTokens.typography.fontSize.body,
       fontWeight: '600',
     },
+    cancelButton: {
+      backgroundColor: 'transparent',
+      borderColor: designTokens.colors.border,
+      borderWidth: 1,
+    },
     cancelButtonText: {
       color: designTokens.colors.textSecondary,
     },
+    confirmButton: {
+      backgroundColor: designTokens.colors.accent,
+      borderColor: designTokens.colors.accent,
+      borderWidth: 1,
+    },
     confirmButtonText: {
       color: designTokens.colors.background,
+    },
+    dangerButton: {
+      backgroundColor: designTokens.colors.danger,
+      borderColor: designTokens.colors.danger,
+    },
+    message: {
+      color: designTokens.colors.textSecondary,
+      fontSize: designTokens.typography.fontSize.body,
+      lineHeight: 20,
+      marginBottom: designTokens.spacing.xl,
+      textAlign: 'center',
+    },
+    modalContent: {
+      backgroundColor: designTokens.colors.surface,
+      borderRadius: designTokens.radius.lg,
+      margin: designTokens.spacing.lg,
+      maxWidth: 400,
+      padding: designTokens.spacing.xl,
+      width: width - designTokens.spacing.lg * 2,
+    },
+    modalOverlay: {
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      flex: 1,
+      justifyContent: 'center',
+    },
+    title: {
+      color: designTokens.colors.text,
+      fontSize: designTokens.typography.fontSize.lg,
+      fontWeight: '600',
+      marginBottom: designTokens.spacing.sm,
+      textAlign: 'center',
     },
   });
 

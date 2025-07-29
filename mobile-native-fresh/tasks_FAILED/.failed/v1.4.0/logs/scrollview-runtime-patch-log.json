@@ -1,0 +1,319 @@
+{
+  "auditMetadata": {
+    "generatedAt": "2025-01-27T23:47:33.905Z",
+    "branch": "fix/v1.4.0_scrollview-autopatch-and-audit",
+    "totalViolationsFixed": 10,
+    "auditVersion": "1.0.0",
+    "generator": "DebugScrollView Auto-Patch System"
+  },
+  "violations": [
+    {
+      "id": 1,
+      "debugId": "header",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 1003,
+      "propsFixed": ["alignItems", "justifyContent"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "marginBottom": "tokens.spacing.lg * 0.25",
+            "paddingHorizontal": "tokens.spacing.page * 0.25",
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        },
+        "after": {
+          "style": {
+            "marginBottom": "tokens.spacing.lg * 0.25",
+            "paddingHorizontal": "tokens.spacing.page * 0.25"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "debugId": "header-left",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 1015,
+      "propsFixed": ["alignItems", "flexDirection"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flex": 1,
+            "flexDirection": "row",
+            "alignItems": "center"
+          }
+        },
+        "after": {
+          "style": {
+            "flex": 1
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "debugId": "header-right",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 1035,
+      "propsFixed": ["alignItems", "flexDirection"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flexDirection": "row",
+            "alignItems": "center"
+          }
+        },
+        "after": {
+          "style": {},
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "debugId": "tags-header",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 346,
+      "propsFixed": ["alignItems", "justifyContent", "flexDirection"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "marginBottom": "tokens.spacing.md * 1.34",
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        },
+        "after": {
+          "style": {
+            "marginBottom": "tokens.spacing.md * 1.34"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "debugId": "bin-content-${bin.id}",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 507,
+      "propsFixed": ["flexDirection", "alignItems", "justifyContent"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between",
+            "width": "100%"
+          }
+        },
+        "after": {
+          "style": {
+            "width": "100%"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "debugId": "new-bin-content",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 528,
+      "propsFixed": ["flexDirection", "alignItems", "justifyContent"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between",
+            "width": "100%"
+          }
+        },
+        "after": {
+          "style": {
+            "width": "100%"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "debugId": "sort-later-content",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 547,
+      "propsFixed": ["flexDirection", "alignItems", "justifyContent"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between",
+            "width": "100%"
+          }
+        },
+        "after": {
+          "style": {
+            "width": "100%"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "debugId": "archive-content",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 563,
+      "propsFixed": ["flexDirection", "alignItems", "justifyContent"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between",
+            "width": "100%"
+          }
+        },
+        "after": {
+          "style": {
+            "width": "100%"
+          },
+          "contentContainerStyle": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "justifyContent": "space-between"
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "debugId": "fallback-content",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 986,
+      "propsFixed": ["alignItems"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "alignItems": "center",
+            "paddingVertical": "tokens.spacing.xl * 1.34"
+          }
+        },
+        "after": {
+          "style": {
+            "paddingVertical": "tokens.spacing.xl * 1.34"
+          },
+          "contentContainerStyle": {
+            "alignItems": "center"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "debugId": "empty-state",
+      "file": "src/features/home/screens/DashboardScreen.tsx",
+      "line": 440,
+      "propsFixed": ["alignItems"],
+      "status": "fixed",
+      "timestamp": "2025-01-27T23:47:33.905Z",
+      "fixPattern": {
+        "before": {
+          "style": {
+            "alignItems": "center",
+            "paddingVertical": "tokens.spacing.xl * 1.34"
+          }
+        },
+        "after": {
+          "style": {
+            "paddingVertical": "tokens.spacing.xl * 1.34"
+          },
+          "contentContainerStyle": {
+            "alignItems": "center"
+          }
+        }
+      }
+    }
+  ],
+  "statistics": {
+    "totalViolations": 10,
+    "filesAffected": 1,
+    "propsFixed": {
+      "alignItems": 8,
+      "justifyContent": 6,
+      "flexDirection": 6
+    },
+    "mostCommonViolation": "alignItems in style prop",
+    "fixSuccessRate": "100%"
+  },
+  "verification": {
+    "preFixState": {
+      "appLoads": false,
+      "blackScreen": true,
+      "runtimeErrors": true,
+      "debugScrollViewViolations": true
+    },
+    "postFixState": {
+      "appLoads": true,
+      "blackScreen": false,
+      "runtimeErrors": false,
+      "debugScrollViewViolations": false
+    }
+  },
+  "recommendations": [
+    "Add ESLint rule to catch layout props in ScrollView style",
+    "Use stricter TypeScript types for ScrollView style props",
+    "Include ScrollView layout compliance in code review checklist",
+    "Add unit tests for ScrollView style prop validation"
+  ]
+} 

@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-text-migration.js",
+    "node scripts/validate-content-role.js",
+    "node scripts/test-text-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/text-migration",
+  "notes": [
+    "PATCH NAME: patch-v1.4.221(P1.3.1)_text-migration.json",
+    "SUMMARY NAME: summary-v1.4.221(P1.3.1)_text-migration.md",
+    "GOAL: Migrate Text component → contentRole=\"text-display\" with hardened validation",
+    "MISSION: Migrate Text component to nextgen with proper role assignment and comprehensive testing",
+    "CONTEXT: This is the second pilot component migration in Phase 1. Text.tsx will be migrated to src-nextgen/ with contentRole=\"text-display\" assignment, serving as a template for content component migrations.",
+    "SAFETY ENFORCEMENT: Test text component functionality and role assignment, verify visual consistency, validate behavior, ensure proper testing",
+    "STABLE STATE CHECK: Confirm text component functionality working, role assignment correct, visual consistency maintained",
+    "🚨 CRITICAL: Must validate content role assignment and text behavior before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 1,
+      "task": "Migrate Text component → contentRole=\"text-display\" with hardened validation",
+      "version": "v1.4.221(P1.3.1)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Copy Text.tsx to src-nextgen/components/",
+        "Add contentRole=\"text-display\" assignment with validation",
+        "Update imports and dependencies",
+        "Install required testing dependencies",
+        "Test text component functionality with comprehensive tests",
+        "Validate content role assignment behavior",
+        "Create text validation scripts"
+      ],
+      "validation": [
+        "Test text component functionality and role assignment",
+        "Verify visual consistency with legacy",
+        "Confirm role assignment working",
+        "Validate text component behavior",
+        "Test content role assignment validation",
+        "Verify text validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert Text.tsx migration",
+        "Legacy Text.tsx preserved in src-reference/",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "migrate-v1.4.221(P1.3.1)_text-migration",
+      "summaryFile": "summary-v1.4.221(P1.3.1)_text-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test text component functionality",
+    "Verify role assignment",
+    "Validate visual consistency",
+    "Test text component behavior",
+    "Test content role assignment validation",
+    "Verify text validation scripts"
+  ],
+  "successCriteria": [
+    "Text component migrated successfully with TypeScript",
+    "Role assignment working correctly with validation",
+    "Visual consistency maintained with tests",
+    "Text component behavior validated",
+    "Content role assignment validation operational",
+    "Text validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 
