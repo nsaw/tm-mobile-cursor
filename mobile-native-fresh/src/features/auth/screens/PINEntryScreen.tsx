@@ -98,7 +98,9 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
     const pinString = pin.join('');
     
     if (pinString === storedPin) {
-      onSuccess?.();
+      Alert.alert('Success', 'PIN verified successfully!', [
+        { text: 'OK', onPress: () => onSuccess?.() }
+      ]);
     } else {
       Alert.alert('Error', 'Incorrect PIN. Please try again.');
       setPin([]);
@@ -116,24 +118,19 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
   };
 
   const handleCancel = () => {
-    if (mode === 'setup') {
-      Alert.alert('Cancel Setup', 'Are you sure you want to cancel PIN setup?', [
-        { text: 'No', style: 'cancel' },
-        { text: 'Yes', onPress: () => onCancel?.() }
-      ]);
-    } else {
-      onCancel?.();
+    if (onCancel) {
+      onCancel();
     }
   };
 
   const getTitle = () => {
     switch (mode) {
       case 'setup':
-        return isConfirming ? 'Confirm PIN' : 'Set Up PIN';
+        return 'Set Up PIN';
       case 'verify':
         return 'Enter PIN';
       case 'change':
-        return isConfirming ? 'Confirm New PIN' : 'Enter New PIN';
+        return 'Change PIN';
       default:
         return 'PIN Entry';
     }
@@ -142,34 +139,20 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
   const getSubtitle = () => {
     switch (mode) {
       case 'setup':
-        return isConfirming 
-          ? 'Please confirm your 4-digit PIN'
-          : 'Create a 4-digit PIN for quick access';
+        return isConfirming ? 'Confirm your PIN' : 'Create a 4-digit PIN';
       case 'verify':
-        return 'Enter your 4-digit PIN to continue';
+        return 'Enter your PIN to continue';
       case 'change':
-        return isConfirming 
-          ? 'Please confirm your new 4-digit PIN'
-          : 'Enter your new 4-digit PIN';
+        return 'Enter your current PIN';
       default:
         return '';
     }
   };
 
-  const currentPin = isConfirming ? confirmPin : pin;
-  const isComplete = currentPin.length === PIN_LENGTH;
-
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: designTokens.colors.background }]}>
-      {/* Header */}
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={handleCancel}
-          accessibilityRole="button"
-          accessible={true}
-          accessibilityLabel="Go back"
-        >
+        <TouchableOpacity onPress={handleCancel} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={designTokens.colors.text} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: designTokens.colors.text }]}>
@@ -178,8 +161,10 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
         <View style={styles.headerSpacer} />
       </View>
 
-      {/* Content */}
       <View style={styles.content}>
+        <Text style={[styles.title, { color: designTokens.colors.text }]}>
+          {getTitle()}
+        </Text>
         <Text style={[styles.subtitle, { color: designTokens.colors.textSecondary }]}>
           {getSubtitle()}
         </Text>
@@ -187,18 +172,16 @@ export const PINEntryScreen: React.FC<PINEntryScreenProps> = ({
         {/* PIN Dots */}
         <View style={styles.pinContainer}>
           {Array.from({ length: PIN_LENGTH }).map((_, index) => (
-            <View
-              key={index}
-              style={[
-                styles.pinDot,
+            <View key={index} style={styles.pinDot}>
+              <View style={[
+                styles.dot,
                 {
-                  backgroundColor: index < currentPin.length 
+                  backgroundColor: (isConfirming ? confirmPin : pin).length > index 
                     ? designTokens.colors.accent 
-                    : designTokens.colors.border,
-                  borderColor: designTokens.colors.border,
+                    : designTokens.colors.border
                 }
-              ]}
-            />
+              ]} />
+            </View>
           ))}
         </View>
 
@@ -296,6 +279,21 @@ const styles = StyleSheet.create({
     margin: 8,
     width: 70,
   },
+  dot: {
+    borderColor: 'transparent',
+    borderRadius: 8,
+    borderWidth: 2,
+    height: 16,
+    width: 16,
+  },
+  pinContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 32,
+  },
+  pinDot: {
+    marginHorizontal: 8,
+  },
   numberPad: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -307,23 +305,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
   },
-  pinContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 60,
-  },
-  pinDot: {
-    borderRadius: 10,
-    borderWidth: 1,
-    height: 20,
-    marginHorizontal: 8,
-    width: 20,
-  },
   subtitle: {
     fontSize: 16,
-    lineHeight: 22,
-    marginBottom: 40,
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
     textAlign: 'center',
   },
 }); 

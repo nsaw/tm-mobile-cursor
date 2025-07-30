@@ -1,13 +1,13 @@
+import { Text } from 'react-native';
 import React from 'react';
 import { render, RenderOptions } from '@testing-library/react-native';
+
 import { ThemeProvider } from '../../theme/ThemeProvider';
 
 // Mock providers wrapper
 const AllTheProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
+    <ThemeProvider><Text>{children}</Text></ThemeProvider>
   );
 };
 

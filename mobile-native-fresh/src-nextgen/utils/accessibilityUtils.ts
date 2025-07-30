@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { AccessibilityInfo, Platform } from 'react-native';
 
 export interface AccessibilityConfig {
@@ -14,7 +13,7 @@ export interface AccessibilityConfig {
 
 export const createAccessibilityProps = (
   config: AccessibilityConfig,
-  screenReaderEnabled: boolean = true
+  screenReaderEnabled = true
 ): AccessibilityConfig => {
   if (!screenReaderEnabled && config.importantForAccessibility !== 'yes') {
     return {

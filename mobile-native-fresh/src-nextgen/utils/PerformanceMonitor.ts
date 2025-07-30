@@ -9,9 +9,9 @@ let performanceAPI: any;
 // Error boundary for performance collection failures
 class PerformanceErrorBoundary {
   private static instance: PerformanceErrorBoundary;
-  private errorCount: number = 0;
-  private maxErrors: number = 10;
-  private fallbackMode: boolean = false;
+  private errorCount = 0;
+  private maxErrors = 10;
+  private fallbackMode = false;
 
   public static getInstance(): PerformanceErrorBoundary {
     if (!PerformanceErrorBoundary.instance) {
@@ -581,7 +581,7 @@ class PerformanceMonitor {
     return baseline;
   }
 
-  public assertPerformanceBaseline(baseline: PerformanceBaseline, threshold: number = 0.2): boolean {
+  public assertPerformanceBaseline(baseline: PerformanceBaseline, threshold = 0.2): boolean {
     try {
       const currentMetrics = this.getCurrentMetrics();
       
@@ -632,6 +632,8 @@ class PerformanceMonitor {
 }
 
 const performanceMonitor = PerformanceMonitor.getInstance();
+
+export { PerformanceMonitor };
 
 export const usePerformanceMonitor = (): PerformanceMonitorHook => {
   return {
@@ -718,7 +720,7 @@ export const establishPerformanceBaseline = async (): Promise<PerformanceBaselin
 export const detectPerformanceRegression = (
   currentMetrics: PerformanceMetrics,
   baseline: PerformanceBaseline,
-  threshold: number = 0.2 // 20% degradation threshold
+  threshold = 0.2 // 20% degradation threshold
 ): PerformanceRegressionReport => {
   try {
     const report: PerformanceRegressionReport = {

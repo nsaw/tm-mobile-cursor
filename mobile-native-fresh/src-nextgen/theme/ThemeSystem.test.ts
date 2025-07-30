@@ -1,5 +1,6 @@
-import { ThemeSystem, Theme } from './ThemeSystem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { ThemeSystem } from './ThemeSystem';
 
 // Mock AsyncStorage
 const mockAsyncStorage = AsyncStorage as jest.Mocked<typeof AsyncStorage>;

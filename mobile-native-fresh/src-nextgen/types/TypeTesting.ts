@@ -3,7 +3,6 @@
  * Provides utilities for generating test data and validating types in tests
  */
 
-import { typeValidator } from './TypeValidation';
 
 export interface TestDataGenerator<T> {
   generate(): T;
@@ -300,7 +299,7 @@ export class TypeTesting {
   validateGeneratedData<T>(
     generator: () => T,
     validator: (value: unknown) => boolean,
-    count: number = 100
+    count = 100
   ): { valid: number; invalid: number; successRate: number } {
     let valid = 0;
     let invalid = 0;

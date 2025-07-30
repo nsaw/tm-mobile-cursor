@@ -10,15 +10,33 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
     "allowJs": true,
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "moduleDetection": "force",
-    "customConditions": ["react-native"],
+    "customConditions": [
+      "react-native"
+    ],
     "noEmit": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "react-native"]
   },
-  "include": ["src", "app"],
-  "exclude": ["tm-mobile-clone/**/*", "reference/**/*", "ios bak/**/*", "node_modules"]
+  "include": [
+    "src",
+    "src-nextgen",
+    "app"
+  ],
+  "exclude": [
+    "tm-mobile-clone/**/*",
+    "reference/**/*",
+    "ios bak/**/*",
+    "node_modules",
+    "backend/dist/**/*"
+  ],
+  "extends": "expo/tsconfig.base"
 }

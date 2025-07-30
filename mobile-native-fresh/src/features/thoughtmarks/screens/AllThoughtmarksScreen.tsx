@@ -331,9 +331,9 @@ export const AllThoughtmarksScreen: React.FC = () => {
         <TouchableOpacity
           style={[styles.binFilterButton, !selectedBin && styles.binFilterButtonActive]}
           onPress={() => setSelectedBin(null)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Button"
         >
           <Text style={[styles.binFilterText, !selectedBin && styles.binFilterTextActive]}>
             All
@@ -344,9 +344,9 @@ export const AllThoughtmarksScreen: React.FC = () => {
             key={bin.id}
             style={[styles.binFilterButton, selectedBin === bin.id && styles.binFilterButtonActive]}
             onPress={() => setSelectedBin(bin.id)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Button"
           >
             <Ionicons 
               name={bin.icon as any} 
@@ -404,9 +404,9 @@ export const AllThoughtmarksScreen: React.FC = () => {
                   key={bin.id}
                   style={[styles.dropdownButton, selectedBin === bin.id && styles.dropdownButtonActive]}
                   onPress={() => setSelectedBin(bin.id)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Button"
                 >
                   <Text style={[styles.dropdownButtonText, selectedBin === bin.id && styles.dropdownButtonTextActive]}>
                     {bin.name}
@@ -498,7 +498,10 @@ export const AllThoughtmarksScreen: React.FC = () => {
                   <TouchableOpacity
                     style={styles.createButton}
                     onPress={handleCreateThoughtmark}
-                   accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+                    accessibilityRole="button"
+                    accessible={true}
+                    accessibilityLabel="Button"
+                  >
                     <Ionicons name="add" size={20} color={designTokens.colors.background} />
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>

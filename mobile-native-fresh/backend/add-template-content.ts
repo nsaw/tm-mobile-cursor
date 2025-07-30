@@ -63,7 +63,7 @@ async function addTemplateContent() {
       { name: "Newsworthy", description: "Current events and news", color: "#DC2626", icon: "folder-outline", userId: user.id, sortOrder: 13 },
     ];
 
-    const createdBins: any[] = [];
+    const createdBins: unknown[] = [];
     for (const binData of defaultBins) {
       const result = await db.insert(bins).values(binData).returning();
       const bin = Array.isArray(result) ? result[0] : result;
@@ -224,7 +224,7 @@ async function addTemplateContent() {
     for (const thoughtmark of templateThoughtmarks) {
       try {
         const result = await db.insert(thoughtmarks).values(thoughtmark).returning();
-        const createdThoughtmark = Array.isArray(result) ? result[0] : result;
+        const _createdThoughtmark = Array.isArray(result) ? result[0] : result;
         console.log(`Created thoughtmark: ${thoughtmark.title}`);
       } catch (error) {
         console.error('Error inserting thoughtmark:', thoughtmark.title, error);

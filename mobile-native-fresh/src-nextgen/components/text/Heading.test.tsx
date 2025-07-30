@@ -2,8 +2,9 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 
-import { Heading } from './Heading';
 import { TestWrapper } from '../../__tests__/TestWrapper';
+
+import { Heading } from './Heading';
 
 // Mock useTheme
 jest.mock('../../theme/ThemeProvider', () => ({
@@ -47,27 +48,27 @@ const renderWithTheme = (component: React.ReactElement) => {
 
 describe('Heading', () => {
   it('should render with default props', () => {
-    const { getByText } = renderWithTheme(<Heading>Test Heading</Heading>);
+    const { getByText } = renderWithTheme(<Heading><Text>Test Heading</Text></Heading>);
     
     const heading = getByText('Test Heading');
     expect(heading).toBeTruthy();
   });
 
   it('should render with different levels', () => {
-    const { getByText, rerender } = renderWithTheme(<Heading level={1}>H1 Heading</Heading>);
+    const { getByText, rerender } = renderWithTheme(<Heading level={1}><Text>H1 Heading</Text></Heading>);
     expect(getByText('H1 Heading')).toBeTruthy();
     
-    rerender(<TestWrapper><Heading level={2}>H2 Heading</Heading></TestWrapper>);
+    rerender(<TestWrapper><Heading level={2}><Text>H2 Heading</Text></Heading></TestWrapper>);
     expect(getByText('H2 Heading')).toBeTruthy();
     
-    rerender(<TestWrapper><Heading level={3}>H3 Heading</Heading></TestWrapper>);
+    rerender(<TestWrapper><Heading level={3}><Text>H3 Heading</Text></Heading></TestWrapper>);
     expect(getByText('H3 Heading')).toBeTruthy();
   });
 
   it('should apply custom styles', () => {
     const customStyle = { color: 'red' };
     const { getByText } = renderWithTheme(
-      <Heading style={customStyle}>Styled Heading</Heading>
+      <Heading style={customStyle}><Text>Styled Heading</Text></Heading>
     );
     
     const heading = getByText('Styled Heading');
@@ -77,7 +78,7 @@ describe('Heading', () => {
   it('should handle onPress events', () => {
     const onPress = jest.fn();
     const { getByText } = renderWithTheme(
-      <Heading onPress={onPress}>Clickable Heading</Heading>
+      <Heading onPress={onPress}><Text>Clickable Heading</Text></Heading>
     );
     
     const heading = getByText('Clickable Heading');
@@ -88,9 +89,7 @@ describe('Heading', () => {
 
   it('should render with accessibility props', () => {
     const { getByText } = renderWithTheme(
-      <Heading accessibilityLabel="Main heading" accessibilityRole="header">
-        Accessible Heading
-      </Heading>
+      <Heading accessibilityLabel="Main heading" accessibilityRole="header"><Text>Accessible Heading</Text></Heading>
     );
     
     const heading = getByText('Accessible Heading');
@@ -100,9 +99,9 @@ describe('Heading', () => {
   it('should handle different text content types', () => {
     const { getByText } = renderWithTheme(
       <Heading>
-        {'Dynamic '}
+        <Text>Dynamic</Text>
         <Text>Mixed</Text>
-        {' Content'}
+        <Text>Content</Text>
       </Heading>
     );
     
@@ -111,7 +110,7 @@ describe('Heading', () => {
 
   it('should apply theme colors correctly', () => {
     const { getByText } = renderWithTheme(
-      <Heading color="primary">Colored Heading</Heading>
+      <Heading color="primary"><Text>Colored Heading</Text></Heading>
     );
     
     const heading = getByText('Colored Heading');
@@ -128,7 +127,7 @@ describe('Heading', () => {
 
   it('should render with custom testID', () => {
     const { getByTestId } = renderWithTheme(
-      <Heading testID="custom-heading">Test Heading</Heading>
+      <Heading testID="custom-heading"><Text>Test Heading</Text></Heading>
     );
     
     const heading = getByTestId('custom-heading');
@@ -142,7 +141,7 @@ describe('Heading', () => {
 
   it('should apply responsive styles', () => {
     const { getByText } = renderWithTheme(
-      <Heading responsive>Responsive Heading</Heading>
+      <Heading responsive><Text>Responsive Heading</Text></Heading>
     );
     
     const heading = getByText('Responsive Heading');

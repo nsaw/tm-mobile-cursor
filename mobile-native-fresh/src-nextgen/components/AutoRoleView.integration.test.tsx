@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
+import { Text, View } from 'react-native';
 
 import { AutoRoleView } from './AutoRoleView';
-import { Text, View } from 'react-native';
 
 // Mock performance monitor
 jest.mock('../utils/PerformanceMonitor', () => ({

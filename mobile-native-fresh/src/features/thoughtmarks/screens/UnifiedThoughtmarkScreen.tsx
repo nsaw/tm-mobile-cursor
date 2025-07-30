@@ -720,7 +720,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   !selectedBinId && styles.binOptionActive,
                   { borderColor: designTokens.colors.border }
                 ]}
-                onPress={() => setSelectedBinId(undefined)}
+                                    onPress={() => setSelectedBinId(undefined)}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Button"

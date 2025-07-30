@@ -76,7 +76,7 @@ const CreateBinScreen: React.FC = () => {
           borderRadius: 8,
           alignItems: 'center',
         }}
-      >
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
           Create Bin
         </Text>

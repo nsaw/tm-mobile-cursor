@@ -10,11 +10,9 @@ const mockPerformance = {
 
 global.performance = mockPerformance;
 
-const TestComponent: React.FC<{ testID?: string }> = ({ testID }) => (
-  <View testID={testID}>
-    <Text>Test Component</Text>
-  </View>
-);
+const TestComponent: React.FC<{ testID?: string }> = ({ testID }) => {
+  return React.createElement('View', { testID }, React.createElement('Text', null, 'Test Component'));
+};
 
 const MonitoredComponent = withPerformanceMonitoring(TestComponent, 'TestComponent', 'nextgen');
 
@@ -28,16 +26,16 @@ describe('PerformanceMonitor Integration', () => {
   });
 
   it('should integrate with React components', () => {
-    const { getByTestId } = render(<MonitoredComponent testID="test-component" />);
+    const { getByTestId } = render(React.createElement(MonitoredComponent, { testID: "test-component" }));
     
     expect(getByTestId('test-component')).toBeTruthy();
     
     // Component should be rendered without errors
-    expect(() => render(<MonitoredComponent testID="test-component" />)).not.toThrow();
+    expect(() => render(React.createElement(MonitoredComponent, { testID: "test-component" }))).not.toThrow();
   });
 
   it('should handle performance monitoring in component lifecycle', () => {
-    const { unmount } = render(<MonitoredComponent testID="test-component" />);
+    const { unmount } = render(React.createElement(MonitoredComponent, { testID: "test-component" }));
     
     // Component should render
     expect(monitor.getPerformanceReport().currentMetrics.length).toBeGreaterThanOrEqual(0);
@@ -48,11 +46,11 @@ describe('PerformanceMonitor Integration', () => {
 
   it('should handle multiple monitored components', () => {
     const { getByTestId } = render(
-      <View>
-        <MonitoredComponent testID="component-1" />
-        <MonitoredComponent testID="component-2" />
-        <MonitoredComponent testID="component-3" />
-      </View>
+      React.createElement(View, null,
+        React.createElement(MonitoredComponent, { testID: "component-1" }),
+        React.createElement(MonitoredComponent, { testID: "component-2" }),
+        React.createElement(MonitoredComponent, { testID: "component-3" })
+      )
     );
     
     expect(getByTestId('component-1')).toBeTruthy();
@@ -62,11 +60,11 @@ describe('PerformanceMonitor Integration', () => {
     // Should handle multiple components without errors
     expect(() => {
       render(
-        <View>
-          <MonitoredComponent testID="component-1" />
-          <MonitoredComponent testID="component-2" />
-          <MonitoredComponent testID="component-3" />
-        </View>
+        React.createElement(View, null,
+          React.createElement(MonitoredComponent, { testID: "component-1" }),
+          React.createElement(MonitoredComponent, { testID: "component-2" }),
+          React.createElement(MonitoredComponent, { testID: "component-3" })
+        )
       );
     }).not.toThrow();
   });
@@ -80,7 +78,7 @@ describe('PerformanceMonitor Integration', () => {
 
     // Should not throw error when rendering
     expect(() => {
-      render(<MonitoredComponent testID="test-component" />);
+      render(React.createElement(MonitoredComponent, { testID: "test-component" }));
     }).not.toThrow();
 
     // Restore original
@@ -91,14 +89,14 @@ describe('PerformanceMonitor Integration', () => {
     // Test with legacy environment
     const LegacyComponent = withPerformanceMonitoring(TestComponent, 'TestComponent', 'legacy');
     
-    const { getByTestId } = render(<LegacyComponent testID="legacy-component" />);
+    const { getByTestId } = render(React.createElement(LegacyComponent, { testID: "legacy-component" }));
     
     expect(getByTestId('legacy-component')).toBeTruthy();
     
     // Should handle both environments
     expect(() => {
-      render(<MonitoredComponent testID="nextgen-component" />);
-      render(<LegacyComponent testID="legacy-component" />);
+      render(React.createElement(MonitoredComponent, { testID: "nextgen-component" }));
+      render(React.createElement(LegacyComponent, { testID: "legacy-component" }));
     }).not.toThrow();
   });
 }); 

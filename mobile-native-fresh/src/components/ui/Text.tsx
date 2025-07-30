@@ -127,12 +127,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <RNText
-      style={[getVariantStyle(), style]}
-      {...props}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 };
 

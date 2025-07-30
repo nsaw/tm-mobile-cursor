@@ -1,17 +1,12 @@
+/* Core hooks for the nextgen system */
+
 import React, { useState, useEffect, useCallback, useRef, useMemo, useContext } from 'react';
-import type {
-  ThemeConfig,
-  ComponentRole,
-  ComponentVariant,
-  ComponentSize,
-  ComponentState,
-  RoleContext,
-  EnvironmentConfig,
-  ValidationResult,
-  PerformanceMetric,
-  HookResult,
-  HookOptions,
-} from '../types/core';
+import { ValidationResult } from '../types/core';
+
+export function useCore<T>(props: T) {
+  const ref = useRef<T | null>(null);
+  return ref;
+}
 
 // ============================================================================
 // Theme Hooks
@@ -71,9 +66,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [availableThemes] = useState(['light', 'dark']);
 
   const setTheme = useCallback(async (themeName: string) => {
-    // In a real implementation, this would call the theme system
     console.log(`🎨 Setting theme to: ${themeName}`);
-    // For now, just update the state
     setThemeState(prev => ({ ...prev, name: themeName, isDark: themeName === 'dark' }));
   }, []);
 
@@ -98,31 +91,31 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 };
 
 // Use theme hook
-export const useTheme = (): ThemeContextValue => {
+export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-};
+}
 
 // Use theme color hook
-export const useThemeColor = (colorKey: keyof ThemeConfig['colors']): string => {
+export function useThemeColor(colorKey: keyof ThemeConfig['colors']): string {
   const { theme } = useTheme();
   return theme.colors[colorKey];
-};
+}
 
 // Use theme spacing hook
-export const useThemeSpacing = (size: keyof ThemeConfig['spacing']): number => {
+export function useThemeSpacing(size: keyof ThemeConfig['spacing']): number {
   const { theme } = useTheme();
   return theme.spacing[size];
-};
+}
 
 // Use theme typography hook
-export const useThemeTypography = () => {
+export function useThemeTypography() {
   const { theme } = useTheme();
   return theme.typography;
-};
+}
 
 // ============================================================================
 // Role Hooks
@@ -143,23 +136,28 @@ const RoleContext = React.createContext<RoleContextValue | null>(null);
 
 // Role provider component
 export const RoleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [roleContext, setRoleContext] = useState<RoleContextValue>({
-    role: 'container',
-    variant: 'default',
-    size: 'md',
-    state: 'default',
-    props: {},
-    updateRole: () => {},
-  });
+  const [role, setRole] = useState('default');
+  const [variant, setVariant] = useState<ComponentVariant>('default');
+  const [size, setSize] = useState<ComponentSize>('md');
+  const [state, setState] = useState<ComponentState>('default');
+  const [props, setProps] = useState<Record<string, any>>({});
 
   const updateRole = useCallback((updates: Partial<RoleContext>) => {
-    setRoleContext(prev => ({ ...prev, ...updates }));
+    if (updates.role) setRole(updates.role);
+    if (updates.variant) setVariant(updates.variant);
+    if (updates.size) setSize(updates.size);
+    if (updates.state) setState(updates.state);
+    if (updates.props) setProps(updates.props);
   }, []);
 
   const value = useMemo(() => ({
-    ...roleContext,
+    role,
+    variant,
+    size,
+    state,
+    props,
     updateRole,
-  }), [roleContext, updateRole]);
+  }), [role, variant, size, state, props, updateRole]);
 
   return (
     <RoleContext.Provider value={value}>
@@ -214,7 +212,7 @@ const EnvironmentContext = React.createContext<EnvironmentContextValue | null>(n
 // Environment provider component
 export const EnvironmentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<EnvironmentConfig>({
-    apiUrl: 'https://api.thoughtmarks.app',
+    apiUrl: 'https://api.example.com',
     apiKey: '',
     environment: 'development',
     debugMode: true,
@@ -230,9 +228,17 @@ export const EnvironmentProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [warnings, setWarnings] = useState<string[]>([]);
 
   const reloadConfig = useCallback(async () => {
-    console.log('🔄 Reloading environment configuration...');
-    // In a real implementation, this would reload from the environment system
-    // For now, just log the action
+    try {
+      // In a real implementation, this would reload config from various sources
+      console.log('🔄 Reloading environment configuration...');
+      setIsValid(true);
+      setErrors([]);
+      setWarnings([]);
+    } catch (error) {
+      console.error('Failed to reload config:', error);
+      setIsValid(false);
+      setErrors(['Failed to reload configuration']);
+    }
   }, []);
 
   const value = useMemo(() => ({
@@ -266,7 +272,7 @@ export const useEnvironmentConfig = (): EnvironmentConfig => {
 };
 
 // Use environment value hook
-export const useEnvironmentValue = <T>(key: keyof EnvironmentConfig, fallback?: T): T => {
+export const useEnvironmentValue = function<T>(key: keyof EnvironmentConfig, fallback?: T): T {
   const { config } = useEnvironment();
   return (config[key] as T) ?? fallback;
 };
@@ -276,11 +282,11 @@ export const useEnvironmentValue = <T>(key: keyof EnvironmentConfig, fallback?: 
 // ============================================================================
 
 // Use validation hook
-export const useValidation = <T>(
+export const useValidation = function<T>(
   value: T,
   rules: Array<(value: T) => ValidationResult>,
   options?: HookOptions
-): HookResult<ValidationResult> => {
+): HookResult<ValidationResult> {
   const [result, setResult] = useState<ValidationResult>({
     isValid: true,
     errors: [],
@@ -289,9 +295,7 @@ export const useValidation = <T>(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const validate = useCallback(async () => {
-    if (!options?.enabled) return;
-
+  const validate = useCallback(() => {
     setLoading(true);
     setError(null);
 
@@ -304,20 +308,18 @@ export const useValidation = <T>(
         isValid: allErrors.length === 0,
         errors: allErrors,
         warnings: allWarnings,
-        data: value,
       });
     } catch (err) {
-      setError(err as Error);
+      setError(err instanceof Error ? err : new Error('Validation failed'));
       setResult({
         isValid: false,
-        errors: [(err as Error).message],
+        errors: ['Validation error occurred'],
         warnings: [],
-        data: value,
       });
     } finally {
       setLoading(false);
     }
-  }, [value, rules, options?.enabled]);
+  }, [value, rules]);
 
   useEffect(() => {
     validate();
@@ -337,42 +339,47 @@ export const useFormValidation = <T extends Record<string, any>>(
   validationSchema: Record<keyof T, Array<(value: any) => ValidationResult>>
 ) => {
   const [values, setValues] = useState<T>(initialValues);
-  const [errors, setErrors] = useState<Partial<Record<keyof T, string[]>>>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
+  const [errors, setErrors] = useState<Record<keyof T, string[]>>({} as Record<keyof T, string[]>);
+  const [touched, setTouched] = useState<Record<keyof T, boolean>>({} as Record<keyof T, boolean>);
 
   const validateField = useCallback((field: keyof T, value: any) => {
-    const fieldRules = validationSchema[field];
-    if (!fieldRules) return [];
-
+    const fieldRules = validationSchema[field] || [];
     const validationResults = fieldRules.map(rule => rule(value));
     return validationResults.flatMap(r => r.errors);
   }, [validationSchema]);
 
   const setValue = useCallback((field: keyof T, value: any) => {
     setValues(prev => ({ ...prev, [field]: value }));
+    setTouched(prev => ({ ...prev, [field]: true }));
+    
     const fieldErrors = validateField(field, value);
     setErrors(prev => ({ ...prev, [field]: fieldErrors }));
   }, [validateField]);
 
-  const setTouchedField = useCallback((field: keyof T, isTouched: boolean = true) => {
-    setTouched(prev => ({ ...prev, [field]: isTouched }));
-  }, []);
+  const validateForm = useCallback(() => {
+    const newErrors: Record<keyof T, string[]> = {} as Record<keyof T, string[]>;
+    let isValid = true;
 
-  const isValid = useMemo(() => {
-    return Object.keys(validationSchema).every(field => {
-      const fieldErrors = errors[field as keyof T];
-      return !fieldErrors || fieldErrors.length === 0;
+    Object.keys(validationSchema).forEach((field) => {
+      const fieldKey = field as keyof T;
+      const fieldErrors = validateField(fieldKey, values[fieldKey]);
+      newErrors[fieldKey] = fieldErrors;
+      if (fieldErrors.length > 0) {
+        isValid = false;
+      }
     });
-  }, [errors, validationSchema]);
+
+    setErrors(newErrors);
+    return isValid;
+  }, [values, validationSchema, validateField]);
 
   return {
     values,
     errors,
     touched,
-    isValid,
     setValue,
-    setTouchedField,
-    setValues,
+    validateForm,
+    isValid: Object.values(errors).every(fieldErrors => fieldErrors.length === 0),
   };
 };
 
@@ -390,45 +397,37 @@ export const usePerformanceMonitoring = (
   }
 ) => {
   const [metrics, setMetrics] = useState<PerformanceMetric[]>([]);
-  const startTimeRef = useRef<number>(0);
+  const startTime = useRef<number>(0);
 
   const startMeasurement = useCallback(() => {
-    if (!options?.enabled) return;
-    startTimeRef.current = performance.now();
+    if (options?.enabled !== false) {
+      startTime.current = performance.now();
+    }
   }, [options?.enabled]);
 
   const endMeasurement = useCallback((metricName: string) => {
-    if (!options?.enabled || startTimeRef.current === 0) return;
+    if (options?.enabled !== false && startTime.current > 0) {
+      const duration = performance.now() - startTime.current;
+      const metric: PerformanceMetric = {
+        name: metricName,
+        value: duration,
+        unit: 'ms',
+        timestamp: Date.now(),
+        componentId,
+      };
 
-    const endTime = performance.now();
-    const duration = endTime - startTimeRef.current;
+      setMetrics(prev => [...prev, metric]);
 
-    const metric: PerformanceMetric = {
-      name: metricName,
-      value: duration,
-      unit: 'ms',
-      timestamp: Date.now(),
-      componentId,
-    };
-
-    setMetrics(prev => [...prev, metric]);
-
-    if (options.threshold && duration > options.threshold) {
-      options.onThresholdExceeded?.(metric);
+      if (options?.threshold && duration > options.threshold) {
+        options.onThresholdExceeded?.(metric);
+      }
     }
-
-    startTimeRef.current = 0;
-  }, [options?.enabled, options?.threshold, options?.onThresholdExceeded, componentId]);
-
-  const clearMetrics = useCallback(() => {
-    setMetrics([]);
-  }, []);
+  }, [options, componentId]);
 
   return {
     metrics,
     startMeasurement,
     endMeasurement,
-    clearMetrics,
   };
 };
 
@@ -438,7 +437,7 @@ export const useRenderPerformance = (componentId: string) => {
     enabled: true,
     threshold: 16, // 60fps threshold
     onThresholdExceeded: (metric) => {
-      console.warn(`⚠️ Render performance exceeded threshold: ${metric.value}ms`, metric);
+      console.warn(`⚠️ Slow render detected: ${metric.name} took ${metric.value}ms`);
     },
   });
 
@@ -448,6 +447,8 @@ export const useRenderPerformance = (componentId: string) => {
       endMeasurement('render');
     };
   }, [startMeasurement, endMeasurement]);
+
+  return { startMeasurement, endMeasurement };
 };
 
 // ============================================================================
@@ -455,7 +456,7 @@ export const useRenderPerformance = (componentId: string) => {
 // ============================================================================
 
 // Use previous value hook
-export const usePrevious = <T>(value: T): T | undefined => {
+export const usePrevious = function<T>(value: T): T | undefined {
   const ref = useRef<T>();
   useEffect(() => {
     ref.current = value;
@@ -466,12 +467,10 @@ export const usePrevious = <T>(value: T): T | undefined => {
 // Use mounted hook
 export const useMounted = (): boolean => {
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
-
   return mounted;
 };
 
@@ -508,7 +507,7 @@ export const useTimeout = (callback: () => void, delay: number | null) => {
 };
 
 // Use debounce hook
-export const useDebounce = <T>(value: T, delay: number): T => {
+export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -522,10 +521,10 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   }, [value, delay]);
 
   return debouncedValue;
-};
+}
 
 // Use throttle hook
-export const useThrottle = <T>(value: T, delay: number): T => {
+export function useThrottle<T>(value: T, delay: number): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRun = useRef(Date.now());
 
@@ -543,10 +542,10 @@ export const useThrottle = <T>(value: T, delay: number): T => {
   }, [value, delay]);
 
   return throttledValue;
-};
+}
 
 // Use local storage hook
-export const useLocalStorage = <T>(key: string, initialValue: T) => {
+export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -568,10 +567,10 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   }, [key, storedValue]);
 
   return [storedValue, setValue] as const;
-};
+}
 
 // Use session storage hook
-export const useSessionStorage = <T>(key: string, initialValue: T) => {
+export function useSessionStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.sessionStorage.getItem(key);
@@ -593,7 +592,7 @@ export const useSessionStorage = <T>(key: string, initialValue: T) => {
   }, [key, storedValue]);
 
   return [storedValue, setValue] as const;
-};
+}
 
 // Use media query hook
 export const useMediaQuery = (query: string): boolean => {
@@ -615,39 +614,27 @@ export const useMediaQuery = (query: string): boolean => {
 
 // Use window size hook
 export const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      setSize({ width: window.innerWidth, height: window.innerHeight });
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return windowSize;
+  return size;
 };
 
 // Use scroll position hook
 export const useScrollPosition = () => {
-  const [scrollPosition, setScrollPosition] = useState({
-    x: window.pageXOffset,
-    y: window.pageYOffset,
-  });
+  const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition({
-        x: window.pageXOffset,
-        y: window.pageYOffset,
-      });
+      setScrollPosition({ x: window.scrollX, y: window.scrollY });
     };
 
     window.addEventListener('scroll', handleScroll);

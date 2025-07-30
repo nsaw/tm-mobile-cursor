@@ -1,5 +1,6 @@
-import { PerformanceMonitor, establishPerformanceBaseline, detectPerformanceRegression } from './PerformanceMonitor';
 import { Platform } from 'react-native';
+
+import { PerformanceMonitor, establishPerformanceBaseline, detectPerformanceRegression } from './PerformanceMonitor';
 
 // Mock Platform
 jest.mock('react-native', () => ({

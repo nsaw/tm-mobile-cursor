@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 
 import { TestWrapper } from '../../__tests__/TestWrapper';
+
 import { Link } from './Link';
 
 // Mock useTheme
@@ -48,7 +49,7 @@ const renderWithTheme = (component: React.ReactElement) => {
 describe('Link', () => {
   it('should render with default props', () => {
     const { getByText } = renderWithTheme(
-      <Link onPress={() => {}}>Test Link</Link>
+      <Link onPress={() => {}}><Text>Test Link</Text></Link>
     );
     
     const link = getByText('Test Link');
@@ -58,7 +59,7 @@ describe('Link', () => {
   it('should handle onPress events', () => {
     const onPress = jest.fn();
     const { getByText } = renderWithTheme(
-      <Link onPress={onPress}>Clickable Link</Link>
+      <Link onPress={onPress}><Text>Clickable Link</Text></Link>
     );
     
     const link = getByText('Clickable Link');
@@ -70,7 +71,7 @@ describe('Link', () => {
   it('should apply custom styles', () => {
     const customStyle = { color: 'red' };
     const { getByText } = renderWithTheme(
-      <Link style={customStyle} onPress={() => {}}>Styled Link</Link>
+      <Link style={customStyle} onPress={() => {}}><Text>Styled Link</Text></Link>
     );
     
     const link = getByText('Styled Link');
@@ -83,9 +84,7 @@ describe('Link', () => {
         onPress={() => {}}
         accessibilityLabel="External link"
         accessibilityRole="link"
-      >
-        Accessible Link
-      </Link>
+      ><Text>Accessible Link</Text></Link>
     );
     
     const link = getByText('Accessible Link');
@@ -95,7 +94,7 @@ describe('Link', () => {
   it('should handle disabled state', () => {
     const onPress = jest.fn();
     const { getByText } = renderWithTheme(
-      <Link onPress={onPress} disabled>Disabled Link</Link>
+      <Link onPress={onPress} disabled><Text>Disabled Link</Text></Link>
     );
     
     const link = getByText('Disabled Link');
@@ -108,9 +107,9 @@ describe('Link', () => {
   it('should handle different text content types', () => {
     const { getByText } = renderWithTheme(
       <Link onPress={() => {}}>
-        {'Dynamic '}
+        <Text>Dynamic</Text>
         <Text>Mixed</Text>
-        {' Content'}
+        <Text>Content</Text>
       </Link>
     );
     
@@ -119,7 +118,7 @@ describe('Link', () => {
 
   it('should apply theme colors correctly', () => {
     const { getByText } = renderWithTheme(
-      <Link color="primary" onPress={() => {}}>Colored Link</Link>
+      <Link color="primary" onPress={() => {}}><Text>Colored Link</Text></Link>
     );
     
     const link = getByText('Colored Link');
@@ -138,7 +137,7 @@ describe('Link', () => {
 
   it('should render with custom testID', () => {
     const { getByTestId } = renderWithTheme(
-      <Link testID="custom-link" onPress={() => {}}>Test Link</Link>
+      <Link testID="custom-link" onPress={() => {}}><Text>Test Link</Text></Link>
     );
     
     const link = getByTestId('custom-link');
@@ -152,7 +151,7 @@ describe('Link', () => {
 
   it('should apply responsive styles', () => {
     const { getByText } = renderWithTheme(
-      <Link responsive onPress={() => {}}>Responsive Link</Link>
+      <Link responsive onPress={() => {}}><Text>Responsive Link</Text></Link>
     );
     
     const link = getByText('Responsive Link');
@@ -161,7 +160,7 @@ describe('Link', () => {
 
   it('should handle external links', () => {
     const { getByText } = renderWithTheme(
-      <Link external onPress={() => {}}>External Link</Link>
+      <Link external onPress={() => {}}><Text>External Link</Text></Link>
     );
     
     const link = getByText('External Link');
@@ -170,7 +169,7 @@ describe('Link', () => {
 
   it('should handle underline styles', () => {
     const { getByText } = renderWithTheme(
-      <Link underline onPress={() => {}}>Underlined Link</Link>
+      <Link underline onPress={() => {}}><Text>Underlined Link</Text></Link>
     );
     
     const link = getByText('Underlined Link');

@@ -119,14 +119,14 @@ export const ContentScreen: React.FC = () => {
         </Text>
 
         {contentPages.map((page) => (
-        <TouchableOpacity
-          key={page.route}
-          style={styles.card}
-          onPress={() => navigation.navigate(page.route as any)}
-          accessibilityRole="button"
-          accessible={true}
-          accessibilityLabel={page.title}
-        >
+          <TouchableOpacity
+            key={page.route}
+            style={styles.card}
+            onPress={() => navigation.navigate(page.route as any)}
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel={page.title}
+          >
           <View style={styles.tag}>
             <Feather name={page.iconName} size={24} color={page.iconColor} />
           </View>

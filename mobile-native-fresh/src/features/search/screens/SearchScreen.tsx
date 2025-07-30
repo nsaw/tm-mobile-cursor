@@ -295,9 +295,9 @@ export const SearchScreen: React.FC = () => {
                         key={index}
                         style={styles.suggestionItem}
                         onPress={() => handleSuggestionPress(suggestion)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+                        accessibilityRole="button"
+                        accessible={true}
+                        accessibilityLabel="Button"
                       >
                         <Ionicons name="bulb-outline" size={16} color={designTokens.colors.accent} />
                         <Text style={styles.suggestionText}>{suggestion.query}</Text>
@@ -322,9 +322,9 @@ export const SearchScreen: React.FC = () => {
                     <TouchableOpacity
                       key={index}
                       onPress={() => handleRecentSearchPress(query)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
+                      accessibilityRole="button"
+                      accessible={true}
+                      accessibilityLabel="Button"
                     >
                       <TagChip
                         tag={query}

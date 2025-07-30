@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Dimensions, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+import { Modal, View, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 import { Brain, Mic, Search } from 'lucide-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,8 +7,6 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui/Text';
-
-const { width: screenWidth } = Dimensions.get('window');
 
 interface ModalButtonProps {
   onPress: (event: GestureResponderEvent) => void;
@@ -47,7 +45,7 @@ const ModalButton: React.FC<ModalButtonProps> = ({ onPress, icon, children, styl
       activeOpacity={0.85}
       accessibilityRole="button"
       disabled={disabled}
-    >
+     accessible={true} accessibilityLabel="Button">
       {!iconRight && icon && <Feather name={icon} size={18} color={themeTokens.colors.buttonText} style={{ marginRight: 8 }} />}
       <Text style={{
         ...typography.buttonText,
@@ -117,7 +115,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
   };
 
   // Button text size for onboarding
-  const onboardingButtonText = {
+  const _onboardingButtonText = {
     ...typography.buttonText,
     fontSize: 14,
     textAlign: 'center',
@@ -168,7 +166,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
             color: themeTokens.colors.textSecondary,
           }}>{`${currentStep + 1} of ${steps.length}`}</Text>
           {/* Icon */}
-          <View>{steps[currentStep].icon}</View>
+          <View><Text>{steps[currentStep].icon}</Text></View>
           {/* Body Text */}
           <Text style={{
             ...typography.body,
@@ -181,13 +179,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
           {/* Pagination Dots */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: themeTokens.spacing.md, marginBottom: themeTokens.spacing.md }}>
             {steps.map((_, i) => (
-              <View key={i} style={{
-                width: 8,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: i === currentStep ? themeTokens.colors.accent : themeTokens.colors.border,
-                marginHorizontal: 4
-              }} />
+              <View key={i} style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: i === currentStep ? themeTokens.colors.accent : themeTokens.colors.textSecondary, marginHorizontal: 4 }} />
             ))}
           </View>
           {/* Buttons */}
@@ -196,11 +188,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ visible, onClo
               onPress={handlePrevious}
               disabled={currentStep === 0}
             ><Text>Previous</Text></ModalButton>
-            <ModalButton
-              onPress={handleNext}
-            >
-              {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ModalButton>
+            <ModalButton onPress={handleNext}><Text>{currentStep === steps.length - 1 ? 'Finish' : 'Next'}</Text></ModalButton>
           </View>
         </View>
       </View>
