@@ -48,6 +48,7 @@ function AppContent() {
 }
 
 export default function App() {
+  console.log('[App] Starting font loading...');
   const [fontsLoaded] = useFonts({
     Oswald_400Regular,
     Oswald_500Medium,
@@ -57,6 +58,8 @@ export default function App() {
     Ubuntu_500Medium,
     Ubuntu_700Bold,
   })
+  
+  console.log('[App] Font loading status:', fontsLoaded);
 
   // Deep Link Handler
   useEffect(() => {

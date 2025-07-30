@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { User, Thoughtmark, Bin, APIResponse, ThoughtmarkFormData, BinFormData } from '../types';
 
+type HeadersInit = Record<string, string>;
+
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://localhost:4000';
 
 class ApiService {
@@ -27,13 +29,20 @@ class ApiService {
       const url = `${API_BASE_URL}${endpoint}`;
       const headers = await this.getAuthHeaders();
       
+      // Add timeout to prevent hanging requests
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
       const response = await fetch(url, {
         ...options,
         headers: {
           ...headers,
           ...options.headers,
         },
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const responseData = await response.json();
 
@@ -54,6 +63,7 @@ class ApiService {
         data,
       };
     } catch (error) {
+      console.error(`API request failed for ${endpoint}:`, error);
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Network error',
@@ -103,9 +113,42 @@ class ApiService {
   }
 
   async demoLogin(): Promise<APIResponse<{ user: User; token: string }>> {
-    return this.makeRequest('/api/auth/demo', {
-      method: 'POST',
-    });
+    try {
+      // Try the backend first
+      const result = await this.makeRequest<{ user: User; token: string }>('/api/auth/demo', {
+        method: 'POST',
+      });
+      
+      if (result.success) {
+        return result;
+      }
+      
+      // Fallback to local demo user if backend is not available
+      console.log('🔐 Auth: Backend not available, using local demo user');
+      const demoUser: User = {
+        id: 'demo-user-123',
+        email: 'demo@thoughtmarks.com',
+        firstName: 'Demo',
+        lastName: 'User',
+        isPremium: true,
+        isTestUser: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      
+      const demoToken = 'demo-token-' + Date.now();
+      
+      return {
+        success: true,
+        data: {
+          user: demoUser,
+          token: demoToken,
+        },
+      };
+    } catch (error) {
+      console.error('Demo login failed:', error);
+      throw error;
+    }
   }
 
   // User profile methods
