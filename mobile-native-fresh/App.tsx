@@ -1,4 +1,5 @@
 // App.tsx
+import './global/polyfills/registerTextDecoder';
 import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
@@ -150,7 +151,9 @@ export default function App() {
     };
 
     if (fontsLoaded) {
-      initializeSiriShortcuts().catch(console.error);
+      initializeSiriShortcuts().catch((error) => {
+        console.error('Siri Shortcuts initialization failed:', error);
+      });
     }
   }, [fontsLoaded]);
 

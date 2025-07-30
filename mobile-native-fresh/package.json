@@ -107,6 +107,7 @@
     "react-native-svg": "15.11.2",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "^0.20.0",
+    "text-encoding": "^0.7.0",
     "zustand": "^5.0.6"
   },
   "devDependencies": {
