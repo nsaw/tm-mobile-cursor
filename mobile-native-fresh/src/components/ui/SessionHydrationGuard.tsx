@@ -13,9 +13,11 @@ interface SessionHydrationGuardProps {
 
 export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ children }) => {
   const { tokens: designTokens } = useTheme();
-  const { loading } = useAuth();
+  const { loading, isAuthenticated } = useAuth();
   const [hydrationTimeout, setHydrationTimeout] = useState(false);
   const [hydrationError, setHydrationError] = useState<string | null>(null);
+
+  console.log('[SessionHydrationGuard] State:', { loading, isAuthenticated, hydrationTimeout, hydrationError });
 
   useEffect(() => {
     // Set a timeout for hydration (10 seconds)
@@ -40,7 +42,9 @@ export const SessionHydrationGuard: React.FC<SessionHydrationGuardProps> = ({ ch
     setHydrationTimeout(false);
     setHydrationError(null);
     // Force a re-render by updating loading state
-    window.location.reload();
+    // Note: window.location.reload() is not available in React Native
+    // Instead, we'll just reset the state and let the auth hook handle re-initialization
+    console.log('[SessionHydrationGuard] Retry pressed, resetting hydration state');
   };
 
   const styles = getStyles(designTokens);
