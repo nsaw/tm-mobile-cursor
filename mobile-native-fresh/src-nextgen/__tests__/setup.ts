@@ -1,6 +1,17 @@
 import '@testing-library/jest-native/extend-expect';
 import 'react-native-gesture-handler/jestSetup';
 
+// Declare global for TypeScript
+declare global {
+  var global: any;
+  var testUtils: {
+    waitFor: (ms: number) => Promise<void>;
+    mockPerformanceNow: (time: number) => void;
+    resetPerformanceMock: () => void;
+  };
+  var performance: any;
+}
+
 // Mock React Native modules
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
@@ -79,7 +90,7 @@ Object.defineProperty(global, 'performance', {
 });
 
 // Mock fetch
-global.fetch = jest.fn(() =>
+(global as any).fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
     json: () => Promise.resolve({ data: 'test' }),
@@ -101,22 +112,20 @@ afterAll(() => {
 });
 
 // Global test utilities
-global.testUtils = {
-  waitFor: (ms: number) => new Promise(resolve => setTimeout(resolve, ms)),
+(global as any).testUtils = {
+  waitFor: (ms: number) => new Promise(resolve => setTimeout(() => resolve(undefined), ms)),
   mockPerformanceNow: (time: number) => {
-    (global.performance.now as jest.Mock).mockReturnValue(time);
+    ((global as any).performance.now as jest.Mock).mockReturnValue(time);
   },
   resetPerformanceMock: () => {
-    (global.performance.now as jest.Mock).mockReturnValue(Date.now());
+    ((global as any).performance.now as jest.Mock).mockReturnValue(Date.now());
   },
 };
 
 declare global {
-  interface Global {
-    testUtils: {
-      waitFor: (ms: number) => Promise<void>;
-      mockPerformanceNow: (time: number) => void;
-      resetPerformanceMock: () => void;
-    };
-  }
+  var testUtils: {
+    waitFor: (ms: number) => Promise<void>;
+    mockPerformanceNow: (time: number) => void;
+    resetPerformanceMock: () => void;
+  };
 } 

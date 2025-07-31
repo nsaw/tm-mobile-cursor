@@ -2,6 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, TextInput, FlatList, ScrollView, Image, Switch } from 'react-native';
 import { ThemeProvider, useTheme } from './src/theme/ThemeProvider';
 
+// Dual-mount system: Check environment variable to determine which app to load
+const USE_NEXTGEN = process.env.EXPO_PUBLIC_USE_NEXTGEN === 'true';
+console.log('[DUAL-MOUNT] Environment check:', {
+  EXPO_PUBLIC_USE_NEXTGEN: process.env.EXPO_PUBLIC_USE_NEXTGEN,
+  USE_NEXTGEN: USE_NEXTGEN,
+  NODE_ENV: process.env.NODE_ENV,
+  EXPO_PUBLIC_ENVIRONMENT: process.env.EXPO_PUBLIC_ENVIRONMENT
+});
+
+// Temporary hardcode for testing
+const FORCE_NEXTGEN = true;
+
 // Mock Auth Context to bypass Firebase
 const MockAuthContext = React.createContext({
   isAuthenticated: false,
@@ -619,15 +631,35 @@ function MockAppContent() {
 }
 
 export default function App() {
-  console.log('[APP] App function executed');
+  console.log('[APP] 🚀 App function executed - THIS SHOULD APPEAR');
+  console.log('[APP] USE_NEXTGEN:', USE_NEXTGEN);
   
+  // Dual-mount system: Load NextGen app if environment variable is set
+  if (USE_NEXTGEN || FORCE_NEXTGEN) {
+    console.log('[APP] Loading NextGen app...');
+    try {
+      // Try dynamic import first
+      const NextGenApp = require('./src-nextgen/App').default;
+      console.log('[APP] NextGen app loaded successfully');
+      console.log('[APP] NextGenApp type:', typeof NextGenApp);
+      return <NextGenApp />;
+    } catch (error) {
+      console.error('[APP] Failed to load NextGen app:', error);
+      console.error('[APP] Error details:', error.message);
+      console.log('[APP] Falling back to mock app...');
+    }
+  } else {
+    console.log('[APP] USE_NEXTGEN is false, loading mock app...');
+  }
+  
+  // Mock app logic
   const [show, setShow] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => setShow(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
-  console.log('[APP] VisualRoot import test:', typeof VisualRoot);
+  console.log('[APP] Loading mock app...');
 
   if (!show) {
     return (

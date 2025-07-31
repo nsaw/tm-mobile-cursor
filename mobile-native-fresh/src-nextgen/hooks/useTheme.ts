@@ -1,10 +1,11 @@
-import { useState } from 'react';
-
+import { useState, useCallback } from 'react';
 import { ThemeColors } from '../types/theme';
+import { createThemeStyles, ThemeStyles } from '../utils/themeStyles';
 
 export interface ThemeState {
   theme: 'light' | 'dark';
   colors: ThemeColors;
+  styles: ThemeStyles;
 }
 
 export function useTheme(): ThemeState {
@@ -28,8 +29,11 @@ export function useTheme(): ThemeState {
     border: '#404040',
   };
 
+  const styles = createThemeStyles(colors);
+
   return {
     theme,
     colors,
+    styles,
   };
 } 

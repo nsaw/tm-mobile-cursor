@@ -1,0 +1,1 @@
+module.exports={ current:{ recordComponentMetrics: jest.fn() } }; 

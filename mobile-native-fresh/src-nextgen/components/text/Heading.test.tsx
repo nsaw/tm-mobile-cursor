@@ -48,7 +48,7 @@ const renderWithTheme = (component: React.ReactElement) => {
 
 describe('Heading', () => {
   it('should render with default props', () => {
-    const { getByText } = renderWithTheme(<Heading><Text>Test Heading</Text></Heading>);
+    const { getByText } = renderWithTheme(<Heading level={1}><Text>Test Heading</Text></Heading>);
     
     const heading = getByText('Test Heading');
     expect(heading).toBeTruthy();
@@ -68,7 +68,7 @@ describe('Heading', () => {
   it('should apply custom styles', () => {
     const customStyle = { color: 'red' };
     const { getByText } = renderWithTheme(
-      <Heading style={customStyle}><Text>Styled Heading</Text></Heading>
+      <Heading level={1} style={customStyle}><Text>Styled Heading</Text></Heading>
     );
     
     const heading = getByText('Styled Heading');
@@ -78,7 +78,7 @@ describe('Heading', () => {
   it('should handle onPress events', () => {
     const onPress = jest.fn();
     const { getByText } = renderWithTheme(
-      <Heading onPress={onPress}><Text>Clickable Heading</Text></Heading>
+      <Heading level={1} onPress={onPress}><Text>Clickable Heading</Text></Heading>
     );
     
     const heading = getByText('Clickable Heading');
@@ -89,7 +89,7 @@ describe('Heading', () => {
 
   it('should render with accessibility props', () => {
     const { getByText } = renderWithTheme(
-      <Heading accessibilityLabel="Main heading" accessibilityRole="header"><Text>Accessible Heading</Text></Heading>
+      <Heading level={1} accessibilityLabel="Main heading" accessibilityRole="header"><Text>Accessible Heading</Text></Heading>
     );
     
     const heading = getByText('Accessible Heading');
@@ -98,7 +98,7 @@ describe('Heading', () => {
 
   it('should handle different text content types', () => {
     const { getByText } = renderWithTheme(
-      <Heading>
+      <Heading level={1}>
         <Text>Dynamic</Text>
         <Text>Mixed</Text>
         <Text>Content</Text>
@@ -110,7 +110,7 @@ describe('Heading', () => {
 
   it('should apply theme colors correctly', () => {
     const { getByText } = renderWithTheme(
-      <Heading color="primary"><Text>Colored Heading</Text></Heading>
+      <Heading level={1} color="primary"><Text>Colored Heading</Text></Heading>
     );
     
     const heading = getByText('Colored Heading');
@@ -119,7 +119,7 @@ describe('Heading', () => {
 
   it('should handle long text content', () => {
     const longText = 'This is a very long heading text that should wrap properly and not cause any layout issues or overflow problems';
-    const { getByText } = renderWithTheme(<Heading>{longText}</Heading>);
+    const { getByText } = renderWithTheme(<Heading level={1}>{longText}</Heading>);
     
     const heading = getByText(longText);
     expect(heading).toBeTruthy();
@@ -127,7 +127,7 @@ describe('Heading', () => {
 
   it('should render with custom testID', () => {
     const { getByTestId } = renderWithTheme(
-      <Heading testID="custom-heading"><Text>Test Heading</Text></Heading>
+      <Heading level={1} testID="custom-heading"><Text>Test Heading</Text></Heading>
     );
     
     const heading = getByTestId('custom-heading');
@@ -135,13 +135,13 @@ describe('Heading', () => {
   });
 
   it('should handle empty content gracefully', () => {
-    const { container } = renderWithTheme(<Heading></Heading>);
-    expect(container).toBeTruthy();
+    const { getByTestId } = renderWithTheme(<Heading level={1} testID="empty-heading">{}</Heading>);
+    expect(getByTestId('empty-heading')).toBeTruthy();
   });
 
   it('should apply responsive styles', () => {
     const { getByText } = renderWithTheme(
-      <Heading responsive><Text>Responsive Heading</Text></Heading>
+      <Heading level={1}><Text>Responsive Heading</Text></Heading>
     );
     
     const heading = getByText('Responsive Heading');

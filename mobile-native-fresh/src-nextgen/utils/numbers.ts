@@ -1,0 +1,1 @@
+export const round=(n:number,p=2)=>Number(n.toFixed(p)); 

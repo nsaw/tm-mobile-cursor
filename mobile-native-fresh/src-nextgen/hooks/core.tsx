@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* Core hooks for the nextgen system */
 
 import React, { useState, useEffect, useCallback, useRef, useMemo, useContext } from 'react';

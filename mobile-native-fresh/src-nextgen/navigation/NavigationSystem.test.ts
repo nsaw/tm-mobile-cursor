@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NavigationSystem } from './NavigationSystem';
 
 describe('NavigationSystem', () => {

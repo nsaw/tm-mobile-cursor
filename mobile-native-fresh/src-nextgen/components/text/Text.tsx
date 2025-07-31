@@ -33,10 +33,20 @@ export const Text: React.FC<TextProps> = ({
   });
 
   const getTextStyle = () => {
+    const getFontWeight = (weight: TextProps['weight']) => {
+      switch (weight) {
+        case 'normal': return theme.typography.fontWeight.normal;
+        case 'medium': return theme.typography.fontWeight.medium;
+        case 'semibold': return theme.typography.fontWeight.bold;
+        case 'bold': return theme.typography.fontWeight.bold;
+        default: return theme.typography.fontWeight.normal;
+      }
+    };
+
     const baseStyle = {
-      fontFamily: theme.typography.fontFamily[weight],
+      fontFamily: 'System',
       fontSize: getFontSize(variant),
-      fontWeight: theme.typography.fontWeight[weight],
+      fontWeight: getFontWeight(weight),
       lineHeight: getLineHeight(variant),
       color: getTextColor(color),
       textAlign: align,
@@ -68,19 +78,19 @@ export const Text: React.FC<TextProps> = ({
       case 'h1':
       case 'h2':
       case 'h3':
-        return theme.typography.lineHeight.tight;
+        return 1.2;
       case 'h4':
       case 'h5':
       case 'h6':
-        return theme.typography.lineHeight.normal;
+        return 1.5;
       case 'body':
       case 'body2':
-        return theme.typography.lineHeight.relaxed;
+        return 1.8;
       case 'caption':
       case 'overline':
-        return theme.typography.lineHeight.normal;
+        return 1.5;
       default:
-        return theme.typography.lineHeight.normal;
+        return 1.5;
     }
   };
 

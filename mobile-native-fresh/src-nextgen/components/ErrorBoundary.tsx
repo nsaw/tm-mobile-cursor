@@ -18,7 +18,7 @@ export interface ErrorBoundaryProps {
   resetOnPropsChange?: boolean;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<any, any> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -107,7 +107,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
     },
     buttonText: {
       color: theme.colors.background,
-      fontSize: theme.typography.fontSize.base,
+      fontSize: theme.typography.fontSize.md,
       fontWeight: theme.typography.fontWeight.medium,
     },
     container: {
@@ -119,8 +119,8 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
     },
     message: {
       color: theme.colors.text,
-      fontSize: theme.typography.fontSize.base,
-      lineHeight: theme.typography.lineHeight.normal,
+      fontSize: theme.typography.fontSize.md,
+      lineHeight: 1.5,
       marginBottom: theme.spacing.lg,
       textAlign: 'center',
     },

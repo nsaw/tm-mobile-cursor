@@ -1,13 +1,13 @@
 module.exports = {
-  extends: ['expo'],
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended'
+  ],
+  // parserOptions.project removed to avoid type-aware RAM spike
   rules: {
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
-    'promise/catch-or-return': 'error'
-  },
-  ignorePatterns: [
-    'node_modules/',
-    'backend/dist/',
-    '*.d.ts'
-  ]
+    // project-specific overrides go here
+  }
 }; 

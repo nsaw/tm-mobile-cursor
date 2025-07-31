@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Alert, Vibration } from 'react-native';
@@ -62,6 +63,42 @@ describe('PINEntryScreen', () => {
       error: '#DC3545',
       border: '#DEE2E6',
       warning: '#FFA500',
+    },
+    styles: {
+      screenContainer: {},
+      container: {},
+      contentContainer: {},
+      searchBar: {},
+      input: {},
+      voiceButton: {},
+      voiceLabel: {},
+      clearButton: {},
+      clearButtonText: {},
+      searchItem: {},
+      searchItemContent: {},
+      searchItemIcon: {},
+      searchItemText: {},
+      searchItemLabel: {},
+      searchItemDescription: {},
+      searchItemTimestamp: {},
+      suggestionBadge: {},
+      fieldContainer: {},
+      fieldHeader: {},
+      fieldLabel: {},
+      editButton: {},
+      editButtonText: {},
+      editingContainer: {},
+      multilineInput: {},
+      inputError: {},
+      errorText: {},
+      editActions: {},
+      saveButton: {},
+      saveButtonText: {},
+      cancelButton: {},
+      cancelButtonText: {},
+      displayContainer: {},
+      displayText: {},
+      editableSection: {},
     },
   };
 

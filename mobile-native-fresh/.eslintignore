@@ -1,0 +1,5 @@
+# Ignore heavy snapshots & legacy code
+src-reference/
+src-old/
+**/__generated__/
+**/__mocks__/ 

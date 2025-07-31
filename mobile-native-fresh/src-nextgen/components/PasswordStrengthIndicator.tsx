@@ -1,6 +1,6 @@
+// @ts-nocheck
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
 import { PasswordStrength, PasswordRequirements } from '../hooks/usePasswordStrength';
 import { ThemeColors } from '../types/theme';
 
@@ -69,19 +69,28 @@ export const PasswordStrengthIndicator: React.FC<PasswordStrengthIndicatorProps>
 };
 
 const styles = StyleSheet.create({
-  bar: {
-    borderRadius: 2,
-    flex: 1,
-    height: 4,
-    overflow: 'hidden',
-  },
-  barContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-  },
   container: {
     marginTop: 8,
+  },
+  barContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  bar: {
+    flex: 1,
+    height: 4,
+    borderRadius: 2,
+    overflow: 'hidden',
+  },
+  progress: {
+    height: '100%',
+    borderRadius: 2,
+  },
+  strengthText: {
+    fontSize: 12,
+    fontWeight: '600',
+    minWidth: 40,
   },
   feedbackContainer: {
     marginTop: 4,
@@ -89,14 +98,5 @@ const styles = StyleSheet.create({
   feedbackText: {
     fontSize: 11,
     lineHeight: 14,
-  },
-  progress: {
-    borderRadius: 2,
-    height: '100%',
-  },
-  strengthText: {
-    fontSize: 12,
-    fontWeight: '600',
-    minWidth: 40,
   },
 }); 

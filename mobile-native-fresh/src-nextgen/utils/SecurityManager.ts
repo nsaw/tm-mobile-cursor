@@ -61,4 +61,27 @@ export class SecurityManager {
   clearEvents(): void {
     this.securityEvents = [];
   }
+
+  async validateUserPermissions(permission: string): Promise<boolean> {
+    // Stub implementation - in real app would check actual permissions
+    this.logEvent('permission_check', { permission });
+    return true;
+  }
+
+  async getAuthToken(): Promise<string | null> {
+    // Stub implementation - in real app would get from secure storage
+    this.logEvent('auth_token_request');
+    return 'stub-auth-token';
+  }
+
+  async getSearchHistory(): Promise<any[]> {
+    // Stub implementation - in real app would get from secure storage
+    this.logEvent('search_history_request');
+    return [];
+  }
+
+  async saveSearchHistory(history: any[]): Promise<void> {
+    // Stub implementation - in real app would save to secure storage
+    this.logEvent('search_history_save', { historyLength: history.length });
+  }
 } 

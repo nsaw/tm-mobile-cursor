@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator, StyleSheet } from 'react-native';
-
+import { TouchableOpacity, Text, ActivityIndicator, StyleSheet, AccessibilityRole } from 'react-native';
 import { ThemeColors } from '../types/theme';
 
 export interface BiometricButtonProps {
@@ -12,7 +11,7 @@ export interface BiometricButtonProps {
   style?: any;
   accessibilityLabel?: string;
   accessibilityHint?: string;
-  accessibilityRole?: string;
+  accessibilityRole?: AccessibilityRole;
 }
 
 export const BiometricButton: React.FC<BiometricButtonProps> = ({
@@ -24,7 +23,7 @@ export const BiometricButton: React.FC<BiometricButtonProps> = ({
   style,
   accessibilityLabel,
   accessibilityHint,
-  accessibilityRole = 'button',
+  accessibilityRole = 'button' as AccessibilityRole,
 }) => {
   const colors: ThemeColors = {
     background: '#FFFFFF',
@@ -66,12 +65,12 @@ export const BiometricButton: React.FC<BiometricButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
-    borderRadius: 8,
-    borderWidth: 1,
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderRadius: 8,
     paddingHorizontal: 16,
   },
   icon: {

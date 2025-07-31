@@ -1,73 +1,9 @@
 import { StyleSheet } from 'react-native';
-
 import { ThemeColors } from '../../types/theme';
 
 export const createStyles = (colors: ThemeColors) => StyleSheet.create({
-  actionsContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 24,
-  },
-  biometricButton: {
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderColor: colors.border,
-    borderRadius: 8,
-    borderWidth: 1,
-    flexDirection: 'row',
-    height: 48,
-    justifyContent: 'center',
-    maxWidth: 280,
-    width: '100%',
-  },
-  biometricContainer: {
-    alignItems: 'center',
-    marginBottom: 24,
-  },
   container: {
     flex: 1,
-  },
-  content: {
-    alignSelf: 'center',
-    maxWidth: 400,
-    width: '100%',
-  },
-  errorText: {
-    fontSize: 12,
-    marginTop: 8,
-    textAlign: 'center',
-  },
-  forgotPINButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  forgotPINText: {
-    fontSize: 14,
-    textDecorationLine: 'underline',
-  },
-  form: {
-    marginBottom: 32,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 48,
-  },
-  lockoutContainer: {
-    backgroundColor: colors.error + '10',
-    borderColor: colors.error + '30',
-    borderRadius: 8,
-    borderWidth: 1,
-    marginBottom: 16,
-    padding: 12,
-  },
-  lockoutText: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  pinContainer: {
-    alignItems: 'center',
-    marginBottom: 32,
   },
   scrollContent: {
     flexGrow: 1,
@@ -75,45 +11,99 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 32,
   },
-  securityNotice: {
-    alignItems: 'center',
-    paddingHorizontal: 16,
+  content: {
+    width: '100%',
+    maxWidth: 400,
+    alignSelf: 'center',
   },
-  securityText: {
+  header: {
+    alignItems: 'center',
+    marginBottom: 48,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+  form: {
+    marginBottom: 32,
+  },
+  pinContainer: {
+    marginBottom: 32,
+    alignItems: 'center',
+  },
+  errorText: {
     fontSize: 12,
-    opacity: 0.7,
+    marginTop: 8,
     textAlign: 'center',
   },
+  biometricContainer: {
+    marginBottom: 24,
+    alignItems: 'center',
+  },
+  biometricButton: {
+    width: '100%',
+    height: 48,
+    borderRadius: 8,
+  },
+  lockoutContainer: {
+    marginBottom: 24,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: colors.error + '10',
+    borderWidth: 1,
+    borderColor: colors.error + '30',
+  },
+  lockoutText: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  warningContainer: {
+    marginBottom: 24,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: colors.warning + '10',
+    borderWidth: 1,
+    borderColor: colors.warning + '30',
+  },
+  warningText: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  forgotPINButton: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  forgotPINText: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
   signOutButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    flex: 1,
+    alignItems: 'flex-end',
   },
   signOutText: {
     fontSize: 14,
     textDecorationLine: 'underline',
   },
-  subtitle: {
-    fontSize: 16,
-    opacity: 0.8,
-    textAlign: 'center',
+  securityNotice: {
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 8,
+  securityText: {
+    fontSize: 12,
     textAlign: 'center',
-  },
-  warningContainer: {
-    backgroundColor: (colors.warning || '#FFA500') + '10',
-    borderColor: (colors.warning || '#FFA500') + '30',
-    borderRadius: 8,
-    borderWidth: 1,
-    marginBottom: 16,
-    padding: 12,
-  },
-  warningText: {
-    fontSize: 14,
-    textAlign: 'center',
+    opacity: 0.7,
   },
 });
 
@@ -124,6 +114,6 @@ export const styles = createStyles({
   textSecondary: '#6C757D',
   primary: '#007AFF',
   error: '#DC3545',
+  warning: '#FFC107',
   border: '#DEE2E6',
-  warning: '#FFA500',
 } as ThemeColors); 

@@ -1,47 +1,35 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useAuth } from '../features/auth/hooks/useAuth';
-import { useNavigation } from '@react-navigation/native';
 declare const console: any;
-
-type RootStackParamList = {
-  Home: undefined;
-  Search: undefined;
-  Content: undefined;
-};
-
-type NavigationProp = {
-  navigate: (screen: keyof RootStackParamList) => void;
-};
 
 const HomeScreen: React.FC = () => {
   const { user, logout } = useAuth();
-  const navigation = useNavigation<NavigationProp>();
 
   const handleLogout = () => {
     console.log('[HOME] Logout button pressed');
     logout();
   };
 
-  const navigateToSearch = () => {
-    console.log('[HOME] Navigating to Search');
-    navigation.navigate('Search');
+  const handleSearch = () => {
+    console.log('[HOME] Search button pressed');
+    // TODO: Implement search functionality
   };
 
-  const navigateToContent = () => {
-    console.log('[HOME] Navigating to Content');
-    navigation.navigate('Content');
+  const handleBrowseContent = () => {
+    console.log('[HOME] Browse Content button pressed');
+    // TODO: Implement content browsing
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome, {user?.name}!</Text>
+      <Text style={styles.title}>Welcome, {user?.name || 'User'}!</Text>
       <Text style={styles.subtitle}>What would you like to do?</Text>
       
       <View style={styles.buttonContainer}>
-        <Button title="Search" onPress={navigateToSearch} />
+        <Button title="Search" onPress={handleSearch} />
         <View style={styles.buttonSpacer} />
-        <Button title="Browse Content" onPress={navigateToContent} />
+        <Button title="Browse Content" onPress={handleBrowseContent} />
         <View style={styles.buttonSpacer} />
         <Button title="Logout" onPress={handleLogout} color="#ff4444" />
       </View>
@@ -55,15 +43,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#181818',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#E0E0E0',
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: '#888',
     marginBottom: 30,
   },
   buttonContainer: {

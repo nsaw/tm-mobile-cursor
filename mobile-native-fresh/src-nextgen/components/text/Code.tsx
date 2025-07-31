@@ -26,9 +26,9 @@ export const Code: React.FC<CodeProps> = ({
     code: {
       backgroundColor: theme.colors.surface,
       borderColor: theme.colors.border,
-      borderRadius: theme.borderRadius,
+      borderRadius: 8,
       borderWidth: 1,
-      fontFamily: theme.typography.fontFamily,
+      fontFamily: 'System',
       paddingHorizontal: theme.spacing.xs,
       paddingVertical: theme.spacing.xs / 2,
     },

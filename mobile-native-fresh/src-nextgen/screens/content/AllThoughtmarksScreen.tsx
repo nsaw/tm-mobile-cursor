@@ -357,7 +357,7 @@ const AllThoughtmarksScreen: React.FC<AllThoughtmarksScreenProps> = ({ route: _r
 
   return (
     <ErrorBoundary>
-      <AutoRoleView role="main" style={{ flex: 1, backgroundColor: colors.background }}>
+      <AutoRoleView style={{ flex: 1, backgroundColor: colors.background }}>
         {renderHeader()}
         
         <FlatList

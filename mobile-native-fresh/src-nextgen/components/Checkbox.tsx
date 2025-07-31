@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
-
+import { TouchableOpacity, View, StyleSheet, AccessibilityRole } from 'react-native';
 import { ThemeColors } from '../types/theme';
 
 export interface CheckboxProps {
@@ -8,7 +7,7 @@ export interface CheckboxProps {
   onValueChange: (value: boolean) => void;
   disabled?: boolean;
   accessibilityLabel?: string;
-  accessibilityRole?: string;
+  accessibilityRole?: AccessibilityRole;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -16,7 +15,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   onValueChange,
   disabled = false,
   accessibilityLabel,
-  accessibilityRole = 'checkbox',
+  accessibilityRole = 'checkbox' as AccessibilityRole,
 }) => {
   const colors: ThemeColors = {
     background: '#FFFFFF',
@@ -55,23 +54,23 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
 const styles = StyleSheet.create({
   checkbox: {
-    alignItems: 'center',
-    borderRadius: 4,
-    borderWidth: 2,
-    height: 20,
-    justifyContent: 'center',
     width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   checkmark: {
-    alignItems: 'center',
+    width: 10,
     height: 10,
     justifyContent: 'center',
-    width: 10,
+    alignItems: 'center',
   },
   checkmarkLine: {
-    borderRadius: 1,
-    height: 6,
     position: 'absolute',
     width: 2,
+    height: 6,
+    borderRadius: 1,
   },
 }); 

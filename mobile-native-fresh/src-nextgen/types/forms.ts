@@ -13,6 +13,23 @@ export interface SignUpFormData {
   acceptMarketing: boolean;
 }
 
+export interface SignInValidationSchema {
+  email: any[];
+  password: any[];
+}
+
+export interface SignUpValidationSchema {
+  firstName: any[];
+  lastName: any[];
+  email: any[];
+  password: any[];
+  confirmPassword: any[];
+}
+
+export interface PINValidationSchema {
+  pin: any[];
+}
+
 export const SignInValidationSchema = {
   email: [],
   password: [],

@@ -1,5 +1,4 @@
-import { useState, useCallback } from 'react';
-
+import { useState, useCallback, useEffect } from 'react';
 import { AuthError } from '../types/auth';
 
 export interface AuthState {
@@ -14,11 +13,7 @@ export interface AuthActions {
   signUp: (userData: any) => Promise<void>;
   signOut: () => Promise<void>;
   verifyPIN: (pin: string) => Promise<void>;
-  resetPassword: {
-    sendResetEmail: (email: string) => Promise<void>;
-    resetPassword: (email: string, token: string, newPassword: string) => Promise<void>;
-  };
-  validateResetToken: (email: string, token: string) => Promise<boolean>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 export function useAuth(): AuthState & AuthActions {
@@ -91,49 +86,20 @@ export function useAuth(): AuthState & AuthActions {
     }
   }, []);
 
-  const sendResetEmail = useCallback(async (email: string) => {
+  const resetPassword = useCallback(async (email: string) => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
     try {
-      // TODO: Implement actual password reset email
-      console.log('Password reset email sent:', email);
+      // TODO: Implement actual password reset
+      console.log('Password reset attempt:', email);
       setState(prev => ({ ...prev, isLoading: false }));
     } catch (error) {
       const authError: AuthError = {
         code: 'RESET_ERROR',
-        message: error instanceof Error ? error.message : 'Failed to send reset email',
+        message: error instanceof Error ? error.message : 'Password reset failed',
         timestamp: new Date().toISOString(),
       };
       setState(prev => ({ ...prev, error: authError, isLoading: false }));
       throw authError;
-    }
-  }, []);
-
-  const resetPasswordWithToken = useCallback(async (email: string, token: string, newPassword: string) => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    try {
-      // TODO: Implement actual password reset with token
-      console.log('Password reset with token:', { email, token, newPassword });
-      setState(prev => ({ ...prev, isLoading: false }));
-    } catch (error) {
-      const authError: AuthError = {
-        code: 'RESET_ERROR',
-        message: error instanceof Error ? error.message : 'Failed to reset password',
-        timestamp: new Date().toISOString(),
-      };
-      setState(prev => ({ ...prev, error: authError, isLoading: false }));
-      throw authError;
-    }
-  }, []);
-
-  const validateResetToken = useCallback(async (email: string, token: string): Promise<boolean> => {
-    try {
-      // TODO: Implement actual token validation
-      console.log('Validating reset token:', { email, token });
-      // For now, return true if token is 6 characters
-      return token.length === 6;
-    } catch (error) {
-      console.error('Token validation error:', error);
-      return false;
     }
   }, []);
 
@@ -143,10 +109,6 @@ export function useAuth(): AuthState & AuthActions {
     signUp,
     signOut,
     verifyPIN,
-    resetPassword: {
-      sendResetEmail,
-      resetPassword: resetPasswordWithToken,
-    },
-    validateResetToken,
+    resetPassword,
   };
 } 

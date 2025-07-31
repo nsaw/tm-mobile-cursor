@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
-  Text,
+  View,
   TextInput,
   TouchableOpacity,
   Alert,
@@ -10,28 +10,29 @@ import {
   Vibration,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { useValidation } from '../../hooks/useValidation';
 import { useAccessibility } from '../../hooks/useAccessibility';
 import { useBiometrics } from '../../hooks/useBiometrics';
 import { useSecurity } from '../../hooks/useSecurity';
+import { Button } from '../../components/Button';
 import { Text as CustomText } from '../../components/Text';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { PINInput } from '../../components/PINInput';
 import { BiometricButton } from '../../components/BiometricButton';
 import { AuthError } from '../../types/auth';
 import { PINValidationSchema } from '../../types/forms';
+import { authService } from '../../services/authService';
 import { analyticsService } from '../../services/analyticsService';
 import { errorService } from '../../services/errorService';
-
+import { securityService } from '../../services/securityService';
 import { styles } from './PINEntryScreen.styles';
 
 export const PINEntryScreen: React.FC = () => {
   const navigation = useNavigation();
   const { verifyPIN, isLoading: authLoading, error: authError } = useAuth();
-  const { theme, colors } = useTheme();
+  const { colors } = useTheme();
   const { validateForm, validationErrors, clearValidationErrors } = useValidation();
   const { isScreenReaderEnabled } = useAccessibility();
   const { 
@@ -195,7 +196,7 @@ export const PINEntryScreen: React.FC = () => {
       });
 
       // Navigate to main app
-      navigation.navigate('Main');
+      navigation.navigate('Main' as never);
 
     } catch (error) {
       console.error('PIN verification error:', error);
@@ -247,7 +248,7 @@ export const PINEntryScreen: React.FC = () => {
         });
 
         // Navigate to main app
-        navigation.navigate('Main');
+        navigation.navigate('Main' as never);
       } else {
         Alert.alert(
           'Authentication Failed',
@@ -284,12 +285,12 @@ export const PINEntryScreen: React.FC = () => {
 
   const handleForgotPIN = useCallback(() => {
     analyticsService.track('forgot_pin_clicked');
-    navigation.navigate('PasswordReset');
+    navigation.navigate('PasswordReset' as never);
   }, [navigation]);
 
   const handleSignOut = useCallback(() => {
     analyticsService.track('sign_out_from_pin');
-    navigation.navigate('SignIn');
+    navigation.navigate('SignIn' as never);
   }, [navigation]);
 
   const getBiometricIcon = () => {
@@ -341,11 +342,15 @@ export const PINEntryScreen: React.FC = () => {
               variant="h1"
               style={[styles.title, { color: colors.text }]}
               accessibilityRole="header"
-            ><Text>Enter PIN</Text></CustomText>
+            >
+              Enter PIN
+            </CustomText>
             <CustomText
               variant="body"
               style={[styles.subtitle, { color: colors.textSecondary }]}
-            ><Text>Enter your 6-digit PIN to continue</Text></CustomText>
+            >
+              Enter your 6-digit PIN to continue
+            </CustomText>
           </AutoRoleView>
 
           {/* PIN Input */}
@@ -403,7 +408,9 @@ export const PINEntryScreen: React.FC = () => {
                   variant="body"
                   style={[styles.lockoutText, { color: colors.error }]}
                   accessibilityRole="text"
-                ><Text>Account temporarily locked. Please try again in</Text>{Math.ceil((lockoutEndTime! - Date.now()) / 1000 / 60)}<Text>minutes.</Text></CustomText>
+                >
+                  Account temporarily locked. Please try again in {Math.ceil((lockoutEndTime! - Date.now()) / 1000 / 60)} minutes.
+                </CustomText>
               </AutoRoleView>
             )}
 
@@ -414,7 +421,8 @@ export const PINEntryScreen: React.FC = () => {
                   style={[styles.warningText, { color: colors.warning }]}
                   accessibilityRole="text"
                 >
-                  {MAX_PIN_ATTEMPTS - failedAttempts}<Text>attempts remaining</Text></CustomText>
+                  {MAX_PIN_ATTEMPTS - failedAttempts} attempts remaining
+                </CustomText>
               </AutoRoleView>
             )}
 
@@ -430,7 +438,9 @@ export const PINEntryScreen: React.FC = () => {
                 <CustomText
                   variant="body"
                   style={[styles.forgotPINText, { color: colors.primary }]}
-                ><Text>Forgot PIN?</Text></CustomText>
+                >
+                  Forgot PIN?
+                </CustomText>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -443,7 +453,9 @@ export const PINEntryScreen: React.FC = () => {
                 <CustomText
                   variant="body"
                   style={[styles.signOutText, { color: colors.textSecondary }]}
-                ><Text>Sign Out</Text></CustomText>
+                >
+                  Sign Out
+                </CustomText>
               </TouchableOpacity>
             </AutoRoleView>
           </AutoRoleView>
@@ -454,7 +466,9 @@ export const PINEntryScreen: React.FC = () => {
               variant="caption"
               style={[styles.securityText, { color: colors.textSecondary }]}
               accessibilityRole="text"
-            ><Text>Your PIN is encrypted and stored securely on your device.</Text></CustomText>
+            >
+              Your PIN is encrypted and stored securely on your device.
+            </CustomText>
           </AutoRoleView>
         </AutoRoleView>
       </ScrollView>

@@ -1,77 +1,26 @@
 import React from 'react';
-import { Text as RNText, StyleSheet } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, StyleSheet } from 'react-native';
 
-import { ThemeColors } from '../types/theme';
-
-export interface TextProps {
-  children: React.ReactNode;
+export interface TextProps extends RNTextProps {
   variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption' | 'label';
-  style?: any;
-  accessibilityRole?: string;
-  accessibilityLabel?: string;
-  accessibilityHint?: string;
 }
 
-export const Text: React.FC<TextProps> = ({
-  children,
-  variant = 'body',
-  style,
-  accessibilityRole = 'text',
-  accessibilityLabel,
-  accessibilityHint,
+export const Text: React.FC<TextProps> = ({ 
+  variant = 'body', 
+  style, 
+  children, 
+  ...props 
 }) => {
-  const colors: ThemeColors = {
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
-    text: '#1A1A1A',
-    textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
-    border: '#DEE2E6',
-  };
-
-  const getVariantStyle = () => {
-    switch (variant) {
-      case 'h1':
-        return styles.h1;
-      case 'h2':
-        return styles.h2;
-      case 'h3':
-        return styles.h3;
-      case 'body':
-        return styles.body;
-      case 'caption':
-        return styles.caption;
-      case 'label':
-        return styles.label;
-      default:
-        return styles.body;
-    }
-  };
-
+  const variantStyle = styles[variant];
+  
   return (
-    <RNText
-      style={[
-        getVariantStyle(),
-        { color: colors.text },
-        style,
-      ]}
-      accessibilityRole={accessibilityRole}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityHint={accessibilityHint}
-    >
+    <RNText style={[variantStyle, style]} {...props}>
       {children}
     </RNText>
   );
 };
 
 const styles = StyleSheet.create({
-  body: {
-    fontSize: 16,
-  },
-  caption: {
-    fontSize: 12,
-  },
   h1: {
     fontSize: 32,
     fontWeight: 'bold',
@@ -83,6 +32,12 @@ const styles = StyleSheet.create({
   h3: {
     fontSize: 20,
     fontWeight: '600',
+  },
+  body: {
+    fontSize: 16,
+  },
+  caption: {
+    fontSize: 12,
   },
   label: {
     fontSize: 14,

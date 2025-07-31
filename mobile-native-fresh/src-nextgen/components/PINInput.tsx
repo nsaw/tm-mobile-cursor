@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
-
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, AccessibilityRole } from 'react-native';
 import { ThemeColors } from '../types/theme';
 
 export interface PINInputProps {
@@ -13,7 +12,7 @@ export interface PINInputProps {
   error?: boolean;
   accessibilityLabel?: string;
   accessibilityHint?: string;
-  accessibilityRole?: string;
+  accessibilityRole?: AccessibilityRole;
   accessibilityState?: any;
 }
 
@@ -28,7 +27,7 @@ export const PINInput = forwardRef<TextInput, PINInputProps>((
     error = false,
     accessibilityLabel,
     accessibilityHint,
-    accessibilityRole = 'text',
+    accessibilityRole = 'text' as AccessibilityRole,
     accessibilityState,
   },
   ref
@@ -105,37 +104,37 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
   },
+  hiddenInput: {
+    position: 'absolute',
+    opacity: 0,
+    height: 0,
+    width: 0,
+  },
+  dotsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 12,
+  },
   dot: {
-    alignItems: 'center',
+    width: 16,
+    height: 16,
     borderRadius: 8,
     borderWidth: 2,
-    height: 16,
     justifyContent: 'center',
-    width: 16,
+    alignItems: 'center',
   },
   dotText: {
     fontSize: 12,
     fontWeight: 'bold',
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    gap: 12,
-    justifyContent: 'center',
-  },
-  hiddenInput: {
-    height: 0,
-    opacity: 0,
-    position: 'absolute',
-    width: 0,
-  },
   visibilityButton: {
-    alignItems: 'center',
-    height: 32,
-    justifyContent: 'center',
     position: 'absolute',
     right: -40,
     top: 0,
     width: 32,
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   visibilityText: {
     fontSize: 16,

@@ -1,62 +1,38 @@
 import { StyleSheet } from 'react-native';
-
 import { ThemeColors } from '../../types/theme';
 
 export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 32,
+  },
   content: {
-    alignSelf: 'center',
-    maxWidth: 400,
     width: '100%',
-  },
-  errorText: {
-    fontSize: 12,
-    marginLeft: 4,
-    marginTop: 4,
-  },
-  eyeButton: {
-    alignItems: 'center',
-    height: 24,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 12,
-    top: 12,
-    width: 24,
-  },
-  eyeButtonText: {
-    fontSize: 16,
-  },
-  footer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  footerText: {
-    fontSize: 14,
-  },
-  forgotPasswordContainer: {
-    alignSelf: 'flex-end',
-    marginBottom: 32,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    textDecorationLine: 'underline',
-  },
-  form: {
-    marginBottom: 32,
+    maxWidth: 400,
+    alignSelf: 'center',
   },
   header: {
     alignItems: 'center',
     marginBottom: 48,
   },
-  input: {
-    borderRadius: 8,
-    borderWidth: 1,
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
     fontSize: 16,
-    height: 48,
-    paddingHorizontal: 16,
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+  form: {
+    marginBottom: 32,
   },
   inputContainer: {
     marginBottom: 24,
@@ -66,17 +42,12 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontWeight: '600',
     marginBottom: 8,
   },
-  lockoutContainer: {
-    backgroundColor: colors.error + '10',
-    borderColor: colors.error + '30',
-    borderRadius: 8,
+  input: {
+    height: 48,
     borderWidth: 1,
-    marginTop: 16,
-    padding: 12,
-  },
-  lockoutText: {
-    fontSize: 14,
-    textAlign: 'center',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    fontSize: 16,
   },
   passwordContainer: {
     position: 'relative',
@@ -84,31 +55,59 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   passwordInput: {
     paddingRight: 48,
   },
-  scrollContent: {
-    flexGrow: 1,
+  eyeButton: {
+    position: 'absolute',
+    right: 12,
+    top: 12,
+    width: 24,
+    height: 24,
     justifyContent: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 32,
+    alignItems: 'center',
+  },
+  eyeButtonText: {
+    fontSize: 16,
+  },
+  errorText: {
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
+  },
+  forgotPasswordContainer: {
+    alignSelf: 'flex-end',
+    marginBottom: 32,
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
   signInButton: {
-    borderRadius: 8,
     height: 48,
+    borderRadius: 8,
+  },
+  lockoutContainer: {
+    marginTop: 16,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: colors.error + '10',
+    borderWidth: 1,
+    borderColor: colors.error + '30',
+  },
+  lockoutText: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 14,
   },
   signUpLink: {
     fontSize: 14,
     fontWeight: '600',
     textDecorationLine: 'underline',
-  },
-  subtitle: {
-    fontSize: 16,
-    opacity: 0.8,
-    textAlign: 'center',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    textAlign: 'center',
   },
 });
 

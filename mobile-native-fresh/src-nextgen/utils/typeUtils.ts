@@ -94,4 +94,7 @@ export type PerformanceMetrics = {
   dualMountOverhead: number;
   timestamp: number;
   environment: 'legacy' | 'nextgen';
-}; 
+};
+
+export type Primitive=string|number|boolean|null|undefined;
+export const isPrimitive=(v:unknown):v is Primitive=>['string','number','boolean'].includes(typeof v)||v==null; 

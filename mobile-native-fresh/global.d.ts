@@ -1,0 +1,1 @@
+type NodeTimer = ReturnType<typeof setTimeout>; 

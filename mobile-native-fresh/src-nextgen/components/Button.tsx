@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator, StyleSheet } from 'react-native';
-
+import { TouchableOpacity, Text, ActivityIndicator, StyleSheet, AccessibilityRole } from 'react-native';
 import { ThemeColors } from '../types/theme';
 
 export interface ButtonProps {
@@ -11,7 +10,7 @@ export interface ButtonProps {
   style?: any;
   accessibilityLabel?: string;
   accessibilityHint?: string;
-  accessibilityRole?: string;
+  accessibilityRole?: AccessibilityRole;
   accessibilityState?: any;
 }
 
@@ -23,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   accessibilityLabel,
   accessibilityHint,
-  accessibilityRole = 'button',
+  accessibilityRole = 'button' as AccessibilityRole,
   accessibilityState,
 }) => {
   const colors: ThemeColors = {
@@ -63,10 +62,10 @@ export const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
-    borderRadius: 8,
     height: 48,
+    borderRadius: 8,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 16,
   },
   buttonText: {

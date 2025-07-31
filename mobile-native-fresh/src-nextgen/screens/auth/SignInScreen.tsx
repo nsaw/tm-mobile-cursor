@@ -7,9 +7,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { useValidation } from '../../hooks/useValidation';
@@ -19,9 +19,9 @@ import { Text as CustomText } from '../../components/Text';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { AuthError } from '../../types/auth';
 import { SignInFormData, SignInValidationSchema } from '../../types/forms';
+import { authService } from '../../services/authService';
 import { analyticsService } from '../../services/analyticsService';
 import { errorService } from '../../services/errorService';
-
 import { styles } from './SignInScreen.styles';
 
 export const SignInScreen: React.FC = () => {
@@ -79,7 +79,7 @@ export const SignInScreen: React.FC = () => {
         'Account Temporarily Locked',
         'Too many failed attempts. Please try again in 15 minutes or reset your password.',
         [
-          { text: 'Reset Password', onPress: () => navigation.navigate('PasswordReset') },
+          { text: 'Reset Password', onPress: () => navigation.navigate('PasswordReset' as never) },
           { text: 'OK', style: 'default' }
         ]
       );
@@ -189,12 +189,12 @@ export const SignInScreen: React.FC = () => {
 
   const handleForgotPassword = useCallback(() => {
     analyticsService.track('forgot_password_clicked');
-    navigation.navigate('PasswordReset');
+    navigation.navigate('PasswordReset' as never);
   }, [navigation]);
 
   const handleSignUp = useCallback(() => {
     analyticsService.track('sign_up_clicked');
-    navigation.navigate('SignUp');
+    navigation.navigate('SignUp' as never);
   }, [navigation]);
 
   const isFormValid = formData.email.length > 0 && formData.password.length > 0;
@@ -220,11 +220,15 @@ export const SignInScreen: React.FC = () => {
               variant="h1"
               style={[styles.title, { color: colors.text }]}
               accessibilityRole="header"
-            ><Text>Welcome Back</Text></CustomText>
+            >
+              Welcome Back
+            </CustomText>
             <CustomText
               variant="body"
               style={[styles.subtitle, { color: colors.textSecondary }]}
-            ><Text>Sign in to your account</Text></CustomText>
+            >
+              Sign in to your account
+            </CustomText>
           </AutoRoleView>
 
           {/* Form */}
@@ -235,7 +239,9 @@ export const SignInScreen: React.FC = () => {
                 variant="label"
                 style={[styles.label, { color: colors.text }]}
                 accessibilityRole="text"
-              ><Text>Email</Text></CustomText>
+              >
+                Email
+              </CustomText>
               <TextInput
                 style={[
                   styles.input,
@@ -257,7 +263,6 @@ export const SignInScreen: React.FC = () => {
                 accessibilityLabel="Email input field"
                 accessibilityHint="Enter your email address"
                 accessibilityRole="text"
-                accessibilityState={{ invalid: !!validationErrors.email }}
                 editable={!isLockedOut && !isLoading}
               />
               {validationErrors.email && (
@@ -277,7 +282,9 @@ export const SignInScreen: React.FC = () => {
                 variant="label"
                 style={[styles.label, { color: colors.text }]}
                 accessibilityRole="text"
-              ><Text>Password</Text></CustomText>
+              >
+                Password
+              </CustomText>
               <View style={styles.passwordContainer}>
                 <TextInput
                   style={[
@@ -301,8 +308,7 @@ export const SignInScreen: React.FC = () => {
                   accessibilityLabel="Password input field"
                   accessibilityHint="Enter your password"
                   accessibilityRole="text"
-                  accessibilityState={{ invalid: !!validationErrors.password }}
-                  editable={!isLockedOut && !isLoading}
+                  editable={!isLockedOut || isLoading}
                 />
                 <TouchableOpacity
                   style={styles.eyeButton}
@@ -341,7 +347,9 @@ export const SignInScreen: React.FC = () => {
               <CustomText
                 variant="body"
                 style={[styles.forgotPasswordText, { color: colors.primary }]}
-              ><Text>Forgot your password?</Text></CustomText>
+              >
+                Forgot your password?
+              </CustomText>
             </TouchableOpacity>
 
             {/* Sign In Button */}
@@ -364,7 +372,9 @@ export const SignInScreen: React.FC = () => {
                   variant="body"
                   style={[styles.lockoutText, { color: colors.error }]}
                   accessibilityRole="text"
-                ><Text>Account temporarily locked. Please try again in</Text>{Math.ceil((lockoutEndTime - Date.now()) / 1000 / 60)}<Text>minutes.</Text></CustomText>
+                >
+                  Account temporarily locked. Please try again in {Math.ceil((lockoutEndTime - Date.now()) / 1000 / 60)} minutes.
+                </CustomText>
               </AutoRoleView>
             )}
           </AutoRoleView>
@@ -375,7 +385,8 @@ export const SignInScreen: React.FC = () => {
               variant="body"
               style={[styles.footerText, { color: colors.textSecondary }]}
               accessibilityRole="text"
-            ><Text>Don't have an account?</Text>{' '}
+            >
+              Don't have an account?{' '}
             </CustomText>
             <TouchableOpacity
               onPress={handleSignUp}
@@ -386,7 +397,9 @@ export const SignInScreen: React.FC = () => {
               <CustomText
                 variant="body"
                 style={[styles.signUpLink, { color: colors.primary }]}
-              ><Text>Sign Up</Text></CustomText>
+              >
+                Sign Up
+              </CustomText>
             </TouchableOpacity>
           </AutoRoleView>
         </AutoRoleView>

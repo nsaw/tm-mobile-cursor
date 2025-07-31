@@ -1,72 +1,38 @@
 import { StyleSheet } from 'react-native';
-
 import { ThemeColors } from '../../types/theme';
 
 export const createStyles = (colors: ThemeColors) => StyleSheet.create({
-  checkboxContainer: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
   container: {
     flex: 1,
   },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 32,
+  },
   content: {
-    alignSelf: 'center',
-    maxWidth: 400,
     width: '100%',
-  },
-  errorText: {
-    fontSize: 12,
-    marginLeft: 4,
-    marginTop: 4,
-  },
-  eyeButton: {
-    alignItems: 'center',
-    height: 24,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 12,
-    top: 12,
-    width: 24,
-  },
-  eyeButtonText: {
-    fontSize: 16,
-  },
-  footer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  footerText: {
-    fontSize: 14,
-  },
-  form: {
-    marginBottom: 32,
+    maxWidth: 400,
+    alignSelf: 'center',
   },
   header: {
     alignItems: 'center',
     marginBottom: 48,
   },
-  input: {
-    borderRadius: 8,
-    borderWidth: 1,
-    fontSize: 16,
-    height: 48,
-    paddingHorizontal: 16,
-  },
-  inputContainer: {
-    marginBottom: 24,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: '600',
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 8,
   },
-  marketingText: {
-    flex: 1,
-    fontSize: 14,
-    marginLeft: 8,
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+  form: {
+    marginBottom: 32,
   },
   nameContainer: {
     flexDirection: 'row',
@@ -76,54 +42,46 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   nameField: {
     flex: 1,
   },
+  inputContainer: {
+    marginBottom: 24,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    fontSize: 16,
+  },
   passwordContainer: {
     position: 'relative',
   },
   passwordInput: {
     paddingRight: 48,
   },
+  eyeButton: {
+    position: 'absolute',
+    right: 12,
+    top: 12,
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  eyeButtonText: {
+    fontSize: 16,
+  },
   passwordStrength: {
     marginTop: 8,
   },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 32,
-  },
-  signInLink: {
-    fontSize: 14,
-    fontWeight: '600',
-    textDecorationLine: 'underline',
-  },
-  signUpButton: {
-    borderRadius: 8,
-    height: 48,
-    marginTop: 16,
-  },
-  subtitle: {
-    fontSize: 16,
-    opacity: 0.8,
-    textAlign: 'center',
-  },
-  termsLink: {
-    fontSize: 14,
-    textDecorationLine: 'underline',
-  },
-  termsText: {
-    fontSize: 14,
-  },
-  termsTextContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginLeft: 8,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    textAlign: 'center',
+  errorText: {
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
   verificationButton: {
     alignSelf: 'flex-end',
@@ -131,6 +89,47 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   verificationButtonText: {
     fontSize: 14,
+    textDecorationLine: 'underline',
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 16,
+  },
+  termsTextContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginLeft: 8,
+  },
+  termsText: {
+    fontSize: 14,
+  },
+  termsLink: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
+  marketingText: {
+    fontSize: 14,
+    marginLeft: 8,
+    flex: 1,
+  },
+  signUpButton: {
+    height: 48,
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 14,
+  },
+  signInLink: {
+    fontSize: 14,
+    fontWeight: '600',
     textDecorationLine: 'underline',
   },
 });

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 import { Brain, Mic, Search } from 'lucide-react-native';

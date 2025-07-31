@@ -10,7 +10,6 @@ import {
   Linking,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { useValidation } from '../../hooks/useValidation';
@@ -24,10 +23,10 @@ import { PasswordStrengthIndicator } from '../../components/PasswordStrengthIndi
 import { Checkbox } from '../../components/Checkbox';
 import { AuthError } from '../../types/auth';
 import { SignUpFormData, SignUpValidationSchema } from '../../types/forms';
+import { authService } from '../../services/authService';
 import { analyticsService } from '../../services/analyticsService';
 import { errorService } from '../../services/errorService';
 import { emailService } from '../../services/emailService';
-
 import { styles } from './SignUpScreen.styles';
 
 export const SignUpScreen: React.FC = () => {
@@ -286,7 +285,7 @@ export const SignUpScreen: React.FC = () => {
 
   const handleSignIn = useCallback(() => {
     analyticsService.track('sign_in_clicked_from_signup');
-    navigation.navigate('SignIn');
+    navigation.navigate('SignIn' as never);
   }, [navigation]);
 
   const isFormValid = 
@@ -320,11 +319,15 @@ export const SignUpScreen: React.FC = () => {
               variant="h1"
               style={[styles.title, { color: colors.text }]}
               accessibilityRole="header"
-            ><Text>Create Account</Text></CustomText>
+            >
+              Create Account
+            </CustomText>
             <CustomText
               variant="body"
               style={[styles.subtitle, { color: colors.textSecondary }]}
-            ><Text>Join Thoughtmarks and start organizing your ideas</Text></CustomText>
+            >
+              Join Thoughtmarks and start organizing your ideas
+            </CustomText>
           </AutoRoleView>
 
           {/* Form */}
@@ -336,7 +339,9 @@ export const SignUpScreen: React.FC = () => {
                   variant="label"
                   style={[styles.label, { color: colors.text }]}
                   accessibilityRole="text"
-                ><Text>First Name</Text></CustomText>
+                >
+                  First Name
+                </CustomText>
                 <TextInput
                   ref={firstNameRef}
                   style={[
@@ -359,7 +364,6 @@ export const SignUpScreen: React.FC = () => {
                   accessibilityLabel="First name input field"
                   accessibilityHint="Enter your first name"
                   accessibilityRole="text"
-                  accessibilityState={{ invalid: !!validationErrors.firstName }}
                   editable={!isLoading}
                 />
                 {validationErrors.firstName && (
@@ -378,7 +382,9 @@ export const SignUpScreen: React.FC = () => {
                   variant="label"
                   style={[styles.label, { color: colors.text }]}
                   accessibilityRole="text"
-                ><Text>Last Name</Text></CustomText>
+                >
+                  Last Name
+                </CustomText>
                 <TextInput
                   ref={lastNameRef}
                   style={[
@@ -401,7 +407,6 @@ export const SignUpScreen: React.FC = () => {
                   accessibilityLabel="Last name input field"
                   accessibilityHint="Enter your last name"
                   accessibilityRole="text"
-                  accessibilityState={{ invalid: !!validationErrors.lastName }}
                   editable={!isLoading}
                 />
                 {validationErrors.lastName && (
@@ -422,7 +427,9 @@ export const SignUpScreen: React.FC = () => {
                 variant="label"
                 style={[styles.label, { color: colors.text }]}
                 accessibilityRole="text"
-              ><Text>Email</Text></CustomText>
+              >
+                Email
+              </CustomText>
               <TextInput
                 ref={emailRef}
                 style={[
@@ -447,7 +454,6 @@ export const SignUpScreen: React.FC = () => {
                 accessibilityLabel="Email input field"
                 accessibilityHint="Enter your email address"
                 accessibilityRole="text"
-                accessibilityState={{ invalid: !!validationErrors.email }}
                 editable={!isLoading}
               />
               {validationErrors.email && (
@@ -467,7 +473,9 @@ export const SignUpScreen: React.FC = () => {
                 variant="label"
                 style={[styles.label, { color: colors.text }]}
                 accessibilityRole="text"
-              ><Text>Password</Text></CustomText>
+              >
+                Password
+              </CustomText>
               <View style={styles.passwordContainer}>
                 <TextInput
                   ref={passwordRef}
@@ -494,7 +502,6 @@ export const SignUpScreen: React.FC = () => {
                   accessibilityLabel="Password input field"
                   accessibilityHint="Create a strong password"
                   accessibilityRole="text"
-                  accessibilityState={{ invalid: !!validationErrors.password }}
                   editable={!isLoading}
                 />
                 <TouchableOpacity
@@ -537,7 +544,9 @@ export const SignUpScreen: React.FC = () => {
                 variant="label"
                 style={[styles.label, { color: colors.text }]}
                 accessibilityRole="text"
-              ><Text>Confirm Password</Text></CustomText>
+              >
+                Confirm Password
+              </CustomText>
               <View style={styles.passwordContainer}>
                 <TextInput
                   ref={confirmPasswordRef}
@@ -562,9 +571,6 @@ export const SignUpScreen: React.FC = () => {
                   accessibilityLabel="Confirm password input field"
                   accessibilityHint="Confirm your password"
                   accessibilityRole="text"
-                  accessibilityState={{ 
-                    invalid: formData.confirmPassword && formData.password !== formData.confirmPassword 
-                  }}
                   editable={!isLoading}
                 />
                 <TouchableOpacity
@@ -587,7 +593,9 @@ export const SignUpScreen: React.FC = () => {
                   variant="caption"
                   style={[styles.errorText, { color: colors.error }]}
                   accessibilityRole="text"
-                ><Text>Passwords do not match</Text></CustomText>
+                >
+                  Passwords do not match
+                </CustomText>
               )}
             </AutoRoleView>
 
@@ -603,7 +611,9 @@ export const SignUpScreen: React.FC = () => {
                 <CustomText
                   variant="body"
                   style={[styles.verificationButtonText, { color: colors.primary }]}
-                ><Text>Send Verification Code</Text></CustomText>
+                >
+                  Send Verification Code
+                </CustomText>
               </TouchableOpacity>
             )}
 
@@ -613,7 +623,9 @@ export const SignUpScreen: React.FC = () => {
                   variant="label"
                   style={[styles.label, { color: colors.text }]}
                   accessibilityRole="text"
-                ><Text>Verification Code</Text></CustomText>
+                >
+                  Verification Code
+                </CustomText>
                 <TextInput
                   style={[
                     styles.input,
@@ -651,7 +663,8 @@ export const SignUpScreen: React.FC = () => {
                   variant="body"
                   style={[styles.termsText, { color: colors.textSecondary }]}
                   accessibilityRole="text"
-                ><Text>I accept the</Text>{' '}
+                >
+                  I accept the{' '}
                 </CustomText>
                 <TouchableOpacity
                   onPress={handleTermsPress}
@@ -662,14 +675,16 @@ export const SignUpScreen: React.FC = () => {
                   <CustomText
                     variant="body"
                     style={[styles.termsLink, { color: colors.primary }]}
-                  ><Text>Terms of Service</Text></CustomText>
+                  >
+                    Terms of Service
+                  </CustomText>
                 </TouchableOpacity>
                 <CustomText
                   variant="body"
                   style={[styles.termsText, { color: colors.textSecondary }]}
                   accessibilityRole="text"
                 >
-                  {' '}<Text>and</Text>{' '}
+                  {' '}and{' '}
                 </CustomText>
                 <TouchableOpacity
                   onPress={handlePrivacyPress}
@@ -680,7 +695,9 @@ export const SignUpScreen: React.FC = () => {
                   <CustomText
                     variant="body"
                     style={[styles.termsLink, { color: colors.primary }]}
-                  ><Text>Privacy Policy</Text></CustomText>
+                  >
+                    Privacy Policy
+                  </CustomText>
                 </TouchableOpacity>
               </View>
             </AutoRoleView>
@@ -698,7 +715,9 @@ export const SignUpScreen: React.FC = () => {
                 variant="body"
                 style={[styles.marketingText, { color: colors.textSecondary }]}
                 accessibilityRole="text"
-              ><Text>I would like to receive updates about new features and promotions</Text></CustomText>
+              >
+                I would like to receive updates about new features and promotions
+              </CustomText>
             </AutoRoleView>
 
             {/* Sign Up Button */}
@@ -721,7 +740,8 @@ export const SignUpScreen: React.FC = () => {
               variant="body"
               style={[styles.footerText, { color: colors.textSecondary }]}
               accessibilityRole="text"
-            ><Text>Already have an account?</Text>{' '}
+            >
+              Already have an account?{' '}
             </CustomText>
             <TouchableOpacity
               onPress={handleSignIn}
@@ -732,7 +752,9 @@ export const SignUpScreen: React.FC = () => {
               <CustomText
                 variant="body"
                 style={[styles.signInLink, { color: colors.primary }]}
-              ><Text>Sign In</Text></CustomText>
+              >
+                Sign In
+              </CustomText>
             </TouchableOpacity>
           </AutoRoleView>
         </AutoRoleView>

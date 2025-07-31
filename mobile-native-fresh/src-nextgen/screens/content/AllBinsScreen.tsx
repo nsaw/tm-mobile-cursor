@@ -15,7 +15,7 @@ import {
 
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useBins } from '../../hooks/useBins';
-import { useTheme } from '../../hooks/useTheme';
+import { useThemeWithStyles } from '../../hooks/useThemeWithStyles';
 import { SecurityManager } from '../../utils/SecurityManager';
 import { ValidationSystem } from '../../utils/ValidationSystem';
 import { PerformanceMonitor , withPerformanceMonitoring } from '../../utils/PerformanceMonitor';
@@ -124,7 +124,7 @@ const BinItem: React.FC<BinItemProps> = React.memo(({
 });
 
 const AllBinsScreen: React.FC = () => {
-  const { theme } = useTheme();
+  const theme = useThemeWithStyles();
   const { 
     bins, 
     fetchBins, 
@@ -315,7 +315,7 @@ const AllBinsScreen: React.FC = () => {
         style={{ flex: 1 }} 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <AutoRoleView role="main" style={theme.styles.screenContainer}>
+        <AutoRoleView style={theme.styles.screenContainer}>
           <TextInput
             placeholder="Search Bins..."
             value={searchQuery}
