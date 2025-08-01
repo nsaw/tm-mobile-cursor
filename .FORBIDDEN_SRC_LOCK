@@ -1,0 +1,24 @@
+# 🚨 FORBIDDEN SRC/ DIRECTORY LOCK FILE
+# 
+# CRITICAL: This file prevents creation of forbidden src/ directories
+# 
+# FORBIDDEN LOCATIONS:
+# - /Users/sawyer/gitSync/tm-mobile-cursor/src/ (WRONG - project root)
+# - /Users/sawyer/gitSync/tm-mobile-cursor/src-nextgen/ (WRONG - project root)
+# - /Users/sawyer/gitSync/tm-mobile-cursor/src-reference/ (WRONG - project root)
+#
+# CORRECT LOCATIONS:
+# - /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-reference/ (CORRECT)
+# - /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-nextgen/ (CORRECT)
+#
+# ENFORCEMENT:
+# - AI Assistant MUST read this file before any file operations
+# - AI Assistant MUST use absolute paths only
+# - AI Assistant MUST verify target locations before creating files
+# - AI Assistant MUST NOT create any src/ directories at project root
+#
+# CREATED: 2025-01-29T23:05:00.000Z
+# REASON: Prevent path mistakes and forbidden directory creation
+# ENFORCER: User (Nick)
+#
+# THIS FILE MUST NOT BE DELETED OR MODIFIED 
