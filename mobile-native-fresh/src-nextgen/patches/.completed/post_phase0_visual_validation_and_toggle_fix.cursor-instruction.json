@@ -1,0 +1,40 @@
+{
+  "id": "post_phase0_visual_validation_and_toggle_fix",
+  "showInUI": true,
+  "role": "manager",
+  "agent": "BRAUN",
+  "phase": "0.6",
+  "mode": "sequential",
+  "notes": [
+    "🧠 POST PHASE 0 — FINAL VERIFICATION CYCLE",
+    "1️⃣ Fix Dual Mount LEGACY toggle (SafeArea + tapability + transparency)",
+    "2️⃣ Trigger Detox or Headless UI test suite for key screen verification",
+    "3️⃣ Capture and diff visual snapshots (Expo export + Puppeteer)",
+    "4️⃣ Auto-generate UI Manifest Map of mounted screens/states",
+    "5️⃣ Freeze the working app state to .tar.gz"
+  ],
+  "targets": [
+    "mobile-native-fresh/src/components/layout/DualMountToggle.tsx",
+    "mobile-native-fresh/src/navigation/AppShell.tsx"
+  ],
+  "patch": {
+    "pattern": ".*",
+    "replacement": "// Patch: Fix legacy toggle button placement, interaction, and visibility"
+  },
+  "postMutationBuild": [
+    "yarn lint",
+    "yarn tsc",
+    "yarn test:unit",
+    "npx detox build --configuration ios.sim.release",
+    "npx detox test --configuration ios.sim.release --cleanup",
+    "yarn export-ui-snapshots",
+    "node scripts/generate-ui-manifest.js",
+    "tar -czf /Users/sawyer/gitSync/_backups/tm-mobile-cursor/250719-PT_v1.4.154_phase0-final-visual-verification.tar.gz /Users/sawyer/gitSync/tm-mobile-cursor"
+  ],
+  "final": {
+    "commit": "chore: visual toggle fix + headless UI test + snapshot diff + manifest + backup",
+    "tag": "v1.4.154_phase0-visual-verify-complete_250719_ghost",
+    "notes": "✅ Final verification + freezer snapshot of functional post-phase-0 UI baseline."
+  }
+}
+

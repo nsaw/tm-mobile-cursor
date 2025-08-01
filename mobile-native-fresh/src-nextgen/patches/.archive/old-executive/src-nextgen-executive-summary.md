@@ -111,7 +111,7 @@ The **B + D + E strategy** combines the best approaches:
 ✅ VALIDATION GATES (Non-Negotiable):
 - All validation gates must trigger before every commit
 - tsc --noEmit (TypeScript validation)
-- { { { npm run lint:guard (ESLint validation) & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- npm run lint:guard (ESLint validation)
 - Visual regression testing (both legacy and nextgen)
 - Performance impact measurement
 - Accessibility compliance check
@@ -264,7 +264,7 @@ The **B + D + E strategy** combines the best approaches:
 - Snapshot captured
 - Lint + typecheck clean
 - Debug overlay confirmed
-- Accessibility pro{ { { ps validated & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Accessibility props validated
 - No sacred components violated
 - Dual-mount toggle working
 ```
@@ -360,8 +360,8 @@ The **B + D + E strategy** combines the best approaches:
 ✅ DEBUG REQUIREMENTS:
 - Debug mode toggles (basic/verbose/off)
 - Debug level controls per component
-- Production debug strip{ { { ping
-- Debug performance optimization & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Production debug stripping
+- Debug performance optimization
 - Environment-specific debug settings
 - Component-specific debug controls
 - Dual-mount debug controls
@@ -541,9 +541,9 @@ The **B + D + E strategy** combines the best approaches:
 - Validate visual regression
 - Monitor performance impact
 - Check accessibility compliance
-- Never skip validation ste{ { { ps
+- Never skip validation steps
 
-### **5. Create Robust Rollback Strategy** & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+### **5. Create Robust Rollback Strategy**
 - Multiple rollback options available
 - Create rollback points frequently
 - Test rollback procedures

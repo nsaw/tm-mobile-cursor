@@ -1,75 +1,162 @@
 import React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator, StyleSheet, AccessibilityRole } from 'react-native';
-import { ThemeColors } from '../types/theme';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+  ActivityIndicator,
+} from 'react-native';
+import { AutoRoleView } from '../shell/wrappers/AutoRoleView';
 
 export interface ButtonProps {
   title: string;
   onPress: () => void;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   loading?: boolean;
-  style?: any;
-  accessibilityLabel?: string;
-  accessibilityHint?: string;
-  accessibilityRole?: AccessibilityRole;
-  accessibilityState?: any;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  testID?: string;
 }
 
+/**
+ * Button - Interactive button component with role assignment
+ * 
+ * This component is migrated to nextgen with interactiveRole="button-action"
+ * assignment, providing proper accessibility and role-based styling.
+ * 
+ * Usage:
+ * <Button title="Press Me" onPress={() => {}} />
+ */
 export const Button: React.FC<ButtonProps> = ({
   title,
   onPress,
+  variant = 'primary',
+  size = 'medium',
   disabled = false,
   loading = false,
   style,
-  accessibilityLabel,
-  accessibilityHint,
-  accessibilityRole = 'button' as AccessibilityRole,
-  accessibilityState,
+  textStyle,
+  testID,
 }) => {
-  const colors: ThemeColors = {
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
-    text: '#1A1A1A',
-    textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
-    border: '#DEE2E6',
-  };
+  const buttonStyle = [
+    styles.base,
+    styles[variant],
+    styles[size],
+    disabled && styles.disabled,
+    style,
+  ];
+
+  const textStyleCombined = [
+    styles.text,
+    styles[`${variant}Text`],
+    styles[`${size}Text`],
+    disabled && styles.disabledText,
+    textStyle,
+  ];
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.button,
-        {
-          backgroundColor: disabled ? colors.textSecondary : colors.primary,
-        },
-        style,
-      ]}
-      onPress={onPress}
-      disabled={disabled || loading}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityHint={accessibilityHint}
-      accessibilityRole={accessibilityRole}
-      accessibilityState={accessibilityState}
-    >
-      {loading ? (
-        <ActivityIndicator color="#FFFFFF" />
-      ) : (
-        <Text style={[styles.buttonText, { color: '#FFFFFF' }]}>{title}</Text>
-      )}
-    </TouchableOpacity>
+    <AutoRoleView interactiveRole="button-action">
+      <TouchableOpacity
+        style={buttonStyle}
+        onPress={onPress}
+        disabled={disabled || loading}
+        activeOpacity={0.7}
+        testID={testID || 'button'}
+        accessibilityLabel={title}
+        accessibilityRole="button"
+        accessibilityState={{ disabled: disabled || loading }}
+      >
+        {loading ? (
+          <ActivityIndicator
+            size="small"
+            color={variant === 'primary' ? '#FFFFFF' : '#007AFF'}
+          />
+        ) : (
+          <Text style={textStyleCombined}>{title}</Text>
+        )}
+      </TouchableOpacity>
+    </AutoRoleView>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    height: 48,
+  base: {
     borderRadius: 8,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  
+  // Variants
+  primary: {
+    backgroundColor: '#007AFF',
+  },
+  secondary: {
+    backgroundColor: '#F2F2F7',
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#007AFF',
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+  },
+  
+  // Sizes
+  small: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    minHeight: 32,
+  },
+  medium: {
     paddingHorizontal: 16,
+    paddingVertical: 10,
+    minHeight: 44,
   },
-  buttonText: {
-    fontSize: 16,
+  large: {
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    minHeight: 56,
+  },
+  
+  // Disabled state
+  disabled: {
+    opacity: 0.5,
+  },
+  
+  // Text styles
+  text: {
     fontWeight: '600',
+    textAlign: 'center',
   },
-}); 
+  primaryText: {
+    color: '#FFFFFF',
+  },
+  secondaryText: {
+    color: '#000000',
+  },
+  outlineText: {
+    color: '#007AFF',
+  },
+  ghostText: {
+    color: '#007AFF',
+  },
+  smallText: {
+    fontSize: 14,
+  },
+  mediumText: {
+    fontSize: 16,
+  },
+  largeText: {
+    fontSize: 18,
+  },
+  disabledText: {
+    opacity: 0.5,
+  },
+});
+
+export default Button; 

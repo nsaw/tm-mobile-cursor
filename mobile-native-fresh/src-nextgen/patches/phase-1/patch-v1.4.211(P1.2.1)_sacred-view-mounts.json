@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-sacred-view-mounts.js",
+    "node scripts/validate-protection-system.js",
+    "node scripts/test-mount-points.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/sacred-view-mounts",
+  "notes": [
+    "PATCH NAME: patch-v1.4.211(P1.2.1)_sacred-view-mounts.json",
+    "SUMMARY NAME: summary-v1.4.211(P1.2.1)_sacred-view-mounts.md",
+    "GOAL: Set up sacred view mounts and protection system with hardened validation",
+    "MISSION: Establish sacred view mount system for protected component rendering with comprehensive testing",
+    "CONTEXT: Sacred view mounts are essential for the hybrid shell strategy. We need to create mount points for sacred components that are protected from role wrapping and maintain their original behavior.",
+    "SAFETY ENFORCEMENT: Test sacred view mounts, verify protection system, validate mount point functionality, ensure proper testing",
+    "STABLE STATE CHECK: Confirm sacred view mounts operational, protection system working, mount points functional",
+    "🚨 CRITICAL: Must validate protection system and mount point functionality before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 2,
+      "attempt": 1,
+      "task": "Set up sacred view mounts and protection system with hardened validation",
+      "version": "v1.4.211(P1.2.1)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Create sacred view mount interfaces with TypeScript",
+        "Set up protection system for sacred components with validation",
+        "Configure mount point validation",
+        "Set up sacred component isolation",
+        "Install required testing dependencies",
+        "Test sacred view mount functionality with comprehensive tests",
+        "Validate protection system behavior",
+        "Create sacred component validation scripts"
+      ],
+      "validation": [
+        "Test sacred view mounts",
+        "Verify protection system working",
+        "Confirm mount point functionality",
+        "Validate sacred component isolation",
+        "Test protection system validation",
+        "Verify sacred component validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert sacred view mount setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "sacred-v1.4.211(P1.2.1)_sacred-view-mounts",
+      "summaryFile": "summary-v1.4.211(P1.2.1)_sacred-view-mounts.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test sacred view mounts",
+    "Verify protection system",
+    "Validate mount point functionality",
+    "Test protection system validation",
+    "Verify sacred component validation scripts"
+  ],
+  "successCriteria": [
+    "Sacred view mounts operational with TypeScript",
+    "Protection system working with validation",
+    "Mount points functional with tests",
+    "Sacred component isolation validated",
+    "Protection system validation operational",
+    "Sacred component validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

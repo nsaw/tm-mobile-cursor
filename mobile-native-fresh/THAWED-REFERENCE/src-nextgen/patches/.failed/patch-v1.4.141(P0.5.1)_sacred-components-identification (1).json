@@ -1,0 +1,36 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Identify sacred components and mark them for import protection",
+    "MISSION: Ensure all known sacred components (UI core, navigation base, shell anchors) are tagged for safe migration",
+    "SAFETY ENFORCEMENT: Output list must be added to /src-nextgen/constants/sacred.ts and referenced in shell/router",
+    "STABLE STATE CHECK: sacred.ts generated, RoleWrapper.tsx validated"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 5,
+      "attempt": 1,
+      "task": "Map and validate sacred components",
+      "version": "v1.4.141(P0.5.1)",
+      "executionSteps": [
+        "Create src-nextgen/constants/sacred.ts",
+        "Add export const SACRED_COMPONENTS = ['HomeView', 'MainFAB', 'BottomNav', 'AIButton', ...]",
+        "Update shell/RoleWrapper.tsx to import and reference these in conflict protection",
+        "Log audit to summaries/phase-0/summary-v1.4.141(P0.5.1)_sacred-components-identification.md"
+      ],
+      "validation": [
+        "src-nextgen/constants/sacred.ts created",
+        "RoleWrapper compiles and excludes sacred components when wrapping",
+        "Summary file exists"
+      ]
+    }
+  ],
+  "postMutationBuild": "tsc --noEmit && eslint . --ext .ts,.tsx && npm test -- --watchAll=false",
+  "final": {
+    "commit": "chore: map sacred components for wrapper protection",
+    "tag": "protect-v1.4.141(P0.5.1)_sacred-components",
+    "notes": "Sacred components now protected from role wrapping"
+  }
+}

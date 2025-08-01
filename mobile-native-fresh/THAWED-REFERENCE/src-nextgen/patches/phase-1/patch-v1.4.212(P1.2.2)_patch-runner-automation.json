@@ -1,0 +1,129 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit --skipLibCheck",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/validate-dual-mount.js",
+    "node scripts/validate-environment-specific.js",
+    "node scripts/verify-patch-runner.js",
+    "node scripts/validate-automation-system.js",
+    "node scripts/test-patch-execution-order.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/patch-runner-automation",
+  "notes": [
+    "🧠 MISSION: Set up patch runner automation system with dual-mount validation",
+    "🎯 GOAL: Establish automated patch runner system for coordinated patch execution with comprehensive testing",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Test patch runner functionality, verify automation system, validate patch execution order",
+    "✅ Ensure proper testing and validation of patch rollback automation",
+    "✅ Validate automation system and patch execution order before proceeding",
+    "📝 CONTEXT: Patch runner automation is critical for the dual-mount strategy. We need automated systems that can execute patches in the correct order, validate results, and handle rollbacks.",
+    "🔒 RELEVANCE: Essential for coordinated patch execution during migration",
+    "🔄 DUAL-MOUNT: This patch validates patch runner automation works in both legacy and nextgen environments"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 2,
+      "attempt": 2,
+      "task": "Set up patch runner automation system with dual-mount validation",
+      "version": "v1.4.212(P1.2.2)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Create src-nextgen/shell/PatchRunner.ts",
+        "Create patch runner automation system with TypeScript",
+        "Set up patch execution order validation",
+        "Configure automated patch validation",
+        "Set up patch rollback automation",
+        "Install required testing dependencies",
+        "Test patch runner functionality with comprehensive tests",
+        "Validate automation system behavior in legacy environment",
+        "Validate automation system behavior in nextgen environment",
+        "Create patch automation validation scripts"
+      ],
+      "validation": [
+        "Test patch runner functionality",
+        "Verify automation system working",
+        "Confirm patch execution order",
+        "Validate patch rollback automation",
+        "Test automation system validation",
+        "Verify patch automation validation scripts",
+        "Validate dual-mount compatibility",
+        "Test patch runner in legacy environment",
+        "Test patch runner in nextgen environment"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert patch runner setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed",
+        "Preserve dual-mount system integrity"
+      ],
+      "gitTag": "runner-v1.4.212(P1.2.2)_patch-runner-automation",
+      "summaryFile": "summary-v1.4.212(P1.2.2)_patch-runner-automation.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit --skipLibCheck)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Dual-mount validation (validate-dual-mount.js)",
+    "Environment-specific validation (validate-environment-specific.js)",
+    "Patch runner functionality validation",
+    "Automation system validation",
+    "Patch execution order validation",
+    "Patch automation validation scripts validation"
+  ],
+  "successCriteria": [
+    "Patch runner automation operational with TypeScript",
+    "Automation system working with validation",
+    "Patch execution order validated with tests",
+    "Patch rollback automation functional",
+    "Automation system validation operational",
+    "Patch automation validation scripts working",
+    "Dual-mount compatibility confirmed",
+    "Patch runner automation works in both legacy and nextgen environments"
+  ],
+  "dualMountValidation": {
+    "legacyEnvironment": {
+      "validation": [
+        "test -f THAWED-REFERENCE/src-reference/patches/phase-1/README.md",
+        "test -f THAWED-REFERENCE/src-reference/patches/phase-1/PHASE1_AUDIT_SUMMARY.md",
+        "node scripts/verify-patch-runner.js --env=legacy"
+      ],
+      "rollback": [
+        "git checkout THAWED-REFERENCE/src-reference/patches/phase-1/README.md",
+        "git checkout THAWED-REFERENCE/src-reference/patches/phase-1/PHASE1_AUDIT_SUMMARY.md"
+      ]
+    },
+    "nextgenEnvironment": {
+      "validation": [
+        "test -f src-nextgen/shell/PatchRunner.ts",
+        "test -f src-nextgen/shell/PatchRunner.test.ts",
+        "node scripts/verify-patch-runner.js --env=nextgen"
+      ],
+      "rollback": [
+        "git checkout src-nextgen/shell/PatchRunner.ts",
+        "git checkout src-nextgen/shell/PatchRunner.test.ts"
+      ]
+    }
+  },
+    }
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

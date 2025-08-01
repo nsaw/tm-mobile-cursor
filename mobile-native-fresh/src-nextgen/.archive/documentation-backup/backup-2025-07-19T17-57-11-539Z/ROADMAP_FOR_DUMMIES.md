@@ -152,7 +152,7 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 ✅ VALIDATION GATES (Non-Negotiable):
 - All validation gates must trigger before every commit
 - tsc --noEmit (TypeScript validation)
-- { { { { { { { { npm run lint:guard (ESLint validation) & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+- npm run lint:guard (ESLint validation)
 - Visual regression testing (both legacy and nextgen)
 - Performance impact measurement
 - Accessibility compliance check
@@ -262,7 +262,7 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 - Snapshot captured
 - Lint + typecheck clean
 - Debug overlay confirmed
-- Accessibility pro{ { { { ps validated & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Accessibility props validated
 - No sacred components violated
 - Dual-mount toggle working
 ```
@@ -367,8 +367,8 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 ✅ DEBUG REQUIREMENTS:
 - Debug mode toggles (basic/verbose/off)
 - Debug level controls per component
-- Production debug strip{ { { { ping
-- Debug performance optimization & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Production debug stripping
+- Debug performance optimization
 - Environment-specific debug settings
 - Component-specific debug controls
 - Dual-mount debug controls
@@ -420,8 +420,8 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 
 ### **5. Validation Is Mandatory**
 ```
-🚨 WARNING: Never skip validation ste{ { { { ps
-- Test after each change & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+🚨 WARNING: Never skip validation steps
+- Test after each change
 - Validate visual regression (both modes)
 - Monitor performance impact
 - Check accessibility compliance
@@ -538,7 +538,7 @@ Example: patch-1.4.1e-1-3e_src-nextgen-init.json
 - Dual-mount enables safe testing
 
 ❌ AVOID: Global replacement strategies
-- Skip{ { { { ping validation steps & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Skipping validation steps
 - Ignoring performance impact
 - Assuming changes are safe
 ```
@@ -547,15 +547,15 @@ Example: patch-1.4.1e-1-3e_src-nextgen-init.json
 ```
 ✅ LESSON: Role assignment requires analysis
 - Component purpose analysis required
-- Role map{ { { { ping documentation essential & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Role mapping documentation essential
 - Conflict resolution strategy needed
 - Shell structure enables gradual migration
 
 ❌ AVOID: Automated role assignment without analysis
 - Ignoring role conflicts
-- Skip{ { { { ping role hierarchy planning & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- Assuming simple View → AutoRoleView map{ { { { ping
-``` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Skipping role hierarchy planning
+- Assuming simple View → AutoRoleView mapping
+```
 
 ### **3. Performance Must Be Monitored**
 ```
@@ -566,7 +566,7 @@ Example: patch-1.4.1e-1-3e_src-nextgen-init.json
 - Dual-mount overhead must be measured
 
 ❌ AVOID: Ignoring performance implications
-- Skip{ { { { ping performance testing & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Skipping performance testing
 - Assuming AutoRoleView overhead is negligible
 - No performance monitoring
 ```
@@ -575,7 +575,7 @@ Example: patch-1.4.1e-1-3e_src-nextgen-init.json
 ```
 ✅ LESSON: Debug systems can overwhelm
 - Debug controls essential
-- Production debug strip{ { { { ping required & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Production debug stripping required
 - Debug performance optimization needed
 - Dual-mount debug controls required
 
@@ -595,7 +595,7 @@ Example: patch-1.4.1e-1-3e_src-nextgen-init.json
 
 ❌ AVOID: No rollback strategy
 - Assuming changes are reversible
-- Skip{ { { { ping rollback testing & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Skipping rollback testing
 - No recovery procedures
 ```
 

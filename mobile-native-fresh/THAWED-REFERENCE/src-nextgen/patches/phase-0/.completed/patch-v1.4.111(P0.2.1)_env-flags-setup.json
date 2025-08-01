@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.111(P0.2.1)_env-flags-setup.json",
+    "SUMMARY NAME: summary-v1.4.111(P0.2.1)_env-flags-setup.md",
+    "GOAL: Set up environment flags and configuration system",
+    "MISSION: Establish comprehensive environment variable system for dual-mount architecture",
+    "CONTEXT: Environment flags are critical for the dual-mount strategy. We need a robust system to manage different environments, feature flags, and configuration states.",
+    "SAFETY ENFORCEMENT: Test environment variable handling, verify flag validation, validate configuration loading",
+    "STABLE STATE CHECK: Confirm environment flags working, configuration loading functional, flag validation operational"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 2,
+      "attempt": 1,
+      "task": "Set up environment flags and configuration system",
+      "version": "v1.4.111(P0.2.1)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Create .env.app with dual-mount flags",
+        "Create .env.account with user-specific flags",
+        "Set up environment validation system",
+        "Configure flag validation and defaults",
+        "Test environment variable loading",
+        "Validate flag inheritance and overrides"
+      ],
+      "validation": [
+        "Test environment variable handling",
+        "Verify flag validation working",
+        "Confirm configuration loading functional",
+        "Validate flag inheritance and overrides"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert environment files",
+        "No impact on app functionality"
+      ],
+      "gitTag": "env-v1.4.111(P0.2.1)_env-flags-setup",
+      "summaryFile": "summary-v1.4.111(P0.2.1)_env-flags-setup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test environment variable handling",
+    "Verify flag validation",
+    "Validate configuration loading"
+  ],
+  "successCriteria": [
+    "Environment flags system operational",
+    "Flag validation working correctly",
+    "Configuration loading functional",
+    "Flag inheritance and overrides working"
+  ]
+} 

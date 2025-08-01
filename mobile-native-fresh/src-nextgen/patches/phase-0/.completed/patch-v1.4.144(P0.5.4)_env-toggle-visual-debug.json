@@ -1,0 +1,59 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.144(P0.5.4)_env-toggle-visual-debug.json",
+    "SUMMARY NAME: summary-v1.4.144(P0.5.4)_env-toggle-visual-debug.md",
+    "GOAL: Add visual environment indicator for dual-mount debugging",
+    "MISSION: Create a subtle visual indicator to show which environment (legacy/nextgen) is currently active during development",
+    "CONTEXT: During dual-mount development, developers need a quick visual way to identify which environment is active. This helps prevent confusion and ensures proper testing.",
+    "SAFETY ENFORCEMENT: Visual indicator must be subtle, dev-only, and not interfere with UI testing",
+    "STABLE STATE CHECK: Confirm environment indicator visible, toggleable, and non-intrusive"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 5,
+      "attempt": 4,
+      "task": "Add environment toggle visual debug indicator",
+      "version": "v1.4.144(P0.5.4)",
+      "priority": "medium",
+      "estimatedTime": "30 minutes",
+      "executionSteps": [
+        "Create EnvironmentIndicator component",
+        "Add subtle header overlay or splash indicator",
+        "Integrate with dual-mount toggle system",
+        "Make indicator dev-only and toggleable",
+        "Test visibility and non-interference",
+        "Validate in both legacy and nextgen environments"
+      ],
+      "validation": [
+        "Environment indicator visible in dev mode",
+        "Indicator shows correct environment",
+        "No interference with UI testing",
+        "Toggle functionality works",
+        "Indicator is subtle and non-intrusive"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can remove EnvironmentIndicator component",
+        "No impact on production functionality"
+      ],
+      "gitTag": "visual-v1.4.144(P0.5.4)_env-toggle-visual-debug",
+      "summaryFile": "summary-v1.4.144(P0.5.4)_env-toggle-visual-debug.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Environment indicator visible and functional",
+    "No interference with UI testing",
+    "Toggle functionality works correctly"
+  ],
+  "successCriteria": [
+    "Environment indicator visible in development",
+    "Correct environment displayed",
+    "Toggle functionality working",
+    "No interference with UI testing",
+    "Indicator is subtle and non-intrusive"
+  ]
+} 

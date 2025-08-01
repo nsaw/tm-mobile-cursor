@@ -1,0 +1,91 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/verify-tagchip-migration.js",
+    "node scripts/validate-chip-role.js",
+    "node scripts/test-tagchip-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/tagchip-migration",
+  "notes": [
+    "PATCH NAME: patch-v1.4.222(P1.3.2)_tagchip-migration.json",
+    "SUMMARY NAME: summary-v1.4.222(P1.3.2)_tagchip-migration.md",
+    "GOAL: Migrate TagChip component → interactiveRole=\"chip-select\" with hardened validation",
+    "MISSION: Migrate TagChip component to nextgen with proper role assignment and comprehensive testing",
+    "CONTEXT: This is the third pilot component migration in Phase 1. TagChip.tsx will be migrated to src-nextgen/ with interactiveRole=\"chip-select\" assignment, serving as a template for interactive component migrations.",
+    "SAFETY ENFORCEMENT: Test tagchip component functionality and role assignment, verify visual consistency, validate behavior, ensure proper testing",
+    "STABLE STATE CHECK: Confirm tagchip component functionality working, role assignment correct, visual consistency maintained",
+    "🚨 CRITICAL: Must validate chip role assignment and tagchip behavior before proceeding"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 2,
+      "task": "Migrate TagChip component → interactiveRole=\"chip-select\" with hardened validation",
+      "version": "v1.4.222(P1.3.2)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Copy TagChip.tsx to src-nextgen/components/",
+        "Add interactiveRole=\"chip-select\" assignment with validation",
+        "Update imports and dependencies",
+        "Install required testing dependencies",
+        "Test tagchip component functionality with comprehensive tests",
+        "Validate chip role assignment behavior",
+        "Create tagchip validation scripts"
+      ],
+      "validation": [
+        "Test tagchip component functionality and role assignment",
+        "Verify visual consistency with legacy",
+        "Confirm role assignment working",
+        "Validate tagchip component behavior",
+        "Test chip role assignment validation",
+        "Verify tagchip validation scripts"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert TagChip.tsx migration",
+        "Legacy TagChip.tsx preserved in src-reference/",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "migrate-v1.4.222(P1.3.2)_tagchip-migration",
+      "summaryFile": "summary-v1.4.222(P1.3.2)_tagchip-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Test tagchip component functionality",
+    "Verify role assignment",
+    "Validate visual consistency",
+    "Test tagchip component behavior",
+    "Test chip role assignment validation",
+    "Verify tagchip validation scripts"
+  ],
+  "successCriteria": [
+    "TagChip component migrated successfully with TypeScript",
+    "Role assignment working correctly with validation",
+    "Visual consistency maintained with tests",
+    "TagChip component behavior validated",
+    "Chip role assignment validation operational",
+    "TagChip validation scripts working"
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

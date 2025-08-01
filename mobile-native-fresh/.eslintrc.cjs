@@ -8,6 +8,20 @@ module.exports = {
   ],
   // parserOptions.project removed to avoid type-aware RAM spike
   rules: {
-    // project-specific overrides go here
+    // Stricter TypeScript rules
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'warn',
+    
+    // Code quality rules
+    'no-empty-function': 'error',
+    'no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    
+    // React rules
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    
+    // Project-specific overrides
+    '@typescript-eslint/no-var-requires': 'error'
   }
 }; 

@@ -1,0 +1,126 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit --skipLibCheck",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/validate-dual-mount.js",
+    "node scripts/validate-environment-specific.js",
+    "node scripts/verify-role-wrappers.js",
+    "node scripts/validate-role-assignment.js",
+    "node scripts/test-role-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/role-wrappers-implementation",
+  "notes": [
+    "🧠 MISSION: Implement role-based wrappers with hardened validation for component migration",
+    "🎯 GOAL: Create role-based wrapper system for component migration with comprehensive testing",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Test role-based wrapper functionality, verify role assignment, validate wrapper behavior",
+    "✅ Ensure proper testing and validation of wrapper interfaces",
+    "✅ Validate role assignment logic and wrapper behavior before proceeding",
+    "📝 CONTEXT: Role-based wrappers are core to the E strategy (Hybrid Shell). These wrappers provide a consistent interface for components during migration, ensuring proper role assignment and behavior.",
+    "🔒 RELEVANCE: Essential for component migration from legacy to nextgen environment",
+    "🔄 DUAL-MOUNT: This patch validates role wrappers work in both legacy and nextgen environments"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 1,
+      "attempt": 1,
+      "task": "Implement role-based wrappers with dual-mount validation",
+      "version": "v1.4.201(P1.1.1)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Create src-nextgen/shell/components/RoleWrapper.tsx",
+        "Implement wrapper interfaces with TypeScript",
+        "Set up role assignment logic with validation",
+        "Create wrapper validation system",
+        "Install required testing dependencies",
+        "Test wrapper functionality with comprehensive tests",
+        "Validate role assignment behavior in legacy environment",
+        "Validate role assignment behavior in nextgen environment",
+        "Create role behavior validation scripts"
+      ],
+      "validation": [
+        "Test role-based wrapper functionality",
+        "Verify role assignment working",
+        "Confirm wrapper behavior correct",
+        "Validate wrapper interfaces",
+        "Test role assignment validation",
+        "Verify role behavior scripts",
+        "Validate dual-mount compatibility",
+        "Test role wrappers in legacy environment",
+        "Test role wrappers in nextgen environment"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert wrapper implementation",
+        "No impact on legacy functionality",
+        "Restore original package.json if needed",
+        "Preserve dual-mount system integrity"
+      ],
+      "gitTag": "backup-v1.4.201(P1.1.1)_role-wrappers-implementation",
+      "summaryFile": "summary-v1.4.201(P1.1.1)_role-wrappers-implementation.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit --skipLibCheck)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Dual-mount validation (validate-dual-mount.js)",
+    "Environment-specific validation (validate-environment-specific.js)",
+    "Role wrapper functionality validation",
+    "Role assignment validation",
+    "Wrapper behavior validation",
+    "Role assignment scripts validation"
+  ],
+  "successCriteria": [
+    "Role-based wrappers implemented with TypeScript",
+    "Role assignment working with validation",
+    "Wrapper behavior validated with tests",
+    "Wrapper interfaces functional",
+    "Role assignment validation operational",
+    "Role behavior scripts working",
+    "Dual-mount compatibility confirmed",
+    "Role wrappers work in both legacy and nextgen environments"
+  ],
+  "dualMountValidation": {
+    "legacyEnvironment": {
+      "validation": [
+        "test -f THAWED-REFERENCE/src-reference/components/AutoRoleView.tsx",
+        "test -f THAWED-REFERENCE/src-reference/components/ui/Button.tsx",
+        "node scripts/validate-role-assignment.js --env=legacy"
+      ],
+      "rollback": [
+        "git checkout THAWED-REFERENCE/src-reference/components/AutoRoleView.tsx",
+        "git checkout THAWED-REFERENCE/src-reference/components/ui/Button.tsx"
+      ]
+    },
+    "nextgenEnvironment": {
+      "validation": [
+        "test -f src-nextgen/shell/components/RoleWrapper.tsx",
+        "test -f src-nextgen/shell/components/RoleWrapper.test.tsx",
+        "node scripts/validate-role-assignment.js --env=nextgen"
+      ],
+      "rollback": [
+        "git checkout src-nextgen/shell/components/RoleWrapper.tsx",
+        "git checkout src-nextgen/shell/components/RoleWrapper.test.tsx"
+      ]
+    }
+  },
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

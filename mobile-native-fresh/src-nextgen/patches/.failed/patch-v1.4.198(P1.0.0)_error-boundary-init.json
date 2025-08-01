@@ -1,0 +1,30 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Add ErrorBoundary component",
+    "SUMMARY NAME: summary-v1.4.320(P2.3.0)_error-boundary-init.md",
+    "STABLE STATE CHECK: Target file exists, commit pushed, summary tagged"
+  ],
+  "phases": [
+    {
+      "task": "Add ErrorBoundary component",
+      "executionSteps": [
+        "Create or configure src-nextgen/components/ErrorBoundary.tsx",
+        "Log results to summaries/phase-2/summary-v1.4.320(P2.3.0)_error-boundary-init.md",
+        "Create tag: v1.4.320(P2.3.0)_error-boundary-init"
+      ],
+      "validation": [
+        "src-nextgen/components/ErrorBoundary.tsx exists",
+        "summary-v1.4.320(P2.3.0)_error-boundary-init.md written",
+        "v1.4.320(P2.3.0)_error-boundary-init in Git log"
+      ]
+    }
+  ],
+  "postMutationBuild": "tsc --noEmit && eslint . --ext .ts,.tsx && npm test -- --watchAll=false",
+  "final": {
+    "commit": "chore: add errorboundary component",
+    "tag": "v1.4.320(P2.3.0)_error-boundary-init",
+    "notes": "Add ErrorBoundary component patch created and validated"
+  }
+}

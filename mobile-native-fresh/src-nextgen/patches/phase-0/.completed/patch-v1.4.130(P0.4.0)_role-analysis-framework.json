@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.130(P0.4.0)_role-analysis-framework.json",
+    "SUMMARY NAME: summary-v1.4.130(P0.4.0)_role-analysis-framework.md",
+    "GOAL: Set up role analysis and validation framework",
+    "MISSION: Establish comprehensive role analysis system for component migration and validation",
+    "CONTEXT: Role analysis is fundamental to the hybrid shell strategy. We need automated tools to analyze component roles, validate role assignments, and ensure proper role-based wrappers.",
+    "SAFETY ENFORCEMENT: Test role analysis tools, verify role validation, validate role assignment accuracy",
+    "STABLE STATE CHECK: Confirm role analysis framework operational, role validation working, assignment accuracy validated"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 4,
+      "attempt": 0,
+      "task": "Set up role analysis and validation framework",
+      "version": "v1.4.130(P0.4.0)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Create role analysis tools and utilities",
+        "Set up role validation system",
+        "Configure role assignment analysis",
+        "Set up role conflict detection",
+        "Test role analysis functionality",
+        "Validate role assignment accuracy"
+      ],
+      "validation": [
+        "Test role analysis tools",
+        "Verify role validation working",
+        "Confirm role assignment accuracy",
+        "Validate role conflict detection"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert role analysis setup",
+        "No impact on app functionality"
+      ],
+      "gitTag": "role-v1.4.130(P0.4.0)_role-analysis-framework",
+      "summaryFile": "summary-v1.4.130(P0.4.0)_role-analysis-framework.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test role analysis tools",
+    "Verify role validation",
+    "Validate role assignment accuracy"
+  ],
+  "successCriteria": [
+    "Role analysis framework operational",
+    "Role validation working",
+    "Role assignment accuracy validated",
+    "Role conflict detection functional"
+  ]
+} 

@@ -26,9 +26,9 @@ This directory contains the next generation architecture for the mobile-native-f
 - ✅ CI/CD pipeline integration
 
 ## Quick Start
-1. Run validation: `{ { { { node scripts/validate-patch-dependencies.js` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-2. Check test coordination: `{ { { { node scripts/test-coordination.js` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-3. Update documentation: `{ { { { node scripts/update-documentation.js` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+1. Run validation: `node scripts/validate-patch-dependencies.js`
+2. Check test coordination: `node scripts/test-coordination.js`
+3. Update documentation: `node scripts/update-documentation.js`
 
 ## Recent Updates
 - Integrated splash mount guard (P0.5.3)

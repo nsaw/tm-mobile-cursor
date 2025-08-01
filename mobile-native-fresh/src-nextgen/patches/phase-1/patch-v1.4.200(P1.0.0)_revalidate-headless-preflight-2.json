@@ -1,0 +1,52 @@
+{
+  "notes": [
+    "\ud83e\udde0 MISSION: Revalidate and configure headless automation tools (Detox, Puppeteer, Modern Screenshot)",
+    "\ud83c\udfaf GOAL: Ensure screenshot, testing, and browser-based validators are preflighted before Phase 1 begins",
+    "\ud83d\udea8 SAFETY ENFORCEMENT \ud83d\udea8",
+    "\u2705 Enforce configuration presence for Detox, Puppeteer, Modern Screenshot",
+    "\u2705 Validate CLI access, config paths, env requirements, and detection logic",
+    "\u2705 Prebuild patch to confirm all headless automation dependencies are functional",
+    "\ud83d\udccc CONTEXT: Phase 0 audit validated presence, but config/CLI invocation logic was incomplete",
+    "\ud83d\udd10 RELEVANCE: Future visual regression, CI pipelines, and role heatmap tools rely on this"
+  ],
+  "showInUI": true,
+  "parseCheck": true,
+  "onParseFail": "revert-and-alert",
+  "postMutationBuild": [
+    "npx detox --configuration ios.sim.debug --cleanup",
+    "npx puppeteer --version",
+    "node scripts/validate-headless-screenshot.js"
+  ],
+  "blockCommitOnError": true,
+  "alertUserOnParseFail": true,
+  "preCommit": {
+    "before": [
+      "git add .",
+      "git commit -m \"chore(env): preflight headless test + screenshot infrastructure\"",
+      "git tag v1.4.200(P1.0.0)_revalidate-headless-preflight-2",
+      "tar -czf /Users/sawyer/gitSync/_backups/tm-mobile-cursor/250720-PT_v1.4.200(P1.0.0)_revalidate-headless-preflight-2_backup_tm-mobile-cursor.tar.gz ."
+    ]
+  },
+  "branch": "hotfix/preflight-screenshot-detox-v2",
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "phases": [
+    {
+      "section": "Revalidate Detox + Screenshot Preflight",
+      "actions": [
+        "Ensure Detox config file is present (`.detoxrc.js` or package.json > detox)",
+        "Ensure Puppeteer is resolvable via `npx puppeteer`",
+        "Add `scripts/validate-headless-screenshot.js` for Modern Screenshot detection",
+        "Ensure screenshot CLI is available under expected path or install fallback"
+      ],
+      "commit": "chore: revalidate detox/screenshot preflight setup",
+      "tag": "v1.4.200(P1.0.0)_revalidate-headless-preflight-2"
+    }
+  ],
+  "final": {
+    "commit": "chore: complete preflight setup for headless automation",
+    "tag": "v1.4.200(P1.0.0)_revalidate-headless-preflight-2_final",
+    "notes": "Validated Detox, Puppeteer, and Modern Screenshot presence, config, and CLI entry. Cleared for Phase 1 usage."
+  }
+}

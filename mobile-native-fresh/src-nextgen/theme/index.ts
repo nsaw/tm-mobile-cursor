@@ -1,2 +1,2 @@
-export * from './ThemeSystem';
-export * from './ThemeProvider'; 
+// src-nextgen/theme/index.ts
+export { ThemeProvider, useTheme, type ThemeTokens } from './ThemeProvider'; 

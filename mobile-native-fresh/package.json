@@ -4,6 +4,7 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
+    "alias:sanity": "bash scripts/alias-sanity.sh",
     "validate:patch": "bash scripts/validate-patch.sh",
     "dev": "bash scripts/dev-workflow.sh",
     "maintain": "bash scripts/maintain-validation.sh",
@@ -62,6 +63,11 @@
     "test:text:rtl": "node scripts/test-text-rtl.cjs",
     "test:text:visual-regression": "node scripts/test-text-visual-regression.cjs",
     "test:integration:text": "node scripts/test-integration-text.cjs",
+    "alias:sanity": "bash scripts/alias-sanity.sh",
+    "validate:dual-mount": "bash scripts/validate-dual-mount.sh",
+    "validate:dual-mount:device": "timeout 60s bash scripts/validate-dual-mount-device.sh || exit 0",
+    "validate:dual-mount:device:nb": "nohup npm run validate:dual-mount:device >/dev/null 2>&1 &",
+    "ci:legacy-alias-check": "npm run alias:sanity && npm run validate:dual-mount && npm run validate:dual-mount:device",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -115,7 +121,6 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
-    "eslint-plugin-expo": "0.1.4",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
@@ -129,8 +134,10 @@
     "@types/react-native-vector-icons": "^6.4.18",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.57.1",
     "eslint-config-expo": "^9.2.0",
+    "eslint-plugin-expo": "0.1.4",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-promise": "^7.2.1",

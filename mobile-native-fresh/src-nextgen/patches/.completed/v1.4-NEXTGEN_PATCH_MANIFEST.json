@@ -1,0 +1,691 @@
+{
+  "manifest_version": "1.0.0",
+  "project": "tm-mobile-cursor",
+  "strategy": "B + D + E (Clean Rebuild + Dual-Mount + Hybrid Shell)",
+  "version_format": "v1.4.1{phase}{step}{attempt}(P{phase}.{step}.{attempt})",
+  "generated": "2025-07-19T10:30:00.000Z",
+  "status": "ready_for_phase_0",
+  "current_phase": 0,
+  "current_step": 0,
+  "current_attempt": 0,
+  "total_tasks": 51,
+  "completed_tasks": 0,
+  "failed_tasks": 0,
+  "pending_tasks": 51,
+  "phases": {
+    "phase_0": {
+      "name": "Foundation & Dual-Mount Setup",
+      "status": "pending",
+      "total_tasks": 11,
+      "completed_tasks": 0,
+      "steps": {
+        "step_0_1": {
+          "name": "Legacy Backup & Reference Setup",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.100(P0.1.0)",
+              "name": "Move src/ to src-reference/ (complete backup)",
+              "patch": "patch-v1.4.100(P0.1.0)_legacy-backup.json",
+              "backup_tag": "backup-v1.4.100(P0.1.0)_legacy-backup",
+              "summary": "summary-v1.4.100(P0.1.0)_legacy-backup.md",
+              "status": "pending",
+              "validation": "Verify src-reference/ contains complete legacy codebase"
+            },
+            {
+              "id": "v1.4.101(P0.1.1)",
+              "name": "Create src-nextgen/ directory structure",
+              "patch": "patch-v1.4.101(P0.1.1)_nextgen-init.json",
+              "backup_tag": "backup-v1.4.101(P0.1.1)_nextgen-init",
+              "summary": "summary-v1.4.101(P0.1.1)_nextgen-init.md",
+              "status": "pending",
+              "validation": "Verify src-nextgen/ structure matches roadmap"
+            }
+          ]
+        },
+        "step_0_2": {
+          "name": "Dual-Mount Configuration",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.110(P0.2.0)",
+              "name": "Set up dual-mount App.tsx toggle",
+              "patch": "patch-v1.4.110(P0.2.0)_dual-mount-toggle.json",
+              "backup_tag": "backup-v1.4.110(P0.2.0)_dual-mount-toggle",
+              "summary": "summary-v1.4.110(P0.2.0)_dual-mount-toggle.md",
+              "status": "pending",
+              "validation": "Test environment toggle functionality"
+            },
+            {
+              "id": "v1.4.111(P0.2.1)",
+              "name": "Configure CI for parallel testing",
+              "patch": "patch-v1.4.111(P0.2.1)_ci-parallel-setup.json",
+              "backup_tag": "backup-v1.4.111(P0.2.1)_ci-parallel-setup",
+              "summary": "summary-v1.4.111(P0.2.1)_ci-parallel-setup.md",
+              "status": "pending",
+              "validation": "Verify CI pipeline for both legacy and nextgen"
+            },
+            {
+              "id": "v1.4.112(P0.2.2)",
+              "name": "Set up development environment flags",
+              "patch": "patch-v1.4.112(P0.2.2)_env-flags-setup.json",
+              "backup_tag": "backup-v1.4.112(P0.2.2)_env-flags-setup",
+              "summary": "summary-v1.4.112(P0.2.2)_env-flags-setup.md",
+              "status": "pending",
+              "validation": "Test environment flag functionality"
+            }
+          ]
+        },
+        "step_0_3": {
+          "name": "Performance & Validation Setup",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.120(P0.3.0)",
+              "name": "Set up performance benchmarking tools",
+              "patch": "patch-v1.4.120(P0.3.0)_perf-benchmark-setup.json",
+              "backup_tag": "backup-v1.4.120(P0.3.0)_perf-benchmark-setup",
+              "summary": "summary-v1.4.120(P0.3.0)_perf-benchmark-setup.md",
+              "status": "pending",
+              "validation": "Verify performance measurement tools working"
+            },
+            {
+              "id": "v1.4.121(P0.3.1)",
+              "name": "Create visual regression baseline",
+              "patch": "patch-v1.4.121(P0.3.1)_visual-regression-baseline.json",
+              "backup_tag": "backup-v1.4.121(P0.3.1)_visual-regression-baseline",
+              "summary": "summary-v1.4.121(P0.3.1)_visual-regression-baseline.md",
+              "status": "pending",
+              "validation": "Capture baseline images for both legacy and nextgen"
+            },
+            {
+              "id": "v1.4.122(P0.3.2)",
+              "name": "Conduct accessibility compliance audit",
+              "patch": "patch-v1.4.122(P0.3.2)_accessibility-audit.json",
+              "backup_tag": "backup-v1.4.122(P0.3.2)_accessibility-audit",
+              "summary": "summary-v1.4.122(P0.3.2)_accessibility-audit.md",
+              "status": "pending",
+              "validation": "Complete accessibility compliance report"
+            }
+          ]
+        },
+        "step_0_4": {
+          "name": "Framework & Documentation Setup",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.130(P0.4.0)",
+              "name": "Document role analysis framework",
+              "patch": "patch-v1.4.130(P0.4.0)_role-analysis-framework.json",
+              "backup_tag": "backup-v1.4.130(P0.4.0)_role-analysis-framework",
+              "summary": "summary-v1.4.130(P0.4.0)_role-analysis-framework.md",
+              "status": "pending",
+              "validation": "Complete role analysis documentation"
+            },
+            {
+              "id": "v1.4.131(P0.4.1)",
+              "name": "Set up testing framework",
+              "patch": "patch-v1.4.131(P0.4.1)_testing-framework-setup.json",
+              "backup_tag": "backup-v1.4.131(P0.4.1)_testing-framework-setup",
+              "summary": "summary-v1.4.131(P0.4.1)_testing-framework-setup.md",
+              "status": "pending",
+              "validation": "Verify testing framework for both environments"
+            },
+            {
+              "id": "v1.4.132(P0.4.2)",
+              "name": "Validate rollback strategy",
+              "patch": "patch-v1.4.132(P0.4.2)_rollback-strategy-validation.json",
+              "backup_tag": "backup-v1.4.132(P0.4.2)_rollback-strategy-validation",
+              "summary": "summary-v1.4.132(P0.4.2)_rollback-strategy-validation.md",
+              "status": "pending",
+              "validation": "Test rollback procedures and backup strategies"
+            }
+          ]
+        },
+        "step_0_5": {
+          "name": "Debug & Sacred Component Setup",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.140(P0.5.0)",
+              "name": "Configure debug system",
+              "patch": "patch-v1.4.140(P0.5.0)_debug-system-config.json",
+              "backup_tag": "backup-v1.4.140(P0.5.0)_debug-system-config",
+              "summary": "summary-v1.4.140(P0.5.0)_debug-system-config.md",
+              "status": "pending",
+              "validation": "Verify debug controls and toggles working"
+            },
+            {
+              "id": "v1.4.141(P0.5.1)",
+              "name": "Identify sacred components (preserved via import)",
+              "patch": "patch-v1.4.141(P0.5.1)_sacred-components-identification.json",
+              "backup_tag": "backup-v1.4.141(P0.5.1)_sacred-components-identification",
+              "summary": "summary-v1.4.141(P0.5.1)_sacred-components-identification.md",
+              "status": "pending",
+              "validation": "Complete sacred component list and import protection plan",
+              "examples": "BottomNav, OnboardingModal, Authentication flows"
+            },
+            {
+              "id": "v1.4.142(P0.5.2)",
+              "name": "Identify sacred layouts (preserved via z-index contract or safe-frame shell)",
+              "patch": "patch-v1.4.142(P0.5.2)_sacred-layouts-identification.json",
+              "backup_tag": "backup-v1.4.142(P0.5.2)_sacred-layouts-identification",
+              "summary": "summary-v1.4.142(P0.5.2)_sacred-layouts-identification.md",
+              "status": "pending",
+              "validation": "Complete sacred layout list and z-index/safe-frame protection plan",
+              "examples": "FAB, SlideDeck, Modal overlays, Toast notifications"
+            },
+            {
+              "id": "v1.4.143(P0.5.3)",
+              "name": "Splash mount guard implementation",
+              "patch": "patch-v1.4.143(P0.5.3)_splash-mount-guard.json",
+              "status": "completed",
+              "validation": "Patch integrated and validated"
+            }
+          ]
+        }
+      }
+    },
+    "phase_1": {
+      "name": "Hybrid Shell Scaffold",
+      "status": "pending",
+      "total_tasks": 13,
+      "completed_tasks": 0,
+      "steps": {
+        "step_1_1": {
+          "name": "Shell Directory Structure",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.200(P1.1.0)",
+              "name": "Create src/shell/ directory",
+              "patch": "patch-v1.4.200(P1.1.0)_shell-directory-create.json",
+              "backup_tag": "backup-v1.4.200(P1.1.0)_shell-directory-create",
+              "summary": "summary-v1.4.200(P1.1.0)_shell-directory-create.md",
+              "status": "pending",
+              "validation": "Verify shell directory structure created"
+            },
+            {
+              "id": "v1.4.201(P1.1.1)",
+              "name": "Implement role-based wrappers",
+              "patch": "patch-v1.4.201(P1.1.1)_role-wrappers-implementation.json",
+              "backup_tag": "backup-v1.4.201(P1.1.1)_role-wrappers-implementation",
+              "summary": "summary-v1.4.201(P1.1.1)_role-wrappers-implementation.md",
+              "status": "pending",
+              "validation": "Test role-based wrapper functionality"
+            },
+            {
+              "id": "v1.4.202(P1.1.2)",
+              "name": "Define layout contracts",
+              "patch": "patch-v1.4.202(P1.1.2)_layout-contracts-definition.json",
+              "backup_tag": "backup-v1.4.202(P1.1.2)_layout-contracts-definition",
+              "summary": "summary-v1.4.202(P1.1.2)_layout-contracts-definition.md",
+              "status": "pending",
+              "validation": "Verify layout contract definitions"
+            }
+          ]
+        },
+        "step_1_2": {
+          "name": "Navigation & Sacred Views",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.210(P1.2.0)",
+              "name": "Set up navigation definitions",
+              "patch": "patch-v1.4.210(P1.2.0)_navigation-definitions-setup.json",
+              "backup_tag": "backup-v1.4.210(P1.2.0)_navigation-definitions-setup",
+              "summary": "summary-v1.4.210(P1.2.0)_navigation-definitions-setup.md",
+              "status": "pending",
+              "validation": "Test navigation definitions"
+            },
+            {
+              "id": "v1.4.211(P1.2.1)",
+              "name": "Create sacred view mounts",
+              "patch": "patch-v1.4.211(P1.2.1)_sacred-view-mounts.json",
+              "backup_tag": "backup-v1.4.211(P1.2.1)_sacred-view-mounts",
+              "summary": "summary-v1.4.211(P1.2.1)_sacred-view-mounts.md",
+              "status": "pending",
+              "validation": "Verify sacred view mounts working"
+            },
+            {
+              "id": "v1.4.212(P1.2.2)",
+              "name": "Configure patch-runner automation",
+              "patch": "patch-v1.4.212(P1.2.2)_patch-runner-automation.json",
+              "backup_tag": "backup-v1.4.212(P1.2.2)_patch-runner-automation",
+              "summary": "summary-v1.4.212(P1.2.2)_patch-runner-automation.md",
+              "status": "pending",
+              "validation": "Test patch-runner automation"
+            }
+          ]
+        },
+        "step_1_3": {
+          "name": "Pilot Component Migration",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.220(P1.3.0)",
+              "name": "Migrate Button.tsx → interactiveRole=\"button-action\"",
+              "patch": "patch-v1.4.220(P1.3.0)_button-migration.json",
+              "backup_tag": "backup-v1.4.220(P1.3.0)_button-migration",
+              "summary": "summary-v1.4.220(P1.3.0)_button-migration.md",
+              "status": "pending",
+              "validation": "Test button functionality and role assignment"
+            },
+            {
+              "id": "v1.4.221(P1.3.1)",
+              "name": "Migrate Text.tsx → contentRole=\"body\"",
+              "patch": "patch-v1.4.221(P1.3.1)_text-migration.json",
+              "backup_tag": "backup-v1.4.221(P1.3.1)_text-migration",
+              "summary": "summary-v1.4.221(P1.3.1)_text-migration.md",
+              "status": "pending",
+              "validation": "Test text component and content role"
+            },
+            {
+              "id": "v1.4.222(P1.3.2)",
+              "name": "Migrate TagChip.tsx → interactiveRole=\"chip\"",
+              "patch": "patch-v1.4.222(P1.3.2)_tagchip-migration.json",
+              "backup_tag": "backup-v1.4.222(P1.3.2)_tagchip-migration",
+              "summary": "summary-v1.4.222(P1.3.2)_tagchip-migration.md",
+              "status": "pending",
+              "validation": "Test TagChip functionality and interactive role"
+            },
+            {
+              "id": "v1.4.223(P1.3.3)",
+              "name": "Migrate ModernHeader.tsx → layoutRole=\"header\"",
+              "patch": "patch-v1.4.223(P1.3.3)_header-migration.json",
+              "backup_tag": "backup-v1.4.223(P1.3.3)_header-migration",
+              "summary": "summary-v1.4.223(P1.3.3)_header-migration.md",
+              "status": "pending",
+              "validation": "Test header layout and role assignment"
+            },
+            {
+              "id": "v1.4.224(P1.3.4)",
+              "name": "Migrate BottomNav.tsx → layoutRole=\"navigation\"",
+              "patch": "patch-v1.4.224(P1.3.4)_bottomnav-migration.json",
+              "backup_tag": "backup-v1.4.224(P1.3.4)_bottomnav-migration",
+              "summary": "summary-v1.4.224(P1.3.4)_bottomnav-migration.md",
+              "status": "pending",
+              "validation": "Test BottomNav functionality and navigation role"
+            },
+            {
+              "id": "v1.4.225(P1.3.5)",
+              "name": "Visual overlay debug implementation",
+              "patch": "patch-v1.4.225(P1.3.5)_visual-overlay-debug.json",
+              "status": "completed",
+              "validation": "Patch integrated and validated"
+            }
+          ]
+        }
+      }
+    },
+    "phase_2": {
+      "name": "Systematic Migration",
+      "status": "pending",
+      "total_tasks": 14,
+      "completed_tasks": 0,
+      "steps": {
+        "step_2_1": {
+          "name": "High Traffic Screens (Dual-Mount)",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.300(P2.1.0)",
+              "name": "Migrate DashboardScreen.tsx → src-nextgen/screens/DashboardScreen.tsx",
+              "patch": "patch-v1.4.300(P2.1.0)_dashboard-dual-mount.json",
+              "backup_tag": "backup-v1.4.300(P2.1.0)_dashboard-dual-mount",
+              "summary": "summary-v1.4.300(P2.1.0)_dashboard-dual-mount.md",
+              "status": "pending",
+              "validation": "Test dashboard in both legacy and nextgen environments"
+            },
+            {
+              "id": "v1.4.301(P2.1.1)",
+              "name": "Migrate HomeScreen.tsx → src-nextgen/screens/HomeScreen.tsx",
+              "patch": "patch-v1.4.301(P2.1.1)_home-dual-mount.json",
+              "backup_tag": "backup-v1.4.301(P2.1.1)_home-dual-mount",
+              "summary": "summary-v1.4.301(P2.1.1)_home-dual-mount.md",
+              "status": "pending",
+              "validation": "Test home screen in both environments"
+            },
+            {
+              "id": "v1.4.302(P2.1.2)",
+              "name": "Migrate ThoughtmarkDetailScreen.tsx → src-nextgen/screens/ThoughtmarkDetailScreen.tsx",
+              "patch": "patch-v1.4.302(P2.1.2)_thoughtmark-detail-dual-mount.json",
+              "backup_tag": "backup-v1.4.302(P2.1.2)_thoughtmark-detail-dual-mount",
+              "summary": "summary-v1.4.302(P2.1.2)_thoughtmark-detail-dual-mount.md",
+              "status": "pending",
+              "validation": "Test thoughtmark detail screen in both environments"
+            },
+            {
+              "id": "v1.4.303(P2.1.3)",
+              "name": "Migrate SearchScreen.tsx → src-nextgen/screens/SearchScreen.tsx",
+              "patch": "patch-v1.4.303(P2.1.3)_search-dual-mount.json",
+              "backup_tag": "backup-v1.4.303(P2.1.3)_search-dual-mount",
+              "summary": "summary-v1.4.303(P2.1.3)_search-dual-mount.md",
+              "status": "pending",
+              "validation": "Test search screen in both environments"
+            },
+            {
+              "id": "v1.4.304(P2.1.4)",
+              "name": "Migrate AllBinsScreen.tsx → src-nextgen/screens/AllBinsScreen.tsx",
+              "patch": "patch-v1.4.304(P2.1.4)_allbins-dual-mount.json",
+              "backup_tag": "backup-v1.4.304(P2.1.4)_allbins-dual-mount",
+              "summary": "summary-v1.4.304(P2.1.4)_allbins-dual-mount.md",
+              "status": "pending",
+              "validation": "Test all bins screen in both environments"
+            }
+          ]
+        },
+        "step_2_2": {
+          "name": "Authentication & Input (Shell Migration)",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.310(P2.2.0)",
+              "name": "Migrate SignIn.tsx → src/shell/auth/SignIn.tsx",
+              "patch": "patch-v1.4.310(P2.2.0)_signin-shell-migration.json",
+              "backup_tag": "backup-v1.4.310(P2.2.0)_signin-shell-migration",
+              "summary": "summary-v1.4.310(P2.2.0)_signin-shell-migration.md",
+              "status": "pending",
+              "validation": "Test signin component in shell structure"
+            },
+            {
+              "id": "v1.4.311(P2.2.1)",
+              "name": "Migrate SignUp.tsx → src/shell/auth/SignUp.tsx",
+              "patch": "patch-v1.4.311(P2.2.1)_signup-shell-migration.json",
+              "backup_tag": "backup-v1.4.311(P2.2.1)_signup-shell-migration",
+              "summary": "summary-v1.4.311(P2.2.1)_signup-shell-migration.md",
+              "status": "pending",
+              "validation": "Test signup component in shell structure"
+            },
+            {
+              "id": "v1.4.312(P2.2.2)",
+              "name": "Migrate PINEntryScreen.tsx → src/shell/auth/PINEntryScreen.tsx",
+              "patch": "patch-v1.4.312(P2.2.2)_pinentry-shell-migration.json",
+              "backup_tag": "backup-v1.4.312(P2.2.2)_pinentry-shell-migration",
+              "summary": "summary-v1.4.312(P2.2.2)_pinentry-shell-migration.md",
+              "status": "pending",
+              "validation": "Test PIN entry component in shell structure"
+            },
+            {
+              "id": "v1.4.313(P2.2.3)",
+              "name": "Migrate CreateBinScreen.tsx → src/shell/bins/CreateBinScreen.tsx",
+              "patch": "patch-v1.4.313(P2.2.3)_createbin-shell-migration.json",
+              "backup_tag": "backup-v1.4.313(P2.2.3)_createbin-shell-migration",
+              "summary": "summary-v1.4.313(P2.2.3)_createbin-shell-migration.md",
+              "status": "pending",
+              "validation": "Test create bin component in shell structure"
+            },
+            {
+              "id": "v1.4.314(P2.2.4)",
+              "name": "Migrate AIToolsScreen.tsx → src/shell/ai/AIToolsScreen.tsx",
+              "patch": "patch-v1.4.314(P2.2.4)_aitools-shell-migration.json",
+              "backup_tag": "backup-v1.4.314(P2.2.4)_aitools-shell-migration",
+              "summary": "summary-v1.4.314(P2.2.4)_aitools-shell-migration.md",
+              "status": "pending",
+              "validation": "Test AI tools component in shell structure"
+            }
+          ]
+        },
+        "step_2_3": {
+          "name": "Settings & Misc (Shell Migration)",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.320(P2.3.0)",
+              "name": "Migrate ProfileScreen.tsx → src/shell/settings/ProfileScreen.tsx",
+              "patch": "patch-v1.4.320(P2.3.0)_profile-shell-migration.json",
+              "backup_tag": "backup-v1.4.320(P2.3.0)_profile-shell-migration",
+              "summary": "summary-v1.4.320(P2.3.0)_profile-shell-migration.md",
+              "status": "pending",
+              "validation": "Test profile component in shell structure"
+            },
+            {
+              "id": "v1.4.321(P2.3.1)",
+              "name": "Migrate ContentScreen.tsx → src/shell/content/ContentScreen.tsx",
+              "patch": "patch-v1.4.321(P2.3.1)_content-shell-migration.json",
+              "backup_tag": "backup-v1.4.321(P2.3.1)_content-shell-migration",
+              "summary": "summary-v1.4.321(P2.3.1)_content-shell-migration.md",
+              "status": "pending",
+              "validation": "Test content component in shell structure"
+            },
+            {
+              "id": "v1.4.322(P2.3.2)",
+              "name": "Migrate ExportScreen.tsx → src/shell/export/ExportScreen.tsx",
+              "patch": "patch-v1.4.322(P2.3.2)_export-shell-migration.json",
+              "backup_tag": "backup-v1.4.322(P2.3.2)_export-shell-migration",
+              "summary": "summary-v1.4.322(P2.3.2)_export-shell-migration.md",
+              "status": "pending",
+              "validation": "Test export component in shell structure"
+            },
+            {
+              "id": "v1.4.323(P2.3.3)",
+              "name": "Migrate AllSettings → src/shell/settings/AllSettings.tsx",
+              "patch": "patch-v1.4.323(P2.3.3)_allsettings-shell-migration.json",
+              "backup_tag": "backup-v1.4.323(P2.3.3)_allsettings-shell-migration",
+              "summary": "summary-v1.4.323(P2.3.3)_allsettings-shell-migration.md",
+              "status": "pending",
+              "validation": "Test all settings component in shell structure"
+            }
+          ]
+        },
+        "step_2_9": {
+          "name": "Step 2.9",
+          "status": "completed",
+          "tasks": [
+            {
+              "id": "v1.4.998(P2.9.8)",
+              "name": "Auto test map initialization",
+              "patch": "patch-v1.4.998(P2.9.8)_auto-test-map-init.json",
+              "status": "completed",
+              "validation": "Patch integrated and validated"
+            },
+            {
+              "id": "v1.4.999(P2.9.9)",
+              "name": "CI pipeline integration",
+              "patch": "patch-v1.4.999(P2.9.9)_ci-pipeline-integration.json",
+              "status": "completed",
+              "validation": "Patch integrated and validated"
+            }
+          ]
+        }
+      }
+    },
+    "phase_3": {
+      "name": "Optimization & Consolidation",
+      "status": "pending",
+      "total_tasks": 13,
+      "completed_tasks": 0,
+      "steps": {
+        "step_3_1": {
+          "name": "Performance Optimization",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.400(P3.1.0)",
+              "name": "Optimize performance bottlenecks",
+              "patch": "patch-v1.4.400(P3.1.0)_performance-optimization.json",
+              "backup_tag": "backup-v1.4.400(P3.1.0)_performance-optimization",
+              "summary": "summary-v1.4.400(P3.1.0)_performance-optimization.md",
+              "status": "pending",
+              "validation": "Verify performance improvements"
+            },
+            {
+              "id": "v1.4.401(P3.1.1)",
+              "name": "Refine role assignments based on usage",
+              "patch": "patch-v1.4.401(P3.1.1)_role-assignment-refinement.json",
+              "backup_tag": "backup-v1.4.401(P3.1.1)_role-assignment-refinement",
+              "summary": "summary-v1.4.401(P3.1.1)_role-assignment-refinement.md",
+              "status": "pending",
+              "validation": "Test refined role assignments"
+            },
+            {
+              "id": "v1.4.402(P3.1.2)",
+              "name": "Memory usage optimization",
+              "patch": "patch-v1.4.402(P3.1.2)_memory-optimization.json",
+              "backup_tag": "backup-v1.4.402(P3.1.2)_memory-optimization",
+              "summary": "summary-v1.4.402(P3.1.2)_memory-optimization.md",
+              "status": "pending",
+              "validation": "Verify memory usage improvements"
+            }
+          ]
+        },
+        "step_3_2": {
+          "name": "Validation & Testing",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.410(P3.2.0)",
+              "name": "Validate accessibility compliance",
+              "patch": "patch-v1.4.410(P3.2.0)_accessibility-validation.json",
+              "backup_tag": "backup-v1.4.410(P3.2.0)_accessibility-validation",
+              "summary": "summary-v1.4.410(P3.2.0)_accessibility-validation.md",
+              "status": "pending",
+              "validation": "Complete accessibility compliance validation"
+            },
+            {
+              "id": "v1.4.411(P3.2.1)",
+              "name": "Test visual regression thoroughly",
+              "patch": "patch-v1.4.411(P3.2.1)_visual-regression-testing.json",
+              "backup_tag": "backup-v1.4.411(P3.2.1)_visual-regression-testing",
+              "summary": "summary-v1.4.411(P3.2.1)_visual-regression-testing.md",
+              "status": "pending",
+              "validation": "Verify no visual regressions in both environments"
+            },
+            {
+              "id": "v1.4.412(P3.2.2)",
+              "name": "Performance regression testing",
+              "patch": "patch-v1.4.412(P3.2.2)_performance-regression-testing.json",
+              "backup_tag": "backup-v1.4.412(P3.2.2)_performance-regression-testing",
+              "summary": "summary-v1.4.412(P3.2.2)_performance-regression-testing.md",
+              "status": "pending",
+              "validation": "Verify no performance regressions"
+            }
+          ]
+        },
+        "step_3_3": {
+          "name": "Documentation & Finalization",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.420(P3.3.0)",
+              "name": "Document final implementation",
+              "patch": "patch-v1.4.420(P3.3.0)_final-implementation-docs.json",
+              "backup_tag": "backup-v1.4.420(P3.3.0)_final-implementation-docs",
+              "summary": "summary-v1.4.420(P3.3.0)_final-implementation-docs.md",
+              "status": "pending",
+              "validation": "Complete implementation documentation"
+            },
+            {
+              "id": "v1.4.421(P3.3.1)",
+              "name": "Gradual legacy cleanup",
+              "patch": "patch-v1.4.421(P3.3.1)_legacy-cleanup.json",
+              "backup_tag": "backup-v1.4.421(P3.3.1)_legacy-cleanup",
+              "summary": "summary-v1.4.421(P3.3.1)_legacy-cleanup.md",
+              "status": "pending",
+              "validation": "Verify legacy cleanup without breaking functionality"
+            },
+            {
+              "id": "v1.4.422(P3.3.2)",
+              "name": "Final dual-mount validation",
+              "patch": "patch-v1.4.422(P3.3.2)_final-dual-mount-validation.json",
+              "backup_tag": "backup-v1.4.422(P3.3.2)_final-dual-mount-validation",
+              "summary": "summary-v1.4.422(P3.3.2)_final-dual-mount-validation.md",
+              "status": "pending",
+              "validation": "Complete dual-mount system validation"
+            }
+          ]
+        },
+        "step_3_4": {
+          "name": "Consolidation",
+          "status": "pending",
+          "tasks": [
+            {
+              "id": "v1.4.430(P3.4.0)",
+              "name": "Remove unused legacy components",
+              "patch": "patch-v1.4.430(P3.4.0)_unused-legacy-removal.json",
+              "backup_tag": "backup-v1.4.430(P3.4.0)_unused-legacy-removal",
+              "summary": "summary-v1.4.430(P3.4.0)_unused-legacy-removal.md",
+              "status": "pending",
+              "validation": "Verify no functionality broken by removal"
+            },
+            {
+              "id": "v1.4.431(P3.4.1)",
+              "name": "Optimize bundle size",
+              "patch": "patch-v1.4.431(P3.4.1)_bundle-size-optimization.json",
+              "backup_tag": "backup-v1.4.431(P3.4.1)_bundle-size-optimization",
+              "summary": "summary-v1.4.431(P3.4.1)_bundle-size-optimization.md",
+              "status": "pending",
+              "validation": "Verify bundle size optimization"
+            },
+            {
+              "id": "v1.4.432(P3.4.2)",
+              "name": "Finalize migration documentation",
+              "patch": "patch-v1.4.432(P3.4.2)_migration-docs-finalization.json",
+              "backup_tag": "backup-v1.4.432(P3.4.2)_migration-docs-finalization",
+              "summary": "summary-v1.4.432(P3.4.2)_migration-docs-finalization.md",
+              "status": "pending",
+              "validation": "Complete migration documentation"
+            },
+            {
+              "id": "v1.4.433(P3.4.3)",
+              "name": "Validate complete dual-mount system",
+              "patch": "patch-v1.4.433(P3.4.3)_complete-dual-mount-validation.json",
+              "backup_tag": "backup-v1.4.433(P3.4.3)_complete-dual-mount-validation",
+              "summary": "summary-v1.4.433(P3.4.3)_complete-dual-mount-validation.md",
+              "status": "pending",
+              "validation": "Final validation of complete dual-mount system"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "validation_gates": {
+    "mandatory_checks": [
+      "Parse and type checking (tsc --noEmit)",
+      "Visual regression testing (both legacy and nextgen)",
+      "Performance impact measurement",
+      "Accessibility compliance validation",
+      "ESLint and linting validation",
+      "Memory usage monitoring",
+      "Runtime error detection",
+      "Dual-mount toggle validation"
+    ],
+    "failure_handling": [
+      "Stop all automation on validation failure",
+      "Revert to last known good state",
+      "Document the failure point",
+      "Create targeted fix before continuing"
+    ]
+  },
+  "success_metrics": {
+    "performance_targets": [
+      "No more than 5% render time increase",
+      "No more than 10% memory usage increase",
+      "No performance regressions in critical paths",
+      "Bundle size increase < 15%",
+      "Startup time increase < 10%",
+      "Dual-mount overhead < 3%"
+    ],
+    "quality_targets": [
+      "100% accessibility compliance",
+      "Zero visual regressions (both legacy and nextgen)",
+      "All ESLint rules passing",
+      "No runtime errors",
+      "100% test coverage for new components",
+      "Zero accessibility violations",
+      "Dual-mount toggle working perfectly"
+    ],
+    "process_targets": [
+      "Each phase completed within estimated time",
+      "Rollback capability tested and working",
+      "Documentation updated for each phase",
+      "Team knowledge transfer completed",
+      "Zero rollback failures",
+      "100% validation gate compliance",
+      "Dual-mount CI pipeline working"
+    ]
+  },
+  "last_updated": "2025-07-19T17:57:11.554Z",
+  "maintained_by": "GPT autopilot"
+}

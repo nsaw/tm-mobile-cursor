@@ -1,0 +1,61 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.141(P0.5.1)_sacred-components-identification.json",
+    "SUMMARY NAME: summary-v1.4.141(P0.5.1)_sacred-components-identification.md",
+    "GOAL: Identify sacred components (preserved via import)",
+    "MISSION: Identify and document components that must be preserved via import mechanism",
+    "CONTEXT: Sacred components are critical UI elements that must be preserved during migration. These are preserved via import mechanism rather than z-index contracts. Examples include BottomNav, OnboardingModal, and Authentication flows.",
+    "SAFETY ENFORCEMENT: Complete sacred component list, verify import protection plan, test import validation",
+    "STABLE STATE CHECK: Confirm sacred component list complete, import protection plan documented, import validation working"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 5,
+      "attempt": 1,
+      "task": "Identify sacred components (preserved via import)",
+      "version": "v1.4.141(P0.5.1)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Analyze existing components",
+        "Identify sacred components (BottomNav, OnboardingModal, Authentication flows)",
+        "Document import protection plan",
+        "Set up import validation",
+        "Create sacred component list"
+      ],
+      "validation": [
+        "Complete sacred component list and import protection plan",
+        "Verify import validation working",
+        "Confirm sacred component identification",
+        "Test import protection mechanisms"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Sacred component list preserved",
+        "No impact on app functionality"
+      ],
+      "gitTag": "backup-v1.4.141(P0.5.1)_sacred-components-identification",
+      "summaryFile": "summary-v1.4.141(P0.5.1)_sacred-components-identification.md",
+      "examples": [
+        "BottomNav",
+        "OnboardingModal", 
+        "Authentication flows"
+      ]
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Complete sacred component list",
+    "Verify import protection plan",
+    "Test import validation mechanisms"
+  ],
+  "successCriteria": [
+    "Sacred component list complete",
+    "Import protection plan documented",
+    "Import validation working",
+    "Sacred component identification confirmed"
+  ]
+} 

@@ -1,0 +1,56 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.100(P0.1.0)_legacy-backup.json",
+    "SUMMARY NAME: summary-v1.4.100(P0.1.0)_legacy-backup.md",
+    "GOAL: Move src/ to src-reference/ (complete backup)",
+    "MISSION: Create complete backup of legacy codebase before any modifications",
+    "CONTEXT: This is the first critical step in the B + D + E strategy. We need to preserve the entire legacy codebase as src-reference/ before proceeding with any changes.",
+    "SAFETY ENFORCEMENT: Verify complete file transfer, create git tag, document backup location",
+    "STABLE STATE CHECK: Confirm src-reference/ contains exact copy of src/, git tag created, backup documented"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 1,
+      "attempt": 0,
+      "task": "Move src/ to src-reference/ (complete backup)",
+      "version": "v1.4.100(P0.1.0)",
+      "priority": "critical",
+      "estimatedTime": "30 minutes",
+      "executionSteps": [
+        "Create backup directory: /Users/sawyer/gitSync/_backups/tm-safety_backups/",
+        "Copy src/ to src-reference/ with complete preservation",
+        "Verify all files and directories transferred",
+        "Create git tag for rollback point",
+        "Document backup completion"
+      ],
+      "validation": [
+        "Verify src-reference/ contains complete legacy codebase",
+        "Confirm no files lost in transfer",
+        "Test git tag creation and accessibility",
+        "Document backup location and contents"
+      ],
+      "rollbackPlan": [
+        "Git tag provides immediate rollback",
+        "src-reference/ serves as ultimate safety net",
+        "Manual verification of backup integrity"
+      ],
+      "gitTag": "backup-v1.4.100(P0.1.0)_legacy-backup",
+      "summaryFile": "summary-v1.4.100(P0.1.0)_legacy-backup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Verify complete file transfer",
+    "Test git tag creation",
+    "Document backup location"
+  ],
+  "successCriteria": [
+    "src-reference/ contains exact copy of src/",
+    "Git tag created successfully",
+    "Backup location documented",
+    "No files lost in transfer"
+  ]
+} 

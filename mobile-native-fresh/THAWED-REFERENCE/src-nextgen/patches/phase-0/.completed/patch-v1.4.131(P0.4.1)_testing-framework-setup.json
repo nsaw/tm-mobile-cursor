@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.131(P0.4.1)_testing-framework-setup.json",
+    "SUMMARY NAME: summary-v1.4.131(P0.4.1)_testing-framework-setup.md",
+    "GOAL: Set up comprehensive testing framework",
+    "MISSION: Establish complete testing framework for dual-mount architecture with unit, integration, and e2e testing",
+    "CONTEXT: A comprehensive testing framework is essential for the dual-mount strategy. We need unit tests, integration tests, and end-to-end tests that can validate both legacy and nextgen environments.",
+    "SAFETY ENFORCEMENT: Test testing framework functionality, verify test execution, validate test coverage",
+    "STABLE STATE CHECK: Confirm testing framework operational, test execution working, coverage validation functional"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 4,
+      "attempt": 1,
+      "task": "Set up comprehensive testing framework",
+      "version": "v1.4.131(P0.4.1)",
+      "priority": "high",
+      "estimatedTime": "150 minutes",
+      "executionSteps": [
+        "Configure Jest for unit testing",
+        "Set up React Testing Library",
+        "Configure integration test framework",
+        "Set up end-to-end testing (Detox)",
+        "Configure test coverage reporting",
+        "Set up test parallelization"
+      ],
+      "validation": [
+        "Test testing framework functionality",
+        "Verify test execution working",
+        "Confirm test coverage validation",
+        "Validate test parallelization"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert testing framework setup",
+        "No impact on app functionality"
+      ],
+      "gitTag": "test-v1.4.131(P0.4.1)_testing-framework-setup",
+      "summaryFile": "summary-v1.4.131(P0.4.1)_testing-framework-setup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test testing framework functionality",
+    "Verify test execution",
+    "Validate test coverage"
+  ],
+  "successCriteria": [
+    "Testing framework operational",
+    "Test execution working",
+    "Test coverage validated",
+    "Test parallelization functional"
+  ]
+} 

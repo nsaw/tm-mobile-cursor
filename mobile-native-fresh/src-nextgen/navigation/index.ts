@@ -1,3 +1,2 @@
-export * from './types';
-export * from './NavigationProvider';
-export * from './hooks/useNavigation'; 
+// src-nextgen/navigation/index.ts
+export { NavigationProvider, useNavigation, type NavigationState, type NavigationContextType } from './NavigationProvider'; 

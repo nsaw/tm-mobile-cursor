@@ -173,7 +173,7 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 ✅ VALIDATION GATES (Non-Negotiable):
 - All validation gates must trigger before every commit
 - tsc --noEmit (TypeScript validation)
-- { { { npm run lint:guard (ESLint validation) & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- npm run lint:guard (ESLint validation)
 - Visual regression testing (both legacy and nextgen)
 - Performance impact measurement
 - Accessibility compliance check
@@ -440,7 +440,7 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 - Snapshot captured
 - Lint + typecheck clean
 - Debug overlay confirmed
-- Accessibility pro{ { { ps validated & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Accessibility props validated
 - No sacred components violated
 - Dual-mount toggle working
 
@@ -597,8 +597,8 @@ const App = process.env.EXPERIMENTAL_NEXTGEN === "true"
 ✅ DEBUG REQUIREMENTS:
 - Debug mode toggles (basic/verbose/off)
 - Debug level controls per component
-- Production debug strip{ { { ping
-- Debug performance optimization & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Production debug stripping
+- Debug performance optimization
 - Environment-specific debug settings
 - Component-specific debug controls
 - Dual-mount debug controls

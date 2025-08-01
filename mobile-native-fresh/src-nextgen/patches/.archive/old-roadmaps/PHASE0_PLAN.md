@@ -377,15 +377,15 @@ Establish the foundational infrastructure for the B + D + E strategy:
 ✅ EXECUTION STEPS:
 1. Set up debug mode toggles
 2. Configure debug level controls
-3. Set up production debug strip{ { { ping
-4. Configure debug performance optimization & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+3. Set up production debug stripping
+4. Configure debug performance optimization
 5. Test debug functionality
 
 ✅ VALIDATION:
 - Verify debug controls and toggles working
 - Test debug level controls
-- Confirm production debug strip{ { { ping
-- Validate debug performance & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Confirm production debug stripping
+- Validate debug performance
 
 ✅ ROLLBACK PLAN:
 - Git tag for this step
@@ -493,9 +493,9 @@ Establish the foundational infrastructure for the B + D + E strategy:
 - [ ] **Zero functionality loss** in legacy
 - [ ] **Dual-mount toggle** working perfectly
 - [ ] **All validation gates** passing
-- [ ] **Complete documentation** for all ste{ { { ps
+- [ ] **Complete documentation** for all steps
 
---- & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+---
 
 ## 🚀 **NEXT PHASE PREPARATION**
 

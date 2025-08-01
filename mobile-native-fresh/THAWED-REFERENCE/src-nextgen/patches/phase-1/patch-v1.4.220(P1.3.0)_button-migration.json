@@ -1,0 +1,128 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit --skipLibCheck",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/validate-dual-mount.js",
+    "node scripts/validate-environment-specific.js",
+    "node scripts/verify-button-migration.js",
+    "node scripts/validate-role-assignment.js",
+    "node scripts/test-button-behavior.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/button-migration",
+  "notes": [
+    "🧠 MISSION: Migrate Button component to nextgen with dual-mount validation",
+    "🎯 GOAL: Migrate Button.tsx → interactiveRole=\"button-action\" with comprehensive testing",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Test button functionality and role assignment, verify visual consistency, validate behavior",
+    "✅ Ensure proper testing and validation of component migration",
+    "✅ Validate role assignment and button behavior before proceeding",
+    "📝 CONTEXT: This is the first pilot component migration in Phase 1. Button.tsx will be migrated to src-nextgen/ with interactiveRole=\"button-action\" assignment, serving as a template for future migrations.",
+    "🔒 RELEVANCE: First component migration, sets pattern for future migrations",
+    "🔄 DUAL-MOUNT: This patch validates button component works in both legacy and nextgen environments"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 3,
+      "attempt": 0,
+      "task": "Migrate Button.tsx → interactiveRole=\"button-action\" with dual-mount validation",
+      "version": "v1.4.220(P1.3.0)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Copy Button.tsx from THAWED-REFERENCE/src-reference/components/ui/ to src-nextgen/components/",
+        "Add interactiveRole=\"button-action\" assignment with validation",
+        "Update imports and dependencies for nextgen environment",
+        "Install required testing dependencies",
+        "Test button functionality with comprehensive tests",
+        "Validate role assignment behavior in legacy environment",
+        "Validate role assignment behavior in nextgen environment",
+        "Create button validation scripts"
+      ],
+      "validation": [
+        "Test button functionality and role assignment",
+        "Verify visual consistency with legacy",
+        "Confirm role assignment working",
+        "Validate button behavior",
+        "Test role assignment validation",
+        "Verify button validation scripts",
+        "Validate dual-mount compatibility",
+        "Test button in legacy environment",
+        "Test button in nextgen environment"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert Button.tsx migration",
+        "Legacy Button.tsx preserved in THAWED-REFERENCE/src-reference/components/ui/",
+        "Restore original package.json if needed",
+        "Preserve dual-mount system integrity"
+      ],
+      "gitTag": "backup-v1.4.220(P1.3.0)_button-migration",
+      "summaryFile": "summary-v1.4.220(P1.3.0)_button-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit --skipLibCheck)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Dual-mount validation (validate-dual-mount.js)",
+    "Environment-specific validation (validate-environment-specific.js)",
+    "Button functionality validation",
+    "Role assignment validation",
+    "Visual consistency validation",
+    "Button behavior validation",
+    "Button validation scripts validation"
+  ],
+  "successCriteria": [
+    "Button component migrated successfully with TypeScript",
+    "Role assignment working correctly with validation",
+    "Visual consistency maintained with tests",
+    "Button behavior validated",
+    "Role assignment validation operational",
+    "Button validation scripts working",
+    "Dual-mount compatibility confirmed",
+    "Button component works in both legacy and nextgen environments"
+  ],
+  "dualMountValidation": {
+    "legacyEnvironment": {
+      "validation": [
+        "test -f THAWED-REFERENCE/src-reference/components/ui/Button.tsx",
+        "test -f THAWED-REFERENCE/src-reference/components/AutoRoleView.tsx",
+        "node scripts/verify-button-migration.js --env=legacy"
+      ],
+      "rollback": [
+        "git checkout THAWED-REFERENCE/src-reference/components/ui/Button.tsx",
+        "git checkout THAWED-REFERENCE/src-reference/components/AutoRoleView.tsx"
+      ]
+    },
+    "nextgenEnvironment": {
+      "validation": [
+        "test -f src-nextgen/components/Button.tsx",
+        "test -f src-nextgen/components/Button.test.tsx",
+        "node scripts/verify-button-migration.js --env=nextgen"
+      ],
+      "rollback": [
+        "git checkout src-nextgen/components/Button.tsx",
+        "git checkout src-nextgen/components/Button.test.tsx"
+      ]
+    }
+  },
+    }
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

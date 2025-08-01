@@ -1,16 +1,26 @@
-// Learn more: https://docs.expo.dev/guides/customizing-metro/
-const { getDefaultConfig } = require('@expo/metro-config');
+/* eslint-env node */
+// @ts-check
+const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
+/** @type {import('metro-config').Config} */
 const defaultConfig = getDefaultConfig(__dirname);
 
-defaultConfig.resolver.sourceExts.push('cjs');
-defaultConfig.resolver.unstable_enablePackageExports = false;
+// Preserve any aliases already defined by Expo.
+const baseAliases = defaultConfig.resolver.alias || {};
 
-// Exclude clone directories from Metro bundling
-defaultConfig.resolver.blockList = [
-  /tm-mobile-clone\/.*/,
-  /reference\/.*/,
-  /ios bak\/.*/,
-];
-
-module.exports = defaultConfig; 
+module.exports = {
+  ...defaultConfig,
+  resolver: {
+    ...defaultConfig.resolver,
+    alias: {
+      ...baseAliases,
+      // Primary alias → src-reference root
+      '@legacy': path.join(__dirname, 'src-reference'),
+      '@legacy/*': path.join(__dirname, 'src-reference/*')
+    },
+    extraNodeModules: new Proxy({}, {
+      get: (_, name) => path.join(__dirname, 'src-reference', name)
+    })
+  }
+}; 

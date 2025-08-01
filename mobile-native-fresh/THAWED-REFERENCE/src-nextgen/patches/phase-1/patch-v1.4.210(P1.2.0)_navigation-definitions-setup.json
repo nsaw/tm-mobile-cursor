@@ -1,0 +1,129 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit --skipLibCheck",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/validate-dual-mount.js",
+    "node scripts/validate-environment-specific.js",
+    "node scripts/verify-navigation-definitions.js",
+    "node scripts/validate-routing-system.js",
+    "node scripts/test-screen-transitions.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "feature/navigation-definitions-setup",
+  "notes": [
+    "🧠 MISSION: Set up navigation definitions and routing system with dual-mount validation",
+    "🎯 GOAL: Establish navigation definitions and routing system for hybrid shell architecture with comprehensive testing",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Test navigation definitions, verify routing system, validate screen transitions",
+    "✅ Ensure proper testing and validation of navigation logic",
+    "✅ Validate routing system and screen transitions before proceeding",
+    "📝 CONTEXT: Navigation definitions are critical for the hybrid shell strategy. We need to define navigation routes, screen transitions, and routing logic that works with both legacy and nextgen environments.",
+    "🔒 RELEVANCE: Essential for navigation system during component migration",
+    "🔄 DUAL-MOUNT: This patch validates navigation definitions work in both legacy and nextgen environments"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 2,
+      "attempt": 0,
+      "task": "Set up navigation definitions and routing system with dual-mount validation",
+      "version": "v1.4.210(P1.2.0)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Create src-nextgen/shell/navigation/NavigationDefinitions.ts",
+        "Define navigation route interfaces with TypeScript",
+        "Set up routing system configuration with validation",
+        "Configure screen transition logic",
+        "Set up navigation validation system",
+        "Install required testing dependencies",
+        "Test navigation definitions functionality with comprehensive tests",
+        "Validate routing system behavior in legacy environment",
+        "Validate routing system behavior in nextgen environment",
+        "Create navigation validation scripts"
+      ],
+      "validation": [
+        "Test navigation definitions",
+        "Verify routing system working",
+        "Confirm screen transitions functional",
+        "Validate navigation logic",
+        "Test routing system validation",
+        "Verify navigation validation scripts",
+        "Validate dual-mount compatibility",
+        "Test navigation definitions in legacy environment",
+        "Test navigation definitions in nextgen environment"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert navigation setup",
+        "No impact on app functionality",
+        "Restore original package.json if needed",
+        "Preserve dual-mount system integrity"
+      ],
+      "gitTag": "nav-v1.4.210(P1.2.0)_navigation-definitions-setup",
+      "summaryFile": "summary-v1.4.210(P1.2.0)_navigation-definitions-setup.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit --skipLibCheck)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Dual-mount validation (validate-dual-mount.js)",
+    "Environment-specific validation (validate-environment-specific.js)",
+    "Navigation definitions validation",
+    "Routing system validation",
+    "Screen transitions validation",
+    "Navigation validation scripts validation"
+  ],
+  "successCriteria": [
+    "Navigation definitions operational with TypeScript",
+    "Routing system working with validation",
+    "Screen transitions functional with tests",
+    "Navigation logic validated",
+    "Routing system validation operational",
+    "Navigation validation scripts working",
+    "Dual-mount compatibility confirmed",
+    "Navigation definitions work in both legacy and nextgen environments"
+  ],
+  "dualMountValidation": {
+    "legacyEnvironment": {
+      "validation": [
+        "test -f THAWED-REFERENCE/src-reference/navigation/AppNavigator.tsx",
+        "test -f THAWED-REFERENCE/src-reference/navigation/types.ts",
+        "node scripts/verify-navigation-definitions.js --env=legacy"
+      ],
+      "rollback": [
+        "git checkout THAWED-REFERENCE/src-reference/navigation/AppNavigator.tsx",
+        "git checkout THAWED-REFERENCE/src-reference/navigation/types.ts"
+      ]
+    },
+    "nextgenEnvironment": {
+      "validation": [
+        "test -f src-nextgen/shell/navigation/NavigationDefinitions.ts",
+        "test -f src-nextgen/shell/navigation/NavigationDefinitions.test.ts",
+        "node scripts/verify-navigation-definitions.js --env=nextgen"
+      ],
+      "rollback": [
+        "git checkout src-nextgen/shell/navigation/NavigationDefinitions.ts",
+        "git checkout src-nextgen/shell/navigation/NavigationDefinitions.test.ts"
+      ]
+    }
+  },
+    }
+  ],
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native"
+    ]
+  }
+} 

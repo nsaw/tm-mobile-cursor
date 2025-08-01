@@ -11,7 +11,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "src-nextgen/*"
+      ],
+      "@legacy": [
+        "src-reference"
+      ],
+      "@legacy/*": [
+        "src-reference/*"
       ]
     },
     "allowJs": true,
@@ -24,19 +30,24 @@
     ],
     "noEmit": true,
     "resolveJsonModule": true,
-    "types": ["jest", "react-native"]
+    "types": [
+      "jest",
+      "react-native"
+    ]
   },
   "include": [
-    "src",
     "src-nextgen",
-    "app"
+    "src-reference",
+    "App.tsx"
   ],
   "exclude": [
     "tm-mobile-clone/**/*",
     "reference/**/*",
     "ios bak/**/*",
     "node_modules",
-    "backend/dist/**/*"
+    "backend/dist/**/*",
+    "src-artifact/**/*",
+    "THAWED-REFERENCE/**/*"
   ],
   "extends": "expo/tsconfig.base"
 }

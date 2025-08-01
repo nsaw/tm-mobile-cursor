@@ -1,0 +1,125 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "parseCheck": true,
+  "onParseFail": "alert-and-rollback",
+  "postMutationBuild": [
+    "npm install --save-dev @types/testing-library__react-native @types/testing-library__jest-native",
+    "chmod +x scripts/*.sh",
+    "tsc --noEmit --skipLibCheck",
+    "eslint . --ext .ts,.tsx --max-warnings=0",
+    "yarn test:unit --watchAll=false",
+    "node scripts/validate-dual-mount.js",
+    "node scripts/validate-environment-specific.js",
+    "npx detox --configuration ios.sim.debug --cleanup",
+    "npx puppeteer --version",
+    "node scripts/validate-headless-screenshot.js"
+  ],
+  "mode": "auto",
+  "watchConsole": true,
+  "onReloadHang": "Move to background and resume automatically",
+  "branch": "hotfix/preflight-screenshot-detox-v2",
+  "notes": [
+    "🧠 MISSION: Revalidate and configure headless automation tools (Detox, Puppeteer, Modern Screenshot)",
+    "🎯 GOAL: Ensure screenshot, testing, and browser-based validators are preflighted before Phase 1 begins",
+    "🚨 SAFETY ENFORCEMENT 🚨",
+    "✅ Enforce configuration presence for Detox, Puppeteer, Modern Screenshot",
+    "✅ Validate CLI access, config paths, env requirements, and detection logic",
+    "✅ Prebuild patch to confirm all headless automation dependencies are functional",
+    "📝 CONTEXT: Phase 0 audit validated presence, but config/CLI invocation logic was incomplete",
+    "🔒 RELEVANCE: Future visual regression, CI pipelines, and role heatmap tools rely on this",
+    "🔄 DUAL-MOUNT: This patch validates headless tools work in both legacy and nextgen environments"
+  ],
+  "phases": [
+    {
+      "phase": 1,
+      "step": 0,
+      "attempt": 0,
+      "task": "Revalidate headless automation tools with dual-mount validation",
+      "version": "v1.4.200(P1.0.0)",
+      "priority": "high",
+      "estimatedTime": "45 minutes",
+      "executionSteps": [
+        "Ensure Detox config file is present (.detoxrc.js or package.json > detox)",
+        "Ensure Puppeteer is resolvable via npx puppeteer",
+        "Add scripts/validate-headless-screenshot.js for Modern Screenshot detection",
+        "Ensure screenshot CLI is available under expected path or install fallback",
+        "Validate headless tools work in legacy environment",
+        "Validate headless tools work in nextgen environment",
+        "Test dual-mount compatibility for headless automation"
+      ],
+      "validation": [
+        "Verify Detox configuration is present and functional",
+        "Confirm Puppeteer is accessible and working",
+        "Test Modern Screenshot detection and functionality",
+        "Validate headless tools in legacy environment",
+        "Validate headless tools in nextgen environment",
+        "Confirm dual-mount compatibility for automation"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert headless tool configuration",
+        "No impact on core functionality",
+        "Restore original package.json if needed"
+      ],
+      "gitTag": "backup-v1.4.200(P1.0.0)_revalidate-headless-preflight-2",
+      "summaryFile": "summary-v1.4.200(P1.0.0)_revalidate-headless-preflight-2.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit --skipLibCheck)",
+    "ESLint validation (eslint . --ext .ts,.tsx --max-warnings=0)",
+    "Unit test execution (yarn test:unit --watchAll=false)",
+    "Dual-mount validation (validate-dual-mount.js)",
+    "Environment-specific validation (validate-environment-specific.js)",
+    "Detox configuration validation",
+    "Puppeteer accessibility validation",
+    "Modern Screenshot detection validation"
+  ],
+  "successCriteria": [
+    "Detox configuration present and functional",
+    "Puppeteer accessible and working",
+    "Modern Screenshot detection operational",
+    "Headless tools work in legacy environment",
+    "Headless tools work in nextgen environment",
+    "Dual-mount compatibility confirmed",
+    "All validation scripts operational"
+  ],
+  "dualMountValidation": {
+    "legacyEnvironment": {
+      "validation": [
+        "test -f .detoxrc.js || test -f package.json && grep -q 'detox' package.json",
+        "npx puppeteer --version",
+        "node scripts/validate-headless-screenshot.js"
+      ],
+      "rollback": [
+        "git checkout .detoxrc.js",
+        "git checkout package.json"
+      ]
+    },
+    "nextgenEnvironment": {
+      "validation": [
+        "test -f .detoxrc.js || test -f package.json && grep -q 'detox' package.json",
+        "npx puppeteer --version",
+        "node scripts/validate-headless-screenshot.js"
+      ],
+      "rollback": [
+        "git checkout .detoxrc.js",
+        "git checkout package.json"
+      ]
+    }
+  },
+  "dependencies": {
+    "dev": [
+      "@types/testing-library__react-native",
+      "@types/testing-library__jest-native",
+      "detox",
+      "puppeteer"
+    ]
+  },
+  "final": {
+    "commit": "chore: complete preflight setup for headless automation with dual-mount validation",
+    "tag": "v1.4.200(P1.0.0)_revalidate-headless-preflight-2_final",
+    "notes": "Validated Detox, Puppeteer, and Modern Screenshot presence, config, and CLI entry. Cleared for Phase 1 usage with dual-mount compatibility."
+  }
+}

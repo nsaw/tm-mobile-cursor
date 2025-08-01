@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.140(P0.5.0)_debug-system-config.json",
+    "SUMMARY NAME: summary-v1.4.140(P0.5.0)_debug-system-config.md",
+    "GOAL: Set up debug system configuration",
+    "MISSION: Establish comprehensive debug system for dual-mount architecture development",
+    "CONTEXT: Debug system is essential for development and troubleshooting. We need debug tools, logging systems, and development utilities that work with both legacy and nextgen environments.",
+    "SAFETY ENFORCEMENT: Test debug system functionality, verify logging systems, validate development utilities",
+    "STABLE STATE CHECK: Confirm debug system operational, logging systems working, development utilities functional"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 5,
+      "attempt": 0,
+      "task": "Set up debug system configuration",
+      "version": "v1.4.140(P0.5.0)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Configure React Native Debugger",
+        "Set up logging system (Winston)",
+        "Configure development utilities",
+        "Set up error tracking (Sentry)",
+        "Configure debug environment variables",
+        "Test debug system functionality"
+      ],
+      "validation": [
+        "Test debug system functionality",
+        "Verify logging systems working",
+        "Confirm development utilities",
+        "Validate error tracking"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert debug system setup",
+        "No impact on app functionality"
+      ],
+      "gitTag": "debug-v1.4.140(P0.5.0)_debug-system-config",
+      "summaryFile": "summary-v1.4.140(P0.5.0)_debug-system-config.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test debug system functionality",
+    "Verify logging systems",
+    "Validate development utilities"
+  ],
+  "successCriteria": [
+    "Debug system operational",
+    "Logging systems working",
+    "Development utilities functional",
+    "Error tracking operational"
+  ]
+} 

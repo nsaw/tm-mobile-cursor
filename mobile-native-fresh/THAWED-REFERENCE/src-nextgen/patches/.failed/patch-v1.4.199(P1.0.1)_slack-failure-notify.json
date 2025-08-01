@@ -1,0 +1,30 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Trigger Slack message on test failure by phase",
+    "SUMMARY NAME: summary-v1.4.350(P2.6.0)_slack-failure-notify.md",
+    "STABLE STATE CHECK: Target file exists, commit pushed, summary tagged"
+  ],
+  "phases": [
+    {
+      "task": "Trigger Slack message on test failure by phase",
+      "executionSteps": [
+        "Create or configure tools/slack-phase-fail-ping.js",
+        "Log results to summaries/phase-2/summary-v1.4.350(P2.6.0)_slack-failure-notify.md",
+        "Create tag: v1.4.350(P2.6.0)_slack-phase-fail"
+      ],
+      "validation": [
+        "tools/slack-phase-fail-ping.js exists",
+        "summary-v1.4.350(P2.6.0)_slack-failure-notify.md written",
+        "v1.4.350(P2.6.0)_slack-phase-fail in Git log"
+      ]
+    }
+  ],
+  "postMutationBuild": "tsc --noEmit && eslint . --ext .ts,.tsx && npm test -- --watchAll=false",
+  "final": {
+    "commit": "chore: trigger slack message on test failure by phase",
+    "tag": "v1.4.350(P2.6.0)_slack-phase-fail",
+    "notes": "Trigger Slack message on test failure by phase patch created and validated"
+  }
+}

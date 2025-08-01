@@ -1,0 +1,251 @@
+import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Platform,
+} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Brain } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from '../core/roles/AutoRoleView';
+
+const { width } = Dimensions.get('window');
+
+interface BottomNavProps {
+  onNavigate: (path: string) => void;
+  onVoiceRecord?: () => void;
+  showCreateButton?: boolean;
+  currentRoute?: string;
+  onCreateNew?: () => void;
+}
+
+export const BottomNav: React.FC<BottomNavProps> = ({
+  onNavigate,
+  onVoiceRecord,
+  showCreateButton = true,
+  currentRoute = '/',
+  onCreateNew,
+}) => {
+  const insets = useSafeAreaInsets();
+  const { tokens: designTokens } = useTheme();
+
+  const handleAIToolsClick = () => {
+    // TODO: Check if user is premium
+    onNavigate('AITools');
+  };
+
+  const navItems = [
+    { icon: 'home-outline', label: 'Home', path: 'Dashboard', iconType: 'material' },
+    { icon: 'magnify', label: 'Search', path: 'Search', iconType: 'material' },
+    { icon: 'microphone-outline', label: 'Voice', action: 'voice', iconType: 'material' },
+    { icon: 'crown-outline', label: 'AI', action: 'ai-tools', iconType: 'material' },
+    { icon: 'brain', label: 'All', path: 'AllThoughtmarks', iconType: 'lucide' },
+  ];
+
+  const renderIcon = (item: any, isActive: boolean, isHome: boolean, isVoice: boolean) => {
+    const iconColor = isHome
+      ? designTokens.colors.accent // Always blue for Home
+      : isActive
+      ? designTokens.colors.accent // Blue active tint for other active items
+      : isVoice
+      ? designTokens.colors.danger // Red tint for Voice
+      : item.action === 'ai-tools'
+      ? '#FFD700' // Gold tint for AI
+      : designTokens.colors.textMuted; // Light gray for inactive
+
+    if (item.iconType === 'lucide') {
+      return (
+        <Brain
+          size={27}
+          strokeWidth={2}
+          color={iconColor}
+        />
+      );
+    }
+
+    return (
+      <MaterialCommunityIcons
+        name={item.icon as any}
+        size={32}
+        color={iconColor}
+      />
+    );
+  };
+
+  return (
+    <AutoRoleView layoutRole="navigation">
+      <View style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        maxWidth: 440,
+        alignSelf: 'center',
+        width: '100%',
+        zIndex: designTokens.zIndex.modal,
+        paddingBottom: 0,
+      }}>
+        <View style={{
+          backgroundColor: designTokens.colors.backgroundSecondary,
+          borderTopWidth: 1,
+          borderTopColor: designTokens.colors.divider,
+          // Cross-platform shadow
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000000',
+              shadowOffset: {
+                width: 0,
+                height: -2,
+              },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
+            },
+            android: {
+              elevation: 12,
+            },
+          }),
+        }}>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            paddingVertical: designTokens.spacing.md,
+            paddingHorizontal: designTokens.spacing.lg,
+            minHeight: 107,
+          }}>
+            {navItems.map((item, index) => {
+              const { icon, label, path, action, iconType } = item;
+              const isActive = currentRoute === path;
+              const isVoice = action === 'voice';
+              const isHome = path === '/';
+
+              return (
+                <TouchableOpacity
+                  key={path || action || label}
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingVertical: designTokens.spacing.sm,
+                    paddingHorizontal: designTokens.spacing.sm,
+                    borderRadius: designTokens.radius.sm,
+                    backgroundColor: 'transparent',
+                    minHeight: 59,
+                    minWidth: 59,
+                    position: 'relative',
+                  }}
+                  onPress={() => {
+                    if (isVoice && onVoiceRecord) {
+                      onVoiceRecord();
+                    } else if (action === 'ai-tools') {
+                      handleAIToolsClick();
+                    } else if (path) {
+                      onNavigate(path);
+                    }
+                  }}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Button"
+                >
+                  {renderIcon(item, isActive, isHome, isVoice)}
+                  {isActive && (
+                    <View style={{
+                      position: 'absolute',
+                      top: -2,
+                      left: -2,
+                      right: -2,
+                      bottom: -2,
+                      borderRadius: designTokens.radius.md,
+                      backgroundColor: `${designTokens.colors.accent}1A`,
+                      borderWidth: 1,
+                      borderColor: `${designTokens.colors.accent}4D`,
+                    }} />
+                  )}
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* Floating New Thoughtmark Button */}
+        {showCreateButton && currentRoute !== '/' && (
+          <View style={{
+            position: 'absolute',
+            left: '50%',
+            transform: [{ translateX: -43 }],
+            zIndex: designTokens.zIndex.tooltip,
+            alignItems: 'center',
+            justifyContent: 'center',
+            bottom: (insets.bottom + 40) * 1.34,
+          }}>
+            <View style={{
+              width: 83,
+              height: 83,
+              borderRadius: 56,
+              padding: 4,
+              backgroundColor: `${designTokens.colors.accent}E6`,
+              borderWidth: 4,
+              borderColor: `${designTokens.colors.accent}E6`,
+              alignItems: 'center',
+              justifyContent: 'center',
+              // Cross-platform shadow
+              ...Platform.select({
+                ios: {
+                  shadowColor: designTokens.colors.accent,
+                  shadowOffset: {
+                    width: 0,
+                    height: 0,
+                  },
+                  shadowOpacity: 0.6,
+                  shadowRadius: 32,
+                },
+                android: {
+                  elevation: 27,
+                },
+              }),
+            }}>
+              <TouchableOpacity
+                style={{
+                  width: 78,
+                  height: 78,
+                  borderRadius: designTokens.radius.lg,
+                  backgroundColor: designTokens.colors.background,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  // Cross-platform shadow
+                  ...Platform.select({
+                    ios: {
+                      shadowColor: '#000000',
+                      shadowOffset: {
+                        width: 0,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.4,
+                      shadowRadius: 16,
+                    },
+                    android: {
+                      elevation: 16,
+                    },
+                  }),
+                }}
+                onPress={() => {
+                  if (onCreateNew) {
+                    onCreateNew();
+                  } else {
+                    onNavigate('CreateThoughtmark');
+                  }
+                }}
+                accessibilityRole="button"
+                accessibilityLabel="Create new thoughtmark"
+              >
+                <MaterialCommunityIcons name="plus" size={47} color={designTokens.colors.accent} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+      </View>
+    </AutoRoleView>
+  );
+}; 
