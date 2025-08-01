@@ -8,4 +8,5 @@ export { ModernHeader } from './ModernHeader';
 export { BottomNav } from './BottomNav';
 export { ThoughtmarkCard } from './ThoughtmarkCard';
 export { TaskCard } from './TaskCard';
-export { AIToolsCard } from './AIToolsCard'; 
+export { AIToolsCard } from './AIToolsCard';
+export { SlotGrid } from './SlotGrid'; 
