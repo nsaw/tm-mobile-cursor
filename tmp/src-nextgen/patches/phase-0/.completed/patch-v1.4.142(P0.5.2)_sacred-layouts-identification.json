@@ -1,0 +1,62 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.142(P0.5.2)_sacred-layouts-identification.json",
+    "SUMMARY NAME: summary-v1.4.142(P0.5.2)_sacred-layouts-identification.md",
+    "GOAL: Identify sacred layouts (preserved via z-index contract or safe-frame shell)",
+    "MISSION: Identify and document layouts that must be preserved via z-index contracts or safe-frame shell",
+    "CONTEXT: Sacred layouts are critical layout elements that must be preserved during migration. These are preserved via z-index contracts or safe-frame shell rather than import mechanism. Examples include FAB, SlideDeck, Modal overlays, and Toast notifications.",
+    "SAFETY ENFORCEMENT: Complete sacred layout list, verify z-index contract protection plan, test safe-frame shell protection",
+    "STABLE STATE CHECK: Confirm sacred layout list complete, z-index contract protection plan documented, safe-frame shell protection working"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 5,
+      "attempt": 2,
+      "task": "Identify sacred layouts (preserved via z-index contract or safe-frame shell)",
+      "version": "v1.4.142(P0.5.2)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Analyze existing layouts",
+        "Identify sacred layouts (FAB, SlideDeck, Modal overlays, Toast notifications)",
+        "Document z-index contract protection plan",
+        "Set up safe-frame shell protection",
+        "Create sacred layout list"
+      ],
+      "validation": [
+        "Complete sacred layout list and z-index/safe-frame protection plan",
+        "Verify z-index contract working",
+        "Confirm safe-frame shell protection",
+        "Test layout protection mechanisms"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Sacred layout list preserved",
+        "No impact on app functionality"
+      ],
+      "gitTag": "backup-v1.4.142(P0.5.2)_sacred-layouts-identification",
+      "summaryFile": "summary-v1.4.142(P0.5.2)_sacred-layouts-identification.md",
+      "examples": [
+        "FAB",
+        "SlideDeck",
+        "Modal overlays",
+        "Toast notifications"
+      ]
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Complete sacred layout list",
+    "Verify z-index contract protection plan",
+    "Test safe-frame shell protection mechanisms"
+  ],
+  "successCriteria": [
+    "Sacred layout list complete",
+    "Z-index contract protection plan documented",
+    "Safe-frame shell protection working",
+    "Layout protection mechanisms confirmed"
+  ]
+} 

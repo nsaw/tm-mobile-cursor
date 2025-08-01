@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.300(P2.1.0)_dashboard-dual-mount.json",
+    "SUMMARY NAME: summary-v1.4.300(P2.1.0)_dashboard-dual-mount.md",
+    "GOAL: Migrate DashboardScreen.tsx → src-nextgen/screens/DashboardScreen.tsx",
+    "MISSION: Migrate DashboardScreen to nextgen with dual-mount architecture",
+    "CONTEXT: This is the first high-traffic screen migration in Phase 2. DashboardScreen.tsx will be migrated to src-nextgen/screens/ with dual-mount architecture, allowing parallel testing of legacy and nextgen versions.",
+    "SAFETY ENFORCEMENT: Test dashboard in both legacy and nextgen environments, verify functionality, validate performance",
+    "STABLE STATE CHECK: Confirm dashboard working in both environments, functionality preserved, performance maintained"
+  ],
+  "phases": [
+    {
+      "phase": 2,
+      "step": 1,
+      "attempt": 0,
+      "task": "Migrate DashboardScreen.tsx → src-nextgen/screens/DashboardScreen.tsx",
+      "version": "v1.4.300(P2.1.0)",
+      "priority": "high",
+      "estimatedTime": "90 minutes",
+      "executionSteps": [
+        "Copy DashboardScreen.tsx to src-nextgen/screens/",
+        "Update imports and dependencies",
+        "Configure dual-mount routing",
+        "Test dashboard in legacy environment",
+        "Test dashboard in nextgen environment"
+      ],
+      "validation": [
+        "Test dashboard in both legacy and nextgen environments",
+        "Verify dashboard functionality preserved",
+        "Confirm dual-mount routing working",
+        "Validate dashboard performance"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert DashboardScreen.tsx migration",
+        "Legacy DashboardScreen.tsx preserved in src-reference/"
+      ],
+      "gitTag": "backup-v1.4.300(P2.1.0)_dashboard-dual-mount",
+      "summaryFile": "summary-v1.4.300(P2.1.0)_dashboard-dual-mount.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test dashboard in legacy environment",
+    "Test dashboard in nextgen environment",
+    "Verify dual-mount routing",
+    "Validate dashboard functionality"
+  ],
+  "successCriteria": [
+    "DashboardScreen migrated successfully",
+    "Dual-mount routing working",
+    "Dashboard functionality preserved",
+    "Performance maintained"
+  ]
+} 

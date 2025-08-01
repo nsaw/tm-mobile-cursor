@@ -1,0 +1,30 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "GOAL: Setup jest-image-snapshot for onboarding and dashboard",
+    "SUMMARY NAME: summary-v1.4.330(P2.4.0)_jest-image-snapshot-setup.md",
+    "STABLE STATE CHECK: Target file exists, commit pushed, summary tagged"
+  ],
+  "phases": [
+    {
+      "task": "Setup jest-image-snapshot for onboarding and dashboard",
+      "executionSteps": [
+        "Create or configure src-nextgen/tests/imageSnapshot.config.js",
+        "Log results to summaries/phase-2/summary-v1.4.330(P2.4.0)_jest-image-snapshot-setup.md",
+        "Create tag: v1.4.330(P2.4.0)_jest-image-snapshot"
+      ],
+      "validation": [
+        "src-nextgen/tests/imageSnapshot.config.js exists",
+        "summary-v1.4.330(P2.4.0)_jest-image-snapshot-setup.md written",
+        "v1.4.330(P2.4.0)_jest-image-snapshot in Git log"
+      ]
+    }
+  ],
+  "postMutationBuild": "tsc --noEmit && eslint . --ext .ts,.tsx && npm test -- --watchAll=false",
+  "final": {
+    "commit": "chore: setup jest-image-snapshot for onboarding and dashboard",
+    "tag": "v1.4.330(P2.4.0)_jest-image-snapshot",
+    "notes": "Setup jest-image-snapshot for onboarding and dashboard patch created and validated"
+  }
+}

@@ -1,0 +1,10 @@
+#!/bin/bash
+cd "$(dirname "$0")/.."
+echo "[ENV VALIDATOR] Current EXPO_PUBLIC_USE_NEXTGEN: $EXPO_PUBLIC_USE_NEXTGEN"
+echo "[ENV VALIDATOR] Current EXPO_PUBLIC_ENVIRONMENT: $EXPO_PUBLIC_ENVIRONMENT"
+echo "[ENV VALIDATOR] Current USE_NEXTGEN: $USE_NEXTGEN"
+echo "[ENV VALIDATOR] Checking Expo config..."
+npx expo config --json | grep -E 'EXPO_PUBLIC_USE_NEXTGEN|EXPO_PUBLIC_ENVIRONMENT|USE_NEXTGEN' || echo "No environment variables found in Expo config"
+echo "[ENV VALIDATOR] Checking .env files..."
+echo "Base .env EXPO_PUBLIC_USE_NEXTGEN: $(grep 'EXPO_PUBLIC_USE_NEXTGEN' .env 2>/dev/null || echo 'not found')"
+echo "Override .env.development.local EXPO_PUBLIC_USE_NEXTGEN: $(grep 'EXPO_PUBLIC_USE_NEXTGEN' .env.development.local 2>/dev/null || echo 'not found')" 

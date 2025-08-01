@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.320(P2.3.0)_settings-screen-shell-migration.json",
+    "SUMMARY NAME: summary-v1.4.320(P2.3.0)_settings-screen-shell-migration.md",
+    "GOAL: Migrate SettingsScreen.tsx → src/shell/settings/SettingsScreen.tsx",
+    "MISSION: Migrate SettingsScreen component to shell structure for settings management",
+    "CONTEXT: This is the first settings component migration in Phase 2. SettingsScreen.tsx will be migrated to src/shell/settings/ as part of the E strategy (Hybrid Shell), ensuring proper settings management flow preservation.",
+    "SAFETY ENFORCEMENT: Test settings screen in shell structure, verify settings management flow, validate functionality",
+    "STABLE STATE CHECK: Confirm settings screen working in shell structure, settings management flow preserved, functionality validated"
+  ],
+  "phases": [
+    {
+      "phase": 2,
+      "step": 3,
+      "attempt": 0,
+      "task": "Migrate SettingsScreen.tsx → src/shell/settings/SettingsScreen.tsx",
+      "version": "v1.4.320(P2.3.0)",
+      "priority": "high",
+      "estimatedTime": "60 minutes",
+      "executionSteps": [
+        "Copy SettingsScreen.tsx to src/shell/settings/",
+        "Update imports and dependencies",
+        "Configure shell settings routing",
+        "Test settings screen functionality",
+        "Validate settings management flow"
+      ],
+      "validation": [
+        "Test settings screen in shell structure",
+        "Verify settings management flow preserved",
+        "Confirm shell routing working",
+        "Validate settings functionality"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert SettingsScreen.tsx migration",
+        "Legacy SettingsScreen.tsx preserved in src-reference/"
+      ],
+      "gitTag": "migrate-v1.4.320(P2.3.0)_settings-screen-shell-migration",
+      "summaryFile": "summary-v1.4.320(P2.3.0)_settings-screen-shell-migration.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test settings screen functionality",
+    "Verify settings management flow",
+    "Validate shell routing",
+    "Test settings functionality"
+  ],
+  "successCriteria": [
+    "SettingsScreen component migrated successfully",
+    "Shell settings routing working",
+    "Settings management flow preserved",
+    "Functionality validated"
+  ]
+} 

@@ -1,0 +1,57 @@
+{
+  "showInUI": true,
+  "blockCommitOnError": true,
+  "notes": [
+    "PATCH NAME: patch-v1.4.121(P0.3.1)_visual-regression-baseline.json",
+    "SUMMARY NAME: summary-v1.4.121(P0.3.1)_visual-regression-baseline.md",
+    "GOAL: Set up visual regression baseline testing",
+    "MISSION: Establish visual regression testing baseline for dual-mount architecture",
+    "CONTEXT: Visual regression testing is critical for ensuring UI consistency during migration. We need to capture baseline screenshots and establish automated visual comparison.",
+    "SAFETY ENFORCEMENT: Test visual regression capture, verify baseline establishment, validate comparison accuracy",
+    "STABLE STATE CHECK: Confirm visual regression baseline established, capture system working, comparison accurate"
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "step": 3,
+      "attempt": 1,
+      "task": "Set up visual regression baseline testing",
+      "version": "v1.4.121(P0.3.1)",
+      "priority": "high",
+      "estimatedTime": "120 minutes",
+      "executionSteps": [
+        "Install jest-image-snapshot and related tools",
+        "Configure screenshot capture system",
+        "Set up baseline screenshot capture",
+        "Configure visual comparison thresholds",
+        "Test visual regression detection",
+        "Validate baseline accuracy"
+      ],
+      "validation": [
+        "Test visual regression capture",
+        "Verify baseline establishment",
+        "Confirm comparison accuracy",
+        "Validate screenshot quality"
+      ],
+      "rollbackPlan": [
+        "Git tag for this step",
+        "Can revert visual regression setup",
+        "No impact on app functionality"
+      ],
+      "gitTag": "visual-v1.4.121(P0.3.1)_visual-regression-baseline",
+      "summaryFile": "summary-v1.4.121(P0.3.1)_visual-regression-baseline.md"
+    }
+  ],
+  "validationGates": [
+    "Parse and type checking (tsc --noEmit)",
+    "Test visual regression capture",
+    "Verify baseline establishment",
+    "Validate comparison accuracy"
+  ],
+  "successCriteria": [
+    "Visual regression baseline established",
+    "Screenshot capture system working",
+    "Comparison accuracy validated",
+    "Baseline screenshots captured"
+  ]
+} 

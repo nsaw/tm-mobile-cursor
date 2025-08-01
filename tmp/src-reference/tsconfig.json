@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "strict": false
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+} 

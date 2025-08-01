@@ -1,0 +1,149 @@
+{
+  "stage_status": {
+    "current_stage": "phase_0_step_0_1",
+    "current_task": "v1.4.100(P0.1.0)",
+    "stage_name": "Legacy Backup & Reference Setup",
+    "task_name": "Move src/ to src-reference/ (complete backup)",
+    "status": "pending",
+    "progress": {
+      "phase": 0,
+      "step": 1,
+      "attempt": 0,
+      "total_phases": 4,
+      "total_steps": 12,
+      "total_tasks": 51,
+      "completed_tasks": 0,
+      "failed_tasks": 0,
+      "pending_tasks": 51
+    },
+    "timing": {
+      "started_at": null,
+      "estimated_duration": "1 day",
+      "time_remaining": null,
+      "phase_0_estimated": "1 day",
+      "phase_1_estimated": "1 day",
+      "phase_2_estimated": "3-5 days",
+      "phase_3_estimated": "1-2 days"
+    },
+    "validation": {
+      "last_validation": null,
+      "validation_status": "pending",
+      "validation_gates_passed": 0,
+      "validation_gates_failed": 0,
+      "total_validation_gates": 8
+    },
+    "backup": {
+      "last_backup": null,
+      "backup_status": "pending",
+      "backup_location": "/Users/sawyer/gitSync/_backups/tm-safety_backups",
+      "backup_tag": "backup-v1.4.100(P0.1.0)_legacy-backup"
+    },
+    "performance": {
+      "baseline_established": false,
+      "current_metrics": null,
+      "performance_targets": {
+        "render_time_increase": "≤ 5%",
+        "memory_usage_increase": "≤ 10%",
+        "bundle_size_increase": "< 15%",
+        "startup_time_increase": "< 10%",
+        "dual_mount_overhead": "< 3%"
+      }
+    },
+    "quality": {
+      "accessibility_compliance": "pending",
+      "visual_regressions": "pending",
+      "eslint_rules": "pending",
+      "runtime_errors": "none",
+      "test_coverage": "pending"
+    },
+    "slack_summary": {
+      "last_summary_sent": null,
+      "summary_frequency": "after_each_task",
+      "next_summary_trigger": "task_completion",
+      "summary_channels": ["#runner-control", "DM"],
+      "summary_format": "compact"
+    },
+    "rollback": {
+      "rollback_points": [],
+      "last_rollback": null,
+      "rollback_status": "ready",
+      "emergency_rollback_available": true,
+      "src_reference_backup": "pending"
+    },
+    "dual_mount": {
+      "legacy_environment": "functional",
+      "nextgen_environment": "pending",
+      "toggle_functionality": "pending",
+      "parallel_testing": "pending",
+      "ci_pipeline": "pending"
+    },
+    "shell_structure": {
+      "src_shell_created": false,
+      "role_wrappers_implemented": false,
+      "layout_contracts_defined": false,
+      "navigation_definitions": false,
+      "sacred_view_mounts": false
+    },
+    "migration": {
+      "pilot_components_migrated": 0,
+      "high_traffic_screens_migrated": 0,
+      "auth_components_migrated": 0,
+      "settings_components_migrated": 0,
+      "total_components_migrated": 0
+    },
+    "optimization": {
+      "performance_bottlenecks_optimized": 0,
+      "role_assignments_refined": false,
+      "memory_usage_optimized": false,
+      "bundle_size_optimized": false,
+      "legacy_cleanup_completed": false
+    },
+    "documentation": {
+      "implementation_docs": "pending",
+      "migration_docs": "pending",
+      "rollback_docs": "pending",
+      "performance_docs": "pending",
+      "final_docs": "pending"
+    },
+    "next_actions": [
+      {
+        "action": "Move src/ to src-reference/",
+        "priority": "critical",
+        "estimated_time": "30 minutes",
+        "dependencies": [],
+        "validation": "Verify src-reference/ contains complete legacy codebase"
+      },
+      {
+        "action": "Create src-nextgen/ directory structure",
+        "priority": "high",
+        "estimated_time": "15 minutes",
+        "dependencies": ["legacy_backup_complete"],
+        "validation": "Verify src-nextgen/ structure matches roadmap"
+      },
+      {
+        "action": "Set up dual-mount App.tsx toggle",
+        "priority": "high",
+        "estimated_time": "45 minutes",
+        "dependencies": ["nextgen_structure_created"],
+        "validation": "Test environment toggle functionality"
+      }
+    ],
+    "blockers": [],
+    "warnings": [
+      "Ensure complete backup before any destructive operations",
+      "Validate dual-mount toggle before proceeding to shell structure",
+      "Test rollback procedures before major migrations"
+    ],
+    "success_criteria": {
+      "phase_0_complete": false,
+      "dual_mount_functional": false,
+      "shell_structure_ready": false,
+      "pilot_migration_successful": false,
+      "systematic_migration_complete": false,
+      "optimization_finished": false,
+      "documentation_complete": false
+    }
+  },
+  "last_updated": "2025-07-19T10:30:00.000Z",
+  "maintained_by": "GPT autopilot"
+} 

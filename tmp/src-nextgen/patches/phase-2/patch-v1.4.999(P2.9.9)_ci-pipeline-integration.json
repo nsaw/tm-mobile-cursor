@@ -1,0 +1,30 @@
+{
+  "notes": [
+    "\ud83e\udde0 CI/CD Patch Bootstrap",
+    "\ud83c\udfaf Scaffold GitHub Actions and post-run verification",
+    "\u2705 Prepares project for GitHub CI test runs per patch"
+  ],
+  "postMutationBuild": [
+    "tsc --noEmit",
+    "eslint . --max-warnings=0",
+    "yarn test:unit --watchAll=false"
+  ],
+  "branch": "feature/init-ci-pipeline",
+  "phases": [
+    {
+      "section": "P2.9.9 CI Integration",
+      "actions": [
+        "Add .github/workflows/validate-patch.yml",
+        "Wire up tsc, eslint, test:unit per patch",
+        "Enable summary hooks to post success/fail"
+      ],
+      "commit": "feat: CI pipeline validation",
+      "tag": "v1.4.999(P2.9.9)_ci-pipeline"
+    }
+  ],
+  "final": {
+    "commit": "chore: finalize CI bootstrapping",
+    "tag": "v1.4.999(P2.9.9)_ci-pipeline-final",
+    "notes": "CI bootstrapped with patch-aware validation hooks"
+  }
+}
