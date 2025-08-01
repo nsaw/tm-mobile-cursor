@@ -3,4 +3,6 @@
 
 export * from './useAuth';
 export * from './useValidation';
-export * from './useAccessibility'; 
+export * from './useAccessibility';
+export * from './useThoughtmarks';
+export * from './useBins'; 
