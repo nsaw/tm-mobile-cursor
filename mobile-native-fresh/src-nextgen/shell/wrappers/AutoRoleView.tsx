@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ViewProps } from 'react-native';
 import { RoleWrapper } from './RoleWrapper';
+import { ComponentRole } from './types';
 
 export type InteractiveRole = 
   | 'button-action'
@@ -71,7 +72,7 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   const primaryRole = interactiveRole || contentRole || layoutRole;
   
   // Map role to RoleWrapper component role
-  const getRoleWrapperRole = (role?: Role): string => {
+  const getRoleWrapperRole = (role?: Role): ComponentRole => {
     if (!role) return 'content';
     
     if (interactiveRole) return 'interactive';

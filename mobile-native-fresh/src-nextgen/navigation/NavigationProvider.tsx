@@ -1,67 +1,74 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RootStackParamList, TabParamList } from './types';
+import { useTheme } from '../theme';
+import { useAccessibility } from '../hooks/useAccessibility';
 
-export interface NavigationState {
-  currentScreen: string;
-  history: string[];
-}
-
-export interface NavigationContextType {
-  state: NavigationState;
-  navigate: (_screen: string) => void;
-  goBack: () => void;
-  goToRoot: () => void;
-}
-
-const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
+const Stack = createStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<TabParamList>();
 
 interface NavigationProviderProps {
   children: ReactNode;
-  initialScreen?: string;
 }
 
-export function NavigationProvider({ children, initialScreen = 'home' }: NavigationProviderProps) {
-  const [state, setState] = useState<NavigationState>({
-    currentScreen: initialScreen,
-    history: [initialScreen],
-  });
+export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {
+  const { tokens } = useTheme();
+  const { isScreenReaderEnabled } = useAccessibility();
 
-  const navigate = (screen: string) => {
-    setState(prev => ({
-      currentScreen: screen,
-      history: [...prev.history, screen],
-    }));
+  const defaultScreenOptions = {
+    headerStyle: {
+      backgroundColor: tokens.colors.background,
+      elevation: 0,
+      shadowOpacity: 0,
+    },
+    headerTintColor: tokens.colors.text,
+    headerTitleStyle: {
+      color: tokens.colors.text,
+      fontSize: tokens.typography.fontSize.lg,
+      fontWeight: tokens.typography.fontWeight.semibold,
+    },
+    cardStyle: {
+      backgroundColor: tokens.colors.background,
+    },
   };
 
-  const goBack = () => {
-    setState(prev => {
-      const newHistory = prev.history.slice(0, -1);
-      const previousScreen = newHistory[newHistory.length - 1] || 'home';
-      
-      return {
-        currentScreen: previousScreen,
-        history: newHistory,
-      };
-    });
-  };
-
-  const goToRoot = () => {
-    setState({
-      currentScreen: 'home',
-      history: ['home'],
-    });
+  const defaultTabOptions = {
+    tabBarStyle: {
+      backgroundColor: tokens.colors.background,
+      borderTopColor: tokens.colors.border,
+      borderTopWidth: 1,
+    },
+    tabBarActiveTintColor: tokens.colors.accent,
+    tabBarInactiveTintColor: tokens.colors.textSecondary,
+    tabBarLabelStyle: {
+      fontSize: tokens.typography.fontSize.xs,
+      fontWeight: tokens.typography.fontWeight.medium,
+    },
   };
 
   return (
-    <NavigationContext.Provider value={{ state, navigate, goBack, goToRoot }}>
+    <NavigationContainer
+      theme={{
+        dark: false, // Will be determined by theme system
+        colors: {
+          primary: tokens.colors.accent,
+          background: tokens.colors.background,
+          card: tokens.colors.background,
+          text: tokens.colors.text,
+          border: tokens.colors.border,
+          notification: tokens.colors.error,
+        },
+        fonts: {
+          regular: { fontFamily: 'System' },
+          medium: { fontFamily: 'System' },
+          bold: { fontFamily: 'System' },
+          heavy: { fontFamily: 'System' },
+        },
+      }}
+    >
       {children}
-    </NavigationContext.Provider>
+    </NavigationContainer>
   );
-}
-
-export function useNavigation(): NavigationContextType {
-  const context = useContext(NavigationContext);
-  if (!context) {
-    throw new Error('useNavigation must be used within a NavigationProvider');
-  }
-  return context;
-} 
+}; 

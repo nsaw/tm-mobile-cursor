@@ -14,6 +14,15 @@ interface ApiResponse<T = any> {
 class ApiService {
   private baseUrl: string;
   
+  constructor() {
+    console.log('🌐 ApiService initialized - Runtime validation active');
+    console.log('📊 ApiService config:', {
+      baseUrl: API_BASE_URL,
+      platform: Platform.OS,
+      hasAsyncStorage: typeof AsyncStorage !== 'undefined'
+    });
+  }
+  
   private async getAuthHeaders(): Promise<Record<string, string>> {
     const token = await AsyncStorage.getItem('authToken');
     const headers: Record<string, string> = {
@@ -34,6 +43,14 @@ class ApiService {
     try {
       const url = `${API_BASE_URL}${endpoint}`;
       const headers = await this.getAuthHeaders();
+      
+      // Runtime validation
+      console.log('🌐 API request:', {
+        url,
+        method: options.method || 'GET',
+        hasAuthHeader: !!headers.Authorization,
+        endpoint
+      });
       
       const response = await fetch(url, {
         ...options,

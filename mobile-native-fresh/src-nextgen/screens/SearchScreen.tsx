@@ -19,7 +19,14 @@ export const SearchScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
       <View style={{ padding: 16, gap: 16 }}>
-        <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>Search</Text>
+        {/* Screen Reader Optimization — Improve voiceover support for key flows */}
+        <Text 
+          accessibilityLabel='Search title input' 
+          role='header'
+          style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}
+        >
+          Search
+        </Text>
         <TextInput
           style={{ 
             backgroundColor: '#333', 
@@ -32,17 +39,32 @@ export const SearchScreen = () => {
           placeholderTextColor="#666"
           value={searchQuery}
           onChangeText={handleSearch}
+          accessibilityLabel="Search input field"
+          accessibilityHint="Enter text to search for thoughtmarks"
         />
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView 
+          style={{ flex: 1 }}
+          accessibilityLabel="Search results list"
+        >
           {searchResults.length > 0 ? (
             <View style={{ gap: 8 }}>
-              <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Results</Text>
+              <Text 
+                style={{ color: 'white', fontSize: 18, fontWeight: '600' }}
+                accessibilityLabel={`${searchResults.length} search results found`}
+              >
+                Results
+              </Text>
               {searchResults.map(tm => (
                 <ThoughtmarkCard key={tm.id} slotType="SEARCH_RESULT" />
               ))}
             </View>
           ) : searchQuery.trim() ? (
-            <Text style={{ color: '#666', textAlign: 'center', marginTop: 20 }}>No results found</Text>
+            <Text 
+              style={{ color: '#666', textAlign: 'center', marginTop: 20 }}
+              accessibilityLabel="No search results found"
+            >
+              No results found
+            </Text>
           ) : null}
         </ScrollView>
       </View>

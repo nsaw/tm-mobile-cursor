@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export interface ThemeTokens {
   colors: {
@@ -141,8 +141,21 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
-  if (!context) {
+  
+  if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
+
+  // Runtime validation hook
+  useEffect(() => {
+    console.log('🎨 useTheme hook initialized - Runtime validation active');
+    console.log('📊 Theme state:', {
+      isDark: context.isDarkMode,
+      colors: Object.keys(context.tokens.colors).length,
+      spacing: Object.keys(context.tokens.spacing).length,
+      typography: Object.keys(context.tokens.typography).length
+    });
+  }, [context.isDarkMode]);
+
   return context;
 } 

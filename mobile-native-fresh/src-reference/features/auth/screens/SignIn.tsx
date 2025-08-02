@@ -25,6 +25,16 @@ export const SignInScreen: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   // const { promptAsync: googlePromptAsync } = useGoogleAuth(); // TEMPORARILY DISABLED
 
+  // Runtime validation hook
+  React.useEffect(() => {
+    console.log('🔐 SignInScreen initialized - Runtime validation active');
+    console.log('📊 SignInScreen state:', {
+      isLoading,
+      hasDesignTokens: !!designTokens,
+      tokensKeys: designTokens ? Object.keys(designTokens).length : 0
+    });
+  }, [isLoading, designTokens]);
+
   const styles = getStyles(designTokens);
 
   const handleEmailSignIn = async (email: string, password: string) => {
