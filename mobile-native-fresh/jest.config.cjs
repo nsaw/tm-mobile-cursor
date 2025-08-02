@@ -1,9 +1,9 @@
 module.exports = {
   preset: 'jest-expo',
   rootDir: '.',
-  roots: ['<rootDir>', '<rootDir>/src', '<rootDir>/src-nextgen'],
-  modulePaths: ['<rootDir>', '<rootDir>/src', '<rootDir>/src-nextgen'],
-  moduleDirectories: ['node_modules', 'src', 'src-nextgen'],
+  roots: ['<rootDir>', '<rootDir>/src-reference', '<rootDir>/src-nextgen'],
+  modulePaths: ['<rootDir>', '<rootDir>/src-reference', '<rootDir>/src-nextgen'],
+  moduleDirectories: ['node_modules', 'src-reference', 'src-nextgen'],
   testEnvironment: 'jsdom',
   testTimeout: 80000,
   detectOpenHandles: true,

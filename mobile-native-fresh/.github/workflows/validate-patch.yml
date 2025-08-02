@@ -1,0 +1,154 @@
+name: Validate Patch
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+    paths:
+      - 'src-nextgen/**'
+      - 'src-reference/**'
+      - 'test-map.json'
+      - 'jest.config.cjs'
+      - 'package.json'
+      - 'yarn.lock'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'src-nextgen/**'
+      - 'src-reference/**'
+      - 'test-map.json'
+      - 'jest.config.cjs'
+      - 'package.json'
+      - 'yarn.lock'
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Patch phase for test selection'
+        required: false
+        default: 'phase-2'
+        type: choice
+        options:
+          - phase-0
+          - phase-1
+          - phase-2
+          - phase-3
+          - phase-4
+          - phase-5
+          - phase-6
+          - phase-7
+
+jobs:
+  validate-patch:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+        
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+      
+    - name: Parse test-map.json
+      id: test-map
+      run: |
+        if [ -f "test-map.json" ]; then
+          PHASE="${github.event.inputs.phase:-phase-2}"
+          TESTS=$(node -e "
+            const testMap = require('./test-map.json');
+            const phase = testMap.testMap.phases['$PHASE'];
+            if (phase && phase.tests) {
+              console.log(phase.tests.join(' '));
+            } else {
+              console.log('tsc --noEmit eslint . --max-warnings=0 yarn test:unit --watchAll=false');
+            }
+          ")
+          echo "tests=$TESTS" >> $GITHUB_OUTPUT
+          echo "phase=$PHASE" >> $GITHUB_OUTPUT
+        else
+          echo "tests=tsc --noEmit eslint . --max-warnings=0 yarn test:unit --watchAll=false" >> $GITHUB_OUTPUT
+          echo "phase=default" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Run TypeScript compilation
+      run: npx tsc --noEmit
+      
+    - name: Run ESLint validation
+      run: npx eslint . --ext .ts,.tsx --max-warnings=0
+      
+    - name: Run unit tests
+      run: yarn test:unit --watchAll=false
+      
+    - name: Run integration tests (if configured)
+      if: contains(steps.test-map.outputs.tests, 'yarn test:integration')
+      run: yarn test:integration --watchAll=false
+      
+    - name: Run E2E tests (if configured)
+      if: contains(steps.test-map.outputs.tests, 'yarn test:e2e')
+      run: yarn test:e2e --watchAll=false
+      
+    - name: Run performance tests (if configured)
+      if: contains(steps.test-map.outputs.tests, 'yarn test:performance')
+      run: yarn test:performance --watchAll=false
+      
+    - name: Run memory tests (if configured)
+      if: contains(steps.test-map.outputs.tests, 'yarn test:memory')
+      run: yarn test:memory --watchAll=false
+      
+    - name: Run accessibility tests (if configured)
+      if: contains(steps.test-map.outputs.tests, 'yarn test:accessibility')
+      run: yarn test:accessibility --watchAll=false
+      
+    - name: Generate test report
+      if: always()
+      run: |
+        echo "## Patch Validation Report" >> $GITHUB_STEP_SUMMARY
+        echo "**Phase**: ${{ steps.test-map.outputs.phase }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Tests Executed**: ${{ steps.test-map.outputs.tests }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Node Version**: ${{ matrix.node-version }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-${{ matrix.node-version }}
+        path: |
+          coverage/
+          test-results/
+          *.log
+        retention-days: 7
+        
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const phase = '${{ steps.test-map.outputs.phase }}';
+          const status = '${{ job.status }}';
+          const tests = '${{ steps.test-map.outputs.tests }}';
+          
+          const comment = `## 🧪 Patch Validation Results
+          
+          **Phase**: ${phase}
+          **Status**: ${status === 'success' ? '✅ PASS' : '❌ FAIL'}
+          **Tests Executed**: ${tests}
+          **Node Versions**: 18.x, 20.x
+          
+          ${status === 'success' ? 'All validation checks passed!' : 'Some validation checks failed. Please review the logs.'}
+          `;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          }); 

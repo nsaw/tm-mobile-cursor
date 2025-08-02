@@ -1,0 +1,76 @@
+{
+  "testMap": {
+    "version": "1.4.998",
+    "description": "Dynamic test trigger configuration based on patch phase and risk level",
+    "created": "2025-01-29T23:30:00.000Z",
+    "enabled": true,
+    "phases": {
+      "phase-0": {
+        "risk": "low",
+        "tests": ["tsc --noEmit"],
+        "description": "Preflight validation only"
+      },
+      "phase-1": {
+        "risk": "medium",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0"],
+        "description": "Type checking and linting"
+      },
+      "phase-2": {
+        "risk": "high",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false"],
+        "description": "Full validation including unit tests"
+      },
+      "phase-3": {
+        "risk": "critical",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false", "yarn test:integration --watchAll=false"],
+        "description": "Complete test suite including integration tests"
+      },
+      "phase-4": {
+        "risk": "critical",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false", "yarn test:integration --watchAll=false", "yarn test:e2e --watchAll=false"],
+        "description": "End-to-end testing for pre-launch validation"
+      },
+      "phase-5": {
+        "risk": "critical",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false", "yarn test:integration --watchAll=false", "yarn test:e2e --watchAll=false", "yarn test:performance --watchAll=false"],
+        "description": "Performance testing included"
+      },
+      "phase-6": {
+        "risk": "critical",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false", "yarn test:integration --watchAll=false", "yarn test:e2e --watchAll=false", "yarn test:performance --watchAll=false", "yarn test:memory --watchAll=false"],
+        "description": "Memory optimization testing"
+      },
+      "phase-7": {
+        "risk": "critical",
+        "tests": ["tsc --noEmit", "eslint . --max-warnings=0", "yarn test:unit --watchAll=false", "yarn test:integration --watchAll=false", "yarn test:e2e --watchAll=false", "yarn test:performance --watchAll=false", "yarn test:memory --watchAll=false", "yarn test:accessibility --watchAll=false"],
+        "description": "Accessibility testing for app store submission"
+      }
+    },
+    "triggers": {
+      "auto": true,
+      "manual": true,
+      "onPatch": true,
+      "onCommit": true,
+      "onPush": false
+    },
+    "timeouts": {
+      "tsc": 30,
+      "eslint": 60,
+      "unit": 120,
+      "integration": 300,
+      "e2e": 600,
+      "performance": 180,
+      "memory": 240,
+      "accessibility": 120
+    },
+    "failFast": true,
+    "parallel": false,
+    "retries": 1,
+    "reporting": {
+      "console": true,
+      "json": true,
+      "html": false,
+      "junit": false
+    }
+  }
+} 
