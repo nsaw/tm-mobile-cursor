@@ -11,7 +11,7 @@ export const setAccessibilityFocus = (reactTag: number): void => {
 };
 
 export const getRecommendedTimeoutMillis = (): Promise<number> => {
-  return AccessibilityInfo.getRecommendedTimeoutMillis();
+  return AccessibilityInfo.getRecommendedTimeoutMillis(1000);
 };
 
 // Note: getRecommendedTimeoutMillisSync and shouldShowAccessibilityMenu are not available in React Native

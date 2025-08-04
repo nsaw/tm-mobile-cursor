@@ -12,4 +12,11 @@ export async function signUp(_name: string, _email: string, _password: string): 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function resetPassword(_email: string): Promise<void> {
   return Promise.resolve();
-} 
+}
+
+// Named export for the service
+export const authService = {
+  signIn,
+  signUp,
+  resetPassword,
+}; 

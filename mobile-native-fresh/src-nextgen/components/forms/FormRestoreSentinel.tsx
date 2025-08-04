@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AutoRoleView } from '../AutoRoleView';
 
 interface FormRestoreSentinelProps {
@@ -35,14 +36,14 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
   const [isRestoring, setIsRestoring] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [lastSavedState, setLastSavedState] = useState<any>(null);
-  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastStateRef = useRef<any>(null);
 
   // Generate storage key for this form
   const getStorageKey = () => `form-sentinel-${environment}-${formKey}`;
 
-  // Save form state to localStorage
-  const saveFormState = (state: any) => {
+  // Save form state to AsyncStorage
+  const saveFormState = async (state: any) => {
     if (!autoSave || !state) return;
 
     try {
@@ -54,7 +55,7 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
       };
 
       const storageKey = getStorageKey();
-      localStorage.setItem(storageKey, JSON.stringify(savedState));
+      await AsyncStorage.setItem(storageKey, JSON.stringify(savedState));
       
       setLastSavedState(state);
       setIsSaving(true);
@@ -70,11 +71,11 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
     }
   };
 
-  // Load form state from localStorage
-  const loadFormState = (): any | null => {
+  // Load form state from AsyncStorage
+  const loadFormState = async (): Promise<any | null> => {
     try {
       const storageKey = getStorageKey();
-      const saved = localStorage.getItem(storageKey);
+      const saved = await AsyncStorage.getItem(storageKey);
       
       if (!saved) return null;
 
@@ -89,7 +90,7 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
       // Check if state is too old
       if (Date.now() - parsed.timestamp > maxAge) {
         console.warn('FormRestoreSentinel: Saved state too old, clearing');
-        localStorage.removeItem(storageKey);
+        await AsyncStorage.removeItem(storageKey);
         return null;
       }
 
@@ -101,10 +102,10 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
   };
 
   // Clear saved form state
-  const clearFormState = () => {
+  const clearFormState = async () => {
     try {
       const storageKey = getStorageKey();
-      localStorage.removeItem(storageKey);
+      await AsyncStorage.removeItem(storageKey);
       setLastSavedState(null);
       console.log('FormRestoreSentinel: Cleared saved form state');
     } catch (error) {
@@ -113,13 +114,13 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
   };
 
   // Restore form state
-  const restoreFormState = () => {
+  const restoreFormState = async () => {
     if (!autoRestore) return;
 
     setIsRestoring(true);
     
     try {
-      const savedState = loadFormState();
+      const savedState = await loadFormState();
       
       if (savedState) {
         setLastSavedState(savedState);
@@ -147,9 +148,9 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
       clearTimeout(saveTimeoutRef.current);
     }
 
-    saveTimeoutRef.current = setTimeout(() => {
+    saveTimeoutRef.current = setTimeout(async () => {
       if (JSON.stringify(state) !== JSON.stringify(lastStateRef.current)) {
-        saveFormState(state);
+        await saveFormState(state);
         lastStateRef.current = state;
       }
     }, saveInterval);
@@ -172,18 +173,18 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
   }, []);
 
   // Expose methods to parent components
-  React.useImperativeHandle(React.useRef(), () => ({
+  React.useImperativeHandle(React.useRef(null), () => ({
     saveFormState,
     loadFormState,
     clearFormState,
     restoreFormState,
-  }));
+  } as any), []);
 
   return (
-    <AutoRoleView role="form-restore-sentinel" style={styles.container}>
+    <AutoRoleView role="layout" style={styles.container}>
       {/* Status indicator */}
       {(isRestoring || isSaving) && (
-        <AutoRoleView role="form-sentinel-status" style={styles.statusContainer}>
+        <AutoRoleView role="feedback" style={styles.statusContainer}>
           <Text style={styles.statusText}>
             {isRestoring ? '🔄 Restoring form data...' : '💾 Saving form data...'}
           </Text>
@@ -191,13 +192,13 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
       )}
 
       {/* Form content */}
-      <AutoRoleView role="form-sentinel-content" style={styles.contentContainer}>
+      <AutoRoleView role="content" style={styles.contentContainer}>
         {children}
       </AutoRoleView>
 
       {/* Debug information (only in development) */}
       {__DEV__ && (
-        <AutoRoleView role="form-sentinel-debug" style={styles.debugContainer}>
+        <AutoRoleView role="feedback" style={styles.debugContainer}>
           <Text style={styles.debugText}>
             Form: {formKey} | Environment: {environment}
           </Text>
@@ -245,7 +246,6 @@ export const useFormRestoreSentinel = (
   return {
     FormRestoreSentinel: (
       <FormRestoreSentinel
-        ref={sentinelRef}
         formKey={formKey}
         environment={environment}
         onStateRestored={handleStateRestored}

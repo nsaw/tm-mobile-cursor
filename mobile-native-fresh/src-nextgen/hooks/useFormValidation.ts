@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   ValidationRule, 
   FormField, 
@@ -146,12 +147,12 @@ export const useDualMountFormValidation = (
     }
   }, [validateForm, getFormValues]);
 
-  // Auto-save form state to localStorage for dual-mount persistence
+  // Auto-save form state to AsyncStorage for dual-mount persistence
   useEffect(() => {
-    const saveFormState = () => {
+    const saveFormState = async () => {
       try {
         const values = getFormValues();
-        localStorage.setItem(`form-state-${environment}`, JSON.stringify(values));
+        await AsyncStorage.setItem(`form-state-${environment}`, JSON.stringify(values));
       } catch (error) {
         console.warn('Failed to save form state:', error);
       }
@@ -162,17 +163,21 @@ export const useDualMountFormValidation = (
     return () => clearTimeout(timeoutId);
   }, [formState, environment, getFormValues]);
 
-  // Load form state from localStorage on mount
+  // Load form state from AsyncStorage on mount
   useEffect(() => {
-    try {
-      const savedState = localStorage.getItem(`form-state-${environment}`);
-      if (savedState) {
-        const values = JSON.parse(savedState);
-        setFormValues(values);
+    const loadFormState = async () => {
+      try {
+        const savedState = await AsyncStorage.getItem(`form-state-${environment}`);
+        if (savedState) {
+          const values = JSON.parse(savedState);
+          setFormValues(values);
+        }
+      } catch (error) {
+        console.warn('Failed to load form state:', error);
       }
-    } catch (error) {
-      console.warn('Failed to load form state:', error);
-    }
+    };
+    
+    loadFormState();
   }, [environment, setFormValues]);
 
   return {
@@ -209,10 +214,10 @@ export const useProfileForm = (environment: 'legacy' | 'nextgen' = 'nextgen') =>
 export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nextgen' = 'nextgen') => {
   const [persistedState, setPersistedState] = useState<any>(null);
 
-  const saveState = useCallback((state: any) => {
+  const saveState = useCallback(async (state: any) => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
-      localStorage.setItem(key, JSON.stringify({
+      await AsyncStorage.setItem(key, JSON.stringify({
         state,
         timestamp: Date.now(),
         environment,
@@ -222,10 +227,10 @@ export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nex
     }
   }, [formKey, environment]);
 
-  const loadState = useCallback(() => {
+  const loadState = useCallback(async () => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
-      const saved = localStorage.getItem(key);
+      const saved = await AsyncStorage.getItem(key);
       if (saved) {
         const parsed = JSON.parse(saved);
         // Only load if it's from the same environment and not too old (24 hours)
@@ -241,10 +246,10 @@ export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nex
     return null;
   }, [formKey, environment]);
 
-  const clearState = useCallback(() => {
+  const clearState = useCallback(async () => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
-      localStorage.removeItem(key);
+      await AsyncStorage.removeItem(key);
       setPersistedState(null);
     } catch (error) {
       console.warn('Failed to clear form state:', error);

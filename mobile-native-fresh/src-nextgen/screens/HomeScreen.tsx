@@ -5,7 +5,7 @@ import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { SlotGrid } from '../components/SlotGrid';
 
 export const HomeScreen = () => {
-  const [thoughtmarks] = useThoughtmarks();
+  const { thoughtmarks } = useThoughtmarks();
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>

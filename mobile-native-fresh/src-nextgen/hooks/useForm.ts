@@ -36,12 +36,14 @@ export function useForm(
   const validationSchemaRef = useRef(config.validationSchema);
 
   const validateField = useCallback(
-    async (name: keyof T, value: unknown, allValues?: T): Promise<string | undefined> => {
+    async (name: string, value: unknown, allValues?: Record<string, any>): Promise<string | undefined> => {
       const validators = validationSchemaRef.current?.[name] || [];
       
       for (const validator of validators) {
-        const error = await validator(value, allValues);
-        if (error) return error;
+        const result = validator.validator?.(value);
+        if (result === false || (typeof result === 'string' && result)) {
+          return typeof result === 'string' ? result : validator.message;
+        }
       }
       
       return undefined;
@@ -49,17 +51,17 @@ export function useForm(
     []
   );
 
-  const validateForm = useCallback(async (): Promise<Record<keyof T, string>> => {
+  const validateForm = useCallback(async (): Promise<boolean> => {
     const allValues = Object.keys(state.fields).reduce((acc, key) => {
       acc[key] = state.fields[key].value;
       return acc;
-    }, {} as T);
+    }, {} as Record<string, any>);
 
-    const newErrors: Record<keyof T, string> = {} as any;
+    const newErrors: Record<string, string> = {};
     let isValid = true;
 
     for (const key of Object.keys(state.fields)) {
-      const error = await validateField(key as keyof T, state.fields[key].value, allValues);
+      const error = await validateField(key, state.fields[key].value, allValues);
       newErrors[key] = error || '';
       if (error) isValid = false;
     }
@@ -70,11 +72,11 @@ export function useForm(
       isValid,
     }));
 
-    return newErrors;
+    return isValid;
   }, [state.fields, validateField]);
 
   const setFieldValue = useCallback(
-    async (name: keyof T, value: unknown) => {
+    async (name: string, value: unknown) => {
       setState(prev => {
         const newFields = { ...prev.fields };
         newFields[name] = { ...newFields[name], value };
@@ -101,7 +103,7 @@ export function useForm(
     [config.validateOnChange, validateField]
   );
 
-  const setFieldError = useCallback((name: keyof T, error: string) => {
+  const setFieldError = useCallback((name: string, error: string) => {
     setState(prev => ({
       ...prev,
       errors: { ...prev.errors, [name]: error },
@@ -109,7 +111,7 @@ export function useForm(
   }, []);
 
   const setFieldTouched = useCallback(
-    async (name: keyof T, touched: boolean) => {
+    async (name: string, touched: boolean) => {
       setState(prev => ({
         ...prev,
         fields: {
@@ -150,11 +152,11 @@ export function useForm(
         errors: Object.keys(newFields).reduce((acc, key) => {
           acc[key] = '';
           return acc;
-        }, {} as Record<keyof T, string>),
+        }, {} as Record<string, string>),
         touched: Object.keys(newFields).reduce((acc, key) => {
           acc[key] = false;
           return acc;
-        }, {} as Record<keyof T, boolean>),
+        }, {} as Record<string, boolean>),
       };
     });
     config.onReset?.();
@@ -164,10 +166,9 @@ export function useForm(
     setState(prev => ({ ...prev, isSubmitting: true }));
 
     try {
-      const errors = await validateForm();
-      const hasErrors = Object.values(errors).some(error => error);
+      const isValid = await validateForm();
 
-      if (hasErrors) {
+      if (!isValid) {
         setState(prev => ({ ...prev, isSubmitting: false }));
         return;
       }
@@ -175,7 +176,7 @@ export function useForm(
       const values = Object.keys(state.fields).reduce((acc, key) => {
         acc[key] = state.fields[key].value;
         return acc;
-      }, {} as T);
+      }, {} as Record<string, any>);
 
       await config.onSubmit(values);
     } catch (error) {
@@ -185,15 +186,15 @@ export function useForm(
     }
   }, [validateForm, state.fields, config.onSubmit]);
 
-  const getFieldValue = useCallback((name: keyof T) => {
+  const getFieldValue = useCallback((name: string) => {
     return state.fields[name].value;
   }, [state.fields]);
 
-  const getFieldError = useCallback((name: keyof T) => {
+  const getFieldError = useCallback((name: string) => {
     return state.errors[name] || undefined;
   }, [state.errors]);
 
-  const getFieldTouched = useCallback((name: keyof T) => {
+  const getFieldTouched = useCallback((name: string) => {
     return state.touched[name];
   }, [state.touched]);
 
@@ -206,6 +207,7 @@ export function useForm(
       resetForm,
       submitForm,
       validateForm,
+      validateField,
       getFieldValue,
       getFieldError,
       getFieldTouched,

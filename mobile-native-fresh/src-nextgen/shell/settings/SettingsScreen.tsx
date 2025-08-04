@@ -9,19 +9,20 @@ import { Text ,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { IconWrapper } from '../../infrastructure/IconWrapper';
 import { Brain } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Card } from '../../../components/ui/Card';
-import { Button } from '../../../components/ui/Button';
-import { useAuth } from '../../../features/auth/hooks/useAuth';
-import { useTheme } from '../../../theme/ThemeProvider';
-import { AutoRoleView } from '../../../components/AutoRoleView';
+import { Card } from '../../components/ui/Card';
+import { Button } from '../../components/ui/Button';
+import { useAuth } from '../../features/auth/hooks/useAuth';
+import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from '../../components/AutoRoleView';
 
 export const SettingsScreen: React.FC = () => {
-  const { tokens, typography } = useTheme();
+  const { tokens } = useTheme();
+  const { typographyTokens } = require('../../../src-reference/theme/typography');
   const navigation = useNavigation<any>();
   const { user, isAuthenticated, signOut } = useAuth();
   
@@ -167,7 +168,7 @@ export const SettingsScreen: React.FC = () => {
   }) => {
     let iconElement = null;
     if (icon === 'crown') {
-      iconElement = <MaterialCommunityIcons name="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
+      iconElement = <IconWrapper name="MaterialCommunityIcons" icon="crown-outline" iconName="crown-outline" size={20} color={tokens.colors.accent ?? '#FFD700'} />;
     } else if (icon === 'brain') {
       iconElement = <Brain size={28} />;
     } else {
@@ -228,18 +229,18 @@ export const SettingsScreen: React.FC = () => {
       marginRight: tokens.spacing.md,
     },
     headerTitle: {
-      ...typography.title,
+      ...typographyTokens.title,
       color: tokens.colors.text,
     },
     headerSubtitle: {
-      ...typography.body,
+      ...typographyTokens.body,
       color: tokens.colors.textSecondary,
     },
     section: {
       marginBottom: tokens.spacing.xxl,
     },
     sectionTitle: {
-      ...typography.sectionTitle,
+      ...typographyTokens.sectionTitle,
       color: tokens.colors.textSecondary,
       marginBottom: tokens.spacing.sm,
       paddingHorizontal: tokens.spacing.lg,
@@ -268,12 +269,12 @@ export const SettingsScreen: React.FC = () => {
       flex: 1,
     },
     settingItemTitle: {
-      ...typography.body,
+      ...typographyTokens.body,
       color: tokens.colors.text,
       opacity: 0.85,
     },
     settingItemSubtitle: {
-      ...typography.small,
+      ...typographyTokens.small,
       color: tokens.colors.textSecondary,
       marginTop: 2,
     },
@@ -355,7 +356,7 @@ export const SettingsScreen: React.FC = () => {
   });
 
   return (
-    <AutoRoleView layoutRole="section" style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
+            <AutoRoleView style={{ flex: 1, backgroundColor: tokens.colors.background ?? '#0D0D0F' }}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
@@ -389,16 +390,16 @@ export const SettingsScreen: React.FC = () => {
                 </View>
                 {/* Title */}
                 <Text style={{
-                  ...typography.sectionTitle,
+                  ...typographyTokens.sectionTitle,
                   color: tokens.colors.text,
                   textAlign: 'center',
                   marginBottom: tokens.spacing.sm,
                 }}>
-                  Welcome to Thoughtmarks{user ? `, ${user.firstName || user.displayName?.split(' ')[0] || user.email?.split('@')[0]}` : ''}
+                  Welcome to Thoughtmarks{user ? `, ${user.firstName || user.email?.split('@')[0]}` : ''}
                 </Text>
                 {/* Subtitle */}
                 <Text style={{
-                  ...typography.body,
+                  ...typographyTokens.body,
                   color: tokens.colors.textSecondary,
                   textAlign: 'center',
                   marginBottom: tokens.spacing.md,
@@ -407,6 +408,7 @@ export const SettingsScreen: React.FC = () => {
                 </Text>
                 {/* User Guide Button */}
                 <Button
+                  title="User Guide"
                   style={{
                     width: '100%',
                     minWidth: '50%',
@@ -415,16 +417,13 @@ export const SettingsScreen: React.FC = () => {
                     borderRadius: tokens.radius.md,
                   }}
                   onPress={() => navigation.navigate('HowTo')}
-                >
-                  <Text style={{
-                    ...typography.buttonText,
+                  textStyle={{
+                    ...typographyTokens.buttonText,
                     color: tokens.colors.buttonText,
                     textAlign: 'center',
                     width: '100%',
-                   }}>
-                    User Guide
-                  </Text>
-                </Button>
+                   }}
+                />
               </>
             );
           })()}
@@ -619,7 +618,7 @@ export const SettingsScreen: React.FC = () => {
         </View>
 
         {/* Admin Section - Only show for admin users */}
-        {(user?.email?.includes('admin') || user?.isAdmin) && (
+        {user?.email?.includes('admin') && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Administration</Text>
             <TouchableOpacity

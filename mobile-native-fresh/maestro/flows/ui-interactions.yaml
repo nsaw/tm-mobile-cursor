@@ -1,0 +1,97 @@
+appId: com.thoughtmarks.mobile
+name: UI Interactions Test
+tags:
+  - ui
+  - navigation
+  - components
+
+# Launch the app
+---
+- launchApp
+
+# Wait for app to load
+---
+- runFlow:
+    when:
+      visible: "Home"
+    commands:
+      - tapOn: "Home"
+      - assertVisible: "Home Screen"
+      - takeScreenshot: "home-screen"
+
+# Test bottom tab navigation
+---
+- runFlow:
+    when:
+      visible: "Profile"
+    commands:
+      - tapOn: "Profile"
+      - assertVisible: "Profile Screen"
+      - takeScreenshot: "profile-screen"
+
+---
+- runFlow:
+    when:
+      visible: "Settings"
+    commands:
+      - tapOn: "Settings"
+      - assertVisible: "Settings Screen"
+      - takeScreenshot: "settings-screen"
+
+# Test component interactions
+---
+- runFlow:
+    when:
+      visible: "Button"
+    commands:
+      - tapOn: "Button"
+      - assertVisible: "Button Pressed"
+      - takeScreenshot: "button-interaction"
+
+---
+- runFlow:
+    when:
+      visible: "Dropdown"
+    commands:
+      - tapOn: "Dropdown"
+      - assertVisible: "Dropdown Options"
+      - tapOn: "Option 1"
+      - assertVisible: "Option 1 Selected"
+      - takeScreenshot: "dropdown-interaction"
+
+# Test form interactions
+---
+- runFlow:
+    when:
+      visible: "Input Field"
+    commands:
+      - tapOn: "Input Field"
+      - inputText: "Test Input"
+      - assertVisible: "Test Input"
+      - takeScreenshot: "form-input"
+
+---
+- runFlow:
+    when:
+      visible: "Submit Button"
+    commands:
+      - tapOn: "Submit Button"
+      - assertVisible: "Form Submitted"
+      - takeScreenshot: "form-submission"
+
+# Test FAB (Floating Action Button)
+---
+- runFlow:
+    when:
+      visible: "FAB"
+    commands:
+      - tapOn: "FAB"
+      - assertVisible: "FAB Menu"
+      - takeScreenshot: "fab-interaction"
+
+# Final validation
+---
+- runFlow:
+    commands:
+      - assertVisible: "App Loaded Successfully"
+      - takeScreenshot: "final-state" 

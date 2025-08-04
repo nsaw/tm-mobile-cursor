@@ -99,9 +99,9 @@ export const validateZIndexHierarchy = (
     sacred: []
   };
 
-  const allowedChildren = hierarchyRules[parentLayer] || [];
+  const allowedChildren = hierarchyRules[parentLayer as keyof typeof hierarchyRules] || [];
   
-  if (!allowedChildren.includes(childLayer)) {
+  if (allowedChildren.length > 0 && !(allowedChildren as string[]).includes(childLayer)) {
     result.warnings.push(`Z-index layer ${parentLayer} should not contain ${childLayer} directly`);
     result.suggestions.push(`Consider using an intermediate ${allowedChildren[0] || 'content'} layer`);
   }

@@ -82,14 +82,14 @@ export const RoutingSystem: React.FC<RoutingSystemProps> = ({
       baseStyle.backgroundColor = '#ECFEFF';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getRoutingStyle()}
-      className={className}
+
       testID={testID || `routing-system-${state.environment}`}
       accessibilityRole="none"
       accessibilityLabel={`Routing system for ${state.environment} environment`}

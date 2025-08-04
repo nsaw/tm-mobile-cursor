@@ -5,9 +5,12 @@
  * for the hybrid renderer shell.
  */
 
-export * from './LayoutContract';
-export * from './ZIndexProtection';
-export * from './SafeFrameShell';
+// Explicit exports to avoid naming conflicts
+export { LayoutContract as LayoutContractComponent } from './LayoutContract';
+export { ZIndexProtection as ZIndexProtectionComponent } from './ZIndexProtection';
+export { SafeFrameShell as SafeFrameShellComponent } from './SafeFrameShell';
+
+// Re-export types
 export * from './types';
 export * from './utils';
 export * from './validation'; 

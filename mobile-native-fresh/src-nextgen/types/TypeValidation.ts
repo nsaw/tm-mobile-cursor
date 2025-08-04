@@ -28,6 +28,60 @@ export class TypeValidator {
     return TypeValidator.instance;
   }
 
+  public clearCache(): void {
+    this.validationCache.clear();
+  }
+
+  public validateType(typeName: string, data: unknown): TypeValidationResult {
+    const result: TypeValidationResult = {
+      isValid: true,
+      errors: [],
+      warnings: [],
+      timestamp: Date.now(),
+    };
+
+    try {
+      // Basic type validation based on typeName
+      switch (typeName) {
+        case 'User':
+          if (!(data as Record<string, unknown>).id || !(data as Record<string, unknown>).email) {
+            result.errors.push(`Invalid User: missing required fields`);
+            result.isValid = false;
+          }
+          break;
+        case 'Thoughtmark':
+          if (!(data as Record<string, unknown>).id || !(data as Record<string, unknown>).content) {
+            result.errors.push(`Invalid Thoughtmark: missing required fields`);
+            result.isValid = false;
+          }
+          break;
+        case 'ApiResponse':
+          if (!(data as Record<string, unknown>).data || !(data as Record<string, unknown>).success) {
+            result.errors.push(`Invalid ApiResponse: missing required fields`);
+            result.isValid = false;
+          }
+          break;
+        default:
+          result.warnings.push(`Unknown type: ${typeName}`);
+      }
+    } catch (error) {
+      result.errors.push(`Type validation error: ${error}`);
+      result.isValid = false;
+    }
+
+    return result;
+  }
+
+  public validateMultipleTypes(types: Record<string, unknown>): Record<string, TypeValidationResult> {
+    const results: Record<string, TypeValidationResult> = {};
+    
+    for (const [typeName, data] of Object.entries(types)) {
+      results[typeName] = this.validateType(typeName, data);
+    }
+    
+    return results;
+  }
+
   public validateApiTypes(): TypeValidationResult {
     const result: TypeValidationResult = {
       isValid: true,

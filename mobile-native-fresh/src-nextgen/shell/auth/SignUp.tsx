@@ -6,24 +6,21 @@ import { Text ,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
+  TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useAuth } from '../../../features/auth/hooks/useAuth';
-import { useGoogleAuth, signInWithApple } from '../../../features/auth/hooks/useNativeSocialAuth';
-import { RegistrationForm } from '../../../features/auth/components/RegistrationForm';
-import { OAuthButton } from '../../../features/auth/components/OAuthButton';
-import { colors, spacing, typography } from '../../../theme/theme';
-import { useTheme } from '../../../theme/ThemeProvider';
+import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const logo = require('../../../../assets/logo.png');
 
 export const SignUpScreen: React.FC = () => {
-  const { signUp, loading } = useAuth();
+  const { signUp } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const { promptAsync: googlePromptAsync } = useGoogleAuth();
-  const { tokens: designTokens } = useTheme();
+  const { theme } = useTheme();
 
   const handleEmailSignUp = async (
     email: string,
@@ -33,7 +30,7 @@ export const SignUpScreen: React.FC = () => {
   ) => {
     try {
       setIsLoading(true);
-      await signUp(email, password, firstName, lastName);
+      await signUp(firstName + ' ' + lastName, email, password);
     } catch (err: any) {
       Alert.alert('Sign Up Failed', err.message);
     } finally {
@@ -44,7 +41,8 @@ export const SignUpScreen: React.FC = () => {
   const handleGoogleSignUp = async () => {
     try {
       setIsLoading(true);
-      await googlePromptAsync();
+      // Mock Google sign up for now
+      console.log('Google sign up requested');
     } catch (err: any) {
       Alert.alert('Google Sign Up Failed', err.message);
     } finally {
@@ -55,7 +53,8 @@ export const SignUpScreen: React.FC = () => {
   const handleAppleSignUp = async () => {
     try {
       setIsLoading(true);
-      await signInWithApple();
+      // Mock Apple sign up for now
+      console.log('Apple sign up requested');
     } catch (err: any) {
       Alert.alert('Apple Sign Up Failed', err.message);
     } finally {
@@ -66,11 +65,11 @@ export const SignUpScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: theme.colors.background,
     },
     keyboard: {
       flex: 1,
-      paddingHorizontal: spacing.md,
+      paddingHorizontal: theme.spacing.md,
       justifyContent: 'center',
     },
     scrollContent: {
@@ -79,28 +78,30 @@ export const SignUpScreen: React.FC = () => {
     },
     logoContainer: {
       alignItems: 'center',
-      marginBottom: spacing.xl,
+      marginBottom: theme.spacing.xl,
     },
     logo: {
       width: 100,
       height: 100,
     },
     title: {
-      ...typography.heading,
-      color: colors.text,
+      fontSize: theme.typography.fontSize.heading,
+      fontWeight: 'bold',
+      color: theme.colors.text,
       textAlign: 'center',
-      marginBottom: spacing.sm,
+      marginBottom: theme.spacing.sm,
     },
     subtitle: {
-      ...typography.body,
-      color: colors.subtext,
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: 'normal',
+      color: theme.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: spacing.lg,
+      marginBottom: theme.spacing.lg,
     },
     formContainer: {
-      backgroundColor: colors.card,
-      borderRadius: designTokens.radius.md,
-      padding: spacing.md,
+      backgroundColor: theme.colors.surface,
+      borderRadius: 8,
+      padding: theme.spacing.md,
       shadowColor: '#000',
       shadowOpacity: 0.05,
       shadowRadius: 10,
@@ -108,46 +109,47 @@ export const SignUpScreen: React.FC = () => {
     },
     input: {
       borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
-      paddingHorizontal: spacing.md,
-      marginBottom: spacing.md,
+      borderColor: theme.colors.border,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 1.5,
+      paddingHorizontal: theme.spacing.md,
+      marginBottom: theme.spacing.md,
     },
     primaryButton: {
-      backgroundColor: colors.primary,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
+      backgroundColor: theme.colors.accent,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 1.5,
       alignItems: 'center',
-      marginBottom: spacing.md,
+      marginBottom: theme.spacing.md,
     },
     primaryButtonText: {
-      ...typography.body,
-      color: '#fff',
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
+      color: '#fff',
     },
     divider: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginVertical: spacing.lg,
+      marginVertical: theme.spacing.lg,
     },
     dividerLine: {
       flex: 1,
       height: 1,
-      backgroundColor: colors.border,
+      backgroundColor: theme.colors.border,
     },
     dividerText: {
-      marginHorizontal: spacing.sm,
-      ...typography.body,
-      color: colors.border,
+      marginHorizontal: theme.spacing.sm,
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: 'normal',
+      color: theme.colors.border,
     },
     oauthButton: {
-      backgroundColor: colors.background,
+      backgroundColor: theme.colors.background,
       borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 2,
-      marginBottom: spacing.sm,
+      borderColor: theme.colors.border,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 2,
+      marginBottom: theme.spacing.sm,
     },
   });
 
@@ -169,10 +171,27 @@ export const SignUpScreen: React.FC = () => {
           <Text style={styles.subtitle}>Join Thoughtmarks to get started</Text>
 
           <View style={styles.formContainer}>
-            <RegistrationForm
-              onSubmit={handleEmailSignUp}
-              loading={isLoading || loading}
-            />
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Email"
+                placeholderTextColor={theme.colors.textSecondary}
+                style={{ color: theme.colors.text }}
+              />
+            </View>
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Password"
+                placeholderTextColor={theme.colors.textSecondary}
+                secureTextEntry
+                style={{ color: theme.colors.text }}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={() => handleEmailSignUp('test@example.com', 'password')}
+            >
+              <Text style={styles.primaryButtonText}>Sign Up</Text>
+            </TouchableOpacity>
 
             <View style={styles.divider}>
               <View style={styles.dividerLine} />
@@ -180,18 +199,20 @@ export const SignUpScreen: React.FC = () => {
               <View style={styles.dividerLine} />
             </View>
 
-            <OAuthButton
-              provider="google"
+            <TouchableOpacity
+              style={styles.oauthButton}
               onPress={handleGoogleSignUp}
-              loading={isLoading || loading}
-            />
+            >
+              <Text style={{ color: theme.colors.text }}>Sign up with Google</Text>
+            </TouchableOpacity>
 
             {Platform.OS === 'ios' && (
-              <OAuthButton
-                provider="apple"
+              <TouchableOpacity
+                style={styles.oauthButton}
                 onPress={handleAppleSignUp}
-                loading={isLoading || loading}
-              />
+              >
+                <Text style={{ color: theme.colors.text }}>Sign up with Apple</Text>
+              </TouchableOpacity>
             )}
           </View>
         </ScrollView>

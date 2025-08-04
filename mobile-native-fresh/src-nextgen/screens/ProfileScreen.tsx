@@ -41,24 +41,24 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   const handleEditProfile = () => {
     setIsEditing(true);
-    nav.navigate('ProfileEdit');
+    nav.navigate('ProfileEdit' as never);
   };
 
   const handleSignOut = async () => {
     try {
       await signOut();
-      nav.navigate('SignIn');
+      nav.navigate('SignIn' as never);
     } catch (error) {
       console.error('Sign out error:', error);
     }
   };
 
   return (
-    <AutoRoleView layoutRole="screen-container" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header Section */}
-        <AutoRoleView layoutRole="header-section" style={styles.header}>
-          <AutoRoleView layoutRole="avatar-container" style={styles.avatarContainer}>
+        <AutoRoleView style={styles.header}>
+          <AutoRoleView style={styles.avatarContainer}>
             <Image 
               source={{ uri: profile.avatar }} 
               style={styles.avatar}
@@ -72,50 +72,50 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
           </AutoRoleView>
           
-          <AutoRoleView contentRole="profile-name" style={styles.nameContainer}>
+          <AutoRoleView style={styles.nameContainer}>
             <Text style={[styles.name, { color: theme.colors.text }]}>{profile.name}</Text>
             <Text style={[styles.email, { color: theme.colors.textSecondary }]}>{profile.email}</Text>
           </AutoRoleView>
         </AutoRoleView>
 
         {/* Stats Section */}
-        <AutoRoleView layoutRole="stats-section" style={styles.statsContainer}>
-          <AutoRoleView layoutRole="stat-item" style={styles.statItem}>
+        <AutoRoleView style={styles.statsContainer}>
+          <AutoRoleView style={styles.statItem}>
             <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.thoughts}</Text>
             <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Thoughts</Text>
           </AutoRoleView>
           
-          <AutoRoleView layoutRole="stat-item" style={styles.statItem}>
+          <AutoRoleView style={styles.statItem}>
             <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.followers}</Text>
             <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Followers</Text>
           </AutoRoleView>
           
-          <AutoRoleView layoutRole="stat-item" style={styles.statItem}>
+          <AutoRoleView style={styles.statItem}>
             <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.following}</Text>
             <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Following</Text>
           </AutoRoleView>
         </AutoRoleView>
 
         {/* Bio Section */}
-        <AutoRoleView contentRole="profile-bio" style={styles.bioContainer}>
+        <AutoRoleView style={styles.bioContainer}>
           <Text style={[styles.bioTitle, { color: theme.colors.text }]}>About</Text>
           <Text style={[styles.bioText, { color: theme.colors.textSecondary }]}>{profile.bio}</Text>
         </AutoRoleView>
 
         {/* Action Buttons */}
-        <AutoRoleView layoutRole="action-buttons" style={styles.actionContainer}>
+        <AutoRoleView style={styles.actionContainer}>
           <TouchableOpacity 
             style={[styles.actionButton, { backgroundColor: theme.colors.primary }]}
             onPress={handleEditProfile}
           >
-            <Text style={[styles.actionButtonText, { color: theme.colors.onPrimary }]}>
+            <Text style={[styles.actionButtonText, { color: theme.colors.background }]}>
               Edit Profile
             </Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={[styles.actionButton, { backgroundColor: theme.colors.surface }]}
-            onPress={() => nav.navigate('Settings')}
+            onPress={() => nav.navigate('Settings' as never)}
           >
             <Text style={[styles.actionButtonText, { color: theme.colors.text }]}>
               Settings
@@ -126,7 +126,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             style={[styles.actionButton, { backgroundColor: theme.colors.error }]}
             onPress={handleSignOut}
           >
-            <Text style={[styles.actionButtonText, { color: theme.colors.onError }]}>
+            <Text style={[styles.actionButtonText, { color: theme.colors.background }]}>
               Sign Out
             </Text>
           </TouchableOpacity>

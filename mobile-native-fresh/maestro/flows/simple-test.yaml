@@ -1,0 +1,18 @@
+appId: com.thoughtmarks.mobile
+name: Simple Test
+tags:
+  - simple
+  - verification
+
+# Simple test to verify Maestro setup
+---
+- launchApp
+
+# Wait for app to load and take screenshot
+---
+- runFlow:
+    when:
+      visible: "App"
+    commands:
+      - takeScreenshot: "app-launched"
+      - assertVisible: "App Loaded" 

@@ -7,8 +7,8 @@ import { TaskCard } from '../components/TaskCard';
 import { AIToolsCard } from '../components/AIToolsCard';
 
 export const DashboardScreen = () => {
-  const [thoughtmarks] = useThoughtmarks();
-  const [bins] = useBins();
+  const { thoughtmarks } = useThoughtmarks();
+  const { bins } = useBins();
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>

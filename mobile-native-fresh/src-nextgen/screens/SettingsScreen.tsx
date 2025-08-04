@@ -4,7 +4,7 @@ import { AutoRoleView } from '../components/AutoRoleView';
 
 export const SettingsScreen: React.FC = () => {
   return (
-    <AutoRoleView role="screen" style={styles.container}>
+    <AutoRoleView style={styles.container}>
       <Text style={styles.title}>Settings</Text>
       <Text style={styles.subtitle}>Configure your app preferences</Text>
     </AutoRoleView>

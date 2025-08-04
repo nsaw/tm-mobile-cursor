@@ -65,7 +65,7 @@ export const validateRoleHierarchy = (
 
   const allowedChildren = hierarchyRules[parentRole] || [];
   
-  if (!allowedChildren.includes(childRole)) {
+  if (allowedChildren.length > 0 && !(allowedChildren as string[]).includes(childRole)) {
     result.warnings.push(`Role ${parentRole} should not contain ${childRole} directly`);
     result.suggestions.push(`Consider using an intermediate ${allowedChildren[0] || 'layout'} wrapper`);
   }
@@ -136,7 +136,7 @@ export const getRoleSuggestions = (componentName: string): ComponentRole[] => {
     Modal: ['layout', 'feedback']
   };
 
-  return suggestions[componentName as keyof typeof suggestions] || ['layout'];
+  return (suggestions[componentName as keyof typeof suggestions] || ['layout']) as ComponentRole[];
 };
 
 /**

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AutoRoleView } from '../components/AutoRoleView';
+import { AutoRoleView } from '../shell/wrappers/AutoRoleView';
 
 // CODE SPLITTING: Dynamically import screen modules to reduce initial JS load
 const ThoughtmarkDetailScreen = React.lazy(() => import('../screens/ThoughtmarkDetailScreen'));
@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 export const RootNavigator: React.FC = () => {
   return (
-    <AutoRoleView role="navigation">
+    <AutoRoleView layoutRole="navigation">
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen 
@@ -42,7 +42,7 @@ const ThoughtmarkDetailScreenWrapper: React.FC = () => {
 // Placeholder HomeScreen component
 const HomeScreen: React.FC = () => {
   return (
-    <AutoRoleView role="screen" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <AutoRoleView layoutRole="container-main" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home Screen</Text>
     </AutoRoleView>
   );

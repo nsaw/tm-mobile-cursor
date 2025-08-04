@@ -82,14 +82,14 @@ export const SafeFrameShell: React.FC<SafeFrameShellType> = ({
       baseStyle.backgroundColor = '#D1FAE5';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getSafeFrameStyle()}
-      className={className}
+
       testID={testID || `safe-frame-shell-${contract.zIndex}`}
       accessibilityRole="none"
       accessibilityLabel={`Safe frame shell for ${contract.zIndex} layer`}

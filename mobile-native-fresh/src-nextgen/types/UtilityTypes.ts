@@ -12,7 +12,7 @@ export type AsyncReturnType<T extends (...args: unknown[]) => Promise<unknown>> 
 
 export type ComponentProps<T> = T extends React.ComponentType<infer P> ? P : never;
 
-export type EventHandler<T = unknown> = (event: T) => void;
+export type GenericEventHandler<T = unknown> = (event: T) => void;
 
 export type Callback<T = unknown> = (...args: T[]) => void;
 

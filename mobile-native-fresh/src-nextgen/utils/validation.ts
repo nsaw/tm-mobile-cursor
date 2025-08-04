@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export interface ValidationResult {
   isValid: boolean;
   errors: string[];
@@ -100,6 +102,54 @@ export class ValidationService {
 }
 
 export function useValidation() {
+  const [validationErrors, setValidationErrors] = useState<Record<string, string[]>>({});
+
+  const clearValidationErrors = () => {
+    setValidationErrors({});
+  };
+
+  const validateForm = (formData: Record<string, any>): boolean => {
+    const errors: Record<string, string[]> = {};
+    let isValid = true;
+
+    // Basic form validation - can be extended based on form structure
+    Object.keys(formData).forEach(key => {
+      const value = formData[key];
+      const fieldErrors: string[] = [];
+
+      // Required field validation
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        fieldErrors.push(`${key} is required`);
+        isValid = false;
+      }
+
+      // Email validation for email fields
+      if (key.toLowerCase().includes('email') && value) {
+        const emailResult = ValidationService.validateEmail(value);
+        if (!emailResult.isValid) {
+          fieldErrors.push(...emailResult.errors);
+          isValid = false;
+        }
+      }
+
+      // Password validation for password fields
+      if (key.toLowerCase().includes('password') && value) {
+        const passwordResult = ValidationService.validatePassword(value);
+        if (!passwordResult.isValid) {
+          fieldErrors.push(...passwordResult.errors);
+          isValid = false;
+        }
+      }
+
+      if (fieldErrors.length > 0) {
+        errors[key] = fieldErrors;
+      }
+    });
+
+    setValidationErrors(errors);
+    return isValid;
+  };
+
   return {
     validateEmail: ValidationService.validateEmail,
     validatePassword: ValidationService.validatePassword,
@@ -107,5 +157,8 @@ export function useValidation() {
     validateMinLength: ValidationService.validateMinLength,
     validateMaxLength: ValidationService.validateMaxLength,
     combineResults: ValidationService.combineResults,
+    validateForm,
+    validationErrors,
+    clearValidationErrors,
   };
 } 

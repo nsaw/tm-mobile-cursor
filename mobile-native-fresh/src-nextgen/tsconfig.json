@@ -1,0 +1,40 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["ESNext"],
+    "types": ["jest", "react-native"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@screens/*": ["./screens/*"],
+      "@utils/*": ["./utils/*"],
+      "@types/*": ["./types/*"],
+      "@services/*": ["./services/*"],
+      "@theme/*": ["./theme/*"],
+      "@navigation/*": ["./navigation/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ]
+} 

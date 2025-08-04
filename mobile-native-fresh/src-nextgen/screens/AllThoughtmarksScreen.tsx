@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image';
-import { AutoRoleView } from '../components/AutoRoleView';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { AutoRoleView } from '../shell/wrappers/AutoRoleView';
 
 interface Thoughtmark {
   id: string;
@@ -26,7 +25,7 @@ export const AllThoughtmarksScreen: React.FC<AllThoughtmarksScreenProps> = ({ vi
       try {
         setLoading(true);
         // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(() => resolve(undefined), 1000));
         
         const mockThoughtmarks: Thoughtmark[] = [
           {
@@ -59,15 +58,14 @@ export const AllThoughtmarksScreen: React.FC<AllThoughtmarksScreenProps> = ({ vi
   }, [visible]);
 
   const renderThoughtmark = ({ item }: { item: Thoughtmark }) => (
-    <AutoRoleView role="listitem" style={styles.thoughtmarkItem}>
+    <AutoRoleView contentRole="list-item" style={styles.thoughtmarkItem}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.content}>{item.content}</Text>
       {/* LAZY LOADING: Only load image when visible */}
       {visible && item.image && (
-        <FastImage 
+        <Image 
           source={{ uri: item.image }} 
           style={{ height: 200, width: '100%', marginTop: 8 }}
-          resizeMode={FastImage.resizeMode.cover}
         />
       )}
     </AutoRoleView>
@@ -75,14 +73,14 @@ export const AllThoughtmarksScreen: React.FC<AllThoughtmarksScreenProps> = ({ vi
 
   if (loading) {
     return (
-      <AutoRoleView role="loading" style={styles.container}>
+      <AutoRoleView contentRole="text-display" style={styles.container}>
         <Text>Loading thoughtmarks...</Text>
       </AutoRoleView>
     );
   }
 
   return (
-    <AutoRoleView role="screen" style={styles.container}>
+    <AutoRoleView layoutRole="container-main" style={styles.container}>
       <FlatList
         data={thoughtmarks}
         renderItem={renderThoughtmark}

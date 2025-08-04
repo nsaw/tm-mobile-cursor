@@ -15,6 +15,7 @@ class ApiService {
   private baseUrl: string;
   
   constructor() {
+    this.baseUrl = API_BASE_URL;
     console.log('🌐 ApiService initialized - Runtime validation active');
     console.log('📊 ApiService config:', {
       baseUrl: API_BASE_URL,

@@ -114,7 +114,7 @@ export const validateLayoutContract = (contract: LayoutContract): LayoutValidati
  */
 export const validateZIndexProtection = (
   layer: ZIndexLayer,
-  protected: boolean,
+  isProtected: boolean,
   fallback: number
 ): LayoutValidationResult => {
   const result: LayoutValidationResult = {
@@ -133,13 +133,13 @@ export const validateZIndexProtection = (
   }
 
   // Validate fallback value
-  if (protected && fallback < 0) {
+  if (isProtected && fallback < 0) {
     result.warnings.push('Fallback z-index should be non-negative');
   }
 
   // Check for conflicts with existing contracts
   for (const contract of contractRegistry.values()) {
-    if (contract.zIndex === layer && contract.protected && protected) {
+    if (contract.zIndex === layer && contract.protected && isProtected) {
       result.zIndexConflicts.push(`Protected layer conflict: ${layer}`);
     }
   }

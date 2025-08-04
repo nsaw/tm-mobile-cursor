@@ -6,7 +6,7 @@ export const useNavigation = <T extends keyof RootStackParamList>(): NavigationP
 };
 
 export const useRoute = <T extends keyof RootStackParamList>(): RouteProp<T> => {
-  return useRNRoute<RouteProp<T>>();
+  return useRNRoute() as RouteProp<T>;
 };
 
 export const useNavigationState = () => {

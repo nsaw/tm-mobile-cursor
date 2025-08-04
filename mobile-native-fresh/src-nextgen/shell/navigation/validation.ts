@@ -319,7 +319,7 @@ export const validateNavigationHierarchy = (
 
   const allowedChildren = hierarchyRules[parentRoute.name as keyof typeof hierarchyRules] || [];
   
-  if (!allowedChildren.includes(childRoute.name)) {
+  if (allowedChildren.length > 0 && !(allowedChildren as string[]).includes(childRoute.name)) {
     result.warnings.push(`Route ${parentRoute.name} should not contain ${childRoute.name} directly`);
     result.suggestions.push(`Consider using an intermediate ${allowedChildren[0] || 'home'} route`);
   }

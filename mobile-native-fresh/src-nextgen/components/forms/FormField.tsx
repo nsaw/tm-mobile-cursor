@@ -32,7 +32,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   const hasError = showError !== null;
 
   return (
-    <AutoRoleView role="form-field" style={styles.container}>
+    <AutoRoleView style={styles.container}>
       <View style={styles.labelContainer}>
         <Text style={[styles.label, hasError && styles.labelError]}>
           {label}
@@ -54,13 +54,13 @@ export const FormField: React.FC<FormFieldProps> = ({
       />
 
       {showError && (
-        <AutoRoleView role="form-error" style={styles.errorContainer}>
+        <AutoRoleView style={styles.errorContainer}>
           <Text style={styles.errorText}>{error}</Text>
         </AutoRoleView>
       )}
 
       {helperText && !showError && (
-        <AutoRoleView role="form-helper" style={styles.helperContainer}>
+        <AutoRoleView style={styles.helperContainer}>
           <Text style={styles.helperText}>{helperText}</Text>
         </AutoRoleView>
       )}

@@ -237,6 +237,32 @@ export class ValidationSystem {
   private validationQueue: Array<() => Promise<ValidationResult>> = [];
   private isProcessing: boolean = false;
 
+  // Test-only accessors
+  public get validateQueue() {
+    return this.validationQueue;
+  }
+
+  public async validateWithTimeout<T>(
+    operation: () => Promise<T>,
+    timeout: number = 5000
+  ): Promise<T> {
+    return new Promise((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+        reject(new Error(`Operation timed out after ${timeout}ms`));
+      }, timeout);
+
+      operation()
+        .then((result) => {
+          clearTimeout(timeoutId);
+          resolve(result);
+        })
+        .catch((error) => {
+          clearTimeout(timeoutId);
+          reject(error);
+        });
+    });
+  }
+
   constructor() {
     this.circuitBreaker = new CircuitBreaker(30000, 3); // 30s timeout, 3 failures
     this.retryMechanism = new RetryMechanism({

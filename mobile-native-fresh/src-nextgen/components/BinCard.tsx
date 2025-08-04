@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AutoRoleView } from './AutoRoleView';
 
 interface Bin {
@@ -26,14 +26,16 @@ export const BinCard: React.FC<BinCardProps> = ({ bin, onPress }) => {
   }, [bin.createdAt]);
 
   return (
-    <AutoRoleView role="card" style={styles.container} onPress={onPress}>
-      <Text style={styles.title}>{bin.name}</Text>
-      <Text style={styles.summary}>{summary}</Text>
-      <View style={styles.metadata}>
-        <Text style={styles.count}>{itemCount} items</Text>
-        <Text style={styles.date}>{formattedDate}</Text>
-      </View>
-    </AutoRoleView>
+    <TouchableOpacity onPress={onPress}>
+      <AutoRoleView role="content" style={styles.container}>
+        <Text style={styles.title}>{bin.name}</Text>
+        <Text style={styles.summary}>{summary}</Text>
+        <View style={styles.metadata}>
+          <Text style={styles.count}>{itemCount} items</Text>
+          <Text style={styles.date}>{formattedDate}</Text>
+        </View>
+      </AutoRoleView>
+    </TouchableOpacity>
   );
 };
 

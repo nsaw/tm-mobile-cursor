@@ -85,12 +85,8 @@ export const useAccessibility = (): AccessibilityConfig => {
 
     updateAccessibilityConfig();
 
-    const highContrastListener = AccessibilityInfo.addEventListener(
-      'highTextContrastDidChange',
-      (isHighContrastEnabled: boolean) => {
-        setConfig(prev => ({ ...prev, isHighContrastEnabled }));
-      }
-    );
+    // Note: highTextContrastDidChange is not a valid AccessibilityInfo event
+    // We'll rely on the initial check and manual updates
 
     const screenReaderListener = AccessibilityInfo.addEventListener(
       'screenReaderChanged',
@@ -135,17 +131,15 @@ export const useAccessibility = (): AccessibilityConfig => {
     );
 
     // Large text listener is not available in React Native, so we'll skip it
-    const largeTextListener = null;
 
     return () => {
-      highContrastListener?.remove();
       screenReaderListener?.remove();
       reduceMotionListener?.remove();
       reduceTransparencyListener?.remove();
       invertColorsListener?.remove();
       boldTextListener?.remove();
       grayscaleListener?.remove();
-      largeTextListener?.remove();
+      // largeTextListener is null, so no need to remove
     };
   }, []);
 

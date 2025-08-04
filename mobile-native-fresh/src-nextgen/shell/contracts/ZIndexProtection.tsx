@@ -64,14 +64,14 @@ export const ZIndexProtection: React.FC<ZIndexProtectionProps> = ({
       baseStyle.backgroundColor = '#FEE2E2';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getZIndexStyle()}
-      className={className}
+
       testID={testID || `z-index-protection-${layer}`}
       accessibilityRole="none"
       accessibilityLabel={`Z-index protection for ${layer} layer`}

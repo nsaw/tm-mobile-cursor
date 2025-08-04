@@ -1,3 +1,12 @@
+// Type declarations for Node.js modules (for development only)
+declare module 'child_process' {
+  export function exec(command: string): any;
+}
+
+declare module 'util' {
+  export function promisify(fn: any): any;
+}
+
 import { exec } from 'child_process';
 import { promisify } from 'util';
 

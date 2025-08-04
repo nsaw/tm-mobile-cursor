@@ -77,14 +77,13 @@ export const ScreenTransitions: React.FC<ScreenTransitionsProps> = ({
       baseStyle.backgroundColor = '#FEF3C7';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getTransitionStyle()}
-      className={className}
       testID={testID || `screen-transition-${transition.from}-${transition.to}`}
       accessibilityRole="none"
       accessibilityLabel={`Screen transition from ${transition.from} to ${transition.to}`}

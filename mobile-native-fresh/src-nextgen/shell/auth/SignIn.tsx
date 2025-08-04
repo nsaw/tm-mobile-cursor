@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AutoRoleView } from '../../components/AutoRoleView';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../hooks/useAuth';
 
 interface SignInProps {
@@ -15,7 +15,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { signIn, signInWithGoogle } = useAuth();
   const nav = useNavigation();
 
@@ -28,7 +28,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
     setIsLoading(true);
     try {
       await signIn(email, password);
-      nav.navigate('Home');
+      nav.navigate('Home' as never);
     } catch (error: any) {
       Alert.alert('Sign In Error', error.message || 'Failed to sign in');
     } finally {
@@ -40,7 +40,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
     setIsLoading(true);
     try {
       await signInWithGoogle();
-      nav.navigate('Home');
+      nav.navigate('Home' as never);
     } catch (error: any) {
       Alert.alert('Google Sign In Error', error.message || 'Failed to sign in with Google');
     } finally {
@@ -49,29 +49,29 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
   };
 
   const handleForgotPassword = () => {
-    nav.navigate('PasswordReset');
+    nav.navigate('PasswordReset' as never);
   };
 
   const handleSignUp = () => {
-    nav.navigate('SignUp');
+    nav.navigate('SignUp' as never);
   };
 
   return (
-    <AutoRoleView layoutRole="auth-container" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardAvoidingView}
       >
-        <AutoRoleView layoutRole="auth-header" style={styles.header}>
+        <AutoRoleView style={styles.header}>
           <Text style={[styles.title, { color: theme.colors.text }]}>Welcome Back</Text>
           <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
             Sign in to your account to continue
           </Text>
         </AutoRoleView>
 
-        <AutoRoleView layoutRole="auth-form" style={styles.form}>
+        <AutoRoleView style={styles.form}>
           {/* Email Input */}
-          <AutoRoleView layoutRole="input-group" style={styles.inputGroup}>
+          <AutoRoleView style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.colors.text }]}>Email</Text>
             <TextInput
               style={[styles.input, { 
@@ -90,7 +90,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
           </AutoRoleView>
 
           {/* Password Input */}
-          <AutoRoleView layoutRole="input-group" style={styles.inputGroup}>
+          <AutoRoleView style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.colors.text }]}>Password</Text>
             <View style={[styles.passwordContainer, { 
               backgroundColor: theme.colors.surface,
@@ -145,7 +145,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
           </TouchableOpacity>
 
           {/* Divider */}
-          <AutoRoleView layoutRole="divider" style={styles.divider}>
+          <AutoRoleView style={styles.divider}>
             <View style={[styles.dividerLine, { backgroundColor: theme.colors.outline }]} />
             <Text style={[styles.dividerText, { color: theme.colors.textSecondary }]}>or</Text>
             <View style={[styles.dividerLine, { backgroundColor: theme.colors.outline }]} />
@@ -167,7 +167,7 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
         </AutoRoleView>
 
         {/* Sign Up Link */}
-        <AutoRoleView layoutRole="auth-footer" style={styles.footer}>
+        <AutoRoleView style={styles.footer}>
           <Text style={[styles.footerText, { color: theme.colors.textSecondary }]}>
             Don't have an account?{' '}
           </Text>

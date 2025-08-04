@@ -1,5 +1,13 @@
-import * as React from 'react';
-import { View, Text, Platform } from 'react-native';
+// Global type declarations for React Native environment
+declare global {
+  var global: any;
+  var performance: any;
+  var PerformanceObserver: any;
+  var PerformanceEntry: any;
+}
+
+import React, { useEffect, useRef, useState } from 'react';
+import { Platform } from 'react-native';
 
 // React Native Performance API fallbacks with error boundary
 let PerformanceObserver: any;
@@ -152,6 +160,35 @@ interface PerformanceReport {
 export class PerformanceMonitor {
   private static instance: PerformanceMonitor;
   private metrics: PerformanceMetrics[] = [];
+  
+  // Test-only accessor for private metrics
+  public getMetricsForTesting(): PerformanceMetrics[] {
+    return this.metrics;
+  }
+
+  // Test-only methods for regression testing
+  public startMonitoring(): void {
+    this.monitorRenderPerformance();
+    this.monitorMemoryUsage();
+  }
+
+  public stopMonitoring(): void {
+    this.destroy();
+  }
+
+  public async measureAsyncOperation<T>(operation: () => Promise<T>): Promise<T> {
+    const startTime = performanceAPI.now();
+    try {
+      const result = await operation();
+      const endTime = performanceAPI.now();
+      this.recordComponentMetrics('async-operation', endTime - startTime, 'nextgen');
+      return result;
+    } catch (error) {
+      const endTime = performanceAPI.now();
+      this.recordComponentMetrics('async-operation-error', endTime - startTime, 'nextgen');
+      throw error;
+    }
+  }
   private memoryLeaks: MemoryLeak[] = [];
   private memoryThresholdViolations: MemoryThresholdViolation[] = [];
   private activeIntervals: number[] = [];
@@ -763,7 +800,7 @@ export const withPerformanceMonitoring = <P extends object>(
       
       if (errorBoundary.isInFallbackMode()) {
         // Fallback to basic component rendering
-        return React.createElement(WrappedComponent, { ...props, ref });
+        return React.createElement(WrappedComponent, { ...props, ref } as any);
       }
       
       const { recordComponentRender } = usePerformanceMonitor();
@@ -777,12 +814,12 @@ export const withPerformanceMonitoring = <P extends object>(
         }
       });
 
-      return React.createElement(WrappedComponent, { ...props, ref });
+      return React.createElement(WrappedComponent, { ...props, ref } as any);
     } catch (error) {
       const errorBoundary = PerformanceErrorBoundary.getInstance();
       errorBoundary.handleError(error as Error, `HOC performance monitoring for ${componentName}`);
       // Fallback to basic component rendering
-      return React.createElement(WrappedComponent, { ...props, ref });
+      return React.createElement(WrappedComponent, { ...props, ref } as any);
     }
   });
 };
@@ -801,7 +838,7 @@ export const establishPerformanceBaseline = async (): Promise<PerformanceBaselin
 
     // Measure baseline metrics
     const startTime = performanceAPI.now();
-    await new Promise(resolve => setTimeout(resolve, 100)); // Warm-up period
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 100)); // Warm-up period
     const endTime = performanceAPI.now();
     
     baseline.renderTime = endTime - startTime;

@@ -6,7 +6,7 @@ import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 
 export const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [thoughtmarks] = useThoughtmarks();
+  const { thoughtmarks } = useThoughtmarks();
   const [searchResults, searchThoughtmarks] = useSearch();
 
   const handleSearch = (query: string) => {
@@ -22,7 +22,7 @@ export const SearchScreen = () => {
         {/* Screen Reader Optimization — Improve voiceover support for key flows */}
         <Text 
           accessibilityLabel='Search title input' 
-          role='header'
+          accessibilityRole='header'
           style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}
         >
           Search

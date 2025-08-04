@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, ViewStyle } from 'react-native';
-import { LayoutContractProps, LayoutContract, ZIndexLayer } from './types';
+import { LayoutContractProps, LayoutContract as LayoutContractType, ZIndexLayer } from './types';
 import { validateLayoutContract, getZIndexValue } from './utils';
 
 /**
@@ -48,7 +48,7 @@ export const LayoutContract: React.FC<LayoutContractProps> = ({
   // Get layout style based on contract
   const getLayoutStyle = (): ViewStyle => {
     const baseStyle: ViewStyle = {
-      position: contract.constraints.position || 'relative',
+      position: (contract.constraints.position === 'fixed' ? 'absolute' : contract.constraints.position) || 'relative',
       zIndex: getZIndexValue(contract.zIndex),
     };
 
@@ -85,14 +85,14 @@ export const LayoutContract: React.FC<LayoutContractProps> = ({
       baseStyle.backgroundColor = '#FEF3C7';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getLayoutStyle()}
-      className={className}
+
       testID={testID || `layout-contract-${contract.zIndex}`}
       accessibilityRole="none"
       accessibilityLabel={`Layout contract for ${contract.zIndex} layer`}

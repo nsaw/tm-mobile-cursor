@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Post-commit hook to mirror patches and summaries to MAIN cache
+# This ensures all patches and summaries committed to mobile-native-fresh are also available in .cursor-cache/MAIN
+
+# Source the .env file to load environment variables
+if [ -f ".env" ]; then
+    source .env
+fi
+
+# Check if PATCH_MIRROR_ENABLED is set
+if [ "$PATCH_MIRROR_ENABLED" != "true" ]; then
+    echo "Patch mirroring disabled, skipping..."
+    exit 0
+fi
+
+# Get the project root
+PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+
+# Check if we're in the right directory
+if [ ! -f "$PROJECT_ROOT/scripts/mirror-to-main-cache.sh" ]; then
+    echo "Mirror script not found, skipping..."
+    exit 0
+fi
+
+# Run the comprehensive mirroring script
+echo "🔄 Auto-mirroring patches and summaries to MAIN cache..."
+cd "$PROJECT_ROOT"
+./scripts/mirror-to-main-cache.sh
+
+echo "✅ Comprehensive mirroring completed" 

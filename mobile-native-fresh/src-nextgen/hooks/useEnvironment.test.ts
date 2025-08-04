@@ -5,10 +5,14 @@ import { PerformanceMonitor } from '../utils/PerformanceMonitor';
 
 // Mock dependencies
 jest.mock('@react-native-async-storage/async-storage');
-jest.mock('../utils/PerformanceMonitor');
+jest.mock('../utils/PerformanceMonitor', () => ({
+  PerformanceMonitor: {
+    getInstance: jest.fn(),
+  },
+}));
 
 const mockAsyncStorage = AsyncStorage as jest.Mocked<typeof AsyncStorage>;
-const mockPerformanceMonitor = PerformanceMonitor as jest.MockedClass<typeof PerformanceMonitor>;
+const mockPerformanceMonitor = PerformanceMonitor as jest.Mocked<typeof PerformanceMonitor>;
 
 describe('useEnvironment', () => {
   beforeEach(() => {
@@ -17,9 +21,12 @@ describe('useEnvironment', () => {
     mockAsyncStorage.setItem.mockResolvedValue();
     mockAsyncStorage.removeItem.mockResolvedValue();
     
-    mockPerformanceMonitor.getInstance.mockReturnValue({
+    (mockPerformanceMonitor.getInstance as jest.Mock).mockReturnValue({
       recordComponentMetrics: jest.fn(),
-    } as any);
+      startMonitoring: jest.fn(),
+      stopMonitoring: jest.fn(),
+      measureAsyncOperation: jest.fn(),
+    });
   });
 
   it('should initialize with legacy environment', async () => {

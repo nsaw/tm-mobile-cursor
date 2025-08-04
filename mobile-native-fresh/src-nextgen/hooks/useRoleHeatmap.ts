@@ -25,7 +25,7 @@ export const useRoleHeatmap = (options: UseRoleHeatmapOptions = {}) => {
   const analyzeRoleDistribution = useCallback(() => {
     // In a real implementation, this would traverse the component tree
     // and analyze role assignments. For now, we'll use mock data.
-    const mockStats = {
+    const mockStats: Record<string, number> = {
       'button': 12,
       'text': 45,
       'image': 8,

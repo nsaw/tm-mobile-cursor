@@ -61,10 +61,10 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
           notification: tokens.colors.error,
         },
         fonts: {
-          regular: { fontFamily: 'System' },
-          medium: { fontFamily: 'System' },
-          bold: { fontFamily: 'System' },
-          heavy: { fontFamily: 'System' },
+          regular: { fontFamily: 'System', fontWeight: '400' },
+          medium: { fontFamily: 'System', fontWeight: '500' },
+          bold: { fontFamily: 'System', fontWeight: '700' },
+          heavy: { fontFamily: 'System', fontWeight: '900' },
         },
       }}
     >

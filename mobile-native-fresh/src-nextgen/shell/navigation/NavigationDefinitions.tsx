@@ -68,14 +68,14 @@ export const NavigationDefinitions: React.FC<NavigationDefinitionsProps> = ({
       baseStyle.backgroundColor = '#F3E8FF';
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   return (
     <View
       ref={componentRef}
       style={getNavigationStyle()}
-      className={className}
+
       testID={testID || `navigation-definitions-${environment}`}
       accessibilityRole="none"
       accessibilityLabel={`Navigation definitions for ${environment} environment`}

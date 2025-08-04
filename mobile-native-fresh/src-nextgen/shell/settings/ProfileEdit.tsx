@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { User, Edit, Save, X } from 'lucide-react-native';
 
-import { useTheme } from '../../../theme/theme';
-import { Button } from '../../../components/ui/Button';
-import { AutoRoleView } from '../../../components/AutoRoleView';
+import { useTheme } from '../../theme/ThemeProvider';
+import { Button } from '../../components/ui/Button';
+import { AutoRoleView } from '../../components/AutoRoleView';
 
 interface ProfileData {
   firstName: string;
@@ -16,7 +16,8 @@ interface ProfileData {
 }
 
 export const ProfileEdit: React.FC = () => {
-  const { colors, spacing, typography } = useTheme();
+  const { theme } = useTheme();
+  const { colors, spacing, typography } = theme;
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData>({
     firstName: 'John',
@@ -42,8 +43,8 @@ export const ProfileEdit: React.FC = () => {
       marginBottom: spacing.xl,
     },
     headerTitle: {
-      fontSize: typography.sizes.xl,
-      fontWeight: typography.weights.bold,
+      fontSize: typography.fontSize.xl,
+      fontWeight: 'bold' as const,
       color: colors.text,
     },
     editButton: {
@@ -59,22 +60,22 @@ export const ProfileEdit: React.FC = () => {
       width: 80,
       height: 80,
       borderRadius: 40,
-      backgroundColor: colors.accentMuted,
+      backgroundColor: colors.accent,
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom: spacing.lg,
     },
     avatarText: {
-      fontSize: typography.sizes.xl,
-      fontWeight: typography.weights.bold,
+      fontSize: typography.fontSize.xl,
+      fontWeight: 'bold' as const,
       color: colors.background,
     },
     formSection: {
       marginBottom: spacing.xl,
     },
     sectionTitle: {
-      fontSize: typography.sizes.lg,
-      fontWeight: typography.weights.semibold,
+      fontSize: typography.fontSize.lg,
+      fontWeight: '600' as const,
       color: colors.text,
       marginBottom: spacing.md,
     },
@@ -82,8 +83,8 @@ export const ProfileEdit: React.FC = () => {
       marginBottom: spacing.md,
     },
     label: {
-      fontSize: typography.sizes.sm,
-      fontWeight: typography.weights.medium,
+      fontSize: typography.fontSize.sm,
+      fontWeight: '500' as const,
       color: colors.textMuted,
       marginBottom: spacing.xs,
     },
@@ -92,7 +93,7 @@ export const ProfileEdit: React.FC = () => {
       borderColor: colors.border,
       borderRadius: spacing.sm,
       padding: spacing.md,
-      fontSize: typography.sizes.md,
+      fontSize: typography.fontSize.body,
       color: colors.text,
       backgroundColor: colors.surface,
     },
@@ -117,8 +118,8 @@ export const ProfileEdit: React.FC = () => {
     },
     buttonText: {
       color: colors.background,
-      fontSize: typography.sizes.md,
-      fontWeight: typography.weights.semibold,
+      fontSize: typography.fontSize.body,
+      fontWeight: '600' as const,
     },
   });
 
@@ -157,14 +158,17 @@ export const ProfileEdit: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AutoRoleView layoutRole="screen" style={styles.container}>
+      <AutoRoleView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Edit Profile</Text>
             {!isEditing && (
-              <Button onPress={handleEdit} style={styles.editButton}>
-                <Edit size={20} color={colors.background} />
-              </Button>
+              <Button 
+                title="Edit" 
+                onPress={handleEdit} 
+                style={styles.editButton}
+                textStyle={styles.buttonText}
+              />
             )}
           </View>
 
@@ -247,12 +251,18 @@ export const ProfileEdit: React.FC = () => {
 
           {isEditing && (
             <View style={styles.buttonRow}>
-              <Button onPress={handleSave} style={styles.saveButton}>
-                <Text style={styles.buttonText}>Save Changes</Text>
-              </Button>
-              <Button onPress={handleCancel} style={styles.cancelButton}>
-                <Text style={styles.buttonText}>Cancel</Text>
-              </Button>
+              <Button 
+                title="Save Changes" 
+                onPress={handleSave} 
+                style={styles.saveButton}
+                textStyle={styles.buttonText}
+              />
+              <Button 
+                title="Cancel" 
+                onPress={handleCancel} 
+                style={styles.cancelButton}
+                textStyle={styles.buttonText}
+              />
             </View>
           )}
         </ScrollView>

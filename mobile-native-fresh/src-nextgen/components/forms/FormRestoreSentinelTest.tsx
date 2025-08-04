@@ -78,12 +78,12 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
   };
 
   return (
-    <AutoRoleView role="form-restore-sentinel-test" style={styles.container}>
+    <AutoRoleView role="content" style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.title}>Form Restore Sentinel Test ({environment})</Text>
         
         {/* Test Controls */}
-        <AutoRoleView role="test-controls" style={styles.testSection}>
+        <AutoRoleView role="interactive" style={styles.testSection}>
           <Text style={styles.sectionTitle}>Test Controls</Text>
           
           <TouchableOpacity 
@@ -109,7 +109,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
         </AutoRoleView>
 
         {/* Form with Sentinel */}
-        <AutoRoleView role="form-with-sentinel" style={styles.formSection}>
+        <AutoRoleView role="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Form with Restore Sentinel</Text>
           
           <FormRestoreSentinel
@@ -193,7 +193,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
             </TouchableOpacity>
 
             {signupForm.submitError && (
-              <AutoRoleView role="submit-error" style={styles.errorContainer}>
+              <AutoRoleView role="feedback" style={styles.errorContainer}>
                 <Text style={styles.errorText}>{signupForm.submitError}</Text>
               </AutoRoleView>
             )}
@@ -201,7 +201,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
         </AutoRoleView>
 
         {/* Form State Display */}
-        <AutoRoleView role="form-state-display" style={styles.stateSection}>
+        <AutoRoleView role="content" style={styles.stateSection}>
           <Text style={styles.sectionTitle}>Current Form State</Text>
           <Text style={styles.stateText}>
             {JSON.stringify(signupForm.getFormValues(), null, 2)}
@@ -209,7 +209,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
         </AutoRoleView>
 
         {/* Test Results */}
-        <AutoRoleView role="test-results" style={styles.resultsSection}>
+        <AutoRoleView role="content" style={styles.resultsSection}>
           <Text style={styles.sectionTitle}>Test Results</Text>
           {testResults.length === 0 ? (
             <Text style={styles.noResultsText}>No test results yet. Run a test to see results.</Text>
@@ -223,7 +223,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
         </AutoRoleView>
 
         {/* Sentinel Features */}
-        <AutoRoleView role="sentinel-features" style={styles.featuresSection}>
+        <AutoRoleView role="content" style={styles.featuresSection}>
           <Text style={styles.sectionTitle}>Sentinel Features</Text>
           <Text style={styles.featureText}>✅ Auto-save form state every 1 second</Text>
           <Text style={styles.featureText}>✅ Auto-restore form state on mount</Text>

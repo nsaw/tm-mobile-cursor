@@ -8,7 +8,6 @@ export * from './FormTypes';
 export * from './NavigationTypes';
 export * from './StateTypes';
 export * from './UtilityTypes';
-export * from './ValidationTypes';
 export * from './PerformanceTypes';
 export * from './AccessibilityTypes';
 

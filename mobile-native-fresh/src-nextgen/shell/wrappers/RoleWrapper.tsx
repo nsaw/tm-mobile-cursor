@@ -40,7 +40,7 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
   // Check for debug environment variable
   useEffect(() => {
     const debugEnabled = process.env.EXPO_PUBLIC_DEBUG_ROLES === 'true' || finalConfig.debug;
-    setShowDebugOverlay(debugEnabled);
+    setShowDebugOverlay(debugEnabled ?? false);
   }, [finalConfig.debug]);
 
   // Role-specific styling
@@ -56,7 +56,7 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
       baseStyle.padding = 2;
     }
 
-    return { ...baseStyle, ...style };
+    return { ...baseStyle, ...style } as ViewStyle;
   };
 
   // Get color for role debugging
@@ -116,9 +116,8 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
     <View
       ref={componentRef}
       style={getRoleStyle()}
-      className={className}
       testID={testID || `role-wrapper-${role}`}
-      accessibilityRole={role}
+      accessibilityRole="none"
       accessibilityLabel={`Role wrapper for ${role}`}
     >
       {children}

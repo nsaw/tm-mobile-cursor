@@ -6,8 +6,8 @@ import {
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import { useTheme } from '../../theme/ThemeProvider';
-import { AutoRoleView } from '../core/roles/AutoRoleView';
+import { useTheme } from '../theme/ThemeProvider';
+import { AutoRoleView } from './AutoRoleView';
 
 import { Text } from './Text';
 
@@ -32,11 +32,11 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   const { tokens: designTokens } = useTheme();
 
   return (
-    <AutoRoleView layoutRole="header-navigation">
+            <AutoRoleView>
       <View style={{
         backgroundColor: 'rgba(0, 0, 0, 0)',
         borderBottomWidth: 1,
-        borderBottomColor: designTokens.colors.divider,
+        borderBottomColor: designTokens.colors.border,
         paddingHorizontal: designTokens.spacing.md,
         paddingVertical: 2,
         minHeight: 40,
@@ -82,7 +82,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             )}
             <View style={{ flex: 1 }}>
               <Text 
-                variant="heading2" 
+                variant="heading" 
                 style={{ 
                   textTransform: 'uppercase',
                   letterSpacing: 1,
@@ -93,7 +93,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               {subtitle && (
                 <Text 
                   variant="body" 
-                  size="sm"
+                  size="small"
                   style={{ 
                     marginTop: 1,
                   }}

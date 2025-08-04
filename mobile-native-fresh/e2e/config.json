@@ -1,0 +1,6 @@
+{
+  "testEnvironment": "node",
+  "testTimeout": 120000,
+  "testRegex": ".*\\.e2e\\.js$",
+  "verbose": true
+} 

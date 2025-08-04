@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Switch, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Bell, BellOff, MessageSquare, Heart, Star, Users } from 'lucide-react-native';
 
-import { useTheme } from '../../../theme/theme';
-import { Button } from '../../../components/ui/Button';
-import { AutoRoleView } from '../../../components/AutoRoleView';
+import { useTheme } from '../../theme/ThemeProvider';
+import { Button } from '../../components/ui/Button';
+import { AutoRoleView } from '../../components/AutoRoleView';
 
 interface NotificationSettings {
   pushNotifications: boolean;
@@ -19,7 +19,8 @@ interface NotificationSettings {
 }
 
 export const Notifications: React.FC = () => {
-  const { colors, spacing, typography } = useTheme();
+  const { theme } = useTheme();
+  const { colors, spacing, typography } = theme;
   const [settings, setSettings] = useState<NotificationSettings>({
     pushNotifications: true,
     emailNotifications: true,
@@ -43,22 +44,22 @@ export const Notifications: React.FC = () => {
       marginBottom: spacing.xl,
     },
     headerTitle: {
-      fontSize: typography.sizes.xl,
-      fontWeight: typography.weights.bold,
+      fontSize: typography.fontSize.xl,
+      fontWeight: 'bold' as const,
       color: colors.text,
       marginBottom: spacing.sm,
     },
     headerSubtitle: {
-      fontSize: typography.sizes.md,
+      fontSize: typography.fontSize.body,
       color: colors.textMuted,
-      lineHeight: typography.lineHeights.md,
+      lineHeight: typography.lineHeight.body,
     },
     section: {
       marginBottom: spacing.xl,
     },
     sectionTitle: {
-      fontSize: typography.sizes.lg,
-      fontWeight: typography.weights.semibold,
+      fontSize: typography.fontSize.lg,
+      fontWeight: '600' as const,
       color: colors.text,
       marginBottom: spacing.md,
     },
@@ -75,15 +76,15 @@ export const Notifications: React.FC = () => {
       marginRight: spacing.md,
     },
     settingTitle: {
-      fontSize: typography.sizes.md,
-      fontWeight: typography.weights.medium,
+      fontSize: typography.fontSize.body,
+      fontWeight: '500' as const,
       color: colors.text,
       marginBottom: spacing.xs,
     },
     settingDescription: {
-      fontSize: typography.sizes.sm,
+      fontSize: typography.fontSize.sm,
       color: colors.textMuted,
-      lineHeight: typography.lineHeights.sm,
+      lineHeight: typography.lineHeight.sm,
     },
     settingIcon: {
       width: 40,
@@ -118,8 +119,8 @@ export const Notifications: React.FC = () => {
     },
     buttonText: {
       color: colors.background,
-      fontSize: typography.sizes.md,
-      fontWeight: typography.weights.semibold,
+      fontSize: typography.fontSize.body,
+      fontWeight: '600' as const,
     },
     disabledText: {
       color: colors.textMuted,
@@ -199,7 +200,7 @@ export const Notifications: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AutoRoleView layoutRole="screen" style={styles.container}>
+      <AutoRoleView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Notifications</Text>
@@ -291,12 +292,18 @@ export const Notifications: React.FC = () => {
           </View>
 
           <View style={styles.buttonRow}>
-            <Button onPress={handleSave} style={styles.saveButton}>
-              <Text style={styles.buttonText}>Save Settings</Text>
-            </Button>
-            <Button onPress={handleReset} style={styles.resetButton}>
-              <Text style={styles.buttonText}>Reset to Default</Text>
-            </Button>
+            <Button 
+              title="Save Settings" 
+              onPress={handleSave} 
+              style={styles.saveButton}
+              textStyle={styles.buttonText}
+            />
+            <Button 
+              title="Reset to Default" 
+              onPress={handleReset} 
+              style={styles.resetButton}
+              textStyle={styles.buttonText}
+            />
           </View>
         </ScrollView>
       </AutoRoleView>

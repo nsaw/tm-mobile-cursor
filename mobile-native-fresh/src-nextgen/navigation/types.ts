@@ -1,22 +1,34 @@
 import { NavigationProp as RNNavigationProp, RouteProp as RNRouteProp } from '@react-navigation/native';
 
 // Core navigation types
-export type RootStackParamList = {
+export interface RootStackParamList {
   Home: undefined;
   Dashboard: undefined;
   Search: undefined;
-  Profile: undefined;
-  Settings: undefined;
+  AllThoughtmarks: {
+    filter?: 'tasks' | 'bin' | 'tag';
+    binId?: string;
+    tag?: string;
+  } | undefined;
+  AllBins: undefined;
+  CreateThoughtmark: undefined;
+  CreateBin: undefined;
+  ThoughtmarkDetail: { id: string };
+  BinDetail: { id: string };
   SignIn: undefined;
   SignUp: undefined;
   PasswordReset: undefined;
-  ThoughtmarkDetail: { id: string };
-  TaskDetail: { id: string };
-  EditProfile: undefined;
+  Profile: undefined;
+  ProfileEdit: undefined;
+  Settings: undefined;
   Notifications: undefined;
+  ThemeScreen: undefined;
+  ContactScreen: undefined;
+  HowToScreen: undefined;
   Loading: { isVisible: boolean };
-  Error: { message: string };
-};
+  AITools: undefined;
+  [key: string]: any;
+}
 
 // Navigation prop types
 export type NavigationProps<T extends keyof RootStackParamList> = {
@@ -32,10 +44,12 @@ export interface DeepLinkConfig {
 }
 
 export interface NavigationState {
-  currentRoute: keyof RootStackParamList;
-  previousRoute?: keyof RootStackParamList;
-  params?: Record<string, unknown>;
-  timestamp: number;
+  index: number;
+  routes: Array<{
+    key: string;
+    name: string;
+    params?: any;
+  }>;
 }
 
 // Navigation validation types
@@ -53,12 +67,18 @@ export interface RouteMismatchError {
   context: string;
 }
 
-export type TabParamList = {
-  HomeTab: undefined;
-  SearchTab: undefined;
-  DashboardTab: undefined;
-  ProfileTab: undefined;
-};
+export interface TabParamList {
+  Home: undefined;
+  Search: undefined;
+  AllThoughtmarks: undefined;
+  Profile: undefined;
+  [key: string]: any;
+}
+
+export interface NavigationAction {
+  type: string;
+  payload?: any;
+}
 
 export type NavigationProp<T extends keyof RootStackParamList> = {
   navigate: (screen: T, params?: RootStackParamList[T]) => void;
@@ -69,20 +89,7 @@ export type NavigationProp<T extends keyof RootStackParamList> = {
   setOptions: (options: unknown) => void;
 };
 
-export type RouteProp<T extends keyof RootStackParamList> = {
-  key: string;
-  name: T;
-  params: RootStackParamList[T];
-};
-
-export interface NavigationState {
-  index: number;
-  routes: Array<{
-    key: string;
-    name: string;
-    params?: unknown;
-  }>;
-}
+export type RouteProp<T extends keyof RootStackParamList> = RNRouteProp<RootStackParamList, T>;
 
 export interface NavigationOptions {
   title?: string;

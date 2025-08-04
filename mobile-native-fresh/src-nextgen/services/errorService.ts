@@ -38,6 +38,11 @@ export class ErrorService {
     // TODO: Implement real tag setting
     console.log('Tag Set:', key, value);
   }
+
+  static reportError(error: Error, context?: Record<string, unknown>): void {
+    // TODO: Implement real error reporting
+    console.error('Error Reported:', error, context);
+  }
 }
 
 export const errorService = ErrorService; 

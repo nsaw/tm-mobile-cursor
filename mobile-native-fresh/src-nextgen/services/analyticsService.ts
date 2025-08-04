@@ -29,6 +29,11 @@ export class AnalyticsService {
     // TODO: Implement real property setting
     console.log('Set Property:', key, value);
   }
+
+  static track(eventName: string, properties?: Record<string, string | number | boolean>): void {
+    // TODO: Implement real analytics tracking
+    console.log('Analytics Track:', eventName, properties);
+  }
 }
 
 export const analyticsService = AnalyticsService; 

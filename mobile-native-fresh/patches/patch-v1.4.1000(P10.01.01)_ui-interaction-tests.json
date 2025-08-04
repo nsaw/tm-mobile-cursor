@@ -1,0 +1,109 @@
+{
+  "showInUI": true,
+  "blockId": "patch-v1.4.1000(P10.01.01)_ui-interaction-tests",
+  "description": "Comprehensive UI interaction testing with visual validation integration",
+  "target": "MAIN",
+  "version": "patch-v1.4.1000(P10.01.01)_ui-interaction-tests",
+  "notes": [
+    "🎯 MISSION: Implement comprehensive UI testing and visual validation system",
+    "📋 GOAL: Complete UI interaction tests with navigation, components, forms, and visual regression",
+    "🔧 SCOPE: Detox setup, screenshot capture, visual regression, patch integration",
+    "✅ REQUIREMENTS:",
+    "[ ] Fix Node.js environment and install Detox",
+    "[ ] Create comprehensive UI interaction tests",
+    "[ ] Implement screenshot comparison system",
+    "[ ] Integrate with existing patch system",
+    "[ ] Add validation gates and failure handling",
+    "🚨 SAFETY ENFORCEMENT: All tests must pass before patch completion",
+    "📊 VALIDATION: Screenshots, visual regression, and UI interactions validated"
+  ],
+  "preCommit": {
+    "backup": {
+      "path": "/Users/sawyer/gitSync/_backups/tm-safety_backups/",
+      "file": "20250127-UTC_patch-v1.4.1000(P10.01.01)_ui-interaction-tests_backup_tm-mobile-cursor.tar.gz"
+    },
+    "shell": [
+      "export NODE_ENV=test",
+      "echo 'Starting comprehensive UI testing implementation...'"
+    ]
+  },
+  "mutations": [
+    {
+      "description": "Install and configure Detox for UI testing",
+      "shell": [
+        "/opt/homebrew/bin/npm install --save-dev detox",
+        "echo 'Detox installation completed'"
+      ]
+    },
+    {
+      "description": "Create Detox configuration and test structure",
+      "shell": [
+        "mkdir -p e2e/tests",
+        "echo 'E2E test structure created'"
+      ]
+    },
+    {
+      "description": "Create unified validation directories",
+      "shell": [
+        "mkdir -p /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/screenshots/baseline",
+        "mkdir -p /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/screenshots/current",
+        "mkdir -p /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/screenshots/diff",
+        "mkdir -p /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/logs",
+        "echo 'Unified validation directories created'"
+      ]
+    }
+  ],
+  "postMutationBuild": {
+    "shell": [
+      "timeout 300s node scripts/validate-ui-integration.cjs detox || exit 201",
+      "timeout 600s node scripts/validate-ui-integration.cjs screenshots || exit 202",
+      "timeout 300s node scripts/validate-ui-integration.cjs regression || exit 203",
+      "timeout 180s node scripts/validate-ui-integration.cjs gate || exit 204"
+    ]
+  },
+  "validate": {
+    "shell": [
+      "test -f /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/logs/ui-validation-integration.log || exit 301",
+      "test -f /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/logs/ui-validation-report.json || exit 302",
+      "test -d /Users/sawyer/gitSync/.cursor-cache/MAIN/validations/screenshots/current || exit 303",
+      "test -f .detoxrc.js || exit 304",
+      "test -d e2e/tests || exit 305",
+      "grep -q 'test:ui:interactions' package.json || exit 306",
+      "grep -q 'test:visual:regression' package.json || exit 307"
+    ]
+  },
+  "successCriteria": [
+    "Detox properly installed and configured",
+    "Comprehensive UI interaction tests created and functional",
+    "Screenshot capture system working with unified paths",
+    "Visual regression testing system operational",
+    "Integration with existing patch system complete",
+    "All validation gates passing",
+    "Failure handling implemented"
+  ],
+  "failureMode": {
+    "onError": "Rollback and alert user",
+    "onTimeout": "Continue with next step",
+    "onValidationFail": "Mark patch as failed and require manual intervention"
+  },
+  "final": {
+    "git": {
+      "commit": "feat: comprehensive UI interaction testing with visual validation",
+      "tag": "v1.4.1000(P10.01.01)_ui-interaction-tests"
+    },
+    "summary": "✅ Comprehensive UI testing system implemented with Detox, screenshot capture, visual regression, and patch integration",
+    "summaryFile": "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-patch-v1.4.1000(P10.01.01)_ui-interaction-tests.md"
+  },
+  "blockCommitOnError": true,
+  "watchConsole": true,
+  "execution": {
+    "autoReleaseTimeoutMs": 600000,
+    "onReloadHang": "Move to background and resume automatically"
+  },
+  "enforceValidationGate": true,
+  "strictRuntimeAudit": true,
+  "runDryCheck": true,
+  "forceRuntimeTrace": true,
+  "requireMutationProof": true,
+  "requireServiceUptime": true
+} 

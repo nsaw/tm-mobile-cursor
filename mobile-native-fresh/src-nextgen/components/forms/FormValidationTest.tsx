@@ -31,12 +31,12 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
   };
 
   return (
-    <AutoRoleView role="form-validation-test" style={styles.container}>
+    <AutoRoleView role="content" style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.title}>Form Validation Test ({environment})</Text>
         
         {/* Signup Form Test */}
-        <AutoRoleView role="signup-form-test" style={styles.formSection}>
+        <AutoRoleView role="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Signup Form Test</Text>
           
           <FormField
@@ -98,7 +98,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-          <AutoRoleView role="signup-submit" style={styles.buttonContainer}>
+                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -111,14 +111,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {signupForm.submitError && (
-            <AutoRoleView role="signup-error" style={styles.errorContainer}>
+            <AutoRoleView role="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{signupForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Signin Form Test */}
-        <AutoRoleView role="signin-form-test" style={styles.formSection}>
+        <AutoRoleView role="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Signin Form Test</Text>
           
           <FormField
@@ -150,7 +150,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-          <AutoRoleView role="signin-submit" style={styles.buttonContainer}>
+                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -163,14 +163,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {signinForm.submitError && (
-            <AutoRoleView role="signin-error" style={styles.errorContainer}>
+            <AutoRoleView role="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{signinForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Profile Form Test */}
-        <AutoRoleView role="profile-form-test" style={styles.formSection}>
+        <AutoRoleView role="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Profile Form Test</Text>
           
           <FormField
@@ -226,7 +226,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-          <AutoRoleView role="profile-submit" style={styles.buttonContainer}>
+                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -239,14 +239,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {profileForm.submitError && (
-            <AutoRoleView role="profile-error" style={styles.errorContainer}>
+            <AutoRoleView role="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{profileForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Validation Status */}
-        <AutoRoleView role="validation-status" style={styles.statusSection}>
+        <AutoRoleView role="feedback" style={styles.statusSection}>
           <Text style={styles.statusTitle}>Validation Status</Text>
           <Text style={styles.statusText}>
             Signup Form: {signupForm.hasErrors() ? '❌ Has Errors' : '✅ Valid'}

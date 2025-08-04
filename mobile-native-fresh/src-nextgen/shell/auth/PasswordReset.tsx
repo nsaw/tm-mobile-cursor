@@ -13,9 +13,8 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
-import { useAuth } from '../../../features/auth/hooks/useAuth';
-import { colors, spacing, typography } from '../../../theme/theme';
-import { useTheme } from '../../../theme/ThemeProvider';
+import { useAuth } from '../../features/auth/hooks/useAuth';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const logo = require('../../../../assets/logo.png');
 
@@ -23,7 +22,7 @@ export const PasswordResetScreen: React.FC = () => {
   const { resetPassword, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
-  const { tokens: designTokens } = useTheme();
+  const { theme } = useTheme();
 
   const handlePasswordReset = async () => {
     if (!email.trim()) {
@@ -48,11 +47,11 @@ export const PasswordResetScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: theme.colors.background,
     },
     keyboard: {
       flex: 1,
-      paddingHorizontal: spacing.md,
+      paddingHorizontal: theme.spacing.md,
       justifyContent: 'center',
     },
     scrollContent: {
@@ -61,70 +60,72 @@ export const PasswordResetScreen: React.FC = () => {
     },
     logoContainer: {
       alignItems: 'center',
-      marginBottom: spacing.xl,
+      marginBottom: theme.spacing.xl,
     },
     logo: {
       width: 100,
       height: 100,
     },
     title: {
-      ...typography.heading,
-      color: colors.text,
+      fontSize: theme.typography.fontSize.heading,
+      fontWeight: 'bold',
+      color: theme.colors.text,
       textAlign: 'center',
-      marginBottom: spacing.sm,
+      marginBottom: theme.spacing.sm,
     },
     subtitle: {
-      ...typography.body,
-      color: colors.subtext,
+      fontSize: theme.typography.fontSize.body,
+      fontWeight: 'normal',
+      color: theme.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: spacing.lg,
+      marginBottom: theme.spacing.lg,
     },
     formContainer: {
-      backgroundColor: colors.card,
-      borderRadius: designTokens.radius.md,
-      padding: spacing.md,
+      backgroundColor: theme.colors.surface,
+      borderRadius: 8,
+      padding: theme.spacing.md,
       shadowColor: '#000',
       shadowOpacity: 0.05,
       shadowRadius: 10,
       elevation: 3,
     },
     inputContainer: {
-      marginBottom: spacing.md,
+      marginBottom: theme.spacing.md,
     },
     input: {
       borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
-      paddingHorizontal: spacing.md,
+      borderColor: theme.colors.border,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 1.5,
+      paddingHorizontal: theme.spacing.md,
       fontSize: 16,
-      color: colors.text,
-      backgroundColor: colors.background,
+      color: theme.colors.text,
+      backgroundColor: theme.colors.background,
     },
     primaryButton: {
-      backgroundColor: colors.primary,
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
+      backgroundColor: theme.colors.accent,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 1.5,
       alignItems: 'center',
-      marginBottom: spacing.md,
+      marginBottom: theme.spacing.md,
     },
     primaryButtonText: {
-      ...typography.body,
-      color: '#fff',
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '600',
+      color: '#fff',
     },
     secondaryButton: {
       backgroundColor: 'transparent',
-      borderRadius: designTokens.radius.md,
-      paddingVertical: spacing.sm * 1.5,
+      borderRadius: 8,
+      paddingVertical: theme.spacing.sm * 1.5,
       alignItems: 'center',
       borderWidth: 1,
-      borderColor: colors.border,
+      borderColor: theme.colors.border,
     },
     secondaryButtonText: {
-      ...typography.body,
-      color: colors.text,
+      fontSize: theme.typography.fontSize.body,
       fontWeight: '500',
+      color: theme.colors.text,
     },
   });
 
@@ -139,7 +140,7 @@ export const PasswordResetScreen: React.FC = () => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.logoContainer}>
-            <Image source={logo} style={styles.logo} resizeMode="contain" />
+            <Image source={logo} style={styles.logo as any} resizeMode="contain" />
           </View>
 
           <Text style={styles.title}>Reset Password</Text>
@@ -150,7 +151,7 @@ export const PasswordResetScreen: React.FC = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Enter your email"
-                placeholderTextColor={colors.subtext}
+                placeholderTextColor={theme.colors.textSecondary}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"

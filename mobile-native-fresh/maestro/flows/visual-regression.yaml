@@ -1,0 +1,87 @@
+appId: com.thoughtmarks.mobile
+name: Visual Regression Test
+tags:
+  - visual
+  - regression
+  - screenshots
+
+# Launch app and capture baseline screenshots
+---
+- launchApp
+
+# Capture baseline screenshots for all key screens
+---
+- runFlow:
+    when:
+      visible: "Home"
+    commands:
+      - takeScreenshot: "baseline-home-screen"
+
+---
+- runFlow:
+    when:
+      visible: "Profile"
+    commands:
+      - tapOn: "Profile"
+      - takeScreenshot: "baseline-profile-screen"
+
+---
+- runFlow:
+    when:
+      visible: "Settings"
+    commands:
+      - tapOn: "Settings"
+      - takeScreenshot: "baseline-settings-screen"
+
+# Test component states
+---
+- runFlow:
+    when:
+      visible: "Button"
+    commands:
+      - takeScreenshot: "baseline-button-default"
+      - tapOn: "Button"
+      - takeScreenshot: "baseline-button-pressed"
+
+---
+- runFlow:
+    when:
+      visible: "Dropdown"
+    commands:
+      - takeScreenshot: "baseline-dropdown-closed"
+      - tapOn: "Dropdown"
+      - takeScreenshot: "baseline-dropdown-open"
+
+# Test form states
+---
+- runFlow:
+    when:
+      visible: "Input Field"
+    commands:
+      - takeScreenshot: "baseline-input-empty"
+      - tapOn: "Input Field"
+      - inputText: "Test Input"
+      - takeScreenshot: "baseline-input-filled"
+
+# Test navigation states
+---
+- runFlow:
+    commands:
+      - swipe:
+          direction: LEFT
+          duration: 500
+      - takeScreenshot: "baseline-swipe-navigation"
+
+---
+- runFlow:
+    commands:
+      - swipe:
+          direction: RIGHT
+          duration: 500
+      - takeScreenshot: "baseline-swipe-back"
+
+# Final baseline state
+---
+- runFlow:
+    commands:
+      - takeScreenshot: "baseline-final-state" 

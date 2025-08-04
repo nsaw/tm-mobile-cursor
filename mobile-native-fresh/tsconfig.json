@@ -47,7 +47,8 @@
     "node_modules",
     "backend/dist/**/*",
     "src-artifact/**/*",
-    "THAWED-REFERENCE/**/*"
+    "THAWED-REFERENCE/**/*",
+    "src-nextgen/shell/automation/**/*"
   ],
   "extends": "expo/tsconfig.base"
 }

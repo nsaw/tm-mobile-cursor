@@ -1,3 +1,9 @@
+// Global type declarations for test environment
+declare global {
+  var performance: any;
+  var global: any;
+}
+
 import { PerformanceMonitor, establishPerformanceBaseline, detectPerformanceRegression } from './PerformanceMonitor';
 import { Platform } from 'react-native';
 
@@ -70,7 +76,7 @@ describe('PerformanceMonitor', () => {
   it('should detect memory leaks', () => {
     // Simulate increasing memory usage
     for (let i = 0; i < 5; i++) {
-      monitor.metrics.push({
+      monitor.getMetricsForTesting().push({
         renderTime: 100,
         memoryUsage: 1000 + i * 100, // Increasing memory usage
         bundleSize: 1000,
@@ -89,7 +95,7 @@ describe('PerformanceMonitor', () => {
   it('should not detect memory leaks for stable usage', () => {
     // Simulate stable memory usage
     for (let i = 0; i < 5; i++) {
-      monitor.metrics.push({
+      monitor.getMetricsForTesting().push({
         renderTime: 100,
         memoryUsage: 1000, // Stable memory usage
         bundleSize: 1000,

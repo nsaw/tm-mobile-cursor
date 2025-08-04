@@ -24,20 +24,26 @@ export const legacyTypeMappings: LegacyTypeMapping[] = [
   {
     legacyType: 'LegacyUser',
     nextgenType: 'User',
-    transformer: (value) => ({
-      ...value,
-      isPremium: value.premium || false,
-    }),
+    transformer: (value) => {
+      const typedValue = value as Record<string, unknown>;
+      return {
+        ...typedValue,
+        isPremium: typedValue.premium || false,
+      };
+    },
   },
   {
     legacyType: 'LegacyThoughtmark',
     nextgenType: 'Thoughtmark',
-    transformer: (value) => ({
-      ...value,
-      tags: value.tags || [],
-      isArchived: value.archived || false,
-      isPinned: value.pinned || false,
-    }),
+    transformer: (value) => {
+      const typedValue = value as Record<string, unknown>;
+      return {
+        ...typedValue,
+        tags: typedValue.tags || [],
+        isArchived: typedValue.archived || false,
+        isPinned: typedValue.pinned || false,
+      };
+    },
   },
 ];
 

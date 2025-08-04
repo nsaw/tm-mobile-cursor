@@ -9,6 +9,7 @@ export interface FormField {
   validation?: ValidationRule[];
   error?: string;
   disabled?: boolean;
+  touched?: boolean;
 }
 
 export interface ValidationRule {
@@ -31,10 +32,13 @@ export interface FormActions {
   setFieldValue: (name: string, value: any) => void;
   setFieldError: (name: string, error: string) => void;
   setFieldTouched: (name: string, touched: boolean) => void;
-  validateField: (name: string) => void;
-  validateForm: () => boolean;
+  validateField: (name: string, value?: any, allValues?: Record<string, any>) => Promise<string | undefined>;
+  validateForm: () => Promise<boolean>;
   resetForm: () => void;
   submitForm: () => Promise<void>;
+  getFieldValue: (name: string) => any;
+  getFieldError: (name: string) => string | undefined;
+  getFieldTouched: (name: string) => boolean;
 }
 
 export interface FormConfig {
@@ -42,6 +46,9 @@ export interface FormConfig {
   validationSchema?: Record<string, ValidationRule[]>;
   onSubmit: (values: Record<string, any>) => Promise<void>;
   onError?: (errors: Record<string, string>) => void;
+  onReset?: () => void;
+  validateOnChange?: boolean;
+  validateOnBlur?: boolean;
 }
 
 export interface FormHook {

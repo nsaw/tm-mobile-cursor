@@ -127,10 +127,13 @@ const AuthStack = () => (
   </Stack.Navigator>
 );
 
+// Loading Screen Wrapper
+const LoadingScreenWrapper = () => <LoadingScreen isVisible={true} />;
+
 // Loading Stack Navigator
 const LoadingStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="Loading" component={LoadingScreen} />
+    <Stack.Screen name="Loading" component={LoadingScreenWrapper} />
   </Stack.Navigator>
 );
 

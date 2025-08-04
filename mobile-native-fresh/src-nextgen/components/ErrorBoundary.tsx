@@ -86,7 +86,7 @@ interface ErrorFallbackProps {
   onReset: () => void;
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
+export const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
   const { tokens } = useTheme();
   const { isScreenReaderEnabled } = useAccessibility();
   const { setError } = useUIStore();
