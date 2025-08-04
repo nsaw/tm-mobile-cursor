@@ -1,23 +1,23 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../theme/ThemeProvider';
 
-export const SettingsScreen: React.FC = () => {
+export const HomeScreen: React.FC = () => {
   const { theme } = useTheme();
 
   return (
     <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <AutoRoleView role="header-section" style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>Settings</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>Home</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-          Manage your preferences
+          Welcome to Thoughtmarks
         </Text>
       </AutoRoleView>
       
       <AutoRoleView role="content" style={styles.content}>
         <Text style={[styles.bodyText, { color: theme.colors.text }]}>
-          Settings options will appear here.
+          Your thoughts and ideas are here.
         </Text>
       </AutoRoleView>
     </AutoRoleView>

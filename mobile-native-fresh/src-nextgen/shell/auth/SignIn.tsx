@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { AutoRoleView } from '../../components/AutoRoleView';
-import { useTheme } from '../../theme/ThemeProvider';
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../theme/ThemeProvider';
+import { Button } from '../../components/ui/Button';
+import { IconWrapper } from '../../infrastructure/IconWrapper';
 
-interface SignInProps {
-  navigation?: any;
-}
-
-export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
+export const SignIn: React.FC = () => {
+  const { theme } = useTheme();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const { theme } = useTheme();
-  const { signIn, signInWithGoogle } = useAuth();
-  const nav = useNavigation();
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -25,159 +19,79 @@ export const SignIn: React.FC<SignInProps> = ({ navigation }) => {
       return;
     }
 
-    setIsLoading(true);
+    setLoading(true);
     try {
       await signIn(email, password);
-      nav.navigate('Home' as never);
-    } catch (error: any) {
-      Alert.alert('Sign In Error', error.message || 'Failed to sign in');
+    } catch (error) {
+      Alert.alert('Error', 'Invalid credentials');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  };
-
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      await signInWithGoogle();
-      nav.navigate('Home' as never);
-    } catch (error: any) {
-      Alert.alert('Google Sign In Error', error.message || 'Failed to sign in with Google');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleForgotPassword = () => {
-    nav.navigate('PasswordReset' as never);
-  };
-
-  const handleSignUp = () => {
-    nav.navigate('SignUp' as never);
   };
 
   return (
-    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}
-      >
-        <AutoRoleView style={styles.header}>
-          <Text style={[styles.title, { color: theme.colors.text }]}>Welcome Back</Text>
-          <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-            Sign in to your account to continue
+    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <AutoRoleView role="content" style={styles.content}>
+        <AutoRoleView role="header-section" style={styles.header}>
+          <IconWrapper
+            name="MaterialCommunityIcons"
+            iconName="thought-bubble"
+            size={64}
+            color={theme.colors.primary}
+            style={styles.logo}
+          />
+          <Text style={[styles.title, { color: theme.colors.onBackground }]}>Welcome Back</Text>
+          <Text style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+            Sign in to your account
           </Text>
         </AutoRoleView>
 
-        <AutoRoleView style={styles.form}>
-          {/* Email Input */}
-          <AutoRoleView style={styles.inputGroup}>
-            <Text style={[styles.label, { color: theme.colors.text }]}>Email</Text>
+        <AutoRoleView role="form" style={styles.form}>
+          <AutoRoleView role="input" style={styles.inputContainer}>
+            <IconWrapper
+              name="Ionicons"
+              iconName="mail"
+              size={20}
+              color={theme.colors.onSurfaceVariant}
+              style={styles.inputIcon}
+            />
             <TextInput
-              style={[styles.input, { 
-                backgroundColor: theme.colors.surface,
-                color: theme.colors.text,
-                borderColor: theme.colors.outline
-              }]}
-              placeholder="Enter your email"
-              placeholderTextColor={theme.colors.textSecondary}
+              style={[styles.input, { color: theme.colors.onSurface, borderColor: theme.colors.outline }]}
+              placeholder="Email"
+              placeholderTextColor={theme.colors.onSurfaceVariant}
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
               autoCapitalize="none"
-              autoCorrect={false}
             />
           </AutoRoleView>
 
-          {/* Password Input */}
-          <AutoRoleView style={styles.inputGroup}>
-            <Text style={[styles.label, { color: theme.colors.text }]}>Password</Text>
-            <View style={[styles.passwordContainer, { 
-              backgroundColor: theme.colors.surface,
-              borderColor: theme.colors.outline
-            }]}>
-              <TextInput
-                style={[styles.passwordInput, { color: theme.colors.text }]}
-                placeholder="Enter your password"
-                placeholderTextColor={theme.colors.textSecondary}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
-              <TouchableOpacity
-                style={styles.showPasswordButton}
-                onPress={() => setShowPassword(!showPassword)}
-              >
-                <Text style={[styles.showPasswordText, { color: theme.colors.primary }]}>
-                  {showPassword ? 'Hide' : 'Show'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+          <AutoRoleView role="input" style={styles.inputContainer}>
+            <IconWrapper
+              name="Ionicons"
+              iconName="lock-closed"
+              size={20}
+              color={theme.colors.onSurfaceVariant}
+              style={styles.inputIcon}
+            />
+            <TextInput
+              style={[styles.input, { color: theme.colors.onSurface, borderColor: theme.colors.outline }]}
+              placeholder="Password"
+              placeholderTextColor={theme.colors.onSurfaceVariant}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
           </AutoRoleView>
 
-          {/* Forgot Password */}
-          <TouchableOpacity 
-            style={styles.forgotPasswordContainer}
-            onPress={handleForgotPassword}
-          >
-            <Text style={[styles.forgotPasswordText, { color: theme.colors.primary }]}>
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
-
-          {/* Sign In Button */}
-          <TouchableOpacity
-            style={[
-              styles.signInButton,
-              { 
-                backgroundColor: isLoading ? theme.colors.disabled : theme.colors.primary,
-                opacity: isLoading ? 0.7 : 1
-              }
-            ]}
+          <Button
+            title={loading ? 'Signing In...' : 'Sign In'}
             onPress={handleSignIn}
-            disabled={isLoading}
-          >
-            <Text style={[styles.signInButtonText, { color: theme.colors.onPrimary }]}>
-              {isLoading ? 'Signing In...' : 'Sign In'}
-            </Text>
-          </TouchableOpacity>
-
-          {/* Divider */}
-          <AutoRoleView style={styles.divider}>
-            <View style={[styles.dividerLine, { backgroundColor: theme.colors.outline }]} />
-            <Text style={[styles.dividerText, { color: theme.colors.textSecondary }]}>or</Text>
-            <View style={[styles.dividerLine, { backgroundColor: theme.colors.outline }]} />
-          </AutoRoleView>
-
-          {/* Google Sign In */}
-          <TouchableOpacity
-            style={[styles.googleButton, { 
-              backgroundColor: theme.colors.surface,
-              borderColor: theme.colors.outline
-            }]}
-            onPress={handleGoogleSignIn}
-            disabled={isLoading}
-          >
-            <Text style={[styles.googleButtonText, { color: theme.colors.text }]}>
-              Continue with Google
-            </Text>
-          </TouchableOpacity>
+            disabled={loading}
+            style={styles.signInButton}
+          />
         </AutoRoleView>
-
-        {/* Sign Up Link */}
-        <AutoRoleView style={styles.footer}>
-          <Text style={[styles.footerText, { color: theme.colors.textSecondary }]}>
-            Don't have an account?{' '}
-          </Text>
-          <TouchableOpacity onPress={handleSignUp}>
-            <Text style={[styles.signUpLink, { color: theme.colors.primary }]}>
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-        </AutoRoleView>
-      </KeyboardAvoidingView>
+      </AutoRoleView>
     </AutoRoleView>
   );
 };
@@ -186,14 +100,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  keyboardAvoidingView: {
+  content: {
     flex: 1,
+    padding: 20,
     justifyContent: 'center',
   },
   header: {
     alignItems: 'center',
     marginBottom: 40,
-    paddingHorizontal: 20,
+  },
+  logo: {
+    marginBottom: 20,
   },
   title: {
     fontSize: 28,
@@ -205,99 +122,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   form: {
-    paddingHorizontal: 20,
-    marginBottom: 40,
+    width: '100%',
   },
-  inputGroup: {
-    marginBottom: 20,
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 8,
+  inputIcon: {
+    marginRight: 12,
   },
   input: {
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    fontSize: 16,
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 16,
-  },
-  passwordInput: {
     flex: 1,
     height: 48,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
     fontSize: 16,
-  },
-  showPasswordButton: {
-    paddingHorizontal: 8,
-  },
-  showPasswordText: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  forgotPasswordContainer: {
-    alignItems: 'flex-end',
-    marginBottom: 24,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    fontWeight: '500',
   },
   signInButton: {
-    height: 48,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
+    marginTop: 8,
   },
-  signInButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-  },
-  dividerText: {
-    marginHorizontal: 16,
-    fontSize: 14,
-  },
-  googleButton: {
-    height: 48,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-  },
-  googleButtonText: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  footerText: {
-    fontSize: 14,
-  },
-  signUpLink: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
-
-export default SignIn; 
+}); 

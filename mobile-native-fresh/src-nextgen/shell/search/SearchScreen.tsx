@@ -3,21 +3,21 @@ import { Text, StyleSheet } from 'react-native';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../theme/ThemeProvider';
 
-export const SettingsScreen: React.FC = () => {
+export const SearchScreen: React.FC = () => {
   const { theme } = useTheme();
 
   return (
     <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <AutoRoleView role="header-section" style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>Settings</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>Search</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-          Manage your preferences
+          Find your thoughts
         </Text>
       </AutoRoleView>
       
       <AutoRoleView role="content" style={styles.content}>
         <Text style={[styles.bodyText, { color: theme.colors.text }]}>
-          Settings options will appear here.
+          Search functionality will appear here.
         </Text>
       </AutoRoleView>
     </AutoRoleView>

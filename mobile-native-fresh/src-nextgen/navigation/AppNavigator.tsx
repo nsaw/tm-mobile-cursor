@@ -4,16 +4,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Import screens
-import { SignInScreen } from '../screens/auth/SignInScreen';
+import { HomeScreen } from '../shell/home/HomeScreen';
+import { SignInScreen } from '../shell/auth/SignInScreen';
 import { SettingsScreen } from '../shell/settings/SettingsScreen';
-
-// Placeholder components for missing screens
-const HomeScreen = () => null;
-const ProfileScreen = () => null;
-const AllBinsScreen = () => null;
-const SearchScreen = () => null;
-const ThoughtmarkDetailScreen = () => null;
-const CreateBinScreen = () => null;
+import { ProfileScreen } from '../shell/profile/ProfileScreen';
+import { AllBinsScreen } from '../shell/bins/AllBinsScreen';
+import { SearchScreen } from '../shell/search/SearchScreen';
+import { ThoughtmarkDetailScreen } from '../shell/thoughtmarks/ThoughtmarkDetailScreen';
+import { CreateBinScreen } from '../shell/bins/CreateBinScreen';
 
 // Define navigation types
 export type AppRoutes = {

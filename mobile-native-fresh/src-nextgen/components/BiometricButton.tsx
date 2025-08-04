@@ -1,69 +1,53 @@
 import React from 'react';
-import { TouchableOpacity, ActivityIndicator, StyleSheet, AccessibilityRole } from 'react-native';
-import { ThemeColors } from '../types/theme';
-import { Text as CustomText } from './Text';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
+import { IconWrapper } from '../infrastructure/IconWrapper';
+import { useTheme } from '../theme/ThemeProvider';
 
 export interface BiometricButtonProps {
-  icon: string;
-  label: string;
   onPress: () => void;
-  loading?: boolean;
+  type: 'fingerprint' | 'face';
   disabled?: boolean;
-  style?: object;
-  accessibilityLabel?: string;
-  accessibilityHint?: string;
-  accessibilityRole?: AccessibilityRole;
+  style?: ViewStyle;
 }
 
 export const BiometricButton: React.FC<BiometricButtonProps> = ({
-  icon,
-  label,
   onPress,
-  loading = false,
+  type,
   disabled = false,
-  style,
-  accessibilityLabel,
-  accessibilityHint,
-  accessibilityRole = 'button' as AccessibilityRole,
+  style
 }) => {
-  const colors: ThemeColors = {
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
-    text: '#1A1A1A',
-    textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
-    border: '#DEE2E6',
-  };
+  const { theme } = useTheme();
+
+  const buttonStyle = [
+    styles.button,
+    { backgroundColor: theme.colors.primary },
+    disabled && { opacity: 0.5 },
+    style
+  ];
+
+  const textStyle = [
+    styles.text,
+    { color: theme.colors.text }
+  ];
+
+  const iconName = type === 'fingerprint' ? 'fingerprint' : 'face';
+  const label = type === 'fingerprint' ? 'Use Fingerprint' : 'Use Face ID';
 
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        {
-          backgroundColor: disabled ? colors.textSecondary : colors.surface,
-          borderColor: colors.border,
-        },
-        style,
-      ]}
+      style={buttonStyle}
       onPress={onPress}
-      disabled={disabled || loading}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityHint={accessibilityHint}
-      accessibilityRole={accessibilityRole}
+      disabled={disabled}
+      activeOpacity={0.8}
     >
-      {loading ? (
-        <ActivityIndicator color={colors.primary} />
-      ) : (
-        <>
-          <CustomText variant="body" style={styles.icon}>
-            {icon}
-          </CustomText>
-          <CustomText variant="body" style={{ ...styles.label, color: colors.text }}>
-            {label}
-          </CustomText>
-        </>
-      )}
+      <IconWrapper
+        name="MaterialCommunityIcons"
+        iconName={iconName}
+        size={24}
+        color={theme.colors.text}
+        style={styles.icon}
+      />
+      <Text style={textStyle}>{label}</Text>
     </TouchableOpacity>
   );
 };
@@ -73,15 +57,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
-    borderWidth: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
     borderRadius: 8,
-    paddingHorizontal: 16,
+    marginVertical: 8,
   },
   icon: {
-    fontSize: 20,
+    marginRight: 8,
   },
-  label: {
+  text: {
     fontSize: 16,
     fontWeight: '500',
   },

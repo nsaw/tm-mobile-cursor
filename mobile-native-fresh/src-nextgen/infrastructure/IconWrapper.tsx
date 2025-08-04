@@ -28,7 +28,10 @@ export type IconName =
 
 export interface IconWrapperProps {
   name: IconName;
-  iconName: string; // The actual icon name to display
+  iconName: string;
+  size?: number;
+  color?: string;
+  style?: any;
   [key: string]: any;
 }
 
@@ -47,7 +50,7 @@ const iconComponents = {
   Zocial,
 };
 
-export function IconWrapper({ name, iconName, ...props }: IconWrapperProps) {
+export function IconWrapper({ name, iconName, size = 24, color = '#000000', style, ...props }: IconWrapperProps) {
   const IconComponent = iconComponents[name];
   
   if (!IconComponent) {
@@ -55,5 +58,5 @@ export function IconWrapper({ name, iconName, ...props }: IconWrapperProps) {
     return null;
   }
 
-  return <IconComponent name={iconName} {...props} />;
+  return <IconComponent name={iconName} size={size} color={color} style={style} {...props} />;
 } 

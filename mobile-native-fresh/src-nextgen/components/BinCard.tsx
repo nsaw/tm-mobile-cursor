@@ -1,89 +1,133 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
+import { IconWrapper } from '../infrastructure/IconWrapper';
+import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from './AutoRoleView';
+import { Bin } from '../hooks/useBins';
 
-interface Bin {
-  id: string;
-  name: string;
-  content: string[];
-  createdAt: Date;
-}
-
-interface BinCardProps {
+export interface BinCardProps {
   bin: Bin;
   onPress?: () => void;
+  style?: ViewStyle;
 }
 
-// Memoization — Cache expensive computations in components and hooks
-export const BinCard: React.FC<BinCardProps> = ({ bin, onPress }) => {
-  // MEMOIZATION: Cache expensive selector calculations
-  const summary = useMemo(() => summarizeBinContent(bin), [bin.id]);
-  
-  const itemCount = useMemo(() => bin.content.length, [bin.content.length]);
-  
-  const formattedDate = useMemo(() => {
-    return bin.createdAt.toLocaleDateString();
-  }, [bin.createdAt]);
+export const BinCard: React.FC<BinCardProps> = ({
+  bin,
+  onPress,
+  style
+}) => {
+  const { theme } = useTheme();
+
+  const cardStyle = [
+    styles.card,
+    {
+      backgroundColor: theme.colors.surface,
+      borderColor: theme.colors.border,
+    },
+    style
+  ];
+
+  const titleStyle = [
+    styles.title,
+    { color: theme.colors.text }
+  ];
+
+  const descriptionStyle = [
+    styles.description,
+    { color: theme.colors.textSecondary }
+  ];
+
+  const metaStyle = [
+    styles.meta,
+    { color: theme.colors.textSecondary }
+  ];
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <AutoRoleView role="content" style={styles.container}>
-        <Text style={styles.title}>{bin.name}</Text>
-        <Text style={styles.summary}>{summary}</Text>
-        <View style={styles.metadata}>
-          <Text style={styles.count}>{itemCount} items</Text>
-          <Text style={styles.date}>{formattedDate}</Text>
-        </View>
+    <TouchableOpacity
+      style={cardStyle}
+      onPress={onPress}
+      activeOpacity={0.8}
+    >
+      <AutoRoleView role="card">
+        <Text style={titleStyle}>{bin.name}</Text>
+        {bin.description && (
+          <Text style={descriptionStyle}>{bin.description}</Text>
+        )}
+        <AutoRoleView role="content" style={styles.metaContainer}>
+          <AutoRoleView role="item" style={styles.metaItem}>
+            <IconWrapper
+              name="MaterialCommunityIcons"
+              iconName="file-document-outline"
+              size={16}
+              color={theme.colors.textSecondary}
+            />
+            <Text style={metaStyle}>{bin.thoughtmarkCount} thoughtmarks</Text>
+          </AutoRoleView>
+          <AutoRoleView role="item" style={styles.metaItem}>
+            <IconWrapper
+              name="MaterialCommunityIcons"
+              iconName={bin.isPrivate ? 'lock' : 'lock-open-variant'}
+              size={16}
+              color={theme.colors.textSecondary}
+            />
+            <Text style={metaStyle}>{bin.isPrivate ? 'Private' : 'Public'}</Text>
+          </AutoRoleView>
+          {bin.isCollaborative && (
+            <AutoRoleView role="item" style={styles.metaItem}>
+              <IconWrapper
+                name="MaterialCommunityIcons"
+                iconName="account-group"
+                size={16}
+                color={theme.colors.textSecondary}
+              />
+              <Text style={metaStyle}>Collaborative</Text>
+            </AutoRoleView>
+          )}
+        </AutoRoleView>
       </AutoRoleView>
     </TouchableOpacity>
   );
 };
 
-// Expensive computation function that benefits from memoization
-const summarizeBinContent = (bin: Bin): string => {
-  // Simulate expensive computation
-  const words = bin.content.join(' ').split(' ');
-  const uniqueWords = new Set(words);
-  const averageLength = words.reduce((sum, word) => sum + word.length, 0) / words.length;
-  
-  return `${uniqueWords.size} unique words, avg length: ${averageLength.toFixed(1)}`;
-};
-
 const styles = StyleSheet.create({
-  container: {
+  card: {
     padding: 16,
-    backgroundColor: '#fff',
-    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
     marginVertical: 8,
     marginHorizontal: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    borderWidth: 1,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontWeight: '600',
+    marginBottom: 4,
   },
-  summary: {
+  description: {
     fontSize: 14,
-    color: '#666',
     marginBottom: 12,
+    lineHeight: 20,
   },
-  metadata: {
+  metaContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 12,
   },
-  count: {
+  metaItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  meta: {
     fontSize: 12,
-    color: '#999',
+    fontWeight: '500',
   },
-  date: {
-    fontSize: 12,
-    color: '#999',
-  },
-});
-
-export default BinCard; 
+}); 

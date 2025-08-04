@@ -1,55 +1,33 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  ActivityIndicator,
-} from 'react-native';
-import { AutoRoleView } from '../../shell/wrappers/AutoRoleView';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
 export interface ButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'small' | 'medium' | 'large';
+  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
   style?: ViewStyle;
   textStyle?: TextStyle;
-  testID?: string;
-  accessibilityLabel?: string;
-  accessibilityHint?: string;
 }
 
-/**
- * Button - Interactive button component with role assignment
- * 
- * This component provides proper accessibility and role-based styling.
- * 
- * Usage:
- * <Button title="Press Me" onPress={() => {}} />
- */
 export const Button: React.FC<ButtonProps> = ({
   title,
   onPress,
   variant = 'primary',
-  size = 'medium',
+  size = 'md',
   disabled = false,
   loading = false,
   style,
-  textStyle,
-  testID,
-  accessibilityLabel,
-  accessibilityHint,
+  textStyle
 }) => {
   const buttonStyle = [
-    styles.base,
+    styles.button,
     styles[variant],
     styles[size],
     disabled && styles.disabled,
-    style,
+    style
   ];
 
   const textStyleCombined = [
@@ -57,92 +35,92 @@ export const Button: React.FC<ButtonProps> = ({
     styles[`${variant}Text`],
     styles[`${size}Text`],
     disabled && styles.disabledText,
-    textStyle,
+    textStyle
   ];
 
   return (
-    <AutoRoleView interactiveRole="button-action">
-      <TouchableOpacity
-        style={buttonStyle}
-        onPress={onPress}
-        disabled={disabled || loading}
-        testID={testID}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityHint={accessibilityHint}
-      >
-        {loading ? (
-          <ActivityIndicator size="small" color="#FFFFFF" />
-        ) : (
-          <Text style={textStyleCombined}>{title}</Text>
-        )}
-      </TouchableOpacity>
-    </AutoRoleView>
+    <TouchableOpacity
+      style={buttonStyle}
+      onPress={onPress}
+      disabled={disabled || loading}
+      activeOpacity={0.8}
+    >
+      <Text style={textStyleCombined}>
+        {loading ? 'Loading...' : title}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  base: {
+  button: {
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
   },
   primary: {
     backgroundColor: '#007AFF',
   },
   secondary: {
-    backgroundColor: '#6C757D',
+    backgroundColor: '#F2F2F7',
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: '#007AFF',
   },
+  destructive: {
+    backgroundColor: '#FF3B30',
+  },
   ghost: {
     backgroundColor: 'transparent',
   },
-  small: {
+  sm: {
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingVertical: 6,
+    minHeight: 32,
   },
-  medium: {
+  md: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 8,
+    minHeight: 40,
   },
-  large: {
+  lg: {
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingVertical: 12,
+    minHeight: 48,
   },
   disabled: {
     opacity: 0.5,
   },
   text: {
-    fontSize: 16,
     fontWeight: '600',
   },
   primaryText: {
     color: '#FFFFFF',
   },
   secondaryText: {
-    color: '#FFFFFF',
+    color: '#000000',
   },
   outlineText: {
     color: '#007AFF',
   },
+  destructiveText: {
+    color: '#FFFFFF',
+  },
   ghostText: {
     color: '#007AFF',
   },
-  smallText: {
+  smText: {
     fontSize: 14,
   },
-  mediumText: {
+  mdText: {
     fontSize: 16,
   },
-  largeText: {
+  lgText: {
     fontSize: 18,
   },
   disabledText: {
-    color: '#999999',
+    opacity: 0.5,
   },
 }); 

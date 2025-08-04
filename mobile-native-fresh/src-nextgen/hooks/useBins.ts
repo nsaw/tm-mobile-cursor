@@ -1,130 +1,245 @@
 import { useState, useEffect, useCallback } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface Bin {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   isPrivate: boolean;
+  isCollaborative: boolean;
+  thoughtmarkCount: number;
   createdAt: string;
   updatedAt: string;
-  thoughtmarkCount: number;
+  collaborators?: string[];
 }
 
-export interface UseBinsReturn {
+export interface BinsState {
   bins: Bin[];
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
+}
+
+export interface BinsActions {
   fetchBins: () => Promise<void>;
-  addBin: (bin: Omit<Bin, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
+  createBin: (name: string, description?: string, isPrivate?: boolean) => Promise<void>;
   updateBin: (id: string, updates: Partial<Bin>) => Promise<void>;
   deleteBin: (id: string) => Promise<void>;
-  togglePrivacy: (id: string) => Promise<void>;
+  toggleBinPrivacy: (id: string) => Promise<void>;
   inviteCollaborator: (binId: string, email: string) => Promise<void>;
 }
 
-export const useBins = (): UseBinsReturn => {
-  const [bins, setBins] = useState<Bin[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const mockBins: Bin[] = [
+  {
+    id: '1',
+    name: 'Personal Thoughts',
+    description: 'My personal collection of thoughts and ideas',
+    isPrivate: true,
+    isCollaborative: false,
+    thoughtmarkCount: 15,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    name: 'Work Ideas',
+    description: 'Ideas and concepts for work projects',
+    isPrivate: false,
+    isCollaborative: true,
+    thoughtmarkCount: 8,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    collaborators: ['colleague@example.com'],
+  },
+  {
+    id: '3',
+    name: 'Learning Notes',
+    description: 'Notes from courses and tutorials',
+    isPrivate: false,
+    isCollaborative: false,
+    thoughtmarkCount: 23,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+export const useBins = (): BinsState & BinsActions => {
+  const [state, setState] = useState<BinsState>({
+    bins: [],
+    isLoading: true,
+    error: null,
+  });
+
+  useEffect(() => {
+    loadBinsFromStorage();
+  }, []);
+
+  const loadBinsFromStorage = async () => {
+    try {
+      const binsData = await AsyncStorage.getItem('bins');
+      if (binsData) {
+        const bins = JSON.parse(binsData) as Bin[];
+        setState(prev => ({
+          ...prev,
+          bins,
+          isLoading: false,
+        }));
+      } else {
+        // Initialize with mock data
+        await AsyncStorage.setItem('bins', JSON.stringify(mockBins));
+        setState(prev => ({
+          ...prev,
+          bins: mockBins,
+          isLoading: false,
+        }));
+      }
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to load bins',
+        isLoading: false,
+      }));
+    }
+  };
 
   const fetchBins = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+    setState(prev => ({ ...prev, isLoading: true, error: null }));
+    
     try {
-      // Mock API call for now
-      const mockBins: Bin[] = [
-        {
-          id: '1',
-          name: 'Sample Bin',
-          description: 'This is a sample bin for testing purposes.',
-          isPrivate: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          thoughtmarkCount: 5,
-        },
-      ];
-      setBins(mockBins);
-    } catch (err) {
-      setError('Failed to fetch bins');
-      console.error('Error fetching bins:', err);
-    } finally {
-      setLoading(false);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(() => resolve(undefined), 500));
+      await loadBinsFromStorage();
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to fetch bins',
+        isLoading: false,
+      }));
     }
   }, []);
 
-  const addBin = useCallback(async (binData: Omit<Bin, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const createBin = useCallback(async (name: string, description?: string, isPrivate = false) => {
     try {
       const newBin: Bin = {
-        ...binData,
         id: Date.now().toString(),
+        name,
+        description,
+        isPrivate,
+        isCollaborative: false,
+        thoughtmarkCount: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
-      setBins(prev => [...prev, newBin]);
-    } catch (err) {
-      setError('Failed to add bin');
-      console.error('Error adding bin:', err);
+
+      const updatedBins = [...state.bins, newBin];
+      await AsyncStorage.setItem('bins', JSON.stringify(updatedBins));
+      
+      setState(prev => ({
+        ...prev,
+        bins: updatedBins,
+      }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to create bin',
+      }));
     }
-  }, []);
+  }, [state.bins]);
 
   const updateBin = useCallback(async (id: string, updates: Partial<Bin>) => {
     try {
-      setBins(prev => prev.map(bin => 
-        bin.id === id 
+      const updatedBins = state.bins.map(bin =>
+        bin.id === id
           ? { ...bin, ...updates, updatedAt: new Date().toISOString() }
           : bin
-      ));
-    } catch (err) {
-      setError('Failed to update bin');
-      console.error('Error updating bin:', err);
+      );
+      
+      await AsyncStorage.setItem('bins', JSON.stringify(updatedBins));
+      
+      setState(prev => ({
+        ...prev,
+        bins: updatedBins,
+      }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to update bin',
+      }));
     }
-  }, []);
+  }, [state.bins]);
 
   const deleteBin = useCallback(async (id: string) => {
     try {
-      setBins(prev => prev.filter(bin => bin.id !== id));
-    } catch (err) {
-      setError('Failed to delete bin');
-      console.error('Error deleting bin:', err);
+      const updatedBins = state.bins.filter(bin => bin.id !== id);
+      await AsyncStorage.setItem('bins', JSON.stringify(updatedBins));
+      
+      setState(prev => ({
+        ...prev,
+        bins: updatedBins,
+      }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to delete bin',
+      }));
     }
-  }, []);
+  }, [state.bins]);
 
-  const togglePrivacy = useCallback(async (id: string) => {
+  const toggleBinPrivacy = useCallback(async (id: string) => {
     try {
-      setBins(prev => prev.map(bin => 
-        bin.id === id 
+      const updatedBins = state.bins.map(bin =>
+        bin.id === id
           ? { ...bin, isPrivate: !bin.isPrivate, updatedAt: new Date().toISOString() }
           : bin
-      ));
-    } catch (err) {
-      setError('Failed to toggle bin privacy');
-      console.error('Error toggling bin privacy:', err);
+      );
+      
+      await AsyncStorage.setItem('bins', JSON.stringify(updatedBins));
+      
+      setState(prev => ({
+        ...prev,
+        bins: updatedBins,
+      }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to toggle bin privacy',
+      }));
     }
-  }, []);
+  }, [state.bins]);
 
   const inviteCollaborator = useCallback(async (binId: string, email: string) => {
     try {
-      // Mock collaborator invitation
-      console.log(`Inviting ${email} to bin ${binId}`);
-    } catch (err) {
-      setError('Failed to invite collaborator');
-      console.error('Error inviting collaborator:', err);
+      const updatedBins = state.bins.map(bin =>
+        bin.id === binId
+          ? {
+              ...bin,
+              isCollaborative: true,
+              collaborators: [...(bin.collaborators || []), email],
+              updatedAt: new Date().toISOString(),
+            }
+          : bin
+      );
+      
+      await AsyncStorage.setItem('bins', JSON.stringify(updatedBins));
+      
+      setState(prev => ({
+        ...prev,
+        bins: updatedBins,
+      }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to invite collaborator',
+      }));
     }
-  }, []);
-
-  useEffect(() => {
-    fetchBins();
-  }, [fetchBins]);
+  }, [state.bins]);
 
   return {
-    bins,
-    loading,
-    error,
+    ...state,
     fetchBins,
-    addBin,
+    createBin,
     updateBin,
     deleteBin,
-    togglePrivacy,
+    toggleBinPrivacy,
     inviteCollaborator,
   };
 }; 
