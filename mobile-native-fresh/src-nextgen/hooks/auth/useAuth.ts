@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
+export interface User {
+  email: string;
+  name: string;
+}
+
 export interface AuthState {
   isAuthenticated: boolean;
-  user: any | null;
+  user: User | null;
   loading: boolean;
   error: string | null;
 }

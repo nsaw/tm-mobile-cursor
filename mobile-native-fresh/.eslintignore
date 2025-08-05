@@ -2,4 +2,15 @@
 src-reference/
 src-old/
 **/__generated__/
-**/__mocks__/ 
+**/__mocks__/
+
+# Ignore quarantine directories
+**/*_quarantine/**/*
+**/_quarantine/**/*
+
+# Ignore build and dependency directories
+node_modules/
+dist/
+build/
+.expo/
+web-build/ 

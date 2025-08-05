@@ -185,7 +185,13 @@ export const validateSafeFrameShell = (shell: SafeFrameShellType): LayoutValidat
 /**
  * Get layout contract statistics
  */
-export const getLayoutContractStatistics = () => {
+export const getLayoutContractStatistics = (): {
+  total: number;
+  byZIndex: Record<ZIndexLayer, number>;
+  protected: number;
+  safeFrame: number;
+  validated: number;
+} => {
   const stats = {
     total: contractRegistry.size,
     byZIndex: {} as Record<ZIndexLayer, number>,

@@ -1,33 +1,22 @@
-import { ReactNode } from 'react';
-import { ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import React from 'react';
 
 export interface BaseComponentProps {
-  children?: ReactNode;
-  style?: ViewStyle | TextStyle | ImageStyle;
+  children?: React.ReactNode;
+  style?: React.CSSProperties | Record<string, unknown>;
+  className?: string;
   testID?: string;
-  accessible?: boolean;
   accessibilityLabel?: string;
-  accessibilityHint?: string;
   accessibilityRole?: string;
+  accessibilityHint?: string;
 }
 
 export interface ButtonProps extends BaseComponentProps {
   title: string;
   onPress: () => void;
   disabled?: boolean;
-  loading?: boolean;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'small' | 'medium' | 'large';
-}
-
-export interface TextProps extends BaseComponentProps {
-  children: ReactNode;
-  variant?: 'heading' | 'body' | 'caption' | 'label';
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl';
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
-  color?: string;
-  align?: 'left' | 'center' | 'right' | 'justify';
-  numberOfLines?: number;
+  loading?: boolean;
 }
 
 export interface InputProps extends BaseComponentProps {
@@ -37,28 +26,17 @@ export interface InputProps extends BaseComponentProps {
   secureTextEntry?: boolean;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  autoCorrect?: boolean;
   multiline?: boolean;
-  maxLength?: number;
+  numberOfLines?: number;
   error?: string;
 }
 
 export interface CardProps extends BaseComponentProps {
   title?: string;
   subtitle?: string;
+  image?: string;
   onPress?: () => void;
-  variant?: 'default' | 'elevated' | 'outlined';
-  padding?: 'none' | 'small' | 'medium' | 'large';
-}
-
-export interface ListItemProps extends BaseComponentProps {
-  title: string;
-  subtitle?: string;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
-  onPress?: () => void;
-  chevron?: boolean;
-  disabled?: boolean;
+  elevation?: number;
 }
 
 export interface ModalProps extends BaseComponentProps {
@@ -66,28 +44,51 @@ export interface ModalProps extends BaseComponentProps {
   onClose: () => void;
   title?: string;
   showCloseButton?: boolean;
-  closeOnBackdropPress?: boolean;
   animationType?: 'none' | 'slide' | 'fade';
 }
 
-export interface LoadingProps extends BaseComponentProps {
-  size?: 'small' | 'medium' | 'large';
-  color?: string;
-  text?: string;
-}
-
-export interface ErrorProps extends BaseComponentProps {
-  error: string;
-  onRetry?: () => void;
-  showRetryButton?: boolean;
-}
-
-export interface EmptyStateProps extends BaseComponentProps {
+export interface ListItemProps extends BaseComponentProps {
   title: string;
-  message?: string;
-  icon?: ReactNode;
-  action?: {
-    title: string;
-    onPress: () => void;
+  subtitle?: string;
+  leftIcon?: string;
+  rightIcon?: string;
+  onPress?: () => void;
+  chevron?: boolean;
+}
+
+export interface AvatarProps extends BaseComponentProps {
+  source?: string;
+  size?: number;
+  fallback?: string;
+  shape?: 'circle' | 'square';
+}
+
+export interface BadgeProps extends BaseComponentProps {
+  count: number;
+  maxCount?: number;
+  showZero?: boolean;
+  color?: string;
+}
+
+export interface DividerProps extends BaseComponentProps {
+  orientation?: 'horizontal' | 'vertical';
+  color?: string;
+  thickness?: number;
+}
+
+export interface SpinnerProps extends BaseComponentProps {
+  size?: 'small' | 'large';
+  color?: string;
+  animating?: boolean;
+}
+
+export interface SwitchProps extends BaseComponentProps {
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+  disabled?: boolean;
+  trackColor?: {
+    false?: string;
+    true?: string;
   };
+  thumbColor?: string;
 } 

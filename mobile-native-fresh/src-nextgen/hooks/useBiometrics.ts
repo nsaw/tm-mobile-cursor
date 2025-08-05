@@ -2,7 +2,12 @@ import { useState, useCallback, useEffect } from 'react';
 
 export type BiometricType = 'TouchID' | 'FaceID' | 'Fingerprint' | 'None';
 
-export function useBiometrics() {
+export function useBiometrics(): {
+  isBiometricAvailable: boolean;
+  biometricType: BiometricType;
+  authenticateWithBiometrics: () => Promise<boolean>;
+  isBiometricSupported: boolean;
+} {
   const [isBiometricAvailable, setIsBiometricAvailable] = useState(false);
   const [biometricType, setBiometricType] = useState<BiometricType>('None');
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);

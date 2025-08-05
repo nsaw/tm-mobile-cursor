@@ -87,7 +87,12 @@ export const validateRoleAssignment = (
 /**
  * Get role statistics
  */
-export const getRoleStatistics = () => {
+export const getRoleStatistics = (): {
+  total: number;
+  byRole: Record<ComponentRole, number>;
+  byEnvironment: { legacy: number; nextgen: number };
+  validated: number;
+} => {
   const stats = {
     total: roleRegistry.size,
     byRole: {} as Record<ComponentRole, number>,

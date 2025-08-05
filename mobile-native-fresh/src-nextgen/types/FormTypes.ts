@@ -1,66 +1,74 @@
-export interface FormField {
+export interface FormField<T = string> {
   name: string;
-  label: string;
-  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'date';
-  value: any;
-  required?: boolean;
-  placeholder?: string;
-  options?: Array<{ label: string; value: any }>;
-  validation?: ValidationRule[];
+  value: T;
   error?: string;
+  touched: boolean;
+  required: boolean;
   disabled?: boolean;
-  touched?: boolean;
 }
 
-export interface ValidationRule {
-  type: 'required' | 'minLength' | 'maxLength' | 'pattern' | 'email' | 'custom';
-  value?: any;
+export interface FormValidationRule<T = unknown> {
+  type: 'required' | 'min' | 'max' | 'pattern' | 'custom';
+  value?: T;
   message: string;
-  validator?: (value: any) => boolean | string;
-}
-
-export interface FormState {
-  fields: Record<string, FormField>;
-  isValid: boolean;
-  isDirty: boolean;
-  isSubmitting: boolean;
-  errors: Record<string, string>;
-  touched: Record<string, boolean>;
-}
-
-export interface FormActions {
-  setFieldValue: (name: string, value: any) => void;
-  setFieldError: (name: string, error: string) => void;
-  setFieldTouched: (name: string, touched: boolean) => void;
-  validateField: (name: string, value?: any, allValues?: Record<string, any>) => Promise<string | undefined>;
-  validateForm: () => Promise<boolean>;
-  resetForm: () => void;
-  submitForm: () => Promise<void>;
-  getFieldValue: (name: string) => any;
-  getFieldError: (name: string) => string | undefined;
-  getFieldTouched: (name: string) => boolean;
 }
 
 export interface FormConfig {
-  initialValues: Record<string, any>;
-  validationSchema?: Record<string, ValidationRule[]>;
-  onSubmit: (values: Record<string, any>) => Promise<void>;
+  initialValues: Record<string, unknown>;
+  validationSchema?: Record<string, FormValidationRule[]>;
+  onSubmit: (values: Record<string, unknown>) => void | Promise<void>;
   onError?: (errors: Record<string, string>) => void;
-  onReset?: () => void;
-  validateOnChange?: boolean;
-  validateOnBlur?: boolean;
+}
+
+export interface FormState {
+  values: Record<string, unknown>;
+  errors: Record<string, string>;
+  touched: Record<string, boolean>;
+  isSubmitting: boolean;
+  isValid: boolean;
+}
+
+export interface FormActions {
+  setFieldValue: (name: string, value: unknown) => void;
+  setFieldError: (name: string, error: string) => void;
+  setFieldTouched: (name: string, touched: boolean) => void;
+  resetForm: () => void;
+  submitForm: () => void;
 }
 
 export interface FormHook {
-  values: Record<string, any>;
-  errors: Record<string, string>;
-  touched: Record<string, boolean>;
-  isValid: boolean;
-  isDirty: boolean;
+  state: FormState;
+  actions: FormActions;
+}
+
+export interface FormFieldProps<T = string> {
+  name: string;
+  value: T;
+  onChange: (value: T) => void;
+  onBlur: () => void;
+  error?: string;
+  touched: boolean;
+  disabled?: boolean;
+}
+
+export interface FormSubmitProps {
+  onSubmit: () => void;
   isSubmitting: boolean;
-  setFieldValue: (name: string, value: any) => void;
-  setFieldError: (name: string, error: string) => void;
-  setFieldTouched: (name: string, touched: boolean) => void;
-  handleSubmit: () => Promise<void>;
-  resetForm: () => void;
+  isValid: boolean;
+  disabled?: boolean;
+}
+
+export interface FormResetProps {
+  onReset: () => void;
+  disabled?: boolean;
+}
+
+export interface FormValidationResult {
+  isValid: boolean;
+  errors: Record<string, string>;
+}
+
+export interface FormValidator {
+  validate: (values: Record<string, unknown>) => FormValidationResult;
+  validateField: (name: string, value: unknown) => string | undefined;
 } 

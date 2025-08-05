@@ -34,7 +34,7 @@ export const AIToolsCard: React.FC<AIToolsCardProps> = ({
         borderLeftWidth: 4,
         borderLeftColor: getStatusColor(tool?.status || 'offline'),
       }}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <View>
         <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
           {tool?.name || 'AI Tool'}

@@ -1,0 +1,55 @@
+#!/bin/bash
+# Shell Configuration for tm-mobile-cursor project
+# Enforces zsh or bash usage, prevents PowerShell
+
+# Check if we're in a supported shell
+if [[ "$SHELL" != *"/zsh" && "$SHELL" != *"/bash" ]]; then
+    echo "❌ ERROR: This project requires zsh or bash shell."
+    echo "Current shell: $SHELL"
+    echo "Please switch to zsh or bash before continuing."
+    echo "Available shells:"
+    echo "  zsh: $(which zsh)"
+    echo "  bash: $(which bash)"
+    exit 1
+fi
+
+# Set project-specific environment variables
+export TM_MOBILE_CURSOR_PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor"
+export TM_MOBILE_FRESH_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+export CURSOR_CACHE_ROOT="/Users/sawyer/gitSync/.cursor-cache"
+
+# Ensure we're using the correct shell
+if [[ "$0" == *"zsh" ]]; then
+    export PROJECT_SHELL="zsh"
+elif [[ "$0" == *"bash" ]]; then
+    export PROJECT_SHELL="bash"
+else
+    export PROJECT_SHELL="unknown"
+fi
+
+# Log shell usage for debugging
+echo "✅ Using $PROJECT_SHELL shell for tm-mobile-cursor project"
+
+# Set PATH to prioritize project tools
+export PATH="$TM_MOBILE_FRESH_ROOT/node_modules/.bin:$TM_MOBILE_CURSOR_PROJECT_ROOT/scripts:$PATH"
+
+# Shell-specific configurations
+if [[ "$PROJECT_SHELL" == "zsh" ]]; then
+    # Zsh specific settings
+    setopt AUTO_CD
+    setopt EXTENDED_GLOB
+    setopt NO_CASE_GLOB
+elif [[ "$PROJECT_SHELL" == "bash" ]]; then
+    # Bash specific settings
+    shopt -s globstar
+    shopt -s extglob
+fi
+
+# Prevent PowerShell usage
+if [[ "$TERM_PROGRAM" == "PowerShell" || "$POWERSHELL_TELEMETRY_OPTOUT" ]]; then
+    echo "❌ ERROR: PowerShell is not allowed in this project."
+    echo "Please use zsh or bash instead."
+    exit 1
+fi
+
+echo "✅ Shell configuration loaded successfully" 

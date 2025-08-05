@@ -1,17 +1,17 @@
 export const logger = {
-  info: (message: string, meta?: any) => {
+  info: (message: string, meta?: unknown): void => {
     console.log(`[INFO] ${message}`, meta || '');
   },
   
-  error: (message: string, meta?: any) => {
+  error: (message: string, meta?: unknown): void => {
     console.error(`[ERROR] ${message}`, meta || '');
   },
   
-  warn: (message: string, meta?: any) => {
+  warn: (message: string, meta?: unknown): void => {
     console.warn(`[WARN] ${message}`, meta || '');
   },
   
-  debug: (message: string, meta?: any) => {
+  debug: (message: string, meta?: unknown): void => {
     if (process.env.NODE_ENV === 'development') {
       console.log(`[DEBUG] ${message}`, meta || '');
     }

@@ -1,0 +1,93 @@
+{
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": ["-l"],
+            "overrideName": true
+        },
+        "bash": {
+            "path": "/bin/bash",
+            "args": ["-l"],
+            "overrideName": true
+        }
+    },
+    "terminal.integrated.automationProfile.osx": {
+        "path": "/bin/zsh",
+        "args": ["-l"]
+    },
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "terminal.integrated.shellArgs.osx": ["-l"],
+    "terminal.integrated.env.osx": {
+        "SHELL": "/bin/zsh"
+    },
+    "terminal.integrated.cwd": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh",
+    "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.enablePersistentSessions": true,
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "terminal.integrated.showExitAlert": false,
+    "terminal.integrated.confirmOnExit": "never",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableBell": false,
+    "terminal.integrated.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.rightClickBehavior": "selectWord",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.fastScrollSensitivity": 5,
+    "terminal.integrated.mouseWheelScrollSensitivity": 1,
+    "terminal.integrated.tabFocusMode": "singleClick",
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.allowMnemonics": false,
+    "terminal.integrated.enableFileLinks": true,
+    "terminal.integrated.enableTrash": true,
+    "terminal.integrated.enableDragAndDrop": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.suggest.autoImports": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.autofetchPeriod": 180,
+    "git.branchProtection": [
+        "main"
+    ],
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/.git": true,
+        "**/.DS_Store": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/.expo": true,
+        "**/web-build": true
+    }
+} 

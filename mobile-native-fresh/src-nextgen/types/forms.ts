@@ -14,16 +14,16 @@ export interface SignUpFormData {
 }
 
 export interface SignInValidationSchema {
-  email: any[];
-  password: any[];
+  email: unknown[];
+  password: unknown[];
 }
 
 export interface SignUpValidationSchema {
-  firstName: any[];
-  lastName: any[];
-  email: any[];
-  password: any[];
-  confirmPassword: any[];
+  firstName: unknown[];
+  lastName: unknown[];
+  email: unknown[];
+  password: unknown[];
+  confirmPassword: unknown[];
 }
 
 export const SignInValidationSchema = {
@@ -40,7 +40,7 @@ export const SignUpValidationSchema = {
 };
 
 export interface PINValidationSchema {
-  pin: any[];
+  pin: unknown[];
 }
 
 export const PINValidationSchema = {

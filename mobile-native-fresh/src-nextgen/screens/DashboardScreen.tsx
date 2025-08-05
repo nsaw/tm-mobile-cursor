@@ -6,9 +6,9 @@ import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { TaskCard } from '../components/TaskCard';
 import { AIToolsCard } from '../components/AIToolsCard';
 
-export const DashboardScreen = () => {
-  const { thoughtmarks } = useThoughtmarks();
-  const { bins } = useBins();
+export const DashboardScreen = (): React.JSX.Element => {
+  const { thoughtmarks: _thoughtmarks } = useThoughtmarks();
+  const { bins: _bins } = useBins();
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>

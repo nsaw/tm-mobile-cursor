@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface RoleHeatmapDevtoolProps {
   enabled?: boolean;
@@ -26,9 +26,9 @@ const ROLE_COLORS: Record<string, RoleType> = {
 };
 
 export const RoleHeatmapDevtool: React.FC<RoleHeatmapDevtoolProps> = ({
-  enabled = false,
+  enabled,
   onToggle
-}) => {
+}): React.JSX.Element => {
   const [isVisible, setIsVisible] = useState(enabled);
   const [roleStats, setRoleStats] = useState<Record<string, number>>({});
 
@@ -56,19 +56,20 @@ export const RoleHeatmapDevtool: React.FC<RoleHeatmapDevtoolProps> = ({
     setRoleStats(mockStats);
   };
 
-  const toggleHeatmap = () => {
+  const toggleHeatmap = (): void => {
     const newState = !isVisible;
     setIsVisible(newState);
     onToggle?.(newState);
   };
 
-  const getRoleColor = (roleType: string): string => {
-    return ROLE_COLORS[roleType]?.color || ROLE_COLORS.default.color;
-  };
+  // Helper functions for role analysis
+  // const getRoleColor = (roleType: string): string => {
+  //   return ROLE_COLORS[roleType]?.color || ROLE_COLORS.default.color;
+  // };
 
-  const getRoleName = (roleType: string): string => {
-    return ROLE_COLORS[roleType]?.name || ROLE_COLORS.default.name;
-  };
+  // const getRoleName = (roleType: string): string => {
+  //   return ROLE_COLORS[roleType]?.name || ROLE_COLORS.default.name;
+  // };
 
   if (!isVisible) {
     return (
@@ -76,7 +77,7 @@ export const RoleHeatmapDevtool: React.FC<RoleHeatmapDevtoolProps> = ({
         style={styles.toggleButton}
         onPress={toggleHeatmap}
         accessibilityLabel="Enable role heatmap"
-      >
+       accessibilityRole="button" accessible={true}>
         <Text style={styles.toggleButtonText}>🔍 Show Role Heatmap</Text>
       </TouchableOpacity>
     );
@@ -88,7 +89,7 @@ export const RoleHeatmapDevtool: React.FC<RoleHeatmapDevtoolProps> = ({
       <View style={styles.statsPanel}>
         <View style={styles.header}>
           <Text style={styles.title}>Role Heatmap Analysis</Text>
-          <TouchableOpacity onPress={toggleHeatmap} style={styles.closeButton}>
+          <TouchableOpacity onPress={toggleHeatmap} style={styles.closeButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.closeButtonText}>✕</Text>
           </TouchableOpacity>
         </View>

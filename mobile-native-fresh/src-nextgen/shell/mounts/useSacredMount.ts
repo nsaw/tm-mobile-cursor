@@ -7,7 +7,14 @@ import { sacredMountRegistry, SacredMountDefinition } from './SacredMountRegistr
  * This hook provides access to sacred mount registry operations
  * and ensures type safety for mount operations.
  */
-export const useSacredMount = () => {
+export const useSacredMount = (): {
+  registerMount: (mountDefinition: SacredMountDefinition) => void;
+  isSacredMount: (mountId: string) => boolean;
+  getSacredMount: (mountId: string) => SacredMountDefinition | undefined;
+  getAllSacredMounts: () => SacredMountDefinition[];
+  unregisterMount: (mountId: string) => boolean;
+  clearAllMounts: () => void;
+} => {
   /**
    * Register a new sacred mount point
    */

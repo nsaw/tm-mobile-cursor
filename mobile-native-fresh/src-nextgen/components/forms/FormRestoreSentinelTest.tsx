@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { AutoRoleView } from '../AutoRoleView';
 import { FormRestoreSentinel } from './FormRestoreSentinel';
 import { FormField } from './FormField';
 import { useSignupForm } from '../../hooks/useFormValidation';
+
+
+// Type definitions for form state
+interface FormFieldState {
+  value: unknown;
+  touched: boolean;
+  error: string | null;
+  rules: unknown;
+}
 
 interface FormRestoreSentinelTestProps {
   environment?: 'legacy' | 'nextgen';
@@ -19,24 +28,25 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
     setTestResults(prev => [...prev, `${new Date().toLocaleTimeString()}: ${result}`]);
   };
 
-  const handleStateRestored = (state: any) => {
+  const handleStateRestored = (state: unknown) => {
     addTestResult(`✅ Form state restored: ${JSON.stringify(state)}`);
     
     // Apply restored state to form
-    if (state) {
+    if (state && typeof state === 'object' && state !== null) {
       Object.keys(state).forEach(fieldName => {
-        if (signupForm.formState[fieldName]) {
-          signupForm.updateField(fieldName, state[fieldName]);
+        const fieldState = signupForm.formState[fieldName] as FormFieldState;
+        if (fieldState && typeof fieldState === 'object' && 'value' in fieldState) {
+          signupForm.updateField(fieldName, (state as Record<string, unknown>)[fieldName]);
         }
       });
     }
   };
 
-  const handleStateSaved = (state: any) => {
+  const handleStateSaved = (state: unknown) => {
     addTestResult(`💾 Form state saved: ${JSON.stringify(state)}`);
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: unknown) => {
     Alert.alert('Form Submitted', JSON.stringify(values, null, 2));
     addTestResult(`📤 Form submitted: ${JSON.stringify(values)}`);
     signupForm.resetForm();
@@ -89,21 +99,21 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
           <TouchableOpacity 
             style={styles.testButton}
             onPress={testEnvironmentSwitch}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Test Environment Switch</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.testButton}
             onPress={testDataLoss}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Test Data Loss Scenario</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.testButton}
             onPress={clearTestResults}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Clear Test Results</Text>
           </TouchableOpacity>
         </AutoRoleView>
@@ -119,14 +129,12 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
             onStateSaved={handleStateSaved}
             autoRestore={true}
             autoSave={true}
-            saveInterval={1000} // 1 second for testing
           >
             <FormField
               label="Email"
-              name="email"
-              value={signupForm.formState.email.value}
+              value={(signupForm.formState.email as FormFieldState)?.value as string}
               error={signupForm.getFieldError('email')}
-              touched={signupForm.formState.email.touched}
+              touched={(signupForm.formState.email as FormFieldState)?.touched || false}
               onValueChange={(value) => signupForm.updateField('email', value)}
               onBlur={() => signupForm.setFieldTouched('email')}
               placeholder="Enter your email"
@@ -138,10 +146,9 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
 
             <FormField
               label="Password"
-              name="password"
-              value={signupForm.formState.password.value}
+              value={(signupForm.formState.password as FormFieldState)?.value as string}
               error={signupForm.getFieldError('password')}
-              touched={signupForm.formState.password.touched}
+              touched={(signupForm.formState.password as FormFieldState)?.touched || false}
               onValueChange={(value) => signupForm.updateField('password', value)}
               onBlur={() => signupForm.setFieldTouched('password')}
               placeholder="Enter your password"
@@ -153,10 +160,9 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
 
             <FormField
               label="Confirm Password"
-              name="confirmPassword"
-              value={signupForm.formState.confirmPassword.value}
+              value={(signupForm.formState.confirmPassword as FormFieldState)?.value as string}
               error={signupForm.getFieldError('confirmPassword')}
-              touched={signupForm.formState.confirmPassword.touched}
+              touched={(signupForm.formState.confirmPassword as FormFieldState)?.touched || false}
               onValueChange={(value) => signupForm.updateField('confirmPassword', value)}
               onBlur={() => signupForm.setFieldTouched('confirmPassword')}
               placeholder="Confirm your password"
@@ -167,10 +173,9 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
 
             <FormField
               label="Username"
-              name="username"
-              value={signupForm.formState.username.value}
+              value={(signupForm.formState.username as FormFieldState)?.value as string}
               error={signupForm.getFieldError('username')}
-              touched={signupForm.formState.username.touched}
+              touched={(signupForm.formState.username as FormFieldState)?.touched || false}
               onValueChange={(value) => signupForm.updateField('username', value)}
               onBlur={() => signupForm.setFieldTouched('username')}
               placeholder="Enter your username"

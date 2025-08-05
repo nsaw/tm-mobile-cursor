@@ -13,7 +13,13 @@ interface UpdateThoughtmarkData {
   content?: string;
 }
 
-export const useThoughtmark = () => {
+export const useThoughtmark = (): {
+  thoughtmark: Thoughtmark | null;
+  fetchThoughtmark: (id: string) => Promise<void>;
+  updateThoughtmark: (id: string, data: UpdateThoughtmarkData) => Promise<void>;
+  deleteThoughtmark: (id: string) => Promise<void>;
+  shareThoughtmark: (id: string) => Promise<void>;
+} => {
   const [thoughtmark, setThoughtmark] = useState<Thoughtmark | null>(null);
 
   const fetchThoughtmark = useCallback(async (id: string) => {

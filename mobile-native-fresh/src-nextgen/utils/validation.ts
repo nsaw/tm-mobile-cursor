@@ -99,66 +99,91 @@ export class ValidationService {
       warnings: allWarnings,
     };
   }
-}
 
-export function useValidation() {
-  const [validationErrors, setValidationErrors] = useState<Record<string, string[]>>({});
+  static validateForm(formData: Record<string, unknown>): ValidationResult {
+    const errors: string[] = [];
+    const warnings: string[] = [];
 
-  const clearValidationErrors = () => {
-    setValidationErrors({});
-  };
-
-  const validateForm = (formData: Record<string, any>): boolean => {
-    const errors: Record<string, string[]> = {};
-    let isValid = true;
-
-    // Basic form validation - can be extended based on form structure
-    Object.keys(formData).forEach(key => {
-      const value = formData[key];
-      const fieldErrors: string[] = [];
-
-      // Required field validation
-      if (!value || (typeof value === 'string' && value.trim() === '')) {
-        fieldErrors.push(`${key} is required`);
-        isValid = false;
-      }
-
-      // Email validation for email fields
-      if (key.toLowerCase().includes('email') && value) {
-        const emailResult = ValidationService.validateEmail(value);
-        if (!emailResult.isValid) {
-          fieldErrors.push(...emailResult.errors);
-          isValid = false;
-        }
-      }
-
-      // Password validation for password fields
-      if (key.toLowerCase().includes('password') && value) {
-        const passwordResult = ValidationService.validatePassword(value);
-        if (!passwordResult.isValid) {
-          fieldErrors.push(...passwordResult.errors);
-          isValid = false;
-        }
-      }
-
-      if (fieldErrors.length > 0) {
-        errors[key] = fieldErrors;
+    // Validate required fields
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value === undefined || value === null || value === '') {
+        errors.push(`${key} is required`);
       }
     });
 
-    setValidationErrors(errors);
-    return isValid;
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings,
+    };
+  }
+
+  static validateObject(obj: Record<string, unknown>, schema: Record<string, ValidationRule<unknown>[]>): ValidationResult {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    Object.entries(schema).forEach(([field, rules]) => {
+      const value = obj[field];
+      rules.forEach(rule => {
+        const result = rule.validate(value);
+        errors.push(...result.errors);
+        warnings.push(...result.warnings);
+      });
+    });
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings,
+    };
+  }
+}
+
+export function useValidation(): {
+  errors: Record<string, string[]>;
+  clearValidationErrors: () => void;
+  validateForm: (formData: Record<string, unknown>) => boolean;
+  setFieldError: (field: string, error: string) => void;
+  clearFieldError: (field: string) => void;
+} {
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+
+  const clearValidationErrors = (): void => {
+    setErrors({});
+  };
+
+  const validateForm = (formData: Record<string, unknown>): boolean => {
+    const validationResult = ValidationService.validateForm(formData);
+    const newErrors: Record<string, string[]> = {};
+
+    if (!validationResult.isValid) {
+      newErrors.general = validationResult.errors;
+    }
+
+    setErrors(newErrors);
+    return validationResult.isValid;
+  };
+
+  const setFieldError = (field: string, error: string): void => {
+    setErrors(prev => ({
+      ...prev,
+      [field]: [...(prev[field] || []), error],
+    }));
+  };
+
+  const clearFieldError = (field: string): void => {
+    setErrors(prev => {
+      const newErrors = { ...prev };
+      delete newErrors[field];
+      return newErrors;
+    });
   };
 
   return {
-    validateEmail: ValidationService.validateEmail,
-    validatePassword: ValidationService.validatePassword,
-    validateRequired: ValidationService.validateRequired,
-    validateMinLength: ValidationService.validateMinLength,
-    validateMaxLength: ValidationService.validateMaxLength,
-    combineResults: ValidationService.combineResults,
-    validateForm,
-    validationErrors,
+    errors,
     clearValidationErrors,
+    validateForm,
+    setFieldError,
+    clearFieldError,
   };
 } 

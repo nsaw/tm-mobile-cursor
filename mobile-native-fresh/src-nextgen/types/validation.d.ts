@@ -11,7 +11,7 @@ declare module 'validation' {
     warnings: string[];
     duration?: number;
     timestamp?: number;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
   }
 
   export interface ValidationContext {
@@ -24,8 +24,8 @@ declare module 'validation' {
   // Role validation types
   export interface RoleValidationContext extends ValidationContext {
     role: string;
-    roleConfig?: Record<string, any>;
-    componentProps?: Record<string, any>;
+    roleConfig?: Record<string, unknown>;
+    componentProps?: Record<string, unknown>;
   }
 
   export interface RoleValidationResult extends ValidationResult {
@@ -65,7 +65,7 @@ declare module 'validation' {
   }
 
   // Validation function types
-  export type ValidationFunction<T = any> = (input: T, context: ValidationContext) => Promise<ValidationResult>;
+  export type ValidationFunction<T = unknown> = (input: T, context: ValidationContext) => Promise<ValidationResult>;
   export type RoleValidationFunction = (role: string, context: RoleValidationContext) => Promise<RoleValidationResult>;
   export type TypeValidationFunction = (typeName: string, context: TypeValidationContext) => Promise<TypeValidationResult>;
   export type SystemValidationFunction = (systemName: string, context: SystemValidationContext) => Promise<SystemValidationResult>;
@@ -81,7 +81,7 @@ declare module 'validation' {
   // Validation pipeline types
   export interface ValidationPipeline {
     addStep(step: ValidationFunction): ValidationPipeline;
-    execute(input: any, context: ValidationContext): Promise<ValidationResult[]>;
+    execute(input: unknown, context: ValidationContext): Promise<ValidationResult[]>;
     clear(): void;
   }
 
@@ -150,7 +150,7 @@ declare module 'validation' {
     errors: ValidationError[];
     warnings: ValidationWarning[];
     suggestions: ValidationSuggestion[];
-    metadata: Record<string, any>;
+    metadata: Record<string, unknown>;
   }
 
   // Validation event types
@@ -167,7 +167,7 @@ declare module 'validation' {
 
   // Validation manager types
   export interface ValidationManager {
-    validate(input: any, context: ValidationContext): Promise<ValidationResult>;
+    validate(input: unknown, context: ValidationContext): Promise<ValidationResult>;
     validateRole(role: string, context: RoleValidationContext): Promise<RoleValidationResult>;
     validateType(typeName: string, context: TypeValidationContext): Promise<TypeValidationResult>;
     validateSystem(systemName: string, context: SystemValidationContext): Promise<SystemValidationResult>;

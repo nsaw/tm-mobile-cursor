@@ -2,6 +2,8 @@ import { renderHook } from '@testing-library/react-native';
 import { useAccessibility } from './useAccessibility';
 
 // Mock React Native AccessibilityInfo
+const mockAddEventListener = jest.fn().mockReturnValue({ remove: jest.fn() });
+
 jest.mock('react-native', () => ({
   ...jest.requireActual('react-native'),
   AccessibilityInfo: {
@@ -12,7 +14,7 @@ jest.mock('react-native', () => ({
     isInvertColorsEnabled: jest.fn().mockResolvedValue(false),
     isBoldTextEnabled: jest.fn().mockResolvedValue(false),
     isGrayscaleEnabled: jest.fn().mockResolvedValue(false),
-    addEventListener: jest.fn().mockReturnValue({ remove: jest.fn() }),
+    addEventListener: mockAddEventListener,
   },
 }));
 
@@ -36,6 +38,6 @@ describe('useAccessibility', () => {
     renderHook(() => useAccessibility());
     
     // Verify that event listeners are set up
-    expect(jest.mocked(require('react-native').AccessibilityInfo.addEventListener)).toHaveBeenCalled();
+    expect(mockAddEventListener).toHaveBeenCalled();
   });
 }); 

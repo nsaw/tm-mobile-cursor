@@ -1,74 +1,49 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import { Text } from 'react-native';
+import React, { ReactNode } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { RootStackParamList, TabParamList } from './types';
 import { useTheme } from '../theme';
 import { useAccessibility } from '../hooks/useAccessibility';
-
-const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<TabParamList>();
 
 interface NavigationProviderProps {
   children: ReactNode;
 }
 
 export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {
-  const { tokens } = useTheme();
-  const { isScreenReaderEnabled } = useAccessibility();
+  const theme = useTheme();
+  const _isScreenReaderEnabled = useAccessibility();
 
-  const defaultScreenOptions = {
+  const _defaultScreenOptions = {
     headerStyle: {
-      backgroundColor: tokens.colors.background,
+      backgroundColor: theme.colors.background,
       elevation: 0,
       shadowOpacity: 0,
     },
-    headerTintColor: tokens.colors.text,
+    headerTintColor: theme.colors.text,
     headerTitleStyle: {
-      color: tokens.colors.text,
-      fontSize: tokens.typography.fontSize.lg,
-      fontWeight: tokens.typography.fontWeight.semibold,
+      color: theme.colors.text,
+      fontSize: theme.fontSize.lg,
+      fontWeight: theme.fontWeight.semibold,
     },
     cardStyle: {
-      backgroundColor: tokens.colors.background,
+      backgroundColor: theme.colors.background,
     },
   };
 
-  const defaultTabOptions = {
+  const _defaultTabOptions = {
     tabBarStyle: {
-      backgroundColor: tokens.colors.background,
-      borderTopColor: tokens.colors.border,
+      backgroundColor: theme.colors.background,
+      borderTopColor: theme.colors.border,
       borderTopWidth: 1,
     },
-    tabBarActiveTintColor: tokens.colors.accent,
-    tabBarInactiveTintColor: tokens.colors.textSecondary,
+    tabBarActiveTintColor: theme.colors.accent,
+    tabBarInactiveTintColor: theme.colors.textSecondary,
     tabBarLabelStyle: {
-      fontSize: tokens.typography.fontSize.xs,
-      fontWeight: tokens.typography.fontWeight.medium,
+      fontSize: theme.fontSize.xs,
+      fontWeight: theme.fontWeight.medium,
     },
   };
 
   return (
-    <NavigationContainer
-      theme={{
-        dark: false, // Will be determined by theme system
-        colors: {
-          primary: tokens.colors.accent,
-          background: tokens.colors.background,
-          card: tokens.colors.background,
-          text: tokens.colors.text,
-          border: tokens.colors.border,
-          notification: tokens.colors.error,
-        },
-        fonts: {
-          regular: { fontFamily: 'System', fontWeight: '400' },
-          medium: { fontFamily: 'System', fontWeight: '500' },
-          bold: { fontFamily: 'System', fontWeight: '700' },
-          heavy: { fontFamily: 'System', fontWeight: '900' },
-        },
-      }}
-    >
-      {children}
-    </NavigationContainer>
+    <NavigationContainer><Text>{children}</Text></NavigationContainer>
   );
 }; 

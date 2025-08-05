@@ -1,0 +1,27 @@
+#!/bin/bash
+# Shell Configuration for mobile-native-fresh project
+# Enforces zsh or bash usage, prevents PowerShell
+
+# Source parent project shell configuration
+if [[ -f "/Users/sawyer/gitSync/tm-mobile-cursor/.shellrc" ]]; then
+    source "/Users/sawyer/gitSync/tm-mobile-cursor/.shellrc"
+fi
+
+# Mobile-native-fresh specific configurations
+export MOBILE_NATIVE_FRESH_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+
+# Ensure we're in the correct directory
+if [[ "$PWD" != *"mobile-native-fresh"* ]]; then
+    echo "⚠️  WARNING: This shell configuration is for mobile-native-fresh project"
+    echo "Current directory: $PWD"
+fi
+
+# Set Expo and React Native specific environment variables
+export EXPO_DEVTOOLS_LISTEN_ADDRESS="0.0.0.0"
+export REACT_NATIVE_PACKAGER_HOSTNAME="localhost"
+
+# Ensure proper Node.js and npm configuration
+export NODE_ENV="development"
+export EXPO_DEBUG="*"
+
+echo "✅ Mobile-native-fresh shell configuration loaded" 

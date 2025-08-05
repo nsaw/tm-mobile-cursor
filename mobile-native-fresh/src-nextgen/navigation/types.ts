@@ -27,7 +27,7 @@ export interface RootStackParamList {
   HowToScreen: undefined;
   Loading: { isVisible: boolean };
   AITools: undefined;
-  [key: string]: any;
+  [key: string]: object | undefined;
 }
 
 // Navigation prop types
@@ -48,7 +48,7 @@ export interface NavigationState {
   routes: Array<{
     key: string;
     name: string;
-    params?: any;
+    params?: Record<string, unknown>;
   }>;
 }
 
@@ -72,21 +72,20 @@ export interface TabParamList {
   Search: undefined;
   AllThoughtmarks: undefined;
   Profile: undefined;
-  [key: string]: any;
 }
 
 export interface NavigationAction {
   type: string;
-  payload?: any;
+  payload?: Record<string, unknown>;
 }
 
 export type NavigationProp<T extends keyof RootStackParamList> = {
   navigate: (screen: T, params?: RootStackParamList[T]) => void;
   goBack: () => void;
   canGoBack: () => boolean;
-  reset: (state: unknown) => void;
+  reset: (state: Record<string, unknown>) => void;
   setParams: (params: Partial<RootStackParamList[T]>) => void;
-  setOptions: (options: unknown) => void;
+  setOptions: (options: Record<string, unknown>) => void;
 };
 
 export type RouteProp<T extends keyof RootStackParamList> = RNRouteProp<RootStackParamList, T>;

@@ -3,24 +3,25 @@ import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-nativ
 
 import { useTheme } from '../../theme/ThemeProvider';
 
-export interface TextProps extends RNTextProps {
+export interface TextProps extends Omit<RNTextProps, 'role'> {
   variant?: 'body' | 'heading' | 'title' | 'subtitle' | 'subheading' | 'heading2' | 'label' | 'caption' | 'muted' | 'tagline' | 'button' | 'section';
   size?: 'xs' | 'sm' | 'body' | 'lg' | 'xl' | 'heading' | '2xl' | '3xl';
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
   children: React.ReactNode;
+  _style?: TextStyle;
 }
 
 export const Text: React.FC<TextProps> = ({ 
   variant = 'body', 
   size,
   weight,
-  style, 
+  _style, 
   children, 
-  ...props 
+  ..._props 
 }) => {
-  const { tokens: designTokens } = useTheme();
+  const theme = useTheme();
   
-  const getVariantStyle = (): TextStyle => {
+  const _getVariantStyle = (): TextStyle => {
     // Map missing variants to existing ones
     const mappedVariant = variant === 'subheading' ? 'subtitle' : 
                          variant === 'heading2' ? 'heading' : 
@@ -32,115 +33,110 @@ export const Text: React.FC<TextProps> = ({
     switch (mappedVariant) {
       case 'heading':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.heading,
-          fontWeight: designTokens.typography.fontWeight.bold as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.heading * 1.2,
+          fontSize: theme.fontSize.h1,
+          fontWeight: theme.fontWeight.bold,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.h1 * 1.2,
         };
         break;
       case 'title':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.lg,
-          fontWeight: designTokens.typography.fontWeight.semibold as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.lg * 1.4,
+          fontSize: theme.fontSize.lg,
+          fontWeight: theme.fontWeight.semibold,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.lg * 1.4,
         };
         break;
       case 'subtitle':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.body,
-          fontWeight: designTokens.typography.fontWeight.medium as any,
-          color: designTokens.colors.textSecondary,
-          lineHeight: designTokens.typography.fontSize.body * 1.4,
+          fontSize: theme.fontSize.body,
+          fontWeight: theme.fontWeight.medium,
+          color: theme.colors.textSecondary,
+          lineHeight: theme.fontSize.body * 1.4,
         };
         break;
       case 'body':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.body,
-          fontWeight: designTokens.typography.fontWeight.normal as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.body * 1.4,
+          fontSize: theme.fontSize.body,
+          fontWeight: theme.fontWeight.normal,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.body * 1.4,
         };
         break;
       case 'caption':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.xs,
-          fontWeight: designTokens.typography.fontWeight.normal as any,
-          color: designTokens.colors.textSecondary,
-          lineHeight: designTokens.typography.fontSize.xs * 1.4,
+          fontSize: theme.fontSize.xs,
+          fontWeight: theme.fontWeight.normal,
+          color: theme.colors.textSecondary,
+          lineHeight: theme.fontSize.xs * 1.4,
         };
         break;
       case 'muted':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.sm,
-          fontWeight: designTokens.typography.fontWeight.normal as any,
-          color: designTokens.colors.textMuted,
-          lineHeight: designTokens.typography.fontSize.sm * 1.4,
+          fontSize: theme.fontSize.sm,
+          fontWeight: theme.fontWeight.normal,
+          color: theme.colors.textMuted,
+          lineHeight: theme.fontSize.sm * 1.4,
         };
         break;
       case 'tagline':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.xl,
-          fontWeight: designTokens.typography.fontWeight.light as any,
-          color: designTokens.colors.textSecondary,
-          lineHeight: designTokens.typography.fontSize.xl * 1.5,
+          fontSize: theme.fontSize.xl,
+          fontWeight: theme.fontWeight.light,
+          color: theme.colors.textSecondary,
+          lineHeight: theme.fontSize.xl * 1.5,
         };
         break;
       case 'button':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.sm,
-          fontWeight: designTokens.typography.fontWeight.medium as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.sm * 1.4,
+          fontSize: theme.fontSize.sm,
+          fontWeight: theme.fontWeight.medium,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.sm * 1.4,
         };
         break;
       case 'section':
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.lg,
-          fontWeight: designTokens.typography.fontWeight.semibold as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.lg * 1.4,
+          fontSize: theme.fontSize.lg,
+          fontWeight: theme.fontWeight.semibold,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.lg * 1.4,
         };
         break;
       default:
         baseStyle = {
-          fontSize: designTokens.typography.fontSize.body,
-          fontWeight: designTokens.typography.fontWeight.normal as any,
-          color: designTokens.colors.text,
-          lineHeight: designTokens.typography.fontSize.body * 1.4,
+          fontSize: theme.fontSize.body,
+          fontWeight: theme.fontWeight.normal,
+          color: theme.colors.text,
+          lineHeight: theme.fontSize.body * 1.4,
         };
     }
     
     // Apply size override if provided
     if (size) {
       const sizeMap: Record<string, number> = {
-        xs: designTokens.typography.fontSize.xs,
-        sm: designTokens.typography.fontSize.sm,
-        body: designTokens.typography.fontSize.body,
-        lg: designTokens.typography.fontSize.lg,
-        xl: designTokens.typography.fontSize.xl,
-        heading: designTokens.typography.fontSize.heading,
-        '2xl': designTokens.typography.fontSize['2xl'],
-        '3xl': designTokens.typography.fontSize['3xl'],
+        xs: theme.fontSize.xs,
+        sm: theme.fontSize.sm,
+        body: theme.fontSize.body,
+        lg: theme.fontSize.lg,
+        xl: theme.fontSize.xl,
+        heading: theme.fontSize.h1,
+        '2xl': theme.fontSize.h2,
+        '3xl': theme.fontSize.h3,
       };
       baseStyle.fontSize = sizeMap[size] || baseStyle.fontSize;
     }
     
     // Apply weight override if provided
     if (weight) {
-      baseStyle.fontWeight = (designTokens.typography.fontWeight[weight] || baseStyle.fontWeight) as any;
+      baseStyle.fontWeight = (theme.fontWeight[weight as keyof typeof theme.fontWeight] || baseStyle.fontWeight);
     }
     
     return baseStyle;
   };
 
   return (
-    <RNText
-      style={[getVariantStyle(), style]}
-      {...props}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 };
 

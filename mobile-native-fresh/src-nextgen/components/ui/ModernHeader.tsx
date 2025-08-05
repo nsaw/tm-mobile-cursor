@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useTheme } from '../../theme/ThemeProvider';
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
+import { useTheme } from '../../hooks/useTheme';
 
 export interface ModernHeaderProps {
   title: string;
@@ -13,7 +13,7 @@ export interface ModernHeaderProps {
     icon?: string;
     onPress: () => void;
   };
-  style?: any;
+  style?: ViewStyle;
 }
 
 export const ModernHeader: React.FC<ModernHeaderProps> = ({
@@ -23,7 +23,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   rightAction,
   style,
 }) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   const styles = StyleSheet.create({
     header: {
@@ -41,14 +41,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
       alignItems: 'center',
     },
     title: {
-      fontSize: theme.typography.fontSize.heading,
-      fontWeight: theme.typography.fontWeight.bold as any,
+      fontSize: theme.fontSize.h1,
+      fontWeight: theme.fontWeight.bold,
       color: theme.colors.text,
       textAlign: 'center',
     },
     subtitle: {
-      fontSize: theme.typography.fontSize.caption,
-      fontWeight: theme.typography.fontWeight.normal as any,
+      fontSize: theme.fontSize.caption,
+      fontWeight: theme.fontWeight.normal,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginTop: 2,
@@ -62,8 +62,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
       justifyContent: 'center',
     },
     actionText: {
-      fontSize: theme.typography.fontSize.body,
-      fontWeight: theme.typography.fontWeight.bold as any,
+      fontSize: theme.fontSize.body,
+      fontWeight: theme.fontWeight.bold,
       color: theme.colors.onAccent,
     },
     placeholder: {
@@ -74,7 +74,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   return (
     <View style={[styles.header, style]}>
       {leftAction ? (
-        <TouchableOpacity style={styles.actionButton} onPress={leftAction.onPress}>
+        <TouchableOpacity style={styles.actionButton} onPress={leftAction.onPress} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
           <Text style={styles.actionText}>{leftAction.icon || '←'}</Text>
         </TouchableOpacity>
       ) : (
@@ -87,7 +87,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
       </View>
       
       {rightAction ? (
-        <TouchableOpacity style={styles.actionButton} onPress={rightAction.onPress}>
+        <TouchableOpacity style={styles.actionButton} onPress={rightAction.onPress} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
           <Text style={styles.actionText}>{rightAction.icon || '→'}</Text>
         </TouchableOpacity>
       ) : (

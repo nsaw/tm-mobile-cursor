@@ -68,7 +68,7 @@ export const Button: React.FC<ButtonProps> = ({
         accessibilityLabel={title}
         accessibilityRole="button"
         accessibilityState={{ disabled: disabled || loading }}
-      >
+       accessible={true}>
         {loading ? (
           <ActivityIndicator
             size="small"

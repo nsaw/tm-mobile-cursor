@@ -47,7 +47,7 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
               borderLeftWidth: 4,
               borderLeftColor: getSlotColor(slot.type),
             }}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={{ color: 'white', fontSize: 14, fontWeight: '600' }}>
               {slot.title}
             </Text>

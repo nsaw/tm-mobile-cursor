@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AutoRoleView } from '../../shell/wrappers/AutoRoleView';
 import { useTheme } from '../../theme/ThemeProvider';
-import { useSearch } from '../../hooks/useSearch';
 import { View, TextInput, FlatList, Text, TouchableOpacity } from 'react-native';
 
 const SearchScreen: React.FC = () => {
-  const { theme } = useTheme();
+  const theme = useTheme();
   const [query, setQuery] = useState('');
 
   const handleChange = (text: string) => {
@@ -34,7 +33,7 @@ const SearchScreen: React.FC = () => {
           accessibilityRole="button"
           accessibilityLabel="Voice Search"
           style={theme.styles.voiceButton}
-        >
+         accessible={true}>
           <Text style={theme.styles.voiceLabel}>🎤</Text>
         </TouchableOpacity>
       </View>

@@ -29,15 +29,15 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   rightAction,
   showBackButton = true,
 }) => {
-  const { tokens: designTokens } = useTheme();
+  const theme = useTheme();
 
   return (
             <AutoRoleView>
       <View style={{
         backgroundColor: 'rgba(0, 0, 0, 0)',
         borderBottomWidth: 1,
-        borderBottomColor: designTokens.colors.border,
-        paddingHorizontal: designTokens.spacing.md,
+        borderBottomColor: theme.colors.border,
+        paddingHorizontal: theme.spacing.md,
         paddingVertical: 2,
         minHeight: 40,
         // Cross-platform shadow
@@ -70,14 +70,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {showBackButton && onBack && (
               <TouchableOpacity 
                 style={{
-                  marginRight: designTokens.spacing.md,
-                  padding: designTokens.spacing.xs,
-                  borderRadius: designTokens.radius.sm,
-                  backgroundColor: designTokens.colors.surface,
+                                  marginRight: theme.spacing.md,
+                padding: theme.spacing.xs,
+                borderRadius: theme.borderRadius.sm,
+                backgroundColor: theme.colors.surface,
                 }} 
                 onPress={onBack}
                accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-                <Ionicons name="arrow-back" size={20} color={designTokens.colors.text} />
+                <Ionicons name="arrow-back" size={20} color={theme.colors.text} />
               </TouchableOpacity>
             )}
             <View style={{ flex: 1 }}>
@@ -107,13 +107,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
           {rightAction && (
             <TouchableOpacity 
               style={{
-                padding: designTokens.spacing.xs,
-                borderRadius: designTokens.radius.sm,
-                backgroundColor: designTokens.colors.surface,
+                padding: theme.spacing.xs,
+                borderRadius: theme.borderRadius.sm,
+                backgroundColor: theme.colors.surface,
               }} 
               onPress={rightAction.onPress}
              accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-              <Ionicons name={rightAction.icon as any} size={20} color={designTokens.colors.text} />
+              <Ionicons name={rightAction.icon} size={20} color={theme.colors.text} />
             </TouchableOpacity>
           )}
         </View>

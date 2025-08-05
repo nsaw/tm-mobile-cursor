@@ -1,0 +1,38 @@
+# Cursor Rules for tm-mobile-cursor Project
+# Enforces zsh or bash usage, prevents PowerShell
+
+## Shell Requirements
+- **REQUIRED**: Use only zsh or bash shells
+- **FORBIDDEN**: PowerShell, PowerShell Core, fish, tcsh, csh
+- **DEFAULT**: zsh (`/bin/zsh`) is the preferred shell
+
+## Terminal Configuration
+- All terminal commands must use zsh or bash
+- PowerShell commands are not allowed
+- Use absolute paths for all file operations
+- Follow project shell validation requirements
+
+## Environment Setup
+- Source `.shellrc` files when working in project directories
+- Set proper environment variables for project paths
+- Use project-specific shell configurations
+
+## Command Execution
+- Wrap long-running commands in non-blocking patterns
+- Use timeout and disown for background processes
+- Follow project CLI conventions for curl and other commands
+
+## Validation
+- Run shell validation script before major operations
+- Ensure compliance with shell requirements
+- Check for PowerShell usage and prevent it
+
+## Project Structure
+- Use absolute paths starting with `/Users/sawyer/gitSync/`
+- Follow established directory structure
+- Maintain shell configuration files
+
+## Error Prevention
+- Never use PowerShell commands
+- Always validate shell type before execution
+- Follow project shell enforcement rules 

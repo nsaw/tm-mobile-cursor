@@ -4,7 +4,7 @@ import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../theme/ThemeProvider';
 
 export const SettingsScreen: React.FC = () => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   return (
     <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>

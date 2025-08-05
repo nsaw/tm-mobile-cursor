@@ -7,12 +7,12 @@ export interface ErrorReport {
   environment: 'legacy' | 'nextgen';
   version: string;
   platform: string;
-  additionalData?: Record<string, any>;
+  additionalData?: Record<string, unknown>;
 }
 
 export interface ErrorReporter {
-  report: (error: Error, additionalData?: Record<string, any>) => void;
-  reportBoundary: (error: Error, errorInfo: any, additionalData?: Record<string, any>) => void;
+  report: (error: Error, additionalData?: Record<string, unknown>) => void;
+  reportBoundary: (error: Error, errorInfo: Record<string, unknown>, additionalData?: Record<string, unknown>) => void;
   setUser: (userId: string) => void;
   setVersion: (version: string) => void;
   setEnvironment: (environment: 'legacy' | 'nextgen') => void;
@@ -20,10 +20,10 @@ export interface ErrorReporter {
 
 export class ConsoleErrorReporter implements ErrorReporter {
   private userId?: string;
-  private version: string = '1.0.0';
+  private version = '1.0.0';
   private environment: 'legacy' | 'nextgen' = 'legacy';
 
-  report(error: Error, additionalData?: Record<string, any>): void {
+  report(error: Error, additionalData?: Record<string, unknown>): void {
     const report: ErrorReport = {
       message: error.message,
       stack: error.stack,
@@ -38,11 +38,11 @@ export class ConsoleErrorReporter implements ErrorReporter {
     console.error('Error Report:', report);
   }
 
-  reportBoundary(error: Error, errorInfo: any, additionalData?: Record<string, any>): void {
+  reportBoundary(error: Error, errorInfo: Record<string, unknown>, additionalData?: Record<string, unknown>): void {
     const report: ErrorReport = {
       message: error.message,
       stack: error.stack,
-      componentStack: errorInfo.componentStack,
+      componentStack: errorInfo.componentStack as string,
       timestamp: new Date().toISOString(),
       userId: this.userId,
       environment: this.environment,
@@ -69,11 +69,11 @@ export class ConsoleErrorReporter implements ErrorReporter {
 
 export const errorReporter = new ConsoleErrorReporter();
 
-export const reportError = (error: Error, additionalData?: Record<string, any>): void => {
+export const reportError = (error: Error, additionalData?: Record<string, unknown>): void => {
   errorReporter.report(error, additionalData);
 };
 
-export const reportBoundaryError = (error: Error, errorInfo: any, additionalData?: Record<string, any>): void => {
+export const reportBoundaryError = (error: Error, errorInfo: Record<string, unknown>, additionalData?: Record<string, unknown>): void => {
   errorReporter.reportBoundary(error, errorInfo, additionalData);
 };
 

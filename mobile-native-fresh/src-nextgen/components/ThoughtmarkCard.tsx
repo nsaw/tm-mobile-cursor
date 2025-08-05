@@ -22,7 +22,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
         borderRadius: 8,
         marginVertical: 4,
       }}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <View>
         <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
           {thoughtmark?.title || 'Thoughtmark Card'}

@@ -1,228 +1,173 @@
-import React, { useState, useCallback } from 'react';
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../../hooks/useAuth';
-import { useTheme } from '../../hooks/useTheme';
-import { useValidation } from '../../hooks/useValidation';
-import { useAccessibility } from '../../hooks/useAccessibility';
-import { Button } from '../../components/Button';
-import { Text as CustomText } from '../../components/Text';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { AutoRoleView } from '../../components/AutoRoleView';
-import { SignUpFormData, SignUpValidationSchema } from '../../types/forms';
-import { createStyles } from './SignUpScreen.styles';
+import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
+
+type SignUpScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'SignUp'>;
 
 export const SignUpScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<SignUpScreenNavigationProp>();
+  const theme = useTheme();
   const { signUp } = useAuth();
-  const { colors } = useTheme();
-  const { validateForm, validationErrors, clearValidationErrors } = useValidation();
-  const { isScreenReaderEnabled } = useAccessibility();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [formData, setFormData] = useState<SignUpFormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    acceptTerms: false,
-    acceptMarketing: false,
-  });
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleInputChange = useCallback((field: keyof SignUpFormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    clearValidationErrors();
-  }, [clearValidationErrors]);
-
-  const handleSignUp = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const isValid = validateForm(formData);
-      if (!isValid) {
-        Alert.alert('Validation Error', 'Please check your input and try again.');
-        return;
-      }
-
-      await signUp(formData.firstName + ' ' + formData.lastName, formData.email, formData.password);
-      Alert.alert('Success', 'Account created successfully!');
-      // Navigate to next screen
-    } catch (error) {
-      Alert.alert('Error', 'Failed to create account. Please try again.');
-    } finally {
-      setIsLoading(false);
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match');
+      return;
     }
-  }, [formData, validateForm, signUp]);
 
-  const styles = createStyles(colors);
+    try {
+      await signUp(email, password);
+      // Navigation will be handled by auth state change
+    } catch (error) {
+      Alert.alert('Sign Up Error', 'Failed to create account');
+    }
+  };
+
+  const handleSignIn = () => {
+    navigation.navigate('SignIn');
+  };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.content}>
-          <AutoRoleView style={styles.header}>
-            <CustomText variant="heading" style={styles.title}>
-              Create Account
-            </CustomText>
-          </AutoRoleView>
+    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>Create Account</Text>
+        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+          Join Thoughtmarks to start organizing your thoughts
+        </Text>
 
-          <AutoRoleView style={styles.subtitle}>
-            <CustomText variant="body" style={styles.subtitle}>
-              Join Thoughtmarks to get started
-            </CustomText>
-          </AutoRoleView>
-
-          <AutoRoleView style={styles.form}>
-            <View style={styles.inputContainer}>
-              <CustomText variant="label">First Name</CustomText>
-              <TextInput
-                style={styles.input}
-                value={formData.firstName}
-                onChangeText={(value) => handleInputChange('firstName', value)}
-                placeholder="Enter your first name"
-                accessibilityLabel="First name input"
-                accessibilityHint="Enter your first name"
-              />
-              {validationErrors.firstName && (
-                <CustomText variant="caption" style={styles.errorText}>
-                  {validationErrors.firstName}
-                </CustomText>
-              )}
-            </View>
-
-            <View style={styles.inputContainer}>
-              <CustomText variant="label">Last Name</CustomText>
-              <TextInput
-                style={styles.input}
-                value={formData.lastName}
-                onChangeText={(value) => handleInputChange('lastName', value)}
-                placeholder="Enter your last name"
-                accessibilityLabel="Last name input"
-                accessibilityHint="Enter your last name"
-              />
-              {validationErrors.lastName && (
-                <CustomText variant="caption" style={styles.errorText}>
-                  {validationErrors.lastName}
-                </CustomText>
-              )}
-            </View>
-
-            <View style={styles.inputContainer}>
-              <CustomText variant="label">Email</CustomText>
-              <TextInput
-                style={styles.input}
-                value={formData.email}
-                onChangeText={(value) => handleInputChange('email', value)}
-                placeholder="Enter your email"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                accessibilityLabel="Email input"
-                accessibilityHint="Enter your email address"
-              />
-              {validationErrors.email && (
-                <CustomText variant="caption" style={styles.errorText}>
-                  {validationErrors.email}
-                </CustomText>
-              )}
-            </View>
-
-            <View style={styles.inputContainer}>
-              <CustomText variant="label">Password</CustomText>
-              <TextInput
-                style={styles.input}
-                value={formData.password}
-                onChangeText={(value) => handleInputChange('password', value)}
-                placeholder="Enter your password"
-                secureTextEntry
-                accessibilityLabel="Password input"
-                accessibilityHint="Enter your password"
-              />
-              {validationErrors.password && (
-                <CustomText variant="caption" style={styles.errorText}>
-                  {validationErrors.password}
-                </CustomText>
-              )}
-            </View>
-
-            <View style={styles.inputContainer}>
-              <CustomText variant="label">Confirm Password</CustomText>
-              <TextInput
-                style={styles.input}
-                value={formData.confirmPassword}
-                onChangeText={(value) => handleInputChange('confirmPassword', value)}
-                placeholder="Confirm your password"
-                secureTextEntry
-                accessibilityLabel="Confirm password input"
-                accessibilityHint="Confirm your password"
-              />
-              {validationErrors.confirmPassword && (
-                <CustomText variant="caption" style={styles.errorText}>
-                  {validationErrors.confirmPassword}
-                </CustomText>
-              )}
-            </View>
-
-            <View style={styles.checkboxContainer}>
-              <TouchableOpacity
-                style={styles.checkbox}
-                onPress={() => handleInputChange('acceptTerms', !formData.acceptTerms)}
-                accessibilityLabel="Accept terms checkbox"
-                accessibilityHint="Toggle to accept terms and conditions"
-              >
-                <View style={[styles.checkboxInner, formData.acceptTerms && styles.checkboxChecked]} />
-              </TouchableOpacity>
-              <CustomText variant="body" style={styles.checkboxLabel}>
-                I accept the Terms and Conditions
-              </CustomText>
-            </View>
-
-            <View style={styles.checkboxContainer}>
-              <TouchableOpacity
-                style={styles.checkbox}
-                onPress={() => handleInputChange('acceptMarketing', !formData.acceptMarketing)}
-                accessibilityLabel="Accept marketing checkbox"
-                accessibilityHint="Toggle to accept marketing communications"
-              >
-                <View style={[styles.checkboxInner, formData.acceptMarketing && styles.checkboxChecked]} />
-              </TouchableOpacity>
-              <CustomText variant="body" style={styles.checkboxLabel}>
-                I would like to receive marketing communications
-              </CustomText>
-            </View>
-          </AutoRoleView>
-
-          <Button
-            title="Create Account"
-            onPress={handleSignUp}
-            disabled={isLoading}
-            loading={isLoading}
-            style={styles.signUpButton}
+        <View style={styles.form}>
+          <TextInput
+            style={[styles.input, { 
+              backgroundColor: theme.colors.surface, 
+              color: theme.colors.text,
+              borderColor: theme.colors.border 
+            }]}
+            placeholder="Email"
+            placeholderTextColor={theme.colors.textSecondary}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
           />
 
-          <AutoRoleView style={styles.footer}>
-            <CustomText variant="body" style={styles.footerText}>
-              Already have an account?{' '}
-            </CustomText>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <CustomText variant="body" style={styles.linkText}>
-                Sign In
-              </CustomText>
-            </TouchableOpacity>
-          </AutoRoleView>
+          <TextInput
+            style={[styles.input, { 
+              backgroundColor: theme.colors.surface, 
+              color: theme.colors.text,
+              borderColor: theme.colors.border 
+            }]}
+            placeholder="Password"
+            placeholderTextColor={theme.colors.textSecondary}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+
+          <TextInput
+            style={[styles.input, { 
+              backgroundColor: theme.colors.surface, 
+              color: theme.colors.text,
+              borderColor: theme.colors.border 
+            }]}
+            placeholder="Confirm Password"
+            placeholderTextColor={theme.colors.textSecondary}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+
+          <TouchableOpacity
+            style={[styles.signUpButton, { backgroundColor: theme.colors.primary }]}
+            onPress={handleSignUp}
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <Text style={[styles.signUpButtonText, { color: theme.colors.onPrimary }]}>
+              Create Account
+            </Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+
+        <View style={styles.footer}>
+          <Text style={[styles.footerText, { color: theme.colors.textSecondary }]}>
+            Already have an account?{' '}
+          </Text>
+          <TouchableOpacity onPress={handleSignIn} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <Text style={[styles.signInLink, { color: theme.colors.primary }]}>
+              Sign In
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </AutoRoleView>
   );
-}; 
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 32,
+  },
+  form: {
+    marginBottom: 24,
+  },
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+  signUpButton: {
+    height: 48,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  signUpButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 14,
+  },
+  signInLink: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+});
+
+// TODO: Implement full feature after navigation unblocked 

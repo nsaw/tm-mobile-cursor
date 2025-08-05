@@ -26,7 +26,7 @@ export interface NavigationRouteDefinition {
   path: string;
   component: string;
   environment: NavigationEnvironment;
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
   options?: NavigationRouteOptions;
 }
 
@@ -80,6 +80,7 @@ export interface NavigationDefinitionsProps {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**
@@ -92,6 +93,7 @@ export interface RoutingSystemProps {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**
@@ -103,6 +105,7 @@ export interface ScreenTransitionsProps {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**

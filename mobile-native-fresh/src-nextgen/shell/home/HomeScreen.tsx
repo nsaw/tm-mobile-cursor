@@ -1,25 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AutoRoleView } from '../../components/AutoRoleView';
+import { Text, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
+import { AutoRoleView } from '../../components/AutoRoleView';
 
-export const HomeScreen: React.FC = () => {
-  const { theme } = useTheme();
+const HomeScreen: React.FC = () => {
+  const theme = useTheme();
 
   return (
-    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <AutoRoleView role="header-section" style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>Home</Text>
-        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-          Welcome to Thoughtmarks
-        </Text>
-      </AutoRoleView>
-      
-      <AutoRoleView role="content" style={styles.content}>
-        <Text style={[styles.bodyText, { color: theme.colors.text }]}>
-          Your thoughts and ideas are here.
-        </Text>
-      </AutoRoleView>
+    <AutoRoleView role="screen" style={styles.container}>
+      <Text style={[styles.title, { color: theme.colors.text }]}>
+        Home
+      </Text>
+      <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+        Welcome to your home screen
+      </Text>
     </AutoRoleView>
   );
 };
@@ -27,27 +21,19 @@ export const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
     padding: 20,
-    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: 10,
   },
   subtitle: {
     fontSize: 16,
-  },
-  content: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bodyText: {
-    fontSize: 18,
     textAlign: 'center',
   },
-}); 
+});
+
+export default HomeScreen; 

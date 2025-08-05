@@ -25,6 +25,7 @@ export interface BinsActions {
   updateBin: (id: string, updates: Partial<Bin>) => Promise<void>;
   deleteBin: (id: string) => Promise<void>;
   toggleBinPrivacy: (id: string) => Promise<void>;
+  togglePrivacy: (id: string) => Promise<void>; // Alias for toggleBinPrivacy
   inviteCollaborator: (binId: string, email: string) => Promise<void>;
 }
 
@@ -206,6 +207,11 @@ export const useBins = (): BinsState & BinsActions => {
     }
   }, [state.bins]);
 
+  const togglePrivacy = useCallback(async (id: string) => {
+    // Alias for toggleBinPrivacy
+    return toggleBinPrivacy(id);
+  }, [toggleBinPrivacy]);
+
   const inviteCollaborator = useCallback(async (binId: string, email: string) => {
     try {
       const updatedBins = state.bins.map(bin =>
@@ -240,6 +246,7 @@ export const useBins = (): BinsState & BinsActions => {
     updateBin,
     deleteBin,
     toggleBinPrivacy,
+    togglePrivacy,
     inviteCollaborator,
   };
 }; 

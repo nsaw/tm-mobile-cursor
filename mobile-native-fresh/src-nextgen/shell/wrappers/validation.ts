@@ -79,7 +79,7 @@ export const validateRoleHierarchy = (
 export const validateComponentRole = (
   componentName: string,
   role: ComponentRole,
-  props: any
+  props: Record<string, unknown>
 ): RoleValidationResult => {
   const result: RoleValidationResult = {
     valid: true,

@@ -46,6 +46,8 @@ export type UIInteractiveRole =
   | 'input'                 // Text input fields and forms
   | 'toggle'                // Toggle switches and checkboxes
   | 'slider'                // Slider controls and range inputs
+  // Feedback Elements
+  | 'feedback'              // Feedback messages and notifications
   // Decorative Elements
   | 'chip'                  // Chips and pills
   | 'badge'                 // Badges and tags
@@ -71,6 +73,9 @@ export const roleGroups = {
   
   // Functional elements (all interactive controls)
   functional: ['button-action', 'button-function', 'input', 'toggle', 'slider'],
+  
+  // Feedback elements (messages and notifications)
+  feedback: ['feedback'],
   
   // Decorative elements (visual indicators)
   decorative: ['chip', 'badge', 'tag'],
@@ -107,7 +112,7 @@ export function isInteractiveRole(role: string): role is UIInteractiveRole {
   return [
     'button-nav-primary', 'button-nav-secondary', 'card-as-nav', 'link-nav',
     'button-action', 'button-function', 'input', 'toggle', 'slider',
-    'chip', 'badge', 'tag'
+    'feedback', 'chip', 'badge', 'tag'
   ].includes(role);
 }
 
@@ -163,6 +168,7 @@ export function validateRoleProps(props: RoleProps): {
 export function getRoleGroup(role: string): string | null {
   if (roleGroups.nav.includes(role as any)) return 'nav';
   if (roleGroups.functional.includes(role as any)) return 'functional';
+  if (roleGroups.feedback.includes(role as any)) return 'feedback';
   if (roleGroups.decorative.includes(role as any)) return 'decorative';
   if (roleGroups.layout.includes(role as any)) return 'layout';
   if (roleGroups.text.includes(role as any)) return 'text';

@@ -1,50 +1,45 @@
-// src-nextgen/App.tsx
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { AppStateProvider } from './contexts/AppStateContext';
+import { AuthFlowProvider } from './contexts/AuthFlowContext';
+import { ThemeProvider } from './theme/ThemeProvider';
+import { MainNavigator } from './navigation/MainNavigator';
+import { useAppState } from './contexts/AppStateContext';
 
-export default function NextGenApp() {
+export default function App(): React.JSX.Element {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.title}>🚀 NextGen Environment</Text>
-          <Text style={styles.subtitle}>Coming soon...</Text>
-          <Text style={styles.description}>
-            This is the nextgen environment that will contain the new codebase.
-          </Text>
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <ErrorBoundary>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <ThemeProvider>
+            <AppStateProvider>
+              <AuthFlowProvider>
+                <AppContent />
+              </AuthFlowProvider>
+            </AppStateProvider>
+          </ThemeProvider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ErrorBoundary>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#666',
-    marginBottom: 20,
-  },
-  description: {
-    fontSize: 16,
-    color: '#888',
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-}); 
+const AppContent: React.FC = () => {
+  const { dispatch, trackEvent } = useAppState();
+
+  useEffect(() => {
+    // Initialize app - only run once on mount
+    dispatch({ type: 'INITIALIZE_APP' });
+    trackEvent('app_initialized');
+  }, [dispatch, trackEvent]); // Include dependencies to prevent lint warning
+
+  return (
+    <>
+      <StatusBar style="auto" />
+      <MainNavigator />
+    </>
+  );
+}; 

@@ -1,6 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 
-export function useSecurity() {
+export function useSecurity(): {
+  isLockedOut: boolean;
+  lockoutEndTime: number | null;
+  failedAttempts: number;
+  maxAttempts: number;
+  lockoutDuration: number;
+  recordFailedAttempt: () => void;
+  resetFailedAttempts: () => void;
+} {
   const [isLockedOut, setIsLockedOut] = useState(false);
   const [lockoutEndTime, setLockoutEndTime] = useState<number | null>(null);
   const [failedAttempts, setFailedAttempts] = useState(0);

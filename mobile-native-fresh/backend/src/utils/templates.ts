@@ -144,7 +144,7 @@ Example tags: #work, #personal, #ideas, #tasks, #meeting-notes`,
 ];
 
 // Function to create template content for a new user
-export const createTemplateContent = async (userId: number) => {
+export const createTemplateContent = async (userId: number): Promise<{ bins: unknown[]; thoughtmarks: unknown[] } | undefined> => {
   try {
     // Create default bins - matching dashboard order from web app
     const defaultBins = [
@@ -322,8 +322,7 @@ export const createTemplateContent = async (userId: number) => {
     // Insert template thoughtmarks
     for (const thoughtmark of templateThoughtmarks) {
       try {
-        const result = await db.insert(thoughtmarks).values(thoughtmark).returning();
-        const createdThoughtmark = Array.isArray(result) ? result[0] : result;
+        await db.insert(thoughtmarks).values(thoughtmark).returning();
         console.log(`Created thoughtmark: ${thoughtmark.title}`);
       } catch (error) {
         console.error('Error inserting thoughtmark:', thoughtmark.title, error);

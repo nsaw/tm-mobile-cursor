@@ -1,6 +1,10 @@
 import { useState, useCallback } from 'react';
 
-export function useCaptcha() {
+export function useCaptcha(): {
+  captchaToken: string | null;
+  verifyCaptcha: () => Promise<boolean>;
+  resetCaptcha: () => void;
+} {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const verifyCaptcha = useCallback(async (): Promise<boolean> => {

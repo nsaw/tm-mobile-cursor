@@ -4,7 +4,7 @@ import { ThemeColors } from '../types/theme';
 
 export interface CheckboxProps {
   value: boolean;
-  onValueChange: (value: boolean) => void;
+  onValueChange: (newValue: boolean) => void;
   disabled?: boolean;
   accessibilityLabel?: string;
   accessibilityRole?: AccessibilityRole;
@@ -18,13 +18,24 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   accessibilityRole = 'checkbox' as AccessibilityRole,
 }) => {
   const colors: ThemeColors = {
+    primary: '#007AFF',
+    secondary: '#5E5CE6',
     background: '#FFFFFF',
     surface: '#F8F9FA',
     text: '#1A1A1A',
     textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
+    textMuted: '#6C757D',
     border: '#DEE2E6',
+    error: '#DC3545',
+    success: '#28A745',
+    warning: '#FFC107',
+    accent: '#007AFF',
+    onAccent: '#FFFFFF',
+    onSurface: '#1A1A1A',
+    onSurfaceVariant: '#6C757D',
+    onBackground: '#1A1A1A',
+    onPrimary: '#FFFFFF',
+    outline: '#DEE2E6',
   };
 
   return (

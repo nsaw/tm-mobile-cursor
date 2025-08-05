@@ -1,15 +1,19 @@
 import React from 'react';
 import { Text as RNText, TextProps, StyleSheet } from 'react-native';
 import { AutoRoleView } from '../AutoRoleView';
-import { useTheme } from '../../theme/ThemeProvider';
+import { useTheme } from '../../hooks/useTheme';
 
 export interface TextPropsExtended extends Omit<TextProps, 'role'> {
-  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption';
+  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'body2' | 'caption';
   color?: string;
   align?: 'left' | 'center' | 'right';
-  weight?: 'normal' | 'bold' | '600' | '700';
-  role?: 'text' | 'heading' | 'label' | 'paragraph';
+  weight?: 'normal' | 'medium' | 'bold' | '600' | '700';
+  role?: 'text' | 'heading' | 'label' | 'paragraph' | 'content' | 'element';
+  _truncate?: boolean;
 }
+
+// Export TextProps for other components to use
+export type { TextProps };
 
 export const Text: React.FC<TextPropsExtended> = ({
   children,
@@ -17,19 +21,19 @@ export const Text: React.FC<TextPropsExtended> = ({
   color,
   align = 'left',
   weight,
-  role = 'text',
   style,
-  accessible = true,
   accessibilityLabel,
   accessibilityHint,
   accessibilityRole,
   accessibilityState,
   importantForAccessibility,
-  ...props
+  _truncate,
+  role,
+  ..._props
 }) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
-  const textStyle = [
+  const _textStyle = [
     styles.text,
     styles[variant],
     { color: color || theme.colors.text },
@@ -38,22 +42,36 @@ export const Text: React.FC<TextPropsExtended> = ({
     style,
   ];
 
-  const getAutoRoleViewRole = (): 'text' => {
-    return 'text';
+  // Map text-specific roles to AutoRoleView compatible roles
+  const getAutoRoleViewRole = (textRole?: string): 'text' | 'content' | 'element' => {
+    switch (textRole) {
+      case 'heading':
+        return 'text';
+      case 'label':
+        return 'text';
+      case 'paragraph':
+        return 'text';
+      case 'content':
+        return 'content';
+      case 'element':
+        return 'element';
+      default:
+        return 'text';
+    }
   };
+
+  const autoRoleViewRole = getAutoRoleViewRole(role);
 
   return (
     <AutoRoleView
-      role={getAutoRoleViewRole()}
+      role={autoRoleViewRole}
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={accessibilityHint}
       accessibilityRole={accessibilityRole}
       accessibilityState={accessibilityState as Record<string, unknown>}
       importantForAccessibility={importantForAccessibility}
     >
-      <RNText style={textStyle} {...props}>
-        {children}
-      </RNText>
+      <RNText><Text>{children}</Text></RNText>
     </AutoRoleView>
   );
 };
@@ -77,6 +95,10 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: 16,
+    fontWeight: '400',
+  },
+  body2: {
+    fontSize: 14,
     fontWeight: '400',
   },
   caption: {

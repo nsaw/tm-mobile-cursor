@@ -9,7 +9,11 @@ export const useRoute = <T extends keyof RootStackParamList>(): RouteProp<T> => 
   return useRNRoute() as RouteProp<T>;
 };
 
-export const useNavigationState = () => {
+export const useNavigationState = (): {
+  canGoBack: boolean;
+  routeNames: string[];
+  currentRoute: Record<string, unknown> | undefined;
+} => {
   const navigation = useRNNavigation();
   const state = navigation.getState();
   return {

@@ -1,137 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from '../components/AutoRoleView';
-import { useTheme } from '../hooks/useTheme';
-import { useAuth } from '../hooks/useAuth';
 
 interface ProfileScreenProps {
-  navigation?: any;
+  _route: Record<string, unknown>;
 }
 
-export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const [profile, setProfile] = useState({
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ _route }) => {
+  const theme = useTheme();
+  const [profile] = useState({
     name: 'John Doe',
-    email: 'john.doe@example.com',
-    avatar: 'https://via.placeholder.com/100',
-    bio: 'Software developer passionate about creating amazing user experiences.',
-    stats: {
-      thoughts: 42,
-      followers: 156,
-      following: 89
-    }
+    email: 'john@example.com',
+    avatar: 'https://via.placeholder.com/100'
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const theme = useTheme();
-  const { user, signOut } = useAuth();
-  const nav = useNavigation();
-
-  useEffect(() => {
-    // Load user profile data
-    if (user) {
-      setProfile(prev => ({
-        ...prev,
-        name: user.displayName || prev.name,
-        email: user.email || prev.email,
-        avatar: user.photoURL || prev.avatar
-      }));
-    }
-  }, [user]);
-
   const handleEditProfile = () => {
-    setIsEditing(true);
-    nav.navigate('ProfileEdit' as never);
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      nav.navigate('SignIn' as never);
-    } catch (error) {
-      console.error('Sign out error:', error);
-    }
+    // Profile editing logic
+    console.log('Edit profile clicked');
   };
 
   return (
-    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {/* Header Section */}
-        <AutoRoleView style={styles.header}>
-          <AutoRoleView style={styles.avatarContainer}>
-            <Image 
-              source={{ uri: profile.avatar }} 
-              style={styles.avatar}
-              resizeMode="cover"
-            />
-            <TouchableOpacity 
-              style={styles.editAvatarButton}
-              onPress={() => console.log('Edit avatar')}
-            >
-              <Text style={[styles.editAvatarText, { color: theme.colors.primary }]}>Edit</Text>
-            </TouchableOpacity>
-          </AutoRoleView>
-          
-          <AutoRoleView style={styles.nameContainer}>
-            <Text style={[styles.name, { color: theme.colors.text }]}>{profile.name}</Text>
-            <Text style={[styles.email, { color: theme.colors.textSecondary }]}>{profile.email}</Text>
-          </AutoRoleView>
-        </AutoRoleView>
-
-        {/* Stats Section */}
-        <AutoRoleView style={styles.statsContainer}>
-          <AutoRoleView style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.thoughts}</Text>
-            <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Thoughts</Text>
-          </AutoRoleView>
-          
-          <AutoRoleView style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.followers}</Text>
-            <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Followers</Text>
-          </AutoRoleView>
-          
-          <AutoRoleView style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: theme.colors.text }]}>{profile.stats.following}</Text>
-            <Text style={[styles.statLabel, { color: theme.colors.textSecondary }]}>Following</Text>
-          </AutoRoleView>
-        </AutoRoleView>
-
-        {/* Bio Section */}
-        <AutoRoleView style={styles.bioContainer}>
-          <Text style={[styles.bioTitle, { color: theme.colors.text }]}>About</Text>
-          <Text style={[styles.bioText, { color: theme.colors.textSecondary }]}>{profile.bio}</Text>
-        </AutoRoleView>
-
-        {/* Action Buttons */}
-        <AutoRoleView style={styles.actionContainer}>
-          <TouchableOpacity 
-            style={[styles.actionButton, { backgroundColor: theme.colors.primary }]}
-            onPress={handleEditProfile}
-          >
-            <Text style={[styles.actionButtonText, { color: theme.colors.background }]}>
-              Edit Profile
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={[styles.actionButton, { backgroundColor: theme.colors.surface }]}
-            onPress={() => nav.navigate('Settings' as never)}
-          >
-            <Text style={[styles.actionButtonText, { color: theme.colors.text }]}>
-              Settings
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={[styles.actionButton, { backgroundColor: theme.colors.error }]}
-            onPress={handleSignOut}
-          >
-            <Text style={[styles.actionButtonText, { color: theme.colors.background }]}>
-              Sign Out
-            </Text>
-          </TouchableOpacity>
-        </AutoRoleView>
-      </ScrollView>
+    <AutoRoleView role="screen" style={styles.container}>
+      <Text style={[styles.title, { color: theme.colors.text }]}>
+        Profile
+      </Text>
+      <Text style={[styles.name, { color: theme.colors.text }]}>
+        {profile.name}
+      </Text>
+      <Text style={[styles.email, { color: theme.colors.textSecondary }]}>
+        {profile.email}
+      </Text>
+      <TouchableOpacity
+        style={[styles.editButton, { backgroundColor: theme.colors.primary }]}
+        onPress={handleEditProfile}
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        <Text style={[styles.editButtonText, { color: theme.colors.onPrimary }]}>
+          Edit Profile
+        </Text>
+      </TouchableOpacity>
     </AutoRoleView>
   );
 };
@@ -139,94 +46,31 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  header: {
+    padding: 20,
     alignItems: 'center',
-    paddingVertical: 24,
-    paddingHorizontal: 20,
+    justifyContent: 'center',
   },
-  avatarContainer: {
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 8,
-  },
-  editAvatarButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-    backgroundColor: 'rgba(0,0,0,0.1)',
-  },
-  editAvatarText: {
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  nameContainer: {
-    alignItems: 'center',
-  },
-  name: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 18,
+    marginBottom: 10,
   },
   email: {
     fontSize: 16,
-    opacity: 0.7,
+    marginBottom: 30,
   },
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 20,
+  editButton: {
     paddingHorizontal: 20,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.1)',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.1)',
-  },
-  statItem: {
-    alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  statLabel: {
-    fontSize: 14,
-    opacity: 0.7,
-  },
-  bioContainer: {
-    padding: 20,
-  },
-  bioTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  bioText: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  actionContainer: {
-    padding: 20,
-    gap: 12,
-  },
-  actionButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 8,
-    alignItems: 'center',
   },
-  actionButtonText: {
+  editButtonText: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });
 

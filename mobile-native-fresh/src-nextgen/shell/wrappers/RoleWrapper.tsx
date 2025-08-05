@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { View, ViewStyle, Text, StyleSheet } from 'react-native';
 import { RoleWrapperProps, RoleConfig, ComponentRole } from './types';
 
@@ -18,7 +18,7 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
   role,
   children,
   config = {},
-  className,
+  className: _className,
   style,
   testID
 }) => {
@@ -27,15 +27,15 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
   const [showDebugOverlay, setShowDebugOverlay] = useState(false);
 
   // Default configuration
-  const defaultConfig: RoleConfig = {
+  const defaultConfig = useMemo((): RoleConfig => ({
     role,
     priority: 1,
     protected: false,
     validation: true,
     debug: false
-  };
+  }), [role]);
 
-  const finalConfig = { ...defaultConfig, ...config };
+  const finalConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config, defaultConfig]);
 
   // Check for debug environment variable
   useEffect(() => {
@@ -72,27 +72,8 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
     return colors[componentRole] || '#6B7280';
   };
 
-  // Validation effect
-  useEffect(() => {
-    if (finalConfig.validation) {
-      validateRoleAssignment();
-    }
-  }, [role, finalConfig.validation]);
-
-  // Debug logging effect
-  useEffect(() => {
-    if (showDebugOverlay) {
-      console.log(`🔧 RoleWrapper: ${role}`, {
-        componentId: componentId.current,
-        config: finalConfig,
-        timestamp: new Date().toISOString(),
-        debugOverlay: showDebugOverlay
-      });
-    }
-  }, [role, showDebugOverlay]);
-
   // Validate role assignment
-  const validateRoleAssignment = () => {
+  const validateRoleAssignment = useCallback(() => {
     const errors: string[] = [];
     const warnings: string[] = [];
 
@@ -110,7 +91,26 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
     if (errors.length > 0 || warnings.length > 0) {
       console.warn(`RoleWrapper validation for ${role}:`, { errors, warnings });
     }
-  };
+  }, [role, finalConfig.priority]);
+
+  // Validation effect
+  useEffect(() => {
+    if (finalConfig.validation) {
+      validateRoleAssignment();
+    }
+  }, [finalConfig.validation, validateRoleAssignment]);
+
+  // Debug logging effect
+  useEffect(() => {
+    if (showDebugOverlay) {
+      console.log(`🔧 RoleWrapper: ${role}`, {
+        componentId: componentId.current,
+        config: finalConfig,
+        timestamp: new Date().toISOString(),
+        debugOverlay: showDebugOverlay
+      });
+    }
+  }, [role, showDebugOverlay, finalConfig]);
 
   return (
     <View

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-native';
-import { useAppStore } from './appStore';
+import useAppStore from './appStore';
 
 // Mock AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -13,104 +13,47 @@ describe('AppStore', () => {
   beforeEach(() => {
     // Clear store state before each test
     act(() => {
-      useAppStore.getState().resetApp();
+      useAppStore.getState().initialize();
     });
   });
 
   it('should have initial state', () => {
     const { result } = renderHook(() => useAppStore());
     
-    expect(result.current.currentEnvironment).toBe('legacy');
-    expect(result.current.isFirstLaunch).toBe(true);
-    expect(result.current.onboardingCompleted).toBe(false);
-    expect(result.current.theme).toBe('system');
-    expect(result.current.notifications).toBe(true);
-    expect(result.current.analytics).toBe(true);
+    expect(result.current.isInitialized).toBe(false);
+    expect(result.current.version).toBe('1.0.0');
+    expect(result.current.buildNumber).toBe('1');
+    expect(result.current.lastUpdated).toBeInstanceOf(Date);
   });
 
-  it('should set environment', () => {
+  it('should initialize app', () => {
     const { result } = renderHook(() => useAppStore());
     
     act(() => {
-      result.current.setEnvironment('nextgen');
+      result.current.initialize();
     });
     
-    expect(result.current.currentEnvironment).toBe('nextgen');
+    expect(result.current.isInitialized).toBe(true);
   });
 
-  it('should set first launch', () => {
+  it('should update version', () => {
     const { result } = renderHook(() => useAppStore());
     
     act(() => {
-      result.current.setFirstLaunch(false);
+      result.current.updateVersion('2.0.0');
     });
     
-    expect(result.current.isFirstLaunch).toBe(false);
+    expect(result.current.version).toBe('2.0.0');
   });
 
-  it('should set onboarding completed', () => {
+  it('should set last updated', () => {
     const { result } = renderHook(() => useAppStore());
+    const newDate = new Date('2024-01-01');
     
     act(() => {
-      result.current.setOnboardingCompleted(true);
+      result.current.setLastUpdated(newDate);
     });
     
-    expect(result.current.onboardingCompleted).toBe(true);
-  });
-
-  it('should set theme', () => {
-    const { result } = renderHook(() => useAppStore());
-    
-    act(() => {
-      result.current.setTheme('dark');
-    });
-    
-    expect(result.current.theme).toBe('dark');
-  });
-
-  it('should set notifications', () => {
-    const { result } = renderHook(() => useAppStore());
-    
-    act(() => {
-      result.current.setNotifications(false);
-    });
-    
-    expect(result.current.notifications).toBe(false);
-  });
-
-  it('should set analytics', () => {
-    const { result } = renderHook(() => useAppStore());
-    
-    act(() => {
-      result.current.setAnalytics(false);
-    });
-    
-    expect(result.current.analytics).toBe(false);
-  });
-
-  it('should reset app', () => {
-    const { result } = renderHook(() => useAppStore());
-    
-    // Change some values
-    act(() => {
-      result.current.setEnvironment('nextgen');
-      result.current.setFirstLaunch(false);
-      result.current.setOnboardingCompleted(true);
-      result.current.setTheme('dark');
-      result.current.setNotifications(false);
-      result.current.setAnalytics(false);
-    });
-    
-    // Reset
-    act(() => {
-      result.current.resetApp();
-    });
-    
-    expect(result.current.currentEnvironment).toBe('legacy');
-    expect(result.current.isFirstLaunch).toBe(true);
-    expect(result.current.onboardingCompleted).toBe(false);
-    expect(result.current.theme).toBe('system');
-    expect(result.current.notifications).toBe(true);
-    expect(result.current.analytics).toBe(true);
+    expect(result.current.lastUpdated).toEqual(newDate);
   });
 }); 

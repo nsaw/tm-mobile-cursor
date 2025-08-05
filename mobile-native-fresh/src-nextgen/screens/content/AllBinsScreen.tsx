@@ -7,11 +7,11 @@ import { useTheme } from '../../theme/ThemeProvider';
 const AllBinsScreen: React.FC = () => {
   const { bins, fetchBins, togglePrivacy, inviteCollaborator } = useBins();
   const [filter, setFilter] = useState('');
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   useEffect(() => {
     fetchBins();
-  }, []);
+  }, [fetchBins]);
 
   const renderItem = ({ item }: { item: Bin }) => (
     <View style={theme.styles.binItem}>

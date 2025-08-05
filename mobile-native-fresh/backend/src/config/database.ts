@@ -24,7 +24,7 @@ export const databaseConfig = {
 };
 
 // Get the appropriate database config based on environment
-export const getDatabaseConfig = () => {
+export const getDatabaseConfig = (): typeof databaseConfig.production => {
   const env = process.env.NODE_ENV || 'development';
   return databaseConfig[env as keyof typeof databaseConfig] || databaseConfig.development;
 }; 

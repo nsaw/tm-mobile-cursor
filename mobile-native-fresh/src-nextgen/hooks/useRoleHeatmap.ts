@@ -12,7 +12,12 @@ interface UseRoleHeatmapOptions {
   onToggle?: (enabled: boolean) => void;
 }
 
-export const useRoleHeatmap = (options: UseRoleHeatmapOptions = {}) => {
+export const useRoleHeatmap = (options: UseRoleHeatmapOptions = {}): RoleHeatmapState & {
+  toggleHeatmap: () => void;
+  enableHeatmap: () => void;
+  disableHeatmap: () => void;
+  analyzeRoleDistribution: () => void;
+} => {
   const { initialEnabled = false, onToggle } = options;
   
   const [state, setState] = useState<RoleHeatmapState>({

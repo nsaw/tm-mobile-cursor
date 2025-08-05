@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../types/theme';
 
-export const createStyles = (colors: ThemeColors) => StyleSheet.create({
+export const createStyles = (colors: ThemeColors): ReturnType<typeof StyleSheet.create> => StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -22,7 +22,7 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold' as any,
+    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 8,
   },
@@ -39,7 +39,7 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: '600' as any,
+    fontWeight: '600',
     marginBottom: 8,
   },
   input: {
@@ -106,7 +106,7 @@ export const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   signUpLink: {
     fontSize: 14,
-    fontWeight: '600' as any,
+    fontWeight: '600',
     textDecorationLine: 'underline',
   },
 });

@@ -1,4 +1,4 @@
-import { typeValidator, TypeValidationResult } from './TypeValidation';
+import { typeValidator } from './TypeValidation';
 import { User, Thoughtmark } from './DataTypes';
 import { ApiResponse } from './ApiTypes';
 

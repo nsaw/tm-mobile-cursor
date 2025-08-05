@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, ReactNode } from 'react';
 
 interface ShellSlotContextType {
   topbarSlot?: ReactNode;
@@ -7,7 +7,7 @@ interface ShellSlotContextType {
 
 const ShellSlotContext = createContext<ShellSlotContextType>({});
 
-export const ShellSlotProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ShellSlotProvider: React.FC<{ children: ReactNode }> = ({ children }): React.JSX.Element => {
   const [topbarSlot, setTopbarSlot] = React.useState<ReactNode>(null);
 
   return (

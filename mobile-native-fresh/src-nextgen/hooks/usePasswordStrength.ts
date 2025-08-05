@@ -14,7 +14,10 @@ export interface PasswordStrength {
   meetsRequirements: boolean;
 }
 
-export function usePasswordStrength() {
+export function usePasswordStrength(): {
+  passwordStrength: PasswordStrength;
+  validatePassword: (password: string, requirements: PasswordRequirements) => PasswordStrength;
+} {
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>({
     score: 0,
     feedback: [],

@@ -1,21 +1,19 @@
 // Type declarations for Node.js modules (for development only)
 declare module 'child_process' {
-  export function exec(command: string): any;
+  export function exec(command: string): Promise<{ stdout: string; stderr: string }>;
 }
 
 declare module 'util' {
-  export function promisify(fn: any): any;
+  export function promisify<T extends (...args: unknown[]) => unknown>(fn: T): (...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>>;
 }
 
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
-const execAsync = promisify(exec);
-
 export interface ValidationResult {
   success: boolean;
   message: string;
-  details?: any;
+  details?: Record<string, unknown>;
   duration: number;
 }
 
@@ -174,7 +172,7 @@ export class PatchValidator {
    */
   private async validateTypeScriptCompilation(): Promise<ValidationResult> {
     try {
-      const { stdout, stderr } = await execAsync('npx tsc --noEmit --skipLibCheck');
+      const { stdout, stderr } = await promisify(exec)('npx tsc --noEmit --skipLibCheck');
       
       if (stderr && stderr.trim()) {
         return {
@@ -206,7 +204,7 @@ export class PatchValidator {
    */
   private async validateESLint(): Promise<ValidationResult> {
     try {
-      const { stdout, stderr } = await execAsync('npx eslint . --ext .ts,.tsx --max-warnings=0');
+      const { stdout, stderr } = await promisify(exec)('npx eslint . --ext .ts,.tsx --max-warnings=0');
       
       if (stderr && stderr.trim()) {
         return {
@@ -238,7 +236,7 @@ export class PatchValidator {
    */
   private async validateUnitTests(): Promise<ValidationResult> {
     try {
-      const { stdout, stderr } = await execAsync('yarn test:unit --watchAll=false');
+      const { stdout, stderr } = await promisify(exec)('yarn test:unit --watchAll=false');
       
       if (stderr && stderr.includes('FAIL')) {
         return {
@@ -270,7 +268,7 @@ export class PatchValidator {
    */
   private async validateDualMountSystem(): Promise<ValidationResult> {
     try {
-      const { stdout, stderr } = await execAsync('node scripts/validate-dual-mount.js');
+      const { stdout, stderr } = await promisify(exec)('node scripts/validate-dual-mount.js');
       
       if (stderr && stderr.trim()) {
         return {
@@ -302,7 +300,7 @@ export class PatchValidator {
    */
   private async validateEnvironmentSpecific(): Promise<ValidationResult> {
     try {
-      const { stdout, stderr } = await execAsync('node scripts/validate-environment-specific.js');
+      const { stdout, stderr } = await promisify(exec)('node scripts/validate-environment-specific.js');
       
       if (stderr && stderr.trim()) {
         return {

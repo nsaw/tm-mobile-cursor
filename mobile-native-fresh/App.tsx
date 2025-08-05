@@ -29,7 +29,7 @@ console.log('[DUAL-MOUNT] Environment check:', {
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-export default function App() {
+export default async function App(): Promise<React.JSX.Element | null> {
   console.log('[APP] 🚀 App function executed - THIS SHOULD APPEAR');
   console.log('[APP] USE_NEXTGEN:', USE_NEXTGEN);
 
@@ -58,7 +58,7 @@ export default function App() {
     console.log('[APP] Loading NextGen app...');
     try {
       // Try dynamic import first
-      const NextGenApp = require('./src-nextgen/App').default;
+      const NextGenApp = (await import('./src-nextgen/App')).default;
       console.log('[APP] NextGen app loaded successfully');
       console.log('[APP] NextGenApp type:', typeof NextGenApp);
       return <NextGenApp />;
@@ -71,7 +71,7 @@ export default function App() {
     console.log('[APP] USE_NEXTGEN is false, loading legacy app...');
     try {
       // Load the simple legacy app
-      const LegacyApp = require('./legacy.App').default;
+      const LegacyApp = (await import('./legacy.App')).default;
       console.log('[APP] Legacy app loaded successfully');
       console.log('[APP] LegacyApp type:', typeof LegacyApp);
       return <LegacyApp />;

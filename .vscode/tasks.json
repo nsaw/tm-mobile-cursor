@@ -1,0 +1,95 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Validate Shell",
+            "type": "shell",
+            "command": "/Users/sawyer/gitSync/tm-mobile-cursor/scripts/validate-shell.sh",
+            "args": ["--check-only"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-l"]
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Source Shell Configuration",
+            "type": "shell",
+            "command": "source",
+            "args": ["/Users/sawyer/gitSync/tm-mobile-cursor/.shellrc"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-l"]
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "TypeScript Check",
+            "type": "shell",
+            "command": "npx",
+            "args": ["tsc", "--noEmit"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-l"]
+                },
+                "cwd": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+            },
+            "problemMatcher": ["$tsc"]
+        },
+        {
+            "label": "ESLint Check",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "lint:guard"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-l"]
+                },
+                "cwd": "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+            },
+            "problemMatcher": ["$eslint-stylish"]
+        }
+    ]
+} 

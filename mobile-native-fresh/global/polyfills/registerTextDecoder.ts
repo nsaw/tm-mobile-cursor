@@ -1,10 +1,11 @@
 /* Polyfill: TextDecoder for React Native */
+import { TextDecoder, TextEncoder } from 'text-encoding';
+
 console.log('[Polyfill] Starting TextDecoder/TextEncoder polyfill registration...');
 
 try {
   if (typeof globalThis.TextDecoder === 'undefined') {
     console.log('[Polyfill] TextDecoder not found, applying polyfill...');
-    const { TextDecoder } = require('text-encoding');
     globalThis.TextDecoder = TextDecoder;
     console.log('[Polyfill] TextDecoder polyfill applied to globalThis');
   } else {
@@ -13,7 +14,6 @@ try {
 
   if (typeof globalThis.TextEncoder === 'undefined') {
     console.log('[Polyfill] TextEncoder not found, applying polyfill...');
-    const { TextEncoder } = require('text-encoding');
     globalThis.TextEncoder = TextEncoder;
     console.log('[Polyfill] TextEncoder polyfill applied to globalThis');
   } else {
@@ -23,7 +23,6 @@ try {
   // Also ensure they're available on global for older code
   if (typeof global.TextDecoder === 'undefined') {
     console.log('[Polyfill] TextDecoder not found on global, applying polyfill...');
-    const { TextDecoder } = require('text-encoding');
     global.TextDecoder = TextDecoder;
     console.log('[Polyfill] TextDecoder polyfill applied to global');
   } else {
@@ -32,7 +31,6 @@ try {
 
   if (typeof global.TextEncoder === 'undefined') {
     console.log('[Polyfill] TextEncoder not found on global, applying polyfill...');
-    const { TextEncoder } = require('text-encoding');
     global.TextEncoder = TextEncoder;
     console.log('[Polyfill] TextEncoder polyfill applied to global');
   } else {

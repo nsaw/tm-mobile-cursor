@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Edit, Save, X } from 'lucide-react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Button } from '../../components/ui/Button';
@@ -16,8 +15,8 @@ interface ProfileData {
 }
 
 export const ProfileEdit: React.FC = () => {
-  const { theme } = useTheme();
-  const { colors, spacing, typography } = theme;
+  const theme = useTheme();
+  const { colors, spacing } = theme;
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData>({
     firstName: 'John',
@@ -43,59 +42,59 @@ export const ProfileEdit: React.FC = () => {
       marginBottom: spacing.xl,
     },
     headerTitle: {
-      fontSize: typography.fontSize.xl,
-      fontWeight: 'bold' as const,
-      color: colors.text,
+      fontSize: theme.fontSize.h1,
+      fontWeight: theme.fontWeight.bold,
+      color: theme.colors.text,
     },
     editButton: {
-      padding: spacing.sm,
-      borderRadius: spacing.sm,
-      backgroundColor: colors.accent,
+      padding: theme.spacing.sm,
+      borderRadius: theme.spacing.sm,
+      backgroundColor: theme.colors.accent,
     },
     profileSection: {
       alignItems: 'center',
-      marginBottom: spacing.xl,
+      marginBottom: theme.spacing.xl,
     },
     avatarContainer: {
       width: 80,
       height: 80,
       borderRadius: 40,
-      backgroundColor: colors.accent,
+      backgroundColor: theme.colors.accent,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: spacing.lg,
+      marginBottom: theme.spacing.lg,
     },
     avatarText: {
-      fontSize: typography.fontSize.xl,
-      fontWeight: 'bold' as const,
-      color: colors.background,
+      fontSize: theme.fontSize.h1,
+      fontWeight: theme.fontWeight.bold,
+      color: theme.colors.background,
     },
     formSection: {
-      marginBottom: spacing.xl,
+      marginBottom: theme.spacing.xl,
     },
     sectionTitle: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: '600' as const,
-      color: colors.text,
-      marginBottom: spacing.md,
+      fontSize: theme.fontSize.h2,
+      fontWeight: theme.fontWeight.semibold,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.md,
     },
     inputGroup: {
-      marginBottom: spacing.md,
+      marginBottom: theme.spacing.md,
     },
     label: {
-      fontSize: typography.fontSize.sm,
-      fontWeight: '500' as const,
-      color: colors.textMuted,
-      marginBottom: spacing.xs,
+      fontSize: theme.fontSize.caption,
+      fontWeight: theme.fontWeight.medium,
+      color: theme.colors.textMuted,
+      marginBottom: theme.spacing.xs,
     },
     input: {
       borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: spacing.sm,
-      padding: spacing.md,
-      fontSize: typography.fontSize.body,
-      color: colors.text,
-      backgroundColor: colors.surface,
+      borderColor: theme.colors.border,
+      borderRadius: theme.spacing.sm,
+      padding: theme.spacing.md,
+      fontSize: theme.fontSize.body,
+      color: theme.colors.text,
+      backgroundColor: theme.colors.surface,
     },
     textArea: {
       height: 100,
@@ -104,22 +103,22 @@ export const ProfileEdit: React.FC = () => {
     buttonRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: spacing.xl,
+      marginTop: theme.spacing.xl,
     },
     saveButton: {
       flex: 1,
-      marginRight: spacing.sm,
-      backgroundColor: colors.accent,
+      marginRight: theme.spacing.sm,
+      backgroundColor: theme.colors.accent,
     },
     cancelButton: {
       flex: 1,
-      marginLeft: spacing.sm,
-      backgroundColor: colors.error,
+      marginLeft: theme.spacing.sm,
+      backgroundColor: theme.colors.error,
     },
     buttonText: {
-      color: colors.background,
-      fontSize: typography.fontSize.body,
-      fontWeight: '600' as const,
+      color: theme.colors.background,
+      fontSize: theme.fontSize.body,
+      fontWeight: theme.fontWeight.semibold,
     },
   });
 

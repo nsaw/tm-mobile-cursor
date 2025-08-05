@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, View, StyleSheet, Animated } from 'react-native';
+import { TouchableOpacity, StyleSheet, Animated } from 'react-native';
 
 export interface SwitchProps {
   value: boolean;
@@ -55,7 +55,7 @@ export const Switch: React.FC<SwitchProps> = ({
       onPress={handlePress}
       disabled={disabled}
       activeOpacity={0.8}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Animated.View style={thumbStyle} />
     </TouchableOpacity>
   );

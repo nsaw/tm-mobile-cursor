@@ -1,4 +1,5 @@
 # 🚨 FORBIDDEN SRC/ DIRECTORY LOCK FILE
+# 🚨 FORBIDDEN SRC-NEXTGEN/ DIRECTORY LOCK FILE
 # 
 # CRITICAL: This file prevents creation of forbidden src/ directories
 # 
@@ -6,6 +7,7 @@
 # - /Users/sawyer/gitSync/tm-mobile-cursor/src/ (WRONG - project root)
 # - /Users/sawyer/gitSync/tm-mobile-cursor/src-nextgen/ (WRONG - project root)
 # - /Users/sawyer/gitSync/tm-mobile-cursor/src-reference/ (WRONG - project root)
+# - /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/ (WRONG - deprecated)
 #
 # CORRECT LOCATIONS:
 # - /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-reference/ (CORRECT)

@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-native';
+import { useNavigation as useNavigationOriginal, useRoute as useRouteOriginal } from '@react-navigation/native';
 import { useNavigation, useRoute, useNavigationState } from './useNavigation';
 
 // Mock @react-navigation/native
@@ -7,8 +8,8 @@ jest.mock('@react-navigation/native', () => ({
   useRoute: jest.fn(),
 }));
 
-const mockUseNavigation = jest.mocked(require('@react-navigation/native').useNavigation);
-const mockUseRoute = jest.mocked(require('@react-navigation/native').useRoute);
+const mockUseNavigation = jest.mocked(useNavigationOriginal);
+const mockUseRoute = jest.mocked(useRouteOriginal);
 
 describe('Navigation Hooks', () => {
   beforeEach(() => {

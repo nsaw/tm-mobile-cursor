@@ -25,7 +25,11 @@ export const SHELL_CONFIG = {
 };
 
 // Shell initialization
-export const initializeShell = () => {
+export const initializeShell = (): {
+  status: string;
+  timestamp: string;
+  config: typeof SHELL_CONFIG;
+} => {
   console.log('🔧 Initializing Hybrid Renderer Shell...');
   console.log(`Version: ${SHELL_CONFIG.version}`);
   console.log(`Architecture: ${SHELL_CONFIG.architecture}`);

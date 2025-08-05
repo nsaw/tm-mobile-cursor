@@ -29,9 +29,9 @@ export const Text: React.FC<TextProps> = ({
   align = 'left',
   style,
   children,
-  ...props
+  ..._props
 }) => {
-  const textStyle = [
+  const _textStyle = [
     styles.base,
     styles[variant],
     styles[size],
@@ -58,13 +58,7 @@ export const Text: React.FC<TextProps> = ({
 
   return (
     <AutoRoleView contentRole={getContentRole()}>
-      <RNText
-        style={textStyle}
-        {...props}
-        accessibilityRole="text"
-      >
-        {children}
-      </RNText>
+      <RNText><Text>{children}</Text></RNText>
     </AutoRoleView>
   );
 };

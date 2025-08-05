@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextProps } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -26,13 +27,11 @@ export type IconName =
   | 'SimpleLineIcons'
   | 'Zocial';
 
-export interface IconWrapperProps {
+export interface IconWrapperProps extends Omit<TextProps, 'children'> {
   name: IconName;
   iconName: string;
   size?: number;
   color?: string;
-  style?: any;
-  [key: string]: any;
 }
 
 const iconComponents = {
@@ -48,15 +47,30 @@ const iconComponents = {
   Octicons,
   SimpleLineIcons,
   Zocial,
-};
+} as const;
 
-export function IconWrapper({ name, iconName, size = 24, color = '#000000', style, ...props }: IconWrapperProps) {
+export const IconWrapper: React.FC<IconWrapperProps> = ({
+  name,
+  iconName,
+  size = 24,
+  color = '#000000',
+  style,
+  ...props
+}) => {
   const IconComponent = iconComponents[name];
   
   if (!IconComponent) {
     console.warn(`Icon component '${name}' not found`);
     return null;
   }
-
-  return <IconComponent name={iconName} size={size} color={color} style={style} {...props} />;
-} 
+  
+  return (
+    <IconComponent
+      name={iconName}
+      size={size}
+      color={color}
+      style={style}
+      {...props}
+    />
+  );
+}; 

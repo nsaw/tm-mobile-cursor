@@ -1,4 +1,20 @@
-export interface ThemeColors {
+// Re-export theme types from the main ThemeProvider
+export type { 
+  Theme, 
+  ThemeColors, 
+  ThemeSpacing, 
+  ThemeBorderRadius, 
+  ThemeTypography, 
+  ThemeFontSizes, 
+  ThemeFontWeights, 
+  ThemeStyles, 
+  ThemeTokens,
+  TypographyElement,
+  FontWeight 
+} from '../theme/ThemeProvider';
+
+// Legacy interface for backward compatibility
+export interface LegacyThemeColors {
   background: string;
   surface: string;
   text: string;
@@ -9,8 +25,8 @@ export interface ThemeColors {
   warning?: string;
 }
 
-export interface Theme {
-  colors: ThemeColors;
+export interface LegacyTheme {
+  colors: LegacyThemeColors;
   spacing: {
     xs: number;
     sm: number;

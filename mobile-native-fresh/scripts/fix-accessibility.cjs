@@ -182,7 +182,7 @@ function processFile(filePath) {
 }
 
 function main() {
-  const srcDir = path.join(__dirname, '..', 'src');
+  const srcDir = path.join(__dirname, '..', 'src-nextgen');
   const pattern = path.join(srcDir, '**/*.tsx');
   
   console.log('🔍 Scanning for accessibility issues...');

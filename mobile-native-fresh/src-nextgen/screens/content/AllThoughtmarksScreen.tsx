@@ -13,16 +13,16 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { ThoughtmarkCard } from '../../components/ui/ThoughtmarkCard';
-import { useThoughtmarks } from '../../hooks/useThoughtmarks';
-import { useBins } from '../../hooks/useBins';
+import { useThoughtmarks, Thoughtmark } from '../../hooks/useThoughtmarks';
+import { useBins, Bin } from '../../hooks/useBins';
 import { ModernHeader } from '../../components/ui/ModernHeader';
 import { BottomNav } from '../../components/BottomNav';
-import { RootStackParamList } from '../../navigation/types';
+import { RootStackParamList, NavigationProp } from '../../navigation/types';
 import { useVoiceRecorder } from '../../components/ui/VoiceRecorderProvider';
 
 export const AllThoughtmarksScreen: React.FC = () => {
-  const { tokens: designTokens } = useTheme();
-  const navigation = useNavigation<any>();
+  const theme = useTheme();
+  const navigation = useNavigation<NavigationProp<keyof RootStackParamList>>();
   const route = useRoute<RouteProp<RootStackParamList, 'AllThoughtmarks'>>();
   const { thoughtmarks, loading, fetchThoughtmarks } = useThoughtmarks();
   const { bins } = useBins();
@@ -40,16 +40,16 @@ export const AllThoughtmarksScreen: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: designTokens.colors.background ?? '#0D0D0F',
+      backgroundColor: theme.colors.background ?? '#0D0D0F',
     },
     controls: {
-      paddingHorizontal: designTokens.spacing.lg,
-      paddingBottom: designTokens.spacing.sm,
+      paddingHorizontal: theme.spacing.lg,
+      paddingBottom: theme.spacing.sm,
     },
     filterRow: {
       flexDirection: 'row',
-      gap: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.sm,
+      gap: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
     },
     filterDropdown: {
       flex: 1,
@@ -58,89 +58,89 @@ export const AllThoughtmarksScreen: React.FC = () => {
     filterLabel: {
       fontSize: 12,
       fontWeight: '600',
-      color: designTokens.colors.text ?? '#F5F5F7',
-      marginBottom: designTokens.spacing.xs,
+      color: theme.colors.text ?? '#F5F5F7',
+      marginBottom: theme.spacing.xs,
       opacity: 0.8,
     },
     dropdownContainer: {
       flexDirection: 'row',
-      gap: designTokens.spacing.xs,
+      gap: theme.spacing.xs,
     },
     dropdownButton: {
-      paddingHorizontal: designTokens.spacing.sm,
-      paddingVertical: designTokens.spacing.xs,
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.xs,
       borderRadius: 6,
-      backgroundColor: designTokens.colors.surface ?? '#2C2C2E',
+      backgroundColor: theme.colors.surface ?? '#2C2C2E',
       borderWidth: 1,
-      borderColor: designTokens.colors.border ?? '#2C2C2E',
+      borderColor: theme.colors.border ?? '#2C2C2E',
     },
     dropdownButtonActive: {
-      backgroundColor: designTokens.colors.accent ?? '#FFD500',
-      borderColor: designTokens.colors.accent ?? '#FFD500',
+      backgroundColor: theme.colors.accent ?? '#FFD500',
+      borderColor: theme.colors.accent ?? '#FFD500',
     },
     dropdownButtonText: {
       fontSize: 11,
-      color: designTokens.colors.text ?? '#F5F5F7',
+      color: theme.colors.text ?? '#F5F5F7',
       fontWeight: '500',
     },
     dropdownButtonTextActive: {
-      color: designTokens.colors.background ?? '#0D0D0F',
+      color: theme.colors.background ?? '#0D0D0F',
     },
     sortButton: {
-      paddingHorizontal: designTokens.spacing.sm,
-      paddingVertical: designTokens.spacing.xs,
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.xs,
       borderRadius: 6,
-      backgroundColor: designTokens.colors.surface,
+      backgroundColor: theme.colors.surface,
       borderWidth: 1,
-      borderColor: designTokens.colors.border,
+      borderColor: theme.colors.border,
     },
     sortButtonActive: {
-      backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent,
+      backgroundColor: theme.colors.accent,
+      borderColor: theme.colors.accent,
     },
     sortButtonText: {
       fontSize: 11,
-      color: designTokens.colors.text,
+      color: theme.colors.text,
       fontWeight: '500',
     },
     sortButtonTextActive: {
-      color: designTokens.colors.background,
+      color: theme.colors.background,
     },
     binFilterContainer: {
-      marginBottom: designTokens.spacing.md,
+      marginBottom: theme.spacing.md,
     },
     binFilterButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: designTokens.spacing.md,
-      paddingVertical: designTokens.spacing.sm,
-      marginRight: designTokens.spacing.sm,
-      borderRadius: designTokens.spacing.sm,
-      backgroundColor: designTokens.colors.surface,
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: theme.spacing.sm,
+      marginRight: theme.spacing.sm,
+      borderRadius: theme.spacing.sm,
+      backgroundColor: theme.colors.surface,
       borderWidth: 1,
-      borderColor: designTokens.colors.border,
+      borderColor: theme.colors.border,
     },
     binFilterButtonActive: {
-      backgroundColor: designTokens.colors.accent,
-      borderColor: designTokens.colors.accent,
+      backgroundColor: theme.colors.accent,
+      borderColor: theme.colors.accent,
     },
     binFilterIcon: {
-      marginRight: designTokens.spacing.xs,
+      marginRight: theme.spacing.xs,
     },
     binFilterText: {
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.text,
+      fontSize: theme.fontSize.body,
+      color: theme.colors.text,
       fontWeight: '500',
     },
     binFilterTextActive: {
-      color: designTokens.colors.background,
+      color: theme.colors.background,
     },
     listContainer: {
       flex: 1,
-      paddingHorizontal: designTokens.spacing.lg,
+      paddingHorizontal: theme.spacing.lg,
     },
     listContent: {
-      paddingBottom: designTokens.spacing.lg,
+      paddingBottom: theme.spacing.lg,
     },
     loadingContainer: {
       flex: 1,
@@ -148,42 +148,42 @@ export const AllThoughtmarksScreen: React.FC = () => {
       alignItems: 'center',
     },
     loadingText: {
-      marginTop: designTokens.spacing.md,
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
+      marginTop: theme.spacing.md,
+      fontSize: theme.fontSize.body,
+      color: theme.colors.textSecondary,
     },
     emptyState: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      paddingVertical: designTokens.spacing.xl,
+      paddingVertical: theme.spacing.xl,
     },
     emptyStateTitle: {
-      fontSize: designTokens.typography.fontSize.lg,
+      fontSize: theme.fontSize.lg,
       fontWeight: '600',
-      color: designTokens.colors.text,
-      marginTop: designTokens.spacing.md,
-      marginBottom: designTokens.spacing.sm,
+      color: theme.colors.text,
+      marginTop: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
     },
     emptyStateSubtitle: {
-      fontSize: designTokens.typography.fontSize.body,
-      color: designTokens.colors.textSecondary,
+      fontSize: theme.fontSize.body,
+      color: theme.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: designTokens.spacing.lg,
+      marginBottom: theme.spacing.lg,
     },
     createButton: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: designTokens.colors.accent,
-      paddingHorizontal: designTokens.spacing.lg,
-      paddingVertical: designTokens.spacing.md,
-      borderRadius: designTokens.spacing.md,
+      backgroundColor: theme.colors.accent,
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.md,
+      borderRadius: theme.spacing.md,
     },
     createButtonText: {
-      fontSize: designTokens.typography.fontSize.body,
+      fontSize: theme.fontSize.body,
       fontWeight: '600',
-      color: designTokens.colors.background,
-      marginLeft: designTokens.spacing.sm,
+      color: theme.colors.background,
+      marginLeft: theme.spacing.sm,
     },
   });
 
@@ -208,25 +208,25 @@ export const AllThoughtmarksScreen: React.FC = () => {
 
   // Get all unique tags from thoughtmarks
   const allTags = Array.from(
-    new Set(thoughtmarks.flatMap((t: any) => t.tags || []))
+    new Set(thoughtmarks.flatMap((t: Thoughtmark) => t.tags || []))
   ).sort();
 
   // Filter thoughtmarks based on selected tags and bin
-  const filteredThoughtmarks = thoughtmarks.filter((thoughtmark: any) => {
+  const filteredThoughtmarks = thoughtmarks.filter((thoughtmark: Thoughtmark) => {
     const matchesTags = selectedTags.length === 0 || 
       selectedTags.some(tag => thoughtmark.tags?.includes(tag));
-    const matchesBin = !selectedBin || thoughtmark.binId === parseInt(selectedBin);
+    const matchesBin = !selectedBin || thoughtmark.binId === selectedBin;
     
     // Additional filter for tasks if specified
     const matchesTaskFilter = !filterParams?.filter || 
       filterParams.filter !== 'tasks' || 
-      thoughtmark.isTask;
+      thoughtmark.isArchived === false; // Use isArchived instead of isTask
     
-    return matchesTags && matchesBin && matchesTaskFilter && !thoughtmark.isDeleted;
+    return matchesTags && matchesBin && matchesTaskFilter && !thoughtmark.isArchived; // Use isArchived instead of isDeleted
   });
 
   // Sort thoughtmarks
-  const sortedThoughtmarks = [...filteredThoughtmarks].sort((a: any, b: any) => {
+  const sortedThoughtmarks = [...filteredThoughtmarks].sort((a: Thoughtmark, b: Thoughtmark) => {
     if (sortBy === 'pinned') {
       if (a.isPinned && !b.isPinned) return -1;
       if (!a.isPinned && b.isPinned) return 1;
@@ -244,12 +244,12 @@ export const AllThoughtmarksScreen: React.FC = () => {
     setRefreshing(false);
   };
 
-  const handleThoughtmarkPress = (thoughtmark: any) => {
+  const handleThoughtmarkPress = (thoughtmark: Thoughtmark) => {
     navigation.navigate('ThoughtmarkDetail', { thoughtmarkId: thoughtmark.id });
   };
 
-  const handleCreateThoughtmark = () => {
-    navigation.navigate('CreateThoughtmark' as any);
+  const handleCreateThoughtmark = (): void => {
+    navigation.navigate('CreateThoughtmark');
   };
 
   const handlePinToggle = async (thoughtmarkId: string, pinned: boolean) => {
@@ -265,31 +265,26 @@ export const AllThoughtmarksScreen: React.FC = () => {
     }
   };
 
-  const handleNavigate = (path: string) => {
+  const handleNavigate = (path: string): void => {
     switch (path) {
-      case '/':
-      case 'Dashboard':
-        navigation.navigate('Dashboard' as any);
+      case 'home':
+        navigation.navigate('Home');
         break;
-      case '/search':
-      case 'Search':
-        navigation.navigate('Search' as any);
+      case 'search':
+        navigation.navigate('Search');
         break;
-      case '/all-thoughtmarks':
-      case 'AllThoughtmarks':
-        navigation.navigate('AllThoughtmarks' as any);
+      case 'profile':
+        navigation.navigate('Profile');
         break;
-      case '/ai-tools':
-      case 'AITools':
-        navigation.navigate('AITools' as any);
+      case 'settings':
+        navigation.navigate('Settings');
         break;
       default:
-        console.log('Unknown navigation path:', path);
         break;
     }
   };
 
-  const handleVoiceRecord = () => {
+  const _handleVoiceRecord = (): void => {
     showVoiceRecorder();
   };
 
@@ -312,56 +307,68 @@ export const AllThoughtmarksScreen: React.FC = () => {
 
   const renderSortButton = (sortType: 'date' | 'title' | 'pinned', label: string) => (
     <TouchableOpacity
-      style={[styles.sortButton, sortBy === sortType && styles.sortButtonActive]}
+      style={[
+        styles.sortButton,
+        sortBy === sortType && styles.sortButtonActive
+      ]}
       onPress={() => setSortBy(sortType)}
       accessibilityRole="button"
-      accessible={true}
-      accessibilityLabel={sortType}
+      accessibilityLabel={`Sort by ${label}`}
     >
-      <Text style={[styles.sortButtonText, sortBy === sortType && styles.sortButtonTextActive]}>
+      <Text style={[
+        styles.sortButtonText,
+        sortBy === sortType && styles.sortButtonTextActive
+      ]}>
         {label}
       </Text>
     </TouchableOpacity>
-
   );
 
-  const renderBinFilter = () => (
+  const _renderBinFilter = () => (
     <View style={styles.binFilterContainer}>
-      <Text style={styles.filterLabel}>Filter by Bin:</Text>
+      <Text style={styles.filterLabel}>Filter by Bin</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <TouchableOpacity
-          style={[styles.binFilterButton, !selectedBin && styles.binFilterButtonActive]}
+          style={[
+            styles.binFilterButton,
+            !selectedBin && styles.binFilterButtonActive
+          ]}
           onPress={() => setSelectedBin(null)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
         >
-          <Text style={[styles.binFilterText, !selectedBin && styles.binFilterTextActive]}>
+          <Text style={[
+            styles.binFilterText,
+            !selectedBin && styles.binFilterTextActive
+          ]}>
             All
           </Text>
         </TouchableOpacity>
-        {bins.map((bin: any) => (
+        {bins.map((bin) => (
           <TouchableOpacity
             key={bin.id}
-            style={[styles.binFilterButton, selectedBin === bin.id && styles.binFilterButtonActive]}
+            style={[
+              styles.binFilterButton,
+              selectedBin === bin.id && styles.binFilterButtonActive
+            ]}
             onPress={() => setSelectedBin(bin.id)}
-                accessibilityRole="button"
-                accessible={true}
-                accessibilityLabel="Button"
           >
-            <Ionicons 
-              name={bin.icon as any} 
-              size={16} 
-              color={selectedBin === bin.id ? designTokens.colors.background : designTokens.colors.text}
-              style={styles.binFilterIcon}
-            />
-            <Text style={[styles.binFilterText, selectedBin === bin.id && styles.binFilterTextActive]}>
+            <Text style={[
+              styles.binFilterText,
+              selectedBin === bin.id && styles.binFilterTextActive
+            ]}>
               {bin.name}
             </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
+  );
+
+  const renderThoughtmark = ({ item }: { item: Thoughtmark }) => (
+    <ThoughtmarkCard
+      thoughtmark={item}
+      onPress={() => handleThoughtmarkPress(item)}
+      onLongPress={() => handlePinToggle(item.id, !item.isPinned)}
+    />
   );
 
   return (
@@ -396,20 +403,18 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 style={[styles.dropdownButton, !selectedBin && styles.dropdownButtonActive]}
                 onPress={() => setSelectedBin(null)}
                 accessibilityRole="button"
-                accessible={true}
                 accessibilityLabel="Button"
               >
                 <Text style={[styles.dropdownButtonText, !selectedBin && styles.dropdownButtonTextActive]}>
                   All
                 </Text>
               </TouchableOpacity>
-              {bins.slice(0, 5).map((bin: any) => (
+              {bins.slice(0, 5).map((bin: Bin) => (
                 <TouchableOpacity
                   key={bin.id}
                   style={[styles.dropdownButton, selectedBin === bin.id && styles.dropdownButtonActive]}
                   onPress={() => setSelectedBin(bin.id)}
                 accessibilityRole="button"
-                accessible={true}
                 accessibilityLabel="Button"
                 >
                   <Text style={[styles.dropdownButtonText, selectedBin === bin.id && styles.dropdownButtonTextActive]}>
@@ -428,7 +433,6 @@ export const AllThoughtmarksScreen: React.FC = () => {
                 style={[styles.dropdownButton, selectedTags.length === 0 && styles.dropdownButtonActive]}
                 onPress={() => setSelectedTags([])}
                 accessibilityRole="button"
-                accessible={true}
                 accessibilityLabel="Button"
               >
                 <Text style={[styles.dropdownButtonText, selectedTags.length === 0 && styles.dropdownButtonTextActive]}>
@@ -447,7 +451,6 @@ export const AllThoughtmarksScreen: React.FC = () => {
                     }
                   }}
                   accessibilityRole="button"
-                  accessible={true}
                   accessibilityLabel="Button"
                 >
                   <Text style={[styles.dropdownButtonText, selectedTags.includes(tag) && styles.dropdownButtonTextActive]}>
@@ -464,19 +467,13 @@ export const AllThoughtmarksScreen: React.FC = () => {
       <View style={styles.listContainer}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={designTokens.colors.accent} />
+            <ActivityIndicator size="large" color={theme.colors.accent} />
             <Text style={styles.loadingText}>Loading thoughtmarks...</Text>
           </View>
         ) : (
           <FlatList
             data={sortedThoughtmarks}
-            renderItem={({ item }) => (
-              <ThoughtmarkCard 
-                thoughtmark={item} 
-                onPress={() => handleThoughtmarkPress(item)}
-                onLongPress={() => handlePinToggle(item.id, !item.isPinned)}
-              />
-            )}
+            renderItem={renderThoughtmark}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.listContent}
             showsVerticalScrollIndicator={false}
@@ -484,13 +481,13 @@ export const AllThoughtmarksScreen: React.FC = () => {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                colors={[designTokens.colors.accent]}
-                tintColor={designTokens.colors.accent}
+                colors={[theme.colors.accent]}
+                tintColor={theme.colors.accent}
               />
             }
             ListEmptyComponent={
               <View style={styles.emptyState}>
-                <Ionicons name="document-text" size={64} color={designTokens.colors.textSecondary} />
+                <Ionicons name="document-text" size={64} color={theme.colors.textSecondary} />
                 <Text style={styles.emptyStateTitle}>No thoughtmarks found</Text>
                 <Text style={styles.emptyStateSubtitle}>
                   {selectedTags.length > 0 || selectedBin 
@@ -502,8 +499,11 @@ export const AllThoughtmarksScreen: React.FC = () => {
                   <TouchableOpacity
                     style={styles.createButton}
                     onPress={handleCreateThoughtmark}
-                   accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-                    <Ionicons name="add" size={20} color={designTokens.colors.background} />
+                   accessibilityRole="button"
+                   accessibilityLabel="Create new thoughtmark"
+                   accessible={true}
+                 >
+                    <Ionicons name="add" size={20} color={theme.colors.background} />
                     <Text style={styles.createButtonText}>Create Thoughtmark</Text>
                   </TouchableOpacity>
                 )}
@@ -515,14 +515,8 @@ export const AllThoughtmarksScreen: React.FC = () => {
 
       {/* Bottom Navigation */}
       <BottomNav
-        items={[
-          { id: 'home', label: 'Home', icon: '🏠', route: '/dashboard' },
-          { id: 'search', label: 'Search', icon: '🔍', route: '/search' },
-          { id: 'thoughtmarks', label: 'Thoughtmarks', icon: '📝', route: '/all-thoughtmarks' },
-          { id: 'profile', label: 'Profile', icon: '👤', route: '/profile' }
-        ]}
-        activeRoute="/all-thoughtmarks"
-        onRouteChange={handleNavigate}
+        currentRoute="/all-thoughtmarks"
+        onNavigate={handleNavigate}
       />
     </View>
   );

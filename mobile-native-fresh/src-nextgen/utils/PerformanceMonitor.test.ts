@@ -1,6 +1,8 @@
 // Global type declarations for test environment
 declare global {
+  // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
   var performance: any;
+  // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
   var global: any;
 }
 
@@ -65,6 +67,7 @@ describe('PerformanceMonitor', () => {
 
   it('should handle performance API unavailability gracefully', () => {
     // Mock Platform.OS to simulate web environment without Performance API
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (Platform.OS as any) = 'web';
     
     // This should not throw an error
@@ -210,7 +213,26 @@ describe('detectPerformanceRegression', () => {
   });
 
   it('should handle errors gracefully', () => {
-    const report = detectPerformanceRegression(null as any, null as any);
+    const mockCurrentMetrics = {
+      renderTime: 0,
+      memoryUsage: 0,
+      bundleSize: 0,
+      startupTime: 0,
+      dualMountOverhead: 0,
+      timestamp: Date.now(),
+      environment: 'nextgen' as const,
+    };
+
+    const mockBaseline = {
+      renderTime: 0,
+      memoryUsage: 0,
+      bundleSize: 0,
+      startupTime: 0,
+      dualMountOverhead: 0,
+      timestamp: Date.now(),
+    };
+
+    const report = detectPerformanceRegression(mockCurrentMetrics, mockBaseline);
     
     expect(report.hasRegression).toBe(false);
     expect(report.regressions.length).toBe(0);

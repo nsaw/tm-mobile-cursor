@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Switch, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Bell, BellOff, MessageSquare, Heart, Star, Users } from 'lucide-react-native';
+import { Bell, MessageSquare, Heart, Star, Users } from 'lucide-react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Button } from '../../components/ui/Button';
@@ -19,8 +19,8 @@ interface NotificationSettings {
 }
 
 export const Notifications: React.FC = () => {
-  const { theme } = useTheme();
-  const { colors, spacing, typography } = theme;
+  const theme = useTheme();
+  const { colors, spacing } = theme;
   const [settings, setSettings] = useState<NotificationSettings>({
     pushNotifications: true,
     emailNotifications: true,
@@ -44,24 +44,24 @@ export const Notifications: React.FC = () => {
       marginBottom: spacing.xl,
     },
     headerTitle: {
-      fontSize: typography.fontSize.xl,
-      fontWeight: 'bold' as const,
-      color: colors.text,
-      marginBottom: spacing.sm,
+      fontSize: theme.fontSize.h1,
+      fontWeight: theme.fontWeight.bold,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.sm,
     },
     headerSubtitle: {
-      fontSize: typography.fontSize.body,
-      color: colors.textMuted,
-      lineHeight: typography.lineHeight.body,
+      fontSize: theme.fontSize.body,
+      color: theme.colors.textMuted,
+      lineHeight: 20,
     },
     section: {
       marginBottom: spacing.xl,
     },
     sectionTitle: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: '600' as const,
-      color: colors.text,
-      marginBottom: spacing.md,
+      fontSize: theme.fontSize.h2,
+      fontWeight: theme.fontWeight.semibold,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.md,
     },
     settingItem: {
       flexDirection: 'row',
@@ -73,18 +73,18 @@ export const Notifications: React.FC = () => {
     },
     settingInfo: {
       flex: 1,
-      marginRight: spacing.md,
+      marginRight: theme.spacing.md,
     },
     settingTitle: {
-      fontSize: typography.fontSize.body,
-      fontWeight: '500' as const,
-      color: colors.text,
-      marginBottom: spacing.xs,
+      fontSize: theme.fontSize.body,
+      fontWeight: theme.fontWeight.medium,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.xs,
     },
     settingDescription: {
-      fontSize: typography.fontSize.sm,
-      color: colors.textMuted,
-      lineHeight: typography.lineHeight.sm,
+      fontSize: theme.fontSize.caption,
+      color: theme.colors.textMuted,
+      lineHeight: 16,
     },
     settingIcon: {
       width: 40,
@@ -92,7 +92,7 @@ export const Notifications: React.FC = () => {
       borderRadius: 20,
       alignItems: 'center',
       justifyContent: 'center',
-      marginRight: spacing.md,
+      marginRight: theme.spacing.md,
     },
     iconContainer: {
       flexDirection: 'row',
@@ -100,30 +100,30 @@ export const Notifications: React.FC = () => {
       flex: 1,
     },
     switchContainer: {
-      marginLeft: spacing.sm,
+      marginLeft: theme.spacing.sm,
     },
     buttonRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: spacing.xl,
+      marginTop: theme.spacing.xl,
     },
     saveButton: {
       flex: 1,
-      marginRight: spacing.sm,
-      backgroundColor: colors.accent,
+      marginRight: theme.spacing.sm,
+      backgroundColor: theme.colors.accent,
     },
     resetButton: {
       flex: 1,
-      marginLeft: spacing.sm,
-      backgroundColor: colors.error,
+      marginLeft: theme.spacing.sm,
+      backgroundColor: theme.colors.error,
     },
     buttonText: {
-      color: colors.background,
-      fontSize: typography.fontSize.body,
-      fontWeight: '600' as const,
+      color: theme.colors.background,
+      fontSize: theme.fontSize.body,
+      fontWeight: theme.fontWeight.semibold,
     },
     disabledText: {
-      color: colors.textMuted,
+      color: theme.colors.textMuted,
       fontStyle: 'italic',
     },
   });
@@ -174,9 +174,7 @@ export const Notifications: React.FC = () => {
   ) => (
     <View style={styles.settingItem}>
       <View style={styles.iconContainer}>
-        <View style={[styles.settingIcon, { backgroundColor: iconColor }]}>
-          {icon}
-        </View>
+        <View><Text>{icon}</Text></View>
         <View style={styles.settingInfo}>
           <Text style={[styles.settingTitle, disabled && styles.disabledText]}>
             {title}

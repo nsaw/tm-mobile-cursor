@@ -1,12 +1,7 @@
-// src-nextgen/components/index.ts
-// Nextgen components with role assignments
+// Core components
+export * from './AutoRoleView';
+export * from './Button';
+export * from './Text';
 
-export { Text } from './Text';
-export { Button } from './Button';
-export { TagChip } from './TagChip';
-export { ModernHeader } from './ModernHeader';
-export { BottomNav } from './BottomNav';
-export { ThoughtmarkCard } from './ThoughtmarkCard';
-export { TaskCard } from './TaskCard';
-export { AIToolsCard } from './AIToolsCard';
-export { SlotGrid } from './SlotGrid'; 
+// Error handling
+export * from './ErrorBoundary'; 

@@ -74,7 +74,7 @@ function scanDirectory(dir) {
 }
 
 // Main execution
-const srcDir = path.join(__dirname, '..', 'src');
+const srcDir = path.join(__dirname, '..', 'src-nextgen');
 const tsxFiles = scanDirectory(srcDir);
 
 console.log('Scanning for unwrapped text strings...\n');

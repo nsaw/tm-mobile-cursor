@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { Text, FlatList, StyleSheet, Image } from 'react-native';
 import { AutoRoleView } from '../shell/wrappers/AutoRoleView';
 
 interface Thoughtmark {

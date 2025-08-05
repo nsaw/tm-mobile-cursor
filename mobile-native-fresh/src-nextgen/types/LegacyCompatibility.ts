@@ -22,10 +22,28 @@ export function createLegacyAdapter<TLegacy, TNextgen>(
   };
 }
 
+interface LegacyUser {
+  id: string;
+  email: string;
+  name: string;
+  premium?: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+interface NextgenUser {
+  id: string;
+  email: string;
+  name: string;
+  isPremium: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export const legacyAdapters = {
   // Example adapters for common legacy types
   user: createLegacyAdapter(
-    (legacy: any) => ({
+    (legacy: LegacyUser): NextgenUser => ({
       id: legacy.id,
       email: legacy.email,
       name: legacy.name,
@@ -33,7 +51,7 @@ export const legacyAdapters = {
       createdAt: legacy.created_at,
       updatedAt: legacy.updated_at,
     }),
-    (nextgen: any) => ({
+    (nextgen: NextgenUser): LegacyUser => ({
       id: nextgen.id,
       email: nextgen.email,
       name: nextgen.name,
@@ -41,7 +59,7 @@ export const legacyAdapters = {
       created_at: nextgen.createdAt,
       updated_at: nextgen.updatedAt,
     }),
-    (data: unknown): data is any => 
+    (data: unknown): data is LegacyUser => 
       typeof data === 'object' && data !== null && 'id' in data && 'email' in data
   ),
 }; 

@@ -24,7 +24,7 @@ export const legacyTypeMappings: LegacyTypeMapping[] = [
   {
     legacyType: 'LegacyUser',
     nextgenType: 'User',
-    transformer: (value) => {
+    transformer: (value: unknown): unknown => {
       const typedValue = value as Record<string, unknown>;
       return {
         ...typedValue,
@@ -35,7 +35,7 @@ export const legacyTypeMappings: LegacyTypeMapping[] = [
   {
     legacyType: 'LegacyThoughtmark',
     nextgenType: 'Thoughtmark',
-    transformer: (value) => {
+    transformer: (value: unknown): unknown => {
       const typedValue = value as Record<string, unknown>;
       return {
         ...typedValue,

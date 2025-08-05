@@ -3,7 +3,13 @@
 module.exports = {
   root: true,
   extends: ['expo'],
-  ignorePatterns: ['/dist/*', 'reference/**/*'],
+  ignorePatterns: [
+    '/dist/*', 
+    'reference/**/*', 
+    '_quarantine/**/*',
+    '**/*_quarantine/**/*',
+    '**/_quarantine/**/*'
+  ],
   rules: {
     // catch any tokens.colors.* at module level
     'no-restricted-syntax': [

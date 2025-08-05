@@ -44,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       disabled={disabled || loading}
       activeOpacity={0.8}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Text style={textStyleCombined}>
         {loading ? 'Loading...' : title}
       </Text>

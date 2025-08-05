@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Import screens
-import { HomeScreen } from '../shell/home/HomeScreen';
-import { SignInScreen } from '../shell/auth/SignInScreen';
+import HomeScreen from '../shell/home/HomeScreen';
+import SignInScreen from '../shell/auth/SignInScreen';
 import { SettingsScreen } from '../shell/settings/SettingsScreen';
 import { ProfileScreen } from '../shell/profile/ProfileScreen';
 import { AllBinsScreen } from '../shell/bins/AllBinsScreen';
@@ -28,7 +28,7 @@ export type AppRoutes = {
 const Stack = createStackNavigator<AppRoutes>();
 const Tab = createBottomTabNavigator<AppRoutes>();
 
-function TabNavigator() {
+function TabNavigator(): React.JSX.Element {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -39,7 +39,7 @@ function TabNavigator() {
   );
 }
 
-export function AppNavigator() {
+export function AppNavigator(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator>

@@ -12,7 +12,6 @@ interface TagChipProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-/* eslint-disable no-unused-vars */
 export const TagChip: React.FC<TagChipProps> = ({
   tag,
   isSelected = false,
@@ -20,12 +19,11 @@ export const TagChip: React.FC<TagChipProps> = ({
   variant = 'outline',
   size = 'md',
 }: TagChipProps) => {
-/* eslint-enable no-unused-vars */
-  const { tokens: designTokens } = useTheme();
+  const theme = useTheme();
 
-  // Guard against undefined designTokens
-  if (!designTokens) {
-    console.warn('TagChip: theme designTokens not initialized');
+  // Guard against undefined theme
+  if (!theme) {
+    console.warn('TagChip: theme not initialized');
     return null;
   }
 
@@ -34,20 +32,20 @@ export const TagChip: React.FC<TagChipProps> = ({
     switch (size) {
       case 'sm':
         return {
-          paddingHorizontal: designTokens.spacing.sm,
-          paddingVertical: designTokens.spacing.xs,
+          paddingHorizontal: theme.spacing.sm,
+          paddingVertical: theme.spacing.xs,
           borderRadius: 6,
         };
       case 'lg':
         return {
-          paddingHorizontal: designTokens.spacing.lg,
-          paddingVertical: designTokens.spacing.md,
+          paddingHorizontal: theme.spacing.lg,
+          paddingVertical: theme.spacing.md,
           borderRadius: 10,
         };
       default: // md
         return {
-          paddingHorizontal: designTokens.spacing.md,
-          paddingVertical: designTokens.spacing.sm,
+          paddingHorizontal: theme.spacing.md,
+          paddingVertical: theme.spacing.sm,
           borderRadius: 8,
         };
     }
@@ -58,27 +56,27 @@ export const TagChip: React.FC<TagChipProps> = ({
     switch (variant) {
       case 'primary':
         return {
-          borderColor: designTokens.colors.accent,
-          backgroundColor: isSelected ? designTokens.colors.accent : 'transparent',
+          borderColor: theme.colors.accent,
+          backgroundColor: isSelected ? theme.colors.accent : 'transparent',
         };
       case 'success':
         return {
-          borderColor: designTokens.colors.success,
-          backgroundColor: isSelected ? designTokens.colors.success : 'transparent',
+          borderColor: theme.colors.success,
+          backgroundColor: isSelected ? theme.colors.success : 'transparent',
         };
       case 'warning':
         return {
-          borderColor: designTokens.colors.warning,
-          backgroundColor: isSelected ? designTokens.colors.warning : 'transparent',
+          borderColor: theme.colors.warning,
+          backgroundColor: isSelected ? theme.colors.warning : 'transparent',
         };
       case 'danger':
         return {
-          borderColor: designTokens.colors.error,
-          backgroundColor: isSelected ? designTokens.colors.error : 'transparent',
+          borderColor: theme.colors.error,
+          backgroundColor: isSelected ? theme.colors.error : 'transparent',
         };
       default: // outline
         return {
-          borderColor: isSelected ? designTokens.colors.accent : designTokens.colors.border,
+          borderColor: isSelected ? theme.colors.accent : theme.colors.border,
           backgroundColor: 'transparent',
         };
     }
@@ -93,8 +91,8 @@ export const TagChip: React.FC<TagChipProps> = ({
   };
 
   const textColor = isSelected 
-    ? (variant === 'outline' ? designTokens.colors.accent : '#FFFFFF')
-    : designTokens.colors.text;
+    ? (variant === 'outline' ? theme.colors.accent : '#FFFFFF')
+    : theme.colors.text;
 
   return (
     <TouchableOpacity

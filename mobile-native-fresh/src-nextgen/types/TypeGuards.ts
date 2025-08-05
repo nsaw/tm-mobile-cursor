@@ -2,151 +2,165 @@ import { User, Thoughtmark, Bin, Task } from './DataTypes';
 import { ApiResponse, ApiError } from './ApiTypes';
 import { AppState, AuthState, UIState } from './StateTypes';
 
-export function isUser(obj: any): obj is User {
-  return (
+export function isUser(obj: unknown): obj is User {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.email === 'string' &&
-    typeof obj.name === 'string' &&
-    typeof obj.isPremium === 'boolean' &&
-    typeof obj.createdAt === 'string' &&
-    typeof obj.updatedAt === 'string'
+    typeof typedObj.id === 'string' &&
+    typeof typedObj.email === 'string' &&
+    typeof typedObj.name === 'string' &&
+    typeof typedObj.isPremium === 'boolean' &&
+    typeof typedObj.createdAt === 'string' &&
+    typeof typedObj.updatedAt === 'string'
   );
 }
 
-export function isThoughtmark(obj: any): obj is Thoughtmark {
-  return (
+export function isThoughtmark(obj: unknown): obj is Thoughtmark {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.title === 'string' &&
-    typeof obj.content === 'string' &&
-    Array.isArray(obj.tags) &&
-    typeof obj.binId === 'string' &&
-    typeof obj.createdAt === 'string' &&
-    typeof obj.updatedAt === 'string' &&
-    typeof obj.isArchived === 'boolean' &&
-    typeof obj.isPinned === 'boolean'
+    typeof typedObj.id === 'string' &&
+    typeof typedObj.title === 'string' &&
+    typeof typedObj.content === 'string' &&
+    Array.isArray(typedObj.tags) &&
+    typeof typedObj.binId === 'string' &&
+    typeof typedObj.createdAt === 'string' &&
+    typeof typedObj.updatedAt === 'string' &&
+    typeof typedObj.isArchived === 'boolean' &&
+    typeof typedObj.isPinned === 'boolean'
   );
 }
 
-export function isBin(obj: any): obj is Bin {
-  return (
+export function isBin(obj: unknown): obj is Bin {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.name === 'string' &&
-    typeof obj.color === 'string' &&
-    typeof obj.thoughtmarkCount === 'number' &&
-    typeof obj.createdAt === 'string' &&
-    typeof obj.updatedAt === 'string' &&
-    typeof obj.isDefault === 'boolean' &&
-    typeof obj.sortOrder === 'number'
+    typeof typedObj.id === 'string' &&
+    typeof typedObj.name === 'string' &&
+    typeof typedObj.color === 'string' &&
+    typeof typedObj.thoughtmarkCount === 'number' &&
+    typeof typedObj.createdAt === 'string' &&
+    typeof typedObj.updatedAt === 'string' &&
+    typeof typedObj.isDefault === 'boolean' &&
+    typeof typedObj.sortOrder === 'number'
   );
 }
 
-export function isTask(obj: any): obj is Task {
-  return (
+export function isTask(obj: unknown): obj is Task {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.title === 'string' &&
-    typeof obj.isCompleted === 'boolean' &&
-    typeof obj.priority === 'string' &&
-    ['low', 'medium', 'high'].includes(obj.priority) &&
-    typeof obj.createdAt === 'string' &&
-    typeof obj.updatedAt === 'string'
+    typeof typedObj.id === 'string' &&
+    typeof typedObj.title === 'string' &&
+    typeof typedObj.isCompleted === 'boolean' &&
+    typeof typedObj.priority === 'string' &&
+    ['low', 'medium', 'high'].includes(typedObj.priority as string) &&
+    typeof typedObj.createdAt === 'string' &&
+    typeof typedObj.updatedAt === 'string'
   );
 }
 
-export function isApiResponse<T>(obj: any): obj is ApiResponse<T> {
-  return (
+export function isApiResponse<T>(obj: unknown): obj is ApiResponse<T> {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.status === 'number' &&
-    typeof obj.message === 'string' &&
-    typeof obj.success === 'boolean' &&
-    typeof obj.timestamp === 'string' &&
+    typeof typedObj.status === 'number' &&
+    typeof typedObj.message === 'string' &&
+    typeof typedObj.success === 'boolean' &&
+    typeof typedObj.timestamp === 'string' &&
     'data' in obj
   );
 }
 
-export function isApiError(obj: any): obj is ApiError {
-  return (
+export function isApiError(obj: unknown): obj is ApiError {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.code === 'string' &&
-    typeof obj.message === 'string' &&
-    typeof obj.timestamp === 'string'
+    typeof typedObj.code === 'string' &&
+    typeof typedObj.message === 'string' &&
+    typeof typedObj.timestamp === 'string'
   );
 }
 
-export function isAppState(obj: any): obj is AppState {
-  return (
+export function isAppState(obj: unknown): obj is AppState {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    ['legacy', 'nextgen'].includes(obj.currentEnvironment) &&
-    typeof obj.isFirstLaunch === 'boolean' &&
-    typeof obj.onboardingCompleted === 'boolean' &&
-    ['light', 'dark', 'system'].includes(obj.theme) &&
-    typeof obj.notifications === 'boolean' &&
-    typeof obj.analytics === 'boolean' &&
-    typeof obj.version === 'string' &&
-    typeof obj.buildNumber === 'string'
+    ['legacy', 'nextgen'].includes(typedObj.currentEnvironment as string) &&
+    typeof typedObj.isFirstLaunch === 'boolean' &&
+    typeof typedObj.onboardingCompleted === 'boolean' &&
+    ['light', 'dark', 'system'].includes(typedObj.theme as string) &&
+    typeof typedObj.notifications === 'boolean' &&
+    typeof typedObj.analytics === 'boolean' &&
+    typeof typedObj.version === 'string' &&
+    typeof typedObj.buildNumber === 'string'
   );
 }
 
-export function isAuthState(obj: any): obj is AuthState {
-  return (
+export function isAuthState(obj: unknown): obj is AuthState {
+  const typedObj = obj as Record<string, unknown>;
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    (obj.user === null || isUser(obj.user)) &&
-    typeof obj.isAuthenticated === 'boolean' &&
-    typeof obj.isLoading === 'boolean' &&
-    (obj.error === null || typeof obj.error === 'string') &&
-    (obj.token === null || typeof obj.token === 'string') &&
-    (obj.refreshToken === null || typeof obj.refreshToken === 'string') &&
-    (obj.tokenExpiry === null || typeof obj.tokenExpiry === 'string')
+    (typedObj.user === null || isUser(typedObj.user)) &&
+    typeof typedObj.isAuthenticated === 'boolean' &&
+    typeof typedObj.isLoading === 'boolean' &&
+    (typedObj.error === null || typeof typedObj.error === 'string') &&
+    (typedObj.token === null || typeof typedObj.token === 'string') &&
+    (typedObj.refreshToken === null || typeof typedObj.refreshToken === 'string') &&
+    (typedObj.tokenExpiry === null || typeof typedObj.tokenExpiry === 'string')
   );
 }
 
-export function isUIState(obj: any): obj is UIState {
-  return (
+export function isUIState(obj: unknown): obj is UIState {
+  const typedObj = obj as Record<string, unknown>;
+  const modal = typedObj.modal as Record<string, unknown>;
+  const sidebar = typedObj.sidebar as Record<string, unknown>;
+  const search = typedObj.search as Record<string, unknown>;
+  const toast = typedObj.toast as Record<string, unknown>;
+  
+  return Boolean(
     obj &&
     typeof obj === 'object' &&
-    typeof obj.isLoading === 'boolean' &&
-    (obj.error === null || typeof obj.error === 'string') &&
-    obj.modal &&
-    typeof obj.modal.isVisible === 'boolean' &&
-    (obj.modal.type === null || typeof obj.modal.type === 'string') &&
-    obj.sidebar &&
-    typeof obj.sidebar.isOpen === 'boolean' &&
-    obj.search &&
-    typeof obj.search.query === 'string' &&
-    typeof obj.search.isActive === 'boolean' &&
-    Array.isArray(obj.search.results) &&
-    obj.toast &&
-    typeof obj.toast.isVisible === 'boolean' &&
-    typeof obj.toast.message === 'string' &&
-    ['success', 'error', 'warning', 'info'].includes(obj.toast.type) &&
-    typeof obj.toast.duration === 'number'
+    typeof typedObj.isLoading === 'boolean' &&
+    (typedObj.error === null || typeof typedObj.error === 'string') &&
+    modal &&
+    typeof modal.isVisible === 'boolean' &&
+    (modal.type === null || typeof modal.type === 'string') &&
+    sidebar &&
+    typeof sidebar.isOpen === 'boolean' &&
+    search &&
+    typeof search.query === 'string' &&
+    typeof search.isActive === 'boolean' &&
+    Array.isArray(search.results) &&
+    toast &&
+    typeof toast.isVisible === 'boolean' &&
+    typeof toast.message === 'string' &&
+    ['success', 'error', 'warning', 'info'].includes(toast.type as string) &&
+    typeof toast.duration === 'number'
   );
 }
 
-export function isString(value: any): value is string {
+export function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
-export function isNumber(value: any): value is number {
+export function isNumber(value: unknown): value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 
-export function isBoolean(value: any): value is boolean {
+export function isBoolean(value: unknown): value is boolean {
   return typeof value === 'boolean';
 }
 
-export function isArray<T>(value: any, itemGuard?: (item: any) => item is T): value is T[] {
+export function isArray<T>(value: unknown, itemGuard?: (item: unknown) => item is T): value is T[] {
   if (!Array.isArray(value)) return false;
   if (itemGuard) {
     return value.every(item => itemGuard(item));
@@ -154,18 +168,22 @@ export function isArray<T>(value: any, itemGuard?: (item: any) => item is T): va
   return true;
 }
 
-export function isObject(value: any): value is Record<string, any> {
+export function isObject(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
-export function isFunction(value: any): value is Function {
+export function isFunction(value: unknown): value is (...args: unknown[]) => unknown {
   return typeof value === 'function';
 }
 
-export function isDate(value: any): value is Date {
+export function isDate(value: unknown): value is Date {
   return value instanceof Date;
 }
 
-export function isPromise<T>(value: any): value is Promise<T> {
-  return value && typeof value.then === 'function' && typeof value.catch === 'function';
+export function isPromise<T>(value: unknown): value is Promise<T> {
+  return Boolean(
+    value && 
+    typeof (value as Record<string, unknown>).then === 'function' && 
+    typeof (value as Record<string, unknown>).catch === 'function'
+  );
 } 

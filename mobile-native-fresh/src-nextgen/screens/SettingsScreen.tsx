@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
+import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from '../components/AutoRoleView';
 
-export const SettingsScreen: React.FC = () => {
+const SettingsScreen: React.FC = () => {
+  const theme = useTheme();
+
   return (
-    <AutoRoleView style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <Text style={styles.subtitle}>Configure your app preferences</Text>
+    <AutoRoleView role="screen" style={styles.container}>
+      <Text style={[styles.title, { color: theme.colors.text }]}>
+        Settings
+      </Text>
+      <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+        Settings functionality coming soon
+      </Text>
     </AutoRoleView>
   );
 };
@@ -14,17 +21,18 @@ export const SettingsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    textAlign: 'center',
   },
 });
 

@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 
 import { db } from './src/db';
 import { bins, thoughtmarks, users } from './src/db/schema';
+import type { User } from './src/db/schema';
 
 async function addTemplateContent() {
   try {
@@ -9,7 +10,7 @@ async function addTemplateContent() {
 
     // Find the demo user
     const demoUser = await db.select().from(users).where(eq(users.email, 'demo@thoughtmarks.app')).limit(1);
-    let user = demoUser[0];
+    let user: User | undefined = demoUser[0];
 
     if (!user) {
       // Try to find by firebaseUid in case email changed
@@ -223,8 +224,7 @@ async function addTemplateContent() {
     // Insert template thoughtmarks
     for (const thoughtmark of templateThoughtmarks) {
       try {
-        const result = await db.insert(thoughtmarks).values(thoughtmark).returning();
-        const _createdThoughtmark = Array.isArray(result) ? result[0] : result;
+        await db.insert(thoughtmarks).values(thoughtmark).returning();
         console.log(`Created thoughtmark: ${thoughtmark.title}`);
       } catch (error) {
         console.error('Error inserting thoughtmark:', thoughtmark.title, error);

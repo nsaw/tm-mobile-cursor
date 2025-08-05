@@ -1,15 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Text, TextProps } from './Text';
-import { useTheme } from '../../theme';
+import { Text, TextPropsExtended } from './Text';
+import { useTheme } from '../../hooks/useTheme';
 import { useAccessibilityProps } from '../../hooks/useAccessibilityProps';
 
-export interface LinkProps extends Omit<TextProps, 'color'> {
+export interface LinkProps extends Omit<TextPropsExtended, 'color' | 'role'> {
   onPress: () => void;
   disabled?: boolean;
   underline?: boolean;
   children: React.ReactNode;
   touchableProps?: TouchableOpacityProps;
+  role?: 'text' | 'label';
 }
 
 export const Link: React.FC<LinkProps> = ({
@@ -19,9 +20,10 @@ export const Link: React.FC<LinkProps> = ({
   children,
   touchableProps,
   style,
+  role = 'text',
   ...props
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
   const accessibilityProps = useAccessibilityProps({
     role: 'button',
     label: typeof children === 'string' ? children : undefined,
@@ -30,7 +32,7 @@ export const Link: React.FC<LinkProps> = ({
 
   const linkStyle = {
     textDecorationLine: underline ? ('underline' as const) : ('none' as const),
-    color: disabled ? tokens.colors.textSecondary : tokens.colors.accent,
+    color: disabled ? theme.colors.textSecondary : theme.colors.accent,
   };
 
   return (
@@ -39,10 +41,11 @@ export const Link: React.FC<LinkProps> = ({
       disabled={disabled}
       activeOpacity={0.7}
       {...touchableProps}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Text
         variant="body"
         weight="medium"
+        role={role}
         style={[linkStyle, style]}
         {...accessibilityProps}
         {...props}

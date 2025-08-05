@@ -2,7 +2,13 @@ import { useState, useEffect } from 'react';
 
 export type Environment = 'legacy' | 'nextgen';
 
-export const useEnvironment = () => {
+export const useEnvironment = (): readonly [
+  Environment,
+  {
+    toggleEnvironment: () => void;
+    setEnvironmentMode: (mode: Environment) => void;
+  }
+] => {
   const [environment, setEnvironment] = useState<Environment>('legacy');
 
   useEffect(() => {

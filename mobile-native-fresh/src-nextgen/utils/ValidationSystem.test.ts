@@ -1,6 +1,6 @@
 import { ValidationSystem, FailSafeValidationLoop } from './ValidationSystem';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { _View, _Text } from 'react-native';
 
 // Mock React Native
 jest.mock('react-native', () => ({
@@ -9,12 +9,12 @@ jest.mock('react-native', () => ({
   },
 }));
 
-const TestComponent: React.FC = () => {
-  return React.createElement(View, null, React.createElement(Text, null, 'Test Component'));
+const TestComponent: React.ComponentType<unknown> = () => {
+  return React.createElement('div', null, 'Test Component');
 };
 
-const TestScreen: React.FC = () => {
-  return React.createElement(View, null, React.createElement(Text, null, 'Test Screen'));
+const TestScreen: React.ComponentType<unknown> = () => {
+  return React.createElement('div', null, 'Test Screen');
 };
 
 describe('ValidationSystem', () => {

@@ -5,10 +5,7 @@
  * used in the Thoughtmark mobile application.
  */
 
-import { User, Thoughtmark, Bin, Task } from './DataTypes';
-import { ApiResponse, ApiError, ApiRequestConfig } from './ApiTypes';
-import { AppState, AuthState, UIState } from './StateTypes';
-import { RootStackParamList, TabParamList } from './NavigationTypes';
+// ApiResponse type is used in the documentation but not imported
 
 export interface TypeDocumentation {
   typeName: string;

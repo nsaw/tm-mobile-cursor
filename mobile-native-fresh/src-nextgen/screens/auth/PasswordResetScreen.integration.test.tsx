@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import PasswordResetScreen from './PasswordResetScreen';
-import { ValidationService } from '../../utils/validation';
+import { PasswordResetScreen } from './PasswordResetScreen';
 
 // Mock the hooks
 jest.mock('../../../hooks/useAuth', () => ({
@@ -38,12 +37,12 @@ describe('PasswordResetScreen Integration', () => {
 
   it('completes full password reset flow successfully', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
 
-    const { getByPlaceholderText, getByText, queryByText } = render(<PasswordResetScreen />);
+    const { getByPlaceholderText, getByText, queryByText: _queryByText } = render(<PasswordResetScreen />);
 
     // Step 1: Enter email
     const emailInput = getByPlaceholderText('Enter your email address');
@@ -78,7 +77,7 @@ describe('PasswordResetScreen Integration', () => {
 
   it('handles validation errors throughout the flow', async () => {
     const mockResetPassword = jest.fn().mockRejectedValue(new Error('Reset failed'));
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
@@ -117,7 +116,7 @@ describe('PasswordResetScreen Integration', () => {
 
   it('handles network errors gracefully', async () => {
     const mockResetPassword = jest.fn().mockRejectedValue(new Error('Network error'));
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
@@ -147,7 +146,7 @@ describe('PasswordResetScreen Integration', () => {
 
   it('maintains state consistency during navigation', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
@@ -173,7 +172,7 @@ describe('PasswordResetScreen Integration', () => {
 
   it('handles rapid user interactions correctly', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
@@ -198,12 +197,12 @@ describe('PasswordResetScreen Integration', () => {
 
   it('validates accessibility throughout the flow', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
-    const mockUseAuth = require('../../../hooks/useAuth');
+    const mockUseAuth = jest.requireMock('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
 
-    const { getByPlaceholderText, getByText, getByRole } = render(<PasswordResetScreen />);
+    const { getByPlaceholderText, getByText, getByRole: _getByRole } = render(<PasswordResetScreen />);
 
     // Check initial accessibility
     const emailInput = getByPlaceholderText('Enter your email address');

@@ -2,15 +2,15 @@
 // Removed unused: logDevState, printMemoryStats
 
 // Only export functions that are actually used
-export const logPerformance = (metric: string, value: number) => {
+export const logPerformance = (metric: string, value: number): void => {
   console.log(`[PERF] ${metric}: ${value}`);
 };
 
-export const logError = (error: Error, context?: string) => {
+export const logError = (error: Error, context?: string): void => {
   console.error(`[ERROR] ${context || 'Unknown'}:`, error.message);
 };
 
-export const logInfo = (message: string) => {
+export const logInfo = (message: string): void => {
   console.log(`[INFO] ${message}`);
 };
 

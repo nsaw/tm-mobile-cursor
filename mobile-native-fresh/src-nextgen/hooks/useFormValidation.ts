@@ -1,10 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
-  ValidationRule, 
-  FormField, 
   FormState, 
   ValidationResult,
+  ValidationRule,
   validateField,
   VALIDATION_SCHEMAS,
   createFormState
@@ -14,7 +13,21 @@ import {
 export const useDualMountFormValidation = (
   schema: { [key: string]: ValidationRule },
   environment: 'legacy' | 'nextgen' = 'nextgen'
-) => {
+): {
+  formState: FormState;
+  validateForm: () => ValidationResult;
+  updateField: (name: string, value: unknown) => void;
+  setFieldTouched: (name: string, touched?: boolean) => void;
+  resetForm: () => void;
+  getFieldError: (name: string) => string | null;
+  hasErrors: () => boolean;
+  getFormValues: () => Record<string, unknown>;
+  setFormValues: (values: Record<string, unknown>) => void;
+  handleSubmit: (onSubmit: (values: Record<string, unknown>) => Promise<void>) => Promise<void>;
+  isSubmitting: boolean;
+  submitError: string | null;
+  environment: 'legacy' | 'nextgen';
+} => {
   const [formState, setFormState] = useState<FormState>(() => createFormState(schema));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -34,7 +47,7 @@ export const useDualMountFormValidation = (
         if (field.rules.email && field.value) {
           // Legacy email validation might be more lenient
           const legacyEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!legacyEmailPattern.test(field.value)) {
+          if (!legacyEmailPattern.test(String(field.value))) {
             error = 'Invalid email address';
           }
         }
@@ -52,7 +65,7 @@ export const useDualMountFormValidation = (
     return { isValid, errors };
   }, [formState, environment]);
 
-  const updateField = useCallback((name: string, value: any) => {
+  const updateField = useCallback((name: string, value: unknown) => {
     setFormState(prev => ({
       ...prev,
       [name]: {
@@ -65,7 +78,7 @@ export const useDualMountFormValidation = (
     setSubmitError(null); // Clear submit error when user starts typing
   }, []);
 
-  const setFieldTouched = useCallback((name: string, touched: boolean = true) => {
+  const setFieldTouched = useCallback((name: string, touched = true) => {
     setFormState(prev => ({
       ...prev,
       [name]: {
@@ -92,14 +105,14 @@ export const useDualMountFormValidation = (
   }, [formState]);
 
   const getFormValues = useCallback(() => {
-    const values: { [key: string]: any } = {};
+    const values: { [key: string]: unknown } = {};
     Object.keys(formState).forEach(fieldName => {
       values[fieldName] = formState[fieldName].value;
     });
     return values;
   }, [formState]);
 
-  const setFormValues = useCallback((values: { [key: string]: any }) => {
+  const setFormValues = useCallback((values: { [key: string]: unknown }) => {
     setFormState(prev => {
       const newState = { ...prev };
       Object.keys(values).forEach(fieldName => {
@@ -116,7 +129,7 @@ export const useDualMountFormValidation = (
   }, []);
 
   const handleSubmit = useCallback(async (
-    onSubmit: (values: { [key: string]: any }) => Promise<void>
+    onSubmit: (values: { [key: string]: unknown }) => Promise<void>
   ) => {
     const validation = validateForm();
     if (!validation.isValid) {
@@ -198,23 +211,28 @@ export const useDualMountFormValidation = (
 };
 
 // Pre-configured hooks for common forms
-export const useSignupForm = (environment: 'legacy' | 'nextgen' = 'nextgen') => {
+export const useSignupForm = (environment: 'legacy' | 'nextgen' = 'nextgen'): ReturnType<typeof useDualMountFormValidation> => {
   return useDualMountFormValidation(VALIDATION_SCHEMAS.SIGNUP, environment);
 };
 
-export const useSigninForm = (environment: 'legacy' | 'nextgen' = 'nextgen') => {
+export const useSigninForm = (environment: 'legacy' | 'nextgen' = 'nextgen'): ReturnType<typeof useDualMountFormValidation> => {
   return useDualMountFormValidation(VALIDATION_SCHEMAS.SIGNIN, environment);
 };
 
-export const useProfileForm = (environment: 'legacy' | 'nextgen' = 'nextgen') => {
+export const useProfileForm = (environment: 'legacy' | 'nextgen' = 'nextgen'): ReturnType<typeof useDualMountFormValidation> => {
   return useDualMountFormValidation(VALIDATION_SCHEMAS.PROFILE, environment);
 };
 
 // Form state persistence hook for dual-mount architecture
-export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nextgen' = 'nextgen') => {
-  const [persistedState, setPersistedState] = useState<any>(null);
+export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nextgen' = 'nextgen'): {
+  persistedState: unknown;
+  saveState: (state: unknown) => Promise<void>;
+  loadState: () => Promise<unknown>;
+  clearState: () => Promise<void>;
+} => {
+  const [persistedState, setPersistedState] = useState<unknown>(null);
 
-  const saveState = useCallback(async (state: any) => {
+  const saveState = useCallback(async (state: unknown) => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
       await AsyncStorage.setItem(key, JSON.stringify({
@@ -227,7 +245,7 @@ export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nex
     }
   }, [formKey, environment]);
 
-  const loadState = useCallback(async () => {
+  const loadState = useCallback(async (): Promise<unknown> => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
       const saved = await AsyncStorage.getItem(key);
@@ -246,7 +264,7 @@ export const useFormPersistence = (formKey: string, environment: 'legacy' | 'nex
     return null;
   }, [formKey, environment]);
 
-  const clearState = useCallback(async () => {
+  const clearState = useCallback(async (): Promise<void> => {
     try {
       const key = `form-persistence-${environment}-${formKey}`;
       await AsyncStorage.removeItem(key);

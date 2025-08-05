@@ -1,33 +1,35 @@
 import React from 'react';
-import { Text, TextProps } from './Text';
-import { useTheme } from '../../theme';
+import { Text, TextPropsExtended } from './Text';
+import { useTheme } from '../../hooks/useTheme';
 import { StyleSheet } from 'react-native';
 
-export interface CodeProps extends Omit<TextProps, 'variant'> {
+export interface CodeProps extends Omit<TextPropsExtended, 'variant' | 'role'> {
   children: React.ReactNode;
   block?: boolean;
+  role?: 'text' | 'label';
 }
 
 export const Code: React.FC<CodeProps> = ({ 
   children, 
   block = false, 
-  style, 
+  style,
+  role = 'text',
   ...props 
 }) => {
-  const { tokens } = useTheme();
+  const theme = useTheme();
 
   const codeStyle = StyleSheet.create({
     code: {
-      backgroundColor: tokens.colors.surface,
-      paddingHorizontal: tokens.spacing.xs,
-      paddingVertical: tokens.spacing.xs / 2,
+      backgroundColor: theme.colors.surface,
+      paddingHorizontal: theme.spacing.xs,
+      paddingVertical: theme.spacing.xs / 2,
       borderRadius: 4,
       borderWidth: 1,
-      borderColor: tokens.colors.border,
+      borderColor: theme.colors.border,
     },
     blockCode: {
-      padding: tokens.spacing.sm,
-      marginVertical: tokens.spacing.xs,
+      padding: theme.spacing.sm,
+      marginVertical: theme.spacing.xs,
     },
   });
 
@@ -35,7 +37,8 @@ export const Code: React.FC<CodeProps> = ({
     <Text
       variant="body2"
       weight="normal"
-      color="primary"
+      color={theme.colors.primary}
+      role={role}
       style={[
         codeStyle.code,
         block && codeStyle.blockCode,

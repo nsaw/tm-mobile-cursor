@@ -5,7 +5,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { useCreateBin } from '../../hooks/useCreateBin';
 
 const CreateBinScreen: React.FC = () => {
-  const { theme } = useTheme();
+  const theme = useTheme();
   const { createBin, isCreating } = useCreateBin();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -89,7 +89,7 @@ const CreateBinScreen: React.FC = () => {
             theme.styles.createButton,
             (!name.trim() || isCreating) && theme.styles.createButtonDisabled
           ]}
-        >
+         accessibilityRole="button" accessible={true} accessibilityLabel="Button">
           <Text style={theme.styles.createButtonText}>
             {isCreating ? 'Creating...' : 'Create Bin'}
           </Text>

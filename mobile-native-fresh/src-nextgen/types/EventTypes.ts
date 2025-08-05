@@ -1,6 +1,6 @@
 export interface BaseEvent {
   id: string;
-  timestamp: string;
+  timestamp: Date;
   type: string;
   source: string;
 }
@@ -9,22 +9,28 @@ export interface UserEvent extends BaseEvent {
   type: 'user_action';
   userId: string;
   action: string;
-  data?: Record<string, any>;
+  metadata: Record<string, unknown>;
+}
+
+export interface SystemEvent extends BaseEvent {
+  type: 'system_event';
+  level: 'info' | 'warning' | 'error' | 'debug';
+  message: string;
+  context: Record<string, unknown>;
 }
 
 export interface NavigationEvent extends BaseEvent {
   type: 'navigation';
   from: string;
   to: string;
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
 }
 
 export interface ErrorEvent extends BaseEvent {
   type: 'error';
-  error: string;
+  error: Error;
   stack?: string;
-  componentStack?: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  context?: Record<string, unknown>;
 }
 
 export interface PerformanceEvent extends BaseEvent {
@@ -32,33 +38,35 @@ export interface PerformanceEvent extends BaseEvent {
   metric: string;
   value: number;
   unit: string;
-  context?: Record<string, any>;
 }
 
-export interface ApiEvent extends BaseEvent {
-  type: 'api';
-  method: string;
-  url: string;
-  status: number;
-  duration: number;
-  success: boolean;
+export interface AnalyticsEvent extends BaseEvent {
+  type: 'analytics';
+  eventName: string;
+  properties: Record<string, unknown>;
+  userId?: string;
 }
 
-export interface AppEvent extends BaseEvent {
-  type: 'app';
-  action: 'launch' | 'background' | 'foreground' | 'close';
-  sessionId: string;
+export type AppEvent = 
+  | UserEvent 
+  | SystemEvent 
+  | NavigationEvent 
+  | ErrorEvent 
+  | PerformanceEvent 
+  | AnalyticsEvent;
+
+export interface EventHandler<T extends AppEvent = AppEvent> {
+  (event: T): void | Promise<void>;
 }
 
-export type Event = UserEvent | NavigationEvent | ErrorEvent | PerformanceEvent | ApiEvent | AppEvent;
-
-export interface EventHandler<T extends Event = Event> {
-  (event: T): void;
+export interface EventListener {
+  eventType: string;
+  handler: EventHandler;
+  priority?: number;
 }
 
-export interface EventEmitter {
-  on<T extends Event>(type: T['type'], handler: EventHandler<T>): void;
-  off<T extends Event>(type: T['type'], handler: EventHandler<T>): void;
-  emit<T extends Event>(event: T): void;
-  once<T extends Event>(type: T['type'], handler: EventHandler<T>): void;
+export interface EventBus {
+  subscribe<T extends AppEvent>(eventType: string, handler: EventHandler<T>): () => void;
+  publish<T extends AppEvent>(event: T): void;
+  unsubscribe(eventType: string, handler: EventHandler): void;
 } 

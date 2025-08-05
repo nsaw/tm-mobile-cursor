@@ -25,7 +25,7 @@ export interface UIState {
   modal: {
     isVisible: boolean;
     type: string | null;
-    data: any;
+    data: unknown;
   };
   sidebar: {
     isOpen: boolean;
@@ -33,7 +33,7 @@ export interface UIState {
   search: {
     query: string;
     isActive: boolean;
-    results: any[];
+    results: unknown[];
     filters: {
       bins: string[];
       tags: string[];

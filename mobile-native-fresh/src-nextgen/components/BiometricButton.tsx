@@ -16,7 +16,7 @@ export const BiometricButton: React.FC<BiometricButtonProps> = ({
   disabled = false,
   style
 }) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   const buttonStyle = [
     styles.button,
@@ -39,7 +39,7 @@ export const BiometricButton: React.FC<BiometricButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.8}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <IconWrapper
         name="MaterialCommunityIcons"
         iconName={iconName}

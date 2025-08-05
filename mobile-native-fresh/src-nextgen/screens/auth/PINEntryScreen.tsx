@@ -1,124 +1,140 @@
-import React, { useState, useCallback, useRef } from 'react';
-import {
-  View,
-  TextInput,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-} from 'react-native';
-import { useAuth } from '../../hooks/useAuth';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../hooks/useTheme';
-import { Button } from '../../components/ui/Button';
-import { Text as CustomText } from '../../components/ui/Text';
-import { AutoRoleView } from '../../shell/wrappers/AutoRoleView';
-import { createStyles } from './PINEntryScreen.styles';
+import { useAuth } from '../../hooks/useAuth';
 
-export const PINEntryScreen: React.FC = () => {
-  const { verifyPIN } = useAuth();
-  const { colors } = useTheme();
+type PinEntryScreenRouteProp = RouteProp<AuthStackParamList, 'PinEntry'>;
 
+export const PinEntryScreen: React.FC = () => {
+  const route = useRoute<PinEntryScreenRouteProp>();
+  const theme = useTheme();
+  const { verifyPin } = useAuth();
   const [pin, setPin] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const inputRef = useRef<TextInput>(null);
 
-  const handlePINChange = useCallback((value: string) => {
-    // Only allow numeric input and limit to 6 digits
-    const numericValue = value.replace(/[^0-9]/g, '');
-    if (numericValue.length <= 6) {
-      setPin(numericValue);
-    }
-  }, []);
-
-  const handleVerifyPIN = useCallback(async () => {
-    if (pin.length !== 6) {
-      Alert.alert('Invalid PIN', 'Please enter a 6-digit PIN.');
-      return;
-    }
-
-    setIsLoading(true);
+  const handleVerifyPin = async () => {
     try {
-      await verifyPIN(pin);
-      Alert.alert('Success', 'PIN verified successfully!');
-      // Navigate to next screen
+      await verifyPin(pin, route.params.purpose);
+      // Navigation will be handled by auth state change
     } catch (error) {
-      Alert.alert('Error', 'Invalid PIN. Please try again.');
-      setPin('');
-      inputRef.current?.focus();
-    } finally {
-      setIsLoading(false);
+      Alert.alert('PIN Error', 'Invalid PIN. Please try again.');
     }
-  }, [pin, verifyPIN]);
+  };
 
-  const handleResendPIN = useCallback(() => {
-    Alert.alert('PIN Resent', 'A new PIN has been sent to your device.');
-  }, []);
+  const handleResendPin = () => {
+    // TODO: Implement resend PIN functionality
+    Alert.alert('Resend PIN', 'PIN resent to your email');
+  };
 
-  const styles = createStyles(colors);
+  const getTitle = () => {
+    return route.params.purpose === 'verification' ? 'Verify Your Account' : 'Set Up PIN';
+  };
+
+  const getSubtitle = () => {
+    return route.params.purpose === 'verification' 
+      ? 'Enter the PIN sent to your email' 
+      : 'Create a PIN for your account';
+  };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.content}>
-          <AutoRoleView contentRole="text-display" style={styles.header}>
-            <Text style={styles.title}>Enter PIN</Text>
-          </AutoRoleView>
+    <AutoRoleView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>{getTitle()}</Text>
+        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+          {getSubtitle()}
+        </Text>
 
-          <AutoRoleView contentRole="text-display" style={styles.subtitle}>
-            <Text style={styles.subtitle}>Please enter your 4-digit PIN</Text>
-          </AutoRoleView>
-
-          <AutoRoleView contentRole="text-display" style={styles.form}>
-            <View style={styles.inputContainer}>
-              <TextInput
-                ref={inputRef}
-                style={styles.input}
-                value={pin}
-                onChangeText={handlePINChange}
-                placeholder="000000"
-                keyboardType="numeric"
-                maxLength={6}
-                secureTextEntry
-                textAlign="center"
-                accessibilityLabel="PIN input"
-                accessibilityHint="Enter your 6-digit PIN"
-                autoFocus
-              />
-            </View>
-
-            <CustomText variant="caption" style={styles.hintText}>
-              Enter the 6-digit PIN to verify your identity
-            </CustomText>
-          </AutoRoleView>
-
-          <Button
-            title="Verify PIN"
-            onPress={handleVerifyPIN}
-            disabled={pin.length !== 6 || isLoading}
-            loading={isLoading}
-            style={styles.verifyButton}
-            accessibilityLabel="Verify PIN button"
-            accessibilityHint="Tap to verify your PIN"
+        <View style={styles.form}>
+          <TextInput
+            style={[styles.pinInput, { 
+              backgroundColor: theme.colors.surface, 
+              color: theme.colors.text,
+              borderColor: theme.colors.border 
+            }]}
+            placeholder="Enter PIN"
+            placeholderTextColor={theme.colors.textSecondary}
+            value={pin}
+            onChangeText={setPin}
+            keyboardType="numeric"
+            maxLength={6}
+            secureTextEntry
           />
 
-          <AutoRoleView contentRole="text-display" style={styles.footer}>
-            <CustomText variant="body" style={styles.footerText}>
-              Didn't receive the PIN?{' '}
-            </CustomText>
-            <Button
-              title="Resend PIN"
-              onPress={handleResendPIN}
-              style={styles.resendButton}
-              accessibilityLabel="Resend PIN button"
-              accessibilityHint="Tap to resend PIN"
-            />
-          </AutoRoleView>
+          <TouchableOpacity
+            style={[styles.verifyButton, { backgroundColor: theme.colors.primary }]}
+            onPress={handleVerifyPin}
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <Text style={[styles.verifyButtonText, { color: theme.colors.onPrimary }]}>
+              Verify PIN
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.resendButton}
+            onPress={handleResendPin}
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <Text style={[styles.resendText, { color: theme.colors.primary }]}>
+              Resend PIN
+            </Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </View>
+    </AutoRoleView>
   );
-}; 
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 32,
+  },
+  form: {
+    marginBottom: 24,
+  },
+  pinInput: {
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    fontSize: 16,
+    textAlign: 'center',
+    letterSpacing: 8,
+  },
+  verifyButton: {
+    height: 48,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  verifyButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  resendButton: {
+    alignItems: 'center',
+  },
+  resendText: {
+    fontSize: 14,
+  },
+});
+
+// TODO: Implement full feature after navigation unblocked 

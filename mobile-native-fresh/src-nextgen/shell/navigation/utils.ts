@@ -215,7 +215,12 @@ export const validateScreenTransition = (transition: NavigationTransition): Navi
 /**
  * Get navigation statistics
  */
-export const getNavigationStatistics = () => {
+export const getNavigationStatistics = (): {
+  totalRoutes: number;
+  totalStates: number;
+  byEnvironment: { legacy: number; nextgen: number };
+  byRoute: Record<string, number>;
+} => {
   const stats = {
     totalRoutes: routeRegistry.size,
     totalStates: stateRegistry.size,
@@ -248,7 +253,10 @@ export const clearNavigationRegistries = (): void => {
 /**
  * Export navigation registries for debugging
  */
-export const exportNavigationRegistries = () => {
+export const exportNavigationRegistries = (): {
+  routes: NavigationRouteDefinition[];
+  states: NavigationState[];
+} => {
   return {
     routes: Array.from(routeRegistry.values()),
     states: Array.from(stateRegistry.values())

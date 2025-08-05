@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
+export function useLocalStorage<T>(key: string, initialValue: T): [
+  T,
+  (value: T | ((val: T) => T)) => Promise<void>,
+  () => Promise<void>,
+  boolean
+] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       return initialValue;
@@ -52,5 +57,5 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     }
   }, [key, initialValue]);
 
-  return [storedValue, setValue, removeValue, isLoading] as const;
+  return [storedValue, setValue, removeValue, isLoading];
 } 

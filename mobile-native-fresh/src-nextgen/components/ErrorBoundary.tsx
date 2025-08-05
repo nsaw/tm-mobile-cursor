@@ -1,8 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useTheme } from '../theme';
-import { useAccessibility } from '../hooks/useAccessibility';
-import { useUIStore } from '../state/stores/uiStore';
+import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
 export interface ErrorBoundaryState {
   hasError: boolean;
@@ -27,10 +24,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     };
   }
 
-  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return {
       hasError: true,
       error,
+      errorInfo: null,
     };
   }
 
@@ -40,18 +38,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       errorInfo,
     });
 
-    // Call onError callback if provided
-    this.props.onError?.(error, errorInfo);
-
-    // Log error for debugging
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Call custom error handler
+    if (this.props.onError) {
+      this.props.onError(error, errorInfo);
+    }
   }
 
   componentDidUpdate(prevProps: ErrorBoundaryProps): void {
-    if (
-      this.props.resetOnPropsChange &&
-      prevProps.children !== this.props.children
-    ) {
+    // Reset error state when props change if resetOnPropsChange is true
+    if (this.props.resetOnPropsChange && prevProps.children !== this.props.children) {
       this.setState({
         hasError: false,
         error: null,
@@ -60,12 +55,22 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
   }
 
-  handleReset = (): void => {
+  handleRetry = (): void => {
     this.setState({
       hasError: false,
       error: null,
       errorInfo: null,
     });
+  };
+
+  handleReport = (): void => {
+    if (this.state.error) {
+      Alert.alert(
+        'Error Report',
+        `Error: ${this.state.error.message}\n\nStack: ${this.state.error.stack?.substring(0, 200)}...`,
+        [{ text: 'OK' }]
+      );
+    }
   };
 
   render(): ReactNode {
@@ -74,7 +79,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         return this.props.fallback;
       }
 
-      return <ErrorFallback error={this.state.error} onReset={this.handleReset} />;
+      return <ErrorFallback error={this.state.error} onRetry={this.handleRetry} onReport={this.handleReport} />;
     }
 
     return this.props.children;
@@ -83,72 +88,64 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
 interface ErrorFallbackProps {
   error: Error | null;
-  onReset: () => void;
+  onRetry: () => void;
+  onReport: () => void;
 }
 
-export const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
-  const { tokens } = useTheme();
-  const { isScreenReaderEnabled } = useAccessibility();
-  const { setError } = useUIStore();
-
-  React.useEffect(() => {
-    if (error) {
-      setError(error.message);
-    }
-  }, [error, setError]);
-
+export const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onRetry, onReport }): React.JSX.Element => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      padding: tokens.spacing.lg,
-      backgroundColor: tokens.colors.background,
+      padding: 20,
+      backgroundColor: '#ffffff',
     },
     title: {
-      fontSize: tokens.typography.fontSize.xl,
-      fontWeight: tokens.typography.fontWeight.bold as any,
-      color: tokens.colors.error,
-      marginBottom: tokens.spacing.md,
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#ff0000',
+      marginBottom: 10,
       textAlign: 'center',
     },
     message: {
-      fontSize: tokens.typography.fontSize.body,
-      color: tokens.colors.text,
-      marginBottom: tokens.spacing.lg,
+      fontSize: 14,
+      color: '#333333',
+      marginBottom: 20,
       textAlign: 'center',
       lineHeight: 1.5,
     },
+    actions: {
+      flexDirection: 'row',
+      gap: 10,
+    },
     button: {
-      backgroundColor: tokens.colors.accent,
-      paddingHorizontal: tokens.spacing.lg,
-      paddingVertical: tokens.spacing.md,
+      backgroundColor: '#007AFF',
+      paddingHorizontal: 20,
+      paddingVertical: 10,
       borderRadius: 8,
     },
     buttonText: {
-      color: tokens.colors.background,
-      fontSize: tokens.typography.fontSize.body,
-      fontWeight: tokens.typography.fontWeight.medium as any,
+      color: '#ffffff',
+      fontSize: 14,
+      fontWeight: '500',
     },
   });
 
   return (
-    <View style={styles.container} accessible={isScreenReaderEnabled}>
-      <Text style={styles.title} accessibilityRole="header">
-        Something went wrong
+    <View style={styles.container}>
+      <Text style={styles.title}>Something went wrong</Text>
+      <Text style={styles.message}>
+        {error?.message || 'An unexpected error occurred'}
       </Text>
-      <Text style={styles.message} accessibilityRole="text">
-        {error?.message || 'An unexpected error occurred. Please try again.'}
-      </Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={onReset}
-        accessibilityRole="button"
-        accessibilityLabel="Try again"
-        accessibilityHint="Press to retry the operation"
-      >
-        <Text style={styles.buttonText}>Try Again</Text>
-      </TouchableOpacity>
+      <View style={styles.actions}>
+        <TouchableOpacity style={styles.button} onPress={onRetry} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <Text style={styles.buttonText}>Try Again</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={onReport} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <Text style={styles.buttonText}>Report Issue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }; 

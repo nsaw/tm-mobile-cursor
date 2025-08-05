@@ -39,7 +39,7 @@ const STORAGE_KEYS = {
   LAST_ACTIVE: '@thoughtmarks_last_active',
 };
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextValue => {
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
@@ -72,13 +72,13 @@ export const useAuth = () => {
     initializeAuth();
   }, []);
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (_email: string, _password: string): Promise<User> => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
       // Mock authentication - replace with actual auth logic
       const user: User = {
         id: 'mock-user-id',
-        email,
+        email: _email,
         firstName: 'Mock',
         lastName: 'User',
         isPremium: false,
@@ -96,19 +96,19 @@ export const useAuth = () => {
       });
 
       return user;
-    } catch (error: any) {
+    } catch (error: unknown) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error(error.message || 'Sign in failed');
+      throw new Error((error as Error).message || 'Sign in failed');
     }
   };
 
-  const signUp = async (email: string, password: string, firstName?: string, lastName?: string) => {
+  const signUp = async (_email: string, _password: string, firstName?: string, lastName?: string): Promise<User> => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
       // Mock user creation - replace with actual signup logic
       const user: User = {
         id: 'mock-user-id',
-        email,
+        email: _email,
         firstName: firstName || 'New',
         lastName: lastName || 'User',
         isPremium: false,
@@ -126,13 +126,13 @@ export const useAuth = () => {
       });
 
       return user;
-    } catch (error: any) {
+    } catch (error: unknown) {
       setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error(error.message || 'Sign up failed');
+      throw new Error((error as Error).message || 'Sign up failed');
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (): Promise<void> => {
     try {
       await AsyncStorage.multiRemove([
         STORAGE_KEYS.USER,
@@ -152,7 +152,7 @@ export const useAuth = () => {
     }
   };
 
-  const enableGuestMode = () => {
+  const enableGuestMode = (): void => {
     setAuthState({
       user: null,
       isAuthenticated: false,
@@ -161,7 +161,7 @@ export const useAuth = () => {
     });
   };
 
-  const disableGuestMode = () => {
+  const disableGuestMode = (): void => {
     setAuthState({
       user: null,
       isAuthenticated: false,
@@ -170,12 +170,12 @@ export const useAuth = () => {
     });
   };
 
-  const resetPassword = async (email: string) => {
+  const resetPassword = async (_email: string): Promise<void> => {
     // Mock password reset for now
-    console.log('Password reset requested for:', email);
+    console.log('Password reset requested for:', _email);
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (): Promise<void> => {
     // Mock Google sign in for now
     console.log('Google sign in requested');
   };

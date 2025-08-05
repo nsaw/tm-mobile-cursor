@@ -1,24 +1,12 @@
-// src-nextgen/hooks/index.ts
-// Core hooks for nextgen architecture
-
+// Core hooks
 export * from './useAuth';
+export * from './useTheme';
 export * from './useValidation';
 export * from './useAccessibility';
-export * from './useAccessibilityProps';
-export * from './useErrorHandler';
-export * from './useApi';
-export * from './useForm';
-export * from './useDebounce';
-export * from './useThrottle';
-export * from './useLocalStorage';
 
-export { useAccessibility } from './useAccessibility';
-export { useAccessibilityProps } from './useAccessibilityProps';
-export { useErrorHandler } from './useErrorHandler';
-export { useApi } from './useApi';
-export { useForm } from './useForm';
-export { useDebounce, useDebouncedCallback } from './useDebounce';
-export { useThrottle, useThrottledCallback } from './useThrottle';
-export { useLocalStorage } from './useLocalStorage';
+// Auth flow hooks
+export * from './useAuthFlow';
+
+// Content hooks
 export * from './useThoughtmarks';
 export * from './useBins'; 

@@ -25,7 +25,7 @@ import { ThemeProvider } from '@legacy/theme/ThemeProvider';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-function LegacyApp() {
+function LegacyApp(): React.JSX.Element | null {
   const [fontsLoaded] = useFonts({
     'Oswald-Regular': Oswald_400Regular,
     'Oswald-Medium': Oswald_500Medium,

@@ -5,15 +5,98 @@ import OpenAI from 'openai';
 import { db } from '../db';
 import { thoughtmarks } from '../db/schema';
 import { config } from '../config';
+
 console.log('AI CONTROLLER FILE LOADED');
 
 const openai = new OpenAI({ apiKey: config.openai.apiKey });
 
+// Type definitions
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id: number;
+    userId: number;
+  };
+}
+
+interface Insight {
+  type: 'pattern' | 'recommendation' | 'trend' | 'connection';
+  title: string;
+  description: string;
+  actionable: boolean;
+  relatedThoughtmarks: number[];
+}
+
+interface AIResponse {
+  insights: Insight[];
+}
+
+interface SmartSortItem {
+  id: number;
+  title: string;
+  content: string;
+  sortOrder: number;
+}
+
+interface SmartSortResponse {
+  smartSort: SmartSortItem[];
+}
+
+interface Recommendation {
+  title: string;
+  description: string;
+  relatedThoughtmarks: number[];
+}
+
+interface RecommendationsResponse {
+  recommendations: Recommendation[];
+}
+
+interface LearningResource {
+  title: string;
+  description: string;
+  url: string;
+  type: 'article' | 'video' | 'course' | 'book';
+}
+
+interface LearningResourcesResponse {
+  resources: LearningResource[];
+}
+
+interface SearchResult {
+  id: number;
+  title: string;
+  content: string;
+  relevanceScore: number;
+}
+
+interface SearchResultsResponse {
+  results: SearchResult[];
+}
+
+interface SearchSuggestion {
+  query: string;
+  reason: string;
+}
+
+interface SearchSuggestionsResponse {
+  suggestions: SearchSuggestion[];
+}
+
+interface ThoughtmarkSuggestion {
+  title: string;
+  content: string;
+  tags: string[];
+}
+
+interface ThoughtmarkSuggestionsResponse {
+  suggestions: ThoughtmarkSuggestion[];
+}
+
 export const aiController = {
-  async generateInsights(req: Request, res: Response) {
+  async generateInsights(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      console.log('[aiController] /api/ai/insights called', { userId: (req as any).user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
-      const userId = (req as any).user?.userId || 1;
+      console.log('[aiController] /api/ai/insights called', { userId: req.user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
+      const userId = req.user?.userId || 1;
       const userThoughtmarks = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.userId, userId))
         .where(eq(thoughtmarks.isDeleted, false));
@@ -21,7 +104,8 @@ export const aiController = {
       console.log('[aiController] Fetched thoughtmarks:', userThoughtmarks);
 
       if (!userThoughtmarks || userThoughtmarks.length === 0) {
-        return res.status(200).json({ insights: [] });
+        res.status(200).json({ insights: [] });
+        return;
       }
 
       // Prepare the data for the AI
@@ -59,26 +143,32 @@ ${thoughtmarkSummaries}`;
       console.log('[aiController] Raw OpenAI response:', completion);
 
       // Parse the JSON response
-      let insights: any[] = [];
+      let insights: Insight[] = [];
       try {
         const content = completion.choices[0]?.message?.content || '{}';
-        const json = JSON.parse(content);
+        const json: AIResponse = JSON.parse(content);
         if (Array.isArray(json.insights)) {
           insights = json.insights;
-        } else if (typeof json.summary === 'string') {
+        } else if (typeof (json as unknown as { summary: string }).summary === 'string') {
           // fallback: split summary into multiple insights by numbered or bulleted list
-          const parts = json.summary.split(/\n\d+\.\s|\n-\s|\n•\s/).map((s: string) => s.trim()).filter(Boolean);
+          const summary = (json as unknown as { summary: string }).summary;
+          const parts = summary.split(/\n\d+\.\s|\n-\s|\n•\s/).map((s: string) => s.trim()).filter(Boolean);
           if (parts.length > 1) {
             insights = parts.map((desc: string, idx: number) => ({
-              type: 'pattern',
+              type: 'pattern' as const,
               title: `Insight ${idx + 1}`,
               description: desc,
-              content: desc,
               actionable: false,
               relatedThoughtmarks: []
             }));
           } else {
-            insights = [{ type: 'pattern', title: 'Summary', description: json.summary, content: json.summary, actionable: false, relatedThoughtmarks: [] }];
+            insights = [{ 
+              type: 'pattern' as const, 
+              title: 'Summary', 
+              description: summary, 
+              actionable: false, 
+              relatedThoughtmarks: [] 
+            }];
           }
         }
       } catch (err) {
@@ -93,16 +183,17 @@ ${thoughtmarkSummaries}`;
     }
   },
 
-  async smartSort(req: Request, res: Response) {
+  async smartSort(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      console.log('[aiController] /api/ai/smart-sort called', { userId: (req as any).user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
-      const userId = (req as any).user?.userId || 1;
+      console.log('[aiController] /api/ai/smart-sort called', { userId: req.user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
+      const userId = req.user?.userId || 1;
       const userThoughtmarks = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.userId, userId))
         .where(eq(thoughtmarks.isDeleted, false));
       console.log('[aiController] Fetched thoughtmarks:', userThoughtmarks);
       if (!userThoughtmarks || userThoughtmarks.length === 0) {
-        return res.status(200).json({ smartSort: [] });
+        res.status(200).json({ smartSort: [] });
+        return;
       }
       const thoughtmarkSummaries = userThoughtmarks.map(tm => `Title: ${tm.title}\nContent: ${tm.content}`).join('\n---\n');
       const prompt = `Analyze the following user thoughtmarks and return a JSON object with a 'smartSort' array of 3-5 groups. Each group must have: label (string), description (1-2 sentences, use 'you' language), thoughtmarkIds (array of ids). Respond ONLY with a valid JSON object in this format, with no extra text or markdown:\n{\n  \"smartSort\": [\n    {\n      \"label\": \"Group label\",\n      \"description\": \"Description using 'you' language.\",\n      \"thoughtmarkIds\": [1,2,3]\n    }\n  ]\n}\nUser Thoughtmarks:\n${thoughtmarkSummaries}`;
@@ -118,10 +209,10 @@ ${thoughtmarkSummaries}`;
         temperature: 0.4,
       });
       console.log('[aiController] Raw OpenAI response (smartSort):', completion);
-      let smartSort: any[] = [];
+      let smartSort: SmartSortItem[] = [];
       try {
         const content = completion.choices[0]?.message?.content || '{}';
-        const json = JSON.parse(content);
+        const json: SmartSortResponse = JSON.parse(content);
         if (Array.isArray(json.smartSort)) {
           smartSort = json.smartSort;
         }
@@ -136,16 +227,17 @@ ${thoughtmarkSummaries}`;
     }
   },
 
-  async recommendations(req: Request, res: Response) {
+  async recommendations(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      console.log('[aiController] /api/ai/recommendations called', { userId: (req as any).user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
-      const userId = (req as any).user?.userId || 1;
+      console.log('[aiController] /api/ai/recommendations called', { userId: req.user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
+      const userId = req.user?.userId || 1;
       const userThoughtmarks = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.userId, userId))
         .where(eq(thoughtmarks.isDeleted, false));
       console.log('[aiController] Fetched thoughtmarks:', userThoughtmarks);
       if (!userThoughtmarks || userThoughtmarks.length === 0) {
-        return res.status(200).json({ recommendations: [] });
+        res.status(200).json({ recommendations: [] });
+        return;
       }
       const thoughtmarkSummaries = userThoughtmarks.map(tm => `Title: ${tm.title}\nContent: ${tm.content}`).join('\n---\n');
       const prompt = `Analyze the following user thoughtmarks and return a JSON object with a 'recommendations' array of 3-5 actionable recommendations. Each recommendation must have: title (string), description (1-2 sentences, use 'you' language), relatedThoughtmarks (array of ids). Respond ONLY with a valid JSON object in this format, with no extra text or markdown:\n{\n  \"recommendations\": [\n    {\n      \"title\": \"Recommendation title\",\n      \"description\": \"Description using 'you' language.\",\n      \"relatedThoughtmarks\": [1,2,3]\n    }\n  ]\n}\nUser Thoughtmarks:\n${thoughtmarkSummaries}`;
@@ -161,10 +253,10 @@ ${thoughtmarkSummaries}`;
         temperature: 0.4,
       });
       console.log('[aiController] Raw OpenAI response (recommendations):', completion);
-      let recommendations: any[] = [];
+      let recommendations: Recommendation[] = [];
       try {
         const content = completion.choices[0]?.message?.content || '{}';
-        const json = JSON.parse(content);
+        const json: RecommendationsResponse = JSON.parse(content);
         if (Array.isArray(json.recommendations)) {
           recommendations = json.recommendations;
         }
@@ -179,7 +271,7 @@ ${thoughtmarkSummaries}`;
     }
   },
 
-  async learningResources(req: Request, res: Response) {
+  async learningResources(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       console.log('[aiController] Learning resources request received');
       
@@ -187,27 +279,29 @@ ${thoughtmarkSummaries}`;
       console.log('[aiController] Thoughtmark IDs:', thoughtmarkIds);
 
       if (!thoughtmarkIds || !Array.isArray(thoughtmarkIds) || thoughtmarkIds.length === 0) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Thoughtmark IDs array is required'
         });
+        return;
       }
 
       // Get thoughtmarks from database
       const userThoughtmarks = await db.select().from(thoughtmarks)
-        .where(inArray(thoughtmarks.id, thoughtmarkIds.map((id: any) => parseInt(id))));
+        .where(inArray(thoughtmarks.id, thoughtmarkIds.map((id: string | number) => parseInt(String(id)))));
 
       if (userThoughtmarks.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'No thoughtmarks found'
         });
+        return;
       }
 
       console.log('[aiController] Found thoughtmarks:', userThoughtmarks.length);
 
       // Format thoughtmarks for AI
-      const formattedThoughtmarks = userThoughtmarks.map((t: any) => 
+      const formattedThoughtmarks = userThoughtmarks.map((t) => 
         `Title: ${t.title}\nContent: ${t.content}`
       ).join('\n---\n');
 
@@ -250,15 +344,18 @@ ${formattedThoughtmarks}`;
         throw new Error('No response from OpenAI');
       }
 
-      let learningResources;
+      let learningResources: LearningResource[] = [];
       try {
-        learningResources = JSON.parse(responseText);
+        const json: LearningResourcesResponse = JSON.parse(responseText);
+        if (Array.isArray(json.resources)) {
+          learningResources = json.resources;
+        }
       } catch (parseError) {
         console.error('[aiController] JSON parse error:', parseError);
         throw new Error('Invalid JSON response from AI');
       }
 
-      console.log('[aiController] Final learningResources array:', learningResources.learningResources);
+      console.log('[aiController] Final learningResources array:', learningResources);
 
       res.json({
         success: true,
@@ -274,7 +371,7 @@ ${formattedThoughtmarks}`;
     }
   },
 
-  async semanticSearch(req: Request, res: Response) {
+  async semanticSearch(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       console.log('[aiController] Semantic search request received');
       
@@ -301,7 +398,7 @@ ${formattedThoughtmarks}`;
       console.log('[aiController] Found thoughtmarks for search:', allThoughtmarks.length);
 
       // Format thoughtmarks for AI
-      const formattedThoughtmarks = allThoughtmarks.map((t: any) => 
+      const formattedThoughtmarks = allThoughtmarks.map((t) => 
         `ID: ${t.id}\nTitle: ${t.title}\nContent: ${t.content}`
       ).join('\n---\n');
 
@@ -344,15 +441,18 @@ ${formattedThoughtmarks}`;
         throw new Error('No response from OpenAI');
       }
 
-      let searchResults;
+      let searchResults: SearchResult[] = [];
       try {
-        searchResults = JSON.parse(responseText);
+        const json: SearchResultsResponse = JSON.parse(responseText);
+        if (Array.isArray(json.results)) {
+          searchResults = json.results;
+        }
       } catch (parseError) {
         console.error('[aiController] JSON parse error:', parseError);
         throw new Error('Invalid JSON response from AI');
       }
 
-      console.log('[aiController] Final search results:', searchResults.results);
+      console.log('[aiController] Final search results:', searchResults);
 
       res.json({
         success: true,
@@ -368,7 +468,7 @@ ${formattedThoughtmarks}`;
     }
   },
 
-  async generateSearchSuggestions(req: Request, res: Response) {
+  async generateSearchSuggestions(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       console.log('[aiController] Generate search suggestions request received');
 
@@ -387,7 +487,7 @@ ${formattedThoughtmarks}`;
       console.log('[aiController] Found recent thoughtmarks:', recentThoughtmarks.length);
 
       // Format thoughtmarks for AI
-      const formattedThoughtmarks = recentThoughtmarks.map((t: any) => 
+      const formattedThoughtmarks = recentThoughtmarks.map((t) => 
         `Title: ${t.title}\nContent: ${t.content}`
       ).join('\n---\n');
 
@@ -428,15 +528,18 @@ ${formattedThoughtmarks}`;
         throw new Error('No response from OpenAI');
       }
 
-      let suggestions;
+      let suggestions: SearchSuggestion[] = [];
       try {
-        suggestions = JSON.parse(responseText);
+        const json: SearchSuggestionsResponse = JSON.parse(responseText);
+        if (Array.isArray(json.suggestions)) {
+          suggestions = json.suggestions;
+        }
       } catch (parseError) {
         console.error('[aiController] JSON parse error:', parseError);
         throw new Error('Invalid JSON response from AI');
       }
 
-      console.log('[aiController] Final search suggestions:', suggestions.suggestions);
+      console.log('[aiController] Final search suggestions:', suggestions);
 
       res.json({
         success: true,
@@ -452,7 +555,7 @@ ${formattedThoughtmarks}`;
     }
   },
 
-  async generateThoughtmarkSuggestions(req: Request, res: Response) {
+  async generateThoughtmarkSuggestions(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       console.log('[aiController] Generate thoughtmark suggestions request received');
       
@@ -506,9 +609,12 @@ ${tags && tags.length > 0 ? `Current Tags: ${tags.join(', ')}` : ''}`;
         throw new Error('No response from OpenAI');
       }
 
-      let suggestions;
+      let suggestions: ThoughtmarkSuggestion[] = [];
       try {
-        suggestions = JSON.parse(responseText);
+        const json: ThoughtmarkSuggestionsResponse = JSON.parse(responseText);
+        if (Array.isArray(json.suggestions)) {
+          suggestions = json.suggestions;
+        }
       } catch (parseError) {
         console.error('[aiController] JSON parse error:', parseError);
         throw new Error('Invalid JSON response from AI');

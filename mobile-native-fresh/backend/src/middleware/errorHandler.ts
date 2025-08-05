@@ -1,13 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
 import { logger } from '../utils/logger';
 
 export const errorHandler = (
   error: Error,
   req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+  res: Response
+): void => {
   logger.error('Unhandled error:', error);
 
   // Default error response

@@ -1,8 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { AutoRoleView } from '../AutoRoleView';
 import { FormField } from './FormField';
 import { useSignupForm, useSigninForm, useProfileForm } from '../../hooks/useFormValidation';
+
+// Type definitions for form state
+interface FormFieldState {
+  value: unknown;
+  touched: boolean;
+  error: string | null;
+  rules: unknown;
+}
 
 interface FormValidationTestProps {
   environment?: 'legacy' | 'nextgen';
@@ -15,17 +23,17 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
   const signinForm = useSigninForm(environment);
   const profileForm = useProfileForm(environment);
 
-  const handleSignupSubmit = async (values: any) => {
+  const handleSignupSubmit = async (values: unknown) => {
     Alert.alert('Signup Form Submitted', JSON.stringify(values, null, 2));
     signupForm.resetForm();
   };
 
-  const handleSigninSubmit = async (values: any) => {
+  const handleSigninSubmit = async (values: unknown) => {
     Alert.alert('Signin Form Submitted', JSON.stringify(values, null, 2));
     signinForm.resetForm();
   };
 
-  const handleProfileSubmit = async (values: any) => {
+  const handleProfileSubmit = async (values: unknown) => {
     Alert.alert('Profile Form Submitted', JSON.stringify(values, null, 2));
     profileForm.resetForm();
   };
@@ -41,10 +49,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           
           <FormField
             label="Email"
-            name="email"
-            value={signupForm.formState.email.value}
+            value={(signupForm.formState.email as FormFieldState)?.value as string}
             error={signupForm.getFieldError('email')}
-            touched={signupForm.formState.email.touched}
+            touched={(signupForm.formState.email as FormFieldState)?.touched || false}
             onValueChange={(value) => signupForm.updateField('email', value)}
             onBlur={() => signupForm.setFieldTouched('email')}
             placeholder="Enter your email"
@@ -56,10 +63,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Password"
-            name="password"
-            value={signupForm.formState.password.value}
+            value={(signupForm.formState.password as FormFieldState)?.value as string}
             error={signupForm.getFieldError('password')}
-            touched={signupForm.formState.password.touched}
+            touched={(signupForm.formState.password as FormFieldState)?.touched || false}
             onValueChange={(value) => signupForm.updateField('password', value)}
             onBlur={() => signupForm.setFieldTouched('password')}
             placeholder="Enter your password"
@@ -71,10 +77,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Confirm Password"
-            name="confirmPassword"
-            value={signupForm.formState.confirmPassword.value}
+            value={(signupForm.formState.confirmPassword as FormFieldState)?.value as string}
             error={signupForm.getFieldError('confirmPassword')}
-            touched={signupForm.formState.confirmPassword.touched}
+            touched={(signupForm.formState.confirmPassword as FormFieldState)?.touched || false}
             onValueChange={(value) => signupForm.updateField('confirmPassword', value)}
             onBlur={() => signupForm.setFieldTouched('confirmPassword')}
             placeholder="Confirm your password"
@@ -85,10 +90,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Username"
-            name="username"
-            value={signupForm.formState.username.value}
+            value={(signupForm.formState.username as FormFieldState)?.value as string}
             error={signupForm.getFieldError('username')}
-            touched={signupForm.formState.username.touched}
+            touched={(signupForm.formState.username as FormFieldState)?.touched || false}
             onValueChange={(value) => signupForm.updateField('username', value)}
             onBlur={() => signupForm.setFieldTouched('username')}
             placeholder="Enter your username"
@@ -123,10 +127,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           
           <FormField
             label="Email"
-            name="email"
-            value={signinForm.formState.email.value}
+            value={(signinForm.formState.email as FormFieldState)?.value as string}
             error={signinForm.getFieldError('email')}
-            touched={signinForm.formState.email.touched}
+            touched={(signinForm.formState.email as FormFieldState)?.touched || false}
             onValueChange={(value) => signinForm.updateField('email', value)}
             onBlur={() => signinForm.setFieldTouched('email')}
             placeholder="Enter your email"
@@ -138,10 +141,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Password"
-            name="password"
-            value={signinForm.formState.password.value}
+            value={(signinForm.formState.password as FormFieldState)?.value as string}
             error={signinForm.getFieldError('password')}
-            touched={signinForm.formState.password.touched}
+            touched={(signinForm.formState.password as FormFieldState)?.touched || false}
             onValueChange={(value) => signinForm.updateField('password', value)}
             onBlur={() => signinForm.setFieldTouched('password')}
             placeholder="Enter your password"
@@ -175,10 +177,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           
           <FormField
             label="First Name"
-            name="firstName"
-            value={profileForm.formState.firstName.value}
+            value={(profileForm.formState.firstName as FormFieldState)?.value as string}
             error={profileForm.getFieldError('firstName')}
-            touched={profileForm.formState.firstName.touched}
+            touched={(profileForm.formState.firstName as FormFieldState)?.touched || false}
             onValueChange={(value) => profileForm.updateField('firstName', value)}
             onBlur={() => profileForm.setFieldTouched('firstName')}
             placeholder="Enter your first name"
@@ -188,10 +189,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Last Name"
-            name="lastName"
-            value={profileForm.formState.lastName.value}
+            value={(profileForm.formState.lastName as FormFieldState)?.value as string}
             error={profileForm.getFieldError('lastName')}
-            touched={profileForm.formState.lastName.touched}
+            touched={(profileForm.formState.lastName as FormFieldState)?.touched || false}
             onValueChange={(value) => profileForm.updateField('lastName', value)}
             onBlur={() => profileForm.setFieldTouched('lastName')}
             placeholder="Enter your last name"
@@ -201,10 +201,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Phone"
-            name="phone"
-            value={profileForm.formState.phone.value}
+            value={(profileForm.formState.phone as FormFieldState)?.value as string}
             error={profileForm.getFieldError('phone')}
-            touched={profileForm.formState.phone.touched}
+            touched={(profileForm.formState.phone as FormFieldState)?.touched || false}
             onValueChange={(value) => profileForm.updateField('phone', value)}
             onBlur={() => profileForm.setFieldTouched('phone')}
             placeholder="Enter your phone number"
@@ -214,10 +213,9 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
 
           <FormField
             label="Website"
-            name="website"
-            value={profileForm.formState.website.value}
+            value={(profileForm.formState.website as FormFieldState)?.value as string}
             error={profileForm.getFieldError('website')}
-            touched={profileForm.formState.website.touched}
+            touched={(profileForm.formState.website as FormFieldState)?.touched || false}
             onValueChange={(value) => profileForm.updateField('website', value)}
             onBlur={() => profileForm.setFieldTouched('website')}
             placeholder="Enter your website URL"

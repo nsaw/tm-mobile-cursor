@@ -1,21 +1,24 @@
 import React from 'react';
-import { Text, TextProps } from './Text';
+import { AccessibilityRole } from 'react-native';
+import { Text, TextPropsExtended } from './Text';
 import { useAccessibilityProps } from '../../hooks/useAccessibilityProps';
+import { useTheme } from '../../hooks/useTheme';
 
-export interface LabelProps extends Omit<TextProps, 'variant'> {
-  htmlFor?: string;
+export interface LabelProps extends Omit<TextPropsExtended, 'variant' | 'role'> {
   required?: boolean;
   children: React.ReactNode;
+  role?: 'text' | 'label';
 }
 
 export const Label: React.FC<LabelProps> = ({ 
-  htmlFor, 
   required = false, 
-  children, 
+  children,
+  role = 'label',
   ...props 
 }) => {
+  const theme = useTheme();
   const accessibilityProps = useAccessibilityProps({
-    role: 'text',
+    role: role as AccessibilityRole,
     label: typeof children === 'string' ? children : undefined,
   });
 
@@ -23,13 +26,14 @@ export const Label: React.FC<LabelProps> = ({
     <Text
       variant="body2"
       weight="medium"
-      color="primary"
+      color={theme.colors.primary}
+      role={role}
       {...accessibilityProps}
       {...props}
     >
       {children}
       {required && (
-        <Text variant="caption" color="error" weight="bold">
+        <Text variant="caption" color={theme.colors.error} weight="bold">
           {' *'}
         </Text>
       )}

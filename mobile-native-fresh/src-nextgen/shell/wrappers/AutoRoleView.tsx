@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ViewProps } from 'react-native';
+import { View, ViewProps, Text } from 'react-native';
 import { RoleWrapper } from './RoleWrapper';
 import { ComponentRole } from './types';
 
@@ -40,6 +40,7 @@ export interface AutoRoleViewProps extends ViewProps {
   layoutRole?: LayoutRole;
   children: React.ReactNode;
   debug?: boolean;
+  _style?: React.CSSProperties;
 }
 
 /**
@@ -56,7 +57,7 @@ export interface AutoRoleViewProps extends ViewProps {
  * 
  * Usage:
  * <AutoRoleView interactiveRole="button-action">
- *   <TouchableOpacity>Press Me</TouchableOpacity>
+ *   <TouchableOpacity accessibilityRole="button" accessible={true} accessibilityLabel="Button"><Text>Press Me</Text></TouchableOpacity>
  * </AutoRoleView>
  */
 export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
@@ -64,9 +65,9 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   contentRole,
   layoutRole,
   children,
-  style,
+  _style,
   debug = false,
-  ...props
+  ..._props
 }) => {
   // Determine the primary role (interactive takes precedence)
   const primaryRole = interactiveRole || contentRole || layoutRole;
@@ -83,10 +84,10 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   };
 
   // Generate role-based styles
-  const roleStyles = getRoleStyles(primaryRole);
+  const _roleStyles = getRoleStyles(primaryRole);
   
   // Generate accessibility props
-  const accessibilityProps = getAccessibilityProps(primaryRole);
+  const _accessibilityProps = getAccessibilityProps(primaryRole);
 
   // Check for debug environment variable
   const debugEnabled = process.env.EXPO_PUBLIC_DEBUG_ROLES === 'true' || debug;
@@ -101,13 +102,7 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
         protected: false
       }}
     >
-      <View
-        style={[roleStyles, style]}
-        {...accessibilityProps}
-        {...props}
-      >
-        {children}
-      </View>
+      <View><Text>{children}</Text></View>
     </RoleWrapper>
   );
 };

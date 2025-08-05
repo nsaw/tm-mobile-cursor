@@ -15,7 +15,7 @@ class CircuitBreaker {
   private readonly timeout: number;
   private readonly threshold: number;
 
-  constructor(timeout: number = 60000, threshold: number = 5) {
+  constructor(timeout = 60000, threshold = 5) {
     this.timeout = timeout;
     this.threshold = threshold;
     this.state = {
@@ -96,16 +96,16 @@ class RetryMechanism {
   }
 
   async execute<T>(operation: () => Promise<T>): Promise<T> {
-    let lastError: Error;
+    let lastError: Error | null = null;
 
     for (let attempt = 1; attempt <= this.config.maxAttempts; attempt++) {
       try {
         return await operation();
       } catch (error) {
-        lastError = error as Error;
-
+        lastError = error instanceof Error ? error : new Error(String(error));
+        
         if (attempt === this.config.maxAttempts) {
-          throw lastError;
+          break;
         }
 
         const delay = Math.min(
@@ -117,11 +117,14 @@ class RetryMechanism {
       }
     }
 
-    throw lastError!;
+    if (lastError) {
+      throw lastError;
+    }
+    throw new Error('Validation failed after all retry attempts');
   }
 }
 
-// Result caching for bundle stability
+// Result caching with TTL
 interface CacheEntry<T> {
   value: T;
   timestamp: number;
@@ -132,21 +135,24 @@ class ResultCache<T> {
   private cache: Map<string, CacheEntry<T>> = new Map();
   private readonly defaultTTL: number;
 
-  constructor(defaultTTL: number = 300000) { // 5 minutes default
+  constructor(defaultTTL = 300000) { // 5 minutes default
     this.defaultTTL = defaultTTL;
   }
 
   set(key: string, value: T, ttl?: number): void {
-    this.cache.set(key, {
+    const entry: CacheEntry<T> = {
       value,
       timestamp: Date.now(),
       ttl: ttl || this.defaultTTL,
-    });
+    };
+    this.cache.set(key, entry);
   }
 
   get(key: string): T | null {
     const entry = this.cache.get(key);
-    if (!entry) return null;
+    if (!entry) {
+      return null;
+    }
 
     if (Date.now() - entry.timestamp > entry.ttl) {
       this.cache.delete(key);
@@ -165,29 +171,28 @@ class ResultCache<T> {
   }
 }
 
-// Timeout and debounce logic
 class TimeoutManager {
   private timeouts: Map<string, ReturnType<typeof setTimeout>> = new Map();
 
   setTimeout(key: string, callback: () => void, delay: number): void {
     this.clearTimeout(key);
-    const timeout = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       callback();
       this.timeouts.delete(key);
     }, delay);
-    this.timeouts.set(key, timeout);
+    this.timeouts.set(key, timeoutId);
   }
 
   clearTimeout(key: string): void {
-    const timeout = this.timeouts.get(key);
-    if (timeout) {
-      clearTimeout(timeout);
+    const timeoutId = this.timeouts.get(key);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
       this.timeouts.delete(key);
     }
   }
 
   clearAll(): void {
-    this.timeouts.forEach(timeout => clearTimeout(timeout));
+    this.timeouts.forEach(timeoutId => clearTimeout(timeoutId));
     this.timeouts.clear();
   }
 }
@@ -197,66 +202,64 @@ class DebounceManager {
 
   debounce(key: string, callback: () => void, delay: number): void {
     this.clearDebounce(key);
-    const timer = setTimeout(() => {
+    const timerId = setTimeout(() => {
       callback();
       this.debounceTimers.delete(key);
     }, delay);
-    this.debounceTimers.set(key, timer);
+    this.debounceTimers.set(key, timerId);
   }
 
   clearDebounce(key: string): void {
-    const timer = this.debounceTimers.get(key);
-    if (timer) {
-      clearTimeout(timer);
+    const timerId = this.debounceTimers.get(key);
+    if (timerId) {
+      clearTimeout(timerId);
       this.debounceTimers.delete(key);
     }
   }
 
   clearAll(): void {
-    this.debounceTimers.forEach(timer => clearTimeout(timer));
+    this.debounceTimers.forEach(timerId => clearTimeout(timerId));
     this.debounceTimers.clear();
   }
 }
 
-// Validation result interface
 interface ValidationResult {
   isValid: boolean;
   errors: string[];
   warnings: string[];
   duration?: number;
   timestamp?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export class ValidationSystem {
   private circuitBreaker: CircuitBreaker;
   private retryMechanism: RetryMechanism;
-  private resultCache: ResultCache<any>;
+  private resultCache: ResultCache<ValidationResult>;
   private timeoutManager: TimeoutManager;
   private debounceManager: DebounceManager;
   private validationQueue: Array<() => Promise<ValidationResult>> = [];
-  private isProcessing: boolean = false;
+  private isProcessing = false;
 
-  // Test-only accessors
-  public get validateQueue() {
-    return this.validationQueue;
+  public get validateQueue(): number {
+    return this.validationQueue.length;
   }
 
   public async validateWithTimeout<T>(
     operation: () => Promise<T>,
-    timeout: number = 5000
+    timeout = 5000
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
-        reject(new Error(`Operation timed out after ${timeout}ms`));
+        reject(new Error('Operation timed out'));
       }, timeout);
 
       operation()
-        .then((result) => {
+        .then(result => {
           clearTimeout(timeoutId);
           resolve(result);
         })
-        .catch((error) => {
+        .catch(error => {
           clearTimeout(timeoutId);
           reject(error);
         });
@@ -264,178 +267,126 @@ export class ValidationSystem {
   }
 
   constructor() {
-    this.circuitBreaker = new CircuitBreaker(30000, 3); // 30s timeout, 3 failures
-    this.retryMechanism = new RetryMechanism({
-      maxAttempts: 3,
-      baseDelay: 1000,
-      maxDelay: 5000,
-      backoffMultiplier: 2,
-    });
-    this.resultCache = new ResultCache(300000); // 5 minutes TTL
+    this.circuitBreaker = new CircuitBreaker();
+    this.retryMechanism = new RetryMechanism();
+    this.resultCache = new ResultCache<ValidationResult>();
     this.timeoutManager = new TimeoutManager();
     this.debounceManager = new DebounceManager();
   }
 
-  async validateComponent(component: React.ComponentType<any>, props: any): Promise<ValidationResult> {
-    const cacheKey = `component_${component.name}_${JSON.stringify(props)}`;
-    
-    // Check cache first
-    const cachedResult = this.resultCache.get(cacheKey);
-    if (cachedResult) {
-      return cachedResult;
+  async validateComponent(component: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
+    const cacheKey = `component:${component.name}:${JSON.stringify(props)}`;
+    const cached = this.resultCache.get(cacheKey);
+    if (cached) {
+      return cached;
     }
 
-    // Use circuit breaker with retry mechanism
-    const result = await this.circuitBreaker.execute(async () => {
-      return await this.retryMechanism.execute(async () => {
-        return await this.performComponentValidation(component, props);
-      });
-    });
+    const result = await this.circuitBreaker.execute(() => 
+      this.performComponentValidation(component, props)
+    );
 
-    // Cache the result
     this.resultCache.set(cacheKey, result);
     return result;
   }
 
-  private async performComponentValidation(component: React.ComponentType<any>, props: any): Promise<ValidationResult> {
+  private async performComponentValidation(component: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
     const startTime = Date.now();
     
     try {
-      // Set timeout for validation
-      const validationPromise = this.executeValidation(component, props);
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        this.timeoutManager.setTimeout('component_validation', () => {
-          reject(new Error('Component validation timeout'));
-        }, 10000); // 10 second timeout
-      });
-
-      const result = await Promise.race([validationPromise, timeoutPromise]);
-      
-      // Clear timeout
-      this.timeoutManager.clearTimeout('component_validation');
-      
+      const result = await this.executeValidation(component, props);
+      result.duration = Date.now() - startTime;
+      result.timestamp = Date.now();
+      return result;
+    } catch (error) {
       return {
-        ...result,
+        isValid: false,
+        errors: [`Validation failed: ${(error as Error).message}`],
+        warnings: [],
         duration: Date.now() - startTime,
         timestamp: Date.now(),
       };
-    } catch (error) {
-      this.timeoutManager.clearTimeout('component_validation');
-      throw error;
     }
   }
 
-  async validateScreen(screen: React.ComponentType<any>, props: any): Promise<ValidationResult> {
-    const cacheKey = `screen_${screen.name}_${JSON.stringify(props)}`;
-    
-    // Check cache first
-    const cachedResult = this.resultCache.get(cacheKey);
-    if (cachedResult) {
-      return cachedResult;
+  async validateScreen(screen: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
+    const cacheKey = `screen:${screen.name}:${JSON.stringify(props)}`;
+    const cached = this.resultCache.get(cacheKey);
+    if (cached) {
+      return cached;
     }
 
-    // Use circuit breaker with retry mechanism
-    const result = await this.circuitBreaker.execute(async () => {
-      return await this.retryMechanism.execute(async () => {
-        return await this.performScreenValidation(screen, props);
-      });
-    });
+    const result = await this.circuitBreaker.execute(() => 
+      this.performScreenValidation(screen, props)
+    );
 
-    // Cache the result
     this.resultCache.set(cacheKey, result);
     return result;
   }
 
-  private async performScreenValidation(screen: React.ComponentType<any>, props: any): Promise<ValidationResult> {
+  private async performScreenValidation(screen: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
     const startTime = Date.now();
     
     try {
-      // Set timeout for validation
-      const validationPromise = this.executeScreenValidation(screen, props);
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        this.timeoutManager.setTimeout('screen_validation', () => {
-          reject(new Error('Screen validation timeout'));
-        }, 15000); // 15 second timeout
-      });
-
-      const result = await Promise.race([validationPromise, timeoutPromise]);
-      
-      // Clear timeout
-      this.timeoutManager.clearTimeout('screen_validation');
-      
+      const result = await this.executeScreenValidation(screen, props);
+      result.duration = Date.now() - startTime;
+      result.timestamp = Date.now();
+      return result;
+    } catch (error) {
       return {
-        ...result,
+        isValid: false,
+        errors: [`Screen validation failed: ${(error as Error).message}`],
+        warnings: [],
         duration: Date.now() - startTime,
         timestamp: Date.now(),
       };
-    } catch (error) {
-      this.timeoutManager.clearTimeout('screen_validation');
-      throw error;
     }
   }
 
-  async validateBundle(bundle: any): Promise<ValidationResult> {
-    const cacheKey = `bundle_${JSON.stringify(bundle)}`;
-    
-    // Check cache first
-    const cachedResult = this.resultCache.get(cacheKey);
-    if (cachedResult) {
-      return cachedResult;
+  async validateBundle(bundle: Record<string, unknown>): Promise<ValidationResult> {
+    const cacheKey = `bundle:${JSON.stringify(bundle)}`;
+    const cached = this.resultCache.get(cacheKey);
+    if (cached) {
+      return cached;
     }
 
-    // Use circuit breaker with retry mechanism
-    const result = await this.circuitBreaker.execute(async () => {
-      return await this.retryMechanism.execute(async () => {
-        return await this.performBundleValidation(bundle);
-      });
-    });
+    const result = await this.circuitBreaker.execute(() => 
+      this.performBundleValidation(bundle)
+    );
 
-    // Cache the result
     this.resultCache.set(cacheKey, result);
     return result;
   }
 
-  private async performBundleValidation(bundle: any): Promise<ValidationResult> {
+  private async performBundleValidation(bundle: Record<string, unknown>): Promise<ValidationResult> {
     const startTime = Date.now();
     
     try {
-      // Set timeout for validation
-      const validationPromise = this.executeBundleValidation(bundle);
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        this.timeoutManager.setTimeout('bundle_validation', () => {
-          reject(new Error('Bundle validation timeout'));
-        }, 30000); // 30 second timeout
-      });
-
-      const result = await Promise.race([validationPromise, timeoutPromise]);
-      
-      // Clear timeout
-      this.timeoutManager.clearTimeout('bundle_validation');
-      
+      const result = await this.executeBundleValidation(bundle);
+      result.duration = Date.now() - startTime;
+      result.timestamp = Date.now();
+      return result;
+    } catch (error) {
       return {
-        ...result,
+        isValid: false,
+        errors: [`Bundle validation failed: ${(error as Error).message}`],
+        warnings: [],
         duration: Date.now() - startTime,
         timestamp: Date.now(),
       };
-    } catch (error) {
-      this.timeoutManager.clearTimeout('bundle_validation');
-      throw error;
     }
   }
 
-  // Core validation methods
-  private async executeValidation(component: React.ComponentType<any>, props: any): Promise<ValidationResult> {
+  private async executeValidation(component: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
     try {
       // Basic component validation
-      const errors: string[] = [];
-      const warnings: string[] = [];
-
-      // Check if component is a valid React component
-      if (typeof component !== 'function') {
-        errors.push('Component must be a function or class');
+      if (!component) {
+        errors.push('Component is required');
       }
 
-      // Check props structure
+      // Props validation
       if (props && typeof props !== 'object') {
         errors.push('Props must be an object');
       }
@@ -476,25 +427,19 @@ export class ValidationSystem {
     }
   }
 
-  private async executeScreenValidation(screen: React.ComponentType<any>, props: any): Promise<ValidationResult> {
+  private async executeScreenValidation(screen: React.ComponentType<unknown>, props: Record<string, unknown>): Promise<ValidationResult> {
     try {
       // Screen-specific validation
       const errors: string[] = [];
       const warnings: string[] = [];
 
-      // Check if screen is a valid React component
-      if (typeof screen !== 'function') {
-        errors.push('Screen must be a function or class');
+      if (!screen) {
+        errors.push('Screen component is required');
       }
 
-      // Screen-specific checks
-      if (screen.name && !screen.name.includes('Screen')) {
-        warnings.push('Screen component name should include "Screen"');
-      }
-
-      // Navigation props validation
-      if (props?.navigation && typeof props.navigation !== 'object') {
-        errors.push('Navigation prop must be an object');
+      // Validate screen props
+      if (props && typeof props !== 'object') {
+        errors.push('Screen props must be an object');
       }
 
       return {
@@ -502,9 +447,8 @@ export class ValidationSystem {
         errors,
         warnings,
         metadata: {
-          platform: Platform.OS,
           screenName: screen.name || 'Anonymous',
-          hasNavigation: !!props?.navigation,
+          propsKeys: props ? Object.keys(props) : [],
         },
       };
     } catch (error) {
@@ -514,42 +458,37 @@ export class ValidationSystem {
         warnings: [],
         metadata: {
           error: (error as Error).message,
-          stack: (error as Error).stack,
         },
       };
     }
   }
 
-  private async executeBundleValidation(bundle: any): Promise<ValidationResult> {
+  private async executeBundleValidation(bundle: Record<string, unknown>): Promise<ValidationResult> {
     try {
-      // Bundle validation
       const errors: string[] = [];
       const warnings: string[] = [];
 
-      // Check bundle structure
+      // Bundle structure validation
       if (!bundle || typeof bundle !== 'object') {
         errors.push('Bundle must be an object');
         return {
           isValid: false,
           errors,
           warnings,
-          metadata: { bundleType: typeof bundle },
         };
       }
 
-      // Validate components array
-      if (bundle.components && !Array.isArray(bundle.components)) {
-        errors.push('Bundle components must be an array');
+      // Validate bundle keys
+      const requiredKeys = ['version', 'components', 'screens'];
+      for (const key of requiredKeys) {
+        if (!(key in bundle)) {
+          errors.push(`Bundle missing required key: ${key}`);
+        }
       }
 
-      // Validate screens array
-      if (bundle.screens && !Array.isArray(bundle.screens)) {
-        errors.push('Bundle screens must be an array');
-      }
-
-      // Check for required fields
-      if (!bundle.components && !bundle.screens) {
-        warnings.push('Bundle should contain components or screens');
+      // Validate bundle version
+      if (bundle.version && typeof bundle.version !== 'string') {
+        warnings.push('Bundle version should be a string');
       }
 
       return {
@@ -557,12 +496,10 @@ export class ValidationSystem {
         errors,
         warnings,
         metadata: {
-          bundleSize: {
-            components: bundle.components?.length || 0,
-            screens: bundle.screens?.length || 0,
-          },
-          hasComponents: !!bundle.components,
-          hasScreens: !!bundle.screens,
+          bundleKeys: Object.keys(bundle),
+          hasVersion: 'version' in bundle,
+          hasComponents: 'components' in bundle,
+          hasScreens: 'screens' in bundle,
         },
       };
     } catch (error) {
@@ -572,18 +509,16 @@ export class ValidationSystem {
         warnings: [],
         metadata: {
           error: (error as Error).message,
-          stack: (error as Error).stack,
         },
       };
     }
   }
 
-  // Queue-based validation for batch processing
   async queueValidation(validationFn: () => Promise<ValidationResult>): Promise<void> {
     this.validationQueue.push(validationFn);
     
     if (!this.isProcessing) {
-      this.processValidationQueue();
+      await this.processValidationQueue();
     }
   }
 
@@ -598,11 +533,7 @@ export class ValidationSystem {
       while (this.validationQueue.length > 0) {
         const validationFn = this.validationQueue.shift();
         if (validationFn) {
-          try {
-            await validationFn();
-          } catch (error) {
-            console.error('Validation in queue failed:', error);
-          }
+          await this.retryMechanism.execute(validationFn);
         }
       }
     } finally {
@@ -610,8 +541,7 @@ export class ValidationSystem {
     }
   }
 
-  // Debounced validation for frequent updates
-  debouncedValidation(key: string, validationFn: () => Promise<ValidationResult>, delay: number = 500): void {
+  debouncedValidation(key: string, validationFn: () => Promise<ValidationResult>, delay = 500): void {
     this.debounceManager.debounce(key, async () => {
       try {
         await validationFn();
@@ -621,7 +551,6 @@ export class ValidationSystem {
     }, delay);
   }
 
-  // Circuit breaker status
   getCircuitBreakerState(): CircuitBreakerState {
     return this.circuitBreaker.getState();
   }
@@ -630,7 +559,6 @@ export class ValidationSystem {
     this.circuitBreaker.reset();
   }
 
-  // Cache management
   getCacheSize(): number {
     return this.resultCache.size();
   }
@@ -639,36 +567,29 @@ export class ValidationSystem {
     this.resultCache.clear();
   }
 
-  // Cleanup
   destroy(): void {
     this.timeoutManager.clearAll();
     this.debounceManager.clearAll();
-    this.validationQueue = [];
+    this.validationQueue.length = 0;
     this.isProcessing = false;
   }
 }
 
-// Fail-safe loop with recovery and retry controls
 export class FailSafeValidationLoop {
   private circuitBreaker: CircuitBreaker;
   private retryMechanism: RetryMechanism;
   private maxConsecutiveFailures: number;
-  private failureCount: number = 0;
-  private lastSuccessTime: number = 0;
+  private failureCount = 0;
+  private lastSuccessTime = 0;
 
   constructor(
-    maxConsecutiveFailures: number = 5,
-    circuitBreakerTimeout: number = 60000,
-    circuitBreakerThreshold: number = 3
+    maxConsecutiveFailures = 5,
+    circuitBreakerTimeout = 60000,
+    circuitBreakerThreshold = 3
   ) {
     this.maxConsecutiveFailures = maxConsecutiveFailures;
     this.circuitBreaker = new CircuitBreaker(circuitBreakerTimeout, circuitBreakerThreshold);
-    this.retryMechanism = new RetryMechanism({
-      maxAttempts: 3,
-      baseDelay: 2000,
-      maxDelay: 10000,
-      backoffMultiplier: 2,
-    });
+    this.retryMechanism = new RetryMechanism();
   }
 
   async executeWithRecovery<T>(
@@ -676,52 +597,37 @@ export class FailSafeValidationLoop {
     recoveryOperation?: () => Promise<T>,
     onFailure?: (error: Error, attempt: number) => void
   ): Promise<T> {
-    let lastError: Error;
+    try {
+      const result = await this.circuitBreaker.execute(() => 
+        this.retryMechanism.execute(operation)
+      );
+      
+      this.failureCount = 0;
+      this.lastSuccessTime = Date.now();
+      
+      return result;
+    } catch (error) {
+      this.failureCount++;
+      
+      if (onFailure) {
+        onFailure(error as Error, this.failureCount);
+      }
 
-    for (let attempt = 1; attempt <= this.maxConsecutiveFailures; attempt++) {
-      try {
-        const result = await this.circuitBreaker.execute(async () => {
-          return await this.retryMechanism.execute(async () => {
-            return await operation();
-          });
-        });
-
-        // Success - reset failure count
-        this.failureCount = 0;
-        this.lastSuccessTime = Date.now();
-        return result;
-      } catch (error) {
-        lastError = error as Error;
-        this.failureCount++;
-
-        if (onFailure) {
-          onFailure(lastError, attempt);
-        }
-
-        // Try recovery operation if provided
-        if (recoveryOperation && attempt === Math.floor(this.maxConsecutiveFailures / 2)) {
+      if (this.failureCount >= this.maxConsecutiveFailures) {
+        console.error('Max consecutive failures reached, attempting recovery...');
+        
+        if (recoveryOperation) {
           try {
-            console.log('Attempting recovery operation...');
-            const recoveryResult = await recoveryOperation();
-            this.failureCount = 0;
-            this.lastSuccessTime = Date.now();
-            return recoveryResult;
+            return await recoveryOperation();
           } catch (recoveryError) {
             console.error('Recovery operation failed:', recoveryError);
+            throw recoveryError;
           }
         }
-
-        if (attempt === this.maxConsecutiveFailures) {
-          throw new Error(`Operation failed after ${this.maxConsecutiveFailures} attempts: ${lastError.message}`);
-        }
-
-        // Exponential backoff between attempts
-        const backoffDelay = Math.min(1000 * Math.pow(2, attempt - 1), 30000);
-        await new Promise<void>(resolve => setTimeout(resolve, backoffDelay));
       }
-    }
 
-    throw lastError!;
+      throw error;
+    }
   }
 
   getFailureCount(): number {

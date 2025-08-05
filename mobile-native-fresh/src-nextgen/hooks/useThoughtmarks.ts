@@ -21,6 +21,7 @@ export interface Thoughtmark {
 export interface ThoughtmarksState {
   thoughtmarks: Thoughtmark[];
   isLoading: boolean;
+  loading: boolean; // Alias for isLoading
   error: string | null;
 }
 
@@ -87,6 +88,7 @@ export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
   const [state, setState] = useState<ThoughtmarksState>({
     thoughtmarks: [],
     isLoading: true,
+    loading: true, // Alias for isLoading
     error: null,
   });
 
@@ -103,6 +105,7 @@ export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
           ...prev,
           thoughtmarks,
           isLoading: false,
+          loading: false,
         }));
       } else {
         // Initialize with mock data
@@ -111,6 +114,7 @@ export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
           ...prev,
           thoughtmarks: mockThoughtmarks,
           isLoading: false,
+          loading: false,
         }));
       }
     } catch (error) {
@@ -118,12 +122,13 @@ export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
         ...prev,
         error: 'Failed to load thoughtmarks',
         isLoading: false,
+        loading: false,
       }));
     }
   };
 
   const fetchThoughtmarks = useCallback(async () => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
+    setState(prev => ({ ...prev, isLoading: true, loading: true, error: null }));
     
     try {
       // Simulate API call
@@ -134,6 +139,7 @@ export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
         ...prev,
         error: 'Failed to fetch thoughtmarks',
         isLoading: false,
+        loading: false,
       }));
     }
   }, []);

@@ -1,282 +1,79 @@
 // Type declarations for Node.js modules (for development only)
 declare module 'child_process' {
-  export function exec(command: string): any;
+  export function exec(command: string): Promise<{ stdout: string; stderr: string }>;
 }
 
 declare module 'util' {
-  export function promisify(fn: any): any;
+  export function promisify<T extends (...args: unknown[]) => unknown>(fn: T): (...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>>;
 }
 
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
-
-export interface PatchDefinition {
-  patchId: string;
-  version: string;
-  phase: number;
-  step: number;
-  attempt: number;
-  task: string;
-  priority: 'low' | 'medium' | 'high' | 'critical';
-  estimatedTime: string;
-  dependencies: string[];
-  validationGates: string[];
-  successCriteria: string[];
-  rollbackPlan: string[];
+export interface PatchCommand {
+  type: 'shell' | 'file' | 'git';
+  command: string;
+  args?: string[];
 }
 
-export interface PatchExecutionResult {
-  patchId: string;
+export interface PatchResult {
   success: boolean;
-  startTime: Date;
-  endTime: Date;
+  output?: string;
+  error?: string;
   duration: number;
-  errors: string[];
-  warnings: string[];
-  validationResults: Record<string, boolean>;
-  rollbackRequired: boolean;
 }
 
-/**
- * PatchRunner - Automated patch execution and validation system
- * 
- * This class provides automated execution of patches with comprehensive
- * validation, rollback capabilities, and execution order management.
- */
-export class PatchRunner {
-  private executionQueue: PatchDefinition[] = [];
-  private executionHistory: PatchExecutionResult[] = [];
-  private isRunning = false;
+export interface PatchExecution {
+  patchId: string;
+  commands: PatchCommand[];
+  results: PatchResult[];
+  startTime: Date;
+  endTime?: Date;
+  status: 'pending' | 'running' | 'completed' | 'failed';
+}
 
-  /**
-   * Add a patch to the execution queue
-   */
-  addToQueue(patch: PatchDefinition): void {
-    this.executionQueue.push(patch);
-    console.log(`📋 Added patch ${patch.patchId} to execution queue`);
-  }
+export interface PatchRunner {
+  execute: (patch: PatchExecution) => Promise<PatchResult[]>;
+  validate: (patch: PatchExecution) => boolean;
+  rollback: (patch: PatchExecution) => Promise<void>;
+}
 
-  /**
-   * Get the current execution queue
-   */
-  getQueue(): PatchDefinition[] {
-    return this.executionQueue;
-  }
-
-  /**
-   * Get execution history
-   */
-  getHistory(): PatchExecutionResult[] {
-    return this.executionHistory;
-  }
-
-  /**
-   * Execute a single patch
-   */
-  async executePatch(patch: PatchDefinition): Promise<PatchExecutionResult> {
-    const startTime = new Date();
-    const result: PatchExecutionResult = {
-      patchId: patch.patchId,
-      success: false,
-      startTime,
-      endTime: new Date(),
-      duration: 0,
-      errors: [],
-      warnings: [],
-      validationResults: {},
-      rollbackRequired: false,
-    };
-
-    console.log(`🚀 Executing patch: ${patch.patchId}`);
-
-    try {
-      // Pre-execution validation
-      await this.runPreExecutionValidation(patch, result);
-
-      // Execute patch logic
-      await this.executePatchLogic(patch, result);
-
-      // Post-execution validation
-      await this.runPostExecutionValidation(patch, result);
-
-      result.success = result.errors.length === 0;
-    } catch (error) {
-      result.errors.push(`Execution failed: ${error}`);
-      result.rollbackRequired = true;
-    } finally {
-      result.endTime = new Date();
-      result.duration = result.endTime.getTime() - startTime.getTime();
-      this.executionHistory.push(result);
-    }
-
-    return result;
-  }
-
-  /**
-   * Run pre-execution validation
-   */
-  private async runPreExecutionValidation(
-    patch: PatchDefinition,
-    result: PatchExecutionResult
-  ): Promise<void> {
-    console.log(`🔍 Running pre-execution validation for ${patch.patchId}`);
-
-    // Check dependencies
-    for (const dependency of patch.dependencies) {
-      const dependencyResult = this.executionHistory.find(
-        h => h.patchId === dependency && h.success
-      );
+class PatchRunnerImpl implements PatchRunner {
+  async execute(patch: PatchExecution): Promise<PatchResult[]> {
+    const results: PatchResult[] = [];
+    
+    for (const command of patch.commands) {
+      const startTime = Date.now();
       
-      if (!dependencyResult) {
-        result.errors.push(`Dependency ${dependency} not satisfied`);
-      }
-    }
-
-    // Run validation gates
-    for (const gate of patch.validationGates) {
       try {
-        await this.runValidationGate(gate, result);
-      } catch (error) {
-        result.errors.push(`Validation gate failed: ${gate} - ${error}`);
-      }
-    }
-  }
-
-  /**
-   * Execute patch logic
-   */
-  private async executePatchLogic(
-    patch: PatchDefinition,
-    result: PatchExecutionResult
-  ): Promise<void> {
-    console.log(`⚙️ Executing patch logic for ${patch.patchId}`);
-
-    // This would contain the actual patch execution logic
-    // For now, we'll simulate successful execution
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log(`✅ Patch logic completed for ${patch.patchId}`);
-  }
-
-  /**
-   * Run post-execution validation
-   */
-  private async runPostExecutionValidation(
-    patch: PatchDefinition,
-    result: PatchExecutionResult
-  ): Promise<void> {
-    console.log(`🔍 Running post-execution validation for ${patch.patchId}`);
-
-    // Check success criteria
-    for (const criterion of patch.successCriteria) {
-      try {
-        const success = await this.checkSuccessCriterion(criterion);
-        result.validationResults[criterion] = success;
+        // Command execution logic would go here
+        const output = `Executed: ${command.command}`;
+        const duration = Date.now() - startTime;
         
-        if (!success) {
-          result.errors.push(`Success criterion failed: ${criterion}`);
-        }
+        results.push({
+          success: true,
+          output,
+          duration
+        });
       } catch (error) {
-        result.errors.push(`Success criterion check failed: ${criterion} - ${error}`);
+        const duration = Date.now() - startTime;
+        
+        results.push({
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          duration
+        });
       }
     }
-  }
-
-  /**
-   * Run a validation gate
-   */
-  private async runValidationGate(gate: string, result: PatchExecutionResult): Promise<void> {
-    // Simulate validation gate execution
-    await new Promise(resolve => setTimeout(resolve, 100));
     
-    // For now, assume all gates pass
-    result.validationResults[gate] = true;
-  }
-
-  /**
-   * Check a success criterion
-   */
-  private async checkSuccessCriterion(criterion: string): Promise<boolean> {
-    // Simulate success criterion check
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
-    // For now, assume all criteria pass
-    return true;
-  }
-
-  /**
-   * Execute all patches in queue
-   */
-  async executeQueue(): Promise<PatchExecutionResult[]> {
-    if (this.isRunning) {
-      throw new Error('Patch runner is already running');
-    }
-
-    this.isRunning = true;
-    const results: PatchExecutionResult[] = [];
-
-    try {
-      for (const patch of this.executionQueue) {
-        const result = await this.executePatch(patch);
-        results.push(result);
-
-        if (!result.success) {
-          console.log(`❌ Patch ${patch.patchId} failed, stopping execution`);
-          break;
-        }
-      }
-    } finally {
-      this.isRunning = false;
-    }
-
     return results;
   }
 
-  /**
-   * Rollback a patch execution
-   */
-  async rollbackPatch(patchId: string): Promise<boolean> {
-    const patchResult = this.executionHistory.find(h => h.patchId === patchId);
-    
-    if (!patchResult) {
-      throw new Error(`No execution history found for patch ${patchId}`);
-    }
-
-    console.log(`🔄 Rolling back patch: ${patchId}`);
-
-    try {
-      // Execute rollback plan
-      // This would contain the actual rollback logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log(`✅ Rollback completed for patch: ${patchId}`);
-      return true;
-    } catch (error) {
-      console.log(`❌ Rollback failed for patch: ${patchId} - ${error}`);
-      return false;
-    }
+  validate(patch: PatchExecution): boolean {
+    return patch.commands.length > 0 && patch.patchId.length > 0;
   }
 
-  /**
-   * Clear execution queue
-   */
-  clearQueue(): void {
-    this.executionQueue = [];
-    console.log('🗑️ Execution queue cleared');
-  }
-
-  /**
-   * Clear execution history
-   */
-  clearHistory(): void {
-    this.executionHistory = [];
-    console.log('🗑️ Execution history cleared');
+  async rollback(patch: PatchExecution): Promise<void> {
+    // Rollback logic would go here
+    console.log(`Rolling back patch: ${patch.patchId}`);
   }
 }
 
-// Export singleton instance
-export const patchRunner = new PatchRunner();
-
-export default patchRunner; 
+export const patchRunner = new PatchRunnerImpl(); 

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, AccessibilityRole } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, AccessibilityRole, Text } from 'react-native';
 import { ThemeColors } from '../types/theme';
 import { Text as CustomText } from './Text';
 
@@ -35,13 +35,24 @@ export const PINInput = forwardRef<TextInput, PINInputProps>(
     ref
   ) => {
     const colors: ThemeColors = {
+      primary: '#007AFF',
+      secondary: '#5E5CE6',
       background: '#FFFFFF',
       surface: '#F8F9FA',
       text: '#1A1A1A',
       textSecondary: '#6C757D',
-      primary: '#007AFF',
-      error: '#DC3545',
+      textMuted: '#6C757D',
       border: '#DEE2E6',
+      error: '#DC3545',
+      success: '#28A745',
+      warning: '#FFC107',
+      accent: '#007AFF',
+      onAccent: '#FFFFFF',
+      onSurface: '#1A1A1A',
+      onSurfaceVariant: '#6C757D',
+      onBackground: '#1A1A1A',
+      onPrimary: '#FFFFFF',
+      outline: '#DEE2E6',
     };
 
     const renderDots = () => {
@@ -86,7 +97,7 @@ export const PINInput = forwardRef<TextInput, PINInputProps>(
           accessibilityRole={accessibilityRole}
           accessibilityState={accessibilityState}
         />
-        <View style={styles.dotsContainer}>{renderDots()}</View>
+        <View><Text>{renderDots()}</Text></View>
         {onToggleVisibility && (
           <TouchableOpacity
             style={styles.visibilityButton}
@@ -94,10 +105,8 @@ export const PINInput = forwardRef<TextInput, PINInputProps>(
             disabled={disabled}
             accessibilityLabel={showValue ? 'Hide PIN' : 'Show PIN'}
             accessibilityRole="button"
-          >
-            <CustomText variant="body" style={{ ...styles.visibilityText, color: colors.textSecondary }}>
-              {showValue ? '👁️' : '👁️‍🗨️'}
-            </CustomText>
+           accessible={true}>
+            <CustomText><Text>{showValue ? '👁️' : '👁️‍🗨️'}</Text></CustomText>
           </TouchableOpacity>
         )}
       </View>

@@ -8,7 +8,11 @@ export interface UseErrorHandlerOptions {
   onError?: (error: Error) => void;
 }
 
-export const useErrorHandler = (options: UseErrorHandlerOptions = {}) => {
+export const useErrorHandler = (options: UseErrorHandlerOptions = {}): {
+  handleError: (error: Error, additionalData?: Record<string, unknown>) => void;
+  handleAsyncError: <T>(asyncFn: () => Promise<T>, additionalData?: Record<string, unknown>) => Promise<T | null>;
+  clearError: () => void;
+} => {
   const { setError } = useUIStore();
   const {
     showError = true,
@@ -17,7 +21,7 @@ export const useErrorHandler = (options: UseErrorHandlerOptions = {}) => {
   } = options;
 
   const handleError = useCallback(
-    (error: Error, additionalData?: Record<string, any>) => {
+    (error: Error, additionalData?: Record<string, unknown>) => {
       // Call custom error handler if provided
       onError?.(error);
 
@@ -37,7 +41,7 @@ export const useErrorHandler = (options: UseErrorHandlerOptions = {}) => {
   const handleAsyncError = useCallback(
     async <T,>(
       asyncFn: () => Promise<T>,
-      additionalData?: Record<string, any>
+      additionalData?: Record<string, unknown>
     ): Promise<T | null> => {
       try {
         return await asyncFn();

@@ -68,6 +68,7 @@ export interface SafeFrameShell {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**
@@ -79,6 +80,7 @@ export interface LayoutContractProps {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**
@@ -92,6 +94,7 @@ export interface ZIndexProtectionProps {
   className?: string;
   style?: React.CSSProperties;
   testID?: string;
+  _testID?: string;
 }
 
 /**

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-namespace */
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { Alert } from 'react-native';
-import PasswordResetScreen from './PasswordResetScreen';
+import { PasswordResetScreen } from './PasswordResetScreen';
 
 // Mock the hooks and services
 jest.mock('../../../hooks/useAuth', () => ({
@@ -64,6 +64,7 @@ describe('PasswordResetScreen', () => {
   });
 
   it('validates email format before submission', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockValidateEmail = require('../../../utils/validation').ValidationService.validateEmail;
     mockValidateEmail.mockReturnValue(false);
     
@@ -81,6 +82,7 @@ describe('PasswordResetScreen', () => {
 
   it('shows password reset form after email submission', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
@@ -101,10 +103,12 @@ describe('PasswordResetScreen', () => {
   });
 
   it('validates password strength', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockValidatePassword = require('../../../utils/validation').ValidationService.validatePassword;
     mockValidatePassword.mockReturnValue(false);
     
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
@@ -134,6 +138,7 @@ describe('PasswordResetScreen', () => {
 
   it('validates password confirmation match', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
@@ -164,11 +169,13 @@ describe('PasswordResetScreen', () => {
 
   it('handles successful password reset', async () => {
     const mockResetPassword = jest.fn().mockResolvedValue({ success: true });
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
     });
     
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockValidatePassword = require('../../../utils/validation').ValidationService.validatePassword;
     mockValidatePassword.mockReturnValue(true);
     
@@ -196,6 +203,7 @@ describe('PasswordResetScreen', () => {
 
   it('handles password reset error', async () => {
     const mockResetPassword = jest.fn().mockRejectedValue(new Error('Reset failed'));
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,
@@ -224,7 +232,7 @@ describe('PasswordResetScreen', () => {
   });
 
   it('shows loading state during submission', async () => {
-    const mockResetPassword = jest.fn().mockImplementation(() => new Promise(resolve => setTimeout(() => resolve(undefined), 100)));
+    const mockResetPassword = jest.fn().mockImplementation((): Promise<undefined> => new Promise(resolve => setTimeout(() => resolve(undefined), 100)));
     const mockUseAuth = require('../../../hooks/useAuth');
     mockUseAuth.useAuth.mockReturnValue({
       resetPassword: mockResetPassword,

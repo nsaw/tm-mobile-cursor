@@ -4,10 +4,17 @@ import { eq, like, or } from 'drizzle-orm';
 import { db } from '../db';
 import { thoughtmarks } from '../db/schema';
 
+// Extend Request interface to include user property
+interface AuthenticatedRequest extends Request {
+  user?: {
+    userId: number;
+  };
+}
+
 export const thoughtmarkController = {
-  async getAll(req: Request, res: Response) {
+  async getAll(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       
       const userThoughtmarks = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.userId, userId))
@@ -26,10 +33,10 @@ export const thoughtmarkController = {
     }
   },
 
-  async getById(req: Request, res: Response) {
+  async getById(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
       const thoughtmark = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.id, parseInt(id)))
@@ -57,9 +64,9 @@ export const thoughtmarkController = {
     }
   },
 
-  async create(req: Request, res: Response) {
+  async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       const { title, content, tags, binId, isTask, dueDate } = req.body;
 
       if (!title || !content) {
@@ -96,10 +103,10 @@ export const thoughtmarkController = {
     }
   },
 
-  async update(req: Request, res: Response) {
+  async update(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       const updates = req.body;
 
       const updatedThoughtmark = await db.update(thoughtmarks)
@@ -131,10 +138,10 @@ export const thoughtmarkController = {
     }
   },
 
-  async delete(req: Request, res: Response) {
+  async delete(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
       const deletedThoughtmark = await db.update(thoughtmarks)
         .set({
@@ -166,10 +173,10 @@ export const thoughtmarkController = {
     }
   },
 
-  async search(req: Request, res: Response) {
+  async search(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { query } = req.query;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
       if (!query || typeof query !== 'string') {
         return res.status(400).json({
@@ -201,10 +208,10 @@ export const thoughtmarkController = {
     }
   },
 
-  async togglePin(req: Request, res: Response) {
+  async togglePin(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
       const thoughtmark = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.id, parseInt(id)))

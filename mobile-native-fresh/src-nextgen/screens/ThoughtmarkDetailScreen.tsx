@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { AutoRoleView } from '../components/AutoRoleView';
 
 interface ThoughtmarkDetailScreenProps {
@@ -7,7 +7,7 @@ interface ThoughtmarkDetailScreenProps {
 }
 
 export const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = ({ thoughtmarkId }) => {
-  const [details, setDetails] = useState<any>(null);
+  const [details, setDetails] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(true);
   const mounted = useRef(false);
 
@@ -30,7 +30,7 @@ export const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = (
       mounted.current = true;
       loadDetails();
     }
-  }, [loadDetails]);
+  }, [loadDetails, thoughtmarkId]);
 
   if (loading) {
     return (
@@ -50,8 +50,8 @@ export const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = (
 
   return (
     <AutoRoleView style={styles.container}>
-      <Text style={styles.title}>{details.title}</Text>
-      <Text style={styles.content}>{details.content}</Text>
+      <Text style={styles.title}>{details.title as string}</Text>
+      <Text style={styles.content}>{details.content as string}</Text>
     </AutoRoleView>
   );
 };

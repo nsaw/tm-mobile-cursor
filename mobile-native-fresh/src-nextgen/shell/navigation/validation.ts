@@ -1,6 +1,5 @@
 import { 
   NavigationRouteDefinition, 
-  NavigationEnvironment, 
   NavigationState, 
   NavigationTransition,
   NavigationValidationResult 
@@ -170,13 +169,13 @@ export const validateNavigationConsistency = (
   const nextgenRouteMap = new Map(nextgenRoutes.map(route => [route.name, route]));
 
   // Check for missing routes
-  for (const [name, legacyRoute] of legacyRouteMap) {
+  for (const [name, _legacyRoute] of legacyRouteMap) {
     if (!nextgenRouteMap.has(name)) {
       result.warnings.push(`Route ${name} missing in nextgen environment`);
     }
   }
 
-  for (const [name, nextgenRoute] of nextgenRouteMap) {
+  for (const [name, _nextgenRoute] of nextgenRouteMap) {
     if (!legacyRouteMap.has(name)) {
       result.warnings.push(`Route ${name} missing in legacy environment`);
     }

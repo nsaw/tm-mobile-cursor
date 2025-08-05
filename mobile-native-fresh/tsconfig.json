@@ -48,7 +48,10 @@
     "backend/dist/**/*",
     "src-artifact/**/*",
     "THAWED-REFERENCE/**/*",
-    "src-nextgen/shell/automation/**/*"
+    "src-nextgen/shell/automation/**/*",
+    "_quarantine/**/*",
+    "**/*_quarantine/**/*",
+    "**/_quarantine/**/*"
   ],
   "extends": "expo/tsconfig.base"
 }

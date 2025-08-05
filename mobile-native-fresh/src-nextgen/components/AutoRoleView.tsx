@@ -1,15 +1,14 @@
 import React from 'react';
-import { View, ViewProps, AccessibilityRole } from 'react-native';
+import { View, ViewProps, AccessibilityRole, Text } from 'react-native';
 
-export interface AutoRoleViewProps extends Omit<ViewProps, 'role'> {
-  accessibilityRole?: AccessibilityRole;
-  onPress?: () => void;
-  role?: 'screen' | 'screen-container' | 'header-section' | 'avatar-container' | 'content' | 'interactive' | 'layout' | 'navigation' | 'form' | 'list' | 'card' | 'button' | 'text' | 'image' | 'input' | 'modal' | 'overlay' | 'toolbar' | 'tab' | 'menu' | 'dialog' | 'alert' | 'progress' | 'status' | 'separator' | 'group' | 'section' | 'container' | 'wrapper' | 'item' | 'element' | 'feedback';
+export interface AutoRoleViewProps extends Omit<ViewProps, 'accessibilityRole' | 'role'> {
+  role?: 'screen' | 'screen-container' | 'header-section' | 'avatar-container' | 'content' | 'interactive' | 'layout' | 'navigation' | 'form' | 'list' | 'card' | 'button' | 'text' | 'image' | 'input' | 'modal' | 'overlay' | 'toolbar' | 'tab' | 'tab-icon' | 'menu' | 'dialog' | 'alert' | 'progress' | 'status' | 'separator' | 'group' | 'section' | 'container' | 'wrapper' | 'item' | 'element' | 'feedback';
   interactiveRole?: string;
   contentRole?: string;
   accessibilityLabel?: string;
-  accessibilityHint?: string;
-  accessibilityState?: Record<string, unknown>;
+  _accessibilityHint?: string;
+  accessibilityRole?: AccessibilityRole;
+  _accessibilityState?: Record<string, unknown>;
   children: React.ReactNode;
 }
 
@@ -18,14 +17,14 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   interactiveRole,
   contentRole,
   accessibilityLabel,
-  accessibilityHint,
+  _accessibilityHint,
   accessibilityRole: customAccessibilityRole,
-  accessibilityState,
+  _accessibilityState,
   children,
-  style,
-  ...props
+
+  ..._props
 }) => {
-  const getAccessibilityRole = (): AccessibilityRole | undefined => {
+  const _getAccessibilityRole = (): AccessibilityRole | undefined => {
     if (customAccessibilityRole) return customAccessibilityRole;
     
     switch (role) {
@@ -54,6 +53,8 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
         return 'progressbar';
       case 'status':
         return 'none';
+      case 'feedback':
+        return 'none';
       case 'tab':
         return 'tab';
       case 'menu':
@@ -73,14 +74,12 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
         return 'none';
       case 'element':
         return 'none';
-      case 'feedback':
-        return 'none';
       default:
         return 'none';
     }
   };
 
-  const getAccessibilityLabel = (): string | undefined => {
+  const _getAccessibilityLabel = (): string | undefined => {
     if (accessibilityLabel) return accessibilityLabel;
     
     if (interactiveRole) {
@@ -95,15 +94,6 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   };
 
   return (
-    <View
-      style={style}
-      accessibilityRole={getAccessibilityRole()}
-      accessibilityLabel={getAccessibilityLabel()}
-      accessibilityHint={accessibilityHint}
-      accessibilityState={accessibilityState}
-      {...props}
-    >
-      {children}
-    </View>
+    <View><Text>{children}</Text></View>
   );
 }; 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { PasswordStrength, PasswordRequirements } from '../hooks/usePasswordStrength';
 import { ThemeColors } from '../types/theme';
 import { Text as CustomText } from './Text';
@@ -15,13 +15,24 @@ export const PasswordStrengthIndicator: React.FC<PasswordStrengthIndicatorProps>
   style,
 }) => {
   const colors: ThemeColors = {
+    primary: '#007AFF',
+    secondary: '#5E5CE6',
     background: '#FFFFFF',
     surface: '#F8F9FA',
     text: '#1A1A1A',
     textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
+    textMuted: '#6C757D',
     border: '#DEE2E6',
+    error: '#DC3545',
+    success: '#28A745',
+    warning: '#FFC107',
+    accent: '#007AFF',
+    onAccent: '#FFFFFF',
+    onSurface: '#1A1A1A',
+    onSurfaceVariant: '#6C757D',
+    onBackground: '#1A1A1A',
+    onPrimary: '#FFFFFF',
+    outline: '#DEE2E6',
   };
 
   const getStrengthColor = () => {
@@ -50,16 +61,12 @@ export const PasswordStrengthIndicator: React.FC<PasswordStrengthIndicatorProps>
             ]}
           />
         </View>
-        <CustomText variant="caption" style={{ ...styles.strengthText, color: getStrengthColor() }}>
-          {getStrengthText()}
-        </CustomText>
+        <CustomText><Text>{getStrengthText()}</Text></CustomText>
       </View>
       {strength.feedback.length > 0 && (
         <View style={styles.feedbackContainer}>
           {strength.feedback.map((feedback, index) => (
-            <CustomText key={index} variant="caption" style={{ ...styles.feedbackText, color: colors.textSecondary }}>
-              • {feedback}
-            </CustomText>
+            <CustomText key={index}><Text>• {feedback}</Text></CustomText>
           ))}
         </View>
       )}

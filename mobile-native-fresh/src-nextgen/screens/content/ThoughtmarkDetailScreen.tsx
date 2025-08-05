@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useRoute, RouteProp } from '@react-navigation/native';
 import { AutoRoleView } from '../../shell/wrappers/AutoRoleView';
 import { useTheme } from '../../theme/ThemeProvider';
 import { useThoughtmark } from '../../hooks/useThoughtmark';
 import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { ContentStackParamList } from '../../navigation/MainNavigator';
 
-interface ThoughtmarkDetailScreenProps {
-  thoughtmarkId: string;
-}
+type ThoughtmarkDetailScreenRouteProp = RouteProp<ContentStackParamList, 'ThoughtmarkDetail'>;
 
-const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = ({ thoughtmarkId }) => {
-  const { theme } = useTheme();
+const ThoughtmarkDetailScreen: React.FC = () => {
+  const route = useRoute<ThoughtmarkDetailScreenRouteProp>();
+  const thoughtmarkId = route.params.thoughtmarkId;
+  const theme = useTheme();
   const { thoughtmark, fetchThoughtmark, updateThoughtmark, deleteThoughtmark, shareThoughtmark } = useThoughtmark();
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
@@ -17,7 +19,7 @@ const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = ({ thoug
 
   useEffect(() => {
     fetchThoughtmark(thoughtmarkId);
-  }, [thoughtmarkId]);
+  }, [thoughtmarkId, fetchThoughtmark]);
 
   useEffect(() => {
     if (thoughtmark) {
@@ -84,12 +86,18 @@ const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = ({ thoug
                 <TouchableOpacity
                   onPress={handleShare}
                   style={theme.styles.shareButton}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Share thoughtmark"
                 >
                   <Text style={theme.styles.shareButtonText}>Share</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={handleDelete}
                   style={theme.styles.deleteButton}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Delete thoughtmark"
                 >
                   <Text style={theme.styles.deleteButtonText}>Delete</Text>
                 </TouchableOpacity>
@@ -99,12 +107,18 @@ const ThoughtmarkDetailScreen: React.FC<ThoughtmarkDetailScreenProps> = ({ thoug
                 <TouchableOpacity
                   onPress={handleSave}
                   style={theme.styles.saveButton}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Save changes"
                 >
                   <Text style={theme.styles.saveButtonText}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={handleCancel}
                   style={theme.styles.cancelButton}
+                  accessibilityRole="button"
+                  accessible={true}
+                  accessibilityLabel="Cancel editing"
                 >
                   <Text style={theme.styles.cancelButtonText}>Cancel</Text>
                 </TouchableOpacity>

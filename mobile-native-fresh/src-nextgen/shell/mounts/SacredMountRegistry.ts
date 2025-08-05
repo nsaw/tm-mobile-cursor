@@ -1,9 +1,9 @@
-import { SacredViewMount } from './SacredViewMount';
+import { SacredViewMount, SacredViewMountProps } from './SacredViewMount';
 
 export interface SacredMountDefinition {
   mountId: string;
-  component: React.ComponentType<any>;
-  props?: Record<string, any>;
+  component: React.ComponentType<SacredViewMountProps>;
+  props?: Record<string, unknown>;
   zIndex?: number;
   description: string;
 }

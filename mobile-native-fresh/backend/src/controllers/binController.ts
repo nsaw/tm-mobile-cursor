@@ -4,11 +4,18 @@ import { eq } from 'drizzle-orm';
 import { db } from '../db';
 import { bins } from '../db/schema';
 
+// Extend Request interface to include user property
+interface AuthenticatedRequest extends Request {
+  user?: {
+    userId: number;
+  };
+}
+
 export const binController = {
-  async getBins(req: Request, res: Response) {
+  async getBins(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       // In a real app, you'd get the user ID from the JWT token
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       
       const userBins = await db.select().from(bins).where(eq(bins.userId, userId));
       
@@ -25,9 +32,9 @@ export const binController = {
     }
   },
 
-  async createBin(req: Request, res: Response) {
+  async createBin(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       const { name, description, color, icon, parentBinId } = req.body;
 
       if (!name) {
@@ -60,10 +67,10 @@ export const binController = {
     }
   },
 
-  async getBin(req: Request, res: Response) {
+  async getBin(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
       const bin = await db.select().from(bins)
         .where(eq(bins.id, parseInt(id)))
@@ -90,10 +97,10 @@ export const binController = {
     }
   },
 
-  async updateBin(req: Request, res: Response) {
+  async updateBin(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
       const updates = req.body;
 
       const updatedBin = await db.update(bins)
@@ -122,21 +129,27 @@ export const binController = {
     }
   },
 
-  async deleteBin(req: Request, res: Response) {
+  async deleteBin(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const userId = (req as any).user?.userId || 1;
+      const userId = req.user?.userId || 1;
 
-      const deletedBin = await db.delete(bins)
+      // First check if bin exists and belongs to user
+      const existingBin = await db.select().from(bins)
         .where(eq(bins.id, parseInt(id)))
-        .returning();
+        .where(eq(bins.userId, userId))
+        .limit(1);
 
-      if (deletedBin.length === 0) {
+      if (existingBin.length === 0) {
         return res.status(404).json({
           success: false,
           error: 'Bin not found'
         });
       }
+
+      // Delete the bin using a single where clause
+      await db.delete(bins)
+        .where(eq(bins.id, parseInt(id)));
 
       res.json({
         success: true,

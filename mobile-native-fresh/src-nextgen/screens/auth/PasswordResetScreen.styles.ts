@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../types/theme';
 
-export const createStyles = (colors: ThemeColors) => StyleSheet.create({
+export const createStyles = (colors: ThemeColors): ReturnType<typeof StyleSheet.create> => StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,

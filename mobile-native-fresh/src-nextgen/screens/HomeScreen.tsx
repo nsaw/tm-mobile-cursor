@@ -4,7 +4,7 @@ import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
 import { SlotGrid } from '../components/SlotGrid';
 
-export const HomeScreen = () => {
+export const HomeScreen = (): React.JSX.Element => {
   const { thoughtmarks } = useThoughtmarks();
 
   return (

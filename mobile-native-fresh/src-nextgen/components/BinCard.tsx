@@ -16,7 +16,7 @@ export const BinCard: React.FC<BinCardProps> = ({
   onPress,
   style
 }) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   const cardStyle = [
     styles.card,
@@ -47,7 +47,7 @@ export const BinCard: React.FC<BinCardProps> = ({
       style={cardStyle}
       onPress={onPress}
       activeOpacity={0.8}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <AutoRoleView role="card">
         <Text style={titleStyle}>{bin.name}</Text>
         {bin.description && (

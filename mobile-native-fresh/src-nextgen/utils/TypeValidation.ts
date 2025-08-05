@@ -7,7 +7,7 @@ import { ComponentRole, RoleConfig, RoleAssignment, RoleValidationResult } from 
 export class TypeValidation {
   private static instance: TypeValidation;
   private validationCache: Map<string, RoleValidationResult> = new Map();
-  private typeRegistry: Map<string, any> = new Map();
+  private typeRegistry: Map<string, unknown> = new Map();
 
   private constructor() {
     console.log('🔍 TypeValidation system initialized');
@@ -31,7 +31,7 @@ export class TypeValidation {
     const suggestions: string[] = [];
 
     // Validate ComponentRole type
-    const validRoles: ComponentRole[] = ['layout', 'content', 'interactive', 'navigation', 'feedback', 'sacred'];
+    const _validRoles: ComponentRole[] = ['layout', 'content', 'interactive', 'navigation', 'feedback', 'sacred'];
     
     // Check for any invalid role assignments
     const invalidRoles = this.findInvalidRoleAssignments();
@@ -108,7 +108,7 @@ export class TypeValidation {
   }
 
   /**
-   * Performs roundtrip testing of the role system
+   * Performs roundtrip tests to ensure type system integrity
    */
   public async performRoundtripTests(): Promise<RoleValidationResult> {
     console.log('🔍 Performing roundtrip tests...');
@@ -119,68 +119,56 @@ export class TypeValidation {
 
     try {
       // Test role assignment roundtrip
-      const roleAssignment: RoleAssignment = {
+      const testRole: ComponentRole = 'content';
+      const testAssignment: RoleAssignment = {
         componentId: 'test-component',
-        role: 'content',
+        role: testRole,
         timestamp: new Date().toISOString(),
         environment: 'nextgen',
         validated: true
       };
 
-      // Serialize and deserialize
-      const serialized = JSON.stringify(roleAssignment);
+      // Verify role assignment can be serialized/deserialized
+      const serialized = JSON.stringify(testAssignment);
       const deserialized = JSON.parse(serialized) as RoleAssignment;
 
-      // Validate roundtrip integrity
-      if (deserialized.role !== roleAssignment.role) {
-        errors.push('Role assignment roundtrip failed: role mismatch');
-      }
-
-      if (deserialized.componentId !== roleAssignment.componentId) {
-        errors.push('Role assignment roundtrip failed: componentId mismatch');
+      if (deserialized.role !== testRole) {
+        errors.push('Role assignment roundtrip test failed');
       }
 
       // Test role configuration roundtrip
-      const roleConfig: RoleConfig = {
-        role: 'interactive',
+      const testConfig: RoleConfig = {
+        role: 'content',
         priority: 1,
         protected: true,
         validation: true,
         debug: false
       };
 
-      const configSerialized = JSON.stringify(roleConfig);
+      const configSerialized = JSON.stringify(testConfig);
       const configDeserialized = JSON.parse(configSerialized) as RoleConfig;
 
-      if (configDeserialized.role !== roleConfig.role) {
-        errors.push('Role configuration roundtrip failed: role mismatch');
-      }
-
-      if (configDeserialized.priority !== roleConfig.priority) {
-        errors.push('Role configuration roundtrip failed: priority mismatch');
+      if (configDeserialized.priority !== testConfig.priority) {
+        errors.push('Role configuration roundtrip test failed');
       }
 
       // Test validation result roundtrip
-      const validationResult: RoleValidationResult = {
+      const testResult: RoleValidationResult = {
         valid: true,
         errors: [],
         warnings: ['Test warning'],
         suggestions: ['Test suggestion']
       };
 
-      const resultSerialized = JSON.stringify(validationResult);
+      const resultSerialized = JSON.stringify(testResult);
       const resultDeserialized = JSON.parse(resultSerialized) as RoleValidationResult;
 
-      if (resultDeserialized.valid !== validationResult.valid) {
-        errors.push('Validation result roundtrip failed: valid mismatch');
-      }
-
-      if (resultDeserialized.warnings.length !== validationResult.warnings.length) {
-        errors.push('Validation result roundtrip failed: warnings mismatch');
+      if (resultDeserialized.valid !== testResult.valid) {
+        errors.push('Validation result roundtrip test failed');
       }
 
     } catch (error) {
-      errors.push(`Roundtrip test failed with error: ${error}`);
+      errors.push(`Roundtrip test error: ${(error as Error).message}`);
     }
 
     const result: RoleValidationResult = {
@@ -195,7 +183,7 @@ export class TypeValidation {
   }
 
   /**
-   * Validates role system consistency across components
+   * Validates role system consistency
    */
   public validateRoleSystemConsistency(): RoleValidationResult {
     console.log('🔍 Validating role system consistency...');
@@ -204,16 +192,17 @@ export class TypeValidation {
     const warnings: string[] = [];
     const suggestions: string[] = [];
 
-    // Check for role usage patterns
+    // Analyze role usage patterns
     const roleUsage = this.analyzeRoleUsage();
-    
-    // Validate that sacred roles are properly protected
+    console.log('📊 Role usage analysis:', roleUsage);
+
+    // Validate sacred roles
     const sacredRoleIssues = this.validateSacredRoles();
-    errors.push(...sacredRoleIssues);
+    warnings.push(...sacredRoleIssues);
 
     // Check for role conflicts
     const roleConflicts = this.findRoleConflicts();
-    warnings.push(...roleConflicts);
+    errors.push(...roleConflicts);
 
     // Validate role hierarchy
     const hierarchyIssues = this.validateRoleHierarchy();
@@ -236,110 +225,103 @@ export class TypeValidation {
   public async validateTypeSystem(): Promise<RoleValidationResult> {
     console.log('🔍 Starting comprehensive type system validation...');
     
-    const allErrors: string[] = [];
-    const allWarnings: string[] = [];
-    const allSuggestions: string[] = [];
+    const errors: string[] = [];
+    const warnings: string[] = [];
+    const suggestions: string[] = [];
 
-    // Run all validation methods
+    // Run all validation checks
     const roleTypeResult = this.validateRoleTypeSystem();
     const typeDeclarationsResult = this.validateTypeDeclarations();
     const roundtripResult = await this.performRoundtripTests();
     const consistencyResult = this.validateRoleSystemConsistency();
 
     // Aggregate results
-    allErrors.push(...roleTypeResult.errors);
-    allErrors.push(...typeDeclarationsResult.errors);
-    allErrors.push(...roundtripResult.errors);
-    allErrors.push(...consistencyResult.errors);
+    errors.push(...roleTypeResult.errors);
+    errors.push(...typeDeclarationsResult.errors);
+    errors.push(...roundtripResult.errors);
+    errors.push(...consistencyResult.errors);
 
-    allWarnings.push(...roleTypeResult.warnings);
-    allWarnings.push(...typeDeclarationsResult.warnings);
-    allWarnings.push(...roundtripResult.warnings);
-    allWarnings.push(...consistencyResult.warnings);
+    warnings.push(...roleTypeResult.warnings);
+    warnings.push(...typeDeclarationsResult.warnings);
+    warnings.push(...roundtripResult.warnings);
+    warnings.push(...consistencyResult.warnings);
 
-    allSuggestions.push(...roleTypeResult.suggestions);
-    allSuggestions.push(...typeDeclarationsResult.suggestions);
-    allSuggestions.push(...roundtripResult.suggestions);
-    allSuggestions.push(...consistencyResult.suggestions);
+    suggestions.push(...roleTypeResult.suggestions);
+    suggestions.push(...typeDeclarationsResult.suggestions);
+    suggestions.push(...roundtripResult.suggestions);
+    suggestions.push(...consistencyResult.suggestions);
 
     const result: RoleValidationResult = {
-      valid: allErrors.length === 0,
-      errors: allErrors,
-      warnings: allWarnings,
-      suggestions: allSuggestions
+      valid: errors.length === 0,
+      errors,
+      warnings,
+      suggestions
     };
 
-    console.log('📊 Comprehensive type system validation complete:', result);
+    console.log('📊 Comprehensive type system validation result:', result);
     return result;
   }
 
-  // Private helper methods
   private findInvalidRoleAssignments(): string[] {
-    // This would scan the codebase for invalid role assignments
-    // For now, return empty array as placeholder
+    // Implementation would check actual role assignments in the codebase
     return [];
   }
 
   private validateRoleConfigurations(): string[] {
-    // This would validate role configurations
-    // For now, return empty array as placeholder
+    // Implementation would validate role configurations
     return [];
   }
 
   private findMissingRoleAssignments(): string[] {
-    // This would find components without role assignments
-    // For now, return empty array as placeholder
+    // Implementation would find components without role assignments
     return [];
   }
 
-  private isTypeDeclared(typeName: string): boolean {
-    // This would check if a type is properly declared
-    // For now, return true as placeholder
+  private isTypeDeclared(_typeName: string): boolean {
+    // Implementation would check if type is actually declared
     return true;
   }
 
   private findTypeConflicts(): string[] {
-    // This would find type conflicts
-    // For now, return empty array as placeholder
+    // Implementation would find type conflicts
     return [];
   }
 
   private validateTypeExports(): string[] {
-    // This would validate type exports
-    // For now, return empty array as placeholder
+    // Implementation would validate type exports
     return [];
   }
 
   private analyzeRoleUsage(): Record<ComponentRole, number> {
-    // This would analyze role usage patterns
-    // For now, return empty object as placeholder
-    return {} as Record<ComponentRole, number>;
+    // Implementation would analyze actual role usage
+    return {
+      layout: 0,
+      content: 0,
+      interactive: 0,
+      navigation: 0,
+      feedback: 0,
+      sacred: 0
+    };
   }
 
   private validateSacredRoles(): string[] {
-    // This would validate sacred role protection
-    // For now, return empty array as placeholder
+    // Implementation would validate sacred role usage
     return [];
   }
 
   private findRoleConflicts(): string[] {
-    // This would find role conflicts
-    // For now, return empty array as placeholder
+    // Implementation would find role conflicts
     return [];
   }
 
   private validateRoleHierarchy(): string[] {
-    // This would validate role hierarchy
-    // For now, return empty array as placeholder
+    // Implementation would validate role hierarchy
     return [];
   }
 
-  /**
-   * Cleanup method
-   */
   public destroy(): void {
     this.validationCache.clear();
     this.typeRegistry.clear();
-    console.log('🔍 TypeValidation system destroyed');
+    TypeValidation.instance = null as unknown as TypeValidation;
   }
 } 

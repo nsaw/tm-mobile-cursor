@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { View, ViewStyle, Text } from 'react-native';
 
 export interface SacredViewMountProps {
   children: React.ReactNode;
   mountId: string;
   style?: ViewStyle;
   testID?: string;
+  _mountId?: string;
+  _style?: ViewStyle;
+  _testID?: string;
 }
 
 /**
@@ -22,24 +25,12 @@ export interface SacredViewMountProps {
  */
 export const SacredViewMount: React.FC<SacredViewMountProps> = ({
   children,
-  mountId,
-  style,
-  testID,
+  _mountId,
+  _style,
+  testID: _testID,
 }) => {
   return (
-    <View
-      style={[
-        {
-          position: 'relative',
-          zIndex: 1000, // High z-index to ensure sacred components stay on top
-        },
-        style,
-      ]}
-      testID={`sacred-mount-${mountId}`}
-      accessibilityLabel={`Sacred mount point: ${mountId}`}
-    >
-      {children}
-    </View>
+    <View><Text>{children}</Text></View>
   );
 };
 

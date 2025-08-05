@@ -7,7 +7,10 @@ interface CreateBinData {
   allowCollaboration: boolean;
 }
 
-export const useCreateBin = () => {
+export const useCreateBin = (): {
+  createBin: (data: CreateBinData) => Promise<unknown>;
+  isCreating: boolean;
+} => {
   const [isCreating, setIsCreating] = useState(false);
 
   const createBin = useCallback(async (data: CreateBinData) => {

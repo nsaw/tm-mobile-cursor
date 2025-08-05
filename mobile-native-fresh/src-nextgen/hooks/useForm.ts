@@ -1,5 +1,51 @@
 import { useState, useCallback, useRef } from 'react';
-import { FormState, FormConfig, FormActions, FormField, ValidationRule } from '../types/FormTypes';
+
+// Local interfaces that match the actual implementation
+interface FormField {
+  name: string;
+  label: string;
+  type: string;
+  value: unknown;
+  error?: string;
+  required: boolean;
+  touched?: boolean;
+}
+
+interface FormState {
+  fields: Record<string, FormField>;
+  isValid: boolean;
+  isDirty: boolean;
+  isSubmitting: boolean;
+  errors: Record<string, string>;
+  touched: Record<string, boolean>;
+}
+
+interface FormConfig {
+  initialValues: Record<string, unknown>;
+  validationSchema?: Record<string, ValidationRule[]>;
+  validateOnChange?: boolean;
+  validateOnBlur?: boolean;
+  onSubmit?: (values: Record<string, unknown>) => void | Promise<void>;
+  onReset?: () => void;
+}
+
+interface ValidationRule {
+  validator?: (value: unknown) => boolean | string;
+  message: string;
+}
+
+interface FormActions {
+  setFieldValue: (name: string, value: unknown) => void;
+  setFieldError: (name: string, error: string) => void;
+  setFieldTouched: (name: string, touched: boolean) => void;
+  resetForm: () => void;
+  submitForm: () => void;
+  validateForm: () => Promise<boolean>;
+  validateField: (name: string, value: unknown) => Promise<string | undefined>;
+  getFieldValue: (name: string) => unknown;
+  getFieldError: (name: string) => string | undefined;
+  getFieldTouched: (name: string) => boolean;
+}
 
 export function useForm(
   config: FormConfig
@@ -36,7 +82,7 @@ export function useForm(
   const validationSchemaRef = useRef(config.validationSchema);
 
   const validateField = useCallback(
-    async (name: string, value: unknown, allValues?: Record<string, any>): Promise<string | undefined> => {
+    async (name: string, value: unknown, _allValues?: Record<string, unknown>): Promise<string | undefined> => {
       const validators = validationSchemaRef.current?.[name] || [];
       
       for (const validator of validators) {
@@ -55,7 +101,7 @@ export function useForm(
     const allValues = Object.keys(state.fields).reduce((acc, key) => {
       acc[key] = state.fields[key].value;
       return acc;
-    }, {} as Record<string, any>);
+    }, {} as Record<string, unknown>);
 
     const newErrors: Record<string, string> = {};
     let isValid = true;
@@ -160,7 +206,7 @@ export function useForm(
       };
     });
     config.onReset?.();
-  }, [config.onReset]);
+  }, [config]);
 
   const submitForm = useCallback(async () => {
     setState(prev => ({ ...prev, isSubmitting: true }));
@@ -176,15 +222,15 @@ export function useForm(
       const values = Object.keys(state.fields).reduce((acc, key) => {
         acc[key] = state.fields[key].value;
         return acc;
-      }, {} as Record<string, any>);
+      }, {} as Record<string, unknown>);
 
-      await config.onSubmit(values);
+      await config.onSubmit?.(values);
     } catch (error) {
       console.error('Form submission error:', error);
     } finally {
       setState(prev => ({ ...prev, isSubmitting: false }));
     }
-  }, [validateForm, state.fields, config.onSubmit]);
+  }, [validateForm, state.fields, config]);
 
   const getFieldValue = useCallback((name: string) => {
     return state.fields[name].value;
