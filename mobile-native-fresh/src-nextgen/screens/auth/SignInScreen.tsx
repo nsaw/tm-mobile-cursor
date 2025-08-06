@@ -6,6 +6,7 @@ import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
+import { ThemeContext } from '../../theme/ThemeProvider';
 
 type SignInScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'SignIn'>;
 
@@ -13,6 +14,7 @@ export const SignInScreen: React.FC = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
   const theme = useTheme();
   const { signIn } = useAuth();
+  const themeContext = React.useContext(ThemeContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -36,6 +38,18 @@ export const SignInScreen: React.FC = () => {
   return (
     <AutoRoleView componentRole="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.content}>
+        {/* Theme Toggle Button for Testing */}
+        <TouchableOpacity
+          style={[styles.themeToggle, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
+          onPress={themeContext?.toggleTheme}
+          accessibilityRole="button"
+          accessible={true}
+          accessibilityLabel="Toggle theme button">
+          <Text style={[styles.themeToggleText, { color: theme.colors.text }]}>
+            {themeContext?.isDark ? '🌙 Dark' : '☀️ Light'}
+          </Text>
+        </TouchableOpacity>
+
         <Text style={[styles.title, { color: theme.colors.text }]}>Welcome Back</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
           Sign in to your Thoughtmarks account
@@ -117,6 +131,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 24,
+  },
+  themeToggle: {
+    position: 'absolute',
+    top: 50,
+    right: 24,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  themeToggleText: {
+    fontSize: 14,
+    fontWeight: '600',
   },
   title: {
     fontSize: 32,

@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 import { DesignTokens } from '../types/designTokens';
 import { lightDesignTokens, darkDesignTokens } from './designTokens';
 
@@ -206,8 +207,14 @@ interface ThemeContextType {
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }): React.JSX.Element {
-  const [isDark, setIsDark] = useState(false);
+  const systemColorScheme = useColorScheme();
+  const [isDark, setIsDark] = useState(systemColorScheme === 'dark');
   const theme = isDark ? darkTheme : lightTheme;
+
+  // Update theme when system color scheme changes
+  useEffect(() => {
+    setIsDark(systemColorScheme === 'dark');
+  }, [systemColorScheme]);
 
   const toggleTheme = (): void => {
     setIsDark(!isDark);
