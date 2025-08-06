@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
-import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
+import ThoughtmarkCard from '../components/ThoughtmarkCard';
 import { SlotGrid } from '../components/SlotGrid';
 
 export const HomeScreen = (): React.JSX.Element => {

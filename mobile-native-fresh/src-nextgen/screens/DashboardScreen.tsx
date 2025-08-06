@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
 import { useBins } from '../hooks/useBins';
-import { ThoughtmarkCard } from '../components/ThoughtmarkCard';
+import ThoughtmarkCard from '../components/ThoughtmarkCard';
 import { TaskCard } from '../components/TaskCard';
 import { AIToolsCard } from '../components/AIToolsCard';
 
