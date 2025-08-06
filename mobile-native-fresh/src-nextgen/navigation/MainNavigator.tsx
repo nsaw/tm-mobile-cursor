@@ -1,10 +1,10 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
-import { AuthNavigator } from './AuthNavigator';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthContext } from '../contexts/AuthContext';
 import { useTheme } from '../hooks/useTheme';
+import { AuthNavigator } from './AuthNavigator';
 import { AllThoughtmarksScreen } from '../screens/content/AllThoughtmarksScreen';
 import AllBinsScreen from '../screens/content/AllBinsScreen';
 import SearchScreen from '../screens/content/SearchScreen';
@@ -236,7 +236,7 @@ const TabNavigator: React.FC = () => {
 
 // Main App Navigator
 export const MainNavigator: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthContext();
 
   // Debug: Log navigation state
   React.useEffect(() => {

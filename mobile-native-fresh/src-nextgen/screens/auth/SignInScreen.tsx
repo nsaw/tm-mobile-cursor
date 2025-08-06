@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../hooks/useTheme';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../theme/ThemeProvider';
 
 type SignInScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'SignIn'>;
@@ -13,7 +13,7 @@ type SignInScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'SignI
 export const SignInScreen: React.FC = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
   const theme = useTheme();
-  const { signIn, isAuthenticated, loading } = useAuth();
+  const { signIn, isAuthenticated, loading } = useAuthContext();
   const themeContext = React.useContext(ThemeContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
