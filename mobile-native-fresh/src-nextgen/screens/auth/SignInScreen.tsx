@@ -55,6 +55,9 @@ export const SignInScreen: React.FC = () => {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
+            accessibilityRole="text"
+            accessible={true}
+            accessibilityLabel="Email input field"
           />
 
           <TextInput
