@@ -8,12 +8,12 @@ export interface AuthState {
 }
 
 export interface UseAuthReturn extends AuthState {
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<{ requiresPin: boolean }>;
+  signUp: (email: string, password: string) => Promise<{ requiresPin: boolean }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
-  verifyPIN: (pin: string) => Promise<boolean>;
-  verifyPin: (pin: string) => Promise<boolean>;
+  verifyPIN: (pin: string, purpose?: string) => Promise<{ success: boolean }>;
+  verifyPin: (pin: string, purpose?: string) => Promise<{ success: boolean }>;
   isLoading: boolean;
 }
 
@@ -36,12 +36,18 @@ export const useAuth = (): UseAuthReturn => {
         loading: false,
         error: null,
       });
+      
+      // Return auth flow result for useAuthFlow compatibility
+      return { requiresPin: false };
     } catch (error) {
       setState(prev => ({
         ...prev,
         loading: false,
         error: error instanceof Error ? error.message : 'Authentication failed',
       }));
+      
+      // Return auth flow result even on error for useAuthFlow compatibility
+      return { requiresPin: false };
     }
   }, []);
 
@@ -56,12 +62,18 @@ export const useAuth = (): UseAuthReturn => {
         loading: false,
         error: null,
       });
+      
+      // Return auth flow result for useAuthFlow compatibility
+      return { requiresPin: false };
     } catch (error) {
       setState(prev => ({
         ...prev,
         loading: false,
         error: error instanceof Error ? error.message : 'Sign up failed',
       }));
+      
+      // Return auth flow result even on error for useAuthFlow compatibility
+      return { requiresPin: false };
     }
   }, []);
 
@@ -89,17 +101,17 @@ export const useAuth = (): UseAuthReturn => {
     }
   }, []);
 
-  const verifyPIN = useCallback(async (pin: string): Promise<boolean> => {
+  const verifyPIN = useCallback(async (pin: string, _purpose?: string): Promise<{ success: boolean }> => {
     setState(prev => ({ ...prev, loading: true }));
     try {
       // Mock PIN verification
       await new Promise<void>(resolve => setTimeout(resolve, 500));
       const isValid = pin === '1234'; // Mock validation
       setState(prev => ({ ...prev, loading: false }));
-      return isValid;
+      return { success: isValid };
     } catch (error) {
       setState(prev => ({ ...prev, loading: false }));
-      return false;
+      return { success: false };
     }
   }, []);
 

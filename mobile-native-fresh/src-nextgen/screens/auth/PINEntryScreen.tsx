@@ -16,8 +16,12 @@ export const PinEntryScreen: React.FC = () => {
 
   const handleVerifyPin = async () => {
     try {
-      await verifyPin(pin, route.params.purpose);
-      // Navigation will be handled by auth state change
+      const result = await verifyPin(pin, route.params.purpose);
+      if (result.success) {
+        // Navigation will be handled by auth state change
+      } else {
+        Alert.alert('PIN Error', 'Invalid PIN. Please try again.');
+      }
     } catch (error) {
       Alert.alert('PIN Error', 'Invalid PIN. Please try again.');
     }
