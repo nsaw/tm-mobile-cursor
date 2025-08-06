@@ -49,9 +49,9 @@ jest.mock('./src-nextgen/theme/ThemeProvider', () => ({
 }));
 
 // Mock AccessibilityProvider to avoid complex initialization issues
-jest.mock('./src-nextgen/accessibility/AccessibilityProvider', () => ({
-  AccessibilityProvider: ({ children }) => children,
-}));
+// jest.mock('./src-nextgen/accessibility/AccessibilityProvider', () => ({
+//   AccessibilityProvider: ({ children }) => children,
+// }));
 
 // Mock expo-modules-core to avoid Winter runtime issues
 jest.mock('expo-modules-core', () => ({

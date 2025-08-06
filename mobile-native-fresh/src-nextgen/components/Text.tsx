@@ -6,7 +6,7 @@ import { LegacyThemeColors } from '../types/theme';
 export interface TextProps {
   children: React.ReactNode;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption' | 'label';
-  style?: any;
+  style?: React.ComponentProps<typeof RNText>['style'];
   accessibilityRole?: AccessibilityRole;
   accessibilityLabel?: string;
   accessibilityHint?: string;

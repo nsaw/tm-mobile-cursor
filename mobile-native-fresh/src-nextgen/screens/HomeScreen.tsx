@@ -16,7 +16,7 @@ export const HomeScreen = (): React.JSX.Element => {
           <View style={{ gap: 8 }}>
             <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Recent Thoughtmarks</Text>
             {thoughtmarks.slice(0, 3).map(tm => (
-              <ThoughtmarkCard key={tm.id} thoughtmark={tm} slotType="HOME_RECENT" />
+              <ThoughtmarkCard key={tm.id} thoughtmark={tm} _slotType="HOME_RECENT" />
             ))}
           </View>
         )}

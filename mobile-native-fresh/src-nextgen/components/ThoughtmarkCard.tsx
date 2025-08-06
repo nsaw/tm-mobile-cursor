@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from './ui/Text';
-import { Card } from './ui/Card';
 import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from './AutoRoleView';
 import { Thoughtmark } from '../types/DataTypes';
 
 export interface ThoughtmarkCardProps {
   thoughtmark: Thoughtmark;
-  slotType?: 'SEARCH_RESULT' | 'DASHBOARD' | 'BIN_VIEW' | 'PROFILE' | 'DASHBOARD_ENTRY' | 'HOME_RECENT';
+  _slotType?: 'SEARCH_RESULT' | 'DASHBOARD' | 'BIN_VIEW' | 'PROFILE' | 'DASHBOARD_ENTRY' | 'HOME_RECENT';
   onPress?: (thoughtmark: Thoughtmark) => void;
   onLongPress?: (thoughtmark: Thoughtmark) => void;
   showAuthor?: boolean;
@@ -19,7 +18,7 @@ export interface ThoughtmarkCardProps {
 
 export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
   thoughtmark,
-  slotType = 'DASHBOARD',
+  _slotType = 'DASHBOARD',
   onPress,
   onLongPress,
   showAuthor = true,

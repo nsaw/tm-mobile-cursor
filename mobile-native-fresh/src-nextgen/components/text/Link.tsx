@@ -10,7 +10,7 @@ export interface LinkProps extends Omit<TextPropsExtended, 'color' | 'role'> {
   underline?: boolean;
   children: React.ReactNode;
   touchableProps?: TouchableOpacityProps;
-  role?: 'text' | 'label';
+  _role?: 'text' | 'label';
   style?: TextStyle;
 }
 
@@ -21,7 +21,7 @@ export const Link: React.FC<LinkProps> = ({
   children,
   touchableProps,
   style,
-  role = 'text',
+  _role = 'text',
   ...props
 }) => {
   const theme = useTheme();

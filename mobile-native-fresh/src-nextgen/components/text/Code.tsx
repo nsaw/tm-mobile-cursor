@@ -6,7 +6,7 @@ import { StyleSheet, TextStyle } from 'react-native';
 export interface CodeProps extends Omit<TextPropsExtended, 'variant' | 'role'> {
   children: React.ReactNode;
   block?: boolean;
-  role?: 'text' | 'label';
+  _role?: 'text' | 'label';
   style?: TextStyle;
 }
 
@@ -14,7 +14,7 @@ export const Code: React.FC<CodeProps> = ({
   children, 
   block = false, 
   style,
-  role = 'text',
+  _role = 'text',
   ...props 
 }) => {
   const theme = useTheme();

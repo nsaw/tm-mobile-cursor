@@ -32,7 +32,7 @@ export const DashboardScreen = (): React.JSX.Element => {
     <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
       <View style={{ padding: 16, gap: 16 }}>
         <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>Dashboard</Text>
-        <ThoughtmarkCard thoughtmark={mockThoughtmark} slotType="DASHBOARD_ENTRY" />
+        <ThoughtmarkCard thoughtmark={mockThoughtmark} _slotType="DASHBOARD_ENTRY" />
         <TaskCard slotType="TASKS_ENTRY" />
         <AIToolsCard slotType="AI_TOOLS_ENTRY" />
       </View>
