@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useCallback } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
 import { useThoughtmarks } from '../hooks/useThoughtmarks';
@@ -120,7 +120,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }):
   const thoughtmarks = useThoughtmarks();
   const bins = useBins();
 
-  const trackEvent = (event: string, properties?: Record<string, unknown>): void => {
+  const trackEvent = useCallback((event: string, properties?: Record<string, unknown>): void => {
     if (state.featureFlags.analytics) {
       analyticsService.track(event, {
         ...properties,
@@ -129,9 +129,9 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }):
         timestamp: Date.now(),
       });
     }
-  };
+  }, [state.featureFlags.analytics, state.currentRoute, isAuthenticated]);
 
-  const reportError = (error: unknown, context?: Record<string, unknown>): void => {
+  const reportError = useCallback((error: unknown, context?: Record<string, unknown>): void => {
     const errorObj = error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Unknown error');
     errorService.reportError(errorObj, {
       error,
@@ -140,7 +140,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }):
       isAuthenticated,
       timestamp: Date.now(),
     });
-  };
+  }, [state.currentRoute, isAuthenticated]);
 
   const contextValue: AppStateContextType = {
     state,

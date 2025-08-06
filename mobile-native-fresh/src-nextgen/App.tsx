@@ -34,7 +34,7 @@ const AppContent: React.FC = () => {
     // Initialize app - only run once on mount
     dispatch({ type: 'INITIALIZE_APP' });
     trackEvent('app_initialized');
-  }, [dispatch, trackEvent]); // Include dependencies to prevent lint warning
+  }, [dispatch, trackEvent]); // Now safe since functions are memoized with useCallback
 
   return (
     <>
