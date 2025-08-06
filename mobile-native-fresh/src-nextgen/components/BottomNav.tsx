@@ -40,7 +40,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
   return (
     <AutoRoleView
-      role="navigation"
+      componentRole="navigation"
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       {navItems.map((item) => (

@@ -7,7 +7,7 @@ const ThemeScreen: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <AutoRoleView role="screen" style={styles.container}>
+    <AutoRoleView componentRole="screen" style={styles.container}>
       <Text style={[styles.title, { color: theme.colors.text }]}>
         Theme Settings
       </Text>

@@ -1,49 +1,87 @@
-import { Text } from 'react-native';
-import React, { ReactNode } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { useTheme } from '../theme';
-import { useAccessibility } from '../hooks/useAccessibility';
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import { AppRoutes, NavigationProp } from '../types/navigation';
 
-interface NavigationProviderProps {
-  children: ReactNode;
+export interface NavigationState {
+  currentRoute: keyof AppRoutes | null;
+  routeHistory: (keyof AppRoutes)[];
+  params: Record<string, unknown>;
 }
 
-export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children }) => {
-  const theme = useTheme();
-  const _isScreenReaderEnabled = useAccessibility();
+interface NavigationContextType {
+  state: NavigationState;
+  navigate: <T extends keyof AppRoutes>(route: T, params?: AppRoutes[T]) => void;
+  goBack: () => void;
+  canGoBack: () => boolean;
+  getCurrentRoute: () => keyof AppRoutes | null;
+  getParams: <T extends keyof AppRoutes>(route: T) => AppRoutes[T] | undefined;
+}
 
-  const _defaultScreenOptions = {
-    headerStyle: {
-      backgroundColor: theme.colors.background,
-      elevation: 0,
-      shadowOpacity: 0,
-    },
-    headerTintColor: theme.colors.text,
-    headerTitleStyle: {
-      color: theme.colors.text,
-      fontSize: theme.fontSize.lg,
-      fontWeight: theme.fontWeight.semibold,
-    },
-    cardStyle: {
-      backgroundColor: theme.colors.background,
-    },
+const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
+
+export const useNavigation = <T extends keyof AppRoutes>(): NavigationProp<T> => {
+  const context = useContext(NavigationContext);
+  if (!context) {
+    throw new Error('useNavigation must be used within a NavigationProvider');
+  }
+  
+  return {
+    navigate: context.navigate,
+    goBack: context.goBack,
+    canGoBack: context.canGoBack,
   };
+};
 
-  const _defaultTabOptions = {
-    tabBarStyle: {
-      backgroundColor: theme.colors.background,
-      borderTopColor: theme.colors.border,
-      borderTopWidth: 1,
-    },
-    tabBarActiveTintColor: theme.colors.accent,
-    tabBarInactiveTintColor: theme.colors.textSecondary,
-    tabBarLabelStyle: {
-      fontSize: theme.fontSize.xs,
-      fontWeight: theme.fontWeight.medium,
-    },
+export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [state, setState] = useState<NavigationState>({
+    currentRoute: null,
+    routeHistory: [],
+    params: {},
+  });
+
+  const navigate = useCallback(<T extends keyof AppRoutes>(route: T, params?: AppRoutes[T]) => {
+    setState(prev => ({
+      currentRoute: route,
+      routeHistory: [...prev.routeHistory, route],
+      params: { ...prev.params, [route]: params },
+    }));
+  }, []);
+
+  const goBack = useCallback(() => {
+    setState(prev => {
+      const newHistory = prev.routeHistory.slice(0, -1);
+      const newCurrentRoute = newHistory[newHistory.length - 1] || null;
+      return {
+        currentRoute: newCurrentRoute,
+        routeHistory: newHistory,
+        params: prev.params,
+      };
+    });
+  }, []);
+
+  const canGoBack = useCallback(() => {
+    return state.routeHistory.length > 1;
+  }, [state.routeHistory.length]);
+
+  const getCurrentRoute = useCallback(() => {
+    return state.currentRoute;
+  }, [state.currentRoute]);
+
+  const getParams = useCallback(<T extends keyof AppRoutes>(route: T): AppRoutes[T] | undefined => {
+    return state.params[route] as AppRoutes[T] | undefined;
+  }, [state.params]);
+
+  const contextValue: NavigationContextType = {
+    state,
+    navigate,
+    goBack,
+    canGoBack,
+    getCurrentRoute,
+    getParams,
   };
 
   return (
-    <NavigationContainer><Text>{children}</Text></NavigationContainer>
+    <NavigationContext.Provider value={contextValue}>
+      {children}
+    </NavigationContext.Provider>
   );
 }; 

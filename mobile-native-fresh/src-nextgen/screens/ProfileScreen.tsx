@@ -21,7 +21,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ _route }) => {
   };
 
   return (
-    <AutoRoleView role="screen" style={styles.container}>
+    <AutoRoleView componentRole="screen" style={styles.container}>
       <Text style={[styles.title, { color: theme.colors.text }]}>
         Profile
       </Text>

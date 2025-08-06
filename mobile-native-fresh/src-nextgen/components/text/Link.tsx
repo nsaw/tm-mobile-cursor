@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacity, TouchableOpacityProps, TextStyle } from 'react-native';
 import { Text, TextPropsExtended } from './Text';
 import { useTheme } from '../../hooks/useTheme';
 import { useAccessibilityProps } from '../../hooks/useAccessibilityProps';
@@ -11,6 +11,7 @@ export interface LinkProps extends Omit<TextPropsExtended, 'color' | 'role'> {
   children: React.ReactNode;
   touchableProps?: TouchableOpacityProps;
   role?: 'text' | 'label';
+  style?: TextStyle;
 }
 
 export const Link: React.FC<LinkProps> = ({
@@ -45,7 +46,6 @@ export const Link: React.FC<LinkProps> = ({
       <Text
         variant="body"
         weight="medium"
-        role={role}
         style={[linkStyle, style]}
         {...accessibilityProps}
         {...props}

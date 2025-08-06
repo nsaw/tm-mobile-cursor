@@ -1,160 +1,94 @@
 import React from 'react';
-import { Text as RNText, TextStyle, TextProps as RNTextProps, StyleSheet } from 'react-native';
-import { AutoRoleView, ContentRole } from '../shell/wrappers/AutoRoleView';
+import { Text as RNText, StyleSheet, AccessibilityRole } from 'react-native';
 
-export interface TextProps extends RNTextProps {
-  variant?: 'display' | 'heading' | 'body' | 'caption' | 'label';
-  size?: 'small' | 'medium' | 'large' | 'xl';
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
-  color?: 'primary' | 'secondary' | 'tertiary' | 'accent' | 'error' | 'success';
-  align?: 'left' | 'center' | 'right' | 'justify';
-  style?: TextStyle;
+import { LegacyThemeColors } from '../types/theme';
+
+export interface TextProps {
   children: React.ReactNode;
+  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption' | 'label';
+  style?: any;
+  accessibilityRole?: AccessibilityRole;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  numberOfLines?: number;
 }
 
-/**
- * Text - Content text component with role assignment
- * 
- * This component is migrated to nextgen with contentRole="text-display"
- * assignment, providing proper accessibility and role-based styling.
- * 
- * Usage:
- * <Text variant="heading" size="large">Hello World</Text>
- */
 export const Text: React.FC<TextProps> = ({
-  variant = 'body',
-  size = 'medium',
-  weight = 'normal',
-  color = 'primary',
-  align = 'left',
-  style,
   children,
-  ..._props
+  variant = 'body',
+  style,
+  accessibilityRole = 'text',
+  accessibilityLabel,
+  accessibilityHint,
+  numberOfLines,
 }) => {
-  const _textStyle = [
-    styles.base,
-    styles[variant],
-    styles[size],
-    weight === 'medium' ? styles.mediumWeight : styles[weight],
-    styles[color],
-    styles[align],
-    style,
-  ];
+  const colors: LegacyThemeColors = {
+    background: '#FFFFFF',
+    surface: '#F8F9FA',
+    text: '#1A1A1A',
+    textSecondary: '#6C757D',
+    primary: '#007AFF',
+    error: '#DC3545',
+    border: '#DEE2E6',
+  };
 
-  // Determine content role based on variant
-  const getContentRole = (): ContentRole => {
+  const getVariantStyle = () => {
     switch (variant) {
-      case 'display':
-      case 'heading':
-        return 'text-heading';
-      case 'label':
-        return 'text-label';
+      case 'h1':
+        return styles.h1;
+      case 'h2':
+        return styles.h2;
+      case 'h3':
+        return styles.h3;
+      case 'body':
+        return styles.body;
       case 'caption':
-        return 'text-caption';
+        return styles.caption;
+      case 'label':
+        return styles.label;
       default:
-        return 'text-display';
+        return styles.body;
     }
   };
 
   return (
-    <AutoRoleView contentRole={getContentRole()}>
-      <RNText><Text>{children}</Text></RNText>
-    </AutoRoleView>
+    <RNText
+      style={[
+        getVariantStyle(),
+        { color: colors.text },
+        style,
+      ]}
+      accessibilityRole={accessibilityRole}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      numberOfLines={numberOfLines}
+    >
+      {children}
+    </RNText>
   );
 };
 
 const styles = StyleSheet.create({
-  base: {
-    fontFamily: 'System',
-  },
-  
-  // Variants
-  display: {
-    fontWeight: '700',
-    letterSpacing: -0.5,
-  },
-  heading: {
-    fontWeight: '600',
-    letterSpacing: -0.25,
-  },
   body: {
-    fontWeight: '400',
-    letterSpacing: 0,
+    fontSize: 16,
   },
   caption: {
-    fontWeight: '400',
-    letterSpacing: 0.25,
-  },
-  label: {
-    fontWeight: '500',
-    letterSpacing: 0,
-  },
-  
-  // Sizes
-  small: {
     fontSize: 12,
-    lineHeight: 16,
   },
-  medium: {
-    fontSize: 16,
-    lineHeight: 22,
+  h1: {
+    fontSize: 32,
+    fontWeight: 'bold',
   },
-  large: {
-    fontSize: 20,
-    lineHeight: 28,
-  },
-  xl: {
+  h2: {
     fontSize: 24,
-    lineHeight: 32,
-  },
-  
-  // Weights
-  normal: {
-    fontWeight: '400',
-  },
-  mediumWeight: {
-    fontWeight: '500',
-  },
-  semibold: {
     fontWeight: '600',
   },
-  bold: {
-    fontWeight: '700',
+  h3: {
+    fontSize: 20,
+    fontWeight: '600',
   },
-  
-  // Colors
-  primary: {
-    color: '#000000',
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
   },
-  secondary: {
-    color: '#6B7280',
-  },
-  tertiary: {
-    color: '#9CA3AF',
-  },
-  accent: {
-    color: '#007AFF',
-  },
-  error: {
-    color: '#EF4444',
-  },
-  success: {
-    color: '#10B981',
-  },
-  
-  // Alignment
-  left: {
-    textAlign: 'left',
-  },
-  center: {
-    textAlign: 'center',
-  },
-  right: {
-    textAlign: 'right',
-  },
-  justify: {
-    textAlign: 'justify',
-  },
-});
-
-export default Text; 
+}); 

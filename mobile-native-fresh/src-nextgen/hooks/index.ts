@@ -3,10 +3,25 @@ export * from './useAuth';
 export * from './useTheme';
 export * from './useValidation';
 export * from './useAccessibility';
-
-// Auth flow hooks
+export * from './useAccessibilityProps';
+export * from './useApi';
 export * from './useAuthFlow';
-
-// Content hooks
-export * from './useThoughtmarks';
-export * from './useBins'; 
+export * from './useBiometrics';
+export * from './useBins';
+export * from './useCaptcha';
+export * from './useCreateBin';
+export * from './useDebounce';
+export * from './useDesignTokens';
+export * from './useEnvironment';
+export * from './useErrorHandler';
+export * from './useForm';
+export * from './useFormValidation';
+export * from './useLocalStorage';
+export * from './usePasswordStrength';
+export * from './useRoleHeatmap';
+export * from './useSearch';
+export * from './useSecurity';
+export * from './useThemeWithStyles';
+export * from './useThrottle';
+export * from './useThoughtmark';
+export * from './useThoughtmarks'; 

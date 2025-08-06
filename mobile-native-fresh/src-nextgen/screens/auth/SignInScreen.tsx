@@ -34,7 +34,7 @@ export const SignInScreen: React.FC = () => {
   };
 
   return (
-    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <AutoRoleView componentRole="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.content}>
         <Text style={[styles.title, { color: theme.colors.text }]}>Welcome Back</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>

@@ -26,14 +26,13 @@ export const Label: React.FC<LabelProps> = ({
     <Text
       variant="body2"
       weight="medium"
-      color={theme.colors.primary}
-      role={role}
+      style={{ color: theme.colors.primary }}
       {...accessibilityProps}
       {...props}
     >
       {children}
       {required && (
-        <Text variant="caption" color={theme.colors.error} weight="bold">
+        <Text variant="caption" style={{ color: theme.colors.error }} weight="bold">
           {' *'}
         </Text>
       )}

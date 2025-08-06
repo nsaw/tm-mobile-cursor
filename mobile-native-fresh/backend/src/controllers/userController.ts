@@ -20,10 +20,11 @@ export const userController = {
       const user = await db.select().from(users).where(eq(users.id, userId)).limit(1);
       
       if (user.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       const userData = user[0];
@@ -66,10 +67,11 @@ export const userController = {
         .returning();
 
       if (updatedUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       const userData = updatedUser[0];
@@ -153,10 +155,11 @@ export const userController = {
       const user = await db.select().from(users).where(eq(users.id, parseInt(id))).limit(1);
       
       if (user.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       const userData = user[0];
@@ -199,10 +202,11 @@ export const userController = {
         .returning();
 
       if (updatedUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       const userData = updatedUser[0];
@@ -240,10 +244,11 @@ export const userController = {
         .returning();
 
       if (deletedUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       res.json({
@@ -273,10 +278,11 @@ export const userController = {
         .returning();
 
       if (updatedUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       res.json({

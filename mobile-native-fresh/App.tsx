@@ -1,5 +1,5 @@
 // App.tsx - Dual-mount system with environment toggle
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -29,7 +29,7 @@ console.log('[DUAL-MOUNT] Environment check:', {
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-export default async function App(): Promise<React.JSX.Element | null> {
+export default function App(): React.JSX.Element | null {
   console.log('[APP] 🚀 App function executed - THIS SHOULD APPEAR');
   console.log('[APP] USE_NEXTGEN:', USE_NEXTGEN);
 
@@ -43,43 +43,50 @@ export default async function App(): Promise<React.JSX.Element | null> {
     'Ubuntu-Bold': Ubuntu_700Bold,
   });
 
+  const [appComponent, setAppComponent] = useState<React.ComponentType | null>(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
+  useEffect(() => {
+    const loadApp = async () => {
+      try {
+        if (USE_NEXTGEN) {
+          console.log('[APP] Loading NextGen app...');
+          const NextGenApp = (await import('./src-nextgen/App')).default;
+          console.log('[APP] NextGen app loaded successfully');
+          setAppComponent(() => NextGenApp);
+        } else {
+          console.log('[APP] USE_NEXTGEN is false, loading legacy app...');
+          const LegacyApp = (await import('./legacy.App')).default;
+          console.log('[APP] Legacy app loaded successfully');
+          setAppComponent(() => LegacyApp);
+        }
+      } catch (error) {
+        console.error('[APP] Failed to load app:', error);
+        console.error('[APP] Error details:', error instanceof Error ? error.message : String(error));
+        console.log('[APP] Falling back to mock app...');
+        setAppComponent(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadApp();
+  }, []);
+
+  if (!fontsLoaded || loading) {
     return null;
   }
 
-  // Dual-mount system: Load NextGen app if environment variable is set
-  if (USE_NEXTGEN) {
-    console.log('[APP] Loading NextGen app...');
-    try {
-      // Try dynamic import first
-      const NextGenApp = (await import('./src-nextgen/App')).default;
-      console.log('[APP] NextGen app loaded successfully');
-      console.log('[APP] NextGenApp type:', typeof NextGenApp);
-      return <NextGenApp />;
-    } catch (error) {
-      console.error('[APP] Failed to load NextGen app:', error);
-      console.error('[APP] Error details:', error instanceof Error ? error.message : String(error));
-      console.log('[APP] Falling back to mock app...');
-    }
-  } else {
-    console.log('[APP] USE_NEXTGEN is false, loading legacy app...');
-    try {
-      // Load the simple legacy app
-      const LegacyApp = (await import('./legacy.App')).default;
-      console.log('[APP] Legacy app loaded successfully');
-      console.log('[APP] LegacyApp type:', typeof LegacyApp);
-      return <LegacyApp />;
-    } catch (error) {
-      console.error('[APP] Failed to load legacy app:', error);
-      console.error('[APP] Error details:', error instanceof Error ? error.message : String(error));
-      console.log('[APP] Falling back to mock app...');
-    }
+  // Render the loaded app component
+  if (appComponent) {
+    const AppComponent = appComponent;
+    return <AppComponent />;
   }
 
   // Fallback mock app if both fail

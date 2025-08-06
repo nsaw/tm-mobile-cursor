@@ -45,10 +45,11 @@ export const thoughtmarkController = {
         .limit(1);
       
       if (thoughtmark.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Thoughtmark not found'
         });
+        return;
       }
 
       res.json({
@@ -70,10 +71,11 @@ export const thoughtmarkController = {
       const { title, content, tags, binId, isTask, dueDate } = req.body;
 
       if (!title || !content) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Title and content are required'
         });
+        return;
       }
 
       const newThoughtmark = await db.insert(thoughtmarks).values({
@@ -119,10 +121,11 @@ export const thoughtmarkController = {
         .returning();
 
       if (updatedThoughtmark.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Thoughtmark not found'
         });
+        return;
       }
 
       res.json({
@@ -154,10 +157,11 @@ export const thoughtmarkController = {
         .returning();
 
       if (deletedThoughtmark.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Thoughtmark not found'
         });
+        return;
       }
 
       res.json({
@@ -179,10 +183,11 @@ export const thoughtmarkController = {
       const userId = req.user?.userId || 1;
 
       if (!query || typeof query !== 'string') {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Search query is required'
         });
+        return;
       }
 
       const results = await db.select().from(thoughtmarks)
@@ -219,10 +224,11 @@ export const thoughtmarkController = {
         .limit(1);
 
       if (thoughtmark.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Thoughtmark not found'
         });
+        return;
       }
 
       const updatedThoughtmark = await db.update(thoughtmarks)

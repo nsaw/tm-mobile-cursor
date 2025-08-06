@@ -20,7 +20,7 @@ export const SettingsScreen: React.FC = () => {
   ];
 
   return (
-    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <AutoRoleView componentRole="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={[styles.title, { color: theme.colors.text }]}>Settings</Text>
         
@@ -33,7 +33,7 @@ export const SettingsScreen: React.FC = () => {
             accessibilityLabel={`Navigate to ${option.title} settings`}
           >
             <AutoRoleView
-              role="button"
+              componentRole="button"
               style={[styles.option, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
             >
               <Text style={[styles.optionIcon, { color: theme.colors.primary }]}>{option.icon}</Text>

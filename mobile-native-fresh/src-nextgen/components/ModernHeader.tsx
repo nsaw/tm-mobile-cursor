@@ -82,7 +82,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             )}
             <View style={{ flex: 1 }}>
               <Text 
-                variant="heading" 
+                variant="h1" 
                 style={{ 
                   textTransform: 'uppercase',
                   letterSpacing: 1,
@@ -93,9 +93,9 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               {subtitle && (
                 <Text 
                   variant="body" 
-                  size="small"
                   style={{ 
                     marginTop: 1,
+                    fontSize: 12,
                   }}
                 >
                   {subtitle}

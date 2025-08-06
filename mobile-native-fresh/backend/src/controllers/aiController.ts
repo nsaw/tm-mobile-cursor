@@ -379,20 +379,22 @@ ${formattedThoughtmarks}`;
       console.log('[aiController] Search query:', query);
 
       if (!query || typeof query !== 'string') {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Search query is required'
         });
+        return;
       }
 
       // Get all thoughtmarks for semantic search
       const allThoughtmarks = await db.select().from(thoughtmarks);
 
       if (allThoughtmarks.length === 0) {
-        return res.json({
+        res.json({
           success: true,
           data: { results: [] }
         });
+        return;
       }
 
       console.log('[aiController] Found thoughtmarks for search:', allThoughtmarks.length);
@@ -478,10 +480,11 @@ ${formattedThoughtmarks}`;
         .limit(10);
 
       if (recentThoughtmarks.length === 0) {
-        return res.json({
+        res.json({
           success: true,
           data: { suggestions: [] }
         });
+        return;
       }
 
       console.log('[aiController] Found recent thoughtmarks:', recentThoughtmarks.length);
@@ -565,10 +568,11 @@ ${formattedThoughtmarks}`;
       console.log('[aiController] Tags:', tags);
 
       if (!content || typeof content !== 'string') {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Content is required'
         });
+        return;
       }
 
       const prompt = `Analyze the following thoughtmark content and provide suggestions for improvement. Return a JSON object with: suggestedTitle (string), suggestedTags (array of 3-5 relevant tags), contentSuggestions (array of 2-3 ideas to expand the content). Respond ONLY with a valid JSON object in this format, with no extra text or markdown:

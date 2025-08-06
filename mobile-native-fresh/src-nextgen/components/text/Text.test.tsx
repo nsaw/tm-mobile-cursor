@@ -81,7 +81,7 @@ describe('Text', () => {
 
   it('should render with truncation', () => {
     const { getByText } = render(
-      <Text _truncate>Long text that should be truncated</Text>
+      <Text truncate>Long text that should be truncated</Text>
     );
     expect(getByText('Long text that should be truncated')).toBeDefined();
   });

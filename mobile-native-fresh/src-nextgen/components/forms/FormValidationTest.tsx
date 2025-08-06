@@ -39,12 +39,12 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
   };
 
   return (
-    <AutoRoleView role="content" style={styles.container}>
+    <AutoRoleView componentRole="content" style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.title}>Form Validation Test ({environment})</Text>
         
         {/* Signup Form Test */}
-        <AutoRoleView role="content" style={styles.formSection}>
+        <AutoRoleView componentRole="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Signup Form Test</Text>
           
           <FormField
@@ -102,7 +102,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
+                      <AutoRoleView componentRole="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -115,14 +115,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {signupForm.submitError && (
-            <AutoRoleView role="feedback" style={styles.errorContainer}>
+            <AutoRoleView componentRole="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{signupForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Signin Form Test */}
-        <AutoRoleView role="content" style={styles.formSection}>
+        <AutoRoleView componentRole="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Signin Form Test</Text>
           
           <FormField
@@ -152,7 +152,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
+                      <AutoRoleView componentRole="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -165,14 +165,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {signinForm.submitError && (
-            <AutoRoleView role="feedback" style={styles.errorContainer}>
+            <AutoRoleView componentRole="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{signinForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Profile Form Test */}
-        <AutoRoleView role="content" style={styles.formSection}>
+        <AutoRoleView componentRole="content" style={styles.formSection}>
           <Text style={styles.sectionTitle}>Profile Form Test</Text>
           
           <FormField
@@ -224,7 +224,7 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
             environment={environment}
           />
 
-                      <AutoRoleView role="interactive" style={styles.buttonContainer}>
+                      <AutoRoleView componentRole="interactive" style={styles.buttonContainer}>
             <Text 
               style={[
                 styles.submitButton,
@@ -237,14 +237,14 @@ export const FormValidationTest: React.FC<FormValidationTestProps> = ({
           </AutoRoleView>
 
           {profileForm.submitError && (
-            <AutoRoleView role="feedback" style={styles.errorContainer}>
+            <AutoRoleView componentRole="feedback" style={styles.errorContainer}>
               <Text style={styles.errorText}>{profileForm.submitError}</Text>
             </AutoRoleView>
           )}
         </AutoRoleView>
 
         {/* Validation Status */}
-        <AutoRoleView role="feedback" style={styles.statusSection}>
+        <AutoRoleView componentRole="feedback" style={styles.statusSection}>
           <Text style={styles.statusTitle}>Validation Status</Text>
           <Text style={styles.statusText}>
             Signup Form: {signupForm.hasErrors() ? '❌ Has Errors' : '✅ Valid'}

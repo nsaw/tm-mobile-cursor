@@ -7,15 +7,15 @@ export const SearchScreen: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <AutoRoleView role="header-section" style={styles.header}>
+    <AutoRoleView componentRole="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <AutoRoleView componentRole="header-section" style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.text }]}>Search</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
           Find your thoughts
         </Text>
       </AutoRoleView>
       
-      <AutoRoleView role="content" style={styles.content}>
+      <AutoRoleView componentRole="content" style={styles.content}>
         <Text style={[styles.bodyText, { color: theme.colors.text }]}>
           Search functionality will appear here.
         </Text>

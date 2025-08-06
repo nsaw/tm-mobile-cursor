@@ -1,296 +1,261 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Thoughtmark } from '../types/DataTypes';
 
-export interface Thoughtmark {
-  id: string;
-  title: string;
-  content: string;
-  tags: string[];
-  binId?: string;
-  isPinned: boolean;
-  isArchived: boolean;
-  createdAt: string;
-  updatedAt: string;
-  metadata?: {
-    wordCount: number;
-    readingTime: number;
-    lastAccessed?: string;
-  };
-}
-
-export interface ThoughtmarksState {
+export interface UseThoughtmarksReturn {
   thoughtmarks: Thoughtmark[];
   isLoading: boolean;
-  loading: boolean; // Alias for isLoading
+  loading: boolean; // Alias for isLoading for backward compatibility
   error: string | null;
-}
-
-export interface ThoughtmarksActions {
   fetchThoughtmarks: () => Promise<void>;
-  createThoughtmark: (title: string, content: string, tags?: string[], binId?: string) => Promise<void>;
+  createThoughtmark: (thoughtmark: Omit<Thoughtmark, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
   updateThoughtmark: (id: string, updates: Partial<Thoughtmark>) => Promise<void>;
   deleteThoughtmark: (id: string) => Promise<void>;
-  togglePin: (id: string) => Promise<void>;
-  toggleArchive: (id: string) => Promise<void>;
-  searchThoughtmarks: (query: string) => Thoughtmark[];
-  getThoughtmarksByBin: (binId: string) => Thoughtmark[];
+  likeThoughtmark: (id: string) => Promise<void>;
+  unlikeThoughtmark: (id: string) => Promise<void>;
+  searchThoughtmarks: (query: string) => Promise<Thoughtmark[]>;
+  getThoughtmarkById: (id: string) => Thoughtmark | undefined;
 }
 
+// Re-export Thoughtmark for convenience
+export { Thoughtmark } from '../types/DataTypes';
+
+// Mock data for development
 const mockThoughtmarks: Thoughtmark[] = [
   {
     id: '1',
-    title: 'React Native Best Practices',
-    content: 'Always use TypeScript for better type safety and developer experience. Implement proper error boundaries and loading states.',
-    tags: ['react-native', 'typescript', 'best-practices'],
-    binId: '3',
-    isPinned: true,
+    title: 'The Future of AI in Healthcare',
+    content: 'Artificial intelligence is revolutionizing healthcare delivery, from diagnostic imaging to personalized treatment plans. The integration of AI systems promises to improve patient outcomes while reducing costs and increasing efficiency across the healthcare ecosystem.',
+    author: 'Dr. Sarah Chen',
+    createdAt: '2024-07-28T10:30:00Z',
+    updatedAt: '2024-07-28T10:30:00Z',
+    tags: ['AI', 'Healthcare', 'Technology'],
+    binId: 'default',
     isArchived: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    metadata: {
-      wordCount: 25,
-      readingTime: 1,
-    },
+    isPinned: false,
+    isPublic: true,
+    likes: 42,
+    comments: 8,
+    shares: 12,
   },
   {
     id: '2',
-    title: 'Project Architecture Ideas',
-    content: 'Consider implementing a modular architecture with clear separation of concerns. Use dependency injection for better testability.',
-    tags: ['architecture', 'modular', 'testing'],
-    binId: '2',
-    isPinned: false,
+    title: 'Sustainable Urban Planning',
+    content: 'Cities around the world are embracing sustainable urban planning principles to create more livable, environmentally friendly communities. Green infrastructure, renewable energy, and smart transportation systems are key components of this transformation.',
+    author: 'Marcus Rodriguez',
+    createdAt: '2024-07-27T15:45:00Z',
+    updatedAt: '2024-07-27T15:45:00Z',
+    tags: ['Urban Planning', 'Sustainability', 'Cities'],
+    binId: 'default',
     isArchived: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    metadata: {
-      wordCount: 20,
-      readingTime: 1,
-    },
+    isPinned: false,
+    isPublic: true,
+    likes: 28,
+    comments: 5,
+    shares: 7,
   },
   {
     id: '3',
-    title: 'Personal Reflection',
-    content: 'Today was productive. Learned a lot about systematic error fixing and the importance of proper validation gates.',
-    tags: ['personal', 'reflection', 'learning'],
-    binId: '1',
-    isPinned: false,
+    title: 'The Psychology of Habit Formation',
+    content: 'Understanding how habits are formed and maintained is crucial for personal development and behavior change. Research shows that consistent routines, environmental cues, and reward systems play essential roles in building lasting habits.',
+    author: 'Dr. Emily Watson',
+    createdAt: '2024-07-26T09:15:00Z',
+    updatedAt: '2024-07-26T09:15:00Z',
+    tags: ['Psychology', 'Habits', 'Self-Improvement'],
+    binId: 'default',
     isArchived: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    metadata: {
-      wordCount: 18,
-      readingTime: 1,
-    },
+    isPinned: false,
+    isPublic: true,
+    likes: 35,
+    comments: 12,
+    shares: 9,
+  },
+  {
+    id: '4',
+    title: 'Blockchain Beyond Cryptocurrency',
+    content: 'While blockchain is often associated with cryptocurrency, its applications extend far beyond digital currencies. Supply chain management, voting systems, and digital identity verification are just a few areas where blockchain technology is making significant impacts.',
+    author: 'Alex Thompson',
+    createdAt: '2024-07-25T14:20:00Z',
+    updatedAt: '2024-07-25T14:20:00Z',
+    tags: ['Blockchain', 'Technology', 'Innovation'],
+    binId: 'default',
+    isArchived: false,
+    isPinned: false,
+    isPublic: true,
+    likes: 19,
+    comments: 3,
+    shares: 4,
+  },
+  {
+    id: '5',
+    title: 'The Art of Mindful Communication',
+    content: 'Mindful communication involves being fully present in conversations, listening with empathy, and responding with intention. This approach can transform relationships, reduce conflicts, and create deeper connections with others.',
+    author: 'Lisa Park',
+    createdAt: '2024-07-24T11:00:00Z',
+    updatedAt: '2024-07-24T11:00:00Z',
+    tags: ['Communication', 'Mindfulness', 'Relationships'],
+    binId: 'default',
+    isArchived: false,
+    isPinned: false,
+    isPublic: true,
+    likes: 31,
+    comments: 7,
+    shares: 6,
   },
 ];
 
-export const useThoughtmarks = (): ThoughtmarksState & ThoughtmarksActions => {
-  const [state, setState] = useState<ThoughtmarksState>({
-    thoughtmarks: [],
-    isLoading: true,
-    loading: true, // Alias for isLoading
-    error: null,
-  });
-
-  useEffect(() => {
-    loadThoughtmarksFromStorage();
-  }, []);
-
-  const loadThoughtmarksFromStorage = async () => {
-    try {
-      const thoughtmarksData = await AsyncStorage.getItem('thoughtmarks');
-      if (thoughtmarksData) {
-        const thoughtmarks = JSON.parse(thoughtmarksData) as Thoughtmark[];
-        setState(prev => ({
-          ...prev,
-          thoughtmarks,
-          isLoading: false,
-          loading: false,
-        }));
-      } else {
-        // Initialize with mock data
-        await AsyncStorage.setItem('thoughtmarks', JSON.stringify(mockThoughtmarks));
-        setState(prev => ({
-          ...prev,
-          thoughtmarks: mockThoughtmarks,
-          isLoading: false,
-          loading: false,
-        }));
-      }
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to load thoughtmarks',
-        isLoading: false,
-        loading: false,
-      }));
-    }
-  };
+export const useThoughtmarks = (): UseThoughtmarksReturn => {
+  const [thoughtmarks, setThoughtmarks] = useState<Thoughtmark[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchThoughtmarks = useCallback(async () => {
-    setState(prev => ({ ...prev, isLoading: true, loading: true, error: null }));
+    setIsLoading(true);
+    setError(null);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(() => resolve(undefined), 500));
-      await loadThoughtmarksFromStorage();
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to fetch thoughtmarks',
-        isLoading: false,
-        loading: false,
-      }));
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(() => resolve(undefined), 1000));
+      
+      // For now, use mock data
+      // In production, this would fetch from API
+      setThoughtmarks(mockThoughtmarks);
+      
+      // Store in AsyncStorage for offline access
+      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(mockThoughtmarks));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch thoughtmarks');
+      console.error('Error fetching thoughtmarks:', err);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
-  const createThoughtmark = useCallback(async (title: string, content: string, tags: string[] = [], binId?: string) => {
+  const createThoughtmark = useCallback(async (thoughtmarkData: Omit<Thoughtmark, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       const newThoughtmark: Thoughtmark = {
+        ...thoughtmarkData,
         id: Date.now().toString(),
-        title,
-        content,
-        tags,
-        binId,
-        isPinned: false,
-        isArchived: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        metadata: {
-          wordCount: content.split(' ').length,
-          readingTime: Math.ceil(content.split(' ').length / 200),
-        },
       };
-
-      const updatedThoughtmarks = [...state.thoughtmarks, newThoughtmark];
-      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
       
-      setState(prev => ({
-        ...prev,
-        thoughtmarks: updatedThoughtmarks,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to create thoughtmark',
-      }));
+      setThoughtmarks(prev => [newThoughtmark, ...prev]);
+      
+      // Store updated list
+      const updatedThoughtmarks = [newThoughtmark, ...thoughtmarks];
+      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create thoughtmark');
+      console.error('Error creating thoughtmark:', err);
     }
-  }, [state.thoughtmarks]);
+  }, [thoughtmarks]);
 
   const updateThoughtmark = useCallback(async (id: string, updates: Partial<Thoughtmark>) => {
     try {
-      const updatedThoughtmarks = state.thoughtmarks.map(thoughtmark =>
-        thoughtmark.id === id
-          ? {
-              ...thoughtmark,
-              ...updates,
-              updatedAt: new Date().toISOString(),
-              metadata: updates.content ? {
-                ...thoughtmark.metadata,
-                wordCount: updates.content.split(' ').length,
-                readingTime: Math.ceil(updates.content.split(' ').length / 200),
-              } : thoughtmark.metadata,
-            }
-          : thoughtmark
+      setThoughtmarks(prev => 
+        prev.map(tm => 
+          tm.id === id 
+            ? { ...tm, ...updates, updatedAt: new Date().toISOString() }
+            : tm
+        )
       );
       
+      // Store updated list
+      const updatedThoughtmarks = thoughtmarks.map(tm => 
+        tm.id === id 
+          ? { ...tm, ...updates, updatedAt: new Date().toISOString() }
+          : tm
+      );
       await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
-      
-      setState(prev => ({
-        ...prev,
-        thoughtmarks: updatedThoughtmarks,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to update thoughtmark',
-      }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update thoughtmark');
+      console.error('Error updating thoughtmark:', err);
     }
-  }, [state.thoughtmarks]);
+  }, [thoughtmarks]);
 
   const deleteThoughtmark = useCallback(async (id: string) => {
     try {
-      const updatedThoughtmarks = state.thoughtmarks.filter(thoughtmark => thoughtmark.id !== id);
-      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
+      setThoughtmarks(prev => prev.filter(tm => tm.id !== id));
       
-      setState(prev => ({
-        ...prev,
-        thoughtmarks: updatedThoughtmarks,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to delete thoughtmark',
-      }));
+      // Store updated list
+      const updatedThoughtmarks = thoughtmarks.filter(tm => tm.id !== id);
+      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete thoughtmark');
+      console.error('Error deleting thoughtmark:', err);
     }
-  }, [state.thoughtmarks]);
+  }, [thoughtmarks]);
 
-  const togglePin = useCallback(async (id: string) => {
+  const likeThoughtmark = useCallback(async (id: string) => {
     try {
-      const updatedThoughtmarks = state.thoughtmarks.map(thoughtmark =>
-        thoughtmark.id === id
-          ? { ...thoughtmark, isPinned: !thoughtmark.isPinned, updatedAt: new Date().toISOString() }
-          : thoughtmark
+      setThoughtmarks(prev => 
+        prev.map(tm => 
+          tm.id === id 
+            ? { ...tm, likes: tm.likes + 1 }
+            : tm
+        )
       );
-      
-      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
-      
-      setState(prev => ({
-        ...prev,
-        thoughtmarks: updatedThoughtmarks,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to toggle pin',
-      }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to like thoughtmark');
+      console.error('Error liking thoughtmark:', err);
     }
-  }, [state.thoughtmarks]);
+  }, []);
 
-  const toggleArchive = useCallback(async (id: string) => {
+  const unlikeThoughtmark = useCallback(async (id: string) => {
     try {
-      const updatedThoughtmarks = state.thoughtmarks.map(thoughtmark =>
-        thoughtmark.id === id
-          ? { ...thoughtmark, isArchived: !thoughtmark.isArchived, updatedAt: new Date().toISOString() }
-          : thoughtmark
+      setThoughtmarks(prev => 
+        prev.map(tm => 
+          tm.id === id 
+            ? { ...tm, likes: Math.max(0, tm.likes - 1) }
+            : tm
+        )
       );
-      
-      await AsyncStorage.setItem('thoughtmarks', JSON.stringify(updatedThoughtmarks));
-      
-      setState(prev => ({
-        ...prev,
-        thoughtmarks: updatedThoughtmarks,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: 'Failed to toggle archive',
-      }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to unlike thoughtmark');
+      console.error('Error unliking thoughtmark:', err);
     }
-  }, [state.thoughtmarks]);
+  }, []);
 
-  const searchThoughtmarks = useCallback((query: string): Thoughtmark[] => {
-    const lowercaseQuery = query.toLowerCase();
-    return state.thoughtmarks.filter(thoughtmark =>
-      thoughtmark.title.toLowerCase().includes(lowercaseQuery) ||
-      thoughtmark.content.toLowerCase().includes(lowercaseQuery) ||
-      thoughtmark.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
-    );
-  }, [state.thoughtmarks]);
+  const searchThoughtmarks = useCallback(async (query: string): Promise<Thoughtmark[]> => {
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(() => resolve(undefined), 500));
+      
+      const lowerQuery = query.toLowerCase();
+      return thoughtmarks.filter(tm => 
+        tm.title.toLowerCase().includes(lowerQuery) ||
+        tm.content.toLowerCase().includes(lowerQuery) ||
+        tm.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to search thoughtmarks');
+      console.error('Error searching thoughtmarks:', err);
+      return [];
+    }
+  }, [thoughtmarks]);
 
-  const getThoughtmarksByBin = useCallback((binId: string): Thoughtmark[] => {
-    return state.thoughtmarks.filter(thoughtmark => thoughtmark.binId === binId);
-  }, [state.thoughtmarks]);
+  const getThoughtmarkById = useCallback((id: string): Thoughtmark | undefined => {
+    return thoughtmarks.find(tm => tm.id === id);
+  }, [thoughtmarks]);
+
+  // Load thoughtmarks on mount
+  useEffect(() => {
+    fetchThoughtmarks();
+  }, [fetchThoughtmarks]);
 
   return {
-    ...state,
+    thoughtmarks,
+    isLoading,
+    loading: isLoading, // Alias for backward compatibility
+    error,
     fetchThoughtmarks,
     createThoughtmark,
     updateThoughtmark,
     deleteThoughtmark,
-    togglePin,
-    toggleArchive,
+    likeThoughtmark,
+    unlikeThoughtmark,
     searchThoughtmarks,
-    getThoughtmarksByBin,
+    getThoughtmarkById,
   };
 }; 

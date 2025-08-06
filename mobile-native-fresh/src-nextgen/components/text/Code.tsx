@@ -1,12 +1,13 @@
 import React from 'react';
 import { Text, TextPropsExtended } from './Text';
 import { useTheme } from '../../hooks/useTheme';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 
 export interface CodeProps extends Omit<TextPropsExtended, 'variant' | 'role'> {
   children: React.ReactNode;
   block?: boolean;
   role?: 'text' | 'label';
+  style?: TextStyle;
 }
 
 export const Code: React.FC<CodeProps> = ({ 
@@ -37,11 +38,10 @@ export const Code: React.FC<CodeProps> = ({
     <Text
       variant="body2"
       weight="normal"
-      color={theme.colors.primary}
-      role={role}
       style={[
         codeStyle.code,
         block && codeStyle.blockCode,
+        { color: theme.colors.primary },
         style
       ]}
       {...props}

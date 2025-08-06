@@ -48,13 +48,13 @@ export const BinCard: React.FC<BinCardProps> = ({
       onPress={onPress}
       activeOpacity={0.8}
      accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-      <AutoRoleView role="card">
+      <AutoRoleView componentRole="card">
         <Text style={titleStyle}>{bin.name}</Text>
         {bin.description && (
           <Text style={descriptionStyle}>{bin.description}</Text>
         )}
-        <AutoRoleView role="content" style={styles.metaContainer}>
-          <AutoRoleView role="item" style={styles.metaItem}>
+        <AutoRoleView componentRole="content" style={styles.metaContainer}>
+          <AutoRoleView componentRole="item" style={styles.metaItem}>
             <IconWrapper
               name="MaterialCommunityIcons"
               iconName="file-document-outline"
@@ -63,7 +63,7 @@ export const BinCard: React.FC<BinCardProps> = ({
             />
             <Text style={metaStyle}>{bin.thoughtmarkCount} thoughtmarks</Text>
           </AutoRoleView>
-          <AutoRoleView role="item" style={styles.metaItem}>
+          <AutoRoleView componentRole="item" style={styles.metaItem}>
             <IconWrapper
               name="MaterialCommunityIcons"
               iconName={bin.isPrivate ? 'lock' : 'lock-open-variant'}
@@ -73,7 +73,7 @@ export const BinCard: React.FC<BinCardProps> = ({
             <Text style={metaStyle}>{bin.isPrivate ? 'Private' : 'Public'}</Text>
           </AutoRoleView>
           {bin.isCollaborative && (
-            <AutoRoleView role="item" style={styles.metaItem}>
+            <AutoRoleView componentRole="item" style={styles.metaItem}>
               <IconWrapper
                 name="MaterialCommunityIcons"
                 iconName="account-group"

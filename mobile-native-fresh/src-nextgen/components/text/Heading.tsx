@@ -6,8 +6,8 @@ export interface HeadingProps extends Omit<TextPropsExtended, 'variant'> {
   children: React.ReactNode;
 }
 
-export const Heading: React.FC<HeadingProps> = ({ level, children, ...props }) => {
-  const getVariant = (level: number): TextPropsExtended['variant'] => {
+export const Heading: React.FC<HeadingProps> = ({ level, children, weight, ...props }) => {
+  const getVariant = (level: number): 'h1' | 'h2' | 'h3' => {
     switch (level) {
       case 1: return 'h1';
       case 2: return 'h2';
@@ -16,14 +16,14 @@ export const Heading: React.FC<HeadingProps> = ({ level, children, ...props }) =
     }
   };
 
-  const getDefaultWeight = (level: number): TextPropsExtended['weight'] => {
-    return level <= 3 ? 'bold' : '600';
+  const getDefaultWeight = (level: number): 'bold' | 'semibold' => {
+    return level <= 3 ? 'bold' : 'semibold';
   };
 
   return (
     <Text
       variant={getVariant(level)}
-      weight={props.weight || getDefaultWeight(level)}
+      weight={weight ?? getDefaultWeight(level)}
       {...props}
     >
       {children}

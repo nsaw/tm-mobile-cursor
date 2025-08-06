@@ -161,10 +161,10 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
   }), [saveFormState, loadFormState, clearFormState, restoreFormState]);
 
   return (
-    <AutoRoleView role="layout" style={styles.container}>
+    <AutoRoleView componentRole="layout" style={styles.container}>
       {/* Status indicator */}
       {(isRestoring || isSaving) && (
-        <AutoRoleView role="feedback" style={styles.statusContainer}>
+        <AutoRoleView componentRole="feedback" style={styles.statusContainer}>
           <Text style={styles.statusText}>
             {isRestoring ? '🔄 Restoring form data...' : '💾 Saving form data...'}
           </Text>
@@ -176,7 +176,7 @@ export const FormRestoreSentinel: React.FC<FormRestoreSentinelProps> = ({
 
       {/* Debug information (only in development) */}
       {__DEV__ && (
-        <AutoRoleView role="feedback" style={styles.debugContainer}>
+        <AutoRoleView componentRole="feedback" style={styles.debugContainer}>
           <Text style={styles.debugText}>
             Form: {formKey} | Environment: {environment}
           </Text>

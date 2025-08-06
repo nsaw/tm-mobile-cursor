@@ -188,7 +188,7 @@ const TabNavigator: React.FC = () => {
         options={{
           title: 'Thoughtmarks',
           tabBarIcon: ({ color, size }) => (
-            <AutoRoleView role="tab-icon" style={{ width: size, height: size }}>
+            <AutoRoleView componentRole="tab-icon" style={{ width: size, height: size }}>
               <Text style={{ color, fontSize: size }}>📝</Text>
             </AutoRoleView>
           ),
@@ -200,7 +200,7 @@ const TabNavigator: React.FC = () => {
         options={{
           title: 'Bins',
           tabBarIcon: ({ color, size }) => (
-            <AutoRoleView role="tab-icon" style={{ width: size, height: size }}>
+            <AutoRoleView componentRole="tab-icon" style={{ width: size, height: size }}>
               <Text style={{ color, fontSize: size }}>📦</Text>
             </AutoRoleView>
           ),
@@ -212,7 +212,7 @@ const TabNavigator: React.FC = () => {
         options={{
           title: 'Search',
           tabBarIcon: ({ color, size }) => (
-            <AutoRoleView role="tab-icon" style={{ width: size, height: size }}>
+            <AutoRoleView componentRole="tab-icon" style={{ width: size, height: size }}>
               <Text style={{ color, fontSize: size }}>🔍</Text>
             </AutoRoleView>
           ),
@@ -224,7 +224,7 @@ const TabNavigator: React.FC = () => {
         options={{
           title: 'Settings',
           tabBarIcon: ({ color, size }) => (
-            <AutoRoleView role="tab-icon" style={{ width: size, height: size }}>
+            <AutoRoleView componentRole="tab-icon" style={{ width: size, height: size }}>
               <Text style={{ color, fontSize: size }}>⚙️</Text>
             </AutoRoleView>
           ),

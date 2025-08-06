@@ -12,12 +12,17 @@ export interface Thoughtmark {
   id: string;
   title: string;
   content: string;
+  author: string;
   tags: string[];
   binId: string;
   createdAt: string;
   updatedAt: string;
   isArchived: boolean;
   isPinned: boolean;
+  isPublic: boolean;
+  likes: number;
+  comments: number;
+  shares: number;
 }
 
 export interface Bin {

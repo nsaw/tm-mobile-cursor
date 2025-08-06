@@ -105,11 +105,11 @@ export const TagChip: React.FC<TagChipProps> = ({
     >
       <Text 
         variant="caption"
-        weight="medium"
         style={{
           color: textColor,
           textAlign: 'center',
-          paddingHorizontal: 0
+          paddingHorizontal: 0,
+          fontWeight: '500'
         }} 
         numberOfLines={1}
       >

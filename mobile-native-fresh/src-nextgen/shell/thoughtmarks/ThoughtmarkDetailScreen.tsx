@@ -7,15 +7,15 @@ export const ThoughtmarkDetailScreen: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <AutoRoleView role="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <AutoRoleView role="header-section" style={styles.header}>
+    <AutoRoleView componentRole="screen" style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <AutoRoleView componentRole="header-section" style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.text }]}>Thoughtmark Detail</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
           View your thought
         </Text>
       </AutoRoleView>
       
-      <AutoRoleView role="content" style={styles.content}>
+      <AutoRoleView componentRole="content" style={styles.content}>
         <Text style={[styles.bodyText, { color: theme.colors.text }]}>
           Thoughtmark details will appear here.
         </Text>

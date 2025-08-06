@@ -5,6 +5,10 @@ export { ValidationSystem, FailSafeValidationLoop } from './ValidationSystem';
 export { useEnvironment, Environment, EnvironmentState, EnvironmentToggleResult } from '../hooks/useEnvironment';
 export * from './accessibilityUtils';
 export * from './errorReporting';
+export * from './designTokenUtils';
+export * from './themeStyles';
+export * from './TypeValidation';
+export * from './devTools';
 
 export {
   announceForAccessibility,

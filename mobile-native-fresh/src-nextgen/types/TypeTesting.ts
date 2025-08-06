@@ -54,12 +54,17 @@ export class TypeTester {
         id: 'test',
         title: 'Test Title',
         content: 'Test Content',
+        author: 'Test Author',
         tags: ['test'],
         binId: 'bin-1',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         isArchived: false,
         isPinned: false,
+        isPublic: true,
+        likes: 0,
+        comments: 0,
+        shares: 0,
       };
       return isThoughtmark(validThoughtmark) && !isThoughtmark({ invalid: 'data' });
     }));

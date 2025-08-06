@@ -1,108 +1,115 @@
 import React from 'react';
-import { Text as RNText, TextProps, StyleSheet } from 'react-native';
-import { AutoRoleView } from '../AutoRoleView';
-import { useTheme } from '../../hooks/useTheme';
+import { Text as RNText, TextProps as RNTextProps, StyleSheet, TextStyle } from 'react-native';
 
-export interface TextPropsExtended extends Omit<TextProps, 'role'> {
-  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'body2' | 'caption';
-  color?: string;
-  align?: 'left' | 'center' | 'right';
-  weight?: 'normal' | 'medium' | 'bold' | '600' | '700';
-  role?: 'text' | 'heading' | 'label' | 'paragraph' | 'content' | 'element';
+export interface TextProps extends RNTextProps {
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'body2' | 'caption' | 'overline';
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'warning' | 'info';
+  align?: 'left' | 'center' | 'right' | 'justify';
+  truncate?: boolean;
+  numberOfLines?: number;
+  children: React.ReactNode;
+}
+
+export interface TextPropsExtended extends TextProps {
   _truncate?: boolean;
 }
 
-// Export TextProps for other components to use
-export type { TextProps };
-
-export const Text: React.FC<TextPropsExtended> = ({
-  children,
+export const Text: React.FC<TextProps> = ({
   variant = 'body',
-  color,
+  weight = 'normal',
+  color = 'primary',
   align = 'left',
-  weight,
+  truncate = false,
+  numberOfLines,
   style,
-  accessibilityLabel,
-  accessibilityHint,
-  accessibilityRole,
-  accessibilityState,
-  importantForAccessibility,
-  _truncate,
-  role,
-  ..._props
+  children,
+  ...props
 }) => {
-  const theme = useTheme();
+  const getTextStyle = (): TextStyle => {
+    const baseStyle: TextStyle = {
+      fontSize: getFontSize(variant),
+      fontWeight: getFontWeight(weight),
+      lineHeight: getLineHeight(variant),
+      color: getTextColor(color),
+      textAlign: align,
+    };
 
-  const _textStyle = [
-    styles.text,
-    styles[variant],
-    { color: color || theme.colors.text },
-    { textAlign: align },
-    weight && { fontWeight: weight },
-    style,
-  ];
+    return StyleSheet.create({
+      text: baseStyle,
+    }).text;
+  };
 
-  // Map text-specific roles to AutoRoleView compatible roles
-  const getAutoRoleViewRole = (textRole?: string): 'text' | 'content' | 'element' => {
-    switch (textRole) {
-      case 'heading':
-        return 'text';
-      case 'label':
-        return 'text';
-      case 'paragraph':
-        return 'text';
-      case 'content':
-        return 'content';
-      case 'element':
-        return 'element';
-      default:
-        return 'text';
+  const getFontSize = (variant: TextProps['variant']) => {
+    switch (variant) {
+      case 'h1': return 32;
+      case 'h2': return 28;
+      case 'h3': return 24;
+      case 'h4': return 20;
+      case 'h5': return 18;
+      case 'h6': return 16;
+      case 'body': return 16;
+      case 'body2': return 14;
+      case 'caption': return 12;
+      case 'overline': return 12;
+      default: return 16;
     }
   };
 
-  const autoRoleViewRole = getAutoRoleViewRole(role);
+  const getFontWeight = (weight: TextProps['weight']): TextStyle['fontWeight'] => {
+    switch (weight) {
+      case 'normal': return 'normal';
+      case 'medium': return '500';
+      case 'semibold': return '600';
+      case 'bold': return 'bold';
+      default: return 'normal';
+    }
+  };
+
+  const getLineHeight = (variant: TextProps['variant']) => {
+    switch (variant) {
+      case 'h1':
+      case 'h2':
+      case 'h3':
+        return 1.2;
+      case 'h4':
+      case 'h5':
+      case 'h6':
+        return 1.4;
+      case 'body':
+      case 'body2':
+        return 1.6;
+      case 'caption':
+      case 'overline':
+        return 1.4;
+      default:
+        return 1.4;
+    }
+  };
+
+  const getTextColor = (color: TextProps['color']) => {
+    switch (color) {
+      case 'primary': return '#1A1A1A';
+      case 'secondary': return '#6C757D';
+      case 'tertiary': return '#6C757D';
+      case 'error': return '#DC3545';
+      case 'success': return '#28A745';
+      case 'warning': return '#FFC107';
+      case 'info': return '#17A2B8';
+      default: return '#1A1A1A';
+    }
+  };
+
+  const textStyle = getTextStyle();
+  const finalNumberOfLines = truncate ? 1 : numberOfLines;
 
   return (
-    <AutoRoleView
-      role={autoRoleViewRole}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityHint={accessibilityHint}
-      accessibilityRole={accessibilityRole}
-      accessibilityState={accessibilityState as Record<string, unknown>}
-      importantForAccessibility={importantForAccessibility}
+    <RNText
+      style={[textStyle, style]}
+      numberOfLines={finalNumberOfLines}
+      {...props}
     >
-      <RNText><Text>{children}</Text></RNText>
-    </AutoRoleView>
+      {children}
+    </RNText>
   );
-};
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 16,
-    fontWeight: '400',
-  },
-  h1: {
-    fontSize: 32,
-    fontWeight: '700',
-  },
-  h2: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  h3: {
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  body: {
-    fontSize: 16,
-    fontWeight: '400',
-  },
-  body2: {
-    fontSize: 14,
-    fontWeight: '400',
-  },
-  caption: {
-    fontSize: 14,
-    fontWeight: '400',
-  },
-}); 
+}; 

@@ -41,12 +41,17 @@ describe('TypeValidator', () => {
         id: 'thought-123',
         title: 'Test Thoughtmark',
         content: 'Test content',
+        author: 'Test Author',
         tags: ['test'],
         binId: 'bin-123',
         createdAt: '2023-01-01T00:00:00.000Z',
         updatedAt: '2023-01-01T00:00:00.000Z',
         isArchived: false,
         isPinned: false,
+        isPublic: true,
+        likes: 0,
+        comments: 0,
+        shares: 0,
       };
 
       const result = typeValidator.validateType('Thoughtmark', validThoughtmark);
@@ -91,12 +96,17 @@ describe('TypeValidator', () => {
           id: 'thought-123',
           title: 'Test Thoughtmark',
           content: 'Test content',
+          author: 'Test Author',
           tags: ['test'],
           binId: 'bin-123',
           createdAt: '2023-01-01T00:00:00.000Z',
           updatedAt: '2023-01-01T00:00:00.000Z',
           isArchived: false,
           isPinned: false,
+          isPublic: true,
+          likes: 0,
+          comments: 0,
+          shares: 0,
         },
       };
 

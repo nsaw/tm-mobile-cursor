@@ -40,7 +40,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <AutoRoleView role="screen" style={styles.container}>
+    <AutoRoleView componentRole="screen" style={styles.container}>
       <Text style={[styles.title, { color: theme.colors.text }]}>
         Create Account
       </Text>

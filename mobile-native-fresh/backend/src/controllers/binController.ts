@@ -38,10 +38,11 @@ export const binController = {
       const { name, description, color, icon, parentBinId } = req.body;
 
       if (!name) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Bin name is required'
         });
+        return;
       }
 
       const newBin = await db.insert(bins).values({
@@ -78,10 +79,11 @@ export const binController = {
         .limit(1);
       
       if (bin.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Bin not found'
         });
+        return;
       }
 
       res.json({
@@ -110,10 +112,11 @@ export const binController = {
         .returning();
 
       if (updatedBin.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Bin not found'
         });
+        return;
       }
 
       res.json({
@@ -141,10 +144,11 @@ export const binController = {
         .limit(1);
 
       if (existingBin.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Bin not found'
         });
+        return;
       }
 
       // Delete the bin using a single where clause

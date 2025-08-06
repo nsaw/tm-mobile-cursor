@@ -161,12 +161,17 @@ export class TypeValidator {
         id: 'thought-1',
         title: 'Test Thoughtmark',
         content: 'Test content',
+        author: 'Test Author',
         tags: ['test'],
         binId: 'bin-1',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         isArchived: false,
         isPinned: false,
+        isPublic: true,
+        likes: 0,
+        comments: 0,
+        shares: 0,
       };
 
       if (!testThoughtmark.id || !testThoughtmark.title || !testThoughtmark.content) {

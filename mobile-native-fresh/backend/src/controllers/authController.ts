@@ -16,20 +16,22 @@ export const authController = {
       const { email, password } = req.body;
 
       if (!email || !password) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Email and password are required'
         });
+        return;
       }
 
       // Find user by email
       const existingUsers = await db.select().from(users).where(eq(users.email, email)).limit(1);
       
       if (existingUsers.length === 0) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           error: 'Invalid credentials'
         });
+        return;
       }
 
       const user = existingUsers[0];
@@ -83,20 +85,22 @@ export const authController = {
       const { email, password, firstName, lastName } = req.body;
 
       if (!email || !password) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Email and password are required'
         });
+        return;
       }
 
       // Check if user already exists
       const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
       
       if (existingUser.length > 0) {
-        return res.status(409).json({
+        res.status(409).json({
           success: false,
           error: 'User already exists'
         });
+        return;
       }
 
       // Create new user
@@ -106,10 +110,9 @@ export const authController = {
         lastName: lastName || '',
         displayName: `${firstName || ''} ${lastName || ''}`.trim() || email,
         firebaseUid: `local-${Date.now()}`, // For local auth
-        password: password, // In production, hash this
         isPremium: false,
         isAdmin: false,
-        subscriptionStatus: 'free',
+        subscriptionStatus: 'active',
         emailVerified: false,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -171,10 +174,11 @@ export const authController = {
       const { refreshToken } = req.body;
 
       if (!refreshToken) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Refresh token is required'
         });
+        return;
       }
 
       // Verify refresh token
@@ -211,10 +215,9 @@ export const authController = {
         lastName: 'User',
         displayName: 'Demo User',
         firebaseUid: `demo-${Date.now()}`,
-        password: 'demo-password',
         isPremium: true,
         isAdmin: false,
-        subscriptionStatus: 'premium',
+        subscriptionStatus: 'active',
         emailVerified: true,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -258,10 +261,11 @@ export const authController = {
       const { idToken } = req.body;
 
       if (!idToken) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Google ID token is required'
         });
+        return;
       }
 
       // In a real implementation, verify the Google ID token
@@ -298,10 +302,11 @@ export const authController = {
       const { identityToken } = req.body;
 
       if (!identityToken) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Apple identity token is required'
         });
+        return;
       }
 
       // In a real implementation, verify the Apple identity token
@@ -338,20 +343,22 @@ export const authController = {
       const { email } = req.body;
 
       if (!email) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Email is required'
         });
+        return;
       }
 
       // Check if user exists
       const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
       
       if (existingUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       // In a real implementation, send password reset email
@@ -374,10 +381,11 @@ export const authController = {
       const { token, newPassword } = req.body;
 
       if (!token || !newPassword) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Token and new password are required'
         });
+        return;
       }
 
       // In a real implementation, verify the reset token and update password
@@ -400,20 +408,22 @@ export const authController = {
       const { email } = req.body;
 
       if (!email) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Email is required'
         });
+        return;
       }
 
       // Check if user exists
       const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
       
       if (existingUser.length === 0) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'User not found'
         });
+        return;
       }
 
       // In a real implementation, send verification email
@@ -436,10 +446,11 @@ export const authController = {
       const { token } = req.body;
 
       if (!token) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Verification token is required'
         });
+        return;
       }
 
       // In a real implementation, verify the email verification token
@@ -462,10 +473,11 @@ export const authController = {
       const token = req.headers.authorization?.replace('Bearer ', '');
 
       if (!token) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           error: 'Token is required'
         });
+        return;
       }
 
       // Verify token
@@ -475,10 +487,11 @@ export const authController = {
       const user = await db.select().from(users).where(eq(users.id, decoded.userId)).limit(1);
 
       if (user.length === 0) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           error: 'Invalid token'
         });
+        return;
       }
 
       res.json({
