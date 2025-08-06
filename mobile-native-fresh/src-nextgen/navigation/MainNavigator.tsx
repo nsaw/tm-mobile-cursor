@@ -238,6 +238,11 @@ const TabNavigator: React.FC = () => {
 export const MainNavigator: React.FC = () => {
   const { isAuthenticated } = useAuth();
 
+  // Debug: Log navigation state
+  React.useEffect(() => {
+    console.log('🧭 MainNavigator - Auth State:', { isAuthenticated });
+  }, [isAuthenticated]);
+
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       {isAuthenticated ? (
