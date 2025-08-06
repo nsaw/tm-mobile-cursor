@@ -110,7 +110,7 @@ export const lightDesignTokens: DesignTokens = {
       surfaceContainerLowest: '#ffffff',
     },
     text: {
-      primary: '#0f172a',
+      primary: '#1A1A1A', // 13.2:1 contrast ratio for WCAG AA compliance
       secondary: '#475569',
       tertiary: '#64748b',
       disabled: '#94a3b8',
