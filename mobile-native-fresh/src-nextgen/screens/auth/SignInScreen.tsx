@@ -27,6 +27,15 @@ export const SignInScreen: React.FC = () => {
     }
   };
 
+  const handleBypassLogin = async () => {
+    try {
+      // Bypass login for testing
+      await signIn('test@example.com', 'password');
+    } catch (error) {
+      Alert.alert('Bypass Error', 'Failed to bypass login');
+    }
+  };
+
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   };
@@ -95,6 +104,16 @@ export const SignInScreen: React.FC = () => {
            accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={[styles.signInButtonText, { color: theme.colors.onPrimary }]}>
               Sign In
+            </Text>
+          </TouchableOpacity>
+
+          {/* Bypass Login Button for Testing */}
+          <TouchableOpacity
+            style={[styles.bypassButton, { backgroundColor: theme.colors.secondary, borderColor: theme.colors.border }]}
+            onPress={handleBypassLogin}
+           accessibilityRole="button" accessible={true} accessibilityLabel="Bypass login button">
+            <Text style={[styles.bypassButtonText, { color: theme.colors.onSurface }]}>
+              🚀 Bypass Login (Test)
             </Text>
           </TouchableOpacity>
 
@@ -175,6 +194,18 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   signInButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  bypassButton: {
+    height: 48,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+  },
+  bypassButtonText: {
     fontSize: 16,
     fontWeight: '600',
   },
