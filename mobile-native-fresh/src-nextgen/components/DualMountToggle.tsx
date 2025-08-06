@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../hooks/useTheme';
+import { useDualMount } from '../contexts/DualMountContext';
 
 interface DualMountToggleProps {
   position?: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
@@ -14,12 +15,10 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
   opacity = 0.8,
 }) => {
   const theme = useTheme();
-  const [isNextGen, setIsNextGen] = React.useState(true); // Default to nextgen
+  const { isNextGen, toggleMount } = useDualMount();
 
   const handleToggle = () => {
-    setIsNextGen(!isNextGen);
-    // TODO: Implement actual dual mount switching logic
-    console.log(`🔄 Dual Mount Toggle: Switching to ${!isNextGen ? 'NextGen' : 'Legacy'}`);
+    toggleMount();
   };
 
   const getPositionStyle = () => {
