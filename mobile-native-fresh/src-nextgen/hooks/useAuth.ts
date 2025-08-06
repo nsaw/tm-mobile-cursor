@@ -1,115 +1,116 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar?: string;
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: { email: string } | null;
+  loading: boolean;
+  error: string | null;
 }
 
-export const useAuth = (): {
-  isAuthenticated: boolean;
-  user: User | null;
-  isLoading: boolean;
-  error: string | null;
-  signIn: (email: string, password: string) => Promise<{ success: boolean; requiresPin: boolean; error?: string }>;
-  signUp: (email: string, password: string) => Promise<{ success: boolean; requiresPin: boolean; error?: string }>;
+export interface UseAuthReturn extends AuthState {
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  verifyPin: (pin: string, purpose: 'verification' | 'setup') => Promise<{ success: boolean; requiresPin: boolean; error?: string }>;
-  verifyPIN: (pin: string, purpose: 'verification' | 'setup') => Promise<{ success: boolean; requiresPin: boolean; error?: string }>;
-  resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
-} => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  resetPassword: (email: string) => Promise<void>;
+  verifyPIN: (pin: string) => Promise<boolean>;
+  verifyPin: (pin: string) => Promise<boolean>;
+  isLoading: boolean;
+}
+
+export const useAuth = (): UseAuthReturn => {
+  const [state, setState] = useState<AuthState>({
+    isAuthenticated: false,
+    user: null,
+    loading: false,
+    error: null,
+  });
+
+  const signIn = useCallback(async (email: string, _password: string) => {
+    setState(prev => ({ ...prev, loading: true, error: null }));
+    try {
+      // Mock authentication logic
+      await new Promise<void>(resolve => setTimeout(resolve, 1000));
+      setState({
+        isAuthenticated: true,
+        user: { email },
+        loading: false,
+        error: null,
+      });
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        error: error instanceof Error ? error.message : 'Authentication failed',
+      }));
+    }
+  }, []);
+
+  const signUp = useCallback(async (email: string, _password: string) => {
+    setState(prev => ({ ...prev, loading: true, error: null }));
+    try {
+      // Mock sign up logic
+      await new Promise<void>(resolve => setTimeout(resolve, 1000));
+      setState({
+        isAuthenticated: true,
+        user: { email },
+        loading: false,
+        error: null,
+      });
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        error: error instanceof Error ? error.message : 'Sign up failed',
+      }));
+    }
+  }, []);
+
+  const signOut = useCallback(async () => {
+    setState({
+      isAuthenticated: false,
+      user: null,
+      loading: false,
+      error: null,
+    });
+  }, []);
+
+  const resetPassword = useCallback(async (_email: string) => {
+    setState(prev => ({ ...prev, loading: true, error: null }));
+    try {
+      // Mock password reset logic
+      await new Promise<void>(resolve => setTimeout(resolve, 1000));
+      setState(prev => ({ ...prev, loading: false }));
+    } catch (error) {
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        error: error instanceof Error ? error.message : 'Password reset failed',
+      }));
+    }
+  }, []);
+
+  const verifyPIN = useCallback(async (pin: string): Promise<boolean> => {
+    setState(prev => ({ ...prev, loading: true }));
+    try {
+      // Mock PIN verification
+      await new Promise<void>(resolve => setTimeout(resolve, 500));
+      const isValid = pin === '1234'; // Mock validation
+      setState(prev => ({ ...prev, loading: false }));
+      return isValid;
+    } catch (error) {
+      setState(prev => ({ ...prev, loading: false }));
+      return false;
+    }
+  }, []);
 
   return {
-    isAuthenticated,
-    user,
-    isLoading,
-    error,
-    signIn: async (email: string, password: string) => {
-      // TODO: Implement actual sign in logic
-      setIsLoading(true);
-      setError(null);
-      try {
-        console.log('Sign in:', email, password);
-        setIsAuthenticated(true);
-        setUser({ id: '1', email, name: 'User' });
-        return { success: true, requiresPin: false };
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Sign in failed');
-        return { success: false, requiresPin: false, error: err instanceof Error ? err.message : 'Sign in failed' };
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    signUp: async (email: string, password: string) => {
-      // TODO: Implement actual sign up logic
-      setIsLoading(true);
-      setError(null);
-      try {
-        console.log('Sign up:', email, password);
-        setIsAuthenticated(true);
-        setUser({ id: '1', email, name: 'User' });
-        return { success: true, requiresPin: false };
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Sign up failed');
-        return { success: false, requiresPin: false, error: err instanceof Error ? err.message : 'Sign up failed' };
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    signOut: async () => {
-      // TODO: Implement actual sign out logic
-      console.log('Sign out');
-      setIsAuthenticated(false);
-      setUser(null);
-    },
-    verifyPin: async (pin: string, purpose: 'verification' | 'setup') => {
-      // TODO: Implement actual PIN verification logic
-      setIsLoading(true);
-      setError(null);
-      try {
-        console.log('Verify PIN:', pin, purpose);
-        return { success: true, requiresPin: false };
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'PIN verification failed');
-        return { success: false, requiresPin: false, error: err instanceof Error ? err.message : 'PIN verification failed' };
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    verifyPIN: async (pin: string, purpose: 'verification' | 'setup') => {
-      // Alias for verifyPin for backward compatibility
-      setIsLoading(true);
-      setError(null);
-      try {
-        console.log('Verify PIN:', pin, purpose);
-        return { success: true, requiresPin: false };
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'PIN verification failed');
-        return { success: false, requiresPin: false, error: err instanceof Error ? err.message : 'PIN verification failed' };
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    resetPassword: async (email: string) => {
-      // TODO: Implement actual password reset logic
-      setIsLoading(true);
-      setError(null);
-      try {
-        console.log('Reset password:', email);
-        return { success: true };
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Password reset failed');
-        return { success: false, error: err instanceof Error ? err.message : 'Password reset failed' };
-      } finally {
-        setIsLoading(false);
-      }
-    },
+    ...state,
+    signIn,
+    signUp,
+    signOut,
+    resetPassword,
+    verifyPIN,
+    verifyPin: verifyPIN, // Alias for compatibility
+    isLoading: state.loading,
   };
 };
-
-// TODO: Implement full feature after navigation unblocked 

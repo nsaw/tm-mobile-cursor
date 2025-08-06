@@ -1,5 +1,8 @@
 import { Platform, Appearance } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// Import default themes - these will be properly defined
+const defaultTheme = { colors: { primary: '#007AFF' }, typography: { sizes: {} } };
+const darkTheme = { colors: { primary: '#0A84FF' }, typography: { sizes: {} } };
 
 // Theme configuration
 const THEME_STORAGE_KEY = '@thoughtmarks_theme';
@@ -121,10 +124,11 @@ export class ThemeSystem {
     this.themeCache = new Map();
     this.listeners = new Set();
     
+    // Initialize with safe defaults to avoid circular calls
     this.state = {
-      current: this.getDefaultTheme(),
-      available: this.getAvailableThemes(),
-      isLoading: true,
+      current: defaultTheme,
+      available: [defaultTheme, darkTheme],
+      isLoading: false,
       error: null,
       lastUpdated: Date.now(),
       validationStatus: 'pending',
@@ -139,6 +143,8 @@ export class ThemeSystem {
   public static getInstance(): ThemeSystem {
     if (!ThemeSystem.instance) {
       ThemeSystem.instance = new ThemeSystem();
+      // Initialize after instance creation to avoid circular reference
+      ThemeSystem.instance.initialize();
     }
     return ThemeSystem.instance;
   }
