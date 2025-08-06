@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from '../components/AutoRoleView';
 
@@ -9,10 +10,16 @@ interface ProfileScreenProps {
 
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ _route }) => {
   const theme = useTheme();
+  const editButtonRef = useRef<TouchableOpacity>(null);
   const [profile] = useState({
     name: 'John Doe',
     email: 'john@example.com',
     avatar: 'https://via.placeholder.com/100'
+  });
+
+  useFocusEffect(() => {
+    // Focus the edit button when screen comes into focus
+    editButtonRef.current?.focus();
   });
 
   const handleEditProfile = () => {
@@ -32,9 +39,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ _route }) => {
         {profile.email}
       </Text>
       <TouchableOpacity
+        ref={editButtonRef}
         style={[styles.editButton, { backgroundColor: theme.colors.primary }]}
         onPress={handleEditProfile}
-       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        accessibilityRole="button" 
+        accessible={true} 
+        accessibilityLabel="Edit profile button">
         <Text style={[styles.editButtonText, { color: theme.colors.onPrimary }]}>
           Edit Profile
         </Text>
