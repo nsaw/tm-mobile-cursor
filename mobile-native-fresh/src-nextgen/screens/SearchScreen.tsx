@@ -8,7 +8,7 @@ const SearchScreen: React.FC = () => {
 
   return (
     <AutoRoleView componentRole="screen" style={styles.container}>
-      <Text style={[styles.title, { color: theme.colors.text }]}>
+      <Text accessibilityLabel='Search title input' accessibilityRole='header' style={[styles.title, { color: theme.colors.text }]}>
         Search
       </Text>
       <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
