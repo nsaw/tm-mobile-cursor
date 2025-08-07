@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
-
-import { useTheme } from '../../theme/ThemeProvider';
+import { useTheme, FontWeight } from '../../hooks/useTheme';
 
 export interface TextProps extends Omit<RNTextProps, 'role'> {
   variant?: 'body' | 'heading' | 'title' | 'subtitle' | 'subheading' | 'heading2' | 'label' | 'caption' | 'muted' | 'tagline' | 'button' | 'section';
@@ -34,7 +33,7 @@ export const Text: React.FC<TextProps> = ({
       case 'heading':
         baseStyle = {
           fontSize: theme.fontSize.h1,
-          fontWeight: theme.fontWeight.bold,
+          fontWeight: theme.fontWeight.bold as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.h1 * 1.2,
         };
@@ -42,7 +41,7 @@ export const Text: React.FC<TextProps> = ({
       case 'title':
         baseStyle = {
           fontSize: theme.fontSize.lg,
-          fontWeight: theme.fontWeight.semibold,
+          fontWeight: theme.fontWeight.semibold as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.lg * 1.4,
         };
@@ -50,7 +49,7 @@ export const Text: React.FC<TextProps> = ({
       case 'subtitle':
         baseStyle = {
           fontSize: theme.fontSize.body,
-          fontWeight: theme.fontWeight.medium,
+          fontWeight: theme.fontWeight.medium as FontWeight,
           color: theme.colors.textSecondary,
           lineHeight: theme.fontSize.body * 1.4,
         };
@@ -58,7 +57,7 @@ export const Text: React.FC<TextProps> = ({
       case 'body':
         baseStyle = {
           fontSize: theme.fontSize.body,
-          fontWeight: theme.fontWeight.normal,
+          fontWeight: theme.fontWeight.normal as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.body * 1.4,
         };
@@ -66,7 +65,7 @@ export const Text: React.FC<TextProps> = ({
       case 'caption':
         baseStyle = {
           fontSize: theme.fontSize.xs,
-          fontWeight: theme.fontWeight.normal,
+          fontWeight: theme.fontWeight.normal as FontWeight,
           color: theme.colors.textSecondary,
           lineHeight: theme.fontSize.xs * 1.4,
         };
@@ -74,7 +73,7 @@ export const Text: React.FC<TextProps> = ({
       case 'muted':
         baseStyle = {
           fontSize: theme.fontSize.sm,
-          fontWeight: theme.fontWeight.normal,
+          fontWeight: theme.fontWeight.normal as FontWeight,
           color: theme.colors.textMuted,
           lineHeight: theme.fontSize.sm * 1.4,
         };
@@ -82,7 +81,7 @@ export const Text: React.FC<TextProps> = ({
       case 'tagline':
         baseStyle = {
           fontSize: theme.fontSize.xl,
-          fontWeight: theme.fontWeight.light,
+          fontWeight: theme.fontWeight.light as FontWeight,
           color: theme.colors.textSecondary,
           lineHeight: theme.fontSize.xl * 1.5,
         };
@@ -90,7 +89,7 @@ export const Text: React.FC<TextProps> = ({
       case 'button':
         baseStyle = {
           fontSize: theme.fontSize.sm,
-          fontWeight: theme.fontWeight.medium,
+          fontWeight: theme.fontWeight.medium as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.sm * 1.4,
         };
@@ -98,7 +97,7 @@ export const Text: React.FC<TextProps> = ({
       case 'section':
         baseStyle = {
           fontSize: theme.fontSize.lg,
-          fontWeight: theme.fontWeight.semibold,
+          fontWeight: theme.fontWeight.semibold as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.lg * 1.4,
         };
@@ -106,7 +105,7 @@ export const Text: React.FC<TextProps> = ({
       default:
         baseStyle = {
           fontSize: theme.fontSize.body,
-          fontWeight: theme.fontWeight.normal,
+          fontWeight: theme.fontWeight.normal as FontWeight,
           color: theme.colors.text,
           lineHeight: theme.fontSize.body * 1.4,
         };
@@ -129,7 +128,8 @@ export const Text: React.FC<TextProps> = ({
     
     // Apply weight override if provided
     if (weight) {
-      baseStyle.fontWeight = (theme.fontWeight[weight as keyof typeof theme.fontWeight] || baseStyle.fontWeight);
+      const weightValue = theme.fontWeight[weight as keyof typeof theme.fontWeight];
+      baseStyle.fontWeight = (weightValue as FontWeight) || baseStyle.fontWeight;
     }
     
     return baseStyle;

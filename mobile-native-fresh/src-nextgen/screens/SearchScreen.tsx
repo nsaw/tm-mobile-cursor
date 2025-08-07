@@ -36,4 +36,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export { SearchScreen };
 export default SearchScreen; 

@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import type { Theme, TypographyElement, FontWeight } from '../theme/ThemeProvider';
+import type { Theme, FontWeight } from '../theme/ThemeProvider';
 
 // Type-safe theme style utilities
 export interface ThemeStyleUtils {
-  createTypographyStyle: (element: TypographyElement) => {
+  createTypographyStyle: (element: keyof Theme['typography']) => {
     fontSize: number;
     fontWeight: FontWeight;
     lineHeight?: number;
@@ -22,15 +22,16 @@ export class ThemeStyleFactory {
   }
 
   // Create typography styles
-  createTypographyStyle(element: TypographyElement): {
+  createTypographyStyle(element: keyof Theme['typography']): {
     fontSize: number;
     fontWeight: FontWeight;
     lineHeight?: number;
   } {
+    const typographyElement = this.theme.typography[element];
     return {
-      fontSize: element.fontSize,
-      fontWeight: element.fontWeight,
-      lineHeight: element.lineHeight,
+      fontSize: typographyElement.fontSize,
+      fontWeight: typographyElement.fontWeight as FontWeight,
+      lineHeight: typographyElement.fontSize * 1.4, // Default line height
     };
   }
 
@@ -74,9 +75,9 @@ export class ThemeStyleFactory {
     lineHeight?: number;
     color: string;
   } {
-    const typographyElement = this.theme.typography[variant];
+    const _typographyElement = this.theme.typography[variant];
     return {
-      ...this.createTypographyStyle(typographyElement),
+      ...this.createTypographyStyle(variant),
       color: this.theme.colors.text,
     };
   }
@@ -204,6 +205,6 @@ export const getThemeFontSize = (theme: Theme, size: keyof Theme['fontSize']): n
   return theme.fontSize[size];
 };
 
-export const getThemeFontWeight = (theme: Theme, weight: keyof Theme['fontWeight']): FontWeight => {
+export const getThemeFontWeight = (theme: Theme, weight: keyof Theme['fontWeight']): string => {
   return theme.fontWeight[weight];
 }; 

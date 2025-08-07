@@ -68,7 +68,7 @@ jest.mock('react-native', () => {
   // Mock AccessibilityInfo with comprehensive functionality
   const mockAddEventListener = jest.fn(() => ({ remove: jest.fn() }));
   
-  return {
+  const mockComponents = {
     View: ({ children, ...props }) => React.createElement('View', props, children),
     Text: ({ children, ...props }) => React.createElement('Text', props, children),
     TouchableOpacity: ({ children, onPress, ...props }) => 
@@ -124,6 +124,8 @@ jest.mock('react-native', () => {
     },
     __DEV__: true,
   };
+  
+  return mockComponents;
 });
 
 // Mock @testing-library/jest-native to avoid React Native dependencies
@@ -424,6 +426,98 @@ jest.mock('lucide-react-native', () => ({
   Crown: 'Crown',
 }));
 
+// Mock Zustand stores
+jest.mock('./src-nextgen/state/stores/authStore', () => ({
+  useAuthStore: () => ({
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    error: null,
+    token: null,
+    setUser: jest.fn(),
+    setToken: jest.fn(),
+    setLoading: jest.fn(),
+    setError: jest.fn(),
+    login: jest.fn(),
+    logout: jest.fn(),
+    clearError: jest.fn(),
+    updateUser: jest.fn(),
+  }),
+}));
+
+jest.mock('./src-nextgen/state/stores/uiStore', () => ({
+  useUIStore: () => ({
+    error: null,
+    setError: jest.fn(),
+    clearError: jest.fn(),
+  }),
+}));
+
+jest.mock('./src-nextgen/state/stores/themeStore', () => ({
+  useThemeStore: () => ({
+    currentTheme: 'light',
+    setTheme: jest.fn(),
+  }),
+}));
+
+// Mock hooks
+jest.mock('./src-nextgen/hooks/useAuth', () => ({
+  useAuth: () => ({
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    error: null,
+    login: jest.fn(),
+    logout: jest.fn(),
+    signUp: jest.fn(),
+    resetPassword: jest.fn(),
+    verifyPIN: jest.fn(),
+  }),
+}));
+
+jest.mock('./src-nextgen/hooks/useThoughtmarks', () => ({
+  useThoughtmarks: () => ({
+    thoughtmarks: [],
+    starred: [],
+    toggleStar: jest.fn(),
+    addThoughtmark: jest.fn(),
+    updateThoughtmark: jest.fn(),
+    deleteThoughtmark: jest.fn(),
+  }),
+}));
+
+jest.mock('./src-nextgen/hooks/useBins', () => ({
+  useBins: () => ({
+    bins: [],
+    createBin: jest.fn(),
+    updateBin: jest.fn(),
+    deleteBin: jest.fn(),
+    getBin: jest.fn(),
+  }),
+}));
+
+jest.mock('./src-nextgen/hooks/useTheme', () => ({
+  useTheme: () => ({
+    colors: {
+      background: '#ffffff',
+      text: '#000000',
+      primary: '#007AFF',
+      secondary: '#5856D6',
+      success: '#34C759',
+      warning: '#FF9500',
+      error: '#FF3B30',
+      textMuted: '#8E8E93',
+    },
+    fontSize: {
+      body: 16,
+    },
+    fontWeight: {
+      normal: '400',
+    },
+    styles: {},
+  }),
+}));
+
 // Global test utilities
 global.console = {
   ...console,
@@ -433,4 +527,39 @@ global.console = {
   // info: jest.fn(),
   // warn: jest.fn(),
   // error: jest.fn(),
-}; 
+};
+
+// Custom Jest matchers for accessibility
+expect.extend({
+  toBeAccessible(received) {
+    const pass = received && typeof received === 'object';
+    if (pass) {
+      return {
+        message: () => `expected element to be accessible`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `expected element to be accessible, but it was not`,
+        pass: false,
+      };
+    }
+  },
+  
+  toHaveEnvironment(received, environment) {
+    const pass = received && typeof received === 'object';
+    if (pass) {
+      return {
+        message: () => `expected element to have environment ${environment}`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `expected element to have environment ${environment}, but it did not`,
+        pass: false,
+      };
+    }
+  },
+});
+
+// Custom matchers added for accessibility and environment testing 

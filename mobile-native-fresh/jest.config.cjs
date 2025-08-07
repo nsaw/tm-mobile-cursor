@@ -9,9 +9,9 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|@react-native|react-clone-referenced-element|@expo|expo(s)?|@react-navigation)/'
+    'node_modules/(?!(jest-)?react-native|@react-native|react-clone-referenced-element|@expo|expo(s)?|@react-navigation|react-native-reanimated|react-native-gesture-handler|react-native-vector-icons|lucide-react-native)/'
   ],
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src-nextgen/$1'
   },
   globals: {

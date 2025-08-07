@@ -18,6 +18,16 @@ describe('AppStore', () => {
   });
 
   it('should have initial state', () => {
+    // Reset store to initial state
+    act(() => {
+      useAppStore.setState({
+        isInitialized: false,
+        version: '1.0.0',
+        buildNumber: '1',
+        lastUpdated: new Date(),
+      });
+    });
+    
     const { result } = renderHook(() => useAppStore());
     
     expect(result.current.isInitialized).toBe(false);

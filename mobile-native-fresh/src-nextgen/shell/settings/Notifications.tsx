@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Bell, MessageSquare, Heart, Star, Users } from 'lucide-react-native';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import type { FontWeight } from '../../theme/ThemeProvider';
 import { Button } from '../../components/ui/Button';
 import { AutoRoleView } from '../../components/AutoRoleView';
 
@@ -45,7 +46,7 @@ export const Notifications: React.FC = () => {
     },
     headerTitle: {
       fontSize: theme.fontSize.h1,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.text,
       marginBottom: theme.spacing.sm,
     },
@@ -59,7 +60,7 @@ export const Notifications: React.FC = () => {
     },
     sectionTitle: {
       fontSize: theme.fontSize.h2,
-      fontWeight: theme.fontWeight.semibold,
+      fontWeight: theme.fontWeight.semibold as FontWeight,
       color: theme.colors.text,
       marginBottom: theme.spacing.md,
     },
@@ -77,7 +78,7 @@ export const Notifications: React.FC = () => {
     },
     settingTitle: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.medium,
+      fontWeight: theme.fontWeight.medium as FontWeight,
       color: theme.colors.text,
       marginBottom: theme.spacing.xs,
     },
@@ -120,7 +121,7 @@ export const Notifications: React.FC = () => {
     buttonText: {
       color: theme.colors.background,
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.semibold,
+      fontWeight: theme.fontWeight.semibold as FontWeight,
     },
     disabledText: {
       color: theme.colors.textMuted,

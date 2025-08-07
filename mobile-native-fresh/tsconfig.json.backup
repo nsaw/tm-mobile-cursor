@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src-nextgen/*"
+      ],
+      "@legacy": [
+        "src-reference"
+      ],
+      "@legacy/*": [
+        "src-reference/*"
+      ]
+    },
+    "allowJs": true,
+    "lib": [
+      "ESNext"
+    ],
+    "moduleDetection": "force",
+    "customConditions": [
+      "react-native"
+    ],
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "types": [
+      "jest",
+      "react-native"
+    ]
+  },
+  "include": [
+    "src-nextgen",
+    "src-reference",
+    "App.tsx"
+  ],
+  "exclude": [
+    "tm-mobile-clone/**/*",
+    "reference/**/*",
+    "ios bak/**/*",
+    "node_modules",
+    "backend/dist/**/*",
+    "src-artifact/**/*",
+    "THAWED-REFERENCE/**/*",
+    "src-nextgen/shell/automation/**/*",
+    "_quarantine/**/*",
+    "**/*_quarantine/**/*",
+    "**/_quarantine/**/*"
+  ],
+
+}

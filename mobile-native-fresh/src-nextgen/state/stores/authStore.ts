@@ -9,6 +9,8 @@ export interface AuthStore extends AuthState {
   setToken: (token: string | null) => void;
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
+  setAuthenticated: (isAuthenticated: boolean) => void;
+  clearUser: () => void;
   login: (user: User, token: string) => void;
   logout: () => void;
   clearError: () => void;
@@ -40,6 +42,12 @@ export const useAuthStore = create<AuthStore>()(
 
       setError: (error) =>
         set({ error }),
+
+      setAuthenticated: (isAuthenticated) =>
+        set({ isAuthenticated }),
+
+      clearUser: () =>
+        set({ user: null }),
 
       login: (user, token) =>
         set({

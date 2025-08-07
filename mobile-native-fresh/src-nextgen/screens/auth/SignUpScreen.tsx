@@ -24,7 +24,7 @@ export const SignUpScreen: React.FC = () => {
     }
 
     try {
-      await signUp(email, password);
+      await signUp({ name: '', email, password });
       // Navigation will be handled by auth state change
     } catch (error) {
       Alert.alert('Sign Up Error', 'Failed to create account');

@@ -19,7 +19,11 @@ import { useTheme } from '../../../theme/ThemeProvider';
 
 const logo = require('../../../../assets/logo.png');
 
-export const SignInScreen: React.FC = () => {
+interface SignInScreenProps {
+  onAuthenticationSuccess?: () => void;
+}
+
+export const SignInScreen: React.FC<SignInScreenProps> = ({ onAuthenticationSuccess }) => {
   const { tokens: designTokens } = useTheme();
   // const { signIn, loading, signInWithDemo } = useAuth(); // TEMPORARILY DISABLED
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +31,8 @@ export const SignInScreen: React.FC = () => {
 
   // Runtime validation hook
   React.useEffect(() => {
-    console.log('🔐 SignInScreen initialized - Runtime validation active');
-    console.log('📊 SignInScreen state:', {
+    console.log('🔐 Legacy SignInScreen initialized - Runtime validation active');
+    console.log('📊 Legacy SignInScreen state:', {
       isLoading,
       hasDesignTokens: !!designTokens,
       tokensKeys: designTokens ? Object.keys(designTokens).length : 0
@@ -40,7 +44,7 @@ export const SignInScreen: React.FC = () => {
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      console.log('[SIGNIN] Email sign in attempted:', email);
+      console.log('[LEGACY-SIGNIN] Email sign in attempted:', email);
       // await signIn(email, password); // TEMPORARILY DISABLED
       Alert.alert('Sign In', 'Firebase auth temporarily disabled for testing');
     } catch (err: any) {
@@ -53,7 +57,7 @@ export const SignInScreen: React.FC = () => {
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
-      console.log('[SIGNIN] Google sign in attempted');
+      console.log('[LEGACY-SIGNIN] Google sign in attempted');
       // await googlePromptAsync(); // TEMPORARILY DISABLED
       Alert.alert('Sign In', 'Google auth temporarily disabled for testing');
     } catch (err: any) {
@@ -66,7 +70,7 @@ export const SignInScreen: React.FC = () => {
   const handleAppleSignIn = async () => {
     try {
       setIsLoading(true);
-      console.log('[SIGNIN] Apple sign in attempted');
+      console.log('[LEGACY-SIGNIN] Apple sign in attempted');
       // await signInWithApple(); // TEMPORARILY DISABLED
       Alert.alert('Sign In', 'Apple auth temporarily disabled for testing');
     } catch (err: any) {
@@ -79,7 +83,7 @@ export const SignInScreen: React.FC = () => {
   const handleDemoSignIn = async () => {
     try {
       setIsLoading(true);
-      console.log('[SIGNIN] Demo sign in attempted');
+      console.log('[LEGACY-SIGNIN] Demo sign in attempted');
       // await signInWithDemo(); // TEMPORARILY DISABLED
       Alert.alert('Sign In', 'Demo auth temporarily disabled for testing');
     } catch (err: any) {
@@ -89,8 +93,75 @@ export const SignInScreen: React.FC = () => {
     }
   };
 
+  const handleBypassLogin = async () => {
+    try {
+      setIsLoading(true);
+      console.log('[LEGACY-SIGNIN] Bypass login attempted');
+      
+      // Simulate successful authentication
+      setTimeout(() => {
+        console.log('[LEGACY-SIGNIN] Bypass login successful');
+        Alert.alert(
+          'Legacy App - Bypass Login',
+          'Authentication successful! This is the legacy app version.\n\nNote: Legacy app has limited functionality for comparison purposes.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                console.log('[LEGACY-SIGNIN] User acknowledged bypass login');
+                // Call the success callback to advance to main app
+                if (onAuthenticationSuccess) {
+                  onAuthenticationSuccess();
+                }
+              }
+            }
+          ]
+        );
+        setIsLoading(false);
+      }, 1000);
+      
+    } catch (err: any) {
+      Alert.alert('Bypass Login Failed', err.message);
+      setIsLoading(false);
+    }
+  };
+
+  const handleSwitchToNextGen = () => {
+    Alert.alert(
+      'Switch to NextGen',
+      'Switch to NextGen app version?\n\nThis will require restarting the Expo server.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Switch to NextGen',
+          onPress: () => {
+            console.log('[LEGACY-SIGNIN] User requested switch to NextGen');
+            Alert.alert(
+              'Manual Switch Required',
+              'To switch to NextGen mode:\n\n1. Stop Expo server (Ctrl+C)\n2. Set EXPO_PUBLIC_USE_NEXTGEN=true\n3. Restart: npx expo start --ios --clear',
+              [{ text: 'OK' }]
+            );
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Dual Mount Toggle */}
+      <TouchableOpacity
+        style={[styles.dualMountToggle, { backgroundColor: designTokens.colors.surface }]}
+        onPress={handleSwitchToNextGen}
+      >
+        <Text style={[styles.dualMountText, { color: designTokens.colors.text }]}>
+          🚀 Switch to NextGen
+        </Text>
+      </TouchableOpacity>
+
       <KeyboardAvoidingView
         style={styles.keyboard}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -101,6 +172,7 @@ export const SignInScreen: React.FC = () => {
 
         <Text style={styles.title}>WELCOME TO THOUGHTMARKS!</Text>
         <Text style={styles.subtitle}>please sign in to continue</Text>
+        <Text style={styles.legacyNote}>📱 Legacy App Version</Text>
 
         <View style={styles.formContainer}>
           {/* TEMPORARILY DISABLED: LoginForm component
@@ -112,6 +184,18 @@ export const SignInScreen: React.FC = () => {
 
           <View style={styles.simpleForm}>
             <Text style={styles.formText}>Email/Password form temporarily disabled</Text>
+            
+            {/* Working Bypass Login Button */}
+            <TouchableOpacity 
+              style={styles.bypassButton}
+              onPress={handleBypassLogin}
+              disabled={isLoading}
+            >
+              <Text style={styles.bypassButtonText}>
+                {isLoading ? 'Loading...' : '🔓 Bypass Login (Legacy)'}
+              </Text>
+            </TouchableOpacity>
+
             <TouchableOpacity 
               style={styles.demoButton}
               onPress={handleDemoSignIn}
@@ -175,6 +259,21 @@ const getStyles = (tokens: any) => StyleSheet.create({
     flex: 1,
     backgroundColor: tokens.colors.background,
   },
+  dualMountToggle: {
+    position: 'absolute',
+    top: 50,
+    right: 24,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: tokens.colors.border,
+    zIndex: 1000,
+  },
+  dualMountText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
   keyboard: {
     flex: 1,
     paddingHorizontal: tokens.spacing.md,
@@ -199,7 +298,14 @@ const getStyles = (tokens: any) => StyleSheet.create({
     fontSize: tokens.typography.fontSize.body,
     color: tokens.colors.textSecondary,
     textAlign: 'center',
+    marginBottom: tokens.spacing.sm,
+  },
+  legacyNote: {
+    fontSize: tokens.typography.fontSize.body,
+    color: tokens.colors.accent,
+    textAlign: 'center',
     marginBottom: tokens.spacing.lg,
+    fontWeight: '600',
   },
   formContainer: {
     backgroundColor: tokens.colors.surface,
@@ -256,6 +362,18 @@ const getStyles = (tokens: any) => StyleSheet.create({
     color: tokens.colors.textSecondary,
     textAlign: 'center',
     marginBottom: tokens.spacing.sm,
+  },
+  bypassButton: {
+    backgroundColor: '#28a745',
+    borderRadius: 8,
+    paddingVertical: tokens.spacing.sm * 1.5,
+    alignItems: 'center',
+    marginBottom: tokens.spacing.sm,
+  },
+  bypassButtonText: {
+    fontSize: tokens.typography.fontSize.body,
+    color: '#ffffff',
+    fontWeight: '600',
   },
   demoButton: {
     backgroundColor: tokens.colors.accent,

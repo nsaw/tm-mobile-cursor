@@ -14,6 +14,11 @@ export interface ErrorReport {
 }
 
 export class ErrorService {
+  static async initialize(): Promise<void> {
+    // TODO: Implement real error service initialization
+    console.log('ErrorService initialized');
+  }
+
   static captureError(error: Error, context?: Record<string, unknown>): void {
     // TODO: Implement real error reporting
     console.error('Error Captured:', error, context);
@@ -42,6 +47,16 @@ export class ErrorService {
   static reportError(error: Error, context?: Record<string, unknown>): void {
     // TODO: Implement real error reporting
     console.error('Error Reported:', error, context);
+  }
+
+  static logError(error: Error, context?: Record<string, unknown>): void {
+    // TODO: Implement real error logging
+    console.error('Error Logged:', error, context);
+  }
+
+  static async cleanup(): Promise<void> {
+    // TODO: Implement real cleanup
+    console.log('ErrorService cleanup completed');
   }
 }
 

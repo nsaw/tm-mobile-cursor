@@ -27,6 +27,7 @@ export interface BinsActions {
   toggleBinPrivacy: (id: string) => Promise<void>;
   togglePrivacy: (id: string) => Promise<void>; // Alias for toggleBinPrivacy
   inviteCollaborator: (binId: string, email: string) => Promise<void>;
+  getBin: (id: string) => Bin | undefined; // Add getBin method
 }
 
 const mockBins: Bin[] = [
@@ -239,6 +240,11 @@ export const useBins = (): BinsState & BinsActions => {
     }
   }, [state.bins]);
 
+  // Add getBin method
+  const getBin = useCallback((id: string): Bin | undefined => {
+    return state.bins.find(bin => bin.id === id);
+  }, [state.bins]);
+
   return {
     ...state,
     fetchBins,
@@ -248,5 +254,6 @@ export const useBins = (): BinsState & BinsActions => {
     toggleBinPrivacy,
     togglePrivacy,
     inviteCollaborator,
+    getBin,
   };
 }; 

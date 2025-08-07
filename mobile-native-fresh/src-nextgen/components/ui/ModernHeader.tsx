@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme, FontWeight } from '../../hooks/useTheme';
 
 export interface ModernHeaderProps {
   title: string;
@@ -42,13 +42,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     },
     title: {
       fontSize: theme.fontSize.h1,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.text,
       textAlign: 'center',
     },
     subtitle: {
       fontSize: theme.fontSize.caption,
-      fontWeight: theme.fontWeight.normal,
+      fontWeight: theme.fontWeight.normal as FontWeight,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginTop: 2,
@@ -63,7 +63,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     },
     actionText: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.onAccent,
     },
     placeholder: {

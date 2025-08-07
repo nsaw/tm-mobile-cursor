@@ -16,6 +16,7 @@ import {
   ImageStyle,
 } from 'react-native';
 import { useTheme } from '../../hooks/useTheme';
+import type { FontWeight } from '../../theme/ThemeProvider';
 
 // Convert require to ES6 import
 // import logo from '../../../assets/logo.png';
@@ -62,14 +63,14 @@ export const PasswordResetScreen: React.FC = () => {
     },
     title: {
       fontSize: theme.fontSize.h1,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.text,
       textAlign: 'center',
       marginBottom: theme.spacing.sm,
     },
     subtitle: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.normal,
+      fontWeight: theme.fontWeight.normal as FontWeight,
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: theme.spacing.lg,
@@ -105,7 +106,7 @@ export const PasswordResetScreen: React.FC = () => {
     },
     primaryButtonText: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.semibold,
+      fontWeight: theme.fontWeight.semibold as FontWeight,
       color: '#fff',
     },
     secondaryButton: {
@@ -118,7 +119,7 @@ export const PasswordResetScreen: React.FC = () => {
     },
     secondaryButtonText: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.medium,
+      fontWeight: theme.fontWeight.medium as FontWeight,
       color: theme.colors.text,
     },
   };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme, FontWeight } from '../../hooks/useTheme';
 
 export interface Thoughtmark {
   id: string;
@@ -43,13 +43,13 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
     },
     title: {
       fontSize: theme.fontSize.h2,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.text,
       marginBottom: theme.spacing.xs,
     },
     content: {
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.normal,
+      fontWeight: theme.fontWeight.normal as FontWeight,
       color: theme.colors.textSecondary,
       marginBottom: theme.spacing.sm,
     },
@@ -66,7 +66,7 @@ export const ThoughtmarkCard: React.FC<ThoughtmarkCardProps> = ({
     },
     tagText: {
       fontSize: theme.fontSize.caption,
-      fontWeight: theme.fontWeight.medium,
+      fontWeight: theme.fontWeight.medium as FontWeight,
       color: theme.colors.onAccent,
     },
   });

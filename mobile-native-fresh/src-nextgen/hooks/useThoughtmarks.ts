@@ -15,6 +15,7 @@ export interface UseThoughtmarksReturn {
   unlikeThoughtmark: (id: string) => Promise<void>;
   searchThoughtmarks: (query: string) => Promise<Thoughtmark[]>;
   getThoughtmarkById: (id: string) => Thoughtmark | undefined;
+  getThoughtmark: (id: string) => Thoughtmark | undefined; // Add getThoughtmark method
 }
 
 // Re-export Thoughtmark for convenience
@@ -239,6 +240,11 @@ export const useThoughtmarks = (): UseThoughtmarksReturn => {
     return thoughtmarks.find(tm => tm.id === id);
   }, [thoughtmarks]);
 
+  // Add getThoughtmark method (alias for getThoughtmarkById)
+  const getThoughtmark = useCallback((id: string): Thoughtmark | undefined => {
+    return getThoughtmarkById(id);
+  }, [getThoughtmarkById]);
+
   // Load thoughtmarks on mount
   useEffect(() => {
     fetchThoughtmarks();
@@ -257,5 +263,6 @@ export const useThoughtmarks = (): UseThoughtmarksReturn => {
     unlikeThoughtmark,
     searchThoughtmarks,
     getThoughtmarkById,
+    getThoughtmark,
   };
 }; 

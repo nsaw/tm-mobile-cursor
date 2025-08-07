@@ -100,4 +100,5 @@ const useThemeStore = create<ThemeStore>()(
   )
 );
 
+export { useThemeStore };
 export default useThemeStore; 

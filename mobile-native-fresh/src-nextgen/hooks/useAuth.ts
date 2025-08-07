@@ -1,128 +1,252 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useAuthStore } from '../state/stores/authStore';
+import { apiServiceIntegration, User } from '../services/ApiServiceIntegration';
 
+// Auth state interface
 export interface AuthState {
+  user: User | null;
   isAuthenticated: boolean;
-  user: { email: string } | null;
-  loading: boolean;
-  error: string | null;
-}
-
-export interface UseAuthReturn extends AuthState {
-  signIn: (email: string, password: string) => Promise<{ requiresPin: boolean }>;
-  signUp: (email: string, password: string) => Promise<{ requiresPin: boolean }>;
-  signOut: () => Promise<void>;
-  resetPassword: (email: string) => Promise<void>;
-  verifyPIN: (pin: string, purpose?: string) => Promise<{ success: boolean }>;
-  verifyPin: (pin: string, purpose?: string) => Promise<{ success: boolean }>;
   isLoading: boolean;
+  error: string | null;
+  token: string | null;
 }
 
+// Login credentials interface
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+// Sign up data interface
+export interface SignUpData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+// Auth hook return interface
+export interface UseAuthReturn {
+  // State
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  token: string | null;
+
+  // Actions
+  login: (user: User, token: string) => Promise<void>;
+  logout: () => Promise<void>;
+  signIn: (credentials: LoginCredentials) => Promise<void>;
+  signUp: (data: SignUpData) => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
+  verifyPIN: (pin: string) => Promise<boolean>;
+  updateProfile: (updates: Partial<User>) => Promise<void>;
+  clearError: () => void;
+  setLoading: (loading: boolean) => void;
+}
+
+/**
+ * useAuth Hook
+ * 
+ * Provides authentication functionality with Zustand store integration
+ * and API service communication.
+ */
 export const useAuth = (): UseAuthReturn => {
-  const [state, setState] = useState<AuthState>({
-    isAuthenticated: false,
-    user: null,
-    loading: false,
-    error: null,
-  });
+  const authStore = useAuthStore();
+  const [localLoading, setLocalLoading] = useState(false);
 
-  const signIn = useCallback(async (email: string, _password: string) => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+  // Initialize auth state on mount
+  useEffect(() => {
+    const initializeAuth = async () => {
+      try {
+        const response = await apiServiceIntegration.getCurrentUser();
+        if (response.success && response.data?.user) {
+          authStore.setUser(response.data.user);
+          authStore.setAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Failed to initialize auth:', error);
+      }
+    };
+
+    initializeAuth();
+  }, [authStore]);
+
+  // Login function
+  const login = useCallback(async (user: User, token: string) => {
     try {
-      // Mock authentication logic
-      await new Promise<void>(resolve => setTimeout(resolve, 1000));
-      setState({
-        isAuthenticated: true,
-        user: { email },
-        loading: false,
-        error: null,
-      });
-      
-      // Return auth flow result for useAuthFlow compatibility
-      return { requiresPin: false };
+      setLocalLoading(true);
+      authStore.setUser(user);
+      authStore.setToken(token);
+      authStore.setAuthenticated(true);
+      authStore.clearError();
     } catch (error) {
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: error instanceof Error ? error.message : 'Authentication failed',
-      }));
-      
-      // Return auth flow result even on error for useAuthFlow compatibility
-      return { requiresPin: false };
+      const errorMessage = error instanceof Error ? error.message : 'Login failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
     }
-  }, []);
+  }, [authStore]);
 
-  const signUp = useCallback(async (email: string, _password: string) => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+  // Logout function
+  const logout = useCallback(async () => {
     try {
-      // Mock sign up logic
-      await new Promise<void>(resolve => setTimeout(resolve, 1000));
-      setState({
-        isAuthenticated: true,
-        user: { email },
-        loading: false,
-        error: null,
-      });
-      
-      // Return auth flow result for useAuthFlow compatibility
-      return { requiresPin: false };
+      setLocalLoading(true);
+      await apiServiceIntegration.signOut();
+      authStore.clearUser();
+      authStore.setToken(null);
+      authStore.setAuthenticated(false);
+      authStore.clearError();
     } catch (error) {
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: error instanceof Error ? error.message : 'Sign up failed',
-      }));
-      
-      // Return auth flow result even on error for useAuthFlow compatibility
-      return { requiresPin: false };
+      const errorMessage = error instanceof Error ? error.message : 'Logout failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
     }
-  }, []);
+  }, [authStore]);
 
-  const signOut = useCallback(async () => {
-    setState({
-      isAuthenticated: false,
-      user: null,
-      loading: false,
-      error: null,
-    });
-  }, []);
-
-  const resetPassword = useCallback(async (_email: string) => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+  // Sign in function
+  const signIn = useCallback(async (credentials: LoginCredentials) => {
     try {
-      // Mock password reset logic
-      await new Promise<void>(resolve => setTimeout(resolve, 1000));
-      setState(prev => ({ ...prev, loading: false }));
+      setLocalLoading(true);
+      authStore.clearError();
+      
+      const response = await apiServiceIntegration.signIn(credentials);
+      
+      if (response.success && response.data) {
+        await login(response.data.user, response.data.token);
+      } else {
+        throw new Error(response.error || 'Sign in failed');
+      }
     } catch (error) {
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: error instanceof Error ? error.message : 'Password reset failed',
-      }));
+      const errorMessage = error instanceof Error ? error.message : 'Sign in failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
     }
-  }, []);
+  }, [authStore, login]);
 
-  const verifyPIN = useCallback(async (pin: string, _purpose?: string): Promise<{ success: boolean }> => {
-    setState(prev => ({ ...prev, loading: true }));
+  // Sign up function
+  const signUp = useCallback(async (data: SignUpData) => {
     try {
-      // Mock PIN verification
-      await new Promise<void>(resolve => setTimeout(resolve, 500));
-      const isValid = pin === '1234'; // Mock validation
-      setState(prev => ({ ...prev, loading: false }));
-      return { success: isValid };
+      setLocalLoading(true);
+      authStore.clearError();
+      
+      const response = await apiServiceIntegration.signUp(data);
+      
+      if (response.success && response.data) {
+        await login(response.data.user, response.data.token);
+      } else {
+        throw new Error(response.error || 'Sign up failed');
+      }
     } catch (error) {
-      setState(prev => ({ ...prev, loading: false }));
-      return { success: false };
+      const errorMessage = error instanceof Error ? error.message : 'Sign up failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
     }
-  }, []);
+  }, [authStore, login]);
+
+  // Reset password function
+  const resetPassword = useCallback(async (email: string) => {
+    try {
+      setLocalLoading(true);
+      authStore.clearError();
+      
+      const response = await apiServiceIntegration.sendPasswordResetEmail(email);
+      
+      if (!response.success) {
+        throw new Error(response.error || 'Password reset failed');
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Password reset failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
+    }
+  }, [authStore]);
+
+  // Verify PIN function
+  const verifyPIN = useCallback(async (pin: string): Promise<boolean> => {
+    try {
+      // This would typically call an API to verify the PIN
+      // For now, we'll simulate a simple verification
+      const isValid = pin.length === 4 && /^\d+$/.test(pin);
+      
+      if (!isValid) {
+        authStore.setError('Invalid PIN format');
+        return false;
+      }
+      
+      // Simulate API call
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
+      
+      // For demo purposes, accept any 4-digit PIN
+      authStore.clearError();
+      return true;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'PIN verification failed';
+      authStore.setError(errorMessage);
+      return false;
+    }
+  }, [authStore]);
+
+  // Update profile function
+  const updateProfile = useCallback(async (updates: Partial<User>) => {
+    try {
+      setLocalLoading(true);
+      authStore.clearError();
+      
+      const response = await apiServiceIntegration.updateUserProfile(updates);
+      
+      if (response.success && response.data) {
+        authStore.updateUser(response.data);
+      } else {
+        throw new Error(response.error || 'Profile update failed');
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Profile update failed';
+      authStore.setError(errorMessage);
+      throw error;
+    } finally {
+      setLocalLoading(false);
+    }
+  }, [authStore]);
+
+  // Clear error function
+  const clearError = useCallback(() => {
+    authStore.clearError();
+  }, [authStore]);
+
+  // Set loading function
+  const setLoading = useCallback((loading: boolean) => {
+    authStore.setLoading(loading);
+  }, [authStore]);
 
   return {
-    ...state,
+    // State
+    user: authStore.user,
+    isAuthenticated: authStore.isAuthenticated,
+    isLoading: authStore.isLoading || localLoading,
+    error: authStore.error,
+    token: authStore.token,
+
+    // Actions
+    login,
+    logout,
     signIn,
     signUp,
-    signOut,
     resetPassword,
     verifyPIN,
-    verifyPin: verifyPIN, // Alias for compatibility
-    isLoading: state.loading,
+    updateProfile,
+    clearError,
+    setLoading,
   };
 };
+
+export default useAuth;

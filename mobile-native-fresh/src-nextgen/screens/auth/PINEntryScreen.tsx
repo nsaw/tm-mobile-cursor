@@ -11,13 +11,13 @@ type PinEntryScreenRouteProp = RouteProp<AuthStackParamList, 'PinEntry'>;
 export const PinEntryScreen: React.FC = () => {
   const route = useRoute<PinEntryScreenRouteProp>();
   const theme = useTheme();
-  const { verifyPin } = useAuth();
+  const { verifyPIN } = useAuth();
   const [pin, setPin] = useState('');
 
   const handleVerifyPin = async () => {
     try {
-      const result = await verifyPin(pin, route.params.purpose);
-      if (result.success) {
+      const result = await verifyPIN(pin);
+      if (result) {
         // Navigation will be handled by auth state change
       } else {
         Alert.alert('PIN Error', 'Invalid PIN. Please try again.');

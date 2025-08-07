@@ -36,4 +36,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export { SettingsScreen };
 export default SettingsScreen; 

@@ -13,20 +13,20 @@ type SignInScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'SignI
 export const SignInScreen: React.FC = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
   const theme = useTheme();
-  const { signIn, isAuthenticated, loading } = useAuthContext();
+  const { signIn, isAuthenticated, isLoading } = useAuthContext();
   const themeContext = React.useContext(ThemeContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Debug: Log authentication state
   React.useEffect(() => {
-    console.log('🔐 SignInScreen - Auth State:', { isAuthenticated, loading });
-  }, [isAuthenticated, loading]);
+    console.log('🔐 SignInScreen - Auth State:', { isAuthenticated, isLoading });
+  }, [isAuthenticated, isLoading]);
 
   const handleSignIn = async () => {
     try {
       console.log('🔐 Attempting sign in with:', email);
-      await signIn(email, password);
+      await signIn({ email, password });
       console.log('✅ Sign in completed');
     } catch (error) {
       console.error('❌ Sign in error:', error);
@@ -37,7 +37,7 @@ export const SignInScreen: React.FC = () => {
   const handleBypassLogin = async () => {
     try {
       console.log('🚀 Attempting bypass login');
-      await signIn('test@example.com', 'password');
+      await signIn({ email: 'test@example.com', password: 'password' });
       console.log('✅ Bypass login completed');
     } catch (error) {
       console.error('❌ Bypass login error:', error);
@@ -71,7 +71,7 @@ export const SignInScreen: React.FC = () => {
         {/* Debug Info */}
         <View style={[styles.debugInfo, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}>
           <Text style={[styles.debugText, { color: theme.colors.text }]}>
-            Auth: {isAuthenticated ? '✅' : '❌'} | Loading: {loading ? '⏳' : '✅'}
+            Auth: {isAuthenticated ? '✅' : '❌'} | Loading: {isLoading ? '⏳' : '✅'}
           </Text>
         </View>
 
@@ -117,10 +117,10 @@ export const SignInScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.signInButton, { backgroundColor: theme.colors.primary }]}
             onPress={handleSignIn}
-            disabled={loading}
+            disabled={isLoading}
            accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={[styles.signInButtonText, { color: theme.colors.onPrimary }]}>
-              {loading ? 'Signing In...' : 'Sign In'}
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </Text>
           </TouchableOpacity>
 
@@ -128,7 +128,7 @@ export const SignInScreen: React.FC = () => {
           <TouchableOpacity
             style={[styles.bypassButton, { backgroundColor: theme.colors.secondary, borderColor: theme.colors.border }]}
             onPress={handleBypassLogin}
-            disabled={loading}
+            disabled={isLoading}
            accessibilityRole="button" accessible={true} accessibilityLabel="Bypass login button">
             <Text style={[styles.bypassButtonText, { color: theme.colors.onSurface }]}>
               🚀 Bypass Login (Test)

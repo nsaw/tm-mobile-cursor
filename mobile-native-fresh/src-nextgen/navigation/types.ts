@@ -68,10 +68,10 @@ export interface RouteMismatchError {
 }
 
 export interface TabParamList {
-  Home: undefined;
-  Search: undefined;
-  AllThoughtmarks: undefined;
-  Profile: undefined;
+  DashboardTab: undefined;
+  SearchTab: undefined;
+  ProfileTab: undefined;
+  [key: string]: undefined; // Add index signature for ParamListBase constraint
 }
 
 export interface NavigationAction {

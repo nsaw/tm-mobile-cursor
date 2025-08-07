@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from './useAuth';
 import { analyticsService } from '../services/analyticsService';
-import { errorService } from '../services/errorService';
+import { ErrorService } from '../services/errorService';
 
 // Define navigation type for auth flow
 type AuthNavigation = {
@@ -22,7 +22,7 @@ export interface AuthFlowState {
 export interface UserData {
   email: string;
   password: string;
-  name?: string;
+  name: string;
 }
 
 export const useAuthFlow = (): {
@@ -69,17 +69,13 @@ export const useAuthFlow = (): {
       trackFlowStep('signin_attempt');
       setFlowState(prev => ({ ...prev, email, currentStep: 'signin' }));
 
-      const result = await signIn(email, password);
+      await signIn({ email, password });
 
-      if (result.requiresPin) {
-        setFlowState(prev => ({ 
-          ...prev, 
-          requiresPin: true, 
-          pinPurpose: 'verification',
-          currentStep: 'pinentry' 
-        }));
-        trackFlowStep('signin_pin_required');
-        navigation.navigate('PinEntry', { email, purpose: 'verification' });
+      // Check if PIN is required
+      if (flowState.requiresPin) {
+        setFlowState(prev => ({ ...prev, currentStep: 'pinentry' }));
+        trackFlowStep('pin_required');
+        // Navigation will be handled by PIN entry
       } else {
         setFlowState(prev => ({ ...prev, currentStep: 'complete', isFlowComplete: true }));
         trackFlowStep('signin_complete');
@@ -88,10 +84,10 @@ export const useAuthFlow = (): {
     } catch (error) {
       trackFlowStep('signin_error');
       const errorObj = error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Sign in error');
-      errorService.reportError(errorObj, { error, email });
+      ErrorService.reportError(errorObj, { error, email });
       throw error;
     }
-  }, [signIn, navigation, trackFlowStep]);
+  }, [signIn, trackFlowStep, flowState.requiresPin]);
 
   // Handle sign up flow
   const handleSignUp = useCallback(async (userData: UserData) => {
@@ -99,29 +95,24 @@ export const useAuthFlow = (): {
       trackFlowStep('signup_attempt');
       setFlowState(prev => ({ ...prev, email: userData.email, currentStep: 'signup' }));
 
-      const result = await signUp(userData.email, userData.password);
+      await signUp({
+        name: userData.name || '',
+        email: userData.email,
+        password: userData.password,
+      });
 
-      if (result.requiresPin) {
-        setFlowState(prev => ({ 
-          ...prev, 
-          requiresPin: true, 
-          pinPurpose: 'setup',
-          currentStep: 'pinentry' 
-        }));
-        trackFlowStep('signup_pin_required');
-        navigation.navigate('PinEntry', { email: userData.email, purpose: 'setup' });
-      } else {
-        setFlowState(prev => ({ ...prev, currentStep: 'complete', isFlowComplete: true }));
-        trackFlowStep('signup_complete');
-        // Navigate to main app
-      }
+      // For now, assume no PIN is required
+      // TODO: Implement PIN flow when API supports it
+      setFlowState(prev => ({ ...prev, currentStep: 'complete', isFlowComplete: true }));
+      trackFlowStep('signup_complete');
+      // Navigate to main app
     } catch (error) {
       trackFlowStep('signup_error');
       const errorObj = error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Sign up error');
-      errorService.reportError(errorObj, { error, email: userData.email });
+      ErrorService.reportError(errorObj, { error, email: userData.email });
       throw error;
     }
-  }, [signUp, navigation, trackFlowStep]);
+  }, [signUp, trackFlowStep]);
 
   // Handle PIN entry
   const handlePinEntry = useCallback(async (pin: string) => {
@@ -129,9 +120,9 @@ export const useAuthFlow = (): {
       trackFlowStep('pin_entry_attempt');
       setFlowState(prev => ({ ...prev, currentStep: 'pinentry' }));
 
-      const result = await verifyPIN(pin, flowState.pinPurpose);
+      const result = await verifyPIN(pin);
 
-      if (result.success) {
+      if (result) {
         setFlowState(prev => ({ ...prev, currentStep: 'complete', isFlowComplete: true }));
         trackFlowStep('pin_entry_success');
         // Navigate to main app
@@ -142,10 +133,10 @@ export const useAuthFlow = (): {
     } catch (error) {
       trackFlowStep('pin_entry_error');
       const errorObj = error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'PIN entry error');
-      errorService.reportError(errorObj, { error, email: flowState.email });
+      ErrorService.reportError(errorObj, { error, email: flowState.email });
       throw error;
     }
-  }, [verifyPIN, trackFlowStep, flowState.email, flowState.pinPurpose]);
+  }, [verifyPIN, trackFlowStep, flowState.email]);
 
   // Handle password reset
   const handlePasswordReset = useCallback(async (email: string) => {
@@ -161,7 +152,7 @@ export const useAuthFlow = (): {
     } catch (error) {
       trackFlowStep('password_reset_error');
       const errorObj = error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Password reset error');
-      errorService.reportError(errorObj, { error, email });
+      ErrorService.reportError(errorObj, { error, email });
       throw error;
     }
   }, [resetPassword, trackFlowStep]);

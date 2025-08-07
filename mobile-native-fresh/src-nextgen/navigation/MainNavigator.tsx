@@ -27,6 +27,7 @@ export type TabParamList = {
   Bins: undefined;
   Search: undefined;
   Settings: undefined;
+  [key: string]: undefined; // Add index signature for ParamListBase constraint
 };
 
 export type ContentStackParamList = {

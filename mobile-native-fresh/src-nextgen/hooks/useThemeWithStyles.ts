@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { useTheme } from '../theme/ThemeProvider';
 import { createThemeStyles, ThemeStyleFactory } from '../utils/themeStyles';
-import type { Theme } from '../theme/ThemeProvider';
+import type { ThemeContextType } from '../theme/ThemeProvider';
 
 // Hook that provides both theme and pre-computed styles
 export const useThemeWithStyles = (): {
-  theme: Theme;
+  theme: ThemeContextType;
   styles: ReturnType<typeof createThemeStyles>;
   styleFactory: ThemeStyleFactory;
 } => {
@@ -23,13 +23,13 @@ export const useThemeWithStyles = (): {
 
 // Hook for dynamic theme-based styling
 export const useThemeStyle = (): {
-  theme: Theme;
+  theme: ThemeContextType;
   createStyle: ThemeStyleFactory;
-  getColor: (colorKey: keyof Theme['colors']) => Theme['colors'][keyof Theme['colors']];
-  getSpacing: (size: keyof Theme['spacing']) => Theme['spacing'][keyof Theme['spacing']];
-  getFontSize: (size: keyof Theme['fontSize']) => Theme['fontSize'][keyof Theme['fontSize']];
-  getFontWeight: (weight: keyof Theme['fontWeight']) => Theme['fontWeight'][keyof Theme['fontWeight']];
-  getBorderRadius: (size: keyof Theme['borderRadius']) => Theme['borderRadius'][keyof Theme['borderRadius']];
+  getColor: (colorKey: keyof ThemeContextType['colors']) => ThemeContextType['colors'][keyof ThemeContextType['colors']];
+  getSpacing: (size: keyof ThemeContextType['spacing']) => ThemeContextType['spacing'][keyof ThemeContextType['spacing']];
+  getFontSize: (size: keyof ThemeContextType['fontSize']) => ThemeContextType['fontSize'][keyof ThemeContextType['fontSize']];
+  getFontWeight: (weight: keyof ThemeContextType['fontWeight']) => ThemeContextType['fontWeight'][keyof ThemeContextType['fontWeight']];
+  getBorderRadius: (size: keyof ThemeContextType['borderRadius']) => ThemeContextType['borderRadius'][keyof ThemeContextType['borderRadius']];
 } => {
   const theme = useTheme();
   
@@ -38,17 +38,17 @@ export const useThemeStyle = (): {
   return {
     theme,
     createStyle: styleFactory,
-    getColor: (colorKey: keyof Theme['colors']) => theme.colors[colorKey],
-    getSpacing: (size: keyof Theme['spacing']) => theme.spacing[size],
-    getFontSize: (size: keyof Theme['fontSize']) => theme.fontSize[size],
-    getFontWeight: (weight: keyof Theme['fontWeight']) => theme.fontWeight[weight],
-    getBorderRadius: (size: keyof Theme['borderRadius']) => theme.borderRadius[size],
+    getColor: (colorKey: keyof ThemeContextType['colors']) => theme.colors[colorKey],
+    getSpacing: (size: keyof ThemeContextType['spacing']) => theme.spacing[size],
+    getFontSize: (size: keyof ThemeContextType['fontSize']) => theme.fontSize[size],
+    getFontWeight: (weight: keyof ThemeContextType['fontWeight']) => theme.fontWeight[weight],
+    getBorderRadius: (size: keyof ThemeContextType['borderRadius']) => theme.borderRadius[size],
   };
 };
 
 // Hook for theme-aware component styling
 export const useComponentTheme = (_componentName: string): {
-  theme: Theme;
+  theme: ThemeContextType;
   styles: Record<string, unknown>;
 } => {
   const theme = useTheme();
@@ -101,40 +101,40 @@ export const useComponentTheme = (_componentName: string): {
 
 // Type-safe theme color hook
 export const useThemeColor = (): {
-  colors: Theme['colors'];
-  getColor: (colorKey: keyof Theme['colors']) => Theme['colors'][keyof Theme['colors']];
+  colors: ThemeContextType['colors'];
+  getColor: (colorKey: keyof ThemeContextType['colors']) => string;
   isDark: boolean;
 } => {
   const theme = useTheme();
   
   return {
     colors: theme.colors,
-    getColor: (colorKey: keyof Theme['colors']) => theme.colors[colorKey],
+    getColor: (colorKey: keyof ThemeContextType['colors']) => theme.colors[colorKey],
     isDark: theme.colors.background === '#000000', // Simple dark mode detection
   };
 };
 
 // Type-safe theme spacing hook
 export const useThemeSpacing = (): {
-  spacing: Theme['spacing'];
-  getSpacing: (size: keyof Theme['spacing']) => Theme['spacing'][keyof Theme['spacing']];
+  spacing: ThemeContextType['spacing'];
+  getSpacing: (size: keyof ThemeContextType['spacing']) => ThemeContextType['spacing'][keyof ThemeContextType['spacing']];
 } => {
   const theme = useTheme();
   
   return {
     spacing: theme.spacing,
-    getSpacing: (size: keyof Theme['spacing']) => theme.spacing[size],
+    getSpacing: (size: keyof ThemeContextType['spacing']) => theme.spacing[size],
   };
 };
 
 // Type-safe theme typography hook
 export const useThemeTypography = (): {
-  typography: Theme['typography'];
-  fontSize: Theme['fontSize'];
-  fontWeight: Theme['fontWeight'];
-  getTypography: (variant: keyof Theme['typography']) => Theme['typography'][keyof Theme['typography']];
-  getFontSize: (size: keyof Theme['fontSize']) => Theme['fontSize'][keyof Theme['fontSize']];
-  getFontWeight: (weight: keyof Theme['fontWeight']) => Theme['fontWeight'][keyof Theme['fontWeight']];
+  typography: ThemeContextType['typography'];
+  fontSize: ThemeContextType['fontSize'];
+  fontWeight: ThemeContextType['fontWeight'];
+  getTypography: (variant: keyof ThemeContextType['typography']) => ThemeContextType['typography'][keyof ThemeContextType['typography']];
+  getFontSize: (size: keyof ThemeContextType['fontSize']) => ThemeContextType['fontSize'][keyof ThemeContextType['fontSize']];
+  getFontWeight: (weight: keyof ThemeContextType['fontWeight']) => ThemeContextType['fontWeight'][keyof ThemeContextType['fontWeight']];
 } => {
   const theme = useTheme();
   
@@ -142,8 +142,8 @@ export const useThemeTypography = (): {
     typography: theme.typography,
     fontSize: theme.fontSize,
     fontWeight: theme.fontWeight,
-    getTypography: (variant: keyof Theme['typography']) => theme.typography[variant],
-    getFontSize: (size: keyof Theme['fontSize']) => theme.fontSize[size],
-    getFontWeight: (weight: keyof Theme['fontWeight']) => theme.fontWeight[weight],
+    getTypography: (variant: keyof ThemeContextType['typography']) => theme.typography[variant],
+    getFontSize: (size: keyof ThemeContextType['fontSize']) => theme.fontSize[size],
+    getFontWeight: (weight: keyof ThemeContextType['fontWeight']) => theme.fontWeight[weight],
   };
 }; 

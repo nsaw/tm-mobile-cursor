@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from '../../theme/ThemeProvider';
+import type { FontWeight } from '../../theme/ThemeProvider';
 import { Button } from '../../components/ui/Button';
 import { AutoRoleView } from '../../components/AutoRoleView';
 
@@ -43,7 +44,7 @@ export const ProfileEdit: React.FC = () => {
     },
     headerTitle: {
       fontSize: theme.fontSize.h1,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.text,
     },
     editButton: {
@@ -66,7 +67,7 @@ export const ProfileEdit: React.FC = () => {
     },
     avatarText: {
       fontSize: theme.fontSize.h1,
-      fontWeight: theme.fontWeight.bold,
+      fontWeight: theme.fontWeight.bold as FontWeight,
       color: theme.colors.background,
     },
     formSection: {
@@ -74,7 +75,7 @@ export const ProfileEdit: React.FC = () => {
     },
     sectionTitle: {
       fontSize: theme.fontSize.h2,
-      fontWeight: theme.fontWeight.semibold,
+      fontWeight: theme.fontWeight.semibold as FontWeight,
       color: theme.colors.text,
       marginBottom: theme.spacing.md,
     },
@@ -83,7 +84,7 @@ export const ProfileEdit: React.FC = () => {
     },
     label: {
       fontSize: theme.fontSize.caption,
-      fontWeight: theme.fontWeight.medium,
+      fontWeight: theme.fontWeight.medium as FontWeight,
       color: theme.colors.textMuted,
       marginBottom: theme.spacing.xs,
     },
@@ -118,7 +119,7 @@ export const ProfileEdit: React.FC = () => {
     buttonText: {
       color: theme.colors.background,
       fontSize: theme.fontSize.body,
-      fontWeight: theme.fontWeight.semibold,
+      fontWeight: theme.fontWeight.semibold as FontWeight,
     },
   });
 

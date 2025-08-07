@@ -4,13 +4,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '../theme/ThemeProvider';
 import { AutoRoleView } from '../components/AutoRoleView';
 
-interface ProfileScreenProps {
-  _route: Record<string, unknown>;
-}
-
-const ProfileScreen: React.FC<ProfileScreenProps> = ({ _route }) => {
+const ProfileScreen: React.FC = () => {
   const theme = useTheme();
-  const editButtonRef = useRef<TouchableOpacity>(null);
+  const editButtonRef = useRef<React.ElementRef<typeof TouchableOpacity>>(null);
   const [profile] = useState({
     name: 'John Doe',
     email: 'john@example.com',
@@ -84,4 +80,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export { ProfileScreen };
 export default ProfileScreen; 
