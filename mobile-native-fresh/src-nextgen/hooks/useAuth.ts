@@ -30,6 +30,7 @@ export interface UseAuthReturn {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  loading: boolean; // Alias for isLoading for backward compatibility
   error: string | null;
   token: string | null;
 
@@ -233,6 +234,7 @@ export const useAuth = (): UseAuthReturn => {
     user: authStore.user,
     isAuthenticated: authStore.isAuthenticated,
     isLoading: authStore.isLoading || localLoading,
+    loading: authStore.isLoading || localLoading, // Alias for backward compatibility
     error: authStore.error,
     token: authStore.token,
 

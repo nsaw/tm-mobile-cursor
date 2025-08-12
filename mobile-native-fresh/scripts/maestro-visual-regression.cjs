@@ -7,7 +7,8 @@ const { execSync } = require('child_process');
 class MaestroVisualRegression {
   constructor() {
     this.maestroPath = path.join(process.cwd(), 'maestro');
-    this.screenshotsPath = path.join(this.maestroPath, 'screenshots');
+    // Unified screenshots path per enforcement
+    this.screenshotsPath = '/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/screenshots';
     this.baselinePath = path.join(this.screenshotsPath, 'baseline');
     this.currentPath = path.join(this.screenshotsPath, 'current');
     this.diffPath = path.join(this.screenshotsPath, 'diff');

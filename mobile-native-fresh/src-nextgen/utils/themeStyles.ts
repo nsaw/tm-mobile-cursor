@@ -27,7 +27,7 @@ export class ThemeStyleFactory {
     fontWeight: FontWeight;
     lineHeight?: number;
   } {
-    const typographyElement = this.theme.typography[element];
+    const typographyElement = this.theme.typography[element] as { fontSize: number; fontWeight: string };
     return {
       fontSize: typographyElement.fontSize,
       fontWeight: typographyElement.fontWeight as FontWeight,

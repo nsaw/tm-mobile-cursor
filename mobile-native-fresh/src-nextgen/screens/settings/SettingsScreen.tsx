@@ -1,22 +1,16 @@
 import React from 'react';
 import { Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { SettingsStackParamList } from '../../navigation/MainNavigator';
 import { AutoRoleView } from '../../components/AutoRoleView';
 import { useTheme } from '../../hooks/useTheme';
 
-type SettingsScreenNavigationProp = StackNavigationProp<SettingsStackParamList, 'Settings'>;
-
 export const SettingsScreen: React.FC = () => {
-  const navigation = useNavigation<SettingsScreenNavigationProp>();
   const theme = useTheme();
 
   const settingsOptions = [
-    { title: 'Profile', route: 'Profile', icon: '👤' },
-    { title: 'Premium', route: 'Premium', icon: '⭐' },
-    { title: 'Security', route: 'Security', icon: '🔒' },
-    { title: 'Theme', route: 'Theme', icon: '🎨' },
+    { title: 'Profile', icon: '👤' },
+    { title: 'Premium', icon: '⭐' },
+    { title: 'Security', icon: '🔒' },
+    { title: 'Theme', icon: '🎨' },
   ];
 
   return (
@@ -26,8 +20,8 @@ export const SettingsScreen: React.FC = () => {
         
         {settingsOptions.map((option) => (
           <TouchableOpacity
-            key={option.route}
-            onPress={() => navigation.navigate(option.route as keyof SettingsStackParamList)}
+            key={option.title}
+            onPress={() => console.log(`Navigate to ${option.title}`)}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel={`Navigate to ${option.title} settings`}

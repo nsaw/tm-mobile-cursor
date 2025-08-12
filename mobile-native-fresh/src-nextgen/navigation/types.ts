@@ -11,7 +11,11 @@ export interface RootStackParamList {
     tag?: string;
   } | undefined;
   AllBins: undefined;
-  CreateThoughtmark: undefined;
+  CreateThoughtmark: {
+    content?: string;
+    title?: string;
+    isVoiceNote?: boolean;
+  } | undefined;
   CreateBin: undefined;
   ThoughtmarkDetail: { id: string };
   BinDetail: { id: string };

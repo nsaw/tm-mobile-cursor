@@ -1,0 +1,256 @@
+import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Brain } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useTheme } from '../../theme/ThemeProvider';
+
+interface NavItem {
+  icon: string;
+  label: string;
+  path?: string;
+  action?: string;
+  iconType: 'material' | 'lucide';
+}
+
+interface NavigationProps {
+  navigate: (screen: string, params?: Record<string, unknown>) => void;
+}
+
+interface BottomNavProps {
+  navigation: NavigationProps;
+  onVoiceRecord?: () => void;
+  showCreateButton?: boolean;
+  currentRoute?: string;
+  onCreateNew?: () => void;
+}
+
+export const BottomNav: React.FC<BottomNavProps> = ({
+  navigation,
+  onVoiceRecord,
+  showCreateButton = true,
+  currentRoute = '/',
+  onCreateNew,
+}) => {
+  const insets = useSafeAreaInsets();
+  const { tokens: designTokens } = useTheme();
+
+  const handleAIToolsClick = () => {
+    navigation.navigate('AITools');
+  };
+
+  const handleNavigate = (path: string) => {
+    navigation.navigate(path);
+  };
+
+  const navItems: NavItem[] = [
+    { icon: 'home-outline', label: 'Home', path: 'Dashboard', iconType: 'material' },
+    { icon: 'magnify', label: 'Search', path: 'Search', iconType: 'material' },
+    { icon: 'microphone-outline', label: 'Voice', action: 'voice', iconType: 'material' },
+    { icon: 'crown-outline', label: 'AI', action: 'ai-tools', iconType: 'material' },
+    { icon: 'brain', label: 'All', path: 'AllThoughtmarks', iconType: 'lucide' },
+  ];
+
+  const renderIcon = (item: NavItem, isActive: boolean, isHome: boolean, isVoice: boolean) => {
+    const iconColor = isHome
+      ? designTokens.colors.accent
+      : isActive
+      ? designTokens.colors.accent
+      : isVoice
+      ? designTokens.colors.danger
+      : item.action === 'ai-tools'
+      ? '#FFD700'
+      : designTokens.colors.textMuted;
+
+    if (item.iconType === 'lucide') {
+      return (
+        <Brain
+          size={27}
+          strokeWidth={2}
+          color={iconColor}
+        />
+      );
+    }
+
+    return (
+      <MaterialCommunityIcons
+        name={item.icon}
+        size={32}
+        color={iconColor}
+      />
+    );
+  };
+
+  return (
+    <View style={{
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      maxWidth: 440,
+      alignSelf: 'center',
+      width: '100%',
+      zIndex: designTokens.zIndex.modal,
+      paddingBottom: 0,
+    }}>
+      <View style={{
+        backgroundColor: designTokens.colors.backgroundSecondary,
+        borderTopWidth: 1,
+        borderTopColor: designTokens.colors.divider,
+        ...Platform.select({
+          ios: {
+            shadowColor: '#000000',
+            shadowOffset: {
+              width: 0,
+              height: -2,
+            },
+            shadowOpacity: 0.3,
+            shadowRadius: 8,
+          },
+          android: {
+            elevation: 12,
+          },
+        }),
+      }}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          paddingVertical: designTokens.spacing.md,
+          paddingHorizontal: designTokens.spacing.lg,
+          minHeight: 107,
+        }}>
+          {navItems.map((item) => {
+            const { label, path, action } = item;
+            const isActive = currentRoute === path;
+            const isVoice = action === 'voice';
+            const isHome = path === '/';
+
+            return (
+              <TouchableOpacity
+                key={path || action || label}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: designTokens.spacing.sm,
+                  paddingHorizontal: designTokens.spacing.sm,
+                  borderRadius: designTokens.radius.sm,
+                  backgroundColor: 'transparent',
+                  minHeight: 59,
+                  minWidth: 59,
+                  position: 'relative',
+                }}
+                onPress={() => {
+                  if (isVoice && onVoiceRecord) {
+                    onVoiceRecord();
+                  } else if (action === 'ai-tools') {
+                    handleAIToolsClick();
+                  } else if (path) {
+                    handleNavigate(path);
+                  }
+                }}
+                accessibilityRole='button'
+                accessible={true}
+                accessibilityLabel='Button'
+              >
+                {renderIcon(item, isActive, isHome, isVoice)}
+                {isActive && (
+                  <View style={{
+                    position: 'absolute',
+                    top: -2,
+                    left: -2,
+                    right: -2,
+                    bottom: -2,
+                    borderRadius: designTokens.radius.md,
+                    backgroundColor: `${designTokens.colors.accent}1A`,
+                    borderWidth: 1,
+                    borderColor: `${designTokens.colors.accent}4D`,
+                  }} />
+                )}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
+
+      {showCreateButton && currentRoute !== '/' && (
+        <View style={{
+          position: 'absolute',
+          left: '50%',
+          transform: [{ translateX: -43 }],
+          zIndex: designTokens.zIndex.tooltip,
+          alignItems: 'center',
+          justifyContent: 'center',
+          bottom: (insets.bottom + 40) * 1.34,
+        }}>
+          <View style={{
+            width: 83,
+            height: 83,
+            borderRadius: 56,
+            padding: 4,
+            backgroundColor: `${designTokens.colors.accent}E6`,
+            borderWidth: 4,
+            borderColor: `${designTokens.colors.accent}E6`,
+            alignItems: 'center',
+            justifyContent: 'center',
+            ...Platform.select({
+              ios: {
+                shadowColor: designTokens.colors.accent,
+                shadowOffset: {
+                  width: 0,
+                  height: 0,
+                },
+                shadowOpacity: 0.6,
+                shadowRadius: 32,
+              },
+              android: {
+                elevation: 27,
+              },
+            }),
+          }}>
+            <TouchableOpacity
+              style={{
+                width: 78,
+                height: 78,
+                borderRadius: designTokens.radius.lg,
+                backgroundColor: designTokens.colors.background,
+                alignItems: 'center',
+                justifyContent: 'center',
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 5,
+                    },
+                    shadowOpacity: 0.4,
+                    shadowRadius: 16,
+                  },
+                  android: {
+                    elevation: 16,
+                  },
+                }),
+              }}
+              onPress={() => {
+                if (onCreateNew) {
+                  onCreateNew();
+                } else {
+                  handleNavigate('CreateThoughtmark');
+                }
+              }}
+              accessibilityRole='button'
+              accessibilityLabel='Create new thoughtmark'
+            >
+              <MaterialCommunityIcons name='plus' size={47} color={designTokens.colors.accent} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+};

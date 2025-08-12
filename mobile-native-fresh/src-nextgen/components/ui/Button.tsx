@@ -1,13 +1,12 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
-export interface ButtonProps {
+interface ButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
-  loading?: boolean;
   style?: ViewStyle;
   textStyle?: TextStyle;
 }
@@ -16,18 +15,17 @@ export const Button: React.FC<ButtonProps> = ({
   title,
   onPress,
   variant = 'primary',
-  size = 'md',
+  size = 'medium',
   disabled = false,
-  loading = false,
   style,
-  textStyle
+  textStyle,
 }) => {
   const buttonStyle = [
     styles.button,
     styles[variant],
     styles[size],
     disabled && styles.disabled,
-    style
+    style,
   ];
 
   const textStyleCombined = [
@@ -35,19 +33,17 @@ export const Button: React.FC<ButtonProps> = ({
     styles[`${variant}Text`],
     styles[`${size}Text`],
     disabled && styles.disabledText,
-    textStyle
+    textStyle,
   ];
 
   return (
     <TouchableOpacity
       style={buttonStyle}
       onPress={onPress}
-      disabled={disabled || loading}
-      activeOpacity={0.8}
-     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-      <Text style={textStyleCombined}>
-        {loading ? 'Loading...' : title}
-      </Text>
+      disabled={disabled}
+      activeOpacity={0.7}
+    >
+      <Text style={textStyleCombined}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -69,26 +65,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#007AFF',
   },
-  destructive: {
-    backgroundColor: '#FF3B30',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-  },
-  sm: {
+  small: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    minHeight: 32,
   },
-  md: {
+  medium: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    minHeight: 40,
   },
-  lg: {
+  large: {
     paddingHorizontal: 20,
     paddingVertical: 12,
-    minHeight: 48,
   },
   disabled: {
     opacity: 0.5,
@@ -105,22 +92,16 @@ const styles = StyleSheet.create({
   outlineText: {
     color: '#007AFF',
   },
-  destructiveText: {
-    color: '#FFFFFF',
+  smallText: {
+    fontSize: 12,
   },
-  ghostText: {
-    color: '#007AFF',
-  },
-  smText: {
+  mediumText: {
     fontSize: 14,
   },
-  mdText: {
+  largeText: {
     fontSize: 16,
   },
-  lgText: {
-    fontSize: 18,
-  },
   disabledText: {
-    opacity: 0.5,
+    color: '#8E8E93',
   },
 }); 

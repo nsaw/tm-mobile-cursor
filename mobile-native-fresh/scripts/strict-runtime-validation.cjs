@@ -7,6 +7,7 @@
  * Actually tests app boot and runtime functionality
  */
 
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { execSync, spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -15,8 +16,13 @@ const path = require('path');
 const VALIDATION_CONFIG = {
   timeoutMs: 60000, // 60 seconds for app boot
   outputDir: '/Users/sawyer/gitSync/.cursor-cache/MAIN/validation',
+  unifiedLogsDir: '/Users/sawyer/gitSync/.cursor-cache/ROOT/.logs/MAIN',
   expoPort: 8081,
-  maxRetries: 3
+  maxRetries: 3,
+  simulatorLogFile: '/tmp/simulator.log',
+  maestroTimeout: 60000, // 60 seconds for Maestro tests
+  screenshotDir: '/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/screenshots',
+  providerTestTimeout: 30000 // 30 seconds for provider tests
 };
 
 // Colors for console output
@@ -121,7 +127,91 @@ const testESLintValidation = async () => {
   }
 };
 
-// Test Expo app boot and runtime
+// Parse simulator logs for runtime errors
+const parseSimulatorLogs = async () => {
+  logSection('SIMULATOR LOG ANALYSIS');
+  
+  try {
+    const startTime = Date.now();
+    
+    // Start simulator log capture
+    const logProcess = spawn('xcrun', [
+      'simctl',
+      'spawn',
+      'booted',
+      'log',
+      'stream',
+      '--style',
+      'compact',
+      '--predicate',
+      'eventType = logEvent AND (composedMessage CONTAINS[c] "Error" OR composedMessage CONTAINS[c] "must be used within a" OR composedMessage CONTAINS[c] "TypeError" OR composedMessage CONTAINS[c] "undefined is not an object")'
+    ], {
+      stdio: ['pipe', 'pipe', 'pipe']
+    });
+    
+    let logOutput = '';
+    let runtimeErrors = [];
+    
+    logProcess.stdout.on('data', (data) => {
+      const text = data.toString();
+      logOutput += text;
+      
+      // Check for provider/context errors
+      if (text.includes('must be used within a')) {
+        runtimeErrors.push(`Provider Error: ${text.trim()}`);
+      }
+      
+      // Check for runtime errors
+      if (text.includes('TypeError') || text.includes('undefined is not an object')) {
+        runtimeErrors.push(`Runtime Error: ${text.trim()}`);
+      }
+    });
+    
+    // Wait for log collection
+    await new Promise(resolve => setTimeout(resolve, 10000)); // Collect logs for 10 seconds
+    
+    const duration = Date.now() - startTime;
+    
+    if (runtimeErrors.length === 0) {
+      logTest('Simulator Log Analysis', 'PASS', 'No runtime or provider errors detected', duration);
+      return { status: 'PASS', duration };
+    } else {
+      logTest('Simulator Log Analysis', 'FAIL', `Found ${runtimeErrors.length} runtime errors: ${runtimeErrors.join(', ')}`, duration);
+      return { status: 'FAIL', duration, errors: runtimeErrors };
+    }
+    
+  } catch (error) {
+    logTest('Simulator Log Analysis', 'FAIL', error.message);
+    return { status: 'FAIL', error: error.message };
+  }
+};
+
+  // Run Maestro UI tests
+const runMaestroTests = async () => {
+  logSection('MAESTRO UI TESTS');
+  
+  try {
+    const startTime = Date.now();
+    
+    // Run Maestro tests
+    const { stdout, stderr } = await execPromise('bash scripts/run-maestro-tests.sh');
+    
+    const duration = Date.now() - startTime;
+    
+    if (stderr && stderr.includes('Error')) {
+      logTest('Maestro Tests', 'FAIL', stderr, duration);
+      return false;
+    }
+    
+    logTest('Maestro Tests', 'PASS', stdout, duration);
+    return true;
+  } catch (error) {
+    logTest('Maestro Tests', 'FAIL', error.message, 0);
+    return false;
+  }
+};
+
+  // Test Expo app boot and runtime
 const testExpoAppBoot = async () => {
   logSection('EXPO APP BOOT & RUNTIME TEST');
   
@@ -186,8 +276,8 @@ const testExpoAppBoot = async () => {
       // Fallback: Check if Expo server is responding
       if (!bootSuccess) {
         try {
-          const { execSync } = require('child_process');
-          const response = execSync('curl -s http://localhost:8081/status', { timeout: 5000 }).toString();
+          const { execSync: _execSync } = require('child_process'); // eslint-disable-line @typescript-eslint/no-var-requires
+          const response = _execSync('curl -s http://localhost:8081/status', { timeout: 5000 }).toString();
           if (response.includes('packager-status:running')) {
             log('  Expo server responding via curl check', 'green');
             bootSuccess = true;
@@ -227,6 +317,146 @@ const testExpoAppBoot = async () => {
   }
 };
 
+// Test screen-by-screen navigation
+const testScreenNavigation = async () => {
+  logSection('SCREEN-BY-SCREEN NAVIGATION TEST');
+  
+  try {
+    const startTime = Date.now();
+    
+    // Define critical screens to test
+    const criticalScreens = [
+      'LoginScreen',
+      'DashboardScreen',
+      'SettingsScreen',
+      'ProfileScreen',
+      'SearchScreen',
+      'AIScreen',
+      'VoiceScreen',
+      'ThoughtmarksScreen'
+    ];
+    
+    // Create Maestro flow for screen navigation
+    const navigationFlow = criticalScreens.map(screen => ({
+      name: `Navigate to ${screen}`,
+      steps: [
+        { tapOn: { text: screen } },
+        { wait: 2000 },
+        { assertVisible: { text: screen } },
+        { takeScreenshot: `${screen.toLowerCase()}-validation` }
+      ]
+    }));
+    
+    // Write navigation flow to temp file
+    const flowPath = path.join(VALIDATION_CONFIG.outputDir, 'screen-navigation-flow.yaml');
+    fs.writeFileSync(flowPath, JSON.stringify(navigationFlow, null, 2));
+    
+    // Run navigation flow
+    try {
+      execSync(`maestro test --format junit ${flowPath}`, {
+        cwd: path.join(__dirname, '..'),
+        timeout: VALIDATION_CONFIG.maestroTimeout,
+        stdio: 'pipe'
+      });
+      
+      // Check for navigation errors in simulator logs
+      const navigationErrors = [];
+      const logOutput = fs.readFileSync(VALIDATION_CONFIG.simulatorLogFile, 'utf8');
+      
+      criticalScreens.forEach(screen => {
+        if (logOutput.includes(`Error rendering ${screen}`) || 
+            logOutput.includes(`${screen} failed to mount`) ||
+            logOutput.includes(`Cannot read property`) ||
+            logOutput.includes(`undefined is not an object`)) {
+          navigationErrors.push(`Error in ${screen}`);
+        }
+      });
+      
+      const duration = Date.now() - startTime;
+      
+      if (navigationErrors.length === 0) {
+        logTest('Screen Navigation', 'PASS', 'All screens rendered without errors', duration);
+        return { status: 'PASS', duration };
+      } else {
+        logTest('Screen Navigation', 'FAIL', `Found ${navigationErrors.length} screen errors: ${navigationErrors.join(', ')}`, duration);
+        return { status: 'FAIL', duration, errors: navigationErrors };
+      }
+      
+    } catch (error) {
+      logTest('Screen Navigation', 'FAIL', error.message);
+      return { status: 'FAIL', error: error.message };
+    }
+    
+  } catch (error) {
+    logTest('Screen Navigation', 'FAIL', error.message);
+    return { status: 'FAIL', error: error.message };
+  }
+};
+
+// Run Maestro UI automation tests
+const runMaestroTests = async () => {
+  logSection('MAESTRO UI AUTOMATION TEST');
+  
+  try {
+    const startTime = Date.now();
+    
+    // Ensure Maestro is installed
+    try {
+      execSync('maestro -v', { stdio: 'pipe' });
+    } catch (error) {
+      logTest('Maestro Installation', 'FAIL', 'Maestro CLI not found. Please install Maestro first.');
+      return { status: 'FAIL', error: 'Maestro not installed' };
+    }
+    
+    // Run Maestro flow tests
+    try {
+      execSync('maestro test --format junit mobile-native-fresh/maestro/flows/*.yaml', {
+        cwd: path.join(__dirname, '..', '..'),
+        timeout: VALIDATION_CONFIG.maestroTimeout,
+        stdio: 'pipe'
+      });
+      
+      // Check for test results
+      const resultsPath = path.join(__dirname, '..', 'maestro', 'test-results');
+      if (!fs.existsSync(resultsPath)) {
+        throw new Error('No Maestro test results found');
+      }
+      
+      // Parse results
+      const results = fs.readdirSync(resultsPath)
+        .filter(f => f.endsWith('.xml'))
+        .map(f => {
+          const content = fs.readFileSync(path.join(resultsPath, f), 'utf8');
+          return {
+            file: f,
+            failures: (content.match(/<failure/g) || []).length,
+            errors: (content.match(/<error/g) || []).length
+          };
+        });
+      
+      const totalFailures = results.reduce((sum, r) => sum + r.failures + r.errors, 0);
+      
+      const duration = Date.now() - startTime;
+      
+      if (totalFailures === 0) {
+        logTest('Maestro UI Tests', 'PASS', 'All UI automation tests passed', duration);
+        return { status: 'PASS', duration };
+      } else {
+        logTest('Maestro UI Tests', 'FAIL', `Found ${totalFailures} UI test failures`, duration);
+        return { status: 'FAIL', duration, failures: totalFailures };
+      }
+      
+    } catch (error) {
+      logTest('Maestro UI Tests', 'FAIL', error.message);
+      return { status: 'FAIL', error: error.message };
+    }
+    
+  } catch (error) {
+    logTest('Maestro UI Tests', 'FAIL', error.message);
+    return { status: 'FAIL', error: error.message };
+  }
+};
+
 // Test integration with actual app components
 const testIntegrationWithRealApp = async () => {
   logSection('REAL APP INTEGRATION TEST');
@@ -242,7 +472,7 @@ const testIntegrationWithRealApp = async () => {
       test: () => {
         // Test that ThemeProvider can be imported and used
         try {
-          const { ThemeProvider } = require('./src-nextgen/theme/ThemeProvider');
+          const { ThemeProvider: _ThemeProvider } = require('../src-nextgen/theme/ThemeProvider'); // eslint-disable-line @typescript-eslint/no-var-requires
           return { status: 'PASS', message: 'ThemeProvider imports successfully' };
         } catch (error) {
           return { status: 'FAIL', message: error.message };
@@ -253,8 +483,8 @@ const testIntegrationWithRealApp = async () => {
       name: 'Auth Store Integration',
       test: () => {
         try {
-          const { useAuthStore } = require('./src-nextgen/state/stores/authStore');
-          return { status: 'PASS', message: 'Auth store imports successfully' };
+          const { useAuth: _useAuth } = require('../src-nextgen/hooks/useAuth'); // eslint-disable-line @typescript-eslint/no-var-requires
+          return { status: 'PASS', message: 'Auth hook imports successfully' };
         } catch (error) {
           return { status: 'FAIL', message: error.message };
         }
@@ -264,7 +494,7 @@ const testIntegrationWithRealApp = async () => {
       name: 'Navigation Integration',
       test: () => {
         try {
-          const { AuthNavigator } = require('./src-nextgen/navigation/AuthNavigator');
+          const { MainNavigator: _MainNavigator } = require('../src-nextgen/navigation/MainNavigator'); // eslint-disable-line @typescript-eslint/no-var-requires
           return { status: 'PASS', message: 'Navigation components import successfully' };
         } catch (error) {
           return { status: 'FAIL', message: error.message };
@@ -275,8 +505,8 @@ const testIntegrationWithRealApp = async () => {
       name: 'Hook Integration',
       test: () => {
         try {
-          const { useTheme } = require('./src-nextgen/hooks/useTheme');
-          const { useAuth } = require('./src-nextgen/hooks/useAuth');
+          const { useTheme: _useTheme } = require('../src-nextgen/theme/ThemeProvider'); // eslint-disable-line @typescript-eslint/no-var-requires
+          const { useAuth: _useAuth } = require('../src-nextgen/hooks/useAuth'); // eslint-disable-line @typescript-eslint/no-var-requires
           return { status: 'PASS', message: 'Custom hooks import successfully' };
         } catch (error) {
           return { status: 'FAIL', message: error.message };
@@ -330,6 +560,8 @@ const runStrictRuntimeValidation = async () => {
     typescriptCompilation: {},
     eslintValidation: {},
     expoAppBoot: {},
+    simulatorLogs: {},
+    maestroTests: {},
     integrationTests: [],
     summary: {}
   };
@@ -339,13 +571,17 @@ const runStrictRuntimeValidation = async () => {
     validationResults.typescriptCompilation = await testTypeScriptCompilation();
     validationResults.eslintValidation = await testESLintValidation();
     validationResults.expoAppBoot = await testExpoAppBoot();
+    validationResults.simulatorLogs = await parseSimulatorLogs();
+    validationResults.maestroTests = await runMaestroTests();
     validationResults.integrationTests = await testIntegrationWithRealApp();
 
     // Calculate summary
     const criticalTests = [
       validationResults.typescriptCompilation,
       validationResults.eslintValidation,
-      validationResults.expoAppBoot
+      validationResults.expoAppBoot,
+      validationResults.simulatorLogs,
+      validationResults.maestroTests
     ];
     
     const allTests = [
@@ -386,6 +622,7 @@ const runStrictRuntimeValidation = async () => {
     log(`Critical Success Rate: ${validationResults.summary.criticalSuccessRate}%`, 'bright');
     log(`Total Duration: ${validationResults.summary.totalDuration}ms`, 'cyan');
     log(`Results saved to: ${resultsFile}`, 'cyan');
+    log(`Unified logs directory: ${VALIDATION_CONFIG.unifiedLogsDir}`, 'cyan');
 
     // STRICT ENFORCEMENT: All critical tests must pass
     if (validationResults.summary.criticalSuccessRate === 100) {

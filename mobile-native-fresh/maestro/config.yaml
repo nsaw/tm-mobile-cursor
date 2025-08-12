@@ -1,0 +1,27 @@
+server:
+  port: 7001
+  host: localhost
+
+ios:
+  simulator: "iPhone 16 Pro"
+  bundleId: "com.thoughtmarks.mobile"
+
+android:
+  avd: "Pixel_4_API_30"
+  packageName: "com.thoughtmarks.mobile"
+
+flows:
+  - path: flows/app-launch.yaml
+  - path: flows/thoughtmark-creation.yaml
+  - path: flows/voice-recording.yaml
+  - path: flows/ai-tools.yaml
+
+reporting:
+  enabled: true
+  outputDir: "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/test-results"
+  format: "html"
+
+screenshots:
+  enabled: true
+  directory: "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/screenshots"
+  onFailure: true

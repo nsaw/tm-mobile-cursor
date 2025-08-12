@@ -11,8 +11,8 @@ export const useThemeWithStyles = (): {
 } => {
   const theme = useTheme();
   
-  const styles = useMemo(() => createThemeStyles(theme), [theme]);
-  const styleFactory = useMemo(() => new ThemeStyleFactory(theme), [theme]);
+  const styles = useMemo(() => createThemeStyles(theme.tokens), [theme.tokens]);
+  const styleFactory = useMemo(() => new ThemeStyleFactory(theme.tokens), [theme.tokens]);
 
   return {
     theme,
@@ -33,7 +33,7 @@ export const useThemeStyle = (): {
 } => {
   const theme = useTheme();
   
-  const styleFactory = useMemo(() => new ThemeStyleFactory(theme), [theme]);
+  const styleFactory = useMemo(() => new ThemeStyleFactory(theme.tokens), [theme.tokens]);
 
   return {
     theme,
@@ -54,7 +54,7 @@ export const useComponentTheme = (_componentName: string): {
   const theme = useTheme();
   
   const componentStyles = useMemo(() => {
-    const factory = new ThemeStyleFactory(theme);
+    const factory = new ThemeStyleFactory(theme.tokens);
     
     return {
       // Common component styles

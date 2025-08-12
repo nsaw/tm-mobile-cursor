@@ -89,5 +89,8 @@
         "**/build": true,
         "**/.expo": true,
         "**/web-build": true
+    },
+    "accessibility.signals.terminalBell": {
+        "sound": "off"
     }
 } 

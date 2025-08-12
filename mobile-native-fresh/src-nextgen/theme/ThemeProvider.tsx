@@ -22,6 +22,10 @@ export interface ThemeColors {
   onSurfaceVariant: string;
   onBackground: string;
   outline: string;
+  // Add missing properties
+  danger: string;
+  backgroundSecondary: string;
+  divider: string;
 }
 
 export interface ThemeSpacing {
@@ -46,11 +50,11 @@ export interface ThemeFontSizes {
 }
 
 export interface ThemeFontWeights {
-  light: string;
-  normal: string;
-  medium: string;
-  semibold: string;
-  bold: string;
+  light: '300';
+  normal: '400';
+  medium: '500';
+  semibold: '600';
+  bold: '700';
 }
 
 export interface ThemeBorderRadius {
@@ -59,27 +63,43 @@ export interface ThemeBorderRadius {
   lg: number;
 }
 
+// Add missing radius interface
+export interface ThemeRadius {
+  sm: number;
+  md: number;
+  lg: number;
+  full: number;
+}
+
+// Add missing zIndex interface
+export interface ThemeZIndex {
+  modal: number;
+  tooltip: number;
+}
+
 export interface ThemeTypography {
   h1: {
     fontSize: number;
-    fontWeight: string;
+    fontWeight: '700';
   };
   h2: {
     fontSize: number;
-    fontWeight: string;
+    fontWeight: '600';
   };
   h3: {
     fontSize: number;
-    fontWeight: string;
+    fontWeight: '600';
   };
   body: {
     fontSize: number;
-    fontWeight: string;
+    fontWeight: '400';
   };
   caption: {
     fontSize: number;
-    fontWeight: string;
+    fontWeight: '400';
   };
+  // Add missing fontSize property
+  fontSize: ThemeFontSizes;
 }
 
 export interface ThemeStyles {
@@ -92,6 +112,8 @@ export interface ThemeTokens {
   fontSize: ThemeFontSizes;
   fontWeight: ThemeFontWeights;
   borderRadius: ThemeBorderRadius;
+  radius: ThemeRadius;
+  zIndex: ThemeZIndex;
   typography: ThemeTypography;
   styles: ThemeStyles;
 }
@@ -111,6 +133,8 @@ export interface ThemeContextType {
   borderRadius: ThemeBorderRadius;
   typography: ThemeTypography;
   styles: ThemeStyles;
+  tokens: ThemeTokens; // Add missing tokens property
+  buttonStyles: Record<string, unknown>; // Add missing buttonStyles property
   isDark: boolean;
   setTheme: (theme: 'light' | 'dark') => void;
   toggleTheme: () => void;
@@ -173,6 +197,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     borderRadius: baseTheme.borderRadius,
     typography: baseTheme.typography,
     styles: baseTheme.styles,
+    tokens: {
+      colors: baseTheme.colors,
+      spacing: baseTheme.spacing,
+      fontSize: baseTheme.fontSize,
+      fontWeight: baseTheme.fontWeight,
+      borderRadius: baseTheme.borderRadius,
+      radius: baseTheme.radius,
+      zIndex: baseTheme.zIndex,
+      typography: baseTheme.typography,
+      styles: baseTheme.styles,
+    },
+    buttonStyles: {}, // Placeholder for button styles, will be populated later
     isDark: currentTheme === 'dark',
     setTheme,
     toggleTheme,

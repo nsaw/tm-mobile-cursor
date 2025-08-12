@@ -1,0 +1,38 @@
+appId: com.thoughtmarks.mobile
+name: App Launch Test
+onFlowStart:
+  - launchApp:
+      clearState: true
+      clearKeychain: true
+      permissions:
+        notifications: allow
+        microphone: allow
+
+steps:
+  - assertVisible: "Dashboard"
+  - assertVisible: "Create New"
+  - assertVisible: "Voice"
+  - assertVisible: "AI"
+  - assertVisible: "All"
+
+  # Test navigation
+  - tapOn: "AI"
+  - assertVisible: "AI Tools"
+  - tapOn: "Back"
+
+  # Test voice recorder
+  - tapOn: "Voice"
+  - assertVisible: "Voice Recorder"
+  - tapOn: "Close"
+
+  # Test thoughtmark creation
+  - tapOn: "Create New"
+  - assertVisible: "New Thoughtmark"
+  - inputText:
+      id: "title-input"
+      text: "Test Thoughtmark"
+  - inputText:
+      id: "content-input"
+      text: "This is a test thoughtmark created by Maestro"
+  - tapOn: "Save & Exit"
+  - assertVisible: "Test Thoughtmark"

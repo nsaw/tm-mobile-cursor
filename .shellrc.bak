@@ -14,9 +14,10 @@ if [[ "$SHELL" != *"/zsh" && "$SHELL" != *"/bash" ]]; then
 fi
 
 # Set project-specific environment variables
-export TM_MOBILE_CURSOR_PROJECT_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor"
-export TM_MOBILE_FRESH_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
-export CURSOR_CACHE_ROOT="/Users/sawyer/gitSync/.cursor-cache"
+export MAIN_REPO="/Users/sawyer/gitSync/tm-mobile-cursor"
+export MAIN_ROOT="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+export CURSOR_CACHE="/Users/sawyer/gitSync/.cursor-cache"
+export CURSOR_CACHE_MAIN="/Users/sawyer/gitSync/.cursor-cache/MAIN"
 
 # Ensure we're using the correct shell
 if [[ "$0" == *"zsh" ]]; then
@@ -24,14 +25,14 @@ if [[ "$0" == *"zsh" ]]; then
 elif [[ "$0" == *"bash" ]]; then
     export PROJECT_SHELL="bash"
 else
-    export PROJECT_SHELL="unknown"
+    export PROJECT_SHELL="other"
 fi
 
 # Log shell usage for debugging
 echo "✅ Using $PROJECT_SHELL shell for tm-mobile-cursor project"
 
 # Set PATH to prioritize project tools
-export PATH="$TM_MOBILE_FRESH_ROOT/node_modules/.bin:$TM_MOBILE_CURSOR_PROJECT_ROOT/scripts:$PATH"
+export PATH="$MAIN_ROOT/node_modules/.bin:$MAIN_ROOT/scripts:$PATH"
 
 # Shell-specific configurations
 if [[ "$PROJECT_SHELL" == "zsh" ]]; then

@@ -7,6 +7,8 @@ export interface User {
   name: string;
   email: string;
   avatar?: string;
+  isPremium?: boolean;
+  isTestUser?: boolean;
   preferences: Record<string, unknown>;
 }
 

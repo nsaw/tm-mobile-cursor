@@ -4,9 +4,9 @@ const { execSync } = require('child_process');
 
 class UIValidationIntegration {
   constructor() {
-    this.validationDir = '/Users/sawyer/gitSync/.cursor-cache/MAIN/validations';
-    this.logDir = path.join(this.validationDir, 'logs');
-    this.screenshotDir = path.join(this.validationDir, 'screenshots');
+    this.validationDir = '/Users/sawyer/gitSync/.cursor-cache/MAIN/validation';
+    this.logDir = '/Users/sawyer/gitSync/.cursor-cache/ROOT/.logs/MAIN';
+    this.screenshotDir = '/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/screenshots';
     this.results = {
       detox: { status: 'pending', message: '' },
       screenshots: { status: 'pending', message: '' },

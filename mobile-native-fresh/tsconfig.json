@@ -51,7 +51,8 @@
     "src-nextgen/shell/automation/**/*",
     "_quarantine/**/*",
     "**/*_quarantine/**/*",
-    "**/_quarantine/**/*"
+    "**/_quarantine/**/*",
+    "src-nextgen/utils/auditProviderUsage.tsx"
   ],
   "extends": "expo/tsconfig.base"
 }

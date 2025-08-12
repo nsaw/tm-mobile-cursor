@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
 import { AutoRoleView } from '../../components/AutoRoleView';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from '../../theme/ThemeProvider';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../theme/ThemeProvider';
 

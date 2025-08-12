@@ -1,19 +1,11 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export interface VoiceRecorderState {
-  isRecording: boolean;
-  isPaused: boolean;
-  duration: number;
-  audioUri?: string;
-}
+import { RootStackParamList } from '../../navigation/types';
+import { VoiceRecorder } from './VoiceRecorder';
 
-export interface VoiceRecorderContextType {
-  state: VoiceRecorderState;
-  startRecording: () => Promise<void>;
-  stopRecording: () => Promise<void>;
-  pauseRecording: () => void;
-  resumeRecording: () => void;
-  clearRecording: () => void;
+interface VoiceRecorderContextType {
   showVoiceRecorder: () => void;
   hideVoiceRecorder: () => void;
 }
@@ -28,94 +20,38 @@ export const useVoiceRecorder = (): VoiceRecorderContextType => {
   return context;
 };
 
-export interface VoiceRecorderProviderProps {
+interface VoiceRecorderProviderProps {
   children: React.ReactNode;
 }
 
+type NavigationProp = StackNavigationProp<RootStackParamList>;
+
 export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ children }) => {
-  const [state, setState] = useState<VoiceRecorderState>({
-    isRecording: false,
-    isPaused: false,
-    duration: 0,
-  });
+  const [isVisible, setIsVisible] = useState(false);
+  const navigation = useNavigation<NavigationProp>();
 
-  const startRecording = useCallback(async () => {
-    try {
-      // Mock recording start for now
-      setState(prev => ({
-        ...prev,
-        isRecording: true,
-        isPaused: false,
-        duration: 0,
-      }));
-      console.log('Voice recording started');
-    } catch (error) {
-      console.error('Failed to start recording:', error);
+  const showVoiceRecorder = () => setIsVisible(true);
+  const hideVoiceRecorder = () => setIsVisible(false);
+
+  const handleVoiceComplete = (thoughtmarkId?: string, transcript?: string, aiTitle?: string) => {
+    setIsVisible(false);
+    if (transcript && aiTitle) {
+      navigation.navigate('CreateThoughtmark', {
+        content: transcript,
+        title: aiTitle,
+        isVoiceNote: true,
+      });
     }
-  }, []);
-
-  const stopRecording = useCallback(async () => {
-    try {
-      // Mock recording stop for now
-      setState(prev => ({
-        ...prev,
-        isRecording: false,
-        isPaused: false,
-        audioUri: 'mock-audio-uri',
-      }));
-      console.log('Voice recording stopped');
-    } catch (error) {
-      console.error('Failed to stop recording:', error);
-    }
-  }, []);
-
-  const pauseRecording = useCallback(() => {
-    setState(prev => ({
-      ...prev,
-      isPaused: true,
-    }));
-    console.log('Voice recording paused');
-  }, []);
-
-  const resumeRecording = useCallback(() => {
-    setState(prev => ({
-      ...prev,
-      isPaused: false,
-    }));
-    console.log('Voice recording resumed');
-  }, []);
-
-  const clearRecording = useCallback(() => {
-    setState({
-      isRecording: false,
-      isPaused: false,
-      duration: 0,
-    });
-    console.log('Voice recording cleared');
-  }, []);
-
-  const showVoiceRecorder = useCallback(() => {
-    console.log('Show voice recorder');
-  }, []);
-
-  const hideVoiceRecorder = useCallback(() => {
-    console.log('Hide voice recorder');
-  }, []);
-
-  const value: VoiceRecorderContextType = {
-    state,
-    startRecording,
-    stopRecording,
-    pauseRecording,
-    resumeRecording,
-    clearRecording,
-    showVoiceRecorder,
-    hideVoiceRecorder,
   };
 
   return (
-    <VoiceRecorderContext.Provider value={value}>
+    <VoiceRecorderContext.Provider value={{ showVoiceRecorder, hideVoiceRecorder }}>
       {children}
+      <VoiceRecorder
+        isVisible={isVisible}
+        onClose={hideVoiceRecorder}
+        onComplete={handleVoiceComplete}
+      />
     </VoiceRecorderContext.Provider>
   );
 }; 

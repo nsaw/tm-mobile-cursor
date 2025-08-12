@@ -12,6 +12,7 @@ export interface User {
   email: string;
   avatar?: string;
   isPremium: boolean;
+  isTestUser?: boolean;
   preferences?: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;

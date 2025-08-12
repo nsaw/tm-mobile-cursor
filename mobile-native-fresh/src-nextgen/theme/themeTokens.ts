@@ -26,6 +26,10 @@ export const lightThemeTokens = {
     onBackground: '#000000',
     onPrimary: '#FFFFFF',
     outline: '#C6C6C8',
+    // Add missing properties
+    danger: '#FF3B30',
+    backgroundSecondary: '#F8F8F8',
+    divider: '#E5E5EA',
   },
   spacing: {
     xs: 4,
@@ -39,12 +43,37 @@ export const lightThemeTokens = {
     md: 8,
     lg: 12,
   },
+  // Add missing radius property
+  radius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    full: 9999,
+  },
+  // Add missing zIndex property
+  zIndex: {
+    modal: 1000,
+    tooltip: 1100,
+  },
   typography: {
-    h1: { fontSize: 32, fontWeight: 'bold' },
-    h2: { fontSize: 24, fontWeight: 'semibold' },
-    h3: { fontSize: 20, fontWeight: 'semibold' },
-    body: { fontSize: 16, fontWeight: 'normal' },
-    caption: { fontSize: 14, fontWeight: 'normal' },
+    h1: { fontSize: 32, fontWeight: '700' as const },
+    h2: { fontSize: 24, fontWeight: '600' as const },
+    h3: { fontSize: 20, fontWeight: '600' as const },
+    body: { fontSize: 16, fontWeight: '400' as const },
+    caption: { fontSize: 14, fontWeight: '400' as const },
+    // Add missing fontSize property
+    fontSize: {
+      xs: 12,
+      sm: 14,
+      md: 16,
+      lg: 18,
+      xl: 20,
+      h1: 32,
+      h2: 24,
+      h3: 20,
+      body: 16,
+      caption: 14,
+    },
   },
   fontSize: {
     xs: 12,
@@ -59,11 +88,11 @@ export const lightThemeTokens = {
     caption: 14,
   },
   fontWeight: {
-    light: 'light',
-    normal: 'normal',
-    medium: 'medium',
-    semibold: 'semibold',
-    bold: 'bold',
+    light: '300' as const,
+    normal: '400' as const,
+    medium: '500' as const,
+    semibold: '600' as const,
+    bold: '700' as const,
   },
   styles: {},
 };
@@ -89,6 +118,10 @@ export const darkThemeTokens = {
     onBackground: '#FFFFFF',
     onPrimary: '#000000',
     outline: '#38383A',
+    // Add missing properties
+    danger: '#FF453A',
+    backgroundSecondary: '#2C2C2E',
+    divider: '#38383A',
   },
   spacing: {
     xs: 4,
@@ -102,12 +135,37 @@ export const darkThemeTokens = {
     md: 8,
     lg: 12,
   },
+  // Add missing radius property
+  radius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    full: 9999,
+  },
+  // Add missing zIndex property
+  zIndex: {
+    modal: 1000,
+    tooltip: 1100,
+  },
   typography: {
-    h1: { fontSize: 32, fontWeight: 'bold' },
-    h2: { fontSize: 24, fontWeight: 'semibold' },
-    h3: { fontSize: 20, fontWeight: 'semibold' },
-    body: { fontSize: 16, fontWeight: 'normal' },
-    caption: { fontSize: 14, fontWeight: 'normal' },
+    h1: { fontSize: 32, fontWeight: '700' as const },
+    h2: { fontSize: 24, fontWeight: '600' as const },
+    h3: { fontSize: 20, fontWeight: '600' as const },
+    body: { fontSize: 16, fontWeight: '400' as const },
+    caption: { fontSize: 14, fontWeight: '400' as const },
+    // Add missing fontSize property
+    fontSize: {
+      xs: 12,
+      sm: 14,
+      md: 16,
+      lg: 18,
+      xl: 20,
+      h1: 32,
+      h2: 24,
+      h3: 20,
+      body: 16,
+      caption: 14,
+    },
   },
   fontSize: {
     xs: 12,
@@ -122,11 +180,11 @@ export const darkThemeTokens = {
     caption: 14,
   },
   fontWeight: {
-    light: 'light',
-    normal: 'normal',
-    medium: 'medium',
-    semibold: 'semibold',
-    bold: 'bold',
+    light: '300' as const,
+    normal: '400' as const,
+    medium: '500' as const,
+    semibold: '600' as const,
+    bold: '700' as const,
   },
   styles: {},
 };

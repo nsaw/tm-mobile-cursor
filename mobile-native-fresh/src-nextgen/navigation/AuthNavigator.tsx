@@ -4,8 +4,7 @@ import { SignInScreen } from '../screens/auth/SignInScreen';
 import { SignUpScreen } from '../screens/auth/SignUpScreen';
 import { PinEntryScreen } from '../screens/auth/PinEntryScreen';
 import { PasswordResetScreen } from '../screens/auth/PasswordResetScreen';
-import { useAuth } from '../hooks/useAuth';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../theme/ThemeProvider';
 
 export type AuthStackParamList = {
   SignIn: undefined;
@@ -17,22 +16,21 @@ export type AuthStackParamList = {
 const Stack = createStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator: React.FC = () => {
-  const theme = useTheme();
-  const _isAuthenticated = useAuth();
+  const { colors } = useTheme();
 
   return (
     <Stack.Navigator
       initialRouteName="SignIn"
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.background,
+          backgroundColor: colors.background,
         },
-        headerTintColor: theme.colors.text,
+        headerTintColor: colors.text,
         headerTitleStyle: {
           fontWeight: '600',
         },
         cardStyle: {
-          backgroundColor: theme.colors.background,
+          backgroundColor: colors.background,
         },
       }}
     >
