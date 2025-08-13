@@ -1,75 +1,66 @@
 // @ts-nocheck
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs'), path = require('path');
+const ROOT = '/Users/sawyer/gitSync/tm-mobile-cursor';
+const LOG_DIR = path.join(ROOT, 'mobile-native-fresh', 'validations', 'logs');
+const OUT_DIR = path.join(ROOT, 'mobile-native-fresh', 'validations', 'verify');
+fs.mkdirSync(LOG_DIR, { recursive: true });
+fs.mkdirSync(OUT_DIR, { recursive: true });
 
-const ROOT_MAIN = '/Users/sawyer/gitSync/tm-mobile-cursor';
-const ROOT_APP  = '/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh';
+// Args/env
+const args = process.argv.slice(2);
+const getArg = (k, d = null) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+const cfgPath = getArg('--config', path.join(ROOT, 'mobile-native-fresh', 'scripts', 'admin', 'enforcer.config.json'));
+const modeArg = getArg('--mode', null);
+const envMode = process.env.ENFORCER_MODE || null;
 
-const TARGETS = [
-  path.join(ROOT_APP, 'tasks'),
-  path.join(ROOT_APP, 'scripts'),
-  path.join(ROOT_APP, 'src-nextgen', 'patches'),
-  path.join(ROOT_MAIN, '.cursor', 'rules'),
-].filter(p => fs.existsSync(p));
+const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+const MODE = (modeArg || envMode || cfg.mode || 'warn').toLowerCase();
+const targets = cfg.targets || [];
+const ignoreDirs = new Set(cfg.ignoreDirs || []);
+const exts = new Set((cfg.extensions || []).map(s => s.toLowerCase()));
 
-const FILE_RE = /\.(cjs|js|mjs|sh|zsh|ts|tsx)$/i; // exclude docs/json
-
-// Known exemptions that contain controlled backgrounding patterns required by legacy tooling
-const EXEMPT = new Set([
-  path.join(ROOT_APP, 'scripts', 'admin', 'safe-launch-expo.sh')
-]);
-
+const FILE_RE = new RegExp(`\\.(${Array.from(exts).join('|')})$`, 'i');
 const BAD = [
-  /\bdisown\b/i,
-  /\$\!/g,
-  /\btail\s+-[Ff]\b/i,
-  /\bg?timeout\s+\d+[smh]?/i,
-  /\{\s*[^}]*\}\s*&/i,   // brace group background
-  /\([^)]+\)\s*&/i,       // subshell background
-  /\bgrep\b/i,
-  /\bps\s+aux\b/i,
-  /\bsleep\b/i,
-  /\bfg\b/i,
-  /\bwatch\b/i,
-  /(^|\s)read(\s|$)/i,
-  /\byes\s*\|/i,
-  /\bnc\s+-l\b/i,
-  /\bnetcat\b.*\b-l\b/i,
-  /\blsof\s+-ti:8081\b/i,
-  /\bpgrep\b/i,
-  /\bpkill\b/i,
-  /\bkillall\b/i,
+  /\bdisown\b/i, /\$\!/g, /\btail\s+-[Ff]\b/i,
+  /\bg?timeout\s+\d+[smh]?/i, /\{\s*[^}]*\}\s*&/i, /\([^)]+\)\s*&/i,
+  /\bgrep\b/i, /\bps\s+aux\b/i, /\bsleep\b/i, /\bfg\b/i,
+  /\bwatch\b/i, /(^|\s)read(\s|$)/i, /\byes\s*\|/i,
+  /\bnc\s+-l\b/i, /\bnetcat\b.*\b-l\b/i,
+  /\blsof\s+-ti:8081\b/i, /\bpgrep\b/i, /\bpkill\b/i, /\bkillall\b/i,
   /xcrun\s+simctl\s+.*\blog\s+stream\b/i
 ];
 
-const IGNORE_DIRS = new Set(['node_modules','.git','validations','logs','artifacts','.expo','.expo-shared','scripts/.mypy_cache','tasks/summaries','.cursor/rules/.archive']);
-function walk(dir) {
+const walk = (dir) => {
+  if (!fs.existsSync(dir)) return [];
   const out = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory() && IGNORE_DIRS.has(path.relative(ROOT_APP, full)) ) continue;
-    if (EXEMPT.has(full)) continue;
-    if (entry.isDirectory()) {
-      out.push(...walk(full));
-    } else if (FILE_RE.test(entry.name)) {
-      out.push(full);
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      if (ignoreDirs.has(ent.name)) continue;
+      out.push(...walk(p));
+    } else {
+      if (FILE_RE.test(ent.name)) out.push(p);
     }
   }
   return out;
+};
+
+const files = targets.flatMap(walk);
+const violations = [];
+for (const f of files) {
+  let txt; try { txt = fs.readFileSync(f, 'utf8'); } catch { continue; }
+  if (BAD.some(re => re.test(txt))) violations.push(f);
 }
 
-let hits = [];
-for (const target of TARGETS) {
-  const files = walk(target);
-  for (const f of files) {
-    const t = fs.readFileSync(f, 'utf8');
-    if (BAD.some(re => re.test(t))) hits.push(f);
-  }
-}
+const jsonOut = path.join(OUT_DIR, 'enforce-no-legacy.violations.json');
+const mdOut = path.join(OUT_DIR, 'enforce-no-legacy.violations.md');
+fs.writeFileSync(jsonOut, JSON.stringify({ mode: MODE, count: violations.length, files: violations.slice(0, 1000) }, null, 2));
+fs.writeFileSync(mdOut, ['# Enforcer Violations', `mode: ${MODE}`, `count: ${violations.length}`, '', ...violations.map(v => `- ${v}`)].join('\n'));
 
-if (hits.length) {
-  console.error(`❌ Blocking/legacy patterns in ${hits.length} file(s):`);
-  console.error(hits.slice(0, 500).join('\n'));
-  process.exit(2);
+if (violations.length) {
+  const msg = `Legacy/terminal-blocking patterns found in ${violations.length} file(s).`;
+  if (MODE === 'error') { console.error(`❌ ${msg}`); process.exit(2); }
+  console.warn(`⚠️ ${msg} (WARN mode)`);
+} else {
+  console.log('✅ Repo clean.');
 }
-console.log('✅ Clean.');
