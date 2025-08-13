@@ -1,4 +1,66 @@
 #!/usr/bin/env bash
+# Ultra runtime validation with auto-fix loop (NB-runner bounded; no blocking primitives)
+set -euo pipefail
+APP_DIR="/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh"
+cd "$APP_DIR"
+LOG_DIR="$APP_DIR/validations/logs"
+STATUS_DIR="$APP_DIR/validations/status"
+mkdir -p "$LOG_DIR" "$STATUS_DIR"
+
+NB="node scripts/nb.cjs"
+
+run_nb () {
+  local label="$1"; shift
+  local ttl="$1"; shift
+  local cmd="$*"
+  $NB --ttl "$ttl" --label "$label" --log "$LOG_DIR/$label.log" --status "$STATUS_DIR" -- bash -lc "$cmd"
+}
+
+do_ultra_fix () {
+  if [[ -f "scripts/ULTRA-fix.sh" ]]; then
+    run_nb ultra-fix 420s "scripts/ULTRA-fix.sh"
+    return
+  fi
+  [[ -f "scripts/fix-parsing-errors.sh"    ]] && run_nb fix-parsing 120s "bash scripts/fix-parsing-errors.sh" || true
+  [[ -f "scripts/fix-typescript-errors.sh" ]] && run_nb fix-ts       240s "bash scripts/fix-typescript-errors.sh" || true
+  if [[ -f "scripts/fix-eslint-errors.sh" ]]; then
+    run_nb fix-eslint 300s "bash scripts/fix-eslint-errors.sh"
+  elif [[ -f "scripts/fix-eslint-errors" ]]; then
+    run_nb fix-eslint 300s "bash scripts/fix-eslint-errors"
+  fi
+}
+
+MAX_CYCLES=2
+cycle=0
+TS_OK=1
+ESL_OK=1
+
+while (( cycle <= MAX_CYCLES )); do
+  TS_OK=0
+  ESL_OK=0
+  if run_nb tsc 240s "npx tsc --noEmit"; then TS_OK=1; fi
+  if run_nb eslint 300s "npx eslint . --ext .ts,.tsx --max-warnings=0"; then ESL_OK=1; fi
+
+  if (( TS_OK == 1 && ESL_OK == 1 )); then
+    echo "Static validation: PASS"
+    break
+  fi
+
+  if (( cycle == MAX_CYCLES )); then
+    echo "Static validation: FAIL after ${MAX_CYCLES} cycles"
+    break
+  fi
+
+  echo "Running ULTRA-fix (cycle $((cycle+1))/${MAX_CYCLES})…"
+  do_ultra_fix
+  cycle=$((cycle+1))
+done
+
+run_nb expo-health 18s "curl -sSf http://127.0.0.1:8081/status >/dev/null" || true
+
+if (( TS_OK == 1 && ESL_OK == 1 )); then exit 0; else exit 2; fi
+
+#!/usr/bin/env bash
 
 # Ultra Runtime Validation Script
 # Comprehensive validation combining all approaches with non-blocking patterns
