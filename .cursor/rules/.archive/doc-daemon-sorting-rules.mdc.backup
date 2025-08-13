@@ -1,0 +1,16 @@
+# Document Daemon Sorting and Organization
+tags: ["daemon", "organization", "sorting"]
+appliesTo: ["CursorAgent", "Ghost"]
+enforce: true
+priority: medium
+
+## Rules
+
+- After execution:
+  - Move `.summary.md` to `.completed/` if it contains "PASS"
+  - Move to `.archive/` if > 2 days old
+  - Move to `.failed/` if any validator status is FAIL
+
+- On movement:
+  - Rebuild `INDEX.md` with updated location
+  - Update table of contents in `README.md`

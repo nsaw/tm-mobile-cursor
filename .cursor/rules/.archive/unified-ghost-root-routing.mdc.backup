@@ -1,0 +1,26 @@
+# Unified Ghost Root Routing Structure
+tags: ["ghost", "routing", "structure"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+All Ghost-related I/O must use this structure:
+
+```
+├── patches/
+│   ├── .archive/
+│   ├── .failed/
+
+├── summaries/
+│   ├── .logs/
+│   ├── .heartbeat/
+│   ├── .completed/
+│   ├── .archive/
+│   ├── .failed/
+```
+
+- No new summaries or patches may be written outside this root.
+- Watchdog + doc daemon must monitor this path only.
+- INDEX.md must update automatically on mutation.

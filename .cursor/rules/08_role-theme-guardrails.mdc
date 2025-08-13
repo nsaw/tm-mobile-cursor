@@ -1,8 +1,3 @@
-
-:::rule
-id: role-theme-guardrails
-title: Role/Theming Enforcement (UI)
-scope: repo
-requires:
-  - Keep refined role/lexicon structure active for hybrid generation + layout restoration
-:::
+---
+# Archived: superseded by UI role/theming validators in app validation suite
+---

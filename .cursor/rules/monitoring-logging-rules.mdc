@@ -1,0 +1,19 @@
+---
+description: Enforce monitoring and logging rules
+globs:
+  - "**/*.log"
+  - "**/monitoring-*.json"
+alwaysApply: true
+---
+# Monitoring and Logging Rules
+
+## Rules
+
+- `.clock-status.md` must update every 2 minutes.
+- If heartbeat fails, execution must halt and GPT notified.
+- All runtime logs must be saved to `/summaries/_heartbeat/`.
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

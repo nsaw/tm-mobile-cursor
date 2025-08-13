@@ -1,0 +1,17 @@
+# Cursor CLI Command Audit Standards
+tags: ["cli", "audit", "commands"]
+appliesTo: ["CursorAgent", "Ghost"]
+enforce: true
+priority: medium
+
+## Rules
+
+All CLI commands must:
+
+- Log input args
+- Confirm stdout matches intended behavior
+- Write error output to `.logs/` if failure
+- Print `✅` or `❌` to stdout for automation detection
+- Use `process.exit(0)` or `exit(1)` explicitly
+
+Example: `ghost validate summaries/foo.md`

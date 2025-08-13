@@ -1,0 +1,17 @@
+---
+alwaysApply: false
+---
+## ABSOLUTE PATHS ONLY (MAIN)
+
+All operations must use absolute references from `/Users/sawyer/gitSync/`
+
+❌ Relative path examples:
+- `~/gitSync/`
+- `../summaries/`
+
+✅ Correct:
+- `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/`
+
+---
+**Status**: ✅ STRICT
+**Compliance**: Required by BRAUN

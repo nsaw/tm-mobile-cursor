@@ -1,0 +1,40 @@
+# GPT Summary Proof Required
+
+## Core Enforcement
+- **NO SUMMARY DECLARATION WITHOUT DISK PROOF**: GPT, GHOST, BRAUN, and DEV agents cannot claim a summary exists unless it is physically located on disk
+- **MANDATORY CACHE PATHS**: All summaries must be written to:
+  - `.cursor-cache/CYOPS/summaries/` for CYOPS operations
+  - `.cursor-cache/MAIN/summaries/` for MAIN operations
+- **RESPECT SUMMARYWRITEDIR**: Patch writebacks, daemons, and CLI must honor the `summaryWriteDir` configuration
+
+## Validation Requirements
+- **DISK VERIFICATION**: Before declaring any summary, agents must confirm the file exists at the specified path
+- **METADATA VALIDATION**: GPT cannot invent summary metadata without reading the actual file from disk
+- **PATH CONSISTENCY**: Summary paths must match the expected cache directory structure
+
+## Violation Consequences
+- **CLI ERROR + REVERT**: If GPT or any agent fabricates a summary, CLI will issue an error and revert the operation
+- **VALIDATOR FAILURE**: Summary validators will fail if the disk location is missing
+- **AUTOMATIC ROLLBACK**: Any operation claiming a summary without disk proof will be automatically rolled back
+
+## Implementation Details
+- **READ CONFIRMATION**: GPT must use file system tools to verify summary existence before declaration
+- **PATH VALIDATION**: All summary paths must be validated against the allowed cache directories
+- **METADATA INTEGRITY**: Summary metadata must be extracted from actual file content, not invented
+
+## Error Handling
+- **FAIL LOUDLY**: Any summary fabrication attempt must result in immediate error reporting
+- **TRACE LOGGING**: All summary validation attempts must be logged for audit purposes
+- **USER NOTIFICATION**: Users must be immediately notified of any summary proof violations
+
+## Compliance Checklist
+- [ ] Summary file exists on disk before declaration
+- [ ] Summary path matches allowed cache directory structure
+- [ ] Summary metadata is read from actual file content
+- [ ] No invented or fabricated summary information
+- [ ] Proper error handling for missing summaries
+- [ ] Audit trail maintained for all summary operations 
+description:
+globs:
+alwaysApply: false
+---

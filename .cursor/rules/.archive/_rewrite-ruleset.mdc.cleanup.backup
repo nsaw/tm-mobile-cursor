@@ -1,0 +1,27 @@
+---
+description: Enforce rule compliance for _rewrite-ruleset operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+priority: medium
+---
+## ABSOLUTE PATHS ONLY (MAIN)
+
+All operations must use absolute references from `/Users/sawyer/gitSync/`
+
+❌ Relative path examples:
+- `~/gitSync/`
+- `../summaries/`
+
+✅ Correct:
+- `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/`
+
+**Status**: ✅ STRICT
+**Compliance**: Required by BRAUN
+
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

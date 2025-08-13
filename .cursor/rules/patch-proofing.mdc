@@ -1,0 +1,23 @@
+---
+description: Enforce patch validation and proof requirements
+globs:
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+# Patch Validation and Proof Requirements
+
+## Rules
+
+- No patch is marked complete unless:
+  - Logs prove validation
+  - Summary is confirmed and visible on disk
+  - Agent reports successful runtime behavior
+
+- GPT must never close a patch cycle without running all:
+  - Lint, TypeScript, test, performance, runtime, and role checks
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

@@ -1,0 +1,16 @@
+# Prevent Main Ghost Collision with CYOPS
+tags: ["ghost", "collision", "control"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+- If `GHOST_CONTROLLED_BY=CYOPS` is set:
+  - Disable MAIN-side boot of ghost bridge
+  - Prevent daemon spawn or `pm2 start` from main repo
+  - Redirect ghost status checks to `/gpt-cursor-runner/ghost/status.json`
+  - Mark MAIN ghost as read-only watcher
+
+- If override is needed:
+  - Require `override=true` passed via flag or ENV

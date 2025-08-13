@@ -1,0 +1,17 @@
+# Patch Success Proof Requirements
+tags: ["patches", "proof", "validation"]
+appliesTo: ["GPT", "CursorAgent"]
+enforce: true
+priority: critical
+
+## Rules
+
+- GPT must validate every patch with:
+  - `diff` output
+  - console execution logs
+  - validation logs
+  - summary markdown presence
+
+- A patch may not be tagged, committed, or reported complete until:
+  - At least one runtime trace confirms execution
+  - All postMutationBuild commands complete without failure

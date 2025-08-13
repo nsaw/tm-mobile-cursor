@@ -1,0 +1,15 @@
+# Cursor Index Auto-Generation
+tags: ["index", "autogeneration", "documentation"]
+appliesTo: ["CursorAgent", "Ghost"]
+enforce: true
+priority: medium
+
+## Rules
+
+- Anytime a `.mdc` or `.json` file is added, moved, or archived:
+  - Rebuild `INDEX.md` as table of contents
+  - Regenerate `README.md` with purpose, structure, and usage
+
+- Use consistent structure:
+  - Group by phase or intent
+  - Include links to `.completed/`, `.failed/`, and `.archive/`

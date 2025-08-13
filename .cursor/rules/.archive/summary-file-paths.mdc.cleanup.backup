@@ -1,0 +1,14 @@
+---
+description: Enforce summary file standards and routing
+globs:
+  - "**/summary-*.md"
+  - "**/patch-*.json"
+alwaysApply: true
+priority: critical
+---
+
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

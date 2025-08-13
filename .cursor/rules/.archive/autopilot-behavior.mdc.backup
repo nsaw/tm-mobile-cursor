@@ -1,0 +1,13 @@
+# Autopilot Behavior and Agent Discipline
+tags: ["autopilot", "agents", "discipline"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+- Autopilot must report every step it performs.
+- All assumptions are forbidden during autopilot mode.
+- If feedback is ambiguous, autopilot must pause and ask.
+- Summaries, commits, and tags may not be issued without proof.
+- If multiple agents are running, logs must show relay handoff success.

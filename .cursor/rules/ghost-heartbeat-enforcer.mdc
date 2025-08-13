@@ -1,0 +1,27 @@
+---
+description: Enforce Ghost runner integrity and routing validation
+globs:
+  - "**/ghost-*.log"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+# Ghost Heartbeat Enforcement
+
+## Rules
+
+- Each ghost must publish to:
+  - `summaries/.heartbeat/.clock-status.md`
+  - `summaries/.heartbeat/.ghost-relay.log`
+
+- If any:
+  - File is > 120s old
+  - `.clock-status.md` drift > 60s
+
+→ Trigger `restart-daemon.sh` or alert GPT.
+
+- Also append timestamp to `heartbeat-uptime.log`
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

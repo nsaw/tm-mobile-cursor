@@ -1,0 +1,25 @@
+---
+description: Enforce patch validation and proof requirements
+globs:
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+# Patch Success Proof Requirements
+
+## Rules
+
+- GPT must validate every patch with:
+  - `diff` output
+  - console execution logs
+  - validation logs
+  - summary markdown presence
+
+- A patch may not be tagged, committed, or reported complete until:
+  - At least one runtime trace confirms execution
+  - All postMutationBuild commands complete without failure
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

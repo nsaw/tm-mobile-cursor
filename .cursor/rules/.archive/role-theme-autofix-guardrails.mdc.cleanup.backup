@@ -1,0 +1,36 @@
+---
+description: Enforce rule compliance for role-theme-autofix-guardrails operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+priority: medium
+---
+# Role and Theme Autofix Guardrails
+tags: ["roles", "themes", "autofix", "guardrails"]
+appliesTo: ["GPT", "CursorAgent"]
+enforce: true
+priority: medium
+
+## Rules
+
+- Only suggest roles if:
+  - `auditMode: true`
+  - `onlySuggestRoles: true`
+
+- Obey:
+  - `SACRED_COWS_PROTECTION.md`
+  - `roles-cheatsheet.md`
+  - `ROLE_TYPE_MAP.md`
+
+- Use:
+  - Max one role per component
+  - `AutoRoleView` over raw View/Text unless forbidden
+
+- Must pass `validate-roles.sh` or halt.
+
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

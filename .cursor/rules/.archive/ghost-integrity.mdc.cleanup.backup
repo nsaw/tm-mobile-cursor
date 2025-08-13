@@ -1,0 +1,29 @@
+---
+description: Enforce Ghost runner integrity and routing validation
+globs:
+  - "**/ghost-*.log"
+  - "**/patch-*.json"
+alwaysApply: true
+priority: high
+---
+# Ghost Runner Integrity and Routing Validation
+tags: ["ghost", "routing", "validation"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+- All Ghost dispatches must:
+  - Be confirmed via logs and `/summaries/_heartbeat/`
+  - Return validation proof via summary and status ping
+  - Use a single `.cursor-cache` location for all routing if consolidated
+
+- Ghost must not run duplicate daemon processes across MAIN or CYOPS.
+- Orchestrator PID files must be unique and verified on live scan.
+
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

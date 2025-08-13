@@ -1,0 +1,12 @@
+# Project Structure Rules
+tags: ["structure", "paths", "backups"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+- All patch paths must use hardened absolute paths (no `~/` or relative).
+- Backups must follow the format: `YYMMDD-UTC_vX.X.X-description_backup_[project].tar.gz`.
+- Task filenames must follow Cursor-compliant semantic format.
+- No `.tar.gz` backups may occur unless system is stable.

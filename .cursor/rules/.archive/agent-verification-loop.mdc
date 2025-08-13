@@ -1,0 +1,26 @@
+---
+description: Enforce agent behavior and discipline across all operations
+globs:
+  - "**/agent-*.log"
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+# Agent Verification and Dispatch Loop
+
+## Rules
+
+- Every patch sent to Cursor must:
+  - Appear in the agent's visible execution log
+  - Create a `*.summary.md` file post-execution
+  - Show up in the `.heartbeat` monitor or live agent logs
+
+- GHOST must route back:
+  - Delivery confirmation
+  - File placement
+  - Agent-pickup confirmation
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

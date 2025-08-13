@@ -1,4 +1,6 @@
-
+---
+alwaysApply: true
+---
 :::rule
 id: no-bare-grep
 title: No bare 'grep' in shells or scripts

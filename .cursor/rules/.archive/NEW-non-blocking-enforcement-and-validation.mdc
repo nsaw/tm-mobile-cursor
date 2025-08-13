@@ -1,0 +1,132 @@
+---
+alwaysApply: true
+---
+
+# NEW RUNTIME VALIDATION WITH BASH SAFE NON-BLOCKING PATTERNS
+
+
+:::rule
+
+# title: No bare 'grep' in shells or scripts
+scope: repo
+intent:
+  - 'grep' is terminal-blocking in this environment; use Node scanners instead
+prohibits:
+  - Any 'grep' invocation in patch 'postMutationBuild'/'validate' or repo scripts
+guidance:
+  - Use `node scripts/tools/scan-legacy-patterns.cjs --dir <path>` for pattern checks
+
+# title: Launch Expo via scripts/admin/safe-launch-expo.sh
+scope: repo
+requires:
+  - Replace any inline `npx expo start --ios --clear` launch group with `scripts/admin/safe-launch-expo.sh`
+  - Health probe via NB-runner curl to `http://localhost:8081/status`
+prohibits:
+  - Inline launch groups using `$!`, `disown`, or braces
+
+# title: Use NB-runner for all long/IO-bound work
+scope: repo
+intent:
+  - Prevent terminal blocking and zombie processes
+requires:
+  - Use: `node scripts/nb.cjs --ttl <Xs> --label <name> --log validations/logs/<name>.log --status validations/status -- <cmd>`
+prohibits:
+  - `& disown`, raw `timeout`, infinite `tail -f`, brace-group spawns `{ ... } &`, `$!`
+  - bare `grep` usage (use Node scanners or NB-runner-wrapped tools)
+
+# title: Watchdogs, Heartbeat, and Logging
+scope: repo
+requires:
+  - Write NB-runner logs under `validations/logs/`, status under `validations/status/`
+  - Maintain heartbeat artifacts in `/summaries/_heartbeat/` when applicable
+prohibits:
+  - Silent failures; any stall must emit a summary/log line
+
+# title: Secret Management & 1Password Session Refresh
+scope: repo
+requires:
+  - Use `~/bin/op-session-refresh.zsh` via NB-runner before steps needing secrets
+  
+# title: Role/Theming Enforcement (UI)
+scope: repo
+requires:
+  - Keep refined role/lexicon structure active for hybrid generation + layout restoration
+
+# title: No bare 'grep' in shells or scripts
+scope: repo
+intent:
+  - 'grep' is terminal-blocking in this environment; use Node scanners instead
+prohibits:
+  - Any 'grep' invocation in patch 'postMutationBuild'/'validate' or repo scripts
+guidance:
+  - Use `node scripts/tools/scan-legacy-patterns.cjs --dir <path>` for pattern checks
+
+# title: Launch Expo via scripts/admin/safe-launch-expo.sh
+scope: repo
+requires:
+  - Replace any inline `npx expo start --ios --clear` launch group with `scripts/admin/safe-launch-expo.sh`
+  - Health probe via NB-runner curl to `http://localhost:8081/status`
+prohibits:
+  - Inline launch groups using `$!`, `disown`, or braces
+
+# title: Use NB-runner for all long/IO-bound work
+scope: repo
+intent:
+  - Prevent terminal blocking and zombie processes
+requires:
+  - Use: `node scripts/nb.cjs --ttl <Xs> --label <name> --log validations/logs/<name>.log --status validations/status -- <cmd>`
+prohibits:
+  - `& disown`, raw `timeout`, infinite `tail -f`, brace-group spawns `{ ... } &`, `$!`
+  - bare `grep` usage (use Node scanners or NB-runner-wrapped tools)
+
+# title: Watchdogs, Heartbeat, and Logging
+scope: repo
+requires:
+  - Write NB-runner logs under `validations/logs/`, status under `validations/status/`
+  - Maintain heartbeat artifacts in `/summaries/_heartbeat/` when applicable
+prohibits:
+  - Silent failures; any stall must emit a summary/log line
+
+# title: Secret Management & 1Password Session Refresh
+scope: repo
+requires:
+  - Use `~/bin/op-session-refresh.zsh` via NB-runner before steps needing secrets
+  
+# title: Role/Theming Enforcement (UI)
+scope: repo
+requires:
+  - Keep refined role/lexicon structure active for hybrid generation + layout restoration
+
+
+# title: Canonical Patch Validation Chain (Static + Runtime)
+scope: repo
+intent:
+  - One source of truth for validation ordering and pass criteria
+  - No patch "PASS" without disk evidence and runtime proof
+requires:
+  - Static: `npx tsc --noEmit`, `npx eslint . --ext .ts,.tsx --max-warnings=0`, `npm run test:unit -- --watchAll=false`
+  - Runtime: Expo/Metro refresh + health probe on 8081, then `scripts/validate-runtime.sh`
+  - Evidence: NB-runner logs under `validations/logs/*.log` + status under `validations/status/*`
+  - Summary: patch JSON must include `summaryFile` pointing to `.cursor-cache/MAIN/summaries/`
+prohibits:
+  - Declaring success based on summary text alone
+  - Validation grepping for logs that aren’t produced
+guidance:
+  - Wrap every gate with NB-runner, set sensible TTLs, and keep commands bounded.
+
+# title: Canonical Patch Validation Chain (Static + Runtime)
+scope: repo
+intent:
+  - One source of truth for validation ordering and pass criteria
+  - No patch "PASS" without disk evidence and runtime proof
+requires:
+  - Static: `npx tsc --noEmit`, `npx eslint . --ext .ts,.tsx --max-warnings=0`, `npm run test:unit -- --watchAll=false`
+  - Runtime: Expo/Metro refresh + health probe on 8081, then `scripts/validate-runtime.sh`
+  - Evidence: NB-runner logs under `validations/logs/*.log` + status under `validations/status/*`
+  - Summary: patch JSON must include `summaryFile` pointing to `.cursor-cache/MAIN/summaries/`
+prohibits:
+  - Declaring success based on summary text alone
+  - Validation grepping for logs that aren’t produced
+guidance:
+  - Wrap every gate with NB-runner, set sensible TTLs, and keep commands bounded.
+:::

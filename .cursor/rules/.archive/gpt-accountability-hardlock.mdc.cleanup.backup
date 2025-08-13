@@ -1,0 +1,32 @@
+---
+description: Enforce AI accountability and integrity with strict validation requirements
+globs:
+  - "**/summary-*.md"
+  - "**/patch-*.json"
+  - "**/agent-*.log"
+alwaysApply: true
+priority: critical
+---
+# GPT Accountability and Status Verification
+tags: ["gpt", "accountability", "verification"]
+appliesTo: ["GPT"]
+enforce: true
+priority: critical
+
+## Rules
+
+- GPT may only claim:
+  - "Patch dispatched" if confirmed in `.logs/`
+  - "Patch succeeded" if `.summary.md` is present and states PASS
+  - "Execution passed" if `postMutationBuild` ran and log confirms
+
+- If GPT fails to confirm, it must:
+  - Ask user for help, access, or inspection
+  - Mark status as `UNVERIFIED`
+  - Log "incomplete" in patch status
+
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

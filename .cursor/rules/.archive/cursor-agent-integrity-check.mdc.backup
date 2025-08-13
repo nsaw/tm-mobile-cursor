@@ -1,0 +1,15 @@
+# Cursor Agent Integrity and Health Checks
+tags: ["agents", "integrity", "health"]
+appliesTo: ["CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+- All agents (DEV, BRAUN) must:
+  - Prove daemonized state via pm2 or launchd logs
+  - Show active registration in `.heartbeat/` and `.logs/`
+  - Publish daemon PID or health report on startup
+  - Auto-recover if stuck, zombie, or missing patches
+
+- Missing daemons must alert GPT and trigger `fallback-repair.sh`

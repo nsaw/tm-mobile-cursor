@@ -1,0 +1,55 @@
+---
+description: Enforce absolute path requirements and routing
+globs:
+  - "**/*.json"
+  - "**/*.md"
+  - "**/*.sh"
+alwaysApply: true
+priority: high
+---
+# Absolute Paths Only Rule
+
+## BRUAN-MAIN PROJECT Path Enforcement
+
+**CRITICAL**: BRAUN will wipe all memory of past references to any summary/ folders and will ONLY use ABSOLUTE PATHS starting from `/Users/sawyer/gitSync/*` moving forward.
+
+### Requirements:
+- **ABSOLUTE PATHS ONLY**: All paths must start with `/Users/sawyer/gitSync/`
+- **NO TILDE (~)**: Never use tilde notation for home directory
+- **NO EXCEPTIONS**: This applies to all file operations, references, and paths
+- **MEMORY WIPE**: Past references to summary/ folders are to be ignored
+
+### Path Structure:
+```
+/Users/sawyer/gitSync/
+├── .cursor-cache/
+│   └── MAIN/
+│       └── summaries/          # ONLY location for summary files
+├── tm-mobile-cursor/
+│   └── mobile-native-fresh/
+└── [other projects]/
+```
+
+### Examples:
+✅ **CORRECT**:
+- `/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src/`
+- `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`
+- `/Users/sawyer/gitSync/tm-mobile-cursor/MAIN/patches/`
+
+❌ **INCORRECT**:
+- `~/gitSync/` (uses tilde)
+- `./mobile-native-fresh/` (relative path)
+- `../summaries/` (relative path)
+- `mobile-native-fresh/tasks/summaries/` (relative path)
+
+### Enforcement:
+- This rule applies to ALL file operations and references
+- Any use of tilde (~) is prohibited
+- All paths must be absolute starting from `/Users/sawyer/gitSync/`
+- Past references to summary/ folders in other locations are invalid
+
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

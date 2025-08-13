@@ -1,0 +1,17 @@
+# Global Patch Compliance Checklist
+tags: ["validation", "checklist", "audit"]
+appliesTo: ["CursorAgent", "GPT"]
+enforce: true
+priority: critical
+
+## Rules
+
+- Every patch must pass:
+  - TypeScript compile: `tsc --noEmit`
+  - ESLint: `eslint . --ext .ts,.tsx --max-warnings=0`
+  - Unit tests: `yarn test:unit --watchAll=false`
+  - Runtime test: `bash scripts/validate-runtime.sh`
+  - Snapshot: `bash scripts/validate-components.sh`
+  - Role: `bash scripts/validate-roles.sh`
+  - Performance: `bash scripts/validate-performance.sh`
+- Patches may not tag or commit without all validations passing.

@@ -1,0 +1,227 @@
+---
+description: Enforce non-blocking terminal patterns and prevent UI freezing
+globs:
+  - "**/*.sh"
+  - "**/scripts/**"
+alwaysApply: true
+priority: high
+---
+# Non-Blocking Terminal Patterns
+
+## **CURSOR-COMPATIBLE COMMAND STRUCTURES**
+
+All terminal commands in Cursor agent chat must use these non-blocking patterns to ensure:
+- **No terminal hang**
+- **Logs are still written**
+- **Agents proceed without blocking Cursor UI or GPT flow**
+
+## **CORE NON-BLOCKING PATTERN**
+
+### **Standard Pattern**
+```bash
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+```
+
+### **Pattern Breakdown**
+1. **Subshell Wrapping**: `{ command & }` - Isolates command execution
+2. **Background Execution**: `&` - Runs command in background
+3. **Output Suppression**: `>/dev/null 2>&1` - Prevents output blocking
+4. **Process Detachment**: `& disown` - Removes from parent process
+
+## **SPECIFIC USE CASE PATTERNS**
+
+### **1. Script Execution**
+```bash
+# Validation scripts
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+
+# Build scripts
+{ npm run build & } >/dev/null 2>&1 & disown
+
+# Test scripts
+{ npm run test & } >/dev/null 2>&1 & disown
+
+# Linting scripts
+{ npm run lint:fix-all & } >/dev/null 2>&1 & disown
+```
+
+### **2. Development Server Commands**
+```bash
+# Expo development server
+{ npx expo start --clear & } >/dev/null 2>&1 & disown
+
+# React development server
+{ npm start & } >/dev/null 2>&1 & disown
+
+# Python development server
+{ python3 -m server.main & } >/dev/null 2>&1 & disown
+
+# Node.js development server
+{ node server.js & } >/dev/null 2>&1 & disown
+```
+
+### **3. Background Services**
+```bash
+# Database services
+{ docker-compose up -d & } >/dev/null 2>&1 & disown
+
+# API services
+{ python3 -m api.main & } >/dev/null 2>&1 & disown
+
+# Monitoring services
+{ node monitoring.js & } >/dev/null 2>&1 & disown
+
+# Queue processors
+{ python3 -m queue.processor & } >/dev/null 2>&1 & disown
+```
+
+### **4. Log Monitoring**
+```bash
+# Application logs
+{ tail -f logs/app.log & } >/dev/null 2>&1 & disown
+
+# Error logs
+{ tail -f logs/error.log & } >/dev/null 2>&1 & disown
+
+# System logs
+{ tail -f /var/log/system.log & } >/dev/null 2>&1 & disown
+
+# Docker logs
+{ docker logs -f container_name & } >/dev/null 2>&1 & disown
+```
+
+### **5. File Operations**
+```bash
+# Large file operations
+{ cp large-file.zip backup/ & } >/dev/null 2>&1 & disown
+
+# Archive operations
+{ tar -czf backup.tar.gz src/ & } >/dev/null 2>&1 & disown
+
+# Database backups
+{ pg_dump database > backup.sql & } >/dev/null 2>&1 & disown
+
+# File synchronization
+{ rsync -av src/ dest/ & } >/dev/null 2>&1 & disown
+```
+
+### **6. Network Operations**
+```bash
+# API calls with curl
+{ curl -X POST http://api.example.com/data & } >/dev/null 2>&1 & disown
+
+# WebSocket connections
+{ node websocket-client.js & } >/dev/null 2>&1 & disown
+
+# Network monitoring
+{ ping -c 10 google.com & } >/dev/null 2>&1 & disown
+
+# Port scanning
+{ nmap -p 80,443 example.com & } >/dev/null 2>&1 & disown
+```
+
+## **PATTERN VARIATIONS**
+
+### **With Logging to File**
+```bash
+# Redirect output to log file instead of /dev/null
+{ bash scripts/validate-runtime.sh & } >logs/validation.log 2>&1 & disown
+
+# Separate stdout and stderr
+{ bash scripts/validate-runtime.sh & } >logs/stdout.log 2>logs/stderr.log & disown
+```
+
+### **With Process ID Tracking**
+```bash
+# Capture PID for later management
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & echo $! > /tmp/script.pid & disown
+
+# Kill process later if needed
+kill $(cat /tmp/script.pid) 2>/dev/null || true
+```
+
+### **With Timeout Protection**
+```bash
+# Add timeout to prevent infinite hanging
+{ timeout 300 bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+
+# Using gtimeout on macOS
+{ gtimeout 300 bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+```
+
+## **VALIDATION PATTERNS**
+
+### **Pre-Execution Validation**
+```bash
+# Check if pattern is correct
+echo "Command pattern validation: { command & } >/dev/null 2>&1 & disown"
+
+# Verify command exists
+{ which bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+```
+
+### **Post-Execution Validation**
+```bash
+# Check if process is running
+{ ps aux | grep "validate-runtime" | grep -v grep & } >/dev/null 2>&1 & disown
+
+# Check exit status (if needed)
+{ wait $! && echo "Command completed successfully" & } >/dev/null 2>&1 & disown
+```
+
+## **EXCEPTION HANDLING**
+
+### **Quick Commands (Safe to Run Directly)**
+```bash
+# These can run without non-blocking pattern
+ls -la
+pwd
+echo "Hello World"
+git status
+cat small-file.txt
+```
+
+### **Commands Requiring Non-Blocking Pattern**
+```bash
+# ANY command that might take > 1 second
+# ANY command that produces output
+# ANY command that might hang
+# ANY script execution
+# ANY background service
+```
+
+## **ENFORCEMENT CHECKLIST**
+
+### **Before Command Execution**
+- [ ] Command uses non-blocking pattern
+- [ ] Output is redirected to /dev/null or log file
+- [ ] Background execution (`&`) is present
+- [ ] Process disowning (`& disown`) is present
+- [ ] Subshell wrapping (`{ }`) is used
+
+### **After Command Execution**
+- [ ] Agent chat remains responsive
+- [ ] Cursor UI doesn't freeze
+- [ ] GPT flow continues normally
+- [ ] User can continue interaction
+- [ ] No terminal blocking observed
+
+## **TROUBLESHOOTING**
+
+### **If Command Still Blocks**
+1. **Check pattern syntax**: Ensure all components are present
+2. **Verify command**: Some commands may not support background execution
+3. **Add timeout**: Use `timeout` or `gtimeout` for additional protection
+4. **Check dependencies**: Ensure required tools are available
+
+### **If Output is Needed**
+1. **Redirect to file**: `>logs/output.log 2>&1`
+2. **Use separate monitoring**: Run output monitoring in separate non-blocking command
+3. **Check logs later**: Read log files after command completion
+
+
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

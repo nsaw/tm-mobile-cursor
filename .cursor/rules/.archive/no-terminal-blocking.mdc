@@ -1,0 +1,120 @@
+---
+description: Enforce non-blocking terminal patterns and prevent UI freezing
+globs:
+  - "**/*.sh"
+  - "**/scripts/**"
+alwaysApply: true
+---
+# Terminal Blocking Prevention Rules
+
+## **CRITICAL: Never Block Cursor Terminal**
+
+All terminal commands in agent chat MUST use non-blocking patterns to prevent:
+- Cursor UI freezing
+- GPT flow interruption  
+- Agent chat hanging
+- User experience degradation
+
+## **MANDATORY NON-BLOCKING PATTERN**
+
+### **Standard Non-Blocking Command Structure**
+```bash
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+```
+
+### **Pattern Components**
+1. **Command Wrapping**: `{ command & }` - Wraps command in subshell
+2. **Background Execution**: `&` - Runs command in background
+3. **Output Redirection**: `>/dev/null 2>&1` - Suppresses all output
+4. **Process Disowning**: `& disown` - Detaches from parent process
+
+## **ENFORCEMENT RULES**
+
+### **✅ REQUIRED FOR ALL COMMANDS**
+- **Long-running commands**: Always use non-blocking pattern
+- **Script execution**: Wrap all script calls
+- **Background processes**: Use disown pattern
+- **Logging commands**: Redirect output to prevent blocking
+
+### **❌ FORBIDDEN PATTERNS**
+- Direct command execution without wrapping
+- Commands that wait for user input
+- Commands without output redirection
+- Commands that don't use background execution
+
+## **EXAMPLES**
+
+### **✅ CORRECT - Non-Blocking**
+```bash
+# Script execution
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+
+# Long-running process
+{ npm run build & } >/dev/null 2>&1 & disown
+
+# Background service
+{ python3 -m server.main & } >/dev/null 2>&1 & disown
+
+# Log monitoring
+{ tail -f logs/app.log & } >/dev/null 2>&1 & disown
+```
+
+### **❌ INCORRECT - Blocking**
+```bash
+# Direct execution (BLOCKS)
+bash scripts/validate-runtime.sh
+
+# No background execution (BLOCKS)
+npm run build
+
+# No output redirection (BLOCKS)
+python3 -m server.main
+
+# No process disowning (BLOCKS)
+tail -f logs/app.log &
+```
+
+## **VALIDATION REQUIREMENTS**
+
+### **Pre-Execution Checks**
+- Verify command uses non-blocking pattern
+- Confirm output redirection is present
+- Check for background execution (`&`)
+- Ensure process disowning (`& disown`)
+
+### **Post-Execution Validation**
+- Confirm agent chat remains responsive
+- Verify Cursor UI doesn't freeze
+- Check that GPT flow continues
+- Ensure user can continue interaction
+
+## **EXCEPTIONS**
+
+### **Quick Commands Only**
+- `ls`, `pwd`, `echo` - Can run directly if < 1 second
+- `git status` - Safe for quick status checks
+- `cat` - Safe for small file reads
+
+### **Still Require Caution**
+- Even quick commands should use pattern if uncertain
+- When in doubt, use non-blocking pattern
+- Better safe than blocked
+
+## **COMPLIANCE ENFORCEMENT**
+
+### **Agent Responsibility**
+- All agents MUST follow this pattern
+- No exceptions without explicit user approval
+- Pattern must be used for all script executions
+- Background processes require disown pattern
+
+### **Validation Gates**
+- Pre-execution pattern validation
+- Post-execution responsiveness check
+- User experience verification
+- Cursor UI functionality confirmation
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

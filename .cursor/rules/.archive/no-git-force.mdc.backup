@@ -1,0 +1,87 @@
+---
+alwaysApply: true
+description: Prevents the use of --force in git commands to avoid accidental data loss
+---
+
+# Git Force Protection Rule
+
+## ⚠️ CRITICAL: Never Use `--force` in Git Commands
+
+**Cursor must NEVER use `--force` for any git commands under any circumstances.**
+
+### Why This Rule Exists
+- `--force` can cause **permanent data loss**
+- It can **overwrite remote changes** without warning
+- It can **break collaboration** by rewriting history
+- It can **corrupt repositories** if used incorrectly
+
+### Prohibited Commands
+The following commands with `--force` are **STRICTLY FORBIDDEN**:
+
+```bash
+# ❌ NEVER USE THESE
+git push --force
+git push -f
+git push --force-with-lease
+git reset --force
+git clean --force
+git checkout --force
+git merge --force
+git rebase --force
+```
+
+### Safe Alternatives
+Use these safer alternatives instead:
+
+```bash
+# ✅ SAFE ALTERNATIVES
+git push                    # Regular push
+git push origin main        # Explicit push to branch
+git reset --soft HEAD~1     # Soft reset instead of force
+git clean -n               # Dry run first
+git checkout -b new-branch # Create new branch instead
+git merge --no-ff          # No fast-forward merge
+git rebase -i HEAD~3       # Interactive rebase
+```
+
+### When Force Might Seem Necessary
+If you encounter situations where `--force` seems needed:
+
+1. **Large file issues**: Use `git filter-branch` or `git filter-repo` instead
+2. **History rewriting**: Use interactive rebase or cherry-pick
+3. **Remote conflicts**: Use `git pull --rebase` or resolve conflicts manually
+4. **Secret removal**: Use `git filter-branch` to remove files from history
+
+### Emergency Override Process
+If absolutely necessary to use `--force` (emergency only):
+1. **STOP** and ask the user explicitly
+2. **Explain the risks** clearly
+3. **Get explicit user approval** in writing
+4. **Document the reason** for future reference
+5. **Consider alternatives** one more time
+
+### Examples of Safe Git Operations
+```bash
+# Safe way to update remote
+git pull origin main
+git push origin main
+
+# Safe way to clean up history
+git rebase -i HEAD~5
+
+# Safe way to remove large files
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch large-file.zip' --prune-empty --tag-name-filter cat -- --all
+
+# Safe way to resolve conflicts
+git status
+git add resolved-file.txt
+git commit -m "Resolve merge conflict"
+```
+
+### Compliance
+- This rule applies to **ALL git operations** in Cursor
+- **No exceptions** without explicit user approval
+- **Always prefer safety** over convenience
+- **Document any deviations** from this rule
+
+Remember: **It's better to ask for help than to force a git operation that could cause data loss.**

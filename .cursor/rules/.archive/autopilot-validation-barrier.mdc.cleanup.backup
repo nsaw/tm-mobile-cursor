@@ -1,0 +1,35 @@
+---
+description: Enforce autopilot behavior and validation barriers
+globs:
+  - "**/patch-*.json"
+  - "**/autopilot-*.log"
+alwaysApply: true
+priority: high
+---
+# Autopilot Validation Barrier Enforcement
+tags: ["autopilot", "validation", "barrier"]
+appliesTo: ["GPT", "CursorAgent"]
+enforce: true
+priority: critical
+
+## Rules
+
+- GPT/Cursor must **not** proceed unless all post-mutation checks pass:
+
+  - ✅ TypeScript: `tsc --noEmit`
+  - ✅ ESLint: `eslint . --ext .ts,.tsx --max-warnings=0`
+  - ✅ Unit Tests: `yarn test:unit --watchAll=false`
+  - ✅ Runtime: `validate-runtime.sh`
+  - ✅ Component + Role tests
+  - ✅ Performance tests
+
+- A failure in any validator must:
+  - Halt progression
+  - Mark patch `.summary.md` as FAIL
+  - Move to `summaries/.failed/`
+
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

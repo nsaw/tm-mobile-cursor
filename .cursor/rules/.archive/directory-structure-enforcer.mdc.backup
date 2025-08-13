@@ -1,0 +1,39 @@
+# Directory Structure Standardization
+tags: ["structure", "organization", "patches"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: medium
+
+## Rules
+
+- All patches must route to:
+
+```
+/Users/sawyer/gitSync/.cursor-cache/
+├── MAIN
+│   ├── .archive
+│   ├── .completed
+│   ├── .failed
+│   ├── .heartbeat
+│   │   └── .archive
+│   ├── .logs
+│   │   └── .archive
+│   ├── INDEX.md  
+│   ├── README.md
+│   ├── patches
+│   │   ├── .archive
+│   │   ├── .completed
+│   │   └── .failed
+│   └── summaries
+│       ├── .archive
+│       ├── .failed
+│       └── test.md 
+├── README.md 
+├── CYOPS/
+│   └── ...
+```
+
+- GPT and all agents must reference this unified root for:
+  - Summary validation
+  - Patch receipt and execution monitoring
+  - Live health tracking

@@ -1,0 +1,26 @@
+---
+description: Enforce git operation safety and prevent data loss
+globs:
+  - "**/*.sh"
+  - "**/scripts/**"
+  - "**/git-*.json"
+alwaysApply: true
+priority: critical
+---
+# Git Operation Rules
+tags: ["git", "safety", "validation"]
+appliesTo: ["CursorAgent", "GPT", "Ghost"]
+enforce: true
+priority: critical
+
+## Rules
+
+- Never use `--force` without explicit user approval.
+- Never push to `main` unless validated and approved by GPT.
+- Never merge to `main` without GPT validation.
+
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

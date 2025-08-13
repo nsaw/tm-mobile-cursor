@@ -1,0 +1,19 @@
+# Patch Delivery Proof Policy
+tags: ["patches", "delivery", "proof"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: critical
+
+## Rules
+
+For each dispatched patch:
+
+- Cursor must log:
+  - 📨 File creation in `patches/`
+  - 📬 Receipt pickup confirmation (agent log or relay)
+  - 🏁 Execution log output
+  - 📄 Matching `.summary.md` created
+
+If any step is missing:
+  - Patch is invalid
+  - GPT must retry or mark patch `unverified`

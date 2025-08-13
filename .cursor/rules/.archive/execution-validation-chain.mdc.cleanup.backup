@@ -1,0 +1,33 @@
+---
+description: Enforce comprehensive validation chain for all operations
+globs:
+  - "**/patch-*.json"
+  - "**/validation-*.log"
+alwaysApply: true
+priority: critical
+---
+# Patch Execution Validation Chain
+tags: ["validation", "execution", "patches"]
+appliesTo: ["GPT", "CursorAgent"]
+enforce: true
+priority: critical
+
+## Rules
+
+- Patch execution must include, in order:
+  1. Lint check (`eslint`)
+  2. TypeScript build (`tsc`)
+  3. Unit tests (`yarn test`)
+  4. Custom validation scripts
+  5. Runtime functionality
+  6. Role + visual correctness
+  7. Performance profiling
+
+- If any validation fails, halt further actions.
+- No `git commit` may run unless all 7 pass.
+
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

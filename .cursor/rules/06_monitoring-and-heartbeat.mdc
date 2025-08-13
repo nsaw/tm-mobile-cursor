@@ -1,4 +1,6 @@
-
+---
+alwaysApply: true
+---
 :::rule
 id: monitoring-and-heartbeat
 title: Watchdogs, Heartbeat, and Logging

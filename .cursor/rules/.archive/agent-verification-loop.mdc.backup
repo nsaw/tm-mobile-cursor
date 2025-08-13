@@ -1,0 +1,17 @@
+# Agent Verification and Dispatch Loop
+tags: ["agents", "verification", "dispatch"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+- Every patch sent to Cursor must:
+  - Appear in the agent's visible execution log
+  - Create a `*.summary.md` file post-execution
+  - Show up in the `.heartbeat` monitor or live agent logs
+
+- GHOST must route back:
+  - Delivery confirmation
+  - File placement
+  - Agent-pickup confirmation

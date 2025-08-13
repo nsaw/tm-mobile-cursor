@@ -1,0 +1,59 @@
+---
+title: Tilde Replacement Rule
+---
+
+# Tilde Replacement Rule
+
+## Global Tilde Replacement Enforcement
+
+**CRITICAL**: Tilde linking will be grepped and replaced globally in all projects and relentlessly replaced with `/Users/sawyer/`.
+
+### Requirements:
+- **GLOBAL REPLACEMENT**: All tilde (~) usage must be replaced with `/Users/sawyer/`
+- **RELENTLESS ENFORCEMENT**: No exceptions or allowances for tilde usage
+- **ALL PROJECTS**: This applies to all projects in the workspace
+- **AUTOMATIC DETECTION**: Tilde usage should be identified and corrected immediately
+
+### Replacement Pattern:
+```
+~ → /Users/sawyer
+```
+
+### Examples:
+✅ **CORRECT** (After Replacement):
+- `/Users/sawyer/gitSync/tm-mobile-cursor/`
+- `/Users/sawyer/.config/`
+- `/Users/sawyer/Documents/`
+
+❌ **INCORRECT** (Before Replacement):
+- `~/gitSync/tm-mobile-cursor/`
+- `~/.config/`
+- `~/Documents/`
+
+### File Types Affected:
+- All source code files
+- Configuration files
+- Documentation files
+- Script files
+- Any file containing path references
+
+### Enforcement Process:
+1. **DETECT**: Identify any tilde (~) usage in files
+2. **REPLACE**: Immediately replace with `/Users/sawyer/`
+3. **VERIFY**: Ensure all replacements are complete
+4. **PREVENT**: Block any new tilde usage
+
+### Search Patterns:
+```bash
+# Find all tilde usage
+grep -r "~" /Users/sawyer/gitSync/
+
+# Replace tilde with absolute path
+sed -i '' 's|~|/Users/sawyer|g' [files]
+```
+
+### Compliance:
+- This rule is MANDATORY for all file operations
+- No exceptions for tilde usage
+- All paths must use absolute paths starting with `/Users/sawyer/`
+- Continuous monitoring and replacement required

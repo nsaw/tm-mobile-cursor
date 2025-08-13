@@ -1,0 +1,12 @@
+# Agent Behavior and Escalation Rules
+tags: ["agents", "delegation", "autonomy"]
+appliesTo: ["CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+- Ghost may never declare a patch complete without GPT review.
+- Cursor Agents must escalate unclear failures to GPT immediately.
+- BRAUN and DEV must report to GPT after every patch execution.
+- Agents may not override tag, commit, or phase-lock decisions.

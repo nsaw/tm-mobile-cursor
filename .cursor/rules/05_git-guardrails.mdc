@@ -1,4 +1,6 @@
-
+---
+alwaysApply: true
+---
 :::rule
 id: git-guardrails
 title: Safe Git Operations

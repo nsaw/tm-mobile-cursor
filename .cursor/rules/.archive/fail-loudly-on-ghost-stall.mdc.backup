@@ -1,0 +1,17 @@
+# Ghost Stall Detection and Alerting
+tags: ["ghost", "alerts", "stall"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+- GHOST must trigger alerts if:
+  - Patch queue is stagnant > 30s
+  - No agent pickup is logged within 60s
+  - A `.summary.md` fails to appear in `/summaries/` or `.completed/` after dispatch
+
+- All fails must result in:
+  - `.failed/` log entry
+  - Slack, terminal, or file-level error message
+  - GPT notification prompt to reroute or request recovery

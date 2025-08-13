@@ -1,0 +1,33 @@
+---
+# Summary File Path Enforcement
+
+## BRUAN-MAIN PROJECT Summary File Rule
+
+**CRITICAL**: All future .md files (such as summaries) created by BRUAN-MAIN PROJECT must be written EXCLUSIVELY to:
+
+```
+/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries
+```
+
+### Requirements:
+- **NO EXCEPTIONS**: All summary files must use this exact path
+- **ABSOLUTE PATHS ONLY**: Never use relative paths or shortcuts
+- **NO TILDE (~)**: Never use tilde notation for home directory
+- **EXCLUSIVE LOCATION**: No other summary/ folders should be used
+
+### Examples:
+✅ **CORRECT**:
+- `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/patch-summary.md`
+- `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/phase-completion.md`
+
+❌ **INCORRECT**:
+- `~/gitSync/summaries/` (uses tilde)
+- `./summaries/` (relative path)
+- `mobile-native-fresh/tasks/summaries/` (wrong location)
+- `MAIN/patches/summaries/` (wrong location)
+
+### Enforcement:
+- This rule applies to ALL summary files created by BRUAN-MAIN PROJECT
+- Any deviation from this path structure is prohibited
+- All summary files must be written to the exact specified location
+---

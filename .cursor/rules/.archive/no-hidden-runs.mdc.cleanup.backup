@@ -1,0 +1,31 @@
+---
+description: Enforce rule compliance for no-hidden-runs operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+priority: medium
+---
+# Prevent Silent or Untracked Execution
+tags: ["tracking", "execution", "visibility"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+- No GPT-generated block may run without a matching:
+  - `.summary.md`
+  - Patch ID + version label
+  - Proof of dispatch and execution
+
+- If GPT executes a fix or runs validation outside of a patch, it must:
+  - Emit logs or a stub summary
+  - Report action to user in this chat
+  - Track runtime via `/summaries/.heartbeat/`
+
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

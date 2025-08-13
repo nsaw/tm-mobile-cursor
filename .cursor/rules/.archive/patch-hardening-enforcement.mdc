@@ -1,0 +1,93 @@
+---
+alwaysApply: true
+---
+# Patch Hardening Enforcement Rule
+
+## Core Principle
+**"Always harden patches before execution - never auto-fail due to missing dependencies"**
+
+## Mandatory Pre-Execution Steps
+
+### 1. Dependency Analysis
+Before executing any patch, analyze and identify:
+- Missing files that the patch depends on
+- Import/export mismatches
+- Required state management files
+- Library dependencies
+
+### 2. Hardening Requirements
+When a patch fails due to missing dependencies:
+- **DO NOT** mark as failed immediately
+- **DO** create missing dependencies first
+- **DO** fix import/export inconsistencies
+- **DO** ensure all required files exist
+- **DO** validate TypeScript and ESLint compliance
+
+### 3. Validation Chain
+Every patch must pass:
+- TypeScript compilation (`tsc --noEmit`)
+- ESLint validation (`eslint --max-warnings=0`)
+- Runtime validation (if applicable)
+- Import/export consistency checks
+
+## Common Hardening Patterns
+
+### Missing State Files
+If patch imports from `../state/someState` but file doesn't exist:
+```typescript
+// Create the missing state file
+import { useState } from 'react';
+export function useSomeState() {
+  // Implementation
+}
+```
+
+### Missing Library Files
+If patch imports from `../lib/someLib` but file doesn't exist:
+```typescript
+// Create the missing library file
+export function someFunction() {
+  // Implementation
+}
+```
+
+### Import/Export Mismatches
+If component was changed from default to named export:
+```typescript
+// Fix import statement
+import { ComponentName } from './ComponentName'; // NOT import ComponentName
+```
+
+## Failure Prevention
+
+### Auto-Fail Prevention
+- **NEVER** fail a patch unless it's completely misplaced or not aligned with roadmap
+- **ALWAYS** attempt to harden and execute before marking as failed
+- **VALIDATE** through execution, not pre-validation
+
+### Execution-Based Validation
+- Run the patch logic first
+- Check if the patch accomplished its goal
+- Only fail if execution actually fails
+- Document what worked and what didn't
+
+## Summary Requirements
+After patch execution:
+- Create summary file with actual status (PASS/FAIL)
+- Document any hardening steps taken
+- List all files created/modified
+- Include validation results
+- Note any additional fixes required
+
+## Compliance Checklist
+- [ ] Dependencies analyzed before execution
+- [ ] Missing files created
+- [ ] Import/export consistency verified
+- [ ] TypeScript compilation passes
+- [ ] ESLint validation passes
+- [ ] Runtime validation completed
+- [ ] Summary documentation created
+- [ ] No premature failure declarations
+
+## Key Learning from History
+The patch `patch-v1.4.229(P0.2.12)_slot-router-component-map-bootstrap` initially failed due to missing `slotMode.ts` and `slotRouter.tsx` files. It was successfully hardened by creating these dependencies, demonstrating that patches should be hardened rather than auto-failed when they align with the current roadmap phase.

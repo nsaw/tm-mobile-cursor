@@ -1,0 +1,16 @@
+# Patch Instruction Block Rules
+tags: ["patches", "validation", "runtime"]
+appliesTo: ["CursorAgent", "GPT"]
+enforce: true
+priority: critical
+
+## Rules
+
+- All hybrid patches must include:
+  - `enforceValidationGate: true`
+  - `strictRuntimeAudit: true`
+  - `runDryCheck: true`
+  - `forceRuntimeTrace: true`
+  - `requireMutationProof: true`
+  - `requireServiceUptime: true`
+- Patch summaries must show logs, diff, and summary before phase completes.

@@ -1,0 +1,19 @@
+# Ghost Heartbeat Enforcement
+tags: ["ghost", "heartbeat", "monitoring"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+- Each ghost must publish to:
+  - `summaries/.heartbeat/.clock-status.md`
+  - `summaries/.heartbeat/.ghost-relay.log`
+
+- If any:
+  - File is > 120s old
+  - `.clock-status.md` drift > 60s
+
+→ Trigger `restart-daemon.sh` or alert GPT.
+
+- Also append timestamp to `heartbeat-uptime.log`

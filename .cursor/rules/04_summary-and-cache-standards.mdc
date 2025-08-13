@@ -1,4 +1,6 @@
-
+---
+alwaysApply: true
+---
 :::rule
 id: summary-and-cache-standards
 title: Summary + Cache Path Enforcement

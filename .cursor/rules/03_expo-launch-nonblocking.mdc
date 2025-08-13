@@ -1,4 +1,6 @@
-
+---
+alwaysApply: true
+---
 :::rule
 id: expo-launch-nonblocking
 title: Launch Expo via scripts/admin/safe-launch-expo.sh

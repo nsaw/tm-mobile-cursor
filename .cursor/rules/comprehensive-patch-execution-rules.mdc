@@ -1,0 +1,532 @@
+---
+description: # Comprehensive Patch Execution Rules
+globs:
+alwaysApply: true
+---
+
+## **CRITICAL: Unified Non-Blocking & Hardened Patch Enforcement**
+
+This rule consolidates all patch execution requirements including non-blocking terminal patterns, patch hardening, validation gates, and structural requirements.
+
+## **1. NON-BLOCKING TERMINAL PATTERN ENFORCEMENT**
+
+### **MANDATORY NON-BLOCKING PATTERN**
+All terminal commands in Cursor agent chat MUST use non-blocking patterns to prevent:
+- Cursor UI freezing
+- GPT flow interruption  
+- Agent chat hanging
+- User experience degradation
+
+### **Standard Non-Blocking Command Structure**
+```bash
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+```
+
+### **Pattern Components**
+1. **Subshell Wrapping**: `{ command & }` - Isolates command execution
+2. **Background Execution**: `&` - Runs command in background
+3. **Output Suppression**: `>/dev/null 2>&1` - Prevents output blocking
+4. **Process Detachment**: `& disown` - Removes from parent process
+
+### **ENFORCEMENT RULE**
+All commands that may block, wait for input, or spawn a service **MUST** be wrapped in:
+
+```bash
+node scripts/nb.cjs --ttl 30s --label -command- --log validations/logs/-command-.log --status validations/status -- <command>
+```
+
+**Forbidden Patterns:**
+- ❌ Direct command execution: `node server.js`
+- ❌ Foreground processes: `npm install`
+- ❌ Blocking calls: `curl http://localhost:8081`
+- ❌ Service spawning: `expo start`
+
+**Required Patterns:**
+- ✅ Non-blocking: `(node scripts/nb.cjs --ttl 30s --label node --log validations/logs/node.log --status validations/status -- node server.js)`
+- ✅ Background execution: `(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm install)`
+- ✅ Safe health checks: `(node scripts/nb.cjs --ttl 30s --label curl --log validations/logs/curl.log --status validations/status -- curl -s http://localhost:8081/health)`
+- ✅ Service management: `(node scripts/nb.cjs --ttl 30s --label expo --log validations/logs/expo.log --status validations/status -- expo start)`
+
+## **2. PATCH STRUCTURE REQUIREMENTS**
+
+### **Mandatory Patch Structure**
+
+#### **UI & Meta Section**
+```json
+{
+  "showInUI": true,
+  "blockId": "<patch-id>",
+  "description": "<short summary of the patch>",
+  "target": "DEV",
+  "version": "<version-string>"
+}
+```
+
+#### **Dependencies Section**
+```json
+{
+  "dependencies": [...],
+  "prerequisites": [...]
+}
+```
+
+#### **Pre-Mutation Validation**
+```json
+{
+  "preMutationValidation": {
+    "shell": [
+      "test -f /required/file || echo 'Required file missing, continuing...'",
+      "curl -s --max-time 10 http://localhost:8081/health || echo 'Service not available, continuing...'"
+    ]
+  }
+}
+```
+
+#### **Core Mutations - Non-Blocking Pattern Enforcement**
+```json
+{
+  "mutations": {
+    "shell": [
+            "(node scripts/nb.cjs --ttl 30s --label your-command-here --log validations/logs/your-command-here.log --status validations/status -- your-command-here)"
+    ],
+    "description": "Describe what this mutation does."
+  }
+}
+```
+
+#### **Multiple Commands Pattern**
+For multiple commands in a single mutation, wrap in subshell:
+```bash
+(
+    node scripts/nb.cjs --ttl 30s --label cmd1 --log validations/logs/cmd1.log --status validations/status -- cmd1
+    node scripts/nb.cjs --ttl 30s --label cmd2 --log validations/logs/cmd2.log --status validations/status -- cmd2
+    node scripts/nb.cjs --ttl 30s --label cmd3 --log validations/logs/cmd3.log --status validations/status -- cmd3
+)
+```
+
+#### **Testing Section**
+```json
+{
+  "testing": {
+    "shell": [
+            "(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm test)",
+            "(node scripts/nb.cjs --ttl 30s --label tsc --log validations/logs/tsc.log --status validations/status -- tsc --noEmit)"
+    ]
+  }
+}
+```
+
+#### **Post-Mutation Build**
+```json
+{
+  "postMutationBuild": {
+    "shell": [
+            "(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm run build)",
+            "(node scripts/nb.cjs --ttl 30s --label eslint --log validations/logs/eslint.log --status validations/status -- eslint . --ext .ts,.tsx --max-warnings=0)"
+    ]
+  }
+}
+```
+
+#### **Documentation**
+```json
+{
+  "documentation": {
+    "summary": "Patch description and changes made in the appropriate UNIFIED SUMMARY PATH",
+    "filesModified": ["file1.ts", "file2.tsx"],
+    "breakingChanges": false
+  }
+}
+```
+
+#### **Success Criteria**
+```json
+{
+  "successCriteria": [
+    "All TypeScript compilation passes",
+    "ESLint validation succeeds",
+    "Runtime tests pass",
+    "No blocking processes remain"
+  ]
+}
+```
+
+#### **Rollback Plan**
+```json
+{
+  "rollbackPlan": [
+    "tar -czf /tmp/pre-rollback-backup-$(date +%s).tar.gz .",
+    "git rev-parse HEAD  # Log current commit",
+    "git reset --hard HEAD~1",
+    "npm install",
+    "Restart affected services"
+  ]
+}
+```
+
+#### **Validation**
+```json
+{
+  "validate": {
+    "shell": [
+      "test -f /expected/output/file",
+      "grep -q 'success' /logs/patch.log"
+    ]
+  }
+}
+```
+
+#### **Finalization**
+```json
+{
+  "final": {
+    "git": {
+      "commit": "<patch id>",
+      "tag": "GHOST2.0_COMPLETE_ROLLBACK-SAFE"
+    },
+    "summary": "✅ GHOST2 final freeze backup complete - system preserved and tagged",
+    "summaryFile": "/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/summary-<patch id>.md"
+  }
+}
+```
+
+## **3. MANDATORY ENFORCEMENT FLAGS**
+
+### **Required Patch Properties**
+All patches must include:
+```json
+{
+  "blockCommitOnError": true,
+  "watchConsole": true,
+  "execution": {
+    "autoReleaseTimeoutMs": 30000,
+    "onReloadHang": "Move to background and resume automatically"
+  },
+  "enforceValidationGate": true,
+  "strictRuntimeAudit": true,
+  "runDryCheck": true,
+  "forceRuntimeTrace": true,
+  "requireMutationProof": true,
+  "requireServiceUptime": true
+}
+```
+
+## **4. SPECIFIC USE CASE PATTERNS**
+
+### **Script Execution**
+```bash
+# Validation scripts
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+
+# Build scripts
+{ npm run build & } >/dev/null 2>&1 & disown
+
+# Test scripts
+{ npm run test & } >/dev/null 2>&1 & disown
+
+# Linting scripts
+{ npm run lint:fix-all & } >/dev/null 2>&1 & disown
+```
+
+### **Development Server Commands**
+```bash
+# Expo development server
+{ npx expo start --clear & } >/dev/null 2>&1 & disown
+
+# React development server
+{ npm start & } >/dev/null 2>&1 & disown
+
+# Python development server
+{ python3 -m server.main & } >/dev/null 2>&1 & disown
+
+# Node.js development server
+{ node server.js & } >/dev/null 2>&1 & disown
+```
+
+### **Background Services**
+```bash
+# Database services
+{ docker-compose up -d & } >/dev/null 2>&1 & disown
+
+# API services
+{ python3 -m api.main & } >/dev/null 2>&1 & disown
+
+# Monitoring services
+{ node monitoring.js & } >/dev/null 2>&1 & disown
+
+# Queue processors
+{ python3 -m queue.processor & } >/dev/null 2>&1 & disown
+```
+
+### **Log Monitoring**
+```bash
+# Application logs
+{ tail -f logs/app.log & } >/dev/null 2>&1 & disown
+
+# Error logs
+{ tail -f logs/error.log & } >/dev/null 2>&1 & disown
+
+# System logs
+{ tail -f /var/log/system.log & } >/dev/null 2>&1 & disown
+
+# Docker logs
+{ docker logs -f container_name & } >/dev/null 2>&1 & disown
+```
+
+### **File Operations**
+```bash
+# Large file operations
+{ cp large-file.zip backup/ & } >/dev/null 2>&1 & disown
+
+# Archive operations
+{ tar -czf backup.tar.gz src/ & } >/dev/null 2>&1 & disown
+
+# Database backups
+{ pg_dump database > backup.sql & } >/dev/null 2>&1 & disown
+
+# File synchronization
+{ rsync -av src/ dest/ & } >/dev/null 2>&1 & disown
+```
+
+### **Network Operations**
+```bash
+# API calls with curl
+{ curl -X POST http://api.example.com/data & } >/dev/null 2>&1 & disown
+
+# WebSocket connections
+{ node websocket-client.js & } >/dev/null 2>&1 & disown
+
+# Network monitoring
+{ ping -c 10 google.com & } >/dev/null 2>&1 & disown
+
+# Port scanning
+{ nmap -p 80,443 example.com & } >/dev/null 2>&1 & disown
+```
+
+## **5. PATCH HARDENING REQUIREMENTS**
+
+### **Core Principle**
+**"Always harden patches before execution - never auto-fail due to missing dependencies"**
+
+### **Mandatory Pre-Execution Steps**
+
+#### **1. Dependency Analysis**
+Before executing any patch, analyze and identify:
+- Missing files that the patch depends on
+- Import/export mismatches
+- Required state management files
+- Library dependencies
+
+#### **2. Hardening Requirements**
+When a patch fails due to missing dependencies:
+- **DO NOT** mark as failed immediately
+- **DO** create missing dependencies first
+- **DO** fix import/export inconsistencies
+- **DO** ensure all required files exist
+- **DO** validate TypeScript and ESLint compliance
+
+#### **3. Validation Chain**
+Every patch must pass:
+- TypeScript compilation (`tsc --noEmit`)
+- ESLint validation (`eslint --max-warnings=0`)
+- Runtime validation (if applicable)
+- Import/export consistency checks
+
+### **Common Hardening Patterns**
+
+#### **Missing State Files**
+If patch imports from `../state/someState` but file doesn't exist:
+```typescript
+// Create the missing state file
+import { useState } from 'react';
+export function useSomeState() {
+  // Implementation
+}
+```
+
+#### **Missing Library Files**
+If patch imports from `../lib/someLib` but file doesn't exist:
+```typescript
+// Create the missing library file
+export function someFunction() {
+  // Implementation
+}
+```
+
+#### **Import/Export Mismatches**
+If component was changed from default to named export:
+```typescript
+// Fix import statement
+import { ComponentName } from './ComponentName'; // NOT import ComponentName
+```
+
+### **Failure Prevention**
+
+#### **Auto-Fail Prevention**
+- **NEVER** fail a patch unless it's completely misplaced or not aligned with roadmap
+- **ALWAYS** attempt to harden and execute before marking as failed
+- **VALIDATE** through execution, not pre-validation
+
+#### **Execution-Based Validation**
+- Run the patch logic first
+- Check if the patch accomplished its goal
+- Only fail if execution actually fails
+- Document what worked and what didn't
+
+## **6. PATTERN VARIATIONS**
+
+### **With Logging to File**
+```bash
+# Redirect output to log file instead of /dev/null
+{ bash scripts/validate-runtime.sh & } >logs/validation.log 2>&1 & disown
+
+# Separate stdout and stderr
+{ bash scripts/validate-runtime.sh & } >logs/stdout.log 2>logs/stderr.log & disown
+```
+
+### **With Process ID Tracking**
+```bash
+# Capture PID for later management
+{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & echo $! > /tmp/script.pid & disown
+
+# Kill process later if needed
+kill $(cat /tmp/script.pid) 2>/dev/null || true
+```
+
+### **With Timeout Protection**
+```bash
+# Add timeout to prevent infinite hanging
+{ node scripts/nb.cjs --ttl 30s --label 300 --log validations/logs/300.log --status validations/status -- 300 bash scripts/validate-runtime.sh & } >/dev/null 2>&1
+
+# Using gtimeout on macOS
+{ node scripts/nb.cjs --ttl 30s --label 300 --log validations/logs/300.log --status validations/status -- 300 bash scripts/validate-runtime.sh & } >/dev/null 2>&1
+```
+
+## **7. EXCEPTION HANDLING**
+
+### **Quick Commands (Safe to Run Directly)**
+```bash
+# These can run without non-blocking pattern
+ls -la
+pwd
+echo "Hello World"
+git status
+cat small-file.txt
+```
+
+### **Commands Requiring Non-Blocking Pattern**
+```bash
+# ANY command that might take > 1 second
+# ANY command that produces output
+# ANY command that might hang
+# ANY script execution
+# ANY background service
+```
+
+## **8. COMPLIANCE CHECKLIST**
+
+### **Before Patch Execution**
+- [ ] **Non-blocking patterns** used for all mutations
+- [ ] **Timeout enforcement** (30s) applied to all commands
+- [ ] **Process disowning** implemented for background execution
+- [ ] **Subshell wrapping** used for multiple commands
+- [ ] **All required sections** present in patch structure
+- [ ] **Dependencies analyzed** before execution
+- [ ] **Missing files created** if needed
+- [ ] **Import/export consistency** verified
+
+### **During Patch Execution**
+- [ ] **No terminal blocking** observed
+- [ ] **Background processes** properly managed
+- [ ] **Timeout limits** respected
+- [ ] **Error handling** graceful and non-blocking
+- [ ] **Log output** properly redirected
+
+### **After Patch Execution**
+- [ ] **All processes** properly terminated
+- [ ] **Validation checks** completed successfully
+- [ ] **Summary file** created at correct location
+- [ ] **Git operations** completed safely
+- [ ] **System state** stable and functional
+- [ ] **TypeScript compilation** passes
+- [ ] **ESLint validation** passes
+- [ ] **Runtime validation** completed
+- [ ] **Summary documentation** created
+- [ ] **No premature failure** declarations
+
+## **9. ERROR PREVENTION**
+
+### **Common Mistakes Avoided**
+- **Direct command execution**: Always use timeout and disown
+- **Missing subshell wrapping**: Wrap multiple commands properly
+- **Insufficient timeout**: Use 30s minimum for all operations
+- **No process management**: Always disown background processes
+- **Blocking validation**: Use non-blocking health checks
+- **Auto-failing patches**: Always attempt hardening first
+- **Missing dependencies**: Create required files before failing
+
+### **Safe Command Examples**
+```bash
+# ✅ CORRECT - Non-blocking with timeout
+(node scripts/nb.cjs --ttl 30s --label node --log validations/logs/node.log --status validations/status -- node server.js)
+(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm install)
+(node scripts/nb.cjs --ttl 30s --label curl --log validations/logs/curl.log --status validations/status -- curl -s http://localhost:8081/health)
+(node scripts/nb.cjs --ttl 30s --label expo --log validations/logs/expo.log --status validations/status -- expo start)
+
+# ❌ INCORRECT - Blocking patterns
+node server.js
+npm install
+curl http://localhost:8081/health
+expo start
+```
+
+## **10. BENEFITS OF THIS RULE**
+
+### **System Stability**
+- **No terminal blocking**: Patches don't freeze the terminal
+- **Proper process management**: Background processes properly handled
+- **Timeout protection**: Prevents infinite hanging
+- **Resource cleanup**: Processes properly disowned
+- **Patch hardening**: Prevents unnecessary failures
+
+### **Development Efficiency**
+- **Faster patch execution**: Non-blocking operations
+- **Better debugging**: Clear process management
+- **Reduced frustration**: No frozen terminals
+- **Improved reliability**: Consistent behavior
+- **Higher success rates**: Hardened patches succeed more often
+
+### **Quality Assurance**
+- **Structured patches**: Consistent format and validation
+- **Error prevention**: Built-in safety mechanisms
+- **Documentation**: Clear success criteria and rollback plans
+- **Validation**: Comprehensive testing and verification
+- **Execution-based validation**: Real validation through actual execution
+
+## **11. ENFORCEMENT SCOPE**
+
+### **All Patch Operations**
+- Mutation commands and shell operations
+- Service startup and management
+- Health checks and validation
+- Build and test processes
+- Git operations and commits
+- Dependency creation and management
+- Import/export consistency checks
+
+### **Zero Exceptions**
+- **No exceptions** for quick commands
+- **No exceptions** for simple operations
+- **No exceptions** for any potentially blocking command
+- **No exceptions** for patch hardening requirements
+- **Mandatory compliance** for all patch mutations
+
+## **12. SUMMARY REQUIREMENTS**
+After patch execution:
+- Create summary file with actual status (PASS/FAIL)
+- Document any hardening steps taken
+- List all files created/modified
+- Include validation results
+- Note any additional fixes required
+
+**Status**: ✅ **ENFORCED - CRITICAL** - No exceptions allowed for non-blocking patterns, patch hardening, or validation requirements

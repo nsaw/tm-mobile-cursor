@@ -1,0 +1,18 @@
+# Startup Tunnel Validation Requirements
+tags: ["tunnel", "startup", "validation"]
+appliesTo: ["Ghost", "CursorAgent"]
+enforce: true
+priority: high
+
+## Rules
+
+On `ghost-bridge` or `orchestrator.js` launch:
+
+- Confirm:
+  - Ngrok or Cloudflare tunnel is active
+  - Port forwarding to `/ghost/status.json` is accessible
+  - `curl` healthcheck passes
+
+If not:
+- Do not mark startup as successful
+- Restart after 5s with backoff

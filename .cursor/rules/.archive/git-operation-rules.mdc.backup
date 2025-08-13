@@ -1,0 +1,12 @@
+# Git Operation Rules
+tags: ["git", "safety", "validation"]
+appliesTo: ["CursorAgent", "GPT", "Ghost"]
+enforce: true
+priority: critical
+
+## Rules
+
+- Never use `--force` without explicit user approval.
+- Never push to `main` unless validated and approved by GPT.
+- Never merge to `main` without GPT validation.
+- All commits must pass lint + typecheck before being tagged.

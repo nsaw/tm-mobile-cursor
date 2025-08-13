@@ -1,0 +1,31 @@
+---
+description: Enforce rule compliance for gpt-user-override-requests operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+priority: medium
+---
+# GPT User Override Request Protocol
+tags: ["gpt", "override", "user-requests"]
+appliesTo: ["GPT"]
+enforce: true
+priority: high
+
+## Rules
+
+GPT must request user confirmation before:
+
+- Overwriting `.mdc` or `.env` rules
+- Replacing summary or patch files without prompt
+- Resuming stalled daemon without log audit
+- Dispatching patches after crash recovery
+- Modifying sacred paths (e.g., `src-reference/`, `_backups/`)
+
+If unsure: stop, ask, and wait.
+
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

@@ -1,0 +1,32 @@
+---
+description: Enforce summary file standards and routing
+globs:
+  - "**/summary-*.md"
+  - "**/patch-*.json"
+alwaysApply: true
+priority: critical
+---
+
+# Summary File Standards and Requirements
+tags: ["summaries", "standards", "documentation"]
+appliesTo: ["GPT", "CursorAgent", "Ghost"]
+enforce: true
+priority: high
+
+## Rules
+
+All `.summary.md` files must contain:
+
+- ✅ Patch ID (exact match to filename)
+- 🔗 Backlink to patch: `patchName: [patch-name]`
+- 📍 Roadmap phase reference
+- 💬 At least one GPT or DEV status message
+- 🧪 Explicit validation summary (PASS/FAIL)
+- 🕒 Timestamp or UTC trace
+- 📁 Final file write location (`.completed`, `.archive`, `.failed`)
+
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

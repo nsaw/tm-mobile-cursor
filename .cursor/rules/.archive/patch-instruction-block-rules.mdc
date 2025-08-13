@@ -1,0 +1,23 @@
+---
+description: Enforce patch validation and proof requirements
+globs:
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+# Patch Instruction Block Rules
+
+## Rules
+
+- All hybrid patches must include:
+  - `enforceValidationGate: true`
+  - `strictRuntimeAudit: true`
+  - `runDryCheck: true`
+  - `forceRuntimeTrace: true`
+  - `requireMutationProof: true`
+  - `requireServiceUptime: true`
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts
