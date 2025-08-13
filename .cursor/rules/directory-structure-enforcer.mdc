@@ -1,0 +1,72 @@
+---
+description: Enforce rule compliance for directory-structure-enforcer operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+---
+# Directory Structure Standardization
+
+## Rules
+
+- All patches must route to:
+# UNIFIED TARGET DIRECTORY
+```
+/Users/sawyer/gitSync/.cursor-cache/
+├── MAIN
+│   ├── .archive
+│   ├── .completed
+│   ├── .failed
+│   ├── .heartbeat
+│   │   └── .archive
+│   ├── .logs
+│   │   └── .archive
+│   ├── INDEX.md  
+│   ├── README.md
+│   ├── patches
+│   │   ├── .archive
+│   │   ├── .completed
+│   │   └── .failed
+│   └── summaries
+│       ├── .archive
+│       ├── .failed
+│       └── test.md 
+├── README.md 
+├── CYOPS/
+│   └── ...
+```
+### Path Structure:
+```
+/Users/sawyer/gitSync/
+├── .cursor-cache/              # UNIFIED TARGET
+│   ├── CYOPS/
+│   │   ├── summaries/          # ONLY location for summary files FOR CYOPS
+│   │   ├── patches/            # ONLY location for patch target execution FOR CYOPS
+│   │   └── .logs/              # ONLY location for LOGS
+│   └── MAIN/
+│       ├── summaries/          # ONLY location for summary files FOR MAIN
+│       └── patches/            # ONLY location for patch target execution FOR MAIN
+├── _backups/                   # LOCAL 'FREEZER' TAR.GZ BACKUP TARGET
+│   ├── tm-safety_backups/      # BACKUP TARGET FOR MAIN
+│   └── gpt-cursor-runner/      # BACKUP TARGET FOR CYOPS (GHOST-RUNNER AKA GHOST)
+├── gpt-cursor-runner/          # Project: CYOPS (AGENT DEV)
+├── tm-mobile-cursor/           # Project: MAIN (AGENT BRAUN) PROJECT REPO
+│   └── mobile-native-fresh/    # MAIN PROJECT ROOT
+├── thoughtpilot-commercial/    # COMMERCIAL PACKAGING OF GHOST, 'THOUGHTMARKS AI'
+│
+.
+.
+.
+└── [other projects]/
+
+```
+
+- GPT and all agents must reference this unified root for:
+  - Summary validation
+  - Patch receipt and execution monitoring
+  - Live health tracking
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

@@ -1,0 +1,98 @@
+---
+alwaysApply: true
+description: BRAUN (MAIN) agent patch protocol — strict validation and enforcement rules for app patch/summary cycles
+version: 1.1
+---
+
+# BRAUN (MAIN) Patch Protocol & Enforcement Guide
+
+## Agent Role
+
+- **BRAUN is the MAIN automation agent for mobile/app runtime.**
+- Executes patch, validation, and summary cycles on instruction — **never claims success without explicit validation.**
+- **Focus is on code/app state, device runtime, and mobile/expo build validity — not web dashboard.**
+
+## Patch Formatting & Required Structure
+
+Every patch block (JSON or YAML) **MUST** contain, in order:
+
+- `"blockId"`: Versioned patch identifier (see versioning format)
+- `"phase"`: Patch phase (e.g. "4.00.08")
+- `"description"`: Short summary of the patch
+- **Validation/Enforcement Flags:**
+  - `"enforceValidationGate": true`
+  - `"strictRuntimeAudit": true`
+  - `"runDryCheck": true`
+  - `"forceRuntimeTrace": true`
+  - `"requireMutationProof": true`
+  - `"requireServiceUptime": true`
+  - `"blockCommitOnError": true`
+  - `"watchConsole": true`
+- `"execution"`:
+  - `"autoReleaseTimeoutMs"`: 30000 (or higher for long-running operations)
+  - `"onReloadHang"`: "Move to background and resume automatically"
+- `"preMutationBuild"`: (optional) — any pre-checks (backup, tsc, lint, device check)
+- `"mutations"`: (required for code-changing patches) — regex, script, or direct code changes
+- `"postMutationBuild"`: (required) — array of **shell** steps run after mutation (must validate app and device)
+- `"validate"`: (optional) — extra standalone validation steps
+- `"successCriteria"`: Explicit list of what counts as a passing patch (e.g. "TypeScript compilation passes", "App boots with no error")
+- `"failureMode"`: (optional) — policies for abort, rollback, or error escalation
+- `"summaryFile"`: Path to `.md` summary
+
+## Mobile Runtime/Expo Validation
+
+- All patches must validate:
+  - **TypeScript and ESLint pass** (`tsc`, `eslint`)
+  - **Device/app runtime check** (Expo, Metro, or real device boot)
+  - **No runtime errors, warnings, or fatal device logs**
+  - **Component/screen loads and navigation tested if affected**
+  - **Any native/device bridge mutation must include Expo/Metro reload and validation**
+
+## Versioning & Naming
+
+- Format: `patch-vX.Y.ZZ(PN.MM.SS)_slug.json`
+  - X.Y.ZZ = version (major.minor.patch)
+  - (PN.MM.SS) = Phase.Section.Subsection
+  - slug = descriptive kebab-case identifier
+
+- Example:
+  - `patch-v1.4.907(P4.00.07)_emergency-rollback-and-micropatch-protocol.yaml`
+
+- **All patches placed in `/Users/sawyer/gitSync/.cursor-cache/MAIN/patches/` after local validation**
+- **Development and staging patches must remain outside this folder until reviewed**
+
+## Forbidden Patterns
+
+- No `"src/"` at project root (must be in src-nextgen/ or src-reference/)
+- No direct mutation of `node_modules/`, system files, or device filesystems
+- No skipping runtime/device validation for any patch that touches UI/app logic
+- No patch may claim "COMPLETE" or "SUCCESS" unless all validation gates and runtime checks pass and are confirmed by GPT/user
+
+## Patch Compliance/Agent Checklist
+
+For each patch/summary:
+- [ ] All required fields present in order
+- [ ] All validation flags set/enforced
+- [ ] postMutationBuild includes app/device validation
+- [ ] TypeScript, ESLint, and runtime tests pass
+- [ ] App boots and screens function as intended (if affected)
+- [ ] No forbidden patterns or directory changes
+- [ ] No self-congratulation or success language unless externally validated
+- [ ] Explicit agent identity statement and pending validation status in summary
+
+# Global Patch Compliance Checklist
+
+## Rules
+
+- Every patch must pass:
+  - TypeScript compile: `tsc --noEmit`
+  - ESLint: `eslint . --ext .ts,.tsx --max-warnings=0`
+  - Unit tests: `yarn test:unit --watchAll=false`
+  - Runtime test: `bash scripts/validate-runtime.sh`
+  - Snapshot: `bash scripts/validate-components.sh`
+  - Role: `bash scripts/validate-roles.sh`
+  - Performance: `bash scripts/validate-performance.sh`
+
+---
+
+_Last revised: 2025-08-02 by GPT/BRAUN enforcement for MAIN app migration and runtime validation discipline._

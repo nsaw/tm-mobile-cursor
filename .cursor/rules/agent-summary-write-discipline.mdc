@@ -1,0 +1,84 @@
+---
+description: Enforce agent behavior and discipline across all operations
+globs:
+  - "**/agent-*.log"
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+### Path Structure:
+```
+/Users/sawyer/gitSync/
+├── .cursor-cache/              # UNIFIED TARGET
+│   ├── CYOPS/
+│   │   ├── summaries/          # ONLY location for summary files FOR CYOPS
+│   │   ├── patches/            # ONLY location for patch target execution FOR CYOPS
+│   │   └── .logs/              # ONLY location for LOGS
+│   └── MAIN/
+│       ├── summaries/          # ONLY location for summary files FOR MAIN
+│       └── patches/            # ONLY location for patch target execution FOR MAIN
+├── _backups/                   # LOCAL 'FREEZER' TAR.GZ BACKUP TARGET
+│   ├── tm-safety_backups/      # BACKUP TARGET FOR MAIN
+│   └── gpt-cursor-runner/      # BACKUP TARGET FOR CYOPS (GHOST-RUNNER AKA GHOST)
+├── gpt-cursor-runner/          # Project: CYOPS (AGENT DEV)
+├── tm-mobile-cursor/           # Project: MAIN (AGENT BRAUN) PROJECT REPO
+│   └── mobile-native-fresh/    # MAIN PROJECT ROOT
+├── thoughtpilot-commercial/    # COMMERCIAL PACKAGING OF GHOST, 'THOUGHTMARKS AI'
+│
+.
+.
+.
+└── [other projects]/
+
+```
+
+# Agent Summary Write Discipline RULES
+
+### Summary Write Requirements
+All feedback, blocking, update, or reporting summaries must conform to format, naming, and path rules across all agents (DEV, BRAUN).
+
+### Trigger Conditions
+- Any agent stall, update, diagnostic report, failure, progress report
+- Agent startup/shutdown
+- Agent feedback loop with GPT
+
+### Mandatory Requirements
+- **Summary must be a `.md` file**
+- **Filename must begin with `summary-`**
+- **Path must match the assigned summary location per agent**
+
+### Assigned Summary Paths
+- **BRAUN (MAIN)**: `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`
+- **DEV (CYOPS)**: `/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/`
+
+### Valid Examples
+- ✅ `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-heartbeat-timeout.md`
+- ✅ `/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/summary-docdaemon-idleloop.md`
+- ✅ `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-agent-startup.md`
+- ✅ `/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/summary-patch-validation.md`
+
+### Invalid Examples
+- ❌ Summary written to `/tm-mobile-cursor/.cursor-cache/`
+- ❌ Summary written without `summary-` prefix
+- ❌ Summary saved as `.txt`, `.json`, or untyped file
+- ❌ Ghost writing fallback summaries outside CYOPS path
+- ❌ `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/heartbeat-timeout.md` (missing prefix)
+- ❌ `/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/status.json` (wrong format)
+
+### Enforcement Scope
+- **Agents**: DEV, BRAUN
+- **Scope**: All agent activity
+- **Enforcement**: Strict
+- **Priority**: Critical
+
+### Implementation Notes
+- This rule is enforced at runtime and by validation scripts
+- Agents must never bypass this for compatibility or temporary logs
+- Applies immediately and indefinitely
+- All summary writes must be validated before completion
+- Violations must trigger immediate agent shutdown and restart
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

@@ -1,0 +1,19 @@
+
+:::rule
+id: strict-validation
+title: Canonical Patch Validation Chain (Static + Runtime)
+scope: repo
+intent:
+  - One source of truth for validation ordering and pass criteria
+  - No patch "PASS" without disk evidence and runtime proof
+requires:
+  - Static: `npx tsc --noEmit`, `npx eslint . --ext .ts,.tsx --max-warnings=0`, `npm run test:unit -- --watchAll=false`
+  - Runtime: Expo/Metro refresh + health probe on 8081, then `scripts/validate-runtime.sh`
+  - Evidence: NB-runner logs under `validations/logs/*.log` + status under `validations/status/*`
+  - Summary: patch JSON must include `summaryFile` pointing to `.cursor-cache/MAIN/summaries/`
+prohibits:
+  - Declaring success based on summary text alone
+  - Validation grepping for logs that aren’t produced
+guidance:
+  - Wrap every gate with NB-runner, set sensible TTLs, and keep commands bounded.
+:::

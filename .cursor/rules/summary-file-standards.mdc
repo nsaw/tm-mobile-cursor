@@ -1,0 +1,51 @@
+---
+description: Enforce summary file standards and routing
+globs:
+  - "**/summary-*.md"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+### Path Structure:
+```
+/Users/sawyer/gitSync/
+├── .cursor-cache/              # UNIFIED TARGET
+│   ├── CYOPS/
+│   │   ├── summaries/          # ONLY location for summary files FOR CYOPS
+│   │   ├── patches/            # ONLY location for patch target execution FOR CYOPS
+│   │   └── .logs/              # ONLY location for LOGS
+│   └── MAIN/
+│       ├── summaries/          # ONLY location for summary files FOR MAIN
+│       └── patches/            # ONLY location for patch target execution FOR MAIN
+├── _backups/                   # LOCAL 'FREEZER' TAR.GZ BACKUP TARGET
+│   ├── tm-safety_backups/      # BACKUP TARGET FOR MAIN
+│   └── gpt-cursor-runner/      # BACKUP TARGET FOR CYOPS (GHOST-RUNNER AKA GHOST)
+├── gpt-cursor-runner/          # Project: CYOPS (AGENT DEV)
+├── tm-mobile-cursor/           # Project: MAIN (AGENT BRAUN) PROJECT REPO
+│   └── mobile-native-fresh/    # MAIN PROJECT ROOT
+├── thoughtpilot-commercial/    # COMMERCIAL PACKAGING OF GHOST, 'THOUGHTMARKS AI'
+│
+.
+.
+.
+└── [other projects]/
+
+```
+
+# Summary File Standards and Requirements
+
+## Rules
+
+All `.summary.md` files must contain:
+
+- ✅ Patch ID (exact match to filename)
+- 🔗 Backlink to patch: `patchName: [patch-name]`
+- 📍 Roadmap phase reference
+- 💬 At least one GPT or DEV status message
+- 🧪 Explicit validation summary (PASS/FAIL)
+- 🕒 Timestamp or UTC trace
+- 📁 Final file write location (`.completed`, `.archive`, `.failed`)
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts

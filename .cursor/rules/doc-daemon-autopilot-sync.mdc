@@ -1,0 +1,21 @@
+---
+description: Enforce autopilot behavior and validation barriers
+globs:
+  - "**/patch-*.json"
+  - "**/autopilot-*.log"
+alwaysApply: true
+---
+# Document Daemon Autopilot Synchronization
+
+## Rules
+
+- Move `.json` to `.completed/` if summary is PASS
+- Archive after 2 days of inactivity
+- Mirror `.archive/` between `patches/` and `summaries/`
+- Sync `README.md` and `INDEX.md` after each file move
+- Ensure summary patch name matches `.json` exactly
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

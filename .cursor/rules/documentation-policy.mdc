@@ -1,0 +1,20 @@
+---
+description: Enforce documentation and indexing policy
+globs:
+  - "**/*.md"
+  - "**/docs/**"
+alwaysApply: true
+---
+# Documentation and Indexing Policy
+priority: required
+
+## Rules
+
+- Every patch must update `ROADMAP_FOR_DUMMIES.md` and `INDEX.md`.
+- `docs/` folders must always contain an `INDEX.md`, not a `README.md`.
+- Every summary must backlink to its patch and roadmap phase.
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

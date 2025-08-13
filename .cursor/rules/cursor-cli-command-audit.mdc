@@ -1,0 +1,25 @@
+---
+description: Enforce Cursor-specific operations and integrity checks
+globs:
+  - "**/cursor-*.json"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+# Cursor CLI Command Audit Standards
+
+## Rules
+
+All CLI commands must:
+
+- Log input args
+- Confirm stdout matches intended behavior
+- Write error output to `.logs/` if failure
+- Print `✅` or `❌` to stdout for automation detection
+- Use `process.exit(0)` or `exit(1)` explicitly
+
+Example: `ghost validate summaries/foo.md`
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

@@ -1,0 +1,11 @@
+
+:::rule
+id: expo-launch-nonblocking
+title: Launch Expo via scripts/admin/safe-launch-expo.sh
+scope: repo
+requires:
+  - Replace any inline `npx expo start --ios --clear` launch group with `scripts/admin/safe-launch-expo.sh`
+  - Health probe via NB-runner curl to `http://localhost:8081/status`
+prohibits:
+  - Inline launch groups using `$!`, `disown`, or braces
+:::

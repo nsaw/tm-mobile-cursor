@@ -1,0 +1,24 @@
+---
+description: Enforce rule compliance for doc-daemon-sorting-rules operations
+globs:
+  - "**/*.json"
+  - "**/*.md"
+alwaysApply: true
+---
+# Document Daemon Sorting and Organization
+
+## Rules
+
+- After execution:
+  - Move `.summary.md` to `.completed/` if it contains "PASS"
+  - Move to `.archive/` if > 2 days old
+  - Move to `.failed/` if any validator status is FAIL
+
+- On movement:
+  - Rebuild `INDEX.md` with updated location
+  - Update table of contents in `README.md`
+
+---
+**Status**: ✅ **ENFORCED - MEDIUM**
+**Compliance**: Standard validation with logging
+**Scope**: All operations across all contexts

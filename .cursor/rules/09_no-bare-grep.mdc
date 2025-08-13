@@ -1,0 +1,12 @@
+
+:::rule
+id: no-bare-grep
+title: No bare 'grep' in shells or scripts
+scope: repo
+intent:
+  - 'grep' is terminal-blocking in this environment; use Node scanners instead
+prohibits:
+  - Any 'grep' invocation in patch 'postMutationBuild'/'validate' or repo scripts
+guidance:
+  - Use `node scripts/tools/scan-legacy-patterns.cjs --dir <path>` for pattern checks
+:::

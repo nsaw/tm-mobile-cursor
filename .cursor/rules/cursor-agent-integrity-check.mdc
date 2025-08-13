@@ -1,0 +1,24 @@
+---
+description: Enforce agent behavior and discipline across all operations
+globs:
+  - "**/agent-*.log"
+  - "**/patch-*.json"
+  - "**/summary-*.md"
+alwaysApply: true
+---
+# Cursor Agent Integrity and Health Checks
+
+## Rules
+
+- All agents (DEV, BRAUN) must:
+  - Prove daemonized state via pm2 or launchd logs
+  - Show active registration in `.heartbeat/` and `.logs/`
+  - Publish daemon PID or health report on startup
+  - Auto-recover if stuck, zombie, or missing patches
+
+- Missing daemons must alert GPT and trigger `fallback-repair.sh`
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

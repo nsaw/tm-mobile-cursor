@@ -1,0 +1,219 @@
+---
+alwaysApply: true
+description: Backup operations and safety rules for project backups
+---
+### Path Structure:
+```
+/Users/sawyer/gitSync/
+├── .cursor-cache/              # UNIFIED TARGET
+│   ├── CYOPS/
+│   │   ├── summaries/          # ONLY location for summary files FOR CYOPS
+│   │   ├── patches/            # ONLY location for patch target execution FOR CYOPS
+│   │   └── .logs/              # ONLY location for LOGS
+│   └── MAIN/
+│       ├── summaries/          # ONLY location for summary files FOR MAIN
+│       └── patches/            # ONLY location for patch target execution FOR MAIN
+├── _backups/                   # LOCAL 'FREEZER' TAR.GZ BACKUP TARGET
+│   ├── tm-safety_backups/      # BACKUP TARGET FOR MAIN
+│   └── gpt-cursor-runner/      # BACKUP TARGET FOR CYOPS (GHOST-RUNNER AKA GHOST)
+├── gpt-cursor-runner/          # Project: CYOPS (AGENT DEV)
+├── tm-mobile-cursor/           # Project: MAIN (AGENT BRAUN) PROJECT REPO
+│   └── mobile-native-fresh/    # MAIN PROJECT ROOT
+├── thoughtpilot-commercial/    # COMMERCIAL PACKAGING OF GHOST, 'THOUGHTMARKS AI'
+│
+.
+.
+.
+└── [other projects]/
+
+```
+
+# Backup Operations and Safety Rules
+
+## Critical Backup Restrictions
+
+### ❌ NEVER BACKUP BROKEN STATES
+- **Never backup broken apps** or applications in non-functional states
+- **Never backup troubleshooting steps** or debugging sessions
+- **Never backup hotpatches** or temporary fixes
+- **Never backup patches** that are in progress or failed
+- **Disregard backup commands** in patches for troubleshooting or broken project states
+
+### ✅ BACKUP ONLY HEALTHY STATES
+- Only backup **fully functional** applications
+- Only backup **completed and tested** features
+- Only backup **stable releases** and working code
+- Only backup **validated and passing** patches
+
+## Backup Target Locations
+
+### Absolute Path Requirements
+All backup target locations must use **absolute paths** and never backup to project root.
+
+### MAIN Project Backups
+```
+/Users/sawyer/gitSync/_backups/<MAIN>/
+```
+
+**Examples:**
+- `/Users/sawyer/gitSync/_backups/tm-safety_backups/`
+- `/Users/sawyer/gitSync/_backups/tm-mobile-cursor/`
+
+### CYOPS Project Backups
+```
+/Users/sawyer/gitSync/_backups/<CYOPS>/
+```
+
+**Examples:**
+- `/Users/sawyer/gitSync/_backups/gpt-cursor-runner/`
+- `/Users/sawyer/gitSync/_backups/cursor-autopilot/`
+
+## .tarignore Exclusions
+
+All backups must abide by `.tarignore` files and exclude the following:
+
+### System Files
+```
+--exclude=.DS_Store
+--exclude=.AppleDouble
+--exclude=.LSOverride
+--exclude=Thumbs.db
+--exclude=Desktop.ini
+```
+
+### Development Dependencies
+```
+--exclude=node_modules/
+--exclude=.expo/
+--exclude=.expo-shared/
+--exclude=web-build/
+--exclude=.venv/
+```
+
+### Environment and Configuration
+```
+--exclude=.env
+--exclude=.env.local
+--exclude=npm-debug.log*
+--exclude=yarn-debug.log*
+--exclude=yarn-error.log*
+--exclude=cursor-uploads/client_secret_*.json
+```
+
+### Project-Specific Exclusions
+```
+--exclude=.backup/
+--exclude=archive/
+--exclude=ios-bak/
+--exclude=*.log
+--exclude=.git/
+--exclude=ios/
+--exclude=_backups/
+```
+
+## Backup Command Patterns
+
+### MAIN Project Backup Pattern
+```bash
+cd /Users/sawyer/gitSync && \
+tar -czf _backups/tm-safety_backups/250729_UTC_<patch id>.tar.gz \
+  $(grep -vE "^\s*(#|$)" tm-mobile-cursor/.tarignore | sed "s/^/--exclude=/") \
+  tm-mobile-cursor/
+```
+
+### CYOPS Project Backup Pattern
+```bash
+cd /Users/sawyer/gitSync && \
+tar -czf _backups/gpt-cursor-runner/250729_UTC_<patch id>.tar.gz \
+  $(grep -vE "^\s*(#|$)" gpt-cursor-runner/.tarignore | sed "s/^/--exclude=/") \
+  gpt-cursor-runner/
+```
+
+## Backup Validation Requirements
+
+### Pre-Backup Checks
+- [ ] Application is **fully functional** and tested
+- [ ] All tests **pass** (100% success rate)
+- [ ] No **broken features** or critical errors
+- [ ] No **troubleshooting in progress**
+- [ ] No **hotpatches** or temporary fixes
+- [ ] Target directory **exists** and is writable
+- [ ] `.tarignore` file **exists** in project root
+
+### Backup Naming Convention
+```
+YYMMDD_UTC_<patch id>.tar.gz
+```
+
+**Examples:**
+- `250729_UTC_patch-v1.4.500(P3.01.01)_phase3-comprehensive-hardening.tar.gz`
+- `250729_UTC_patch-v1.4.600(P5.01.01)_component-unit-tests.tar.gz`
+
+## Enforcement
+
+### Automatic Validation
+- **Reject backup commands** for broken or troubleshooting states
+- **Validate target paths** are absolute and correct
+- **Verify .tarignore compliance** before backup execution
+- **Check application health** before allowing backup
+
+### Error Prevention
+- **Never backup to project root** - always use designated backup locations
+- **Never backup node_modules** or development dependencies
+- **Never backup sensitive files** (.env, secrets, etc.)
+- **Never backup temporary files** or logs
+- **Never backup git history** or version control files
+
+## Compliance Checklist
+
+### Before Any Backup Operation
+- [ ] **Application is healthy** and fully functional
+- [ ] **No troubleshooting** in progress
+- [ ] **No broken features** or critical errors
+- [ ] **Target path is absolute** and correct
+- [ ] **.tarignore file exists** and is properly configured
+- [ ] **Backup name follows** naming convention
+- [ ] **All exclusions** are properly applied
+
+### Backup Command Validation
+- [ ] **Uses absolute paths** for target location
+- [ ] **Includes .tarignore exclusions** via grep/sed pattern
+- [ ] **Follows proper naming** convention with timestamp
+- [ ] **Excludes all required** system and development files
+- [ ] **Validates target directory** exists and is writable
+
+## Examples of Forbidden Backup Scenarios
+
+### ❌ Broken Application State
+```bash
+# NEVER backup when app is broken
+# Application has TypeScript errors
+# ESLint validation failing
+# Tests not passing
+# Runtime errors present
+```
+
+### ❌ Troubleshooting Session
+```bash
+# NEVER backup during debugging
+# Hotfixes in progress
+# Temporary patches applied
+# Debugging sessions active
+# Error investigation ongoing
+```
+
+### ❌ Incorrect Target Location
+```bash
+# NEVER backup to project root
+tar -czf backup.tar.gz ./  # ❌ WRONG
+tar -czf ./backup.tar.gz ./  # ❌ WRONG
+```
+
+### ✅ Correct Backup Scenario
+```bash
+# ✅ Only backup healthy, functional applications
+# All tests passing
+# No errors or warnings
+# Stable, working code
+# Proper target location with exclusions
+```

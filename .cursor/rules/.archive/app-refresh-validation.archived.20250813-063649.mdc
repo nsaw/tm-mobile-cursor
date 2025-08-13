@@ -1,0 +1,129 @@
+---
+alwaysApply: true
+description: Enforces app refresh validation as part of post-mutation hardening to catch runtime errors
+---
+
+# App Refresh Validation Rule
+
+## CRITICAL: Always Refresh App for Runtime Validation
+
+All patches must include app refresh validation as part of post-mutation hardening to catch runtime errors that static analysis cannot detect.
+
+## Mandatory App Refresh Pattern
+
+### Standard App Refresh Command
+```zsh
+(
+  kill $(lsof -ti:8081) 2>/dev/null || true
+  cd /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh
+  npx expo start --ios --clear &
+  PID=$!
+  sleep 15
+  disown $PID
+) >/dev/null 2>&1 &
+```
+
+### Alternative Validation Script
+Use the validation script at [scripts/validate-app-boot.sh](mdc:mobile-native-fresh/scripts/validate-app-boot.sh) which includes:
+- Expo server status check
+- Force app refresh via curl POST to /reload
+- Wait for app stabilization
+
+## Post-Mutation Validation Requirements
+
+### 1. Static Validation (Pre-Refresh)
+- TypeScript compilation (`npx tsc --noEmit --skipLibCheck`)
+- ESLint validation (`npx eslint . --ext .ts,.tsx --max-warnings=0`)
+- Unit tests (`npm test -- --watchAll=false`)
+
+### 2. Runtime Validation (Post-Refresh)
+- **MANDATORY**: App refresh using the standard pattern above
+- Verify Expo server responds on localhost:8081
+- Check for runtime errors in console
+- Confirm app boots without fatal errors
+- Validate component rendering
+
+### 3. Validation Script Integration
+```bash
+# In postMutationBuild section
+"postMutationBuild": {
+  "shell": [
+    "npx tsc --noEmit --skipLibCheck || exit 101",
+    "eslint . --ext .ts,.tsx --max-warnings=0 || exit 102", 
+    "yarn test:unit --watchAll=false || exit 103",
+    "bash scripts/validate-app-boot.sh || exit 104",
+    "echo '🚀 Forcing Expo refresh...' && curl -X POST http://localhost:8081/reload || echo 'Expo reload hook skipped'"
+  ]
+}
+```
+
+## Why App Refresh is Critical
+
+### Static vs Runtime Errors
+- **Static Analysis**: Catches TypeScript/ESLint errors but misses runtime issues
+- **Runtime Validation**: Catches bundler errors, component conflicts, import issues
+- **App Refresh**: Forces full recompilation and exposes new errors
+
+### Common Runtime Issues Detected
+- Duplicate component declarations (e.g., Text conflicts)
+- Import/export mismatches
+- Missing dependencies
+- Component mounting errors
+- Hot reload failures
+
+## Implementation Examples
+
+### Patch Validation Pattern
+```json
+{
+  "validate": {
+    "shell": [
+      "test -f /Users/sawyer/gitSync/tm-mobile-cursor/summaries/_heartbeat/.last-md-write.log || exit 105",
+      "grep -q 'PASS' /Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-*.md || exit 106"
+    ]
+  }
+}
+```
+
+### Summary Requirements
+All patch summaries must include:
+- App refresh confirmation
+- Runtime validation status
+- Expo server response verification
+- Any runtime errors encountered
+
+## Enforcement
+
+### For All Patches
+- **NO EXCEPTIONS**: Every patch must include app refresh validation
+- **FAILURE HANDLING**: If app refresh fails, patch validation fails
+- **DOCUMENTATION**: Runtime validation results must be documented in summary
+
+### Validation Checklist
+- [ ] Static validation passes (TypeScript, ESLint, Tests)
+- [ ] App refresh executed successfully
+- [ ] Expo server responds on localhost:8081
+- [ ] No runtime errors in console
+- [ ] App boots without fatal errors
+- [ ] Summary includes runtime validation results
+
+## Error Prevention
+
+### Before Marking Patch Complete
+1. **Execute app refresh** using standard pattern
+2. **Wait for stabilization** (15+ seconds)
+3. **Check for errors** in console/logs
+4. **Verify app functionality** 
+5. **Document results** in summary
+
+### If App Refresh Fails
+- **DO NOT** mark patch as complete
+- **Investigate** runtime errors
+- **Fix issues** before proceeding
+- **Re-run validation** until successful
+
+## Compliance
+
+This rule applies to **ALL patches** and **ALL post-mutation validation**. No patch may be marked complete without successful app refresh validation.
+
+**Remember**: Static validation alone is insufficient. Runtime validation through app refresh is mandatory for catching real-world errors that prevent app functionality.

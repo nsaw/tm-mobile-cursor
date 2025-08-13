@@ -1,0 +1,34 @@
+---
+description: Enforce Ghost runner integrity and routing validation
+globs:
+  - "**/ghost-*.log"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+# Unified Ghost Root Routing Structure
+
+## Rules
+
+All Ghost-related I/O must use this structure:
+
+```
+├── patches/
+│   ├── .archive/
+│   ├── .failed/
+
+├── summaries/
+│   ├── .logs/
+│   ├── .heartbeat/
+│   ├── .completed/
+│   ├── .archive/
+│   ├── .failed/
+```
+
+- No new summaries or patches may be written outside this root.
+- Watchdog + doc daemon must monitor this path only.
+- INDEX.md must update automatically on mutation.
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

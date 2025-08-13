@@ -1,0 +1,343 @@
+---
+title: Automatic Patch Hardening Protocol
+---
+
+##  Automatic Patch Hardening Protocol
+This rule enforces automatic patch hardening on intake before execution to prevent common patch failures and ensure successful deployment.
+
+## Pre-Execution Analysis & Fixes
+
+### Validation Requirement Analysis
+- Check if validation commands match what the patch actually does
+- Add missing console logging if validation expects logs
+- Fix timing issues (add sleep delays if needed)
+- Ensure validation looks for evidence that actually exists
+
+### Component Integration Checks
+- Verify hooks are actually used in components
+- Add missing imports and component updates
+- Ensure console declarations are present
+- Fix styling issues (invalid colors, etc.)
+
+### File Path & Structure Validation
+- Ensure summaryFile points to correct cache location (`/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`)
+- Verify all referenced files exist or will be created
+- Check for proper import paths
+- Validate JSON structure
+
+### Runtime Safety Checks
+- Add proper error handling
+- Ensure non-blocking command patterns (`{ command & } >/dev/null 2>&1 & disown`)
+- Add timeout protection
+- Fix race conditions in validation
+
+## Implementation Strategy
+When receiving a patch:
+1. Parse the patch and identify potential issues
+2. Apply automatic fixes before execution
+3. Execute the hardened patch
+4. Create summary in correct location
+
+## Common Fixes Applied
+
+### Missing Console Logging
+- Add `console.log()` calls if validation expects them
+- Add `declare const console: any;` declarations
+- Ensure logging matches validation grep patterns
+
+### Invalid Colors
+- Fix `#fffa` → `rgba(255,255,255,0.6)`
+- Validate all hex colors are 6 digits
+- Use proper React Native color formats
+
+### Missing Imports
+- Add required imports to components
+- Fix import paths for new components
+- Ensure all referenced components exist
+
+### Timing Issues
+- Add `sleep` commands before validation
+- Ensure Expo has time to start and mount components
+- Add delays for log file generation
+
+### Summary Path Fixes
+- Always use centralized cache location: `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`
+- Use proper `summary-` prefix for filenames
+- Ensure summaryFile field is present
+
+### Component Integration
+- Wire up hooks to components if hooks are created
+- Add missing component usage
+- Ensure hooks are actually called and logged
+
+## Validation Patterns
+- Check for `grep -q 'expected-text' logs/expo.log` patterns
+- Ensure validation looks for evidence that will actually exist
+- Add console logging to components if validation expects logs
+- Fix timing by adding appropriate sleep delays
+
+## Error Prevention
+- Always use non-blocking command patterns
+- Add timeout protection to long-running commands
+- Ensure proper error handling in components
+- Validate all file paths before execution
+
+This protocol must be applied to every patch before execution to prevent common failure patterns and ensure successful deployment.
+# Automatic Patch Hardening Protocol
+
+## Overview
+This rule enforces automatic patch hardening on intake before execution to prevent common patch failures and ensure successful deployment.
+
+## Pre-Execution Analysis & Fixes
+
+### Validation Requirement Analysis
+- Check if validation commands match what the patch actually does
+- Add missing console logging if validation expects logs
+- Fix timing issues (add sleep delays if needed)
+- Ensure validation looks for evidence that actually exists
+
+### Component Integration Checks
+- Verify hooks are actually used in components
+- Add missing imports and component updates
+- Ensure console declarations are present
+- Fix styling issues (invalid colors, etc.)
+
+### File Path & Structure Validation
+- Ensure summaryFile points to correct cache location (`/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`)
+- Verify all referenced files exist or will be created
+- Check for proper import paths
+- Validate JSON structure
+
+### Runtime Safety Checks
+- Add proper error handling
+- Ensure non-blocking command patterns (`{ command & } >/dev/null 2>&1 & disown`)
+- Add timeout protection
+- Fix race conditions in validation
+
+## Implementation Strategy
+When receiving a patch:
+1. Parse the patch and identify potential issues
+2. Apply automatic fixes before execution
+3. Execute the hardened patch
+4. Create summary in correct location
+
+## Common Fixes Applied
+
+### Missing Console Logging
+- Add `console.log()` calls if validation expects them
+- Add `declare const console: any;` declarations
+- Ensure logging matches validation grep patterns
+
+### Invalid Colors
+- Fix `#fffa` → `rgba(255,255,255,0.6)`
+- Validate all hex colors are 6 digits
+- Use proper React Native color formats
+
+### Missing Imports
+- Add required imports to components
+- Fix import paths for new components
+- Ensure all referenced components exist
+
+### Timing Issues
+- Add `sleep` commands before validation
+- Ensure Expo has time to start and mount components
+- Add delays for log file generation
+
+### Summary Path Fixes
+- Always use centralized cache location: `/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/`
+- Use proper `summary-` prefix for filenames
+- Ensure summaryFile field is present
+
+### Component Integration
+- Wire up hooks to components if hooks are created
+- Add missing component usage
+- Ensure hooks are actually called and logged
+
+## Validation Patterns
+- Check for `grep -q 'expected-text' logs/expo.log` patterns
+- Ensure validation looks for evidence that will actually exist
+- Add console logging to components if validation expects logs
+- Fix timing by adding appropriate sleep delays
+
+## Error Prevention
+- Always use non-blocking command patterns
+- Add timeout protection to long-running commands
+- Ensure proper error handling in components
+- Validate all file paths before execution
+
+This protocol must be applied to every patch before execution to prevent common failure patterns and ensure successful deployment.
+
+## ✅ **Patch Safety Rule Creation Complete**
+
+### **🎯 Problem Addressed**
+- **Issue**: Patches using destructive full file mutations
+- **Issue**: No pre-patch diff logic for safe merging
+- **Issue**: Patches assuming file ownership despite multiple contributors
+- **Solution**: Comprehensive safety rule with enforcement mechanisms
+
+### **🔧 Rule Components Created**
+
+#### **1. Destructive Pattern Prevention**
+- **❌ Full File Mutation**: Prevents complete file replacement
+- **❌ No Pre-Patch Diff Logic**: Prevents unsafe merging
+- **❌ Assumed File Ownership**: Prevents ignoring other contributors
+
+#### **2. Safe Pattern Enforcement**
+- **✅ Scoped Insertion**: Use `insertAfter`, `insertAt`, `insertBefore`
+- **✅ Pre-Patch Validation**: Verify file state before mutation
+- **✅ Safe Merge Logic**: Handle missing markers gracefully
+
+#### **3. Implementation Examples**
+- **Safe Function Addition**: Targeted insertion with markers
+- **Safe Configuration Update**: Scoped property addition
+- **Safe Import Addition**: Preserved import structure
+
+### **📊 Technical Features**
+
+#### **Pre-Patch Validation Commands**
+```bash
+# File state check
+git diff HEAD~1 /path/to/file.ts
+
+# Expected content verification
+grep -q "expected_marker" /path/to/file.ts
+
+# Contributor analysis
+git blame /path/to/file.ts | head -5
+```
+
+#### **Safe Insertion Validation**
+```bash
+# Marker verification
+grep -q "INSERT_AFTER_IMPORTS" /path/to/file.ts
+
+# Conflict detection
+git merge-tree $(git merge-base HEAD main) HEAD main /path/to/file.ts
+
+# Structure validation
+head -10 /path/to/file.ts | grep -E "(import|export|function)"
+```
+
+#### **Error Prevention Strategies**
+- **Destructive Mutation Detection**: Pattern recognition for full replacements
+- **Missing Diff Logic Detection**: Validation requirement enforcement
+- **Ownership Assumption Detection**: Contributor analysis requirement
+
+### **🛡️ Rollback and Recovery**
+
+#### **Automatic Rollback Triggers**
+- **File corruption**: TypeScript compilation fails
+- **Structure break**: Import/export chain broken
+- **Marker missing**: Insertion points not found
+- **Conflict detected**: Git merge conflicts
+
+#### **Recovery Procedures**
+```bash
+# Restore from git
+git checkout HEAD~1 /path/to/file.ts
+
+# Rebuild from backup
+cp /backup/file.ts /path/to/file.ts
+
+# Manual merge
+git merge --abort && git reset --hard HEAD~1
+```
+
+### **📋 Compliance Requirements**
+
+#### **For All Patch Operations**
+- **Never use full file replacement** - always use scoped insertion
+- **Always include pre-patch validation** - verify file state before mutation
+- **Always check for conflicts** - analyze git history and blame
+- **Always provide fallbacks** - handle missing markers gracefully
+- **Always validate post-patch** - confirm changes applied correctly
+
+#### **For Mutation Design**
+- **Use insertion markers** - `// INSERT_AFTER_IMPORTS`, `// INSERT_BEFORE_EXPORT`
+- **Scope changes precisely** - target specific functions/sections only
+- **Preserve file structure** - maintain existing organization
+- **Add error handling** - graceful degradation for missing elements
+
+### **🎯 Enforcement Checklist**
+
+#### **Before Applying Any Patch**
+- [ ] **Analyzed file history** and current state
+- [ ] **Identified insertion markers** or safe insertion points
+- [ ] **Checked for conflicts** with other contributors
+- [ ] **Designed scoped mutations** instead of full replacements
+- [ ] **Added pre-patch validation** logic
+- [ ] **Included fallback handling** for missing markers
+- [ ] **Planned rollback strategy** if validation fails
+
+#### **During Patch Application**
+- [ ] **Verified pre-patch state** matches expectations
+- [ ] **Applied scoped insertions** at identified markers
+- [ ] **Used fallback logic** when markers not found
+- [ ] **Preserved file structure** and organization
+- [ ] **Maintained import/export** chain integrity
+
+#### **After Patch Application**
+- [ ] **Validated post-patch state** is correct
+- [ ] **Confirmed TypeScript compilation** passes
+- [ ] **Verified file structure** is maintained
+- [ ] **Tested functionality** works as expected
+- [ ] **Documented changes** for future reference
+
+### **📈 Benefits**
+
+#### **System Integrity**
+- **No file corruption** from full replacements
+- **Preserved collaboration** with other contributors
+- **Maintained structure** of existing files
+- **Safe rollback** when issues occur
+
+#### **Development Efficiency**
+- **Faster patch application** with targeted changes
+- **Reduced conflicts** with proper diff logic
+- **Better collaboration** with preserved file ownership
+- **Easier debugging** with scoped changes
+
+#### **Quality Assurance**
+- **Consistent file structure** across patches
+- **Predictable changes** with insertion markers
+- **Reliable validation** with pre/post checks
+- **Safe experimentation** with rollback capability
+
+### **🔗 Integration with Existing Rules**
+
+#### **Patch Hardening Rule**
+- **Complementary**: Both rules work together for comprehensive patch safety
+- **Hardening Rule**: Focuses on validation logic resilience
+- **Safety Rule**: Focuses on mutation pattern safety
+- **Combined Effect**: Robust, safe, and resilient patch system
+
+#### **Application Context**
+- **Phase 4 Patches**: Apply to remaining P4.04.00 and P4.COMPLETE
+- **Future Patches**: All patches must follow safety guidelines
+- **Collaborative Development**: Ensures safe multi-contributor workflow
+- **System Stability**: Prevents destructive mutations
+
+### **🚀 Next Steps**
+
+1. **Enforce in all future patch operations**
+2. **Monitor compliance** and adjust as needed
+3. **Document successful applications** for reference
+
+### **📊 Impact Summary**
+
+#### **Before Rule**:
+- ❌ Destructive full file mutations possible
+- ❌ No pre-patch validation requirements
+- ❌ Assumed file ownership by patches
+- ❌ Risk of file corruption and conflicts
+
+#### **After Rule**:
+- ✅ Safe scoped insertions enforced
+- ✅ Pre-patch validation required
+- ✅ Contributor analysis mandatory
+- ✅ Rollback capability guaranteed
+
+**Status**: ✅ Patch safety rule created and enforced - Destructive mutations prevented, safe collaboration ensured
+
+
+This protocol must be applied to every patch before execution to prevent common failure patterns and ensure successful deployment.

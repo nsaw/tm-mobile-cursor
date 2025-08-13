@@ -1,0 +1,46 @@
+---
+description: Enforce Cursor-specific operations and integrity checks
+globs:
+  - "**/cursor-*.json"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+# Cursor Cache Path Enforcement
+
+## Rules
+
+### Centralized Cache Directory
+All Cursor agents (DEV, BRAUN) must use the centralized hardened cursor-cache directory at `/Users/sawyer/gitSync/.cursor-cache/`
+
+### Strict Enforcement Requirements
+
+- **Reject execution** if referencing `/tm-mobile-cursor/.cursor-cache/**`
+- **Fail validation** if summary or patch is written to a non-hardened location
+- **Daemon healthchecks** must read from unified `/Users/sawyer/gitSync/.cursor-cache/`
+- **Summary watchers, writers, and validators** must all conform to this root
+
+### Valid Path Examples
+- ✅ Valid: `/Users/sawyer/gitSync/.cursor-cache/MAIN/patches/`
+- ✅ Valid: `/Users/sawyer/gitSync/.cursor-cache/CYOPS/summaries/`
+- ✅ Valid: `/Users/sawyer/gitSync/.cursor-cache/MAIN/.heartbeat/`
+
+### Invalid Path Examples
+- ❌ Invalid: `/Users/sawyer/gitSync/tm-mobile-cursor/.cursor-cache/MAIN/patches/`
+- ❌ Invalid: `/Users/sawyer/gitSync/tm-mobile-cursor/.cursor-cache/CYOPS/summaries/`
+- ❌ Invalid: Any path outside the centralized `.cursor-cache/` directory
+
+### Enforcement Scope
+- **Agents**: DEV, BRAUN
+- **Scripts**: autopilot, patch-runner, ghost-dispatcher
+- **Paths**: All files under `**/.cursor-cache/**`
+
+### Implementation Notes
+- This rule is enforced by all health validators and daemon hooks
+- Any legacy code or residual process violating this rule must be patched immediately
+- All new cache operations must use the hardened centralized location
+- Monitoring systems must validate compliance on every operation
+
+---
+**Status**: ✅ **ENFORCED - HIGH**
+**Compliance**: Strict validation with automatic rollback
+**Scope**: All operations across all contexts

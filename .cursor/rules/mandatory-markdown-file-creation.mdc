@@ -1,0 +1,14 @@
+---
+description: Enforce mandatory requirements with zero tolerance
+globs:
+  - "**/summary-*.md"
+  - "**/patch-*.json"
+alwaysApply: true
+---
+WITHOUT EXCEPTIONS:
+ PROGRESS REPORTS, SUMMARIES, STALLS, AND ANYTIME AGENT STOPS PROGRESSING ON PATCH EXECUTION OR AGENT CHAT STOPS A SUMMARY-*.MD FILE **MUST** BE CREATED. MANDATORY ROOT GLOBAL AND IMMUTABLE LAW WRITTEN INTO AGENT, USER, WORKSPACE, ROOT, CURSOR, AND ALL OTHER CONFIG FILES TO BE ABIDED BY WITH STRICT ENFORCEMENT.
+
+---
+**Status**: ✅ **ENFORCED - CRITICAL**
+**Compliance**: Zero tolerance with automatic violation detection
+**Scope**: All operations across all contexts
