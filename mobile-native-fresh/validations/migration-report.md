@@ -1,0 +1,36 @@
+# Timeout+disown occurrences
+
+Root: /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh
+
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:53: `"(timeout 30s tsc --noEmit || exit 101) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:54: `"(timeout 30s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:55: `"(timeout 60s yarn test:unit --watchAll=false || exit 103) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:56: `"(timeout 30s bash scripts/validate-runtime.sh || exit 104) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:57: `"(timeout 30s bash scripts/validate-boot.sh || exit 105) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:58: `"(timeout 30s bash scripts/validate-components.sh || exit 106) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:59: `"(timeout 30s bash scripts/validate-visual.sh || exit 107) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/atch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:60: `"(timeout 30s bash scripts/validate-performance.sh || exit 108) >/dev/null 2>&1 & disown"`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:47: `"(timeout 30s tsc --noEmit || exit 101) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:48: `"(timeout 30s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:49: `"(timeout 60s yarn test:unit --watchAll=false || exit 103) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:50: `"(timeout 30s bash scripts/validate-runtime.sh || exit 104) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:51: `"(timeout 30s bash scripts/validate-boot.sh || exit 105) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:52: `"(timeout 30s bash scripts/validate-components.sh || exit 106) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:53: `"(timeout 30s bash scripts/validate-visual.sh || exit 107) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.21)_nav-core-inject-params.json:54: `"(timeout 30s bash scripts/validate-performance.sh || exit 108) >/dev/null 2>&1 & disown"`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.22)_patch-executor-path-unification.json:55: `"(timeout 30s tsc --noEmit || exit 101) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.22)_patch-executor-path-unification.json:56: `"(timeout 30s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.22)_patch-executor-path-unification.json:57: `"(timeout 60s yarn test:unit --watchAll=false || exit 103) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.archive/patch-v1.4.40(P1.00.22)_patch-executor-path-unification.json:58: `"(timeout 30s bash scripts/validate-runtime.sh || exit 104) >/dev/null 2>&1 & disown"`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:53: `"(timeout 30s tsc --noEmit || exit 101) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:54: `"(timeout 30s eslint . --ext .ts,.tsx --max-warnings=0 || exit 102) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:55: `"(timeout 60s yarn test:unit --watchAll=false || exit 103) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:56: `"(timeout 30s bash scripts/validate-runtime.sh || exit 104) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:57: `"(timeout 30s bash scripts/validate-boot.sh || exit 105) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:58: `"(timeout 30s bash scripts/validate-components.sh || exit 106) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:59: `"(timeout 30s bash scripts/validate-visual.sh || exit 107) >/dev/null 2>&1 & disown",`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/patches/.completed/patch-v1.4.40(P1.00.25)_topbar-zone-shell-link.json:60: `"(timeout 30s bash scripts/validate-performance.sh || exit 108) >/dev/null 2>&1 & disown"`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/README-nb.md:3: `Use this for **all** commands that previously used `timeout ... & disown` (fly, pm2, curl, grep, jest, detox, maestro, etc.).`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/phase4-preflight-hardening.sh:219: `{ timeout 90s yarn validate:dual-mount:device & } >/dev/null 2>&1 & disown`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/strict-postmutation-validation.sh:18: `{ timeout 80s npm run validate:dual-mount:device & } >/dev/null 2>&1 & disown`
+- /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/zero-error-hardblock.sh:30: `{ timeout 90s npm run validate:dual-mount:device & } >/dev/null 2>&1 & disown`

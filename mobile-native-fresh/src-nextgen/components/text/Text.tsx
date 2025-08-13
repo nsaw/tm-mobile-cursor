@@ -104,12 +104,6 @@ export const Text: React.FC<TextProps> = ({
   const finalNumberOfLines = truncate ? 1 : numberOfLines;
 
   return (
-    <RNText
-      style={[textStyle, style]}
-      numberOfLines={finalNumberOfLines}
-      {...props}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 }; 

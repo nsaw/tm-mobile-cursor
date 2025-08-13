@@ -47,12 +47,12 @@ Contains artifacts and documentation from version 1.3.1 development phase.
 - **Android**: ⏳ Pending keystore configuration
 
 ### Build Scripts Available:
-- `{ { { { npm run build:ios` - Build for iOS & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- `{ { { { npm run build:android` - Build for Android & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- `{ { { { npm run build:ios-preview` - Preview build for iOS & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- `{ { { { npm run build:android-preview` - Preview build for Android & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- `{ { { { npm run build:all` - Build for all platforms & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-- `{ { { { npm run build:all-preview` - Preview build for all platforms & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- `{ { { { npm run build:ios` - Build for iOS & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+- `{ { { { npm run build:android` - Build for Android & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+- `{ { { { npm run build:ios-preview` - Preview build for iOS & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+- `{ { { { npm run build:android-preview` - Preview build for Android & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+- `{ { { { npm run build:all` - Build for all platforms & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+- `{ { { { npm run build:all-preview` - Preview build for all platforms & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 ## Documentation
 
@@ -67,7 +67,7 @@ Each task directory contains relevant documentation and artifacts for that speci
 
 To execute a task, use the corresponding instruction file with the cursor instruction system. For example:
 ```{ { { { bash
-# Execute EAS setup task & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+# Execute EAS setup task & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 @6_eas-setup.cursor-instruction.json run it
 ```
 

@@ -292,11 +292,11 @@ export class GlobalErrorBoundary extends Component<
             </Text>
             
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.retryButton} onPress={this.handleRetry}>
+              <TouchableOpacity style={styles.retryButton} onPress={this.handleRetry} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                 <Text style={styles.buttonText}>Try Again</Text>
               </TouchableOpacity>
               
-              <TouchableOpacity style={styles.resetButton} onPress={this.handleReset}>
+              <TouchableOpacity style={styles.resetButton} onPress={this.handleReset} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
                 <Text style={styles.buttonText}>Reset App</Text>
               </TouchableOpacity>
             </View>

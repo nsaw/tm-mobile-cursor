@@ -1,0 +1,17 @@
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/.archived/PHASE4_COMPREHENSIVE_IMPLEMENTATION_SUMMARY.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/.archived/summary-P1.00.04-status-check.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/.archived/summary-mdc-formatting-revision.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/summaries/.archived/summary-terminal-blocking-rules-revision.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.archive/INDEX.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.archive/INDEX_CLEANED.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.archive/audit-clickable-elements.js
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.completed/docs/MasterTask-250627.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.completed/docs/Notes_250627.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.completed/docs/postmortem.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.completed/recovery_troubleshooting/postmortem.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.completed/recovery_troubleshooting/recovery-audit-fresh-tasks_250628.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.failed/v1.4.0/docs/DASHBOARD_LAYOUT.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.failed/v1.4.0/docs/MasterTask-250627.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.failed/v1.4.0/docs/Notes_250627.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.failed/v1.4.0/docs/ROLE_TYPE_MAP.md
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/tasks_FAILED/.failed/v1.4.0/docs/postmortem.md

@@ -88,7 +88,7 @@ export const IntegrationTest: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Integration Test Suite</Text>
-      <TouchableOpacity style={styles.runButton} onPress={runAllTests}>
+      <TouchableOpacity style={styles.runButton} onPress={runAllTests} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <Text style={styles.runButtonText}>Run All Tests</Text>
       </TouchableOpacity>
       {testResults.map((result, index) => (

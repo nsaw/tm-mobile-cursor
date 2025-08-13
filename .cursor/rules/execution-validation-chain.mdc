@@ -1,27 +1,15 @@
 ---
-description: Enforce comprehensive validation chain for all operations
-globs:
-  - "**/patch-*.json"
-  - "**/validation-*.log"
 alwaysApply: true
+description: Enforce comprehensive validation chain for all operations
 ---
-# Patch Execution Validation Chain
+# Patch Execution Validation Chain (Hardened)
 
-## Rules
+- Validation must include, in order (bounded via NB-runner where applicable):
+  1. TypeScript: `npx tsc --noEmit`
+  2. ESLint: `npx eslint . --ext .ts,.tsx --max-warnings=0`
+  3. Unit tests: `npm run test:unit -- --watchAll=false`
+  4. Runtime validation: safe Expo launch + health probe
+  5. Custom validators (as needed)
 
-- Patch execution must include, in order:
-  1. Lint check (`eslint`)
-  2. TypeScript build (`tsc`)
-  3. Unit tests (`yarn test`)
-  4. Custom validation scripts
-  5. Runtime functionality
-  6. Role + visual correctness
-  7. Performance profiling
-
-- If any validation fails, halt further actions.
-- No `git commit` may run unless all 7 pass.
-
----
-**Status**: ✅ **ENFORCED - CRITICAL**
-**Compliance**: Zero tolerance with automatic violation detection
-**Scope**: All operations across all contexts
+- Use absolute paths and NB-runner wrappers for long/IO-bound steps.
+- Halt on first failure; no commits until all pass.

@@ -95,4 +95,4 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
       )}
     </View>
   );
-}; 
+};

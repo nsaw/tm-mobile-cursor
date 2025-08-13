@@ -12,12 +12,13 @@ alwaysApply: true
 For each dispatched patch:
 
 - Cursor must log:
+ - Cursor must log (absolute paths, NB-runner bounded):
   - 📨 File creation in `patches/`
   - 📬 Receipt pickup confirmation (agent log or relay)
   - 🏁 Execution log output
   - 📄 Matching `.summary.md` created
 
-If any step is missing:
+If any step is missing (or logs absent under `validations/logs/`):
   - Patch is invalid
   - GPT must retry or mark patch `unverified`
 

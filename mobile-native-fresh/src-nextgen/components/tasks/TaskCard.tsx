@@ -1,25 +1,23 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '../../theme/ThemeProvider';
 
-interface Task {
-  id: string;
+interface ThoughtmarkTask {
+  id: string | number;
   title: string;
   content?: string;
-  isCompleted: boolean;
-  dueDate?: string;
+  isCompleted?: boolean;
+  dueDate?: string | number | Date | null;
 }
 
 interface TaskCardProps {
-  task: Task;
+  task: ThoughtmarkTask;
   onPress: () => void;
   onToggle: () => void;
-  style?: StyleProp<ViewStyle>;
+  style?: ViewStyle | ViewStyle[];
 }
-
-
 
 export const TaskCard: React.FC<TaskCardProps> = ({
   task,
@@ -43,7 +41,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           onPress={onToggle}
           accessibilityRole='checkbox'
           accessible={true}
-          accessibilityLabel={task.isCompleted ? 'Mark task incomplete' : 'Mark task complete'}
+          accessibilityLabel="Button"
         >
           {task.isCompleted && (
             <Ionicons name='checkmark' size={16} color='#FFFFFF' />

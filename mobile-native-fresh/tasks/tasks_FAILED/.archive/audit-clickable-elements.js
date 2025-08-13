@@ -47,11 +47,11 @@ function fileSummary(filename) {
     let match;
     while ((match = regex.exec(text)) !== null) {
       const propsText = match[1];
-      // Find handlers and accessibility pro{ { { ps in prop string & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+      // Find handlers and accessibility pro{ { { ps in prop string & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
       let handlerFound = /(onPress|onPressIn|onPressOut)=\{([^\}]+)\}/.test(propsText);
       let handlerValue = propsText.match(/(onPress|onPressIn|onPressOut)=\{([^\}]+)\}/);
       let accessMissing = ACCESS_PROPS.filter(p => !propsText.includes(p));
-      // Look for accessibility pro{ { { ps in handler (illegal) & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+      // Look for accessibility pro{ { { ps in handler (illegal) & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
       let illegalAccessInHandler = /\(\)\s*=>\s*[^}]*accessibilityRole/.test(propsText);
 
       clickableBlocks.push({
@@ -110,7 +110,7 @@ files.forEach(file => {
       hasIssue = true;
     }
     if (block.illegalAccessInHandler) {
-      console.log(`❌ [${file}] <${block.element} #${idx+1}>: Accessibility pro{ { { ps must NOT be set inside handler!`) & &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown;
+      console.log(`❌ [${file}] <${block.element} #${idx+1}>: Accessibility pro{ { { ps must NOT be set inside handler!`) & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
       hasIssue = true;
     }
   });

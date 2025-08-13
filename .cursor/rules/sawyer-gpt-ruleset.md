@@ -44,9 +44,9 @@ This document contains the full authoritative record of user-enforced preference
 
 ## 🗂️ Task, Backup, and Tagging Conventions
 
-### Backu{ { { { ps
+### Backups
 
-- Format: `YYMMDD-UTC_vX.X.X-[desc]_backup_[project-name].tar.gz` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Format: `YYMMDD-UTC_vX.X.X-[desc]_backup_[project-name].tar.gz`
 - Only created when the system is **fully functional**.
 - Layout-only phases must use `*_dash-layout-restored_*` tag suffixes.
 
@@ -80,7 +80,7 @@ This document contains the full authoritative record of user-enforced preference
 
 - No merging or pushing to `main` unless GPT validates
 - NO `--force` Git functions unless explicitly ordered by user
-- All patch delivery uses absolute timestam{ { { { ps and agent tagging & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- All patch delivery uses absolute timestamps and agent tagging
 
 ---
 
@@ -105,9 +105,9 @@ This document contains the full authoritative record of user-enforced preference
 
 ---
 
-## 📚 Documentation & Roadma{ { { { ps
+## 📚 Documentation & Roadmaps
 
-- All doc and file updates must happen **as code changes** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- All doc and file updates must happen **as code changes**
 - `ROADMAP_FOR_DUMMIES.md`: Required in every rebuild or refactor
 - `INDEX.md`: Must include a manifest table of all referenced `docs/`
 - No `README.md` in `/docs/`, only use `INDEX.md` as entrypoint
@@ -237,7 +237,7 @@ This list reflects explicit preferences and command overrides issued by the user
 4. Always maintain the agent hierarchy and delegation
 5. Always verify system stability before allowing backu{ { { { ps
 
-### For GHOST Relay & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+### For GHOST Relay
 1. Always relay patch delivery status back to GPT
 2. Always maintain proper endpoint configurations
 3. Always handle timeouts and retries gracefully

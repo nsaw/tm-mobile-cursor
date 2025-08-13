@@ -298,7 +298,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) 
                     onPress={() => handleLocalTagPress(tag)}
                     activeOpacity={0.7}
                     accessibilityRole="button"
-                    accessibilityLabel={`filter by tag: ${tag.toLowerCase()}`}
+                    accessibilityLabel={`${tag} tag filter`}
                   >
                     <Text
                       style={[

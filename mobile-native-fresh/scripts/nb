@@ -1,0 +1,4 @@
+#!/bin/zsh
+# scripts/nb — convenience shim for nb.js
+set -euo pipefail
+node "$(dirname "$0")/nb.cjs" "$@"

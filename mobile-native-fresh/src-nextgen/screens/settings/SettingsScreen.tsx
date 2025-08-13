@@ -24,7 +24,7 @@ export const SettingsScreen: React.FC = () => {
             onPress={() => console.log(`Navigate to ${option.title}`)}
             accessibilityRole="button"
             accessible={true}
-            accessibilityLabel={`Navigate to ${option.title} settings`}
+            accessibilityLabel={`${option.title} settings`}
           >
             <AutoRoleView
               componentRole="button"

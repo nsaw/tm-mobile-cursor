@@ -38,3 +38,6 @@ alwaysApply: true
 **Status**: ✅ **ENFORCED - HIGH**
 **Compliance**: Strict validation with automatic rollback
 **Scope**: All operations across all contexts
+
+---
+Note: All runtime checks and health probes must use NB-runner with bounded TTLs and absolute paths.

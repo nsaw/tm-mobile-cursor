@@ -101,7 +101,7 @@ export const TagChip: React.FC<TagChipProps> = ({
       activeOpacity={0.7}
       accessibilityRole="button"
       accessible={true}
-      accessibilityLabel={`tag: ${tag.toLowerCase()}`}
+      accessibilityLabel={`${tag} tag button`}
     >
       <Text 
         variant="caption"

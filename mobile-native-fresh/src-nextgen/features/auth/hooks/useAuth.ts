@@ -1,195 +1,228 @@
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { User, SignInCredentials, SignUpCredentials, PINCredentials, AuthState } from '../types/auth';
+import { authService } from '../services/authService';
 
-export interface User {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  isPremium: boolean;
-  isTestUser: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
-  loading: boolean;
-  guestMode: boolean;
-}
-
-export interface AuthContextValue extends AuthState {
-  signIn: (email: string, password: string) => Promise<User>;
-  signUp: (email: string, password: string, firstName?: string, lastName?: string) => Promise<User>;
-  signOut: () => Promise<void>;
-  resetPassword: (email: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
-  enableGuestMode: () => void;
-  disableGuestMode: () => void;
-  verifyPIN?: (pin: string) => Promise<boolean>;
-  isLoading?: boolean;
-  error?: string | null;
-}
-
-const STORAGE_KEYS = {
-  USER: '@thoughtmarks_user',
-  TOKEN: '@thoughtmarks_token',
-  REFRESH_TOKEN: '@thoughtmarks_refresh_token',
-  LAST_ACTIVE: '@thoughtmarks_last_active',
-};
-
-export const useAuth = (): AuthContextValue => {
+export const useAuth = () => {
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
-    loading: true,
-    guestMode: false,
+    isLoading: true,
+    error: null,
+    requiresPIN: false,
+    isDemoUser: false,
   });
 
-  // Initialize auth state from storage
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        const userData = await AsyncStorage.getItem(STORAGE_KEYS.USER);
-        if (userData) {
-          const user = JSON.parse(userData);
-          setAuthState({
-            user,
-            isAuthenticated: true,
-            loading: false,
-            guestMode: false,
-          });
-        } else {
-          setAuthState(prev => ({ ...prev, loading: false }));
-        }
-      } catch (error) {
-        console.error('Failed to initialize auth:', error);
-        setAuthState(prev => ({ ...prev, loading: false }));
-      }
-    };
-
     initializeAuth();
   }, []);
 
-  const signIn = async (_email: string, _password: string): Promise<User> => {
-    setAuthState(prev => ({ ...prev, loading: true }));
+  const initializeAuth = async () => {
     try {
-      // Mock authentication - replace with actual auth logic
-      const user: User = {
-        id: 'mock-user-id',
-        email: _email,
-        firstName: 'Mock',
-        lastName: 'User',
-        isPremium: false,
-        isTestUser: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      const user = await authService.getCurrentUser();
+      const hasPIN = await authService.hasPIN();
 
-      await AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
       setAuthState({
         user,
-        isAuthenticated: true,
-        loading: false,
-        guestMode: false,
+        isAuthenticated: !!user,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN && !!user,
+        isDemoUser: user?.provider === 'demo',
       });
-
-      return user;
-    } catch (error: unknown) {
-      setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error((error as Error).message || 'Sign in failed');
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Failed to initialize auth',
+      }));
     }
   };
 
-  const signUp = async (_email: string, _password: string, firstName?: string, lastName?: string): Promise<User> => {
-    setAuthState(prev => ({ ...prev, loading: true }));
+  const signInWithEmail = async (credentials: SignInCredentials) => {
     try {
-      // Mock user creation - replace with actual signup logic
-      const user: User = {
-        id: 'mock-user-id',
-        email: _email,
-        firstName: firstName || 'New',
-        lastName: lastName || 'User',
-        isPremium: false,
-        isTestUser: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      const user = await authService.signInWithEmail(credentials);
+      const hasPIN = await authService.hasPIN();
 
-      await AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
       setAuthState({
         user,
         isAuthenticated: true,
-        loading: false,
-        guestMode: false,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN,
+        isDemoUser: user.provider === 'demo',
       });
-
       return user;
-    } catch (error: unknown) {
-      setAuthState(prev => ({ ...prev, loading: false }));
-      throw new Error((error as Error).message || 'Sign up failed');
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Sign in failed',
+      }));
+      throw error;
     }
   };
 
-  const signOut = async (): Promise<void> => {
+  const signUpWithEmail = async (credentials: SignUpCredentials) => {
     try {
-      await AsyncStorage.multiRemove([
-        STORAGE_KEYS.USER,
-        STORAGE_KEYS.TOKEN,
-        STORAGE_KEYS.REFRESH_TOKEN,
-        STORAGE_KEYS.LAST_ACTIVE,
-      ]);
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      const user = await authService.signUpWithEmail(credentials);
+      const hasPIN = await authService.hasPIN();
 
+      setAuthState({
+        user,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN,
+        isDemoUser: user.provider === 'demo',
+      });
+      return user;
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Sign up failed',
+      }));
+      throw error;
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      const user = await authService.signInWithGoogle();
+      const hasPIN = await authService.hasPIN();
+
+      setAuthState({
+        user,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN,
+        isDemoUser: user.provider === 'demo',
+      });
+      return user;
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Google sign in failed',
+      }));
+      throw error;
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      const user = await authService.signInWithApple();
+      const hasPIN = await authService.hasPIN();
+
+      setAuthState({
+        user,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN,
+        isDemoUser: user.provider === 'demo',
+      });
+      return user;
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Apple sign in failed',
+      }));
+      throw error;
+    }
+  };
+
+  const signInAsDemo = async () => {
+    try {
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      const user = await authService.signInAsDemo();
+      const hasPIN = await authService.hasPIN();
+
+      setAuthState({
+        user,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+        requiresPIN: hasPIN,
+        isDemoUser: true,
+      });
+      return user;
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Demo sign in failed',
+      }));
+      throw error;
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      setAuthState(prev => ({ ...prev, isLoading: true }));
+      await authService.signOut();
       setAuthState({
         user: null,
         isAuthenticated: false,
-        loading: false,
-        guestMode: false,
+        isLoading: false,
+        error: null,
+        requiresPIN: false,
+        isDemoUser: false,
       });
     } catch (error) {
-      console.error('Failed to sign out:', error);
+      setAuthState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Sign out failed',
+      }));
+      throw error;
     }
   };
 
-  const enableGuestMode = (): void => {
-    setAuthState({
-      user: null,
-      isAuthenticated: false,
-      loading: false,
-      guestMode: true,
-    });
+  const setupPIN = async (credentials: PINCredentials) => {
+    try {
+      await authService.setupPIN(credentials);
+      setAuthState(prev => ({ ...prev, requiresPIN: true }));
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        error: error instanceof Error ? error.message : 'PIN setup failed',
+      }));
+      throw error;
+    }
   };
 
-  const disableGuestMode = (): void => {
-    setAuthState({
-      user: null,
-      isAuthenticated: false,
-      loading: false,
-      guestMode: false,
-    });
-  };
-
-  const resetPassword = async (_email: string): Promise<void> => {
-    // Mock password reset for now
-    console.log('Password reset requested for:', _email);
-  };
-
-  const signInWithGoogle = async (): Promise<void> => {
-    // Mock Google sign in for now
-    console.log('Google sign in requested');
+  const verifyPIN = async (pin: string) => {
+    try {
+      const isValid = await authService.verifyPIN(pin);
+      if (isValid) {
+        setAuthState(prev => ({ ...prev, requiresPIN: false }));
+      }
+      return isValid;
+    } catch (error) {
+      setAuthState(prev => ({
+        ...prev,
+        error: error instanceof Error ? error.message : 'PIN verification failed',
+      }));
+      return false;
+    }
   };
 
   return {
     ...authState,
-    signIn,
-    signUp,
-    signOut,
-    resetPassword,
+    signInWithEmail,
+    signUpWithEmail,
     signInWithGoogle,
-    enableGuestMode,
-    disableGuestMode,
-    isLoading: authState.loading,
-    error: null,
-  } as AuthContextValue;
-}; 
+    signInWithApple,
+    signInAsDemo,
+    signOut,
+    setupPIN,
+    verifyPIN,
+  };
+};

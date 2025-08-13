@@ -87,7 +87,7 @@ For each patch/summary:
 - Every patch must pass:
   - TypeScript compile: `tsc --noEmit`
   - ESLint: `eslint . --ext .ts,.tsx --max-warnings=0`
-  - Unit tests: `yarn test:unit --watchAll=false`
+  - Unit tests: `npm run test:unit -- --watchAll=false`
   - Runtime test: `bash scripts/validate-runtime.sh`
   - Snapshot: `bash scripts/validate-components.sh`
   - Role: `bash scripts/validate-roles.sh`

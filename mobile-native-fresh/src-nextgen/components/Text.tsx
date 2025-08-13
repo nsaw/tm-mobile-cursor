@@ -1,8 +1,6 @@
 import React from 'react';
 import { Text as RNText, StyleSheet, AccessibilityRole } from 'react-native';
 
-import { LegacyThemeColors } from '../types/theme';
-
 export interface TextProps {
   children: React.ReactNode;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption' | 'label';
@@ -22,16 +20,6 @@ export const Text: React.FC<TextProps> = ({
   accessibilityHint,
   numberOfLines,
 }) => {
-  const colors: LegacyThemeColors = {
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
-    text: '#1A1A1A',
-    textSecondary: '#6C757D',
-    primary: '#007AFF',
-    error: '#DC3545',
-    border: '#DEE2E6',
-  };
-
   const getVariantStyle = () => {
     switch (variant) {
       case 'h1':
@@ -40,24 +28,21 @@ export const Text: React.FC<TextProps> = ({
         return styles.h2;
       case 'h3':
         return styles.h3;
-      case 'body':
-        return styles.body;
       case 'caption':
         return styles.caption;
       case 'label':
         return styles.label;
+      case 'body':
       default:
         return styles.body;
     }
   };
 
+  const variantStyle = getVariantStyle();
+
   return (
     <RNText
-      style={[
-        getVariantStyle(),
-        { color: colors.text },
-        style,
-      ]}
+      style={[variantStyle, style]}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={accessibilityHint}
@@ -91,4 +76,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-}); 
+});

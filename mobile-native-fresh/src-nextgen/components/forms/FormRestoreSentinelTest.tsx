@@ -99,21 +99,21 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
           <TouchableOpacity 
             style={styles.testButton}
             onPress={testEnvironmentSwitch}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Test Environment Switch</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.testButton}
             onPress={testDataLoss}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Test Data Loss Scenario</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.testButton}
             onPress={clearTestResults}
-           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.buttonText}>Clear Test Results</Text>
           </TouchableOpacity>
         </AutoRoleView>

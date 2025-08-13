@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ViewProps, AccessibilityRole } from 'react-native';
+import { View, ViewProps, AccessibilityRole, Text } from 'react-native';
 
 export interface AutoRoleViewProps extends Omit<ViewProps, 'accessibilityRole'> {
   componentRole?: 'screen' | 'screen-container' | 'header-section' | 'avatar-container' | 'content' | 'interactive' | 'layout' | 'navigation' | 'form' | 'list' | 'card' | 'button' | 'text' | 'image' | 'input' | 'modal' | 'overlay' | 'toolbar' | 'tab' | 'tab-icon' | 'menu' | 'dialog' | 'alert' | 'progress' | 'status' | 'separator' | 'group' | 'section' | 'container' | 'wrapper' | 'item' | 'element' | 'feedback';
@@ -96,15 +96,6 @@ export const AutoRoleView: React.FC<AutoRoleViewProps> = ({
   };
 
   return (
-    <View
-      style={style}
-      accessibilityRole={getAccessibilityRole()}
-      accessibilityLabel={getAccessibilityLabel()}
-      accessibilityHint={accessibilityHint}
-      accessibilityState={accessibilityState}
-      {...props}
-    >
-      {children}
-    </View>
+    <View><Text>{children}</Text></View>
   );
 }; 

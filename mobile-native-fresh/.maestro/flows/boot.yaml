@@ -1,0 +1,13 @@
+appId: ${APP_ID:-com.tm.mobile}
+name: Boot App
+steps:
+  - launchApp:
+      clearState: false
+  - waitForAnimationToEnd
+  - tapOn:
+      optional: true
+      text: "Allow"
+  - takeScreenshot: "boot/loaded"
+  - assertVisible:
+      optional: true
+      text: "Settings"

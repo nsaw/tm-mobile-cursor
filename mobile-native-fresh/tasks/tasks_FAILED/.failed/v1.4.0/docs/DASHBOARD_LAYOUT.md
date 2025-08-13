@@ -10,5 +10,5 @@
     - Recent Thoughtmarks (Card or InfoBox)
 
 ## Notes
-- FAB overla{ { { { ps bottom-right & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- FAB overla{ { { { ps bottom-right & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - PersistentNav overlays lower zone

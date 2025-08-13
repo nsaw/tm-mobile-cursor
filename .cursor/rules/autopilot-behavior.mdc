@@ -23,7 +23,7 @@ alwaysApply: true
 
   - ✅ TypeScript: `tsc --noEmit`
   - ✅ ESLint: `eslint . --ext .ts,.tsx --max-warnings=0`
-  - ✅ Unit Tests: `yarn test:unit --watchAll=false`
+  - ✅ Unit Tests: `npm run test:unit -- --watchAll=false`
   - ✅ Runtime: `validate-runtime.sh`
   - ✅ Component + Role tests
   - ✅ Performance tests

@@ -72,9 +72,9 @@ All feedback, blocking, update, or reporting summaries must conform to format, n
 - **Priority**: Critical
 
 ### Implementation Notes
-- This rule is enforced at runtime and by validation scripts
-- Agents must never bypass this for compatibility or temporary logs
-- Applies immediately and indefinitely
+- Enforced by runtime and validation scripts
+- NB-runner required for any long/IO-bound summary generation steps
+- Absolute paths required for all summary destinations
 - All summary writes must be validated before completion
 - Violations must trigger immediate agent shutdown and restart
 

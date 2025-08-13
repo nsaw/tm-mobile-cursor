@@ -78,8 +78,8 @@ This rule enforces flexible patch validation to prevent automatic failure of val
 {
   "validate": {
     "shell": [
-      "ls /patches/patch-v3.4.*.json | head -1 | grep -q 'patch-v3.4' || echo 'No Phase 4 patches found, continuing...'",
-      "grep -r 'functionName' /src/ || echo 'Function not found, continuing...'"
+      "ls /patches/patch-v3.4.*.json | head -1 >/dev/null 2>&1 || echo 'No Phase 4 patches found, continuing...'",
+      "node scripts/tools/scan-legacy-patterns.cjs --dir /src || echo 'Function not found, continuing...'"
     ]
   }
 }
@@ -114,8 +114,8 @@ This rule enforces flexible patch validation to prevent automatic failure of val
 test -f /specific/file && echo "File found" || echo "File not found, continuing..."
 
 # Instead of: grep -q 'exact_content' file || exit 1
-# Use:
-grep -q 'pattern.*' file && echo "Pattern found" || echo "Pattern not found, continuing..."
+# Use a Node-based check or language-native matcher
+node -e "process.exit(!/pattern/.test(require('fs').readFileSync('file','utf8')))" && echo "Pattern found" || echo "Pattern not found, continuing..."
 ```
 
 ### **Flexible Service Validation**
@@ -124,9 +124,9 @@ grep -q 'pattern.*' file && echo "Pattern found" || echo "Pattern not found, con
 # Use:
 curl -s http://localhost:5051/service && echo "Service available" || echo "Service not available, continuing..."
 
-# Instead of: curl -s http://localhost:5051/service | grep -q 'ok' || exit 1
-# Use:
-curl -s http://localhost:5051/service | grep -q 'ok' && echo "Service healthy" || echo "Service response unexpected, continuing..."
+# Instead of: curl ... | grep -q 'ok' || exit 1
+# Use NB-runner bounded probe and evaluate exit code only
+node scripts/nb.cjs --ttl 6s --label svc --log validations/logs/svc.log --status validations/status -- bash -lc 'curl -sSf http://localhost:5051/service >/dev/null' && echo "Service healthy" || echo "Service response unexpected, continuing..."
 ```
 
 ### **Flexible Patch Validation**

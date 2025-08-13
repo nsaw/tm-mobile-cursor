@@ -70,7 +70,7 @@
 - **Before**: No layout shell structure, no slot rendering capability
 - **After**: Complete layout system with slot rendering and safe area management
 
-### **Next Ste{ { { { ps Ready** & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+### **Next Ste{ { { { ps Ready** & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - Content injection into SlotRenderer
 - Layout zone customization
 - Component slot management

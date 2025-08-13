@@ -23,5 +23,5 @@ A standardized interface between component type and styling logic.
 
 Use automated snapshot + tap test to confirm:
 - Role → Token Map{ { { { ping
-- Spacing and size bounds & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Spacing and size bounds & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - Clickable behavior when applied

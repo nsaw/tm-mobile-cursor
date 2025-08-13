@@ -285,7 +285,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
           {/* Task Toggle */}
           <Card style={styles.card}>
-            <TouchableOpacity style={styles.taskToggle} onPress={handleToggleTask}>
+            <TouchableOpacity style={styles.taskToggle} onPress={handleToggleTask} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons 
                 name={isTask ? "checkbox" : "square-outline"} 
                 size={24} 
@@ -323,7 +323,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
 
           {/* Pin Toggle */}
           <Card style={styles.card}>
-            <TouchableOpacity style={styles.pinToggle} onPress={handleTogglePin}>
+            <TouchableOpacity style={styles.pinToggle} onPress={handleTogglePin} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
               <Ionicons 
                 name={isPinned ? "pin" : "pin-outline"} 
                 size={24} 

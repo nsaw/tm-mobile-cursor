@@ -19,7 +19,7 @@ All terminal commands in Cursor agent chat MUST use non-blocking patterns to pre
 
 ### **Standard Non-Blocking Command Structure**
 ```bash
-{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+node scripts/nb.cjs --ttl 120s --label runtime-validate --log validations/logs/runtime-validate.log --status validations/status -- bash -lc 'scripts/validate-runtime.sh'
 ```
 
 ### **Pattern Components**
@@ -44,7 +44,7 @@ node scripts/nb.cjs --ttl 30s --label -command- --log validations/logs/-command-
 **Required Patterns:**
 - ✅ Non-blocking: `(node scripts/nb.cjs --ttl 30s --label node --log validations/logs/node.log --status validations/status -- node server.js)`
 - ✅ Background execution: `(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm install)`
-- ✅ Safe health checks: `(node scripts/nb.cjs --ttl 30s --label curl --log validations/logs/curl.log --status validations/status -- curl -s http://localhost:8081/health)`
+  - ✅ Safe health checks: `node scripts/nb.cjs --ttl 18s --label expo-health --log validations/logs/expo-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8081/status >/dev/null'`
 - ✅ Service management: `(node scripts/nb.cjs --ttl 30s --label expo --log validations/logs/expo.log --status validations/status -- expo start)`
 
 ## **2. PATCH STRUCTURE REQUIREMENTS**
@@ -76,7 +76,7 @@ node scripts/nb.cjs --ttl 30s --label -command- --log validations/logs/-command-
   "preMutationValidation": {
     "shell": [
       "test -f /required/file || echo 'Required file missing, continuing...'",
-      "curl -s --max-time 10 http://localhost:8081/health || echo 'Service not available, continuing...'"
+      "node scripts/nb.cjs --ttl 10s --label preflight-health --log validations/logs/preflight-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8081/status >/dev/null' || echo 'Service not available, continuing...'"
     ]
   }
 }
@@ -109,8 +109,8 @@ For multiple commands in a single mutation, wrap in subshell:
 {
   "testing": {
     "shell": [
-            "(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm test)",
-            "(node scripts/nb.cjs --ttl 30s --label tsc --log validations/logs/tsc.log --status validations/status -- tsc --noEmit)"
+            "node scripts/nb.cjs --ttl 300s --label unit-tests --log validations/logs/unit-tests.log --status validations/status -- bash -lc 'npm run test:unit -- --watchAll=false'",
+            "node scripts/nb.cjs --ttl 180s --label tsc --log validations/logs/tsc.log --status validations/status -- bash -lc 'npx tsc --noEmit'"
     ]
   }
 }
@@ -121,8 +121,8 @@ For multiple commands in a single mutation, wrap in subshell:
 {
   "postMutationBuild": {
     "shell": [
-            "(node scripts/nb.cjs --ttl 30s --label npm --log validations/logs/npm.log --status validations/status -- npm run build)",
-            "(node scripts/nb.cjs --ttl 30s --label eslint --log validations/logs/eslint.log --status validations/status -- eslint . --ext .ts,.tsx --max-warnings=0)"
+            "node scripts/nb.cjs --ttl 120s --label build --log validations/logs/build.log --status validations/status -- bash -lc 'npm run build'",
+            "node scripts/nb.cjs --ttl 180s --label eslint --log validations/logs/eslint.log --status validations/status -- bash -lc 'npx eslint . --ext .ts,.tsx --max-warnings=0'"
     ]
   }
 }
@@ -170,7 +170,7 @@ For multiple commands in a single mutation, wrap in subshell:
   "validate": {
     "shell": [
       "test -f /expected/output/file",
-      "grep -q 'success' /logs/patch.log"
+      "node -e \"process.exit(!/success/.test(require('fs').readFileSync('/logs/patch.log','utf8')))\""
     ]
   }
 }
@@ -215,8 +215,8 @@ All patches must include:
 
 ### **Script Execution**
 ```bash
-# Validation scripts
-{ bash scripts/validate-runtime.sh & } >/dev/null 2>&1 & disown
+# Validation scripts (bounded)
+node scripts/nb.cjs --ttl 120s --label runtime-validate --log validations/logs/runtime-validate.log --status validations/status -- bash -lc 'scripts/validate-runtime.sh'
 
 # Build scripts
 { npm run build & } >/dev/null 2>&1 & disown
@@ -230,8 +230,8 @@ All patches must include:
 
 ### **Development Server Commands**
 ```bash
-# Expo development server
-{ npx expo start --clear & } >/dev/null 2>&1 & disown
+# Expo development server (safe launcher)
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/admin/safe-launch-expo.sh || true
 
 # React development server
 { npm start & } >/dev/null 2>&1 & disown
@@ -260,8 +260,8 @@ All patches must include:
 
 ### **Log Monitoring**
 ```bash
-# Application logs
-{ tail -f logs/app.log & } >/dev/null 2>&1 & disown
+# Application logs (bounded snapshot)
+node scripts/nb.cjs --ttl 10s --label logs-snap --log validations/logs/logs-snap.log --status validations/status -- bash -lc 'tail -n 200 logs/app.log'
 
 # Error logs
 { tail -f logs/error.log & } >/dev/null 2>&1 & disown

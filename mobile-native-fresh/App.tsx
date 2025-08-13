@@ -1,40 +1,65 @@
-// App.tsx - Simplified test version
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { ThemeProvider } from './src-nextgen/theme/ThemeProvider';
+import { AuthProvider } from './src-nextgen/contexts/AuthProvider';
+import { ThoughtmarksProvider } from './src-nextgen/contexts/ThoughtmarksProvider';
+import { VoiceProvider } from './src-nextgen/contexts/VoiceProvider';
+import { AIProvider } from './src-nextgen/contexts/AIProvider';
+import { DashboardScreen } from './src-nextgen/screens/dashboard/DashboardScreen';
+import { LoadingScreen } from './src-nextgen/components/ui/LoadingScreen';
+import { useAuth } from './src-nextgen/hooks/useAuth';
 
-export default function App(): React.JSX.Element {
-  console.log('[APP] 🚀 Simplified App function executed');
+// Define the root stack param list
+export type RootStackParamList = {
+  Dashboard: undefined;
+  Loading: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+const AppNavigator: React.FC = () => {
+  const { isAuthenticated, loading } = useAuth();
+
+  console.log('[APP] Auth state:', { isAuthenticated, loading });
+
+  // Show loading screen while checking authentication
+  if (loading) {
+    console.log('[APP] Showing loading screen');
+    return <LoadingScreen />;
+  }
+
+  console.log('[APP] Auth check complete, showing dashboard');
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const App: React.FC = () => {
+  console.log('[APP] 🚀 Full-featured App loading with navigation');
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <Text style={styles.text}>🚀 App Loading Successfully!</Text>
-      <Text style={styles.subtext}>Basic Expo setup is working</Text>
-      <Text style={styles.subtext}>Environment: {process.env.EXPO_PUBLIC_USE_NEXTGEN || 'not set'}</Text>
-    </View>
+    <SafeAreaProvider>
+      <StatusBar style="auto" />
+      <ThemeProvider>
+        <AuthProvider>
+          <ThoughtmarksProvider>
+            <VoiceProvider>
+              <AIProvider>
+                <AppNavigator />
+              </AIProvider>
+            </VoiceProvider>
+          </ThoughtmarksProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  subtext: {
-    color: '#ccc',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-});
+export default App;

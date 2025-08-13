@@ -151,7 +151,7 @@ export const CoreSystemsIntegrationTest: React.FC = () => {
             style={[styles.runButton, isRunning && styles.runButtonDisabled]} 
             onPress={runAllTests}
             disabled={isRunning}
-          >
+           accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text style={styles.runButtonText}>
               {isRunning ? 'Running Tests...' : 'Run All Tests'}
             </Text>

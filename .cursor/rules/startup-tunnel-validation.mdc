@@ -14,7 +14,7 @@ On `ghost-bridge` or `orchestrator.js` launch:
 - Confirm:
   - Ngrok or Cloudflare tunnel is active
   - Port forwarding to `/ghost/status.json` is accessible
-  - `curl` healthcheck passes
+  - Healthcheck passes (NB-runner bounded curl): `node scripts/nb.cjs --ttl 10s --label ghost-health --log validations/logs/ghost-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8787/ghost/status.json >/dev/null'`
 
 If not:
 - Do not mark startup as successful

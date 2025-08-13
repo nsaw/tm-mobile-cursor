@@ -1,0 +1,11 @@
+getpwuid_r did not find a match for uid 501
+Filtering the log data using "type == 1024 AND (composedMessage CONTAINS[c] "Error" OR composedMessage CONTAINS[c] "must be used within a" OR composedMessage CONTAINS[c] "TypeError" OR composedMessage CONTAINS[c] "undefined is not an object" OR composedMessage CONTAINS[c] "Invariant Violation" OR composedMessage CONTAINS[c] "Component has not been registered" OR composedMessage CONTAINS[c] "Cannot read property")"
+Timestamp               Ty Process[PID:TID]
+2025-08-13 01:02:01.808 E  pairedsyncd[95809:5d5c774] [com.apple.pairedsync:daemon] Fatal error: pairing store path was nil for PSDFileManager.
+2025-08-13 01:02:11.869 Df rapportd[1080:5d5dfd8] [com.apple.IDS:Registration] XPC has informed us that a fatal error has occured, we will not be attempting to reconnect any further
+2025-08-13 01:02:11.870 Df rapportd[1080:5d5dfd8] [com.apple.IDS:Registration] XPC has informed us that a fatal error has occured, we will not be attempting to reconnect any further
+2025-08-13 01:02:13.343 E  pairedsyncd[99866:5d5dfd6] [com.apple.pairedsync:daemon] Fatal error: pairing store path was nil for PSDFileManager.
+2025-08-13 01:02:22.992 E  pairedsyncd[4861:5d5f879] [com.apple.pairedsync:daemon] Fatal error: pairing store path was nil for PSDFileManager.
+2025-08-13 01:02:26.016 Df geoanalyticsd[1427:5d5bac6] [com.apple.xpc:connection] [0x600003d30000] failed to do a bootstrap look-up: xpc_error=[3: No such process]
+2025-08-13 01:02:26.021 Df geoanalyticsd[1427:5d602c8] (CoreTime) Error: Daemon connection invalidated
+Child process terminated with signal 15: Terminated

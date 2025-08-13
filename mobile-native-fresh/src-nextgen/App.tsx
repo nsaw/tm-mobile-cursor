@@ -1,37 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationProvider } from './navigation/NavigationProvider';
+import { AppNavigator } from './navigation/AppNavigator';
+import { ThemeProvider } from './theme/ThemeProvider';
+import { AuthProvider } from './contexts/AuthProvider';
+import { ThoughtmarksProvider } from './contexts/ThoughtmarksProvider';
+import { VoiceProvider } from './contexts/VoiceProvider';
+import { AIProvider } from './contexts/AIProvider';
 
 const App: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaProvider>
       <StatusBar style="auto" />
-      <Text style={styles.text}>🚀 NextGen App Loading...</Text>
-      <Text style={styles.subtext}>Authentication and navigation will be restored once basic boot is confirmed</Text>
-    </View>
+      <ThemeProvider>
+        <AuthProvider>
+          <ThoughtmarksProvider>
+            <VoiceProvider>
+              <AIProvider>
+                <NavigationProvider>
+                  <AppNavigator />
+                </NavigationProvider>
+              </AIProvider>
+            </VoiceProvider>
+          </ThoughtmarksProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  subtext: {
-    color: '#ccc',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-});
 
 export default App; 

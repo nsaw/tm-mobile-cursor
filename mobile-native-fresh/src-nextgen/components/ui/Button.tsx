@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.7}
-    >
+     accessibilityRole="button" accessible={true} accessibilityLabel="Button">
       <Text style={textStyleCombined}>{title}</Text>
     </TouchableOpacity>
   );

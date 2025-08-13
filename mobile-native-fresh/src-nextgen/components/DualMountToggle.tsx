@@ -104,7 +104,7 @@ export const DualMountToggle: React.FC<DualMountToggleProps> = ({
       onPress={handleToggle}
       accessibilityRole="button"
       accessible={true}
-      accessibilityLabel={`Switch to ${!isNextGen ? 'NextGen' : 'Legacy'} mode`}
+      accessibilityLabel={`${isNextGen ? 'NextGen' : 'Legacy'} mode`}
     >
       <Text style={[styles.icon, { color: theme.colors.text }]}>
         {isNextGen ? '🚀' : '📱'}

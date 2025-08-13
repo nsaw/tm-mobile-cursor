@@ -9,24 +9,24 @@ Read file: mobile-native-fresh/package.json
 Read file: ROLLBACK_SUMMARY.md
 Read file: diff-summary.txt
 ```{ { { { bash
-git log --oneline --graph -10 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+git log --oneline --graph -10 & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 Ran tool
 Read file: tasks/v1.3.1/6_eas-setup.cursor-instruction.json
 Read file: tasks/eas-build-checklist.md
 ```{ { { { bash
-cd mobile-native-fresh && npx eas whoami & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cd mobile-native-fresh && npx eas whoami & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 ```{ { { { bash
-npx eas project:info & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+npx eas project:info & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 Read file: mobile-native-fresh/src/features/home/screens/DashboardScreen.tsx
 Read file: mobile-native-fresh/src/components/ui/OnboardingModal.tsx
 ```{ { { { bash
-cd .. && git tag --list | grep -E "(v1\.3\.|eas|setup)" | head -10 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cd .. && git tag --list | grep -E "(v1\.3\.|eas|setup)" | head -10 & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 ```{ { { { bash
-git tag --list | grep -E "(v1\.3\.6|clean|reset)" | head -10 & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+git tag --list | grep -E "(v1\.3\.6|clean|reset)" | head -10 & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 Now let me examine the current task files to understand what's been completed and what's still needed:
 
@@ -157,19 +157,19 @@ Based on my thorough audit of the project, I can now provide you with a comprehe
 
 ### **Option A: Start Deep Linking (Recommended)**
 ```{ { { { bash
-# Execute the deep linking task & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+# Execute the deep linking task & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 @tasks/1_deeplink-siri.cursor-instruction.json run it
 ```
 
 ### **Option B: Start StoreKit Integration**
 ```{ { { { bash
-# Execute the StoreKit task & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+# Execute the StoreKit task & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 @tasks/2_storekit-premium.cursor-instruction.json run it
 ```
 
 ### **Option C: Quick UI Polish First**
 ```{ { { { bash
-# Execute the UI polish task & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+# Execute the UI polish task & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 @tasks/7_ui-polish-phase.cursor-instruction.json run it
 ```
 

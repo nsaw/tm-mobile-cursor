@@ -113,18 +113,18 @@ All backups must abide by `.tarignore` files and exclude the following:
 
 ## Backup Command Patterns
 
-### MAIN Project Backup Pattern
+### MAIN Project Backup Pattern (respect .tarignore)
 ```bash
 cd /Users/sawyer/gitSync && \
-tar -czf _backups/tm-safety_backups/250729_UTC_<patch id>.tar.gz \
+tar -czf _backups/tm-safety_backups/$(date +%y%m%d)_UTC_<patch id>.tar.gz \
   $(grep -vE "^\s*(#|$)" tm-mobile-cursor/.tarignore | sed "s/^/--exclude=/") \
   tm-mobile-cursor/
 ```
 
-### CYOPS Project Backup Pattern
+### CYOPS Project Backup Pattern (respect .tarignore)
 ```bash
 cd /Users/sawyer/gitSync && \
-tar -czf _backups/gpt-cursor-runner/250729_UTC_<patch id>.tar.gz \
+tar -czf _backups/gpt-cursor-runner/$(date +%y%m%d)_UTC_<patch id>.tar.gz \
   $(grep -vE "^\s*(#|$)" gpt-cursor-runner/.tarignore | sed "s/^/--exclude=/") \
   gpt-cursor-runner/
 ```

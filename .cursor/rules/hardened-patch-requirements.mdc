@@ -29,13 +29,13 @@ All patch mutations must use hardened non-blocking patterns to prevent terminal 
 }
 ```
 
-### **Pre-Mutation Validation**
+### **Pre-Mutation Validation (bounded)**
 ```json
 {
   "preMutationValidation": {
     "shell": [
       "test -f /required/file || echo 'Required file missing, continuing...'",
-      "curl -s --max-time 10 http://localhost:8081/health || echo 'Service not available, continuing...'"
+      "node scripts/nb.cjs --ttl 10s --label preflight-health --log validations/logs/preflight-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8081/status >/dev/null' || echo 'Service not available, continuing...'"
     ]
   }
 }

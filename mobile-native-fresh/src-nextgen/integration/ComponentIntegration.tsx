@@ -1,18 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { useTheme } from '../theme/ThemeProvider';
+// import { useTheme } from '../theme/ThemeProvider';
 import { useAppStore } from '../state/store';
 import { VoiceRecorderProvider } from '../components/ui/VoiceRecorderProvider';
-
 
 interface ComponentIntegrationProps {
   children: React.ReactNode;
 }
 
 export const ComponentIntegration: React.FC<ComponentIntegrationProps> = ({ children }) => {
-  const { tokens: _tokens } = useTheme();
-  const { user: _user, isAuthenticated } = useAppStore();
+  const { isAuthenticated } = useAppStore();
 
   if (!isAuthenticated) {
     return (
@@ -24,9 +22,7 @@ export const ComponentIntegration: React.FC<ComponentIntegrationProps> = ({ chil
 
   return (
     <VoiceRecorderProvider>
-      <View style={styles.container}>
-        {children}
-      </View>
+      <View><Text>{children}</Text></View>
     </VoiceRecorderProvider>
   );
 };

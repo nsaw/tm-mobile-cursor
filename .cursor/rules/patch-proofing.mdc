@@ -14,8 +14,8 @@ alwaysApply: true
   - Summary is confirmed and visible on disk
   - Agent reports successful runtime behavior
 
-- GPT must never close a patch cycle without running all:
-  - Lint, TypeScript, test, performance, runtime, and role checks
+- GPT must never close a patch cycle without running all (NB-runner bounded, absolute paths):
+  - Lint, TypeScript, unit tests, runtime, performance, and role checks
 
 ---
 **Status**: ✅ **ENFORCED - CRITICAL**

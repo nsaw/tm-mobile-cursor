@@ -57,9 +57,9 @@ This folder contains all current task instructions, hybrid blocks, and developer
 
 ### Scripts
 ```{ { { { bash
-npm run build:ios & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { npm run build:android & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { npm run build:all & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+npm run build:ios & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { npm run build:android & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { npm run build:all & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ---
@@ -77,12 +77,12 @@ npm run build:ios & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
 
 To run any task instruction:
 ```{ { { { bash
-cursor run tasks/1_deeplink-siri.cursor-instruction.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cursor run tasks/1_deeplink-siri.cursor-instruction.json & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 To run any hybrid block:
 ```{ { { { bash
-cursor run tasks/hybrid_blocks/auto-roleview-enforcement.hybrid-block-v1.json & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+cursor run tasks/hybrid_blocks/auto-roleview-enforcement.hybrid-block-v1.json & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ---

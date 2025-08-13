@@ -47,11 +47,18 @@ export const VoiceRecorderProvider: React.FC<VoiceRecorderProviderProps> = ({ ch
   return (
     <VoiceRecorderContext.Provider value={{ showVoiceRecorder, hideVoiceRecorder }}>
       {children}
-      <VoiceRecorder
-        isVisible={isVisible}
-        onClose={hideVoiceRecorder}
-        onComplete={handleVoiceComplete}
-      />
+      {isVisible && (
+        <VoiceRecorder
+          onRecordingComplete={(recording) => {
+            console.log('Recording completed:', recording);
+            hideVoiceRecorder();
+          }}
+          onTranscriptionComplete={(transcription) => {
+            console.log('Transcription completed:', transcription);
+            handleVoiceComplete(undefined, transcription.text, transcription.title);
+          }}
+        />
+      )}
     </VoiceRecorderContext.Provider>
   );
 }; 

@@ -13,13 +13,13 @@ alwaysApply: true
 
 ## BRUAN-MAIN PROJECT Path Enforcement
 
-**CRITICAL**: BRAUN will wipe all memory of past references to any summary/ folders and will ONLY use ABSOLUTE PATHS starting from `/Users/sawyer/gitSync/*` moving forward.
+**CRITICAL**: All rules and patches must use ABSOLUTE PATHS starting from `/Users/sawyer/gitSync/*`.
 
 ### Requirements:
 - **ABSOLUTE PATHS ONLY**: All paths must start with `/Users/sawyer/gitSync/`
 - **NO TILDE (~)**: Never use tilde notation for home directory
 - **NO EXCEPTIONS**: This applies to all file operations, references, and paths
-- **MEMORY WIPE**: Past references to summary/ folders are to be ignored
+- Prefer canonical cache roots under `.cursor-cache/MAIN` and `.cursor-cache/CYOPS` for summaries/patches
 
 ### Path Structure:
 ```

@@ -1,0 +1,203 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { usePremium } from '../hooks/usePremium';
+
+interface PremiumFeatureWrapperProps {
+  featureId: string;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+  showUpgradePrompt?: boolean;
+}
+
+export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
+  featureId,
+  children,
+  fallback,
+  showUpgradePrompt = true,
+}) => {
+  const { hasFeature, isPremium } = usePremium();
+  const [showUpgradeModal, setShowUpgradeModal] = React.useState(false);
+
+  if (hasFeature(featureId)) {
+    return <>{children}</>;
+  }
+
+  if (fallback) {
+    return <>{fallback}</>;
+  }
+
+  return (
+    <>
+      <TouchableOpacity
+        style={styles.premiumOverlay}
+        onPress={() => showUpgradePrompt && setShowUpgradeModal(true)}
+        disabled={!showUpgradePrompt}
+      >
+        <View style={styles.premiumContent}>
+          <Ionicons name='diamond' size={24} color='#007AFF' />
+          <Text style={styles.premiumText}>Premium Feature</Text>
+          {showUpgradePrompt && (
+            <Text style={styles.upgradeText}>Tap to upgrade</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+
+      <Modal
+        visible={showUpgradeModal}
+        transparent={true}
+        animationType='slide'
+        onRequestClose={() => setShowUpgradeModal(false)}
+        accessible={false}
+        accessibilityLabel="Modal"
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Ionicons name='diamond' size={32} color='#007AFF' />
+              <Text style={styles.modalTitle}>Upgrade to Premium</Text>
+              <TouchableOpacity
+                onPress={() => setShowUpgradeModal(false)}
+                style={styles.closeButton}
+              >
+                <Ionicons name='close' size={24} color='#666' />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.modalContent}>
+              <Text style={styles.modalDescription}>
+                Unlock this premium feature and many more with a Thoughtmarks Premium subscription.
+              </Text>
+              <View style={styles.featureList}>
+                <View style={styles.featureItem}>
+                  <Ionicons name='checkmark-circle' size={20} color='#34c759' />
+                  <Text style={styles.featureText}>Unlimited AI insights</Text>
+                </View>
+                <View style={styles.featureItem}>
+                  <Ionicons name='checkmark-circle' size={20} color='#34c759' />
+                  <Text style={styles.featureText}>Advanced voice transcription</Text>
+                </View>
+                <View style={styles.featureItem}>
+                  <Ionicons name='checkmark-circle' size={20} color='#34c759' />
+                  <Text style={styles.featureText}>Priority support</Text>
+                </View>
+                <View style={styles.featureItem}>
+                  <Ionicons name='checkmark-circle' size={20} color='#34c759' />
+                  <Text style={styles.featureText}>Unlimited storage</Text>
+                </View>
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={styles.upgradeButton}
+              onPress={() => {
+                setShowUpgradeModal(false);
+                // Navigate to premium screen
+              }}
+            >
+              <Text style={styles.upgradeButtonText}>Upgrade Now</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  premiumOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  premiumContent: {
+    alignItems: 'center',
+    padding: 20,
+  },
+  premiumText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#007AFF',
+    marginTop: 8,
+  },
+  upgradeText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 24,
+    margin: 20,
+    maxWidth: 400,
+    width: '100%',
+  },
+  modalHeader: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#333',
+    marginTop: 12,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    padding: 8,
+  },
+  modalContent: {
+    marginBottom: 24,
+  },
+  modalDescription: {
+    fontSize: 16,
+    color: '#666',
+    lineHeight: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  featureList: {
+    gap: 12,
+  },
+  featureItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  featureText: {
+    fontSize: 14,
+    color: '#333',
+    marginLeft: 8,
+  },
+  upgradeButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    paddingVertical: 16,
+    alignItems: 'center',
+  },
+  upgradeButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
+  },
+});

@@ -8,7 +8,19 @@ import { config } from '../config';
 
 console.log('AI CONTROLLER FILE LOADED');
 
-const openai = new OpenAI({ apiKey: config.openai.apiKey });
+// Initialize OpenAI with fallback for missing API key
+let openai: OpenAI | null = null;
+try {
+  if (config.openai.apiKey) {
+    openai = new OpenAI({ apiKey: config.openai.apiKey });
+    console.log('[aiController] OpenAI initialized successfully');
+  } else {
+    console.log('[aiController] Warning: OPENAI_API_KEY not found, AI features will be disabled');
+  }
+} catch (error) {
+  console.log('[aiController] Error initializing OpenAI:', error);
+  openai = null;
+}
 
 // Type definitions
 interface AuthenticatedRequest extends Request {
@@ -92,6 +104,24 @@ interface ThoughtmarkSuggestionsResponse {
   suggestions: ThoughtmarkSuggestion[];
 }
 
+// Helper function to check if OpenAI is available
+const checkOpenAI = (res: Response, feature: string): boolean => {
+  if (!openai) {
+    console.log(`[aiController] OpenAI not available for ${feature}, returning empty response`);
+    res.status(200).json({ [feature]: [] });
+    return false;
+  }
+  return true;
+};
+
+// Helper function to get OpenAI instance (guaranteed to be non-null after checkOpenAI)
+const getOpenAI = (): OpenAI => {
+  if (!openai) {
+    throw new Error('OpenAI not initialized');
+  }
+  return openai;
+};
+
 export const aiController = {
   async generateInsights(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
@@ -129,7 +159,9 @@ ${thoughtmarkSummaries}`;
 
       console.log('[aiController] Prompt for OpenAI:', prompt);
 
-      const completion = await openai.chat.completions.create({
+      if (!checkOpenAI(res, 'insights')) return;
+
+      const completion = await openai!.chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },
@@ -198,7 +230,10 @@ ${thoughtmarkSummaries}`;
       const thoughtmarkSummaries = userThoughtmarks.map(tm => `Title: ${tm.title}\nContent: ${tm.content}`).join('\n---\n');
       const prompt = `Analyze the following user thoughtmarks and return a JSON object with a 'smartSort' array of 3-5 groups. Each group must have: label (string), description (1-2 sentences, use 'you' language), thoughtmarkIds (array of ids). Respond ONLY with a valid JSON object in this format, with no extra text or markdown:\n{\n  \"smartSort\": [\n    {\n      \"label\": \"Group label\",\n      \"description\": \"Description using 'you' language.\",\n      \"thoughtmarkIds\": [1,2,3]\n    }\n  ]\n}\nUser Thoughtmarks:\n${thoughtmarkSummaries}`;
       console.log('[aiController] Prompt for OpenAI (smartSort):', prompt);
-      const completion = await openai.chat.completions.create({
+      
+            if (!checkOpenAI(res, 'smartSort')) return;
+
+      const completion = await openai!.chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },
@@ -242,7 +277,10 @@ ${thoughtmarkSummaries}`;
       const thoughtmarkSummaries = userThoughtmarks.map(tm => `Title: ${tm.title}\nContent: ${tm.content}`).join('\n---\n');
       const prompt = `Analyze the following user thoughtmarks and return a JSON object with a 'recommendations' array of 3-5 actionable recommendations. Each recommendation must have: title (string), description (1-2 sentences, use 'you' language), relatedThoughtmarks (array of ids). Respond ONLY with a valid JSON object in this format, with no extra text or markdown:\n{\n  \"recommendations\": [\n    {\n      \"title\": \"Recommendation title\",\n      \"description\": \"Description using 'you' language.\",\n      \"relatedThoughtmarks\": [1,2,3]\n    }\n  ]\n}\nUser Thoughtmarks:\n${thoughtmarkSummaries}`;
       console.log('[aiController] Prompt for OpenAI (recommendations):', prompt);
-      const completion = await openai.chat.completions.create({
+      
+            if (!checkOpenAI(res, 'recommendations')) return;
+
+      const completion = await openai!.chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },
@@ -321,7 +359,9 @@ ${formattedThoughtmarks}`;
 
       console.log('[aiController] Prompt for OpenAI (learningResources):', prompt);
 
-      const completion = await openai.chat.completions.create({
+      if (!checkOpenAI(res, 'learningResources')) return;
+
+      const completion = await getOpenAI().chat.completions.create({
         model: "gpt-4o",
         messages: [
           {
@@ -420,7 +460,9 @@ ${formattedThoughtmarks}`;
 
       console.log('[aiController] Prompt for OpenAI (semanticSearch):', prompt);
 
-      const completion = await openai.chat.completions.create({
+      if (!checkOpenAI(res, 'semanticSearch')) return;
+
+      const completion = await getOpenAI().chat.completions.create({
         model: "gpt-4o",
         messages: [
           {
@@ -508,7 +550,9 @@ ${formattedThoughtmarks}`;
 
       console.log('[aiController] Prompt for OpenAI (searchSuggestions):', prompt);
 
-      const completion = await openai.chat.completions.create({
+      if (!checkOpenAI(res, 'searchSuggestions')) return;
+
+      const completion = await getOpenAI().chat.completions.create({
         model: "gpt-4o",
         messages: [
           {
@@ -590,7 +634,9 @@ ${tags && tags.length > 0 ? `Current Tags: ${tags.join(', ')}` : ''}`;
 
       console.log('[aiController] Prompt for OpenAI (thoughtmarkSuggestions):', prompt);
 
-      const completion = await openai.chat.completions.create({
+      if (!checkOpenAI(res, 'thoughtmarkSuggestions')) return;
+
+      const completion = await getOpenAI().chat.completions.create({
         model: "gpt-4o",
         messages: [
           {

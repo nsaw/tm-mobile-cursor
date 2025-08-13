@@ -93,6 +93,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
       animationType="slide"
       presentationStyle="pageSheet"
       onRequestClose={onClose}
+      accessible={false}
+      accessibilityLabel="Modal"
     >
       <View
         style={[
@@ -111,7 +113,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
             },
           ]}
         >
-          <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+          <TouchableOpacity onPress={onClose} style={styles.closeButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
             <Text
               style={[
                 styles.closeText,
@@ -124,7 +126,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
               Skip
             </Text>
           </TouchableOpacity>
-          
+
           <View style={styles.progressContainer}>
             {steps.map((_, index) => (
               <View
@@ -132,15 +134,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                 style={[
                   styles.progressDot,
                   {
-                    backgroundColor:
-                      index <= currentStep ? colors.primary : colors.border,
+                    backgroundColor: index === currentStep ? colors.primary : colors.border,
                   },
                 ]}
               />
             ))}
           </View>
-          
-          <View style={styles.placeholder} />
         </View>
 
         {/* Content */}
@@ -202,6 +201,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                   },
                 ]}
                 onPress={handlePrevious}
+                accessibilityRole="button"
+                accessible={true}
+                accessibilityLabel="Previous"
               >
                 <Text
                   style={[
@@ -228,6 +230,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                 },
               ]}
               onPress={handleNext}
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Next"
             >
               <Text
                 style={[

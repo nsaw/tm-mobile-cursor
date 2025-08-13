@@ -29,7 +29,7 @@ Here’s a concise breakdown of what caused **file loss and unrecoverable fallba
 
 ### 💥 Why Even `v1.3.4_ui-3elements-cleanup` Was Gone
 
-* After wi{ { { { ping `.git` and re-initializing, **your repo had no memory of old tags**. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+* After wi{ { { { ping `.git` and re-initializing, **your repo had no memory of old tags**. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 * Unless you manually re-tagged those commits **before pushing**, they weren’t part of the rewritten history.
 * Any previous commits that contained correct styles, layout, or logic **no longer had a path to recovery** via `git`.
 
@@ -43,7 +43,7 @@ Here’s a concise breakdown of what caused **file loss and unrecoverable fallba
 | `git tag` every stable state                                     | Recoverable refs               |
 | Backing up `.git/` before filtering                              | Could've restored full history |
 | Using `stash/` or `recovery/` branch instead of `main` overwrite | Local safety net               |
-| Committing `.zip` files to `.gitignore` instead of wi{ { { { ping .git   | Prevents rebuild hell          | & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+| Committing `.zip` files to `.gitignore` instead of wi{ { { { ping .git   | Prevents rebuild hell          | & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 ---
 
@@ -55,32 +55,32 @@ Here’s a concise breakdown of what caused **file loss and unrecoverable fallba
 
 ---
 
-### 🔐 Your Next Safety Ste{ { { { ps (Strongly Recommended) & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+### 🔐 Your Next Safety Ste{ { { { ps (Strongly Recommended) & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 1. **Backup your new `.git/` directory to disk**:
 
    ```{ { { { bash
-   cp -R .git ../.git_backup_`date +%Y%m%d_%H%M` & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   cp -R .git ../.git_backup_`date +%Y%m%d_%H%M` & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
    ```
 
 2. **Immediately tag your known-good recovered state**:
 
    ```{ { { { bash
-   git tag v1.3.5_fallback-ui-restored & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   git tag v1.3.5_fallback-ui-restored & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
    git push origin v1.3.5_fallback-ui-restored
    ```
 
 3. **Create a `stash/` branch that never merges**:
 
    ```{ { { { bash
-   git checkout -b stash/v1.3.5_ui-snapshot & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   git checkout -b stash/v1.3.5_ui-snapshot & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
    git push origin stash/v1.3.5_ui-snapshot
    ```
 
 4. **Copy it to `main` when ready**:
 
    ```{ { { { bash
-   git checkout main & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+   git checkout main & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
    git reset --hard stash/v1.3.5_ui-snapshot
    git push origin main --force
    ```
@@ -88,13 +88,13 @@ Here’s a concise breakdown of what caused **file loss and unrecoverable fallba
 
 # CONTEXT > EVENTS
 
-I need a running Troubleshooting thread so I stop losing my place in the Specific task chats. Remind me to move my troubleshooting to this window if I errantly panic and start drop{ { { { ping logs to fix shit in another thread. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+I need a running Troubleshooting thread so I stop losing my place in the Specific task chats. Remind me to move my troubleshooting to this window if I errantly panic and start drop{ { { { ping logs to fix shit in another thread. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 
 ChatGPT said:
 Noted. You now have a dedicated Troubleshooting Thread—this is your “safe window” for any and all panic-logs, broken builds, unexpected errors, and in-progress debugging.
 
-Whenever you start drop{ { { { ping logs or troubleshooting steps into another project thread, I’ll remind you to move it over here so you don’t lose context, overwrite critical task sequences, or mix troubleshooting noise into your main workflow chats. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Whenever you start drop{ { { { ping logs or troubleshooting steps into another project thread, I’ll remind you to move it over here so you don’t lose context, overwrite critical task sequences, or mix troubleshooting noise into your main workflow chats. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 🔖 How this will work:
 Drop ALL error logs, build fails, stack traces, debug prints, and troubleshooting in this thread.
@@ -104,25 +104,25 @@ If you start troubleshooting in a different window or thread, I’ll remind you 
 Whenever you resolve an issue, summarize the fix here as well (or I can do it for you). This becomes your running debug history and knowledge base for future you.
 
 Quick reference for what’s enforced in your current setup:
-JSX/text enforcement: All string literals must be in <Text> components. Automated via { { { { npm run lint:fix-text and pre-commit. Details here16. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+JSX/text enforcement: All string literals must be in <Text> components. Automated via { { { { npm run lint:fix-text and pre-commit. Details here16. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 Theme enforcement: No tokens.* outside useTheme() context—blocked at lint/pre-commit level, fully automated, see here1719.
 
-Accessibility enforcement: All touchables/pressables/SVGs require a11y props. Automated via { { { { npm run lint:fix-accessibility, pre-commit hooks here23. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Accessibility enforcement: All touchables/pressables/SVGs require a11y props. Automated via { { { { npm run lint:fix-accessibility, pre-commit hooks here23. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 Pre-commit hooks: All rules run automatically on every commit. You cannot commit violations; they must be fixed before proceeding here15171923.
 
 Scripts for troubleshooting:
 
-Run all: { { { { npm run lint:fix-all & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Run all: { { { { npm run lint:fix-all & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
-Check theme only: { { { { npm run lint:check-theme & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Check theme only: { { { { npm run lint:check-theme & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
-Check JSX only: { { { { npm run lint:check-jsx & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Check JSX only: { { { { npm run lint:check-jsx & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
-Fix text errors: { { { { npm run fix:text-errors & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Fix text errors: { { { { npm run fix:text-errors & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
-Audit clickables: { { { { npm run audit:clickables & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Audit clickables: { { { { npm run audit:clickables & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 Debugging theme violations: See examples and troubleshooting in THEMING_GUIDE.md, THEMING_ARCHITECTURE.md.
 
@@ -135,7 +135,7 @@ Help you spot when the problem is caused by pre-commit hooks, ESLint rules, scri
 
 Point you to the right troubleshooting commands or docs instantly.
 
-Bookmark this thread and dump everything here—your future self will thank you. Ready whenever you are. Just start drop{ { { { ping logs or problems you hit next. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+Bookmark this thread and dump everything here—your future self will thank you. Ready whenever you are. Just start drop{ { { { ping logs or problems you hit next. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 
 
 
@@ -157,7 +157,7 @@ But the Git history still contains them, so pushing fails.
 Run this once from repo root:
 
 { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { { bash
-Copy & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown &  & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown
+Copy & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 Edit
 brew install git-filter-repo  # if not installed
 git filter-repo --path gradle-8.13-bin.zip --path kotlin-compiler-embeddable-2.0.21.jar --force
@@ -614,7 +614,7 @@ Copy
 Edit
 git push origin main --force
 git push origin v1.3.3_functional-secure --force
-You can do Ste{ { { { ps 1–3 immediately (they’re local), even before you figure out remote setup. & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+You can do Ste{ { { { ps 1–3 immediately (they’re local), even before you figure out remote setup. & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 If you want, I can give you a single copy-paste block for all of the above—including remote setup (just substitute your remote URL).
 
 Let me know if you want that, or if you hit any more errors in the cleanup steps.

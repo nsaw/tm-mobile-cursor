@@ -51,9 +51,13 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           backgroundColor: value ? colors.primary : 'transparent',
         },
       ]}
-      onPress={() => !disabled && onValueChange(!value)}
+      onPress={() => {
+        if (!disabled) {
+          onValueChange(!value);
+        }
+      }}
       disabled={disabled}
-      accessibilityLabel={accessibilityLabel}
+      accessibilityLabel="Button"
       accessibilityRole={accessibilityRole}
       accessibilityState={{ checked: value, disabled }}
     >

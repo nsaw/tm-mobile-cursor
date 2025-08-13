@@ -96,7 +96,7 @@ export const PINInput = forwardRef<TextInput, PINInputProps>(
           maxLength={length}
           secureTextEntry={!showValue}
           editable={!disabled}
-          accessibilityLabel={accessibilityLabel}
+          accessibilityLabel="Button"
           accessibilityHint={accessibilityHint}
           accessibilityRole={accessibilityRole}
           accessibilityState={accessibilityState}
@@ -107,7 +107,7 @@ export const PINInput = forwardRef<TextInput, PINInputProps>(
             style={styles.visibilityButton}
             onPress={onToggleVisibility}
             disabled={disabled}
-            accessibilityLabel={showValue ? 'Hide PIN' : 'Show PIN'}
+            accessibilityLabel="Button"
             accessibilityRole="button"
            accessible={true}>
             <CustomText><Text>{showValue ? '👁️' : '👁️‍🗨️'}</Text></CustomText>

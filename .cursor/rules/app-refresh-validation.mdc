@@ -11,23 +11,17 @@ All patches must include app refresh validation as part of post-mutation hardeni
 
 ## Mandatory App Refresh Pattern
 
-### Standard App Refresh Command
-```zsh
-(
-  kill $(lsof -ti:8081) 2>/dev/null || true
-  cd /Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh
-  npx expo start --ios --clear &
-  PID=$!
-  sleep 15
-  disown $PID
-) >/dev/null 2>&1 &
+### Safe Expo Launch (required)
+```bash
+# Non-blocking, history-safe launcher
+/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/admin/safe-launch-expo.sh || true
 ```
 
-### Alternative Validation Script
-Use the validation script at [scripts/validate-app-boot.sh](mdc:mobile-native-fresh/scripts/validate-app-boot.sh) which includes:
-- Expo server status check
-- Force app refresh via curl POST to /reload
-- Wait for app stabilization
+### Health Probe (NB-runner)
+```bash
+# Bounded, non-blocking probe of Metro status
+node scripts/nb.cjs --ttl 18s --label expo-health --log validations/logs/expo-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8081/status >/dev/null'
+```
 
 ## Post-Mutation Validation Requirements
 
@@ -37,22 +31,22 @@ Use the validation script at [scripts/validate-app-boot.sh](mdc:mobile-native-fr
 - Unit tests (`npm test -- --watchAll=false`)
 
 ### 2. Runtime Validation (Post-Refresh)
-- **MANDATORY**: App refresh using the standard pattern above
-- Verify Expo server responds on localhost:8081
+- Launch via safe launcher (above)
+- Verify Metro responds on localhost:8081 (NB-runner health probe)
 - Check for runtime errors in console
 - Confirm app boots without fatal errors
 - Validate component rendering
 
 ### 3. Validation Script Integration
 ```bash
-# In postMutationBuild section
+# In postMutationBuild section (examples)
 "postMutationBuild": {
   "shell": [
     "npx tsc --noEmit --skipLibCheck || exit 101",
-    "eslint . --ext .ts,.tsx --max-warnings=0 || exit 102", 
-    "yarn test:unit --watchAll=false || exit 103",
-    "bash scripts/validate-app-boot.sh || exit 104",
-    "echo '🚀 Forcing Expo refresh...' && curl -X POST http://localhost:8081/reload || echo 'Expo reload hook skipped'"
+    "npx eslint . --ext .ts,.tsx --max-warnings=0 || exit 102",
+    "npm run test:unit -- --watchAll=false || exit 103",
+    "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/admin/safe-launch-expo.sh || true",
+    "node scripts/nb.cjs --ttl 18s --label expo-health --log validations/logs/expo-health.log --status validations/status -- bash -lc 'curl -sSf http://localhost:8081/status >/dev/null'"
   ]
 }
 ```
@@ -60,9 +54,9 @@ Use the validation script at [scripts/validate-app-boot.sh](mdc:mobile-native-fr
 ## Why App Refresh is Critical
 
 ### Static vs Runtime Errors
-- **Static Analysis**: Catches TypeScript/ESLint errors but misses runtime issues
-- **Runtime Validation**: Catches bundler errors, component conflicts, import issues
-- **App Refresh**: Forces full recompilation and exposes new errors
+- Static analysis misses bundler/import/runtime composition issues
+- Runtime validation catches bundler errors, import/export mismatches, missing deps, mount errors
+- Safe refresh forces a full bundle and exposes new errors
 
 ### Common Runtime Issues Detected
 - Duplicate component declarations (e.g., Text conflicts)
@@ -71,59 +65,31 @@ Use the validation script at [scripts/validate-app-boot.sh](mdc:mobile-native-fr
 - Component mounting errors
 - Hot reload failures
 
-## Implementation Examples
-
-### Patch Validation Pattern
-```json
-{
-  "validate": {
-    "shell": [
-      "test -f /Users/sawyer/gitSync/tm-mobile-cursor/summaries/_heartbeat/.last-md-write.log || exit 105",
-      "grep -q 'PASS' /Users/sawyer/gitSync/.cursor-cache/MAIN/summaries/summary-*.md || exit 106"
-    ]
-  }
-}
-```
-
-### Summary Requirements
+## Summary Requirements
 All patch summaries must include:
-- App refresh confirmation
+- App refresh confirmation (safe-launcher used)
 - Runtime validation status
 - Expo server response verification
 - Any runtime errors encountered
 
 ## Enforcement
+- No exceptions: every patch must include app refresh validation
+- Failure handling: if app refresh fails, validation fails
+- Documentation: runtime validation results must be documented in summary
 
-### For All Patches
-- **NO EXCEPTIONS**: Every patch must include app refresh validation
-- **FAILURE HANDLING**: If app refresh fails, patch validation fails
-- **DOCUMENTATION**: Runtime validation results must be documented in summary
-
-### Validation Checklist
+## Validation Checklist
 - [ ] Static validation passes (TypeScript, ESLint, Tests)
-- [ ] App refresh executed successfully
-- [ ] Expo server responds on localhost:8081
+- [ ] Safe launcher executed successfully
+- [ ] Metro responds on localhost:8081
 - [ ] No runtime errors in console
 - [ ] App boots without fatal errors
 - [ ] Summary includes runtime validation results
 
 ## Error Prevention
-
-### Before Marking Patch Complete
-1. **Execute app refresh** using standard pattern
-2. **Wait for stabilization** (15+ seconds)
-3. **Check for errors** in console/logs
-4. **Verify app functionality** 
-5. **Document results** in summary
-
-### If App Refresh Fails
-- **DO NOT** mark patch as complete
-- **Investigate** runtime errors
-- **Fix issues** before proceeding
-- **Re-run validation** until successful
+- Do not use inline background groups or `disown`/`$!`
+- Use NB-runner for bounded health checks
+- Ensure proper error handling and bounded timeouts
+- Verify absolute paths in all commands
 
 ## Compliance
-
-This rule applies to **ALL patches** and **ALL post-mutation validation**. No patch may be marked complete without successful app refresh validation.
-
-**Remember**: Static validation alone is insufficient. Runtime validation through app refresh is mandatory for catching real-world errors that prevent app functionality.
+This rule applies to ALL patches and ALL post-mutation validation. No patch may be marked complete without successful app refresh validation using the safe launcher and NB-runner health probe.

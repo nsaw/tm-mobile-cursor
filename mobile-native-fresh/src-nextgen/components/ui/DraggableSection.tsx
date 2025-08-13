@@ -55,7 +55,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
         ]}
         onPress={handleToggleCollapse}
         disabled={!collapsible}
-      >
+       accessibilityRole="button" accessible={true} accessibilityLabel="Button">
         <View style={styles.headerContent}>
           <Text
             style={[
@@ -116,17 +116,7 @@ export const DraggableSection: React.FC<DraggableSectionProps> = ({
       </TouchableOpacity>
       
       {!isCollapsed && (
-        <View
-          style={[
-            styles.content,
-            {
-              paddingHorizontal: spacing.md,
-              paddingVertical: spacing.sm,
-            },
-          ]}
-        >
-          {children}
-        </View>
+        <View><Text>{children}</Text></View>
       )}
     </View>
   );

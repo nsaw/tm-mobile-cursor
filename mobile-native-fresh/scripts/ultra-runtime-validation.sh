@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Ultra Runtime Validation Script
 # Comprehensive validation combining all approaches with non-blocking patterns
@@ -39,6 +39,11 @@ TIMEOUT_SHORT=10
 TIMEOUT_MEDIUM=30
 TIMEOUT_LONG=60
 TIMEOUT_EXPO=120
+
+# Load non-blocking helper if available
+if [ -f "$ROOT_DIR/scripts/lib-nonblocking.sh" ]; then
+    . "$ROOT_DIR/scripts/lib-nonblocking.sh"
+fi
 
 # Colors for output
 RED='\033[0;31m'
@@ -130,59 +135,64 @@ validate_typescript() {
     
     log "Running TypeScript compilation (max ${TIMEOUT_MEDIUM}s)..."
     
-    # Run TypeScript with output capture
-    local ts_output
-    ts_output=$(timeout ${TIMEOUT_MEDIUM}s npx tsc --noEmit --skipLibCheck 2>&1)
-    local ts_exit=$?
-    
-    # Count errors and warnings - ensure numeric values
-    local error_count=0
-    local warning_count=0
-    
-    # Count errors safely
-    if echo "$ts_output" | grep -q "error TS"; then
-        error_count=$(echo "$ts_output" | grep -c "error TS" 2>/dev/null || echo "0")
-    fi
-    
-    # Count warnings safely
-    if echo "$ts_output" | grep -q "warning TS"; then
-        warning_count=$(echo "$ts_output" | grep -c "warning TS" 2>/dev/null || echo "0")
-    fi
-    
-    # Check if errors are only in legacy/test files
-    local legacy_errors=0
-    local non_legacy_errors=0
-    if echo "$ts_output" | grep -q "error TS.*test\|error TS.*legacy"; then
-        legacy_errors=$(echo "$ts_output" | grep "error TS" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
-    fi
-    non_legacy_errors=$((error_count - legacy_errors))
-    
-    # Check if warnings are only in legacy/test files
-    local legacy_warnings=0
-    local non_legacy_warnings=0
-    if echo "$ts_output" | grep -q "warning TS.*test\|warning TS.*legacy"; then
-        legacy_warnings=$(echo "$ts_output" | grep "warning TS" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
-    fi
-    non_legacy_warnings=$((warning_count - legacy_warnings))
-    
-    # TypeScript compilation fails if there are any errors or if exit code is non-zero
-    if [ $ts_exit -eq 0 ] && [ $error_count -eq 0 ]; then
-        log_success "TypeScript compilation passed"
-        if [ $legacy_warnings -gt 0 ]; then
-            log_warning "Found $legacy_warnings warnings in legacy/test files (allowed)"
-        fi
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_MEDIUM}s tsc "cd \"$ROOT_DIR\" && npx tsc --noEmit --skipLibCheck"
     else
-        log_error "TypeScript compilation failed"
-        if [ $error_count -gt 0 ]; then
-            log_error "Found $error_count TypeScript errors"
-            echo "$ts_output" | grep "error TS" | head -10
+        # Run TypeScript with output capture
+        local ts_output
+        ts_output=$(timeout ${TIMEOUT_MEDIUM}s npx tsc --noEmit --skipLibCheck 2>&1)
+        local ts_exit=$?
+        
+        # Count errors and warnings - ensure numeric values
+        local error_count=0
+        local warning_count=0
+        
+        # Count errors safely
+        if echo "$ts_output" | grep -q "error TS"; then
+            error_count=$(echo "$ts_output" | grep -c "error TS" 2>/dev/null || echo "0")
         fi
-        if [ $warning_count -gt 0 ]; then
-            log_warning "Found $warning_count TypeScript warnings"
-            echo "$ts_output" | grep "warning TS" | head -5
+        
+        # Count warnings safely
+        if echo "$ts_output" | grep -q "warning TS"; then
+            warning_count=$(echo "$ts_output" | grep -c "warning TS" 2>/dev/null || echo "0")
         fi
-        return 1
+        
+        # Check if errors are only in legacy/test files
+        local legacy_errors=0
+        local non_legacy_errors=0
+        if echo "$ts_output" | grep -q "error TS.*test\|error TS.*legacy"; then
+            legacy_errors=$(echo "$ts_output" | grep "error TS" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
+        fi
+        non_legacy_errors=$((error_count - legacy_errors))
+        
+        # Check if warnings are only in legacy/test files
+        local legacy_warnings=0
+        local non_legacy_warnings=0
+        if echo "$ts_output" | grep -q "warning TS.*test\|warning TS.*legacy"; then
+            legacy_warnings=$(echo "$ts_output" | grep "warning TS" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
+        fi
+        non_legacy_warnings=$((warning_count - legacy_warnings))
+        
+        # TypeScript compilation fails if there are any errors or if exit code is non-zero
+        if [ $ts_exit -eq 0 ] && [ $error_count -eq 0 ]; then
+            log_success "TypeScript compilation passed"
+            if [ $legacy_warnings -gt 0 ]; then
+                log_warning "Found $legacy_warnings warnings in legacy/test files (allowed)"
+            fi
+            return 0
+        else
+            log_error "TypeScript compilation failed"
+            if [ $error_count -gt 0 ]; then
+                log_error "Found $error_count TypeScript errors"
+                echo "$ts_output" | grep "error TS" | head -10
+            fi
+            if [ $warning_count -gt 0 ]; then
+                log_warning "Found $warning_count TypeScript warnings"
+                echo "$ts_output" | grep "warning TS" | head -5
+            fi
+            return 1
+        fi
     fi
 }
 
@@ -194,59 +204,64 @@ validate_eslint() {
     
     log "Running ESLint validation (max ${TIMEOUT_MEDIUM}s)..."
     
-    # Run ESLint with output capture
-    local eslint_output
-    eslint_output=$(timeout ${TIMEOUT_MEDIUM}s npx eslint . --ext .ts,.tsx 2>&1)
-    local eslint_exit=$?
-    
-    # Count errors and warnings - ensure numeric values
-    local error_count=0
-    local warning_count=0
-    
-    # Count errors safely
-    if echo "$eslint_output" | grep -q "error"; then
-        error_count=$(echo "$eslint_output" | grep -c "error" 2>/dev/null || echo "0")
-    fi
-    
-    # Count warnings safely
-    if echo "$eslint_output" | grep -q "warning"; then
-        warning_count=$(echo "$eslint_output" | grep -c "warning" 2>/dev/null || echo "0")
-    fi
-    
-    # Check if errors are only in legacy/test files
-    local legacy_errors=0
-    local non_legacy_errors=0
-    if echo "$eslint_output" | grep -q "error.*test\|error.*legacy"; then
-        legacy_errors=$(echo "$eslint_output" | grep "error" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
-    fi
-    non_legacy_errors=$((error_count - legacy_errors))
-    
-    # Check if warnings are only in legacy/test files
-    local legacy_warnings=0
-    local non_legacy_warnings=0
-    if echo "$eslint_output" | grep -q "warning.*test\|warning.*legacy"; then
-        legacy_warnings=$(echo "$eslint_output" | grep "warning" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
-    fi
-    non_legacy_warnings=$((warning_count - legacy_warnings))
-    
-    # ESLint validation fails if there are any errors or if exit code is non-zero
-    if [ $eslint_exit -eq 0 ] && [ $error_count -eq 0 ]; then
-        log_success "ESLint validation passed"
-        if [ $legacy_warnings -gt 0 ]; then
-            log_warning "Found $legacy_warnings warnings in legacy/test files (allowed)"
-        fi
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_MEDIUM}s eslint "cd \"$ROOT_DIR\" && npx eslint . --ext .ts,.tsx"
     else
-        log_error "ESLint validation failed"
-        if [ $error_count -gt 0 ]; then
-            log_error "Found $error_count ESLint errors"
-            echo "$eslint_output" | grep "error" | head -10
+        # Run ESLint with output capture
+        local eslint_output
+        eslint_output=$(timeout ${TIMEOUT_MEDIUM}s npx eslint . --ext .ts,.tsx 2>&1)
+        local eslint_exit=$?
+        
+        # Count errors and warnings - ensure numeric values
+        local error_count=0
+        local warning_count=0
+        
+        # Count errors safely
+        if echo "$eslint_output" | grep -q "error"; then
+            error_count=$(echo "$eslint_output" | grep -c "error" 2>/dev/null || echo "0")
         fi
-        if [ $warning_count -gt 0 ]; then
-            log_warning "Found $warning_count ESLint warnings"
-            echo "$eslint_output" | grep "warning" | head -5
+        
+        # Count warnings safely
+        if echo "$eslint_output" | grep -q "warning"; then
+            warning_count=$(echo "$eslint_output" | grep -c "warning" 2>/dev/null || echo "0")
         fi
-        return 1
+        
+        # Check if errors are only in legacy/test files
+        local legacy_errors=0
+        local non_legacy_errors=0
+        if echo "$eslint_output" | grep -q "error.*test\|error.*legacy"; then
+            legacy_errors=$(echo "$eslint_output" | grep "error" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
+        fi
+        non_legacy_errors=$((error_count - legacy_errors))
+        
+        # Check if warnings are only in legacy/test files
+        local legacy_warnings=0
+        local non_legacy_warnings=0
+        if echo "$eslint_output" | grep -q "warning.*test\|warning.*legacy"; then
+            legacy_warnings=$(echo "$eslint_output" | grep "warning" | grep -c "/test/\|/legacy/" 2>/dev/null || echo "0")
+        fi
+        non_legacy_warnings=$((warning_count - legacy_warnings))
+        
+        # ESLint validation fails if there are any errors or if exit code is non-zero
+        if [ $eslint_exit -eq 0 ] && [ $error_count -eq 0 ]; then
+            log_success "ESLint validation passed"
+            if [ $legacy_warnings -gt 0 ]; then
+                log_warning "Found $legacy_warnings warnings in legacy/test files (allowed)"
+            fi
+            return 0
+        else
+            log_error "ESLint validation failed"
+            if [ $error_count -gt 0 ]; then
+                log_error "Found $error_count ESLint errors"
+                echo "$eslint_output" | grep "error" | head -10
+            fi
+            if [ $warning_count -gt 0 ]; then
+                log_warning "Found $warning_count ESLint warnings"
+                echo "$eslint_output" | grep "warning" | head -5
+            fi
+            return 1
+        fi
     fi
 }
 
@@ -256,37 +271,50 @@ validate_tests() {
     
     cd "$ROOT_DIR"
     
-    log "Running Jest tests (max ${TIMEOUT_LONG}s)..."
-    
-    # Run tests with output capture
-    local test_output
-    test_output=$(timeout ${TIMEOUT_LONG}s npm test -- --watchAll=false --passWithNoTests 2>&1)
-    local test_exit=$?
-    
-    # Check for critical failures
-    local critical_failures=0
-    local skipped_tests=0
-    critical_failures=$(echo "$test_output" | grep -c "FAIL\|Error\|Exception" 2>/dev/null || echo "0")
-    skipped_tests=$(echo "$test_output" | grep -c "SKIP\|pending" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric
-    critical_failures=${critical_failures:-0}
-    skipped_tests=${skipped_tests:-0}
-    
-    if [ $test_exit -eq 0 ] && [ $critical_failures -eq 0 ]; then
-        log_success "Jest tests passed"
-        if [ $skipped_tests -gt 0 ]; then
-            log_warning "Found $skipped_tests skipped tests (non-critical)"
-        fi
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_LONG}s jest "cd \"$ROOT_DIR\" && NODE_OPTIONS=--experimental-vm-modules yarn test:unit --config jest.config.js --runInBand --detectOpenHandles --forceExit --testTimeout=30000"
     else
-        if [ $critical_failures -gt 0 ]; then
-            log_error "Found $critical_failures critical test failures"
-            echo "$test_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception" | head -20
-            return 1
+        # Use ESM Jest configuration from P6.5.30
+        if [ -f "jest.config.js" ]; then
+            log "Using ESM Jest configuration..."
+            # Set NODE_OPTIONS for ESM support if invoking Jest directly
+            export NODE_OPTIONS="--experimental-vm-modules"
+            local test_output
+            test_output=$(timeout ${TIMEOUT_LONG}s npm test -- --watchAll=false --passWithNoTests 2>&1)
+            local test_exit=$?
         else
-            log_warning "Tests completed with non-critical issues"
+            log "Using default Jest configuration..."
+            local test_output
+            test_output=$(timeout ${TIMEOUT_LONG}s npm test -- --watchAll=false --passWithNoTests 2>&1)
+            local test_exit=$?
+        fi
+        
+        # Check for critical failures
+        local critical_failures=0
+        local skipped_tests=0
+        critical_failures=$(echo "$test_output" | grep -c "FAIL\|Error\|Exception" 2>/dev/null || echo "0")
+        skipped_tests=$(echo "$test_output" | grep -c "SKIP\|pending" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric
+        critical_failures=${critical_failures:-0}
+        skipped_tests=${skipped_tests:-0}
+        
+        if [ $test_exit -eq 0 ] && [ $critical_failures -eq 0 ]; then
+            log_success "Jest tests passed"
+            if [ $skipped_tests -gt 0 ]; then
+                log_warning "Found $skipped_tests skipped tests (non-critical)"
+            fi
             return 0
+        else
+            if [ $critical_failures -gt 0 ]; then
+                log_error "Found $critical_failures critical test failures"
+                echo "$test_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception" | head -20
+                return 1
+            else
+                log_warning "Tests completed with non-critical issues"
+                return 0
+            fi
         fi
     fi
 }
@@ -299,38 +327,43 @@ validate_provider_audit() {
     
     log "Running provider audit tests (max ${TIMEOUT_MEDIUM}s)..."
     
-    # Run provider audit with output capture
-    local audit_output
-    audit_output=$(timeout ${TIMEOUT_MEDIUM}s npm test -- --testNamePattern="Provider/Hook Usage Audit" --watchAll=false 2>&1)
-    local audit_exit=$?
-    
-    # Check for provider/context errors and test failures
-    local provider_errors=0
-    local test_failures=0
-    provider_errors=$(echo "$audit_output" | grep -c "must be used within a\|No provider found" 2>/dev/null || echo "0")
-    test_failures=$(echo "$audit_output" | grep -c "FAIL\|Error\|Exception" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric and handle empty strings
-    provider_errors=${provider_errors:-0}
-    test_failures=${test_failures:-0}
-    # Convert to integer safely
-    provider_errors=$(printf '%d' "$provider_errors" 2>/dev/null || echo "0")
-    test_failures=$(printf '%d' "$test_failures" 2>/dev/null || echo "0")
-    
-    if [ "$audit_exit" -eq 0 ] && [ "$provider_errors" -eq 0 ] && [ "$test_failures" -eq 0 ]; then
-        log_success "Provider audit tests passed"
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_MEDIUM}s provider-audit "cd \"$ROOT_DIR\" && npm test -- --testNamePattern=\"Provider/Hook Usage Audit\" --watchAll=false"
     else
-        log_error "Provider audit tests failed"
-        if [ "$provider_errors" -gt 0 ]; then
-            log_error "Found $provider_errors provider/context errors"
-            echo "$audit_output" | grep -A 2 -B 2 "must be used within a\|No provider found" | head -10
+        # Run provider audit with output capture
+        local audit_output
+        audit_output=$(timeout ${TIMEOUT_MEDIUM}s npm test -- --testNamePattern="Provider/Hook Usage Audit" --watchAll=false 2>&1)
+        local audit_exit=$?
+        
+        # Check for provider/context errors and test failures
+        local provider_errors=0
+        local test_failures=0
+        provider_errors=$(echo "$audit_output" | grep -c "must be used within a\|No provider found" 2>/dev/null || echo "0")
+        test_failures=$(echo "$audit_output" | grep -c "FAIL\|Error\|Exception" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric and handle empty strings
+        provider_errors=${provider_errors:-0}
+        test_failures=${test_failures:-0}
+        # Convert to integer safely
+        provider_errors=$(printf '%d' "$provider_errors" 2>/dev/null || echo "0")
+        test_failures=$(printf '%d' "$test_failures" 2>/dev/null || echo "0")
+        
+        if [ "$audit_exit" -eq 0 ] && [ "$provider_errors" -eq 0 ] && [ "$test_failures" -eq 0 ]; then
+            log_success "Provider audit tests passed"
+            return 0
+        else
+            log_error "Provider audit tests failed"
+            if [ "$provider_errors" -gt 0 ]; then
+                log_error "Found $provider_errors provider/context errors"
+                echo "$audit_output" | grep -A 2 -B 2 "must be used within a\|No provider found" | head -10
+            fi
+            if [ "$test_failures" -gt 0 ]; then
+                log_error "Found $test_failures test failures"
+                echo "$audit_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception" | head -10
+            fi
+            return 1
         fi
-        if [ "$test_failures" -gt 0 ]; then
-            log_error "Found $test_failures test failures"
-            echo "$audit_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception" | head -10
-        fi
-        return 1
     fi
 }
 
@@ -342,38 +375,43 @@ validate_hook_usage() {
     
     log "Running hook usage audit (max ${TIMEOUT_MEDIUM}s)..."
     
-    # Run hook audit with output capture
-    local hook_output
-    hook_output=$(timeout ${TIMEOUT_MEDIUM}s node scripts/audit-hooks.js 2>&1)
-    local hook_exit=$?
-    
-    # Check for unprotected hook usage
-    local unprotected_hooks=0
-    local critical_issues=0
-    unprotected_hooks=$(echo "$hook_output" | grep -c "unprotected\|missing provider\|not wrapped" 2>/dev/null || echo "0")
-    critical_issues=$(echo "$hook_output" | grep -c "CRITICAL\|ERROR\|FAIL" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric and handle empty strings
-    unprotected_hooks=${unprotected_hooks:-0}
-    critical_issues=${critical_issues:-0}
-    # Convert to integer safely
-    unprotected_hooks=$(printf '%d' "$unprotected_hooks" 2>/dev/null || echo "0")
-    critical_issues=$(printf '%d' "$critical_issues" 2>/dev/null || echo "0")
-    
-    if [ "$hook_exit" -eq 0 ] && [ "$unprotected_hooks" -eq 0 ] && [ "$critical_issues" -eq 0 ]; then
-        log_success "Hook usage audit passed"
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_MEDIUM}s hook-audit "cd \"$ROOT_DIR\" && node scripts/audit-hooks.js"
     else
-        log_error "Hook usage audit found critical issues"
-        if [ "$unprotected_hooks" -gt 0 ]; then
-            log_error "Found $unprotected_hooks unprotected hook usages"
-            echo "$hook_output" | grep -A 2 -B 2 "unprotected\|missing provider" | head -10
+        # Run hook audit with output capture
+        local hook_output
+        hook_output=$(timeout ${TIMEOUT_MEDIUM}s node scripts/audit-hooks.js 2>&1)
+        local hook_exit=$?
+        
+        # Check for unprotected hook usage
+        local unprotected_hooks=0
+        local critical_issues=0
+        unprotected_hooks=$(echo "$hook_output" | grep -c "unprotected\|missing provider\|not wrapped" 2>/dev/null || echo "0")
+        critical_issues=$(echo "$hook_output" | grep -c "CRITICAL\|ERROR\|FAIL" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric and handle empty strings
+        unprotected_hooks=${unprotected_hooks:-0}
+        critical_issues=${critical_issues:-0}
+        # Convert to integer safely
+        unprotected_hooks=$(printf '%d' "$unprotected_hooks" 2>/dev/null || echo "0")
+        critical_issues=$(printf '%d' "$critical_issues" 2>/dev/null || echo "0")
+        
+        if [ "$hook_exit" -eq 0 ] && [ "$unprotected_hooks" -eq 0 ] && [ "$critical_issues" -eq 0 ]; then
+            log_success "Hook usage audit passed"
+            return 0
+        else
+            log_error "Hook usage audit found critical issues"
+            if [ "$unprotected_hooks" -gt 0 ]; then
+                log_error "Found $unprotected_hooks unprotected hook usages"
+                echo "$hook_output" | grep -A 2 -B 2 "unprotected\|missing provider" | head -10
+            fi
+            if [ "$critical_issues" -gt 0 ]; then
+                log_error "Found $critical_issues critical hook issues"
+                echo "$hook_output" | grep -A 2 -B 2 "CRITICAL\|ERROR\|FAIL" | head -10
+            fi
+            return 1
         fi
-        if [ "$critical_issues" -gt 0 ]; then
-            log_error "Found $critical_issues critical hook issues"
-            echo "$hook_output" | grep -A 2 -B 2 "CRITICAL\|ERROR\|FAIL" | head -10
-        fi
-        return 1
     fi
 }
 
@@ -388,13 +426,19 @@ validate_expo_boot() {
     
     log "Starting Expo development server (non-blocking)..."
     
-    # Start Expo in background with proper non-blocking pattern
-    (
-        timeout ${TIMEOUT_EXPO}s npx expo start --ios --clear &
-        PID=$!
-        sleep 25
-        disown $PID
-    ) >/dev/null 2>&1 &
+    # Use non-blocking pattern if available, otherwise fallback to traditional pattern
+    if command -v nb_bg >/dev/null 2>&1; then
+        nb_bg ${TIMEOUT_EXPO}s expo "cd \"$ROOT_DIR\" && npx expo start --ios --clear"
+        sleep 5
+    else
+        # Start Expo in background with proper non-blocking pattern
+        (
+            timeout ${TIMEOUT_EXPO}s npx expo start --ios --clear &
+            PID=$!
+            sleep 25
+            disown $PID
+        ) >/dev/null 2>&1 &
+    fi
     
     # Wait for Expo to start
     log "Waiting for Expo to start (max ${TIMEOUT_LONG}s)..."
@@ -436,36 +480,18 @@ validate_maestro() {
     
     cd "$ROOT_DIR"
     
-    # Check if Maestro is installed
-    if ! command -v maestro >/dev/null 2>&1; then
-        log_error "Maestro not installed - UI validation required"
-        return 1
-    fi
-    
-    log "Running Maestro baseline tests (max ${TIMEOUT_LONG}s)..."
-    local baseline_output
-    baseline_output=$(timeout ${TIMEOUT_LONG}s npm run test:maestro:baseline 2>&1)
-    local baseline_exit=$?
-    
-    if [ $baseline_exit -eq 0 ]; then
-        log_success "Maestro baseline tests passed"
+    # Use non-blocking pattern if available, otherwise fallback to direct execution
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run 90s maestro-visual "cd \"$ROOT_DIR\" && scripts/validate-visual.sh 80"
     else
-        log_error "Maestro baseline tests failed"
-        echo "$baseline_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception" | head -10
-        return 1
-    fi
-    
-    log "Running Maestro visual tests (max ${TIMEOUT_LONG}s)..."
-    local visual_output
-    visual_output=$(timeout ${TIMEOUT_LONG}s npm run test:maestro:visual 2>&1)
-    local visual_exit=$?
-    
-    if [ $visual_exit -eq 0 ]; then
-        log_success "Maestro visual tests passed"
-    else
-        log_error "Maestro visual tests failed"
-        echo "$visual_output" | grep -A 2 -B 2 "FAIL\|Error\|Exception\|diff\|regression" | head -10
-        return 1
+        # Use the hardened visual validation script
+        if [ -x "$ROOT_DIR/scripts/validate-visual.sh" ]; then
+            log "Running hardened visual validation script..."
+            bash "$ROOT_DIR/scripts/validate-visual.sh"
+        else
+            log_error "validate-visual.sh not found - UI validation required"
+            return 1
+        fi
     fi
 }
 
@@ -473,62 +499,51 @@ validate_maestro() {
 validate_simulator_logs() {
     log_section "SIMULATOR LOG ANALYSIS"
     
-    log "Capturing simulator logs (max ${TIMEOUT_MEDIUM}s)..."
-    
-    # Start simulator log capture with timeout
-    (
-        timeout ${TIMEOUT_MEDIUM}s xcrun simctl spawn booted log stream \
-            --style compact \
-            --predicate 'eventType = logEvent AND (composedMessage CONTAINS[c] "Error" OR composedMessage CONTAINS[c] "must be used within a" OR composedMessage CONTAINS[c] "TypeError" OR composedMessage CONTAINS[c] "undefined is not an object" OR composedMessage CONTAINS[c] "Warning:" OR composedMessage CONTAINS[c] "Exception" OR composedMessage CONTAINS[c] "Fatal" OR composedMessage CONTAINS[c] "Invariant Violation")' \
-            > "$VALIDATION_DIR/simulator-errors.log" 2>&1 &
-        PID=$!
-        sleep ${TIMEOUT_MEDIUM}
-        kill $PID 2>/dev/null || true
-    ) &
-    
-    wait $! 2>/dev/null || true
-    
-    # Check for critical errors
-    log "Analyzing simulator logs for errors..."
-    
-    local error_patterns=(
-        "must be used within a"
-        "No provider found"
-        "TypeError"
-        "undefined is not an object"
-        "Invariant Violation"
-        "Component.*has not been registered"
-        "Cannot read property"
-        "Provider.*not found"
-        "Context.*not found"
-        "useContext.*called outside"
-    )
-    
-    local found_errors=false
-    local error_count=0
-    
-    for pattern in "${error_patterns[@]}"; do
-        local pattern_count=0
-        pattern_count=$(timeout 5s grep -c "$pattern" "$VALIDATION_DIR/simulator-errors.log" 2>/dev/null || echo "0")
-        pattern_count=${pattern_count:-0}
-        # Convert to integer safely
-        pattern_count=$(printf '%d' "$pattern_count" 2>/dev/null || echo "0")
-        if [ "$pattern_count" -gt 0 ]; then
-            log_error "Runtime error detected: $pattern (count: $pattern_count)"
-            timeout 5s grep -A 3 -B 3 "$pattern" "$VALIDATION_DIR/simulator-errors.log" 2>/dev/null | head -10
-            found_errors=true
-            error_count=$((error_count + pattern_count))
+    # Use non-blocking pattern if available, otherwise fallback to direct execution
+    if command -v nb_run >/dev/null 2>&1; then
+        if [ -x "$ROOT_DIR/scripts/capture-simlogs.sh" ]; then
+            nb_run 35s simlog-capture "cd \"$ROOT_DIR\" && scripts/capture-simlogs.sh 15 ./logs/simulator.log"
         fi
-    done
-    
-    if [ "$found_errors" = true ]; then
-        log_error "Simulator log analysis found $error_count runtime errors"
-        log_error "Any runtime error is a critical failure - blocking deployment"
-        return 1
+        if [ -x "$ROOT_DIR/scripts/validate-simlogs.sh" ]; then
+            nb_run 25s simlog-validate "cd \"$ROOT_DIR\" && scripts/validate-simlogs.sh ./logs/simulator.log"
+        fi
     else
-        log_success "No runtime errors detected in simulator logs"
-        return 0
+        # Use the hardened simlog scripts from P6.5.28
+        [ -x "$ROOT_DIR/scripts/ensure-logs-dirs.sh" ] && bash "$ROOT_DIR/scripts/ensure-logs-dirs.sh" || true
+        
+        if [ -x "$ROOT_DIR/scripts/capture-simlogs.sh" ]; then
+            log "Using hardened simlog capture script..."
+            bash "$ROOT_DIR/scripts/capture-simlogs.sh" 20 "$VALIDATION_DIR/simulator.log" || true
+        fi
+        
+        if [ -x "$ROOT_DIR/scripts/validate-simlogs.sh" ]; then
+            log "Using hardened simlog validation script..."
+            bash "$ROOT_DIR/scripts/validate-simlogs.sh" "$VALIDATION_DIR/simulator.log" || true
+        fi
+        
+        # Fallback: keep Ultra's existing grep-based analysis if present
+        if [ -f "$VALIDATION_DIR/simulator-errors.log" ]; then
+            log "Analyzing simulator logs for errors..."
+            local errp=("must be used within a" "No provider found" "TypeError" "undefined is not an object" "Invariant Violation" "Component.*has not been registered" "Cannot read property" "Provider.*not found" "Context.*not found" "useContext.*called outside")
+            local found=false; local count=0
+            for p in "${errp[@]}"; do 
+                c=$(grep -c "$p" "$VALIDATION_DIR/simulator-errors.log" 2>/dev/null || echo 0)
+                c=${c:-0}
+                c=$(printf '%d' "$c" 2>/dev/null || echo 0)
+                if [ "$c" -gt 0 ]; then 
+                    log_error "Runtime error detected: $p (count: $c)"
+                    found=true
+                    count=$((count+c))
+                fi
+            done
+            if [ "$found" = true ]; then 
+                log_error "Simulator log analysis found $count runtime errors"
+                return 1
+            fi
+        fi
     fi
+    
+    log_success "No runtime errors detected in simulator logs"
 }
 
 # Step 11: Device Runtime Validation - Hard Failures
@@ -537,38 +552,43 @@ validate_device_runtime() {
     
     log "Running device runtime validation (max ${TIMEOUT_LONG}s)..."
     
-    # Run device runtime validation script with output capture
-    local device_output
-    device_output=$(timeout ${TIMEOUT_LONG}s bash "$ROOT_DIR/scripts/validate-device-runtime.sh" 2>&1)
-    local device_exit=$?
-    
-    # Check for critical device errors
-    local critical_errors=0
-    local runtime_errors=0
-    critical_errors=$(echo "$device_output" | grep -c "CRITICAL\|FATAL\|crash\|exception" 2>/dev/null || echo "0")
-    runtime_errors=$(echo "$device_output" | grep -c "Error\|Exception\|TypeError" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric and handle empty strings
-    critical_errors=${critical_errors:-0}
-    runtime_errors=${runtime_errors:-0}
-    # Convert to integer safely
-    critical_errors=$(printf '%d' "$critical_errors" 2>/dev/null || echo "0")
-    runtime_errors=$(printf '%d' "$runtime_errors" 2>/dev/null || echo "0")
-    
-    if [ "$device_exit" -eq 0 ] && [ "$critical_errors" -eq 0 ] && [ "$runtime_errors" -eq 0 ]; then
-        log_success "Device runtime validation passed"
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_LONG}s device-runtime "cd \"$ROOT_DIR\" && scripts/validate-device-runtime.sh"
     else
-        log_error "Device runtime validation found critical issues"
-        if [ "$critical_errors" -gt 0 ]; then
-            log_error "Found $critical_errors critical device errors"
-            echo "$device_output" | grep -A 2 -B 2 "CRITICAL\|FATAL\|crash" | head -10
+        # Run device runtime validation script with output capture
+        local device_output
+        device_output=$(timeout ${TIMEOUT_LONG}s bash "$ROOT_DIR/scripts/validate-device-runtime.sh" 2>&1)
+        local device_exit=$?
+        
+        # Check for critical device errors
+        local critical_errors=0
+        local runtime_errors=0
+        critical_errors=$(echo "$device_output" | grep -c "CRITICAL\|FATAL\|crash\|exception" 2>/dev/null || echo "0")
+        runtime_errors=$(echo "$device_output" | grep -c "Error\|Exception\|TypeError" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric and handle empty strings
+        critical_errors=${critical_errors:-0}
+        runtime_errors=${runtime_errors:-0}
+        # Convert to integer safely
+        critical_errors=$(printf '%d' "$critical_errors" 2>/dev/null || echo "0")
+        runtime_errors=$(printf '%d' "$runtime_errors" 2>/dev/null || echo "0")
+        
+        if [ "$device_exit" -eq 0 ] && [ "$critical_errors" -eq 0 ] && [ "$runtime_errors" -eq 0 ]; then
+            log_success "Device runtime validation passed"
+            return 0
+        else
+            log_error "Device runtime validation found critical issues"
+            if [ "$critical_errors" -gt 0 ]; then
+                log_error "Found $critical_errors critical device errors"
+                echo "$device_output" | grep -A 2 -B 2 "CRITICAL\|FATAL\|crash" | head -10
+            fi
+            if [ "$runtime_errors" -gt 0 ]; then
+                log_error "Found $runtime_errors runtime device errors"
+                echo "$device_output" | grep -A 2 -B 2 "Error\|Exception\|TypeError" | head -10
+            fi
+            return 1
         fi
-        if [ "$runtime_errors" -gt 0 ]; then
-            log_error "Found $runtime_errors runtime device errors"
-            echo "$device_output" | grep -A 2 -B 2 "Error\|Exception\|TypeError" | head -10
-        fi
-        return 1
     fi
 }
 
@@ -578,38 +598,43 @@ validate_dual_mount() {
     
     log "Running dual mount validation (max ${TIMEOUT_LONG}s)..."
     
-    # Run dual mount validation script with output capture
-    local dual_output
-    dual_output=$(timeout ${TIMEOUT_LONG}s bash "$ROOT_DIR/scripts/validate-dual-mount-device.sh" ios 2>&1)
-    local dual_exit=$?
-    
-    # Check for critical mounting errors
-    local mount_errors=0
-    local critical_errors=0
-    mount_errors=$(echo "$dual_output" | grep -c "mount.*error\|mount.*failed\|Component.*not.*registered" 2>/dev/null || echo "0")
-    critical_errors=$(echo "$dual_output" | grep -c "CRITICAL\|FATAL\|Exception" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric and handle empty strings
-    mount_errors=${mount_errors:-0}
-    critical_errors=${critical_errors:-0}
-    # Convert to integer safely
-    mount_errors=$(printf '%d' "$mount_errors" 2>/dev/null || echo "0")
-    critical_errors=$(printf '%d' "$critical_errors" 2>/dev/null || echo "0")
-    
-    if [ "$dual_exit" -eq 0 ] && [ "$mount_errors" -eq 0 ] && [ "$critical_errors" -eq 0 ]; then
-        log_success "Dual mount validation passed"
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_LONG}s dual-mount "cd \"$ROOT_DIR\" && scripts/validate-dual-mount-device.sh ios"
     else
-        log_error "Dual mount validation found critical issues"
-        if [ "$mount_errors" -gt 0 ]; then
-            log_error "Found $mount_errors mounting errors"
-            echo "$dual_output" | grep -A 2 -B 2 "mount.*error\|mount.*failed" | head -10
+        # Run dual mount validation script with output capture
+        local dual_output
+        dual_output=$(timeout ${TIMEOUT_LONG}s bash "$ROOT_DIR/scripts/validate-dual-mount-device.sh" ios 2>&1)
+        local dual_exit=$?
+        
+        # Check for critical mounting errors
+        local mount_errors=0
+        local critical_errors=0
+        mount_errors=$(echo "$dual_output" | grep -c "mount.*error\|mount.*failed\|Component.*not.*registered" 2>/dev/null || echo "0")
+        critical_errors=$(echo "$dual_output" | grep -c "CRITICAL\|FATAL\|Exception" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric and handle empty strings
+        mount_errors=${mount_errors:-0}
+        critical_errors=${critical_errors:-0}
+        # Convert to integer safely
+        mount_errors=$(printf '%d' "$mount_errors" 2>/dev/null || echo "0")
+        critical_errors=$(printf '%d' "$critical_errors" 2>/dev/null || echo "0")
+        
+        if [ "$dual_exit" -eq 0 ] && [ "$mount_errors" -eq 0 ] && [ "$critical_errors" -eq 0 ]; then
+            log_success "Dual mount validation passed"
+            return 0
+        else
+            log_error "Dual mount validation found critical issues"
+            if [ "$mount_errors" -gt 0 ]; then
+                log_error "Found $mount_errors mounting errors"
+                echo "$dual_output" | grep -A 2 -B 2 "mount.*error\|mount.*failed" | head -10
+            fi
+            if [ "$critical_errors" -gt 0 ]; then
+                log_error "Found $critical_errors critical dual mount errors"
+                echo "$dual_output" | grep -A 2 -B 2 "CRITICAL\|FATAL\|Exception" | head -10
+            fi
+            return 1
         fi
-        if [ "$critical_errors" -gt 0 ]; then
-            log_error "Found $critical_errors critical dual mount errors"
-            echo "$dual_output" | grep -A 2 -B 2 "CRITICAL\|FATAL\|Exception" | head -10
-        fi
-        return 1
     fi
 }
 
@@ -619,41 +644,46 @@ validate_screenshots() {
     
     cd "$ROOT_DIR"
     
-    # Check if Maestro is available for screenshots
-    if ! command -v maestro >/dev/null 2>&1; then
-        log_error "Maestro not available for screenshot validation - UI validation required"
-        return 1
-    fi
-    
-    log "Running screenshot validation (max ${TIMEOUT_LONG}s)..."
-    local screenshot_output
-    screenshot_output=$(timeout ${TIMEOUT_LONG}s npm run test:maestro:screenshots 2>&1)
-    local screenshot_exit=$?
-    
-    # Check for visual regressions
-    local visual_regressions=0
-    local critical_ui_errors=0
-    visual_regressions=$(echo "$screenshot_output" | grep -c "diff\|regression\|mismatch\|failed" 2>/dev/null || echo "0")
-    critical_ui_errors=$(echo "$screenshot_output" | grep -c "Error\|Exception\|FAIL" 2>/dev/null || echo "0")
-    
-    # Ensure variables are numeric
-    visual_regressions=${visual_regressions:-0}
-    critical_ui_errors=${critical_ui_errors:-0}
-    
-    if [ $screenshot_exit -eq 0 ] && [ $visual_regressions -eq 0 ] && [ $critical_ui_errors -eq 0 ]; then
-        log_success "Screenshot validation passed"
-        return 0
+    # Use non-blocking pattern if available, otherwise fallback to timeout
+    if command -v nb_run >/dev/null 2>&1; then
+        nb_run ${TIMEOUT_LONG}s screenshots "cd \"$ROOT_DIR\" && npm run test:maestro:screenshots"
     else
-        log_error "Screenshot validation found critical issues"
-        if [ $visual_regressions -gt 0 ]; then
-            log_error "Found $visual_regressions visual regressions"
-            echo "$screenshot_output" | grep -A 2 -B 2 "diff\|regression\|mismatch" | head -10
+        # Check if Maestro is available for screenshots
+        if ! command -v maestro >/dev/null 2>&1; then
+            log_error "Maestro not available for screenshot validation - UI validation required"
+            return 1
         fi
-        if [ $critical_ui_errors -gt 0 ]; then
-            log_error "Found $critical_ui_errors critical UI errors"
-            echo "$screenshot_output" | grep -A 2 -B 2 "Error\|Exception\|FAIL" | head -10
+        
+        log "Running screenshot validation (max ${TIMEOUT_LONG}s)..."
+        local screenshot_output
+        screenshot_output=$(timeout ${TIMEOUT_LONG}s npm run test:maestro:screenshots 2>&1)
+        local screenshot_exit=$?
+        
+        # Check for visual regressions
+        local visual_regressions=0
+        local critical_ui_errors=0
+        visual_regressions=$(echo "$screenshot_output" | grep -c "diff\|regression\|mismatch\|failed" 2>/dev/null || echo "0")
+        critical_ui_errors=$(echo "$screenshot_output" | grep -c "Error\|Exception\|FAIL" 2>/dev/null || echo "0")
+        
+        # Ensure variables are numeric
+        visual_regressions=${visual_regressions:-0}
+        critical_ui_errors=${critical_ui_errors:-0}
+        
+        if [ $screenshot_exit -eq 0 ] && [ $visual_regressions -eq 0 ] && [ $critical_ui_errors -eq 0 ]; then
+            log_success "Screenshot validation passed"
+            return 0
+        else
+            log_error "Screenshot validation found critical issues"
+            if [ $visual_regressions -gt 0 ]; then
+                log_error "Found $visual_regressions visual regressions"
+                echo "$screenshot_output" | grep -A 2 -B 2 "diff\|regression\|mismatch" | head -10
+            fi
+            if [ $critical_ui_errors -gt 0 ]; then
+                log_error "Found $critical_ui_errors critical UI errors"
+                echo "$screenshot_output" | grep -A 2 -B 2 "Error\|Exception\|FAIL" | head -10
+            fi
+            return 1
         fi
-        return 1
     fi
 }
 

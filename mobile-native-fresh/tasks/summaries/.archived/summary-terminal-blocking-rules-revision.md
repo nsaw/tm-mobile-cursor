@@ -13,7 +13,7 @@
 - **File 2**: `docs/cursor-rules/non-blocking-terminal-patterns.mdc` - Comprehensive patterns
 
 ### **✅ Cursor-Compatible Pattern Implementation**
-- **Standard Pattern**: `{ { { { { bash scripts/validate-runtime.sh & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown`
+- **Standard Pattern**: `{ { { { { bash scripts/validate-runtime.sh & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - **Pattern Components**: Subshell wrapping, background execution, output suppression, process disowning
 - **Compliance**: Mandatory for all agent chat terminal commands
 
@@ -23,14 +23,14 @@
 
 ### **Core Non-Blocking Pattern**
 ```{ { { { bash
-{ command & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ command & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ### **Pattern Breakdown**
 1. **Subshell Wrapping**: `{ command & }` - Isolates command execution
 2. **Background Execution**: `&` - Runs command in background  
 3. **Output Suppression**: `>/dev/null 2>&1` - Prevents output blocking
-4. **Process Detachment**: `& disown` - Removes from parent process
+4. **Process Detachment**: `& # replaced by safe-launch-expo
 
 ### **Key Benefits**
 - ✅ **No terminal hang** - Commands run in background
@@ -44,29 +44,29 @@
 
 ### **Script Execution**
 ```{ { { { bash
-{ bash scripts/validate-runtime.sh & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { npm run build & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { npm run test & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ bash scripts/validate-runtime.sh & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { npm run build & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { npm run test & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ### **Development Servers**
 ```{ { { { bash
-{ npx expo start --clear & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { npm start & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { python3 -m server.main & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ npx expo start --clear & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { npm start & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { python3 -m server.main & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ### **Background Services**
 ```{ { { { bash
-{ docker-compose up -d & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { python3 -m api.main & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ { { { { node monitoring.js & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+{ docker-compose up -d & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { python3 -m api.main & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ { { { { node monitoring.js & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ### **Log Monitoring**
 ```{ { { { bash
-{ tail -f logs/app.log & & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
-{ tail -f logs/error.log & } >/dev/null 2>&1 & disown
+{ tail -f logs/app.log & & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
+{ tail -f logs/error.log & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 ```
 
 ---
@@ -76,12 +76,12 @@
 ### **✅ REQUIRED FOR ALL COMMANDS**
 - **Long-running commands**: Always use non-blocking pattern
 - **Script execution**: Wrap all script calls
-- **Background processes**: Use disown pattern
+- **Background processes**: Use # replaced by safe-launch-expo
 - **Logging commands**: Redirect output to prevent blocking
 
 ### **❌ FORBIDDEN PATTERNS**
 - Direct command execution without wrap{ { { { ping
-- Commands that wait for user input & &  & } >/dev/null 2>&1 & disown & } >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown} >/dev/null 2>&1 & disown
+- Commands that wait for user input & &  & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - Commands without output redirection
 - Commands that don't use background execution
 
@@ -98,7 +98,7 @@
 - Verify command uses non-blocking pattern
 - Confirm output redirection is present
 - Check for background execution (`&`)
-- Ensure process disowning (`& disown`)
+- Ensure process disowning (`& # replaced by safe-launch-expo
 
 ### **Post-Execution Validation**
 - Confirm agent chat remains responsive
@@ -128,7 +128,7 @@
 - All agents must follow these patterns immediately
 - No exceptions without explicit user approval
 - Pattern must be used for all script executions
-- Background processes require disown pattern
+- Background processes require # replaced by safe-launch-expo
 
 ### **Validation Gates**
 - Pre-execution pattern validation
@@ -147,7 +147,7 @@
 - ✅ Enforcement requirements
 - ✅ Validation procedures
 
-The new pattern `{ command & } >/dev/null 2>&1 & disown` ensures:
+The new pattern `{ command & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - **No terminal hang**
 - **Logs are still written** 
 - **Agents proceed without blocking Cursor UI or GPT flow**
@@ -157,5 +157,5 @@ All future terminal commands in agent chat must follow these patterns to maintai
 ---
 
 **Status**: ✅ **RULES REVISION COMPLETE - NON-BLOCKING PATTERNS ENFORCED**
-**Pattern**: `{ command & } >/dev/null 2>&1 & disown`
+**Pattern**: `{ command & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 **Compliance**: Mandatory for all agent chat terminal commands 

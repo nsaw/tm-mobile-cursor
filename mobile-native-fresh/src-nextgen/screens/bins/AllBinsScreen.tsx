@@ -151,12 +151,10 @@ export const AllBinsScreen: React.FC = () => {
       
       <View style={styles.content}>
         {/* Sort Controls */}
-        <View style={styles.sortControls}>
-          {renderSortButton('name', 'Name')}
+        <View><Text>{renderSortButton('name', 'Name')}
           {renderSortButton('count', 'Count')}
           {renderSortButton('date', 'Updated')}
-          {renderSortButton('created', 'Created')}
-        </View>
+          {renderSortButton('created', 'Created')}</Text></View>
 
         {/* Bins List */}
         <FlatList

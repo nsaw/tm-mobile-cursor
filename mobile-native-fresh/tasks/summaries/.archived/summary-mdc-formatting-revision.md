@@ -92,7 +92,7 @@ Content with proper markdown formatting
 ## **📋 RULE CONTENT SUMMARY**
 
 ### **Terminal Blocking Prevention**
-- **Pattern**: `{ command & } >/dev/null 2>&1 & disown`
+- **Pattern**: `{ command & } >/dev/null 2>&1 & # replaced by safe-launch-expo
 - **Purpose**: Prevent Cursor UI blocking
 - **Scope**: All terminal commands in agent chat
 

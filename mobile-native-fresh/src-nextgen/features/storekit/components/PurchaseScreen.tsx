@@ -1,0 +1,295 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useStoreKit } from '../hooks/useStoreKit';
+import { ProductCard } from './ProductCard';
+import { StoreKitProduct } from '../types/storekit';
+
+export const PurchaseScreen: React.FC = () => {
+  const {
+    products,
+    activeSubscription,
+    loading,
+    error,
+    purchasing,
+    purchaseProduct,
+    restorePurchases,
+    cancelSubscription,
+  } = useStoreKit();
+
+  const [selectedProduct, setSelectedProduct] = useState<StoreKitProduct | null>(null);
+
+  const handleProductSelect = (product: StoreKitProduct) => {
+    setSelectedProduct(product);
+  };
+
+  const handlePurchase = async () => {
+    if (!selectedProduct) {
+      Alert.alert('Error', 'Please select a product first');
+      return;
+    }
+
+    Alert.alert(
+      'Confirm Purchase',
+      `Are you sure you want to purchase ${selectedProduct.title} for ${selectedProduct.localizedPrice}?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Purchase',
+          style: 'default',
+          onPress: async () => {
+            try {
+              await purchaseProduct(selectedProduct.id);
+              Alert.alert('Success', 'Purchase completed successfully!');
+            } catch (err) {
+              Alert.alert('Error', 'Purchase failed. Please try again.');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handleRestore = async () => {
+    try {
+      await restorePurchases();
+      Alert.alert('Success', 'Purchases restored successfully!');
+    } catch (err) {
+      Alert.alert('Error', 'Failed to restore purchases.');
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    Alert.alert(
+      'Cancel Subscription',
+      'Are you sure you want to cancel your subscription? You will lose access to premium features at the end of your current billing period.',
+      [
+        { text: 'Keep Subscription', style: 'cancel' },
+        {
+          text: 'Cancel Subscription',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await cancelSubscription();
+              Alert.alert('Success', 'Subscription cancelled successfully');
+            } catch (err) {
+              Alert.alert('Error', 'Failed to cancel subscription');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size='large' color='#007AFF' />
+        <Text style={styles.loadingText}>Loading products...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Ionicons name='alert-circle' size={48} color='#FF3B30' />
+        <Text style={styles.errorTitle}>Something went wrong</Text>
+        <Text style={styles.errorMessage}>{error.message}</Text>
+        <TouchableOpacity style={styles.retryButton} onPress={() => globalThis.location.reload()}>
+          <Text style={styles.retryButtonText}>Try Again</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Choose Your Plan</Text>
+        <Text style={styles.subtitle}>Unlock premium features and enhance your experience</Text>
+      </View>
+
+      {activeSubscription && (
+        <View style={styles.currentPlan}>
+          <View style={styles.currentPlanHeader}>
+            <Ionicons name='checkmark-circle' size={24} color='#34C759' />
+            <Text style={styles.currentPlanTitle}>Active Subscription</Text>
+          </View>
+          <Text style={styles.currentPlanText}>
+            You currently have an active subscription.
+          </Text>
+          <TouchableOpacity style={styles.cancelButton} onPress={handleCancelSubscription} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+            <Text style={styles.cancelButtonText}>Manage Subscription</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      <View style={styles.productsContainer}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            isSelected={selectedProduct?.id === product.id}
+            onSelect={handleProductSelect}
+            disabled={!product.isAvailable || purchasing}
+          />
+        ))}
+      </View>
+
+      {selectedProduct && !activeSubscription && (
+        <TouchableOpacity
+          style={[styles.purchaseButton, purchasing && styles.purchaseButtonDisabled]}
+          onPress={handlePurchase}
+          disabled={purchasing}
+         accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          {purchasing ? (
+            <ActivityIndicator size='small' color='#fff' />
+          ) : (
+            <Text style={styles.purchaseButtonText}>
+              Purchase {selectedProduct.localizedPrice}
+            </Text>
+          )}
+        </TouchableOpacity>
+      )}
+
+      <TouchableOpacity style={styles.restoreButton} onPress={handleRestore} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+        <Text style={styles.restoreButtonText}>Restore Purchases</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#666',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    padding: 32,
+  },
+  errorTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#333',
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  errorMessage: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  retryButton: {
+    backgroundColor: '#007AFF',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  header: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#1a1a1a',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+  },
+  currentPlan: {
+    backgroundColor: '#e8f5e8',
+    padding: 16,
+    margin: 20,
+    borderRadius: 12,
+  },
+  currentPlanHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  currentPlanTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#2d5a2d',
+    marginLeft: 8,
+  },
+  currentPlanText: {
+    fontSize: 14,
+    color: '#2d5a2d',
+    marginBottom: 12,
+  },
+  cancelButton: {
+    backgroundColor: '#ff4444',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+    alignSelf: 'flex-start',
+  },
+  cancelButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  productsContainer: {
+    padding: 20,
+  },
+  purchaseButton: {
+    backgroundColor: '#007AFF',
+    margin: 20,
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  purchaseButtonDisabled: {
+    backgroundColor: '#ccc',
+  },
+  purchaseButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  restoreButton: {
+    backgroundColor: 'transparent',
+    padding: 16,
+    alignItems: 'center',
+  },
+  restoreButtonText: {
+    color: '#007AFF',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+});
