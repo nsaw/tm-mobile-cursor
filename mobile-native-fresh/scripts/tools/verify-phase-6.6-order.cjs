@@ -47,13 +47,14 @@ for (const fn of PATCHES){
     ensureValidationDirs: mustHave(sh, "ensure-validation-dirs"),
     ultraBeforeExpo: (()=>{ const iU=sh.findIndex(s=>String(s).includes("ultra-runtime")); const iE=sh.findIndex(s=>String(s).includes("ensure-expo")); return (iU>=0 && iE>=0 && iU<iE); })(),
     expoHealthAfterEnsure: (()=>{ const iE=sh.findIndex(s=>String(s).includes("ensure-expo")); const iH=sh.findIndex(s=>String(s).includes("expo-health")); return (iE>=0 && iH>=0 && iE<iH); })(),
-    routeAssert: mustHave(sh, "route-assert"),
+    routeAssert: isDocs ? "N/A" : mustHave(sh, "route-assert"),
     jestAbsolute: isDocs ? "N/A" : mustHave(sh, "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/test-results"),
     maestroAbsolute: isDocs ? "N/A" : mustHave(sh, "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/test-results/maestro.xml"),
     detoxAbsolute: isDocs ? "N/A" : mustHave(sh, "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/visual"),
   };
 
-  const required = [checks.ensureValidationDirs, checks.ultraBeforeExpo, checks.expoHealthAfterEnsure, checks.routeAssert];
+  const required = [checks.ensureValidationDirs, checks.ultraBeforeExpo, checks.expoHealthAfterEnsure];
+  if (!isDocs) required.push(checks.routeAssert);
   if (STRICT_VISUALS && !isDocs){ required.push(!!checks.jestAbsolute, !!checks.maestroAbsolute, !!checks.detoxAbsolute); }
   const ok = required.every(Boolean);
 

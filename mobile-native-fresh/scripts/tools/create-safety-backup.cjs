@@ -11,14 +11,23 @@ fs.mkdirSync(outDir, { recursive: true });
 const ts = new Date().toISOString().replace(/[:.]/g,'-');
 const outFile = path.join(outDir, `ROLLBACKSAFE_P66_${ts}.tar.gz`);
 
-const includeList = [
-  projectRoot,
-  fs.existsSync(patchesPrimary) ? patchesPrimary : patchesFallback,
-  "/Users/sawyer/gitSync/.cursor-cache/MAIN/validation",
-  "/Users/sawyer/gitSync/.cursor-cache/MAIN/summaries"
-].filter(Boolean);
+// Use BSD tar-compatible invocation: -C to a common root and include relative paths
+const root = "/Users/sawyer/gitSync";
+const includeRel = [
+  "tm-mobile-cursor/mobile-native-fresh",
+  fs.existsSync(patchesPrimary) ? ".cursor-cache/MAIN/patches/phase-6.6/P6.6_GPT-revisions" : ".cursor-cache/MAIN/patches/phase-6.6",
+  ".cursor-cache/MAIN/validation",
+  ".cursor-cache/MAIN/summaries"
+];
 
-const args = ["-czf", outFile, "--exclude=.git", "--exclude=node_modules", "--absolute-names"].concat(includeList);
+const args = [
+  "-czf", outFile,
+  "--exclude=.git",
+  "--exclude=node_modules",
+  "--exclude=_backups",
+  "-C", root
+].concat(includeRel);
+
 const r = spawnSync("tar", args, { stdio: "inherit" });
 if (r.status !== 0) { console.error("tar failed"); process.exit(r.status); }
 
@@ -26,7 +35,8 @@ const manifestPath = path.join(outDir, `ROLLBACKSAFE_P66_${ts}.json`);
 fs.writeFileSync(manifestPath, JSON.stringify({
   generatedAt: new Date().toISOString(),
   archive: outFile,
-  includes: includeList
+  root: root,
+  includesRelative: includeRel
 }, null, 2));
 console.log("backup_created:", outFile);
 
