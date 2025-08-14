@@ -1,5 +1,10 @@
 // @ts-nocheck
 const fs = require('fs'), path = require('path');
+const mm = (pat, str) => {
+  const esc = s => s.replace(/[.+^${}()|[\]\\]/g,'\\$&');
+  let rx = '^' + pat.split('**').map(p => esc(p).replace(/\*/g,'[^/]*')).join('.*') + '$';
+  return new RegExp(rx).test(str);
+};
 const ROOT = '/Users/sawyer/gitSync/tm-mobile-cursor';
 const LOG_DIR = path.join(ROOT, 'mobile-native-fresh', 'validations', 'logs');
 const OUT_DIR = path.join(ROOT, 'mobile-native-fresh', 'validations', 'verify');
@@ -18,6 +23,7 @@ const MODE = (modeArg || envMode || cfg.mode || 'warn').toLowerCase();
 const targets = cfg.targets || [];
 const ignoreDirs = new Set(cfg.ignoreDirs || []);
 const exts = new Set((cfg.extensions || []).map(s => s.toLowerCase()));
+const waives = (cfg.waiveFiles || []).map(String);
 
 const FILE_RE = new RegExp(`\\.(${Array.from(exts).join('|')})$`, 'i');
 const BAD = [
@@ -45,9 +51,12 @@ const walk = (dir) => {
   return out;
 };
 
+const isWaived = (absPath) => waives.some(pat => mm(pat, absPath));
+
 const files = targets.flatMap(walk);
 const violations = [];
 for (const f of files) {
+  if (isWaived(f)) continue;
   let txt; try { txt = fs.readFileSync(f, 'utf8'); } catch { continue; }
   if (BAD.some(re => re.test(txt))) violations.push(f);
 }

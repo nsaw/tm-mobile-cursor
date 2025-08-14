@@ -6,8 +6,14 @@
     "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/src-nextgen/patches",
     "/Users/sawyer/gitSync/tm-mobile-cursor/.cursor/rules"
   ],
-  "ignoreDirs": ["node_modules", ".git", "ios/build", "android/build", "docs", "legacy", "ops"],
-  "extensions": ["json","yaml","yml","mdc","md","cjs","js","sh","zsh","ts","tsx"]
+  "ignoreDirs": ["node_modules", ".git", "ios/build", "android/build", "docs", "legacy", "ops", "scripts/archive"],
+  "extensions": ["mdc","md","cjs","js","sh","zsh","ts","tsx","json","yml","yaml"],
+  "waiveFiles": [
+    "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/scripts/legacy/**",
+    "/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/tasks/legacy/**",
+    "/Users/sawyer/gitSync/tm-mobile-cursor/ops/**"
+  ]
 }
+
 
 

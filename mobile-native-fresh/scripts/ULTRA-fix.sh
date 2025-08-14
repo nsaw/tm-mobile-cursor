@@ -8,6 +8,10 @@ mkdir -p "$LOG_DIR" "$STATUS_DIR"
 
 NB="node scripts/nb.cjs"
 
+# Ensure triage and run focused parser pass first
+$NB --ttl 20s  --label triage-static          --log "$LOG_DIR/triage-static.log"          --status "$STATUS_DIR" -- node scripts/tools/triage-static.cjs
+$NB --ttl 120s --label focused-parser-pass    --log "$LOG_DIR/focused-parser-pass.log"    --status "$STATUS_DIR" -- node scripts/tools/focused-parser-pass.cjs --top 50
+
 DRY=0
 for arg in "$@"; do
   [[ "$arg" == "--dry-run" ]] && DRY=1
@@ -49,5 +53,6 @@ else ESL_PATH=""; fi
 
 echo "ULTRA-fix complete."
 exit 0
+
 
 
