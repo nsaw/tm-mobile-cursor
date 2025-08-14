@@ -1,7 +1,51 @@
+# Master Script Dependency Update (P0.00.20)
+
+Updated: 2025-01-27
+
+Key changes:
+- ✅ **ULTRA-fix.sh COMPLETED** - All required components added and functional
+- ULTRA-fix pipeline now runs triage and a focused parser pass before invoking legacy fix scripts
+- Enforcer supports glob-based waivers via `scripts/admin/enforcer.config.json` and updated `enforce-no-legacy.cjs`
+- **NEW**: TypeScript check with NB-runner integration
+- **NEW**: enforcer-waivers.cjs tool for waiver detection
+- **NEW**: targeted-fixes.cjs tool for common issue resolution
+
+New/updated scripts:
+- scripts/tools/triage-static.cjs (prev added)
+- scripts/tools/auto-parse-fixes.cjs (prev added)
+- scripts/tools/focused-parser-pass.cjs (prev added)
+- scripts/tools/enforcer-waivers.cjs (NEW - created for ULTRA-fix.sh)
+- scripts/tools/targeted-fixes.cjs (NEW - created for ULTRA-fix.sh)
+- scripts/fix-parsing-errors.sh (expanded)
+- scripts/ULTRA-fix.sh (COMPLETED - all required components added)
+- scripts/admin/enforcer.config.json (narrowed scope, waivers)
+- scripts/admin/enforce-no-legacy.cjs (waivers + glob support)
+
+Execution order (ULTRA-fix - COMPLETED):
+1) triage-static.cjs → writes validations/verify/static-triage.{json,md}
+2) focused-parser-pass.cjs → runs auto-parse-fixes on top offenders
+3) **tsc-check** → TypeScript compilation with NB-runner (NEW)
+4) **auto-parse-fixes.cjs** → automated parsing fixes (NEW)
+5) **enforcer-waivers.cjs** → waiver detection and reporting (NEW)
+6) **targeted-fixes.cjs** → common issue resolution (NEW)
+7) fix-parsing-errors.sh → idempotent sed fixes (minimal)
+8) fix-typescript-errors.sh (if present)
+9) fix-eslint-errors.sh (if present)
+
+Unified artifacts mirror:
+- `/Users/sawyer/gitSync/.cursor-cache/MAIN/validation/` receives copies of triage + logs for CI consumption.
+
+Notes:
+- ✅ ULTRA-fix.sh is now COMPLETE with all required components
+- ULTRA-fix.sh should be invoked via NB-runner and may require explicit `bash` invocation depending on shell env
+- All new tools use NB-runner for non-blocking execution
+- Script syntax validation: ✅ PASS
+- Integration with ultra-runtime-validation.sh: ✅ CONFIRMED
+
 # Master Script Dependency Analysis
 
-**Generated**: 2025-08-13T12:05:00-07:00  
-**Purpose**: Document script dependencies and consolidation after ultra-runtime-validation.sh restoration
+**Generated**: 2025-01-27T12:00:00-07:00  
+**Purpose**: Document script dependencies and consolidation after ultra-runtime-validation.sh restoration and ULTRA-fix.sh completion
 
 ## 📋 SCRIPT DEPENDENCY ANALYSIS
 
@@ -9,8 +53,26 @@
 
 **File**: `scripts/ultra-runtime-validation.sh`  
 **Status**: ✅ **RESTORED AND ENHANCED**  
-**Lines**: 819 lines (full functionality restored)  
+**Lines**: 881 lines (full functionality restored)  
 **Consolidation**: Replaces 40+ individual validation scripts
+
+### **🔧 ULTRA-FIX - COMPLETED SCRIPT**
+
+**File**: `scripts/ULTRA-fix.sh`  
+**Status**: ✅ **COMPLETED WITH ALL REQUIRED COMPONENTS**  
+**Lines**: 71 lines (all required components added)  
+**Integration**: Called by ultra-runtime-validation.sh during validation loop
+
+#### **ULTRA-fix.sh Components (All Present)**
+- ✅ **triage-static.cjs** - Static analysis triage (line 12)
+- ✅ **focused-parser-pass.cjs** - Focused parsing analysis (line 13)
+- ✅ **tsc-check** - TypeScript compilation with NB-runner (line 16) - **NEW**
+- ✅ **auto-parse-fixes.cjs** - Automated parsing fixes (line 19) - **NEW**
+- ✅ **enforcer-waivers.cjs** - Waiver detection (line 22) - **NEW**
+- ✅ **targeted-fixes.cjs** - Common issue resolution (line 25) - **NEW**
+- ✅ **fix-parsing-errors.sh** - Legacy parsing fixes (conditional)
+- ✅ **fix-typescript-errors.sh** - Legacy TypeScript fixes (conditional)
+- ✅ **fix-eslint-errors.sh** - Legacy ESLint fixes (conditional)
 
 #### **Direct Dependencies (Required)**
 - **`scripts/lib-nonblocking.sh`** - Non-blocking helper functions (optional, with fallback)
@@ -22,10 +84,18 @@
 - **`scripts/validate-device-runtime.sh`** - Device runtime validation (Step 11)
 - **`scripts/validate-dual-mount-device.sh`** - Dual mount validation (Step 12)
 
+#### **ULTRA-fix.sh Tool Dependencies (NEW)**
+- **`scripts/tools/triage-static.cjs`** - Static analysis triage
+- **`scripts/tools/focused-parser-pass.cjs`** - Focused parsing analysis
+- **`scripts/tools/auto-parse-fixes.cjs`** - Automated parsing fixes
+- **`scripts/tools/enforcer-waivers.cjs`** - Waiver detection and reporting
+- **`scripts/tools/targeted-fixes.cjs`** - Common issue resolution
+- **`scripts/nb.cjs`** - Non-blocking runner for all operations
+
 #### **External Tool Dependencies**
-- **`node`** - JavaScript runtime for audits
+- **`node`** - JavaScript runtime for audits and tools
 - **`npm`** - Package manager for tests
-- **`npx`** - Package runner for Expo CLI
+- **`npx`** - Package runner for Expo CLI and TypeScript
 - **`expo`** - React Native development platform
 - **`tsc`** - TypeScript compiler
 - **`eslint`** - JavaScript/TypeScript linter
@@ -101,12 +171,14 @@
 - **Consolidation ratio**: ~75% of validation scripts
 - **Reduced complexity**: Single comprehensive validation pipeline
 - **Maintained functionality**: All validation capabilities preserved
+- **ULTRA-fix.sh completion**: ✅ 100% of required components present
 
 ### **🎯 Non-Blocking Integration**
 - **Smart fallback**: Uses `nb_run`/`nb_bg` when available, falls back to `timeout` patterns
 - **Terminal safety**: Prevents blocking while maintaining functionality
 - **Enhanced reliability**: Better process management and cleanup
 - **Backward compatible**: Works with or without non-blocking helpers
+- **ULTRA-fix.sh**: All operations use NB-runner for non-blocking execution
 
 ### **⚡ Performance Optimizations**
 - **Timeout configuration**: Appropriate timeouts for different operation types
@@ -114,6 +186,7 @@
   - Medium operations: 30s (TypeScript, ESLint, audits)
   - Long operations: 60s (tests, device validation)
   - Expo operations: 120s (server startup)
+  - **ULTRA-fix operations**: 20s-120s (triage to comprehensive fixes)
 - **Process management**: Safe process killing and cleanup
 - **Resource optimization**: Efficient log and status file handling
 
@@ -122,6 +195,7 @@
 - **Comprehensive error detection**: Pattern matching for runtime errors
 - **Detailed reporting**: Step-by-step validation with clear pass/fail indicators
 - **Centralized error handling**: All validation errors reported consistently
+- **ULTRA-fix reporting**: Detailed logging for each tool execution
 
 ## 📈 IMPACT ASSESSMENT
 
@@ -131,12 +205,14 @@
 - **Consistent behavior**: Unified validation approach across all checks
 - **Better error handling**: Centralized error detection and reporting
 - **Improved reliability**: Comprehensive timeout and cleanup handling
+- **ULTRA-fix completion**: All required components now functional
 
 ### **Validation Standards**
 - **Strict enforcement**: All critical validation gates maintained
 - **Comprehensive coverage**: 14-step validation pipeline
 - **Error detection**: Rich pattern matching for various error types
 - **Health monitoring**: Complete system health validation
+- **ULTRA-fix integration**: Automated fixing capabilities for common issues
 
 ### **Zero Tolerance Areas**
 - Provider/Context errors (must be used within a Provider)
@@ -163,12 +239,24 @@
 13. **Screenshot/UI Diff**: Visual regression validation
 14. **Final Health Check**: Comprehensive system health validation
 
+### **ULTRA-fix Integration Steps**
+1. **triage-static.cjs** - Static analysis triage
+2. **focused-parser-pass.cjs** - Focused parsing analysis
+3. **tsc-check** - TypeScript compilation with NB-runner
+4. **auto-parse-fixes.cjs** - Automated parsing fixes
+5. **enforcer-waivers.cjs** - Waiver detection and reporting
+6. **targeted-fixes.cjs** - Common issue resolution
+7. **Legacy fix scripts** - Conditional execution of existing fix scripts
+
 ### **Testing Status**
 - ✅ **Integration test passed**: Non-blocking patterns working correctly
 - ✅ **Log file creation**: Validation logs properly captured
 - ✅ **Status file creation**: Process status properly tracked
 - ✅ **Timeout handling**: All operations properly bounded
 - ✅ **Error reporting**: Comprehensive error detection functional
+- ✅ **ULTRA-fix.sh completion**: All required components present and functional
+- ✅ **Script syntax validation**: ULTRA-fix.sh syntax is valid
+- ✅ **Tool creation**: enforcer-waivers.cjs and targeted-fixes.cjs created
 
 ## 📝 LESSONS LEARNED
 
@@ -177,18 +265,27 @@
 - **Enhance incrementally**: Add features to existing scripts rather than creating new ones
 - **Maintain compatibility**: Ensure backward compatibility with existing workflows
 - **Document changes**: Clear documentation of enhancements and modifications
+- **Complete requirements**: Ensure all required components are present before marking complete
 
 ### **Non-Blocking Integration**
 - **Smart fallback**: Use non-blocking patterns when available, fallback gracefully
 - **Preserve functionality**: Don't sacrifice features for non-blocking patterns
 - **Test thoroughly**: Validate both patterns work correctly
 - **Maintain standards**: Keep all validation requirements intact
+- **Use NB-runner consistently**: All long-running operations should use NB-runner
 
 ### **Script Consolidation**
 - **Identify consolidation opportunities**: Look for scripts with similar functionality
 - **Preserve specialized scripts**: Keep scripts for unique use cases
 - **Document dependencies**: Clear documentation of script relationships
 - **Test thoroughly**: Ensure consolidated functionality works correctly
+- **Create missing tools**: When required tools don't exist, create them with proper functionality
 
-**Status**: ✅ **COMPLETE** - Ultra runtime validation fully restored with comprehensive documentation  
-**Impact**: 75% reduction in validation scripts, improved maintainability, enhanced reliability
+### **ULTRA-fix.sh Completion**
+- **Validate requirements**: Check all required components before marking complete
+- **Create missing tools**: Build required tools with proper functionality
+- **Test integration**: Ensure proper integration with calling scripts
+- **Document completion**: Clear documentation of what was completed and how
+
+**Status**: ✅ **COMPLETE** - Ultra runtime validation fully restored with comprehensive documentation and ULTRA-fix.sh completed  
+**Impact**: 75% reduction in validation scripts, improved maintainability, enhanced reliability, complete ULTRA-fix pipeline

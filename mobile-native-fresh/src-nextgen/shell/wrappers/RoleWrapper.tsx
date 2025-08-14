@@ -118,7 +118,7 @@ export const RoleWrapper: React.FC<RoleWrapperProps> = ({
       style={getRoleStyle()}
       testID={testID || `role-wrapper-${role}`}
       accessibilityRole="none"
-      accessibilityLabel={`${role} component wrapper`}
+      accessibilityLabel="Component Wrapper Button"
     >
       {children}
       

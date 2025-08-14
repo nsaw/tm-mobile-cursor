@@ -13,10 +13,10 @@ import { useDashboard } from '../hooks/useDashboard';
 import { DashboardSection } from '../components/DashboardSection';
 import { QuickActionsGrid } from '../components/QuickActionsGrid';
 import { QuickAction } from '../types/dashboard';
-import { useAppStore } from '../../../state/store';
+import useAppStore from "../../../state/stores/appStore";
 
 export const DashboardScreen: React.FC = () => {
-  const { user } = useAppStore();
+  const appStore = useAppStore();
   const {
     config,
     stats,
@@ -31,7 +31,7 @@ export const DashboardScreen: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
 
   const handleQuickAction = (action: QuickAction) => {
-    if (action.requiresPremium && !user?.premium) {
+    if (action.requiresPremium) {
       Alert.alert('Premium Feature', 'This feature requires a premium subscription.');
       return;
     }
@@ -46,7 +46,7 @@ export const DashboardScreen: React.FC = () => {
   };
 
   const renderRecentThoughtmarks = () => {
-    const { thoughtmarks } = useAppStore.getState();
+    const { thoughtmarks } = useAppStore();
     const recentThoughtmarks = thoughtmarks.slice(0, 3);
 
     return (
@@ -70,8 +70,8 @@ export const DashboardScreen: React.FC = () => {
   };
 
   const renderTasks = () => {
-    const { tasks } = useAppStore.getState();
-    const pendingTasks = tasks.filter(t => !t.completed).slice(0, 3);
+    const { tasks } = useAppStore();
+    const pendingTasks = tasks.filter(t => !t.isCompleted).slice(0, 3);
 
     return (
       <View style={styles.tasksContainer}>
@@ -155,11 +155,23 @@ export const DashboardScreen: React.FC = () => {
           switch (section.type) {
             case 'recent':
               return (
-                <DashboardSection><Text>{renderRecentThoughtmarks()}</Text></DashboardSection>
+                <DashboardSection
+                  key={section.id}
+                  section={section}
+                  onToggleVisibility={toggleSectionVisibility}
+                >
+                  {renderRecentThoughtmarks()}
+                </DashboardSection>
               );
             case 'tasks':
               return (
-                <DashboardSection><Text>{renderTasks()}</Text></DashboardSection>
+                <DashboardSection
+                  key={section.id}
+                  section={section}
+                  onToggleVisibility={toggleSectionVisibility}
+                >
+                  {renderTasks()}
+                </DashboardSection>
               );
             case 'quick-actions':
               return (
@@ -177,7 +189,13 @@ export const DashboardScreen: React.FC = () => {
               );
             case 'stats':
               return (
-                <DashboardSection><Text>{renderStats()}</Text></DashboardSection>
+                <DashboardSection
+                  key={section.id}
+                  section={section}
+                  onToggleVisibility={toggleSectionVisibility}
+                >
+                  {renderStats()}
+                </DashboardSection>
               );
             default:
               return null;

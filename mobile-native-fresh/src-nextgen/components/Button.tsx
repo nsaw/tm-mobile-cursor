@@ -28,7 +28,7 @@ export interface ButtonProps {
  * assignment, providing proper accessibility and role-based styling.
  * 
  * Usage:
- * <Button title="Press Me" onPress={() => {}} />
+ * <Button title="Press Me" onPress={() =>> {}} />
  */
 export const Button: React.FC<ButtonProps> = ({
   title,

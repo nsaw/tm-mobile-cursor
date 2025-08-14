@@ -1,0 +1,943 @@
+{
+  "ts": [
+    {
+      "file": "/components/BottomNav.tsx",
+      "line": 50,
+      "col": 25,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 111,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 161,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 233,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/home/components/QuickActionsGrid.tsx",
+      "line": 21,
+      "col": 21,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 26,
+      "col": 21,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 28,
+      "col": 16,
+      "code": "TS1005",
+      "msg": "',' expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 28,
+      "col": 58,
+      "code": "TS1005",
+      "msg": "',' expected."
+    },
+    {
+      "file": "/features/premium/components/PremiumFeatureWrapper.tsx",
+      "line": 56,
+      "col": 30,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/tags/components/TagSelector.tsx",
+      "line": 118,
+      "col": 30,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/screens/settings/SettingsScreen.tsx",
+      "line": 24,
+      "col": 27,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 111,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 161,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/forms/FormValidationTest.tsx",
+      "line": 233,
+      "col": 29,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/home/components/QuickActionsGrid.tsx",
+      "line": 21,
+      "col": 21,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 26,
+      "col": 21,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 28,
+      "col": 16,
+      "code": "TS1005",
+      "msg": "',' expected."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 28,
+      "col": 58,
+      "code": "TS1005",
+      "msg": "',' expected."
+    },
+    {
+      "file": "/features/premium/components/PremiumFeatureWrapper.tsx",
+      "line": 56,
+      "col": 30,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/features/tags/components/TagSelector.tsx",
+      "line": 118,
+      "col": 30,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/screens/settings/SettingsScreen.tsx",
+      "line": 24,
+      "col": 27,
+      "code": "TS1109",
+      "msg": "Expression expected."
+    },
+    {
+      "file": "/components/Text.tsx",
+      "line": 2,
+      "col": 57,
+      "code": "TS2395",
+      "msg": "Individual declarations in merged declaration 'Text' must be all exported or all local."
+    },
+    {
+      "file": "/components/Text.tsx",
+      "line": 2,
+      "col": 57,
+      "code": "TS2440",
+      "msg": "Import declaration conflicts with local declaration of 'Text'."
+    },
+    {
+      "file": "/components/Text.tsx",
+      "line": 14,
+      "col": 14,
+      "code": "TS2395",
+      "msg": "Individual declarations in merged declaration 'Text' must be all exported or all local."
+    },
+    {
+      "file": "/features/ai/services/aiService.ts",
+      "line": 170,
+      "col": 22,
+      "code": "TS7006",
+      "msg": "Parameter 'tag' implicitly has an 'any' type."
+    },
+    {
+      "file": "/features/bins/screens/BinsScreen.tsx",
+      "line": 140,
+      "col": 9,
+      "code": "TS2322",
+      "msg": "Type 'false | Element' is not assignable to type 'ReactElement<unknown, string | JSXElementConstructor<any>> | ComponentType<any> | null | undefined'."
+    },
+    {
+      "file": "/features/bulk-operations/services/bulkOperationsService.ts",
+      "line": 132,
+      "col": 47,
+      "code": "TS2353",
+      "msg": "Object literal may only specify known properties, and 'binId' does not exist in type 'Partial<Thoughtmark>'."
+    },
+    {
+      "file": "/features/home/screens/DashboardScreen.tsx",
+      "line": 19,
+      "col": 11,
+      "code": "TS2339",
+      "msg": "Property 'user' does not exist on type 'AppStore'."
+    },
+    {
+      "file": "/features/home/screens/DashboardScreen.tsx",
+      "line": 158,
+      "col": 18,
+      "code": "TS2741",
+      "msg": "Property 'section' is missing in type '{ children: Element; }' but required in type 'DashboardSectionProps'."
+    },
+    {
+      "file": "/features/home/screens/DashboardScreen.tsx",
+      "line": 162,
+      "col": 18,
+      "code": "TS2741",
+      "msg": "Property 'section' is missing in type '{ children: Element; }' but required in type 'DashboardSectionProps'."
+    },
+    {
+      "file": "/features/home/screens/DashboardScreen.tsx",
+      "line": 180,
+      "col": 18,
+      "code": "TS2741",
+      "msg": "Property 'section' is missing in type '{ children: Element; }' but required in type 'DashboardSectionProps'."
+    },
+    {
+      "file": "/features/home/services/dashboardService.ts",
+      "line": 84,
+      "col": 32,
+      "code": "TS2339",
+      "msg": "Property 'thoughtmarks' does not exist on type 'AppState'."
+    },
+    {
+      "file": "/features/home/services/dashboardService.ts",
+      "line": 85,
+      "col": 25,
+      "code": "TS2339",
+      "msg": "Property 'tasks' does not exist on type 'AppState'."
+    },
+    {
+      "file": "/features/home/services/dashboardService.ts",
+      "line": 87,
+      "col": 41,
+      "code": "TS7006",
+      "msg": "Parameter 't' implicitly has an 'any' type."
+    },
+    {
+      "file": "/features/home/services/dashboardService.ts",
+      "line": 88,
+      "col": 39,
+      "code": "TS7006",
+      "msg": "Parameter 't' implicitly has an 'any' type."
+    },
+    {
+      "file": "/features/home/services/dashboardService.ts",
+      "line": 92,
+      "col": 48,
+      "code": "TS7006",
+      "msg": "Parameter 't' implicitly has an 'any' type."
+    },
+    {
+      "file": "/features/organization/components/PreferenceToggle.tsx",
+      "line": 10,
+      "col": 32,
+      "code": "TS2339",
+      "msg": "Property 'glyphMap' does not exist on type 'ComponentType<any>'."
+    },
+    {
+      "file": "/features/organizations/components/OrganizationCard.tsx",
+      "line": 10,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/organization' or its corresponding type declarations."
+    },
+    {
+      "file": "/features/organizations/components/OrganizationForm.tsx",
+      "line": 12,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/organization' or its corresponding type declarations."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationDetailsScreen.tsx",
+      "line": 13,
+      "col": 33,
+      "code": "TS2307",
+      "msg": "Cannot find module '../hooks/useOrganization' or its corresponding type declarations."
+    },
+    {
+      "file": "/features/organizations/screens/OrganizationsScreen.tsx",
+      "line": 12,
+      "col": 34,
+      "code": "TS2307",
+      "msg": "Cannot find module '../hooks/useOrganizations' or its corresponding type declarations."
+    },
+    {
+      "file": "/features/premium/components/PremiumFeatureCard.tsx",
+      "line": 11,
+      "col": 41,
+      "code": "TS2339",
+      "msg": "Property 'isEnabled' does not exist on type 'PremiumFeature'."
+    },
+    {
+      "file": "/features/premium/components/PremiumFeatureCard.tsx",
+      "line": 17,
+      "col": 17,
+      "code": "TS2339",
+      "msg": "Property 'isEnabled' does not exist on type 'PremiumFeature'."
+    },
+    {
+      "file": "/features/premium/screens/PremiumEnrollmentScreen.tsx",
+      "line": 8,
+      "col": 11,
+      "code": "TS2339",
+      "msg": "Property 'premiumStatus' does not exist on type '{ subscription: Subscription | null; plans: SubscriptionPlan[]; loading: boolean; error: string | null; isPremium: () => boolean; hasFeature: (featureId: string) => boolean; ... 4 more ...; refreshData: () => Promise<...>; }'."
+    },
+    {
+      "file": "/features/premium/screens/PremiumEnrollmentScreen.tsx",
+      "line": 8,
+      "col": 42,
+      "code": "TS2339",
+      "msg": "Property 'upgradeToPremium' does not exist on type '{ subscription: Subscription | null; plans: SubscriptionPlan[]; loading: boolean; error: string | null; isPremium: () => boolean; hasFeature: (featureId: string) => boolean; ... 4 more ...; refreshData: () => Promise<...>; }'."
+    },
+    {
+      "file": "/features/premium/screens/PremiumEnrollmentScreen.tsx",
+      "line": 8,
+      "col": 60,
+      "code": "TS2339",
+      "msg": "Property 'cancelPremium' does not exist on type '{ subscription: Subscription | null; plans: SubscriptionPlan[]; loading: boolean; error: string | null; isPremium: () => boolean; hasFeature: (featureId: string) => boolean; ... 4 more ...; refreshData: () => Promise<...>; }'."
+    },
+    {
+      "file": "/features/premium/screens/PremiumEnrollmentScreen.tsx",
+      "line": 14,
+      "col": 13,
+      "code": "TS2741",
+      "msg": "Property 'isDefault' is missing in type '{ id: string; type: \"card\"; last4: string; brand: string; }' but required in type 'PaymentMethod'."
+    },
+    {
+      "file": "/features/premium/screens/PremiumEnrollmentScreen.tsx",
+      "line": 86,
+      "col": 39,
+      "code": "TS7006",
+      "msg": "Parameter 'feature' implicitly has an 'any' type."
+    },
+    {
+      "file": "/features/search/services/searchService.ts",
+      "line": 154,
+      "col": 33,
+      "code": "TS18048",
+      "msg": "'filters.status' is possibly 'undefined'."
+    },
+    {
+      "file": "/features/search/services/searchService.ts",
+      "line": 160,
+      "col": 35,
+      "code": "TS18048",
+      "msg": "'filters.priority' is possibly 'undefined'."
+    },
+    {
+      "file": "/features/search/services/searchService.ts",
+      "line": 233,
+      "col": 74,
+      "code": "TS2304",
+      "msg": "Cannot find name 'SearchHighlight'."
+    },
+    {
+      "file": "/features/search/services/searchService.ts",
+      "line": 234,
+      "col": 23,
+      "code": "TS2304",
+      "msg": "Cannot find name 'SearchHighlight'."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 29,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 35,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 47,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 53,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 65,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 71,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 83,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 89,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 101,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 107,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/settings/screens/SettingsScreen.tsx",
+      "line": 113,
+      "col": 46,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/storekit/components/PurchaseScreen.tsx",
+      "line": 107,
+      "col": 80,
+      "code": "TS7017",
+      "msg": "Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature."
+    },
+    {
+      "file": "/features/tags/screens/TagsScreen.tsx",
+      "line": 152,
+      "col": 9,
+      "code": "TS2322",
+      "msg": "Type 'false | Element' is not assignable to type 'ReactElement<unknown, string | JSXElementConstructor<any>> | ComponentType<any> | null | undefined'."
+    },
+    {
+      "file": "/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx",
+      "line": 173,
+      "col": 31,
+      "code": "TS2339",
+      "msg": "Property 'clear' does not exist on type 'NativeMethods'."
+    },
+    {
+      "file": "/features/voice/hooks/useVoiceRecorder.ts",
+      "line": 13,
+      "col": 45,
+      "code": "TS2694",
+      "msg": "Namespace 'global.NodeJS' has no exported member 'Timeout'."
+    },
+    {
+      "file": "/features/voice/screens/VoiceRecordingScreen.tsx",
+      "line": 9,
+      "col": 31,
+      "code": "TS2307",
+      "msg": "Cannot find module '../../components/ui/VoiceRecorder' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/deepLinking.ts",
+      "line": 2,
+      "col": 33,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-intent-launcher' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 3,
+      "col": 26,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-sharing' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 4,
+      "col": 33,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-document-picker' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 82,
+      "col": 25,
+      "code": "TS7006",
+      "msg": "Parameter 'file' implicitly has an 'any' type."
+    },
+    {
+      "file": "/native/capabilities/pushNotifications.ts",
+      "line": 24,
+      "col": 41,
+      "code": "TS2322",
+      "msg": "Type 'Promise<{ shouldShowAlert: true; shouldPlaySound: true; shouldSetBadge: true; }>' is not assignable to type 'Promise<NotificationBehavior>'."
+    },
+    {
+      "file": "/native/utils/nativeUtils.ts",
+      "line": 2,
+      "col": 25,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-device' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/utils/nativeUtils.ts",
+      "line": 29,
+      "col": 29,
+      "code": "TS2551",
+      "msg": "Property 'androidId' does not exist on type 'typeof import(\"/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/node_modules/expo-application/build/Application\")'. Did you mean 'getAndroidId'?"
+    },
+    {
+      "file": "/security/auth/biometricService.ts",
+      "line": 45,
+      "col": 33,
+      "code": "TS2339",
+      "msg": "Property 'saveCredentialsAsync' does not exist on type 'typeof import(\"/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/node_modules/expo-local-authentication/build/LocalAuthentication\")'."
+    },
+    {
+      "file": "/security/encryption/encryptionService.ts",
+      "line": 3,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-secure-store' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 2,
+      "col": 31,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-media-library' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 3,
+      "col": 25,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-camera' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 4,
+      "col": 27,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-location' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/storage/secureStorage.ts",
+      "line": 1,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-secure-store' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 16,
+      "col": 5,
+      "code": "TS2739",
+      "msg": "Type 'AxiosResponse<AIInsightResponse, any>' is missing the following properties from type 'AIInsightResponse': insight, confidence"
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 21,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'tags' does not exist on type 'AxiosResponse<{ tags: string[]; }, any>'."
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 26,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'bins' does not exist on type 'AxiosResponse<{ bins: string[]; }, any>'."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 2,
+      "col": 21,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/bin' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 12,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Bin[], any>' is missing the following properties from type 'Bin[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 28,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 2,
+      "col": 22,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/task' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 14,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Task[], any>' is missing the following properties from type 'Task[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 30,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 2,
+      "col": 29,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/thoughtmark' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 18,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Thoughtmark[], any>' is missing the following properties from type 'Thoughtmark[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 34,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 38,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Thoughtmark[], any>' is missing the following properties from type 'Thoughtmark[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/voice/voiceService.ts",
+      "line": 16,
+      "col": 5,
+      "code": "TS2739",
+      "msg": "Type 'AxiosResponse<VoiceTranscriptionResponse, any>' is missing the following properties from type 'VoiceTranscriptionResponse': text, confidence, duration"
+    },
+    {
+      "file": "/services/voice/voiceService.ts",
+      "line": 21,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'audioUrl' does not exist on type 'AxiosResponse<{ audioUrl: string; }, any>'."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 149,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 160,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 171,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/features/storekit/components/PurchaseScreen.tsx",
+      "line": 107,
+      "col": 80,
+      "code": "TS7017",
+      "msg": "Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature."
+    },
+    {
+      "file": "/features/thoughtmarks/screens/UnifiedThoughtmarkScreen.tsx",
+      "line": 173,
+      "col": 31,
+      "code": "TS2339",
+      "msg": "Property 'clear' does not exist on type 'NativeMethods'."
+    },
+    {
+      "file": "/features/voice/hooks/useVoiceRecorder.ts",
+      "line": 13,
+      "col": 45,
+      "code": "TS2694",
+      "msg": "Namespace 'global.NodeJS' has no exported member 'Timeout'."
+    },
+    {
+      "file": "/features/voice/screens/VoiceRecordingScreen.tsx",
+      "line": 9,
+      "col": 31,
+      "code": "TS2307",
+      "msg": "Cannot find module '../../components/ui/VoiceRecorder' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/deepLinking.ts",
+      "line": 2,
+      "col": 33,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-intent-launcher' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 3,
+      "col": 26,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-sharing' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 4,
+      "col": 33,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-document-picker' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/capabilities/fileSharing.ts",
+      "line": 82,
+      "col": 25,
+      "code": "TS7006",
+      "msg": "Parameter 'file' implicitly has an 'any' type."
+    },
+    {
+      "file": "/native/capabilities/pushNotifications.ts",
+      "line": 24,
+      "col": 41,
+      "code": "TS2322",
+      "msg": "Type 'Promise<{ shouldShowAlert: true; shouldPlaySound: true; shouldSetBadge: true; }>' is not assignable to type 'Promise<NotificationBehavior>'."
+    },
+    {
+      "file": "/native/utils/nativeUtils.ts",
+      "line": 2,
+      "col": 25,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-device' or its corresponding type declarations."
+    },
+    {
+      "file": "/native/utils/nativeUtils.ts",
+      "line": 29,
+      "col": 29,
+      "code": "TS2551",
+      "msg": "Property 'androidId' does not exist on type 'typeof import(\"/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/node_modules/expo-application/build/Application\")'. Did you mean 'getAndroidId'?"
+    },
+    {
+      "file": "/security/auth/biometricService.ts",
+      "line": 45,
+      "col": 33,
+      "code": "TS2339",
+      "msg": "Property 'saveCredentialsAsync' does not exist on type 'typeof import(\"/Users/sawyer/gitSync/tm-mobile-cursor/mobile-native-fresh/node_modules/expo-local-authentication/build/LocalAuthentication\")'."
+    },
+    {
+      "file": "/security/encryption/encryptionService.ts",
+      "line": 3,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-secure-store' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 2,
+      "col": 31,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-media-library' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 3,
+      "col": 25,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-camera' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/permissions/permissionService.ts",
+      "line": 4,
+      "col": 27,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-location' or its corresponding type declarations."
+    },
+    {
+      "file": "/security/storage/secureStorage.ts",
+      "line": 1,
+      "col": 30,
+      "code": "TS2307",
+      "msg": "Cannot find module 'expo-secure-store' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 16,
+      "col": 5,
+      "code": "TS2739",
+      "msg": "Type 'AxiosResponse<AIInsightResponse, any>' is missing the following properties from type 'AIInsightResponse': insight, confidence"
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 21,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'tags' does not exist on type 'AxiosResponse<{ tags: string[]; }, any>'."
+    },
+    {
+      "file": "/services/ai/aiService.ts",
+      "line": 26,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'bins' does not exist on type 'AxiosResponse<{ bins: string[]; }, any>'."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 2,
+      "col": 21,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/bin' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 12,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Bin[], any>' is missing the following properties from type 'Bin[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/bins/binsService.ts",
+      "line": 28,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 2,
+      "col": 22,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/task' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 14,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Task[], any>' is missing the following properties from type 'Task[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/tasks/tasksService.ts",
+      "line": 30,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 2,
+      "col": 29,
+      "code": "TS2307",
+      "msg": "Cannot find module '../types/thoughtmark' or its corresponding type declarations."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 18,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Thoughtmark[], any>' is missing the following properties from type 'Thoughtmark[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 34,
+      "col": 5,
+      "code": "TS2322",
+      "msg": "Type 'AxiosResponse<any, any>' is not assignable to type 'void'."
+    },
+    {
+      "file": "/services/thoughtmarks/thoughtmarksService.ts",
+      "line": 38,
+      "col": 5,
+      "code": "TS2740",
+      "msg": "Type 'AxiosResponse<Thoughtmark[], any>' is missing the following properties from type 'Thoughtmark[]': length, pop, push, concat, and 35 more."
+    },
+    {
+      "file": "/services/voice/voiceService.ts",
+      "line": 16,
+      "col": 5,
+      "code": "TS2739",
+      "msg": "Type 'AxiosResponse<VoiceTranscriptionResponse, any>' is missing the following properties from type 'VoiceTranscriptionResponse': text, confidence, duration"
+    },
+    {
+      "file": "/services/voice/voiceService.ts",
+      "line": 21,
+      "col": 21,
+      "code": "TS2339",
+      "msg": "Property 'audioUrl' does not exist on type 'AxiosResponse<{ audioUrl: string; }, any>'."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 150,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 161,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    },
+    {
+      "file": "/state/stores/appStore.ts",
+      "line": 172,
+      "col": 51,
+      "code": "TS2769",
+      "msg": "No overload matches this call."
+    }
+  ],
+  "eslint": []
+}

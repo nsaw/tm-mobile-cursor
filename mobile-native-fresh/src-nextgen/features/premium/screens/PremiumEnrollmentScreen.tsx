@@ -5,7 +5,7 @@ import { PremiumFeatureCard } from '../components/PremiumFeatureCard';
 import { PaymentMethod } from '../types/premium';
 
 export const PremiumEnrollmentScreen: React.FC = () => {
-  const { premiumStatus, loading, error, upgradeToPremium, cancelPremium } = usePremium();
+  const { subscription, plans, loading, error, isPremium, subscribe, cancelSubscription } = usePremium();
   const [upgrading, setUpgrading] = useState(false);
 
   const handleUpgrade = async () => {
@@ -16,8 +16,10 @@ export const PremiumEnrollmentScreen: React.FC = () => {
         type: 'card',
         last4: '1234',
         brand: 'visa',
+        isDefault: true,
       };
-      const success = await upgradeToPremium(mockPaymentMethod);
+      const result = await subscribe('premium_monthly', mockPaymentMethod.id);
+      const success = result.success;
       if (success) {
         Alert.alert('Success', 'Welcome to Premium!');
       } else {
@@ -38,7 +40,8 @@ export const PremiumEnrollmentScreen: React.FC = () => {
           text: 'Yes',
           style: 'destructive',
           onPress: async () => {
-            const success = await cancelPremium();
+            const result = await cancelSubscription();
+            const success = result.success;
             if (success) {
               Alert.alert('Success', 'Premium subscription cancelled');
             } else {
@@ -73,7 +76,7 @@ export const PremiumEnrollmentScreen: React.FC = () => {
         <Text style={styles.subtitle}>Unlock the full potential of Thoughtmarks</Text>
       </View>
 
-      {premiumStatus?.isPremium && (
+      {isPremium() && (
         <View style={styles.premiumStatus}>
           <Text style={styles.premiumStatusText}>You are a Premium member!</Text>
           <TouchableOpacity style={styles.cancelButton} onPress={handleCancel} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
@@ -83,12 +86,12 @@ export const PremiumEnrollmentScreen: React.FC = () => {
       )}
 
       <View style={styles.featuresContainer}>
-        {premiumStatus?.features.map((feature) => (
+        {plans[0]?.features.map((feature) => (
           <PremiumFeatureCard key={feature.id} feature={feature} />
         ))}
       </View>
 
-      {!premiumStatus?.isPremium && (
+      {!isPremium() && (
         <TouchableOpacity
           style={[styles.upgradeButton, upgrading && styles.upgradeButtonDisabled]}
           onPress={handleUpgrade}

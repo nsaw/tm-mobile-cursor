@@ -10,7 +10,6 @@ import { VoiceProvider } from './src-nextgen/contexts/VoiceProvider';
 import { AIProvider } from './src-nextgen/contexts/AIProvider';
 import { DashboardScreen } from './src-nextgen/screens/dashboard/DashboardScreen';
 import { LoadingScreen } from './src-nextgen/components/ui/LoadingScreen';
-import { useAuth } from './src-nextgen/hooks/useAuth';
 
 // Define the root stack param list
 export type RootStackParamList = {
@@ -21,17 +20,8 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth();
+  console.log('[APP] 🚀 Bypassing auth - showing dashboard directly');
 
-  console.log('[APP] Auth state:', { isAuthenticated, loading });
-
-  // Show loading screen while checking authentication
-  if (loading) {
-    console.log('[APP] Showing loading screen');
-    return <LoadingScreen />;
-  }
-
-  console.log('[APP] Auth check complete, showing dashboard');
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

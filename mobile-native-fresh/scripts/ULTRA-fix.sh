@@ -12,6 +12,18 @@ NB="node scripts/nb.cjs"
 $NB --ttl 20s  --label triage-static          --log "$LOG_DIR/triage-static.log"          --status "$STATUS_DIR" -- node scripts/tools/triage-static.cjs
 $NB --ttl 120s --label focused-parser-pass    --log "$LOG_DIR/focused-parser-pass.log"    --status "$STATUS_DIR" -- node scripts/tools/focused-parser-pass.cjs --top 50
 
+# Add TypeScript check with NB-runner (required component)
+$NB --ttl 30s --label tsc-check --log "$LOG_DIR/tsc-check.log" --status "$STATUS_DIR" -- bash -lc 'npx tsc --noEmit'
+
+# Add auto-parse-fixes.cjs (required component)
+$NB --ttl 60s --label auto-parse-fixes --log "$LOG_DIR/auto-parse-fixes.log" --status "$STATUS_DIR" -- node scripts/tools/auto-parse-fixes.cjs
+
+# Add enforcer waivers functionality (required component)
+$NB --ttl 30s --label enforcer-waivers --log "$LOG_DIR/enforcer-waivers.log" --status "$STATUS_DIR" -- node scripts/tools/enforcer-waivers.cjs
+
+# Add targeted fixes functionality (required component)
+$NB --ttl 45s --label targeted-fixes --log "$LOG_DIR/targeted-fixes.log" --status "$STATUS_DIR" -- node scripts/tools/targeted-fixes.cjs
+
 DRY=0
 for arg in "$@"; do
   [[ "$arg" == "--dry-run" ]] && DRY=1

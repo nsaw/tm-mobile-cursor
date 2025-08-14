@@ -1,5 +1,5 @@
 import { BulkOperation, BulkOperationResult, BulkOperationTemplate, BulkSelection } from '../types/bulk-operations';
-import { useAppStore } from '../../../state/store';
+import useAppStore from '../../../state/stores/appStore';
 
 class BulkOperationsService {
   private operations: BulkOperation[] = [];
@@ -127,7 +127,7 @@ class BulkOperationsService {
     switch (operation.type) {
       case 'move':
         if (operation.targetType === 'thoughtmarks') {
-          const thoughtmark = store.thoughtmarks.find(t => t.id === itemId);
+          const thoughtmark = store.thoughtmarks.find((t: any) => t.id === itemId);
           if (thoughtmark) {
             store.updateThoughtmark(itemId, { binId: operation.parameters.binId });
           }
@@ -136,7 +136,7 @@ class BulkOperationsService {
 
       case 'tag':
         if (operation.targetType === 'thoughtmarks') {
-          const thoughtmark = store.thoughtmarks.find(t => t.id === itemId);
+          const thoughtmark = store.thoughtmarks.find((t: any) => t.id === itemId);
           if (thoughtmark) {
             const currentTags = thoughtmark.tags || [];
             const newTags = [...new Set([...currentTags, ...operation.parameters.tagIds])];
@@ -147,10 +147,10 @@ class BulkOperationsService {
 
       case 'untag':
         if (operation.targetType === 'thoughtmarks') {
-          const thoughtmark = store.thoughtmarks.find(t => t.id === itemId);
+          const thoughtmark = store.thoughtmarks.find((t: any) => t.id === itemId);
           if (thoughtmark) {
             const currentTags = thoughtmark.tags || [];
-            const newTags = currentTags.filter(tag => !operation.parameters.tagIds.includes(tag));
+            const newTags = currentTags.filter((tag: any) => !operation.parameters.tagIds.includes(tag));
             store.updateThoughtmark(itemId, { tags: newTags });
           }
         }

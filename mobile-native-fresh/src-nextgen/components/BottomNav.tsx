@@ -16,33 +16,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   const theme = useTheme();
 
   const navItems = [
-    {
-      id: 'home',
-      label: 'Home',
-      iconName: 'home'
-    },
-    {
-      id: 'search',
-      label: 'Search',
-      iconName: 'search'
-    },
-    {
-      id: 'bins',
-      label: 'Bins',
-      iconName: 'folder'
-    },
-    {
-      id: 'profile',
-      label: 'Profile',
-      iconName: 'person'
-    }
+    { id: 'home', label: 'Home', iconName: 'home' },
+    { id: 'search', label: 'Search', iconName: 'search' },
+    { id: 'bins', label: 'Bins', iconName: 'folder' },
+    { id: 'profile', label: 'Profile', iconName: 'person' },
   ];
 
   return (
-    <AutoRoleView
-      componentRole="navigation"
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
+    <AutoRoleView componentRole="navigation" style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {navItems.map((item) => (
         <TouchableOpacity
           key={item.id}
@@ -59,14 +40,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             size={24}
             color={currentRoute === item.id ? theme.colors.primary : theme.colors.textSecondary}
           />
-          <Text
-            style={[
-              styles.navLabel,
-              {
-                color: currentRoute === item.id ? theme.colors.primary : theme.colors.textSecondary
-              }
-            ]}
-          >
+          <Text style={[styles.navLabel, { color: currentRoute === item.id ? theme.colors.primary : theme.colors.textSecondary }]}>
             {item.label}
           </Text>
         </TouchableOpacity>
@@ -76,23 +50,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E5EA',
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  navLabel: {
-    fontSize: 12,
-    marginTop: 4,
-    fontWeight: '500',
-  },
+  container: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingVertical: 8, paddingHorizontal: 16, borderTopWidth: 1, borderTopColor: '#E5E5EA' },
+  navItem: { alignItems: 'center', justifyContent: 'center', flex: 1 },
+  navLabel: { fontSize: 12, marginTop: 4, fontWeight: '500' },
 }); 

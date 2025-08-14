@@ -1,0 +1,306 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useDashboard } from '../hooks/useDashboard';
+import { DashboardSection } from '../components/DashboardSection';
+import { QuickActionsGrid } from '../components/QuickActionsGrid';
+import { QuickAction } from '../types/dashboard';
+import useAppStore from "../../../state/stores/appStore";
+
+export const DashboardScreen: React.FC = () => {
+  const { user } = useAppStore();
+  const {
+    config,
+    stats,
+    quickActions,
+    loading,
+    error,
+    refreshing,
+    refreshDashboard,
+    toggleSectionVisibility,
+  } = useDashboard();
+
+  const [showSettings, setShowSettings] = useState(false);
+
+  const handleQuickAction = (action: QuickAction) => {
+    if (action.requiresPremium && !user?.isPremium) {
+      Alert.alert('Premium Feature', 'This feature requires a premium subscription.');
+      return;
+    }
+
+    console.log('Executing quick action:', action.action);
+    // Implement action execution logic here
+  };
+
+  const handleSectionPress = (sectionId: string) => {
+    console.log('Section pressed:', sectionId);
+    // Implement section navigation logic here
+  };
+
+  const renderRecentThoughtmarks = () => {
+    const { thoughtmarks } = useAppStore();
+    const recentThoughtmarks = thoughtmarks.slice(0, 3);
+
+    return (
+      <View style={styles.recentContainer}>
+        {recentThoughtmarks.length === 0 ? (
+          <Text style={styles.emptyText}>No recent thoughtmarks</Text>
+        ) : (
+          recentThoughtmarks.map(thoughtmark => (
+            <TouchableOpacity key={thoughtmark.id} style={styles.thoughtmarkItem} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+              <Text style={styles.thoughtmarkTitle} numberOfLines={2}>
+                {thoughtmark.title}
+              </Text>
+              <Text style={styles.thoughtmarkDate}>
+                {new Date(thoughtmark.createdAt).toLocaleDateString()}
+              </Text>
+            </TouchableOpacity>
+          ))
+        )}
+      </View>
+    );
+  };
+
+  const renderTasks = () => {
+    const { tasks } = useAppStore();
+    const pendingTasks = tasks.filter(t => !t.isCompleted).slice(0, 3);
+
+    return (
+      <View style={styles.tasksContainer}>
+        {pendingTasks.length === 0 ? (
+          <Text style={styles.emptyText}>No pending tasks</Text>
+        ) : (
+          pendingTasks.map(task => (
+            <TouchableOpacity key={task.id} style={styles.taskItem} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+              <Ionicons name='checkbox-outline' size={20} color='#666' />
+              <Text style={styles.taskTitle} numberOfLines={1}>
+                {task.title}
+              </Text>
+            </TouchableOpacity>
+          ))
+        )}
+      </View>
+    );
+  };
+
+  const renderStats = () => {
+    if (!stats) return null;
+
+    return (
+      <View style={styles.statsContainer}>
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{stats.totalThoughtmarks}</Text>
+          <Text style={styles.statLabel}>Thoughtmarks</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{stats.completedTasks}</Text>
+          <Text style={styles.statLabel}>Completed</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{stats.pendingTasks}</Text>
+          <Text style={styles.statLabel}>Pending</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{stats.recentActivity}</Text>
+          <Text style={styles.statLabel}>This Week</Text>
+        </View>
+      </View>
+    );
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Loading dashboard...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Ionicons name='warning' size={48} color='#FF4444' />
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableOpacity style={styles.retryButton} onPress={refreshDashboard} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
+          <Text style={styles.retryButtonText}>Retry</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Dashboard</Text>
+        <TouchableOpacity onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowSettings(!showSettings)}>
+          <Ionicons name='settings' size={24} color='#007AFF' />
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        style={styles.content}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={refreshDashboard} />
+        }
+      >
+        {config?.sections.map(section => {
+          switch (section.type) {
+            case 'recent':
+              return (
+                <DashboardSection><Text>{renderRecentThoughtmarks()}</Text></DashboardSection>
+              );
+            case 'tasks':
+              return (
+                <DashboardSection><Text>{renderTasks()}</Text></DashboardSection>
+              );
+            case 'quick-actions':
+              return (
+                <DashboardSection
+                  key={section.id}
+                  section={section}
+                  onToggleVisibility={toggleSectionVisibility}
+                >
+                  <QuickActionsGrid
+                    actions={quickActions}
+                    columns={section.config.columns || 2}
+                    onActionPress={handleQuickAction}
+                  />
+                </DashboardSection>
+              );
+            case 'stats':
+              return (
+                <DashboardSection><Text>{renderStats()}</Text></DashboardSection>
+              );
+            default:
+              return null;
+          }
+        })})
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e1e5e9',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1a1a1a',
+  },
+  content: {
+    flex: 1,
+    padding: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    padding: 32,
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#FF4444',
+    textAlign: 'center',
+    marginTop: 16,
+    marginBottom: 24,
+  },
+  retryButton: {
+    backgroundColor: '#007AFF',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  recentContainer: {
+    gap: 12,
+  },
+  thoughtmarkItem: {
+    padding: 12,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 8,
+  },
+  thoughtmarkTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#1a1a1a',
+    marginBottom: 4,
+  },
+  thoughtmarkDate: {
+    fontSize: 12,
+    color: '#666',
+  },
+  tasksContainer: {
+    gap: 8,
+  },
+  taskItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 8,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 6,
+  },
+  taskTitle: {
+    fontSize: 14,
+    color: '#1a1a1a',
+    marginLeft: 8,
+    flex: 1,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  statItem: {
+    alignItems: 'center',
+  },
+  statValue: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#007AFF',
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 4,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+});

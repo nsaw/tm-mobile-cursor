@@ -40,7 +40,7 @@ export const AllThoughtmarksScreen: React.FC = () => {
       style={[styles.thoughtmarkCard, { backgroundColor: theme.colors.surface, borderColor: theme.colors.border }]}
       accessibilityRole="button"
       accessible={true}
-      accessibilityLabel={`${item.title} thoughtmark`}
+      accessibilityLabel="Thoughtmark Button"
     >
       <Text style={[styles.thoughtmarkTitle, { color: theme.colors.text }]}>{item.title}</Text>
       <Text style={[styles.thoughtmarkContent, { color: theme.colors.textSecondary }]}>{item.content}</Text>

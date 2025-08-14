@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DashboardConfig, DashboardStats, QuickAction } from '../types/dashboard';
-import { useAppStore } from '../../../state/store';
+import useAppStore from '../../../state/stores/appStore';
 
 const DASHBOARD_CONFIG_KEY = '@thoughtmarks_dashboard_config';
 
@@ -84,12 +84,12 @@ class DashboardService {
     const thoughtmarks = store.thoughtmarks;
     const tasks = store.tasks;
 
-    const completedTasks = tasks.filter(t => t.completed).length;
-    const pendingTasks = tasks.filter(t => !t.completed).length;
+    const completedTasks = tasks.filter((t: any) => t.isCompleted).length;
+    const pendingTasks = tasks.filter((t: any) => !t.isCompleted).length;
 
     // Calculate recent activity (last 7 days)
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    const recentActivity = thoughtmarks.filter(t => new Date(t.createdAt) > weekAgo).length;
+    const recentActivity = thoughtmarks.filter((t: any) => new Date(t.createdAt) > weekAgo).length;
 
     return {
       totalThoughtmarks: thoughtmarks.length,

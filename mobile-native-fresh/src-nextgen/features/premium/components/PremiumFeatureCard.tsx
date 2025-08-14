@@ -8,13 +8,13 @@ interface PremiumFeatureCardProps {
 
 export const PremiumFeatureCard: React.FC<PremiumFeatureCardProps> = ({ feature }) => {
   return (
-    <View style={[styles.card, !feature.isEnabled && styles.disabledCard]}>
+    <View style={styles.card}>
       <View style={styles.header}>
         <Text style={styles.icon}>{feature.icon}</Text>
         <Text style={styles.name}>{feature.name}</Text>
       </View>
       <Text style={styles.description}>{feature.description}</Text>
-      {!feature.isEnabled && <Text style={styles.upgradeText}>Upgrade to Premium</Text>}
+      {feature.required && <Text style={styles.upgradeText}>Upgrade to Premium</Text>}
     </View>
   );
 };

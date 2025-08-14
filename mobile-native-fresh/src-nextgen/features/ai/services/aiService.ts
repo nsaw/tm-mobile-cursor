@@ -1,5 +1,5 @@
 import { AIInsight, AIRecommendation, AISortingRule, LearningResource } from '../types/ai-types';
-import { useAppStore } from '../../../state/store';
+import useAppStore, { Thoughtmark, Task } from '../../../state/stores/appStore';
 
 class AIService {
   private insights: AIInsight[] = [];
@@ -36,7 +36,7 @@ class AIService {
     const thoughtmarks = store.thoughtmarks;
     if (thoughtmarks.length > 0) {
       // Productivity insight
-      const recentThoughtmarks = thoughtmarks.filter(t => {
+      const recentThoughtmarks = thoughtmarks.filter((t: Thoughtmark) => {
         const createdAt = new Date(t.createdAt);
         const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
         return createdAt > weekAgo;
@@ -57,7 +57,7 @@ class AIService {
       }
 
       // Organization insight
-      const untaggedThoughtmarks = thoughtmarks.filter(t => !t.tags || t.tags.length === 0);
+      const untaggedThoughtmarks = thoughtmarks.filter((t: Thoughtmark) => !t.tags || t.tags.length === 0);
       if (untaggedThoughtmarks.length > 5) {
         insights.push({
           id: (Date.now() + 1).toString(),
@@ -76,7 +76,7 @@ class AIService {
     // Analyze tasks for insights
     const tasks = store.tasks;
     if (tasks.length > 0) {
-      const incompleteTasks = tasks.filter(t => !t.completed);
+      const incompleteTasks = tasks.filter((t: Task) => !t.isCompleted);
       if (incompleteTasks.length > 10) {
         insights.push({
           id: (Date.now() + 2).toString(),
@@ -104,8 +104,8 @@ class AIService {
     const thoughtmarks = store.thoughtmarks;
     if (thoughtmarks.length > 0) {
       // Find common themes
-      const allTags = thoughtmarks.flatMap(t => t.tags || []);
-      const tagCounts = allTags.reduce((acc, tag) => {
+      const allTags = thoughtmarks.flatMap((t: Thoughtmark) => t.tags || []);
+      const tagCounts = allTags.reduce((acc: Record<string, number>, tag: string) => {
         acc[tag] = (acc[tag] || 0) + 1;
         return acc;
       }, {} as Record<string, number>);
@@ -114,14 +114,14 @@ class AIService {
         .sort(([,a], [,b]) => b - a)
         .slice(0, 3);
 
-      topTags.forEach(([tag, count]) => {
+      topTags.forEach(([tag, count]: [string, number]) => {
         recommendations.push({
           id: Date.now().toString() + Math.random(),
           type: 'content',
           title: `Explore ${tag} further`,
           description: `You've used the '${tag}' tag ${count} times. Consider creating more content in this area or exploring related topics.`,
           confidence: Math.min(70 + count * 5, 95),
-          relatedItems: thoughtmarks.filter(t => t.tags?.includes(tag)).map(t => t.id),
+          relatedItems: thoughtmarks.filter((t: Thoughtmark) => t.tags?.includes(tag)).map((t: Thoughtmark) => t.id),
           tags: [tag],
           createdAt: new Date().toISOString(),
         });
@@ -167,7 +167,7 @@ class AIService {
     if (criteria.groupBy === 'tags') {
       const grouped = items.reduce((acc, item) => {
         const tags = item.tags || [];
-        tags.forEach(tag => {
+        tags.forEach((tag: any) => {
           if (!acc[tag]) acc[tag] = [];
           acc[tag].push(item);
         });

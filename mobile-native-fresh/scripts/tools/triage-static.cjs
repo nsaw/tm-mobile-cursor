@@ -36,3 +36,4 @@ fs.writeFileSync(path.join(OUT_DIR, 'static-triage.md'), md.join('\n'));
 console.log(`Wrote triage to ${path.join(OUT_DIR, 'static-triage.json')}`);
 
 
+

@@ -137,7 +137,7 @@ export const BinsScreen: React.FC = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
-        ListEmptyComponent={!loading && renderEmptyState()}
+        ListEmptyComponent={!loading ? renderEmptyState() : null}
       />
 
       <CreateBinModal

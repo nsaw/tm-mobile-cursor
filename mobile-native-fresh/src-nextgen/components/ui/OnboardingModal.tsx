@@ -25,36 +25,11 @@ interface OnboardingModalProps {
 }
 
 const defaultSteps: OnboardingStep[] = [
-  {
-    id: 'welcome',
-    title: 'Welcome to Thoughtmarks',
-    description: 'Your personal space for capturing thoughts, ideas, and tasks.',
-    icon: '🌟',
-  },
-  {
-    id: 'thoughtmarks',
-    title: 'Create Thoughtmarks',
-    description: 'Capture your ideas quickly with voice notes or text.',
-    icon: '💭',
-  },
-  {
-    id: 'tasks',
-    title: 'Manage Tasks',
-    description: 'Turn your thoughts into actionable tasks and track progress.',
-    icon: '✅',
-  },
-  {
-    id: 'organization',
-    title: 'Stay Organized',
-    description: 'Use tags and bins to keep your content organized.',
-    icon: '📁',
-  },
-  {
-    id: 'ready',
-    title: "You're All Set!",
-    description: 'Start capturing your thoughts and ideas now.',
-    icon: '🚀',
-  },
+  { id: 'welcome', title: 'Welcome to Thoughtmarks', description: 'Your personal space for capturing thoughts, ideas, and tasks.', icon: '🌟' },
+  { id: 'thoughtmarks', title: 'Create Thoughtmarks', description: 'Capture your ideas quickly with voice notes or text.', icon: '💭' },
+  { id: 'tasks', title: 'Manage Tasks', description: 'Turn your thoughts into actionable tasks and track progress.', icon: '✅' },
+  { id: 'organization', title: 'Stay Organized', description: 'Use tags and bins to keep your content organized.', icon: '📁' },
+  { id: 'ready', title: "You're All Set!", description: 'Start capturing your thoughts and ideas now.', icon: '🚀' },
 ];
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({
@@ -80,9 +55,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
     }
   };
 
-  const _handleSkip = () => {
-    onComplete();
-  };
+  const _handleSkip = () => { onComplete(); };
 
   const currentStepData = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
@@ -97,153 +70,60 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
       accessibilityLabel="Modal"
     >
       <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: colors.background,
-          },
-        ]}
+        style={[styles.container, { backgroundColor: colors.background }]}
       >
         {/* Header */}
-        <View
-          style={[
-            styles.header,
-            {
-              borderBottomColor: colors.border,
-            },
-          ]}
-        >
+        <View style={[styles.header, { borderBottomColor: colors.border }] }>
           <TouchableOpacity onPress={onClose} style={styles.closeButton} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
-            <Text
-              style={[
-                styles.closeText,
-                {
-                  color: colors.textSecondary,
-                  fontSize: typography.body.fontSize,
-                },
-              ]}
-            >
-              Skip
-            </Text>
+            <Text style={[styles.closeText, { color: colors.textSecondary, fontSize: typography.body.fontSize }]}>Skip</Text>
           </TouchableOpacity>
 
           <View style={styles.progressContainer}>
             {steps.map((_, index) => (
               <View
                 key={index}
-                style={[
-                  styles.progressDot,
-                  {
-                    backgroundColor: index === currentStep ? colors.primary : colors.border,
-                  },
-                ]}
+                style={[styles.progressDot, { backgroundColor: index === currentStep ? colors.primary : colors.border }]}
               />
             ))}
           </View>
         </View>
 
         {/* Content */}
-        <ScrollView
-          style={styles.content}
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-        >
+        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.stepContainer}>
-            {currentStepData.icon && (
-              <Text style={styles.icon}>{currentStepData.icon}</Text>
-            )}
-            
-            <Text
-              style={[
-                styles.title,
-                {
-                  color: colors.text,
-                  fontSize: typography.h1.fontSize,
-                  fontWeight: typography.h1.fontWeight,
-                },
-              ]}
-            >
+            {currentStepData.icon && (<Text style={styles.icon}>{currentStepData.icon}</Text>)}
+            <Text style={[styles.title, { color: colors.text, fontSize: typography.h1.fontSize, fontWeight: typography.h1.fontWeight }]}>
               {currentStepData.title}
             </Text>
-            
-            <Text
-              style={[
-                styles.description,
-                {
-                  color: colors.textSecondary,
-                  fontSize: typography.body.fontSize,
-                  fontWeight: typography.body.fontWeight,
-                },
-              ]}
-            >
+            <Text style={[styles.description, { color: colors.textSecondary, fontSize: typography.body.fontSize, fontWeight: typography.body.fontWeight }]}>
               {currentStepData.description}
             </Text>
           </View>
         </ScrollView>
 
         {/* Footer */}
-        <View
-          style={[
-            styles.footer,
-            {
-              borderTopColor: colors.border,
-            },
-          ]}
-        >
+        <View style={[styles.footer, { borderTopColor: colors.border }]}>
           <View style={styles.buttonContainer}>
             {currentStep > 0 && (
               <TouchableOpacity
-                style={[
-                  styles.button,
-                  styles.secondaryButton,
-                  {
-                    borderColor: colors.border,
-                  },
-                ]}
+                style={[styles.button, styles.secondaryButton, { borderColor: colors.border }]}
                 onPress={handlePrevious}
                 accessibilityRole="button"
                 accessible={true}
                 accessibilityLabel="Previous"
               >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    {
-                      color: colors.text,
-                      fontSize: typography.body.fontSize,
-                      fontWeight: typography.body.fontWeight,
-                    },
-                  ]}
-                >
-                  Previous
-                </Text>
+                <Text style={[styles.buttonText, { color: colors.text, fontSize: typography.body.fontSize, fontWeight: typography.body.fontWeight }]}>Previous</Text>
               </TouchableOpacity>
             )}
-            
+
             <TouchableOpacity
-              style={[
-                styles.button,
-                styles.primaryButton,
-                {
-                  backgroundColor: colors.primary,
-                  flex: currentStep === 0 ? 1 : 1,
-                },
-              ]}
+              style={[styles.button, styles.primaryButton, { backgroundColor: colors.primary, flex: 1 }]}
               onPress={handleNext}
               accessibilityRole="button"
               accessible={true}
               accessibilityLabel="Next"
             >
-              <Text
-                style={[
-                  styles.buttonText,
-                  {
-                    color: colors.onPrimary,
-                    fontSize: typography.body.fontSize,
-                    fontWeight: typography.body.fontWeight,
-                  },
-                ]}
-              >
+              <Text style={[styles.buttonText, { color: colors.onPrimary, fontSize: typography.body.fontSize, fontWeight: typography.body.fontWeight }]}>
                 {isLastStep ? 'Get Started' : 'Next'}
               </Text>
             </TouchableOpacity>
@@ -343,5 +223,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: '600',
+  },
+  progressDotActive: {
+    backgroundColor: 'currentColor', // Use currentColor to inherit the color from the parent
   },
 });

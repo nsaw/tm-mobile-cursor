@@ -2,16 +2,29 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Types for thoughtmarks and bins
+// Types for thoughtmarks, tasks, and bins
 export interface Thoughtmark {
   id: string;
   title: string;
   content: string;
   tags?: string[];
+  binId?: string;
   isTask?: boolean;
   isCompleted?: boolean;
   isDeleted?: boolean;
   isPinned?: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  description?: string;
+  isCompleted: boolean;
+  priority: 'low' | 'medium' | 'high';
+  dueDate?: Date;
+  tags?: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +44,7 @@ export interface AppStoreState {
   buildNumber: string;
   lastUpdated: Date;
   thoughtmarks: Thoughtmark[];
+  tasks: Task[];
   bins: Bin[];
   error: string | null;
   loading: boolean;
@@ -43,7 +57,11 @@ export interface AppActions {
   createThoughtmark: (thoughtmark: Omit<Thoughtmark, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateThoughtmark: (id: string, updates: Partial<Thoughtmark>) => void;
   deleteThoughtmark: (id: string) => void;
+  createTask: (task: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  updateTask: (id: string, updates: Partial<Task>) => void;
+  deleteTask: (id: string) => void;
   fetchThoughtmarks: () => Promise<void>;
+  fetchTasks: () => Promise<void>;
   fetchBins: () => Promise<void>;
   createBin: (bin: Omit<Bin, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateBin: (id: string, updates: Partial<Bin>) => void;
@@ -62,6 +80,7 @@ const useAppStore = create<AppStore>()(
       buildNumber: '1',
       lastUpdated: new Date(),
       thoughtmarks: [],
+      tasks: [],
       bins: [],
       error: null,
       loading: false,
@@ -97,26 +116,63 @@ const useAppStore = create<AppStore>()(
           ),
         }));
       },
+
+      createTask: (taskData) => {
+        const newTask: Task = {
+          ...taskData,
+          id: Date.now().toString(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+        set((state) => ({
+          tasks: [...state.tasks, newTask],
+        }));
+      },
+      
+      updateTask: (id, updates) => {
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === id ? { ...t, ...updates, updatedAt: new Date() } : t
+          ),
+        }));
+      },
+      
+      deleteTask: (id) => {
+        set((state) => ({
+          tasks: state.tasks.filter((t) => t.id !== id),
+        }));
+      },
       
       fetchThoughtmarks: async () => {
         set({ loading: true, error: null });
         try {
-          // Simulate API call - replace with actual implementation
-          await new Promise<void>((resolve) => setTimeout(() => resolve(), 100));
+          // Mock API call - replace with actual API
+          await new Promise(resolve => setTimeout(resolve, 100));
           set({ loading: false });
         } catch (error) {
-          set({ loading: false, error: error instanceof Error ? error.message : 'Failed to fetch thoughtmarks' });
+          set({ loading: false, error: 'Failed to fetch thoughtmarks' });
+        }
+      },
+
+      fetchTasks: async () => {
+        set({ loading: true, error: null });
+        try {
+          // Mock API call - replace with actual API
+          await new Promise(resolve => setTimeout(resolve, 100));
+          set({ loading: false });
+        } catch (error) {
+          set({ loading: false, error: 'Failed to fetch tasks' });
         }
       },
       
       fetchBins: async () => {
         set({ loading: true, error: null });
         try {
-          // Simulate API call - replace with actual implementation
-          await new Promise<void>((resolve) => setTimeout(() => resolve(), 100));
+          // Mock API call - replace with actual API
+          await new Promise(resolve => setTimeout(resolve, 100));
           set({ loading: false });
         } catch (error) {
-          set({ loading: false, error: error instanceof Error ? error.message : 'Failed to fetch bins' });
+          set({ loading: false, error: 'Failed to fetch bins' });
         }
       },
       

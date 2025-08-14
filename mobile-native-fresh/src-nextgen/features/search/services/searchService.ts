@@ -5,6 +5,7 @@ import {
   SearchResult,
   SearchSuggestion,
   SearchFilters,
+  SearchHighlight,
 } from '../types/search';
 import { useAppStore } from '../../../state/store';
 
@@ -151,13 +152,13 @@ class SearchService {
 
     if (filters.status && filters.status.length > 0) {
       filtered = filtered.filter(item =>
-        item.metadata.status && filters.status.includes(item.metadata.status)
+        item.metadata.status && filters.status!.includes(item.metadata.status)
       );
     }
 
     if (filters.priority && filters.priority.length > 0) {
       filtered = filtered.filter(item =>
-        item.metadata.priority && filters.priority.includes(item.metadata.priority)
+        item.metadata.priority && filters.priority!.includes(item.metadata.priority)
       );
     }
 

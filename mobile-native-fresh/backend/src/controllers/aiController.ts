@@ -5,6 +5,7 @@ import OpenAI from 'openai';
 import { db } from '../db';
 import { thoughtmarks } from '../db/schema';
 import { config } from '../config';
+import { logger } from '../utils/logger';
 
 console.log('AI CONTROLLER FILE LOADED');
 
@@ -124,8 +125,15 @@ const getOpenAI = (): OpenAI => {
 
 export const aiController = {
   async generateInsights(req: AuthenticatedRequest, res: Response): Promise<void> {
+    const startTime = Date.now();
+    const requestId = Math.random().toString(36).substring(7);
+    
     try {
-      console.log('[aiController] /api/ai/insights called', { userId: req.user?.id, thoughtmarkIds: req.body.thoughtmarkIds });
+      logger.info(`[AI-${requestId}] /api/ai/insights called`, { 
+        userId: req.user?.id, 
+        thoughtmarkIds: req.body.thoughtmarkIds,
+        timestamp: new Date().toISOString()
+      });
       const userId = req.user?.userId || 1;
       const userThoughtmarks = await db.select().from(thoughtmarks)
         .where(eq(thoughtmarks.userId, userId))
@@ -161,7 +169,8 @@ ${thoughtmarkSummaries}`;
 
       if (!checkOpenAI(res, 'insights')) return;
 
-      const completion = await openai!.chat.completions.create({
+      const openaiStartTime = Date.now();
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },
@@ -172,6 +181,12 @@ ${thoughtmarkSummaries}`;
         temperature: 0.4,
       });
 
+      const openaiDuration = Date.now() - openaiStartTime;
+      logger.info(`[AI-${requestId}] OpenAI API call completed`, { 
+        openaiDuration: `${openaiDuration}ms`,
+        model: 'gpt-4o',
+        tokensUsed: completion.usage?.total_tokens || 0
+      });
       console.log('[aiController] Raw OpenAI response:', completion);
 
       // Parse the JSON response
@@ -207,10 +222,20 @@ ${thoughtmarkSummaries}`;
         // fallback: return empty array
         insights = [];
       }
-      console.log('[aiController] Final insights array:', insights);
+      const duration = Date.now() - startTime;
+      logger.info(`[AI-${requestId}] /api/ai/insights completed`, { 
+        duration: `${duration}ms`,
+        insightsCount: insights.length,
+        userId: req.user?.id
+      });
       res.status(200).json({ insights });
     } catch (error) {
-      console.error('Error generating AI insights:', error);
+      const duration = Date.now() - startTime;
+      logger.error(`[AI-${requestId}] Error generating AI insights`, { 
+        error: error instanceof Error ? error.message : 'Unknown error',
+        duration: `${duration}ms`,
+        userId: req.user?.id
+      });
       res.status(500).json({ error: 'Failed to generate AI insights.' });
     }
   },
@@ -233,7 +258,7 @@ ${thoughtmarkSummaries}`;
       
             if (!checkOpenAI(res, 'smartSort')) return;
 
-      const completion = await openai!.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },
@@ -280,7 +305,7 @@ ${thoughtmarkSummaries}`;
       
             if (!checkOpenAI(res, 'recommendations')) return;
 
-      const completion = await openai!.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are an expert productivity and knowledge management AI. You must respond ONLY with a valid JSON object matching the provided schema. Do not include any commentary, markdown, or extra text.' },

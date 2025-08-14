@@ -149,7 +149,7 @@ export const TagsScreen: React.FC = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
-        ListEmptyComponent={!loading && renderEmptyState()}
+        ListEmptyComponent={!loading ? renderEmptyState() : null}
       />
     </View>
   );

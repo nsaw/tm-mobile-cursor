@@ -7,7 +7,7 @@ interface PreferenceToggleProps {
   subtitle?: string;
   value: boolean;
   onValueChange: (value: boolean) => void;
-  icon?: keyof typeof Ionicons.glyphMap;
+  icon?: string;
   disabled?: boolean;
 }
 
