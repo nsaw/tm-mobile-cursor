@@ -15,27 +15,32 @@ export interface UpdateThoughtmarkRequest {
 
 class ThoughtmarksService {
   async getThoughtmarks(): Promise<Thoughtmark[]> {
-    return apiClient.get<Thoughtmark[]>('/thoughtmarks');
+    const response = await apiClient.get<Thoughtmark[]>('/thoughtmarks');
+    return response.data;
   }
 
   async getThoughtmark(id: string): Promise<Thoughtmark> {
-    return apiClient.get<Thoughtmark>(`/thoughtmarks/${id}`);
+    const response = await apiClient.get<Thoughtmark>(`/thoughtmarks/${id}`);
+    return response.data;
   }
 
   async createThoughtmark(data: CreateThoughtmarkRequest): Promise<Thoughtmark> {
-    return apiClient.post<Thoughtmark>('/thoughtmarks', data);
+    const response = await apiClient.post<Thoughtmark>('/thoughtmarks', data);
+    return response.data;
   }
 
   async updateThoughtmark(id: string, data: UpdateThoughtmarkRequest): Promise<Thoughtmark> {
-    return apiClient.put<Thoughtmark>(`/thoughtmarks/${id}`, data);
+    const response = await apiClient.put<Thoughtmark>(`/thoughtmarks/${id}`, data);
+    return response.data;
   }
 
   async deleteThoughtmark(id: string): Promise<void> {
-    return apiClient.delete(`/thoughtmarks/${id}`);
+    await apiClient.delete(`/thoughtmarks/${id}`);
   }
 
   async searchThoughtmarks(query: string): Promise<Thoughtmark[]> {
-    return apiClient.get<Thoughtmark[]>(`/thoughtmarks/search?q=${encodeURIComponent(query)}`);
+    const response = await apiClient.get<Thoughtmark[]>(`/thoughtmarks/search?q=${encodeURIComponent(query)}`);
+    return response.data;
   }
 }
 

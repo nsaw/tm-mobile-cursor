@@ -11,27 +11,32 @@ export interface CreateTaskRequest {
 
 class TasksService {
   async getTasks(): Promise<Task[]> {
-    return apiClient.get<Task[]>('/tasks');
+    const response = await apiClient.get<Task[]>('/tasks');
+    return response.data;
   }
 
   async getTask(id: string): Promise<Task> {
-    return apiClient.get<Task>(`/tasks/${id}`);
+    const response = await apiClient.get<Task>(`/tasks/${id}`);
+    return response.data;
   }
 
   async createTask(data: CreateTaskRequest): Promise<Task> {
-    return apiClient.post<Task>('/tasks', data);
+    const response = await apiClient.post<Task>('/tasks', data);
+    return response.data;
   }
 
   async updateTask(id: string, data: Partial<CreateTaskRequest>): Promise<Task> {
-    return apiClient.put<Task>(`/tasks/${id}`, data);
+    const response = await apiClient.put<Task>(`/tasks/${id}`, data);
+    return response.data;
   }
 
   async deleteTask(id: string): Promise<void> {
-    return apiClient.delete(`/tasks/${id}`);
+    await apiClient.delete(`/tasks/${id}`);
   }
 
   async completeTask(id: string): Promise<Task> {
-    return apiClient.put<Task>(`/tasks/${id}/complete`);
+    const response = await apiClient.put<Task>(`/tasks/${id}/complete`);
+    return response.data;
   }
 }
 

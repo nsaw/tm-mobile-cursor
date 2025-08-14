@@ -21,7 +21,7 @@ export const SettingsScreen: React.FC = () => {
         {settingsOptions.map((option) => (
           <TouchableOpacity
             key={option.title}
-            onPress={() => console.log(`Navigate to ${option.title}`)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> console.log(`Navigate to ${option.title}`)}
             accessibilityRole="button"
             accessible={true}
             accessibilityLabel={`${option.title} Settings Button`}

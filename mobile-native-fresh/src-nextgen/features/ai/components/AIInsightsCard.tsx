@@ -40,7 +40,7 @@ export const AIInsightsCard: React.FC<AIInsightsCardProps> = ({
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onPress?.(insight)}>
+    <TouchableOpacity style={styles.container} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(insight)}>
       <View style={styles.header}>
         <Text style={styles.icon}>{getTypeIcon(insight.type)}</Text>
         <View style={styles.headerContent}>
@@ -77,7 +77,7 @@ export const AIInsightsCard: React.FC<AIInsightsCardProps> = ({
       {insight.actionable && insight.action && (
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => onAction?.(insight)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onAction?.(insight)}
         >
           <Ionicons name="flash" size={16} color="#007AFF" />
           <Text style={styles.actionButtonText}>{insight.action}</Text>

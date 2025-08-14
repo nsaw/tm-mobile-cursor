@@ -94,7 +94,7 @@ export const AllBinsScreen: React.FC = () => {
     return (
       <TouchableOpacity
         style={styles.binItem}
-        onPress={() => handleBinPress(bin)}
+        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleBinPress(bin)}
         activeOpacity={0.7}
       >
         <View style={styles.binCard}>
@@ -107,13 +107,13 @@ export const AllBinsScreen: React.FC = () => {
             <View style={styles.binActions}>
               <TouchableOpacity
                 style={styles.actionButton}
-                onPress={() => handleEditBin(bin)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleEditBin(bin)}
               >
                 <Ionicons name="create-outline" size={20} color="#666" />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.actionButton}
-                onPress={() => handleDeleteBin(bin)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleDeleteBin(bin)}
               >
                 <Ionicons name="trash-outline" size={20} color="#666" />
               </TouchableOpacity>
@@ -130,7 +130,7 @@ export const AllBinsScreen: React.FC = () => {
         styles.sortButton,
         sortBy === type && styles.sortButtonActive
       ]}
-      onPress={() => setSortBy(type)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSortBy(type)}
     >
       <Text style={[
         styles.sortButtonText,

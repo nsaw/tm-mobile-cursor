@@ -53,7 +53,7 @@ export const BulkOperationCard: React.FC<BulkOperationCardProps> = ({
   const totalResults = operation.results.length;
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onPress(operation)}>
+    <TouchableOpacity style={styles.container} onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress(operation)}>
       <View style={styles.header}>
         <Text style={styles.icon}>{getTypeIcon(operation.type)}</Text>
         <View style={styles.headerContent}>
@@ -73,7 +73,7 @@ export const BulkOperationCard: React.FC<BulkOperationCardProps> = ({
         {operation.status === 'running' && onCancel && (
           <TouchableOpacity
             style={styles.cancelButton}
-            onPress={() => onCancel(operation.id)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onCancel(operation.id)}
           >
             <Text style={styles.cancelButtonText}>Cancel</Text>
           </TouchableOpacity>

@@ -140,7 +140,7 @@ export const DashboardScreen: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Dashboard</Text>
-        <TouchableOpacity onPress={() => setShowSettings(!showSettings)}>
+        <TouchableOpacity onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowSettings(!showSettings)}>
           <Ionicons name='settings' size={24} color='#007AFF' />
         </TouchableOpacity>
       </View>
@@ -155,23 +155,11 @@ export const DashboardScreen: React.FC = () => {
           switch (section.type) {
             case 'recent':
               return (
-                <DashboardSection
-                  key={section.id}
-                  section={section}
-                  onToggleVisibility={toggleSectionVisibility}
-                >
-                  {renderRecentThoughtmarks()}
-                </DashboardSection>
+                <DashboardSection><Text>{renderRecentThoughtmarks()}</Text></DashboardSection>
               );
             case 'tasks':
               return (
-                <DashboardSection
-                  key={section.id}
-                  section={section}
-                  onToggleVisibility={toggleSectionVisibility}
-                >
-                  {renderTasks()}
-                </DashboardSection>
+                <DashboardSection><Text>{renderTasks()}</Text></DashboardSection>
               );
             case 'quick-actions':
               return (
@@ -189,13 +177,7 @@ export const DashboardScreen: React.FC = () => {
               );
             case 'stats':
               return (
-                <DashboardSection
-                  key={section.id}
-                  section={section}
-                  onToggleVisibility={toggleSectionVisibility}
-                >
-                  {renderStats()}
-                </DashboardSection>
+                <DashboardSection><Text>{renderStats()}</Text></DashboardSection>
               );
             default:
               return null;

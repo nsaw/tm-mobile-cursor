@@ -26,7 +26,7 @@ export class NativeUtils {
       version: appConfig.version,
       buildNumber: appConfig.buildNumber,
       deviceName: Device.deviceName || 'Unknown',
-      deviceId: Application.androidId || Device.osInternalBuildId || 'Unknown',
+      deviceId: Application.getAndroidId?.() || Device.osInternalBuildId || 'Unknown',
       screenWidth: width,
       screenHeight: height,
       statusBarHeight,

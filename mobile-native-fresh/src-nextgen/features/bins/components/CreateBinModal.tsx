@@ -122,7 +122,7 @@ export const CreateBinModal: React.FC<CreateBinModalProps> = ({
                     { backgroundColor: color },
                     selectedColor === color && styles.selectedColor,
                   ]}
-                  onPress={() => setSelectedColor(color)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedColor(color)}
                 >
                   {selectedColor === color && (
                     <Ionicons name='checkmark' size={16} color='#fff' />
@@ -140,7 +140,7 @@ export const CreateBinModal: React.FC<CreateBinModalProps> = ({
                   styles.iconOption,
                   !selectedIcon && styles.selectedIcon,
                 ]}
-                onPress={() => setSelectedIcon(undefined)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedIcon(undefined)}
               >
                 <Text style={styles.noIconText}>None</Text>
               </TouchableOpacity>
@@ -151,7 +151,7 @@ export const CreateBinModal: React.FC<CreateBinModalProps> = ({
                     styles.iconOption,
                     selectedIcon === icon && styles.selectedIcon,
                   ]}
-                  onPress={() => setSelectedIcon(icon)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setSelectedIcon(icon)}
                 >
                   <Ionicons
                     name={icon as any}

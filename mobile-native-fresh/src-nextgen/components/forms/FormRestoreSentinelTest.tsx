@@ -190,7 +190,7 @@ export const FormRestoreSentinelTest: React.FC<FormRestoreSentinelTestProps> = (
                 styles.submitButton,
                 signupForm.isSubmitting && styles.submitButtonDisabled
               ]}
-              onPress={() => signupForm.handleSubmit(handleSubmit)}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> signupForm.handleSubmit(handleSubmit)}
             >
               <Text style={styles.submitButtonText}>
                 {signupForm.isSubmitting ? 'Submitting...' : 'Submit Form'}

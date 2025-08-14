@@ -41,12 +41,9 @@ class BiometricService {
   }
 
   async saveCredentials(credentials: { username: string; password: string }): Promise<void> {
-    if (Platform.OS === 'ios') {
-      await LocalAuthentication.saveCredentialsAsync(
-        credentials.username,
-        credentials.password
-      );
-    }
+    // Note: saveCredentialsAsync is not available in expo-local-authentication
+    // This would need to be implemented using expo-secure-store or similar
+    console.warn('saveCredentials not implemented - use expo-secure-store instead');
   }
 }
 

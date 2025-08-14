@@ -10,7 +10,7 @@ export const useVoiceRecorder = () => {
   const [error, setError] = useState<string | null>(null);
   const [duration, setDuration] = useState(0);
   const recordingRef = useRef<Audio.Recording | null>(null);
-  const durationIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const durationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startRecording = useCallback(async () => {
     try {

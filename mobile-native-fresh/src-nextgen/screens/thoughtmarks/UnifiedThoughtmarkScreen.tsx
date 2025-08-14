@@ -265,7 +265,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 <TouchableOpacity
                   key={index}
                   style={styles.tag}
-                  onPress={() => handleRemoveTag(tag)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleRemoveTag(tag)}
                 >
                   <Text style={styles.tagText}>{tag}</Text>
                   <Ionicons name="close" size={12} color={designTokens.colors.textSecondary} />
@@ -298,7 +298,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <View style={styles.taskOptions}>
                 <TouchableOpacity 
                   style={styles.taskToggle} 
-                  onPress={() => setIsCompleted(!isCompleted)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsCompleted(!isCompleted)}
                 >
                   <Ionicons 
                     name={isCompleted ? "checkmark-circle" : "ellipse-outline"} 
@@ -310,7 +310,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                 
                 <TouchableOpacity 
                   style={styles.dateButton} 
-                  onPress={() => setShowDatePicker(true)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowDatePicker(true)}
                 >
                   <Ionicons name="calendar" size={20} color={designTokens.colors.primary} />
                   <Text style={styles.dateButtonText}>
@@ -342,13 +342,13 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <View style={styles.aiSuggestions}>
                 <TouchableOpacity 
                   style={styles.aiSuggestion}
-                  onPress={() => applyAISuggestion('title', aiSuggestions.title)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> applyAISuggestion('title', aiSuggestions.title)}
                 >
                   <Text style={styles.aiSuggestionText}>Apply Title</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={styles.aiSuggestion}
-                  onPress={() => applyAISuggestion('tags', aiSuggestions.tags)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> applyAISuggestion('tags', aiSuggestions.tags)}
                 >
                   <Text style={styles.aiSuggestionText}>Apply Tags</Text>
                 </TouchableOpacity>

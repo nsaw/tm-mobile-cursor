@@ -19,7 +19,7 @@ export const BinCard: React.FC<BinCardProps> = ({
   return (
     <TouchableOpacity
       style={[styles.container, { borderLeftColor: bin.color }]}
-      onPress={() => onPress(bin)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress(bin)}
       activeOpacity={0.7}
     >
       <View style={styles.content}>
@@ -41,7 +41,7 @@ export const BinCard: React.FC<BinCardProps> = ({
             {onEdit && (
               <TouchableOpacity
                 style={styles.actionButton}
-                onPress={() => onEdit(bin)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onEdit(bin)}
               >
                 <Ionicons name='pencil' size={16} color='#666' />
               </TouchableOpacity>
@@ -49,7 +49,7 @@ export const BinCard: React.FC<BinCardProps> = ({
             {onDelete && !bin.isDefault && (
               <TouchableOpacity
                 style={styles.actionButton}
-                onPress={() => onDelete(bin)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onDelete(bin)}
               >
                 <Ionicons name='trash' size={16} color='#ff4444' />
               </TouchableOpacity>

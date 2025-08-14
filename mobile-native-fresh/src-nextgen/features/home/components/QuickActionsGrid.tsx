@@ -18,7 +18,7 @@ export const QuickActionsGrid: React.FC<QuickActionsGridProps> = ({
     <TouchableOpacity
       key={action.id}
       style={styles.actionButton}
-      onPress={() => onActionPress?.(action)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onActionPress?.(action)}
       accessibilityRole="button"
       accessible={true}
       accessibilityLabel={action.title}
@@ -46,9 +46,7 @@ export const QuickActionsGrid: React.FC<QuickActionsGridProps> = ({
         <View key={rowIndex} style={styles.row}>
           {row.map(renderAction)}
           {row.length < columns && Array(columns - row.length).fill(null).map((_, index) => (
-            <View key={`empty-${rowIndex}-${index}`} style={styles.emptySlot} />
-          ))}
-        </View>
+            <View><Text>))}</Text></View>
       ))}
     </View>
   );

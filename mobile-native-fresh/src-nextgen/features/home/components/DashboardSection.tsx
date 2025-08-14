@@ -23,7 +23,7 @@ export const DashboardSection: React.FC<DashboardSectionProps> = ({
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.titleContainer}
-          onPress={() => onPress?.(section.id)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(section.id)}
         >
           <Text style={styles.title}>{section.title}</Text>
           <Ionicons name='chevron-forward' size={16} color='#666' />
@@ -31,7 +31,7 @@ export const DashboardSection: React.FC<DashboardSectionProps> = ({
         {onToggleVisibility && (
           <TouchableOpacity
             style={styles.toggleButton}
-            onPress={() => onToggleVisibility(section.id)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onToggleVisibility(section.id)}
           >
             <Ionicons name='eye-off' size={20} color='#666' />
           </TouchableOpacity>

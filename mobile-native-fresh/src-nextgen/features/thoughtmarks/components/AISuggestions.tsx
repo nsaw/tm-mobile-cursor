@@ -69,7 +69,7 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({
                 <TouchableOpacity
                   key={index}
                   style={styles.suggestionItem}
-                  onPress={() => onSuggestion(suggestion)}
+                  onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onSuggestion(suggestion)}
                 >
                   <Ionicons name='sparkles' size={16} color='#007AFF' />
                   <Text style={styles.suggestionText}>{suggestion}</Text>

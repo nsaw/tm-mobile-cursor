@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, StyleSheet, AccessibilityRole } from 'react-native';
+import { Text as RNText, StyleSheet, AccessibilityRole, Text } from 'react-native';
 
 export interface TextProps {
   children: React.ReactNode;
@@ -41,15 +41,7 @@ export const Text: React.FC<TextProps> = ({
   const variantStyle = getVariantStyle();
 
   return (
-    <RNText
-      style={[variantStyle, style]}
-      accessibilityRole={accessibilityRole}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityHint={accessibilityHint}
-      numberOfLines={numberOfLines}
-    >
-      {children}
-    </RNText>
+    <RNText><Text>{children}</Text></RNText>
   );
 };
 

@@ -268,7 +268,7 @@ class SearchService {
           comparison = b.relevance - a.relevance;
           break;
         case 'date':
-          comparison = new Date(b.metadata.updatedAt).getTime() - new Date(a.metadata.updatedAt).getTime();
+          comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
           break;
         case 'title':
           comparison = a.title.localeCompare(b.title);

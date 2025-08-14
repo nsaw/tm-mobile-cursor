@@ -40,7 +40,7 @@ export const AudioPlayer: React.FC = () => {
 
         <TouchableOpacity
           style={styles.playButton}
-          onPress={() => isPlaying ? stopRecording() : playRecording(item)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> isPlaying ? stopRecording() : playRecording(item)}
         >
           <Ionicons
             name={isPlaying ? 'pause' : 'play'}

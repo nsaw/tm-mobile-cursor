@@ -6,7 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import { VoiceRecorder } from '../../components/ui/VoiceRecorder';
+import { VoiceRecorder } from '../../../components/ui/VoiceRecorder';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { TranscriptionView } from '../components/TranscriptionView';
 

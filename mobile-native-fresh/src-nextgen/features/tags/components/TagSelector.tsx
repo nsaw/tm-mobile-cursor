@@ -75,7 +75,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     return (
       <TouchableOpacity
         style={[styles.tagItem, isSelected && styles.selectedTagItem]}
-        onPress={() => handleTagSelect(item)}
+        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleTagSelect(item)}
       >
         <TagChip tag={item} size='medium' showCount />
         {isSelected && (
@@ -89,7 +89,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.selector}
-        onPress={() => setIsModalVisible(true)}
+        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsModalVisible(true)}
       >
         {selectedTags.length > 0 ? (
           <View style={styles.selectedTagsContainer}>
@@ -115,7 +115,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
         visible={isModalVisible}
         animationType='slide'
         presentationStyle='pageSheet'
-        onRequestClose={() => setIsModalVisible(false)}
+        onRequestClose={() = accessible={false} accessibilityLabel="Modal"> setIsModalVisible(false)}
         accessible={false}
         accessibilityLabel="Modal"
       >
@@ -123,7 +123,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>Select Tags</Text>
             <TouchableOpacity
-              onPress={() => setIsModalVisible(false)}
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setIsModalVisible(false)}
               style={styles.closeButton}
             >
               <Ionicons name='close' size={24} color='#666' />

@@ -13,12 +13,13 @@ export interface VoiceTranscriptionResponse {
 
 class VoiceService {
   async transcribeAudio(request: VoiceTranscriptionRequest): Promise<VoiceTranscriptionResponse> {
-    return apiClient.post<VoiceTranscriptionResponse>('/voice/transcribe', request);
+    const response = await apiClient.post<VoiceTranscriptionResponse>('/voice/transcribe', request);
+    return response.data;
   }
 
   async textToSpeech(text: string): Promise<string> {
     const response = await apiClient.post<{ audioUrl: string }>('/voice/tts', { text });
-    return response.audioUrl;
+    return response.data.audioUrl;
   }
 }
 

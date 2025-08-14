@@ -37,7 +37,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
     <>
       <TouchableOpacity
         style={styles.premiumOverlay}
-        onPress={() => showUpgradePrompt && setShowUpgradeModal(true)}
+        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> showUpgradePrompt && setShowUpgradeModal(true)}
         disabled={!showUpgradePrompt}
       >
         <View style={styles.premiumContent}>
@@ -53,7 +53,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
         visible={showUpgradeModal}
         transparent={true}
         animationType='slide'
-        onRequestClose={() => setShowUpgradeModal(false)}
+        onRequestClose={() = accessible={false} accessibilityLabel="Modal"> setShowUpgradeModal(false)}
         accessible={false}
         accessibilityLabel="Modal"
       >
@@ -63,7 +63,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
               <Ionicons name='diamond' size={32} color='#007AFF' />
               <Text style={styles.modalTitle}>Upgrade to Premium</Text>
               <TouchableOpacity
-                onPress={() => setShowUpgradeModal(false)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowUpgradeModal(false)}
                 style={styles.closeButton}
               >
                 <Ionicons name='close' size={24} color='#666' />
@@ -96,7 +96,7 @@ export const PremiumFeatureWrapper: React.FC<PremiumFeatureWrapperProps> = ({
 
             <TouchableOpacity
               style={styles.upgradeButton}
-              onPress={() => {
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
                 setShowUpgradeModal(false);
                 // Navigate to premium screen
               }}

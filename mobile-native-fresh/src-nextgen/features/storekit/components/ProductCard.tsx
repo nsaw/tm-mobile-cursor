@@ -45,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         isSelected && styles.selectedCard,
         disabled && styles.disabledCard,
       ]}
-      onPress={() => !disabled && onSelect(product)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> !disabled && onSelect(product)}
       disabled={disabled}
     >
       <View style={styles.header}>

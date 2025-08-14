@@ -87,7 +87,7 @@ export const TagsScreen: React.FC = () => {
   const renderTag = ({ item }: { item: Tag }) => (
     <TouchableOpacity
       style={styles.tagItem}
-      onPress={() => handleTagPress(item)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleTagPress(item)}
       activeOpacity={0.7}
     >
       <View style={styles.tagInfo}>
@@ -102,7 +102,7 @@ export const TagsScreen: React.FC = () => {
         {!item.isSystem && (
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => handleEditTag(item)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleEditTag(item)}
           >
             <Ionicons name='pencil' size={16} color='#666' />
           </TouchableOpacity>
@@ -110,7 +110,7 @@ export const TagsScreen: React.FC = () => {
         {!item.isSystem && (
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => handleDeleteTag(item)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleDeleteTag(item)}
           >
             <Ionicons name='trash' size={16} color='#ff4444' />
           </TouchableOpacity>
@@ -135,7 +135,7 @@ export const TagsScreen: React.FC = () => {
         <Text style={styles.title}>Tags</Text>
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => console.log('Create new tag')}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> console.log('Create new tag')}
         >
           <Ionicons name='add' size={24} color='#fff' />
         </TouchableOpacity>

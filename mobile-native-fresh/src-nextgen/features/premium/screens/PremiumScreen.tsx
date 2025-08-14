@@ -88,7 +88,7 @@ export const PremiumScreen: React.FC = () => {
               <TouchableOpacity
                 key={plan.id}
                 style={styles.planCard}
-                onPress={() => handleSubscribe(plan.id)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleSubscribe(plan.id)}
               >
                 <View style={styles.planHeader}>
                   <Text style={styles.planName}>{plan.name}</Text>

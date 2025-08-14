@@ -82,11 +82,15 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
             {steps.map((_, index) => (
               <View
                 key={index}
-                style={[styles.progressDot, { backgroundColor: index === currentStep ? colors.primary : colors.border }]}
+                style={[
+                  styles.progressDot,
+                  {
+                    backgroundColor: index === currentStep ? colors.primary : colors.border,
+                  },
+                ]}
               />
             ))}
           </View>
-        </View>
 
         {/* Content */}
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>

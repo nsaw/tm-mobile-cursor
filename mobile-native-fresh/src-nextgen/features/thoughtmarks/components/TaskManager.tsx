@@ -28,7 +28,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       <View style={[styles.taskItem, isCompleted && styles.taskCompleted]}>
         <TouchableOpacity
           style={styles.checkbox}
-          onPress={() => onTaskComplete(item.id)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onTaskComplete(item.id)}
         >
           <Ionicons
             name={isCompleted ? 'checkmark-circle' : 'ellipse-outline'}
@@ -67,7 +67,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
 
         <TouchableOpacity
           style={styles.editButton}
-          onPress={() => onTaskEdit(item)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onTaskEdit(item)}
         >
           <Ionicons name='pencil' size={16} color='#666' />
         </TouchableOpacity>

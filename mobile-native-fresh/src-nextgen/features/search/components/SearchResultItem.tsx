@@ -62,7 +62,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => onPress?.(result)}
+      onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> onPress?.(result)}
     >
       <View style={styles.header}>
         <View style={styles.typeContainer}>

@@ -109,7 +109,7 @@ export const BinsScreen: React.FC = () => {
       </Text>
       <TouchableOpacity
         style={styles.createButton}
-        onPress={() => setShowCreateModal(true)}
+        onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowCreateModal(true)}
       >
         <Ionicons name='add' size={20} color='#fff' />
         <Text style={styles.createButtonText}>Create First Bin</Text>
@@ -123,7 +123,7 @@ export const BinsScreen: React.FC = () => {
         <Text style={styles.title}>Bins</Text>
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => setShowCreateModal(true)}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setShowCreateModal(true)}
         >
           <Ionicons name='add' size={24} color='#fff' />
         </TouchableOpacity>

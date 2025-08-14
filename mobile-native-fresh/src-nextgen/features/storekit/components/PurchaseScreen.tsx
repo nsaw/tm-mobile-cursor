@@ -104,7 +104,7 @@ export const PurchaseScreen: React.FC = () => {
         <Ionicons name='alert-circle' size={48} color='#FF3B30' />
         <Text style={styles.errorTitle}>Something went wrong</Text>
         <Text style={styles.errorMessage}>{error.message}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={() => globalThis.location.reload()}>
+        <TouchableOpacity style={styles.retryButton} onPress={() => globalThis.location.reload()} accessibilityRole="button" accessible={true} accessibilityLabel="Button">
           <Text style={styles.retryButtonText}>Try Again</Text>
         </TouchableOpacity>
       </View>

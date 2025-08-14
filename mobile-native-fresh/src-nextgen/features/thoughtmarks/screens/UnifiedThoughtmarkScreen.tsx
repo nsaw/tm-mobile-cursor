@@ -113,7 +113,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   styles.typeButton,
                   type === typeOption && styles.typeButtonActive
                 ]}
-                onPress={() => setType(typeOption)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setType(typeOption)}
               >
                 <Text style={[
                   styles.typeButtonText,
@@ -138,7 +138,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
                   priorityOption === 'high' && styles.priorityHigh,
                   priorityOption === 'low' && styles.priorityLow,
                 ]}
-                onPress={() => setPriority(priorityOption)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setPriority(priorityOption)}
               >
                 <Text style={[
                   styles.priorityButtonText,
@@ -158,7 +158,7 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
               <TouchableOpacity
                 key={index}
                 style={styles.tagBadge}
-                onPress={() => handleTagRemove(tag)}
+                onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleTagRemove(tag)}
               >
                 <Text style={styles.tagText}>{tag}</Text>
                 <Ionicons name='close' size={12} color='#666' />
@@ -170,7 +170,8 @@ export const UnifiedThoughtmarkScreen: React.FC = () => {
             placeholder='Add a tag...'
             onSubmitEditing={(e) => {
               handleTagAdd(e.nativeEvent.text);
-              e.currentTarget.clear();
+              // Clear the input by setting the text to empty
+              e.currentTarget.setNativeProps({ text: '' });
             }}
           />
         </View>

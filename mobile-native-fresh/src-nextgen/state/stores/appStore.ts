@@ -147,7 +147,7 @@ const useAppStore = create<AppStore>()(
         set({ loading: true, error: null });
         try {
           // Mock API call - replace with actual API
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise<void>(resolve => setTimeout(() => resolve(), 100));
           set({ loading: false });
         } catch (error) {
           set({ loading: false, error: 'Failed to fetch thoughtmarks' });
@@ -158,7 +158,7 @@ const useAppStore = create<AppStore>()(
         set({ loading: true, error: null });
         try {
           // Mock API call - replace with actual API
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise<void>(resolve => setTimeout(() => resolve(), 100));
           set({ loading: false });
         } catch (error) {
           set({ loading: false, error: 'Failed to fetch tasks' });
@@ -169,7 +169,7 @@ const useAppStore = create<AppStore>()(
         set({ loading: true, error: null });
         try {
           // Mock API call - replace with actual API
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise<void>(resolve => setTimeout(() => resolve(), 100));
           set({ loading: false });
         } catch (error) {
           set({ loading: false, error: 'Failed to fetch bins' });

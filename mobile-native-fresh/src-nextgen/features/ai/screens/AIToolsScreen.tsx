@@ -67,7 +67,7 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             key={recommendation.id}
             style={styles.recommendationCard}
-            onPress={() => handleRecommendationPress(recommendation)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleRecommendationPress(recommendation)}
           >
             <View style={styles.recommendationHeader}>
               <Ionicons name="star" size={20} color="#FF9500" />
@@ -103,7 +103,7 @@ export const AIToolsScreen: React.FC = () => {
           <TouchableOpacity
             key={resource.id}
             style={styles.learningCard}
-            onPress={() => handleLearningResourcePress(resource)}
+            onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> handleLearningResourcePress(resource)}
           >
             <View style={styles.learningHeader}>
               <Ionicons
@@ -143,7 +143,7 @@ export const AIToolsScreen: React.FC = () => {
       <View style={styles.tabBar}>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'insights' && styles.activeTab]}
-          onPress={() => setActiveTab('insights')}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setActiveTab('insights')}
         >
           <Ionicons
             name="bulb"
@@ -156,7 +156,7 @@ export const AIToolsScreen: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'recommendations' && styles.activeTab]}
-          onPress={() => setActiveTab('recommendations')}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setActiveTab('recommendations')}
         >
           <Ionicons
             name="star"
@@ -169,7 +169,7 @@ export const AIToolsScreen: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'learning' && styles.activeTab]}
-          onPress={() => setActiveTab('learning')}
+          onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> setActiveTab('learning')}
         >
           <Ionicons
             name="school"

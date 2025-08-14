@@ -1,5 +1,5 @@
 # Static Triage
-TS errors: 134
+TS errors: 2922
 ESLint findings: 0
 
 - /components/BottomNav.tsx:50:25 — Expression expected.

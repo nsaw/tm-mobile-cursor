@@ -9,23 +9,27 @@ export interface CreateBinRequest {
 
 class BinsService {
   async getBins(): Promise<Bin[]> {
-    return apiClient.get<Bin[]>('/bins');
+    const response = await apiClient.get<Bin[]>('/bins');
+    return response.data;
   }
 
   async getBin(id: string): Promise<Bin> {
-    return apiClient.get<Bin>(`/bins/${id}`);
+    const response = await apiClient.get<Bin>(`/bins/${id}`);
+    return response.data;
   }
 
   async createBin(data: CreateBinRequest): Promise<Bin> {
-    return apiClient.post<Bin>('/bins', data);
+    const response = await apiClient.post<Bin>('/bins', data);
+    return response.data;
   }
 
   async updateBin(id: string, data: Partial<CreateBinRequest>): Promise<Bin> {
-    return apiClient.put<Bin>(`/bins/${id}`, data);
+    const response = await apiClient.put<Bin>(`/bins/${id}`, data);
+    return response.data;
   }
 
   async deleteBin(id: string): Promise<void> {
-    return apiClient.delete(`/bins/${id}`);
+    await apiClient.delete(`/bins/${id}`);
   }
 }
 

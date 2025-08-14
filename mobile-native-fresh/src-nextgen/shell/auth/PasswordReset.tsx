@@ -167,7 +167,7 @@ export const PasswordResetScreen: React.FC = () => {
 
             <TouchableOpacity
               style={styles.secondaryButton}
-              onPress={() => {
+              onPress={() = accessibilityRole="button" accessible={true} accessibilityLabel="Button"> {
                 // Navigate back placeholder
                 Alert.alert('Navigation', 'Back to Sign In');
               }}
