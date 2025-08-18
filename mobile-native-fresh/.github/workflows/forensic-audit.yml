@@ -1,0 +1,83 @@
+name: Forensic Audit — DualMount vs Rebuild (Read-Only)
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "analysis mode"
+        required: false
+        default: "deep"
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: "forensics-${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  analyze:
+    name: Forensic Deep Dive
+    runs-on: macos-13
+    timeout-minutes: 45
+    env:
+      WORKSPACE: ${{ github.workspace }}
+      OUTDIR: ${{ github.workspace }}/.cursor-cache/MAIN/validation/forensics
+      NODE_OPTIONS: "--max-old-space-size=4096"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: "npm"
+      - name: Install (ci, no scripts)
+        run: |
+          npm ci --ignore-scripts
+      - name: Ensure output dirs
+        run: |
+          mkdir -p "$OUTDIR"
+      - name: Path Policy Audit (read-only)
+        run: |
+          node scripts/tools/path-policy-check.cjs "$WORKSPACE" | tee "$OUTDIR/path-policy.stdout.txt" || true
+        shell: bash
+      - name: Route Map + Route Assert (read-only)
+        run: |
+          node scripts/tools/generate-route-map.cjs 2>/dev/null || true
+          node scripts/tools/route-assert.cjs --json "$OUTDIR/route-assert.json" || true
+        shell: bash
+      - name: App Entry & DualMount Audit (read-only)
+        run: |
+          node scripts/tools/audit-app-entry.cjs "$WORKSPACE" || true
+          node scripts/tools/audit-dual-mount.cjs "$WORKSPACE" '["${{ github.workspace }}/.cursor-cache/MAIN/patches/phase-0_complete","${{ github.workspace }}/.cursor-cache/MAIN/patches/phase-1_complete","${{ github.workspace }}/.cursor-cache/MAIN/patches/phase-2_complete","${{ github.workspace }}/.cursor-cache/MAIN/patches/phase-3_complete"]' || true
+          # Copy any validator outputs into unified OUTDIR mirror for CI consumption
+          find "$WORKSPACE/.cursor-cache/MAIN/validation" -maxdepth 1 -type f -name "*.json" -exec cp {} "$OUTDIR" \; || true
+        shell: bash
+      - name: TypeScript (no emit) — counts only
+        run: |
+          npx --yes typescript@latest -v || true
+          npx --yes tsc --noEmit --pretty false >"$OUTDIR/tsc-report.txt" 2>&1 || true
+      - name: ESLint (P66 adapter if present, otherwise direct) — json report
+        run: |
+          if [ -f "scripts/lint/eslint-p66-adapter.cjs" ]; then
+            node scripts/lint/eslint-p66-adapter.cjs --max-errors 999 >"$OUTDIR/eslint-adapter.stdout.txt" 2>&1 || true
+          fi
+          if [ -f "node_modules/eslint/bin/eslint.js" ]; then
+            node node_modules/eslint/bin/eslint.js "src-nextgen/**/*.{ts,tsx}" -f json -o "$OUTDIR/eslint-report.json" || true
+          fi
+      - name: Reference ↔ NextGen Diff (read-only)
+        run: |
+          node scripts/ci/reference-nextgen-diff.cjs --out "$OUTDIR/ref-next-diff.json" --md "$OUTDIR/ref-next-diff.md"
+      - name: Decision Engine (no code changes)
+        run: |
+          node scripts/ci/forensic-decision.cjs --in "$OUTDIR" --out "$OUTDIR/decision.json" --md "$OUTDIR/decision.md"
+          echo "### Forensic Decision" >> $GITHUB_STEP_SUMMARY
+          cat "$OUTDIR/decision.md"       >> $GITHUB_STEP_SUMMARY
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: forensic-audit-${{ github.run_id }}
+          path: ${{ env.OUTDIR }}
+          if-no-files-found: warn
